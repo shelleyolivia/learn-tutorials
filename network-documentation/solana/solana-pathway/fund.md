@@ -27,8 +27,8 @@ In `src/components/Fund.jsx`, implement `fund()`. Convert the text input to an a
 
 **Need some help?** Here are a few hints.
 
-    →  [Create a publicKey from a string](https://solana-labs.github.io/solana-web3.js/classes/publickey.html#constructor)  
-    →  [`requestAirdrop()`documentation](https://solana-labs.github.io/solana-web3.js/classes/connection.html#requestairdrop)
+    →  [Create a publicKey from a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#constructor)  
+    →  [`requestAirdrop()`documentation](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#requestairdrop)
 {% endhint %}
 
 Take a few minutes to figure this out.

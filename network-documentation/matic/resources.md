@@ -3,7 +3,6 @@
 ## Beginner
 
 * Polygon \(Matic\) Network [Whitepaper](https://github.com/maticnetwork/whitepaper)
-* Polygon \(Matic\) [Litepaper](https://matic.network/matic-litepaper.pdf)
 * Polygon [Lightpaper](https://polygon.technology/lightpaper-polygon.pdf)
 * The Ultimate Polygon [Guide](https://kriptomat.io/polygon/)
 * What is Polygon \(MATIC\)? - [Beginners Guide](https://www.blocmates.com/blogmates/what-is-polygon-matic)

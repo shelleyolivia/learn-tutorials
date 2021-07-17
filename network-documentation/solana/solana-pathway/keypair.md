@@ -19,8 +19,8 @@ In`src/components/Account.jsx`, implement `generateKeypair` and store the keypai
 
 **Need some help?** Check out those two links
 
-    → [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/keypair.html#constructor)  
-    → [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/publickey.html#tostring)
+    → [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
+    → [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
 {% endhint %}
 
 Take a few minutes to figure this out.

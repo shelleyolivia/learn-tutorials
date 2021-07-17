@@ -13,7 +13,7 @@ In `src/components/Balance.jsx`, implement `getBalance` and store the balance in
 
 **Need some help?** Here are a few hints
 
-    →   [Read about getBalance\(\)](https://solana-labs.github.io/solana-web3.js/classes/connection.html#getbalance)
+    →   [Read about getBalance\(\)](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getbalance)
 {% endhint %}
 
 Take a few minutes to figure this out.

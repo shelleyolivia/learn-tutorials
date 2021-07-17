@@ -15,8 +15,8 @@ In `src/components/Transfer.jsx,`finish implementing the `transfer()` function.
 
 **Need some help?** Here are a few hints
 
-    →  Read about [sendAndConfirmTransaction\(\)](https://solana-labs.github.io/solana-web3.js/modules.html#sendandconfirmtransaction)  
-    →  Read about [adding instructions to Transaction](https://solana-labs.github.io/solana-web3.js/classes/transaction.html#add)  
+    →  Read about [sendAndConfirmTransaction\(\)](https://solana-labs.github.io/solana-web3.js/modules.html#sendAndConfirmTransaction)  
+    →  Read about [adding instructions to Transaction](https://solana-labs.github.io/solana-web3.js/classes/Transaction.html#add)  
     → [ Anatomy of a Transaction](https://docs.solana.com/developing/programming-model/transactions)
 {% endhint %}
 

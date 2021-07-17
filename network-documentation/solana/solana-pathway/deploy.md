@@ -347,7 +347,7 @@ You can read more about Solana Programs [here](https://docs.solana.com/developin
 
 ## Potential issues building
 
-An error ```no such subcommand:``build-bpf\`\`\` indicates that there was an issue with the installation of the Solana CLI or that it is installed, but not in the PATH. So if you see this error and exit code 101 :
+An error `no such subcommand:build-bpf` indicates that there was an issue with the installation of the Solana CLI or that it is installed, but not in the PATH. So if you see this error and exit code 101 :
 
 ```text
 $ cargo build-bpf --manifest-path=program/Cargo.toml --bpf-out-dir=dist/program
