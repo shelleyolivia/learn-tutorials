@@ -4,12 +4,6 @@ description: Learn how to create a functional DAO by examining the smart contrac
 ---
 
 # Build a Decentralized Autonomous Organization (DAO) on Celo - Part 4
-
-In this tutorial, we are going to build a fully functional DAO by writing the Smart Contract Code and then build a React Native App to communicate with the Smart Contract.
-This part 4 section focuses on writing the Redux code to connect the React Native App to the Smart Contract using Redux.
-
-&nbsp;
-
 # Prerequisite
 
 [Redux](https://redux.js.org/introduction/getting-started)
@@ -18,19 +12,18 @@ This part 4 section focuses on writing the Redux code to connect the React Nativ
 
 # Redux 
 Install the Redux libraries using the following command:
-```
+
+```javascript
 yarn add redux redux-thunk redux-logger react-redux
 ```
 
-```
+```javascript
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
-
 import { alert } from './reducers/alertReducer';
 import { profile } from "./reducers/profileReducer";
 import { proposal } from './reducers/proposalReducer';
-
 
 const rootReducer = combineReducers({profile, proposal, alert});
 const loggerMiddleware = createLogger();
@@ -46,55 +39,44 @@ export const store = createStore(
 
 # Actions
 ## AlertActions.js
-```
+```javascript
 function request(message) {
     return {type: alertConstants.REQUEST, message};
 }
-
 
 function success(message) {
     return {type: alertContants.SUCCESS, message};
 }
 
-
 function error(message) {
     return {type: alertContants.ERROR, message};
 }
-
 
 function clear() {
     return {type: alertContants.CLEAR};
 }
 ```
 
-Contains redux action creators for actions related to toaster notifications in the dAPP. For example to display a success alert message with the text 'Wallet connection Successful' you can call `dispatch(alertActions.success('Wallet connection successful'));`.
+`AlertActions.js` contains Redux action creators for toast notifications within the dApp. For example, display a success alert message with the text 'Wallet connection Successful' by calling `dispatch(alertActions.success('Wallet connection successful'));`.
 
-```
+```javascript
 function connect(params) {
   return async (dispatch )=> {
     dispatch(alertActions.clear());
     dispatch(alertActions.request("Connecting to wallet..."));
     dispatch(request())
-
-
     try {
       const goldToken = await kit.contracts.getGoldToken();
       const contractAddress = await (await contractInstance).options.address;
       const requestId = 'charlo_login';
       const dappName = 'Charlo';
       const callback = Linking.makeUrl('ProposalsPage');
-
-
       requestAccountAddress({
         requestId,
         dappName,
         callback
       });
-
-
       const response = await waitForAccountAuth(requestId);
-
-
       kit.defaultAccount = response.address;
       response.daoBalance = web3.utils.fromWei((await goldToken.balanceOf(contractAddress)).toString(), 'ether');
       response.userBalance = web3.utils.fromWei((await goldToken.balanceOf(response.address)).toString(), 'ether');
@@ -105,8 +87,6 @@ function connect(params) {
         dispatch(failed());
     }
   }
-
-
   function request() { return { type: profileConstants.CONNECT_REQUEST} };
   function success(res) { return { type: profileConstants.CONNECT_SUCCESS, res } };
   function failed() { return { type: profileConstants.CONNECT_FAILED } };
@@ -369,7 +349,7 @@ All the other actions in this file take the same style as the one explained abov
 # Reducers
 ## Profile Reducer
 
-```
+```javascript
 import { profileConstants } from '../../constants';
 
 const initialState = {
@@ -470,7 +450,7 @@ export function profile(state = initialState, action) {
 
 ## Proposal Reducer
 
-```
+```javascript
 import { proposalConstants } from '../../constants/proposalConstants';
 
 const initialState = {
@@ -549,7 +529,7 @@ export function proposal(state = initialState, action) {
 # The App State:
 
 ## Connect Wallet
-```
+```javascript
 import * as React from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -558,11 +538,9 @@ import { Layout, Button, Text, Spinner } from '@ui-kitten/components';
 import { kit } from '../root';
 import { profileActions } from '../store/actions';
 
-
 export const WelcomePage = ({navigation}) => {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profile);
-
   const login = async () => {
     if (!kit.defaultAccount) {
       await dispatch(profileActions.connect());
@@ -581,9 +559,8 @@ export const WelcomePage = ({navigation}) => {
         onPress={login}
         accessoryLeft={profile.loading ? loadingIndicator : ""}
       >Connect To Wallet</Button>
-
       <Text style={styles.text}>
-        Welcome to the Charity example DAO
+        Welcome to the Charity DAO example
       </Text>
     </Layout>
   );
@@ -615,7 +592,7 @@ const styles = StyleSheet.create({
 ```
 
 ## All Proposals Page
-```
+```javascript
 import * as React from 'react';
 import { View, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { Layout, Button, Text, TopNavigation, Divider, Icon, Card, useTheme, Modal, Input, List, Spinner } from '@ui-kitten/components';
@@ -629,11 +606,9 @@ export const ProposalsPage = ({ navigation }) => {
   const [createVisible, setCreateVisible] = React.useState(false);
   const [viewVisible, setViewVisible] = React.useState(false);
   const [proposals, setProposals] = React.useState([])
-
   const dispatch = useDispatch();
   const store = useSelector(state => state.proposal);
   const profile = useSelector(state => state.profile);
-
   const theme = useTheme();
 
   React.useEffect(() => {
@@ -656,20 +631,17 @@ export const ProposalsPage = ({ navigation }) => {
     const allProposals = store.proposals.filter(
       (element) => element[7] == false && element[2] > today
     );
-
     const filteredProposals = allProposals.filter(
       function(e) {
         return this.indexOf(e[0]) < 0;
       },
       profile.votes
     );
-
     setProposals(filteredProposals);
   };
 
   const getProposal = (id) => {
     dispatch(proposalActions.getProposal(id));
-
     setViewVisible(true);
   };
 
@@ -688,7 +660,6 @@ export const ProposalsPage = ({ navigation }) => {
         style={{borderColor: theme['color-primary-default'], marginVertical: 4}}
         footer={props => chaFooter(props, {for: info.item[3], against: info.item[4]})}
         onPress={() => getProposal(info.item[0])}>
-        
         <Text category='s2' numberOfLines={4} ellipsizeMode='tail'>{info.item[5]}</Text>
       </Card>
     );
@@ -697,7 +668,6 @@ export const ProposalsPage = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Layout style={{ flex: 1, alignItems: 'center', padding: 16 }}>
-
         {
           profile.isStakeholder ?
           <Button
@@ -706,7 +676,6 @@ export const ProposalsPage = ({ navigation }) => {
             onPress={() => setCreateVisible(true)}
           >Create Proposal</Button> : null
         }
-
         {
           store.loadingAll ? <Spinner status='primary' size='giant' /> : 
           store.proposals.length !== 0 ?
@@ -716,16 +685,13 @@ export const ProposalsPage = ({ navigation }) => {
           data={proposals}
           renderItem={cardItem}/> : <Text>The list of proposal is empty</Text>
         }
-
         <CreateProposalModal
           setVisible={setCreateVisible}
           visible={createVisible}/>
-
         <ViewProposalModal
           setVisible={setViewVisible}
           visible={viewVisible}
           isProfile='false'/>
-
       </Layout>
     </SafeAreaView>
   );
@@ -741,12 +707,11 @@ const loadingIndicator = (props) => {
 ```
 
 ## Profile Screen
-```
+```javascript
 import * as React from 'react';
 import { View, SafeAreaView } from 'react-native';
 import { Button, Card, Input, Layout, List, useTheme, Text, Spinner, ViewPager, Icon } from '@ui-kitten/components';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { ViewProposalModal } from '../components';
 import { profileActions, proposalActions } from '../store/actions';
 import { contractInstance, kit } from '../root';
@@ -757,27 +722,19 @@ export const ProfilePage = ({ navigation }) => {
   const [payableVotes, setPayableVotes] = React.useState([]);
   const [inVotingVotes, setInVotingVotes] = React.useState([]);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-
   const dispatch = useDispatch();
   const profile = useSelector(state => state.profile);
   const store = useSelector(state => state.proposal);
-
   const amountInput = useInputState('Amount');
-
   const theme = useTheme();
-
   const contribute = async () => {
     const contributed = amountInput.value;
     if (contributed === '') {
       return;
     }
-
     await dispatch(profileActions.contribute(contributed));
-
     await dispatch(profileActions.grantRole(contributed));
-
     await dispatch(profileActions.getRole());
-
     amountInput.setValue('');
   };
 
@@ -797,19 +754,15 @@ export const ProfilePage = ({ navigation }) => {
       },
       profile.votes
     );
-
     const stakePaidVotes = stakeholderVotes.filter(
       (element) => element[7] == true
     );
-
     const stakePayable = stakeholderVotes.filter(
       (element) => (element[2] <= today && element[7] == false)
     );
-
     const stakeInVoting = stakeholderVotes.filter(
       (element) => (element[2] > today && element[7] == false)
     );
-    
     setPaidVotes(stakePaidVotes);
     setPayableVotes(stakePayable);
     setInVotingVotes(stakeInVoting);
@@ -818,17 +771,12 @@ export const ProfilePage = ({ navigation }) => {
   const getProposal = (id) => {
     if (store.proposal.id == id) {
       setVisible(true);
-
       return;
     }
-
     dispatch(proposalActions.getProposal(id));
-
     setVisible(true);
   };
-
   const shouldLoadComponent = (index) => index == selectedIndex;
-    
   const handleRightClick = () => {
     if (selectedIndex < 2) {
       setSelectedIndex(selectedIndex + 1);
@@ -846,7 +794,6 @@ export const ProfilePage = ({ navigation }) => {
         style={{borderColor: theme['color-primary-default'], marginVertical: 4}}
         footer={props => cardFooter(props, {for: info.item[3], against: info.item[4]})}
         onPress={() => getProposal(info.item[0])}>
-        
         <Text category='s2' numberOfLines={4} ellipsizeMode='tail'>{info.item[5]}</Text>
       </Card>
     );
@@ -900,7 +847,6 @@ export const ProfilePage = ({ navigation }) => {
           name='arrowhead-right-outline'/>
       );
     }
-
     return(null);
   };
 
@@ -912,7 +858,6 @@ export const ProfilePage = ({ navigation }) => {
           name='arrowhead-left-outline'/>
       );
     }
-    
     return(null);
   };
 
@@ -927,7 +872,6 @@ export const ProfilePage = ({ navigation }) => {
             keyboardType='numeric'
             placeholder='Enter amount to contribute'
             {...amountInput}/>
-          
           <Button
             size='small'
             onPress={contribute}
@@ -936,25 +880,20 @@ export const ProfilePage = ({ navigation }) => {
             CONTRIBUTE
           </Button>
         </Card>
-
         <ViewPager style={{height: 480}}
           selectedIndex={selectedIndex}
           shouldLoadComponent={shouldLoadComponent}
           onSelect={setSelectedIndex}>
-
             <Layout level='2'>
               {page()}
             </Layout>
-
             <Layout level='2'>
               {page()}
             </Layout>
-
             <Layout level='2'>
               {page()}
             </Layout>
           </ViewPager>
-
         <ViewProposalModal
           setVisible={setVisible}
           visible={visible}
@@ -966,12 +905,10 @@ export const ProfilePage = ({ navigation }) => {
 
 const useInputState = (name, initialValue = '') => {
   const [value, setValue] = React.useState(initialValue);
-
   let caption;
   if (value === '') {
     caption = `${name} must not be empty`;
   }
-
   return {value, onChangeText: setValue, setValue, caption};
 };
 
@@ -991,5 +928,5 @@ The Smart Contract code is deployed on the Alfajores testnet. The contract allow
 We hope this was not the longest tutorial for you to follow. Lol. Congratulations if you have made it this far! There’s no limits to what you can build given the knowledge that you have thus acquired reading and following this tutorial! Go forth and build great things! 
 
 # About the Authors
-This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe/) and [Emmanuel Oaikhenan](https://github.com/emmaodia).
+This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe/) and [Emmanuel Oaikhenan](https://community.figment.io/u/odia.emma/).
 

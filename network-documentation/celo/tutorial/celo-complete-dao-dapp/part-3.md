@@ -5,30 +5,28 @@ description: Learn how to create a functional DAO by examining the smart contrac
 
 # Build a Decentralized Autonomous Organization (DAO) on Celo - Part 3
 
-In this tutorial, we are going to build a fully functional DAO by writing the Smart Contract Code and then build a React Native App to communicate with the Smart Contract.
-This part 3 section focuses on building the React Native App
-
+In this tutorial, we will continue to build a functional DAO by making a React Native app to communicate with the Solidity smart contract on Celo.
 &nbsp;
 
 # Prerequisite
 
-If you have never built an app using React Native to connect to the Celo wallet, you can follow our previous guide [here](https://learn.figment.io/network-documentation/celo/tutorial/how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp#project-setup
+If you have not built an app using React Native to connect to the Celo wallet before, you can follow the guide [here](https://learn.figment.io/network-documentation/celo/tutorial/how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp#project-setup
 ) 
 
 # Building the React Native dApp
-We are building the dApp using Javascript and Redux. We will make use of the React Native [UI kitten library](https://akveo.github.io/react-native-ui-kitten/) to style the dApp. This section outline the Pages and Components that make up the dApp and then the section on Redux is a deep dive into how to connect the dApp to the Smart Contract.
+We are building the dApp using Javascript and Redux. We will make use of the React Native [UI kitten library]((https://akveo.github.io/react-native-ui-kitten/)) to style the dApp. Following is an outline of the Pages and Components that make up the dApp and then the next section on Redux will be a deep dive into how to connect the dApp to the smart contract.
 
-First, we will outline the screens and then write out the code for building each one:
+First, we will outline the UI and then write out the code for building each of the views:
 - Welcome Screen (Connect Wallet)
 - Side Menu Navigation
-- All Proposal Screen 
+- All Proposals Screen 
 - Votable Proposals [List]
 - Create Proposal [Modal, Form]
 - View Proposal [Modal]
 - Upvote [Button]
 - Downvote [Button]
 - Profile Screen
-- Contribute to the DAO[Modal, Form]
+- Contribute to the DAO [Modal, Form]
 - Proposals voted on [List]
 - View Proposal [Modal]
 - Payable Proposals [List]
@@ -41,19 +39,17 @@ First, we will outline the screens and then write out the code for building each
 &nbsp;
 
 # Initial Setup
-
-
-For this section of the dApp, we will outline how the various actions across the Smart Contract are carried out with a connection to the dApp. First, let’s code the screens. The screens at this point do not yet interact with the Smart Contract.
+At this stage of making the dApp, we will outline how the actions of the smart contract are carried out with a connection to the dApp. First, let’s put the code in place for all the screens. The screens at this point do not yet interact with the smart contract.
 
 &nbsp;
 
 # Initialize the dApp
 This section assumes that you already know how to initialize and start a React Native App. We will simply do a high level overview on how to start your React Native app.
 
-## Starting a React Native APP
+## Starting a React Native app
 
 
-## Setting up UI Kitten Library
+## Setting up UI Kitten
 
 UI Kitten is a customizable React Native UI Library based on Eva Design System specifications, it is a framework of UI components that can easily be added to a React Native app. Initializing the app with the expo init command and the blank managed workflow as the selected template sets up a basic @ui-kitten/components configuration for us. If not:
 
@@ -65,7 +61,7 @@ Once it has completely installed, you can use any of the components available in
 
 Open the `App.js` file and wrap the project in UI Kitten’s ApplicationProvider module and also add the IconRegistry module so we can use @ui-kitten/eva-icons Icons.
 
-```
+```javascript
 import './global';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
@@ -74,7 +70,6 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Navigation } from './navigation'
 
-
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
@@ -82,35 +77,30 @@ export default function App() {
   if (!isLoadingComplete) {
     return null;
   } else {
-    return (
-      
+    return (      
         <ApplicationProvider
           {...eva}
           theme={{...eva.dark, ...theme}}
           customMapping={mapping}>
-
           <IconRegistry icons={EvaIconsPack} />
           <Navigation coloScheme={colorScheme} />
           <StatusBar />
-          
         </ApplicationProvider>
-
     );
   }
 }
 ```
 
-We are making use of the eva dark theme. Configured IconRegistry using the EvaIconsPack. Now that we have the UI Kitten library setup, we can style our dApp as we build. Let’s go ahead and build the screens.
-
+We are making use of the eva dark theme and we have configured IconRegistry to use the EvaIconsPack. Now that we have UI Kitten set up, we can style our dApp as we build. Now let’s go ahead and build out the screens.
 # Screens 
 ## Welcome Screen
-The Welcome Screen is the first screen that loads when the user launches the DAO dApp. The screen has only one button which the user clicks to connect (login) to the DAO. Since our app is on the  Celo protocol, we have to connect to the Alfajores/Valora wallet.
+The Welcome screen is the first thing users will see when loading the dApp. The UI is only one button which the user must click to connect to the DAO. Since our app is making use of the Celo protocol, we will have to connect to the Alfajores/Valora wallet.
 
 <img src="./images/connect-wallet.jpeg" alt="drawing" width="300"/>
 
-Below is the code snippet to create the screen:
+Below is the code needed to create the **Welcome** screen:
 
-```
+```javascript
  export const WelcomePage = ({navigation}) => {
 
  return (
@@ -119,9 +109,8 @@ Below is the code snippet to create the screen:
        raised='true'
        accessoryLeft={profile.loading ? loadingIndicator : ""}
      >Connect To Wallet</Button>
-
      <Text style={styles.text}>
-       Welcome to the Charity example DAO
+       Welcome to the Charity DAO example
      </Text>
    </Layout>
  );
@@ -143,11 +132,10 @@ const styles = StyleSheet.create({
   },
 });
 ```
+Notice anything missing? Don't worry, we will add the functionality to connect this screen to the Wallet and carry out user actions in the Redux tutorial.
 
-
-Subsequently, in the Redux section, we will add the functionality to connect the Screen to the Wallet and carry out user actions.
-
-Side Menu Navigation
+&nbsp;
+## Side Menu Navigation
 
 This is based on React Navigation’s Drawer Navigation. To use the React Drawer navigation, you have to install and set up React Navigation following the instructions in the [docs](https://reactnavigation.org/docs/getting-started)
 The instructions for designing a Drawer based navigation can be found [here](https://reactnavigation.org/docs/drawer-based-navigation).
@@ -155,19 +143,16 @@ The instructions for designing a Drawer based navigation can be found [here](htt
 <img src="./images/sidemenu.jpeg" alt="drawing" width="300"/>
 
 &nbsp;
-
 ## All Proposals Screen
-The All Proposals Screen contains all the DAO proposals that have been created. It contains a button at the top which a User can click upon to create a Proposal. When the button to create a Proposal is clicked upon, it opens a modal that contains a form that a user can fill to create a new proposal.
+The All Proposals screen contains all the DAO proposals that have been created. The UI is a button at the top which will open a modal window containing a form to be filled out by the user creating the proposal.
 
 <img src="./images/all-proposal.jpeg" alt="drawing" width="300"/>
 
-Below is the code snippet to create the screen:
+This is the code to create the All Proposals screen:
 
-```
+```javascript
 export const ProposalsPage = ({ navigation }) => {
-  
   const theme = useTheme();
-
   const chaFooter = (props, info) => {
     return(
       <View {...props} style={{...props.style, flexDirection: 'row', justifyContent: 'space-evenly', padding: 8}}>
@@ -176,7 +161,6 @@ export const ProposalsPage = ({ navigation }) => {
       </View>
     );
   };
-
   const cardItem = (info) => {
     return(
       <Card
@@ -195,16 +179,11 @@ export const ProposalsPage = ({ navigation }) => {
         <Card
           disabled='true'
           style={{borderColor: theme['color-primary-default'], margin: 8, padding: 8}}>
-
           <Button size='medium'>Create Proposal</Button>
         </Card>
-
         <List
           contentContainerStyle={{paddingHorizontal: 8, paddingVertical: 4}}
           renderItem={cardItem}/>
-
-
-
       </Layout>
     </SafeAreaView>
   );
@@ -219,10 +198,9 @@ The Create Proposal modal component is imported into the Proposals page and is d
 
 Below is the code snippet to create the modal:
 
-```
+```javascript
 export const CreateProposalModal = ({setVisible, visible,}) => {
   const theme = useTheme();
-
   const cardHeader = (props) => {
     return(
       <View {...props} style={{...props.style, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -231,12 +209,10 @@ export const CreateProposalModal = ({setVisible, visible,}) => {
           size='large'
           onPress={() => setVisible(false)}
           appearance='ghost'
-          accessoryLeft={closeIcon}/>
-          
+          accessoryLeft={closeIcon}/>     
       </View>
     );
   };
-
   const cardFooter = (props) => {
     return(
       <View {...props} style={{...props.style, flexDirection: 'row', justifyContent: 'flex-end', padding: 8}}>
@@ -268,7 +244,6 @@ export const CreateProposalModal = ({setVisible, visible,}) => {
         style={{flex: 1, borderColor: theme['color-primary-default'], margin: 2}}
         header={cardHeader}
         footer={cardFooter}>
-        
         <Layout style={{flex: 1, padding: 8, width: 250}}>
           <Input
             size='medium'
@@ -277,14 +252,12 @@ export const CreateProposalModal = ({setVisible, visible,}) => {
             keyboardType='numeric'
             placeholder='Enter amount'
             />
-
           <Input
             size='medium'
             style={{marginVertical: 8}}
             status='primary'
             placeholder='Enter Charity address'
             />
-
           <Input
             multiline={true}
             textStyle={{minHeight: 64}}
@@ -292,8 +265,7 @@ export const CreateProposalModal = ({setVisible, visible,}) => {
             status='primary'
             placeholder='Enter the description'
             />
-        </Layout>
-        
+        </Layout>    
       </Card>
   </Modal>
   );
@@ -306,21 +278,18 @@ const closeIcon = (props) => {
 };
 ``` 
 
-Before we go on to all the Modal proposal to the Create Proposal Screen, we can code data input and validation logic for the input fields on the form.
+BBefore we move on to the Create Proposal screen, we can add data input and validation logic for the input fields on the form.
 
 Add the following code snippet after `useTheme()`;
 
-```
+```javascript
 const descriptionInput = useInputState('Description');
 const charityAddressInput = useInputState('Address');
 const amountInput = useInputState('Amount');
-
-  const addItem = () => {
-    if (amountInput.value == ''
+const addItem = () => {
+  if (amountInput.value == ''
       || descriptionInput.value.length < 20
       || charityAddressInput.value == '') {
-      
-
       return;
     }
     let newData = [...data];
@@ -329,19 +298,17 @@ const amountInput = useInputState('Amount');
       desc: descriptionInput.value,
       chaAdd: charityAddressInput.value
     });
-
     amountInput.setValue('');
     descriptionInput.setValue('');
     charityAddressInput.setValue('');
-
     setData(newData);
     setVisible(false);
   };
 ```
 
-On the Create Button, call the function to add an item: additem
+On the Create Button, we can call the addItem function to add an item.
 
-```
+```javascript
         <Button
          ...
           onPress={addItem}>
@@ -349,19 +316,17 @@ On the Create Button, call the function to add an item: additem
      </Button>
 ```
 
-On the input fields, pass the variable to set Input items:
+On the input fields, pass the relevant variable using [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to set the Input items:
 
-```
+```javascript
 <Input
      ...            
      placeholder='Enter amount'
      {...amountInput}/>
-
 <
      ...
      placeholder='Enter Charity address'
      {...charityAddressInput}/>
-
  <Input
       ...
       placeholder='Enter the description'
@@ -387,56 +352,53 @@ const useInputState = (name, initialValue = '') => {
 };
 ```
 
-After creating the Modal, we can then import it into the Create Proposal Screen and establish the state of the modal, by coding states to toggle it as `“visible”` and `“hidden”`. Here is how to get it done:
+After creating the Modal, we can then import it into the Create Proposal screen and establish the state of the modal, by adding states to toggle between `“visible”` and `“hidden”`. Here is how:
 
 First import the CreateProposal module into the Proposal page:
 
-```
+```javascript
 import { CreateProposalModal, ViewProposalModal } from '../components'; 
 ```
 
-Set a state to set the modal to visible when clicked
+Using React's [useState hook](https://reactjs.org/docs/hooks-state.html), the state of the Create modal can be set to visible when it is clicked.
 
-```
+```javascript
 const [createVisible, setCreateVisible] = React.useState(false);
-
 ```
+
 In the return statement inside of `Layout` add the CreateProposalModal Component and set the state of the component
 
-```
+```javascript
 <CreateProposalModal
-       setVisible={setCreateVisible}
-       visible={createVisible}/>
+  setVisible={setCreateVisible}
+  visible={createVisible}
+/>
 ```
 
 &nbsp;
 
 ## Profile Screen
-The Profile Screen contains an input field in which the user has to contribute some celo tokens (at least 5 Celo) to enable a user to become a contributor. This is the static elements of the Profile screen, we will update the User actions in the Redux section below.
+The Profile screen contains an input field through which users can contribute some celo tokens (at least 5 Celo) to become a contributor. Below are the static elements of the Profile screen. We will be adding the user actions in the Redux tutorial ahead.
 
 <img src="./images/profile-blank.jpeg" alt="drawing" width="300"/>
 <img src="./images/profile.jpeg" alt="drawing" width="300"/>
 
 
-The Profile Page is completely styled and contains cards which hold the different sections. The code is broken down below:
+The Profile screen is completely styled and makes use of cards for the different sections. Examine the code below:
 
-```
+```javascript
 import * as React from 'react';
 import { View, SafeAreaView } from 'react-native';
 import { Button, Card, Input, Layout, List, useTheme, Text, Spinner, ViewPager, Icon } from '@ui-kitten/components';
 
-
-export const ProfilePage = ({ navigation }) => {
-  
+export const ProfilePage = ({ navigation }) => {  
   const theme = useTheme();
-
   const cardItem = (info) => {
     return(
       <Card
         style={{borderColor: theme['color-primary-default'], marginVertical: 4}}
         footer={props => cardFooter(props, {for: info.item[3], against: info.item[4]})}
         onPress={() => getProposal(info.item[0])}>
-        
         <Text category='s2' numberOfLines={4} ellipsizeMode='tail'>{info.item[5]}</Text>
       </Card>
     );
@@ -558,15 +520,13 @@ The View Proposal modal component is imported into the Profile page and is displ
 
 Below is the code snippet to create the modal:
 
-```
+```javascript
 import * as React from 'react';
 import { View } from 'react-native';
 import { Button, Card, Icon, Input, Layout, Modal, Text, useTheme, Spinner } from '@ui-kitten/components';
 
 export const ViewProposalModal = ({setVisible, visible }) => {
-  
   const theme = useTheme();
-
   const cardHeader = (props) => {
     return(
       <View {...props} style={{...props.style, flex: 1, flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -581,7 +541,6 @@ export const ViewProposalModal = ({setVisible, visible }) => {
   };
 
   const cardFooter = (props) => {
-    
           return(
             <View {...props} style={{...props.style, flexDirection: 'row', justifyContent: 'space-around', padding: 8}}>
               <Button
@@ -606,13 +565,11 @@ export const ViewProposalModal = ({setVisible, visible }) => {
       visible={visible}
       backdropStyle={{backgroundColor: theme['color-primary-transparent-300']}}
       onBackdropPress={() => setVisible(false)}>
-      
       <Card
         disabled='true'
         style={{flex: 1, borderColor: theme['color-primary-default'], margin: 2}}
         header={cardHeader}
-        footer={cardFooter}>
-          
+        footer={cardFooter}> 
             <>
               <Layout style={{flex: 1, width: 250}}>
                 <Text style={{marginVertical: 8}}>Description: </Text>
@@ -620,14 +577,11 @@ export const ViewProposalModal = ({setVisible, visible }) => {
                 <Text style={{marginVertical: 8}} category='p2'>Proposer: </Text>
                 <Text style={{marginVertical: 8}} category='p2'>Charity: </Text>
               </Layout>
-
               <Layout style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around'}}>
                 <Text style={{color: theme['color-success-default']}}>For: </Text>
                 <Text style={{color: theme['color-danger-default']}}>Against: </Text>
               </Layout>
             </>
-          
-          
       </Card>
     </Modal>
   );
@@ -642,7 +596,7 @@ const closeIcon = (props) => {
 
 &nbsp;
 
-**Our Pages are thus complete! To be able to interact with the Smart Contract, we are using redux actions and reducers to connect with the functions in the smart contract. The next step with be to make these connections!**
+**All of our app pages are now complete! To be able to interact with the smart contract on Celo, we will use Redux actions and reducers to connect with the functions in the smart contract. The next tutorial covers Redux and how to make these connections between actions performed by users and the smart contract functionality.**
 
 [Part 4](./part-4)
 

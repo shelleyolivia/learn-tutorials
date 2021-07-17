@@ -295,11 +295,11 @@ The `CharityProposal` struct definition holds the necessary data that makes up e
 
 &nbsp;
 
-A group of four mapping type:
-`charityProposals` maps a uint256 value and a CharityProposal as key and value respectively. This holds the list of Proposals in the DAO. It uses the id of the Proposal as key and the Proposal itself as the value.
-`stakeholderVotes` maps the `address` of a Stakeholder to a list of the Proposals that address has voted on.
-`contributors` maps the Contributor addresses and the amounts they have sent into the DAO treasury.
-`stakeholders` maps the addresses and balances of Stakeholders.
+There are four mappings used:
+- `charityProposals` maps a uint256 value and a CharityProposal as key and value respectively. This holds the list of Proposals in the DAO. It uses the id of the Proposal as key and the Proposal itself as the value.
+- `stakeholderVotes` maps the `address` of a Stakeholder to a list of the Proposals that address has voted on.
+- `contributors` maps the Contributor addresses and the amounts they have sent into the DAO treasury.
+- `stakeholders` maps the addresses and balances of Stakeholders.
 
 ```
     event ContributionReceived(address indexed fromAddress, uint256 amount);
