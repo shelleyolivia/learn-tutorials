@@ -6,7 +6,7 @@
 
 In this tutorial we will be creating a **token** using the **Solana** blockchain. Tokens have many functionalties, such as a [social token](https://www.nasdaq.com/articles/social-tokens%3A-get-ready-for-the-next-massive-crypto-trend-2021-04-29), a [utility token](https://invao.org/token-classes-explained-coin-vs-utility-token-vs-security-token/), or a [coin](https://invao.org/token-classes-explained-coin-vs-utility-token-vs-security-token/).
 
-Solana has a Token Program, written in Rust, that will allow us to create our own token. 
+Solana has a Token Program, written in [Rust](https://www.rust-lang.org/), that will allow us to create our own token. 
 
 Note: If any command confuses you, it is normally possible to concatenate the command with **--help**.
 
@@ -19,7 +19,7 @@ solana --help
 
 * Basic familiarity with a [command-line interface](https://en.wikipedia.org/wiki/Command-line_interface)
 * Basic familiarity with Git & Github
-* Around $1 USD of [SOL](https://coinmarketcap.com/currencies/solana/) accessible
+* Around $1 USD of [SOL](https://coinmarketcap.com/currencies/solana/) accessible. You can get some SOL through an exchange, such as [FTX](https://ftx.com/#a=13426316).
 
 ## Requirements
 
@@ -33,7 +33,6 @@ solana --help
 First, we are going to create an SOL wallet, through the command line, to handle our transactions.
 
 * Install the **spl-token** CLI
-
 ```bash
 cargo install spl-token-cli
 ```
@@ -51,12 +50,11 @@ solana-keygen new
 
 We will now use the *pubkey* that was returned above to fund our wallet with SOL. The SOL is needed to pay for any changes we make to the blockchain, for example, the transaction that creates our token. 
 
-* I will be sending 0.1 SOL to this wallet from a [Sollet](https://chrome.google.com/webstore/detail/sollet/fhmfendgdocmcbmfikdcogofphimnkno?hl=en) browser wallet, where I have SOL already. You can get some SOL through an exchange, such as [FTX](https://ftx.com/en).
+* I will be sending 0.1 SOL to this wallet from a [Sollet](https://chrome.google.com/webstore/detail/sollet/fhmfendgdocmcbmfikdcogofphimnkno?hl=en) browser wallet, where I have SOL already.
 
 Note: FTX and Solana are closely linked; FTX's sister company Alameda Research is an investor in Solana, and FTX also operates its own decentralized exchange called Serum on the Solana blockchain.
 
 * Check the balance of the wallet
-
 ```bash
 solana balance pubKey
 ```
@@ -64,7 +62,6 @@ solana balance pubKey
 ### **3) Create the token**
 
 * Create the token, which will return the **tokenAddress**
-
 ```bash
 spl-token create-token
 ```
@@ -85,13 +82,11 @@ Your balance should be lower, indicating something happened. We paid for our tok
 Now we need to create an [account](https://docs.solana.com/developing/programming-model/accounts) that can work with the tokens. 
 
 * Create an account, which will return the **accountAddress**
-
 ```bash
 spl-token create-account tokenAddress
 ```
 
 * Check the balance of the wallet 
-
 ```bash
 solana balance pubKey
 ```
@@ -101,7 +96,6 @@ solana balance pubKey
 It's time to mint some tokens and send them around. For the mintAmount, I chose 1,000,000 for fun. This would be based off how big you expect your market cap to be.
 
 * Mint some tokens
-
 ```bash
 spl-token mint tokenAddress mintAmount recipientAddress
 ```
@@ -111,7 +105,6 @@ The recipientAddress would be the account you created to handle the tokens.
 Note: If you are lost on what any of these terms mean, refer to the note at the top of the page, which reminds it's always possible to use the **--help** command for more information.
 
 * For example 
-
 ```bash
 spl-token mint --help
 ```
@@ -125,7 +118,6 @@ Go ahead and check the wallet balance after this transaction if you'd like. Once
 It is crucial to prevent infinite minting of our token, once you have minted as much as needed.
 
 * Disable minting
-
 ```bash
 spl-token authorize tokenAddress mint --disable
 ```
@@ -133,7 +125,6 @@ spl-token authorize tokenAddress mint --disable
 This will show the mint authority, which should match the pubkey of your wallet. The new mint authority should now be disabled. 
 
 * Check token balance of existing accounts
-
 ```bash
 spl-token accounts
 ```
@@ -142,10 +133,9 @@ You should now see your token with the balance matching how much you minted. Che
 
 ### **7) Transfer token to browser wallet**
 
-This step is optional, but now we are going to send all of the token from our terminal-created wallet to our browser wallet. You must have some SOL in your browser wallet as well so it can automatically add the token. 
+This step is optional, but now we are going to send all of the token from our command-line-created wallet to our browser wallet. You must have some SOL in your browser wallet so it can automatically add the token. 
 
 * Send token to browser wallet
-
 ```bash
 spl-token transfer --fund-recipient tokenAddress transferAmount recipientAddress
 ```
@@ -160,7 +150,6 @@ After the transaction goes through, you should see your new token in your browse
 Our token is created and live on the blockchain, but Solana is not yet officially recognizing it. We need to get all the required information for the token ready for submission. 
 
 * Clone the [Solana token list](https://github.com/solana-labs/token-list) 
-
 ```bash
 git clone https://github.com/solana-labs/token-list
 ```
@@ -168,7 +157,6 @@ git clone https://github.com/solana-labs/token-list
 I cloned the repository to my desktop. 
 
 * The logo should be added in the token-list folder under 
-
 ```bash
 assets/mainnet/<mint address>/*.<png/svg>
 ```
@@ -176,7 +164,6 @@ assets/mainnet/<mint address>/*.<png/svg>
 The mint address is the tokenAddress we used before. Go ahead and name the file **logo.png** or **logo.svg**. It looks like they prefer be either of those file types. 
 
 * Go to the token list file 
-
 ```bash
 token-list/src/tokens/solana.tokenlist.json
 ```
@@ -194,7 +181,6 @@ Note: The link for the token image must be that exact format; just change the to
 * Fork the [token-list](https://github.com/solana-labs/token-list) repository to your Github
 
 * While still inside the token-list folder in the command line, set the url of your locally cloned token-list folder to the forked repository, for example: 
-
 ```bash
 git remote set-url origin https://github.com/jacobmakarsky/token-list
 ```
@@ -227,7 +213,7 @@ Congratulations! Your token is now on the way to being official. Only if we coul
 
 ### **9) BONUS: Add a market for your token on Serum**
 
-You've made it! Your token is live and has a name. It can now be sent around and used for whatever its utility may be. But, there is no market created for it to be traded. 
+You've made it! Your token is live and has a name. It can now be sent around and used for whatever its utility may be. But, there is no trading pair for the token to be traded on. 
 
 Note: It costs roughly **10-15 SOL** to create a market, which right now is around **$350 USD**. 
 
@@ -237,7 +223,9 @@ Note: It costs roughly **10-15 SOL** to create a market, which right now is arou
 
 The **Base Token Mint Address** will be your tokenAddress, and the **Quote Token Mint Address** will be what token you want your token paired to. I would use USDT for my example. 
 
-Once submitted, you should have a live market that can trade the tokens. I did not do this for my social token as I do not want it to be traded. 
+Once submitted, you should have a live market that can trade the tokens. 
+
+Note: I did not do this for my social token as I do not want it to be traded. 
 
 ## Conclusion
 
@@ -257,8 +245,8 @@ If you had any difficulties following this tutorial or simply want to discuss So
 
 ## References
 
-1) [Solana Token Program](https://spl.solana.com/token)
-2) [Loop Creative Andy](https://www.youtube.com/watch?v=1cn-HnG_yns)
+* [Solana Token Program](https://spl.solana.com/token)
+* [Loop Creative Andy](https://www.youtube.com/watch?v=1cn-HnG_yns)
 
 
 
