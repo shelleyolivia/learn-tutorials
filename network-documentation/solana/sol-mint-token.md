@@ -44,7 +44,7 @@ solana-keygen new
 	* You can enter a passphrase or just skip ahead and leave it empty. 
 	* Write the seed phrase down somewhere safe. 
 
-![walletCreationPhoto](../../../.gitbook/assets/createSOLWallet.png)
+![walletCreationPhoto](../../.gitbook/assets/createSOLWallet.png)
 
 ### **2) Fund the wallet**
 
@@ -66,7 +66,7 @@ solana balance pubKey
 spl-token create-token
 ```
 
-![tokenCreationPhoto](../../../.gitbook/assets/createSOLToken.png)
+![tokenCreationPhoto](../../.gitbook/assets/createSOLToken.png)
 
 After running this command, congrats! You have created your own token on Solana. But we can't stop here; there is so much more we can do with this.
 
@@ -170,7 +170,7 @@ token-list/src/tokens/solana.tokenlist.json
 
 * Add your token to the list like so:
 
-![addingTokenToListPhoto](../../../.gitbook/assets/SOLTokenList.png)
+![addingTokenToListPhoto](../../.gitbook/assets/SOLTokenList.png)
 
 Note: My example token will be a social token, so make sure to not copy that unless yours is one too.
 
@@ -201,7 +201,7 @@ You should see 2 changed files; your token changes and the logo image.
 
 * Ensure these details are correct, for example, the folder's name holding the logo image should exactly match your token address in the token list. 
 
-![tokenPullRequest](../../../.gitbook/assets/SOLPullRequest.png)
+![tokenPullRequest](../../.gitbook/assets/SOLPullRequest.png)
 
 We are now ready to create the pull request! 
 
