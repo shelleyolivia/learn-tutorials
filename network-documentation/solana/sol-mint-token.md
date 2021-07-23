@@ -109,7 +109,7 @@ Note: If you are lost on what any of these terms mean, refer to the note at the 
 spl-token mint --help
 ```
 
-![mintingTokensPhoto](../../../.gitbook/assets/mintSOLToken.png)
+![mintingTokensPhoto](../.././.gitbook/assets/mintSOLToken.png)
 
 Go ahead and check the wallet balance after this transaction if you'd like. Once your tokens have finished minting, it's time to think: What's stopping me from minting an infinite amount?
 
