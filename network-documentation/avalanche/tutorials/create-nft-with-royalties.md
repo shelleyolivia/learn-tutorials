@@ -72,45 +72,20 @@ Also, to get the royalties from smart contract add function royalties().
 
 Then compile the ERC721 smart contract and check for warnings, make sure the declared solidity version and compiler version are similar.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Now, Download and install the metamask wallet on your browser and connect to the Avalanche Fuji C-Chain. Make sure the parameters like Network Name, RPC URL, Chain ID etc. are exactly the same as shown in the image below.
- 
-
-
-
-
 
 Request AVAX from the test faucet for the gas fees for deployment.
 
+Pass the required params i.e. Token Name, Symbol and Royalties. Eg. "Peter", "PTR", 15 and then press the deploy button.
 
-
-Pass the required params i.e. Token Name, Symbol and Royalties. Eg. "GameItem", "ITM", 15 and then press the deploy button.
-
-
-
+![](/.gitbook/assets/ERC721-Deploy.png)
 
 Now, call the respective functions i.e. *name*, *royalties* and *symbol* from the deployed ERC721 smart contract.
 
+![](/.gitbook/assets/Deploy-And-Run-Transections.png)
 
+Now copy the address of the deployed contract and import that in the avalanche wallet. In the collectibles tab in the portfolio section.
 
-
-Now copy the address of the deployed contract and import that in the avalanche wallet. In the collectibles tab in the portfolio section. 
+![](/.gitbook/assets/Add-Collectibles.png)
 
 Congrats! You have successfully added the NFT as collectible in the avalanche wallet.
