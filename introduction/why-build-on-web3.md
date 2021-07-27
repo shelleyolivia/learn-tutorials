@@ -16,7 +16,7 @@ People are more connected than they have ever been in history. Today, 62% of the
 
 ## 🛑Problems with Web 2
 
-The innovation of Web 2 has given the world a tremendous positive impact, but its negative impact is becoming [**ever more present**](https://medium.com/@essentia1/web-2-0-is-broken-its-time-for-a-new-paradigm-shift-2a4b1fc2ff60). Issues around centralization, privacy, censorship, and ownership of digital goods have limited the previous utopian vision of the limitless connectivity that Web 2 offers.   
+The innovation of Web 2 has given the world a tremendous positive impact, but its negative impact is becoming [**ever more present**](https://medium.com/@essentia1/web-2-0-is-broken-its-time-for-a-new-paradigm-shift-2a4b1fc2ff60). Issues around centralization, privacy, censorship, and ownership of digital goods have limited the previous Utopian vision of the limitless connectivity that Web 2 offers.   
 
 
 ## ✅ Web 3 Solution

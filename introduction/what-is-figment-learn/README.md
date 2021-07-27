@@ -15,13 +15,12 @@ Many promising Web 3 protocols are getting to market and are looking to introduc
 
 ## 🚩 How Learn Helps
 
-Figment Learn aims to solve these problems by guiding developers throughout that process. With Learn, developers can understand which network is right for them and actually interact with the protocol at each step of their learning process. Newcomers are provided with a short curriculum in the form of tutorials which helps them set up their first DApp \(decentralized application\) via DataHub, even with little to no expertise on a given protocol. As they complete the tutorials, they earn tokens from their selected protocol to help align their interests with the protocol’s. 
+Figment Learn aims to solve these problems by guiding developers throughout that process. With Learn, developers can understand which network is right for them and actually interact with the protocol at each step of their learning process. Newcomers are provided with a short curriculum in the form of tutorials which helps them set up their first DApp \(decentralized application\) via DataHub, even with little to no expertise on a given protocol. 
 
 ## ⭐ Building the Web 3 Knowledge Base
 
-Figment Learn’s main objective is to build a community of missionaries where developers are not only incentivized to learn but also to share with others. In order to create the most comprehensive Web 3 knowledge base, we reward community members who publish tutorials to accelerate the pace of innovation in Web 3. Tutorial contributors earn protocol tokens for their efforts and grow their status as protocol experts among their peers. With this dual approach, Figment Learn ensures that developers can not only understand the basics of new protocols but also dig deeper into unique use cases that will spark the next wave of mainstream applications. Learn becomes the strongest alignment mechanism between protocols and its developer community who are now incentivized to see the value of the network and its tokens grow.   
-
-
+Figment Learn’s main objective is to build a community of missionaries where developers are not only incentivized to learn but also to share with others. In order to create the most comprehensive Web 3 knowledge base, we reward community members who publish tutorials to accelerate the pace of innovation in Web 3. Tutorial contributors earn respect within the community for their efforts and grow their status as protocol experts among their peers. With this dual approach, Figment Learn ensures that developers can not only understand the basics of new protocols but also dig deeper into unique use cases that will spark the next wave of mainstream applications. Learn becomes the strongest alignment mechanism between protocols and its developer community who are now incentivized to see the value of the network and its tokens grow.   
+  
 Get started today by reviewing available Pathways [**here**](https://learn.figment.io/figment-learn/pathways) ****or [**apply today**](https://learn.figment.io/figment-learn/contribute) ****to become a Learn contributor! 
 
 [**Subscribe**](https://datahub.figment.io/subscribe) to the Learn newsletter to be the first to know about new protocols launches, upcoming Pathways, and new tutorials! 

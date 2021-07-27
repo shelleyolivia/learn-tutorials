@@ -60,17 +60,30 @@ The Oasis Network is the first privacy-enabled blockchain platform for open fina
 
 {% page-ref page="oasis/" %}
 
+## ![](../.gitbook/assets/osmo.png) Osmosis
+
+Osmosis is an advanced AMM protocol built using the Cosmos SDK that will allow developers to design, build, and deploy their own customized AMMs.
+
+{% page-ref page="osmosis/" %}
+
 ## ![](../.gitbook/assets/4129.png) Polkadot
 
 Polkadot enables scalability by allowing specialized blockchains to communicate with each other in a secure, trust-free environment. It is built to connect and secure unique blockchains, whether they be public, permission-less networks, private consortium chains, or oracles and other Web3 technologies. It enables an internet where independent blockchains can exchange information under common security guarantees.
 
 {% page-ref page="polkadot/" %}
 
-## ![](https://firebasestorage.googleapis.com/v0/b/gitbook-28427.appspot.com/o/assets%2F-MIVL6JKxnpiaciltfue%2F-M_Wa6Nm4vPre3PsT_uZ%2F-M_WabchOF3cOdzI5RD_%2Fmatic_network.png?alt=media&token=7398136b-95ec-4f5f-ab74-0ce3feff4310) Polygon \(Matic\) <a id="polygon-matic"></a>
+## ![](../.gitbook/assets/polygon.png) Polygon \(Matic\) <a id="polygon-matic"></a>
 
 Polygon \(Matic\) Network is a sidechain-based scaling solution for public blockchains. It is based on an adapted implementation of Plasma framework. Polygon \(Matic\) provides scalability while ensuring a superior user experience in a secured and decentralized manner. It has a working implementation for Ethereum. Polygon intends to support other blockchains in the future which will enable it to provide interoperability features alongside offering scalability to existing public blockchains.
 
 {% page-ref page="matic/" %}
+
+## ![](../.gitbook/assets/provenance.png) Provenance
+
+Provenance is a public blockchain network designed and developed to support [financial service industry](https://docs.provenance.io/ecosystem/financial-services-blockchain) needs by providing a **ledger**, **registry**, and **exchange** across multiple financial assets and markets.   
+The Provenance blockchain is based on the Cosmos SDK and the Tendermint blockchain application platforms.
+
+{% page-ref page="provenance/" %}
 
 ## ![](../.gitbook/assets/logo1.png) Secret
 
@@ -78,13 +91,13 @@ Secret Network is the first blockchain with privacy-preserving smart contracts. 
 
 {% page-ref page="secret/" %}
 
-## ![](../.gitbook/assets/solana%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29%20%282%29.png) Solana
+## ![](../.gitbook/assets/solana%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29%20%282%29%20%282%29.png) Solana
 
 Solana is an open-source project implementing a new, high-performance, permissionless blockchain. It provides a platform that enables developers to create DApps without needing to design around performance bottlenecks.
 
 {% page-ref page="solana/" %}
 
-## ![](../.gitbook/assets/rsz_terra-logo%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29.jpg) Terra
+## ![](../.gitbook/assets/rsz_terra-logo%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29.jpg) Terra
 
 Terra is a blockchain protocol that supports stable programmable payments and open financial infrastructure development. One part of Terra’s value contributions, payments, in essence, replaces the complicated payments value chain, including credit card networks, banks, and payment gateways with a single blockchain layer.
 

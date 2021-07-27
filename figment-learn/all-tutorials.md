@@ -34,7 +34,7 @@ Cosmos provides tools that make it easy to build a new, custom-designed blockcha
 
 ## ![](../.gitbook/assets/matic_network.png) Polygon \(Matic\) Tutorials
 
-Polygon \(Matic\) Network is a sidechain scaling solution for public blockchains. It is based on an adapted implementation of the Plasma framework. Polygon \(Matic\) provides scalability while ensuring a superior user experience in a secured and decentralized manner.
+Polygon \(Matic\) Network is a sidechain scaling solution for public blockchains. It is based on an adapted implementation of the Plasma framework. Polygon provides scalability while ensuring a superior user experience in a secured and decentralized manner.
 
 {% page-ref page="../network-documentation/matic/tutorials/" %}
 
@@ -64,7 +64,7 @@ Secret Network is the first blockchain with privacy-preserving smart contracts. 
 
 **Get Started with** [**Secret on DataHub**](https://figment.io/datahub/secret-network/) **today!**
 
-## ![](../.gitbook/assets/solana%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29.png) Solana Tutorials
+## ![](../.gitbook/assets/solana%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29%20%282%29.png) Solana Tutorials
 
 Solana is an open-source project implementing a new, high-performance, permissionless blockchain.
 
@@ -72,7 +72,7 @@ Solana is an open-source project implementing a new, high-performance, permissio
 
 **Get Started with** [**Solana on DataHub**](https://figment.io/datahub/solana/) **today!**
 
-## ![](../.gitbook/assets/rsz_terra-logo%20%282%29%20%282%29%20%282%29%20%282%29.jpg) Terra Tutorials
+## ![](../.gitbook/assets/rsz_terra-logo%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29.jpg) Terra Tutorials
 
 Terra is a price-stable cryptocurrency that will power the next-generation payment network.
 

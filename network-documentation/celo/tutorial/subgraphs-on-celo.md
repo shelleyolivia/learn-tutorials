@@ -158,23 +158,21 @@ We will create a subgraph for a gravatar contract deployed on the Celo mainnet. 
 
    **Note**: Wait for the syncing to complete, otherwise you will see an empty result.
 
-6. How to use subgraphs in our apps? I've created a Postman public workspace for demonstration.
-   1. [Visit the Celo subgraph workspace](https://www.postman.com/cloudy-firefly-3880/workspace/the-graph-celo/request/9305744-4a75a867-c2b3-446b-be18-864c7e6550eb). You can try out the predefined queries by pressing the run button.
-   2. Press the code button on the right side. Select the language of your choice to get the generated code. For example we get this snippet for cURL. Paste it in your terminal \(Mac or Linux\) to see the result.
+6. How to use subgraphs in our apps? I've created a Postman public workspace for demonstration. 1. [Visit the Celo subgraph workspace](https://www.postman.com/cloudy-firefly-3880/workspace/the-graph-celo/request/9305744-4a75a867-c2b3-446b-be18-864c7e6550eb). You can try out the predefined queries by pressing the run button. 2. Press the code button on the right side. Select the language of your choice to get the generated code. For example we get this snippet for cURL. Paste it in your terminal \(Mac or Linux\) to see the result.
 
-      **Postman generate code button**
+   **Postman generate code button**
 
-      ![Postman generate code button](../../../.gitbook/assets/celo-subgraph-04-postman-code-button.png)
+   ![Postman generate code button](../../../.gitbook/assets/celo-subgraph-04-postman-code-button.png)
 
-      **Postman generated code results**
+   **Postman generated code results**
 
-      ![Postman generated code results](../../../.gitbook/assets/celo-subgraph-05-postman-generated-code.png)
+   ![Postman generated code results](../../../.gitbook/assets/celo-subgraph-05-postman-generated-code.png)
 
-      ```bash
+   ```bash
         curl --location --request POST 'https://api.thegraph.com/subgraphs/name/secretshardul/the-graph-celo' \
             --header 'Content-Type: application/json' \
             --data-raw '{"query":"{\n  gravatars(first: 5) {\n    id\n    owner\n    displayName\n    imageUrl\n  }\n}\n","variables":{}}'
-      ```
+   ```
 
 ## 4. Explanation
 
@@ -343,13 +341,11 @@ We will create a subgraph for a gravatar contract deployed on the Celo mainnet. 
 ## 5. Creating subgraphs for your own contracts
 
 1. Make changes to the contracts. You may want to edit or replace [Gravity.sol](https://github.com/secretshardul/the-graph-celo/blob/master/contracts/Gravity.sol) with your custom contract.
-2. Create a file `.env` which will contain environment variables. Look at [.env-template](https://github.com/secretshardul/the-graph-celo/blob/master/.env-template) for the required format. We need two variables:
-   1. `DATAHUB_API_KEY`: Sign up for Datahub and pick Celo from the available protocols. Copy the API key and paste it here. Datahub provides private RPCs for popular blockchains, letting us create high performance apps. We get a free tier of 100k requests per day.
-   2. `PRIVATE_KEY`: Private key of a Celo account. This is different from your Mnemonic. You will need real CELO tokens on this account since we are deploying to the mainnet.
+2. Create a file `.env` which will contain environment variables. Look at [.env-template](https://github.com/secretshardul/the-graph-celo/blob/master/.env-template) for the required format. We need two variables: 1. `DATAHUB_API_KEY`: Sign up for Datahub and pick Celo from the available protocols. Copy the API key and paste it here. Datahub provides private RPCs for popular blockchains, letting us create high performance apps. We get a free tier of 100k requests per day. 2. `PRIVATE_KEY`: Private key of a Celo account. This is different from your Mnemonic. You will need real CELO tokens on this account since we are deploying to the mainnet.
 
-      You can optionally look at [truffle.js](https://github.com/secretshardul/the-graph-celo/blob/master/truffle.js) to see how these parameters are used in code. This script is responsible for compiling our code and deploying it to Celo.
+   You can optionally look at [truffle.js](https://github.com/secretshardul/the-graph-celo/blob/master/truffle.js) to see how these parameters are used in code. This script is responsible for compiling our code and deploying it to Celo.
 
-      ```javascript
+   ```javascript
       require('babel-register')
       require('babel-polyfill')
       require('dotenv').config()
@@ -378,7 +374,8 @@ We will create a subgraph for a gravatar contract deployed on the Celo mainnet. 
                port: 9545,
                network_id: '*',
            },
-           alfajores: { // Not yet supported by The Graph
+           // Change network to celo-alfajores in subgraph.yaml for testnet support
+           celo-alfajores: {
                provider: alfajoresProvider,
                network_id: '44787',
                skipDryRun: true,
@@ -394,7 +391,8 @@ We will create a subgraph for a gravatar contract deployed on the Celo mainnet. 
            }
        }
       }
-      ```
+   ```
+
 3. Run the deployment script. This will build your contract and deploy it on Celo mainnet. Ensure that you have Celo tokens on your address.
 
    ```bash
@@ -473,9 +471,8 @@ We will create a subgraph for a gravatar contract deployed on the Celo mainnet. 
 
 ## 5. Caveats and considerations
 
-1. Alfajores and Baklava testnets are currently unsupported by The Graph. Use Ropsten or Rinkeby for test purposes.
-2. Deployed subgraphs can't be renamed or deleted, although they can be updated.
-3. Subgraphs only support reads/queries. You can't send transactions to update the blockchain state.
+1. Deployed subgraphs can't be renamed or deleted, although they can be updated.
+2. Subgraphs only support reads/queries. You can't send transactions to update the blockchain state.
 
 ## 6. Futher reading
 

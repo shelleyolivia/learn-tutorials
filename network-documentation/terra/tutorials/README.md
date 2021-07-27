@@ -18,8 +18,6 @@ Don't forget that you can try them out [**via Datahub**](https://datahub.figment
 
 ## Creating your first Terra account with the Terra SDK
 
-{% page-ref page="submit-your-first-transaction.md" %}
-
 ## Querying the Terra blockchain 
 
 {% page-ref page="setting-up-your-first-wallet.md" %}

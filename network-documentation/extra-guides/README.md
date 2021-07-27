@@ -4,11 +4,7 @@ description: A collection of guides to support your learning experience
 
 # 📚 Extra Guides
 
-## Review our extra guides!
-
-Sometimes tutorials do not cover all the pre-requisites in details, or you might need some help to streamline debugging. 
-
-Here's a collection of extra guides to support your learning experience. Let's make sure you can spend most of your time learning and building! 
+Sometimes tutorials do not cover all the pre-requisites in details, or you might need some help to streamline debugging or use specific software. Here is a collection of extra guides to support your learning experience. We want to make sure you can spend more of your time learning and building! 
 
 ## Blockchain Fundamentals
 
@@ -21,10 +17,6 @@ Here's a collection of extra guides to support your learning experience. Let's m
 ## **5XX Retry Logic Best Practices**
 
 {% page-ref page="5xx-retry-logic-best-practices/" %}
-
-## Getting started with BrightID
-
-{% page-ref page="getting-started-with-brightid.md" %}
 
 ## dotenv and .env
 
