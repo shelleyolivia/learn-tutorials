@@ -34,7 +34,7 @@ Get the balance of the currently selected account in Metamask and display it on 
 **Imagine this scenario:** You know you have a big balance. You need to show that balance so you can brag about it to all your awesome web3 developer friends!
 
 {% hint style="info" %}
-In `components/protocols/polygon/3_Balance.jsx`, implement the`checkBlance`function :  
+In `components/protocols/polygon/steps/3_Balance.jsx`, implement the`checkBlance`function :  
   
 **Need some help?** Check out these two links  
   **→ Get an** [**account balance**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getBalance) **using ethers  
