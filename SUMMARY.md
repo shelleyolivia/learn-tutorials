@@ -160,6 +160,7 @@
       * [Entry points](network-documentation/cosmos/tutorials/untitled-3/untitled-5.md)
       * [go.mod and Makefile](network-documentation/cosmos/tutorials/untitled-3/untitled-2.md)
       * [Run REST routes](network-documentation/cosmos/tutorials/untitled-3/untitled.md)
+    * [Build a nameservice app](network-documentation/cosmos/tutorials/build-a-nameservice-app.md)
     * [Create a transaction search widget](network-documentation/cosmos/tutorials/create-a-transaction-search-widget.md)
 * [💾 Filecoin](network-documentation/filecoin/README.md)
   * [✏️ Filecoin 101](network-documentation/filecoin/filecoin-101.md)
