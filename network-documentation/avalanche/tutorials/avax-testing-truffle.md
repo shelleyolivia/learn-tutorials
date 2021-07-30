@@ -91,13 +91,13 @@ We have five test cases in total, two to validate that our constructor() and add
 
 Running `truffle init` in the previous article created the basic directories necessary for smart contract development. One of these directories is the `test` directory. We'll need to navigate to this directory as it is the specialized directory for test files:
 
-```bash
+```text
 cd test
 ```
 
 Create a new file:
 
-```bash
+```text
 touch TestElection.sol
 ```
 
@@ -175,7 +175,7 @@ This shows that our test passed as expected.
 
 ### Heres a sample of what the output could be if the test case failed
 
-```bash
+```text
 Using network 'development'.
 
 
