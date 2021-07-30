@@ -136,6 +136,7 @@
       * [App](network-documentation/cosmos/tutorials/build-a-scavenger-game/app.md)
       * [Run](network-documentation/cosmos/tutorials/build-a-scavenger-game/run.md)
       * [Play](network-documentation/cosmos/tutorials/build-a-scavenger-game/play.md)
+    * [Build a scavenger game](network-documentation/cosmos/tutorials/build-a-scavenger-game-1.md)
     * [Build a nameservice application](network-documentation/cosmos/tutorials/untitled-3/README.md)
       * [Application Goals](network-documentation/cosmos/tutorials/untitled-3/application-goals.md)
       * [Start your application](network-documentation/cosmos/tutorials/untitled-3/start-your-application.md)
