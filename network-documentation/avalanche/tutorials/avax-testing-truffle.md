@@ -5,23 +5,23 @@ description: >-
 
 # How to Write Unit-Tests for Smart Contracts in Avalanche
 
-## Introduction
+# Introduction
 
 Unit testing is a software testing method where individual units or components of the software are tested. The purpose of unit tests is to validate that each unit of the software performs as designed.
 
-In smart contract development, good Unit tests are very critical. Given that smart contracts are immutable once deployed and are often responsible for managing huge sums of money, writing good unit tests cannot be over-emphasized.
+In smart contract development, a comprehensive set of unit tests for each function are critical. Given that smart contracts are immutable once the bytecode is deployed and they can be responsible for managing rather large sums of money, writing good unit tests cannot be over-emphasized.
 
-A thorough understanding of the smart contract being tested is very important to the effectiveness of the test. Steps must be taken to document what the smart contract does and how it does it. The next step is to map out each test to correspond with the contract’s functionality. In this tutorial, we will follow these outlined steps to write unit tests that cover the functionality of our contract.
+A thorough understanding of the smart contract being tested is very important to the effectiveness of the test. Steps must be taken to document what the smart contract does and how it does it. The next task is to map out each test to correspond with the contract’s functionality. In this tutorial, we will follow these outlined steps to write unit tests that cover the complete functionality of our contract.
 
-## **Prerequisites**
+# **Prerequisites**
 
-This tutorial builds on a previously written tutorial on avalanche, so before we proceed any further make sure to complete &mdash; <cite>[Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite][1]</cite>.
+This tutorial builds on a previously written tutorial on avalanche, so before we proceed any further make sure to complete - [Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite][1].
 
-## Breaking It Down
+# Breaking It Down
 
-As pointed out above, a thorough understanding of the contract is required to write effective unit tests. Here, we'll break down our smart contract into separate units and map out each of our tests to correspond with the contract's functionality. If you followed the previous tutorial, you have a basic understanding of what the contract does and how. Let's go ahead and break down the contract to figure out what we need to test for.
+As pointed out above, a thorough understanding of the contract is required to write effective unit tests. Here, we'll break down our smart contract into separate units and map out each of our tests to correspond with the contract functions. If you followed the previous tutorial, you have a basic understanding of what the contract does and how. Let's go ahead and break down the contract to figure out what we need to test for.
 
-In the `Election.sol` file, we have one constructor and two functions:
+In the `Election.sol` file from the Avalanche e-voting dApp we mentioned, there is a constructor and two functions, `addCandidate()` and `vote()`:
 
 ```javascript
 constructor(string[] memory _nda, string[] memory _candidates) {
@@ -49,15 +49,15 @@ function vote(uint256 _candidate) public {
 }
 ```
 
-The `constructor(_nda, _candidates)` handles the instantiation of a new Election contract, it declares two `array of string` parameters named `_nda` and `_candidates` respectively. The constructor is responsible for setting values for an Election such as `name`, `description` and `candidates`. It is apparent from this that we need a unit test that validates that when instantiated, the contract variables are set to the values passed to the constructor through the arguments.
+The `constructor(_nda, _candidates)` handles the instantiation of a new Election contract, it declares two arrays of strings named `_nda` and '\_candidates`respectively. The constructor is responsible for setting values for an Election such as `name`, `description`and`candidates`. It is apparent from this that we need a unit test that validates that when instantiated, the contract variables are set to the same values passed to the constructor through the arguments.
 
-The `addCandidate(_name)` function takes a `string` argument named `_name` - the name of the candidate - its function is to add a candidate to the `candidates mapping` variable. The function is called in the constructor so we can validate that it works as expected from the constructor test case.
+The `addCandidate(_name)` function takes a `string` argument named `_name`, the name of the candidate. It will add a candidate to the `candidates mapping` variable and increment the `candidatesCount`. Because this function is called in the constructor, we can validate that it works as expected from the constructor test case.
 
-The `vote(_candidate)` function takes a uint256 argument named `_candidate`. This function is used to increment the total numbers of votes a candidate has and also adds the address of the voter to the `voters` mapping. Testing this will require a unit test that calls this function and validates that the necessary variables are set to the arguments passed to the function. One more thing we need to do here is to find a way to test for the two `require()` statements to make sure the function fails according to the rule.
+The `vote(_candidate)` function takes a uint256 argument named '\_candidate`. This function is used to increment the total numbers of votes a candidate has and also adds the address of the voter to the `voters mapping`. Testing this will require the function to be called to validate the variables being set to the arguments as they are passed to the function. One more thing we need to do here is to test for the two `require()` statements to make sure the function fails according to the rule.
 
 We can map out the above to the following test cases:
 
-`Contructor()` test case
+`contructor()` test case
 
 ```
 when the contract is instantiated  with (["US Election", "Presidential Election"], ["Satoshi", "Musk"])
@@ -68,7 +68,7 @@ when the contract is instantiated  with (["US Election", "Presidential Election"
 
 ```
 
-`Vote()` test cases
+`vote()` test cases
 
 ```
 when the contract is instantiated  with (["US Election", "Presidential Election"], ["Satoshi", "Musk"])
@@ -85,9 +85,9 @@ when the contract is instantiated  with (["US Election", "Presidential Election"
       it should revert
 ```
 
-We have five test cases in total, two to validate that our `constructor()` and `addCandidate()` function work as expected, the other three to validate the functionality of the `vote()` function.
+We have five test cases in total, two to validate that our constructor() and addCandidate() function work as expected, the other three to validate the functionality of the vote() function.
 
-## Writing the unit-tests in Solidity.
+# Writing the unit-tests in Solidity.
 
 Running `truffle init` in the previous article created the basic directories necessary for smart contract development. One of these directories is the `test` directory. We'll need to navigate to this directory as it is the specialized directory for test files:
 
@@ -138,11 +138,13 @@ function testConstructor() public {
 }
 ```
 
-Test cases in Solidity are Solidity functions with one or more assert statements. As the case mapping in the [Breaking It Down](#breaking-it-down) section suggested, We instantiate a new Election contract with the necessary values and then use the Truffle Assertion library to validate that the `name` and `description` variables of the contract has the values as those used to instantiate the contract. The signature of the `Assert.equal()` function is `equal(string memory a, string memory b, string memory message) internal returns (bool result)`. The function compares `a` and `b` returns true/false depending on the result of the comparison.
+Test cases in Solidity are Solidity functions with one or more assert statements. As the case mapping in the [Breaking It Down](#breaking-it-down) section suggested, We instantiate a new Election contract with the necessary values and then use the Truffle Assertion library to validate that the `name` and `description` variables of the contract has the values as those used to instantiate the contract.
+
+The signature of the `Assert.equal()` function is `equal(string memory a, string memory b, string memory message) internal returns (bool result)`. The function compares `a` and `b` returns true/false depending on the result of the comparison.
 
 Running the test with the `truffle test` command yields the following result:
 
-```bash
+```text
 Using network 'development'.
 
 
@@ -209,11 +211,11 @@ Compiling your contracts...
       at Context.<anonymous> (/Users/mac/.nvm/versions/node/v14.15.3/lib/node_modules/truffle/build/webpack:/packages/core/lib/testing/SolidityTest.js:92:1)
 ```
 
-This informs us that the comparison failed as the two values being compared are not the same.
+This informs us that the comparison failed as the two values are not the same.
 
 {% endhint %}
 
-Our second test case is the for the private `addCandidate()` function:
+Our second and slightly more involved test case is for the private `addCandidate()` function:
 
 ```javascript
 function testAddCandidate() public {
@@ -278,17 +280,19 @@ function testVoteFailIfVoted() public {
 }
 ```
 
-What we are testing here is whether the `vote()` function fails as necessary when an address is used to vote twice. To do that, we instantiate the contract, vote for a candidate twice. the second call to vote should fail for this test to pass. To test the exception, we first get access to the function selector with `bytes4 selector = election.vote.selector;`, encode the selector with `bytes memory data = abi.encodeWithSelector(selector, uint256(0));` then make an external call with the returned data from the second step with `(bool success, ) = address(election).call(data);`, lastly we validate that the transaction failed with `Assert.isFalse(success, "Should be false");`
+What we are testing here is whether the `vote()` function fails as necessary when an address is used to vote twice. To do that, we instantiate the contract and call `vote()` for the same candidate twice. The second call must fail for this test to pass.
 
-## **Conclusion**
+To test the exception, we first get access to the function selector with `bytes4 selector = election.vote.selector;`, encode the selector with `bytes memory data = abi.encodeWithSelector(selector, uint256(0));` then make an external call with the returned data from the second step with `(bool success, ) = address(election).call(data);`, lastly we validate that the transaction failed with `Assert.isFalse(success, "Should be false");`
 
-There you go, I believe congratulations are in order. You made it to the end of this short but interesting article on writing unit tests for smart contracts in Avalanche!.
+# **Conclusion**
 
-## What's Next?
+Congratulations! You've made it to the end of this short but informative tutorial on writing unit tests for smart contracts in Avalanche!
 
-Though this article does its best to outline the steps involved in writing unit tests for smart contracts, nothing solidifies your knowledge in this new world of testing more than picking up some contracts and coming up with test cases for them. I also suggest you head on to the project repo on [Github][4]. The repo contains Javascript test files in case you're interested in writing test cases in javascript.
+# What's Next?
 
-## About The **Author**
+Though this tutorial covers the basics involved in writing unit tests for smart contracts, nothing solidifies your knowledge of testing more than reading some existing code & coming up with test cases. It is also recommended to head over to the project repository on [Github][4]. The repo contains Javascript test files in case you're interested in writing test cases in Javascript.
+
+# About The **Author**
 
 This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/segun-ogundipe) and on [GitHub](https://github.com/segun-ogundipe)
 
