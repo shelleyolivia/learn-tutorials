@@ -34,10 +34,6 @@ Each Learn Pathway is a short curriculum that helps developers understand which 
 
 {% page-ref page="network-documentation/polkadot/polkadot-pathway.md" %}
 
-**Ongoing Pathway: Polygon \(Matic\)**
-
-{% page-ref page="network-documentation/matic/polygon-matic-pathway/" %}
-
 **Ongoing Pathway: Avalanche**
 
 {% page-ref page="network-documentation/avalanche/avalanche-pathway.md" %}
