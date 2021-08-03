@@ -878,7 +878,7 @@ And last the markup that defines the buttons and labels, defines 3 buttons for a
 
 You can interact with the interface and see the contract behavior:
 
-![](../../../.gitbook/assets/celo-vault-dapp%20%281%29.gif)
+![](../../../.gitbook/assets/celo-vault-dapp.gif)
 
 You can verify that the constraints of the contract are preserved, like the min time-locked, not existent IDs, already withdrawn lockers, etc.
 

@@ -12,13 +12,13 @@ Click on the icon in the upper-right corner of the page to copy the hexadecimal 
 
 ![](../../../.gitbook/assets/click_to_copy.png)
 
-Visit [https://faucet.matic.network/](https://faucet.matic.network/) and paste the address from your selected account in Metamask into the textinput. It is OK to leave the default options for MATIC tokens and the Mumbai network selected. Click the Submit button, then click again below to confirm the transaction. 
+Visit [https://faucet.matic.network/](https://faucet.matic.network/) and paste the address from your selected account in Metamask into the textinput. It is OK to leave the default options for MATIC tokens and the Mumbai network selected. Click the Submit button, then click again below to confirm the transaction.
 
 {% hint style="warning" %}
-Sometimes the transaction response on the faucet website returns an `[Object object]` - when this happens, simply refresh the page and try again. 
+Sometimes the transaction response on the faucet website returns an `[Object object]` - when this happens, simply refresh the page and try again.
 {% endhint %}
 
-Once this transaction is confirmed, you will have 0.1 MATIC on the Mumbai testnet!   
+Once this transaction is confirmed, you will have 0.1 MATIC on the Mumbai testnet!  
 You will want to patiently repeat this process four more times, waiting about a minute between attempts to avoid being greylisted by the faucet. You will want to have about 0.5 MATIC to complete the Pathway.
 
 ## Account Balances
@@ -34,11 +34,11 @@ Get the balance of the currently selected account in Metamask and display it on 
 **Imagine this scenario:** You know you have a big balance. You need to show that balance so you can brag about it to all your awesome web3 developer friends!
 
 {% hint style="info" %}
-In `components/protocols/polygon/steps/3_Balance.jsx`, implement the`checkBlance`function :  
-  
+In `components/protocols/polygon/steps/3_Balance.jsx`, implement the`checkBlance`function :
+
 **Need some help?** Check out these two links  
-  **→ Get an** [**account balance**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getBalance) **using ethers  
-  → Format the balance using** [**ethers.utils.formatEther**](https://docs.ethers.io/v5/api/utils/display-logic/#unit-conversion)\*\*\*\*
+**→ Get an** [**account balance**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getBalance) **using ethers  
+→ Format the balance using** [**ethers.utils.formatEther**](https://docs.ethers.io/v5/api/utils/display-logic/#unit-conversion)\*\*\*\*
 {% endhint %}
 
 {% tabs %}
@@ -49,12 +49,12 @@ const checkBalance = async () => {
   setFetching(true)
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const selectedAddress = window.ethereum.selectedAddress;
-    
+
   // TODO
   // Define those two variables
   const selectedAddressBalance = undefined
   const balanceToDisplay = undefined
-    
+
   setBalance(balanceToDisplay);
   setFetching(false)
 }
