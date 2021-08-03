@@ -1,9 +1,9 @@
 ---
 description: >-
-  Write unit test for smart contract on the avalanche network using Solidity and Truffle
+  How to write unit tests for smart contract in Solidity
 ---
 
-# How to Write Unit-Tests for Smart Contracts in Avalanche
+# Unit Testing in Solidity
 
 # Introduction
 
