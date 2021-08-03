@@ -60,6 +60,7 @@
     * [Creating An NFT—Part 1](network-documentation/avalanche/tutorials/creating-an-nft-part-1.md)
     * [Create NFTs with the Avalanche Wallet](network-documentation/avalanche/tutorials/create-nfts-with-the-avalanche-wallet.md)
     * [Create, Mint and Transfer NFTs with the Avalanche Wallet](network-documentation/avalanche/tutorials/create-mint-transfer-nft.md)
+    * [Create an NFT with royalties on Avalanche using Remix IDE](network-documentation/avalanche/tutorials/create-nft-with-royalties.md)
     * [Making an e-Voting dApp on Avalanche Fuji network using Trufflesuite](network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle.md)
     * [Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite](network-documentation/avalanche/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle.md)
     * [Create a Voting dApp on Avalanche using ReactJS](network-documentation/avalanche/tutorials/advanced-evoting-avalanche-reactjs.md)
