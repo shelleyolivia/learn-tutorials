@@ -6,11 +6,16 @@ description: 'Learn how to create an NFT with royalties on Avalanche.'
 
 ## Introduction
 
-NFT is an ERC721 token which is a form of “art” that can be a picture, tweet, audio, etc in a broader perspective. A non-fungible token \(NFT\) is a unit of data on a digital ledger called blockchain, where each NFT represents something unique item, that can’t be interchanged. This enables many use cases that would be impossible with interchangeable tokens, like utility, proof of ownership, and a unique asset transaction history. Refer to the below link to learn more about [ERC-721 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/).
+An ERC721 token is a type of Non-Fungible Token (NFT) which can contain or reference metadata in the form of art or digital content such as pictures, audio, social media posts, websites and even generative art projects in a broader perspective - even Virtual Reality and Augmented Reality!
+
+An NFT is represented by a discrete unit of data on a digital ledger known as a blockchain, where each token represents some unique digital properties, that cannot be interchanged.
+These tokens enable many use cases that would be impossible with interchangeable or "fungible" tokens, like specific utility, proof of ownership, and a unique asset transaction history.
+
+Refer to the official Ethereum developer documentation to learn more about [ERC-721 tokens](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/).
 
 ## Prerequisites
 
-In preparation for the tutorial, we will need to have some basic understanding of Remix IDE and smart contracts. Please refer to the documentation for more information on the Avalanche wallet, [here](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask).
+In preparation for the tutorial, you will need to have a basic understanding of [Remix IDE](https://remix.ethereum.org/) and Solidity [smart contracts](https://solidity-by-example.org/). Please refer to the Avalanche [smart contract tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) for more information on the Avalanche wallet.
 
 ## Write a smart contract using Remix IDE
 
@@ -46,7 +51,7 @@ contract GameItem is ERC721URIStorage {
 }
 ```
 
-Open file ERC721.sol to declare royalties in contract.
+Open the file ERC721.sol to declare a royalties variable in the contract.
 
 ```
 contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
@@ -63,7 +68,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     uint8 private _royalties;
 ```
 
-After declaration of royalties in contract ERC721 initialize uint8 royalties in constructor.
+After declaring the royalties variable in the ERC721 contract, we must also initialize it in the constructor.
 
 ```
     constructor(string memory name_, string memory symbol_, uint8 royalties_) {
@@ -74,7 +79,7 @@ After declaration of royalties in contract ERC721 initialize uint8 royalties in 
 ```
 
 
-Also, to get the royalties from smart contract create function royalties().
+To get the current value of the royalties variable from the smart contract, create a function royalties().
 
 ```
     function royalties() public view virtual returns (uint8) {
@@ -82,11 +87,11 @@ Also, to get the royalties from smart contract create function royalties().
     }
 ```
 
-Then compile the ERC721 smart contract and check for warnings, make sure the declared solidity version and compiler version are similar.
+We can now compile the amended ERC721 smart contract and check for warnings, making sure the declared solidity version and compiler version are similar. The Solidity compiler uses [semantic versioning](http://semver.org/), so be aware that for example the version strings ```0.8.0``` and ```^0.8.0``` are not equal.
 
-Now, download and install the metamask wallet on your browser and connect to the Avalanche Fuji C-Chain. Make sure the parameters like Network Name, RPC URL, Chain ID etc. are exactly the same as per the Avalanche Docs.
+Next, download and install the Metamask wallet for your browser. Create a new wallet in Metamask, then [follow our quick guide](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask) to connect to the Avalanche Fuji C-Chain
 
-Request AVAX from the test faucet for the deployment, [here](https://faucet.avax-test.network/).
+Request AVAX from the test faucet for the deployment, from https://faucet.avax-test.network/.
 
 Pass the required params i.e. Token Name, Symbol and Royalties. Eg. "Peter", "PTR", 15 and then press the deploy button.
 
@@ -96,15 +101,15 @@ Now, call the respective functions i.e. *name*, *royalties* and *symbol* from th
 
 ![](/.gitbook/assets/Deploy-And-Run-Transections.png)
 
-Now copy the address of the deployed contract and import that in the avalanche wallet. In the collectibles tab in the portfolio section inside your [Avalanche Wallet](https://wallet.avax.network/).
+Copy the address of the deployed contract to import in the Avalanche wallet. It should now appear on the collectibles tab in the portfolio section inside your [Avalanche wallet](https://wallet.avax.network/).
 
 ![](/.gitbook/assets/Add-Collectibles.png)
 
-Congrats! You have successfully added the NFT as collectible in the avalanche wallet.
+Congratulations! You have successfully added the NFT as collectible in the Avalanche wallet.
 
 ## Summary
 
-Now, you should know how to create NFT with royalties using a smart contract. Have fun with it! If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out this [Avalanche NFT tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/create-mint-transfer-nft)!.
+Thank you for completing this tutorial, you should now know how to create an NFT with royalties on Avalanche using a simple Solidity smart contract. Have fun with it! If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out this [Avalanche NFT tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/create-mint-transfer-nft)!.
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
 
