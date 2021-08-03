@@ -19,7 +19,7 @@ In preparation for the tutorial, you will need to have a basic understanding of 
 
 ## Write a smart contract using Remix IDE
 
-In the Remix IDE, compile and deploy an ERC721 smart contract imported from OpenZeppelin.
+In the Remix IDE, create an ERC721 smart contract imported from OpenZeppelin.
 
 ```
 // contracts/GameItem.sol
@@ -51,7 +51,14 @@ contract GameItem is ERC721URIStorage {
 }
 ```
 
-Open the file ERC721.sol to declare a royalties variable in the contract.
+![](/.gitbook/assets/create-ERC721-contract.png)
+
+Go to the second tab in the left sidebar to compile and install dependecies.
+
+![](/.gitbook/assets/compile-and-install-deps.png)
+
+Open the file ERC721.sol in the ```.deps/npm/openzeppelin/contracts/token/ERC721/ERC721.sol``` 
+directory to declare a royalties variable in the contract.
 
 ```
 contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
