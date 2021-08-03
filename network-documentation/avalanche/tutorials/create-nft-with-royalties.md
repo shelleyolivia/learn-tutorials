@@ -68,6 +68,8 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     uint8 private _royalties;
 ```
 
+![](/.gitbook/assets/add-royalties-ERC721.png)
+
 After declaring the royalties variable in the ERC721 contract, we must also initialize it in the constructor.
 
 ```
@@ -78,6 +80,7 @@ After declaring the royalties variable in the ERC721 contract, we must also init
     }
 ```
 
+![](/.gitbook/assets/initialize-royalties-ERC721.png)
 
 To get the current value of the royalties variable from the smart contract, create a function royalties().
 
@@ -88,6 +91,8 @@ To get the current value of the royalties variable from the smart contract, crea
 ```
 
 We can now compile the amended ERC721 smart contract and check for warnings, making sure the declared solidity version and compiler version are similar. The Solidity compiler uses [semantic versioning](http://semver.org/), so be aware that for example the version strings ```0.8.0``` and ```^0.8.0``` are not equal.
+
+![](/.gitbook/assets/compile-ERC721.png)
 
 Next, download and install the Metamask wallet for your browser. Create a new wallet in Metamask, then [follow our quick guide](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask) to connect to the Avalanche Fuji C-Chain
 
