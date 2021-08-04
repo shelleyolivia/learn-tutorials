@@ -1,5 +1,7 @@
 ---
-description: How to write unit tests for smart contract in Solidity
+description: >-
+  How to write unit tests for Solidity smart contracts using Truffle's
+  Assertions
 ---
 
 # Unit Testing in Solidity
