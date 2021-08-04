@@ -53,7 +53,7 @@ Now use `npm` to install other dependencies
 npm install express dotenv @truffle/hdwallet-provider --save
 ```
 
-Lastly, create a boilerplace truffle project:
+Lastly, create a boilerplate Truffle project with:
 
 ```bash
 truffle init
