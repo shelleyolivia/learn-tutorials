@@ -97,9 +97,19 @@ cd test
 
 Create a new file:
 
+{% tabs %}
+{% tab title="Linux/macOS Terminal" %}
 ```text
 touch TestElection.sol
 ```
+{% endtab %}
+
+{% tab title="Windows Terminal" %}
+```
+type NUL > TestElection.sol
+```
+{% endtab %}
+{% endtabs %}
 
 Open the TestElection.sol file with your favourite code editor and add the following lines:
 
@@ -115,12 +125,11 @@ contract TestElection {
 }
 ```
 
-Truffle provides us with a default assertion library in `truffle/Assert.sol` which we imported in the third line of the code. You can find all available assertion functions in [Assert.sol](https://github.com/trufflesuite/truffle/blob/develop/packages/resolver/solidity/Assert.sol). We also added an import for the contract we are going to test against in the fourth line. Assertion libraries are packages that contain functions we can use to verify that things are correct.
+Truffle provides us with a default assertion library in `truffle/Assert.sol` which we imported in the fourth line of the code. You can find all available assertion functions in [Assert.sol](https://github.com/trufflesuite/truffle/blob/develop/packages/resolver/solidity/Assert.sol). We also added an import for the contract we are going to test against on line 5. The Assertion libraries are packages that contain functions we can use to verify our contract and that the expected results are correct.
 
-In the fifth line, we declared the name of the test contract as `TestElection`. Preceding the name of the contract with `Test` lets the test runner know this is going to be a test suite.
+On line 7, we declare the name of the test contract as `TestElection`. Preceding the name of the contract with `Test` lets the test runner \(Truffle\) know this is going to be a test suite. Now we are ready to start writing our test cases. The first test case we are going to write is the constructor test case:
 
-Now we are ready to start writing our test cases. The first test case we are going to write is the constructor test case:
-
+{% code title="test/TestElection.sol" %}
 ```javascript
 function testConstructor() public {
     string[] memory nda = new string[](2);
@@ -137,12 +146,13 @@ function testConstructor() public {
     Assert.equal(election.description(), "US presidential election", "Name should be US presidential election");
 }
 ```
+{% endcode %}
 
-Test cases in Solidity are Solidity functions with one or more assert statements. As the case mapping in the [Breaking It Down](avax-testing-truffle.md#breaking-it-down) section suggested, We instantiate a new Election contract with the necessary values and then use the Truffle Assertion library to validate that the `name` and `description` variables of the contract has the values as those used to instantiate the contract.
+Test cases in Solidity are functions with one or more assert statements. As the case mapping in the [Breaking It Down](avax-testing-truffle.md#breaking-it-down) section suggested, we instantiate a new Election contract with the necessary values and then use the Truffle Assertion library to validate that the `name` and `description` variables of the contract have the same values as those used to instantiate the contract.
 
-The signature of the `Assert.equal()` function is `equal(string memory a, string memory b, string memory message) internal returns (bool result)`. The function compares `a` and `b` returns true/false depending on the result of the comparison.
+The signature of the `Assert.equal()` function is `equal(string memory a, string memory b, string memory message) internal returns (bool result)`The function compares `a` and `b` returns true/false depending on the result of the comparison.
 
-Running the test with the `truffle test` command yields the following result:
+Before running the test, make sure to run the command `truffle develop` in a separate terminal window, as the Truffle tests will default to using a local development blockchain. Running the available test with `truffle test` should yield the following result:
 
 ```text
 Using network 'development'.
@@ -168,49 +178,7 @@ Compiling your contracts...
 1 passing (34s)
 ```
 
-This shows that our test passed as expected.
-
-{% hint style="info" %}
-### Heres a sample of what the output could be if the test case failed
-
-```text
-Using network 'development'.
-
-
-Compiling your contracts...
-===========================
-✔ Fetching solc version list from solc-bin. Attempt #1
-> Compiling ./contracts/Election.sol
-> Compiling ./contracts/Migrations.sol
-> Compiling ./test/TestElection.sol
-✔ Fetching solc version list from solc-bin. Attempt #1
-> Artifacts written to /var/folders/2z/5tb906js0c9_4y8q_y2hj4l40000gn/T/test--48586-m42AhmyIu6IK
-> Compiled successfully using:
-   - solc: 0.8.6+commit.11564f7e.Emscripten.clang
-
-
-
-  TestElection
-✔ Fetching solc version list from solc-bin. Attempt #1
-✔ Fetching solc version list from solc-bin. Attempt #1
-    1) testConstructor
-    > No events were emitted
-
-
-  0 passing (26s)
-  1 failing
-
-  1) TestElection
-       testConstructor:
-     Error: Name should be US Election (Tested: US Election, Against: US Electio)
-      at checkResultForFailure (/Users/mac/.nvm/versions/node/v14.15.3/lib/node_modules/truffle/build/webpack:/packages/core/lib/testing/SolidityTest.js:66:1)
-      at runMicrotasks (<anonymous>)
-      at processTicksAndRejections (internal/process/task_queues.js:93:5)
-      at Context.<anonymous> (/Users/mac/.nvm/versions/node/v14.15.3/lib/node_modules/truffle/build/webpack:/packages/core/lib/testing/SolidityTest.js:92:1)
-```
-
-This informs us that the comparison failed as the two values are not the same.
-{% endhint %}
+This shows that our test passed as expected! We can be more certain now that our smart contract is going to function the way we intend it to. 
 
 Our second and slightly more involved test case is for the private `addCandidate()` function:
 
@@ -248,7 +216,7 @@ function testAddCandidate() public {
 
 Here, we instantiate a new Election contract, get the details of the candidate from the contract and then test that they equal the values passed to the constructor.
 
-Next, we'll look into how to test the `require()` call in a function. Our next test case is going to be for the second `require()` call in the `vote()` function. Since Solidity v0.4.17, a function type member was added to allow access to a [function selector](https://docs.soliditylang.org/en/v0.5.3/abi-spec.html#function-selector). This made exception testing in solidity so much easier than before:
+Next, we'll look into how to test the `require()` call in a function. Our next test case is going to be for the second `require()` call in the `vote()` function. Since Solidity v0.4.17, a function type member was added to allow access to a [function selector](https://docs.soliditylang.org/en/v0.5.3/abi-spec.html#function-selector). This made exception testing in Solidity much easier than before:
 
 ```javascript
 function testVoteFailIfVoted() public {
@@ -279,7 +247,11 @@ function testVoteFailIfVoted() public {
 
 What we are testing here is whether the `vote()` function fails as necessary when an address is used to vote twice. To do that, we instantiate the contract and call `vote()` for the same candidate twice. The second call must fail for this test to pass.
 
-To test the exception, we first get access to the function selector with `bytes4 selector = election.vote.selector;`, encode the selector with `bytes memory data = abi.encodeWithSelector(selector, uint256(0));` then make an external call with the returned data from the second step with `(bool success, ) = address(election).call(data);`, lastly we validate that the transaction failed with `Assert.isFalse(success, "Should be false");`
+To test the exception:
+
+* First get access to the function selector with `bytes4 selector = election.vote.selector;`, 
+* Encode the selector with `bytes memory data = abi.encodeWithSelector(selector, uint256(0))`
+* Then make an external call with the returned data from the second step with `(bool success, ) = address(election).call(data);`, lastly we validate that the transaction failed with `Assert.isFalse(success, "Should be false");`
 
 ## **Conclusion**
 
