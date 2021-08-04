@@ -18,7 +18,11 @@ Tutorials can be completed seamlessly with [**DataHub**](https://datahub.figment
 
 Each Learn Pathway is a short curriculum that helps developers understand which network is right for them and how to interact with Web 3 protocols at every step.
 
-**Ongoing Pathway: Solana \(New\)**
+**Ongoing Pathway: Polygon \(Matic\) \(New\)**
+
+{% page-ref page="network-documentation/matic/polygon-matic-pathway/" %}
+
+**Ongoing Pathway: Solana**
 
 {% page-ref page="network-documentation/solana/solana-pathway/" %}
 

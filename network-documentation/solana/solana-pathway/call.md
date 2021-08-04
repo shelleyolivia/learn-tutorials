@@ -93,7 +93,7 @@ const greet = async () => {
 * The `instruction` variable contains a new instance of a `TransactionInstruction` \([docs](https://solana-labs.github.io/solana-web3.js/classes/transactioninstruction.html)\), to which we are assigning `keys` comprised of an array object with properties of `pubkey`, `isSigner` and `isWritable`.  We also pass the `programId` \(which is the address of the deployed program that we stored in the state of our React component\) and some `data` -- in the form of a zero-allocated `Buffer` , because in this case all of the instructions are the same.
 * `sendAndConfirmTransaction()` takes 3 arguments: the `connection`, the `instruction` and the array of signers `[payerKeypair]` \(here we have only one signer, the payer\) `sendAndConfirmTransaction()` returns a JS Promise.
 * Once the promise is fulfilled:
-  * we call `setGreetTxSignature(res)` to store the transaction signature \(`res` is the signature string according to the [docs](https://solana-labs.github.io/solana-web3.js/modules.html#sendandconfirmtransaction)\)
+  * we call `setGreetTxSignature(res)` to store the transaction signature \(`res` is the signature string according to the [docs](https://solana-labs.github.io/solana-web3.js/modules.html#sendAndConfirmTransaction)\)
   * we call `setGreetFetching(false)` to update the UI state: We hide the fetching spinner and show the success state \(using the signature from `res` to build the explorer URL\).
   * we call `getGreetings()` which is defined in the same component. It will fetch the `greeterPublicKey` account data, de-serialize it and store its value in a React state variable to update the UI.
 

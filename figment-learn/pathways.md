@@ -48,6 +48,18 @@ Polkadot enables scalability by allowing specialized blockchains to communicate 
 
 #### [Join our community today](https://discord.gg/fszyM7K) if you want to interact with other builders and become a part of this growing ecosystem! 
 
+## Polygon \(Matic\) Pathway
+
+_Polygon is a protocol and a framework for building and connecting Ethereum compatible blockchain networks. Aggregating scalable solutions on Ethereum, supporting a multi-chain Ethereum ecosystem._
+
+Polygon is designed to interoperate with and solve some of Ethereum's limitations: Scaling, the speed of transaction throughput - and poor user experience such as the high cost of transactions. Polygon's testnets can currently reach over 7000 transactions per second and the low cost of the MATIC token means cheap transaction fees!
+
+**Get started with the Polygon \(Matic\) Pathway by visiting the page below.**
+
+{% page-ref page="../network-documentation/matic/polygon-matic-pathway/" %}
+
+
+
 ## ![](../.gitbook/assets/logo1.png) Secret Pathway
 
 Secret Network is the first blockchain with privacy-preserving smart contracts. That means applications built on Secret can utilize encrypted data without revealing it to anyone, even the nodes in the network. For the first time, Secret Network allows developers to build powerful, permissionless, privacy-preserving applications - Secret Apps. Learn what makes it unique and build your first project.
