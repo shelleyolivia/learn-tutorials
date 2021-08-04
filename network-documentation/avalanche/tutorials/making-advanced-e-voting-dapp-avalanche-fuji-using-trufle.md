@@ -1,5 +1,5 @@
 ---
-description: Learn how to use Truffle with the C-Chain
+description: Learn how to use Truffle with the Avalanche C-Chain
 ---
 
 # Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite
