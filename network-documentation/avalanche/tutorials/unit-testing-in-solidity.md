@@ -148,7 +148,7 @@ function testConstructor() public {
 ```
 {% endcode %}
 
-Test cases in Solidity are functions with one or more assert statements. As the case mapping in the [Breaking It Down](avax-testing-truffle.md#breaking-it-down) section suggested, we instantiate a new Election contract with the necessary values and then use the Truffle Assertion library to validate that the `name` and `description` variables of the contract have the same values as those used to instantiate the contract.
+Test cases in Solidity are functions with one or more assert statements. As the case mapping in the [Breaking It Down](unit-testing-in-solidity.md#breaking-it-down) section suggested, we instantiate a new Election contract with the necessary values and then use the Truffle Assertion library to validate that the `name` and `description` variables of the contract have the same values as those used to instantiate the contract.
 
 The signature of the `Assert.equal()` function is `equal(string memory a, string memory b, string memory message) internal returns (bool result)`The function compares `a` and `b` returns true/false depending on the result of the comparison.
 
