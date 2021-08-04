@@ -544,4 +544,4 @@ The `isContributor()` function returns true/false depending on whether the calle
 
 **Now that we have written the Smart Contract Code, the next step is to build the React Native App.**
 
-[Part 3](./part-3)
+[Create a React Native app](./create-a-react-native-app)

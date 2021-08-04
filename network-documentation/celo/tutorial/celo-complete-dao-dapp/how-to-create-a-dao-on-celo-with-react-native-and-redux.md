@@ -13,7 +13,7 @@ In this tutorial, we will build a functioning DAO (Distributed Autonomous Organi
 
 ## What is a DAO? 
 
-A [DAO](https://learn.figment.io/other/glossary#d) is represented as rules encoded as a computer program that is transparent, controlled by the organization members, and not influenced by a central government. It decides which decision will be made by a decentralized organization. 
+> [Wikipedia](https://en.wikipedia.org/wiki/Decentralized_autonomous_organization) defines DAO (Decentralized Autonomous Organization) as an organization represented as rules encoded as a computer program that is transparent, controlled by the organization members, and not influenced by a central government. It decides which decision will be made by a decentralized organization. 
 
 In non-technical terms: **DAOs are an effective and safe way to work with like-minded folks around the globe**.
 
@@ -23,7 +23,9 @@ There’s no CEO who can authorize spending based on their own whims and no chan
 
 Read more [here](https://ethereum.org/en/dao/). 
 
-**In this tutorial, you will learn how to build a functioning Charity DAO. The smart contract code is deployed on the Alfajores testnet. The contract allows its members to contribute to the DAO. Members can initiate charity proposals which Stakeholders will have to vote on within a specified period of time. After that time has elapsed, the DAO contract will disburse the funds pooled into the Charity DAO.**.
+&nbsp;
+
+>In this tutorial, you will learn how to build a functioning Charity DAO. The smart contract code is deployed on the Alfajores testnet of the Celo network. The contract allows its members to contribute to the DAO. Members can initiate charity proposals which Stakeholders will have to vote on within a specified period of time. After that time has elapsed, the DAO contract will disburse the pooled funds.
 
 &nbsp;
 
@@ -44,12 +46,12 @@ For this tutorial, following software needs to be installed:
 - React Native
 - NodeJS v12 and above
 - [Truffle](https://www.trufflesuite.com/)
-- The Alphajores Wallet, which will need to be funded using the [faucet](https://celo.org/developers/faucet)
+- The Alfajores Wallet, which will need to be funded using the [faucet](https://celo.org/developers/faucet)
 
-We will cover the project in three parts:: 
-- Writing the DAO Smart Contract in Solidity
-- Building the React Native App
-- Connecting the App with the Smart Contract using Redux
+We will cover the project in three parts: 
+- Solidity smart contracts on Celo
+- Create a React Native app
+- Bringing it together with Redux
 
 &nbsp;
 
@@ -61,22 +63,24 @@ We will begin by outlining a visual representation of the dApp, its features, an
 
 &nbsp;
 
-## Features
-The functionality of the app includes: 
-- Users connect their Celo Wallet to join the Charity DAO
-* Users contribute Celo to become Contributors of the DAO
+# Features
+The functionality of the dApp includes: 
+- Users connect their Celo Wallet to join the Charity DAO.
+* Users send Celo tokens to the DAO to become Contributors.
 - Contributors that have made 200 or more total contributions are automatically made Stakeholders.
-* Only a stakeholder of the DAO can vote on proposals.
+* Only a Stakeholder of the DAO can vote on proposals.
 - Contributors and/or Stakeholders can create a new proposal.
-* A newly created proposal has a date when voting on it closes.
+* A newly created proposal has an ending date, when voting will conclude.
 - Stakeholders can upvote or downvote a proposal.
-* Once the expiry date for voting on a Proposal closes, a stakeholder then pays out the requested amount to the Charity.
+* Once a Proposal's expiry date passes, a Stakeholder then pays out the requested amount to the specified Charity.
 
 &nbsp;
 
 This is the overview introduction to the project. The next sections are categorized into 3 parts
-Writing the Smart Contract Code.
-Building the React Native App.
-Connecting the React Native App to the Smart Contract using Redux.
+- Writing the DAO Smart Contract in Solidity, where we go over the methods used.
+- Building the React Native App, in which we show you how to quickly put together a mobile app interface.
+- Connecting the React Native App to the Smart Contract using Redux, which brings it all together and allows our mobile dApp to utilize Celo efficiently.
 
-[Part 2](./part-2)
+&nbsp;
+
+Next - [Solidity smart contracts on Celo](./solidity-smart-contracts-on-celo)

@@ -278,7 +278,7 @@ const closeIcon = (props) => {
 };
 ``` 
 
-BBefore we move on to the Create Proposal screen, we can add data input and validation logic for the input fields on the form.
+Before we move on to the Create Proposal screen, we can add data input and validation logic for the input fields on the form.
 
 Add the following code snippet after `useTheme()`;
 
@@ -598,5 +598,7 @@ const closeIcon = (props) => {
 
 **All of our app pages are now complete! To be able to interact with the smart contract on Celo, we will use Redux actions and reducers to connect with the functions in the smart contract. The next tutorial covers Redux and how to make these connections between actions performed by users and the smart contract functionality.**
 
-[Part 4](./part-4)
+&nbsp;
+
+[Bringing it together with Redux](./bringing-it-together-with-redux)
 
