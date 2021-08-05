@@ -104,7 +104,7 @@ spl-token create-token
 
 ---
 
-**NOTE:** If you do not have any SOL in your wallet to pay for the transaction, you will recieve an error:
+**NOTE:** If you do not have any SOL in your wallet to pay for the transaction, you will receive an error:
 
 ```bash
 Creating token AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM
@@ -242,7 +242,7 @@ After the transaction goes through, you should see your new token in your browse
 
 Our token is created and live on the blockchain, but Solana is not yet officially recognizing it. We need to get all the required information for the token ready for submission. 
 
-I created a ```turotial``` folder on my desktop, and changed the directory using ```cd``` in the terminal to the location of the folder.
+I created a `tutorial` folder on my desktop, and changed the directory using `cd` in the terminal to the location of the folder.
 
 * Enter where you want to clone the token list on your computer
 ```bash
@@ -254,14 +254,14 @@ cd /Users/jacobmakarsky/Desktop/tutorial
 git clone https://github.com/solana-labs/token-list
 ```
 
-We now have the ```token-list``` cloned, so we can add our token's image and information for uploading. 
+We now have the `token-list` cloned, so we can add our token's image and information for uploading. 
 
-* Copy and paste the token's logo inside the ```token-list``` folder, in the following directory
+* Copy and paste the token's logo inside the `token-list` folder, in the following directory
 ```bash
-assets/mainnet/<mint address>/*.<png/svg>
+assets/mainnet/<mint address>/logo.png
 ```
 
-The ```mint address``` is the ```tokenAddress``` we used before. Go ahead and name the file ```logo.png``` or ```logo.svg```. It looks like they prefer be either of those file types. 
+The `mint address` is the `tokenAddress` we used before. Go ahead and name the file `logo.png` or `logo.svg`. It looks like they prefer be either of those file types. 
 
 * Open the token list file in the following directory
 ```bash
@@ -280,12 +280,14 @@ The link for the token image must be that exact format; just change the token ad
 
 * Fork the [token-list](https://github.com/solana-labs/token-list) repository to your Github by pressing the **Fork** button in the top right of the repository page. 
 
-This will add the ```token-list``` Github repository to your Github, which will allow us to upload our changes to our forked repository and eventually request the original repository to copy our changes.
+This will add the `token-list` Github repository to your Github, which will allow us to upload our changes to our forked repository and eventually request the original repository to copy our changes.
 
-* While still inside your ```token-list``` folder in the command line, set the url of your local repository to your forked version on Github
+* While still inside your `token-list` folder in the command line, set the url of your local repository to **your** forked version on Github
 ```bash
 git remote set-url origin https://github.com/jacobmakarsky/token-list
 ```
+
+Make sure your Github username is used above.
 
 * Add all the files
 ```bash
@@ -304,19 +306,25 @@ git push origin main
 
 You should now see the changes in your forked repository on Github. 
 
-* Go to the [pull requests page](https://github.com/solana-labs/token-list/pulls)
+* Go to the token list [pull requests page](https://github.com/solana-labs/token-list/pulls)
 
 * Select the **New pull request** button
 
+![solPullRequest](../../.gitbook/assets/solPullRequest.png)
+
 * Select the highlighted **compare across forks** option in the subtitle below the **Compare changes** header
 
+![solCompareForks](../../.gitbook/assets/solCompareForks.png)
+
 * Select your forked repository from the **head repository** dropdown list
+
+![solHeadRepo](../../.gitbook/assets/solHeadRepo.png)
 
 You should see 2 changed files; your token changes and the logo image. 
 
 * Ensure these details are correct, for example, the folder's name holding the logo image should exactly match your token address in the token list. 
 
-![tokenPullRequest](../../.gitbook/assets/SOLPullRequest.png)
+
 
 We are now ready to create the pull request! 
 
@@ -342,7 +350,7 @@ Once submitted, you should have a live market that can trade the tokens.
 
 ## Conclusion
 
-Woohoo! If you made it through all the steps, you have succesfully created your own token on the Solana blockchain. If you completed the bonus, you now have a tradeable token 👍
+Woohoo! If you made it through all the steps, you have successfully created your own token on the Solana blockchain. If you completed the bonus, you now have a tradable token 👍
 
 ## What's next?
 
