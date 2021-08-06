@@ -63,7 +63,7 @@ Height of the transactions to get
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="limit" type="integer" required=false %}
-Limit how many transaction records to get in one request (default: 100, maximum: 1000)
+Limit how many transaction records to get in one request \(default: 100, maximum: 1000\)
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="memo" type="string" required=false %}
@@ -295,15 +295,15 @@ List of currently supported sub event types in polkadot-worker are \(listed by m
 | **utility** | `batchcompleted`, `batchinterrupted` |
 | **vesting** | `vestingupdated`, `vestingcompleted` |
 
-
 List of currently supported extrinsic event types in polkadot-worker are \(listed by modules\):
+
 | **Module** | Type |
 | :--- | :--- |
 | **authorship** | `setuncles` |
 | **babe** | `planconfigchange`, `reportequivocation`, `reportequivocationunsigned` |
 | **balances** | `forcetransfer`, `setbalance`, `transfer`, `transferall`, `transferkeepalive` |
 | **bounties** | `acceptcurator`, `approvebounty`, `awardbounty`, `claimbounty`, `closebounty`, `extendbountyexpiry`, `proposecurator`, `unassigncurator` |
-|**claims** | `attest`, `claim`, `claimattest`, `mintclaim`, `moveclaim` |
+| **claims** | `attest`, `claim`, `claimattest`, `mintclaim`, `moveclaim` |
 | **council** | `close`, `disapproveproposal`, `execute`, `propose`, `setmembers`, `vote` |
 | **democracy** | `blacklist`, `cancelproposal`, `cancelqueued`, `cancelreferendum`, `clearpublicproposals`, `delegate`, `emergencycancel`, `enactproposal`, `externalproposal`, `externalpropose`, `externalproposedefault`, `fasttrack`, `noteimminentpreimage`, `noteimminentpreimageoperational`, `notepreimage`, `notepreimageoperational`, `propose`, `reappreimage`, `removeothervote`, `removevote`, `second`, `undelegate`, `unlock`, `vetoexternal`, `vote` |
 | **electionprovidermultiphase** | `setemergencyelectionresult`, `setminimumuntrustedsource`, `submitunsigned` |
