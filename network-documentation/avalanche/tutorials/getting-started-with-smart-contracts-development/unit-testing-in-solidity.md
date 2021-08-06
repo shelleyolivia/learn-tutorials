@@ -125,9 +125,9 @@ contract TestElection {
 }
 ```
 
-Truffle provides us with a default assertion library in `truffle/Assert.sol` which we imported in the fourth line of the code. You can find all available assertion functions in [Assert.sol](https://github.com/trufflesuite/truffle/blob/develop/packages/resolver/solidity/Assert.sol). We also added an import for the contract we are going to test against on line 5. The Assertion libraries are packages that contain functions we can use to verify our contract and that the expected results are correct.
+Truffle provides us with a default assertion library in `truffle/Assert.sol` which we imported in the fourth line of the code. You can find all available assertion functions in [Assert.sol](https://github.com/trufflesuite/truffle/blob/develop/packages/resolver/solidity/Assert.sol). We also added an import for the contract we are going to test against on line 5. The Assertion libraries contain functions we can use to verify our contract and that the expected results are correct.
 
-On line 7, we declare the name of the test contract as `TestElection`. Preceding the name of the contract with `Test` lets the test runner \(Truffle\) know this is going to be a test suite. Now we are ready to start writing our test cases. The first test case we are going to write is the constructor test case:
+On line 7, we declare the name of the test contract as `TestElection`. Preceding the name of the contract with `Test` lets the test runner \(in this case Truffle\) know this will be a test suite, or a collection of tests. Now we are ready to start writing our tests. Let's start with the constructor:
 
 {% code title="test/TestElection.sol" %}
 ```javascript
@@ -286,13 +286,17 @@ To test the exception:
 * Encode the selector with `bytes memory data = abi.encodeWithSelector(selector, uint256(0))`
 * Then make an external call with the returned data from the second step with `(bool success, ) = address(election).call(data);`, lastly we validate that the transaction failed with `Assert.isFalse(success, "Should be false");`
 
+vv These tests can also 
+
 ## **Conclusion**
 
-Congratulations! You've made it to the end of this short but informative tutorial on writing unit tests for Solidity smart contracts using Truffle's assertions.
+Congratulations! You've made it to the end of this short but informative tutorial on writing unit tests for Solidity smart contracts using Truffle's assertions.   
+You should now be able to identify Solidity functions which require testing and to come up with tests to examine their functionality. Truffle's assertions are only one method of unit testing Solidity code, and we encourage you to also look at testing using other tools such as [Jest](https://jestjs.io/) or [Mocha](https://mochajs.org/).
 
 ## What's Next?
 
-Though this tutorial covers the basics involved in writing unit tests for smart contracts, nothing solidifies your knowledge of testing more than reading some existing code & coming up with test cases. It is also recommended to head over to the project repository on [GitHub](https://github.com/Segun-Ogundipe/advance-voting-test), which also contains Javascript test files in case you're interested in writing tests in Javascript.
+Though this tutorial covers the basics involved in writing unit tests for smart contracts, nothing solidifies your knowledge of testing more than reading some existing code & coming up with test cases.  
+It is also recommended to head over to the project repository on [GitHub](https://github.com/Segun-Ogundipe/advance-voting-test), which also contains Javascript test files in case you're interested in writing tests in Javascript.
 
 ## About The **Author**
 
