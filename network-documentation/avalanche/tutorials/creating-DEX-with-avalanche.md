@@ -299,11 +299,19 @@ Check Token balance :
 ```
 let TokenBalance = await Token.balanceOf(avaSwap.address)
 ```
+
+## Summary
+Now you have the knowledge of creating a Decentralized Exchange (DEX) with the Avalanche network. Creating a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
+
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
+
+## About the author
+
+[Devendra Yadav](https://community.figment.io/u/dev.koold)
+
 ## References
 
 - https://learn.figment.io/network-documentation/avalanche/tutorials/getting-started-with-smart-contracts-development/using-truffle-with-the-avalanche-c-chain
 - https://github.com/OpenZeppelin/openzeppelin-contracts
 - https://github.com/devilla/Avaswap
 
-## Summary
-Now you have the knowledge of creating a Decentralized Exchange (DEX) with the Avalanche network. Creating a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
