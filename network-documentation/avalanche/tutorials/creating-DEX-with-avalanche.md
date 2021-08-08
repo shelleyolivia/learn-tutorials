@@ -1,12 +1,15 @@
-# Create a Decentralized Exchange(DEX) on Avalanche using Trufflesuite and ReactJS
+# Create a Decentralized Exchange (DEX) on Avalanche using Trufflesuite and ReactJS
 
 ## Introduction
+
 Decentralized exchange is a peer-to-peer network, where anyone can exchange cryptocurrency tokens with a blockchain and a wallet with another person by executing a trade between two respective tokens, say AVAX and LINK tokens.
 
 ## Prerequisites
+
 You must have gone through this tutorial Run an Avalanche Node and have performed a cross-chain swap via the Transfer AVAX Between X-Chain and C-Chain tutorial to get AVAX test tokens to your C-Chain address.
 
-## Requirement  
+## Requirement
+
 * [NodeJS](https://nodejs.org/en)
 * Truffle, which you can install with `npm install -g truffle`
 * Metamask extension added to the browser, which you can add from [here](https://metamask.io/download.html)
@@ -53,7 +56,9 @@ module.exports = {
 };
 ```
 Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also, note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
+
 ## Add AvaSwap.sol
+
 In the contracts directory add a new file called `AvaSwap.sol` and add the following block of code:
 ```
 pragma solidity 0.6.7;
@@ -130,6 +135,7 @@ contract AvaSwap {
 ```
 
 ## Add new migration
+
 Create a new file in the ```migrations``` directory named ```2_deploy_contracts.js```, and add the following block of code. This handles deploying the ```Storage``` smart contract to the blockchain.
 
 ```
@@ -149,6 +155,7 @@ module.exports = function (deployer) {
 };
 ```
 ## Compile Contracts with Truffle
+
 Any time you make a change to `Storage.sol` you need to run `truffle` compile.
 ```
 truffle compile
@@ -164,7 +171,8 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 ## Create, fund and unlock an account on the C-Chain
-When deploying smart contracts to the C-Chain, the truffle will default to the first available account provided by your C-Chain client as the from the address used during migrations.
+
+When deploying smart contracts to the C-Chain, the truffle will default to the first available account provided by your C-Chain client as `the from` the address used during migrations.
 Create an account
 Truffle has a very useful console that we can use to interact with the blockchain and our contract. Open the console:
 ```
@@ -196,6 +204,7 @@ true
 ```
 
 ## Run Migrations
+
 Now everything is in place to run migrations and deploy the Storage contract:
 ```
 truffle(development)> migrate --network development
@@ -299,7 +308,8 @@ let TokenBalance = await Token.balanceOf(avaSwap.address)
 ```
 
 ## Summary
-Now you have the knowledge of creating a Decentralized Exchange (DEX) with the Avalanche network. Creating a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
+
+Now you know about creating a Decentralized Exchange (DEX) with Trufflesuite and ReactJS on the Avalanche network.
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
 
