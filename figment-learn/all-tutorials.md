@@ -64,7 +64,7 @@ Secret Network is the first blockchain with privacy-preserving smart contracts. 
 
 **Get Started with** [**Secret on DataHub**](https://figment.io/datahub/secret-network/) **today!**
 
-## ![](../.gitbook/assets/solana%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29%20%282%29%20%282%29.png) Solana Tutorials
+## ![](../.gitbook/assets/solana%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29%20%282%29%20%282%29%20%282%29%20%282%29.png) Solana Tutorials
 
 Solana is an open-source project implementing a new, high-performance, permissionless blockchain.
 
@@ -72,7 +72,7 @@ Solana is an open-source project implementing a new, high-performance, permissio
 
 **Get Started with** [**Solana on DataHub**](https://figment.io/datahub/solana/) **today!**
 
-## ![](../.gitbook/assets/rsz_terra-logo%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29.jpg) Terra Tutorials
+## ![](../.gitbook/assets/rsz_terra-logo%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29.jpg) Terra Tutorials
 
 Terra is a price-stable cryptocurrency that will power the next-generation payment network.
 

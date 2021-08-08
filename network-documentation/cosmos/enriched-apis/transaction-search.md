@@ -63,7 +63,7 @@ Height of the transactions to get
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="limit" type="integer" required=false %}
-Limit how many requests to get in one requests
+Limit how many transaction records to get in one request \(default: 100, maximum: 1000\)
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="memo" type="string" required=false %}
