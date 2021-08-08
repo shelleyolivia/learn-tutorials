@@ -1,19 +1,17 @@
-# Creating a DEX with Avalanche
+# Create a Decentralized Exchange(DEX) on Avalanche using Trufflesuite and ReactJS
 
 ## Introduction
 Decentralized exchange is a peer-to-peer network, where anyone can exchange cryptocurrency tokens with a blockchain and a wallet with another person by executing a trade between two respective tokens, say AVAX and LINK tokens.
 
 ## Prerequisites
-Truffle is a development environment and testing framework for EVM-based blockchains.
-
-MetaMask is a browser-based blockchain wallet that can be used to store any kind of digital assets and cryptocurrency.
-
-Avalanche is a blockchain that is EVM compatible.  
-
-## Requirement  
 You must have gone through this tutorial Run an Avalanche Node and have performed a cross-chain swap via the Transfer AVAX Between X-Chain and C-Chain tutorial to get AVAX test tokens to your C-Chain address.
 
-***Create AvaSwap directory and install dependencies***
+## Requirement  
+* [NodeJS](https://nodejs.org/en)
+* Truffle, which you can install with `npm install -g truffle`
+* Metamask extension added to the browser, which you can add from [here](https://metamask.io/download.html)
+
+**Create AvaSwap directory and install dependencies**
 Open a new terminal tab so we can create a directory and install some further dependencies.
 First, navigate to the directory within which you intend to create your working directory:
 ```
@@ -31,7 +29,7 @@ We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. 
 ```
 truffle init
 ```
-***Update truffle-config.js***
+**Update truffle-config.js**
 One of the files created when you ran truffle init is truffle-config.js. Add the following to ```truffle-config.js```.
 ```
 const Web3 = require('web3');
