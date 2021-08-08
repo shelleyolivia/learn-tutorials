@@ -12,6 +12,7 @@ You must have gone through this tutorial Run an Avalanche Node and have performe
 * Metamask extension added to the browser, which you can add from [here](https://metamask.io/download.html)
 
 **Create AvaSwap directory and install dependencies**
+
 Open a new terminal tab so we can create a directory and install some further dependencies.
 First, navigate to the directory within which you intend to create your working directory:
 ```
@@ -29,8 +30,10 @@ We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. 
 ```
 truffle init
 ```
+
 **Update truffle-config.js**
-One of the files created when you ran truffle init is truffle-config.js. Add the following to ```truffle-config.js```.
+
+One of the files created when you ran truffle init is truffle-config.js. Add the following to `truffle-config.js`.
 ```
 const Web3 = require('web3');
 const protocol = "http";
@@ -49,9 +52,9 @@ module.exports = {
   }
 };
 ```
-Note that you can change the ```protocol```, ```ip``` and ```port``` if you want to direct API calls to a different AvalancheGo node. Also, note that we're setting the ```gasPrice``` and ```gas``` to the appropriate values for the Avalanche C-Chain.
+Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also, note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 ## Add AvaSwap.sol
-In the contracts directory add a new file called ```AvaSwap.sol``` and add the following block of code:
+In the contracts directory add a new file called `AvaSwap.sol` and add the following block of code:
 ```
 pragma solidity 0.6.7;
 import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
@@ -146,7 +149,7 @@ module.exports = function (deployer) {
 };
 ```
 ## Compile Contracts with Truffle
-Any time you make a change to ```Storage.sol``` you need to run ```truffle``` compile.
+Any time you make a change to `Storage.sol` you need to run `truffle` compile.
 ```
 truffle compile
 ```
@@ -294,11 +297,18 @@ Check Token balance :
 ```
 let TokenBalance = await Token.balanceOf(avaSwap.address)
 ```
+
+## Summary
+Now you have the knowledge of creating a Decentralized Exchange (DEX) with the Avalanche network. Creating a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
+
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
+
+## About the author
+
+[Devendra Yadav](https://community.figment.io/u/dev.koold)
+
 ## References
 
-https://learn.figment.io/network-documentation/avalanche/tutorials/getting-started-with-smart-contracts-development/using-truffle-with-the-avalanche-c-chain
-https://github.com/OpenZeppelin/openzeppelin-contracts
-https://github.com/devilla/Avaswap
-
-Summary
-Now you have the knowledge of creating a Decentralized Exchange (DEX) with the Avalanche network. Creating a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
+- https://learn.figment.io/network-documentation/avalanche/tutorials/getting-started-with-smart-contracts-development/using-truffle-with-the-avalanche-c-chain
+- https://github.com/OpenZeppelin/openzeppelin-contracts
+- https://github.com/devilla/Avaswap
