@@ -73,7 +73,7 @@
       * [Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite](network-documentation/avalanche/tutorials/dapp-tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle.md)
       * [Create a Voting dApp on Avalanche using ReactJS](network-documentation/avalanche/tutorials/dapp-tutorials/advanced-evoting-avalanche-reactjs.md)
       * [Create a chat dApp on Avalanche using Solidity and ReactJS](network-documentation/avalanche/tutorials/dapp-tutorials/create-a-chat-application-using-solidity-and-react.md)
-      * [Create a Decentralized Exchange (DEX) on Avalanche using Trufflesuite and ReactJS](network-documentation/avalanche/tutorials/creating-DEX-with-avalanche.md)
+      * [Create a Decentralized Exchange (DEX) on Avalanche using Trufflesuite and ReactJS](network-documentation/avalanche/tutorials/create-a-dex-with-avalanche.md)
   * [Avalanche Indexer API](network-documentation/avalanche/avalanche-indexer-api.md)
 * [💰 Celo](network-documentation/celo/README.md)
   * [✏ Celo 101](network-documentation/celo/celo-101.md)
