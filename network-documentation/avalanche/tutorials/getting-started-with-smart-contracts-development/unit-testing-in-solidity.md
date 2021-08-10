@@ -286,14 +286,12 @@ To test the exception:
 * Encode the selector with `bytes memory data = abi.encodeWithSelector(selector, uint256(0))`
 * Then make an external call with the returned data from the second step with `(bool success, ) = address(election).call(data);`, lastly we validate that the transaction failed with `Assert.isFalse(success, "Should be false");`
 
-vv These tests can also 
 
-## **Conclusion**
 
 Congratulations! You've made it to the end of this short but informative tutorial on writing unit tests for Solidity smart contracts using Truffle's assertions.   
 You should now be able to identify Solidity functions which require testing and to come up with tests to examine their functionality. Truffle's assertions are only one method of unit testing Solidity code, and we encourage you to also look at testing using other tools such as [Jest](https://jestjs.io/) or [Mocha](https://mochajs.org/).
 
-## What's Next?
+## Next Steps
 
 Though this tutorial covers the basics involved in writing unit tests for smart contracts, nothing solidifies your knowledge of testing more than reading some existing code & coming up with test cases.  
 It is also recommended to head over to the project repository on [GitHub](https://github.com/Segun-Ogundipe/advance-voting-test), which also contains Javascript test files in case you're interested in writing tests in Javascript.
