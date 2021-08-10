@@ -8,7 +8,7 @@ description: Learn how to create an account to start building on Terra
 
 In this tutorial, we will be creating your first Terra account using the Terra SDK and [**DataHub**](https://figment.io/datahub-waitlist/). 
 
-### **Prerequisites** 
+## **Prerequisites** 
 
 Please make sure that you completed tutorial \#1 of the Terra Pathway Tutorial, "Connecting to a Terra node with DataHub", before beginning. We will be building on top of the Nodejs application you created in the previous tutorial.
 
