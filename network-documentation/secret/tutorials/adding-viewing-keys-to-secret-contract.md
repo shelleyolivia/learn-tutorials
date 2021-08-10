@@ -125,7 +125,24 @@ In the contract, we also need to add a pseudorandom number generator seed in our
     pub prng_seed: Vec<u8>,
 ```
 
-In `msg.rs` update the `InitMsg` struct to require the owner of the contract to send a pseudorandom number generator seed `String` when the contract is first initialized:
+We also need to create setter and getter functions to store the viewing key. Add the following functions `write_viewing_key` and `read_viewing_key` to `state.rs`:
+
+```rust
+pub const PREFIX_VIEWING_KEY: &[u8] = b"viewingkey";
+
+pub fn write_viewing_key<S: Storage>(store: &mut S, owner: &CanonicalAddr, key: &ViewingKey) {
+    let mut user_key_store = PrefixedStorage::new(PREFIX_VIEWING_KEY, store);
+    user_key_store.set(owner.as_slice(), &key.to_hashed());
+}
+
+pub fn read_viewing_key<S: Storage>(store: &S, owner: &CanonicalAddr) -> Option<Vec<u8>> {
+    let user_key_store = ReadonlyPrefixedStorage::new(PREFIX_VIEWING_KEY, store);
+    user_key_store.get(owner.as_slice())
+}
+
+```
+
+Now in `msg.rs` update the `InitMsg` struct to require the owner of the contract to send a pseudorandom number generator seed `String` when the contract is first initialized:
 
 ```rust
     pub prng_seed: String,
@@ -152,7 +169,7 @@ Next we need to add a Handle function to generate a viewing key for a user. In `
     },
 ```
 
-When we create a new key the client sends in some entropy to contributes to the randomness of the viewing key. The client should create a random string and pass it in with this parameter. Padding is simply an optional parameter that can be used to obfuscate the length of the entropy string.
+When we create a new key the client sends in some entropy to contribute to the randomness of the viewing key. The client should create a random string and pass it in with this parameter. Padding is simply an optional parameter that can be used to obfuscate the length of the entropy string.
 
 Then, we add a new function in `contract.rs` to generate the key. In `handle` add:
 
