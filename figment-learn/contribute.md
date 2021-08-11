@@ -30,7 +30,7 @@ We reserve the right to pay more for exceptional contributions.
 ## **📝 What is the contribution review process?**
 
 1. First, make sure you have a Github account. Visit [Github.com](http://Github.com) to create a new account if you don't have one yet, it's free.
-2. Clone the Datahub Learn documentation [repository](https://github.com/figment-networks/datahub-learn): It's important that you have the most recent version of documentation before you start your contribution. If you have already cloned it, make sure to pull down the latest changes.
+2. Fork the Datahub Learn documentation [repository](https://github.com/figment-networks/datahub-learn), and then clone the repo to your local machine. It's important that you have the most recent version of documentation before you start your contribution. If you have already cloned it, make sure to pull down the latest changes.
 3. Create a new git branch in your local repository, you can name it however you want, though we prefer if you pick a name relevant to your contribution. \(Example: near-nft-tutorial\).
 4. Create a new file\(s\) under the tutorials section of the network documentation you're contributing to. Example: _**network-documentation/near/tutorials/my-new-tutorial.md**_
 5. **⚠ Most Importantly -** Once you have completed the documentation make sure you have added a new entry in the _**SUMMARY.md**_ file.
