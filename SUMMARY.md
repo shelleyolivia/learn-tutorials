@@ -112,7 +112,7 @@
     * [How to Build a Decentralized Autonomous Organization \(DAO\) on Celo](network-documentation/celo/tutorial/how-to-build-a-dao-on-celo/README.md)
       * [Writing the DAO Smart Contract in Solidity](network-documentation/celo/tutorial/how-to-build-a-dao-on-celo/writing-the-dao-smart-contract-in-solidity.md)
       * [Building the React Native App](network-documentation/celo/tutorial/how-to-build-a-dao-on-celo/building-the-react-native-app.md)
-      * [Bringing it together with Redux](network-documentation/celo/tutorial/how-to-build-a-dao-on-celo/connecting-the-react-native-app-to-the-smart-contract-using-redux.md)
+      * [Bringing it together with Redux](network-documentation/celo/tutorial/how-to-build-a-dao-on-celo/bringing-it-together-with-redux.md)
     * [Create Vault Smart Contract](network-documentation/celo/tutorial/create-vault-smart-contract.md)
     * [Celo Crowd Funding Project Tutorial](network-documentation/celo/tutorial/celo-crowd-funding-project.md)
     * [How to create subgraphs for Celo smart contracts](network-documentation/celo/tutorial/subgraphs-on-celo.md)
