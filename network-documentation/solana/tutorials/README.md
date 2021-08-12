@@ -1,3 +1,7 @@
+---
+description: See all tutorials currently available for Solana
+---
+
 # Tutorials
 
 ## Create a token on Solana
