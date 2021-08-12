@@ -44,29 +44,29 @@ If you prefer going through the tutorial with videos, check out this [CELO Learn
 
 {% page-ref page="hello-contracts.md" %}
 
-## Hello Mobile DApp
+## Hello Mobile dApp
 
 {% page-ref page="hello-mobile-dapp.md" %}
 
-## Distributed File Manager \(DFM\) using Celo, IPFS and ReactJS
+## Build a Distributed File Manager using Celo, IPFS and ReactJS
 
 {% page-ref page="distributed-file-manager-using-ipfs-celo-reactjs.md" %}
 
-## Celo-hardhat-deploy-and-nft-app.md
+## Build a Decentralized Autonomous Organization \(DAO\) on Celo
+
+{% page-ref page="how-to-build-a-dao-on-celo/" %}
 
 ## Deploying an existing Smart Contract with Truffle
 
-{% page-ref page="./" %}
+{% page-ref page="deploying-smart-contracts-on-celo-with-truffle.md" %}
 
 ## Create a Vault Smart contract
+
+{% page-ref page="create-vault-smart-contract.md" %}
 
 ## Testing Celo Smart Contracts with Truffle
 
 {% page-ref page="celo-testing-truffle.md" %}
 
-## 1. Building a Crowdfunding Smart Contract in Celo
 
-## 2. Deploying a Crowdfunding Smart Contract in Celo
-
-## 3. Interacting with the Crowdfunding Smart Contracts
 
