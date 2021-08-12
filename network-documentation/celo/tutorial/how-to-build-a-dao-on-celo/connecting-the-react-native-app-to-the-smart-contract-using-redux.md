@@ -1,4 +1,4 @@
-# Connecting the React Native App to the Smart Contract using Redux
+# Bringing it together with Redux
 
 In this tutorial, we will complete our DAO and its dApp interface, writing the Redux code to connect our React Native app to the smart contract on Celo. We will look into how to connect the mobile app to the smart contract on the Celo network. This section contains Redux action creators for connecting to the contract, contributing to the DAO and so forth.  
   
@@ -77,8 +77,6 @@ All other action creators for this project follow the same process as the one ex
 {% hint style="info" %}
 Three dots `...` on a line by themselves indicate the presence of other code which we have trimmed for display purposes.
 {% endhint %}
-
-Profile Screen
 
 ```javascript
 import * as React from 'react';
