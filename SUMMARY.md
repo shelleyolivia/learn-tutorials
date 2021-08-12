@@ -302,6 +302,7 @@
     * [Create your first secret NFT](network-documentation/secret/tutorials/create-your-first-secret-nft.md)
     * [Deploy your own secret NFT](network-documentation/secret/tutorials/deploy-your-own-secret-nft.md)
 * [🔋 Solana](network-documentation/solana/README.md)
+  * [Create a token on Solana](network-documentation/solana/sol-mint-token.md)
   * [✏ Solana 101](network-documentation/solana/solana-101.md)
   * [👀 Resources](network-documentation/solana/resources.md)
   * [🎮 RPC & REST API](network-documentation/solana/rpc-and-rest-api/README.md)
