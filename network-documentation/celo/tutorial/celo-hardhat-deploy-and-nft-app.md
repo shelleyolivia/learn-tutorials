@@ -394,7 +394,7 @@ save the contract address 0x47A424A0975924C3d177470C519C8DBA37e16Ec9
 
 **hardhat.config.js complete code** 
 
-## 3 - Interacts with the contract deployed
+## 4 - Interacts with the contract deployed
 
 Marketplace sites like [opensea.io](https://opensea.io/) do not display NFTs on Celo yet. To be able to view NFTs on Celo, we can build a React app. A sample project is available on [github](https://github.com/lucasespinosa28/Celo-Tutorial/tree/main/demo/start),the complate app is available on [github](https://github.com/lucasespinosa28/Celo-Tutorial/tree/main/demo/final)
 
