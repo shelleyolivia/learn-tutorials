@@ -2,7 +2,7 @@
 description: See all tutorials currently available for Solana
 ---
 
-# Tutorials
+# 💡 Tutorials
 
 ## Create a token on Solana
 
