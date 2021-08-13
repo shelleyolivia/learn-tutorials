@@ -29,25 +29,33 @@ I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Develo
 ## Basics & Installation
 We need the following things on your computer to build our DApp.
 ### Node & npm:
-<div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-1.png" /></div> Node is a JavaScript runtime environment that executes JavaScript code outside a web browser and npm is a JavaScript package installer.<br>
+<div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-1.png" /></div> 
+
+Node is a JavaScript runtime environment that executes JavaScript code outside a web browser and npm is a JavaScript package installer.<br>
 To install Node.js & npm on your computer, click on this [link](https://nodejs.org/en/download/) -> download the file as per your computer requirement -> Install the file.<br>
 To check the successful installation type `npm -v` in cmd prompt or terminal, It'll show the version that means you've successfully installed it on your computer.
 
 <br><br>
 ### Truffle:
-<div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-2.png" /></div> Truffle is the best development environment for developing blockchain applications. Truffle gives us boilerplate code (template code) to start building our DApp.<br>
+<div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-2.png" /></div> 
+
+Truffle is the best development environment for developing blockchain applications. Truffle gives us boilerplate code (template code) to start building our DApp.<br>
 To install truffle open your `windows cmd prompt` or `mac terminal` and paste the following command.<br>
 `npm install -g truffle`
 
 <br><br>
 ### Ganache (Optional for this tutorial):
-<div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-3.png" /></div> Ganache is a personal blockchain environment for DApp development. It provides us 10 ETH accounts, each of them is funded with 100 ETH so you don't have to worry about anything. <br>
+<div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-3.png" /></div> 
+
+Ganache is a personal blockchain environment for DApp development. It provides us 10 ETH accounts, each of them is funded with 100 ETH so you don't have to worry about anything. <br>
 But in this tutorial, we will deploy our smart contracts on Polygon (Matic).<br>
 If you're looking to develop your own DApp then Ganache is a powerful tool. You can download Ganache from this [link](https://www.trufflesuite.com/ganache)
 
 <br><br>
 ### MetaMask Setup:
-<div height="140" width="140" align="left"><img src="https://user-images.githubusercontent.com/68826419/129384153-1088a257-b5f4-4eb0-9c31-516c3e434ca4.png" /></div> MetaMask is used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.<br>
+<div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-4.png" /></div> 
+
+MetaMask is used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.<br>
 To install MetaMask extension, click on this [link](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en).<br>
 Now, `Create a MetaMask account -> save the mnemonics (12 secret words) because we need those mnemonics at the time of deployment`<br>
 To deploy the smart contracts on Matic we first have to create a Matic network in MetaMask wallet. `Settings -> Networks -> Add network -> Save`<br>
