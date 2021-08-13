@@ -29,6 +29,7 @@ I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Develo
 ## Basics & Installation
 We need the following things on your computer to build our DApp.
 ### Node & npm:
+
 <div style="height:140px; width:140px;" align="left"><img src="../../../.gitbook/assets/dtube-1.png" /></div> 
 
 Node is a JavaScript runtime environment that executes JavaScript code outside a web browser and npm is a JavaScript package installer.<br>
@@ -37,6 +38,7 @@ To check the successful installation type `npm -v` in cmd prompt or terminal, It
 
 <br><br>
 ### Truffle:
+
 <div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-2.png" /></div> 
 
 Truffle is the best development environment for developing blockchain applications. Truffle gives us boilerplate code (template code) to start building our DApp.<br>
@@ -45,6 +47,7 @@ To install truffle open your `windows cmd prompt` or `mac terminal` and paste th
 
 <br><br>
 ### Ganache (Optional for this tutorial):
+
 <div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-3.png" /></div> 
 
 Ganache is a personal blockchain environment for DApp development. It provides us 10 ETH accounts, each of them is funded with 100 ETH so you don't have to worry about anything. <br>
@@ -53,6 +56,7 @@ If you're looking to develop your own DApp then Ganache is a powerful tool. You 
 
 <br><br>
 ### MetaMask Setup:
+
 <div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-4.png" /></div> 
 
 MetaMask is used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.<br>
