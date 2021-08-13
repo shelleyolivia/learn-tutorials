@@ -29,7 +29,7 @@ I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Develo
 ## Basics & Installation
 We need the following things on your computer to build our DApp.
 ### Node & npm:
-<div height="140" width="140" align="left"><img src="../../../.gitbook/assets/dtube-1.png" /></div> 
+<div style="height:140px; width:140px;" align="left"><img src="../../../.gitbook/assets/dtube-1.png" /></div> 
 
 Node is a JavaScript runtime environment that executes JavaScript code outside a web browser and npm is a JavaScript package installer.<br>
 To install Node.js & npm on your computer, click on this [link](https://nodejs.org/en/download/) -> download the file as per your computer requirement -> Install the file.<br>
