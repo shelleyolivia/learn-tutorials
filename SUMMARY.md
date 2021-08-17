@@ -264,6 +264,7 @@
       * [4. Submit your first Secret transaction](network-documentation/secret/tutorials/intro-pathway-secret-basics/4.-submit-your-first-transaction.md)
       * [5. Write & deploy your first Secret contract](network-documentation/secret/tutorials/intro-pathway-secret-basics/5.-writing-and-deploying-your-first-secret-contract.md)
     * [Developing your first secret contract](network-documentation/secret/tutorials/creating-a-secret-contract-from-scratch.md)
+    * [Adding viewing keys to a secret contract](network-documentation/secret/tutorials/adding-viewing-keys-to-secret-contract.md)
     * [Delegate to a Validator & Unbond Tokens](network-documentation/secret/tutorials/delegate-and-unbond-tokens.md)
     * [Create your first secret NFT](network-documentation/secret/tutorials/create-your-first-secret-nft.md)
     * [Deploy your own secret NFT](network-documentation/secret/tutorials/deploy-your-own-secret-nft.md)
