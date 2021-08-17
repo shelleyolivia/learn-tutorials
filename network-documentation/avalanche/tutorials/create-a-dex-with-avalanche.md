@@ -282,27 +282,343 @@ Error:  *** Deployment Failed ***
 "Migrations" -- Returned error: authentication needed: password or unlock.
 
 ```
-## Interacting with your contract
+## Interacting with your contract with React UI
+ 
+In this, we will be using `Main.js`, `BuyForm.js`, `SellForm.js` components. Here are the details of the components :
 
-Buy Tokens
+Main.js
+
+In this Main.js file import the `BuyForm` and `SellForm` components, then render the buy and sell form.
+
 ```
-result = await avaSwap.buyTokens({ from : investor, value: web3.utils.toWei('1', 'ether')})
+import React, { Component } from "react";
+import BuyFrom from "./BuyForm";
+import SellForm from "./SellForm";
+
+class Main extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentForm: "buy",
+		};
+	}
+
+	handleTokenChange = (token) => {
+		this.props.handleTokenChange(token);
+	}
+
+	render() {
+		let content;
+		if (this.state.currentForm === "buy")
+			content = (
+				<BuyFrom
+					selectedToken = {this.props.selectedToken}
+					ethBalance={this.props.ethBalance}
+					tokenBalance={this.props.tokenBalance}
+					buyTokens={this.props.buyTokens}
+					handleTokenChange = {this.handleTokenChange}
+				/>
+			);
+		else
+			content = (
+				<SellForm
+					selectedToken = {this.props.selectedToken}
+					ethBalance={this.props.ethBalance}
+					tokenBalance={this.props.tokenBalance}
+					sellTokens={this.props.sellTokens}
+					handleTokenChange = {this.handleTokenChange}
+				/>
+			);
+		return (
+			<div id="content" className="mt-3">
+				<div className="d-flex justify-content-between mb-3">
+					<button
+						className={this.state.currentForm === "buy" ? "btn btn-primary" : "btn btn-light" }
+						onClick={(event) => {
+							this.setState({ currentForm: "buy" });
+						}}
+					>
+						Buy
+					</button>
+					<span>&lt; &nbsp; &gt;</span>
+					<button
+						className={this.state.currentForm === "sell" ? "btn btn-primary" : "btn btn-light" }
+						onClick={(event) => {
+							this.setState({ currentForm: "sell" });
+						}}
+					>
+						Sell
+					</button>
+				</div>
+
+				<div className="card mb-4">
+					<div className="card-body">{content}</div>
+				</div>
+			</div>
+		);
+	}
+}
+
+export default Main;
 ```
-Sell Tokens
-Investor must approve the token before transaction :
+ 
+Buy Tokens:
+```
+result = await avaSwap.buyTokens({ from : investor, value: web3.uti
+
+BuyForm.js file importing the Logos of Avax, Dai, ChainLink, Token and component from react
+
+ls.toWei('1', 'ether')})
+```
+BuyForm.js
+```
+import React, { Component } from "react";
+import avaxLogo from "../avax-logo.png";
+import tokenLogo from "../token-logo.png";
+import daiLogo from '../dai-logo.png';
+import chainLinkLogo from "../chainlink-link-logo.png";
+
+class BuyForm extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			output: "0",
+			rate: 100,
+			selected: props.selectedToken.name
+		};
+	}
+
+	handleChange = (event) => {
+		this.setState({ selected: event.target.value });
+		this.props.handleTokenChange(event.target.value);
+	}
+
+	render() {
+		let { selected, rate } = this.state;
+		return (
+			<form
+				className="mb-5"
+				onSubmit={(event) => {
+					event.preventDefault();
+					let etherAmount;
+					etherAmount = this.input.value.toString();
+					etherAmount = window.web3.utils.toWei(etherAmount, "Ether");
+					this.props.buyTokens(etherAmount);
+				}}
+			>
+				<div>
+					<label className="float-left">
+						<b>Input</b>
+					</label>
+					<span className="float-right text-muted">
+						Balance: {window.web3.utils.fromWei(this.props.ethBalance, "Ether")}
+					</span>
+				</div>
+				<div className="input-group mb-4">
+					<input
+						type="text"
+						onChange={(event) => {
+							const etherAmount = this.input.value.toString();
+							this.setState({
+								output: etherAmount * rate,
+							});
+						}}
+						ref={(input) => {
+							this.input = input;
+						}}
+						placeholder="0"
+						className="form-control form-control-lg"
+						required
+					/>
+					<div className="input-group-append">
+						<div className="input-group-text">
+							&nbsp;&nbsp;&nbsp;
+							<img src={avaxLogo} height="32" alt="" />
+							&nbsp;&nbsp;&nbsp; AVAX
+							&nbsp;&nbsp;&nbsp;
+						</div>
+					</div>
+				</div>
+				<div>
+					<label className="float-left">
+						<b>Output</b>
+					</label>
+					<span className="float-right text-muted">
+						Balance: {window.web3.utils.fromWei(this.props.tokenBalance, "Ether")}
+					</span>
+				</div>
+				<div className="input-group mb-2">
+					<input
+						value={this.state.output}
+						type="text"
+						placeholder="0"
+						className="form-control form-control-lg"
+						disabled
+					/>
+					<div className="input-group-append">
+						<div className="input-group-text">
+							<img src={selected === 'LINK' ? chainLinkLogo
+								: selected === 'DAI' ? daiLogo
+									: tokenLogo} height="32" alt="" />
+							&nbsp;
+							<select onChange={this.handleChange}>
+								<option defaultValue={selected}>LINK</option>
+								<option defaultValue={selected}>DEV</option>
+								<option defaultValue={selected}>DAI</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div className="mb-5">
+					<span className="float-left text-muted">
+						<b>Exchange Rate</b>
+					</span>
+					<span className="float-right text-muted">1 AVAX = {rate} {selected}</span>
+				</div>
+				<button type="submit" className="btn btn-primary btn-block btn-lg">
+					SWAP!
+				</button>
+			</form>
+		);
+	}
+}
+
+export default BuyForm;
+
+```
+
+Sell Tokens:
+The investor must approve the token before transaction :
 ```
 result = await Token.approve(avaSwap.address, tokens('100'), { from: investor})
 ```
-Investor sells tokens :
+The investor sells tokens :
 ```
 result = await avaSwap.sellToken(tokens('100'), { from: investor })
 ```
-Check Balance
-Check Eth balance :
+ 
+ 
+SellForm.js
 ```
-let EthBalance = await web3.eth.getBalance(avaSwap.address)
+import React, { Component } from "react";
+import avaxLogo from "../avax-logo.png";
+import tokenLogo from "../token-logo.png";
+import daiLogo from "../dai-logo.png";
+import chainLinkLogo from "../chainlink-link-logo.png";
+
+class SellForm extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			output: "0",
+			selected: props.selectedToken.name
+		};
+	}
+
+	handleChange = (event) => {
+		this.setState({ selected: event.target.value });
+		this.props.handleTokenChange(event.target.value);
+	}
+
+	render() {
+		let { selected } = this.state;
+		return (
+			<form
+				className="mb-5"
+				onSubmit={(event) => {
+					event.preventDefault();
+					let tokenAmount;
+					tokenAmount = this.input.value.toString();
+					tokenAmount = window.web3.utils.toWei(tokenAmount, "Ether");
+					this.props.sellTokens(tokenAmount);
+				}}
+			>
+				<div>
+					<label className="float-left">
+						<b>Input</b>
+					</label>
+					<span className="float-right text-muted">
+						Balance: {window.web3.utils.fromWei(this.props.tokenBalance, "Ether")}
+					</span>
+				</div>
+				<div className="input-group mb-4">
+					<input
+						type="text"
+						onChange={(event) => {
+							const tokenAmount = this.input.value.toString();
+							this.setState({
+								output: tokenAmount / 100,
+							});
+						}}
+						ref={(input) => {
+							this.input = input;
+						}}
+						placeholder="0"
+						className="form-control form-control-lg"
+						required
+					/>
+					<div className="input-group-append">
+						<div className="input-group-text">
+							<img src={selected === 'LINK' ? chainLinkLogo
+								: selected === 'DAI' ? daiLogo
+									: tokenLogo} height="32" alt="" />
+						&nbsp;
+						<select onChange={this.handleChange}>
+								<option selected={selected === 'LINK'} defaultValue="LINK">LINK</option>
+								<option selected={selected === 'DEV'} defaultValue="DEV">DEV</option>
+								<option selected={selected === 'DAI'} defaultValue="DAI">DAI</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div>
+					<label className="float-left">
+						<b>Output</b>
+					</label>
+					<span className="float-right text-muted">
+						Balance: {window.web3.utils.fromWei(this.props.ethBalance, "Ether")}
+					</span>
+				</div>
+				<div className="input-group mb-2">
+					<input
+						value={this.state.output}
+						type="text"
+						placeholder="0"
+						className="form-control form-control-lg"
+						disabled
+					/>
+					<div className="input-group-append">
+						<div className="input-group-text">
+							&nbsp;&nbsp;&nbsp;
+							<img src={avaxLogo} height="32" alt="" />
+							&nbsp;&nbsp;&nbsp; AVAX
+							&nbsp;&nbsp;&nbsp;
+						</div>
+					</div>
+				</div>
+				<div className="mb-5">
+					<span className="float-left text-muted">
+						<b>Exchange Rate</b>
+					</span>
+					<span className="float-right text-muted">100 {selected} = 1 AVAX</span>
+				</div>
+				<button type="submit" className="btn btn-primary btn-block btn-lg">
+					SWAP!
+				</button>
+			</form>
+		);
+	}
+}
+
+export default SellForm;
+
 ```
-Check Token balance :
+
+Check AVAX balance:
+```
+let AvaxBalance = await web3.eth.getBalance(avaSwap.address)
+```
+Check Token balance:
 ```
 let TokenBalance = await Token.balanceOf(avaSwap.address)
 ```
