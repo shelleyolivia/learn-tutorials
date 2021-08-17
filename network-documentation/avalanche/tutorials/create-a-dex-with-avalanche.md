@@ -364,12 +364,10 @@ export default Main;
  
 Buy Tokens:
 ```
-result = await avaSwap.buyTokens({ from : investor, value: web3.uti
-
-BuyForm.js file importing the Logos of Avax, Dai, ChainLink, Token and component from react
-
-ls.toWei('1', 'ether')})
+result = await avaSwap.buyTokens({ from : investor, value: web3.utils.toWei('1', 'ether')})
 ```
+In BuyForm.js file import the logos and ABIs of Avax, Dai, ChainLink Tokens
+
 BuyForm.js
 ```
 import React, { Component } from "react";
