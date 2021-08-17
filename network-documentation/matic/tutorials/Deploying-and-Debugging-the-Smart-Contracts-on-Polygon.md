@@ -26,14 +26,14 @@ I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Develo
 To deploy the smart contracts on Matic you first have to create a Matic network in MetaMask wallet.
 `Settings -> Networks -> Add network -> Save`
 
-<div align="center"><img src="../../../.gitbook/assets/deploy-and-debug-on-polygon-1.png" /></div>
+<div align="center"><img src="../../../.gitbook/assets/deploy-&-debug-on-polygon-1.png" /></div>
 
 
 To get test Matic for deployment and testing,<br>
 `go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network).<br>
 Done! check your wallet, you'll see some Matic there.
 
-<div align="center"><img src="../../../.gitbook/assets/deploy-and-debug-on-polygon-2.png" /></div>
+<div align="center"><img src="../../../.gitbook/assets/deploy-&-debug-on-polygon-2.png" /></div>
 
 ## truffle-config
 * `truffle-config.js` for Mac users
