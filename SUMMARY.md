@@ -240,7 +240,6 @@
     * [Call the smart contract](network-documentation/matic/polygon-matic-pathway/call-the-smart-contract.md)
   * [💡 Tutorials](network-documentation/matic/tutorials/README.md)
     * [Build a Social Media DApp and Deploy it on Polygon](network-documentation/matic/tutorials/Build-a-Social-Media-DApp-and-Deploy-it-on-Polygon.md)
-    * [Deploying & Debugging the Smart Contracts on Polygon](network-documentation/matic/tutorials/Deploying-and-Debugging-the-Smart-Contracts-on-Polygon.md)
     * [Launch a full stack DApp](network-documentation/matic/tutorials/launch-a-full-stack-dapp.md)
     * [Using Metamask with Matic.js](network-documentation/matic/tutorials/untitled.md)
 * [🅿 Provenance](network-documentation/provenance/README.md)
