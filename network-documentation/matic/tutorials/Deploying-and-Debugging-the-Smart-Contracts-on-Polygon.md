@@ -141,7 +141,7 @@ Summary
 If you get any of these errors then follow these steps
 
 ### Error:
-```javascript
+```
 Error: PollingBlockTracker - encountered an error while attempting to update latest block:
 ```
 
