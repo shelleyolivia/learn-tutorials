@@ -436,7 +436,7 @@ We're displaying the user address in this component with the `this.props.account
 
 ![](../../../.gitbook/assets/dtube-9.png)
 
-To display the current uploaded video & title of the video we're going to use `this.props.currentHash` & `this.props.currentTitle` methods. Now, why we're using `https://ipfs.infura.io/ipfs/` here? Well, Infura will pin our IPFS file to keep the file online. Otherwise, If the normal IPFS node is down then it'll cause some issues to access the video. There are so many IPFS pinning services are out there, Infura is the most common one.
+To display the current uploaded video & title of the video we're going to use `this.props.currentHash` & `this.props.currentTitle` properties. Now, why are we using `https://ipfs.infura.io/ipfs/` here? Because [Infura](https://infura.io/) will [pin our IPFS file](https://docs.ipfs.io/concepts/persistence/) to keep the file available to the network. Otherwise, if the IPFS node we're connected to is down, the video file might not be available. There are several IPFS pinning services available and Infura is one of the most commonly used due to its resilience.
 ```javascript
 import React, { Component } from 'react';
 import './App.css';
