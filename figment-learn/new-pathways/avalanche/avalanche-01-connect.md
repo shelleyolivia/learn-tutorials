@@ -23,7 +23,7 @@ You are stuck in the web2.0 waiting room and need to *connect* to the web3 world
 > Decode **pages/api/avalanche/connect.ts** and the door will open!
 
 ```typescript
-// Fill in the gaps to connect with Avalanche & be one of us :)
+// Fill in the gaps to connect with Avalanche & be one of us =)
 // Do not forget we're in an "async" world,
 // so you may need to "await" some results.
   try {
