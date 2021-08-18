@@ -621,7 +621,7 @@ Summary
 
 **IMPORTANT: If you encounter any errors while deploying the Solidity contracts to Polygon (Matic) then check out the "Dealing with different errors" section of [Deploying and Debugging the Smart Contracts on Polygon](https://learn.figment.io/network-documentation/matic/tutorials/Deploying-and-Debugging-the-Smart-Contracts-on-Polygon) tutorial on Figment learn.**
 
-let's run the react app on http://localhost:3000/ by `npm start` command. First, you'll see a MetaMask pop up to `connect` your MetaMask wallet. Now you can upload and share videos on your DApp which is deployed on polygon network. 
+Now let's run the React app on http://localhost:3000/ with the command `npm start`. You should see MetaMask pop up, asking if you would like to connect your MetaMask wallet with the site. Once connected, you can upload and share videos on your DApp which is deployed on Polygon (Matic) network!
 
 ![](../../../.gitbook/assets/dtube-12.gif)
 
