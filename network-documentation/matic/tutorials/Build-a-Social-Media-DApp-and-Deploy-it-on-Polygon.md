@@ -530,7 +530,7 @@ Wow, that's a lot of code! You can run the React app locally with the command `n
 * `truffle-config.js` for Mac users
 * `truffle.js` for Windows users
 
-truffle-config file is the main and the most important file of your DApp which interacts with everything. In this file, you can mention the path of your solidity file (smart contracts), ABI's, and define **networks**.
+The truffle-config file is an important file to understand. In this file, we must configure the path to the DTube Solidity file (smart contract), the contract ABI, and define the available **networks**.
 ```javascript
 const HDWalletProvider = require("@truffle/hdwallet-provider")
 require('dotenv').config(); // Load .env file
