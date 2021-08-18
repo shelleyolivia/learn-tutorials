@@ -40,7 +40,7 @@ If you're looking to develop your own DApp then Ganache is a powerful tool. You 
 
 ### MetaMask Setup:
 MetaMask is used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.<br>
-To install MetaMask extension, click on this [link](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en).<br>
+To install MetaMask extension, click on this [link](https://metamask.io/).<br>
 Now, `Create a MetaMask account -> save the mnemonics (12 secret words) because we need those mnemonics at the time of deployment`<br>
 To deploy the smart contracts on Matic we first have to create a Matic network in MetaMask wallet. `Settings -> Networks -> Add network -> Save`<br>
 Create a Matic network. Fill out the information as given in the image below.
