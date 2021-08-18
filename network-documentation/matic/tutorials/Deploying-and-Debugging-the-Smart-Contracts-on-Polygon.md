@@ -4,7 +4,7 @@ description: >-
 ---
 
 # Deploying & Debugging the Smart Contracts on Polygon
-<div align="center"><img src="../../../.gitbook/assets/deploy-and-debug-on-polygon.png" /></div>
+![](../../../.gitbook/assets/deploy-and-debug-on-polygon.png)
 
 
 ## Introduction
@@ -16,7 +16,7 @@ So, grab a cup of coffee ☕️ and follow the steps.
 This tutorial assumes that you have some beginner-level experience in programming & blockchain understanding.
 
 ## After this tutorial you will be able to:
-* Deploy the smart contracts on polygon (Matic) Mumbai Test Network.<br>
+* Deploy the smart contracts on polygon (Matic) Mumbai Test Network.
 * Tackle the errors while deploying the smart contracts on polygon (Matic) Mumbai Test Network.
 
 ## About the Author
@@ -26,14 +26,15 @@ I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Develo
 To deploy the smart contracts on Matic you first have to create a Matic network in MetaMask wallet.
 `Settings -> Networks -> Add network -> Save`
 
-<div align="center"><img src="../../../.gitbook/assets/deploy-&-debug-on-polygon-1.png" /></div>
+![](../../../.gitbook/assets/deploy-&-debug-on-polygon-1.png)
 
 
-To get test Matic for deployment and testing,<br>
-`go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network).<br>
+To get test Matic for deployment and testing,
+* `go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network).
+
 Done! check your wallet, you'll see some Matic there.
 
-<div align="center"><img src="../../../.gitbook/assets/deploy-&-debug-on-polygon-2.png" /></div>
+![](../../../.gitbook/assets/deploy-&-debug-on-polygon-2.png)
 
 ## truffle-config
 * `truffle-config.js` for Mac users
@@ -96,8 +97,10 @@ You can set gas price and gas limits for faster transactions by adding,
 ```
 
 ## Deploy Smart Contracts
-* Command: `truffle migrate --network matic`<br>
-If you're deploying it for the second time then deploy with this command just to **reset** and avoid JSON errors.<br>
+* Command: `truffle migrate --network matic`
+
+If you're deploying it for the second time then deploy with this command just to **reset** and avoid JSON errors.
+
 * Command: `truffle migrate --network matic --reset`
 
 If everything worked fine, you'll see something like this:
@@ -146,8 +149,7 @@ Error: PollingBlockTracker - encountered an error while attempting to update lat
 ```
 
 ### Fix_1:
-Change `https://rpc-mumbai.matic.today` by using [Infura custom RPC](https://infura.io)
-<br>
+Change `https://rpc-mumbai.matic.today` by using [Infura custom RPC](https://infura.io).
 `infura -> Create new project -> Settings -> Endpoints -> Polygon Mumbai`
 ```javascript
     matic: {
@@ -160,14 +162,13 @@ Change `https://rpc-mumbai.matic.today` by using [Infura custom RPC](https://inf
     },
   },
 ```
-Paste your PROJECT_ID there from .env file.<br>
-`truffle migrate --network matic --reset`
+Paste your PROJECT_ID there from .env file.
+* `truffle migrate --network matic --reset`
 
 If still dealing with error, try this 2nd fix.
 
 ### Fix_2:
-Change `https://rpc-mumbai.matic.today` by using [Matic custom RPC](https://rpc.maticvigil.com/)
-<br>
+Change `https://rpc-mumbai.matic.today` by using [Matic custom RPC](https://rpc.maticvigil.com/).
 ```javascript
     matic: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, 
@@ -179,8 +180,8 @@ Change `https://rpc-mumbai.matic.today` by using [Matic custom RPC](https://rpc.
     },
   },
 ```
-Paste your PROJECT_ID there from .env file.<br>
-`truffle migrate --network matic --reset`
+Paste your PROJECT_ID there from .env file.
+* `truffle migrate --network matic --reset`
 
 ### Error:
 ```javascript
@@ -190,7 +191,8 @@ Paste your PROJECT_ID there from .env file.<br>
 ```
 
 ### Fix:
-`npm install @truffle/hdwallet-provider@1.4.0`<br>
+* `npm install @truffle/hdwallet-provider@1.4.0`
+
 Truffle hdwallet-provider version 1.4.0 will fix this error.
 
 ### Error:
@@ -218,6 +220,6 @@ Just add `networkCheckTimeout: 100000`
 *If you discover any new errors and If you know the solution for it, then feel free to make a PR, we'll add your Error-Fix here.*
 
 ## References
-*Truffle docs: https://www.trufflesuite.com/docs/truffle/overview*<br>
-*Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started*<br>
-*GitHub repo: https://github.com/AkhileshThite/DTube*
+* *Truffle docs: https://www.trufflesuite.com/docs/truffle/overview*
+* *Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started*
+* *GitHub repo: https://github.com/AkhileshThite/DTube*
