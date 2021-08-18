@@ -9,7 +9,7 @@ description: >-
 ## Introduction
 In this tutorial, you will learn how to build a Social Media DApp (Decentralized Application) like YouTube & how to Deploy it on the Polygon (Matic) Mumbai test network. So, grab a cup of coffee ☕️ and let's get started!
 
-*About this project: DTube was created by me during the ETHOdyssey Virtual Hackathon in July-Aug 2021. All the resources I used to create this DApp are linked at the bottom in the "References" section.*
+The DTube project was created by Akhilesh Thite during the ETHOdyssey Virtual Hackathon in July-Aug 2021. All the resources used to create this DApp are linked at in the "References" section at the end of this tutorial.
 
 ## Prerequisites
 This tutorial assumes that you have some beginner-level experience in programming & blockchain understanding.
