@@ -91,7 +91,7 @@ This will copy the project files from GitHub to your computer.
 
 The command `cd DTube` will bring you into the local copy of the repository that was downloaded onto your computer.
 
-Now, open the folder with your favorite IDE, I'm using VS Code.
+Now, open the folder with your favorite code editor or IDE, [VS Code](https://code.visualstudio.com) for example.
 
 ![](../../../.gitbook/assets/dtube-5.png)
 
