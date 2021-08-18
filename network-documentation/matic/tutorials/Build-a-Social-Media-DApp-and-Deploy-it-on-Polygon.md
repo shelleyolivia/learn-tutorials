@@ -464,7 +464,7 @@ class Main extends Component {
 
 ![](../../../.gitbook/assets/dtube-10.png)
 
-Now, we're going to create a form in the video feed to choose the video file, input the title of the video, and upload the video. First, we're going to choose the video file, which will process to upload on IPFS with `this.props.captureFile` method. Then we're going to input the title of the `video ref={(input) => { this.videoTitle = input }}`. onSubmit event we'll upload the video file with the title of the video by `this.props.uploadVideo(title)` method.
+Next, we're going to create a form in the video feed to choose the video file, input the title of the video, and upload the video. We're going to choose the video file, which will process to upload on IPFS with `this.props.captureFile` method. Then we're going to input the title of the `video ref={(input) => { this.videoTitle = input }}`. In the `onSubmit` event handler we'll upload the video file with the title of the video by `this.props.uploadVideo(title)`.
 
 ```javascript
           <div className="vide-feed col-md-2 border border-secondary overflow-auto text-center" style={{ maxHeight: '4000px', minWidth: '175px' }}>
