@@ -564,7 +564,7 @@ module.exports = {
   }
 }
 ```
-Make sure you create `.env` file in the root dir and paste mnemonics (12 secret words) of your MetaMask wallet with variable name MNEMONIC (give any name).
+Ensure you create an `.env` file in the project root directory (`~/DTube/.env`) and paste into it the Secret Recovery Phrase (12 words) of your preferably newly generated and testnet-only MetaMask wallet with the variable name MNEMONIC. This will be loaded by truffle at runtime, and the environment variable can then be accessed with `process.env.MNEMONIC`.
 ```.env
 MNEMONIC= 12 secret words here..
 ```
