@@ -285,9 +285,7 @@ React components has a built-in state object. The state object is where you stor
     }
   }
 ```
-
-Now we're going to prepare the file for upload to IPFS by `captureFile` function.
-
+Now we're going to prepare the file for upload to IPFS by the `captureFile` function.
 ```javascript
   captureFile = event => {
     event.preventDefault()
