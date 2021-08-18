@@ -80,7 +80,7 @@ What is [Web3.js](https://web3js.readthedocs.io/en/v3.0.0-rc.5/)?
 
 Web3.js is a set of JavaScript libraries that acts as a port to the blockchain world. Web3 is a medium to connect our Smart Contracts to the front-end of the DApp.
 
-In this section, I introduced you to the basics of technology that we're going to use and roadmap of our DApp, now the interesting part. Let's make our DApp!
+In this section, we introduced the technologies that will be used and provided a roadmap for building the DApp. Now on to the the interesting part - Let's make the DApp!
 
 ## Project Setup
 To build the DApp without dealing with any annoying version errors & instead of installing each dependency one-by-one, we'll start building our DApp by installing all the necessary dependencies by cloning the GitHub repository.
