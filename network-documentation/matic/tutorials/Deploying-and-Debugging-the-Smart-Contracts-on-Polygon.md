@@ -147,6 +147,7 @@ Error: PollingBlockTracker - encountered an error while attempting to update lat
 
 ### Fix_1:
 Change the RPC endpoint URL in Metamask from 'https://rpc-mumbai.matic.today' to an [Infura RPC endpoint](https://infura.io/). This will require you to register for an Infura account and set up a Project, to get a Project ID. If you already have an Infura project ID, add it to the `.env` file => `PROJECT_ID=<your project ID>`
+
 `infura -> Create new project -> Settings -> Endpoints -> Polygon Mumbai`
 ```javascript
     matic: {
