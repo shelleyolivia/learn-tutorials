@@ -521,8 +521,7 @@ Finally, to list out all the previously uploaded videos with their title in the 
 
 export default Main;
 ```
-You can run the react app by `npm start` command. But nothing is going to happen, because we haven't deployed our smart contracts to the blockchain yet. Let's deploy our Smart Contracts on Polygon (Matic) Network in the next section.
-
+Wow, that's a lot of code! You can run the React app locally with the command `npm start`. Of course the functionality is missing, because we haven't deployed our smart contracts to the blockchain yet. Let's deploy our Solidity contracts on Polygon (Matic) Network next.
 
 *The `<Footer>` component was created in bootstrap for hackathon purposes. It's not related to our DApp. You can simply modify that part as per your needs.*
   
