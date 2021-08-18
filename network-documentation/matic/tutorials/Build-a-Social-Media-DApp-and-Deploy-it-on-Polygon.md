@@ -619,8 +619,7 @@ Summary
 ```
 *Code snippet from matic truffle docs.*
 
-**IMPORTANT:- If you are dealing with any errors while deploying the Smart Contracts to Polygon (Matic) then check out the "Dealing with different errors" section of [Deploying and Debugging the Smart Contracts on Polygon](https://learn.figment.io/network-documentation/matic/tutorials/Deploying-and-Debugging-the-Smart-Contracts-on-Polygon) tutorial on Figment learn.**
-
+**IMPORTANT: If you encounter any errors while deploying the Solidity contracts to Polygon (Matic) then check out the "Dealing with different errors" section of [Deploying and Debugging the Smart Contracts on Polygon](https://learn.figment.io/network-documentation/matic/tutorials/Deploying-and-Debugging-the-Smart-Contracts-on-Polygon) tutorial on Figment learn.**
 
 let's run the react app on http://localhost:3000/ by `npm start` command. First, you'll see a MetaMask pop up to `connect` your MetaMask wallet. Now you can upload and share videos on your DApp which is deployed on polygon network. 
 
