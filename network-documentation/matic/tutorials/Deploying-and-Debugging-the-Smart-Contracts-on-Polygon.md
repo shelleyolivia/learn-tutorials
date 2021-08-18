@@ -163,7 +163,7 @@ Change the RPC endpoint URL in Metamask from 'https://rpc-mumbai.matic.today' to
 Paste your PROJECT_ID there from .env file.
 * `truffle migrate --network matic --reset`
 
-If still dealing with error, try this 2nd fix.
+If the error still occurs, try another alternate RPC endpoint from [MaticVigil](https://maticvigil.com/).
 
 ### Fix_2:
 Change `https://rpc-mumbai.matic.today` by using [Matic custom RPC](https://rpc.maticvigil.com/).
