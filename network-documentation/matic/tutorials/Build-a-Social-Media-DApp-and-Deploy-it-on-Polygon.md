@@ -204,17 +204,21 @@ Now let's work on our main `app.js` file which will contain all the components (
 
 First, we must import all the components and libraries we need (including web3.js), and instantiate our IPFS client so that we can store and retrieve files from the IPFS network.
 ```javascript
-import React, { Component } from 'react';
-import DTube from '../abis/DTube.json'
-import Navbar from './Navbar'
-import Main from './Main'
-import Footer from './Footer'
-import Web3 from 'web3';
-import './App.css';
+import React, { Component } from "react";
+import DTube from "../abis/DTube.json";
+import Navbar from "./Navbar";
+import Main from "./Main";
+import Footer from "./Footer";
+import Web3 from "web3";
+import "./App.css";
 
 //Declare IPFS
-const ipfsClient = require('ipfs-http-client')
-const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
+const ipfsClient = require("ipfs-http-client");
+const ipfs = ipfsClient({
+  host: "ipfs.infura.io",
+  port: 5001,
+  protocol: "https",
+});
 ```
 About Async/Await Function in JavaScript:
 
@@ -254,95 +258,97 @@ In `loadBlockchainData()` function, we're going to load the ETH accounts, connec
 React components has a built-in state object. The state object is where you store property values that belongs to the component. When the state object changes, the component re-renders. We'll use `this.state` to fetch the blockchain data and display it in our front-end react components later with `this.props`.
 ```javascript
   async loadBlockchainData() {
-    const web3 = window.web3
+    const web3 = window.web3;
     // Load account
-    const accounts = await web3.eth.getAccounts()
-    this.setState({ account: accounts[0] })
+    const accounts = await web3.eth.getAccounts();
+    this.setState({ account: accounts[0] });
     // Network ID
-    const networkId = await web3.eth.net.getId()
-    const networkData = DTube.networks[networkId]
-    if(networkData) {
-      const dtube = new web3.eth.Contract(DTube.abi, networkData.address)
-      this.setState({ dtube })
-      const videosCount = await dtube.methods.videoCount().call()
-      this.setState({ videosCount })
+    const networkId = await web3.eth.net.getId();
+    const networkData = DTube.networks[networkId];
+    if (networkData) {
+      const dtube = new web3.eth.Contract(DTube.abi, networkData.address);
+      this.setState({ dtube });
+      const videosCount = await dtube.methods.videoCount().call();
+      this.setState({ videosCount });
       // Load videos, sort by newest
-      for (var i=videosCount; i>=1; i--) {
-        const video = await dtube.methods.videos(i).call()
+      for (var i = videosCount; i >= 1; i--) {
+        const video = await dtube.methods.videos(i).call();
         this.setState({
-          videos: [...this.state.videos, video]
-        })
+          videos: [...this.state.videos, video],
+        });
       }
-      //Set latest video with title to view as default 
-      const latest = await dtube.methods.videos(videosCount).call()
+      //Set latest video with title to view as default
+      const latest = await dtube.methods.videos(videosCount).call();
       this.setState({
         currentHash: latest.hash,
-        currentTitle: latest.title
-      })
-      this.setState({ loading: false})
+        currentTitle: latest.title,
+      });
+      this.setState({ loading: false });
     } else {
-      window.alert('DTube contract not deployed to detected network.')
+      window.alert("DTube contract not deployed to detected network.");
     }
   }
 ```
 Now we're going to prepare the file for upload to IPFS by the `captureFile` function.
 ```javascript
-  captureFile = event => {
-    event.preventDefault()
-    const file = event.target.files[0]
-    const reader = new window.FileReader()
-    reader.readAsArrayBuffer(file)
+  captureFile = (event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+    const reader = new window.FileReader();
+    reader.readAsArrayBuffer(file);
 
     reader.onloadend = () => {
-      this.setState({ buffer: Buffer(reader.result) })
-      console.log('buffer', this.state.buffer)
-    }
-  }
+      this.setState({ buffer: Buffer(reader.result) });
+      console.log("buffer", this.state.buffer);
+    };
+  };
 ```
 Next, we need the `uploadVideo` function so we can upload the video files to IPFS. While uploading a video file to IPFS it'll show a message in the console "Submitting file to IPFS...". Here, we're adding the file with `ipfs.add()` which will take two arguments: The file being uploaded & a callback function. After that, we're going to store the [CID](https://docs.ipfs.io/concepts/content-addressing/) hash of the video file to the blockchain.
 ```javascript
-  uploadVideo = title => {
-    console.log("Submitting file to IPFS...")
+  uploadVideo = (title) => {
+    console.log("Submitting file to IPFS...");
     //adding file to the IPFS
     ipfs.add(this.state.buffer, (error, result) => {
-      console.log('IPFS result', result)
-      if(error) {
-        console.error(error)
-        return
+      console.log("IPFS result", result);
+      if (error) {
+        console.error(error);
+        return;
       }
 
-      this.setState({ loading: true })
-      //adding IPFS video hash to the blockchain.
-      this.state.dtube.methods.uploadVideo(result[0].hash, title).send({ from: this.state.account }).on('transactionHash', (hash) => {
-        this.setState({ loading: false })
-      })
-    })
-  }
+      this.setState({ loading: true });
+      this.state.dtube.methods
+        .uploadVideo(result[0].hash, title)
+        .send({ from: this.state.account })
+        .on("transactionHash", (hash) => {
+          this.setState({ loading: false });
+        });
+    });
+  };
 ```
 To update the video hash and title of the video to the "current" we're going to create `changeVideo` function. After that, let's create bind functions to display the blockchain data in our front-end react components.
 
 `bind()` is an inbuilt method in React, used to pass the data as an argument to the function of a class based component.
 ```javascript
   changeVideo = (hash, title) => {
-    this.setState({'currentHash': hash});
-    this.setState({'currentTitle': title});
-  }
+    this.setState({ currentHash: hash });
+    this.setState({ currentTitle: title });
+  };
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       buffer: null,
-      account: '',
+      account: "",
       dtube: null,
       videos: [],
       loading: true,
       currentHash: null,
-      currentTitle: null
-    }
+      currentTitle: null,
+    };
 
-    this.uploadVideo = this.uploadVideo.bind(this)
-    this.captureFile = this.captureFile.bind(this)
-    this.changeVideo = this.changeVideo.bind(this)
+    this.uploadVideo = this.uploadVideo.bind(this);
+    this.captureFile = this.captureFile.bind(this);
+    this.changeVideo = this.changeVideo.bind(this);
   }
 ```
 Finally, let's add all the components we imported at the top `<Navbar>`, `<Main>` & `<Footer>`. Remember `this.state` is fetching all the blockchain data so that we can use that data to display in our react front-end components.
@@ -353,17 +359,20 @@ In `<Navbar>` we want to display the account address of the user, hence `<Navbar
     return (
       <div>
         <Navbar account={this.state.account} />
-        { this.state.loading
-          ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
-          : <Main
-              videos={this.state.videos}
-              uploadVideo={this.uploadVideo}
-              captureFile={this.captureFile}
-              changeVideo={this.changeVideo}
-              currentHash={this.state.currentHash}
-              currentTitle={this.state.currentTitle}
-            />
-        }
+        {this.state.loading ? (
+          <div id="loader" className="text-center mt-5">
+            <p>Loading...</p>
+          </div>
+        ) : (
+          <Main
+            videos={this.state.videos}
+            uploadVideo={this.uploadVideo}
+            captureFile={this.captureFile}
+            changeVideo={this.changeVideo}
+            currentHash={this.state.currentHash}
+            currentTitle={this.state.currentTitle}
+          />
+        )}
         <Footer />
       </div>
     );
@@ -378,12 +387,11 @@ export default App;
 
 In the Navbar component, we're going to display the brand logo, brand name, user account address, and user profile (including a unique identicon, using a JavaScript library). First, let's import the code and brand logo. We're going to use [Bootstrap](https://getbootstrap.com/) to make our navigation bar.
 ```javascript
-import React, { Component } from 'react';
-import Identicon from 'identicon.js'; //user profile
-import dtube from '../dtube.png' //logo
+import React, { Component } from "react";
+import Identicon from "identicon.js"; //user profile
+import dtube from "../dtube.png"; //logo
 
 class Navbar extends Component {
-
   render() {
     return (
       <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow text-monospace">
@@ -392,7 +400,13 @@ class Navbar extends Component {
           href="/"
           rel="noopener noreferrer"
         >
-          <img src={dtube} width="30" height="30" className="d-inline-block align-top" alt="DTube logo" />
+          <img
+            src={dtube}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt="DTube logo"
+          />
           &nbsp;DTube
         </a>
         <ul className="navbar-nav px-3">
@@ -400,16 +414,20 @@ class Navbar extends Component {
             <small className="text-secondary">
               <small id="account">{this.props.account}</small>
             </small>
-            { this.props.account
-              ? <img
-                className='ml-2'
-                width='30'
-                height='30'
-                src={`data:image/png;base64,${new Identicon(this.props.account, 30).toString()}`}
+            {this.props.account ? (
+              <img
+                className="ml-2"
+                width="30"
+                height="30"
+                src={`data:image/png;base64,${new Identicon(
+                  this.props.account,
+                  30
+                ).toString()}`}
                 alt="DTube account address"
               />
-              : <span></span>
-            }
+            ) : (
+              <span></span>
+            )}
           </li>
         </ul>
       </nav>
@@ -421,15 +439,19 @@ export default Navbar;
 ```
 We're displaying the user address in this component with the `this.props.account` property. The following code snippet uses [React conditional rendering](https://reactjs.org/docs/conditional-rendering.html) and the JavaScript [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator): If the user account address exists, then show the identicon user profile. Otherwise, display a blank `<span>`.
 ```javascript
-            { this.props.account
-              ? <img
-                className='ml-2'
-                width='30'
-                height='30'
-                src={`data:image/png;base64,${new Identicon(this.props.account, 30).toString()}`}
+            {this.props.account ? (
+              <img
+                className="ml-2"
+                width="30"
+                height="30"
+                src={`data:image/png;base64,${new Identicon(
+                  this.props.account,
+                  30
+                ).toString()}`}
                 alt="DTube account address"
               />
-              : <span></span>
+            ) : (
+              <span></span>
 ```
 
 ### Main.js
@@ -438,27 +460,32 @@ We're displaying the user address in this component with the `this.props.account
 
 To display the current uploaded video & title of the video we're going to use `this.props.currentHash` & `this.props.currentTitle` properties. Now, why are we using `https://ipfs.infura.io/ipfs/` here? Because [Infura](https://infura.io/) will [pin our IPFS file](https://docs.ipfs.io/concepts/persistence/) to keep the file available to the network. Otherwise, if the IPFS node we're connected to is down, the video file might not be available. There are several IPFS pinning services available and Infura is one of the most commonly used due to its resilience.
 ```javascript
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
 class Main extends Component {
-
   render() {
     return (
       <div className="container-fluid text-monospace main">
-          <br></br>
-          &nbsp;
-          <br></br>
-          <div className="row">
-            <div className="col-md-10">
-              <div className="embed-responsive embed-responsive-16by9" style={{ maxHeight: '720px'}}>
-                <video
-                  src={`https://ipfs.infura.io/ipfs/${this.props.currentHash}`}
-                  controls
-                >
-                </video>
-              </div>
-            <h3 className="mt-3"><b><i className="video-title">{this.props.currentTitle}</i></b></h3>
+        <br></br>
+        &nbsp;
+        <br></br>
+        <div className="row">
+          <div className="col-md-10">
+            <div
+              className="embed-responsive embed-responsive-16by9"
+              style={{ maxHeight: "720px" }}
+            >
+              <video
+                src={`https://ipfs.infura.io/ipfs/${this.props.currentHash}`}
+                controls
+              ></video>
+            </div>
+            <h3 className="mt-3">
+              <b>
+                <i className="video-title">{this.props.currentTitle}</i>
+              </b>
+            </h3>
           </div>
 ```
 
@@ -467,25 +494,45 @@ class Main extends Component {
 Next, we're going to create a form in the video feed to choose the video file, input the title of the video, and upload the video. We're going to choose the video file, which will process to upload on IPFS with `this.props.captureFile` method. Then we're going to input the title of the `video ref={(input) => { this.videoTitle = input }}`. In the `onSubmit` event handler we'll upload the video file with the title of the video by `this.props.uploadVideo(title)`.
 
 ```javascript
-          <div className="vide-feed col-md-2 border border-secondary overflow-auto text-center" style={{ maxHeight: '4000px', minWidth: '175px' }}>
-            <h5 className="feed-title"><b>Video Feed 📺</b></h5>
-            <form onSubmit={(event) => {
-              event.preventDefault()
-              const title = this.videoTitle.value
-              this.props.uploadVideo(title)
-            }} >
+          <div
+            className="vide-feed col-md-2 border border-secondary overflow-auto text-center"
+            style={{ maxHeight: "4000px", minWidth: "175px" }}
+          >
+            <h5 className="feed-title">
+              <b>Video Feed 📺</b>
+            </h5>
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+                const title = this.videoTitle.value;
+                this.props.uploadVideo(title);
+              }}
+            >
               &nbsp;
-              <input type='file' accept=".mp4, .mov, .mkv .ogg .wmv" onChange={this.props.captureFile} style={{ width: '250px' }} />
-                <div className="form-group mr-sm-2">
-                  <input
-                    id="videoTitle"
-                    type="text"
-                    ref={(input) => { this.videoTitle = input }}
-                    className="form-control-sm mt-3 mr-3"
-                    placeholder="Title.."
-                    required />
-                </div>
-              <button type="submit" className="btn border border-dark btn-primary btn-block btn-sm">Upload</button>
+              <input
+                type="file"
+                accept=".mp4, .mov, .mkv .ogg .wmv"
+                onChange={this.props.captureFile}
+                style={{ width: "250px" }}
+              />
+              <div className="form-group mr-sm-2">
+                <input
+                  id="videoTitle"
+                  type="text"
+                  ref={(input) => {
+                    this.videoTitle = input;
+                  }}
+                  className="form-control-sm mt-3 mr-3"
+                  placeholder="Title.."
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn border border-dark btn-primary btn-block btn-sm"
+              >
+                Upload
+              </button>
               &nbsp;
             </form>
 ```
@@ -495,22 +542,32 @@ Next, we're going to create a form in the video feed to choose the video file, i
 Finally, to list out all the previously uploaded videos with their title in the video feed we'll use `video.hash` and `video.title` properties. Whenever we click on any listed/previous videos the `changeVideo` function will convert the `video.hash` and `video.title` to `currentHash` & `currentTitle`, so that the selected video will appear on the screen.
 
 ```javascript
-            { this.props.videos.map((video, key) => {
-              return(
-                  <div className="card mb-4 text-center hover-overlay bg-secondary mx-auto" style={{ width: '195px'}} key={key} >
-                    <div className="card-title bg-dark">
-                      <small className="text-white"><b>{video.title}</b></small>
-                    </div>
-                    <div>
-                      <p onClick={() => this.props.changeVideo(video.hash, video.title)}>
-                        <video
-                          src={`https://ipfs.infura.io/ipfs/${video.hash}`}
-                          style={{ width: '170px' }}
-                        />
-                      </p>
-                    </div>
+            {this.props.videos.map((video, key) => {
+              return (
+                <div
+                  className="card mb-4 text-center hover-overlay bg-secondary mx-auto"
+                  style={{ width: "195px" }}
+                  key={key}
+                >
+                  <div className="card-title bg-dark">
+                    <small className="text-white">
+                      <b>{video.title}</b>
+                    </small>
                   </div>
-              )
+                  <div>
+                    <p
+                      onClick={() =>
+                        this.props.changeVideo(video.hash, video.title)
+                      }
+                    >
+                      <video
+                        src={`https://ipfs.infura.io/ipfs/${video.hash}`}
+                        style={{ width: "170px" }}
+                      />
+                    </p>
+                  </div>
+                </div>
+              );
             })}
           </div>
         </div>
