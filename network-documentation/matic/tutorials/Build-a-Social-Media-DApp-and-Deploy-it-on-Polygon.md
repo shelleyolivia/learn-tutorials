@@ -100,7 +100,7 @@ Install all the dependencies by the following command:
 
 Note:- As the tutorial moves further, for each section you can clear the code from the file and code it by yourself. You can always cross-check your code from this tutorial or the original GitHub repository of the project.
 
-*I'll provide a **path** and GitHub **repo link** on top of each section of the tutorial, so you don't need to scroll.*
+*There are path and GitHub repo links with each section of the tutorial, so you won't need to scroll around looking for them.*
 
 ## Smart Contracts in Solidity
 Path:`/src/contracts/DTube.sol`
