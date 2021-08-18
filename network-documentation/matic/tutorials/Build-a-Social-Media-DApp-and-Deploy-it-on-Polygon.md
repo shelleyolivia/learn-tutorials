@@ -376,7 +376,7 @@ export default App;
 
 ![](../../../.gitbook/assets/dtube-8.png)
 
-In Navbar, we're going to display the brand logo, brand name (DTube), user account address, and user profile (with identicon JavaScript library). First, let's import the identicon.js and brand logo. We're going to use bootstrap to make our navigation bar.
+In the Navbar component, we're going to display the brand logo, brand name, user account address, and user profile (including a unique identicon, using a JavaScript library). First, let's import the code and brand logo. We're going to use [Bootstrap](https://getbootstrap.com/) to make our navigation bar.
 ```javascript
 import React, { Component } from 'react';
 import Identicon from 'identicon.js'; //user profile
