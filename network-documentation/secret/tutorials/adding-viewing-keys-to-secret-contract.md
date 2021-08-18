@@ -1,12 +1,12 @@
-# Tutorial: Adding viewing keys to a secret contract
+# Adding viewing keys to a secret contract
 
 ## Introduction
 
-In this tutorial we will demonstrate how to add Viewing Key code to the reminder secret contract that we built in the [Developing your first secret contract](https://learn.figment.io/network-documentation/secret/tutorials/creating-a-secret-contract-from-scratch) tutorial. In that tutorial we implemented code to store and read a private reminder for a user. As implemented, each read of the reminder costs gas, which is not ideal. We will show here how a *viewing key* can be used to implement the same functionality in way that does not require the user to send a gas payment every time they want to read the reminder. 
+In this tutorial we will demonstrate how to add Viewing Key code to the reminder secret contract that we built in the [Developing your first secret contract](https://learn.figment.io/network-documentation/secret/tutorials/creating-a-secret-contract-from-scratch) tutorial. In that tutorial we implemented code to store and read a private reminder for a user. As implemented, each read of the reminder costs gas, which is not ideal. We will show here how a _viewing key_ can be used to implement the same functionality in way that does not require the user to send a gas payment every time they want to read the reminder.
 
 A viewing key is simply a randomly generated password defined for an address that is stored in the contract. If a query sends a user's address and viewing key together as parameters in the query, then we can use that information to share read-only private data with the user without needed to incur any gas fees.
 
-The viewing key code implemented in this tutorial is based on the implementation used in the SecretSCRT contract: https://github.com/enigmampc/secretSCRT.
+The viewing key code implemented in this tutorial is based on the implementation used in the SecretSCRT contract: [https://github.com/enigmampc/secretSCRT](https://github.com/enigmampc/secretSCRT).
 
 ## Pre-requisites
 
@@ -18,7 +18,7 @@ If you get stuck at any point, the completed code for this tutorial can also be 
 
 To begin you will need to add the following packages to the `Cargo.toml` file:
 
-```toml
+```text
 secret-toolkit = { git = "https://github.com/enigmampc/secret-toolkit", branch = "debug-print" }
 subtle = { version = "2.2.3", default-features = false }
 base64 = "0.12.3"
@@ -112,7 +112,7 @@ impl fmt::Display for ViewingKey {
 }
 ```
 
-This file defines the struct for our viewing key, `ViewingKey`. The `new` method is a constructor that creates a new viewing key given a `seed` and `entropy`. The `seed` is the seed we will use with the pseudorandom number generator, and is a property of the contract that is set when the contract is created. The `entropy` is provided by the user and sent from the client when they want to create a new viewing key. The `entropy` is further extended by adding in the current block height, block time, and the canonical address of the sender. The seed and entropy are used to create an instance of a `Prng` (a pseudorandom number generator from the `secret-toolkit` library). We get a slice of random bytes from the random number generator and pass this to the SHA256 algorithm to get our key, which is finally encoded in Base64.
+This file defines the struct for our viewing key, `ViewingKey`. The `new` method is a constructor that creates a new viewing key given a `seed` and `entropy`. The `seed` is the seed we will use with the pseudorandom number generator, and is a property of the contract that is set when the contract is created. The `entropy` is provided by the user and sent from the client when they want to create a new viewing key. The `entropy` is further extended by adding in the current block height, block time, and the canonical address of the sender. The seed and entropy are used to create an instance of a `Prng` \(a pseudorandom number generator from the `secret-toolkit` library\). We get a slice of random bytes from the random number generator and pass this to the SHA256 algorithm to get our key, which is finally encoded in Base64.
 
 Once a viewing key has been created, the method `check_viewing_key` can be used to test whether a given hashed password matches the viewing key.
 
@@ -125,7 +125,7 @@ mod viewing_key;
 mod utils;
 ```
 
-In the contract, we also need to add a pseudorandom number generator seed in our config. In `state.rs` add this to our `State` struct: 
+In the contract, we also need to add a pseudorandom number generator seed in our config. In `state.rs` add this to our `State` struct:
 
 ```rust
     pub prng_seed: Vec<u8>,
@@ -145,7 +145,6 @@ pub fn read_viewing_key<S: Storage>(store: &S, owner: &CanonicalAddr) -> Option<
     let user_key_store = ReadonlyPrefixedStorage::new(PREFIX_VIEWING_KEY, store);
     user_key_store.get(owner.as_slice())
 }
-
 ```
 
 Now in `msg.rs` update the `InitMsg` struct to require the owner of the contract to send a pseudorandom number generator seed `String` when the contract is first initialized:
@@ -231,7 +230,7 @@ Now we can update our Query messages to include authenticated queries. For examp
     }
 ```
 
-When we make a Read query we pass in the address of the querier using their human-friendly address (i.e., `secret...`) and the viewing key string.
+When we make a Read query we pass in the address of the querier using their human-friendly address \(i.e., `secret...`\) and the viewing key string.
 
 To easily access validation parameters for authenticated queries we can add an implementation block to our `QueryMsg` struct by adding the following below its declaration:
 
@@ -296,7 +295,7 @@ fn authenticated_queries<S: Storage, A: Api, Q: Querier>(
 }
 ```
 
-This code checks that the correct viewing key has been sent for the given address(es). If no viewing key has been set, we don't want that information to leak based on the time of execution, so we essentially run a noop to cycle through the same time that it would take to check the key if it did exist. If the key matches, then we can handle the specific type of query that was sent (in our case `Read`). If the viewing key does not match or was not set, then we return an unauthorized error. 
+This code checks that the correct viewing key has been sent for the given address\(es\). If no viewing key has been set, we don't want that information to leak based on the time of execution, so we essentially run a noop to cycle through the same time that it would take to check the key if it did exist. If the key matches, then we can handle the specific type of query that was sent \(in our case `Read`\). If the viewing key does not match or was not set, then we return an unauthorized error.
 
 Now we can implement the `query_read` function. It is very similar to our `try_read` handle function from before, but instead of getting the sender address from `deps.api` we use the address that was sent as a query parameter:
 
@@ -332,7 +331,7 @@ Now you can read the reminder as many times as you want without paying any SCRT!
 
 ## Compiling your contract
 
-As with any secret contract before uploading your contract to the network, you should compile it to wasm and then use the secret contract optimizer to reduce its size using the following commands. 
+As with any secret contract before uploading your contract to the network, you should compile it to wasm and then use the secret contract optimizer to reduce its size using the following commands.
 
 ```bash
 cargo wasm
@@ -348,6 +347,6 @@ Refer to the [Write & deploy your first secret contract](https://learn.figment.i
 
 This tutorial was written by Ben Adams, a senior lecturer in computer science and software engineering at the University of Canterbury in New Zealand.
 
-<div class="cc">
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-</div>
+ [![Creative Commons License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)  
+This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
+
