@@ -195,8 +195,7 @@ module.exports = function(deployer) {
 ## Front-end with React.js
 Path: `/src/components/`
 
-
-React applications are broken into components like for example navigation bar, main page, footer of the webpage. React loads a single HTML page (`/public/index.html`) which is connected with all the components. That's the reason everything loads so fast in react.
+React applications are comprised of various components, for example a navigation bar, main page, webpage footer, etc. React loads a single HTML page (`/public/index.html`) which is then populated with all the components that are defined in the project.
 
 ![](../../../.gitbook/assets/dtube-7.png)
 
