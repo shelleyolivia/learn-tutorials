@@ -182,7 +182,7 @@ Paste your PROJECT_ID there from .env file.
 * `truffle migrate --network matic --reset`
 
 ### Error:
-```javascript
+```
 *** Deployment Failed ***
 
 "Migrations" -- only replay-protected (EIP-155) transactions allowed over RPC.
@@ -194,7 +194,7 @@ Paste your PROJECT_ID there from .env file.
 Truffle hdwallet-provider version 1.4.0 will fix this error.
 
 ### Error:
-```javascript
+```
 Error:  *** Deployment Failed ***
 
 "Migrations" -- Transaction was not mined within 750 seconds, please make sure your transaction was properly sent. Be aware that it might still be mined!.
