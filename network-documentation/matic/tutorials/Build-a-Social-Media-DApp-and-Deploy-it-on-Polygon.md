@@ -152,7 +152,7 @@ Let's create an `uploadVideo` function with two arguments `_videoHash` and `_tit
     // Increment video id
     videoCount ++;
 ```
-Finally, we'll add the video to the contract by including `videoCount`,`_videoHash`, `_title`, `msg.sender`(which is a global variable in solidity, it simply means the current user) variables. Then we'll create a function `VideoUploaded` to trigger the event.
+Finally, we'll add the video to the contract by including the variables `videoCount`,`_videoHash`, `_title` & finally `msg.sender` which is a [global variable](https://docs.soliditylang.org/en/latest/units-and-global-variables.html?highlight=msg.sender#special-variables-and-functions) in Solidity, it simply means the current user. Then we'll emit the `VideoUploaded` event, which will store this information in the logs for the transaction where the event was emitted.
 ```solidity
     // Add video to the contract
     videos[videoCount] = Video(videoCount, _videoHash, _title, msg.sender);
