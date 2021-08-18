@@ -4,7 +4,7 @@ description: >-
 ---
 
 # Build a Social Media DApp & Deploy it on Polygon
-<div align="center"><img src="../../../.gitbook/assets/dtube.png" /></div>
+![](../../../.gitbook/assets/dtube.png)
 
 ## Introduction
 In this tutorial, you will learn how to build a Social Media DApp (Decentralized Application) like YouTube & how to Deploy it on the Polygon (Matic) Mumbai test network. So, grab a cup of coffee ☕️ and let's get started!
@@ -24,41 +24,43 @@ This tutorial assumes that you have some beginner-level experience in programmin
 ## Requirements
 We need the following things on your computer to build our DApp.
 ### Node & npm:
-Node is a JavaScript runtime environment that executes JavaScript code outside a web browser and npm is a JavaScript package installer.<br>
-To install Node.js & npm on your computer, click on this [link](https://nodejs.org/en/download/) -> download the file as per your computer requirement -> Install the file.<br>
+Node is a JavaScript runtime environment that executes JavaScript code outside a web browser and npm is a JavaScript package installer.
+To install Node.js & npm on your computer, click on this [link](https://nodejs.org/en/download/) -> download the file as per your computer requirement -> Install the file.
 To check the successful installation type `npm -v` in cmd prompt or terminal, It'll show the version that means you've successfully installed it on your computer.
 
 ### Truffle:
-Truffle is the best development environment for developing blockchain applications. Truffle gives us boilerplate code (template code) to start building our DApp.<br>
-To install truffle open your `windows cmd prompt` or `mac terminal` and paste the following command.<br>
+Truffle is the best development environment for developing blockchain applications. Truffle gives us boilerplate code (template code) to start building our DApp.
+
+To install truffle open your `windows cmd prompt` or `mac terminal` and paste the following command.
 `npm install -g truffle`
 
 ### Ganache (Optional for this tutorial):
-Ganache is a personal blockchain environment for DApp development. It provides us 10 ETH accounts, each of them is funded with 100 ETH so you don't have to worry about anything. <br>
-But in this tutorial, we will deploy our smart contracts on Polygon (Matic).<br>
+Ganache is a personal blockchain environment for DApp development. It provides us 10 ETH accounts, each of them is funded with 100 ETH so you don't have to worry about anything.
+But in this tutorial, we will deploy our smart contracts on Polygon (Matic).
 If you're looking to develop your own DApp then Ganache is a powerful tool. You can download Ganache from this [link](https://www.trufflesuite.com/ganache)
 
 ### MetaMask Setup:
-MetaMask is used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.<br>
-To install MetaMask extension, click on this [link](https://metamask.io/).<br>
-Now, `Create a MetaMask account -> save the mnemonics (12 secret words) because we need those mnemonics at the time of deployment`<br>
-To deploy the smart contracts on Matic we first have to create a Matic network in MetaMask wallet. `Settings -> Networks -> Add network -> Save`<br>
+MetaMask is used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.
+
+To install MetaMask extension, click on this [link](https://metamask.io/).
+Now, `Create a MetaMask account -> save the mnemonics (12 secret words) because we need those mnemonics at the time of deployment`
+To deploy the smart contracts on Matic we first have to create a Matic network in MetaMask wallet. `Settings -> Networks -> Add network -> Save`
 Create a Matic network. Fill out the information as given in the image below.
 
-<div align="center"><img src="../../../.gitbook/assets/deploy-and-debug-on-polygon-1.png" /></div>
+![](../../../.gitbook/assets/deploy-and-debug-on-polygon-1.png)
 
-Now you'll notice zero balance (0 MATIC) in your wallet, To get test Matic for deployment and testing,<br>
-`go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network).<br>
+Now you'll notice zero balance (0 MATIC) in your wallet, To get test Matic for deployment and testing,
+`go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network).
 Done! check your wallet, you'll see some Matic there. *(We only need small amount of Matic (5-10 Matic) to deploy and test our DApp.)*
 
-<div align="center"><img src="../../../.gitbook/assets/deploy-and-debug-on-polygon-2.png" /></div>
+![](../../../.gitbook/assets/deploy-and-debug-on-polygon-2.png)
 
 ### Tech Stack:
-**Languages:** `Solidity, JavaScript, HTML5, CSS3`<br>
-**Libraries:** `React.js, Web3.js`<br>
-**Tools:** `IPFS`<br>
-**Network:** `Polygon (Matic)`<br>
-**Platforms:** `Ethereum, Fleek`
+* **Languages:** `Solidity, JavaScript, HTML5, CSS3`
+* **Libraries:** `React.js, Web3.js`
+* **Tools:** `IPFS`
+* **Network:** `Polygon (Matic)`
+* **Platforms:** `Ethereum, Fleek`
 
 ### Roadmap:
 First, we'll setup our coding environment with the help of **Truffle**, after that we'll write **Smart Contracts** in **solidity**. 
@@ -69,11 +71,13 @@ We're going to use **IPFS** (InterPlanetary File System) to store the hashes of 
 To connect our Smart Contracts with front-end we'll use **Web3.js** and then we'll deploy our Smart Contracts on **Polygon (Matic) Mumbai Test Network**. In the final step, we'll host this DApp on IPFS by using the **Fleek** platform.
 
 
-What are **Smart Contracts?**<br>
+What are **Smart Contracts?**
+
 Smart Contracts are peer-to-peer digital user agreements on the blockchain. To write Smart contracts in Ethereum we use solidity programming language.
 
 
-What is **Web3.js?**<br>
+What is **Web3.js?**
+
 Web3.js is a set of JavaScript libraries that acts as a port to the blockchain world. Web3 is a medium to connect our Smart Contracts to the front-end of the DApp.
 
 In this section, I introduced you to the basics of technology that we're going to use and roadmap of our DApp, now the interesting part. Let's make our DApp!
@@ -81,15 +85,15 @@ In this section, I introduced you to the basics of technology that we're going t
 ## Project Setup
 To build the DApp without dealing with any annoying version errors & instead of installing each dependency one-by-one, we'll start building our DApp by installing all the necessary dependencies by cloning the GitHub repository.
 
-Clone/download the GitHub repository from https://github.com/AkhileshThite/DTube.<br>
-`git clone https://github.com/AkhileshThite/DTube.git` this command will copy the folder from git on your computer.<br>
-`cd [repo_name]` this command will open that repo you just copied from GitHub.<br>
+* Clone/download the GitHub repository from https://github.com/AkhileshThite/DTube.
+* `git clone https://github.com/AkhileshThite/DTube.git` this command will copy the folder from git on your computer.
+* `cd [repo_name]` this command will open that repo you just copied from GitHub.
 Now, open the folder with your favorite IDE, I'm using VS Code.
 
-<div align="center"><img src="../../../.gitbook/assets/dtube-5.png" /></div>
+![](../../../.gitbook/assets/dtube-5.png)
 
-Install all the dependencies by the following command:<br>
-`npm install`
+Install all the dependencies by the following command:
+* `npm install`
 
 Note:- As the tutorial moves further, for each section you can clear the code from the file and code it by yourself. You can always cross-check your code from this tutorial or the original GitHub repository of the project.
 
@@ -154,15 +158,15 @@ Finally, we'll add the video to the contract by including `videoCount`,`_videoHa
 ```
 
 ## Truffle Migrations
-Path:`/src/contracts/`<br>
-Path:`/migrations/`
+* Path:`/src/contracts/`
+* Path:`/migrations/`
 
 Whenever we create a DApp using truffle by the commands `truffle init` or `truffle unbox react`, truffle gives us boilerplate code to start building our DApp. It contains the following main files:
 
-`migrations/1_initial_migration.js`<br>
-`contracts/Migrations.sol (& DTube.sol)`<br>
-`test`<br>
-`truffle-config.js`<br>
+* `migrations/1_initial_migration.js`
+* `contracts/Migrations.sol (& DTube.sol)`
+* `test`
+* `truffle-config.js`
 *(We'll understand and see `truffle-config.js` at the time of deployment of our Smart Contracts.)*
 
 
@@ -171,7 +175,7 @@ Whenever we create a DApp using truffle by the commands `truffle init` or `truff
 
 Hence, to deploy our Smart Contracts to the Blockchain it is important to create a new file in the migrations folder called `2_initial_migration.js` which will talk to our `DTube.sol` contracts.
 
-<div align="center"><img src="../../../.gitbook/assets/dtube-6.png" /></div>
+![](../../../.gitbook/assets/dtube-6.png)
 
 The code is similar to `1_initial_migration.js`, just replace migrations with DTube.
 
@@ -190,7 +194,7 @@ Path: `/src/components/`
 
 React applications are broken into components like for example navigation bar, main page, footer of the webpage. React loads a single HTML page (`/public/index.html`) which is connected with all the components. That's the reason everything loads so fast in react.
 
-<div align="center"><img src="../../../.gitbook/assets/dtube-7.png" /></div>
+![](../../../.gitbook/assets/dtube-7.png)
 
 ### app.js
 Now let's work on our main `app.js` file which will contain all the components (navbar, main, footer).
@@ -369,7 +373,7 @@ export default App;
 ```
 ### Navbar.js
 
-<div align="center"><img src="../../../.gitbook/assets/dtube-8.png" /></div>
+![](../../../.gitbook/assets/dtube-8.png)
 
 In Navbar, we're going to display the brand logo, brand name (DTube), user account address, and user profile (with identicon JavaScript library). First, let's import the identicon.js and brand logo. We're going to use bootstrap to make our navigation bar.
 ```javascript
@@ -429,7 +433,7 @@ We're displaying the user address in this component by `this.props.account` meth
 
 ### Main.js
 
-<div align="center"><img src="../../../.gitbook/assets/dtube-9.png" /></div>
+![](../../../.gitbook/assets/dtube-9.png)
 
 To display the current uploaded video & title of the video we're going to use `this.props.currentHash` & `this.props.currentTitle` methods. Now, why we're using `https://ipfs.infura.io/ipfs/` here? Well, Infura will pin our IPFS file to keep the file online. Otherwise, If the normal IPFS node is down then it'll cause some issues to access the video. There are so many IPFS pinning services are out there, Infura is the most common one.
 ```javascript
@@ -457,7 +461,7 @@ class Main extends Component {
           </div>
 ```
 
-<div align="center"><img src="../../../.gitbook/assets/dtube-10.png" /></div>
+![](../../../.gitbook/assets/dtube-10.png)
 
 Now, we're going to create a form in the video feed to choose the video file, input the title of the video, and upload the video. First, we're going to choose the video file, which will process to upload on IPFS with `this.props.captureFile` method. Then we're going to input the title of the `video ref={(input) => { this.videoTitle = input }}`. onSubmit event we'll upload the video file with the title of the video by `this.props.uploadVideo(title)` method.
 
@@ -485,7 +489,7 @@ Now, we're going to create a form in the video feed to choose the video file, in
             </form>
 ```
 
-<div align="center"><img src="../../../.gitbook/assets/dtube-11.png" /></div>
+![](../../../.gitbook/assets/dtube-11.png)
 
 Finally, to list out all the previously uploaded videos with their title in the video feed we'll create `video.hash` and `video.title` methods. Whenever we click on any listed/previous videos the `changeVideo` function will convert the `video.hash` and `video.title` to `currentHash` & `currentTitle`, so that the clicked/selected video will appear on the screen. 
 
@@ -583,8 +587,10 @@ You can set the gas price and gas limits for faster transactions by adding
 ```
 
 ### Deploy Smart Contracts
-* Command: `truffle migrate --network matic`<br>
-If you're deploying it for the second time then deploy with this command just to **reset** and avoid JSON errors.<br>
+* Command: `truffle migrate --network matic`
+
+If you're deploying it for the second time then deploy with this command just to **reset** and avoid JSON errors.
+
 * Command: `truffle migrate --network matic --reset`
 
 If everything worked fine, you'll see something like this:
@@ -629,7 +635,7 @@ Summary
 
 let's run the react app on http://localhost:3000/ by `npm start` command. First, you'll see a MetaMask pop up to `connect` your MetaMask wallet. Now you can upload and share videos on your DApp which is deployed on polygon network. 
 
-<div align="center"><img src="../../../.gitbook/assets/dtube-12.gif" /></div>
+![](../../../.gitbook/assets/dtube-12.gif)
 
 ## Host the DApp on IPFS using Fleek
 You cannot call this project a "Decentralized Application" if you are hosting it on any centralized server. To make it decentralized, again we're going to use IPFS. But the problem here is you cannot update/modify the project with same IPFS hash. IPFS uses content based addressing, hence each asset has its own unique address. This is where we're going to use "Fleek" IPFS hosting and Filecoin storage platform where you can **deploy the project, get a link, get SSL certificate, assign the domain, and update the project by simply connecting your GitHub repository**. When you push any changes on that repo, fleek will automatically update the changes with new IPFS hash on the same Fleek url. How cool is that? Let's see how it's done.
@@ -655,13 +661,13 @@ That's it! you'll get the fleek link of your DApp after deploying the site, you 
 I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Development, Open-Source & Decentralization. Feel free to connect with me on [GitHub](https://github.com/AkhileshThite) & [Twitter](https://twitter.com/AkhileshThite_).
 
 ## References
-*Truffle docs: https://www.trufflesuite.com/docs/truffle/overview*<br>
-*Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started*<br>
-*MetaMask docs: https://docs.metamask.io/guide/#why-metamask*<br>
-*Web3 docs: https://web3js.readthedocs.io/en/v1.4.0/*<br>
-*React docs: https://reactjs.org/docs/getting-started.html*<br>
-*Fleek docs: https://docs.fleek.co*<br>
-*IPFS docs: https://docs.ipfs.io/concepts/what-is-ipfs/#decentralization*<br>
-*Async/Await: https://www.geeksforgeeks.org/async-await-function-in-javascript/*<br>
-*Dapp University YouTube: https://www.youtube.com/watch?v=OLsteD3xkPQ*<br>
-*Deploy & debug on polygon :https://learn.figment.io/network-documentation/matic/tutorials/Deploying-and-Debugging-the-Smart-Contracts-on-Polygon*
+* *Truffle docs: https://www.trufflesuite.com/docs/truffle/overview*
+* *Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started*
+* *MetaMask docs: https://docs.metamask.io/guide/#why-metamask*
+* *Web3 docs: https://web3js.readthedocs.io/en/v1.4.0/*
+* *React docs: https://reactjs.org/docs/getting-started.html*
+* *Fleek docs: https://docs.fleek.co*
+* *IPFS docs: https://docs.ipfs.io/concepts/what-is-ipfs/#decentralization*
+* *Async/Await: https://www.geeksforgeeks.org/async-await-function-in-javascript/*
+* *Dapp University YouTube: https://www.youtube.com/watch?v=OLsteD3xkPQ*
+* *Deploy & debug on polygon :https://learn.figment.io/network-documentation/matic/tutorials/Deploying-and-Debugging-the-Smart-Contracts-on-Polygon*
