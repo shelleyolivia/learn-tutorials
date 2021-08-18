@@ -9,7 +9,7 @@ description: >-
 
 ## Introduction
 In this tutorial, we will cover how to deploy smart contracts to the Polygon (Matic) Mumbai test network.
-I'll cover all the possible errors which I faced during the deployment.
+We'll cover some of the possible errors which might occur during the deployment.
 So, grab a cup of coffee ☕️ and follow the steps.
 
 ## Prerequisites
