@@ -137,7 +137,7 @@ Summary
 ```
 *Code snippet from matic truffle docs.*
 
-## Dealing with different errors
+## Deployment errors and solutions
 If you get any of these errors then follow these steps
 
 ### Error:
