@@ -12,7 +12,7 @@ You must have gone through this tutorial Run an Avalanche Node and have performe
 
 * [NodeJS](https://nodejs.org/en)
 * Truffle, which you can install with `npm install -g truffle`
-* Metamask extension added to the browser, which you can add from [here](https://metamask.io/download.html)
+* [Metamask extension](https://metamask.io/download.html) added to the browser
 
 **Create AvaSwap directory and install dependencies**
 
@@ -136,7 +136,7 @@ contract AvaSwap {
 
 ## Add new migration
 
-Create a new file in the ```migrations``` directory named ```2_deploy_contracts.js```, and add the following block of code. This handles deploying the ```Storage``` smart contract to the blockchain.
+Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `EthSwap` smart contract to the blockchain.
 
 ```
 const AvaSwap = artifacts.require("AvaSwap");
@@ -151,7 +151,6 @@ module.exports = function (deployer) {
   avaSwap =  await AvaSwap.deployed();
   // Mint 0.001 DevToken to AvaSwap
   await devToken.transfer(avaSwap.address, '1000000000000000000000000');
-
 };
 ```
 ## Compile Contracts with Truffle
