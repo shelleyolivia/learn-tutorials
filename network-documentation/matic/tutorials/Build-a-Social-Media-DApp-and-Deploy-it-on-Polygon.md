@@ -21,9 +21,6 @@ This tutorial assumes that you have some beginner-level experience in programmin
 * Understand Web3 concepts.
 * Host the DApp on [IPFS](https://docs.ipfs.io/concepts/) using [Fleek](https://docs.fleek.co/) platform.
 
-## About the Author
-I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Development, Open-Source & Decentralization. Feel free to connect with me on [GitHub](https://github.com/AkhileshThite) & [Twitter](https://twitter.com/AkhileshThite_).
-
 ## Basics & Installation
 We need the following things on your computer to build our DApp.
 ### Node & npm:
@@ -654,8 +651,10 @@ Create a new repository on GitHub and push all the changes.
 
 That's it! you'll get the fleek link of your DApp after deploying the site, you can assign a domain and share your DApp link with anyone in the world. Congratulations! You've built a truly Decentralized Social Media Application.
 
-## References
+## About the Author
+I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Development, Open-Source & Decentralization. Feel free to connect with me on [GitHub](https://github.com/AkhileshThite) & [Twitter](https://twitter.com/AkhileshThite_).
 
+## References
 *Truffle docs: https://www.trufflesuite.com/docs/truffle/overview*<br>
 *Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started*<br>
 *MetaMask docs: https://docs.metamask.io/guide/#why-metamask*<br>
