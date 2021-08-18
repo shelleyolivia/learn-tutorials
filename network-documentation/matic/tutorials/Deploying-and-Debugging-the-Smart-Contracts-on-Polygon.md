@@ -8,7 +8,7 @@ description: >-
 
 
 ## Introduction
-In this tutorial, I'll show you how to deploy smart contracts of your DApp to the Polygon (Matic) Mumbai Test Network.
+In this tutorial, we will cover how to deploy smart contracts to the Polygon (Matic) Mumbai test network.
 I'll cover all the possible errors which I faced during the deployment.
 So, grab a cup of coffee ☕️ and follow the steps.
 
