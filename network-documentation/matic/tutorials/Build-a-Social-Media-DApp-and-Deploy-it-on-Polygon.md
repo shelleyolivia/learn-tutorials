@@ -629,7 +629,7 @@ Now let's run the React app on http://localhost:3000/ with the command `npm star
 You cannot call this project a "Decentralized Application" if you are hosting it on any centralized server. To make it decentralized, again we're going to use IPFS. But the problem here is you cannot update/modify the project with same IPFS hash. IPFS uses content based addressing, hence each asset has its own unique address. This is where we're going to use "Fleek" IPFS hosting and Filecoin storage platform where you can **deploy the project, get a link, get SSL certificate, assign the domain, and update the project by simply connecting your GitHub repository**. When you push any changes on that repo, fleek will automatically update the changes with new IPFS hash on the same Fleek url. How cool is that? Let's see how it's done.
 
 Before hosting the DApp on Fleek,
-Create `.gitignore` file in the root dir of your project, put `node_modules` and `.env` files inside `.gitignore` file.
+Create a `.gitignore` file in the root dir of your project, put `node_modules` and `.env` on separate lines inside the `.gitignore` file and remember to save the file to disk.
 
 {% hint style="warning" %}
 Never share or commit your `.env` file. It contains your credentials like `mnemonics` and `API` key. Therefore, it is advised to add `.env` to your `.gitignore` file.
