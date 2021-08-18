@@ -136,7 +136,7 @@ Now, let's create `Video` data types and `VideoUploaded` event.
     address author
   );
 ```
-Let's create a `uploadVideo` function with two arguments `_videoHash` and `_title`, inside the function we're making sure the `video hash`, `video title`, `uploader address` exists by using some conditions (length should be greater than zero). After that, to list down the videos we'll increase the video count (videoCount = videoCount + 1).
+Let's create an `uploadVideo` function with two arguments `_videoHash` and `_title`, inside the function signature. We're making sure the `video hash`, `video title`, `uploader address` exist by using some conditions (require the length of the passed argument be greater than zero). After that, to differentiate the videos we'll increment the videoCount (each video will have a unique number to identify it by).
 ```solidity
   constructor() public {
   } 
