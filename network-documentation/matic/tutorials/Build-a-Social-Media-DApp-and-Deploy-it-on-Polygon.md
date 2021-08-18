@@ -7,9 +7,7 @@ description: >-
 <div align="center"><img src="../../../.gitbook/assets/dtube.png" /></div>
 
 ## Introduction
-In this tutorial, I'll show you how to build a Social Media DApp (Decentralized Application) like YouTube & how to Deploy it on Polygon (Matic) Mumbai Test Network.<br>
-I'll start the tutorial from scratch (MetaMask installation process to hosting the DApp on IPFS using Fleek).<br>
-So, grab a cup of coffee ☕️ and let's get started!
+In this tutorial, you will learn how to build a Social Media DApp (Decentralized Application) like YouTube & how to Deploy it on the Polygon (Matic) Mumbai test network. So, grab a cup of coffee ☕️ and let's get started!
 
 *About this project: DTube was created by me during the ETHOdyssey Virtual Hackathon in July-Aug 2021. All the resources I used to create this DApp are linked at the bottom in the "References" section.*
 
