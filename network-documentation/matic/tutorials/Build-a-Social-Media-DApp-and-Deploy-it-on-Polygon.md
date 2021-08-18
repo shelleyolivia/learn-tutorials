@@ -44,8 +44,8 @@ MetaMask is used to interact with the Ethereum blockchain. It allows users to ac
 
 To install MetaMask extension, click on this [link](https://metamask.io/).
 Now, `Create a MetaMask account -> save the mnemonics (12 secret words) because we need those mnemonics at the time of deployment`
-To deploy the smart contracts on Matic we first have to create a Matic network in MetaMask wallet. `Settings -> Networks -> Add network -> Save`
-Create a Matic network. Fill out the information as given in the image below.
+
+To interact with Polygon via Metamask we first have to add a new RPC endpoint. Open the Metamask extension by clicking on the Fox icon in your browser toolbar then select `Settings -> Networks -> Add network -> Save`. Fill out the information as given in the image below.
 
 ![](../../../.gitbook/assets/deploy-and-debug-on-polygon-1.png)
 
