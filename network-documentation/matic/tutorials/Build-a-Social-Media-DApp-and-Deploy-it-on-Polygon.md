@@ -299,7 +299,7 @@ Now we're going to prepare the file for upload to IPFS by the `captureFile` func
     }
   }
 ```
-Let's upload the file to IPFS by `uploadVideo` function. While uploading a video file to IPFS it'll show a message in the console "Submitting file to IPFS...". Here, we're adding the file to IPFS with `ipfs.add()` function which will take two arguments -> file & callback. After that, we're going to store the IPFS hash of the video file to the blockchain.
+Next, we need the `uploadVideo` function so we can upload the video files to IPFS. While uploading a video file to IPFS it'll show a message in the console "Submitting file to IPFS...". Here, we're adding the file with `ipfs.add()` which will take two arguments: The file being uploaded & a callback function. After that, we're going to store the [CID](https://docs.ipfs.io/concepts/content-addressing/) hash of the video file to the blockchain.
 ```javascript
   uploadVideo = title => {
     console.log("Submitting file to IPFS...")
