@@ -321,7 +321,7 @@ Next, we need the `uploadVideo` function so we can upload the video files to IPF
 ```
 To update the video hash and title of the video to the "current" we're going to create `changeVideo` function. After that, let's create bind functions to display the blockchain data in our front-end react components.
 
-The bind() is an inbuilt method in React that is used to pass the data as an argument to the function of a class based component.
+`bind()` is an inbuilt method in React, used to pass the data as an argument to the function of a class based component.
 ```javascript
   changeVideo = (hash, title) => {
     this.setState({'currentHash': hash});
