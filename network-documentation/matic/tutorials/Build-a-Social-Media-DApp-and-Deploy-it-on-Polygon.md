@@ -89,7 +89,8 @@ Clone the GitHub repository with the command
 `git clone https://github.com/AkhileshThite/DTube.git`
 This will copy the project files from GitHub to your computer.
 
-* `cd [repo_name]` this command will open that repo you just copied from GitHub.
+The command `cd DTube` will bring you into the local copy of the repository that was downloaded onto your computer.
+
 Now, open the folder with your favorite IDE, I'm using VS Code.
 
 ![](../../../.gitbook/assets/dtube-5.png)
