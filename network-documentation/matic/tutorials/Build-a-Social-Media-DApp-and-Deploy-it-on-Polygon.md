@@ -76,7 +76,7 @@ What are **Smart Contracts?**
 Smart Contracts are peer-to-peer digital user agreements on the blockchain. To write Smart contracts in Ethereum we use solidity programming language.
 
 
-What is **Web3.js?**
+What is [Web3.js](https://web3js.readthedocs.io/en/v3.0.0-rc.5/)?
 
 Web3.js is a set of JavaScript libraries that acts as a port to the blockchain world. Web3 is a medium to connect our Smart Contracts to the front-end of the DApp.
 
