@@ -202,7 +202,7 @@ React applications are comprised of various components, for example a navigation
 ### app.js
 Now let's work on our main `app.js` file which will contain all the components (navbar, main, footer).
 
-First, let's import all the components, Web3 and declare IPFS.
+First, we must import all the components and libraries we need (including web3.js), and instantiate our IPFS client so that we can store and retrieve files from the IPFS network.
 ```javascript
 import React, { Component } from 'react';
 import DTube from '../abis/DTube.json'
