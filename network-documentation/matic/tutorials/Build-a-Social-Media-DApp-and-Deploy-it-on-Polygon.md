@@ -108,7 +108,9 @@ Path:`/src/contracts/DTube.sol`
 
 We are going to design Smart Contracts to upload videos (With IPFS video hash), Store videos (With the title and IPFS video hash), list videos (by video IDs) to the blockchain.
 
-Let's define the version of solidity and create a contract called DTube. Initially, we're saying that the video count is zero. `uint` means unsigned integer (Positive number) data type. `string` means char data type. We'll call this contract later on by the name "DTube" with the help of ABI. The state variable `public` doesn't have to do anything with security. `mapping(uint => Video) public videos` this is how the mapping is done in solidity, for multiple videos we're creating a variable `Videos` by using the data type of each element `Video` which we'll create in the next code snippet.
+Let's define the version of the Solidity compiler to be used, and create a Solidity contract named DTube.
+Initially, we're specifying that the video count is zero. `uint` means unsigned integer data type (can only be a number 0 or above, not a negative value). `string` means character string data type. We'll be able to refer to this contract later on by the name "DTube" with the help of an ABI ([Application Binary Interface](https://docs.soliditylang.org/en/latest/abi-spec.html)). The state variable visibility of `public` doesn't have to do anything with security, it simply means that the variable is not hidden or exclusive to the contract.
+`mapping(uint => Video) public videos` is a mapping between a `uint` number and a Video. Because there will be multiple videos, we're creating a variable `Videos` by using the data type of each element `Video` which we'll create in the next code snippet.
 ```solidity
 pragma solidity ^0.5.0;
 
