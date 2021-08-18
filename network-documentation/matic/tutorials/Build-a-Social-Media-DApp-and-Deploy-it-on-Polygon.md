@@ -68,7 +68,7 @@ After writing Smart Contracts, To build the front-end of our DApp we'll use [Rea
 
 We're going to use **IPFS** (InterPlanetary File System) to store the hashes of our videos to the blockchain and later we'll be able to play those videos by calling those video hashes.
 
-To connect our Smart Contracts with front-end we'll use [Web3.js](https://web3js.readthedocs.io/en/v1.4.0/) and then we'll deploy our Smart Contracts on **Polygon (Matic) Mumbai Test Network**. In the final step, we'll host this DApp on IPFS by using the **Fleek** platform.
+To connect our Smart Contracts with front-end we'll use [Web3.js](https://web3js.readthedocs.io/en/v1.4.0/) and then we'll deploy our Smart Contracts on **Mumbai testnet**. In the final step, we'll host this DApp on IPFS by using the **Fleek** platform.
 
 
 What are **Smart Contracts?**
