@@ -18,8 +18,8 @@ This tutorial assumes that you have some beginner-level experience in programmin
 * Build a Full Stack Decentralized Application on top of Ethereum Blockchain.
 * Deploy smart contracts on the Polygon (Matic) Mumbai test network.
 * Use Truffle & MetaMask.
-*  Understand Web3 concepts.
-*  Host the DApp on IPFS using Fleek platform.
+* Understand Web3 concepts.
+* Host the DApp on [IPFS](https://docs.ipfs.io/concepts/) using [Fleek](https://docs.fleek.co/) platform.
 
 ## About the Author
 I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Development, Open-Source & Decentralization. Feel free to connect with me on [GitHub](https://github.com/AkhileshThite) & [Twitter](https://twitter.com/AkhileshThite_).
