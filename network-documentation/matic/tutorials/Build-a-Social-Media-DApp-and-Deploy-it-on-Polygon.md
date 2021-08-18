@@ -17,7 +17,7 @@ This tutorial assumes that you have some beginner-level experience in programmin
 ## After this tutorial you will be able to:
 * Build a Full Stack Decentralized Application on top of Ethereum Blockchain.
 * Deploy smart contracts on the Polygon (Matic) Mumbai test network.
-* Use truffle & MetaMask effectively.
+* Use Truffle & MetaMask.
 *  Understand Web3 concepts.
 *  Host the DApp on IPFS using Fleek platform.
 
