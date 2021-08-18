@@ -569,14 +569,11 @@ Now, let's add `matic` network in our truffle-config file which will contain our
       confirmations: 2,
       timeoutBlocks: 200,
       skipDryRun: true,
-    },
-  },
-```
-You can set the gas price and gas limits for faster transactions by adding
-```javascript
       gas: 6000000,
       gasPrice: 10000000000,
+    },
 ```
+You can set the gas price and gas limits for faster transactions as shown in the above code block.
 
 ### Deploy Smart Contracts
 * Command: `truffle migrate --network matic`
