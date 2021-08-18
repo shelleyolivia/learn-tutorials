@@ -37,7 +37,7 @@ Done! check your wallet, you'll see some Matic there.
 * `truffle-config.js` for Mac users
 * `truffle.js` for Windows users
 
-truffle-config file is the main and the most important file of your DApp which interacts with everything. In this file, you can mention the path of your solidity file (smart contracts), ABI's, and define **networks**.
+The truffle-config file is an important file to understand. In this file, we must configure the path to the DTube Solidity file (smart contract), the contract ABI, and define the available **networks**.
 ```javascript
 const HDWalletProvider = require("@truffle/hdwallet-provider")
 require('dotenv').config(); // Load .env file
@@ -49,14 +49,6 @@ module.exports = {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 8545,            // Standard Ethereum port 
       network_id: "*",       // Any network (default: none)
-    },
-    matic: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, 
-     `https://rpc-mumbai.matic.today`),
-      network_id: 80001,
-      confirmations: 2,
-      timeoutBlocks: 200,
-      skipDryRun: true,
     },
   },
   contracts_directory: './src/contracts/', // path to Smart Contracts
@@ -71,8 +63,8 @@ module.exports = {
   }
 }
 ```
-Make sure you create `.env` file in the root dir and paste mnemonics (12 secret words) of your MetaMask wallet with variable name MNEMONIC (give any name).
-```.env
+Ensure you create an `.env` file in the project root directory (`~/DTube/.env`) and paste into it the Secret Recovery Phrase (12 words) of your preferably newly generated and testnet-only MetaMask wallet with the variable name MNEMONIC. This will be loaded by truffle at runtime, and the environment variable can then be accessed with `process.env.MNEMONIC`.
+```
 MNEMONIC= 12 secret words here..
 ```
 Now, let's add `matic` network in our truffle-config file which will contain our environment variable MNEMONIC and RPC URL.
@@ -84,14 +76,11 @@ Now, let's add `matic` network in our truffle-config file which will contain our
       confirmations: 2,
       timeoutBlocks: 200,
       skipDryRun: true,
-    },
-  },
-```
-You can set gas price and gas limits for faster transactions by adding,
-```javascript
       gas: 6000000,
       gasPrice: 10000000000,
+    },
 ```
+You can set the gas price and gas limits for faster transactions as shown in the above code block.
 
 ## Deploy Smart Contracts
 * Command: `truffle migrate --network matic`
