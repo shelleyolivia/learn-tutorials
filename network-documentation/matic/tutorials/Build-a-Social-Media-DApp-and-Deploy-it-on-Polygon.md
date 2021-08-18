@@ -173,7 +173,7 @@ Whenever we create a DApp using truffle by the commands `truffle init` or `truff
 * `test`
 * `truffle-config.js`
 
-(We'll go over `truffle-config.js` in a moment, before deployment of our smart contracts.)*
+(We'll go over `truffle-config.js` in a moment, before deployment of our smart contracts.)
 
 **Migrations are JavaScript files that help you deploy contracts to the Ethereum network. These files are responsible for staging your deployment tasks, and they're written under the assumption that your deployment needs will change over time.**
 
