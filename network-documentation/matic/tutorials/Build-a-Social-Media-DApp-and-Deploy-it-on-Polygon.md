@@ -21,7 +21,7 @@ This tutorial assumes that you have some beginner-level experience in programmin
 * Understand Web3 concepts.
 * Host the DApp on [IPFS](https://docs.ipfs.io/concepts/) using [Fleek](https://docs.fleek.co/) platform.
 
-## Basics & Installation
+## Requirements
 We need the following things on your computer to build our DApp.
 ### Node & npm:
 Node is a JavaScript runtime environment that executes JavaScript code outside a web browser and npm is a JavaScript package installer.<br>
