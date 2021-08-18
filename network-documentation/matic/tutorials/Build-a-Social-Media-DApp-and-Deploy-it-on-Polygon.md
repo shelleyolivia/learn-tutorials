@@ -172,11 +172,10 @@ Whenever we create a DApp using truffle by the commands `truffle init` or `truff
 * `contracts/Migrations.sol (& DTube.sol)`
 * `test`
 * `truffle-config.js`
-*(We'll understand and see `truffle-config.js` at the time of deployment of our Smart Contracts.)*
 
+(We'll go over `truffle-config.js` in a moment, before deployment of our smart contracts.)*
 
 **Migrations are JavaScript files that help you deploy contracts to the Ethereum network. These files are responsible for staging your deployment tasks, and they're written under the assumption that your deployment needs will change over time.**
-
 
 Hence, to deploy our Smart Contracts to the Blockchain it is important to create a new file in the migrations folder called `2_initial_migration.js` which will talk to our `DTube.sol` contracts.
 
