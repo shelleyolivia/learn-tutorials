@@ -492,7 +492,7 @@ Next, we're going to create a form in the video feed to choose the video file, i
 
 ![](../../../.gitbook/assets/dtube-11.png)
 
-Finally, to list out all the previously uploaded videos with their title in the video feed we'll create `video.hash` and `video.title` methods. Whenever we click on any listed/previous videos the `changeVideo` function will convert the `video.hash` and `video.title` to `currentHash` & `currentTitle`, so that the clicked/selected video will appear on the screen. 
+Finally, to list out all the previously uploaded videos with their title in the video feed we'll use `video.hash` and `video.title` properties. Whenever we click on any listed/previous videos the `changeVideo` function will convert the `video.hash` and `video.title` to `currentHash` & `currentTitle`, so that the selected video will appear on the screen.
 
 ```javascript
             { this.props.videos.map((video, key) => {
