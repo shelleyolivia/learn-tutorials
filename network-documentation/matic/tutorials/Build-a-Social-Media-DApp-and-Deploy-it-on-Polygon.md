@@ -419,7 +419,7 @@ class Navbar extends Component {
 
 export default Navbar;
 ```
-We're displaying the user address in this component by `this.props.account` method. The following code snippet says that, If the user account address exists, then show the identicon user profile.
+We're displaying the user address in this component with the `this.props.account` property. The following code snippet uses [React conditional rendering](https://reactjs.org/docs/conditional-rendering.html) and the JavaScript [ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator): If the user account address exists, then show the identicon user profile. Otherwise, display a blank `<span>`.
 ```javascript
             { this.props.account
               ? <img
