@@ -83,7 +83,7 @@ Web3.js is a set of JavaScript libraries that acts as a port to the blockchain w
 In this section, we introduced the technologies that will be used and provided a roadmap for building the DApp. Now on to the the interesting part - Let's make the DApp!
 
 ## Project Setup
-To build the DApp without dealing with any annoying version errors & instead of installing each dependency one-by-one, we'll start building our DApp by installing all the necessary dependencies by cloning the GitHub repository.
+To avoid dealing with any annoying version errors & instead of installing the supporting code libraries (dependencies) one-by-one, we'll start building our DApp by cloning a GitHub repository which contains the project files and installing all the necessary dependencies.
 
 * Clone/download the GitHub repository from https://github.com/AkhileshThite/DTube.
 * `git clone https://github.com/AkhileshThite/DTube.git` this command will copy the folder from git on your computer.
