@@ -624,7 +624,7 @@ The `isContributor()` function returns true/false depending on whether the calle
 
 Now that we have written the smart contract code, the next step is to build the React Native App!
 
-## **2. Building the React Native App**
+## 2. Building the React Native App
 
 Note: If you have never built an app using React Native to connect to the Celo wallet before, you can follow the guide [here](https://learn.figment.io/network-documentation/celo/tutorial/how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp#project-setup%20).
 
