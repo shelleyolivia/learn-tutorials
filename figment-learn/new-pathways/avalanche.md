@@ -1,1 +1,1 @@
-![](../../.gitbook/assets/Avalanche.jpg)
+![](figment-learn/new-pathways/Avalanche.jpg)
