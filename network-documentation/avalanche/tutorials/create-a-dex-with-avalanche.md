@@ -106,7 +106,7 @@ contract AvaSwap {
 
   function buyTokens() public payable {
     /* Calculate no. of tokens to buy
-     Ether Amount * Redemption rate */
+     Avax Amount * Redemption rate */
     uint tokenAmount = msg.value * rate;
     Token.transfer(msg.sender, tokenAmount);
 
@@ -118,15 +118,15 @@ contract AvaSwap {
     // User can't sell more tokens than they have
     require(Token.balanceOf(msg.sender) >= _amount);
 
-    //Calculate the amount of the ether to redeem
-    uint etherAmount =  _amount / rate;
+    //Calculate the amount of the avax to redeem
+    uint avaxAmount =  _amount / rate;
 
-    // Require that AvaSwap has enough ether
-    require(address(this).balance >= etherAmount);
+    // Require that AvaSwap has enough avax
+    require(address(this).balance >= avaxAmount);
 
     // Perform Sale
     Token.transferFrom(msg.sender, address(this), _amount);
-    msg.sender.transfer(etherAmount);
+    msg.sender.transfer(avaxAmount);
 
     //Emit an event
     emit TokenSold(msg.sender, address(Token), _amount, rate);
@@ -174,7 +174,7 @@ Compiling your contracts...
 When deploying smart contracts to the C-Chain, the truffle will default to the first available account provided by your C-Chain client as `the from` the address used during migrations.
 
 - Create an account
- 
+
 Truffle has a very useful console that we can use to interact with the blockchain and our contract. Open the console:
 ```
 truffle console --network development
@@ -284,7 +284,7 @@ Error:  *** Deployment Failed ***
 
 ```
 ## Interacting with your contract with React UI
- 
+
 In this, we will be using `Main.js`, `BuyForm.js`, `SellForm.js` components. Here are the details of the components :
 
 - Main.js
@@ -362,10 +362,10 @@ class Main extends Component {
 
 export default Main;
 ```
- 
+
 Buy Tokens:
 ```
-result = await avaSwap.buyTokens({ from : investor, value: web3.utils.toWei('1', 'ether')})
+result = await avaSwap.buyTokens({ from : investor, value: web3.utils.toWei('1', 'Ether')})
 ```
 In BuyForm.js file import the logos and ABIs of Avax, Dai, ChainLink Tokens
 
@@ -399,10 +399,10 @@ class BuyForm extends Component {
 				className="mb-5"
 				onSubmit={(event) => {
 					event.preventDefault();
-					let etherAmount;
-					etherAmount = this.input.value.toString();
-					etherAmount = window.web3.utils.toWei(etherAmount, "Ether");
-					this.props.buyTokens(etherAmount);
+					let avaxAmount;
+					avaxAmount = this.input.value.toString();
+					avaxAmount = window.web3.utils.toWei(avaxAmount, "Ether");
+					this.props.buyTokens(avaxAmount);
 				}}
 			>
 				<div>
@@ -417,9 +417,9 @@ class BuyForm extends Component {
 					<input
 						type="text"
 						onChange={(event) => {
-							const etherAmount = this.input.value.toString();
+							const avaxAmount = this.input.value.toString();
 							this.setState({
-								output: etherAmount * rate,
+								output: avaxAmount * rate,
 							});
 						}}
 						ref={(input) => {
@@ -495,8 +495,8 @@ The investor sells tokens :
 ```
 result = await avaSwap.sellToken(tokens('100'), { from: investor })
 ```
- 
- 
+
+
 - SellForm.js
 ```
 import React, { Component } from "react";
