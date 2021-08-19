@@ -11,8 +11,9 @@ You must have gone through this tutorial [Create a Local Test Network on Avalanc
 ## Requirement
 
 * [NodeJS](https://nodejs.org/en)
+* [ReactJS](https://reactjs.org/)
 * Truffle, which you can install with `npm install -g truffle`
-* [Metamask extension](https://metamask.io/download.html) added to the browser
+* Install [Metamask extension](https://metamask.io/download.html) in your browser.
 
 **Create AvaSwap directory and install dependencies**
 
@@ -21,11 +22,11 @@ First, navigate to the directory within which you intend to create your working 
 ```
 cd /path/to/directory
 ```
-Create and enter a new directory named AvaSwap:
+Create and enter a new directory named `AvaSwap`:
 ```
 mkdir AvaSwap; cd AvaSwap
 ```
-Use npm to install web3, which is a library through which we can talk to the EVM:
+Use `npm to install web3`, which is a library through which we can talk to the EVM:
 ```
 npm install web3 -s
 ```
@@ -36,7 +37,7 @@ truffle init
 
 **Update truffle-config.js**
 
-One of the files created when you ran truffle init is truffle-config.js. Add the following to `truffle-config.js`.
+One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to `truffle-config.js`.
 ```
 const Web3 = require('web3');
 const protocol = "http";
@@ -169,11 +170,9 @@ Compiling your contracts...
 > Compiled successfully using:
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
-## Create, fund and unlock an account on the C-Chain
+## Create and unlock an account on the C-Chain
 
 When deploying smart contracts to the C-Chain, the truffle will default to the first available account provided by your C-Chain client as `the from` the address used during migrations.
-
-- Create an account
 
 Truffle has a very useful console that we can use to interact with the blockchain and our contract. Open the console:
 ```
@@ -287,13 +286,13 @@ Error:  *** Deployment Failed ***
 
 In this, we will be using `Main.js`, `BuyForm.js`, `SellForm.js` components. Here are the details of the components :
 
-- Main.js
+**Main.js**
 
-In this Main.js file import the `BuyForm` and `SellForm` components, then render the buy and sell form.
+In this file import the `BuyForm` and `SellForm` components, then render the BuyForm and SellForm components.
 
 ```
 import React, { Component } from "react";
-import BuyFrom from "./BuyForm";
+import BuyForm from "./BuyForm";
 import SellForm from "./SellForm";
 
 class Main extends Component {
@@ -312,7 +311,7 @@ class Main extends Component {
 		let content;
 		if (this.state.currentForm === "buy")
 			content = (
-				<BuyFrom
+				<BuyForm
 					selectedToken = {this.props.selectedToken}
 					ethBalance={this.props.ethBalance}
 					tokenBalance={this.props.tokenBalance}
@@ -363,13 +362,13 @@ class Main extends Component {
 export default Main;
 ```
 
-Buy Tokens:
+**Buy Tokens:**
 ```
 result = await avaSwap.buyTokens({ from : investor, value: web3.utils.toWei('1', 'Ether')})
 ```
 In BuyForm.js file import the logos and ABIs of Avax, Dai, ChainLink Tokens
 
-- BuyForm.js
+BuyForm.js
 ```
 import React, { Component } from "react";
 import avaxLogo from "../avax-logo.png";
@@ -486,7 +485,8 @@ export default BuyForm;
 
 ```
 
-Sell Tokens:
+**Sell Tokens:**
+
 The investor must approve the token before transaction :
 ```
 result = await Token.approve(avaSwap.address, tokens('100'), { from: investor})
@@ -497,7 +497,7 @@ result = await avaSwap.sellToken(tokens('100'), { from: investor })
 ```
 
 
-- SellForm.js
+SellForm.js
 ```
 import React, { Component } from "react";
 import avaxLogo from "../avax-logo.png";
