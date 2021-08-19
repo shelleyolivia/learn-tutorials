@@ -1,7 +1,5 @@
 # Distributed File Manager \(DFM\) using Celo, IPFS and ReactJS
 
-## Distributed File Manager \(DFM\) using IPFS, Celo and ReactJS
-
 ## Introduction
 
 In this tutorial we will be making a **Distributed File Manager** using the **IPFS** protocol for storing our files, **Celo** network for storing the file references of each address to their uploaded files and **ReactJS** for the frontend code. For compiling and deploying our smart contracts, we will be using **Truffle Suite**.

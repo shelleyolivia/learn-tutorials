@@ -72,7 +72,7 @@ Connecting the React Native App to the Smart Contract using Redux, which brings 
 
 ## **1. Writing the DAO Smart Contract in Solidity**
 
-In this tutorial, we are going to build the foundations of a functional DAO by writing the smart contract. 
+In this tutorial, we are going to build the foundations of a functional DAO by writing the smart contract.
 
 The smart contract is written using the [Solidity programming language](https://docs.soliditylang.org/en/v0.8.7/). Solidity is used on Ethereum as well as other Ethereum Virtual Machine \(EVM\) compatible blockchains like Celo.
 
@@ -628,8 +628,8 @@ Now that we have written the smart contract code, the next step is to build the 
 
 Note: If you have never built an app using React Native to connect to the Celo wallet before, you can follow the guide [here](https://learn.figment.io/network-documentation/celo/tutorial/how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp#project-setup%20).
 
-In this tutorial, we will continue building a functional DAO by making a React Native app to communicate with the Solidity smart contract on Celo. We will make use of the [UI Kitten](https://akveo.github.io/react-native-ui-kitten/) library to style the dApp.  
-  
+In this tutorial, we will continue building a functional DAO by making a React Native app to communicate with the Solidity smart contract on Celo. We will make use of the [UI Kitten](https://akveo.github.io/react-native-ui-kitten/) library to style the dApp.
+
 This is an outline of the Pages and Components that make up the dApp. The next section on Redux will be a deep dive into how to connect the dApp to the smart contract.
 
 First, we will outline the UI and then write out the code for building each of the views:
@@ -661,7 +661,7 @@ This section assumes that you already know how to initialize and start a React N
 
 ### Setting up UI Kitten
 
-UI Kitten is a customizable React Native UI Library based on Eva Design System specifications, it is a framework of UI components that can easily be added to a React Native app.   
+UI Kitten is a customizable React Native UI Library based on Eva Design System specifications, it is a framework of UI components that can easily be added to a React Native app.  
 Initializing the app with the `expo init` command and the blank managed workflow as the selected template sets up a basic @ui-kitten/components configuration for us. If this does not work for you, install UI Kitten using the following command instead:
 
 ```text
@@ -1207,14 +1207,14 @@ const closeIcon = (props) => {
 
 ### Next Steps
 
-All of our app pages are now complete!   
-  
+All of our app pages are now complete!
+
 To be able to interact with the smart contract on Celo, we will use Redux actions and reducers to connect with the functions in the smart contract. The next tutorial covers Redux and how to make these connections between actions performed by users and the smart contract functionality.
 
 ## 3. Bringing it together with Redux
 
-In this tutorial, we will complete our DAO and its dApp interface, writing the Redux code to connect our React Native app to the smart contract on Celo. We will look into how to connect the mobile app to the smart contract on the Celo network. This section contains Redux action creators for connecting to the contract, contributing to the DAO and so forth.  
-  
+In this tutorial, we will complete our DAO and its dApp interface, writing the Redux code to connect our React Native app to the smart contract on Celo. We will look into how to connect the mobile app to the smart contract on the Celo network. This section contains Redux action creators for connecting to the contract, contributing to the DAO and so forth.
+
 If you are unfamiliar with Redux, please read their [Getting Started](https://redux.js.org/introduction/getting-started) guide.
 
 Here’s the action creator to contribute some certain amount of Celo to the dApp:
@@ -1279,11 +1279,11 @@ For example the `contribute()` action creator performs the following steps:
 * Sends the transaction with an async call to `sendSignedTransaction(rawTx)` 
 * Dispatches a `CONTRIBUTION_SUCCESS` action with `dispatch(success(receipt));` if contribution was successful, or dispatches a `CONTRIBUTION_FAILED` action with `dispatch(failed());` if login failed.
 
-To keep the code tidy, sub action creators are nested within each async action creator function.   
-For example the `contribute()` function contains 3 nested action creator functions for `request()`, `success()` and `failure()` that return the actions `CONTRIBUTION_REQUEST`, `CONTRIBUTION_SUCCESS` and `CONTRIBUTION_FAILURE` respectively.   
+To keep the code tidy, sub action creators are nested within each async action creator function.  
+For example the `contribute()` function contains 3 nested action creator functions for `request()`, `success()` and `failure()` that return the actions `CONTRIBUTION_REQUEST`, `CONTRIBUTION_SUCCESS` and `CONTRIBUTION_FAILURE` respectively.  
 Putting the sub action creators into nested functions also allows us to give them standard names like request, success and failure without clashing with other function names because they only exist within the scope of the parent function.
 
-All other action creators for this project follow the same process as the one explained above. 
+All other action creators for this project follow the same process as the one explained above.
 
 ### Connecting Action Creators with The UI
 
@@ -1333,15 +1333,15 @@ export const ProfilePage = ({ navigation }) => {
 
 ### Conclusion
 
-In this tutorial, you learned how to build a complete Charity DAO. We covered the complete smart contract code using the Solidity programming language. We scaffolded the App using React Native and then used Redux to tie the actions together!   
-  
+In this tutorial, you learned how to build a complete Charity DAO. We covered the complete smart contract code using the Solidity programming language. We scaffolded the App using React Native and then used Redux to tie the actions together!
+
 The Smart Contract code is deployed on the Alfajores testnet. The contract allows the members to contribute to the DAO.
 
 The App is available in an Open Source code repository on [Github](https://github.com/PhoenixTechAfrica/Tutorials/tree/dev/projects/charlo). You are encouraged to fork it and use it as a starting point for your own DAO.
 
 Congratulations for completing these tutorials. There are no limits to what you can build using the tools and techniques we have discussed.
 
-## About the Authors 
+## About the Authors
 
 This tutorial was created by [Segun Ogundipe](https://community.figment.io/u/segun-ogundipe) and [Emmanuel Oaikhenan](https://community.figment.io/u/odia.emma/).
 
