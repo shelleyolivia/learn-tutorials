@@ -85,11 +85,12 @@ In this section, we introduced the technologies that will be used and provided a
 ## Project Setup
 To avoid dealing with any annoying version errors & instead of installing the supporting code libraries (dependencies) one-by-one, we'll start building our DApp by cloning a GitHub repository which contains the project files and installing all the necessary dependencies.
 
-Clone the GitHub repository with the command
-`git clone https://github.com/AkhileshThite/DTube.git`
+* `Fork` the repository, this will make a copy of this project in your account.
+
+* Clone the GitHub repository with the command `git clone https://github.com/<YourGitHubUsername>/DTube.git`
 This will copy the project files from GitHub to your computer.
 
-The command `cd DTube` will bring you into the local copy of the repository that was downloaded onto your computer.
+* The command `cd DTube` will bring you into the local copy of the repository that was downloaded onto your computer.
 
 Now, open the folder with your favorite code editor or IDE, [VS Code](https://code.visualstudio.com) for example.
 
