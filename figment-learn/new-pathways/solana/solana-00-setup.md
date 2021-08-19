@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-The following software is required to set up and complete the Solana Pathway
+The following software is required to set up and complete the Solana Pathway =)
 
 * Node.js v14 or higher installed : [https://nodejs.org/](https://nodejs.org/)
 * yarn installed : [https://yarnpkg.com/getting-started/install](https://yarnpkg.com/getting-started/install)
@@ -19,7 +19,7 @@ Create an `.env.local` file at the root of the directory. Copy and paste the con
 
 The value for `DATAHUB_SOLANA_API_KEY` can be found on the [DataHub Services Dashboard](https://datahub.figment.io/services/solana). Click on the Solana icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local` . This will authenticate you and enable you to make JSON-RPC requests to the Solana cluster via DataHub.
 
-![](https://raw.githubusercontent.com/figment-networks/datahub-learn/new-pathways/.gitbook/assets/solana-setup-00.gif)
+https://raw.githubusercontent.com/figment-networks/datahub-learn/new-pathways/.gitbook/assets/solana-setup-00.gif
 
 With the API key in place, save the `.env.local` file and start the React interface with :
 
