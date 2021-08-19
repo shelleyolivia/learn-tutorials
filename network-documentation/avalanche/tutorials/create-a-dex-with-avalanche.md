@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Decentralized exchange is a peer-to-peer network, where anyone can exchange cryptocurrency tokens with a blockchain and a wallet with another person by executing a trade between two respective tokens, say AVAX and LINK tokens.
+A decentralized exchange is a network, where anyone can exchange cryptocurrency tokens over blockchain by executing a transaction between two respective tokens, say AVAX with LINK, DAI or DevToken.
 
 ## Prerequisites
 
-You must have gone through this tutorial Run an Avalanche Node and have performed a cross-chain swap via the Transfer AVAX Between X-Chain and C-Chain tutorial to get AVAX test tokens to your C-Chain address.
+You must have gone through this tutorial [Create a Local Test Network on Avalanche](https://learn.figment.io/network-documentation/avalanche/tutorials/platform-overview/create-a-local-test-network) and have performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/token-transfer-tutorials/transfer-avax-between-the-x-chain-and-c-chain) tutorial to get AVAX test tokens to your C-Chain address.
 
 ## Requirement
 
@@ -155,7 +155,7 @@ module.exports = function (deployer) {
 ```
 ## Compile Contracts with Truffle
 
-Any time you make a change to `Storage.sol` you need to run `truffle` compile.
+Any time you make a change to `	AvaSwap.sol` you need to run `truffle` compile.
 ```
 truffle compile
 ```
@@ -164,7 +164,7 @@ You should see:
 Compiling your contracts...
 ===========================
 > Compiling ./contracts/Migrations.sol
-> Compiling ./contracts/Storage.sol
+> Compiling ./contracts/AvaSwap.sol
 > Artifacts written to /path/to/build/contracts
 > Compiled successfully using:
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
@@ -172,7 +172,9 @@ Compiling your contracts...
 ## Create, fund and unlock an account on the C-Chain
 
 When deploying smart contracts to the C-Chain, the truffle will default to the first available account provided by your C-Chain client as `the from` the address used during migrations.
-Create an account
+
+- Create an account
+ 
 Truffle has a very useful console that we can use to interact with the blockchain and our contract. Open the console:
 ```
 truffle console --network development
@@ -241,7 +243,7 @@ Migrations dry-run (simulation)
 2_deploy_contracts.js
 =====================
 
-   Deploying 'Storage'
+   Deploying 'AvaSwap'
    -------------------
    > block number:        6
    > block timestamp:     1607734633
@@ -285,7 +287,7 @@ Error:  *** Deployment Failed ***
  
 In this, we will be using `Main.js`, `BuyForm.js`, `SellForm.js` components. Here are the details of the components :
 
-Main.js
+- Main.js
 
 In this Main.js file import the `BuyForm` and `SellForm` components, then render the buy and sell form.
 
@@ -367,7 +369,7 @@ result = await avaSwap.buyTokens({ from : investor, value: web3.utils.toWei('1',
 ```
 In BuyForm.js file import the logos and ABIs of Avax, Dai, ChainLink Tokens
 
-BuyForm.js
+- BuyForm.js
 ```
 import React, { Component } from "react";
 import avaxLogo from "../avax-logo.png";
@@ -495,7 +497,7 @@ result = await avaSwap.sellToken(tokens('100'), { from: investor })
 ```
  
  
-SellForm.js
+- SellForm.js
 ```
 import React, { Component } from "react";
 import avaxLogo from "../avax-logo.png";
@@ -634,4 +636,6 @@ If you had any difficulties following this tutorial or simply want to discuss Av
 
 - https://learn.figment.io/network-documentation/avalanche/tutorials/getting-started-with-smart-contracts-development/using-truffle-with-the-avalanche-c-chain
 - https://github.com/OpenZeppelin/openzeppelin-contracts
+- https://github.com/makerdao/dss
+- https://github.com/smartcontractkit/LinkToken
 - https://github.com/devilla/Avaswap
