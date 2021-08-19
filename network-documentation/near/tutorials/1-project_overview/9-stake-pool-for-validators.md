@@ -4,7 +4,7 @@ description: OysterPack SMART STAKE Pool Contract API Guide - For Validators
 
 # OysterPack SMART STAKE Pool API Guide for Validators
 
-## OysterPack SMART STAKE Pool API Guide for Validators
+## Introduction
 
 In my last tutorial I introduced you to the **next generation** [OysterPack SMART STAKE Pool](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/8-stake-pool-contract#how-to-operate-the-stake-pool-contract) contract as a getting started guide. In this tutorial, we'll be covering the rest of the contract APIs to help validators manage and operate the STAKE Pool contract. As a validator, it is fundamental to know your staking pool contract in depth because it is core to your validator business, and it impacts your bottom line.
 
@@ -457,7 +457,7 @@ The staking pool operator APIs were well covered in the \[previous tutorial\]\[1
 
 ![](../../../../.gitbook/assets/oysterpack-smart-staking-pool-operator.png)
 
-### It's a wrap folks
+## It's a wrap folks
 
 Congratulations if you made it to the end!
 
@@ -471,7 +471,7 @@ I will leave with one final thought ... I understand that DeFi is all the craze 
 
 That being said ... I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
-### What's Next
+## What's Next
 
 Stay tuned for more tutorials on the OysterPack SMART component based framework to help contract developers build _**SMARTER**_, _**FASTER**_, and _**BETTER**_ on the [NEAR](https://near.org/) platform.
 
