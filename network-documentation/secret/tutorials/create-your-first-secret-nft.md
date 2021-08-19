@@ -27,11 +27,9 @@ We will connect to an already deployed instance of the [snip721 reference implem
 
 ## Prerequisites
 
-This tutorial assumes that you have completed the [Secret Learn Pathway](https://learn.figment.io/network-documentation/secret/secret-pathway) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in section 5 of the Pathway.
+This tutorial assumes that you have completed the [Secret Learn Pathway](https://learn.figment.io/network-documentation/secret/secret-pathway) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in [section 5 of the Pathway](https://app.gitbook.com/@figment-learn/s/learn-docs/network-documentation/secret/tutorials/intro-pathway-secret-basics/5.-writing-and-deploying-your-first-secret-contract)
 
-{% page-ref page="intro-pathway-secret-basics/5.-writing-and-deploying-your-first-secret-contract.md" %}
-
-#### Requirements to successfully complete this tutorial
+**Requirements to successfully complete this tutorial**
 
 * The latest version of NodeJS installed \(use of nvm, the node version manager, is _encouraged_ for web3 developers\)
 * A code editor like VSCode, Theia, Atom, _etc_.
