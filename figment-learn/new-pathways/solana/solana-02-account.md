@@ -16,7 +16,7 @@ Like with most Web 3 protocols, transactions on Solana happen between *accounts*
 
 Take a few minutes to figure this out.
 
-> You can also ****[**join us on Discord**](https://discord.gg/fszyM7K) ****if you have questions.
+> You can also [**join us on Discord**](https://discord.gg/fszyM7K) if you have questions.
 
 ```tsx
 //...
