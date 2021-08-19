@@ -21,7 +21,17 @@ The value for `DATAHUB_SOLANA_API_KEY` can be found on the [DataHub Services Das
 
 https://raw.githubusercontent.com/figment-networks/datahub-learn/new-pathways/.gitbook/assets/solana-setup-00.gif
 
-![](.gitbook/assets/solana-setup-00.gif)
+![](../.gitbook/assets/solana-setup-00.gif)
+
+![](../../.gitbook/assets/solana-setup-00.gif)
+
+![](../../../.gitbook/assets/solana-setup-00.gif)
+
+![](../../../../.gitbook/assets/solana-setup-00.gif)
+
+![](../../../../../.gitbook/assets/solana-setup-00.gif)
+
+
 
 ![](new-pathways/.gitbook/assets/solana-setup-00.gif)
 
