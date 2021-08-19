@@ -8,7 +8,7 @@ description: Learn how to use Remix IDE for deploying Celo smart contracts
 
 Remix is an in-browser Solidity IDE that’s used to write, compile and debug Solidity code. Solidity is a high-level, contract-oriented programming language for writing smart contracts. Celo is a close cousin of Ethereum so Celo developers can use many of the resources available for ethereum, Remix being one of them. In this tutorial, we will learn how to set up our development environment on Remix so that we can deploy and interact with celo smart contracts on Alfajores testnet and mainnet directly from Remix.
 
-### Prerequisites
+## Prerequisites
 
 1. Chromium based browser \(Example- Google Chrome and Brave\)
 2. Celo Extension Wallet can be downloaded from [here](https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelcpgckmpcaemjcdh?hl=en).
