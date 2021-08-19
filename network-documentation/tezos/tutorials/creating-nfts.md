@@ -6,7 +6,7 @@ description: Learn how to create and interact a non-fungible token contract on T
 
 \*\*\*\*[**The original tutorial can be found in the Tezos documentation here**](https://github.com/tqtezos/nft-tutorial). 
 
-## Tutorial: Non-Fungible Tokens on Tezos Using FA2
+## Non-Fungible Tokens on Tezos Using FA2
 
 This tutorial shows how to originate and interact with the FA2 NFT contract implementation. The tutorial uses a pre-compiled FA2 NFT contract written in [LIGO](https://ligolang.org/) smart contract language and a command line interface \(CLI\) to originate and interact with the NFT contracts either on the [Flextesa](https://tezos.gitlab.io/flextesa/) sandbox or Tezos testnet \(Carthagenet\).
 
@@ -26,9 +26,7 @@ For each individual non-fungible token, the FA2 assigns a unique token ID and as
 
 The FA2 contract also associates some metadata with each token. This tutorial supports token symbol and token name metadata attributes. However, the implementation can be easily extended to support custom metadata attributes such as an associated image or document URL and its crypto-hash.
 
-## Tutorial
-
-### Prerequisites
+## Prerequisites
 
 * [Node.js](https://nodejs.org/) must be installed. The Node installation must also include `npm` \(Node package manager\).
 * [Docker](https://www.docker.com/) must be installed. You need docker to run Flextesa sandbox. You might skip docker installation if you plan to run this tutorial on the testnet \(Carthagenet\) only.
