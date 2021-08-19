@@ -318,9 +318,9 @@ When run `npx hardhat celo-account`, The new account are created and the private
  Address <your new address>
 ```
 
-**celo\_account.js complete code** 
+**celo\_account.js complete code**
 
-**hardhat.config.js complete code** 
+**hardhat.config.js complete code**
 
 ### Deploy
 
@@ -390,9 +390,9 @@ npx hardhat celo-deploy
 save the contract address 0x47A424A0975924C3d177470C519C8DBA37e16Ec9
 ```
 
-**celo\_deploy.js complete code** 
+**celo\_deploy.js complete code**
 
-**hardhat.config.js complete code** 
+**hardhat.config.js complete code**
 
 ## 4. Interacts with the contract deployed
 
