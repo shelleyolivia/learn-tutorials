@@ -4,17 +4,11 @@ description: You will learn how to integrate The Graph Protocol in your Celo DAp
 
 # How to create subgraphs for Celo smart contracts
 
+## Introduction
+
 {% embed url="https://www.youtube.com/watch?v=OgIiySTRGQE" caption="Subgraphs for Celo video tutorial" %}
 
-## About the Author
-
-This tutorial was created by Shardul Aeer, a full stack developer exploring the brave new world of Web3 and blockchain. Follow his journey on:
-
-* [GitHub](https://github.com/secretshardul)
-* [LinkedIn](https://www.linkedin.com/in/shardul-aeer-96084a172)
-* [Twitter](https://twitter.com/AeerShardul)
-
-## 1. What is the Graph Protocol?
+## What is the Graph Protocol?
 
 The Graph protocol lets you create GraphQL APIs called subgraphs for your smart contracts. Sounds like a lot? We'll break it down.
 
@@ -27,19 +21,17 @@ GraphQL is a query language for web APIs. Instead of having multiple dumb endpoi
 
 {% embed url="http://www.youtube.com/watch?v=eIQh02xuVw4" caption="GraphQL in 100 seconds" %}
 
-### I'm able to read my contract data. Why use another protocol?
+**I'm able to read my contract data. Why use another protocol?**
 
-Querying directly needs additional setup. For this you need access to a Celo node, plus a frontend library like `web3.js`.
+Querying directly needs additional setup. For this you need access to a Celo node, plus a frontend library like `web3.js`. ****In contrast, you can directly query GraphQL from your app or command line.
 
-In contrast, you can directly query GraphQL from your app or command line.
-
-## 2. How does it work?
+### How does it work?
 
 1. Blockchains store a permanent history of transactions. Graph protocol indexes the transactions for our contract, similar to how Google indexes the internet. We can query these transactions through a GraphQL schema.
 2. Smart contracts let us define and trigger events. For example, when we transfer ERC20 tokens to someone, a `transfer` event is triggered. Graph protocol listens to these events in real time and updates it's data. This way, we always get the latest data.
 3. Graph protocol is decentralized. We don't need to worry about API server going down.
 
-## 3. Show me the code
+### Show me the code
 
 **Resources:**
 
@@ -174,7 +166,7 @@ We will create a subgraph for a gravatar contract deployed on the Celo mainnet. 
             --data-raw '{"query":"{\n  gravatars(first: 5) {\n    id\n    owner\n    displayName\n    imageUrl\n  }\n}\n","variables":{}}'
    ```
 
-## 4. Explanation
+## Explanation
 
 1. We have a predeployed contract `GravatarRegistry`.
    * Gravatar stands for 'globally recognized avatar'. They are profile pictures that are guaranteed to be unique. Did you know that your default avatars on GitHub and StackOverflow are actually gravatars?
@@ -338,7 +330,7 @@ We will create a subgraph for a gravatar contract deployed on the Celo mainnet. 
     }
    ```
 
-## 5. Creating subgraphs for your own contracts
+## Creating subgraphs for your own contracts
 
 1. Make changes to the contracts. You may want to edit or replace [Gravity.sol](https://github.com/secretshardul/the-graph-celo/blob/master/contracts/Gravity.sol) with your custom contract.
 2. Create a file `.env` which will contain environment variables. Look at [.env-template](https://github.com/secretshardul/the-graph-celo/blob/master/.env-template) for the required format. We need two variables: 1. `DATAHUB_API_KEY`: Sign up for Datahub and pick Celo from the available protocols. Copy the API key and paste it here. Datahub provides private RPCs for popular blockchains, letting us create high performance apps. We get a free tier of 100k requests per day. 2. `PRIVATE_KEY`: Private key of a Celo account. This is different from your Mnemonic. You will need real CELO tokens on this account since we are deploying to the mainnet.
@@ -469,17 +461,25 @@ We will create a subgraph for a gravatar contract deployed on the Celo mainnet. 
 
 7. Run the Graph protocol [deployment script mentioned earlier](subgraphs-on-celo.md#3-show-me-the-code).
 
-## 5. Caveats and considerations
+## Caveats and considerations
 
 1. Deployed subgraphs can't be renamed or deleted, although they can be updated.
 2. Subgraphs only support reads/queries. You can't send transactions to update the blockchain state.
 
-## 6. Futher reading
+## Futher reading
 
 * [The Graph documentation](https://thegraph.com/docs/)
 * [graphql.org](https://graphql.org/)
 
-## 7. Conclusion
+## Conclusion
 
 We have learned how Graph Protocol is helpful, and how we can build and deploy our subgraphs.
+
+## About the Author
+
+This tutorial was created by Shardul Aeer, a full stack developer exploring the brave new world of Web3 and blockchain. Follow his journey on:
+
+* [GitHub](https://github.com/secretshardul)
+* [LinkedIn](https://www.linkedin.com/in/shardul-aeer-96084a172)
+* [Twitter](https://twitter.com/AeerShardul)
 
