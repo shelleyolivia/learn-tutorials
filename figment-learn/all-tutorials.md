@@ -38,7 +38,7 @@ Polygon \(Matic\) Network is a sidechain scaling solution for public blockchains
 
 {% page-ref page="../network-documentation/matic/tutorials/" %}
 
-**Get Started with** [**Polygon \(Matic\) on DataHub**](https://figment.io/datahub/matic/) **today!** 
+**Get Started with** [**Polygon \(Matic\) on DataHub**](https://figment.io/datahub/matic/) **today!**
 
 ## ![](../.gitbook/assets/tnear_icon_1.png) **NEAR Tutorials**
 
@@ -46,7 +46,7 @@ NEAR is a decentralized application platform that is secure enough to manage hig
 
 {% page-ref page="../network-documentation/near/tutorials/" %}
 
-**Get Started with** [**NEAR on DataHub** ](https://figment.io/datahub/near/)**today!** 
+**Get Started with** [**NEAR on DataHub** ](https://figment.io/datahub/near/)**today!**
 
 ## ![](../.gitbook/assets/dot-circle-solid-default.svg) **Polkadot Tutorials**
 
@@ -64,7 +64,7 @@ Secret Network is the first blockchain with privacy-preserving smart contracts. 
 
 **Get Started with** [**Secret on DataHub**](https://figment.io/datahub/secret-network/) **today!**
 
-## ![](../.gitbook/assets/solana%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29.png) Solana Tutorials
+## ![](../.gitbook/assets/solana%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29%20%281%29.png) Solana Tutorials
 
 Solana is an open-source project implementing a new, high-performance, permissionless blockchain.
 
@@ -72,7 +72,7 @@ Solana is an open-source project implementing a new, high-performance, permissio
 
 **Get Started with** [**Solana on DataHub**](https://figment.io/datahub/solana/) **today!**
 
-## ![](../.gitbook/assets/rsz_terra-logo%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29.jpg) Terra Tutorials
+## ![](../.gitbook/assets/rsz_terra-logo%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29.jpg) Terra Tutorials
 
 Terra is a price-stable cryptocurrency that will power the next-generation payment network.
 
@@ -80,7 +80,7 @@ Terra is a price-stable cryptocurrency that will power the next-generation payme
 
 **Get Started with** [**Terra on DataHub**](https://figment.io/datahub/terra/) **today!**
 
-## ![](../.gitbook/assets/2011%20%282%29%20%283%29.png) **Tezos Tutorials**
+## ![](../.gitbook/assets/2011%20%282%29%20%283%29%20%281%29.png) **Tezos Tutorials**
 
 Tezos is a secure, smart contract blockchain platform that uses its built-in governance mechanism for protocol upgrades.
 

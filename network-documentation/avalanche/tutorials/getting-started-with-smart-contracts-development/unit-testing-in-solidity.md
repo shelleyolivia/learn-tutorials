@@ -97,19 +97,17 @@ cd test
 
 Create a new file:
 
-{% tabs %}
-{% tab title="Linux/macOS Terminal" %}
-```text
+For Linux/macOS Terminal -
+
+```javascript
 touch TestElection.sol
 ```
-{% endtab %}
 
-{% tab title="Windows Terminal" %}
-```
+For Windows Terminal -
+
+```javascript
 type NUL > TestElection.sol
 ```
-{% endtab %}
-{% endtabs %}
 
 Open the TestElection.sol file with your favourite code editor and add the following lines:
 
