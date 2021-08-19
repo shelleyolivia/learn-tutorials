@@ -18,7 +18,7 @@ I'm Lucas Espinosa ,a C\#/solidity developer.if you are interested in these topi
 * We must have NodeJS &gt;= v12.0 installed, preferably the latest version or an LTS release.
 * Knowledge of JavaScript, Solidity and React is beneficial.
 
-## 1 - Install Hardhat
+## 1. Install Hardhat
 
 Hardhat is a development environment that compiles, deploys, tests, and helps you to debug your Ethereum smart contracts. Hardhat can also be used to deploy to the Celo network because Celo also runs the EVM \(Ethereum Virtual Machine\). This means smart contracts which work on Ethereum will also work on Celo. For the purposes of this tutorial, we will assume that the reader understands how to initialize a new Node project with a package manager \(`npm` or `yarn`\). We will go over how to install and configure Hardhat now.
 
@@ -55,7 +55,7 @@ Welcome to Hardhat v2.1.2
   Quit
 ```
 
-## 2 - Write a smart contract
+## 2. Write a smart contract
 
 ### The OpenZeppelin ERC1155 library
 
@@ -193,7 +193,7 @@ Compilation finished successfully
 
 🔺If you don't have deleted the `contracts/Greeter.sol` it's will give an error because that the contract doesn't have the same version.
 
-## 3 - Test and Deploy with hardhat
+## 3. Test and Deploy with hardhat
 
 ⚠verify if the code was compilet right in `artifacts\contracts\TinyVillage.sol\Tiny Village.json`, This JSON file have all information necessary to deploy a smart contract.
 
@@ -394,7 +394,7 @@ save the contract address 0x47A424A0975924C3d177470C519C8DBA37e16Ec9
 
 **hardhat.config.js complete code** 
 
-## 4 - Interacts with the contract deployed
+## 4. Interacts with the contract deployed
 
 Marketplace sites like [opensea.io](https://opensea.io/) do not display NFTs on Celo yet. To be able to view NFTs on Celo, we can build a React app. A sample project is available on [github](https://github.com/lucasespinosa28/Celo-Tutorial/tree/main/demo/start),the complate app is available on [github](https://github.com/lucasespinosa28/Celo-Tutorial/tree/main/demo/final)
 
