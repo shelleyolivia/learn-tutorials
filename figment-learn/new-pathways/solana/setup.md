@@ -23,7 +23,7 @@ Create an `.env.local` file at the root of the directory. Copy and paste the con
 
 The value for `REACT_APP_DATAHUB_API_KEY` can be found on the [DataHub Services Dashboard](https://datahub.figment.io/services/solana). Click on the Solana icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local` . This will authenticate you and enable you to make JSON-RPC requests to the Solana cluster via DataHub.
 
-![](../../.gitbook/assets/screen-shot-2021-06-14-at-10.46.03-pm.png)
+![](../../../.gitbook/assets/screen-shot-2021-06-14-at-10.46.03-pm.png)
 
 With the API key in place, save the `.env.local` file and start the React interface with :
 
@@ -38,7 +38,7 @@ If the local development server has started, but a new browser window or tab has
 "View step instructions" to see the challenge for step one, Connect to the Solana Devnet!
 {% endhint %}
 
-![](../../.gitbook/assets/screen-shot-2021-06-14-at-10.47.58-pm%20%282%29%20%283%29.png)
+![](../../../.gitbook/assets/solana-setup-01.gif)
 
 {% hint style="info" %}
 [**Join us on Discord**](https://discord.gg/fszyM7K) if you encounter any issues with the tutorial or have any questions!
