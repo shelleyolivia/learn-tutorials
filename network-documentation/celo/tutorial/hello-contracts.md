@@ -4,7 +4,7 @@ description: Learn how to deploy your own smart contracts on the Celo network
 
 # Deploy and Interact with Contracts \(Remotely\)
 
-\*\*\*\*[**The original tutorial can be found in the Celo documentation here**](https://docs.celo.org/developer-guide/start/hello-contract-remote-node).
+\*\*\*\*[**The original tutorial can be found in the Celo documentation here**](https://docs.celo.org/developer-guide/start/hello-contract-remote-node). 
 
 ## Introduction
 
@@ -23,8 +23,6 @@ npm install -g truffle
 {% endhint %}
 
 As you may know, Truffle is built for Ethereum developers. Because Celo has a similar network architecture and runs the Ethereum Virtual Machine, Celo developers are able to leverage many Ethereum developer tools. But it is important to keep in mind the differences. If you haven't already, please review the Celo overview.
-
-{% page-ref page="../celo-101.md" %}
 
 [Clone this Truffle project from GitHub to get started](https://github.com/critesjosh/hello_contract-truffle).
 
