@@ -4,11 +4,11 @@ description: Learn how to interact with Avalanche's C-Chain
 
 # C-Chain \(EVM\) API
 
-## Source documentation 
+## Source documentation
 
-\*\*\*\*[**The EVM API's source documentation can be found here**](https://docs.avax.network/build/apis/contract-chain-c-chain-api). 
+\*\*\*\*[**The EVM API's source documentation can be found here**](https://docs.avax.network/build/apis/contract-chain-c-chain-api).
 
-The C-Chain is an instance of the  Ethereum Virtual Machine \(EVM\). This API allows clients to import their EVM-based projects and build like on Ethereum. 
+The C-Chain is an instance of the Ethereum Virtual Machine \(EVM\). This API allows clients to import their EVM-based projects and build like on Ethereum.
 
 Note: Ethereum has its own notion of `networkID` and `chainID`. These have no relationship to Avalanche’s view of networkID and chainID, and are purely internal to the C-Chain. On Mainnet, the C-Chain uses `1` and `43114` for these values. On the Fuji Testnet, it uses `1` and `43113` for these values. `networkID` anc `chainID` can also be obtained using the `net_version` and `eth_chainId` methods shown below.
 
@@ -84,7 +84,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -113,7 +113,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -130,7 +130,7 @@ curl -X POST --data '{
 
 **Description**
 
-Get the chain ID. 
+Get the chain ID.
 
 Not well documented in JSON-RPC references. See instead [EIP694](https://github.com/ethereum/EIPs/issues/694)
 
@@ -144,7 +144,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -173,7 +173,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -205,7 +205,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -237,7 +237,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -254,7 +254,7 @@ curl -X POST --data '{
 
 **Description**
 
-Calculate a cryptographic hash. 
+Calculate a cryptographic hash.
 
 The input parameter contains hexidecimal bytes of arbitrary length. The example here uses the UTF-8 text string “snowstorm” converted to hexidecimal bytes.
 
@@ -270,7 +270,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -288,7 +288,7 @@ curl -X POST --data '{
 
 **Description**
 
-Create a new account \(private key generated automatically\). 
+Create a new account \(private key generated automatically\).
 
 The EVM will create a new account using the passphrase `cheese` to encrypt and store the new account credentials. `cheese` is not the seed phrase and cannot be used to restore this account from scratch. Calling this function repeatedly with the same passphrase will create multiple unique accounts. Also keep in mind there are no options to export private keys stored in the EVM database. Users are encouraged to use wallet software instead for safer account creation and backup. This method is more suitable for quick account creation for a testnet.
 
@@ -304,7 +304,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -321,7 +321,7 @@ curl -X POST --data '{
 
 **Description**
 
-Create a new account \(using plaintext private key\). 
+Create a new account \(using plaintext private key\).
 
 If the private key is known upfront, it can be provided as plaintext to load into the EVM account database. For more secure account management, consider using wallet software instead. The example below loads the private key `0x627119bb8286874a15d562d32829613311a678da26ca7a6a785ec4ad85937d06` with the passphrase `this is my passphrase`. Note that `0x` prefix cannot be included in the private key argument, otherwise the EVM will throw an error. The example response returns the associated public key.
 
@@ -338,7 +338,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -355,7 +355,7 @@ curl -X POST --data '{
 
 **Description**
 
-List accounts loaded in EVM node. 
+List accounts loaded in EVM node.
 
 **Example Call**
 
@@ -367,7 +367,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -387,7 +387,7 @@ curl -X POST --data '{
 
 **Description**
 
-Unlock an account. 
+Unlock an account.
 
 Personal accounts loaded directly in the EVM can only sign transactions while in an unlocked state. The example below unlocks the listed account address for 60 seconds. Note the associated passphrase `cheese` must be provided for authorization.
 
@@ -405,7 +405,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -422,7 +422,7 @@ curl -X POST --data '{
 
 **Description**
 
-Sign a transaction. 
+Sign a transaction.
 
 This method will create a signed transaction, but will not publish it automatically to the network. Instead, the `raw` result output should be used with `eth_sendRawTransaction` to execute the transaction.
 
@@ -443,7 +443,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -474,7 +474,7 @@ curl -X POST --data '{
 
 **Description**
 
-Send a raw transaction. 
+Send a raw transaction.
 
 Example below shows a raw transaction published to the network and its associated transaction hash.
 
@@ -490,7 +490,7 @@ curl -X POST --data '{
     ]
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -507,7 +507,7 @@ curl -X POST --data '{
 
 **Description**
 
-Call a contract. 
+Call a contract.
 
 **Example Call**
 
@@ -525,7 +525,7 @@ curl -X POST --data '{
     ]
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**
@@ -542,7 +542,7 @@ curl -X POST --data '{
 
 **Description**
 
-Get a block by hash. 
+Get a block by hash.
 
 **Example Call**
 
@@ -612,7 +612,7 @@ curl -X POST --data '{
 
 **Description**
 
-Get a block by number. 
+Get a block by number.
 
 **Example Call**
 
@@ -682,7 +682,7 @@ curl -X POST --data '{
 
 **Description**
 
-Get a transaction by hash. 
+Get a transaction by hash.
 
 **Example Call**
 
@@ -728,7 +728,7 @@ curl -X POST --data '{
 
 **Description**
 
-Get a transaction receipt. 
+Get a transaction receipt.
 
 **Example Call**
 
@@ -771,7 +771,7 @@ curl -X POST --data '{
 
 **Description**
 
-Get count of pending transactions. 
+Get count of pending transactions.
 
 “Pending” transactions will be non-zero during periods of heavy network use. “Queued” transactions indicate transactions have been submitted with nonce values ahead of the next expected value for an address, which places them on hold until a transaction with the next expected nonce value is submitted.
 
@@ -785,7 +785,7 @@ curl -X POST --data '{
     "id": 1
 }' -H 'Content-Type: application/json' \
    -H 'cache-control: no-cache' \
-   127.0.0.1:9650/ext/bc/C/rpc 
+   127.0.0.1:9650/ext/bc/C/rpc
 ```
 
 **Example Response**

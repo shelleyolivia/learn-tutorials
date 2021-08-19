@@ -6,15 +6,15 @@ description: Learn how to start using the Terra SDK with DataHub
 
 ## Introduction
 
-In order to benefit from the full potential of the Terra blockchain, you will first need to connect to a Terra node. 
+In order to benefit from the full potential of the Terra blockchain, you will first need to connect to a Terra node.
 
-In this tutorial, we will use the Terra SDK to connect to a Terra node hosted by ****[**DataHub**](https://figment.io/datahub-waitlist/). We will be building a simple Nodejs application, which we will develop further during the Terra Pathway. 
+In this tutorial, we will use the Terra SDK to connect to a Terra node hosted by **\*\*\[**DataHub\*\*\]\([https://figment.io/datahub-waitlist/](https://figment.io/datahub-waitlist/)\). We will be building a simple Nodejs application, which we will develop further during the Terra Pathway.
 
 More details about Terra.js can be found [**here**](https://terra-project.github.io/terra.js/).
 
 ## **Creating the NodeJS App**
 
-Before we can jump in and start using the Terra SDK, we need to set up our project and all required dependencies. 
+Before we can jump in and start using the Terra SDK, we need to set up our project and all required dependencies.
 
 {% hint style="info" %}
 Please make sure that you have Node 10+ installed on your machine.
@@ -46,8 +46,7 @@ You will then be prompted with several questions. For the purpose of this tutori
 
 ## **Installing packages**
 
-Now that we have our Nodejs application set up we can install the required packages:  
-
+Now that we have our Nodejs application set up we can install the required packages:
 
 * **dotenv** - for keeping sensitive data
 * **terra.js** - Terra SDK
@@ -86,12 +85,11 @@ TERRA_CHAIN_ID='tequila-0004'
 
 Now that we have successfully connected to a Terra node using [**DataHub**](https://figment.io/datahub-waitlist/), we are ready to move on to the next tutorial.
 
-The complete code for this tutorial can be found [**here**](https://github.com/figment-networks/tutorials/blob/main/terra/1_connecting_to_node/connect.js).   
-
+The complete code for this tutorial can be found [**here**](https://github.com/figment-networks/tutorials/blob/main/terra/1_connecting_to_node/connect.js).
 
 ## **Next steps**
 
 In the next tutorial, we will be creating your very first Terra account using the Terra SDK.
 
-If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!                        ****
+If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [**join our community today**](https://discord.gg/fszyM7K)! _\*\*_
 

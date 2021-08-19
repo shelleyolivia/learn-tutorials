@@ -4,7 +4,7 @@ description: Learn how to deploy and interact with a digital asset on Tezos
 
 # Token Contracts
 
-[**The original tutorial can be found in the Tezos documentation here**](https://assets.tqtezos.com/docs/token-contracts/fa2/1-fa2-smartpy/). 
+[**The original tutorial can be found in the Tezos documentation here**](https://assets.tqtezos.com/docs/token-contracts/fa2/1-fa2-smartpy/).
 
 ## Using FA2-SmartPy <a id="__docusaurus"></a>
 
@@ -42,7 +42,6 @@ Let's download the “default” one:
 ```javascript
  $ wget -O fa2_default.tz \
         'https://gitlab.com/smondet/fa2-smartpy/-/raw/4acac092/michelson/20200910-203659+0000_5060996_contract.tz'
-
 ```
 
 #### Origination
@@ -255,7 +254,7 @@ See command `fatoo show-client-uri-documentation`:
 >
 > See for instance the current default: `http://:2020/unencrypted:edsk3S7mCwuuMVS21jsYTczxBU4tgTbQp98J3YmTGcstuUxsrZxKYd?bake=true`.
 
-Assuming we are using the \[sandbox\]\(https://assets.tqtezos.com/docs/setup/2-sandbox\) setup, we can configure the client using \`alice\`'s private key as follows:
+Assuming we are using the \[sandbox\]\([https://assets.tqtezos.com/docs/setup/2-sandbox\](https://assets.tqtezos.com/docs/setup/2-sandbox\)\) setup, we can configure the client using \`alice\`'s private key as follows:
 
 ```javascript
 export fatoo_client='http://:20000/unencrypted:edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZPbwWNnwdZpSpJiEbq?wait=0'
@@ -289,7 +288,6 @@ Here we create four key-pairs from mnemonic seeds, to be used in the following s
    fatoo account-of-seed \
          "this-is-a-potential-token-owner-too" \
          --output owner2.csv
-
 ```
 
 The resulting CSVs are in the same format as with [flextesa](https://tezos.gitlab.io/flextesa/), they contain: `<phrase>,<pk>,<pkh>,<sk>` see for instance:
@@ -312,7 +310,6 @@ Let's name all of these:
    export owner1_sk="$(cut -d, -f 4 owner1.csv)"
    export owner2_pkh="$(cut -d, -f 3 owner2.csv)"
    export owner2_sk="$(cut -d, -f 4 owner2.csv)"
-
 ```
 
 #### Originate
@@ -570,7 +567,6 @@ Finally, let's get `operator` to run a _batch-transfer-heist_ of all the tokens:
          --source "${operator_sk}" \
          --address "$(cat kt1_mutran_contract.txt)"
 ┃ { Pair "tz1MUP3sCWTUQRG2Hon7uhRfmuYZ4guEQntS" { Pair "tz1NkpWhHsBSZHPg2Ljz2hycRiZvcYdcyu85" (Pair 0 999990) ; Pair "tz1NkpWhHsBSZHPg2Ljz2hycRiZvcYdcyu85" (Pair 1 1890)} ; Pair "tz1YYrxf529d3EYzEv5TnsiTpRCzFFB87dAS" { Pair "tz1NkpWhHsBSZHPg2Ljz2hycRiZvcYdcyu85" (Pair 0 10) ; Pair "tz1NkpWhHsBSZHPg2Ljz2hycRiZvcYdcyu85" (Pair 1 100)} ; Pair "tz1TyFYCuKrQ7A3yB4AvpoPRLacb3J6iQB9V" { Pair "tz1NkpWhHsBSZHPg2Ljz2hycRiZvcYdcyu85" (Pair 1 10)}}
-
 ```
 
 We can then observe the resulting state where all the balances are `0` except for `operator` who owns the total supply:

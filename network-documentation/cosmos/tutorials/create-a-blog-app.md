@@ -4,7 +4,7 @@ description: Learn how to create a simple blog app using the Cosmos SDK
 
 # Create a blog app
 
-\*\*\*\*[**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/starport-blog/tutorial/01-index.html). 
+\*\*\*\*[**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/starport-blog/tutorial/01-index.html).
 
 ## Create posts
 
@@ -38,14 +38,14 @@ We’ll be creating a simple blog-like application, so let’s define the first 
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
+    sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type Post struct {
-	Creator sdk.AccAddress `json:"creator" yaml:"creator"`
-	ID      string         `json:"id" yaml:"id"`
-	Title   string         `json:"title" yaml:"title"`
-	Body    string         `json:"body" yaml:"body"`
+    Creator sdk.AccAddress `json:"creator" yaml:"creator"`
+    ID      string         `json:"id" yaml:"id"`
+    Title   string         `json:"title" yaml:"title"`
+    Body    string         `json:"body" yaml:"body"`
 }
 ```
 
@@ -84,8 +84,6 @@ import (
 )
 ```
 
-
-
 This file already contains `func GetTxCmd` which defines custom `blogcli` [commands](https://docs.cosmos.network/master/building-modules/module-interfaces.html#cli). We will add the custom `create-post` command to our `blogcli` by first adding `GetCmdCreatePost` to `blogTxCmd`.
 
 ```javascript
@@ -100,38 +98,38 @@ At the end of the file, let's define `GetCmdCreatePost` itself.
 package cli
 
 import (
-	"bufio"
+    "bufio"
 
-	"github.com/spf13/cobra"
+    "github.com/spf13/cobra"
 
-	"github.com/cosmos/cosmos-sdk/client/context"
-	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth"
-	"github.com/cosmos/cosmos-sdk/x/auth/client/utils"
-	"github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
+    "github.com/cosmos/cosmos-sdk/client/context"
+    "github.com/cosmos/cosmos-sdk/codec"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    "github.com/cosmos/cosmos-sdk/x/auth"
+    "github.com/cosmos/cosmos-sdk/x/auth/client/utils"
+    "github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
 )
 
 func GetCmdCreatePost(cdc *codec.Codec) *cobra.Command {
-	return &cobra.Command{
-		Use:   "create-post [title] [body]",
-		Short: "Creates a new post",
-		Args:  cobra.MinimumNArgs(2),
-		RunE: func(cmd *cobra.Command, args []string) error {
-			argsTitle := string(args[0])
-			argsBody := string(args[1])
+    return &cobra.Command{
+        Use:   "create-post [title] [body]",
+        Short: "Creates a new post",
+        Args:  cobra.MinimumNArgs(2),
+        RunE: func(cmd *cobra.Command, args []string) error {
+            argsTitle := string(args[0])
+            argsBody := string(args[1])
 
-			cliCtx := context.NewCLIContext().WithCodec(cdc)
-			inBuf := bufio.NewReader(cmd.InOrStdin())
-			txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
-			msg := types.NewMsgCreatePost(cliCtx.GetFromAddress(), argsTitle, argsBody)
-			err := msg.ValidateBasic()
-			if err != nil {
-				return err
-			}
-			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
-		},
-	}
+            cliCtx := context.NewCLIContext().WithCodec(cdc)
+            inBuf := bufio.NewReader(cmd.InOrStdin())
+            txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
+            msg := types.NewMsgCreatePost(cliCtx.GetFromAddress(), argsTitle, argsBody)
+            err := msg.ValidateBasic()
+            if err != nil {
+                return err
+            }
+            return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+        },
+    }
 }
 ```
 
@@ -147,51 +145,51 @@ Let’s define `NewMsgCreatePost` in a new file you should create as `x/blog/typ
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/google/uuid"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+    "github.com/google/uuid"
 )
 
 var _ sdk.Msg = &MsgCreatePost{}
 
 type MsgCreatePost struct {
-	ID      string
-	Creator sdk.AccAddress `json:"creator" yaml:"creator"`
-	Title   string         `json:"title" yaml:"title"`
-	Body    string         `json:"body" yaml:"body"`
+    ID      string
+    Creator sdk.AccAddress `json:"creator" yaml:"creator"`
+    Title   string         `json:"title" yaml:"title"`
+    Body    string         `json:"body" yaml:"body"`
 }
 
 func NewMsgCreatePost(creator sdk.AccAddress, title string, body string) MsgCreatePost {
-	return MsgCreatePost{
-		ID:      uuid.New().String(),
-		Creator: creator,
-		Title:   title,
-		Body:    body,
-	}
+    return MsgCreatePost{
+        ID:      uuid.New().String(),
+        Creator: creator,
+        Title:   title,
+        Body:    body,
+    }
 }
 
 func (msg MsgCreatePost) Route() string {
-	return RouterKey
+    return RouterKey
 }
 
 func (msg MsgCreatePost) Type() string {
-	return "CreatePost"
+    return "CreatePost"
 }
 
 func (msg MsgCreatePost) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
+    return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
 }
 
 func (msg MsgCreatePost) GetSignBytes() []byte {
-	bz := ModuleCdc.MustMarshalJSON(msg)
-	return sdk.MustSortJSON(bz)
+    bz := ModuleCdc.MustMarshalJSON(msg)
+    return sdk.MustSortJSON(bz)
 }
 
 func (msg MsgCreatePost) ValidateBasic() error {
-	if msg.Creator.Empty() {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
-	}
-	return nil
+    if msg.Creator.Empty() {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
+    }
+    return nil
 }
 ```
 
@@ -201,51 +199,51 @@ Similarly to the post struct, `MsgCreatePost` contains creator and title propert
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/google/uuid"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+    "github.com/google/uuid"
 )
 
 var _ sdk.Msg = &MsgCreatePost{}
 
 type MsgCreatePost struct {
-	ID      string
-	Creator sdk.AccAddress `json:"creator" yaml:"creator"`
-	Title   string         `json:"title" yaml:"title"`
-	Body    string         `json:"body" yaml:"body"`
+    ID      string
+    Creator sdk.AccAddress `json:"creator" yaml:"creator"`
+    Title   string         `json:"title" yaml:"title"`
+    Body    string         `json:"body" yaml:"body"`
 }
 
 func NewMsgCreatePost(creator sdk.AccAddress, title string, body string) MsgCreatePost {
-	return MsgCreatePost{
-		ID:      uuid.New().String(),
-		Creator: creator,
-		Title:   title,
-		Body:    body,
-	}
+    return MsgCreatePost{
+        ID:      uuid.New().String(),
+        Creator: creator,
+        Title:   title,
+        Body:    body,
+    }
 }
 
 func (msg MsgCreatePost) Route() string {
-	return RouterKey
+    return RouterKey
 }
 
 func (msg MsgCreatePost) Type() string {
-	return "CreatePost"
+    return "CreatePost"
 }
 
 func (msg MsgCreatePost) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
+    return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
 }
 
 func (msg MsgCreatePost) GetSignBytes() []byte {
-	bz := ModuleCdc.MustMarshalJSON(msg)
-	return sdk.MustSortJSON(bz)
+    bz := ModuleCdc.MustMarshalJSON(msg)
+    return sdk.MustSortJSON(bz)
 }
 
 func (msg MsgCreatePost) ValidateBasic() error {
-	if msg.Creator.Empty() {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
-	}
-	return nil
+    if msg.Creator.Empty() {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
+    }
+    return nil
 }
 ```
 
@@ -255,51 +253,51 @@ func (msg MsgCreatePost) ValidateBasic() error {
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/google/uuid"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+    "github.com/google/uuid"
 )
 
 var _ sdk.Msg = &MsgCreatePost{}
 
 type MsgCreatePost struct {
-	ID      string
-	Creator sdk.AccAddress `json:"creator" yaml:"creator"`
-	Title   string         `json:"title" yaml:"title"`
-	Body    string         `json:"body" yaml:"body"`
+    ID      string
+    Creator sdk.AccAddress `json:"creator" yaml:"creator"`
+    Title   string         `json:"title" yaml:"title"`
+    Body    string         `json:"body" yaml:"body"`
 }
 
 func NewMsgCreatePost(creator sdk.AccAddress, title string, body string) MsgCreatePost {
-	return MsgCreatePost{
-		ID:      uuid.New().String(),
-		Creator: creator,
-		Title:   title,
-		Body:    body,
-	}
+    return MsgCreatePost{
+        ID:      uuid.New().String(),
+        Creator: creator,
+        Title:   title,
+        Body:    body,
+    }
 }
 
 func (msg MsgCreatePost) Route() string {
-	return RouterKey
+    return RouterKey
 }
 
 func (msg MsgCreatePost) Type() string {
-	return "CreatePost"
+    return "CreatePost"
 }
 
 func (msg MsgCreatePost) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
+    return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
 }
 
 func (msg MsgCreatePost) GetSignBytes() []byte {
-	bz := ModuleCdc.MustMarshalJSON(msg)
-	return sdk.MustSortJSON(bz)
+    bz := ModuleCdc.MustMarshalJSON(msg)
+    return sdk.MustSortJSON(bz)
 }
 
 func (msg MsgCreatePost) ValidateBasic() error {
-	if msg.Creator.Empty() {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
-	}
-	return nil
+    if msg.Creator.Empty() {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
+    }
+    return nil
 }
 ```
 
@@ -310,8 +308,6 @@ After being broadcast, the messages are processed by an important part of the ap
 #### `x/blog/handler.go`
 
 Begin by importing your new blog types that we created:
-
-
 
 ```javascript
 import (
@@ -326,29 +322,29 @@ You should already have `func NewHandler` defined which lists all available hand
 package blog
 
 import (
-	"fmt"
+    "fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/sdk-tutorials/starport-blog/blog/x/blog/keeper"
-	"github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    "github.com/sdk-tutorials/starport-blog/blog/x/blog/keeper"
+    "github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
+    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 // NewHandler ...
 func NewHandler(k keeper.Keeper) sdk.Handler {
-	return func(ctx sdk.Context, msg sdk.Msg) (*sdk.Result, error) {
-		ctx = ctx.WithEventManager(sdk.NewEventManager())
-		switch msg := msg.(type) {
+    return func(ctx sdk.Context, msg sdk.Msg) (*sdk.Result, error) {
+        ctx = ctx.WithEventManager(sdk.NewEventManager())
+        switch msg := msg.(type) {
     // this line is used by starport scaffolding
-		case types.MsgCreateComment:
-			return handleMsgCreateComment(ctx, k, msg)
-		case types.MsgCreatePost:
-			return handleMsgCreatePost(ctx, k, msg)
-		default:
-			errMsg := fmt.Sprintf("unrecognized %s message type: %T", types.ModuleName, msg)
-			return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, errMsg)
-		}
-	}
+        case types.MsgCreateComment:
+            return handleMsgCreateComment(ctx, k, msg)
+        case types.MsgCreatePost:
+            return handleMsgCreatePost(ctx, k, msg)
+        default:
+            errMsg := fmt.Sprintf("unrecognized %s message type: %T", types.ModuleName, msg)
+            return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, errMsg)
+        }
+    }
 }
 ```
 
@@ -358,21 +354,21 @@ Now let’s define `handleMsgCreatePost`:
 package blog
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/sdk-tutorials/starport-blog/blog/x/blog/keeper"
-	"github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    "github.com/sdk-tutorials/starport-blog/blog/x/blog/keeper"
+    "github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
 )
 
 func handleMsgCreatePost(ctx sdk.Context, k keeper.Keeper, msg types.MsgCreatePost) (*sdk.Result, error) {
-	var post = types.Post{
-		Creator: msg.Creator,
-		ID:      msg.ID,
-		Title:   msg.Title,
-		Body:    msg.Body,
-	}
-	k.CreatePost(ctx, post)
+    var post = types.Post{
+        Creator: msg.Creator,
+        ID:      msg.ID,
+        Title:   msg.Title,
+        Body:    msg.Body,
+    }
+    k.CreatePost(ctx, post)
 
-	return &sdk.Result{Events: ctx.EventManager().Events()}, nil
+    return &sdk.Result{Events: ctx.EventManager().Events()}, nil
 }
 ```
 
@@ -388,29 +384,29 @@ Add a `CreatePost` function that takes two arguments: a [context](https://docs.c
 package keeper
 
 import (
-	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
+    "github.com/cosmos/cosmos-sdk/codec"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    "github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
 )
 
 func (k Keeper) CreatePost(ctx sdk.Context, post types.Post) {
-	store := ctx.KVStore(k.storeKey)
-	key := []byte(types.PostPrefix + post.ID)
-	value := k.cdc.MustMarshalBinaryLengthPrefixed(post)
-	store.Set(key, value)
+    store := ctx.KVStore(k.storeKey)
+    key := []byte(types.PostPrefix + post.ID)
+    value := k.cdc.MustMarshalBinaryLengthPrefixed(post)
+    store.Set(key, value)
 }
 
 func listPost(ctx sdk.Context, k Keeper) ([]byte, error) {
-	var postList []types.Post
-	store := ctx.KVStore(k.storeKey)
-	iterator := sdk.KVStorePrefixIterator(store, []byte(types.PostPrefix))
-	for ; iterator.Valid(); iterator.Next() {
-		var post types.Post
-		k.cdc.MustUnmarshalBinaryLengthPrefixed(store.Get(iterator.Key()), &post)
-		postList = append(postList, post)
-	}
-	res := codec.MustMarshalJSONIndent(k.cdc, postList)
-	return res, nil
+    var postList []types.Post
+    store := ctx.KVStore(k.storeKey)
+    iterator := sdk.KVStorePrefixIterator(store, []byte(types.PostPrefix))
+    for ; iterator.Valid(); iterator.Next() {
+        var post types.Post
+        k.cdc.MustUnmarshalBinaryLengthPrefixed(store.Get(iterator.Key()), &post)
+        postList = append(postList, post)
+    }
+    res := codec.MustMarshalJSONIndent(k.cdc, postList)
+    return res, nil
 }
 ```
 
@@ -424,25 +420,25 @@ To define the post prefix add the following code:
 package types
 
 const (
-	// ModuleName is the name of the module
-	ModuleName = "blog"
+    // ModuleName is the name of the module
+    ModuleName = "blog"
 
-	// StoreKey to be used when creating the KVStore
-	StoreKey = ModuleName
+    // StoreKey to be used when creating the KVStore
+    StoreKey = ModuleName
 
-	// RouterKey to be used for routing msgs
-	RouterKey = ModuleName
+    // RouterKey to be used for routing msgs
+    RouterKey = ModuleName
 
-	// QuerierRoute to be used for querier msgs
-	QuerierRoute = ModuleName
+    // QuerierRoute to be used for querier msgs
+    QuerierRoute = ModuleName
 )
 
 const (
-	PostPrefix = "post-"
+    PostPrefix = "post-"
 )
-		
+
 const (
-	CommentPrefix = "comment-"
+    CommentPrefix = "comment-"
 )
 ```
 
@@ -454,24 +450,24 @@ Finally, `store.Set(key, value)` writes our post to the store. Two last things t
 package types
 
 import (
-	"github.com/cosmos/cosmos-sdk/codec"
+    "github.com/cosmos/cosmos-sdk/codec"
 )
 
 // RegisterCodec registers concrete types on codec
 func RegisterCodec(cdc *codec.Codec) {
-	// this line is used by starport scaffolding
-	cdc.RegisterConcrete(MsgCreateComment{}, "blog/CreateComment", nil)
-	cdc.RegisterConcrete(MsgCreatePost{}, "blog/CreatePost", nil)
+    // this line is used by starport scaffolding
+    cdc.RegisterConcrete(MsgCreateComment{}, "blog/CreateComment", nil)
+    cdc.RegisterConcrete(MsgCreatePost{}, "blog/CreatePost", nil)
 }
 
 // ModuleCdc defines the module codec
 var ModuleCdc *codec.Codec
 
 func init() {
-	ModuleCdc = codec.New()
-	RegisterCodec(ModuleCdc)
-	codec.RegisterCrypto(ModuleCdc)
-	ModuleCdc.Seal()
+    ModuleCdc = codec.New()
+    RegisterCodec(ModuleCdc)
+    codec.RegisterCrypto(ModuleCdc)
+    ModuleCdc.Seal()
 }
 ```
 

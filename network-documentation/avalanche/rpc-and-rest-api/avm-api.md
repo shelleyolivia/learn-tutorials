@@ -4,9 +4,9 @@ description: Learn how to interact with Avalanche's X-Chain
 
 # X-Chain \(AVM\) API
 
-## Source documentation 
+## Source documentation
 
-\*\*\*\*[**The AVM API's source documentation can be found here**](https://docs.avax.network/build/apis/exchange-chain-x-chain-api). 
+\*\*\*\*[**The AVM API's source documentation can be found here**](https://docs.avax.network/build/apis/exchange-chain-x-chain-api).
 
 The X-Chain, Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
 

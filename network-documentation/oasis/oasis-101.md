@@ -4,7 +4,7 @@ description: Learn how Oasis works and what makes it special
 
 # ✏ Oasis 101
 
-## **What is Oasis?** 
+## **What is Oasis?**
 
 Designed for the next generation of blockchain, the Oasis Network is the first privacy-enabled blockchain platform for open finance and a responsible data economy. Combined with its high throughput and secure architecture, the Oasis Network is able to power private, scalable DeFi, revolutionizing Open Finance and expanding it beyond traders and early adopters to a mass market. Its unique privacy features can not only redefine DeFi, but also create a new type of digital asset called Tokenized Data that can enable users to take control of the data they generate and earn rewards for staking it with applications — creating the first ever responsible data economy.
 
@@ -18,13 +18,13 @@ Designed for the next generation of blockchain, the Oasis Network is the first p
 
 **Rapidly Growing Community:** The Oasis Network has a thriving community of close to a thousand node operators, developers, enterprise partners, ambassadors, and nearly ten thousand community members engaged in global social channels.
 
-### **What can you build on Oasis?** 
+### **What can you build on Oasis?**
 
 **Scalable, Private DeFi**
 
-The Oasis Network is designed to support confidential smart contracts, allowing it to keep data private while being processed. By providing end-to-end data confidentiality on Blockchain, the Oasis Network unlocks new and exciting use cases in DeFi. From under-collateralized lending to preventing front/back running, the Oasis Network can help expand DeFi beyond traders and early adopters to a mainstream market. 
+The Oasis Network is designed to support confidential smart contracts, allowing it to keep data private while being processed. By providing end-to-end data confidentiality on Blockchain, the Oasis Network unlocks new and exciting use cases in DeFi. From under-collateralized lending to preventing front/back running, the Oasis Network can help expand DeFi beyond traders and early adopters to a mainstream market.
 
-The network’s cutting-edge scalable features can help unblock DeFi as it works today, fixing the high-transaction fees and slow throughput currently plaguing other Layer 1 networks. Combined, Oasis’ unique ability to provide scalable, private DeFi is expected to make it the leading platform for unlocking the next generation of DeFi markets and use cases. 
+The network’s cutting-edge scalable features can help unblock DeFi as it works today, fixing the high-transaction fees and slow throughput currently plaguing other Layer 1 networks. Combined, Oasis’ unique ability to provide scalable, private DeFi is expected to make it the leading platform for unlocking the next generation of DeFi markets and use cases.
 
 **Data Tokenization & A Responsible Data Economy**
 
@@ -40,8 +40,8 @@ Transaction fees are currently paid in the native token, the ROSE. Since Oasis c
 
 ### **Transaction Speed & Finality**
 
-Oasis is built on the Tendermint BFT which typically have block times between 1 and 8 seconds, and can handle up to thousands of transactions per second.   
-  
+Oasis is built on the Tendermint BFT which typically have block times between 1 and 8 seconds, and can handle up to thousands of transactions per second.
+
 A property of the Tendermint consensus algorithm is instant finality. This means that forks are never created as long as more than a third of the validators are honest \([Byzantine](https://en.wikipedia.org/wiki/Byzantine_fault)\). Users can be sure that their transactions are finalized as soon as a block is created, unlike Proof-of-Work blockchains, like Bitcoin and Ethereum.
 
 ### **Languages supported**
@@ -56,5 +56,5 @@ On the Oasis Network, the SSVM Ewasm runtime will operate in parallel along othe
 
 ### **Role of the ROSE token**
 
-The primary token for the Oasis Network, ROSE fuels all transactions, staking, and delegation on the Oasis Network. 
+The primary token for the Oasis Network, ROSE fuels all transactions, staking, and delegation on the Oasis Network.
 

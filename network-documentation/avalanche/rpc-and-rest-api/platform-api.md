@@ -6,7 +6,7 @@ description: Learn how to interact with Avalanche's P-Chain
 
 ## Source documentation
 
-\*\*\*\*[**The Platform API's source documentation can be found here**](https://docs.avax.network/build/apis/platform-chain-p-chain-api). 
+\*\*\*\*[**The Platform API's source documentation can be found here**](https://docs.avax.network/build/apis/platform-chain-p-chain-api).
 
 This API allows clients to interact with the P-Chain \(Platform Chain\), which maintains Avalanche’s validator set and handles blockchain creation.
 
@@ -34,7 +34,7 @@ The delegatee charges a fee to the delegator; the former receives a percentage o
 
 The delegation period must be a subset of the period that the delegatee validates the Primary Network.
 
-Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t unstake early or change the stake amount, node ID or reward address.** Please make sure you’re using the correct values. 
+Note that once you issue the transaction to add a node as a delegator, there is no way to change the parameters. **You can’t unstake early or change the stake amount, node ID or reward address.** Please make sure you’re using the correct values.
 
 [See here](https://docs.avax.network/learn/platform-overview/staking) for staking parameters like the minimum amount that can be staked.
 
@@ -1127,8 +1127,8 @@ platform.getSubnets(
 ```
 
 `ids` are the IDs of the subnets to get information about. If omitted, gets information about all subnets. `id` is the Subnet’s ID.  
-`threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.  
-  
+`threshold` signatures from addresses in `controlKeys` are needed to add a validator to the subnet.
+
 See [here](https://docs.avax.network/build/tutorials/platform/add-a-validator) for information on adding a validator to a Subnet.
 
 **Example Call**

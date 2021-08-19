@@ -10,7 +10,7 @@ Terra is a blockchain protocol that supports stable programmable payments and op
 
 One part of Terra’s value contributions, payments, in essence replaces the complicated payments value chain, including credit card networks, banks, and payment gateways with a single blockchain layer. In concert with the efficiencies that Terra has provided payment channels for both merchants and consumers, it continues to steadily provide infrastructural improvements and tools for the foundations of laying down a credibly neutral, distributed, and radically transparent ecosystem.
 
-## **Why build on Terra?** 
+## **Why build on Terra?**
 
 **Robust consensus and fast block finality**
 
@@ -24,9 +24,9 @@ With fundamental infrastructure such as price oracles, on-chain swaps, stablecoi
 
 With over 1.5 million total users and a highly active user base from a variety of integrations \(like Terra-powered payment gateways such as CHAI and MemePay\), the Terra economy is a thriving new home for the future of innovative DeFi products. And unlike many other stablecoin protocols, Terra stablecoins are directly integrated in payments solutions where they are used everyday purchases such as groceries, movie tickets, taxis, and more.
 
-## **What can you build on Terra?** 
+## **What can you build on Terra?**
 
-Terra aims to make money easier to spend and more attractive to save. Build financial applications that are easily accessible to the masses. ****This includes popular decentralized finance applications such as: 
+Terra aims to make money easier to spend and more attractive to save. Build financial applications that are easily accessible to the masses. _\*\*_This includes popular decentralized finance applications such as:
 
 * Algorithmic money markets \(AMMs\) 
 * Digital banks 
@@ -34,7 +34,7 @@ Terra aims to make money easier to spend and more attractive to save. Build fina
 * Decentralized exchanges \(DEXs\)
 * Borrowing & lending platforms 
 
-and more! 
+and more!
 
 ## **Network Specifications**
 
@@ -42,7 +42,7 @@ and more!
 
 Gas is a fee that is added on to each transaction to avoid spamming. Validators set minimum gas prices and reject transactions that have implied gas prices above this threshold. At the end of every block, the compute fees are disbursed to the participating validators pro-rata to stake.
 
-All Terra transactions pay a small fee to miners. Fees default to 0.1% and are capped at 1%, meaning that transacting with Terra in e-commerce will be much cheaper than transacting with traditional payment options such as credit cards**.** 
+All Terra transactions pay a small fee to miners. Fees default to 0.1% and are capped at 1%, meaning that transacting with Terra in e-commerce will be much cheaper than transacting with traditional payment options such as credit cards**.**
 
 ### **Transaction Speed & Finality**
 
@@ -54,7 +54,7 @@ The Terra SDKs provide an easy way to programmatically interact with a Terra nod
 
 ### **EVM compatibility**
 
-Terra is not currently compatible with the EVM. ****
+Terra is not currently compatible with the EVM. _\*\*_
 
 ### **Role of the LUNA token**
 

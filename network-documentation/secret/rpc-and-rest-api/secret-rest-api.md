@@ -211,7 +211,7 @@ Encode a transaction to the Amino wire format
 
 ### `POST/txs/decode`
 
- **Description**
+**Description**
 
 Decode a transaction \(signed or not\) from base64-encoded Amino serialized bytes to JSON**.**
 
@@ -613,7 +613,7 @@ Get the account balances
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **address** | string \* required | Account address ****in bech32 format |
+| **address** | string \* required | Account address _\*\*_in bech32 format |
 
 **Example JSON Output**
 
@@ -1415,7 +1415,7 @@ Query a proposer
 
 **Description**
 
-Query deposits ****by proposalID
+Query deposits _\*\*_by proposalID
 
 **Parameters**
 
@@ -2167,7 +2167,7 @@ no parameters
 
 ## **IBC** <a id="supply"></a>
 
-**IBC module APIs** 
+**IBC module APIs**
 
 ### `GET/ibc/clients/{client-id}/consensus-state`
 
@@ -4207,7 +4207,7 @@ string
 
 ### **`GET/node_info`**
 
- **Description**
+**Description**
 
 Information about the connected node
 

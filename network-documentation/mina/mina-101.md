@@ -4,7 +4,7 @@ description: Learn how Mina works and what makes it special
 
 # ✏ Mina 101
 
-## **What is Mina?** 
+## **What is Mina?**
 
 Mina is the first cryptocurrency protocol with a succinct blockchain. Current cryptocurrencies like Bitcoin and Ethereum store hundreds of gigabytes of data, and as time goes on, their blockchains will only increase in size. With Mina however, no matter how much the usage grows, the blockchain always stays the same size - about 22kb \[1\] \(the size of a few tweets\). This means participants can quickly sync and verify the network.
 
@@ -12,13 +12,13 @@ This breakthrough is made possible due to zk-SNARKs - a type of succinct cryptog
 
 ### **Why build on Mina?**
 
-A fixed-size blockchain gives Mina unparalleled censorship resistance, enabling **fully censorship resistant money.**  Mina is the first fully censorship resistant **medium of exchange** that’s built for everyday use _and_ built to integrate into traditional services. A vibrant permissionless economy needs a **store of value** people are willing to spend — a behavior naturally disincentivized by the prospect of transacting in a scarce fixed-supply asset like bitcoin.
+A fixed-size blockchain gives Mina unparalleled censorship resistance, enabling **fully censorship resistant money.** Mina is the first fully censorship resistant **medium of exchange** that’s built for everyday use _and_ built to integrate into traditional services. A vibrant permissionless economy needs a **store of value** people are willing to spend — a behavior naturally disincentivized by the prospect of transacting in a scarce fixed-supply asset like bitcoin.
 
 zk-SNARKs give Mina **permissionless apps** that compute logic and data off-chain for privacy and scalability, verifying them later on-chain for integrity.
 
-Mina’s protocol design gives developers **easy access to digital dollars** — anyone building on Mina can integrate stablecoin payments into their apps with just a couple lines of code. 
+Mina’s protocol design gives developers **easy access to digital dollars** — anyone building on Mina can integrate stablecoin payments into their apps with just a couple lines of code.
 
-### **What can you build on Mina?** 
+### **What can you build on Mina?**
 
 As the world’s lightest blockchain, Mina enables an entirely new category of applications called Snapps \[3\] : Snarkified Applications. Snapps are featurewise similar to Dapps on Ethereum, but are superior thanks to three specific properties:
 
@@ -44,7 +44,7 @@ In general, a Snapp on Mina has the following workflow:
 
 ### **Transaction Fees**
 
-The average gas price suggested on the Mina protocol is 0.001 MINA. 
+The average gas price suggested on the Mina protocol is 0.001 MINA.
 
 ### **Transaction Speed & Finality**
 
@@ -68,15 +68,15 @@ The recommended wait time for a transaction to be confirmed is 15 blocks which p
 
 ### **Languages supported**
 
-Mina currently supports Graphql and is planning to add support for Javascript as a development language for Snapps. 
+Mina currently supports Graphql and is planning to add support for Javascript as a development language for Snapps.
 
 ### **EVM compatibility**
 
-While Mina does not currently support the EVM, the Ethereum Foundation and Mina Foundation have announced a new RFP for the design and implementation of a mechanism to verify the Pickles SNARK on Ethereum. 
+While Mina does not currently support the EVM, the Ethereum Foundation and Mina Foundation have announced a new RFP for the design and implementation of a mechanism to verify the Pickles SNARK on Ethereum.
 
 The goal of this is \(1\) to enable full-verification of the Mina blockchain on Ethereum to enable inter-op between the two chains, and \(2\) to enable applications more generally to use recursive SNARKs on Ethereum.
 
 ### **Role of the MINA token**
 
-The Mina network’s native asset lies at the center of the protocol’s economic incentive system. Block producers and snark producers are paid in MINA, and all holders are incentivized to stake the token: staking rewards during Mina’s first year post-launch will be worth up to 24% of staked capital, with further emissions ****rewards thereafter.
+The Mina network’s native asset lies at the center of the protocol’s economic incentive system. Block producers and snark producers are paid in MINA, and all holders are incentivized to stake the token: staking rewards during Mina’s first year post-launch will be worth up to 24% of staked capital, with further emissions _\*\*_rewards thereafter.
 

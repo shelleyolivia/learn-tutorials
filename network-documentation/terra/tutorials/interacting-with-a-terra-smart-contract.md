@@ -4,11 +4,11 @@ description: Learn how to interact with your own Terra smart contracts
 
 # Interacting with a Terra smart contract
 
-[**The original tutorial can be found in the official Terra documentation here**](https://docs.terra.money/contracts/tutorial/interacting.html#what-s-next). 
+[**The original tutorial can be found in the official Terra documentation here**](https://docs.terra.money/contracts/tutorial/interacting.html#what-s-next).
 
 ## Introduction
 
-In this tutorial, we will learn how to interact with the smart contracts we create. 
+In this tutorial, we will learn how to interact with the smart contracts we create.
 
 ### Requirements
 
@@ -211,7 +211,7 @@ Excellent! Congratulations, you've created your first smart contract, and now kn
 
 We've only walked through a simple example of a smart contract, that modifies a simple balance within its internal state. Although this is enough to make a simple dApp, we can power more interesting applications by **emitting messages**, which will enable us to interact with other contracts as well as the rest of the blockchain's module.
 
-Check out a couple more examples of smart contracts on Terra on this [repo](https://github.com/terra-project/cosmwasm-contracts). 
+Check out a couple more examples of smart contracts on Terra on this [repo](https://github.com/terra-project/cosmwasm-contracts).
 
 If you had any difficulties following this tutorial or simply want to discuss Terra and DataHub tech with us you can join [**our community**](https://discord.gg/fszyM7K) today!
 

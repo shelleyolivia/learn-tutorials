@@ -6,7 +6,7 @@ description: >-
 
 # Send CELO & cUSD
 
-[**The original tutorial can be found in the Celo documentation here**](https://docs.celo.org/developer-guide/start/hellocelo). 
+[**The original tutorial can be found in the Celo documentation here**](https://docs.celo.org/developer-guide/start/hellocelo).
 
 ## Introduction
 
@@ -103,7 +103,7 @@ node helloCelo.js
 ```
 
 {% hint style="info" %}
-You may notice that we convert the balance to a string before we print it. This is because the `balanceOf()` function returns a [BigNumber](https://github.com/MikeMcl/bignumber.js/). Javascript does not have floating point numbers, so it is common to convert integers to large numbers before doing arithmetic. So 1 CELO = 10\*\*18 base units of CELO. The `balanceOf()` function returns the account balance in these base units. Converting the BigNumber to a string converts the BigNumber object into a more legible string. 
+You may notice that we convert the balance to a string before we print it. This is because the `balanceOf()` function returns a [BigNumber](https://github.com/MikeMcl/bignumber.js/). Javascript does not have floating point numbers, so it is common to convert integers to large numbers before doing arithmetic. So 1 CELO = 10\*\*18 base units of CELO. The `balanceOf()` function returns the account balance in these base units. Converting the BigNumber to a string converts the BigNumber object into a more legible string.
 {% endhint %}
 
 Reading all account balances is a powerful feature of blockchains. Next, let's see how we can send value to each other on the testnet.

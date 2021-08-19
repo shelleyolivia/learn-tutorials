@@ -6,7 +6,7 @@ description: Learn how to interact with the web3.eth.utils package
 
 ## Source documentation
 
-[**The web3.utils package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-utils.html). 
+[**The web3.utils package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-utils.html).
 
 ## web3.utils
 

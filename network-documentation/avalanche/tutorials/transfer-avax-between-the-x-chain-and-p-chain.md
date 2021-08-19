@@ -4,7 +4,7 @@ description: Learn how to transfer AVAX between chains
 
 # Transfer AVAX between the X-Chain and P-Chain
 
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain). 
+\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-p-chain).
 
 ## Introduction
 
@@ -24,7 +24,7 @@ The Avalanche Wallet source code can be found [here](https://github.com/ava-labs
 
 ### Step 1 - Open the Avalanche Wallet
 
-![](../../../.gitbook/assets/wallet-x2p-01-login-1-%20%281%29.png)
+![](../../../.gitbook/assets/wallet-x2p-01-login-1-%20%281%29%20%281%29.png)
 
 Select **Access Wallet** to enter your wallet. To connect the wallet to a network other than the main Avalanche network, select **Mainnet** and choose the network to connect to.
 
@@ -83,7 +83,7 @@ As you may have noticed while transferring AVAX using the Avalanche Wallet, a cr
 
 ### Step 1 - Export AVAX from the X-Chain
 
-To export AVAX, call the X-Chain’s [`avm.exportAVAX`]() method.
+To export AVAX, call the X-Chain’s [`avm.exportAVAX`](transfer-avax-between-the-x-chain-and-p-chain.md) method.
 
 Your call should look like this:
 
@@ -103,7 +103,7 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-where `to` is the address of a P-Chain address your user controls and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here]() for instructions on creating a new P-Chain address\).
+where `to` is the address of a P-Chain address your user controls and `changeAddr` is the address to send any change to. You can leave `changeAddr` blank; if you leave it blank, change will be returned to an address controlled by your user \(see [here](transfer-avax-between-the-x-chain-and-p-chain.md) for instructions on creating a new P-Chain address\).
 
 Note that you will pay a transaction fee for both the export and import operations. In this example, let’s assume the transaction fee is `.001` AVAX. Then, the above export actually consumes `.006` AVAX; `.005` goes to the P-Chain and `.001` is burned as a transaction fee.
 
@@ -122,7 +122,7 @@ The response should look like this:
 }
 ```
 
-We can verify that this transaction was accepted by calling [`avm.getTxStatus`]():
+We can verify that this transaction was accepted by calling [`avm.getTxStatus`](transfer-avax-between-the-x-chain-and-p-chain.md):
 
 ```cpp
 curl -X POST --data '{
@@ -147,7 +147,7 @@ Which shows our transaction is accepted:
 }
 ```
 
-We can also call [`avm.getBalance`]() to check that the AVAX was deducted from an address held by our user:
+We can also call [`avm.getBalance`](transfer-avax-between-the-x-chain-and-p-chain.md) to check that the AVAX was deducted from an address held by our user:
 
 ```cpp
 curl -X POST --data '{
@@ -165,7 +165,7 @@ The amount deducted is the exported amount \(`.005` AVAX in this example\) plus 
 
 ### Step 2 - Import AVAX to the P-Chain
 
-Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.importAVAX`]() method to finish the transfer.
+Our transfer isn’t done just yet. We need to call the P-Chain’s [`platform.importAVAX`](transfer-avax-between-the-x-chain-and-p-chain.md) method to finish the transfer.
 
 Your call should look like this:
 
@@ -254,7 +254,7 @@ Same as before, this is also a two transaction operation:
 
 ### Step 1 - Export AVAX from the P-Chain
 
-To do so, call [`platform.exportAVAX`]():
+To do so, call [`platform.exportAVAX`](transfer-avax-between-the-x-chain-and-p-chain.md):
 
 ```cpp
 curl -X POST --data '{
@@ -273,11 +273,11 @@ curl -X POST --data '{
 
 where `to` is the X-Chain address the AVAX is being sent to.
 
-This returns the transaction ID, and we can check that the transaction was committed with another call to [`platform.getTxStatus`](). Again, make sure that the amount you’re sending exceeds the transaction fee.
+This returns the transaction ID, and we can check that the transaction was committed with another call to [`platform.getTxStatus`](transfer-avax-between-the-x-chain-and-p-chain.md). Again, make sure that the amount you’re sending exceeds the transaction fee.
 
 ### Step 2 - Import AVAX to X-Chain
 
-To finish our transfer from the P-Chain to the X-Chain, call [`avm.importAVAX`]():
+To finish our transfer from the P-Chain to the X-Chain, call [`avm.importAVAX`](transfer-avax-between-the-x-chain-and-p-chain.md):
 
 ```cpp
 curl -X POST --data '{
@@ -294,9 +294,9 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-Note that `to` is the same address specified in our call to [`platform.exportAVAX`]().
+Note that `to` is the same address specified in our call to [`platform.exportAVAX`](transfer-avax-between-the-x-chain-and-p-chain.md).
 
-Just as before, we can call [`avm.getBalance`]() to verify the funds were received. The balance should have increased by `.003` AVAX minus the transaction fee.
+Just as before, we can call [`avm.getBalance`](transfer-avax-between-the-x-chain-and-p-chain.md) to verify the funds were received. The balance should have increased by `.003` AVAX minus the transaction fee.
 
 ## Wrapping Up
 

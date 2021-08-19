@@ -4,7 +4,7 @@ description: Learn how to create a local test network on Avalanche
 
 # Create a Local Test Network
 
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network). 
+\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network).
 
 ## Introduction
 
@@ -18,7 +18,7 @@ The 5 nodes will have HTTP ports \(where API calls should be sent\) `9650`, `965
 
 The below commands assume you have AvalancheGo installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
 
-#### Manually <a id="manually"></a>
+### Manually <a id="manually"></a>
 
 To start the network:
 
@@ -32,7 +32,7 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --public-ip=127.0.0.1 --snow-sample-size=2 --snow-quorum-size=2 --http-port=9658 --staking-port=9659 --db-dir=db/node5 --staking-enabled=true --network-id=local --bootstrap-ips=127.0.0.1:9651 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg --staking-tls-cert-file=$(pwd)/staking/local/staker5.crt --staking-tls-key-file=$(pwd)/staking/local/staker5.key
 ```
 
-#### With Avash <a id="with-avash"></a>
+### With Avash <a id="with-avash"></a>
 
 We assume you’ve installed [Avash](https://docs.avax.network/build/tools/avash).
 

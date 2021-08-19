@@ -92,7 +92,7 @@ To handle the "wait" mechanic before retrying the request, you can use `setTimeo
 
 You could use a fetch-equivalent library like node-fetch. To make things interesting, let's look at applying the same concepts above to Node.js' native http module.
 
-Here's a basic GET using http.get: ****
+Here's a basic GET using http.get: _\*\*_
 
 ```ruby
 let https = require("https")
@@ -174,9 +174,9 @@ Source & for more details - [Check Here](https://hackernoon.com/how-to-improve-y
 ## **Method 2 - Add Retries to API Calls using Async Await in NodeJS**
 
 Async functions are available natively in Node and are denoted by the async keyword in their declaration. They always return a promise, even if you don’t explicitly write them to do so. Also, the await keyword is only available inside async functions at the moment - it cannot be used in the global scope.  
-****In an async function, you can await any Promise or catch its rejection cause.  
-  
-****So if you had some logic implemented with promises:
+_\*\*_In an async function, you can await any Promise or catch its rejection cause.
+
+_\*\*_So if you had some logic implemented with promises:
 
 ```ruby
 function handler (req, res) {
@@ -301,7 +301,7 @@ requestRetry(someUrl, someData, 10, 500, function(err, data) {
 });
 ```
 
-This is a fairly simple retry scheme, it just retries on a fixed interval for a fixed number of times. More complicated schemes implement a back-off algorithm where they start with fairly quick retries, but then back-off to a longer period of time between retries after the first few failures to give the server a better chance of recovering. 
+This is a fairly simple retry scheme, it just retries on a fixed interval for a fixed number of times. More complicated schemes implement a back-off algorithm where they start with fairly quick retries, but then back-off to a longer period of time between retries after the first few failures to give the server a better chance of recovering.
 
 If there happens to be lots and lots of clients all doing rapid retries, then as soon as your server has a hiccup, you can get an avalanche failure as all the clients suddenly start rapidly retrying which just puts your server in even more trouble trying to handle all those requests. The back-off algorithm is designed to allow a server a better chance of preventing an avalanche failure and make it easier for it to recover.
 
@@ -321,8 +321,7 @@ function asyncLoop(i, range, callback) {
 }
 ```
 
-  
-To loop it 10 times, call it as follows: 
+To loop it 10 times, call it as follows:
 
 ```ruby
 asyncLoop(0, 10, function(err, results) {

@@ -8,9 +8,9 @@ description: Learn how Tezos works and what makes it special
 
 Tezos is a secure, smart contract blockchain platform that uses its built-in governance mechanism for protocol upgrades. Tezos is one of the first blockchain platforms to introduce a formal on-chain governance process. The Tezos network is highly decentralized with over 500 nodes distributed globally. Tezos’ smart contract language, Michelson, is designed to facilitate formal verification, a technique used to improve security by mathematically proving properties. This technique, if used properly, can help avoid costly bugs and contentious debates that follow.
 
-## **Why build on Tezos?** 
+## **Why build on Tezos?**
 
-Tezos is an open-source platform for assets and applications that can evolve by upgrading itself. Stakeholders govern upgrades to the core protocol, including upgrades to the amendment process itself. ****It benefits from three main characteristics: self-amendment, on-chain governance, and decentralized innovation. ****
+Tezos is an open-source platform for assets and applications that can evolve by upgrading itself. Stakeholders govern upgrades to the core protocol, including upgrades to the amendment process itself. **It benefits from three main characteristics: self-amendment, on-chain governance, and decentralized innovation.** 
 
 Self-amendment allows Tezos to upgrade itself without having to split \(“fork”\) the network into two different blockchains. This is important as the suggestion or expectation of a fork can divide the community, alter stakeholder incentives, and disrupt the network effects that are formed over time. Because of self-amendment, coordination and execution costs for protocol upgrades are reduced and future innovations can be seamlessly implemented.
 
@@ -18,36 +18,31 @@ In Tezos, all stakeholders can participate in governing the protocol. The electi
 
 Proposed amendments that are accepted by stakeholders can include payment to individuals or groups that improve the protocol. This funding mechanism encourages robust participation and decentralizes the maintenance of the network. Fostering an active, open, and diverse developer ecosystem that is incentivized to contribute to the protocol will facilitate Tezos development and adoption.
 
-## **What can you build on Tezos?** 
+## **What can you build on Tezos?**
 
 Turing-complete smart contract platforms like Tezos or Ethereum allow for arbitrary code to be executed in a trust-minimized manner. However, certain applications may be well suited for Tezos based on formal governance and focus on smart contract security. Below are some preliminary examples:
 
 1. **Digital Assets**
 
-   Assets like digital money, tokenized real estate, stablecoins, digital collectibles, and so on are particularly well-suited for Tezos. Avoiding contentious forks can preserve value and coordination around one network, making Tezos a compelling platform for issuing digital assets.  
+   Assets like digital money, tokenized real estate, stablecoins, digital collectibles, and so on are particularly well-suited for Tezos. Avoiding contentious forks can preserve value and coordination around one network, making Tezos a compelling platform for issuing digital assets.
 
+Although no system can be unconditionally secure, the Tezos smart contract language, Michelson, was designed with security and formal verification in mind. This is especially critical for smart contracts representing high value assets, given the unforgiving nature of smart contracts bugs.
 
-   Although no system can be unconditionally secure, the Tezos smart contract language, Michelson, was designed with security and formal verification in mind. This is especially critical for smart contracts representing high value assets, given the unforgiving nature of smart contracts bugs.  
-   ****
+1. **Trust-Minimized Financial Contracts**
 
-2. **Trust-Minimized Financial Contracts**
-
-   Financial contracts such as decentralized exchanges, swaps, loans, and so on demand a high-level of correctness. Decentralized blockchain networks derive their value from the absence of a trusted third party, which makes a loss of funds from a bug in the code particularly unforgiving. 
+   Financial contracts such as decentralized exchanges, swaps, loans, and so on demand a high-level of correctness. Decentralized blockchain networks derive their value from the absence of a trusted third party, which makes a loss of funds from a bug in the code particularly unforgiving.
 
 ## **Network Specifications**
 
 ### **Transaction Fees**
 
-Transaction costs in Tezos depend on gas consumption and storage usage. When you make a transaction, you pay two costs:
-
-* Fee that goes to the baker. It depends on the amount of gas consumed by your transaction.
-* Storage cost that gets burned. If your transaction increases the amount of data permanently stored in the blockchain, you have to pay for that. Storage cost is burned, i. e. nobody receives what you pay.
+So far, this system is similar to the way Ethereum handles transaction. However, we differ in the way we handle fees. Ethereum allows arbitrarily long programs to execute by requiring a fee that increases linearly with the program's executing time.
 
 ### **Transaction Speed & Finality**
 
 Currently, Tezos does around 30-40 transactions per second.
 
-In the current Tezos protocol, 6 confirmations \(~30 minutes\) may be considered a good rule of thumb for transaction to be considered final. Since Tezos uses a chain-based PoS consensus algorithm, the possibility of a chain re-organization remains after a transaction. Users must wait a number of confirmations before they can be overwhelmingly confident that a transaction will not be reversed.
+In the current Tezos protocol, 30 confirmations \(~30 minutes\) may be considered a good rule of thumb for transaction to be considered final. Since Tezos uses a chain-based PoS consensus algorithm, the possibility of a chain re-organization remains after a transaction. Users must wait a number of confirmations before they can be overwhelmingly confident that a transaction will not be reversed.
 
 ### **Languages supported**
 
@@ -61,9 +56,9 @@ Current options in development include:
 
 ### **EVM compatibility**
 
-Tezos does not currently support an EVM implementation. 
+Tezos does not currently support an EVM implementation.
 
 ### **Role of the XTZ token**
 
- XTZ, tez, or ꜩ  is the native currency of Tezos. XTZ is programmable money on the Tezos blockchain. ****It is used to pay on-chain fees and influence the network's governance. 
+XTZ, tez, or ꜩ is the native currency of Tezos. XTZ is programmable money created by smart contract on the Tezos blockchain. _\*\*_It is used to pay on-chain fees and influence the network's governance.
 

@@ -6,10 +6,10 @@ description: Review best practices to deal with 5XX errors
 
 ## Introduction
 
-Since DataHub is a proxy that passes through errors from full node software, our users will need to adopt defensive strategies for interacting with the API.  
-  
-We are making it easy for our users to do the right thing and providing examples of pseudo-code to copy/paste.  
-  
+Since DataHub is a proxy that passes through errors from full node software, our users will need to adopt defensive strategies for interacting with the API.
+
+We are making it easy for our users to do the right thing and providing examples of pseudo-code to copy/paste.
+
 For Example:
 
 ```ruby
@@ -35,7 +35,7 @@ The next consideration we want is how often to retry. We will start with a delay
 * if \(now - delay\) &gt; last attempt, try request
 * else, return to the start
 
-**Let's explore the best practices for NodeJs, Pyhton, Ruby, and Go:** 
+**Let's explore the best practices for NodeJs, Pyhton, Ruby, and Go:**
 
 {% page-ref page="5xx-retry-logic-best-practices-nodejs.md" %}
 
@@ -44,6 +44,4 @@ The next consideration we want is how often to retry. We will start with a delay
 {% page-ref page="5xx-retry-logic-best-practices-ruby.md" %}
 
 {% page-ref page="5xx-retry-logic-best-practices-go.md" %}
-
-
 

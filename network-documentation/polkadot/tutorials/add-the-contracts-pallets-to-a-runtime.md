@@ -62,7 +62,7 @@ pallet-balances = { default-features = false, version = '3.0.0' }
 Copy
 ```
 
-#### Crate Features
+### Crate Features
 
 One important thing we need to call out with importing pallet crates is making sure to set up the crate `features` correctly. In the code snippet above, you will notice that we set `default_features = false`. If you explore the `Cargo.toml` file even closer, you will find something like:
 
@@ -110,7 +110,7 @@ Copy
 
 You can see that at the top of the file, we define that we will use `no_std` when we are _not_ using the `std` feature. A few lines lower you can see `#[cfg(feature = "std")]` above the `wasm_binary.rs` import, which is a flag saying to only import the Wasm binary when we have enabled the `std` feature.
 
-#### Importing the Contracts Pallet Crate
+### Importing the Contracts Pallet Crate
 
 Okay, now that we have covered the basics of crate features, we can actually import the Contracts pallet. The Contracts pallet is probably the most complicated pallet in FRAME, so it makes for a good example of some of the trickiness that can be involved when adding additional pallets.
 
@@ -146,7 +146,7 @@ Copy
 
 Now that we have successfully imported the Contracts pallet crate, we need to add it to our Runtime.
 
-#### Implementing the Contract Trait
+### Implementing the Contract Trait
 
 Every pallet has a configuration trait called `Config` that the runtime must implement.
 
@@ -168,7 +168,6 @@ Copy
 ```
 
 ```rust
-
 // These time units are defined in number of blocks.
    /* --snip-- */
 
@@ -191,7 +190,6 @@ Copy
 ```
 
 ```rust
-
 impl pallet_timestamp::Config for Runtime {
     /* --snip-- */
 }
@@ -250,7 +248,7 @@ Copy
 
 At this point, it is recommended to explore the [Contracts pallet source code](https://github.com/paritytech/substrate/blob/v3.0.0/frame/contracts/src/lib.rs) if things don't make sense or you want to gain a deeper understanding.
 
-#### Adding Contracts to the `construct_runtime!` Macro
+### Adding Contracts to the `construct_runtime!` Macro
 
 Next, we need to add the pallet to the `construct_runtime!` macro. For this, we need to determine the types that the pallet exposes so that we can tell our runtime that they exist. The complete list of possible types can be found in the [`construct_runtime!` macro documentation](https://substrate.dev/rustdocs/v3.0.0/frame_support/macro.construct_runtime.html).
 
@@ -291,7 +289,7 @@ cargo check -p node-template-runtime
 Copy
 ```
 
-#### Exposing The Contracts API
+### Exposing The Contracts API
 
 Some pallets, including the Contracts pallet, expose custom runtime APIs and RPC endpoints. In the case of the Contracts pallet, this enables reading contracts state from off chain.
 
@@ -375,7 +373,7 @@ Copy
 
 At this point we have finished adding a pallet to the runtime. We now turn our attention to the outer node which will often need some corresponding updates. In the case of the Contracts pallet we will add the custom RPC endpoint and a genesis configuration.
 
-#### Adding the RPC API extension
+### Adding the RPC API extension
 
 With the proper runtime API exposed, now we can add the RPC to the node's service to call into that runtime API. Because we are now working in the outer node, we are not building to `no_std` and we don't have to maintain a dedicated `std` feature.
 
@@ -439,7 +437,7 @@ Copy
 > Copy
 > ```
 
-#### Genesis Configuration
+### Genesis Configuration
 
 Not all pallets will have a genesis configuration, but if yours does, you can use its documentation to learn about it. For example, [`pallet_contracts::GenesisConfig` documentation](https://substrate.dev/rustdocs/v3.0.0/pallet_contracts/struct.GenesisConfig.html) describes all the fields you need to define for the Contracts pallet.
 

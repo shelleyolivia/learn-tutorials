@@ -35,7 +35,7 @@ Celo enables developers to build a new financial system to empower their users. 
 * Alternative currencies 
 * Use the full suite of Ethereum smart contracts right off the shelf
 
-You can view some of the projects that are building on Celo [here](https://docs.celo.org/developer-guide/celo-dapp-gallery).
+You can view some of the projects that are building on Celo [here](https://docs.celo.org/developer-guide/overview/celo-dapp-gallery).
 
 ## **Network Specifications**
 

@@ -41,9 +41,9 @@ You agree that you will not:
 
 You grant Figment the rights detailed in the Terms of Use.
 
-You also transfer and assign all right, title, and interest in and to Submitted Content to Figment, and waive any rights of privacy, publicity, moral rights, or other rights of a similar nature applicable to all the Submitted Content, to the extent permissible under applicable law. You represent and warrant that you have all the rights, power, and authority necessary to transfer ownership of the Submitted Content to Figment and to agree to these Contributor Terms.  
+You also transfer and assign all right, title, and interest in and to Submitted Content to Figment, and waive any rights of privacy, publicity, moral rights, or other rights of a similar nature applicable to all the Submitted Content, to the extent permissible under applicable law. You represent and warrant that you have all the rights, power, and authority necessary to transfer ownership of the Submitted Content to Figment and to agree to these Contributor Terms.
 
-We may use all or any part of the Submitted Content for delivering, marketing, promoting, demonstrating, or operating Figment Learn or for any other purpose. You grant Figment permission to use your name, likeness, voice, and image in connection with the offering, delivering, marketing, promoting, demonstrating, and selling Figment Learn \(including all content\), and you waive any rights of privacy, publicity, or other rights of a similar nature, to the extent permissible under applicable law. 
+We may use all or any part of the Submitted Content for delivering, marketing, promoting, demonstrating, or operating Figment Learn or for any other purpose. You grant Figment permission to use your name, likeness, voice, and image in connection with the offering, delivering, marketing, promoting, demonstrating, and selling Figment Learn \(including all content\), and you waive any rights of privacy, publicity, or other rights of a similar nature, to the extent permissible under applicable law.
 
 ### 2.2 License Back
 
@@ -65,7 +65,7 @@ We reserve the right to remove any Submitted Content from Figment Learn for any 
 
 ### 3.2 Relationship to Users and Other Contributors
 
-Contributors don't have a contractual relationship with Users or other Contributors. 
+Contributors don't have a contractual relationship with Users or other Contributors.
 
 ## **4. Incentive Program**
 
@@ -114,8 +114,7 @@ The following sections shall survive the expiration or termination of these Cont
 
 ## 8. Contacting Us
 
-You may get in touch with us by contacting our [**Support Team**](../other/support.md). We welcome your questions, concerns, and feedback about Figment Learn.
+You may get in touch with us by contacting our Support Team. We welcome your questions, concerns, and feedback about Figment Learn.
 
-Thank you for learning!  
-
+Thank you for learning!
 

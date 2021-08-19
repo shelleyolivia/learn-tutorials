@@ -4,7 +4,7 @@ description: Learn how to write smart contracts that talk to each other
 
 # Cross-contract calls
 
-[The original tutorial can be found in the official NEAR documentation here](https://docs.near.org/docs/tutorials/contracts/cross-contract-calls). 
+[The original tutorial can be found in the official NEAR documentation here](https://docs.near.org/docs/tutorials/contracts/cross-contract-calls).
 
 ## Introduction
 
@@ -27,7 +27,7 @@ We're going to create two simple contracts:
 
 For this example, we'll only implement the `add` functionality, but already we've got a problem! The accounting department at Super Evil Mega Corp sent all these numbers as strings. To make things worse, we don't know how long these strings are going to be. Why this is a problem: the largest integer that JavaScript can deal with is [9007199254740991](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER). To help out everyone who wants to add long numbers together, we're going to deploy a contract that people can incorporate into their own calculators.
 
-#### Let's get started!
+### Let's get started!
 
 ## Step 1 - Create a new Token Contract Project in Gitpod
 

@@ -4,7 +4,7 @@ description: Learn how to create a Subnet on Avalanche
 
 # Create a Subnet
 
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-subnet). 
+\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-subnet).
 
 ## Introduction
 

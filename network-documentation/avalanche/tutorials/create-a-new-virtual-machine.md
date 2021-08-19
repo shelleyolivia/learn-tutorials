@@ -4,7 +4,7 @@ description: Learn how to create a new virtual machine on Avalanche
 
 # Create a New Virtual Machine
 
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-virtual-machine-vm). 
+\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-virtual-machine-vm).
 
 ## Note
 
@@ -179,7 +179,7 @@ We’ve created some types that your Virtual Machine implementation can embed \(
 
 In our example we use both of the below library types, and we encourage you to use them too.
 
-#### core.SnowmanVM <a id="coresnowmanvm"></a>
+### core.SnowmanVM <a id="coresnowmanvm"></a>
 
 This type, a struct, contains methods and fields common to all implementations of the `snowman.ChainVM` interface.
 
@@ -204,7 +204,7 @@ This type contains several fields that you’ll want to include in your Virtual 
 * `toEngine`: the channel through which messages are sent to the consensus engine powering the blockchain
 * `State`: used to persist data such as blocks. Can be used to put/get any bytes.
 
-#### core.Block <a id="coreblock"></a>
+### core.Block <a id="coreblock"></a>
 
 This type, a struct, contains methods and fields common to all implementations of the `snowman.Block` interface.
 
@@ -230,7 +230,7 @@ Now we know the interface our Virtual Machine must implement and the libraries w
 
 Let’s write our Virtual Machine, which implements `snowman.VM`, and whose blocks implement `snowman.Block`.
 
-#### Block <a id="block"></a>
+### Block <a id="block"></a>
 
 First, let’s look at our block implementation.
 
@@ -294,7 +294,7 @@ func (b *Block) Verify() error {
 
 That’s all the code for our block implementation! All of the other methods of `snowman.Block`, which our `Block` must implement, are inherited from `*core.Block`.
 
-#### Virtual Machine <a id="virtual-machine"></a>
+### Virtual Machine <a id="virtual-machine"></a>
 
 Now let’s look at the implementation of VM, which implements the `snowman.VM` interface.
 
@@ -509,7 +509,7 @@ func (vm *VM) CreateHandlers() map[string]*common.HTTPHandler {
 }
 ```
 
-#### Service <a id="service"></a>
+### Service <a id="service"></a>
 
 AvalancheGo uses [Gorilla’s RPC library.](https://www.gorillatoolkit.org/pkg/rpc) to implement APIs.
 

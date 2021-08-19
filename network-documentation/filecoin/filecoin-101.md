@@ -4,7 +4,7 @@ description: Learn how Filecoin works and what makes it special
 
 # ✏️ Filecoin 101
 
-## **What is Filecoin?** 
+## **What is Filecoin?**
 
 Filecoin is a peer-to-peer network that stores files, with built-in economic incentives to ensure files are stored reliably over time.
 
@@ -54,7 +54,7 @@ Migrating to a different storage provider is made easier because they all offer 
 
 Traditional cloud storage providers lock users by making it cheap to store files but expensive to retrieve them again. Filecoin avoids this by facilitating a retrieval market where miners compete to give users their files back as fast as possible, at the lowest possible price.
 
-### **What can you build on Filecoin?** 
+### **What can you build on Filecoin?**
 
 Filecoin is a protocol that provides core primitives, enabling a truly trustless decentralized storage network. These primitives and features include publicly verifiable cryptographic storage proofs, [crypto-economic mechanisms \(opens new window\)](https://filecoin.io/blog/filecoin-cryptoeconomic-constructions/), and a public blockchain. Filecoin provides these primitives to solve the really hard problem of creating a trustless decentralized storage network.
 
@@ -98,7 +98,7 @@ Both Lotus and IPFS have several implementations for development in different en
 
 ### **EVM compatibility**
 
-Filecoin ****compatible with the EVM. 
+Filecoin _\*\*_compatible with the EVM.
 
 ### **Role of the FIL token**
 

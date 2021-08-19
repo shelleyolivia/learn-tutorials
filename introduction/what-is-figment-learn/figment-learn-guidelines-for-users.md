@@ -6,9 +6,15 @@ description: >-
 
 # Figment Learn Guidelines for Users
 
-Figment Learn aims to reward developers who are eager to improve their Web 3 skills. There are exclusive NFTs available for devs who complete multiple Pathways.
+Figment Learn aims to reward developers who are eager to improve their Web 3 skills. To make sure we incentivize only those who are looking to learn, we are putting measures in place to block cheaters and uninterested users.
 
-Figment Learn Pathways are designed to give you hands-on experience with blockchains & cover the fundamentals of Web 3 development. The programming languages most commonly in use regarding proof-of-stake blockchains are JavaScript/TypeScript, and Rust. There are many frameworks and tools that rely on JavaScript to communicate between the user and blockchain. Rust is quite powerful and offers an alternative learning path to JavaScript and Solidity.   
-  
-Learn is a place for respectful discussion and passionate pursuit of knowledge. Ask questions! It is OK to disagree with other users, but do it respectfully. The community is here to support learning and the development of awesome dApps. Having technical trouble? We are here to help you! 
+**Make sure to follow the following Learn Guidelines to guarantee your payout after the completion of a Pathway without delays.**
+
+1. Figment Learn Pathways are designed to give you hands-on experience that covers the basic fundamentals of Web 3 development.  As such, we request you don’t copy-paste the code to complete the Pathway faster. 
+2. Before signing up to DataHub and starting the Pathway, make sure you’re not trying to hide your IP address with a proxy or VPN. Accounts with hidden IPs will have their rewards denied. 
+3. Use of VPS isn't allowed, you can only use it if it's recommended officially in the tutorial.
+4. Make sure to use your real mobile number to receive the one-time password at the end of the Pathway. The use of fake mobile number generators such as Google phone numbers or online SMS numbers will block you from receiving rewards. 
+5. Make sure you are not using the same IP address as your friend/colleague/roommate when completing the Pathway. We currently deny all IP address duplications. 
+6. Users can complete a pathway once. If you try completing it with duplicate accounts, you will be blacklisted and will not receive any rewards. 
+7. Your wallet address should be unique to you. If multiple users are found using the same address, they will be accounted as duplicate accounts and will be denied rewards. 
 

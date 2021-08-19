@@ -87,9 +87,9 @@ cd substrate-front-end-template
 yarn install
 ```
 
-## Background Information 
+## Background Information
 
- While we wait for the [node template to build](https://substrate.dev/docs/en/tutorials/create-your-first-substrate-chain/setup/#compiling-substrate), let's learn a little bit about the Substrate blockchain development framework. The Node Template that you are compiling was built with this framework.
+While we wait for the [node template to build](https://substrate.dev/docs/en/tutorials/create-your-first-substrate-chain/setup/#compiling-substrate), let's learn a little bit about the Substrate blockchain development framework. The Node Template that you are compiling was built with this framework.
 
 ### Substrate
 
@@ -103,7 +103,7 @@ We provide an out-of-the-box working Substrate-based node in the form of the Nod
 
 We will teach you how to use this node in "development" mode, which allows you to run a network with a single node, and have some pre-configured user accounts with funds.
 
-## Interacting With Your Node 
+## Interacting With Your Node
 
 Now that your node has finished compiling, let's show you how everything works out of the box.
 

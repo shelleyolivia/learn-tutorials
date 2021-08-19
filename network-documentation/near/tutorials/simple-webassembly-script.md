@@ -4,7 +4,7 @@ description: Learn how to test your AssemblyScript contracts
 
 # Simple AssemblyScript App
 
-\*\*\*\*[**The original tutorial can be found in the official NEAR documentation here**](https://docs.near.org/docs/tutorials/test-your-smart-contracts). 
+\*\*\*\*[**The original tutorial can be found in the official NEAR documentation here**](https://docs.near.org/docs/tutorials/test-your-smart-contracts).
 
 ## A multiplayer "Place" game with shared world state.
 
@@ -18,7 +18,7 @@ Below is an example of a large scale version to which many people contributed.
 
 ![space shuttle against starry sky](https://docs.near.org/docs/assets/spaceship-2.png)
 
-#### Let's get started!
+### Let's get started!
 
 ## Step 1 - Create a new Token Contract Project in Gitpod
 
@@ -164,7 +164,7 @@ import { getMap, setCoords } from "../main";
 
   describe("setCoords", () => {
     it("modifies the board state", () => {
-      
+
        setCoords("0,0", "111111")
        const viewResult = getMap();
        //you can send a log to the console by invoking the log() method 
@@ -393,7 +393,6 @@ In the file `src/index.html` :
 </html>
 
 Copy
-
 ```
 
 * Click **File** &gt;&gt; **Save All** to save your changes to both files

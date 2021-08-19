@@ -4,7 +4,7 @@ description: Learn how to build a polling app using the Cosmos SDK
 
 # Build a polling app
 
-[**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/starport-polling-app/). 
+[**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/starport-polling-app/).
 
 ## Polling app
 
@@ -66,11 +66,11 @@ This, however, does not look and work exactly like we need. We should be able to
 
 Let's take a look at some of the files modified by the `starport type` command.
 
-#### `x/voter/types/TypePoll.go` <a id="x-voter-types-typepoll-go"></a>
+### `x/voter/types/TypePoll.go` <a id="x-voter-types-typepoll-go"></a>
 
 This file contains definition of the `Poll` type. We can see that a poll has two fields \(creator and ID\), which will be created automatically, and two fields \(title and options\) defined by us. Since we want `Options` to be a list of strings, **replace `string` with `[]string`**
 
-#### `x/voter/types/MsgCreatePoll.go` <a id="x-voter-types-msgcreatepoll-go"></a>
+### `x/voter/types/MsgCreatePoll.go` <a id="x-voter-types-msgcreatepoll-go"></a>
 
 This file defines a message that creates a poll.
 
@@ -78,11 +78,11 @@ To write anything to a blockchain or perform any other state transition a client
 
 Going back to `MsgCreatePoll.go`, we need to make options to be stored as a list instead of a string. Replace `Options string` with `Options []string` in `MsgCreatePoll` struct and `options string` with `options []string` in the arguments of `NewMsgCreatePoll` function.
 
-#### `x/voter/client/rest/txPoll.go` <a id="x-voter-client-rest-txpoll-go"></a>
+### `x/voter/client/rest/txPoll.go` <a id="x-voter-client-rest-txpoll-go"></a>
 
 Replace `Options string` with `Options []string` in `createPollRequest` struct.
 
-#### `x/voter/client/cli/txPoll.go` <a id="x-voter-client-cli-txpoll-go"></a>
+### `x/voter/client/cli/txPoll.go` <a id="x-voter-client-cli-txpoll-go"></a>
 
 A user can also interact with our application through a command line interface.
 
@@ -108,11 +108,11 @@ We'll be mostly interested in `frontend/src/views` directory, which contains pag
 
 Inside `frontend/src/store/index.js` we import [CosmJS](https://github.com/cosmwasm/cosmjs), a library for handling wallets, creating, signing and broadcasting transactions and define a Vuex store. We'll use `entitySubmit` function for sending data to our blockchain \(like a JSON representing a newly created poll\), `entityFetch` for requesting a list of polls and `accountUpdate` to fetch information about our token balance.
 
-#### `frontend/src/view/Index.vue` <a id="frontend-src-view-index-vue"></a>
+### `frontend/src/view/Index.vue` <a id="frontend-src-view-index-vue"></a>
 
 Since we don't need the default form component replace `<type-list />` inside of `frontent/src/views/Index.vue` with a new component `<poll-form />` that will be created in a new file at `frontend/src/components/PollForm.vue`.
 
-#### `frontend/src/components/PollForm.vue` <a id="frontend-src-components-pollform-vue"></a>
+### `frontend/src/components/PollForm.vue` <a id="frontend-src-components-pollform-vue"></a>
 
 ```javascript
 <template>
@@ -147,12 +147,12 @@ export default {
         }
       };
       await this.$store.dispatch("entitySubmit", payload);
-			  await this.$store.dispatch("entityFetch", payload);
-			  await this.$store.dispatch("accountUpdate");
+              await this.$store.dispatch("entityFetch", payload);
+              await this.$store.dispatch("accountUpdate");
     }
   }
 };
-</script>      
+</script>
 ```
 
 add\(\) { this.options = \[...this.options, { title: "" }\]; }, async submit\(\) { const payload = { type: "poll", body: { title: this.title, options: this.options.map\(o =&gt; o.title\) } }; await this.$store.dispatch\("entitySubmit", payload\); await this.$store.dispatch\("entityFetch", payload\); await this.$store.dispatch\("accountUpdate"\); } } }; &lt;/script&gt;
@@ -185,11 +185,11 @@ A vote type contains poll ID and a value \(string representation of the selected
 starport type vote pollID value
 ```
 
-#### `frontend/src/views/Index.vue` <a id="frontend-src-views-index-vue"></a>
+### `frontend/src/views/Index.vue` <a id="frontend-src-views-index-vue"></a>
 
 Add `<poll-list />` into the `frontend/src/view/Index.vue` file after the poll form component. Then make a new component at `frontend/src/components/PollList.vue` and add the following:
 
-#### `frontend/src/components/PollList.vue` <a id="frontend-src-components-polllist-vue"></a>
+### `frontend/src/components/PollList.vue` <a id="frontend-src-components-polllist-vue"></a>
 
 ```javascript
 <template>
@@ -286,13 +286,13 @@ Let's make it so that creating a poll costs 200 tokens.
 
 This feature is very easy to add. We already require users to have accounts registered, and each user has tokens on balance. The only thing we need to do is to send coins from user's account to a module account before we create a poll.
 
-#### `x/voter/handlerMsgCreatePoll.go`
+### `x/voter/handlerMsgCreatePoll.go`
 
 ```javascript
 moduleAcct := sdk.AccAddress(crypto.AddressHash([]byte(types.ModuleName)))
 payment, _ := sdk.ParseCoins("200token")
 if err := k.CoinKeeper.SendCoins(ctx, poll.Creator, moduleAcct, payment); err != nil {
-	return nil, err
+    return nil, err
 }
 ```
 

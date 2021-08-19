@@ -5,48 +5,10 @@ description: HTTP API documentation for the Mina Indexer API service provided by
 # Indexer API Documentation
 
 {% api-method method="get" host="https://mina--devnet--indexer.datahub.figment.io/apikey/YOURAPIKEY" path="/health" %}
-{% api-method-summary %}
-Health Status
-{% endapi-method-summary %}
-
-{% api-method-description %}
-Returns the current service health.This endpoint is useful for automated service checks.
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-Service is healthy
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-  "healthy": true
-}
-```
-{% endapi-method-response-example %}
-
-{% api-method-response-example httpCode=500 %}
-{% api-method-response-example-description %}
-Service is unhealthy
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-  "healthy": false
-}
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
 
 {% api-method method="get" host="https://mina--devnet--indexer.datahub.figment.io/apikey/YOURAPIKEY" path="/status" %}
 {% api-method-summary %}
-Service Status
+
 {% endapi-method-summary %}
 
 {% api-method-description %}
@@ -54,149 +16,11 @@ Returns the current service status along with node version and sync status
 {% endapi-method-description %}
 
 {% api-method-spec %}
-{% api-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-Success
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-  "app_name": "mina-indexer",
-  "app_version": "0.4.0",
-  "git_commit": "7689a2cfb93a30a0f91e76db47a295cbc646500c",
-  "go_version": "go1.16",
-  "node_version": "[DIRTY]245a3f7d883c516f5f16742cb1ca672872612851",
-  "node_status": "SYNCED",
-  "node_error": false,
-  "sync_status": "stale",
-  "last_block_time": "2021-03-05T21:13:08Z",
-  "last_block_height": 1489
-}
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
 {% endapi-method %}
 
 {% api-method method="get" host="https://mina--devnet--indexer.datahub.figment.io/apikey/YOURAPIKEY" path="/height" %}
-{% api-method-summary %}
-Latest Height
-{% endapi-method-summary %}
-
-{% api-method-description %}
-Returns the time and height of the most recent block
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-Success
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-  "height": 1490,
-  "time": "2021-03-05T21:46:08Z"
-}
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
 
 {% api-method method="get" host="https://mina--devnet--indexer.datahub.figment.io/apikey/YOURAPIKEY" path="/block" %}
-{% api-method-summary %}
-Latest Block
-{% endapi-method-summary %}
-
-{% api-method-description %}
-Returns the most recent canonical block accepted by the network.
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-Success
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-  "block": {
-    "height": 1490,
-    "hash": "3NLF7dmJQpDaheV2KuTcAHXVuLjGorht25jhJN7uJTAPJvv5dWDS",
-    "parent_hash": "3NLFdGM1q4CiTTmPUKnYywtqqNL6wdfiTnsi1HBeCBTPTsyXwi47",
-    "time": "2021-03-05T21:46:08Z",
-    "canonical": true,
-    "ledger_hash": "jxt6GQM3CvK1nBYxQpSLhGxsFc9VydTnVdNfUsardf1TEFwpK7K",
-    "snarked_ledger_hash": "jxz1rCy4CkDFjHCgjRvZ95m6so35wimW6EaPyBww2ATRcBPoq82",
-    "creator": "B62qnG5JpGGtWKSL9S4emeoEjXzUF7dcuZtBY3nwmAPz3M6pTn92kFh",
-    "coinbase": "1440000000000",
-    "total_currency": "178498400000001000",
-    "epoch": 0,
-    "slot": 5174,
-    "transactions_count": 134,
-    "transactions_fees": 0,
-    "snarkers_count": 9,
-    "snark_jobs_count": 128,
-    "snark_jobs_fees": "2632400000"
-  },
-  "creator": {
-    "public_key": "B62qnG5JpGGtWKSL9S4emeoEjXzUF7dcuZtBY3nwmAPz3M6pTn92kFh",
-    "delegate": null,
-    "balance": "761382529767265",
-    "balance_unknown": "761382529767265",
-    "stake": "22500000000000000",
-    "nonce": 0,
-    "start_height": 1191,
-    "start_time": "2021-03-03T19:52:08Z",
-    "last_height": 1490,
-    "last_time": "2021-03-05T21:46:08Z"
-  },
-  "transactions": [
-    {
-      "id": 58282,
-      "hash": "CkpZzY3TkS4yNVwfnGenk5bbjrMgmxWAWPkpqHxz6BnGfuruh9zE7-123",
-      "type": "fee_transfer",
-      "block_hash": "3NLF7dmJQpDaheV2KuTcAHXVuLjGorht25jhJN7uJTAPJvv5dWDS",
-      "block_height": 1490,
-      "time": "2021-03-05T21:46:08Z",
-      "sender": null,
-      "receiver": "B62qqx6zhqyNHWgbGBZtsYLKqh75kf2UzfuvKexnDHKNfhVD7ShfBPi",
-      "amount": "33600000",
-      "fee": null,
-      "nonce": null,
-      "memo": null,
-      "status": "applied",
-      "failure_reason": null,
-      "sequence_number": 127,
-      "secondary_sequence_number": 1
-    }
-  ],
-  "snark_jobs": [
-    {
-      "id": 7842,
-      "height": 1490,
-      "time": "2021-03-05T21:46:08Z",
-      "prover": "B62qmYsHSEBv9hND4nr422YyNUEnugpBx2RJrrgeRKp9tB9uhJLHSxg",
-      "fee": "10000000",
-      "works_count": 2
-    }
-  ]
-}
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
 
 {% api-method method="get" host="https://mina--devnet--indexer.datahub.figment.io/apikey/YOURAPIKEY" path="/blocks" %}
 {% api-method-summary %}
@@ -451,7 +275,7 @@ Number of block to include in calculation
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 
 ```
 {% endapi-method-response-example %}
@@ -461,90 +285,30 @@ Number of block to include in calculation
 
 {% api-method method="get" host="https://mina--devnet--indexer.datahub.figment.io/apikey/YOURAPIKEY" path="/validators" %}
 {% api-method-summary %}
-All Validators
+
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Returns list of all validators on the network.Since Mina does not have a concept of active validator set, all validators are returned in the response.To know if a validator is active or not you can check the `last_time` attribute that contains the timestamp of the last block produced by validator.
+
 {% endapi-method-description %}
 
 {% api-method-spec %}
 {% api-method-request %}
+{% api-method-path-parameters %}
+{% api-method-parameter name="" type="string" required=false %}
+
+{% endapi-method-parameter %}
+{% endapi-method-path-parameters %}
+{% endapi-method-request %}
 
 {% api-method-response %}
 {% api-method-response-example httpCode=200 %}
 {% api-method-response-example-description %}
-Success
+
 {% endapi-method-response-example-description %}
 
-```javascript
-{
-  "validator": {
-    "identity_name": null,
-    "public_key": "B62qnG5JpGGtWKSL9S4emeoEjXzUF7dcuZtBY3nwmAPz3M6pTn92kFh",
-    "blocks_created": 737,
-    "blocks_proposed": 1,
-    "stake": "22500000000000000",
-    "delegations": 1,
-    "start_height": 3,
-    "start_time": "2021-02-23T04:25:08Z",
-    "last_height": 1488,
-    "last_time": "2021-03-05T20:58:08Z"
-  },
-  "account": {
-    "public_key": "B62qnG5JpGGtWKSL9S4emeoEjXzUF7dcuZtBY3nwmAPz3M6pTn92kFh",
-    "delegate": null,
-    "balance": "761376144758404",
-    "balance_unknown": "761376144758404",
-    "stake": "22500000000000000",
-    "nonce": 0,
-    "start_height": 1191,
-    "start_time": "2021-03-03T19:52:08Z",
-    "last_height": 1488,
-    "last_time": "2021-03-05T20:58:08Z"
-  },
-  "delegations": [
-    {
-      "public_key": "B62qmBJpATMABGK7Tqbx2uytforM8raSqJ7irfb7q6exrcENQEMHKkC",
-      "delegate": "B62qnG5JpGGtWKSL9S4emeoEjXzUF7dcuZtBY3nwmAPz3M6pTn92kFh",
-      "balance": "22500000000000000"
-    }
-  ],
-  "stats": [
-    {
-      "time": "2021-03-05T00:00:00Z",
-      "bucket": "d",
-      "blocks_produced_count": 71,
-      "delegations_count": 1,
-      "delegations_amount": "22500000000000000"
-    },
-    {
-      "time": "2021-03-04T00:00:00Z",
-      "bucket": "d",
-      "blocks_produced_count": 72,
-      "delegations_count": 1,
-      "delegations_amount": "22500000000000000"
-    }
-  ],
-  "stats_hourly": [
-    {
-      "time": "2021-03-05T20:00:00Z",
-      "bucket": "h",
-      "blocks_produced_count": 4,
-      "delegations_count": 1,
-      "delegations_amount": "22500000000000000"
-    }
-  ],
-  "stats_daily": [
-    {
-      "time": "2021-03-05T20:00:00Z",
-      "bucket": "d",
-      "blocks_produced_count": 4,
-      "delegations_count": 1,
-      "delegations_amount": "22500000000000000"
-    }
-  ]
-}
+```
+
 ```
 {% endapi-method-response-example %}
 {% endapi-method-response %}
@@ -552,39 +316,6 @@ Success
 {% endapi-method %}
 
 {% api-method method="get" host="https://mina--devnet--indexer.datahub.figment.io/apikey/YOURAPIKEY" path="/snarkers" %}
-{% api-method-summary %}
-All Snarkers
-{% endapi-method-summary %}
-
-{% api-method-description %}
-Returns a set of network snarkers
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-Success
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-  "public_key": "B62qnRYW9sFTHgxkytMmmNAa5NN4Yi1DZ33tPujGBEBTmNSJqQp2e8G",
-  "fee": 60000000,
-  "jobs_count": 27,
-  "works_count": 54,
-  "start_time": 1191,
-  "start_height": "2021-03-03T19:52:08Z",
-  "last_height": 1203,
-  "last_time": "2021-03-03T22:46:08Z"
-}
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
 
 {% api-method method="get" host="https://mina--devnet--indexer.datahub.figment.io/apikey/YOURAPIKEY" path="/validators/{id}" %}
 {% api-method-summary %}

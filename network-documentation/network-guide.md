@@ -24,7 +24,7 @@ Avalanche is a layer one protocol by Ava Labs that offers high-throughput, fast 
 
 {% page-ref page="avalanche/" %}
 
-## ![](../.gitbook/assets/37552875%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%285%29.png) Celo
+## ![](../.gitbook/assets/37552875%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29.png) Celo
 
 Celo is a smart contract blockchain network. The technology uses a phone-number-based identity system with address-based encryption and eigentrust-based reputation. Their first application is a social payments system that can be used on a smartphone.
 
@@ -54,17 +54,11 @@ NEAR is a decentralized application platform that is secure enough to manage hig
 
 {% page-ref page="near/" %}
 
-## ![](../.gitbook/assets/oasis-1-.png) Oasis
+## ![](../.gitbook/assets/output-onlinepngtools-3-.png) Oasis
 
 The Oasis Network is the first privacy-enabled blockchain platform for open finance and a responsible data economy. Combined with its high throughput and secure architecture, the Oasis Network is able to power private, scalable DeFi, revolutionizing Open Finance and expanding it beyond traders and early adopters to a mass market.
 
 {% page-ref page="oasis/" %}
-
-## ![](../.gitbook/assets/osmo.png) Osmosis
-
-Osmosis is an advanced AMM protocol built using the Cosmos SDK that will allow developers to design, build, and deploy their own customized AMMs.
-
-{% page-ref page="osmosis/" %}
 
 ## ![](../.gitbook/assets/4129.png) Polkadot
 
@@ -72,46 +66,21 @@ Polkadot enables scalability by allowing specialized blockchains to communicate 
 
 {% page-ref page="polkadot/" %}
 
-## ![](../.gitbook/assets/polygon.png) Polygon \(Matic\) <a id="polygon-matic"></a>
-
-Polygon \(Matic\) Network is a sidechain-based scaling solution for public blockchains. It is based on an adapted implementation of Plasma framework. Polygon \(Matic\) provides scalability while ensuring a superior user experience in a secured and decentralized manner. It has a working implementation for Ethereum. Polygon intends to support other blockchains in the future which will enable it to provide interoperability features alongside offering scalability to existing public blockchains.
-
-{% page-ref page="matic/" %}
-
-## ![](../.gitbook/assets/provenance.png) Provenance
-
-Provenance is a public blockchain network designed and developed to support [financial service industry](https://docs.provenance.io/ecosystem/financial-services-blockchain) needs by providing a **ledger**, **registry**, and **exchange** across multiple financial assets and markets.  
-The Provenance blockchain is based on the Cosmos SDK and the Tendermint blockchain application platforms.
-
-{% page-ref page="provenance/" %}
-
 ## ![](../.gitbook/assets/logo1.png) Secret
 
 Secret Network is the first blockchain with privacy-preserving smart contracts. That means applications built on Secret can utilize encrypted data without revealing it to anyone, even the nodes in the network. For the first time, Secret Network allows developers to build powerful, permissionless, privacy-preserving applications - Secret Apps.
 
 {% page-ref page="secret/" %}
 
-## ![](../.gitbook/assets/solana%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29.png) Solana
-
-Solana is an open-source project implementing a new, high-performance, permissionless blockchain. It provides a platform that enables developers to create DApps without needing to design around performance bottlenecks.
-
-{% page-ref page="solana/" %}
-
-## ![](../.gitbook/assets/rsz_terra-logo%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29%20%282%29.jpg) Terra
+## ![](../.gitbook/assets/rsz_terra-logo%20%286%29.jpg) Terra
 
 Terra is a blockchain protocol that supports stable programmable payments and open financial infrastructure development. One part of Terra’s value contributions, payments, in essence, replaces the complicated payments value chain, including credit card networks, banks, and payment gateways with a single blockchain layer.
 
 {% page-ref page="terra/" %}
 
-## ![](../.gitbook/assets/2011%20%282%29%20%283%29.png) Tezos
+## ![](../.gitbook/assets/2011.png) Tezos
 
 Tezos is a secure, smart contract blockchain platform that uses its built-in governance mechanism for protocol upgrades. Tezos is one of the first blockchain platforms to introduce a formal on-chain governance process.
 
 {% page-ref page="tezos/" %}
-
-## Extra Guides
-
-For broader topics or for explanations which do not fit elsewhere, we provide these additional resources.
-
-{% page-ref page="extra-guides/" %}
 

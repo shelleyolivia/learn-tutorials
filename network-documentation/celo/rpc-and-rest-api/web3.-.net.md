@@ -6,7 +6,7 @@ description: Learn how to interact with the web3.*.net package
 
 ## Source documentation
 
-[**The web3.\*.net package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-net.html). 
+[**The web3.\*.net package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-net.html).
 
 ## web3.\*.net
 

@@ -18,13 +18,9 @@ Be sure to check out the[ **official Polkadot documentation**](https://wiki.polk
 
 🚀 Let's start building the decentralized web 🚀
 
-{% page-ref page="polkadot-pathway.md" %}
-
 {% page-ref page="polkadot-101.md" %}
 
 {% page-ref page="rpc-and-rest-api/" %}
 
 {% page-ref page="enriched-apis/" %}
-
-
 

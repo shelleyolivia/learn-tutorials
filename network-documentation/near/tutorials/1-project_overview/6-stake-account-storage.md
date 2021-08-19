@@ -147,7 +147,7 @@ fn storage_withdraw(&mut self, amount: Option<YoctoNear>) -> AccountStorageBalan
    * If amount is specified, check that the amount is greater than zero
    * `self.predecessor_registered_account()` kills 2 birds with 1 stone - the function is designed to panic if the account is not registered
 2. Check if the requested withdrawal amount is less than or equal to the account's storage available balance. If an amount is not specified, then the total available storage balance will be withdrawn.
-3. Update the account storage balance, and persist the account change to storage. In the STAKE contract, accounts are stored using the [LookupMap](https://github.com/oysterpack/oysterpack-near-stake-token/blob/main/contract/src/lib.rs) provided by the NEAR Rust SDK. Any changes made to objects retrieved from the [LookupMap](https://github.com/oysterpack/oysterpack-near-stake-token/blob/main/contract/src/lib.rs) must be explicitly written back out to contract storage. For details on how that exactly works, look at the 
+3. Update the account storage balance, and persist the account change to storage. In the STAKE contract, accounts are stored using the [LookupMap](https://github.com/oysterpack/oysterpack-near-stake-token/blob/main/contract/src/lib.rs) provided by the NEAR Rust SDK. Any changes made to objects retrieved from the [LookupMap](https://github.com/oysterpack/oysterpack-near-stake-token/blob/main/contract/src/lib.rs) must be explicitly written back out to contract storage. For details on how that exactly works, look at the
 
    `self.predecessor_registered_account()` for reading and `self.save_registered_account(&account)` for writing to contract storage.
 

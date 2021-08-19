@@ -4,7 +4,7 @@ description: Learn how to create a new Blockchain on Avalanche
 
 # Create a New Blockchain
 
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-new-blockchain). 
+\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-new-blockchain).
 
 ## Introduction
 

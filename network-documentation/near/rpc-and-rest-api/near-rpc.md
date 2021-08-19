@@ -6,9 +6,9 @@ description: Learn how to interact with the NEAR RPC
 
 ## Source documentation
 
-\*\*\*\*[**The NEAR RPC's source documentation can be found here**](https://docs.near.org/docs/api/rpc#docsNav). 
+\*\*\*\*[**The NEAR RPC's source documentation can be found here**](https://docs.near.org/docs/api/rpc#docsNav).
 
-A REST interface for state queries, transaction generation, and broadcasting. 
+A REST interface for state queries, transaction generation, and broadcasting.
 
 ## Setup
 
@@ -20,13 +20,13 @@ A REST interface for state queries, transaction generation, and broadcasting.
   * TestNet `https://rpc.testnet.near.org`
   * BetaNet `https://rpc.betanet.near.org` _\(may be unstable\)_
 
-You can see this interface defined in `nearcore` [here.](https://github.com/near/nearcore/blob/bf9ae4ce8c680d3408db1935ebd0ca24c4960884/chain/jsonrpc/client/src/lib.rs#L181) 
+You can see this interface defined in `nearcore` [here.](https://github.com/near/nearcore/blob/bf9ae4ce8c680d3408db1935ebd0ca24c4960884/chain/jsonrpc/client/src/lib.rs#L181)
 
 ## Access Keys
 
 ### **View access key**
 
- **Description** 
+**Description**
 
 Returns information about a single access key for given account.
 
@@ -86,7 +86,7 @@ If `permission` of the key is `FuncationCall`, it will return more details such 
 
 **Description**
 
-Returns all access keys for a given account**.** 
+Returns all access keys for a given account**.**
 
 **Method**
 
@@ -170,7 +170,7 @@ Returns all access keys for a given account**.**
 }
 ```
 
-### View access key changes \(single\) 
+### View access key changes \(single\)
 
 **Description**
 
@@ -314,7 +314,7 @@ Returns changes to all access keys of a specific block. Multiple accounts can be
 }
 ```
 
-##  Accounts/Contracts
+## Accounts/Contracts
 
 ### **View account**
 
@@ -595,7 +595,7 @@ Returns code changes made when deploying a contract. Change is returned is a bas
 | :--- | :--- | :--- |
 | **change\_type** | string | contract\_code\_changes |
 | **account\_ids** | string | `["example.testnet"]` |
-| **block\_id** | string |  `block id` or `"block hash"` |
+| **block\_id** | string | `block id` or `"block hash"` |
 
 **Example query**
 
@@ -654,8 +654,8 @@ Allows you to call a contract method as a [view function](https://docs.near.org/
 | **request\_type** | string | `call_function` |
 | **finality** | string | `optimistic` or `final` |
 | **account\_id** | string | `"example.testnet"` |
-| **method\_name** | string | `name_of_a_example.testnet_method`  |
-| **args\_base64** | string | `method_arguments_base_64_encoded`  |
+| **method\_name** | string | `name_of_a_example.testnet_method` |
+| **args\_base64** | string | `method_arguments_base_64_encoded` |
 
 **Example query**
 
@@ -714,7 +714,7 @@ You may choose to search by a specific block _or_ finality, you can not choose b
 
 **Example query**
 
-`finality` ****example**:**
+`finality` **\*\*example**:\*\*
 
 ```javascript
 {
@@ -883,7 +883,7 @@ You may choose to search by a specific block _or_ finality, you can not choose b
 
 **Example query**
 
-`finality` ****example**:**
+`finality` **\*\*example**:\*\*
 
 ```javascript
 {
@@ -1011,7 +1011,7 @@ Returns details of a specific chunk. You can run a [block details](https://docs.
 }
 ```
 
-### **Gas Price** 
+### **Gas Price**
 
 **Description**
 
@@ -1027,11 +1027,11 @@ Returns gas price for a specific `block_height` or `block_hash`.
 
 | **Parameter** | Type | Description |
 | :--- | :--- | :--- |
-| **block\_id** | string |  `[block_height]`, `["block_hash"]`, or `[null]` |
+| **block\_id** | string | `[block_height]`, `["block_hash"]`, or `[null]` |
 
 **Example query**
 
-`[block_height]` ****example**:**
+`[block_height]` **\*\*example**:\*\*
 
 ```javascript
 {
@@ -1090,7 +1090,7 @@ Returns current genesis configuration.
 
 **Parameters**
 
-No parameters. 
+No parameters.
 
 **Example query**
 
@@ -1338,7 +1338,7 @@ No parameters.
 
 ## Network
 
-### Network Info ****
+### Network Info _\*\*_
 
 **Description**
 
@@ -1350,7 +1350,7 @@ Returns the current state of node network connections \(active peers, transmitte
 
 **Parameters**
 
-No parameters. 
+No parameters.
 
 **Example query**
 
@@ -1480,11 +1480,11 @@ Queries active validators on the network returning details and the current state
 
 | **Parameter** | Type | Description |
 | :--- | :--- | :--- |
-| **block\_id** | string |  `["block hash"]`, `[block number]`, or `[null]` for the latest block |
+| **block\_id** | string | `["block hash"]`, `[block number]`, or `[null]` for the latest block |
 
 **Example query**
 
-`[block_number]` ****example**:**
+`[block_number]` **\*\*example**:\*\*
 
 ```javascript
 {
@@ -1595,11 +1595,11 @@ Queries active validators on the network returning details and the current state
 
 ## Transactions
 
-### Send transaction \(async\) 
+### Send transaction \(async\)
 
 **Description**
 
-Sends a transaction and immediately returns ****the transaction hash.
+Sends a transaction and immediately returns _\*\*_the transaction hash.
 
 **Method**
 
@@ -1638,7 +1638,7 @@ Final transaction results can be queried using [Transaction Status](https://docs
 
 ![](../../../.gitbook/assets/near-explorer-transactionhash.png)
 
-### Send transaction \(await\) 
+### Send transaction \(await\)
 
 **Description**
 

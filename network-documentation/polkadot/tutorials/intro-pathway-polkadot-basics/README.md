@@ -16,11 +16,11 @@ Throughout this Pathway, we will be using Node.js to execute easily understood p
 
 Start by [setting up an account on DataHub](https://datahub.figment.io/sign_up?service=polkadot).
 
-DataHub is Figment's infrastructure platform. It lets developers use the most powerful and unique features of a blockchain without having to become protocol experts. Throughout these tutorials we'll be using DataHub to seamlessly connect to Polkadot. [Learn more about DataHub](https://learn.figment.io/guides/datahub-products). 
+DataHub is Figment's infrastructure platform. It lets developers use the most powerful and unique features of a blockchain without having to become protocol experts. Throughout these tutorials we'll be using DataHub to seamlessly connect to Polkadot. [Learn more about DataHub](https://learn.figment.io/guides/datahub-products).
 
 {% hint style="warning" %}
-**Make sure to use a browser that does not hide your IP address**, we will deny any submissions with hidden IPs. The use of VPNs when working with a Pathway is prohibited. Any issues with your logged IP address are grounds for denial of any Pathway Completion rewards.   
-  
+**Make sure to use a browser that does not hide your IP address**, we will deny any submissions with hidden IPs. The use of VPNs when working with a Pathway is prohibited. Any issues with your logged IP address are grounds for denial of any Pathway Completion rewards.
+
 We also do not accept "Google phone numbers" or any online SMS number. Only your actual phone number or mobile number may be used when signing up for an account. Any issues with phone numbers are grounds for denial of any Pathway Completion rewards. No exceptions!
 {% endhint %}
 
@@ -44,6 +44,4 @@ Verify each tutorial as you complete them and click on "Submit to earn" when you
 {% page-ref page="5.-staking-tokens.md" %}
 
 {% page-ref page="6.-search-for-transactions.md" %}
-
-
 

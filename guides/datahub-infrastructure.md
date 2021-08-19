@@ -44,5 +44,5 @@ The main job of this layer is to either:
 1. Find and return the correct data \(read\)
 2. Submit a transaction \(write\)
 
-\*\*\*\*[**Sign up now**](https://datahub.figment.io/sign_up) ****to start building in minutes and discover the superpowers Datahub can offer you! 
+\*\*\*\*[**Sign up now**](https://datahub.figment.io/sign_up) _\*\*_to start building in minutes and discover the superpowers Datahub can offer you!
 

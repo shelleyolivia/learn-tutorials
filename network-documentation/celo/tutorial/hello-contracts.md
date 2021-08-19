@@ -4,7 +4,7 @@ description: Learn how to deploy your own smart contracts on the Celo network
 
 # Deploy and Interact with Contracts \(Remotely\)
 
-\*\*\*\*[**The original tutorial can be found in the Celo documentation here**](https://docs.celo.org/developer-guide/start/hello-contract-remote-node). 
+\*\*\*\*[**The original tutorial can be found in the Celo documentation here**](https://docs.celo.org/developer-guide/start/hello-contract-remote-node).
 
 ## Introduction
 

@@ -10,7 +10,7 @@ description: Learn how to interact with the Tezos RPC
 
 **Description**
 
-Forcefully set the bootstrapped flag of the node ****
+Forcefully set the bootstrapped flag of the node _\*\*_
 
 **JSON Output**
 
@@ -70,7 +70,7 @@ Get the chain unique identifier
 
 **Description**
 
-Get the current checkpoint for this chain ****
+Get the current checkpoint for this chain _\*\*_
 
 **JSON Output**
 
@@ -172,7 +172,7 @@ Get the errors that appear during the block \(in\)validation
 
 **Description**
 
-Remove an invalid block for the Tezos storage ****
+Remove an invalid block for the Tezos storage _\*\*_
 
 **JSON Output**
 
@@ -184,7 +184,7 @@ Remove an invalid block for the Tezos storage ****
 
 **Description**
 
-Get the bootstrap status of a chain ****
+Get the bootstrap status of a chain _\*\*_
 
 **JSON Output**
 
@@ -192,6 +192,4 @@ Get the bootstrap status of a chain ****
   { "bootstrapped": boolean,
     "sync_state": "sync" | "stuck" | "unsync" }
 ```
-
-
 
