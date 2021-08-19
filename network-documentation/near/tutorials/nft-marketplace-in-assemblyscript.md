@@ -8,7 +8,7 @@ Built on NEAR, [Paras: Digital Art Card](https://paras.id) is an NFT Marketplace
 
 In this tutorial we will be creating the smart contracts for a simple NFT Marketplace similar to [Paras](https://paras.id) and [SuperRare](https://superrare.co) where artists can mint their digital art and sell them directly to collectors. We will be using [NEP-4](https://github.com/near/NEPs/pull/4) NFT standard which is based on the Ethereum [ERC721](https://eips.ethereum.org/EIPS/eip-721) standard.
 
-### Prerequisites:
+## Prerequisites:
 
 This tutorial requires:
 
