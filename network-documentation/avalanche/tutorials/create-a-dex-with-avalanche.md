@@ -24,7 +24,8 @@ cd /path/to/directory
 ```
 Create and enter a new directory named `AvaSwap`:
 ```
-mkdir AvaSwap; cd AvaSwap
+mkdir AvaSwap
+cd AvaSwap
 ```
 Use `npm to install web3`, which is a library through which we can talk to the EVM:
 ```
