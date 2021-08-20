@@ -6,8 +6,6 @@ In the following tutorials, we're going to interact with the Solana blockchain (
 [The documentation for `@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/)
 {% endhint %}
 
-The first thing we need to do is connect to the Solana blockchain. The JS library exposes a class for this named... [Connection](https://solana-labs.github.io/solana-web3.js/classes/Connection.html). It has a constructor that will return an `connection` instance, on which you can call a looong list of methods (they're on the right sidebar of the previous link).
-
 ----------------------------------
 
 ## The challenge
@@ -15,7 +13,6 @@ The first thing we need to do is connect to the Solana blockchain. The JS librar
 {% hint style="warning" %}
 In `pages/api/solana/connect.tsx`, implement `connect` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
 {% endhint %}
-
 
 **Need some help?** Check out those two links
 

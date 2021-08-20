@@ -1,21 +1,23 @@
 # 
 
-## Devnet, Testnet, Mainnet
+With some protocols, different networks (testnet, mainnet, etc) have different tokens names. For example with Polkadot, the mainnet token is *DOT* and the testnet token is *WND*. But in the Solana world, the token is always called **SOL**, no matter what network (or **cluster**) you are on. But don't get too excited: the tokens you get for free on the devnet cannot be used on Solana's mainnet. Nice try though.
 
-With some protocols, different networks (testnet, mainnet, etc) have different tokens names. For example with Polkadot, the mainnet token is DOT and the testnet token is WND. But in the Solana world, the token is always called **SOL**, no matter what network (or *cluster*) you are on. But don't get too excited: the tokens you get for free on the devnet cannot be used on Solana's mainnet. Nice try though.
+----------------------------------
 
 ## Airdropping
 
-To fund an account, we will do what is called an *airdrop* some tokens will magically fall from the sky onto our wallets! This will provide us with some **SOL** so that we can test making transfers as well as view the transaction details on a block explorer.
+To fund an account, we will do what is called an **airdrop** some tokens will magically fall from the sky onto our wallets! This will provide us with some **SOL** so that we can test making transfers as well as view the transaction details on a block explorer.
 
 {% hint style="info" %}
-1 **SOL** is equal to 1,000,000,000 lamports.The name of lamports is in honour of Solana's biggest technical influence, [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport).
+1 **SOL** is equal to 1,000,000,000 **lamports**.The name of **lamports** is in honour of Solana's biggest technical influence, [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport).
 {% endhint %}
+
+----------------------------------
 
 ## The challenge
 
 {% hint style="warning" %}
-In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an address and use `requestAirdrop`to get 1 SOL.
+In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an address and use `requestAirdrop`to get 1 **SOL**.
 {% endhint %}
 
 **Need some help?** Here are a few hints.
@@ -26,9 +28,6 @@ Take a few minutes to figure this out.
 
 ```typescript
 //..
-    // Create a PublicKey address from string formated address
-    // Call requestAirdrop
-    // On success, retrieve the transaction hash
     const { address } = req.body.address as PublicKey;
     const url = getSafeUrl();
     const connection = new Connection(url, "confirmed")
@@ -46,6 +45,8 @@ Take a few minutes to figure this out.
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
+
+----------------------------------
 
 ## The solution
 
@@ -76,6 +77,8 @@ Once you have the code above saved:
 And let's the magic happen
 
 ![](../../../.gitbook/assets/solana-fund.png)
+
+----------------------------------
 
 ## Next
 

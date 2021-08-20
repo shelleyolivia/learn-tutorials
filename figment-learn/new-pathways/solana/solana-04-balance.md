@@ -1,10 +1,10 @@
 # 
 
-## SOL Token balances
-
 We must check the account balance to make sure we have sufficient **SOL** to perform a transfer. The `getBalance()` function takes a `publicKey` as input and will return the balance associated with that `publicKey`, if there is any.
 
-## :eyes: The challenge
+----------------------------------
+
+## The challenge
 
 {% hint style="warning" %}
 In `pages/api/solana/balance.ts`, implement `balance`.
@@ -12,6 +12,7 @@ In `pages/api/solana/balance.ts`, implement `balance`.
 
 **Need some help?** Here are a few hints
 * [Read about getBalance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getbalance)
+* [Create a publicKey from a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#constructor)  
 
 **Take a few minutes to figure this out**
 
@@ -31,6 +32,8 @@ You can also [**join us on Discord**](https://discord.gg/fszyM7K) if you have qu
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
+
+----------------------------------
 
 ## The solution
 
@@ -54,6 +57,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 Enter the address just funded and click on **Check Balance**. You should see:
 
 ![](../../../.gitbook/assets/solana-balance.png)
+
+----------------------------------
 
 ## Next
 

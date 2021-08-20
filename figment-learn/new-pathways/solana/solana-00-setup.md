@@ -1,7 +1,5 @@
 # 
 
-## Prerequisites
-
 The following software is required to set up and complete the Solana Pathway
 
 * [Node.js v14 or higher installed](https://nodejs.org/)
@@ -48,4 +46,10 @@ Once the development server loads and compiles the application, open your defaul
 You can change the default port if needed `yarn dev --port 1234`
 {% endhint %}
 
+---------------------------
+
+## Next
+
 You can now move ahead to the next step by clicking on the "Next" button below on the right.
+
+
