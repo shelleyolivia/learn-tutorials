@@ -1,6 +1,4 @@
-# Setup the project
-
-## Prerequisites
+# 
 
 The following software is required to set up and complete the Solana Pathway
 
@@ -27,7 +25,7 @@ The value for `DATAHUB_SOLANA_API_KEY` can be found on the [DataHub Services Das
 ![](../../../.gitbook/assets/solana-setup-00.gif)
 
 {% hint style="info" %}
-[**Join us on Discord**](https://discord.gg/fszyM7K) if you encounter any issues with the tutorial or have any questions!
+[**Join us on Discord**, if you encounter any issues with the tutorial or have any questions!](https://discord.gg/fszyM7K)
 {% endhint %}
 
 ---------------------------
@@ -42,10 +40,14 @@ yarn dev
 
 Once the development server loads and compiles the application, open your default browser and go to `http://localhost:3000` :
 
-![](../../../.gitbook/assets/solana-setup-01.gif)
+![](../../../.gitbook/assets/pathway-home.gif)
 
 {% hint style="warning" %}
 You can change the default port if needed `yarn dev --port 1234`
 {% endhint %}
+
+---------------------------
+
+## Next
 
 You can now move ahead to the next step by clicking on the "Next" button below on the right.

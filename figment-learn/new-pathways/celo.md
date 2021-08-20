@@ -1,4 +1,3 @@
-# Coming Soon
 
 ![](../../.gitbook/assets/zzzcelo.jpg)
 
