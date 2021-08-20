@@ -17,7 +17,7 @@ Here we will discuss the setup and functionality of both types of wallets.
 
 ## **1. CELO Web Wallet**
 
-Creating your account on the _\*\*_CELO Web wallet is very easy and can be done in just a couple of clicks.
+Creating your account on the \_\*\*\_CELO Web wallet is very easy and can be done in just a couple of clicks.
 
 The Celo Wallet is a free, open-source wallet for the [Celo network](https://celo.org/). It was created by [J M Rossy](https://twitter.com/RossyWrote) and [Brian Schwalm](https://www.linkedin.com/in/brianschwalm/). The source code for the wallet can be found [on Github](https://github.com/celo-tools/celo-web-wallet) and includes answers to [Frequently Asked Questions](https://github.com/celo-tools/celo-web-wallet/blob/master/FAQ.md).
 

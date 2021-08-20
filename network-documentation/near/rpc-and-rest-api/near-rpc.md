@@ -1599,7 +1599,7 @@ Queries active validators on the network returning details and the current state
 
 **Description**
 
-Sends a transaction and immediately returns _\*\*_the transaction hash.
+Sends a transaction and immediately returns \_\*\*\_the transaction hash.
 
 **Method**
 

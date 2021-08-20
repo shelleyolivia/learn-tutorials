@@ -174,9 +174,9 @@ Source & for more details - [Check Here](https://hackernoon.com/how-to-improve-y
 ## **Method 2 - Add Retries to API Calls using Async Await in NodeJS**
 
 Async functions are available natively in Node and are denoted by the async keyword in their declaration. They always return a promise, even if you don’t explicitly write them to do so. Also, the await keyword is only available inside async functions at the moment - it cannot be used in the global scope.  
-_\*\*_In an async function, you can await any Promise or catch its rejection cause.
+\_\*\*\_In an async function, you can await any Promise or catch its rejection cause.
 
-_\*\*_So if you had some logic implemented with promises:
+\_\*\*\_So if you had some logic implemented with promises:
 
 ```ruby
 function handler (req, res) {

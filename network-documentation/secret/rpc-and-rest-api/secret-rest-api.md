@@ -613,7 +613,7 @@ Get the account balances
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **address** | string \* required | Account address _\*\*_in bech32 format |
+| **address** | string \* required | Account address \_\*\*\_in bech32 format |
 
 **Example JSON Output**
 
@@ -1415,7 +1415,7 @@ Query a proposer
 
 **Description**
 
-Query deposits _\*\*_by proposalID
+Query deposits \_\*\*\_by proposalID
 
 **Parameters**
 

@@ -2,7 +2,7 @@
 description: Learn how to contribute to the knowledge base and earn tokens
 ---
 
-# ✒ Contribute
+# ✒ Contribute and Earn
 
 ## 🤝 Share to Earn
 

@@ -26,7 +26,7 @@ With over 1.5 million total users and a highly active user base from a variety o
 
 ## **What can you build on Terra?**
 
-Terra aims to make money easier to spend and more attractive to save. Build financial applications that are easily accessible to the masses. _\*\*_This includes popular decentralized finance applications such as:
+Terra aims to make money easier to spend and more attractive to save. Build financial applications that are easily accessible to the masses. \_\*\*\_This includes popular decentralized finance applications such as:
 
 * Algorithmic money markets \(AMMs\) 
 * Digital banks 

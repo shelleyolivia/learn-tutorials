@@ -8,7 +8,7 @@ description: Enjoy our full suite of tutorials across our supported networks
 
 ### Follow along and build amazing apps on Web 3 protocols with the help of Learn Tutorials from community contributors!
 
-## ![](../.gitbook/assets/avalanche_token_round-300x300.png) _\*\*_Avalanche Tutorials
+## ![](../.gitbook/assets/avalanche_token_round-300x300.png) \_\*\*\_Avalanche Tutorials
 
 Avalanche is a layer one protocol by AVA Labs that offers high-throughput, fast finality, and unprecedented decentralization**.**
 
@@ -16,7 +16,7 @@ Avalanche is a layer one protocol by AVA Labs that offers high-throughput, fast 
 
 **Get Started with** [**Avalanche DataHub today!** ](https://figment.io/datahub/avalanche/)\*\*\*\*
 
-## ![](../.gitbook/assets/37552875%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%288%29.png) Celo Tutorials
+## ![](https://github.com/figment-networks/datahub-learn/tree/09569d196cdea95621779187e595ce39c3890190/.gitbook/assets/37552875%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%288%29.png) Celo Tutorials
 
 Celo is an open platform that makes financial tools accessible to anyone with a mobile phone.
 
@@ -48,7 +48,7 @@ Secret Network is the first blockchain with privacy-preserving smart contracts. 
 
 **Get Started with** [**Secret DataHub today!** ](https://datahub.figment.io/sign_up?service=secret)\*\*\*\*
 
-## ![](../.gitbook/assets/rsz_terra-logo.jpg) Terra Tutorials
+## ![](https://github.com/figment-networks/datahub-learn/tree/09569d196cdea95621779187e595ce39c3890190/.gitbook/assets/rsz_terra-logo.jpg) Terra Tutorials
 
 Terra is a price-stable cryptocurrency that will power the next-generation payment network.
 
@@ -56,7 +56,7 @@ Terra is a price-stable cryptocurrency that will power the next-generation payme
 
 **Get Started with** [**Terra DataHub today!** ](https://figment.io/datahub/terra/)\*\*\*\*
 
-## \*\*\*\*![](../.gitbook/assets/2011.png) **Tezos Tutorials**
+## \*\*\*\*![](https://github.com/figment-networks/datahub-learn/tree/09569d196cdea95621779187e595ce39c3890190/.gitbook/assets/2011.png) **Tezos Tutorials**
 
 Tezos is a secure, smart contract blockchain platform that uses its built-in governance mechanism for protocol upgrades.
 

@@ -2,7 +2,7 @@
 description: See all available and upcoming pathways
 ---
 
-# 🗺 Pathways
+# 🗺 All Pathways
 
 ## ![](../.gitbook/assets/vhhp1wl4_400x400-1-.jpg) Learn Pathways
 

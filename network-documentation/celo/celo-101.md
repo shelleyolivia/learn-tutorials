@@ -14,7 +14,7 @@ Celo is preparing to launch a variety of stable coins pegged to global fiat and 
 
 The Celo blockchain is designed to empower anyone with a smartphone anywhere in the world to have access to financial services, send money to phone numbers, and pay merchants. The project aims to be a decentralized platform that is not controlled by any single entity, but instead developed, upgraded and operated by a broad community of individuals, organizations and partners.
 
-Celo is oriented around providing the simplest possible experience for end users, who may have no familiarity with cryptocurrencies, and may be using low cost devices with limited connectivity. To achieve this, the project takes a full-stack approach, comprising of both a protocol and applications that use that protocol. _\*\*_Celo offers a full suite of powerful features:
+Celo is oriented around providing the simplest possible experience for end users, who may have no familiarity with cryptocurrencies, and may be using low cost devices with limited connectivity. To achieve this, the project takes a full-stack approach, comprising of both a protocol and applications that use that protocol. \_\*\*\_Celo offers a full suite of powerful features:
 
 * Stable value currencies \(cUSD\)
 * Accounts linked to phone numbers

@@ -6,7 +6,7 @@ description: Reach out if you have any questions or enquiries
 
 **Sign up to** [**DataHub**](https://figment.io/datahub-waitlist/) **today to start building amazing applications!**
 
-If you are encountering any issues, need more information, or have some feedback to share you can reach out via our [**community Discord**](https://discord.gg/fszyM7K) _\*\*_or directly via email.
+If you are encountering any issues, need more information, or have some feedback to share you can reach out via our [**community Discord**](https://discord.gg/fszyM7K) \_\*\*\_or directly via email.
 
 Pro and Enterprise customers also have unique Telegram channels to chat in real-time with our team.
 

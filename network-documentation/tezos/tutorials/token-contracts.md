@@ -254,7 +254,7 @@ See command `fatoo show-client-uri-documentation`:
 >
 > See for instance the current default: `http://:2020/unencrypted:edsk3S7mCwuuMVS21jsYTczxBU4tgTbQp98J3YmTGcstuUxsrZxKYd?bake=true`.
 
-Assuming we are using the \[sandbox\]\([https://assets.tqtezos.com/docs/setup/2-sandbox\](https://assets.tqtezos.com/docs/setup/2-sandbox\)\) setup, we can configure the client using \`alice\`'s private key as follows:
+Assuming we are using the \[sandbox\]\([https://assets.tqtezos.com/docs/setup/2-sandbox\](https://assets.tqtezos.com/docs/setup/2-sandbox%29\) setup, we can configure the client using \`alice\`'s private key as follows:
 
 ```javascript
 export fatoo_client='http://:20000/unencrypted:edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZPbwWNnwdZpSpJiEbq?wait=0'

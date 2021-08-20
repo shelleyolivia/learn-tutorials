@@ -78,5 +78,5 @@ The goal of this is \(1\) to enable full-verification of the Mina blockchain on 
 
 ### **Role of the MINA token**
 
-The Mina network’s native asset lies at the center of the protocol’s economic incentive system. Block producers and snark producers are paid in MINA, and all holders are incentivized to stake the token: staking rewards during Mina’s first year post-launch will be worth up to 24% of staked capital, with further emissions _\*\*_rewards thereafter.
+The Mina network’s native asset lies at the center of the protocol’s economic incentive system. Block producers and snark producers are paid in MINA, and all holders are incentivized to stake the token: staking rewards during Mina’s first year post-launch will be worth up to 24% of staked capital, with further emissions \_\*\*\_rewards thereafter.
 

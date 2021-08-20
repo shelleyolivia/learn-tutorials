@@ -78,7 +78,7 @@ After compiling the successfully, we are ready to deploy our contract.
 
 Click on the **Deploy** button and sign the transaction using your wallet.
 
-![](../../../.gitbook/assets/celo-extension-deploy-button%20%281%29%20%281%29%20%284%29.JPG)
+![](https://github.com/figment-networks/datahub-learn/tree/09569d196cdea95621779187e595ce39c3890190/.gitbook/assets/celo-extension-deploy-button%20%281%29%20%281%29%20%284%29.JPG)
 
 Yay! we have successfully deployed our contract to the Alfajores Testnet. We can check the status of the transaction on [Alfajores Blockscout](https://alfajores-blockscout.celo-testnet.org/) by pasting the transaction hash.
 

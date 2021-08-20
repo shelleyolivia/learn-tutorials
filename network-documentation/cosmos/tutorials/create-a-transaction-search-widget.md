@@ -717,7 +717,7 @@ Narrowing down the search time range would significantly improve its performance
 
 Congratulations, you've built your first implementation of the Transaction Search API. You should now have what it takes to implement it in your DApp and leverage the full power of Transaction Search.
 
-If you haven't done so already, remember to [**sign up now**](https://figment.io/datahub-waitlist/) _\*\*_to start building in minutes and discover the superpowers Datahub can offer you!
+If you haven't done so already, remember to [**sign up now**](https://figment.io/datahub-waitlist/) \_\*\*\_to start building in minutes and discover the superpowers Datahub can offer you!
 
 If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
 

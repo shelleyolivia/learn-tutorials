@@ -10,7 +10,7 @@ Tezos is a secure, smart contract blockchain platform that uses its built-in gov
 
 ## **Why build on Tezos?**
 
-Tezos is an open-source platform for assets and applications that can evolve by upgrading itself. Stakeholders govern upgrades to the core protocol, including upgrades to the amendment process itself. **It benefits from three main characteristics: self-amendment, on-chain governance, and decentralized innovation.** 
+Tezos is an open-source platform for assets and applications that can evolve by upgrading itself. Stakeholders govern upgrades to the core protocol, including upgrades to the amendment process itself. **It benefits from three main characteristics: self-amendment, on-chain governance, and decentralized innovation.**
 
 Self-amendment allows Tezos to upgrade itself without having to split \(“fork”\) the network into two different blockchains. This is important as the suggestion or expectation of a fork can divide the community, alter stakeholder incentives, and disrupt the network effects that are formed over time. Because of self-amendment, coordination and execution costs for protocol upgrades are reduced and future innovations can be seamlessly implemented.
 
@@ -60,5 +60,5 @@ Tezos does not currently support an EVM implementation.
 
 ### **Role of the XTZ token**
 
-XTZ, tez, or ꜩ is the native currency of Tezos. XTZ is programmable money created by smart contract on the Tezos blockchain. _\*\*_It is used to pay on-chain fees and influence the network's governance.
+XTZ, tez, or ꜩ is the native currency of Tezos. XTZ is programmable money created by smart contract on the Tezos blockchain. \_\*\*\_It is used to pay on-chain fees and influence the network's governance.
 

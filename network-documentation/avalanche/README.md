@@ -2,7 +2,7 @@
 description: Learn how to interact with Avalanche using DataHub
 ---
 
-# 🏔  Avalanche
+# 🏔 Avalanche
 
 ## Welcome to the Avalanche documentation!
 

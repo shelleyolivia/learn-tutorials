@@ -98,7 +98,7 @@ Both Lotus and IPFS have several implementations for development in different en
 
 ### **EVM compatibility**
 
-Filecoin _\*\*_compatible with the EVM.
+Filecoin \_\*\*\_compatible with the EVM.
 
 ### **Role of the FIL token**
 

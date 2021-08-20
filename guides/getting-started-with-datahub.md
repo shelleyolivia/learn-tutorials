@@ -46,7 +46,7 @@ curl [https://celo-mainnet.datahub.figment.network/apikey/YOUR\_API\_KEY/the/pat
 
 This will display a new “API Key” and also the “Old Key”. To help with a smooth release process, both keys will be valid until the Old Key is removed by clicking the “remove” button.
 
-\*\*\*\*[**Sign up now**](https://datahub.figment.io/sign_up) _\*\*_to start building in minutes and discover the superpowers Datahub can offer you!
+\*\*\*\*[**Sign up now**](https://datahub.figment.io/sign_up) \_\*\*\_to start building in minutes and discover the superpowers Datahub can offer you!
 
 [**Subscribe**](https://datahub.figment.io/subscribe) to the DataHub newsletter to be the first to know about new protocols launches and new features!
 

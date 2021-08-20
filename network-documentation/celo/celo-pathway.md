@@ -68,7 +68,7 @@ Celo is providing Bonus Activity Rewards for additional activities following the
 
 Bonus Activity Rewards will be given out at the discretion of the reviewer. Please provide any context you would like us to consider to maximize your Bonus Activity Reward.
 
-### ![](../../.gitbook/assets/download-6-1-%20%281%29%20%286%29.png) Twitter \($5 in cUSD each\)
+### ![](https://github.com/figment-networks/datahub-learn/tree/09569d196cdea95621779187e595ce39c3890190/.gitbook/assets/download-6-1-%20%281%29%20%286%29.png) Twitter \($5 in cUSD each\)
 
 1. Post a lesson learned about the Celo platform, tools, community, etc.
 2. Post a screenshot of what you just built with Celo
@@ -78,7 +78,7 @@ Bonus Activity Rewards will be given out at the discretion of the reviewer. Plea
 
 Make sure to refer to Figment Learn in your tweet!
 
-### ![](../../.gitbook/assets/download-7-1-%20%281%29%20%285%29.png) Medium \($20 in cUSD each, `1500-2000` words each\)
+### ![](https://github.com/figment-networks/datahub-learn/tree/09569d196cdea95621779187e595ce39c3890190/.gitbook/assets/download-7-1-%20%281%29%20%285%29.png) Medium \($20 in cUSD each, `1500-2000` words each\)
 
 1. Recount your Celo learning experience
 2. Share your ideas for improving the Celo developer experience

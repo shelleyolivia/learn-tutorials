@@ -307,7 +307,7 @@ Number of block to include in calculation
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 
 ```
 {% endapi-method-response-example %}
