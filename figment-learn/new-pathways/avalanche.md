@@ -1,16 +1,5 @@
-# title
+# Coming Soon
 
-## aaha
-
-soosidosidosid
-
-![](figment-learn/new-pathways/Avalanche.jpg)
-
-
-## ajdlkzjd
-
-smlkdmlskdmlsqkdmslqk
-
-## isjdljdsld
+![](../../.gitbook/assets/xyz00avalanche.jpg)
 
 
