@@ -42,7 +42,7 @@ yarn dev
 
 Once the development server loads and compiles the application, open your default browser and go to `http://localhost:3000` :
 
-![](../../../.gitbook/assets/solana-setup-01.gif)
+![](../../../.gitbook/assets/pathway-home.gif)
 
 {% hint style="warning" %}
 You can change the default port if needed `yarn dev --port 1234`
