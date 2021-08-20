@@ -1,5 +1,3 @@
-# Coming Soon
-
 ![](../../.gitbook/assets/zzzpolkadot.jpg)
 
 {% hint style="info" %}

@@ -1,5 +1,3 @@
-# Coming Soon
-
 ![](../../.gitbook/assets/zzzavalanche.jpg)
 
 {% hint style="info" %}
