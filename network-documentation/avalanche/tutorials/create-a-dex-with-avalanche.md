@@ -27,11 +27,11 @@ Create and enter a new directory named `AvaSwap`:
 mkdir AvaSwap
 cd AvaSwap
 ```
-Use `npm to install web3`, which is a library through which we can talk to the EVM:
+We'll be using the web3.js library to set up an HTTP provider so we can "talk" to the EVM. Install it as a dependency with the command:
 ```
 npm install web3 -s
 ```
-We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. Lastly, create a boilerplate truffle project:
+Then, create a boilerplate truffle project:
 ```
 truffle init
 ```
