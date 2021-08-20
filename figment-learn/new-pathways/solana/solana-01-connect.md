@@ -18,7 +18,7 @@ In`components/protocols/solana/components/steps/Account.tsx`, implement `generat
 
   const generateKeypair = () => {
     // Generate a Keypair
-    // Save it to setKeypair Hook
+    // Save it to setKeypair React's Hook
   }
 //...
 ```
@@ -26,7 +26,6 @@ In`components/protocols/solana/components/steps/Account.tsx`, implement `generat
 **Need some help?** Check out those two links
 * [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
 * [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
-
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
