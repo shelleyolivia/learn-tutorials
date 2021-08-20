@@ -1,6 +1,6 @@
 # Coming Soon
 
-![](../../.gitbook/assets/polkadot.jpg)
+![](../../.gitbook/assets/zzzpolkadot.jpg)
 
 > [Stay up to date, join us on Discord](https://discord.gg/fszyM7K)
 
