@@ -71,47 +71,46 @@ contract AvaSwap {
   DevToken public Token;
   uint public rate;
   AggregatorV3Interface internal priceFeed;
+
   event TokenPurchase(
     address account,
     address token,
     uint amount,
     uint rate
   );
+
   event TokenSold(
     address account,
     address token,
     uint amount,
     uint rate
   );
+
   constructor(DevToken _Token) public {
     Token = _Token;
     priceFeed = AggregatorV3Interface(0x22B58f1EbEDfCA50feF632bD73368b2FdA96D541);
     rate = uint256(getLatestPrice());
   }
 
-
-      /**
-     * Returns the latest price
-     */
-    function getLatestPrice() public view returns (int) {
-        (
-            uint80 roundID,
-            int price,
-            uint startedAt,
-            uint timeStamp,
-            uint80 answeredInRound
-        ) = priceFeed.latestRoundData();
-        // If the round is not complete yet, timestamp is 0
-        // require(timeStamp > 0, "Round not complete");
-        return 1e18/price;
-    }
+  // Returns the latest price
+  function getLatestPrice() public view returns (int) {
+    (
+      uint80 roundID,
+      int price,
+      uint startedAt,
+      uint timeStamp,
+      uint80 answeredInRound
+    ) = priceFeed.latestRoundData();
+    // If the round is not complete yet, timestamp is 0
+    require(timeStamp > 0, "Round not complete");
+    return 1e18/price;
+  }
 
   function buyTokens() public payable {
-    /* Calculate no. of tokens to buy
-     Avax Amount * Redemption rate */
+    // Calculate number of tokens to buy:
+    // Avax Amount * Redemption rate 
     uint tokenAmount = msg.value * rate;
     Token.transfer(msg.sender, tokenAmount);
-
     // Emit an event
     emit TokenPurchase(msg.sender, address(Token), tokenAmount, rate);
   }
@@ -119,18 +118,14 @@ contract AvaSwap {
   function sellToken(uint _amount) public {
     // User can't sell more tokens than they have
     require(Token.balanceOf(msg.sender) >= _amount);
-
-    //Calculate the amount of the avax to redeem
+    // Calculate the amount of the avax to redeem
     uint avaxAmount =  _amount / rate;
-
     // Require that AvaSwap has enough avax
     require(address(this).balance >= avaxAmount);
-
     // Perform Sale
     Token.transferFrom(msg.sender, address(this), _amount);
     msg.sender.transfer(avaxAmount);
-
-    //Emit an event
+    // Emit an event
     emit TokenSold(msg.sender, address(Token), _amount, rate);
   }
 }
