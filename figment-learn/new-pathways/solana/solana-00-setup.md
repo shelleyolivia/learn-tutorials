@@ -6,7 +6,7 @@ The following software is required to set up and complete the Solana Pathway
 
 * [Node.js v14 or higher installed](https://nodejs.org/)
 * [yarn installed](https://yarnpkg.com/getting-started/install)
-* (git installed)(https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) 
+* [git installed](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 Start by cloning the repository and install the npm dependencies :
 
@@ -26,6 +26,10 @@ The value for `DATAHUB_SOLANA_API_KEY` can be found on the [DataHub Services Das
 
 ![](../../../.gitbook/assets/solana-setup-00.gif)
 
+{% hint style="info" %}
+[**Join us on Discord**](https://discord.gg/fszyM7K) if you encounter any issues with the tutorial or have any questions!
+{% endhint %}
+
 ---------------------------
 
 ## Start the browser
@@ -36,19 +40,12 @@ With the API key in place, save the `.env.local` file and start the React interf
 yarn dev
 ```
 
-Once the development server loads and compiles the application, open your default browser and open `http://localhost:3000` :
-
-{% hint style="warning" %}
-You can change the default port if needed
-```bash
-yarn dev --port 1234
-```
-{% endhint %}
+Once the development server loads and compiles the application, open your default browser and go to `http://localhost:3000` :
 
 ![](../../../.gitbook/assets/solana-setup-01.gif)
 
-{% hint style="info" %}
-[**Join us on Discord**](https://discord.gg/fszyM7K) if you encounter any issues with the tutorial or have any questions!
+{% hint style="warning" %}
+You can change the default port if needed `yarn dev --port 1234`
 {% endhint %}
 
 You can now move ahead to the next step by clicking on the "Next" button below on the right.
