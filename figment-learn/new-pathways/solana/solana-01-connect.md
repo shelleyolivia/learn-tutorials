@@ -52,3 +52,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * We created a `connection` instance of the `Connection` class using the `new` constructor
 * We then call `getVersion` on that `connection` instance. The docs state that `connection.getVersion()` returns a Promise so we chain `.then()` and a `.catch()` to respectively handle the case where the promise is fulfilled and rejected.
 * If the promise is fulfilled, we get a `version` object back, that we can store in our functional component's local state, using the `setVersion` exposed by the React hook `useState`.
+
+
+
+## Next
+
+We're going to use this `connection` instance every time we need to connect to Solana. We're going to want to move some tokens around but first we need an account to hold tokens. That's what we'll do next!
