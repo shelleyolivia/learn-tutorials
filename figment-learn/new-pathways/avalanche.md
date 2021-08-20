@@ -1,5 +1,6 @@
 # Coming Soon
 
-![](../../.gitbook/assets/xyz00avalanche.jpg)
+![](../../.gitbook/assets/zzzavalanche.jpg)
 
+> [Stay up to date, join us on Discord](https://discord.gg/fszyM7K)
 
