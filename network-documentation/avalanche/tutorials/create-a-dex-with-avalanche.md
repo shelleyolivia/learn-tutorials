@@ -201,7 +201,7 @@ true
 
 ## Run Migrations
 
-Now everything is in place to run migrations and deploy the Storage contract:
+Now everything is in place to run the migrations and deploy the contract:
 ```
 truffle(development)> migrate --network development
 ```
