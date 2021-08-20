@@ -133,17 +133,16 @@ contract AvaSwap {
 
 ## Add new migration
 
-Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `EthSwap` smart contract to the blockchain.
+Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `AvaSwap` smart contract to the blockchain.
 
 ```
 const AvaSwap = artifacts.require("AvaSwap");
 const DevToken = artifacts.require("DevToken");
-
 module.exports = function (deployer) {
-    // Deploy DevToken
+  // Deploy DevToken
   await deployer.deploy(DevToken, '5777');
   const devToken = await DevToken.deployed();
-  //Deploy AvaSwap with DevToken
+  // Deploy AvaSwap with DevToken
   await deployer.deploy(AvaSwap, devToken.address);
   avaSwap =  await AvaSwap.deployed();
   // Mint 0.001 DevToken to AvaSwap
@@ -152,7 +151,7 @@ module.exports = function (deployer) {
 ```
 ## Compile Contracts with Truffle
 
-Any time you make a change to `	AvaSwap.sol` you need to run `truffle` compile.
+Any time you make a change to `AvaSwap.sol` you must compile the contracts again.
 ```
 truffle compile
 ```
@@ -168,7 +167,7 @@ Compiling your contracts...
 ```
 ## Create and unlock an account on the C-Chain
 
-When deploying smart contracts to the C-Chain, the truffle will default to the first available account provided by your C-Chain client as `the from` the address used during migrations.
+When deploying smart contracts to the C-Chain, Truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations.
 
 Truffle has a very useful console that we can use to interact with the blockchain and our contract. Open the console:
 ```
