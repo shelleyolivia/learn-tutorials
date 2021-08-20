@@ -3,7 +3,7 @@
 In the following tutorials, we're going to interact with the Solana blockchain (and in particular its Devnet network) using the `@solana/web3.js` library. It's a convenient way to interface with the RPC API when building a Javascript application (under the hood it implements Solana's RPC methods and exposes them as Javascript objects). We will explore it together as we add features to our app.
 
 {% hint style="info" %}
-[The documentation for the library is here](https://solana-labs.github.io/solana-web3.js/)
+[The documentation for `@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/)
 {% endhint %}
 
 The first thing we need to do is connect to the Solana blockchain. The JS library exposes a class for this named... [Connection](https://solana-labs.github.io/solana-web3.js/classes/Connection.html). It has a constructor that will return an `connection` instance, on which you can call a looong list of methods (they're on the right sidebar of the previous link).
@@ -16,9 +16,11 @@ The first thing we need to do is connect to the Solana blockchain. The JS librar
 In `pages/api/solana/connect.tsx`, implement `connect` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
 {% endhint %}
 
->**Need some help?** Check out those two links
->* [Creating a `Connection` instance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#constructor)  
->* [Getting the API's version](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getversion)
+
+**Need some help?** Check out those two links
+
+* [Creating a `Connection` instance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#constructor)  
+* [Getting the API's `version`](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getversion)
 
 **Take a few minutes to figure this out**
 
