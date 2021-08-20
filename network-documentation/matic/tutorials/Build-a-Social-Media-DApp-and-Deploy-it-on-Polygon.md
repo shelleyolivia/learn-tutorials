@@ -35,9 +35,7 @@ To install truffle, open a terminal (windows cmd prompt or mac terminal) and run
 `npm install -g truffle`
 
 ### Ganache (Optional for this tutorial):
-Ganache is a personal blockchain environment for DApp development. It provides us 10 ETH accounts, each of them is funded with 100 ETH so you don't have to worry about anything.
-But in this tutorial, we will deploy our smart contracts on Polygon (Matic).
-If you're looking to develop your own DApp then Ganache is a powerful tool. You can download Ganache from this [link](https://www.trufflesuite.com/ganache)
+Ganache is a personal blockchain environment for DApp development. It provides a local blockchain with 10 default accounts, each already funded with 100 ETH. This can be very useful for testing and development, [check it out](https://www.trufflesuite.com/ganache) if you are interested.
 
 ### MetaMask Setup:
 MetaMask is used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.
