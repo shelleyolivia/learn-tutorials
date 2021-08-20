@@ -31,7 +31,7 @@ To check the successful installation type `npm -v` in cmd prompt or terminal, It
 ### Truffle:
 Truffle is the best development environment for developing blockchain applications. Truffle gives us boilerplate code (template code) to start building our DApp.
 
-To install truffle open your `windows cmd prompt` or `mac terminal` and paste the following command.
+To install truffle, open a terminal (windows cmd prompt or mac terminal) and run the following command:
 `npm install -g truffle`
 
 ### Ganache (Optional for this tutorial):
