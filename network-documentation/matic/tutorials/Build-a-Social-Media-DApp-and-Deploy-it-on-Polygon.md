@@ -14,7 +14,7 @@ The DTube project was created by Akhilesh Thite during the ETHOdyssey Virtual Ha
 # Prerequisites
 This tutorial assumes that you have some beginner-level experience in programming & blockchain understanding.
 
-## After this tutorial you will be able to:
+After this tutorial you will be able to:
 * Build a Full Stack Decentralized Application on top of Ethereum Blockchain.
 * Deploy smart contracts on the Polygon (Matic) Mumbai test network.
 * Use Truffle & MetaMask.
