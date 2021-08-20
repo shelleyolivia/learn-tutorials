@@ -1,14 +1,14 @@
 # Create a Decentralized Exchange (DEX) on Avalanche using Trufflesuite and ReactJS
 
-## Introduction
+# Introduction
 
 A decentralized exchange is a network, where anyone can exchange cryptocurrency tokens over blockchain by executing a transaction between two respective tokens, say AVAX with LINK, DAI or DevToken.
 
-## Prerequisites
+# Prerequisites
 
 You must have gone through this tutorial [Create a Local Test Network on Avalanche](https://learn.figment.io/network-documentation/avalanche/tutorials/platform-overview/create-a-local-test-network) and have performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/token-transfer-tutorials/transfer-avax-between-the-x-chain-and-c-chain) tutorial to get AVAX test tokens to your C-Chain address.
 
-## Requirements
+# Requirements
 
 * [NodeJS](https://nodejs.org/en)
 * [ReactJS](https://reactjs.org/)
@@ -618,17 +618,17 @@ Check Token balance:
 let TokenBalance = await Token.balanceOf(avaSwap.address)
 ```
 
-## Summary
+# Summary
 
 Now you know about creating a Decentralized Exchange (DEX) with Trufflesuite and ReactJS on the Avalanche network.
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
 
-## About the author
+# About the author
 
 [Devendra Yadav](https://community.figment.io/u/dev.koold)
 
-## References
+# References
 
 - https://learn.figment.io/network-documentation/avalanche/tutorials/getting-started-with-smart-contracts-development/using-truffle-with-the-avalanche-c-chain
 - https://github.com/OpenZeppelin/openzeppelin-contracts
