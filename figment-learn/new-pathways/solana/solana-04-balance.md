@@ -56,7 +56,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Enter the address just funded and click on **Check Balance**. You should see:
 
-![](../../../.gitbook/assets/solana-balance.png)
+![](../assets/solana-balance.png)
 
 ----------------------------------
 

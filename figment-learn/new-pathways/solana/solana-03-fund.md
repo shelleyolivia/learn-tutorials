@@ -24,7 +24,7 @@ In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an 
 * [Create a publicKey from a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#constructor)  
 * [`requestAirdrop()`documentation](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#requestairdrop)
 
-Take a few minutes to figure this out.
+**Take a few minutes to figure this out.**
 
 ```typescript
 //..
