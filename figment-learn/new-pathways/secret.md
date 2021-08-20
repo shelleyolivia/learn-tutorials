@@ -2,5 +2,7 @@
 
 ![](../../.gitbook/assets/zzzsecret.jpg)
 
-> [Stay up to date, join us on Discord](https://discord.gg/fszyM7K)
+{% hint style="info" %}
+[Stay up to date, Join us on discord](https://discord.gg/fszyM7K)
+{% endhint %}
 
