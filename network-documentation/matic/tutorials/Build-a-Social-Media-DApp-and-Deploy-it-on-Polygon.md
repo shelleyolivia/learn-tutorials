@@ -6,12 +6,12 @@ description: >-
 # Build a Social Media DApp & Deploy it on Polygon
 ![](../../../.gitbook/assets/dtube.png)
 
-## Introduction
+# Introduction
 In this tutorial, you will learn how to build a Social Media DApp (Decentralized Application) like YouTube & how to Deploy it on the Polygon (Matic) Mumbai test network. So, grab a cup of coffee ☕️ and let's get started!
 
 The DTube project was created by Akhilesh Thite during the ETHOdyssey Virtual Hackathon in July-Aug 2021. All the resources used to create this DApp are linked at in the "References" section at the end of this tutorial.
 
-## Prerequisites
+# Prerequisites
 This tutorial assumes that you have some beginner-level experience in programming & blockchain understanding.
 
 ## After this tutorial you will be able to:
@@ -21,7 +21,7 @@ This tutorial assumes that you have some beginner-level experience in programmin
 * Understand Web3 concepts.
 * Host the DApp on [IPFS](https://docs.ipfs.io/concepts/) using [Fleek](https://docs.fleek.co/) platform.
 
-## Requirements
+# Requirements
 We need the following things on your computer to build our DApp.
 ### Node & npm:
 Node is a JavaScript runtime environment that executes JavaScript code outside a web browser and npm is a JavaScript package installer.
@@ -82,7 +82,7 @@ Web3.js is a set of JavaScript libraries that acts as a port to the blockchain w
 
 In this section, we introduced the technologies that will be used and provided a roadmap for building the DApp. Now on to the the interesting part - Let's make the DApp!
 
-## Project Setup
+# Project Setup
 To avoid dealing with any annoying version errors & instead of installing the supporting code libraries (dependencies) one-by-one, we'll start building our DApp by cloning a GitHub repository which contains the project files and installing all the necessary dependencies.
 
 * `Fork` the [repository](https://github.com/AkhileshThite/DTube), this will make a copy of this project in your account.
@@ -103,7 +103,7 @@ Note:- As the tutorial moves further, for each section you can clear the code fr
 
 *There are path and GitHub repo links with each section of the tutorial, so you won't need to scroll around looking for them.*
 
-## Smart Contracts in Solidity
+# Smart Contracts in Solidity
 Path:`/src/contracts/DTube.sol`
 
 
@@ -163,7 +163,7 @@ Finally, we'll add the video to the contract by including the variables `videoCo
 }
 ```
 
-## Truffle Migrations
+# Truffle Migrations
 * Path:`/src/contracts/`
 * Path:`/migrations/`
 
@@ -193,7 +193,7 @@ module.exports = function(deployer) {
 };
 ```
 
-## Front-end with React.js
+# Front-end with React.js
 Path: `/src/components/`
 
 React applications are comprised of various components, for example a navigation bar, main page, webpage footer, etc. React loads a single HTML page (`/public/index.html`) which is then populated with all the components that are defined in the project.
@@ -583,7 +583,7 @@ Wow, that's a lot of code! You can run the React app locally with the command `n
 
 *The `<Footer>` component was created in bootstrap for hackathon purposes. It's not related to our DApp. You can simply modify that part as per your needs.*
   
-## Smart Contracts Deployment on Polygon (Matic)
+# Smart Contracts Deployment on Polygon (Matic)
 ### truffle-config
 * `truffle-config.js` for Mac users
 * `truffle.js` for Windows users
@@ -683,7 +683,7 @@ Now let's run the React app on http://localhost:3000/ with the command `npm star
 
 ![](../../../.gitbook/assets/dtube-12.gif)
 
-## Host the DApp on IPFS using Fleek
+# Host the DApp on IPFS using Fleek
 You cannot call this project a "Decentralized Application" if you are hosting it on any centralized server. To make it decentralized, again we're going to use IPFS. But the problem here is you cannot update/modify the project with same IPFS hash. IPFS uses content based addressing, hence each asset has its own unique address. This is where we're going to use "Fleek" IPFS hosting and Filecoin storage platform where you can **deploy the project, get a link, get SSL certificate, assign the domain, and update the project by simply connecting your GitHub repository**. When you push any changes on that repo, fleek will automatically update the changes with new IPFS hash on the same Fleek url. How cool is that? Let's see how it's done.
 
 Before hosting the DApp on Fleek,
@@ -703,10 +703,10 @@ Create a new repository on GitHub and push all the changes.
 
 That's it! you'll get the fleek link of your DApp after deploying the site, you can assign a domain and share your DApp link with anyone in the world. Congratulations! You've built a truly Decentralized Social Media Application.
 
-## About the Author
+# About the Author
 I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Development, Open-Source & Decentralization. Feel free to connect with me on [GitHub](https://github.com/AkhileshThite) & [Twitter](https://twitter.com/AkhileshThite_).
 
-## References
+# References
 * *Truffle docs: https://www.trufflesuite.com/docs/truffle/overview*
 * *Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started*
 * *MetaMask docs: https://docs.metamask.io/guide/#why-metamask*
