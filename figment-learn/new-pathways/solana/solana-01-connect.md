@@ -2,7 +2,7 @@ In the following tutorials, we're going to interact with the Solana blockchain (
 
 ----------------------------------
 
-# The challenge
+## The challenge
 
 {% hint style="warning" %}
 In `pages/api/solana/connect.tsx`, implement `connect` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
@@ -33,7 +33,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+## The solution
 
 ```typescript
 //...
@@ -53,7 +53,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Visual's test
+## Visual's test
 
 Once the code above save you can refresh the page to see the update.
 
@@ -61,6 +61,6 @@ Once the code above save you can refresh the page to see the update.
 
 ----------------------------------
 
-# Next
+## Next
 
 We're going to use this `connection` instance every time we need to connect to Solana. We're going to want to move some tokens around but first we need an account to hold tokens. That's what we'll do next!
