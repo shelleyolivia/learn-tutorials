@@ -54,9 +54,13 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * We call `connection.getBalance` with that `publicKey`
 * Be aware than the balance is on `LAMPORTS` (`console.log` is your friend ^^) 
 
+----------------------------------
+
+## Visual's test
+
 Enter the address just funded and click on **Check Balance**. You should see:
 
-![](../assets/solana-balance.png)
+![](../../../.gitbook/assets/solana-balance.gif)
 
 ----------------------------------
 

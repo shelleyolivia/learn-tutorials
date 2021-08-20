@@ -51,5 +51,3 @@ You can change the default port if needed `yarn dev --port 1234`
 ## Next
 
 You can now move ahead to the next step by clicking on the "Next" button below on the right.
-
-

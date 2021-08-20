@@ -92,12 +92,14 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * We create `instructions` for the transactions. From who, to who and what amount.
 * We create a `Transaction` object and add the instructions
 * Finaly, we send and await the confirmation of the signed transatcion using `sendAndConfirmTransaction`.
+
 ----------------------------------
+
+## Visual's test
 
 Once you've filled in the form, press "Submit" and you should see:
 
-![](../assets/solana-transfer-01.png)
-
+![](../../../.gitbook/assets/solana-transfer.gif)
 
 **About the explorer**, it's very good practice to look over all the fields one by one to familiarize yourself with the structure of a transaction. This page features the transaction result (`SUCCESS`), status (`FINALIZED`), the amount sent, the `from` and `to` addresses, the block that included this transaction, the fee that was paid, etc.
 

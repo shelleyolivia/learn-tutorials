@@ -70,13 +70,17 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * We verify than the transaction is confirmed
 * Then we return the hash of the transaction for the UI.
 
+----------------------------------
+
+## Visual's test
+
 Once you have the code above saved:
 * Copy and paste the genrated address in the text input.   
 * Click on **Fund this Address** 
 
 And let's the magic happen
 
-![](../../../.gitbook/assets/solana-fund.png)
+![](../../../.gitbook/assets/solana-fund.gif)
 
 ----------------------------------
 

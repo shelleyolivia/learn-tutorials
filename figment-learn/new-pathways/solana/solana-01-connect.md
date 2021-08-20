@@ -14,11 +14,6 @@ In the following tutorials, we're going to interact with the Solana blockchain (
 In `pages/api/solana/connect.tsx`, implement `connect` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
 {% endhint %}
 
-**Need some help?** Check out those two links
-
-* [Creating a `Connection` instance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#constructor)  
-* [Getting the API's `version`](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getversion)
-
 **Take a few minutes to figure this out**
 
 ```typescript
@@ -31,6 +26,10 @@ In `pages/api/solana/connect.tsx`, implement `connect` by creating a `Connection
   }
  //...
 ```
+
+**Need some help?** Check out those two links
+* [Creating a `Connection` instance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#constructor)  
+* [Getting the API's `version`](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getversion)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -57,6 +56,14 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * We created a `connection` instance of the `Connection` class using the `new` constructor
 * We then call `getVersion` on that `connection` instance. The docs state that `connection.getVersion()` returns a Promise so we chain `.then()` and a `.catch()` to respectively handle the case where the promise is fulfilled and rejected.
 * If the promise is fulfilled, we get a `version` object back, that we can store in our functional component's local state, using the `setVersion` exposed by the React hook `useState`.
+
+----------------------------------
+
+## Visual's test
+
+Once the code above save you can refresh the page to see the update.
+
+![](../../../.gitbook/assets/solana-connect.gif)
 
 ----------------------------------
 

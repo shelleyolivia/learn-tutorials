@@ -56,9 +56,13 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * Once React re-renders, we parse the keypair object to extract the public key using `keypair.publicKey`
 * But this value is a `Buffer` so we need to convert it to a string using `PublicKey.toString()`
 
+----------------------------------
+
+## Visual's test
+
 Once you have the code above saved, the webpage should automatically reload (React's hot reloading!) and you should see:
 
-![](../../../.gitbook/assets/solana-keypair.png)
+![](../../../.gitbook/assets/solana-account.gif)
 
 **Try and click on "Generate a Keypair" again. And again. And again!** Every time it will generate a new one with virtually no risk that someone else creates the same one as you. That's cause the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
 
