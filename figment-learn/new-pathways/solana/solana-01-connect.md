@@ -18,20 +18,10 @@ In `pages/api/solana/connect.tsx`, implement `connect` by creating a `Connection
 {% endhint %}
 
 >**Need some help?** Check out those two links
->
 >* [Creating a `Connection` instance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#constructor)  
 >* [Getting the API's version](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getversion)
 
-
-{% hint style="warning" %}
->**Need some help?** Check out those two links
->
->* [Creating a `Connection` instance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#constructor)  
->* [Getting the API's version](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getversion)
-{% endhint %}
-
-
-Take a few minutes to figure this out.
+**Take a few minutes to figure this out**
 
 ```typescript
 //...
