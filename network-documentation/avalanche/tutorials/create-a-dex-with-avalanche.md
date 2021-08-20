@@ -8,7 +8,7 @@ A decentralized exchange is a network, where anyone can exchange cryptocurrency 
 
 You must have gone through this tutorial [Create a Local Test Network on Avalanche](https://learn.figment.io/network-documentation/avalanche/tutorials/platform-overview/create-a-local-test-network) and have performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/token-transfer-tutorials/transfer-avax-between-the-x-chain-and-c-chain) tutorial to get AVAX test tokens to your C-Chain address.
 
-## Requirement
+## Requirements
 
 * [NodeJS](https://nodejs.org/en)
 * [ReactJS](https://reactjs.org/)
@@ -280,11 +280,11 @@ Error:  *** Deployment Failed ***
 ```
 ## Interacting with your contract with React UI
 
-In this, we will be using `Main.js`, `BuyForm.js`, `SellForm.js` components. Here are the details of the components :
+To interact with the contract, we will be using `Main.js`, `BuyForm.js` & `SellForm.js` components. Here are the details of the components:
 
 **Main.js**
 
-In this file import the `BuyForm` and `SellForm` components, then render the BuyForm and SellForm components.
+In this file, we must import the `BuyForm` and `SellForm` components, then render them.
 
 ```
 import React, { Component } from "react";
@@ -362,7 +362,7 @@ export default Main;
 ```
 result = await avaSwap.buyTokens({ from : investor, value: web3.utils.toWei('1', 'Ether')})
 ```
-In BuyForm.js file import the logos and ABIs of Avax, Dai, ChainLink Tokens
+In the BuyForm component, import the logos and ABIs of the AVAX, Dai & ChainLink tokens.
 
 BuyForm.js
 ```
