@@ -12,18 +12,11 @@ When a transaction is submitted to the **cluster**, the Solana runtime will exec
 In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
 {% endhint %}
 
-**Need some help?** Here are a few hints
-
-* [Read about `sendAndConfirmTransaction`](https://solana-labs.github.io/solana-web3.js/modules.html#sendAndConfirmTransaction)  
-* [Read about adding instructions to `Transaction`](https://solana-labs.github.io/solana-web3.js/classes/Transaction.html#add)  
-* [Anatomy of a `Transaction`](https://docs.solana.com/developing/programming-model/transactions)
-
 **Take a few minutes to figure this out.**
 
 ```typescript
 //..
   try {
-    //...
     //... let's skip the beginning as it's should be familiar for you now.
     // The secret key is stored in our state as a stingified array
     const secretKey = Uint8Array.from(JSON.parse(secret as string));
@@ -38,11 +31,16 @@ In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
     const transaction = new Transaction()
 
     const hash =// You should now what is expected here.
-
     res.status(200).json(hash);
   };
 //..
 ```
+
+**Need some help?** Here are a few hints
+
+* [Read about `sendAndConfirmTransaction`](https://solana-labs.github.io/solana-web3.js/modules.html#sendAndConfirmTransaction)  
+* [Read about adding instructions to `Transaction`](https://solana-labs.github.io/solana-web3.js/classes/Transaction.html#add)  
+* [Anatomy of a `Transaction`](https://docs.solana.com/developing/programming-model/transactions)
 
 {% hint style="info" %}
 You can also [**join us on Discord**](https://discord.gg/fszyM7K) if you have questions.

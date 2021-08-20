@@ -20,10 +20,6 @@ To fund an account, we will do what is called an **airdrop** some tokens will ma
 In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an address and use `requestAirdrop`to get 1 **SOL**.
 {% endhint %}
 
-**Need some help?** Here are a few hints.
-* [Create a publicKey from a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#constructor)  
-* [`requestAirdrop()`documentation](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#requestairdrop)
-
 **Take a few minutes to figure this out.**
 
 ```typescript
@@ -39,6 +35,11 @@ In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an 
 //..
 }
 ```
+
+**Need some help?** Here are a few hints.
+* [Create a publicKey from a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#constructor)  
+* [`requestAirdrop()`documentation](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#requestairdrop)
+
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)

@@ -10,10 +10,6 @@ We must check the account balance to make sure we have sufficient **SOL** to per
 In `pages/api/solana/balance.ts`, implement `balance`.
 {% endhint %}
 
-**Need some help?** Here are a few hints
-* [Read about getBalance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getbalance)
-* [Create a publicKey from a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#constructor)  
-
 **Take a few minutes to figure this out**
 
 ```typescript
@@ -26,6 +22,10 @@ In `pages/api/solana/balance.ts`, implement `balance`.
     res.status(200).json(balance);
 //...
 ```
+
+**Need some help?** Here are a few hints
+* [Read about getBalance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getbalance)
+* [Create a publicKey from a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#constructor)  
 
 {% hint style="info" %}
 You can also [**join us on Discord**](https://discord.gg/fszyM7K) if you have questions.

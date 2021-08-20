@@ -10,10 +10,6 @@ Like with most Web 3 protocols, transactions on Solana happen between *accounts*
 In`components/protocols/solana/components/steps/Account.tsx`, implement `generateKeypair` and parse the keypair to extract the address as a string and render it in the webpage
 {% endhint %}
 
-**Need some help?** Check out those two links
-* [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
-* [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
-
 **Take a few minutes to figure this out.**
 
 ```tsx
@@ -26,6 +22,11 @@ In`components/protocols/solana/components/steps/Account.tsx`, implement `generat
   }
 //...
 ```
+
+**Need some help?** Check out those two links
+* [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
+* [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
+
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
