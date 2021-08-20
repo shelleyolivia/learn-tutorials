@@ -38,7 +38,7 @@ truffle init
 
 **Update truffle-config.js**
 
-One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to `truffle-config.js`.
+`truffle-config.js` is the configuration file created when you run `truffle init`. Add the following to `truffle-config.js` to set up the web3.js connection to Avalanche:
 ```
 const Web3 = require('web3');
 const protocol = "http";
