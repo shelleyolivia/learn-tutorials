@@ -1,4 +1,4 @@
-# 3. Fund the account
+# 
 
 ## Devnet, Testnet, Mainnet
 

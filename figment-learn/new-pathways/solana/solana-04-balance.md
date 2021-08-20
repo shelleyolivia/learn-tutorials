@@ -1,10 +1,10 @@
-# 4. Check the account balance
+# 
 
 ## SOL Token balances
 
 We must check the account balance to make sure we have sufficient **SOL** to perform a transfer. The `getBalance()` function takes a `publicKey` as input and will return the balance associated with that `publicKey`, if there is any.
 
-## The challenge
+## :eyes: The challenge
 
 {% hint style="warning" %}
 In `pages/api/solana/balance.ts`, implement `balance`.
