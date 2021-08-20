@@ -36,7 +36,7 @@ In `pages/api/solana/connect.tsx`, implement `connect` by creating a `Connection
 ```
 
 {% hint style="info" %}
-You can also[ **join us on Discord**](https://discord.gg/fszyM7K) if you have questions.
+[You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
@@ -49,7 +49,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 //...
   try {
     const url = getSafeUrl();
-    const connection = new Connection(url);
+    const connection = new Connection(url, "confirmed");
     const version = await connection.getVersion();
     res.status(200).json(version?.["solana-core"]);
   } 

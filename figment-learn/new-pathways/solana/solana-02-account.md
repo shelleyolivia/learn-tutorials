@@ -26,6 +26,7 @@ In`components/protocols/solana/components/steps/Account.tsx`, implement `generat
   }
 //...
 ```
+
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
 {% endhint %}
@@ -62,4 +63,3 @@ Once you have the code above saved, the webpage should automatically reload (Rea
 ## Next
 
 Now that we have an account, we can fund it so we can start playing around with tokens!
-
