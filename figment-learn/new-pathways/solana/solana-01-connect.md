@@ -1,31 +1,32 @@
 # 
 
-In the following tutorials, we're going to interact with the Solana blockchain (and in particular its Devnet network) using the `@solana/web3.js` library. It's a convenient way to interface with the RPC API when building a Javascript application (under the hood it implements Solana's RPC methods and exposes them as Javascript objects). We will explore it together as we add features to our app.
+Like with most Web 3 protocols, transactions on Solana happen between *accounts*.  To create an account a client generates a *keypair*, which has a *public's key* (or *address*, used to identify and lookup an account) and a *secret's key* used to sign transactions.
 
 ----------------------------------
 
 ## The challenge
 
 {% hint style="warning" %}
-In `pages/api/solana/connect.tsx`, implement `connect` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
+In`components/protocols/solana/components/steps/Account.tsx`, implement `generateKeypair` and parse the keypair to extract the address as a string and render it in the webpage
 {% endhint %}
 
-**Take a few minutes to figure this out**
+**Take a few minutes to figure this out.**
 
-```typescript
+```tsx
 //...
-  try {
-    const url = getSafeUrl();
-    const connection = undefined;
-    const version = undefined;
-    res.status(200).json(version?.["solana-core"]);
+  const publicKeyStr = undefined // try to display the string formated address
+
+  const generateKeypair = () => {
+    // Generate a Keypair
+    // Save it to setKeypair Hook
   }
- //...
+//...
 ```
 
 **Need some help?** Check out those two links
-* [Creating a `Connection` instance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#constructor)  
-* [Getting the API's `version`](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getversion)
+* [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
+* [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
+
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -37,32 +38,37 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ## The solution
 
-```typescript
+```tsx
 //...
-  try {
-    const url = getSafeUrl();
-    const connection = new Connection(url, "confirmed");
-    const version = await connection.getVersion();
-    res.status(200).json(version?.["solana-core"]);
-  } 
+  const publicKeyStr = keypair?.publicKey.toString();
+
+  const generateKeypair = () => {
+    const keypair = Keypair.generate();
+    console.log(keypair);
+    setKeypair(keypair);
+  }
 //...
 ```
 
 **What happened in the code above?**
-* We created a `connection` instance of the `Connection` class using the `new` constructor
-* We then call `getVersion` on that `connection` instance. The docs state that `connection.getVersion()` returns a Promise so we chain `.then()` and a `.catch()` to respectively handle the case where the promise is fulfilled and rejected.
-* If the promise is fulfilled, we get a `version` object back, that we can store in our functional component's local state, using the `setVersion` exposed by the React hook `useState`.
+
+* We used the JS API's `Keypair` to generate a keypair
+* Once we have it we call `setKeypair` to save it in the react hook
+* Once React re-renders, we parse the keypair object to extract the public key using `keypair.publicKey`
+* But this value is a `Buffer` so we need to convert it to a string using `PublicKey.toString()`
 
 ----------------------------------
 
 ## Visual's test
 
-Once the code above save you can refresh the page to see the update.
+Once you have the code above saved, the webpage should automatically reload (React's hot reloading!) and you should see:
 
-![](../../../.gitbook/assets/solana-connect.gif)
+![](../../../.gitbook/assets/solana-account.gif)
+
+**Try and click on "Generate a Keypair" again. And again. And again!** Every time it will generate a new one with virtually no risk that someone else creates the same one as you. That's cause the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
 
 ----------------------------------
 
 ## Next
 
-We're going to use this `connection` instance every time we need to connect to Solana. We're going to want to move some tokens around but first we need an account to hold tokens. That's what we'll do next!
+Now that we have an account, we can fund it so we can start playing around with tokens!
