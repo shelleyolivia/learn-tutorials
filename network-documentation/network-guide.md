@@ -24,7 +24,7 @@ Avalanche is a layer one protocol by Ava Labs that offers high-throughput, fast 
 
 {% page-ref page="avalanche/" %}
 
-## ![](../.gitbook/assets/37552875%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%281%29.png) Celo
+## ![](../.gitbook/assets/37552875%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%282%29%20%286%29.png) Celo
 
 Celo is a smart contract blockchain network. The technology uses a phone-number-based identity system with address-based encryption and eigentrust-based reputation. Their first application is a social payments system that can be used on a smartphone.
 
