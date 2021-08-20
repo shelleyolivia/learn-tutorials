@@ -6,7 +6,7 @@ With some protocols, different networks (testnet, mainnet, etc) have different t
 
 Speaking of clusters, make sure you always know which one you're on. In your code, we already saw this when we created a `Connection` object. We passed the URL of a node and that node is connected to one of the clusters. When you're looking at the [Solana Explorer](https://explorer.solana.com/?cluster=devnet) you can select which cluster you want to look at by selecting it at the top right of the page:
 
-![](https://github.com/figment-networks/datahub-learn/upload/new-pathways/.gitbook/assets//solana-fund-00.png)
+![](../../../.gitbook/assets//solana-fund-00.png)
 
 ## Airdropping
 
@@ -75,7 +75,7 @@ Once you have the code above saved:
 
 And the magic happen
 
-![](https://github.com/figment-networks/datahub-learn/blob/master/.gitbook/assets/solana-fund.png)
+![](../../../.gitbook/assets/solana-fund.png)
 
 ## Next
 
