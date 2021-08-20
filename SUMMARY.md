@@ -157,7 +157,7 @@
     * [NEAR RPC](network-documentation/near/rpc-and-rest-api/near-rpc.md)
   * [🎊 Enriched APIs](network-documentation/near/enriched-apis/README.md)
     * [Indexer API](network-documentation/near/enriched-apis/indexer-api.md)
-  * [🗺 NEAR Pathway](network-documentation/near/near-pathway.md)
+  * [�� NEAR Pathway](network-documentation/near/near-pathway.md)
   * [💡 Tutorials](network-documentation/near/tutorials/README.md)
     * [Intro Pathway: NEAR Basics](network-documentation/near/tutorials/intro-pathway-write-and-deploy-your-first-near-smart-contract/README.md)
       * [1. Connect to a NEAR node using DataHub](network-documentation/near/tutorials/intro-pathway-write-and-deploy-your-first-near-smart-contract/1.-connecting-to-a-near-node-using-datahub.md)
@@ -331,6 +331,10 @@
   * [Setting up a fresh JavaScript Project with dotenv](network-documentation/extra-guides/setting-up-a-fresh-javascript-project.md)
   * [Getting started with dotenv and .env files](network-documentation/extra-guides/dotenv-and-.env.md)
   * [Rust Learning Resources](network-documentation/extra-guides/rust-learning-resources.md)
+
+---
+
+* [Learn v2 Test](learn-v2-test.md)
 
 ## 🤔 Other
 

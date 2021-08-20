@@ -332,8 +332,6 @@ Copy
 
 Note that not all pallets will expose all of these runtime types, and some may expose more! You should always look at the documentation or source code of a pallet to determine which of these types you need to expose.
 
-
-
 ## Interact with the Nicks Pallet <a id="__docusaurus"></a>
 
 Now you are ready to compile and run your node that has been enhanced with nickname capabilities from the Nicks pallet. Compile the node in release mode with:

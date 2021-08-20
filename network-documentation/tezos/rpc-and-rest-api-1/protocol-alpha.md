@@ -893,7 +893,7 @@ Get all constants
 
 **Description**
 
-Get the schema for all the RPC errors from this protocol version __
+Get the schema for all the RPC errors from this protocol version \_\_
 
 **JSON Output**
 
@@ -905,7 +905,7 @@ Get the schema for all the RPC errors from this protocol version __
 
 **Description**
 
-Get all existing contracts \(including non-empty default contracts\) ****
+Get all existing contracts \(including non-empty default contracts\) _\*\*_
 
 **JSON Output**
 
@@ -927,7 +927,7 @@ Get all existing contracts \(including non-empty default contracts\) ****
 
 **Description**
 
-Access the complete status of a contract ****
+Access the complete status of a contract _\*\*_
 
 **JSON Output**
 
@@ -1094,7 +1094,7 @@ Access the complete status of a contract ****
 
 **Description**
 
-Access the balance of a contract ****
+Access the balance of a contract _\*\*_
 
 **JSON Output**
 
@@ -1111,7 +1111,7 @@ Access the balance of a contract ****
 
 **Description**
 
-Access the value associated with a key in a big map of the contract \(deprecated\) ****
+Access the value associated with a key in a big map of the contract \(deprecated\) _\*\*_
 
 **JSON Output**
 
@@ -1280,7 +1280,7 @@ Access the counter of a contract, if any
 
 **Description**
 
-Access the delegate of a contract, if any ****
+Access the delegate of a contract, if any _\*\*_
 
 **JSON Output**
 
@@ -1454,7 +1454,7 @@ Return the list of entrypoints of the contract
 
 **Description**
 
-Return the type of the given entrypoint of the contract ****
+Return the type of the given entrypoint of the contract _\*\*_
 
 **JSON Output**
 
@@ -1607,7 +1607,7 @@ $micheline.michelson_v1.expression
 
 **Description**
 
-Access the manager of a contract ****
+Access the manager of a contract _\*\*_
 
 **JSON Output**
 
@@ -1627,7 +1627,7 @@ Access the manager of a contract ****
 
 **Description**
 
-Access the code and data of the contract ****
+Access the code and data of the contract _\*\*_
 
 **JSON Output**
 
@@ -1783,7 +1783,7 @@ $scripted.contracts
 
 **Description**
 
-Access the data of the contract ****
+Access the data of the contract _\*\*_
 
 **JSON Output**
 
@@ -1936,7 +1936,7 @@ $micheline.michelson_v1.expression
 
 **Description**
 
-List all registered delegates ****
+List all registered delegates _\*\*_
 
 _Optional query arguments :_
 
@@ -1961,7 +1961,7 @@ _Optional query arguments :_
 
 **Description**
 
-Get everything about a delegate ****
+Get everything about a delegate _\*\*_
 
 **JSON Output**
 
@@ -1999,7 +1999,7 @@ Get everything about a delegate ****
 
 **Description**
 
-Return the full balance of a given delegate, including the frozen balances ****
+Return the full balance of a given delegate, including the frozen balances _\*\*_
 
 **JSON Output**
 
@@ -2016,7 +2016,7 @@ Return the full balance of a given delegate, including the frozen balances ****
 
 **Description**
 
-Tell whether the delegate is currently tagged as deactivated or not ****
+Tell whether the delegate is currently tagged as deactivated or not _\*\*_
 
 **JSON Output**
 
@@ -2047,7 +2047,7 @@ this excludes the delegate's own balance and its frozen balances.
 
 **Description**
 
-Return the list of contracts that delegate to a given delegate ****
+Return the list of contracts that delegate to a given delegate _\*\*_
 
 **JSON Output**
 
@@ -2069,7 +2069,7 @@ Return the list of contracts that delegate to a given delegate ****
 
 **Description**
 
-Return the total frozen balances of a given delegate.  ****
+Return the total frozen balances of a given delegate. _\*\*_
 
 This includes the frozen deposits, rewards and fees.
 
@@ -2088,7 +2088,7 @@ This includes the frozen deposits, rewards and fees.
 
 **Description**
 
-Return the frozen balances of a given delegate.  ****
+Return the frozen balances of a given delegate. _\*\*_
 
 Indexed by the cycle by which it will be unfrozen.
 
@@ -2110,7 +2110,7 @@ Indexed by the cycle by which it will be unfrozen.
 
 **Description**
 
-Return the cycle by the end of which the delegate might be deativated if she fails to execute any delegate action. 
+Return the cycle by the end of which the delegate might be deativated if she fails to execute any delegate action.
 
 A deactivated delegate might be reactivated \(without loosing any rolls\) by simply re-registering as a delegate. For deactivated delegates, this value contains the cycle by which they were deactivated.
 
@@ -2143,7 +2143,7 @@ This includes the balances of all the contracts that delegate to it, but also th
 
 **Description**
 
-Get info about the nonce of a previous block ****
+Get info about the nonce of a previous block _\*\*_
 
 **JSON Output**
 
@@ -2168,7 +2168,7 @@ Get info about the nonce of a previous block ****
 
 **Description**
 
-Return the raw context.  ****
+Return the raw context. _\*\*_
 
 _Optional query arguments :_
 
@@ -2191,7 +2191,7 @@ _Optional query arguments :_
 
 **Description**
 
-Post the seed of the cycle to which the block belongs ****
+Post the seed of the cycle to which the block belongs _\*\*_
 
 **JSON Output**
 
@@ -2217,7 +2217,7 @@ Get the endorsing power of an endorsement, that is, the number of slots that the
 
 **Description**
 
-Get the block's hash, its unique identifier.  ****
+Get the block's hash, its unique identifier. _\*\*_
 
 **JSON Output**
 
@@ -2237,7 +2237,7 @@ Get the block's hash, its unique identifier.  ****
 
 **Description**
 
-Get the whole block header ****
+Get the whole block header _\*\*_
 
 **JSON Output**
 
@@ -2326,7 +2326,7 @@ Get the version-specific fragment of the block header
 
 **Description**
 
-Get the version-specific fragment of the block header \(unparsed\) ****
+Get the version-specific fragment of the block header \(unparsed\) _\*\*_
 
 **JSON Output**
 
@@ -2338,7 +2338,7 @@ Get the version-specific fragment of the block header \(unparsed\) ****
 
 **Description**
 
-Get the whole block header \(unparsed\) ****
+Get the whole block header \(unparsed\) _\*\*_
 
 **JSON Output**
 
@@ -2350,7 +2350,7 @@ Get the whole block header \(unparsed\) ****
 
 **Description**
 
-Get the shell-specific fragment of the block header ****
+Get the shell-specific fragment of the block header _\*\*_
 
 **JSON Output**
 
@@ -2397,7 +2397,7 @@ Get the shell-specific fragment of the block header ****
 
 ## Helpers
 
-### **`GET ../<block_id>/helpers/baking_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)*&[max_priority=<int>]&[all]`** 
+### **`GET ../<block_id>/helpers/baking_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)*&[max_priority=<int>]&[all]`**
 
 **Description**
 
@@ -2438,7 +2438,7 @@ Optional query arguments :
 
 **Description**
 
-Try to complete a prefix of a Base58Check-encoded data ****
+Try to complete a prefix of a Base58Check-encoded data _\*\*_
 
 This RPC is actually able to complete hashes of block, operations, public\_keys and contracts_._
 
@@ -2457,7 +2457,7 @@ This RPC is actually able to complete hashes of block, operations, public\_keys 
 
 **Description**
 
-Return the level of the interrogated block or the one of a block located "offset" blocks after in the chain \(or before when negative\) ****
+Return the level of the interrogated block or the one of a block located "offset" blocks after in the chain \(or before when negative\) _\*\*_
 
 For instance, the next block if \`offset\` is 1.
 
@@ -2501,7 +2501,7 @@ Optional query arguments :
          hash. */ }
 ```
 
-### **`GET ../<block_id>/helpers/endorsing_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)*`** 
+### **`GET ../<block_id>/helpers/endorsing_rights?(level=<block_level>)*&(cycle=<block_cycle>)*&(delegate=<pkh>)*`**
 
 **Description**
 
@@ -2540,7 +2540,7 @@ Optional query arguments :
 
 **Description**
 
-Forge an operation ****
+Forge an operation _\*\*_
 
 **JSON Output**
 
@@ -2552,7 +2552,7 @@ Forge an operation ****
 
 **Description**
 
-Forge the protocol-specific part of a block header ****
+Forge the protocol-specific part of a block header _\*\*_
 
 **JSON Output**
 
@@ -2576,7 +2576,7 @@ Forge a block header
 
 **Description**
 
-Get the levels of a cycle ****
+Get the levels of a cycle _\*\*_
 
 Optional query arguments :
 
@@ -2593,7 +2593,7 @@ Optional query arguments :
 
 **Method**
 
-Parse a block ****
+Parse a block _\*\*_
 
 **JSON Output**
 
@@ -2621,7 +2621,7 @@ $block_header.alpha.signed_contents
 
 **Description**
 
-Parse operations ****
+Parse operations _\*\*_
 
 **JSON Output**
 
@@ -3007,7 +3007,7 @@ Optional query arguments :
 
 **Description**
 
-Simulate the validation of an operation ****
+Simulate the validation of an operation _\*\*_
 
 **JSON Output**
 
@@ -3734,7 +3734,7 @@ Return the type of the given entrypoint
 
 **Description**
 
-Return the list of entrypoints of the given script ****
+Return the list of entrypoints of the given script _\*\*_
 
 **JSON Output**
 
@@ -3888,7 +3888,7 @@ Return the list of entrypoints of the given script ****
 
 **Description**
 
-Compute the serialized version of some data expression using the same algorithm as script instruction PACK ****
+Compute the serialized version of some data expression using the same algorithm as script instruction PACK _\*\*_
 
 **JSON Output**
 
@@ -3905,7 +3905,7 @@ Compute the serialized version of some data expression using the same algorithm 
 
 **Description**
 
-Run a piece of code in the current context ****
+Run a piece of code in the current context _\*\*_
 
 **JSON Output**
 
@@ -4138,7 +4138,7 @@ Run a piece of code in the current context ****
 
 **Description**
 
-Run an operation without signature checks ****
+Run an operation without signature checks _\*\*_
 
 **JSON Output**
 
@@ -4712,7 +4712,7 @@ $operation.alpha.operation_with_metadata
 
 **Description**
 
-Run a piece of code in the current context, keeping a trace ****
+Run a piece of code in the current context, keeping a trace _\*\*_
 
 **JSON Output**
 
@@ -4958,7 +4958,7 @@ Run a piece of code in the current context, keeping a trace ****
 
 **Description**
 
-Typecheck a piece of code in the current context ****
+Typecheck a piece of code in the current context _\*\*_
 
 **JSON Output**
 
@@ -5123,7 +5123,7 @@ Typecheck a piece of code in the current context ****
 
 **Description**
 
-Check that some data expression is well formed and of a given type in the current context ****
+Check that some data expression is well formed and of a given type in the current context _\*\*_
 
 **JSON Output**
 
@@ -5141,7 +5141,7 @@ Check that some data expression is well formed and of a given type in the curren
 
 **Description**
 
-List the ancestor of the given block ****
+List the ancestor of the given block _\*\*_
 
 If referred to as the branch in an operation header, are recent enough for that operation to be included in the current block.
 
@@ -5163,7 +5163,7 @@ If referred to as the branch in an operation header, are recent enough for that 
 
 **Description**
 
-Get all the metadata associated to the block ****
+Get all the metadata associated to the block _\*\*_
 
 **JSON Output**
 
@@ -5296,7 +5296,7 @@ $block_header_metadata
 
 **Description**
 
-Get the minimal valid time for a block given a priority and an endorsing power ****
+Get the minimal valid time for a block given a priority and an endorsing power _\*\*_
 
 Optional query arguments :
 
@@ -5322,7 +5322,7 @@ Optional query arguments :
 
 **Description**
 
-Get the hashes of all the operations included in the block ****
+Get the hashes of all the operations included in the block _\*\*_
 
 **JSON Output**
 
@@ -5342,7 +5342,7 @@ Get the hashes of all the operations included in the block ****
 
 **Description**
 
-Get all the operations included in 'n-th' validation pass of the block ****
+Get all the operations included in 'n-th' validation pass of the block _\*\*_
 
 **JSON Output**
 
@@ -5362,7 +5362,7 @@ Get all the operations included in 'n-th' validation pass of the block ****
 
 **Description**
 
-Get the hash of then 'm-th' operation in the 'n-th' validation pass of the block ****
+Get the hash of then 'm-th' operation in the 'n-th' validation pass of the block _\*\*_
 
 **JSON Output**
 
@@ -5382,7 +5382,7 @@ Get the hash of then 'm-th' operation in the 'n-th' validation pass of the block
 
 **Description**
 
-Get all the operations included in the block ****
+Get all the operations included in the block _\*\*_
 
 **JSON Output**
 
@@ -5974,7 +5974,7 @@ Get all the operations included in the block ****
 
 **Description**
 
-Get all the operations included in 'n-th' validation pass of the block ****
+Get all the operations included in 'n-th' validation pass of the block _\*\*_
 
 **JSON Output**
 
@@ -6566,7 +6566,7 @@ Get all the operations included in 'n-th' validation pass of the block ****
 
 **Description**
 
-Get the 'm-th' operation in the 'n-th' validation pass of the block ****
+Get the 'm-th' operation in the 'n-th' validation pass of the block _\*\*_
 
 **JSON Output**
 
@@ -7158,7 +7158,7 @@ Get the 'm-th' operation in the 'n-th' validation pass of the block ****
 
 **Description**
 
-Get the current and next protocol ****
+Get the current and next protocol _\*\*_
 
 **JSON Output**
 
@@ -7200,7 +7200,7 @@ Optional query arguments :
 
 **Description**
 
-Get ballots cast so far during a voting period ****
+Get ballots cast so far during a voting period _\*\*_
 
 **JSON Output**
 
@@ -7221,7 +7221,7 @@ Get ballots cast so far during a voting period ****
 
 **Description**
 
-Get sum of ballots cast so far during a voting period ****
+Get sum of ballots cast so far during a voting period _\*\*_
 
 **JSON Output**
 
@@ -7235,7 +7235,7 @@ Get sum of ballots cast so far during a voting period ****
 
 **Description**
 
-Get current period kind ****
+Get current period kind _\*\*_
 
 **JSON Output**
 
@@ -7247,7 +7247,7 @@ Get current period kind ****
 
 **Description**
 
-Get current proposal under evaluation ****
+Get current proposal under evaluation _\*\*_
 
 **JSON Output**
 
@@ -7267,7 +7267,7 @@ Get current proposal under evaluation ****
 
 **Description**
 
-Get current expected quorum ****
+Get current expected quorum _\*\*_
 
 **JSON Output**
 
@@ -7279,7 +7279,7 @@ Get current expected quorum ****
 
 **Description**
 
-Get the list of delegates with their voting weight, in number of rolls ****
+Get the list of delegates with their voting weight, in number of rolls _\*\*_
 
 **JSON Output**
 
@@ -7300,7 +7300,7 @@ Get the list of delegates with their voting weight, in number of rolls ****
 
 **Description**
 
-Get the list of proposals with number of supporters ****
+Get the list of proposals with number of supporters _\*\*_
 
 **JSON Output**
 
@@ -7315,6 +7315,4 @@ Get the list of proposals with number of supporters ****
        contain invalid byte sequences. */
     string || { "invalid_utf8_string": [ integer ∈ [0, 255] ... ] }
 ```
-
-
 

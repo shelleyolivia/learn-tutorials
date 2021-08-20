@@ -4,9 +4,9 @@ description: Learn how to interact with the web3.eth.abi package
 
 # Web3.eth.abi
 
-## Source documentation 
+## Source documentation
 
-[**The web3.eth.abi package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-eth-abi.html). 
+[**The web3.eth.abi package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-eth-abi.html).
 
 ## web3.eth.abi
 

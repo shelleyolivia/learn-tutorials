@@ -6,31 +6,29 @@ description: See all tutorials currently available for Secret
 
 ## Time to learn
 
-On this page you can find all tutorials currently available for Secret, including all tutorials created by the community. 
+On this page you can find all tutorials currently available for Secret, including all tutorials created by the community.
 
-Don't forget that you can try them out [**via DataHub**](https://datahub.figment.io/sign_up?service=secret)! 
+Don't forget that you can try them out [**via Datahub**](https://datahub.figment.io/sign_up?service=secret)!
 
-#### [Join our community today](https://discord.gg/fszyM7K) if you want to interact with other builders and become a part of this growing ecosystem! 
+### [Join our community today](https://discord.gg/fszyM7K) if you want to interact with other builders and become a part of this growing ecosystem!
 
-## Intro Pathway
+## Connect to a Secret node with DataHub
 
-{% page-ref page="intro-pathway-secret-basics/" %}
+{% page-ref page="intro-pathway-secret-basics/1.-connecting-to-a-secret-node-using-datahub.md" %}
 
-## Developing your first Secret contract
+## Create your first Secret account
 
-{% page-ref page="creating-a-secret-contract-from-scratch.md" %}
+{% page-ref page="intro-pathway-secret-basics/2.-setting-up-your-wallet.md" %}
 
-## Delegate to a Validator & Unbond Tokens
+## Query the Secret blockchain
 
-{% page-ref page="delegate-and-unbond-tokens.md" %}
+{% page-ref page="intro-pathway-secret-basics/3.-querying-the-secret-blockchain.md" %}
 
-## Create your first Secret NFT
+## Submit your first Secret transaction
 
-{% page-ref page="create-your-first-secret-nft.md" %}
+{% page-ref page="intro-pathway-secret-basics/4.-submit-your-first-transaction.md" %}
 
-## Deploy your own Secret NFT
+## Write & deploy your first Secret smart contract
 
-{% page-ref page="deploy-your-own-secret-nft.md" %}
-
-
+{% page-ref page="intro-pathway-secret-basics/5.-writing-and-deploying-your-first-secret-contract.md" %}
 

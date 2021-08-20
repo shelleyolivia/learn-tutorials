@@ -6,7 +6,7 @@ description: Learn how to interact with the Web3 API
 
 ## Source documentation
 
-[**The Web3 API's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3.html). 
+[**The Web3 API's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3.html).
 
 ## Web3
 

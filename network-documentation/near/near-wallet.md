@@ -4,11 +4,11 @@ description: Learn how to setup your NEAR wallet and store your tokens
 
 # 💼 NEAR Wallet
 
-## Getting started with the NEAR wallet 
+## Getting started with the NEAR wallet
 
-[**The original post can be found here**](https://near.org/blog/getting-started-with-the-near-wallet/). 
+[**The original post can be found here**](https://near.org/blog/getting-started-with-the-near-wallet/).
 
-The [**NEAR Wallet**](https://wallet.near.org/) is a non-custodial, web-based wallet for the NEAR blockchain. 
+The [**NEAR Wallet**](https://wallet.near.org/) is a non-custodial, web-based wallet for the NEAR blockchain.
 
 The wallet is now available to everyone! To get started, go to [**https://wallet.near.org**](https://wallet.near.org/) and click “Create Account”.
 
@@ -34,7 +34,7 @@ If you have a Ledger Nano S or X, we **highly** recommend using it! This ensures
 
 Write down a twelve seed word recovery phrase. If you do not have a Ledger, this is the next best option.
 
-**Important**: The seed phrase is only as secure as your storage of it! If you want to retain access to your account, you **MUST** write down your seed words in order, and store them securely. If you lose your seed words, you lose your account forever. 
+**Important**: The seed phrase is only as secure as your storage of it! If you want to retain access to your account, you **MUST** write down your seed words in order, and store them securely. If you lose your seed words, you lose your account forever.
 
 ### ![Seed Phrase](https://near.org/wp-content/uploads/2020/09/Screen-Shot-2020-08-13-at-3.52.27-PM-1024x629.png)
 
@@ -88,7 +88,7 @@ To stake your NEAR tokens, click on “Staking” in the navigation bar.
 
 In the NEAR wallet, you can choose to stake your tokens with a validator. These validators run the infrastructure that powers the NEAR network and will do the work on your behalf to generate returns on your NEAR. For this work, most will charge a fee, which is only charged on your rewards \(not your total stake\).
 
-Click “Select Validator”, then choose one from the list \(or search for one if you have one in mind\). A complete list with further details of each validator can be found on https://near-staking.com.
+Click “Select Validator”, then choose one from the list \(or search for one if you have one in mind\). A complete list with further details of each validator can be found on [https://near-staking.com](https://near-staking.com).
 
 ![Select a Validator](https://near.org/wp-content/uploads/2020/09/Screen-Shot-2020-10-23-at-8.20.53-AM-1024x643.png)
 

@@ -6,7 +6,7 @@ description: Learn more about Avalanche's node information API
 
 ## Source documentation
 
-\*\*\*\*[**The Info API's source documentation can be found here**](https://docs.avax.network/build/apis/info-api). 
+\*\*\*\*[**The Info API's source documentation can be found here**](https://docs.avax.network/build/apis/info-api).
 
 This API can be used to access basic information about the node.
 

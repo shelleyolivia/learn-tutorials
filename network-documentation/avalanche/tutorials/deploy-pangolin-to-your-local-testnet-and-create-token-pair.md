@@ -34,16 +34,16 @@ In addition, you will need to:
 * install pangolindex exchange contracts
 
 ```bash
-	npm install --dev @pangolindex/exchange-contracts
+    npm install --dev @pangolindex/exchange-contracts
 ```
 
 * install openzepplin contracts
 
 ```bash
-	npm install --dev @openzeppelin/contracts
-```
+    npm install --dev @openzeppelin/contracts
 ```
 
+```text
 ### Copy ERC20 Open Zeppelin Contracts to build directory
 
 We now need to make sure we have access to ERC20 token contracts that we will use help create our token pair when we deploy it to pangolin.
@@ -57,8 +57,8 @@ cp node_modules/\@openzeppelin/contracts/build/contracts/ERC20.json build/contra
 Similarly, we need to copy the IPangolinFactory and IPangolinPair interface contracts to our build directory.
 
 ```javascript
-	cp node_modules/\@pangolindex/exchange-contracts/artifacts/contracts/pangolin-core/interfaces/IPangolinPair.sol/IPangolinPair.json build/contracts/
-	cp node_modules/\@pangolindex/exchange-contracts/artifacts/contracts/pangolin-core/interfaces/IPangolinFactory.sol/IPangolinFactory.json build/contracts/
+    cp node_modules/\@pangolindex/exchange-contracts/artifacts/contracts/pangolin-core/interfaces/IPangolinPair.sol/IPangolinPair.json build/contracts/
+    cp node_modules/\@pangolindex/exchange-contracts/artifacts/contracts/pangolin-core/interfaces/IPangolinFactory.sol/IPangolinFactory.json build/contracts/
 ```
 
 ### Create a new Migration file
@@ -66,48 +66,48 @@ Similarly, we need to copy the IPangolinFactory and IPangolinPair interface cont
 We now need to create a new migration file called `3_deploy.js` with the content, following this; we will step through what is going on below:
 
 ```javascript
-	const MockERC20 = artifacts.require('ERC20');
-	const PangolinFactoryBytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/pangolin-core/PangolinFactory.sol/PangolinFactory.json').bytecode
-	const PangolinRouter02Bytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/pangolin-periphery/PangolinRouter.sol/PangolinRouter.json').bytecode;
-	const WAVAXBytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/WAVAX.sol/WAVAX.json').bytecode;
-	const IPangolinFactory = artifacts.require('IPangolinFactory');
-	const IPangolinPair = artifacts.require('IPangolinPair');
+    const MockERC20 = artifacts.require('ERC20');
+    const PangolinFactoryBytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/pangolin-core/PangolinFactory.sol/PangolinFactory.json').bytecode
+    const PangolinRouter02Bytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/pangolin-periphery/PangolinRouter.sol/PangolinRouter.json').bytecode;
+    const WAVAXBytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/WAVAX.sol/WAVAX.json').bytecode;
+    const IPangolinFactory = artifacts.require('IPangolinFactory');
+    const IPangolinPair = artifacts.require('IPangolinPair');
 
-	module.exports = function(deployer, network, accounts) {
-	  deployer.then(async() => {
-	    const OneERC20 = await deployer.deploy(MockERC20);
-	  	const AnotherERC20 = await deployer.deploy(MockERC20);
+    module.exports = function(deployer, network, accounts) {
+      deployer.then(async() => {
+        const OneERC20 = await deployer.deploy(MockERC20);
+          const AnotherERC20 = await deployer.deploy(MockERC20);
 
-	  	console.log('Deploy Pangolin Factory');
-		// We need an address arg to the contract
-		let pangolinArg = '';
-		for (let i = 0; i < 32; i++) {
-			pangolinArg += '00';
-		}
+          console.log('Deploy Pangolin Factory');
+        // We need an address arg to the contract
+        let pangolinArg = '';
+        for (let i = 0; i < 32; i++) {
+            pangolinArg += '00';
+        }
 
-		const pangolinFactoryAddress = (await web3.eth.sendTransaction({from: accounts[0], gas: 8000000, data: PangolinFactoryBytecode + pangolinArg})).contractAddress;
+        const pangolinFactoryAddress = (await web3.eth.sendTransaction({from: accounts[0], gas: 8000000, data: PangolinFactoryBytecode + pangolinArg})).contractAddress;
 
-		console.log('Deploy wAVAX');
-		const wAVAXAddress = (await web3.eth.sendTransaction({from: accounts[0], gas: 8000000, data: WAVAXBytecode})).contractAddress;
+        console.log('Deploy wAVAX');
+        const wAVAXAddress = (await web3.eth.sendTransaction({from: accounts[0], gas: 8000000, data: WAVAXBytecode})).contractAddress;
 
-		console.log('Deploy Pangolin Router');
-		const PangolinRouterAddress = (await web3.eth.sendTransaction({
-		  from: accounts[0],
-		  gas: 8000000,
-		  data: PangolinRouter02Bytecode + web3.eth.abi.encodeParameters(['address', 'address'],[pangolinFactoryAddress, wAVAXAddress]).slice(2)
-		})).contractAddress;
+        console.log('Deploy Pangolin Router');
+        const PangolinRouterAddress = (await web3.eth.sendTransaction({
+          from: accounts[0],
+          gas: 8000000,
+          data: PangolinRouter02Bytecode + web3.eth.abi.encodeParameters(['address', 'address'],[pangolinFactoryAddress, wAVAXAddress]).slice(2)
+        })).contractAddress;
 
-		console.log('PangolinRouter is at: ' + PangolinRouterAddress);
+        console.log('PangolinRouter is at: ' + PangolinRouterAddress);
 
-		const PangoFactoryInstance = await IPangolinFactory.at(pangolinFactoryAddress);
-		const PangoPairTx = await PangoFactoryInstance.createPair(OneERC20.address, AnotherERC20.address);
-		const PangoPairAddress = PangoPairTx['logs'][0]['args']['pair'];
-		const PangoPair = await IPangolinPair.at(PangoPairAddress);
+        const PangoFactoryInstance = await IPangolinFactory.at(pangolinFactoryAddress);
+        const PangoPairTx = await PangoFactoryInstance.createPair(OneERC20.address, AnotherERC20.address);
+        const PangoPairAddress = PangoPairTx['logs'][0]['args']['pair'];
+        const PangoPair = await IPangolinPair.at(PangoPairAddress);
 
-		console.log('OneERC20-AnotherERC20 Token pair is at: ' + PangoPairAddress);
+        console.log('OneERC20-AnotherERC20 Token pair is at: ' + PangoPairAddress);
 
-	  })
-	};
+      })
+    };
 ```
 
 ## Import Required Contracts/Bytecode
@@ -115,12 +115,12 @@ We now need to create a new migration file called `3_deploy.js` with the content
 The first thing we need to do is to import the ERC20 contracts as well as the bytecode for the Pangolin Factory, Router, Pair Interface and Factory Interface and the Wrapped AVAX \(wAVAX\).
 
 ```javascript
-	const MockERC20 = artifacts.require('ERC20');
-	const PangolinFactoryBytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/pangolin-core/PangolinFactory.sol/PangolinFactory.json').bytecode
-	const PangolinRouter02Bytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/pangolin-periphery/PangolinRouter.sol/PangolinRouter.json').bytecode;
-	const WAVAXBytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/WAVAX.sol/WAVAX.json').bytecode;
-	const IPangolinFactory = artifacts.require('IPangolinFactory');
-	const IPangolinPair = artifacts.require('IPangolinPair');
+    const MockERC20 = artifacts.require('ERC20');
+    const PangolinFactoryBytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/pangolin-core/PangolinFactory.sol/PangolinFactory.json').bytecode
+    const PangolinRouter02Bytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/pangolin-periphery/PangolinRouter.sol/PangolinRouter.json').bytecode;
+    const WAVAXBytecode = require('@pangolindex/exchange-contracts/artifacts/contracts/WAVAX.sol/WAVAX.json').bytecode;
+    const IPangolinFactory = artifacts.require('IPangolinFactory');
+    const IPangolinPair = artifacts.require('IPangolinPair');
 ```
 
 ### Deploy Mock Tokens
@@ -130,8 +130,8 @@ Next, we need to deploy the mock ERC20 tokens.
 These could be any other kind of ERC20 tokens, but for simplicity, we simply deploy the same contract to a different address.
 
 ```javascript
-	const OneERC20 = await deployer.deploy(MockERC20);
-	const AnotherERC20 = await deployer.deploy(MockERC20);
+    const OneERC20 = await deployer.deploy(MockERC20);
+    const AnotherERC20 = await deployer.deploy(MockERC20);
 ```
 
 ### Construct Zero Address Argument And Deploy Factory
@@ -141,11 +141,11 @@ In order to construct any token pair on Pangolin, you will need to interact with
 By appending a zero address to the bytecode of the contract, we make a transaction with the data to store it on-chain.
 
 ```javascript
-	let pangolinArg = '';
-	for (let i = 0; i < 32; i++) {
-		pangolinArg += '00';
-	}
-	const pangolinFactoryAddress = (await web3.eth.sendTransaction({from: accounts[0], gas: 8000000, data: PangolinFactoryBytecode + pangolinArg})).contractAddress;
+    let pangolinArg = '';
+    for (let i = 0; i < 32; i++) {
+        pangolinArg += '00';
+    }
+    const pangolinFactoryAddress = (await web3.eth.sendTransaction({from: accounts[0], gas: 8000000, data: PangolinFactoryBytecode + pangolinArg})).contractAddress;
 ```
 
 ### WAVAX
@@ -157,7 +157,7 @@ It is also needed to deploy the router \(a holdover from the Uniswap V1 architec
 We need to create a transaction where we send the WAVAX bytecode and get back the address.
 
 ```javascript
-	const wAVAXAddress = (await web3.eth.sendTransaction({from: accounts[0], gas: 8000000, data: WAVAXBytecode})).contractAddress;
+    const wAVAXAddress = (await web3.eth.sendTransaction({from: accounts[0], gas: 8000000, data: WAVAXBytecode})).contractAddress;
 ```
 
 ### Router
@@ -169,11 +169,11 @@ In doing this, we will then be able to interact with all the router functions of
 Not too different from what we have done for the router and WAVAX, we will create a transaction and get the address of the deployed bytecode.
 
 ```javascript
-	const PangolinRouterAddress = (await web3.eth.sendTransaction({
-	  from: accounts[0],
-	  gas: 8000000,
-	  data: PangolinRouter02Bytecode + web3.eth.abi.encodeParameters(['address', 'address'],[pangolinFactoryAddress, wAVAXAddress]).slice(2)
-	})).contractAddress;
+    const PangolinRouterAddress = (await web3.eth.sendTransaction({
+      from: accounts[0],
+      gas: 8000000,
+      data: PangolinRouter02Bytecode + web3.eth.abi.encodeParameters(['address', 'address'],[pangolinFactoryAddress, wAVAXAddress]).slice(2)
+    })).contractAddress;
 ```
 
 ### Pangolin Factory interface \(IPangolinFactory\) and PangolinPair interface \(IPangolinPair\)
@@ -195,13 +195,11 @@ This will generate a transaction that we will need to parse the logs and get the
 Then if you wanted to later call functions on the pair address, you need to access the address through the pair interface.
 
 ```javascript
-	const PangoFactoryInstance = await IPangolinFactory.at(pangolinFactoryAddress);
-	const PangoPairTx = await PangoFactoryInstance.createPair(OneERC20.address, AnotherERC20.address);
-	const PangoPairAddress = PangoPairTx['logs'][0]['args']['pair'];
-	const PangoPair = await IPangolinPair.at(PangoPairAddress);
+    const PangoFactoryInstance = await IPangolinFactory.at(pangolinFactoryAddress);
+    const PangoPairTx = await PangoFactoryInstance.createPair(OneERC20.address, AnotherERC20.address);
+    const PangoPairAddress = PangoPairTx['logs'][0]['args']['pair'];
+    const PangoPair = await IPangolinPair.at(PangoPairAddress);
 ```
-
-
 
 ### Wrapping Up
 

@@ -4,7 +4,7 @@ description: Learn how to get started with Oracle Contracts on Tezos
 
 # Oracle Contracts
 
-[**The original tutorial can be found in the Tezos documentation here**](https://assets.tqtezos.com/docs/oracle/). 
+[**The original tutorial can be found in the Tezos documentation here**](https://assets.tqtezos.com/docs/oracle/).
 
 ## Introduction
 

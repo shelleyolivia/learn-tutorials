@@ -8,7 +8,7 @@ description: Learn how to write to the Terra blockchain using DataHub
 
 At some point, while building on the Terra blockchain, you will want to submit transactions in order to unlock the full power of Terra.
 
-In this tutorial, we will learn how to submit transactions using a [**DataHub**](https://figment.io/datahub-waitlist/) ****Terra node. We will submit two transactions:
+In this tutorial, we will learn how to submit transactions using a **DataHub** Terra node. We will submit two transactions:
 
 * Regular transfer of LUNA tokens to another account
 * Swap transactions which will exchange LUNA to UUSD

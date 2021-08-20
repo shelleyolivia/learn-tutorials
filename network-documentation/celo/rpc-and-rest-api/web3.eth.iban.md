@@ -4,9 +4,9 @@ description: Learn how to interact with the web3.eth.iban package
 
 # Web3.eth.iban
 
-## Source documentation 
+## Source documentation
 
-[**The web3.eth.Iban package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-eth-iban.html). 
+[**The web3.eth.Iban package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-eth-iban.html).
 
 ## web3.eth.Iban
 

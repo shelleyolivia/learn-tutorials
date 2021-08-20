@@ -6,9 +6,9 @@ description: Learn how to interact with the Cosmos LCD
 
 ## Source documentation
 
-[**The Cosmos LCD's source documentation can be found here**](https://cosmos.network/rpc/v0.37.9). 
+[**The Cosmos LCD's source documentation can be found here**](https://cosmos.network/rpc/v0.37.9).
 
-A REST interface for state queries, transaction generation and broadcasting. 
+A REST interface for state queries, transaction generation and broadcasting.
 
 ## **Gaia REST**
 
@@ -16,7 +16,7 @@ A REST interface for state queries, transaction generation and broadcasting.
 
 **Description**
 
-Get the properties of the connected node 
+Get the properties of the connected node
 
 **Parameters**
 
@@ -63,13 +63,13 @@ No parameters
 
 **Description**
 
-Broadcast a signed transaction 
+Broadcast a signed transaction
 
 **Parameters**
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **txBroadcast** | object | The transaction must be signed **** StdTx. The supported broadcast modes include `"block"`\(return after tx commit\), `"sync"`\(return afer CheckTx\) and `"async"`\(return right away\). |
+| **txBroadcast** | object | The transaction must be signed _\*\*_ StdTx. The supported broadcast modes include `"block"`\(return after tx commit\), `"sync"`\(return afer CheckTx\) and `"async"`\(return right away\). |
 
 **Example Request**
 
@@ -144,7 +144,7 @@ Broadcast a signed transaction
 
 **Description**
 
-The properties of the connected node ****
+The properties of the connected node _\*\*_
 
 **Parameters**
 
@@ -205,7 +205,7 @@ no parameters
 
 **Description**
 
-Get the latest block 
+Get the latest block
 
 **Parameters**
 
@@ -320,7 +320,7 @@ no parameters
 
 **Description**
 
-Get a block at a certain height 
+Get a block at a certain height
 
 **Parameters**
 
@@ -437,7 +437,7 @@ Get a block at a certain height
 
 **Description**
 
-Get the latest validator set 
+Get the latest validator set
 
 **Parameters**
 
@@ -463,7 +463,7 @@ no parameters
 
 **Description**
 
-Get a validator set a certain height 
+Get a validator set a certain height
 
 **Parameters**
 
@@ -495,13 +495,13 @@ Get a validator set a certain height
 
 **Description**
 
-Submit delegation 
+Submit delegation
 
 **Parameters**
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **delegation** | object | The password of the account to remove from the KMS  **** |
+| **delegation** | object | The password of the account to remove from the KMS  _\*\*_ |
 | **delegatorAddr** | string \* required | Bech32 AccAddress of Delegator |
 
 **Example Request**
@@ -566,13 +566,13 @@ Submit delegation
 
 **Description**
 
-Submit an unbonding delegation 
+Submit an unbonding delegation
 
 **Parameters**
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **delegation** | object | The password of the account to remove from the KMS   |
+| **delegation** | object | The password of the account to remove from the KMS |
 | **delegatorAddr** | string \* required | Bech32 AccAddress of Delegator |
 
 **Example Request**
@@ -661,8 +661,8 @@ Account returns account details based on address
 
 Params queries all parameters
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -742,8 +742,8 @@ Queries the balance of a single coin for a single account
 
 Queries the parameters of x/bank module
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -768,8 +768,8 @@ No parameters
 
 Queries the total supply of all coins
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -814,8 +814,8 @@ Queries the balance of a single coin for a single account
 
 Queries the community pool coins
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -866,8 +866,6 @@ Queries the total rewards accrued by each validator
   ]
 }
 ```
-
-
 
 ### **`GET/cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards/{validator_address}`**
 
@@ -941,10 +939,10 @@ Queries the withdrawal address of a delegator
 
 **Description**
 
-Queries the params of the distribution module 
+Queries the params of the distribution module
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -1026,7 +1024,7 @@ Queries slash events of a validator
 | :--- | :--- | :--- |
 | **validator\_address** | string \* required | defined the validator address to query for |
 | **starting\_height** | string | The optional starting height to query the slashes |
-| **ending\_height** | string | the optional ending height to query the slashes  |
+| **ending\_height** | string | the optional ending height to query the slashes |
 | **pagination.key** | string | key is a value returned to begin querying the next page most efficiently. Only one of offset or key should be set. |
 | **pagination.offset** | string | offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set |
 | **pagination.limit** | string | limit is the total number of results to be returned in  the result page. If left empty, it will default to a value to be set by each app |
@@ -1080,8 +1078,6 @@ Queries all evidence
   }
 }
 ```
-
-
 
 ### **`GET/cosmos/evidence/v1beta1/evidence/{evidence_hash}`**
 
@@ -1150,7 +1146,7 @@ Queries all proposals based on given status
 | :--- | :--- | :--- |
 | **proposal\_status** | string | the status of the proposals |
 | **voter** | string | the voter address for the proposals |
-| **depositor** | string | the deposit addresses from the proposals  |
+| **depositor** | string | the deposit addresses from the proposals |
 | **pagination.key** | string | key is a value returned to begin querying the next page most efficiently. Only one of offset or key should be set. |
 | **pagination.offset** | string | offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set |
 | **pagination.limit** | string | limit is the total number of results to be returned in  the result page. If left empty, it will default to a value to be set by each app |
@@ -1387,8 +1383,8 @@ Queries voted information based on proposalID, voterAddr
 
 Current minting annual provisions value
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -1405,8 +1401,8 @@ No parameters
 
 Returns the current minting inflation value
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -1423,8 +1419,8 @@ No parameters
 
 Returns the total set of minting parameters
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -1444,14 +1440,14 @@ No parameters
 
 ### **`GET/cosmos/params/v1beta1/params`**
 
-Queries a specific parameter of a module, given its subspace and key 
+Queries a specific parameter of a module, given its subspace and key
 
 **Parameters**
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
 | **subspace** | string | the module to query the parameter for |
-| **key** | string | the key of the parameter in the subspace  |
+| **key** | string | the key of the parameter in the subspace |
 
 **Example JSON Output**
 
@@ -1471,8 +1467,8 @@ Queries a specific parameter of a module, given its subspace and key
 
 Queries the parameters of the slashing module
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -1527,7 +1523,7 @@ Queries signing info of all validators
 
 ### **`GET/cosmos/slashing/v1beta1/signing_infos/{cons_address}`**
 
-Queries the signing info of a given cons address 
+Queries the signing info of a given cons address
 
 **Parameters**
 
@@ -1602,7 +1598,7 @@ Queries redelegations of a given address
 | :--- | :--- | :--- |
 | **delegator\_addr** | string \* required | the delegator address to query for |
 | **src\_validator\_addr** | string | the validator address to redelegate from |
-| **dst\_validator\_addr** | string | the validator address to redelegate to  |
+| **dst\_validator\_addr** | string | the validator address to redelegate to |
 | **pagination.key** | string | key is a value returned to begin querying the next page most efficiently. Only one of offset or key should be set. |
 | **pagination.offset** | string | offset is a numeric offset that can be used when key is unavailable. It is less efficient than using key. Only one of offset or key should be set |
 | **pagination.limit** | string | limit is the total number of results to be returned in  the result page. If left empty, it will default to a value to be set by each app |
@@ -1755,7 +1751,7 @@ Queries validator info for given delegator-validator pair
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
 | **delegator\_addr** | string \* required | the delegator address to query for |
-| **validator\_addr** | string \* required | the validator address to query for  |
+| **validator\_addr** | string \* required | the validator address to query for |
 
 **Example JSON Output**
 
@@ -1874,8 +1870,8 @@ Queries the historical info for given height
 
 Queries the parameters of the slashing module
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -1898,8 +1894,8 @@ No parameters
 
 Queries the pool info
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -2181,8 +2177,8 @@ Queries a previously applied upgrade plan by its name
 
 Queries the current upgrade plan
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -2451,8 +2447,6 @@ Queries a stored packet acknowledgement hash
 }
 ```
 
-
-
 ### **`GET/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments`**
 
 Returns all the packet commitments hashes associated with a channel
@@ -2644,8 +2638,8 @@ Queries all the channels associated with a connection end
 
 Queries all parameters of the ibc client
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -3018,8 +3012,8 @@ Queries a denomination trace information
 
 Queries all parameters of the ibc-transfer module
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -3041,8 +3035,8 @@ No parameters
 
 Returns the latest block
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -3451,8 +3445,8 @@ Queries block for given height
 
 Queries the current node info
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**
@@ -3500,8 +3494,8 @@ No parameters
 
 Queries node syncing
 
-**Parameters**  
-  
+**Parameters**
+
 No parameters
 
 **Example JSON Output**

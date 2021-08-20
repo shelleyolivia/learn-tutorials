@@ -8,7 +8,7 @@ I invite you to join me In this tutorial series and learn how to design, build, 
 
 1. Showcase the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) token project on how to monetize NEAR smart contracts
 2. Share with you my approach to architect, design, and code smart contracts in Rust
-3. Take you step by step through designing, coding, and testing on the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) 
+3. Take you step by step through designing, coding, and testing on the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token)
 
    token project.
 

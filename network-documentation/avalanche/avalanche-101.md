@@ -81,7 +81,7 @@ Avalanche protocols are lightweight and sustainable. Unlike Nakamoto protocols, 
 
 ### **Languages supported**
 
-Avalanche's _\*\*_C-Chain is the standard Ethereum suite of tools.
+Avalanche's \_\*\*\_C-Chain is the standard Ethereum suite of tools.
 
 The X-Chain and P-Chain use a Typescript library that supports native javascript cross-platform.
 

@@ -6,7 +6,7 @@ description: Review best practices to deal with 5XX errors in Ruby
 
 ## Method 1 `ensure`
 
- The `ensure` keyword is used for ensuring that a block of code runs, even when an exception happens.
+The `ensure` keyword is used for ensuring that a block of code runs, even when an exception happens.
 
 We’d like to ensure the TCP connection opened by Net::HTTP.start is closed, even if the request fails because it times out, for example. To do this, we’ll first wrap our request in a `begin`/`ensure`/`end` block. The code in the ensure part will always run, even if an exception is raised in the preceding begin block.
 
@@ -30,8 +30,8 @@ The `retry` keyword allows to retry a piece of code in a block. Combined with a 
 
 To do that, we’ll add a `read_timeout` to the `Net::HTTP.start` call which sets the timeout to 10 seconds. If a response to our request hasn’t come in by then, it’ll raise a `Net::ReadTimeout`.
 
-We’ll also match on `Errno::ECONNREFUSED` to handle the API being down completely, which would prevent us from opening the TCP connection. In that case, the http variable is nil.  
-  
+We’ll also match on `Errno::ECONNREFUSED` to handle the API being down completely, which would prevent us from opening the TCP connection. In that case, the http variable is nil.
+
 The exception is rescued and `retry` is called to start the `begin` block again, which results in the code doing the same request until no timeout occurs. We’ll reuse the `http` object which holds the connection if it already exists.
 
 ```ruby
@@ -95,11 +95,11 @@ ensure
 end
 ```
 
-By using the `retries` variable in the call to `sleep`, we can increase the wait time for every new attempt. Check out the source [HERE](https://blog.appsignal.com/2018/05/16/ensure-retry-and-reraise-exceptions-in-ruby.html). 
+By using the `retries` variable in the call to `sleep`, we can increase the wait time for every new attempt. Check out the source [HERE](https://blog.appsignal.com/2018/05/16/ensure-retry-and-reraise-exceptions-in-ruby.html).
 
 ## Method 2
 
-When we are sending an HTTP request and would like to have 3 retries if it fails due to connection errors. We can do this by following the steps below: 
+When we are sending an HTTP request and would like to have 3 retries if it fails due to connection errors. We can do this by following the steps below:
 
 ```ruby
 require 'http'
@@ -119,7 +119,7 @@ def with_connection_retry
 
     raise e if retries >= 3
   end
-end 
+end
 ```
 
 Another way to perform the same action is by using Ruby's native API instead of using loops:
@@ -142,6 +142,4 @@ def with_connection_retry
   end
 end
 ```
-
-
 

@@ -170,7 +170,7 @@ We will deploy our contract on `Alfajores testnet`. We need to make sure that we
 a. Select the account on Celo Wallet with which we want to deploy the smart contract. Make sure to select the account on `Alfajores Test Network`!
 
 b. Click on **Deploy** button.  
- ![accessibility text](../../../.gitbook/assets/celo-extension-deploy-button%20%281%29%20%281%29.JPG)
+![accessibility text](../../../.gitbook/assets/celo-extension-deploy-button%20%281%29%20%281%29.JPG)
 
 c. Pay the `transaction fee` and sign the transaction using celo wallet.
 

@@ -4,7 +4,7 @@ description: Learn how NEAR works and what makes it special
 
 # ✏ NEAR 101
 
-## **What is NEAR?** 
+## **What is NEAR?**
 
 NEAR is a decentralized application platform that makes blockchain accessible to everyday people who are excited for the future of the Open Web. A web that is more private, more secure, and puts people in control of their money, data, and identity. NEAR’s purpose is to enable community-driven innovation to benefit people around the world.
 
@@ -21,8 +21,7 @@ What makes NEAR special?
    1. NEAR is designed to work with existing blockchain platforms and is easy for existing applications to migrate to. NEAR uses the Ethereum Virtual Machine and Web Assembly so that builders can seamlessly swap from Ethereum to NEAR \(and back\) on the NEAR Rainbow Bridge to leverage the performance, security, and favorable economics of NEAR without having to rebuild their applications or smart contracts. 
    2. With NEAR, you don’t have to choose between NEAR and Ethereum or commit to only one blockchain. Interoperability and usability across platforms will be key to the mass adoption of blockchain.
 
-NEAR is the first blockchain platform truly built for the real world. It is a builder's fastest path to market to create blockchain applications that are as easy to use as they are to build.   
-
+NEAR is the first blockchain platform truly built for the real world. It is a builder's fastest path to market to create blockchain applications that are as easy to use as they are to build.
 
 ### **Why build on NEAR?**
 
@@ -30,7 +29,7 @@ NEAR is the first blockchain platform truly built for the real world. It is a bu
 
 * “Writing smart contracts on Rust is awesome. It allows you to code error-free and fault-free. It’s a big reason why we chose NEAR. Other blockchains require you to learn less popular programming languages.” - _Carolin Wend, Co-Founder of Mintbase_
 
-**NEAR is versatile**. It's secure enough for high-value assets like money or identity, and performant enough to scale DeFi or Gaming apps. NEAR helps developers avoid high fees and slow speeds to deliver a delightful user experience. 
+**NEAR is versatile**. It's secure enough for high-value assets like money or identity, and performant enough to scale DeFi or Gaming apps. NEAR helps developers avoid high fees and slow speeds to deliver a delightful user experience.
 
 * “Augur gets $1B in volume and users burn $63M in gas fees. Flux gets $1B in volume and users burn only $10k in gas fees.” _Peter Mitchell, CEO of Flux_
 
@@ -42,9 +41,9 @@ NEAR is the first blockchain platform truly built for the real world. It is a bu
 
 **NEAR makes applications easy to use**. In some cases, users don’t realize they’re using a blockchain application. NEAR Accounts combine human-readable names and a flexible contract-based permission structure that enables business models like recurring, free to play, or freemium that were never before possible using blockchain applications.
 
-**NEAR is fast and future proof**. The unique sharding techniques implemented to enable the NEAR protocol to maintain consensus while splitting the network into multiple pieces. This means that throughput and speed will increase exponentially as the number of nodes on the network increases. There is no theoretical limit on the NEAR network’s capacity. As the Open Web grows, NEAR scales to meet it. 
+**NEAR is fast and future proof**. The unique sharding techniques implemented to enable the NEAR protocol to maintain consensus while splitting the network into multiple pieces. This means that throughput and speed will increase exponentially as the number of nodes on the network increases. There is no theoretical limit on the NEAR network’s capacity. As the Open Web grows, NEAR scales to meet it.
 
-### **What can you build on NEAR?** 
+### **What can you build on NEAR?**
 
 1. Open \(decentralized\) Finance: NEAR provides both a synchronous environment for atomic transactions, which benefits fast-moving financial applications like decentralized exchanges, and an asynchronous environment which allows every other application to hook into these critical financial rails. This will be possible with the upcoming EVM support.  
 2. Open Web: because NEAR is basically the “builder’s blockchain”, it has been optimized to provide substantial flexibility and performance for developers to build great experiences for their end users. This means that consumer-facing blockchain-backed apps are finally possible and the use cases of the Open Web can finally be realized: 
@@ -52,17 +51,17 @@ NEAR is the first blockchain platform truly built for the real world. It is a bu
    2. NFT marketplaces -- marketplaces like [Mintbase](https://mintbase.io), which transferred from Ethereum, allow creators of unique digital assets to easily implement marketplaces to buy and sell them. On NEAR, they have access to reasonable costs plus intuitive end-user experiences. 
    3. Gaming -- because NEAR allows for performant and \*usable\* apps, developers can create gaming experiences that hook into the blockchain without forcing end-users to suffer through wallets or tokens.
 
-Take a look at these examples from a recent hackathon: ****[**https://near.org/blog/winners-of-hack-the-rainbow**](https://near.org/blog/winners-of-hack-the-rainbow)
+Take a look at these examples from a recent hackathon: **\*\*\[**[https://near.org/blog/winners-of-hack-the-rainbow\*\*\]\(https://near.org/blog/winners-of-hack-the-rainbow](https://near.org/blog/winners-of-hack-the-rainbow**]%28https://near.org/blog/winners-of-hack-the-rainbow)\)
 
 ## **Network Specifications**
 
 ### **Transaction Fees**
 
-First, transaction fees on NEAR are a tiny fraction of the amount of fees paid on other blockchains. 1000 times lower transaction fees than Ethereum for users and developers earn 30% of transaction fees.  
-  
-NEAR keeps transaction fees low by dynamically resharding to optimize for performance and avoid congestion on the network. However, the most important feature of the NEAR token isn’t related to fees or rewards, it comes back to the usability and developer experience that truly sets NEAR apart.   
-  
-Complicated blockchain concepts like tokens, rewards, and fees can be almost entirely hidden from end-users of NEAR applications because smart contracts can be configured to pay fees on their behalf. This allows developers to build experiences which feel more like today’s web to their end-users, but still take advantage of the underlying innovations of blockchain. 
+First, transaction fees on NEAR are a tiny fraction of the amount of fees paid on other blockchains. 1000 times lower transaction fees than Ethereum for users and developers earn 30% of transaction fees.
+
+NEAR keeps transaction fees low by dynamically resharding to optimize for performance and avoid congestion on the network. However, the most important feature of the NEAR token isn’t related to fees or rewards, it comes back to the usability and developer experience that truly sets NEAR apart.
+
+Complicated blockchain concepts like tokens, rewards, and fees can be almost entirely hidden from end-users of NEAR applications because smart contracts can be configured to pay fees on their behalf. This allows developers to build experiences which feel more like today’s web to their end-users, but still take advantage of the underlying innovations of blockchain.
 
 ### **Transaction Speed & Finality**
 
@@ -76,9 +75,9 @@ The expected block time is around 1s and the expected time to finality is around
 
 ### **EVM compatibility**
 
-NEAR is fully compatible with the EVM and interoperable with Ethereum. NEAR does not want Ethereum developers to choose between the two networks and commit to only one. Developers can have the same asset on both blockchains and even have apps that seamlessly communicate across the boundary. 
+NEAR is fully compatible with the EVM and interoperable with Ethereum. NEAR does not want Ethereum developers to choose between the two networks and commit to only one. Developers can have the same asset on both blockchains and even have apps that seamlessly communicate across the boundary.
 
-This is made possible by the [**Rainbow Bridge**](https://github.com/near/rainbow-bridge), which connects the Ethereum and NEAR blockchains by leveraging the Ethereum miners and NEAR validators. More info can be found [**here**](https://github.com/near/near-evm). 
+This is made possible by the [**Rainbow Bridge**](https://github.com/near/rainbow-bridge), which connects the Ethereum and NEAR blockchains by leveraging the Ethereum miners and NEAR validators. More info can be found [**here**](https://github.com/near/near-evm).
 
 ### **Role of the NEAR token**
 

@@ -34,7 +34,7 @@ Normally, we would teach you more about the Substrate blockchain development fra
 
 To optimize your time, we will have you start the setup process. While things are compiling, you can continue to the next section to learn more about Substrate and what we are building.
 
-### Prerequisites
+## Prerequisites
 
 You will probably need to do some set-up to prepare your computer for Substrate development.
 

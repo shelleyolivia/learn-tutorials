@@ -6,7 +6,7 @@ description: Learn how to interact with the web3.eth.ens package
 
 ## Source documentation
 
-[**The web3.eth.ens package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-eth-personal.html#). 
+[**The web3.eth.ens package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-eth-personal.html#).
 
 ## web3.eth.ens
 

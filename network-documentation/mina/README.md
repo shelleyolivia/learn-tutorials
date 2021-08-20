@@ -14,11 +14,9 @@ You can then get started with the available RPC & REST APIs we support [**via Da
 
 Last but not least, if you are looking for guidelines or simply some inspiration, check out our list of available tutorials!
 
-Be sure to check out the [**official Mina documentation**](https://minaprotocol.com/docs)**.** 
+Be sure to check out the [**official Mina documentation**](https://minaprotocol.com/docs)**.**
 
 🚀 Let's start building the decentralized web 🚀
 
 {% page-ref page="rpc-and-rest-api/" %}
-
-
 

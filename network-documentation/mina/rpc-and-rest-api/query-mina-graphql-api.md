@@ -266,7 +266,8 @@ Example output:
       }
     ]
   }
-}```
+}
+```
 
 ## Snark Pool
 

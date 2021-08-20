@@ -4,7 +4,7 @@ description: Learn how to use Truffle with the C-Chain
 
 # Using Truffle with the Avalanche C-Chain
 
-[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain). 
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain).
 
 ## Introduction
 
@@ -215,7 +215,7 @@ truffle(development)> .exit
 
 ### Fund your account
 
-Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain]() tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
+Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain](using-truffle-with-the-avalanche-c-chain.md) tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
 
 ## Run Migrations
 
@@ -394,7 +394,7 @@ You should see the number you stored.
 
 ## Summary
 
-Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.  
-  
+Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.
+
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
 

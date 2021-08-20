@@ -4,7 +4,7 @@ description: Learn how to create a fixed-cap asset on Avalanche
 
 # Creating A Fixed-Cap Asset
 
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/create-a-fix-cap-asset). 
+\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/create-a-fix-cap-asset).
 
 ## Introduction
 

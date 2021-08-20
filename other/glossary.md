@@ -22,7 +22,7 @@ It's the process of distributing digital assets to the public. Just like transfe
 
 **Altcoin**
 
-Altcoin refers to cryptocurrencies other than Bitcoin such as Ethereum \(ETH\), NEAR, or Tezos \(XTZ\).
+Altcoins refers to cryptocurrencies other than Bitcoin.
 
 **Archive Node**
 
@@ -37,15 +37,14 @@ The Attack Surface describes all of the different points where an attacker could
 The ATOM token is the native staking currency of the Cosmos Hub. Validators use the ATOM tokens to stake and secure the zones within Cosmos.
 
 **ATH**  
-  
-ATH is an acronym for All Time High. It is used to refer to the highest value/price that an asset or cryptocurrency has ever reached.
+It stands for All-Time-High. It used to point to the highest value/price of cryptocurrencies ever reached in history.
 
 **AVAX**
 
 AVAX is the Avalanche network’s native asset. It has two special uses on the Avalanche network:
 
 * Validators must stake AVAX
-* Transaction fees are paid in AVAX
+* Transaction fees will be paid in AVAX
 
 ## B
 
@@ -55,16 +54,13 @@ Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of pe
 
 **Block**
 
-A block is a collection of several operations. The operations are located in the payload of the block which is specific to the protocol. Along with the payload, the block includes a header that contains protocol-agnostic data. It consists of generic information such as the block predecessor’s hash and the block’s timestamp.
+A block is a collection of several operations. The operations are located in the payload of the block which is specific to the protocol.
+
+Along with the payload, the block includes a header that contains protocol-agnostic data. It consists of generic information such as the block predecessor’s hash and the block’s timestamp.
 
 **Blockchain**
 
 A blockchain is a digital, public ledger that records online transactions. Blockchain is the core technology for [cryptocurrencies](https://www.bankrate.com/glossary/c/cryptocurrency/) like [bitcoin](https://www.bankrate.com/glossary/b/bitcoin/). A blockchain ensures the integrity of a cryptocurrency by encrypting, validating, and permanently recording transactions. A blockchain is similar to a bank’s ledger but open and accessible to everyone who utilizes the cryptocurrency it supports.
-
-**Block Height**
-
-Block height is the number of blocks in a blockchain between any given block and the very first block in the blockchain. It is commonly used to refer to the most recent block produced, but can refer to any given block.  
-Often, the block height is queried directly from the blockchain but can easily be found on most block explorer sites as well.
 
 **BUIDL**
 
@@ -86,7 +82,7 @@ The ticker symbol for the Celo native asset, often written in capital letters to
 
 **Cipher**
 
-A cryptographic technique used to encrypt and decrypt messages. Ciphers can be divided into two categories - [symmetric](https://en.wikipedia.org/wiki/Symmetric-key_algorithm) or [asymmetric](https://searchsecurity.techtarget.com/definition/asymmetric-cryptography).
+A cryptographic technique used to encrypt and decrypt messages. It’s further divided into two categories - symmetric and asymmetric.
 
 **Circulating Supply**
 
@@ -102,7 +98,7 @@ Cosmos is an ecosystem of blockchains that can scale and interoperate with each 
 
 **Cryptocurrency**
 
-A digital currency that is built using blockchain technology and secured by cryptography to use as a medium of peer to peer transaction. For example: Bitcoin, Ether, CELO, NEAR, etc.
+A digital currency that is built using blockchain technology and secured by cryptography to use as a medium of peer to peer transaction. Eg. BTC, ETH etc.
 
 **Cryptography**
 
@@ -132,7 +128,7 @@ A new form of finance that does not rely on central financial intermediaries suc
 
 **Double Spending**
 
-When the same unit of cryptocurrency is spent more than once. Mainly happens due to 51% attack.
+When crypto coins are spent more than once. Mainly happens due to 51% attack.
 
 ## E
 
@@ -142,21 +138,21 @@ An Eclipse Attack is a means of attacking a decentralized network through which 
 
 **ERC-20**
 
-The ERC-20 Ethereum token standard is a blueprint for creating fungible tokens that are compatible with the broader Ethereum network. This standard was proposed by Fabian Vogelsteller in November 2015 and is still widely used today.
+ERC20 is an official protocol for proposing improvements to the Ethereum \(ETH\) network. Proposed by Fabian Vogelsteller in November 2015.
 
 **ERC-721**
 
-An NFT \(Non-Fungible Token\) standard based on Ethereum. Fungibility is the _ability of a good or asset to be interchanged with other individual goods or assets of the same type_. A Non-Fungible Token is unique, and does not have equivalency with other NFTs. 
+An NFT \(Non-Fungible Token\) based on Ethereum. Which means every token is unique and not interchangeable.
 
-**EVM**  
-  
-An acronym which stands for Ethereum Virtual Machine. This is a runtime environment used by Ethereum as well as several other protocols like Celo and Avalanche.
+**EVM**
+
+The Ethereum Virtual Machine. A runtime environment used by smart contracts on some Web 3 protocols including Ethereum.
 
 ## F
 
 **Fiat**
 
-Fiat money is a currency that lacks intrinsic value and is established as a legal tender by government regulation. 
+Fiat money is a currency that lacks intrinsic value and is established as a legal tender by government regulation.
 
 **Fork**
 
@@ -186,13 +182,13 @@ Blockchain governance is a process that allows participants to vote on-chain usi
 
 **Gwei**
 
-[Gwei](https://gwei.io) is a denomination of Ether, meaning "gigawei". One gwei equals 0.000000001 ETH, or 1 to the 9th power \(1e^9\) This is most commonly seen as the Ethereum gas price denomination.  
+Gwei is a denomination of Ether. One gwei equals 0.000000001 or 10-9 ETH.
 
 ## H
 
 **Halving**
 
-When the block reward for mining crypto assets \(like Bitcoin\) is decreased to one half of its previous value.
+When the reward for mining crypto assets \(like Bitcoin\) decreased to one half of its previous value.
 
 **Hash**
 

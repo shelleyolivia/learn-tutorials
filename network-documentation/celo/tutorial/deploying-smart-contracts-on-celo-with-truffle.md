@@ -6,6 +6,10 @@ description: >-
 
 # Deploying smart contracts on Celo with Truffle
 
+## About the Author
+
+This tutorial was created by [Alex Reyes](https://www.linkedin.com/in/alexreyes-tech). Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He completed his previous internships at Facebook and Microsoft.
+
 ## Introduction
 
 How would you go about deploying an existing Solidity smart contract on the Celo network? One answer is that you could do it with the help of Truffle -- a development environment that is designed to make deploying smart contracts much easier.
@@ -71,12 +75,12 @@ contract Migrations {
 
   modifier restricted() {
     require(
-	  msg.sender == owner,"This function is restricted to the contract's owner");
-	  _;
+      msg.sender == owner,"This function is restricted to the contract's owner");
+      _;
   }
 
   function setCompleted(uint completed) public restricted {
-	last_completed_migration = completed;
+    last_completed_migration = completed;
   }
 }
 ```
@@ -155,16 +159,16 @@ require('dotenv').config();
 
 const main =  async  ()  =>  {
     const web3 =  new  Web3(process.env.REST_URL);
-	const client = ContractKit.newKitFromWeb3(web3);
+    const client = ContractKit.newKitFromWeb3(web3);
 
-	const account = web3.eth.accounts.create();
+    const account = web3.eth.accounts.create();
 
-	console.log('address: ', account.address);
+    console.log('address: ', account.address);
     console.log('privateKey: ', account.privateKey);
 };
 
 main().catch((err)  =>  {
-	console.error(err);
+    console.error(err);
 });
 ```
 
@@ -337,8 +341,4 @@ If you want to double check that your account received the funds, go to the [Alf
 Make sure your account isn't empty like this one!
 
 [![empty account](https://camo.githubusercontent.com/60a2da1b381d2d9f9c21ade38e54f3793ead7bf2162d4eb7ccb8297733494cbc/68747470733a2f2f692e696d6775722e636f6d2f795055594353442e706e67)](https://camo.githubusercontent.com/60a2da1b381d2d9f9c21ade38e54f3793ead7bf2162d4eb7ccb8297733494cbc/68747470733a2f2f692e696d6775722e636f6d2f795055594353442e706e67)
-
-## About the Author
-
-This tutorial was created by [Alex Reyes](https://www.linkedin.com/in/alexreyes-tech). Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He completed his previous internships at Facebook and Microsoft.
 

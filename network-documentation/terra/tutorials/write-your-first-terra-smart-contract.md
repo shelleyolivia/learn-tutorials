@@ -1,6 +1,6 @@
 # Write your first Terra smart contract
 
-[The original tutorial can be found in the official Terra documentation here](https://docs.terra.money/contracts/tutorial/implementation.html#optimizing-your-build). 
+[The original tutorial can be found in the official Terra documentation here](https://docs.terra.money/contracts/tutorial/implementation.html#optimizing-your-build).
 
 ## Introduction
 
@@ -89,7 +89,7 @@ The `InitMsg` is provided when a user creates a contract on the blockchain throu
 
 On the Terra blockchain, the uploading of a contract's code and the instantiation of a contract are regarded as separate events, unlike on Ethereum. This is to allow a small set of vetted contract archetypes to exist as multiple instances sharing the same base code but configured with different parameters \(imagine one canonical ERC20, and multiple tokens that use its code\).
 
-#### Example <a id="example"></a>
+### Example <a id="example"></a>
 
 For our contract, we will expect a contract creator to supply the initial state in a JSON message:
 
@@ -99,7 +99,7 @@ For our contract, we will expect a contract creator to supply the initial state 
 }
 ```
 
-#### Message Definition <a id="message-definition"></a>
+### Message Definition <a id="message-definition"></a>
 
 ```javascript
 // src/msg.rs
@@ -111,10 +111,9 @@ use serde::{Deserialize, Serialize};
 pub struct InitMsg {
     pub count: i32,
 }
-
 ```
 
-#### Logic <a id="logic"></a>
+### Logic <a id="logic"></a>
 
 Here we define our first entry-point, the `init()`, or where the contract is instantiated and passed its `InitMsg`. We extract the count from the message and set up our initial state, where:
 
@@ -151,7 +150,7 @@ pub fn init<S: Storage, A: Api, Q: Querier>(
 
 The `HandleMsg` is a JSON message passed to the `handle()` function through a `MsgExecuteContract`. Unlike the `InitMsg`, the `HandleMsg` can exist as several different types of messages, to account for the different types of functions that a smart contract can expose to a user. The `handle()` function demultiplexes these different types of messages to its appropriate message handler logic.
 
-#### Example <a id="example-2"></a>
+### Example <a id="example-2"></a>
 
 **Increment**
 
@@ -175,7 +174,7 @@ Only the owner can reset the count to a specific number.
 }
 ```
 
-#### Message Definition <a id="message-definition-2"></a>
+### Message Definition <a id="message-definition-2"></a>
 
 As for our `HandleMsg`, we will use an `enum` to multiplex over the different types of messages that our contract can understand. The `serde` attribute rewrites our attribute keys in snake case and lower case, so we'll have `increment` and `reset` instead of `Increment` and `Reset` when serializing and deserializing across JSON.
 
@@ -192,7 +191,7 @@ pub enum HandleMsg {
 }
 ```
 
-#### Logic <a id="logic-2"></a>
+### Logic <a id="logic-2"></a>
 
 ```javascript
 // src/contract.rs
@@ -257,7 +256,7 @@ The logic for reset is very similar to increment -- except this time, we first c
 
 ## QueryMsg
 
-#### Example <a id="example-3"></a>
+### Example <a id="example-3"></a>
 
 The template contract only supports one type of `QueryMsg`:
 
@@ -279,7 +278,7 @@ Which should return:
 }
 ```
 
-#### Message Definition <a id="message-definition-3"></a>
+### Message Definition <a id="message-definition-3"></a>
 
 To support queries against our contract for data, we'll have to define both a `QueryMsg` format \(which represents requests\), as well as provide the structure of the query's output -- `CountResponse` in this case. We must do this because `query()` will send back information to the user through JSON in a structure and we must make the shape of our response known.
 
@@ -301,7 +300,7 @@ pub struct CountResponse {
 }
 ```
 
-#### Logic <a id="logic-3"></a>
+### Logic <a id="logic-3"></a>
 
 The logic for `query()` should be similar to that of `handle()`, except that, since `query()` is called without the end-user making a transaction, we omit the `env` argument as there is no information.
 
@@ -331,7 +330,7 @@ To build your contract, run the following command. This will check for any preli
 cargo wasm
 ```
 
-#### Optimizing your build <a id="optimizing-your-build"></a>
+### Optimizing your build <a id="optimizing-your-build"></a>
 
 You will need [Docker \(opens new window\)](https://www.docker.com/)installed to run this command.
 

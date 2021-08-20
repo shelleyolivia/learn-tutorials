@@ -6,7 +6,7 @@ description: Learn how to interact with the Tendermint RPC
 
 ## Source documentation
 
-[**The Tendermint RPC's source documentation can be found here**](https://docs.tendermint.com/master/rpc/#/). 
+[**The Tendermint RPC's source documentation can be found here**](https://docs.tendermint.com/master/rpc/#/).
 
 Tendermint supports the following RPC protocols:
 
@@ -44,14 +44,14 @@ curl --header "Content-Type: application/json" --request POST --data '{"method":
 
 JSONRPC requests can be also made via websocket. The websocket endpoint is at `/websocket`, e.g. `localhost:26657/websocket`. Asynchronous RPC functions like event `subscribe` and `unsubscribe` are only available via websockets.
 
-Example using https://github.com/hashrocket/ws:
+Example using [https://github.com/hashrocket/ws](https://github.com/hashrocket/ws):
 
 ```javascript
 ws ws://localhost:26657/websocket
 > { "jsonrpc": "2.0", "method": "subscribe", "params": ["tm.event='NewBlock'"], "id": 1 }
 ```
 
-## **Websocket** 
+## **Websocket**
 
 **Subscribe/unsubscribe are reserved for websocket events.**
 
@@ -61,7 +61,7 @@ ws ws://localhost:26657/websocket
 
 Subscribe for events via Websocket
 
-**Parameters** 
+**Parameters**
 
 <table>
   <thead>
@@ -143,9 +143,9 @@ Unsubscribe from event on Websocket
 }
 ```
 
-### `GET​/unsubscribe_all` 
+### `GET​/unsubscribe_all`
 
-**Description** 
+**Description**
 
 Unsubscribe from all events via Websocket
 
@@ -398,7 +398,7 @@ Get block headers \(max:20\) for minHeight &lt;= height &lt;= maxHeight
 }
 ```
 
-### `GET​/block` 
+### `GET​/block`
 
 **Description**
 
@@ -520,7 +520,7 @@ Get block at a specified height
 }
 ```
 
-### `GET​/block_by_hash` 
+### `GET​/block_by_hash`
 
 **Description**
 
@@ -530,7 +530,7 @@ Get block by hash
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| **hash** | string \* required | Block hash  |
+| **hash** | string \* required | Block hash |
 
 **Example JSON Output**
 
@@ -629,7 +629,7 @@ Get block by hash
 
 **Description**
 
-Get block results at a specified height 
+Get block results at a specified height
 
 **Parameters**
 
@@ -738,7 +738,7 @@ Get block results at a specified height
 }
 ```
 
-### `GET​/commit` 
+### `GET​/commit`
 
 ### **Get commit results at a specified height**
 
@@ -832,7 +832,7 @@ Get commit results at a specified height
 
 **Description**
 
-Get a validator set at a specified height 
+Get a validator set at a specified height
 
 **Parameters**
 
@@ -856,7 +856,7 @@ Get a validator set at a specified height
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b>page </b> 
+      <td style="text-align:left"><b>page</b>
       </td>
       <td style="text-align:left">integer</td>
       <td style="text-align:left">
@@ -905,7 +905,7 @@ Get a validator set at a specified height
 
 **Description**
 
-Get Genesis 
+Get Genesis
 
 **Parameters**
 
@@ -959,7 +959,7 @@ No parameters
 
 **Description**
 
-Get consensus state 
+Get consensus state
 
 **Parameters**
 
@@ -1086,7 +1086,7 @@ No parameters
 
 **Description**
 
-Get consensus state 
+Get consensus state
 
 **Parameters**
 
@@ -1316,7 +1316,7 @@ Get the list of unconfirmed transactions
 
 **Description**
 
-Get data about unconfirmed transactions 
+Get data about unconfirmed transactions
 
 **Parameters**
 
@@ -1340,7 +1340,7 @@ No parameters
 
 **Description**
 
-Search for transactions 
+Search for transactions
 
 **Parameters**
 
@@ -1445,7 +1445,7 @@ Search for transactions
 
 **Description**
 
-Get transactions by hash 
+Get transactions by hash
 
 **Parameters**
 
@@ -1507,7 +1507,7 @@ Get transactions by hash
 
 **Description**
 
-Broadcast evidence of the misbehavior 
+Broadcast evidence of the misbehavior
 
 **Parameters**
 
@@ -1534,13 +1534,13 @@ Broadcast evidence of the misbehavior
 
 **Description**
 
-Returns with the response from CheckTx. Does not wait for DeliverTx result. 
+Returns with the response from CheckTx. Does not wait for DeliverTx result.
 
 **Parameters**
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| **tx** | string \* required | The transaction  |
+| **tx** | string \* required | The transaction |
 
 **Example JSON Output**
 
@@ -1563,7 +1563,7 @@ Returns with the response from CheckTx. Does not wait for DeliverTx result.
 
 **Description**
 
-Returns right away, with no response. Does not wait for CheckTx nor DeliverTx 
+Returns right away, with no response. Does not wait for CheckTx nor DeliverTx
 
 **Parameters**
 
@@ -1592,7 +1592,7 @@ Returns right away, with no response. Does not wait for CheckTx nor DeliverTx
 
 **Description**
 
-Returns with the responses from CheckTx and DeliverTx 
+Returns with the responses from CheckTx and DeliverTx
 
 **Parameters**
 
@@ -1634,7 +1634,7 @@ Checks the transaction without executing it
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| **tx** | string \* required | The transaction  |
+| **tx** | string \* required | The transaction |
 
 **Example JSON Output**
 
@@ -1671,11 +1671,11 @@ Checks the transaction without executing it
 
 **ABCI APIs**
 
-### `GET​/abci_info` ****
+### `GET​/abci_info` _\*\*_
 
 **Description**
 
-Get some info about the application 
+Get some info about the application
 
 **Parameters**
 
@@ -1701,7 +1701,7 @@ No parameters
 
 **Description**
 
-Query the application for some information 
+Query the application for some information
 
 **Parameters**
 
@@ -1776,7 +1776,7 @@ Query the application for some information
 
 **Description**
 
-Dial Seeds \(unsafe\) 
+Dial Seeds \(unsafe\)
 
 **Parameters**
 
@@ -1796,16 +1796,16 @@ Dial Seeds \(unsafe\)
 
 **Description**
 
-Add Peers/Persistent Peers \(unsafe\) 
+Add Peers/Persistent Peers \(unsafe\)
 
 **Parameters**
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
 | **hash** | string \* required | Have the peers you are dialing be persistent |
-| **persistent** | boolean | Have the peers you are dialing be unconditional  |
+| **persistent** | boolean | Have the peers you are dialing be unconditional |
 | **unconditional** | boolean | Have the peers you are dialing be private |
-| **peers**  | \(array\[string\]\) | Array of peers to dial |
+| **peers** | \(array\[string\]\) | Array of peers to dial |
 
 **Example JSON Output**
 

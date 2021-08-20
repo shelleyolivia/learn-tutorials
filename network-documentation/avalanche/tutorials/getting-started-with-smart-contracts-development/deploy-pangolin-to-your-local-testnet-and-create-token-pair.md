@@ -18,11 +18,11 @@ However, before that, we must familiarize ourselves with the functionality of to
 
 In this tutorial, we will illustrate how to create your own Pangolin exchange locally and also create a trading pair from any arbitrary ERC20 tokens.
 
-### About Pangolin
+## About Pangolin
 
 Pangolin is a fork of Uniswap V2 and the first decentralized exchange \(DEX\) on Avalanche c-chain where users can swap their [ERC20](https://eips.ethereum.org/EIPS/eip-20) tokens.
 
-### Prerequisites
+## Prerequisites
 
 If you have completed the Avalanche tutorial on [Using Truffle with the Avalanche C-Chain](https://docs.avax.network/build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain), you will have completed most of the prerequisites.
 
@@ -203,7 +203,7 @@ Then if you wanted to later call functions on the pair address, you need to acce
 
 
 
-### Wrapping Up
+## Wrapping Up
 
 In this tutorial we have covered:
 
@@ -216,7 +216,7 @@ In this tutorial we have covered:
 * Deploying Pangolin Router
 * Creating a token pair with our mock ERC20 Tokens
 
-### Conclusion
+## Conclusion
 
 You have now deployed Pangolin to your local testnet with your two ERC20 tokens, created a pair token from the ERC20 tokens and now are ready to interact with pangolin through the router as you would on Uniswap v2.
 

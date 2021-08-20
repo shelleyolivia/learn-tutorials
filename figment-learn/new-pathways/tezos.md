@@ -1,1 +1,8 @@
-![Tezos](https://user-images.githubusercontent.com/529836/130071719-e1e8258f-428d-4359-ae8e-702db6a03b19.jpg)
+# Coming Soon
+
+![](../../.gitbook/assets/zzztezos.jpg)
+
+{% hint style="info" %}
+[Stay up to date, Join us on discord](https://discord.gg/fszyM7K)
+{% endhint %}
+

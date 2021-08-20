@@ -1,1 +1,7 @@
-![](https://user-images.githubusercontent.com/529836/130069982-2948f6c5-3b94-460d-a936-21c6a3dfea1d.jpg)
+# Coming Soon
+
+![](../../.gitbook/assets/zzzavalanche.jpg)
+
+{% hint style="info" %}
+[Stay up to date, Join us on discord](https://discord.gg/fszyM7K)
+{% endhint %}
