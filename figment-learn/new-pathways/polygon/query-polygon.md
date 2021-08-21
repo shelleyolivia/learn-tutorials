@@ -7,11 +7,15 @@ In order to gather information from the blockchain, we will use ethers again. Fo
 
 In the file `components/protocols/polygon/steps/2_Query.tsx` we have already written the `getQuery` function which will send a network request to the node server. [By convention of Next.js routing](https://nextjs.org/docs/api-routes/introduction), a client-side request to `http://localhost:3000/api/polygon/query` will get routed to the file `query.js` in `/pages/api/polygon` and be executed by the default imported function.
 
+-------------------------------------
+
 ## The challenge
 
 {% hint style="warning" %}
 **Imagine this scenario:** As the lead developer of a cool new dApp, you need to create a way to query information from the blockchain and then display it on the UI. You know that Next.js has some nice features for creating custom API routes, and that by using TypeScript it is easy to pass complex data types as JSON. Now you just need to wire it up to Polygon to take advantage of the impressive transaction throughput! In **`pages/api/polygon/query.ts`**, assign values to the following variables :  `chainId` , `blockHeight` , `gasPriceAsGwei` ,`blockInfo`
 {% endhint %}
+
+**Take a few minutes to figure this out.**
 
 ```typescript
  try {
@@ -42,6 +46,8 @@ When complete, click on the button and you should see:
 
 ![](../../../.gitbook/assets/query_success.png)
 
+-------------------------------------
+
 ## The solution
 
 ```typescript
@@ -67,6 +73,8 @@ When complete, click on the button and you should see:
 * `gasPriceAsGwei` gets the current gas price and then formats the value into a human-friendly number with the ethers utility function `formatUnits()`.
 * `blockInfo` must be a BlockWithTransactions type, which is what the function `getBlockWithTransactions()` returns.
 
+-------------------------------------
+
 ## Next Steps
 
-Now that we have queried Polygon and retreived information from the blockchain, we will want to get MATIC tokens into our wallet so we can pay the fees to deploy a smart contract. In the next tutorial, we will cover how to fund an account with MATIC through the official faucet.
+Now that we have queried Polygon and retreived information from the blockchain, we will want to get **MATIC** tokens into our wallet so we can pay the fees to deploy a smart contract. In the next tutorial, we will cover how to fund an account with **MATIC** through the official faucet.

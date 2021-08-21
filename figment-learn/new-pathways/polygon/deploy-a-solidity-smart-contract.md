@@ -1,8 +1,4 @@
----
-description: 'Learn how to write, test and deploy Solidity on Polygon using Truffle'
----
-
-# Deploy a Solidity smart contract
+# 
 
 Solidity is a high level language. It is partly designed after ECMAScript and therefore it is said to be **similar to JavaScript**. But the similarity ends there. It gets compiled \(not interpreted\) and usually deployed on Blockchains that understand the Ethereum Virtual Machine \(EVM\), like Polygon! When a smart contract is deployed, it becomes immutable. This has both benefits and drawbacks, which we will discuss below.
 
@@ -10,7 +6,7 @@ We can use [HardHat](https://hardhat.org) or [Truffle](https://trufflesuite.com)
 
 Run the following commands to get started :
 
-```text
+```bash
 npm install -g truffle
 cd contracts/polygon/SimpleStorage
 yarn
@@ -161,13 +157,13 @@ airport battle cargo daughter educate focus green honey immune jelly kick langua
 
 Compiling Solidity with Truffle is a straightforward process, just make sure that your preferred configuration is set in `truffle-config.js` \(paths, compilers, networks, etc.\) and then run the command:
 
-```text
+```bash
 truffle compile
 ```
 
 Deploying Migrations with Truffle is quite similar to deploying, but provides more flexibility for custom workflows. A full explanation of migrations is beyond the scope of this tutorial, but please do read the Truffle [documentation](https://www.trufflesuite.com/docs/truffle/getting-started/running-migrations) on the subject. To deploy the SimpleStorage contract to Polygon, run this command :
 
-```text
+```bash
 truffle migrate --network matic
 ```
 
@@ -175,13 +171,16 @@ The flag `--network matic` lets Truffle know which network we want to deploy our
 
 For this step to work, we will also need to make sure there is a valid secret recovery phrase inside of the `.secret` file, and that the account has some MATIC tokens. If you have followed the tutorial steps so far, these conditions should be satisfied. 
 
+-------------------------------------
+
 ## Using the Application Binary Interface \(ABI\):
 
 [The Solidity Contract ABI Specification](https://docs.soliditylang.org/en/v0.8.6/abi-spec.html) explains that an ABI is a standard way to interact with contracts in the Ethereum ecosystem, both from outside the blockchain and for contract-to-contract interaction. Data is encoded according to its type, as described in the specification. The encoding is not self describing and thus requires a schema in order to decode.
 
 The ABI is considered an "[artifact](https://trufflesuite.github.io/artifact-updates/background.html#what-are-artifacts)" in relation to a compiled Solidity contract. Most commonly, developers will interact with an ABI in JSON format. Read more about [what this means](https://docs.soliditylang.org/en/v0.8.6/abi-spec.html#json).
 
+-------------------------------------
+
 ## Next Steps
 
 Now that we have a deployed and functioning smart contract, let's interact with it!
-

@@ -22,6 +22,8 @@ There are a few important sites that will be of interest to users of **Polygon**
 * [https://docs.matic.network](https://docs.matic.network/) for knowledge!
 * [https://faucet.matic.network](https://faucet.matic.network/) for free testnet assets.
 
+-------------------------------------
+
 ### Heimdall & Bor
 
 For **Polygon**, the node is designed with a two layer implementation with Heimdall (the Validator layer) & Bor (the Block Producer layer) :
@@ -30,6 +32,8 @@ For **Polygon**, the node is designed with a two layer implementation with Heimd
   * On DataHub, the RPC endpoint is used to access Heimdall. 
 * **Bor** is compatible with the Ethereum Virtual Machine (EVM), it is a fork of the [Geth client](https://geth.ethereum.org/docs/) with customized consensus algorithms. User interaction on **Polygon** takes place on this chain, it also makes available the functionality and compatibility of Ethereum developer tooling and applications.  Read more about the [core concepts](https://docs.matic.network/docs/contribute/bor/core_concepts) of Bor.
   * On DataHub, the JSON-RPC endpoint is used to access Bor.
+
+-------------------------------------
 
 ### Bridging Polygon & Ethereum
 
@@ -41,6 +45,7 @@ It is possible to process many transactions on **Polygon** and use relatively li
 
 In summary, **Polygon** is an attractive solution for developers who wish to keep much of the tooling and community of Ethereum, while leveraging the best scaling for their decentralized applications.
 
+-------------------------------------
 
 ## Next Steps
 
