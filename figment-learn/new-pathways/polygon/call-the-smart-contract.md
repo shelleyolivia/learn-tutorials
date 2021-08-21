@@ -13,22 +13,18 @@ As simple as it sounds, what's happening in the background is actually very powe
 {% hint style="warning" %}
 **Implement the `getValue` and `setValue` functions:**  
 {% endhint %}
-  
-Need some help? Check out these two tips/links  
-* [**Create a Contract using ethers**](https://docs.ethers.io/v5/api/contract/contract/#Contract--creating) 
-	* You can **console.log `SimpleStorageJson`** to find the contract's `abi` and `address` (through the property `networks`)  
-* [**How to call a contract's methods on a ethers Contract object**](https://docs.ethers.io/v5/api/contract/contract/#Contract-functionsCall)  
-* *To read from the blockchain you don't need to spend any tokens so you can just use a provider to create a Contract instance. But to write you will need to create and sign a transaction through Metamask. Use a `signer` to create the Contract object!
 
 **Take a few minutes to figure this out.**
 
-
-
 Need some help? Check out these two tips/links  
 * [**Create a Contract using ethers**](https://docs.ethers.io/v5/api/contract/contract/#Contract--creating) 
 	* You can **console.log `SimpleStorageJson`** to find the contract's `abi` and `address` (through the property `networks`)  
 * [**How to call a contract's methods on a ethers Contract object**](https://docs.ethers.io/v5/api/contract/contract/#Contract-functionsCall)  
-* *To read from the blockchain you don't need to spend any tokens so you can just use a provider to create a Contract instance. But to write you will need to create and sign a transaction through Metamask. Use a `signer` to create the Contract object!
+* To read from the blockchain you don't need to spend any tokens so you can just use a provider to create a Contract instance. But to write you will need to create and sign a transaction through Metamask. Use a `signer` to create the Contract object!
+
+{% hint style="info" %}
+[Still not sure how to do this? **Join us on Discord** and someone will help!](https://discord.gg/fszyM7K)
+{% endhint %}
 
 -------------------------------------
 
@@ -115,4 +111,6 @@ From here, there are many ways to increase your skills with web3 development. We
 
 If you are an experienced developer, you are welcome to contribute tutorials for **Polygon** and earn some **MATIC** tokens! Check out our tutorial [contribution guidelines](../../../other/tutorial-guidelines/) to get started.
 
+{% hint style="info" %}
 [**Please tell us what you think about this tutorial!**](https://docs.google.com/forms/d/e/1FAIpQLSc9taxobvDSdXprMEFhCXgfcwS_oA-lu-nbQdYEW6c57Ie6qg/viewform?usp=sf_link)
+{% endhint %}

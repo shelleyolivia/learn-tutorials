@@ -29,7 +29,7 @@ It is possible to view the balance of an address on Polygon in several ways. Thr
 
 ## The challenge
 
-{% hint style="info" %}
+{% hint style="warning" %}
 **Imagine this scenario:** You know you have a big balance. You need to show that balance so you can brag about it to all your awesome web3 developer friends! In `components/protocols/polygon/steps/3_Balance.jsx`, implement the`checkBlance`function :
 {% endhint %}
 
