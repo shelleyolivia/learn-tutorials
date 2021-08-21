@@ -1,9 +1,3 @@
----
-description: Learn how to connect to Polygon using Metamask and ethers.js
----
-
-# Connect to Polygon
-
 ## Add the Mumbai testnet to Metamask
 
 {% hint style="danger" %}
