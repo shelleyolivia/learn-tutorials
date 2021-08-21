@@ -1,8 +1,4 @@
----
-description: Learn how to connect to Polygon using Metamask and ethers.js
----
-
-# Connect to Polygon
+# 
 
 ## Add the Mumbai testnet to Metamask
 
@@ -34,7 +30,9 @@ In ethers, a **provider** is a read-only abstraction to access the blockchain da
 
 The ethers library has some helpful functions that will make this a snap! Read the ethers.js[ API documentation](https://docs.ethers.io/v5/api/) to learn more about its various functions. 
 
+{% hint style="danger" %}
 _It is important to note that throughout the Pathway, we will refer to the_ ethers.js _library only as "_ethers_"._
+{% endhint %}
 
 ## The challenge
 
