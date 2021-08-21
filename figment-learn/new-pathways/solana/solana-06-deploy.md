@@ -1,12 +1,14 @@
 # 
 
-A *program* is to Solana what a *smart contract* is to other protocols. Once a program has been deployed, any app can interact with it by sending a transaction to a Solana cluster that will pass it to the program.
+A *program* is to Solana what a **smart contract** is to other protocols. Once a program has been deployed, any app can interact with it by sending a transaction to a Solana cluster that will pass it to the program.
 
-Solana programs can be written in C or in Rust. You can learn more about Solana's programs [here](https://docs.solana.com/developing/on-chain-programs/overview).
-
-So far we've been using Solana's JS API to interact with the blockchain. In this chapter we're going to deploy a Solana program using another Solana developer tool: their CLI. We'll install it and use it through our Terminal.
+{% hint style="info" %}
+[You can learn more about Solana's programs here](https://docs.solana.com/developing/on-chain-programs/overview).
+{% endhint %}
 
 ## Install Rust and configure the Solana CLI
+
+So far we've been using Solana's JS API to interact with the blockchain. In this chapter we're going to deploy a Solana program using another Solana developer tool: their CLI. We'll install it and use it through our Terminal.
 
 For simplicity, perform both of these installations inside the project root:
 

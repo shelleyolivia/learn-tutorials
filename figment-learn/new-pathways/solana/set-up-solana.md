@@ -18,7 +18,7 @@ For simplicity, perform both of these installations inside the project root:
     sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
 ```
 
-## Install Solana CLI
+## Set up the 
 
 Set the CLI config URL to the devnet cluster by running this command in your Terminal:
 
