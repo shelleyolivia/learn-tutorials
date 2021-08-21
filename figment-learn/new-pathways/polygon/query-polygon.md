@@ -11,10 +11,11 @@ In the file `components/protocols/polygon/steps/2_Query.tsx` we have already wri
 
 {% hint style="warning" %}
 **Imagine this scenario:** As the lead developer of a cool new dApp, you need to create a way to query information from the blockchain and then display it on the UI. You know that Next.js has some nice features for creating custom API routes, and that by using TypeScript it is easy to pass complex data types as JSON. Now you just need to wire it up to Polygon to take advantage of the impressive transaction throughput!
+{% endhint %}
 
 In **`pages/api/polygon/query.ts`**, assign values to the following variables :
  `chainId` , `blockHeight` , `gasPriceAsGwei` ,`blockInfo`
-{% endhint %}
+
 
 ```typescript
  try {
