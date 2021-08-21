@@ -1,3 +1,9 @@
+---
+description: Learn how to use Polygon (Matic)
+---
+
+# Set up your Projetc
+
 ## Requirements
 
 * [Node.js](https://nodejs.org) v14+ installed (we recommend using [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm))
