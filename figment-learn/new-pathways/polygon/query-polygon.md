@@ -12,23 +12,13 @@ In the file `components/protocols/polygon/steps/2_Query.tsx` we have already wri
 
 ## The challenge
 
-**Imagine this scenario:** As the lead developer of a cool new dApp, you need to create a way to query information from the blockchain and then display it on the UI. You know that Next.js has some nice features for creating custom API routes, and that by using TypeScript it is easy to pass complex data types as JSON. Now you just need to wire it up to Polygon to take advantage of the impressive transaction throughput!
-
-{% hint style="info" %}
-In **`pages/api/polygon/query.ts`**, assign values to the following variables :
-
-`chainId` , `blockHeight` , `gasPriceAsGwei` ,`blockInfo`
-
-**Need some help?** Check out these links  
-  **→** [**Getting the network's chainId**](https://ethereum.stackexchange.com/questions/82365/how-get-network-id-with-ethers-js)  
-  **→ What is a** [**block number \(or height**](https://learn.figment.io/other/glossary)**\)? And how to** [**get it from ethers**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getBlockNumber)**.  
-  → What is gas price and** [**gwei**](https://gwei.io/)**? And how to** [**get it from ethers**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getGasPrice)**.  
-  →** [**Formatting units**](https://docs.ethers.io/v5/api/utils/display-logic/#utils-formatUnits) **from BigNumber to gwei**
+{% hint style="warning" %}
+>**Imagine this scenario:** As the lead developer of a cool new dApp, you need to create a way to query information from the blockchain and then display it on the UI. You know that Next.js has some nice features for creating custom API routes, and that by using TypeScript it is easy to pass complex data types as JSON. Now you just need to wire it up to Polygon to take advantage of the impressive transaction throughput!
+>
+>In **`pages/api/polygon/query.ts`**, assign values to the following variables :
+> `chainId` , `blockHeight` , `gasPriceAsGwei` ,`blockInfo`
 {% endhint %}
 
-{% tabs %}
-{% tab title="Coding Challenge" %}
-{% code title="learn-web3-dapp/pages/api/polygon/query.ts" %}
 ```typescript
  try {
     const networkName = await provider.getNetwork().then(res => { return res.name })
@@ -43,12 +33,15 @@ In **`pages/api/polygon/query.ts`**, assign values to the following variables :
     ...
  }
 ```
-{% endcode %}
-{% endtab %}
-{% endtabs %}
+
+**Need some help?** Check out these links  
+  **→** [**Getting the network's chainId**](https://ethereum.stackexchange.com/questions/82365/how-get-network-id-with-ethers-js)  
+  **→ What is a** [**block number \(or height**](https://learn.figment.io/other/glossary)**\)? And how to** [**get it from ethers**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getBlockNumber)**.  
+  → What is gas price and** [**gwei**](https://gwei.io/)**? And how to** [**get it from ethers**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getGasPrice)**.  
+  →** [**Formatting units**](https://docs.ethers.io/v5/api/utils/display-logic/#utils-formatUnits) **from BigNumber to gwei**
 
 {% hint style="info" %}
-Still not sure how to do this? [**Join us on Discord**](https://discord.gg/fszyM7K) and someone will help!
+[Still not sure how to do this? **Join us on Discord**(https://discord.gg/fszyM7K) and someone will help!]
 {% endhint %}
 
 When complete, click on the button and you should see:
@@ -57,15 +50,6 @@ When complete, click on the button and you should see:
 
 ## The solution
 
-{% tabs %}
-{% tab title="SPOILER ALERT!" %}
-```text
-Only click on the solution tab if you are completely stuck and want the answer.
-```
-{% endtab %}
-
-{% tab title="The solution" %}
-{% code title="pages/api/polygon/query.ts" %}
 ```typescript
   const chainId = provider.network.chainId
   const blockHeight = await provider.getBlockNumber()
@@ -74,9 +58,6 @@ Only click on the solution tab if you are completely stuck and want the answer.
   })
   const blockInfo = await provider.getBlockWithTransactions(blockHeight)
 ```
-{% endcode %}
-{% endtab %}
-{% endtabs %}
 
 What happened in the code above? Let's have a closer look!
 
@@ -96,4 +77,3 @@ What happened in the code above? Let's have a closer look!
 
 Now that we have queried Polygon and retreived information from the blockchain, we will want to get MATIC tokens into our wallet so we can pay the fees to deploy a smart contract.  
 In the next tutorial, we will cover how to fund an account with MATIC through the official faucet.
-
