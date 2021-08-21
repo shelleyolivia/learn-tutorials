@@ -2,7 +2,7 @@
 description: Learn how to use Polygon (Matic)
 ---
 
-# Set up your Projetc
+# Set up your Project
 
 ## Requirements
 
