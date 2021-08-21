@@ -1,7 +1,3 @@
----
-description: Learn how to use Polygon (Matic)
----
-
 # Set up your Project
 
 ## Requirements
