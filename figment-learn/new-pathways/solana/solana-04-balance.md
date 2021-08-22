@@ -17,7 +17,7 @@ In `pages/api/solana/balance.ts`, implement `balance`.
     const address = req.body.address as PublicKey;
     const url = getSafeUrl();
     const connection = new Connection(url, "confirmed");
-    const publicKey =undefined;
+    const publicKey = undefined;
     const balance = undefined;
     res.status(200).json(balance);
 //...

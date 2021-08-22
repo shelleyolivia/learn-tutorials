@@ -7,18 +7,16 @@ Last but not least, we'll need to modify the stored data into **greeter**. Doing
 ## The challenge
 
 {% hint style="warning" %}
-In `pages/api/solana/balance.ts`, implement `balance`.
+In `pages/api/solana/callGreetings.ts`, complete `setGreetings`. At first you'll have to create an instruction, next you'll have to send and confirm a transaction storing the instruction.
 {% endhint %}
 
 **Take a few minutes to figure this out**
 
 ```typescript 
 //... 
-  const instruction = new TransactionInstruction({ 
-    keys: [{pubkey: greeterPublicKey as PublicKey, isSigner: false, isWritable: true}], 
-    programId: programKey, 
-    data: Buffer.alloc(0), // All instructions are hellos 
-  }); 
+  // this your turn to figure out 
+  // how to create this instruction
+  const instruction = new TransactionInstruction(undefined); 
 
   // this your turn to figure out 
   // how to create this transaction 
