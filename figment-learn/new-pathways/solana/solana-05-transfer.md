@@ -37,7 +37,6 @@ In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
 ```
 
 **Need some help?** Here are a few hints
-
 * [Read about `sendAndConfirmTransaction`](https://solana-labs.github.io/solana-web3.js/modules.html#sendAndConfirmTransaction)  
 * [Read about adding instructions to `Transaction`](https://solana-labs.github.io/solana-web3.js/classes/Transaction.html#add)  
 * [Anatomy of a `Transaction`](https://docs.solana.com/developing/programming-model/transactions)
@@ -93,7 +92,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## Visual's test
+## Make sure it works
 
 Once you've filled in the form, press "Submit" and you should see:
 

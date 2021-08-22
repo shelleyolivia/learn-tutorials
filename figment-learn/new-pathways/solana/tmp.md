@@ -2,6 +2,11 @@
 
 
 
+---
+description: Learn how Solana works and what makes it special
+---
+
+
 
 ## The Pathway UI
 
@@ -16,3 +21,14 @@ By the end of the Pathway tutorials, you will be confidently interacting with Po
 ## Next Steps
 
 Now that we gave you a quick overview of Polygon ecosystem, we still need to set up our environment.
+
+## Conclusion
+
+Congratulations on completing the Solana Pathway! We hope you had a fun time and learned a lot. Here are a few things you can check out to go further:
+
+* Keep exploring the [Solana JS API](https://solana-labs.github.io/solana-web3.js/modules.html#sendandconfirmtransaction)
+* Solana's [Hello World dApp](https://github.com/solana-labs/example-helloworld)
+* Read some [programs written by Solana devs](https://github.com/solana-labs/solana-program-library/tree/master/examples)
+* Look at the Solana's [Token Swap program](https://github.com/solana-labs/solana-program-library/tree/master/token-swap) \(~ Uniswap clone!\)
+
+If you had any difficulty with this tutorial or simply want to discuss Solana with other developers, [join our community](https://community.figment.io) today, or [join us on Discord](https://discord.gg/EBveT5xs9D)!
