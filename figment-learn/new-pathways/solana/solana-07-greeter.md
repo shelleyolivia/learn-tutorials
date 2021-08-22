@@ -1,49 +1,48 @@
 # 
 
-We must check the account balance to make sure we have sufficient **SOL** to perform a transfer. The `getBalance()` function takes a `publicKey` as input and will return the balance associated with that `publicKey`, if there is any.
+In Solana's world program are stateless, which mean they doesn't store the value they act on. Then how our program can count the number of times its have been greeted ? 
+
+We have to rely on another account to store data. Which why, we're going to create a new account, the **greeter account** owned by our program in order to store the `count` info.
+
+{% hint style="info" %}
+Solana program are stateless to store value we use account
+{% endhint %}
 
 ----------------------------------
 
 ## The challenge
 
 {% hint style="warning" %}
-In `pages/api/solana/balance.ts`, implement `balance`.
+In `pages/api/solana/greeter.ts`, implement `greteer`. We are going to first derive the **greeter** address from some values. Next, we create a transaction which instruct the blockchain to create the **greeter** account. 
 {% endhint %}
 
 **Take a few minutes to figure this out**
 
 ```typescript
 //...
-  try {
-    const programId = req.body.programId as PublicKey;
-    const url = getSafeUrl();
-    const connection = new Connection(url, "confirmed");
-    const publicKey = new PublicKey(programId);
-    const programInfo = await connection.getAccountInfo(publicKey);
+    // Is there any methods from PublicKey allowing to derive a pub's key from a seed ?
+    const greetedPubkey = await PublicKey.undefined  
 
-    if (programInfo === null) {
-        if (fs.existsSync(PROGRAM_SO_PATH)) {
-            throw new Error(
-              'Program needs to be deployed with `solana program deploy`',
-            );
-        } else {
-          throw new Error('Program needs to be built and deployed');
-        }
-    } else if (!programInfo.executable) {
-      throw new Error(`Program is not executable`);
-    }
+    // This function allow to calculate how many fees one have to pay to keep the newly 
+    // created account alive on the blockchain.
+    const lamports = await connection.getMinimumBalanceForRentExemption(GREETING_SIZE);
 
-    res.status(200).json(true);
-  }
+    // Find which method are expected and fill with the required arguements.
+    const transaction = new Transaction().add(
+        SystemProgram.undefined
+    );
+    
+    // complete with the expected arguments 
+    const hash = await sendAndConfirmTransaction(undefined)
 //...
 ```
 
 **Need some help?** Here are a few hints
-* [Read about getBalance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getbalance)
-* [Create a publicKey from a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#constructor)  
+* [Create a publicKey from a seed](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#createWithSeed)  
+* [Create a account from a seed](https://solana-labs.github.io/solana-web3.js/classes/SystemProgram.html#createAccountWithSeed)  
 
 {% hint style="info" %}
-You can also [**join us on Discord**](https://discord.gg/fszyM7K) if you have questions.
+[You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
@@ -54,46 +53,56 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 //...
-  try {
-    const programId = req.body.programId as PublicKey;
-    const url = getSafeUrl();
-    const connection = new Connection(url, "confirmed");
-    const publicKey = new PublicKey(programId);
-    const programInfo = await connection.getAccountInfo(publicKey);
+  const greetedPubkey = await PublicKey.createWithSeed(
+      payer.publicKey,
+      GREETING_SEED,
+      programId,
+    );
 
-    if (programInfo === null) {
-        if (fs.existsSync(PROGRAM_SO_PATH)) {
-            throw new Error(
-              'Program needs to be deployed with `solana program deploy`',
-            );
-        } else {
-          throw new Error('Program needs to be built and deployed');
-        }
-    } else if (!programInfo.executable) {
-      throw new Error(`Program is not executable`);
-    }
+  const lamports = await connection.getMinimumBalanceForRentExemption(GREETING_SIZE);
 
-    res.status(200).json(true);
-  }
+  const transaction = new Transaction().add(
+    SystemProgram.createAccountWithSeed({
+        fromPubkey: payer.publicKey,
+        basePubkey: payer.publicKey,
+        seed: GREETING_SEED,
+        newAccountPubkey: greetedPubkey,
+        lamports,
+        space: GREETING_SIZE,
+        programId,
+    }),
+  );
+  const hash = await sendAndConfirmTransaction(connection, transaction, [payer])
 //...
 ```
 
 **What happened in the code above?**
 
-* We create a `PublicKey` using the string formated address
-* We call `connection.getBalance` with that `publicKey`
-* Be aware than the balance is on `LAMPORTS` (`console.log` is your friend ^^) 
+* We derive a `PublicKey` from three values: the payer of the transaction, a random seed and the programId.
+* Next, we call the system's program `createAccountWithSeed` to create an account:
+  * Feeded with the minimal amount of lamport to exempt him to pay any rent.
+  * With a predefined public's key, the one derived before.
+  * Owned by the programId then giving permission to the program to perform write access.  
+* Finally we send and await that the transaction confirm; payer being the account created during firsts' steps.
+
+{% hint style="info" %}
+* [Learn more about rent exemption](https://docs.solana.com/developing/programming-model/accounts#rent-exemption)
+* [Learn more about system program](https://docs.solana.com/developing/runtime-facilities/programs#system-program)
+{% endhint %}
 
 ----------------------------------
 
 ## Make sure it works
 
-Enter the address just funded and click on **Check Balance**. You should see:
+Once you have the code above saved:
+* Click on **Create Greeter** 
+* Let's the magic happen
 
-![](../../../.gitbook/assets/solana-balance.gif)
+![](../../../.gitbook/assets/solana-greeter.gif)
 
 ----------------------------------
 
 ## Next
 
-Now that we have an account and that this account has been funded with **SOL** tokens, we are ready to make a transfer!
+Now that we have an account owned by the program and dedicated to store the program data. We are ready to go forward and act on theses data.
+The first natural action is to read the data. Ready ?

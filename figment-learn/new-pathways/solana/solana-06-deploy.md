@@ -63,6 +63,11 @@ solana account $(solana-keygen pubkey solana-wallet/keypair.json)
 -----------------------------------------
 ## Deploy a Solana program
 
+{% hint style="info" %}
+The program we're going to deploy is an easy but pretty complete program. This program keep track  the number of times account sent greeting to it.
+{% endhint %}
+
+
 ### Building the program
 
 The first thing we're going to do is compile the Rust program to prepare it for the CLI. To do this we're going to use a custom script that's defined in `package.json`. Let's run the script and build the program by running the following command in the terminal (from the project root directory):
@@ -115,7 +120,7 @@ Program Id: 7KwpCaaYXRsjfCTvf85eCVuZDW894zZNN38UMxMpQoaQ
 ## Challenge
 
 {% hint style="warning" %}
-Before we move to the next step we need to check if our program have been correctly deploy! For this, we'll need the `programId` of the program previously generated.
+Before we move to the next step we need to check if our program have been correctly deploy! For this, we'll need the `programId` of the program previously generated. Copy paste it in the text input and try to figure out how to complete the code for `pages/api/solana/checkProgram.ts` to check if a program have correctly been deployed.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -126,8 +131,8 @@ try {
     const programId = req.body.programId as PublicKey;
     const url = getSafeUrl();
     const connection = new Connection(url, "confirmed");
-    const publicKey = new PublicKey(programId);
-    const programInfo = await connection.getAccountInfo(publicKey);
+    const publicKey = undefined;
+    const programInfo = undefined;
 
     if (programInfo === null) {
         if (fs.existsSync(PROGRAM_SO_PATH)) {
@@ -147,8 +152,8 @@ try {
 ```
 
 **Need some help?** Check out those two links
-* [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
-* [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
+* [How to get account Info ?](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getAccountInfo)  
+* [Is an executable account ?](https://solana-labs.github.io/solana-web3.js/modules.html#AccountInfo)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -188,23 +193,25 @@ try {
 
 **What happened in the code above?**
 
-* We used the JS API's `Keypair` to generate a keypair
-* Once we have it we call `setKeypair` to save it in the react hook
-* Once React re-renders, we parse the keypair object to extract the public key using `keypair.publicKey`
-* But this value is a `Buffer` so we need to convert it to a string using `PublicKey.toString()`
+* We create an new publicKey `Object` from the programId string formatted address.
+* Once we have it we call `getAccountInfo` method to check if info are available for this address.
+* If none, then no account are linked to this address and then the program have not yet been deployed.
+* At last we check if the, account is an executable is yes, then it's a program.
 
 ----------------------------------
 
 ## Make sure it works
 
-Once you've filled in the form, press "Submit" and you should see:
+Once you have the code above saved:
+* Copy and paste the generated address in the text input.   
+* Click on **Check ProgramId** 
 
-![](../../../.gitbook/assets/solana-transfer.gif)
+![](../../../.gitbook/assets/solana-delpoy.gif)
 
-**About the explorer**, it's very good practice to look over all the fields one by one to familiarize yourself with the structure of a transaction. This page features the transaction result (`SUCCESS`), status (`FINALIZED`), the amount sent, the `from` and `to` addresses, the block that included this transaction, the fee that was paid, etc.
+For the rest of the challenge we'll keep this programId into the storage of our application.
 
 ----------------------------------
 
 ## Next
 
-So at this point, we've deployed our dummy smart contract to Solana's devnet cluster. We're finally ready for the big moment: Interacting with the program by calling its functionality from the UI!
+So at this point, we've deployed our dummy smart contract to Solana's devnet cluster. Now it's time to create an account owned by our program. 

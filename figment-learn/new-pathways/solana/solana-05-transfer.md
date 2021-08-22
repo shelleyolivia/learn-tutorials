@@ -94,7 +94,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ## Make sure it works
 
-Once you've filled in the form, press "Submit" and you should see:
+Once you've filled in the form: 
+* Press "Submit"
+* Let's the magic happen
 
 ![](../../../.gitbook/assets/solana-transfer.gif)
 

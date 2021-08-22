@@ -58,7 +58,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ## Make sure it works
 
-Enter the address just funded and click on **Check Balance**. You should see:
+Enter the address just funded:
+* Click on **Check Balance**
+* Let's the magic happen
 
 ![](../../../.gitbook/assets/solana-balance.gif)
 
