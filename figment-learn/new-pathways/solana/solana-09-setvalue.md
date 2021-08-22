@@ -76,7 +76,7 @@ Once you have the code above saved:
 * Click on **Send A Greeting** 
 * Let's the magic happen
 
-![](../../../.gitbook/assets/solana-setter.gif)
+![](../../../.gitbook/assets/solana-set-v3.gif)
 
 ----------------------------------
 

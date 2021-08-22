@@ -86,8 +86,11 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * Finally we send and await that the transaction confirm; payer being the account created during firsts' steps.
 
 {% hint style="info" %}
-> [Learn more about rent exemption](https://docs.solana.com/developing/programming-model/accounts#rent-exemption)
-> [Learn more about system program](https://docs.solana.com/developing/runtime-facilities/programs#system-program)
+[Learn more about rent exemption](https://docs.solana.com/developing/programming-model/accounts#rent-exemption)
+{% endhint %}
+
+{% hint style="info" %}
+[Learn more about system program](https://docs.solana.com/developing/runtime-facilities/programs#system-program)
 {% endhint %}
 
 ----------------------------------
@@ -98,7 +101,7 @@ Once you have the code above saved:
 * Click on **Create Greeter** 
 * Let's the magic happen
 
-![](../../../.gitbook/assets/solana-greeter.gif)
+![](../../../.gitbook/assets/solana-greeter-v3.gif)
 
 ----------------------------------
 

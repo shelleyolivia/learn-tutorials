@@ -92,7 +92,7 @@ Once you have the code above saved:
 * Click on **Get Greeting** 
 * Let's the magic happen
 
-![](../../../.gitbook/assets/solana-getter.gif)
+![](../../../.gitbook/assets/solana-get-v3.gif)
 
 ----------------------------------
 

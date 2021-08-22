@@ -68,7 +68,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once you have the code above saved, click on **Generate a Keypair** and you should see:
 
-![](../../../.gitbook/assets/solana-account.gif)
+![](../../../.gitbook/assets/solana-keypair-v3.gif)
 
 **Try and click on "Generate a Keypair" again. And again. And again!** Every time it will generate a new one with virtually no risk that someone else creates the same one as you. That's cause the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
 

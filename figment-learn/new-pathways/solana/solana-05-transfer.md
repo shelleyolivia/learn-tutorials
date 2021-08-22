@@ -98,7 +98,7 @@ Once you've filled in the form:
 * Press "Submit"
 * Let's the magic happen
 
-![](../../../.gitbook/assets/solana-transfer.gif)
+![](../../../.gitbook/assets/solana-transfer-v3.gif)
 
 **About the explorer**, it's very good practice to look over all the fields one by one to familiarize yourself with the structure of a transaction. This page features the transaction result (`SUCCESS`), status (`FINALIZED`), the amount sent, the `from` and `to` addresses, the block that included this transaction, the fee that was paid, etc.
 

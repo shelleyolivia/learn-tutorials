@@ -57,7 +57,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once the code above save you can refresh the page to see the update
 
-![](../../../.gitbook/assets/solana-connect.gif)
+![](../../../.gitbook/assets/solana-connect-v3.gif)
 
 
 ## Next
