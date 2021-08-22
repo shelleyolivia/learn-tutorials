@@ -53,7 +53,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * We then call `getVersion` on that `connection` instance. The docs state that `connection.getVersion()` returns a Promise so we chain `.then()` and a `.catch()` to respectively handle the case where the promise is fulfilled and rejected.
 * If the promise is fulfilled, we get a `version` object back, that we can store in our functional component's local state, using the `setVersion` exposed by the React hook `useState`.
 
-## Visual's test
+## Make sure it works
 
 Once the code above save you can refresh the page to see the update
 

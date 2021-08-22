@@ -14,12 +14,29 @@ In `pages/api/solana/balance.ts`, implement `balance`.
 
 ```typescript
 //...
-    const address = req.body.address as PublicKey;
+  try {
+    const { greeter } = req.body;
     const url = getSafeUrl();
     const connection = new Connection(url, "confirmed");
-    const publicKey =undefined;
-    const balance = undefined;
-    res.status(200).json(balance);
+    const greeterPublicKey = new PublicKey(greeter);
+
+    const accountInfo = await connection.getAccountInfo(greeterPublicKey);
+
+    if (accountInfo === null) {
+      throw new Error('Error: cannot find the greeted account');
+    }
+
+    const greeting = borsh.deserialize(
+      GreetingSchema,
+      GreetingAccount,
+      accountInfo.data,
+    );
+
+    console.log(greeting)
+    console.log(typeof greeting)
+
+    res.status(200).json(greeting.counter);
+  }
 //...
 ```
 
@@ -39,12 +56,29 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 //...
-    const address = req.body.address as PublicKey;
+  try {
+    const { greeter } = req.body;
     const url = getSafeUrl();
-    const connection = new Connection(url);
-    const publicKey = new PublicKey(address);
-    const balance = await connection.getBalance(publicKey);
-    res.status(200).json(balance);
+    const connection = new Connection(url, "confirmed");
+    const greeterPublicKey = new PublicKey(greeter);
+
+    const accountInfo = await connection.getAccountInfo(greeterPublicKey);
+
+    if (accountInfo === null) {
+      throw new Error('Error: cannot find the greeted account');
+    }
+
+    const greeting = borsh.deserialize(
+      GreetingSchema,
+      GreetingAccount,
+      accountInfo.data,
+    );
+
+    console.log(greeting)
+    console.log(typeof greeting)
+
+    res.status(200).json(greeting.counter);
+  }
 //...
 ```
 

@@ -24,14 +24,15 @@ In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an 
 
 ```typescript
 //..
-    const { address } = req.body.address as PublicKey;
+  try {
     const url = getSafeUrl();
     const connection = new Connection(url, "confirmed")
-    const address = undefined  
+    const address = req.body.address as PublicKey;
+    const publicKey = undefined  
     const hash = undefined
     await undefined
     res.status(200).json(hash)
-  
+  }
 //..
 }
 ```
@@ -53,13 +54,15 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 //..
-    const { address } = req.body.address as PublicKey;
+  try {
     const url = getSafeUrl();
-    const connection = new Connection(url)
-    const address = new PublicKey(req.body.address as PublicKey)  
-    const hash = await connection.requestAirdrop(address, LAMPORTS_PER_SOL)
+    const connection = new Connection(url, "confirmed")
+    const address = req.body.address as PublicKey;
+    const publicKey = new PublicKey(address)  
+    const hash = await connection.requestAirdrop(publicKey, LAMPORTS_PER_SOL)
     await connection.confirmTransaction(hash);
     res.status(200).json(hash)
+  }
 //..
 }
 ```
@@ -73,7 +76,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## Visual's test
+## Make sure it works
 
 Once you have the code above saved:
 * Copy and paste the genrated address in the text input.   

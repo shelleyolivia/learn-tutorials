@@ -1,68 +1,34 @@
-# 
 
-In the following tutorials, we're going to interact with the Solana blockchain (and in particular its Devnet network) using the `@solana/web3.js` library. It's a convenient way to interface with the RPC API when building a Javascript application (under the hood it implements Solana's RPC methods and exposes them as Javascript objects). We will explore it together as we add features to our app.
 
-----------------------------------
 
-## The challenge
 
-{% hint style="warning" %}
-In `pages/api/solana/connect.tsx`, implement `connect` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
-{% endhint %}
+---
+description: Learn how Solana works and what makes it special
+---
 
-**Take a few minutes to figure this out**
 
-```typescript
-//...
-  try {
-    const url = getSafeUrl();
-    const connection = undefined;
-    const version = undefined;
-    res.status(200).json(version?.["solana-core"]);
-  }
- //...
-```
 
-**Need some help?** Check out those two links
-* [Creating a `Connection` instance](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#constructor)  
-* [Getting the API's `version`](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getversion)
+## The Pathway UI
 
-{% hint style="info" %}
-[You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
-{% endhint %}
+Now visit the URL [`http://localhost:3000`](http://localhost:3000) in your web browser to see the All Pathways page:
 
-Still not sure how to do this? No problem! The solution is below so you don't get stuck.
+![Click on the Polygon icon to begin your journey on the Polygon Pathway!](../../../.gitbook/assets/all_pathways.png)
 
-----------------------------------
+In these tutorials we will cover connecting to and interacting with Polygon using the Metamask wallet, as this is the most common use-case even for development. Moving on, we will look at querying information from the blockchain and displaying it on the UI using the ethers library. Having tokens to test with is an important consideration, and we cover how to get test tokens from a faucet website. We will also discuss Solidity, the language used to write Ethereum and Polygon smart contracts. The basic workflow of writing, testing and deploying smart contracts will be the homestretch. We can then interact with the deployed contract to demonstrate its functionality!  
 
-## The solution
+By the end of the Pathway tutorials, you will be confidently interacting with Polygon, sending transactions which cost fractions of a cent and deploying smart contracts.
 
-```typescript
-//...
-  try {
-    const url = getSafeUrl();
-    const connection = new Connection(url, "confirmed");
-    const version = await connection.getVersion();
-    res.status(200).json(version?.["solana-core"]);
-  } 
-//...
-```
+## Next Steps
 
-**What happened in the code above?**
-* We created a `connection` instance of the `Connection` class using the `new` constructor
-* We then call `getVersion` on that `connection` instance. The docs state that `connection.getVersion()` returns a Promise so we chain `.then()` and a `.catch()` to respectively handle the case where the promise is fulfilled and rejected.
-* If the promise is fulfilled, we get a `version` object back, that we can store in our functional component's local state, using the `setVersion` exposed by the React hook `useState`.
+Now that we gave you a quick overview of Polygon ecosystem, we still need to set up our environment.
 
-----------------------------------
+## Conclusion
 
-## Visual's test
+Congratulations on completing the Solana Pathway! We hope you had a fun time and learned a lot. Here are a few things you can check out to go further:
 
-Once the code above save you can refresh the page to see the update.
+* Keep exploring the [Solana JS API](https://solana-labs.github.io/solana-web3.js/modules.html#sendandconfirmtransaction)
+* Solana's [Hello World dApp](https://github.com/solana-labs/example-helloworld)
+* Read some [programs written by Solana devs](https://github.com/solana-labs/solana-program-library/tree/master/examples)
+* Look at the Solana's [Token Swap program](https://github.com/solana-labs/solana-program-library/tree/master/token-swap) \(~ Uniswap clone!\)
 
-![](../../../.gitbook/assets/solana-connect.gif)
-
-----------------------------------
-
-## Next
-
-We're going to use this `connection` instance every time we need to connect to Solana. We're going to want to move some tokens around but first we need an account to hold tokens. That's what we'll do next!
+If you had any difficulty with this tutorial or simply want to discuss Solana with other developers, [join our community](https://community.figment.io) today, or [join us on Discord](https://discord.gg/EBveT5xs9D)!

@@ -1,24 +1,28 @@
 # 
 
-Like with most Web 3 protocols, transactions on Solana happen between *accounts*.  To create an account a client generates a *keypair*, which has a *public's key* (or *address*, used to identify and lookup an account) and a *secret's key* used to sign transactions.
+Like with most Web 3 protocols, transactions on Solana happen between **accounts**.  To create an account a client generates a **keypair**, which has a **public's key** (or **address**, used to identify and lookup an account) and a **secret's key** used to sign transactions.
 
 ----------------------------------
 
 ## The challenge
 
 {% hint style="warning" %}
-In`components/protocols/solana/components/steps/Account.tsx`, implement `generateKeypair` and parse the keypair to extract the address as a string and render it in the webpage
+In`pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string and render it in the webpage
 {% endhint %}
 
 **Take a few minutes to figure this out.**
 
 ```tsx
 //...
-  const publicKeyStr = undefined // try to display the string formated address
+  try {
+    const keypair = undefined
+    const address = undefined
+    const secret = JSON.stringify(Array.from(keypair?.secretKey))
 
-  const generateKeypair = () => {
-    // Generate a Keypair
-    // Save it to setKeypair Hook
+    res.status(200).json({
+        secret,
+        address,
+    });
   }
 //...
 ```
@@ -26,7 +30,6 @@ In`components/protocols/solana/components/steps/Account.tsx`, implement `generat
 **Need some help?** Check out those two links
 * [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
 * [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
-
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -40,12 +43,15 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```tsx
 //...
-  const publicKeyStr = keypair?.publicKey.toString();
-
-  const generateKeypair = () => {
+  try {
     const keypair = Keypair.generate();
-    console.log(keypair);
-    setKeypair(keypair);
+    const address = keypair?.publicKey.toString()
+    const secret = JSON.stringify(Array.from(keypair?.secretKey))
+
+    res.status(200).json({
+        secret,
+        address,
+    });
   }
 //...
 ```
@@ -53,15 +59,14 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 **What happened in the code above?**
 
 * We used the JS API's `Keypair` to generate a keypair
-* Once we have it we call `setKeypair` to save it in the react hook
 * Once React re-renders, we parse the keypair object to extract the public key using `keypair.publicKey`
 * But this value is a `Buffer` so we need to convert it to a string using `PublicKey.toString()`
 
 ----------------------------------
 
-## Visual's test
+## Make sure it works
 
-Once you have the code above saved, the webpage should automatically reload (React's hot reloading!) and you should see:
+Once you have the code above saved, click on **Generate a Keypair** and you should see:
 
 ![](../../../.gitbook/assets/solana-account.gif)
 

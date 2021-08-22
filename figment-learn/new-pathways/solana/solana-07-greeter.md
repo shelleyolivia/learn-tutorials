@@ -14,12 +14,27 @@ In `pages/api/solana/balance.ts`, implement `balance`.
 
 ```typescript
 //...
-    const address = req.body.address as PublicKey;
+  try {
+    const programId = req.body.programId as PublicKey;
     const url = getSafeUrl();
     const connection = new Connection(url, "confirmed");
-    const publicKey =undefined;
-    const balance = undefined;
-    res.status(200).json(balance);
+    const publicKey = new PublicKey(programId);
+    const programInfo = await connection.getAccountInfo(publicKey);
+
+    if (programInfo === null) {
+        if (fs.existsSync(PROGRAM_SO_PATH)) {
+            throw new Error(
+              'Program needs to be deployed with `solana program deploy`',
+            );
+        } else {
+          throw new Error('Program needs to be built and deployed');
+        }
+    } else if (!programInfo.executable) {
+      throw new Error(`Program is not executable`);
+    }
+
+    res.status(200).json(true);
+  }
 //...
 ```
 
@@ -39,12 +54,27 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 //...
-    const address = req.body.address as PublicKey;
+  try {
+    const programId = req.body.programId as PublicKey;
     const url = getSafeUrl();
-    const connection = new Connection(url);
-    const publicKey = new PublicKey(address);
-    const balance = await connection.getBalance(publicKey);
-    res.status(200).json(balance);
+    const connection = new Connection(url, "confirmed");
+    const publicKey = new PublicKey(programId);
+    const programInfo = await connection.getAccountInfo(publicKey);
+
+    if (programInfo === null) {
+        if (fs.existsSync(PROGRAM_SO_PATH)) {
+            throw new Error(
+              'Program needs to be deployed with `solana program deploy`',
+            );
+        } else {
+          throw new Error('Program needs to be built and deployed');
+        }
+    } else if (!programInfo.executable) {
+      throw new Error(`Program is not executable`);
+    }
+
+    res.status(200).json(true);
+  }
 //...
 ```
 

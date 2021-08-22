@@ -1,4 +1,3 @@
-
 ![](../../.gitbook/assets/zzzcelo.jpg)
 
 {% hint style="info" %}
