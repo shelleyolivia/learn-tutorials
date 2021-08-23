@@ -270,13 +270,14 @@ Error:  *** Deployment Failed ***
    * Message:  sender doesn't have enough funds to send tx. The upfront cost is: 1410000000000000000 and the sender's account only has: 0
    * Try:
       + Using an adequately funded account
-
+```
 If you didn't unlock the account, you'll see this error:
+```
 Error:  *** Deployment Failed ***
 
 "Migrations" -- Returned error: authentication needed: password or unlock.
-
 ```
+
 ## Interacting with your contract with React UI
 
 To interact with the contract, we will be using `Main.js`, `BuyForm.js` & `SellForm.js` components. Here are the details of the components:
