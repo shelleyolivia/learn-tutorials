@@ -1,14 +1,8 @@
----
-description: Learn how to start using the Terra SDK with DataHub
----
-
-# Connecting to a Terra node with DataHub
-
-## Introduction
+# Introduction
 
 In order to benefit from the full potential of the Terra blockchain, you will first need to connect to a Terra node. 
 
-In this tutorial, we will use the Terra SDK to connect to a Terra node hosted by **DataHub**. We will be building a simple Nodejs application, which we will develop further during the Terra Pathway. 
+In this tutorial, we will use the Terra SDK to connect to a Terra node hosted by ****[**DataHub**](https://figment.io/datahub-waitlist/). We will be building a simple Nodejs application, which we will develop further during the Terra Pathway. 
 
 More details about Terra.js can be found [**here**](https://terra-project.github.io/terra.js/).
 
