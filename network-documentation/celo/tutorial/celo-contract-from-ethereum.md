@@ -1,16 +1,4 @@
----
-description: >-
-  Learn how to convert & customize an existing Ethereum Smart Contract for Celo
-  network
----
-
-# How to customize an Ethereum smart contract for the Celo network
-
-## About the Author
-
-This tutorial was created by [Brittany Deventer](https://github.com/BrittanyDeventer). Brittany is a full-stack developer.
-
-## Introduction
+# Introduction
 
 The Celo blockchain is completely independent from the Ethereum blockchain, but both compile their smart contracts to [EVM](https://github.com/ethereumbook/ethereumbook/blob/develop/13evm.asciidoc) bytecode. This means that any smart contract written for the Ethereum blockchain is already compatible with the Celo network.
 
@@ -270,17 +258,17 @@ A withdrawal from the faucet function would look like this. This code could be t
   }
 ```
 
-## What we learned
+## Conclusion
 
 In this tutorial, we learned how to alter a smart contract originally written for Ethereum and customize it for use on the Celo network. We learned about the difference between a native token such as Ether or Celo, and an ERC-20 token such as cUSD. We altered some example Solidity code to illustrate the process generally used to prepare an Ethereum contract for use on another EVM compatible network, including specific mention of alternative tokens where necessary - such as inside the withdraw function, as part of a require statement.
 
 As long as we understand that both blockchains are EVM compatible and run the same bytecode, we can customize any existing Ethereum contract for the Celo network.
 
-### Next steps
+# Next Steps
 
 I hope this tutorial helps to see the potential in looking at existing open source code and understanding how simple modifications can lead to efficient coding solutions. Please consider the following reading list to continue on your journey.
 
-### Further Reading:
+## Further Reading:
 
 * [The Ethereum Virtual Machine](https://github.com/ethereumbook/ethereumbook/blob/develop/13evm.asciidoc)
 * [Celo Background and Key Concepts](https://docs.celo.org/overview#background-and-key-concepts)
@@ -292,3 +280,6 @@ I hope this tutorial helps to see the potential in looking at existing open sour
 * [Celo for Ethereum Developers](https://docs.celo.org/developer-guide/celo-for-eth-devs)
 * [Truffle Quickstart](https://www.trufflesuite.com/docs/truffle/quickstart#compiling)
 
+# About the Author
+
+This tutorial was created by [Brittany Deventer](https://github.com/BrittanyDeventer). Brittany is a full-stack developer.

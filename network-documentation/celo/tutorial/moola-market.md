@@ -1,16 +1,4 @@
----
-description: >-
-  This tutorial is a part of DeFi series where people can learn how to
-  participate in DeFi on the Celo Blockchain.
----
-
-# How to use Moola’s money market
-
-## About the author
-
-This tutorial was created by [Deepanshu Hooda](https://github.com/gitofdeepanshu/), who is a computer science junior and a blockchain developer with high interest in finance. He spends most of the his time studying new DeFi protocols and loves to travel.
-
-## Introduction
+# Introduction
 
 Moola is an open-source protocol for decentralized money markets on the Celo blockchain. Moola, which is a fork of the open-source Aave protocol v1, enables liquidity providers to earn compound interest on their Celo Dollars\(cUSD\) or CELO which is paid by borrowers who can take out collateralized loans with variable or stable interest rates.
 
@@ -18,12 +6,12 @@ In this tutorial we will learn how we can use Moola's Money Market to 1. Deposit
 
 We need a custodial wallet with some funds that we can use to interact with **Moola**. We will be using the [`VALORA`](https://valoraapp.com/) app that is a custodial wallet with beautiful UI where we can store our Celo or cUSD.
 
-## Prerequisite
+# Prerequisites
 
 1. Valora App
 2. Funds to use as collateral on Moola.
 
-## Connecting Valora with Moola
+# Connecting Valora with Moola
 
 After we have set up our Valora, we need to head over to [Moola](https://app.moola.market/#/welcome). We will be presented with a screen like this.
 
@@ -150,3 +138,6 @@ If you're attempting to get into a short position in the cUSD price of CELO beca
 
 Moola is just getting started and is on the right path. Moola is experiencing exponential growth with over $1M locked. Many new features like Flash loans and uncollateralized loans are on the roadmap of this promising startup. Moola also received a funding of $1.4M in March,2021 which will help Moola accelerate it's growth. Moola will also release it's new UI soon.
 
+## About the author
+
+This tutorial was created by [Deepanshu Hooda](https://github.com/gitofdeepanshu/), who is a computer science junior and a blockchain developer with high interest in finance. He spends most of the his time studying new DeFi protocols and loves to travel.
