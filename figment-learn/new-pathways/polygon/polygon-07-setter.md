@@ -44,10 +44,11 @@ As simple as it sounds, what's happening in the background is actually very powe
 ```
 
 
-
 Need some help? Check out these two tips/links  
-* [**Create Wallet using ethers**](https://docs.ethers.io/v5/api/signer/#Wallet) 
-* [**Properties of a Wallet**](https://docs.ethers.io/v5/api/signer/#Wallet--properties) 
+* [**Create a Contract using ethers**](https://docs.ethers.io/v5/api/contract/contract/#Contract--creating) 
+	* You can **console.log `SimpleStorageJson`** to find the contract's `abi` and `address` (through the property `networks`)  
+* [**How to call a contract's methods on a ethers Contract object**](https://docs.ethers.io/v5/api/contract/contract/#Contract-functionsCall)  
+* To read from the blockchain you don't need to spend any tokens so you can just use a provider to create a Contract instance. But to write you will need to create and sign a transaction through Metamask. Use a `signer` to create the Contract object!
 
 {% hint style="info" %}
 [Still not sure how to do this? **Join us on Discord** and someone will help!](https://discord.gg/fszyM7K)
@@ -90,7 +91,7 @@ What's happening in the code above?
   * The contract json's address
   * The contract json's abi
   * A web3 provider
-* We then call the function `set()` on this Contract object to operate our decentralized code. The names of the functions must match the ones we defined in our Solidity smart contract, otherwise how would we know which code to execute? 
+* We then call the function `set()` on this Contract object to operate on our decentralized code. The names of the functions must match the ones we defined in our Solidity smart contract, otherwise how would we know which code to execute? 
 
 -----------------------------
 
@@ -104,4 +105,4 @@ Once the code above save you can click and this is what the UI should look like!
 
 ## Conclusion
 
-Now that we've set the storage of our contract, we can read it. We're going to leran how to do this in the next and last steps
+Now that we've set the storage of our contract, we can read it. We're going to learn how to do this in the next and last steps

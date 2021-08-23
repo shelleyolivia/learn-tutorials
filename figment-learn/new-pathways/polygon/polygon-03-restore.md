@@ -9,7 +9,7 @@ Ready ?
 ## The Challenge
 
 {% hint style="warning" %}
-**On the file `components/protocols/steps/polygon/Restore.tsx` Implement the `restore`**. First using `ethers` look for `Wallet`, next when the wallet have been regnerated try do deduce which property we're going to call in order to display the address and the private key, finally verify than the generated key match the existing one.   
+**On the file `components/protocols/steps/polygon/Restore.tsx` Implement the `restore`**. First using `ethers` look for `Wallet`, next when the wallet have been regenerated try do deduce which property we're going to call in order to display the address and the private key, finally verify than the generated key match the existing one.   
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -69,9 +69,9 @@ Need some help? Check out these two tips/links
 What happened in the code above? Let's take a closer look!
 
 * First, we need to call `fromMnemonic` method of `Wallet` class.
-* Next, we compare is the restored address match the existing one.
-* Next, we store the address to display it below in the UI.
-* Last, we do the same for the private key 
+* Next, we compare if the restored address match the existing one.
+* Next, we store the address to display it in the UI.
+* Last, we do the same for the private key.
 
 -------------------------------------
 
@@ -87,4 +87,4 @@ When you have completed the code:
 
 ## Next Steps
 
-The ability to restore an account whitout the need to depend on tier-party is a great features from web3. Now, we're ready to fund our account with some MATIC the native token of the Polygon blockchain.
+The ability to restore an account whitout the need to depend on tier-party is a great feature from web3. Now, we're ready to fund our account with some **MATIC** the native token of the Polygon blockchain.

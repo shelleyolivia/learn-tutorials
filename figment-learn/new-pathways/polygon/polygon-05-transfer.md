@@ -39,7 +39,7 @@ Transfering some token is one of the major feature of web3. In this challenge, w
 ```
 
 **Need some help?** Check out these two links  
-* [**A shor tutorial**](https://ethereum.org/fr/developers/tutorials/send-token-etherjs/) **using ethers  
+* [**A shor tutorial**](https://ethereum.org/fr/developers/tutorials/send-token-etherjs/) using ethers  
 * [**send and sign a transaction**](https://docs.ethers.io/v5/api/signer/#Signer-sendTransaction)
 
 {% hint style="info" %}
@@ -85,7 +85,7 @@ What happened in the code above? Let's take a closer look!
     * A from address
     * A recipient address
     * The amount
-    * nonce, the latest transaction numbering
+    * nonce: the latest transaction's numbering
     * A default gas limit
     * And the current gas price
 * Finaly we sign and send our transaction and wait it's confirmation
