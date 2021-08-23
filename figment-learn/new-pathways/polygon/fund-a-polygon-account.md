@@ -14,16 +14,8 @@ Visit [https://faucet.matic.network/](https://faucet.matic.network/) and paste t
 Sometimes the transaction response on the faucet website returns an `[Object object]` - when this happens, simply refresh the page and try again.
 {% endhint %}
 
-Once this transaction is confirmed, you will have 0.1 **MATIC** on the Mumbai testnet!  
+Once this transaction is confirmed, you will have 1 **MATIC** on the Mumbai testnet!  
 You will want to patiently repeat this process four more times, waiting about a minute between attempts to avoid being greylisted by the faucet. You will want to have about 0.5 **MATIC** to complete the Pathway.
-
--------------------------------------
-
-## Account Balances
-
-It is possible to view the balance of an address on Polygon in several ways. Through a wallet UI such as Metamask, on a block explorer like [polygonscan.com](https://polygonscan.com) \(this is how you view balances of contract addresses\), or via the [ethers API](https://docs.ethers.io/v5/single-page/#/v5/api/providers/provider/-%23-Provider-getBalance) :
-
-![3 different ways of checking account balances](../../../.gitbook/assets/balances.png)
 
 -------------------------------------
 
@@ -53,7 +45,7 @@ const checkBalance = async () => {
 
 **Need some help?** Check out these two links  
 **→ Get an** [**account balance**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getBalance) **using ethers  
-**→ ** Format the balance using** [**ethers.utils.formatEther**](https://docs.ethers.io/v5/api/utils/display-logic/#unit-conversion)
+**→ Format the balance using** [**ethers.utils.formatEther**](https://docs.ethers.io/v5/api/utils/display-logic/#unit-conversion)
 
 {% hint style="info" %}
 [Still not sure how to do this? **Join us on Discord** and someone will help!](https://discord.gg/fszyM7K)
@@ -80,6 +72,10 @@ What happened in the code above? Let's take a closer look!
 * For the duration of this function, `fetching` will be true so that we can conditionally render our UI. 
 * We await `provider.getBalance()` because it returns a Promise. That Promise returns a BigNumber, which is a specific data type for handling numbers which fall [outside the range of safe values](https://docs.ethers.io/v5/api/utils/bignumber/#BigNumber--notes-safenumbers) in JavaScript. A BigNumber cannot be displayed in the same way as a normal number. We must therefore format the balance to transform it into a string for display, using `ethers.utils.formatEther()`.
 * Before we exit the function, set `fetching` to false, which effects the conditional rendering happening in the return function of `3_Balance.tsx`.
+
+-------------------------------------
+
+## Make sure it works
 
 When you have completed the code, the 'Check Balance' button will function. Click it to view the balance of the connected account:
 

@@ -2,11 +2,13 @@
 
 ## Requirements
 
-* [Node.js](https://nodejs.org) v14+ installed (we recommend using [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm))
-* [yarn](https://yarnpkg.com/) installed
+* [Node.js](https://nodejs.org) v14+ installed (we recommend using [nvm](https://github.com/nvm-sh/nvm))
+* [yarn](https://yarnpkg.com/) 
 * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed
-* [Metamask](https://metamask.io/) browser extension installed. Chrome users may want to pin the extension to the Extensions toolbar for easy access. Firefox does this by default.
+* [Metamask](https://metamask.io/) browser extension installed. 
 
+
+Chrome users may want to pin the extension to the Extensions toolbar for easy access. Firefox does this by default.
 ![Pin Metamask to the toolbar in Chrome](../../../.gitbook/assets/pin_metamask.png)
 
 {% hint style="info" %}
@@ -25,10 +27,6 @@ The first piece of advice we will give you is to make _absolutely sure that you 
 The **Polygon** Pathway is in the form of a Next.js app which can be run on your local machine. We will be interacting with it through the web browser, and making changes to the code to make it a basic dApp, using **Polygon**!
 
 Run the following command in a terminal to clone the `learn-web3-dapp` code repository and install the dependencies with `yarn` :
-
-{% hint style="info" %}
-If you find yourself confused by any of the terminology used in the tutorials, or are new to software development in general, please refer to this Beginners Guide to Learn.
-{% endhint %}
 
 ```bash
 git clone https://github.com/figment-networks/learn-web3-dapp.git
@@ -50,16 +48,35 @@ Also be sure to rename the file `.env.example` to `.env.local` before continuing
 
 ## The Pathway UI
 
-Now visit the URL [`http://localhost:3000`](http://localhost:3000) in your web browser to see the All Pathways page:
+Now visit the URL [`http://localhost:3000`](http://localhost:3000) in your web browser to see the home page:
 
-![Click on the Polygon icon to begin your journey on the Polygon Pathway!](../../../.gitbook/assets/all_pathways.png)
+![](../../../.gitbook/assets/pathway-home.gif)
 
-In these tutorials we will cover connecting to and interacting with **Polygon** using the Metamask wallet, as this is the most common use-case even for development. Moving on, we will look at querying information from the blockchain and displaying it on the UI using the ethers library. Having tokens to test with is an important consideration, and we cover how to get test tokens from a faucet website. We will also discuss **Solidity**, the language used to write Ethereum and **Polygon** smart contracts. The basic workflow of writing, testing and deploying smart contracts will be the homestretch. We can then interact with the deployed contract to demonstrate its functionality!  
+In these tutorials we will cover connecting to and interacting with **Polygon** using the Metamask wallet, as this is the most common use-case even for development. 
 
-By the end of the Pathway tutorials, you will be confidently interacting with **Polygon**, sending transactions which cost fractions of a cent and deploying smart contracts.
+-------------------------------------
+
+
+## Add the Mumbai testnet to Metamask
+
+The first task is to connect to the Polygon Mumbai testnet by adding it to the list of RPC endpoints in Metamask. Click on the Fox head icon in your web browser to open the popup, and then follow this workflow to complete the process :
+
+* Click on the current network at the top of the Metamask popup (by default is says "Ethereum Mainnet")
+* Scroll down and click on "Custom RPC"
+* Fill in the form:
+  * Network Name: `Polygon Mumbai`
+  * New RPC URL: `https://rpc-mumbai.maticvigil.com/`
+  * Chain ID: `80001`
+  * Currency Symbol: `MATIC`
+  * Block Explorer URL : `https://mumbai.polygonscan.com`
+* Double check the information, then click on the Save button.
+
+![](../../../.gitbook/assets/add_mumbai.png)
+
+We use the testnet for development before moving into production on the main network or "mainnet".
 
 -------------------------------------
 
 ## Next Steps
 
-Now that we gave you a quick overview of **Polygon** ecosystem, we still need to set up our environment.
+Now that we have our environment set up we can connect to the network.
