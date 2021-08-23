@@ -22,9 +22,9 @@ Start a local five node Avalanche network:
 
 ```javascript
 cd /path/to/avash
-# build Avash if you haven't done so
+// build Avash if you haven't done so
 go build
-# start Avash
+// start Avash
 ./avash
 # start a five node staking network
 runscript scripts/five_node_staking.lua
