@@ -1,12 +1,6 @@
----
-description: Learn how to create a variable-cap asset on Avalanche
----
+**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset). 
 
-# Creating A Variable-Cap Asset
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset). 
-
-## Introduction
+# Introduction
 
 This tutorial illustrates how to create a variable-cap, fungible asset. No units of the asset exist when the asset is initialized, but more units of the asset may be minted. On asset creation we specify which sets of addresses may mint more units.
 
@@ -18,11 +12,11 @@ The second reason is flexibility. It’s nice to be able to encode logic like, �
 
 Suppose that we want to issue an asset that represents shares of a corporation. No shares exist to start with, but more shares may be created later. Let’s create such an asset.
 
-### Assumptions <a id="assumptions"></a>
+## Prerequisites
 
 We assume that you’re already familiar with [**DataHub**](https://datahub.figment.io/sign_up?service=avalanche) and connecting to the Avalanche services.
 
-## Create the Asset
+# Create the Asset
 
 Our asset will exist on the X-Chain, so to create our asset we’ll call `avm.createVariableCapAsset`, which is a method of the [X-Chain’s API.](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api)
 
@@ -48,7 +42,7 @@ avm.createVariableCapAsset({
 }
 ```
 
-#### Parameters <a id="parameters"></a>
+## Parameters
 
 * `name` is a human-readable name for our asset. Not necessarily unique. Between 0 and 128 characters.
 * `symbol` is a shorthand symbol for this asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
@@ -58,14 +52,14 @@ avm.createVariableCapAsset({
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 
-#### Response <a id="response"></a>
+## Response 
 
 * `assetID` is the ID of the new asset.
 * `changeAddr` in the result is the address where any change was sent.
 
 Later in this example we’ll mint more shares, so be sure to replace at least 2 addresses in the second minter set with addresses your user controls.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -99,7 +93,7 @@ curl -X POST --data '{
 
 The response should look like this:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -110,11 +104,11 @@ The response should look like this:
 }
 ```
 
-## Mint the Asset
+# Mint the Asset
 
 Right now 0 shares exist. Let’s mint 10M shares.
 
-#### Create the Unsigned Transaction <a id="create-the-unsigned-transaction"></a>
+## Create the unsigned transaction
 
 We’ll use `avm.mint` to mint the shares.
 
@@ -123,7 +117,7 @@ We’ll use `avm.mint` to mint the shares.
 * `to` is the address that will receive the newly minted shares. Replace `to` with an address your user controls so that later you’ll be able to send some of the newly minted shares.
 * `username` must be a user that holds keys giving it permission to mint more of this asset. That is, it controls at least _threshold_ keys for one of the minter sets we specified above.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -140,7 +134,7 @@ curl -X POST --data '{
 
 The response contains the transaction’s ID:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -153,7 +147,7 @@ The response contains the transaction’s ID:
 
 We can check the status of the transaction we’ve just sent to the network using `avm.getTxStatus`:
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -166,7 +160,7 @@ curl -X POST --data '{
 
 This should give:
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -176,13 +170,11 @@ This should give:
 }
 ```
 
-## Trade the Asset
-
-#### Check a Balance <a id="check-a-balance"></a>
+# Trade the asset
 
 All 10M shares are controlled by the `to` address we specified in `mint`. To verify this we’ll use `avm.getBalance`:
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -196,7 +188,7 @@ curl -X POST --data '{
 
 The response confirms that our asset creation was successful, and that the expected address holds all 10,000,000 shares:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -206,11 +198,11 @@ The response confirms that our asset creation was successful, and that the expec
 }
 ```
 
-#### Send the Asset <a id="send-the-asset"></a>
+## Send the asset 
 
 Let’s send 100 shares to another address by using `avm.send`. To do so:
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -227,7 +219,7 @@ curl -X POST --data '{
 
 Let’s check the balances of the `to` address:
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -241,7 +233,7 @@ curl -X POST --data '{
 
 The response should be:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -251,7 +243,7 @@ The response should be:
 }
 ```
 
-## Wrapping up
+# Conclusion
 
 In this tutorial, we:
 
@@ -261,4 +253,3 @@ In this tutorial, we:
 * Used `send` to transfer shares.
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
-

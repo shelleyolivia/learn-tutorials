@@ -98,4 +98,4 @@ Once you have the code above saved:
 
 ## Next
 
-Now that we have an account and that this account has been funded with **SOL** tokens, we are ready to make a transfer!
+Geeting the number of Greetings is not enough, we'd like to send a greeting to our contract. We're going to learn how to do it in the next step. Ready ?

@@ -1,14 +1,4 @@
----
-description: >-
-  Learn how to deploy a distributed chat application on Avalanche using Solidity
-  and the React framework.
----
-
-# Create a chat dApp on Avalanche using Solidity and ReactJS
-
-## Create a chat dApp using Solidity and ReactJS
-
-## Introduction
+# Introduction
 
 Today we will build a decentralized chat application on Avalanche's Fuji test-network from scratch. The dApp will allow users to connect with other people and chat with them. We will develop our smart contract using Solidity which will be deployed on Avalanche's C-chain. We will have a basic, easy-to-use UI developed using ReactJS. So, let us begin!
 

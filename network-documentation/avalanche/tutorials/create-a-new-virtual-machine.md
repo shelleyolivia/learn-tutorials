@@ -1,14 +1,8 @@
----
-description: Learn how to create a new virtual machine on Avalanche
----
+[The original tutorial can be found in the AVA Labs documentation here](https://docs.avax.network/build/tutorials/platform/create-a-virtual-machine-vm). 
 
-# Create a New Virtual Machine
+## Important Note
 
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-virtual-machine-vm).
-
-## Note
-
-The code below is slightly out of date. Some methods, interfaces and implementations are slightly different than in this tutorial. We’re going to leave this up because the current code is very similar and this tutorial is still useful in demonstrating how Avalanche’s VM model works.
+> The code below is slightly out of date. Some methods, interfaces and implementations are slightly different than in this tutorial. We’re going to leave this up because the current code is very similar and this tutorial is still useful in demonstrating how Avalanche’s VM model works.
 
 ## Introduction
 
@@ -179,7 +173,7 @@ We’ve created some types that your Virtual Machine implementation can embed \(
 
 In our example we use both of the below library types, and we encourage you to use them too.
 
-### core.SnowmanVM <a id="coresnowmanvm"></a>
+#### core.SnowmanVM
 
 This type, a struct, contains methods and fields common to all implementations of the `snowman.ChainVM` interface.
 
@@ -204,7 +198,7 @@ This type contains several fields that you’ll want to include in your Virtual 
 * `toEngine`: the channel through which messages are sent to the consensus engine powering the blockchain
 * `State`: used to persist data such as blocks. Can be used to put/get any bytes.
 
-### core.Block <a id="coreblock"></a>
+#### core.Block
 
 This type, a struct, contains methods and fields common to all implementations of the `snowman.Block` interface.
 
@@ -230,7 +224,7 @@ Now we know the interface our Virtual Machine must implement and the libraries w
 
 Let’s write our Virtual Machine, which implements `snowman.VM`, and whose blocks implement `snowman.Block`.
 
-### Block <a id="block"></a>
+#### Block <a id="block"></a>
 
 First, let’s look at our block implementation.
 
@@ -294,7 +288,7 @@ func (b *Block) Verify() error {
 
 That’s all the code for our block implementation! All of the other methods of `snowman.Block`, which our `Block` must implement, are inherited from `*core.Block`.
 
-### Virtual Machine <a id="virtual-machine"></a>
+#### Virtual Machine
 
 Now let’s look at the implementation of VM, which implements the `snowman.VM` interface.
 
@@ -509,7 +503,7 @@ func (vm *VM) CreateHandlers() map[string]*common.HTTPHandler {
 }
 ```
 
-### Service <a id="service"></a>
+### Service
 
 AvalancheGo uses [Gorilla’s RPC library.](https://www.gorillatoolkit.org/pkg/rpc) to implement APIs.
 
@@ -636,5 +630,5 @@ In this tutorial we learned:
 * The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
 * The `core.SnowmanVM` and `core.Block` library types, which make defining Virtual Machines faster
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [join our community today](https://discord.gg/fszyM7K)!
 

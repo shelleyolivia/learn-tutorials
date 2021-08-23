@@ -15,19 +15,18 @@ Sometimes the transaction response on the faucet website returns an `[Object obj
 {% endhint %}
 
 Once this transaction is confirmed, you will have 1 **MATIC** on the Mumbai testnet!  
-You will want to patiently repeat this process four more times, waiting about a minute between attempts to avoid being greylisted by the faucet. You will want to have about 0.5 **MATIC** to complete the Pathway.
 
 -------------------------------------
 
 ## The challenge
 
 {% hint style="warning" %}
-**Imagine this scenario:** You know you have a big balance. You need to show that balance so you can brag about it to all your awesome web3 developer friends! In `components/protocols/polygon/steps/3_Balance.jsx`, implement the`checkBlance`function :
+**Imagine this scenario:** You know you have a big balance. You need to show that balance so you can brag about it to all your awesome web3 developer friends! In `components/protocols/polygon/steps/Balance.tsx`, implement the`checkBlance`function :
 {% endhint %}
 
 **Take a few minutes to figure this out.**
 
-```jsx
+```typescript
 const checkBalance = async () => {
   setFetching(true)
   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -55,7 +54,7 @@ const checkBalance = async () => {
 
 ## The solution
 
-```javascript
+```typescript
   const checkBalance = async () => {
     setFetching(true)
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -79,7 +78,7 @@ What happened in the code above? Let's take a closer look!
 
 When you have completed the code, the 'Check Balance' button will function. Click it to view the balance of the connected account:
 
-![](../../../.gitbook/assets/matic_balance.png)
+![](../../../.gitbook/assets/polygon-fund-v2.gif)
 
 -------------------------------------
 

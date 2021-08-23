@@ -1,26 +1,20 @@
----
-description: 'Learn how to create, mint, and transfer NFTs on Avalanche.'
----
-
-# Create, Mint and Transfer NFTs with the Avalanche Wallet
-
-## Introduction
+# Introduction
 
 NFT is an interesting term nowadays, in more technical terms NFT collectible is called ERC721 token. Please refer to the below link to learn more about [ERC-721 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/). It is a form of “art” that can be a picture, tweet, audio, etc in a broader perspective. A non-fungible token \(NFT\) is a unit of data on a digital ledger called blockchain, where each NFT represents something unique item, that can’t be interchanged. This enables many use cases that would be impossible with interchangeable tokens, like utility, proof of ownership, and a unique asset transaction history.
 
-## Prerequisites
+# Prerequisites
 
 In preparation for the tutorial, we will need to have some images on hand for testing the upload to Avalanche wallet. Please refer to the documentation for more information on the Avalanche wallet,[here](https://docs.avax.network/).
 
-## Create NFTs
+# Create NFTs
 
-### Create New Wallet
+## Create New Wallet
 
 Go to [Avalanche Wallet](https://wallet.avax.network/) and click on create a new wallet.
 
 ![](../../../.gitbook/assets/create-new-wallet.png)
 
-### Generate Key Phrase
+## Generate Key Phrase
 
 Next, click the "Generate Key Phrase" button, which will display a list of 24 words that you will need to save in a secure location. This list of words is used to access your account, so do not share it with anyone!
 
@@ -28,7 +22,7 @@ Next, click the "Generate Key Phrase" button, which will display a list of 24 wo
 
 ![](../../../.gitbook/assets/your-key-phrase.png)
 
-### Verify And Access Wallet
+## Verify And Access Wallet
 
 Once you have saved or written down the keywords in a secure location, click the checkbox to enable the "Access Wallet" button. Clicking this button displays the Verify Mnemonic modal window. Complete the phrase to verify that you have the correct words.
 
@@ -52,7 +46,7 @@ To access the **NFT Studio**, log into your Avalanche Wallet, and on the left si
 
 This will open the NFT Studio. There you have two options: **New Family**, for the creation of a new family of NFTs, and **Mint Collectible** for creating new assets in existing families. We need to create our first family of NFTs, so click **New Family**.
 
-## Create an NFT Family
+# Create an NFT Family
 
 There you will be asked to enter the name of your collectible family, as well as a symbol \(ticker\). Names do not have to be unique.
 
@@ -98,7 +92,7 @@ A custom collectible can contain an **UTF-8** encoded string, an **URL**, or a *
 
 After you enter and check the data, press **Mint** to create the collectible. Transaction fees will be deducted from your wallet, and a newly created collectible will be placed in your wallet.
 
-## See your collectibles
+# See your collectibles
 
 An overview of your collectibles is always visible at the top of the screen, along with your balances.
 
@@ -112,7 +106,7 @@ For each Generic collectible, a picture will be shown, along with the title, and
 
 If you select a collectible by clicking on it, you will see which group it belongs to, its quantity, along with the **Send** button.
 
-## Transfer NFTs
+# Transfer NFTs
 
 To send your collectible to someone, either click the **Send** button on the selected collectible in the Portfolio, or navigate to the **Send** tab on the left-hand side menu, and click **Add Collectible**:
 
@@ -132,17 +126,16 @@ When you have entered the destination address, and optionally entered the memo t
 
 After pressing **Send Transaction** it will be published on the network, and the transaction fee will be deducted from your balance. Collectibles will be deposited into the destination address shortly after.
 
-## Summary
+# Summary
 
 Now, you should know how to create families of collectible NFTs, mint NFTs in groups, and send them to other addresses. Have fun with it! If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out this [Avalanche NFT tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/creating-an-nft-part-1)!.
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
 
-## About the author
+# About the author
 
 [Devendra Yadav](https://community.figment.io/u/dev.koold)
 
-## References
+# References
 
 This tutorial is based on the official [Avalanche Documentation](https://docs.avax.network/build/tutorials/smart-digital-assets/wallet-nft-studio).
-
