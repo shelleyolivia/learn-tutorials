@@ -25,7 +25,7 @@ As simple as it sounds, what's happening in the background is actually very powe
 		const signer = provider.getSigner()
 		// try to figure out the expected parameters
 		const contract = new ethers.Contract(undefined)
-		)
+		
 		try {
 			// try to figure out the expected method 
 			const transactionResult = undefined
