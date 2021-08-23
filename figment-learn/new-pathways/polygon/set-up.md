@@ -8,8 +8,7 @@
 * [Metamask](https://metamask.io/) browser extension installed. 
 
 
-Chrome users may want to pin the extension to the Extensions toolbar for easy access. Firefox does this by default.
-![Pin Metamask to the toolbar in Chrome](../../../.gitbook/assets/pin_metamask.png)
+## Safety disclaimers
 
 {% hint style="info" %}
 If you **ALREADY** have Metamask installed and are using it for a hot wallet, we _**strongly recommend**_ creating an entirely new wallet in Metamask for the purposes of these tutorials. Figment Learn wants nothing to do with your personal keys. We do not want any accidents involving anybody's cryptocurrency! Again, you _must not_ _continue_ until you take care of this.  
@@ -31,6 +30,7 @@ Run the following command in a terminal to clone the `learn-web3-dapp` code repo
 ```bash
 git clone https://github.com/figment-networks/learn-web3-dapp.git
 cd learn-web3-dapp
+cp .env.example .env.local  
 yarn
 ```
 
@@ -57,7 +57,7 @@ In these tutorials we will cover connecting to and interacting with **Polygon** 
 -------------------------------------
 
 
-## Add the Mumbai testnet to Metamask
+## Add the Mumbai testnet 
 
 The first task is to connect to the Polygon Mumbai testnet by adding it to the list of RPC endpoints in Metamask. Click on the Fox head icon in your web browser to open the popup, and then follow this workflow to complete the process :
 
