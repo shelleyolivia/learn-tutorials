@@ -1,10 +1,10 @@
 # 
 
-Solidity is a high level language. It is partly designed after ECMAScript and therefore it is said to be **similar to JavaScript**. But the similarity ends there. It gets compiled \(not interpreted\) and usually deployed on Blockchains that understand the Ethereum Virtual Machine \(EVM\), like Polygon! When a smart contract is deployed, it becomes immutable. This has both benefits and drawbacks, which we will discuss below.
+Solidity is a high level language. It is partly designed after ECMAScript and therefore it is said to be **similar to JavaScript**. But the similarity ends there. It gets compiled (not interpreted) and usually deployed on Blockchains that understand the Ethereum Virtual Machine (EVM), like Polygon! When a smart contract is deployed, it becomes immutable. This has both benefits and drawbacks, which we will discuss below. 
 
-We can use [HardHat](https://hardhat.org) or [Truffle](https://trufflesuite.com) to ease development and deployment of our Solidity code. The [Remix IDE](https://remix.ethereum.org) is also a popular choice for contract development and deployment. There are several existing guides for other EVM compatible networks available on Figment Learn \(check out the tutorials for [Celo and Truffle](https://learn.figment.io/network-documentation/celo/tutorial/deploying-smart-contracts-on-celo-with-truffle), or [Celo and HardHat](https://learn.figment.io/network-documentation/celo/tutorial/celo-hardhat-deploy-and-nft-app) for example\). Both HardHat and Truffle are capable of running local development blockchains. We will focus on using Truffle in this tutorial.
+We can use [HardHat](https://hardhat.org) or [Truffle](https://trufflesuite.com) to ease development and deployment of our Solidity code. There are several existing guides for other EVM compatible networks available on Figment Learn (check out the tutorials for [Celo and Truffle](https://learn.figment.io/network-documentation/celo/tutorial/deploying-smart-contracts-on-celo-with-truffle), or [Celo and HardHat](https://learn.figment.io/network-documentation/celo/tutorial/celo-hardhat-deploy-and-nft-app) for example). We will focus on using Truffle in this tutorial. 
 
-Run the following commands to get started :
+Run the following commands to get started: 
 
 ```bash
 npm install -g truffle
@@ -14,12 +14,7 @@ yarn
 
 {% hint style="warning" %}
 Also be sure to rename the file **`contracts/polygon/SimpleStorage/.secret.example`** to **`.secret`** before continuing. This file is where we will store the secret recovery phrase used later in this step to deploy the smart contract. You will need to replace the text "your recovery phrase goes here" with your Metamask secret recovery phrase.
-
-Once again, it is **strongly recommended** that you do this with a dedicated testing wallet**. DO NOT** use the secret recovery phrase from a wallet which has cryptocurrency on either the Ethereum or Polygon mainnets.
 {% endhint %}
-
-`yarn` is a Package Manager which lets us easily fetch all of the open source code libraries and install them into the `node_modules` directory of our project. This makes all of the functionality of these 'dependencies' available for use in our project. The names and versions of these packaged code libraries are all available in the projects `package.json`.  
-The rationale for installing Truffle globally with the `-g` flag via `npm` is that it provides access to Truffle's tooling in any project, instead of installing it only as a dependency of a single project.
 
 ## The SimpleStorage Solidity contract
 
@@ -114,7 +109,6 @@ This will compile the contract before deploying it to the Truffle development ch
 ```text
 Using network 'development'.
 
-
 Compiling your contracts...
 ===========================
 > Compiling ./test/TestSimpleStorage.sol
@@ -122,24 +116,15 @@ Compiling your contracts...
 > Compiled successfully using:
    - solc: 0.8.0+commit.c7dfd78e.Emscripten.clang
 
-
-
   TestSimpleStorage
     ✓ testInitialStoredDataUsingDeployedContract (60ms)
     ✓ testSettingStoredData (56ms)
-
 
   2 passing (6s)
 ```
 
 {% hint style="warning" %}
-If there is an error :
-
-```text
-Error: Cannot find module '@truffle/hdwallet-provider'
-```
-
-You need to install the dependencies in this sub-module with `yarn` as mentioned at the beginning of the tutorial.
+If there is an error : `Error: Cannot find module '@truffle/hdwallet-provider'`. You need to install the dependencies in this sub-module with `yarn` as mentioned at the beginning of the tutorial.
 {% endhint %}
 
 ## Deploy the smart contract
