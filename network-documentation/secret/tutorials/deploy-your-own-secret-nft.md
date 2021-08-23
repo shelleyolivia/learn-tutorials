@@ -1,12 +1,4 @@
----
-description: >-
-  In this installment of the secretNFT series you will deploy your very own
-  snip721 token contract and learn how to interact with it.
----
-
-# Deploy your own secret NFT
-
-## Introduction
+# Introduction
 
 For a high level introduction to Non-Fungible-Tokens see the [first installment of this series](https://learn.figment.io/network-documentation/secret/tutorials/create-your-first-secret-nft). In this tutorial we will download and compile the [snip721 reference implementation](https://github.com/baedrik/snip721-reference-impl), deploy it onto the secret testnet and interact with the contract, minting your own secret NFTs. Unlike the [previous tutorial](https://learn.figment.io/network-documentation/secret/tutorials/create-your-first-secret-nft) we will configure the contract ourselves and learn about access right management of secret contracts and tokens on the way.
 
@@ -25,7 +17,9 @@ This tutorial assumes that you have completed the [Secret Learn Pathway](https:/
   * [dotenv](https://www.npmjs.com/package/dotenv) - for working with environment variables
 * [Rust](https://rustup.rs) + [docker](https://docs.docker.com/get-docker/) toolchain to compile secret contracts
 
-For the latest you may want to refer to [Write & deploy your first Secret contract](https://app.gitbook.com/@figment-learn/s/learn-docs/network-documentation/secret/tutorials/intro-pathway-secret-basics/5.-writing-and-deploying-your-first-secret-contract)
+For the latest you may want to refer to
+
+{% page-ref page="intro-pathway-secret-basics/5.-writing-and-deploying-your-first-secret-contract.md" %}
 
 which will help you setting up everything needed for developing on Secret.
 
@@ -85,7 +79,9 @@ For uploading the compiled contract we will reuse the knowledge you gained durin
 
 ## Uploading the contract
 
-We are now switching back to the project root directory and will start writing some Javascript modules to manage our newly created contract. For this we will need the `secretjs` and `dotenv` packages. If you haven't set it up by now I recommend a quick detour to the first step of the secret pathway to do so: Connect to a Secret node with DataHub
+We are now switching back to the project root directory and will start writing some Javascript modules to manage our newly created contract. For this we will need the `secretjs` and `dotenv` packages. If you haven't set it up by now I recommend a quick detour to the first step of the secret pathway to do so:
+
+{% page-ref page="intro-pathway-secret-basics/1.-connecting-to-a-secret-node-using-datahub.md" %}
 
 After setting everything up we start by creating a new file `deploy-nft.js` in the root project directory and add the code below:
 
@@ -264,19 +260,20 @@ contract:  {
 } address: secret1g0t7sggeh89k27xa2vux5rnpc3ly4a9c0u8724
 ```
 
-{% hint style="info" %}
-**Unable to deploy your contract or initializing it using deploy-ft.js**
-
-Let's check for some common causes:
+> **Unable to deploy your contract or initializing it using deploy-ft.js**
+>
+> Let's check for some common causes:
 
 * First, make sure you have `.env` file saved and it's in the correct format as given in the tutorial.
 * If you're getting an error message like `UnauthorizedError: { "message":"Invalid authentication credentials"` then make sure to replace the &lt;API\_KEY&gt; with your correct API key which you copied from your DataHub Dashboard.
 * If you are getting `Error: Cannot find module 'secretjs'` make sure you installed the packages correctly using `npm install --save secretjs dotenv @iov/crypto`
 * If you see `Error: ENOENT: no such file or directory, open 'my-snip721/contract.wasm'` make sure that file path you are using in your deploy script points to the generated `contract.wasm`
 * If still, you're experiencing the same issue, for help reach out to us on [Discord](https://discord.gg/fszyM7K) or [Forum](https://community.figemnt.io)
-{% endhint %}
 
-After this executed successfully you can take the program you created in the first installment, change the contract address to the one of your contract and interact with it in the same way! [Create your first secret NFT](https://app.gitbook.com/@figment-learn/s/learn-docs/~/drafts/-MhUacF9fZZPcEKT9dnD/network-documentation/secret/tutorials/create-your-first-secret-nft)
+
+After this executed successfully you can take the program you created in the first installment, change the contract address to the one of your contract and interact with it in the same way!
+
+{% page-ref page="create-your-first-secret-nft.md" %}
 
 ## Conclusion
 
