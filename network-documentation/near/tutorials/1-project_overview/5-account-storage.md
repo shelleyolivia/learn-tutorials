@@ -1,22 +1,14 @@
----
-description: Complete guide to NEAR's new account storage standard
----
-
-# Account Storage Standard \(NEP-145\)
-
-## Account Storage Standard \(NEP-145\)
-
 [Storage staking](https://docs.near.org/docs/concepts/storage-staking) is an issue that needs to be addressed by any multi-user contract that allocates storage for the user on the blockchain. This issue first arose while designing the [Fungible Token Core Standard - NEP-141](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/2-fungible-token#what-does-account-registration-have-to-do-with-fungible-tokens). Once NEP-141 was finalized, the NEAR community circled back to work on this problem. In this tutorial, I will summarize the lengthy [online discussion](https://github.com/near/NEPs/discussions/145) and present to you the fruits of our labor.
 
-### Motivation: There Is No Free Storage
+# Motivation: There Is No Free Storage
 
 You can't get something for nothing. Long term contract state storage on the blockchain must be paid for. On the NEAR platform long term storage is paid for using a process called [storage staking](https://docs.near.org/docs/concepts/storage-staking). The contract is responsible to stake NEAR to pay for the contract's storage usage. The NEAR amount that is used for storage staking is effectively locked and cannot be transferred or used to pay for gas. Storage staking costs are the most expensive costs to consider for the contract on NEAR. If storage costs are not managed properly, then they can [break the bank](https://docs.near.org/docs/concepts/storage-staking#the-million-cheap-data-additions-attack) for the contract.
 
-{% hint style="info" %}
-#### Side Note about "Account Storage Standard \(formerly Account Registration\)"
+
+## About "Account Storage Standard \(formerly Account Registration\)"
 
 If you happened to follow the [online discussion](https://github.com/near/NEPs/discussions/145), it started as "Account Registration". As we dove deeper, the discussion evolved into "Account Storage". The two are related, but with a different focus. The discussion was shifted towards account storage to focus on the core problem we were trying to solve with [storage staking](https://docs.near.org/docs/concepts/storage-staking) for multi-user contracts. Account registration is related but a separate concern, which is to be continued in future discussions ...
-{% endhint %}
+
 
 ## Account Storage API
 
@@ -27,12 +19,12 @@ On NEAR, the contract is responsible to pay for its long term persistent storage
 3. Account storage balances can be looked up. The amount required to pay for the account's storage usage will be locked up in the contract. Any storage balance above storage staking costs is available for withdrawal.
 4. Accounts can withdraw NEAR from the account's storage available balance.
 
-#### Out of Scope
+## Out of Scope
 
 * How to close the account and be able to withdraw all funds.
 * How the contract should account for changes in price for storage on the NEAR blockchain over time.
 
-### Quick API Overview
+# Quick API Overview
 
 ![](../../../../.gitbook/assets/oysterpack-smart-account-storage-api.png)
 
@@ -149,7 +141,7 @@ Used to lookup the account storage balance for the specified account. If the acc
 
 * If `account_id` is not a valid NEAR account ID
 
-#### It's a wrap folks
+# Conclusion
 
 Overall, the Account Storage API itself is pretty straight forward. The key is to know its purpose and what problem it is trying to solve. Let's recap:
 
@@ -157,11 +149,10 @@ Overall, the Account Storage API itself is pretty straight forward. The key is t
 * We learned about how [storage staking](https://docs.near.org/docs/concepts/storage-staking) works on NEAR and how it impacts multi-user contracts.
 * We reviewed the new standard Account Storage API \(NEP-145\) in detail.
 
-#### What's Next
+# Next Steps
 
 Enough theoretical discussion for now ... in the next tutorial we will get back to coding where we will implement the Account Storage API for the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) token contract. Until next time, I leave you with these final words ...
 
 The Internet is the greatest revolution in humanity's history. It provides the people of the world with an opportunity to connect and unite to build a global community that knows no borders. I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
 ![](../../../../.gitbook/assets/oysterpack-smart-coder.jpeg)
-
