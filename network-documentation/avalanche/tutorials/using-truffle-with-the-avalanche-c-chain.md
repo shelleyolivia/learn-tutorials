@@ -26,7 +26,7 @@ cd /path/to/avash
 go build
 // start Avash
 ./avash
-# start a five node staking network
+// start a five node staking network
 runscript scripts/five_node_staking.lua
 ```
 
