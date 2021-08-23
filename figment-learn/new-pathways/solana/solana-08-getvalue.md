@@ -82,7 +82,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 **What happened in the code above?**
 
 * First, we pass the **Schema**, then the **Account**'s key (here key refer to the key of a map struct), and the the binary data stored into **greeter**.
-* Finaly, we just need to call the propriety counter of `greeting` to pass down the value. 
+* Finaly, we just need to call the property counter of `greeting` to pass down the value. 
 
 ----------------------------------
 

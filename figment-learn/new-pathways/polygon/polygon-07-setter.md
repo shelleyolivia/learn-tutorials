@@ -98,7 +98,7 @@ What's happening in the code above?
 
 Once the code above save you can click and this is what the UI should look like!
 
-![](../../../.gitbook/assets/polygon-setter-v2.gif)
+![](../../../.gitbook/assets/polygon-setter-v21.gif)
 
 -------------------------------------
 
