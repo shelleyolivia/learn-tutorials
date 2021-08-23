@@ -1,8 +1,6 @@
-# Build a PoE Decentralized App
-
 [The original tutorial can be found in the official Substrate documentation here. ](https://substrate.dev/docs/en/tutorials/build-a-dapp/)
 
-## Introduction <a id="__docusaurus"></a>
+## Introduction 
 
 In this tutorial, you will learn to create a custom ["Proof of Existence"](https://en.wikipedia.org/wiki/Proof_of_Existence) dApp using the Substrate blockchain development framework and [FRAME](https://substrate.dev/docs/en/knowledgebase/runtime/frame) runtime libraries.
 
@@ -26,8 +24,7 @@ Before we even get started, let's lay out what we are going to do over the cours
 
 Sound reasonable? Good, then let's begin!
 
-## Prepare to build a dApp <a id="__docusaurus"></a>
-
+## Prepare to build a dApp 
 ### Install the Node Template
 
 You should already have version `v3.0.0` of the [Substrate Developer Hub Node Template](https://github.com/substrate-developer-hub/substrate-node-template) compiled on your computer from when you completed the [Create Your First Substrate Chain Tutorial](https://substrate.dev/docs/en/tutorials/create-your-first-substrate-chain). If you do not, please complete that tutorial.
@@ -63,7 +60,7 @@ In order to implement this, we will only need to store information about the pro
 
 Sounds simple enough? Great, let's get coding.
 
-## Building a Custom Pallet <a id="__docusaurus"></a>
+## Building a Custom Pallet
 
 The Substrate Developer Hub Node Template, which is used as the starting point for this tutorial, has a FRAME-based [runtime](https://substrate.dev/docs/en/knowledgebase/runtime/). [FRAME](https://substrate.dev/docs/en/knowledgebase/runtime/frame) is a library of code that allows you to build a Substrate runtime by composing modules called "pallets". You can think of these pallets as individual pieces of logic that define what your blockchain can do! Substrate provides you with a number of pre-built pallets for use in FRAME-based runtimes.
 
@@ -105,7 +102,6 @@ substrate-node-template
 +-- scripts
 |
 +-- ...
-Copy
 ```
 
 You will see some pre-written code that acts as a template for a new pallet. You can read over this file if you'd like, and then delete the contents since we will start from scratch for full transparency. When writing your own pallets in the future, you will likely find the scaffolding in this template pallet useful.
@@ -138,7 +134,7 @@ Copy
 
 Things like events, storage, and callable functions may look familiar to you if you have done other blockchain development. We will show you what each of these components looks like for a basic Proof Of Existence pallet.
 
-#### Imports and Dependencies
+## Imports and Dependencies
 
 Since imports are pretty boring, you can start by pasting this at the top of your empty `lib.rs` file:
 
@@ -157,28 +153,26 @@ Most of these imports are already available because they were used in the templa
 
 **Add** this block to your `pallets/template/Cargo.toml` file under `[dependencies]` section.
 
-```rust
+```toml
 [dependencies]
 #--snip--
 sp-std = { default-features = false, version = '3.0.0' }
-Copy
 ```
 
 Then, **Update** the existing `[features]` block to look like this. The last line is new. You will learn more about why this is necessary in the next tutorial, the [Add a Pallet](https://substrate.dev/docs/en/tutorials/add-a-pallet) tutorial.
 
-```rust
+```toml
 [features]
 default = ['std']
 std = [
     'codec/std',
     'frame-support/std',
     'frame-system/std',
-    'sp-std/std',          <-- This line is new
+    'sp-std/std', # <-- This line is new
 ]
-Copy
 ```
 
-#### Configuration
+### Configuration
 
 Every pallet has a component called `Config` that is used for configuration. This component is a [Rust "trait"](https://doc.rust-lang.org/book/ch10-02-traits.html); traits in Rust are similar to interfaces in languages such as C++, Java and Go. For now, the only thing we will configure about our pallet is that it will emit some Events. The `Config` interface is another topic that will be covered in greater depth in the next tutorial, the [Add a Pallet](https://substrate.dev/docs/en/tutorials/add-a-pallet) tutorial. The following code will need to be added to your `pallets/template/src/lib.rs` file:
 
@@ -188,10 +182,9 @@ pub trait Config: frame_system::Config {
     /// Because this pallet emits events, it depends on the runtime's definition of an event.
     type Event: From<Event<Self>> + Into<<Self as frame_system::Config>::Event>;
 }
-Copy
 ```
 
-#### Events
+### Events
 
 After we've configured our pallet to emit events, let's go ahead and define which events:
 
@@ -207,7 +200,6 @@ decl_event! {
         ClaimRevoked(AccountId, Vec<u8>),
     }
 }
-Copy
 ```
 
 Our pallet will only emit an event in two circumstances:
@@ -217,7 +209,7 @@ Our pallet will only emit an event in two circumstances:
 
 The events can contain some additional data, in this case, each event will also display who triggered the event \(`AccountId`\), and the proof data \(as `Vec<u8>`\) that is being stored or removed. Note that convention is to include an array with descriptive names for these parameters at the end of event documentation.
 
-### Errors
+## Errors
 
 The events we defined previously indicate when calls to the pallet have completed successfully. Similarly, errors indicate when a call has failed, and why it has failed.
 
@@ -233,12 +225,11 @@ decl_error! {
         NotProofOwner,
     }
 }
-Copy
 ```
 
 The first of these errors can occur when attempting to claim a new proof. Of course a user cannot claim a proof that has already been claimed. The latter two can occur when attempting to revoke a proof.
 
-#### Storage
+### Storage
 
 To add a new proof to the blockchain, we will simply store that proof in our pallet's storage. To store that value, we will create a [hash map](https://en.wikipedia.org/wiki/Hash_table) from the proof to the owner of that proof and the block number the proof was made.
 
@@ -252,12 +243,11 @@ decl_storage! {
         Proofs: map hasher(blake2_128_concat) Vec<u8> => (T::AccountId, T::BlockNumber);
     }
 }
-Copy
 ```
 
 If a proof has an owner and a block number, then we know that it has been claimed! Otherwise, the proof is available to be claimed.
 
-#### Callable Functions
+### Callable Functions
 
 As implied by our pallet's events and errors, we will have two "dispatchable functions" the user can call in this FRAME pallet:
 
@@ -322,23 +312,21 @@ decl_module! {
         }
     }
 }
-Copy
 ```
 
 > The functions you see here do not have return types explicitly stated. In reality they all return [`DispatchResult`](https://substrate.dev/rustdocs/v3.0.0/frame_support/dispatch/type.DispatchResult.html)s. This return type is added on your behalf by the `decl_module!` macro.
 
-### Compile Your New Pallet
+## Compile Your New Pallet
 
 After you've copied all of the parts of this pallet correctly into your `pallets/template/lib.rs` file, you should be able to recompile your node without warning or error. Run this command in the root directory of the `substrate-node-template` repository to build and run the node:
 
-```rust
+```
 WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo run --release -- --dev --tmp
-Copy
 ```
 
 Now it is time to interact with our new Proof of Existence pallet!
 
-## Building a Custom Front End <a id="__docusaurus"></a>
+## Building a Custom Front End 
 
 If you have made it this far, that means you _should_ have a brand new blockchain with custom functionality up and running.
 
@@ -353,7 +341,6 @@ To start the Front-End Template, navigate to its directory and run:
 yarn install
 # Start the template
 yarn start
-Copy
 ```
 
 A new tab should open in your web browser and you'll see the following interface.
@@ -364,7 +351,7 @@ You'll see a list of pre-funded accounts, and you can make token transfers betwe
 
 ![Balance Transfer](https://substrate.dev/docs/assets/tutorials/build-a-dapp/front-end-template-balance-transfer.png)
 
-### Add Your Custom React Component
+## Add Your Custom React Component
 
 In the Front-End Template project, edit the `TemplateModule.js` file in the `/src/` folder:
 
@@ -381,12 +368,11 @@ substrate-front-end-template
 |   |
 |   +-- ...
 +-- ...
-Copy
 ```
 
 Delete the entire contents of that file, and replace it with the following:
 
-```rust
+```jsx
 // React and Semantic UI elements.
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Grid, Message } from 'semantic-ui-react';
@@ -527,12 +513,11 @@ export default function TemplateModule (props) {
   return (api.query.templateModule && api.query.templateModule.proofs
     ? <Main {...props} /> : null);
 }
-Copy
 ```
 
 We won't walk you step by step through the creation of this component, but do look over the code comments to learn what each part is doing.
 
-### Submit a Proof
+## Submit a Proof
 
 Your Front-End Template should reload when you save your changes, and you'll notice our new component. Now we're ready to try out our new dApp. Select any file on your computer, and you will see that you can create a claim with its file digest:
 
@@ -546,7 +531,7 @@ If all went well, you should see a new `ClaimCreated` event appear in the Events
 
 Remember, only the owner can revoke the claim! If you select another user account at the top, and you will see that the revoke option is disabled!
 
-### Next Steps
+# Next Steps
 
 This is the end of our journey into creating a Proof of Existence blockchain.
 
@@ -563,4 +548,3 @@ Substrate is written in the Rust programming language, which has a great communi
 If you experienced any issues with this tutorial or want to provide feedback, You can [ask a question on Stack Overflow](https://stackoverflow.com/questions/tagged/substrate) and use the `substrate` tag or contact us on [Element](https://matrix.to/#/#substrate-technical:matrix.org).
 
 We can't wait to see what you build next!
-

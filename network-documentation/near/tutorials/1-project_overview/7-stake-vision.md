@@ -1,9 +1,3 @@
----
-description: STAKE Token Vision - NEAR Game Changer
----
-
-# It's Time to Put a STAKE in the Ground!
-
 ![](../../../../.gitbook/assets/oysterpack-stake-in-the-ground.jpg)
 
 My vision for STAKE can be summed up in 3 words:

@@ -1,22 +1,12 @@
----
-description: Learn how to delegate and unbond tokens on Secret Network
----
-
-# Delegate to a Validator & Unbond Tokens
-
-## About the Author
-
-This tutorial was created by [Minato Fund](https://github.com/minatofund), an active group helping merge blockchain projects operating as a validator.
-
-## Introduction
+# Introduction
 
 If you are interested in staking SCRT tokens but do not want to run your own node, delegation is a great option. In this tutorial, we will delegate SCRT tokens to a validator, and unbond the delegation using SecretJS and a [DataHub](https://datahub.figment.io/sign_up?service=secret) node.
 
-### About Delegation:
+## What is Delegation?
 
 Delegation involves giving some of your staking power to a specific validator on the Secret Network, who will then give you a share of their fees and rewards. As a delegator, you essentially get the same returns as a node operator minus their commissions. If there is an on-chain governance vote, a delegator's vote will be the same as their validator's, unless the delegator changes their own vote manually. Since there can currently only be 50 active nodes on the network, delegators play a crucial role in decentralization.
 
-### Prerequisites:
+# Prerequisites
 
 If you have completed the Secret Pathway, you should have already taken care of these prerequisites. For this tutorial you must:
 
@@ -24,7 +14,7 @@ If you have completed the Secret Pathway, you should have already taken care of 
 * Create an account on the Secret testnet [\(see Tutorial 2\)](https://learn.figment.io/network-documentation/secret/tutorials/2.-setting-up-your-wallet)
 * Make sure you have testnet tokens in your account [\(see Tutorial 3\)](https://learn.figment.io/network-documentation/secret/tutorials/3.-querying-the-secret-blockchain)
 
-## Delegate to a Validator
+# Delegate to a Validator
 
 First, you need to decide which validator you would like to delegate to. You can go to this URL [https://explorer.secrettestnet.io/validators/](https://explorer.secrettestnet.io/validators/) to check the active validators. Once you have selected one, you can start to build the delegation transaction by creating a new file `delegate.js` and adding the code below:
 
@@ -36,7 +26,7 @@ const {
 require('dotenv').config();
 
 const main = async () => {
-  // As in previous tutorial, initialize client from ENV
+  // As in previous tutorial, initialize client from .env
   const mnemonic = process.env.MNEMONIC;
   const signingPen = await Secp256k1Pen.fromMnemonic(mnemonic)
     .catch((err) => { throw new Error(`Could not get signing pen: ${err}`); });
@@ -65,7 +55,7 @@ main().catch((err) => {
 });
 ```
 
-### Define TX message
+# Define TX message
 
 Now, you need to define the TX message that allows you to specify the delegator address, validator address and the amount of tokens you want to delegate. In the `delegate.js` file under the comment `// 1. Define TX message` add the following code snippet:
 
@@ -83,7 +73,7 @@ Now, you need to define the TX message that allows you to specify the delegator 
   };
 ```
 
-### Define fees
+# Define fees
 
 Then, you have to define the fee and gas for this transaction. Under the comment `// 2. Define fees` add the following code snippet:
 
@@ -99,7 +89,7 @@ Then, you have to define the fee and gas for this transaction. Under the comment
   };
 ```
 
-### Sign transaction
+# Sign transaction
 
 In order to authorize the transaction, and prove it is valid, you need to sign the transaction with the details you defined above. Under the comment `// 3. Sign transaction` add the following code snippet:
 
@@ -119,7 +109,7 @@ In order to authorize the transaction, and prove it is valid, you need to sign t
   };
 ```
 
-### Broadcast transaction
+# Broadcast transaction
 
 Now, you can broadcast your transaction, let others know and process it as well. Under the comment `// 4. Broadcast transaction` add the following code snippet:
 
@@ -128,7 +118,7 @@ Now, you can broadcast your transaction, let others know and process it as well.
     .catch((err) => { throw new Error(`Could not post tx: ${err}`); });
 ```
 
-### Query transaction
+# Query transaction
 
 After your transaction is accepted and processed, you can query the information about your transaction on the Secret Network. Under the comment `// 5. Query transaction` add the following code snippet:
 
@@ -147,7 +137,7 @@ node delegate.js
 
 If everything works \(you have enough tokens, validator is valid, etc\) you should see an output similar to:
 
-```javascript
+```
 Transaction:  [
   {
     height: 1137370,
@@ -165,9 +155,9 @@ Copy the transaction's `hash` from the output and replace `<TRANSACTION HASH>` i
 
 `https://explorer.secrettestnet.io/transactions/<TRANSACTION HASH>`
 
-## Unbond Tokens
+# Unbond Tokens
 
-> **WARNING**: There currently is a 21 days unbonding period, during which no rewards are handed out and your tokens are locked.
+> **WARNING**: There currently is a 21 day unbonding period, during which no rewards are handed out and your tokens are locked.
 
 If for any reason the validator misbehaves, or you just want to unbond a certain amount of tokens, make a copy of `delegate.js` and rename is as `unbond.js`. Then, change the code under the comment `// 1. Define TX message` as following code snippet below:
 
@@ -194,7 +184,7 @@ node unbond.js
 
 If everything works \(you have enough delegation on the validator and etc\) you should see an output similar to:
 
-```javascript
+```
 Transaction:  [
   {
     height: 1137693,
@@ -220,3 +210,6 @@ Congratulations! You now know how to delegate and unbond your tokens by crafting
 
 The complete code can be found on [**Github**](https://github.com/figment-networks/tutorials/blob/main/secret/6_delegations)**.**
 
+# About the Author
+
+This tutorial was created by [Minato Fund](https://github.com/minatofund), an active group helping merge blockchain projects operating as a validator.

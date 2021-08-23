@@ -1,16 +1,10 @@
----
-description: We will learn how to create a Smart Contract which facilitates crowdfunding.
----
-
-# Celo Crowd Funding Project Tutorial
-
-This tutorial has three parts which are as follows -
+This tutorial has three parts:
 
 1. Building a Crowdfunding Smart Contract in Celo
 2. Deploying a Crowdfunding Smart Contract in Celo
 3. Interacting with the Crowdfunding Smart Contracts
 
-## 1. Building a Crowdfunding Smart Contract in Celo
+# 1. Building a Crowdfunding Smart Contract in Celo
 
 We're going to write a smart contract in Solidity which facilitates crowdfunding \(like GoFundMe, Kickstarter, and Indiegogo\) on Celo in 172 lines of code.
 
@@ -24,13 +18,11 @@ Solidity and Celo make building the backend for this easy! Not to mention, 🌎 
 
 This three part tutorial series will take us through writing the smart contract, deploying it, and interacting with it using Javascript.
 
-### Video
+# Prerequisites
 
 Click the image below in order to watch the Youtube video for "Building a Crowdfunding Smart Contract in Celo".
 
 {% embed url="https://youtu.be/uOso0av9gj4" caption="Building a Crowdfunding Smart Contract in Celo" %}
-
-### Prerequisites
 
 This tutorial is meant for intermediate web3 developers. It assumes you have some experience programming in Javascript and Solidity, and an understanding of basic Ethereum and object oriented programming concepts.
 
@@ -38,7 +30,7 @@ Before we continue, make sure you have truffle installed. If you don't, run the 
 
 `npm install -g truffle`
 
-### Project setup
+## Project setup
 
 First, open the terminal and make a new project folder. We’ll call it celo-crowdfunding:
 
@@ -67,7 +59,7 @@ Here's what a successful run of truffle init will look like:
 
 ![truffle init](https://i.imgur.com/JF6zdoT.png)
 
-### Writing the Contract
+# Writing the Contract
 
 First things first, open the newly created project in your favorite code editor and create a file called **CeloCrowdfund.sol** in your `contracts/` folder.
 
@@ -128,7 +120,7 @@ We use the `enum` named `ProjectState` in order to keep track of a project's cur
 
 We also create a private variable named `cUSDToken` which is of type `IERC20`. This is the variable we'll use to interface with the cUSD tokens.
 
-### Expanding the Project contract
+## Expanding the Project contract
 
 Next, we'll add some public variables which describe a `Project`. Public variables in soldity can be accessed by any other contract or dApp. We make these variables public in our contract because we will need it when we interact with the in order to get details about the `Project`. For more info on Solidity variable types, feel free to check out [this guide](https://www.bitdegree.org/learn/solidity-variables#control-variable-visibility).
 
@@ -209,7 +201,7 @@ constructor
 
 If you've done some object oriented programming in the past, constructors should be familiar to you. They're essentially the parameters we need to create a `Project` object.
 
-### The Contribute\(\) function
+## The Contribute\(\) function
 
 Next, let's create a function in the `Project` contract for contributing money to a project:
 
@@ -244,7 +236,7 @@ currentBalance = currentBalance.add(amount);
 emit ReceivedFunding(msg.sender, amount, currentBalance);
 ```
 
-### The checkIfFundingCompleteOrExpired\(\) function
+## The checkIfFundingCompleteOrExpired\(\) function
 
 At the bottom of `contribute()`, the function calls `checkIfFundingCompleteOrExpired();` which doesn't exist yet. Let's create that now!
 
@@ -263,7 +255,7 @@ This function checks if the deadline is past the `block.timestamp` \(the current
 
 Next, let's make the `payOut()` function.
 
-### The payOut\(\) function
+## The payOut\(\) function
 
 Below the `checkIfFundingCompleteOrExpired()` function, add the following for `payOut()`:
 
@@ -294,7 +286,7 @@ Next, the `payOut()` function will send the full amount raised by a project back
 
 `transfer()` returns a boolean value. If it works, then the `CreatorPaid()` event is emitted and the state is updated. If not, we reset the `currentBalance` variable and update the state anyway.
 
-### The getDetails\(\) function
+## The getDetails\(\) function
 
 Finally, we're going to add the last function in our `Project` contract, the `getDetails()` function.
 
@@ -325,7 +317,7 @@ This function returns information about the project by returning the public vari
 
 That's it for the `Project` contract!
 
-### Back to the crowdfund contract
+# Back to the crowdfund contract
 
 ![Celo crowdfund contract back to the future image](https://i.imgur.com/UFqJB0z.png)
 
@@ -402,7 +394,7 @@ function returnProjects() external view returns(Project[] memory) {
 
 And that's it for our two contracts!
 
-### Conclusion
+# Conclusion
 
 Just like that, we've created two smart contracts which will allow for crowdfunding in Celo.
 
@@ -412,27 +404,24 @@ In the next section, we will discuss deploying the contracts we've written to th
 
 **Note**: This tutorial and smart contract is based on the [contracts for Coperacha](https://github.com/Alex-Neo-Projects/Coperacha-contracts) an app built by the tutorial author. If you want to see these contracts being used in a mobile app, you can see an example of that [here](https://github.com/Alex-Neo-Projects/Coperacha-app).
 
-## 2. Deploying a Crowdfunding Smart Contract in Celo
+# 2. Deploying a Crowdfunding Smart Contract in Celo
 
 If you've done part 1 of this tutorial series, you have a crowdfunding contract written in Solidity. Now that we've got a crowdfunding contract, we'll need to deploy it to the Celo test network in order to interact with it. Let's do that now!
-
-### Video
-
-{% embed url="https://youtu.be/HShFGDvBgNk" %}
-
-Click the image below in order to watch the Youtube video for "Building a Crowdfunding Smart Contract in Celo".Deploying a Crowdfunding Smart Contract in Celo
-
-### Prerequisites <a id="prerequisites"></a>
+# Prerequisites 
 
 This tutorial assumes that you have followed and completed part 1 \(Building a Crowdfunding Smart Contract in Celo\). If you have not, please go back and follow that tutorial first.
 
-### Deployment Setup <a id="deployment-setup"></a>
+Click the image below in order to watch the YouTube video for "Deploying a Crowdfunding Smart Contract in Celo". 
+
+{% embed url="https://youtu.be/HShFGDvBgNk" %}
+
+## Deployment Setup 
 
 First, open the terminal and `cd` into the Celo crowdfunding project folder.
 
 `cd celo-crowdfunding`
 
-#### The migrations folder <a id="the-migrations-folder"></a>
+## The migrations folder 
 
 If there is already the `1_initial_migration.js` file in the folder, delete it.
 
@@ -448,7 +437,7 @@ module.exports = function (deployer) {
 
 Migrations in truffle are essentially deployment scripts. What we have written is a very simple deployment script which takes our contract \(`CeloCrowdfund`\) and deploy it.
 
-### Connecting to a Testnet node <a id="connecting-to-a-testnet-node"></a>
+## Connecting to a Testnet node 
 
 We're going to use [Datahub](https://figment.io/datahub/) to connect to the Celo test network. If you don't have an account, sign up on the [Datahub](https://figment.io/datahub/) website and resume this tutorial once you have your Celo API key.
 
@@ -476,7 +465,7 @@ Inside the `.gitignore`, put the following in a new line:
 
 And that's it! The `.env` file will now be ignored by Git.
 
-### Getting a Celo account
+## Getting a Celo account
 
 Next, we’re going to need a Celo account to deploy from. We will need three things for deployment:
 
@@ -542,7 +531,7 @@ Now that you have a Celo account, take the address and paste it into the [Celo d
 
 ​[​![funding](https://camo.githubusercontent.com/0c74bcb5251da3397bae2c6901c25218a6ff73befb825a53c546181e95e0db06/68747470733a2f2f692e696d6775722e636f6d2f7a5074575748572e706e67)​](https://camo.githubusercontent.com/0c74bcb5251da3397bae2c6901c25218a6ff73befb825a53c546181e95e0db06/68747470733a2f2f692e696d6775722e636f6d2f7a5074575748572e706e67)​
 
-### Truffle config <a id="truffle-config"></a>
+## Truffle config
 
 The **truffle-config.js** is used in order to tell truffle how you want to deploy the contract.
 
@@ -610,7 +599,7 @@ alfajores: {
 }
 ```
 
-### Deployment <a id="deployment"></a>
+## Deployment
 
 We’re almost there! Run the following to check that you did everything correctly:
 
@@ -634,11 +623,11 @@ You should see a successful contract deployment at that address in the block exp
 
 ![](https://i.imgur.com/IAENWP1.png)
 
-### Next steps <a id="next-steps"></a>
+## Next steps 
 
 Now that we've deployed our Celo crowdfunding smart contract on Celo, we can move on to interacting with it. In the next tutorial, we'll interact with our smart contract by creating new crowdfunding projects and donating to them.
 
-### Common Errors & Solutions <a id="common-errors-and-solutions"></a>
+### Potential Errors & Solutions 
 
 If you run into any problems, feel free to ask on the [Figment Learn Discord](https://discord.gg/f5YuEsQTAx). You can also view the source code [here](https://github.com/alexreyes/Celo-Crowdfunding-Tutorial-2). In any case, here are some common errors you may encounter.
 
@@ -668,21 +657,18 @@ Make sure your account isn't empty like this one!
 
 ​[​![empty account](https://camo.githubusercontent.com/60a2da1b381d2d9f9c21ade38e54f3793ead7bf2162d4eb7ccb8297733494cbc/68747470733a2f2f692e696d6775722e636f6d2f795055594353442e706e67)](https://camo.githubusercontent.com/60a2da1b381d2d9f9c21ade38e54f3793ead7bf2162d4eb7ccb8297733494cbc/68747470733a2f2f692e696d6775722e636f6d2f795055594353442e706e67)
 
-## 3. Interacting with the Crowdfunding Smart Contracts
+# 3. Interacting with the Crowdfunding Smart Contracts
 
 Welcome to the last tutorial in this three part series on creating a crowdfunding smart contract on Celo. In this last part, we're going to write Javascript code in order to interact with the smart contract we wrote and deployed in the previous two parts.
 
 Now that we have our smart contract on the Celo test network, it's time to use it!
-
-### Video
-
-{% embed url="https://www.youtube.com/watch?v=C24prS3bk\_I" caption="Interacting with the Crowdfunding Smart Contracts" %}
-
-### Prerequisites
+# Prerequisites
 
 You will need the smart contracts we wrote in part 1, and the deployments you made in part 2. Therefore, for the code in this tutorial to work you will need to have completed the prior two tutorials.
 
-### Setup
+{% embed url="https://www.youtube.com/watch?v=C24prS3bk\_I" caption="Interacting with the Crowdfunding Smart Contracts" %}
+
+## Setup
 
 The first step is to create a Javascript file to write our smart contract interactions in. In the root of the `celo-crowdfunding` folder, create a file named `interact.js`.
 
@@ -696,7 +682,7 @@ And that's it for our setup!
 
 ![first step](https://i.imgur.com/Tn7z9oz.png)
 
-#### Importing our modules
+## Importing our modules
 
 The first step for interacting with our smart contracts is importing the modules we'll need for our script.
 
@@ -716,7 +702,7 @@ require('dotenv').config({path:  '.env'});
 
 We will use all of these modules later on in order to interact with the crowdfunding contracts we previously made.
 
-### Getting our contract
+## Getting our contract
 
 The next thing we want to go is get our smart contract as a variable we can use. We'll also need to get our Celo account because we'll be sending transactions to the network.
 
@@ -809,7 +795,7 @@ Now that we have that, we'll create a stableToken variable which uses the `Contr
 
 After running the code, you should see the new project created.
 
-### Sending money to a project
+## Sending money to a project
 
 Now that we've created a project, we'll need to send some money to it.
 
@@ -881,7 +867,7 @@ Back in our `interact()` function, let's call the `contribute()` helper function
   await contribute(stableToken, projectInstanceContract);
 ```
 
-### Printing our balances
+## Printing our balances
 
 There are now two cUSD balances we care about: the balance of our Celo wallet, and the balance of our Project which the `contribute()` function sent 2 cUSD to.
 
@@ -911,7 +897,7 @@ await contribute(stableToken, projectInstanceContract);
 await printBalances(stableToken, projectInstanceContract);
 ```
 
-### Paying out from our Project contract
+## Paying out from our Project contract
 
 So far we're able to create a Project, and fund it. The final step is paying out from our contract!
 
@@ -958,7 +944,7 @@ Awesome! As we can see from the terminal output, our script creates a new projec
 
 It works!
 
-### Conclusion
+# Conclusion
 
 This three part series has shown you how to write a smart contract for Celo, deploy it, and then interact with the smart contract we created.
 
@@ -966,7 +952,7 @@ You can use this third tutorial as a jumping off point for interacting with any 
 
 If you run into any problems, feel free to ask on the [Figment Learn Discord](https://discord.gg/f5YuEsQTAx). You can also view the source code [here](https://github.com/alexreyes/Celo-Crowdfunding-Tutorial-3)
 
-## About the Authors
+# About the Authors
 
 The written tutorials were created by [Alex Reyes](https://www.linkedin.com/in/alexreyes-tech). Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He previously completed internships at Facebook and Microsoft.
 

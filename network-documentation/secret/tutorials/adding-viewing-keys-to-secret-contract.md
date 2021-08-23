@@ -1,24 +1,22 @@
-# Adding viewing keys to a secret contract
+# Introduction
 
-## Introduction
-
-In this tutorial we will demonstrate how to add Viewing Key code to the reminder secret contract that we built in the [Developing your first secret contract](https://learn.figment.io/network-documentation/secret/tutorials/creating-a-secret-contract-from-scratch) tutorial. In that tutorial we implemented code to store and read a private reminder for a user. As implemented, each read of the reminder costs gas, which is not ideal. We will show here how a _viewing key_ can be used to implement the same functionality in way that does not require the user to send a gas payment every time they want to read the reminder.
+In this tutorial we will demonstrate how to add Viewing Key code to the reminder secret contract that we built in the [Developing your first secret contract](https://learn.figment.io/network-documentation/secret/tutorials/creating-a-secret-contract-from-scratch) tutorial. In that tutorial we implemented code to store and read a private reminder for a user. As implemented, each read of the reminder costs gas, which is not ideal. We will show here how a *viewing key* can be used to implement the same functionality in way that does not require the user to send a gas payment every time they want to read the reminder. 
 
 A viewing key is simply a randomly generated password defined for an address that is stored in the contract. If a query sends a user's address and viewing key together as parameters in the query, then we can use that information to share read-only private data with the user without needed to incur any gas fees.
 
-The viewing key code implemented in this tutorial is based on the implementation used in the SecretSCRT contract: [https://github.com/enigmampc/secretSCRT](https://github.com/enigmampc/secretSCRT).
+The viewing key code implemented in this tutorial is based on the implementation used in the SecretSCRT contract: https://github.com/enigmampc/secretSCRT.
 
-## Pre-requisites
+# Prerequisites
 
 If you have not completed the [Developing your first secret contract tutorial](https://learn.figment.io/network-documentation/secret/tutorials/creating-a-secret-contract-from-scratch), do that first. That tutorial also assumes you have completed the [Secret Pathway Tutorials 1-5](https://learn.figment.io/network-documentation/secret/secret-pathway#secret-pathway-tutorials). This tutorial builds on the contract that was used in that tutorial, the full code for which you can find on GitHub at this link: [https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial1/code](https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial1/code).
 
 If you get stuck at any point, the completed code for this tutorial can also be found on GitHub here: [https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial2/code](https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial2/code).
 
-## Step 1 - preparing the build environment
+# Step 1 - Preparing the build environment
 
 To begin you will need to add the following packages to the `Cargo.toml` file:
 
-```text
+```toml
 secret-toolkit = { git = "https://github.com/enigmampc/secret-toolkit", branch = "debug-print" }
 subtle = { version = "2.2.3", default-features = false }
 base64 = "0.12.3"
@@ -26,11 +24,11 @@ hex = "0.4.2"
 sha2 = { version = "0.9.1", default-features = false }
 ```
 
-## Step 2 - adding viewing key utility
+# Step 2 - Adding viewing key utility
 
 First we will import two source files that define the main ViewingKey struct as well as a couple of utility functions. This code is pulled directly from the [Secret SCRT contract](https://github.com/enigmampc/secretSCRT). Both of these files can be found on GitHub at the following link: [https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial2](https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial2). With slight modification you could easily combine these into one file if you wish.
 
-### Add `utils.rs`
+## Add `utils.rs`
 
 ```rust
 use crate::viewing_key::VIEWING_KEY_SIZE;
@@ -52,7 +50,7 @@ pub fn create_hashed_password(s1: &str) -> [u8; VIEWING_KEY_SIZE] {
 
 This utility crate defines two helper functions: `ct_slice_compare`, which will be used to test if two hashed passwords are the same; and `create_hashed_password`, which creates a hashed password from a random seed using the SHA-256 hash algorithm.
 
-### Add `viewing_key.rs`
+## Add `viewing_key.rs`
 
 ```rust
 use std::fmt;
@@ -112,11 +110,11 @@ impl fmt::Display for ViewingKey {
 }
 ```
 
-This file defines the struct for our viewing key, `ViewingKey`. The `new` method is a constructor that creates a new viewing key given a `seed` and `entropy`. The `seed` is the seed we will use with the pseudorandom number generator, and is a property of the contract that is set when the contract is created. The `entropy` is provided by the user and sent from the client when they want to create a new viewing key. The `entropy` is further extended by adding in the current block height, block time, and the canonical address of the sender. The seed and entropy are used to create an instance of a `Prng` \(a pseudorandom number generator from the `secret-toolkit` library\). We get a slice of random bytes from the random number generator and pass this to the SHA256 algorithm to get our key, which is finally encoded in Base64.
+This file defines the struct for our viewing key, `ViewingKey`. The `new` method is a constructor that creates a new viewing key given a `seed` and `entropy`. The `seed` is the seed we will use with the pseudorandom number generator, and is a property of the contract that is set when the contract is created. The `entropy` is provided by the user and sent from the client when they want to create a new viewing key. The `entropy` is further extended by adding in the current block height, block time, and the canonical address of the sender. The seed and entropy are used to create an instance of a `Prng` (a pseudorandom number generator from the `secret-toolkit` library). We get a slice of random bytes from the random number generator and pass this to the SHA256 algorithm to get our key, which is finally encoded in Base64.
 
 Once a viewing key has been created, the method `check_viewing_key` can be used to test whether a given hashed password matches the viewing key.
 
-### Integrating into your contract
+# Integrating into your contract
 
 After you have added `viewing_key.rs` and `utils.rs` to the `src/` directory, in `src/lib.rs` you will need to add them as modules in the project. To do that add these lines near the top:
 
@@ -125,7 +123,7 @@ mod viewing_key;
 mod utils;
 ```
 
-In the contract, we also need to add a pseudorandom number generator seed in our config. In `state.rs` add this to our `State` struct:
+In the contract, we also need to add a pseudorandom number generator seed in our config. In `state.rs` add this to our `State` struct: 
 
 ```rust
     pub prng_seed: Vec<u8>,
@@ -145,6 +143,7 @@ pub fn read_viewing_key<S: Storage>(store: &S, owner: &CanonicalAddr) -> Option<
     let user_key_store = ReadonlyPrefixedStorage::new(PREFIX_VIEWING_KEY, store);
     user_key_store.get(owner.as_slice())
 }
+
 ```
 
 Now in `msg.rs` update the `InitMsg` struct to require the owner of the contract to send a pseudorandom number generator seed `String` when the contract is first initialized:
@@ -163,7 +162,7 @@ Finally, in the `init` function in `contract.rs` update the initialization of th
     };
 ```
 
-## Step 3 - generating a viewing key
+## Step 3 - Generating a viewing key
 
 Next we need to add a Handle function to generate a viewing key for a user. In `msg.rs` we add the following to `HandleMsg`:
 
@@ -217,9 +216,9 @@ pub fn try_generate_viewing_key<S: Storage, A: Api, Q: Querier>(
 }
 ```
 
-## Step 4 - creating authenticated queries
+## Step 4 - Creating authenticated queries
 
-### Updating msg.rs
+## Updating msg.rs
 
 Now we can update our Query messages to include authenticated queries. For example, let's say we want to implement Read as a query instead of a execute function, so we don't need to pay gas fees with every read. In `QueryMsg` in `msg.rs` add:
 
@@ -230,7 +229,7 @@ Now we can update our Query messages to include authenticated queries. For examp
     }
 ```
 
-When we make a Read query we pass in the address of the querier using their human-friendly address \(i.e., `secret...`\) and the viewing key string.
+When we make a Read query we pass in the address of the querier using their human-friendly address (i.e., `secret...`) and the viewing key string.
 
 To easily access validation parameters for authenticated queries we can add an implementation block to our `QueryMsg` struct by adding the following below its declaration:
 
@@ -255,7 +254,7 @@ Then we define the `Read` response in the `QueryAnswer` enum:
     },
 ```
 
-### Updating contract.rs
+## Updating contract.rs
 
 Now we turn to `contract.rs` to update our `query` function. It is easiest to use a helper function to deal with all of the authenticated queries. Add the following line at the bottom of the `match msg` block in `query`:
 
@@ -295,7 +294,7 @@ fn authenticated_queries<S: Storage, A: Api, Q: Querier>(
 }
 ```
 
-This code checks that the correct viewing key has been sent for the given address\(es\). If no viewing key has been set, we don't want that information to leak based on the time of execution, so we essentially run a noop to cycle through the same time that it would take to check the key if it did exist. If the key matches, then we can handle the specific type of query that was sent \(in our case `Read`\). If the viewing key does not match or was not set, then we return an unauthorized error.
+This code checks that the correct viewing key has been sent for the given address(es). If no viewing key has been set, we don't want that information to leak based on the time of execution, so we essentially run a noop to cycle through the same time that it would take to check the key if it did exist. If the key matches, then we can handle the specific type of query that was sent (in our case `Read`). If the viewing key does not match or was not set, then we return an unauthorized error. 
 
 Now we can implement the `query_read` function. It is very similar to our `try_read` handle function from before, but instead of getting the sender address from `deps.api` we use the address that was sent as a query parameter:
 
@@ -329,9 +328,9 @@ fn query_read<S: Storage, A: Api, Q: Querier>(
 
 Now you can read the reminder as many times as you want without paying any SCRT!
 
-## Compiling your contract
+# Compiling your contract
 
-As with any secret contract before uploading your contract to the network, you should compile it to wasm and then use the secret contract optimizer to reduce its size using the following commands.
+As with any secret contract before uploading your contract to the network, you should compile it to wasm and then use the secret contract optimizer to reduce its size using the following commands. 
 
 ```bash
 cargo wasm
@@ -343,10 +342,8 @@ docker run --rm -v "$(pwd)":/contract \
 
 Refer to the [Write & deploy your first secret contract](https://learn.figment.io/network-documentation/secret/tutorials/intro-pathway-secret-basics/5.-writing-and-deploying-your-first-secret-contract) tutorial for more information on compiling and using a javascript client to execute the contract.
 
-## About the author
+# About the author
 
 This tutorial was written by Ben Adams, a senior lecturer in computer science and software engineering at the University of Canterbury in New Zealand.
 
- [![Creative Commons License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)  
-This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
-
+This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/) ![cc](https://i.creativecommons.org/l/by/4.0/88x31.png)

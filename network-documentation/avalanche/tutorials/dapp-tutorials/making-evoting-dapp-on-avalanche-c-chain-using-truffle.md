@@ -1,25 +1,19 @@
----
-description: Learn how to use Truffle with the C-Chain
----
-
-# Making an e-Voting dApp on Avalanche Fuji network using Trufflesuite
-
-## Introduction
+# Introduction
 
 Today we will be learning how to code a decentralized application on Avalanche's Fuji network from scratch. It would be a simple dapp, in which we will be holding an election between the candidates. And users like you and me will be going to vote them. So, to vote easily and efficiently using the browser, we would also be writing client-side application to interact with the blockchain. For developing this dapplication we would be using Trufflesuite. [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dapps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
-## Prerequisites
+# Prerequisites
 
 You've created an [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain) tutorial to get funds to your C-Chain address.
 
-## Requirements
+# Requirements
 
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle, which you can install with `npm install -g truffle`
 * Metamask extension added to the browser, which you can add from [here](https://metamask.io/download.html)
 * Express.js, dotenv and @truffle/hdwallet-provider \(instructions to install these will be added later\)
 
-## Create truffle directory and install dependencies
+# Create truffle directory and install dependencies
 
 Open a new terminal tab ,so that, we can create a `evoting` directory and install some further dependencies.
 
@@ -155,7 +149,7 @@ contract Election {
 
 `Election` is a solidity smart contract which lets us view candidates standing in an election and voting them. This is a basic contract for election and we will advance to more sophisticated smart contract, in which we can even create new elections, add new candidates etc. in the next tutorial of this series.
 
-### Let's under stand this smart contract
+# Understanding the smart contract
 
 1. **Structure to store candidates** - We are using `struct` to store the details of candidates like `name`, `id` and `voteCount`. And further store each candidate in a mapping between candidate's id and their structure.
 
@@ -228,7 +222,7 @@ truffle compile
 
 You should see:
 
-```javascript
+```
 Compiling your contracts...
 ===========================
 > Compiling ./contracts/Migrations.sol
@@ -244,11 +238,11 @@ Compiling your contracts...
 npm install pify --save
 ```
 
-## Fund the account and run migrations on the C-Chain
+# Fund the account and run migrations on the C-Chain
 
 When deploying smart contracts to the C-Chain, it will require some deployment cost. As you can see inside `truffle-config.js`, HDWallet Provider will help us in deploying on Fuji C-chain and deployment cost will be managed by account whose mnemonic has been stored in the `.env` file. Therefore we need to fund the account.
 
-### Fund your account
+## Fund your account
 
 Fund your account using the the faucet link [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and pasting your Fuji's C-Chain address in the input field. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here `nAVAX` refers to nano AVAX, which is one-billionth of an AVAX token. Minimum AVAX required for deployment, will vary from contract to contract, depending upon what variables and data structures our contract is using. Though faucet will give you enough `AVAX` to deploy and transact mulptiple times on Avalanche's Fuji network.
 
@@ -256,15 +250,15 @@ Fund your account using the the faucet link [https://faucet.avax-test.network/](
 
 Now everything is in place to run migrations and deploy the `Election` contract:
 
-```javascript
+```
 truffle migrate --network fuji
 ```
 
 This might take a while depending upon your internet connection or traffic on the network.
 
-On successfull execution of this command, you should see:
+On successful execution of this command, you should see:
 
-```javascript
+```
 Compiling your contracts...
 ===========================
 > Everything is up to date, there is nothing to compile.
@@ -318,13 +312,13 @@ Summary
 
 If you didn't create an account on the C-Chain you'll see this error:
 
-```javascript
+```
 Error: Expected parameter 'from' not passed to function.
 ```
 
 If you didn't fund the account, you'll see this error:
 
-```javascript
+```
 Error:  *** Deployment Failed ***
 
 "Migrations" could not deploy due to insufficient funds
@@ -337,7 +331,7 @@ Error:  *** Deployment Failed ***
 
 The information and ABI of the deployed contract is present in the `/build/contract` directory as `Election.json`. Inforamation like contract address, network info etc. could be found here.
 
-## Building user interface for interacting with the blockchain
+# Building the UI
 
 * Make `src` directory where we will keep all our `web2` files, for interacting with the blockchain.
 * Go to the `src` directory using `cd src`
@@ -583,15 +577,15 @@ window.App = App;
 
 ![](https://j.gifs.com/A6qrxj.gif)
 
-## Conclusion 
+# Conclusion 
 
 Congratulations! You have successfully built a full fledged `dApp` and deployed the smart contract on `Fuji` test network using `Trufflesuite`. Along with that, we have also built the client side application for interacting with the network.
 
-## What's next?
+# Next Steps
 
 The dapp which we built just now is a very simple e-voting application, where for every new election, we need to update the smart contract with new candidates and deploy it on the Avalanche network. So, in order make it more scalable and sophisticated, we would adding more features like creating custom elections, adding new candidates, setting up starting and ending dates for each election and much more in the upcoming tutorials.
 
-## About the author
+# About the author
 
 This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/rranjan01234/) and on [GitHub](https://github.com/rajranjan0608)
 

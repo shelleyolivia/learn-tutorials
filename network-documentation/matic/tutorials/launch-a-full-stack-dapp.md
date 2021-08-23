@@ -1,22 +1,11 @@
----
-description: Learn how to build a decentralized AirBnB on Polygon (Matic)
----
-
-# Launch a full stack DApp
-
-\*\*\*\* [**The original tutorial can be found on Polygon \(Matic\)'s official documentation here.**](https://docs.matic.network/docs/develop/full-stack-dapp-with-pos) \*\*\*\*
-
-## What this tutorial covers
+[**The original tutorial can be found on Polygon \(Matic\)'s official documentation here.**](https://docs.matic.network/docs/develop/full-stack-dapp-with-pos)
+# Introduction
 
 This tutorial is a brief introduction to Full Stack DApp deployed on Polygon \(Matic\) with Proof of Stake Security. As a DApp developer, to build on PoS security, the procedure is as simple as taking your smart contract and deploying it on Polygon \(Matic\). This is possible because of the account**-**based architecture enabling an EVM-compatible sidechain.
 
-## Building a Decentralized Airbnb
+# Prerequisites
 
-### Installation and Prerequisites
-
-**Installation**
-
-1. Node 8.10+
+- Node 8.10+
 
 ```text
 node -v
@@ -29,11 +18,9 @@ If you need to update node:
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash nvm install --ltsnvm use lts
 ```
 
-1. Metamask
+- Metamask: You can download the Metamask extension from the official website: [https://metamask.io/](https://metamask.io/)
 
-You can download the Metamask extension by using this link: [https://metamask.io/](https://metamask.io/)
-
-## What are we building?
+# What are we building?
 
 We plan to build a Decentralized Airbnb that incorporates three main functionalities:
 
@@ -43,25 +30,25 @@ We plan to build a Decentralized Airbnb that incorporates three main functionali
 
 Go ahead and clone the [repository](https://github.com/maticnetwork/ethindia-workshop) and install dependencies and then run `npm install`
 
-## Setup
+# Setup
 
-### Setting up Data Structures
+## Setting up Data Structures
 
 We’d like a property with a name, description, owner and a price to be rented.
 
 So we’d like a structure named ‘property’ that would include a name, description, price, owner, boolean flag denoting if its active or not, and a boolean array denoting the booked days of the property.
 
 ```javascript
-struct Property{
-string name;
-string description;
-bool isActive;      // is property active
-uint256 price;      // per day price in wei (1 ether = 10^18 wei)
-address owner;      // Owner of the property
-// Is the property booked on a particular day,
-// For the sake of simplicity, we assign 0 to Jan 1, 1 to Jan 2 and so on
-// so isBooked[31] will denote whether the property is booked for Feb 1
-bool[] isBooked;
+struct Property { 
+  string name;
+  string description;
+  bool isActive;      // is property active
+  uint256 price;      // per day price in wei (1 ether = 10^18 wei)
+  address owner;      // Owner of the property
+  bool[] isBooked;
+  // Is the property booked on a particular day,
+  // For the sake of simplicity, we assign 0 to Jan 1, 1 to Jan 2 and so on
+  // so isBooked[31] will denote whether the property is booked for Feb 1
 }
 ```
 
@@ -81,10 +68,10 @@ We can do that by creating another structure for a Booking with properties such 
 
 ```javascript
 struct Booking {
-uint256 propertyId;
-uint256 checkInDate;
-uint256 checkoutDate;
-address user;
+  uint256 propertyId;
+  uint256 checkInDate;
+  uint256 checkoutDate;
+  address user;
 }
 ```
 
@@ -97,7 +84,7 @@ mapping(uint256 => Booking)
 public bookings;
 ```
 
-### Defining events
+## Defining events
 
 Next, we would want to add some logic to the flow of data and the working of the smart contract. For this, we add functions.
 
@@ -107,7 +94,7 @@ On the whole, we require three basic functions:
 * To make a booking - `rentProperty`
 * To take down a property from the market - `markPropertyAsInactive`
 
-### Defining functions
+## Defining functions
 
 `renOutProperty`
 
@@ -193,7 +180,7 @@ You can view the entire code [here](https://github.com/maticnetwork/ethindia-wor
 
 Once you have the contract code ready, next steps would be to deploy the code on a testnet and test its working.
 
-## Deploy and Test
+# Deploy and Test
 
 For this, we use the Remix IDE - an online IDE to develop smart contracts.
 
@@ -222,10 +209,10 @@ contract Airbnb {
     bool isActive; // is property active
     uint256 price; // per day price in wei (1 ether = 10^18 wei)
     address owner; // Owner of the property
+    bool[] isBooked;
     // Is the property booked on a particular day,
     // For the sake of simplicity, we assign 0 to Jan 1, 1 to Jan 2 and so on
     // so isBooked[31] will denote whether the property is booked for Feb 1
-    bool[] isBooked;
   }
 
   uint256 public propertyId;
@@ -363,7 +350,7 @@ Once Metamask is connected to Remix, the ‘Deploy’ transaction would generate
 * Click Deploy
 * And once the contract is deployed you can test the functions
 
-### Setting up our DApp
+# Setting up our DApp
 
 Inside the cloned repository, navigate to `plugins` directory inside `dapp-ui`
 
@@ -384,7 +371,7 @@ Get the ABI copied from the previous step
 {"abi": [{"constant": true,"inputs": [],"name": "bookingId","outputs": [{"name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"},.................................]}
 ```
 
-### Connect UI to Metamask
+## Connect UI to Metamask
 
 Next, we’d like the UI to be connected with Metamask. For this we follow the following two steps:
 
@@ -419,7 +406,7 @@ else if (window.web3){
 account = await metamaskWeb3.eth.getAccounts()
 ```
 
-### Defining components and functions
+## Defining components and functions
 
 Once we have connected metamask, we’d next want to be able to communicate with the deployed contract. For this, we’ll create a new contract object - that represents our airbnb smart contract
 
@@ -504,7 +491,7 @@ const properties = []for (let i = 0; i < propertyId; i++){
   return properties
 ```
 
-## Run and Test
+# Run and Test
 
 And this marks the end of our DApp tutorial! We know it’s been a long one.
 
@@ -525,4 +512,3 @@ The Metamask popup displays the gas price for the transaction.
 After the transaction is confirmed, the property lives on the blockchain and since it is available to be booked, it is displayed on the homepage.
 
 If you had any difficulties following this tutorial or simply want to discuss Polygon \(Matic\) and DataHub tech with us you can [join our community](https://discord.gg/Chhuv5zHy3) today!
-

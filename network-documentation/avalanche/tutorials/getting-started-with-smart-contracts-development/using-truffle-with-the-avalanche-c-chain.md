@@ -1,32 +1,26 @@
----
-description: Learn how to use Truffle with the C-Chain
----
-
-# Using Truffle with the Avalanche C-Chain
-
 [**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain). 
 
-## Introduction
+# Introduction
 
 [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dapps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
-## Requirements
+# Requirements
 
 You've created an [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain) tutorial to get funds to your C-Chain address.
 
-## Dependencies
+# Prerequisites
 
 * [Avash](https://github.com/ava-labs/avash) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle, which you can install with `npm install -g truffle`
 
-## Start up a local Avalanche network
+# Start up a local Avalanche network
 
-[Avash](https://github.com/ava-labs/avash) allows you to spin up private test network deployments with up to 15 AvalancheGo nodes out-of-the-box. Avash supports automation of regular tasks via lua scripts. This enables rapid testing against a wide variety of configurations. The first time you use avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
+[Avash](https://github.com/ava-labs/avash) allows you to spin up private test network deployments with up to 15 AvalancheGo nodes out-of-the-box. Avash supports automation of regular tasks via lua scripts. This enables rapid testing against a wide variety of configurations. The first time you use Avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
 
 Start a local five node Avalanche network:
 
-```javascript
+```
 cd /path/to/avash
 # build Avash if you haven't done so
 go build
@@ -36,22 +30,23 @@ go build
 runscript scripts/five_node_staking.lua
 ```
 
-A five node Avalanche network is running on your machine. When you want to exit Avash, run `exit`, but don't do that now, and don't close this terminal tab.
+A five node Avalanche network is running on your machine. When you want to exit Avash, run `exit`, but don't do that just yet, and don't close this terminal tab/window.
 
-## Create truffle directory and install dependencies
+# Create truffle directory and install dependencies
 
 Open a new terminal tab to so we can create a `truffle` directory and install some further dependencies.
 
 First, navigate to the directory within which you intend to create your `truffle` working directory:
 
-```javascript
+```
 cd /path/to/directory
 ```
 
 Create and enter a new directory named `truffle`:
 
-```javascript
-mkdir truffle; cd truffle
+```
+mkdir truffle
+cd truffle
 ```
 
 Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library through which we can talk to the EVM:
@@ -60,15 +55,15 @@ Use `npm` to install [web3](https://web3js.readthedocs.io), which is a library t
 npm install web3 -s
 ```
 
-We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. Lastly, create a boilerplace truffle project:
+We'll use web3 to set an HTTP Provider which is how web3 will speak to the EVM. Lastly, create a boilerplate truffle project:
 
 ```text
 truffle init
 ```
 
-## Update truffle-config.js
+# Update truffle-config.js
 
-One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to `truffle-config.js`.
+One of the files created when you ran `truffle init` is `truffle-config.js`. Add the following to your `truffle-config.js`:
 
 ```javascript
 const Web3 = require('web3');
@@ -91,7 +86,7 @@ module.exports = {
 
 Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 
-## Add Storage.sol
+# Add Storage.sol
 
 In the `contracts` directory add a new file called `Storage.sol` and add the following block of code:
 
@@ -127,7 +122,7 @@ contract Storage {
 
 `Storage` is a solidity smart contract which lets us write a number to the blockchain via a `store` function and then read the number back from the blockchain via a `retrieve` function.
 
-## Add new migration
+# Add new migration
 
 Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `Storage` smart contract to the blockchain.
 
@@ -139,7 +134,7 @@ module.exports = function (deployer) {
 };
 ```
 
-## Compile Contracts with Truffle
+# Compile contracts with Truffle
 
 Any time you make a change to `Storage.sol` you need to run `truffle compile`.
 
@@ -149,7 +144,7 @@ truffle compile
 
 You should see:
 
-```javascript
+```
 Compiling your contracts...
 ===========================
 > Compiling ./contracts/Migrations.sol
@@ -159,21 +154,20 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 
-## Create, fund and unlock an account on the C-Chain
+# Create, fund and unlock an account on the C-Chain
 
 When deploying smart contracts to the C-Chain, truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations.
 
-### Create an account
+Truffle has a very useful [console](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#console) which we can use to interact with the blockchain and our contract.
+Open the console:
 
-Truffle has a very useful [console](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#console) which we can use to interact with the blockchain and our contract. Open the console:
-
-```javascript
+```
 truffle console --network development
 ```
 
 Then, in the console, create the account:
 
-```javascript
+```
 truffle(development)> let account = await web3.eth.personal.newAccount()
 ```
 
@@ -195,7 +189,7 @@ This prints the account:
 '0x090172CD36e9f4906Af17B2C36D662E69f162282'
 ```
 
-### Unlock your account:
+## Unlock your account:
 
 ```javascript
 truffle(development)> await web3.eth.personal.unlockAccount(account[0])
@@ -213,21 +207,21 @@ Exit the truffle console:
 truffle(development)> .exit
 ```
 
-### Fund your account
+## Fund your account
 
 Follow the steps in the [Transfer AVAX Between X-Chain and C-Chain]() tutorial to fund the newly created account. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments.
 
-## Run Migrations
+# Run Migrations
 
 Now everything is in place to run migrations and deploy the `Storage` contract:
 
-```javascript
+```
 truffle migrate --network development
 ```
 
 You should see:
 
-```javascript
+```
 Compiling your contracts...
 ===========================
 > Everything is up to date, there is nothing to compile.
@@ -281,13 +275,13 @@ Summary
 
 If you didn't create an account on the C-Chain you'll see this error:
 
-```javascript
+```
 Error: Expected parameter 'from' not passed to function.
 ```
 
 If you didn't fund the account, you'll see this error:
 
-```javascript
+```
 Error:  *** Deployment Failed ***
 
 "Migrations" could not deploy due to insufficient funds
@@ -300,43 +294,43 @@ Error:  *** Deployment Failed ***
 
 If you didn't unlock the account, you'll see this error:
 
-```javascript
+```
 Error:  *** Deployment Failed ***
 
 "Migrations" -- Returned error: authentication needed: password or unlock.
 ```
 
-## Interacting with your contract
+# Interacting with your contract
 
 Now the `Storage` contract has been deployed. Let's write a number to the blockchain and then read it back. Open the truffle console again:
 
-```javascript
+```
 truffle console --network development
 ```
 
 Get an instance of the deployed `Storage` contract:
 
-```javascript
+```
 truffle(development)> let instance = await Storage.deployed()
 ```
 
 This returns:
 
-```javascript
+```
 undefined
 ```
 
-### Writing a number to the blockchain
+## Writing a number to the blockchain
 
 Now that you have an instance of the `Storage` contract, call it's `store` method and pass in a number to write to the blockchain.
 
-```javascript
+```
 truffle(development)> instance.store(1234)
 ```
 
 If you see this error:
 
-```javascript
+```
 Error: Returned error: authentication needed: password or unlock
 ```
 
@@ -344,7 +338,7 @@ Then run this again: `node web3_script.js`
 
 You should see something like:
 
-```javascript
+```
 {
   tx: '0x10afbc5e0b9fa0c1ef1d9ec3cdd673e7947bd8760b22b8cdfe08f27f3a93ef1e',
   receipt: {
@@ -366,7 +360,7 @@ You should see something like:
 }
 ```
 
-### Reading a number from the blockhain
+## Reading a number from the blockchain
 
 To read the number from the blockchain, call the `retrieve` method of the `Storage` contract instance.
 
@@ -392,9 +386,8 @@ You should see the number you stored.
 1234
 ```
 
-## Summary
+# Conclusion
 
-Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.  
+Now you have the tools you need to launch a local Avalanche network; create a truffle project; as well as create, compile, deploy and interact with Solidity contracts.  
   
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
-

@@ -1,14 +1,4 @@
----
-description: >-
-  How to write unit tests for Solidity smart contracts using Truffle's
-  Assertions
----
-
-# Unit Testing in Solidity
-
-## Unit Testing in Solidity
-
-## Introduction
+# Introduction
 
 Unit testing is a software testing method where individual units or components of the software are tested. The purpose of unit tests is to validate that each unit of the software performs as designed.
 
