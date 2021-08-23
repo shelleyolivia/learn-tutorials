@@ -33,7 +33,7 @@ As simple as it sounds, what's happening in the background is actually very powe
 			setFetchingSet(false)
 			setInputNumber(0)
 			setConfirming(true)
-			const receipt = transactionResult.wait()
+			const receipt = await transactionResult.wait()
 			setTxHash(receipt.transactionHash)
 			setConfirming(false)
 		} catch(error) {
@@ -74,7 +74,7 @@ Need some help? Check out these two tips/links
 			setFetchingSet(false)
 			setInputNumber(0)
 			setConfirming(true)
-			const receipt = transactionResult.wait()
+			const receipt = await transactionResult.wait()
 			setTxHash(receipt.transactionHash)
 			setConfirming(false)
 		} catch(error) {
