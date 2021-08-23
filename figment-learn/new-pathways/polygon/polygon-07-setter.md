@@ -92,7 +92,11 @@ What's happening in the code above?
   * A web3 provider
 * We then call the function `set()` on this Contract object to operate our decentralized code. The names of the functions must match the ones we defined in our Solidity smart contract, otherwise how would we know which code to execute? 
 
-Once you've implemented those two functions, this is what the UI should look like!
+-----------------------------
+
+## Make sure it works
+
+Once the code above save you can click and this is what the UI should look like!
 
 ![](../../../.gitbook/assets/polygon-setter-v2.gif)
 

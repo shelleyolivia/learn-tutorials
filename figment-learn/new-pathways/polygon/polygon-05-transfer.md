@@ -21,16 +21,13 @@ Transfering some token is one of the major feature of web3. In this challenge, w
     
             const currentGasPrice = await provider.getGasPrice();
             const gas_price = ethers.utils.hexlify(parseInt(currentGasPrice.toString()));
-    
-            const transaction = {
-                from: send_account,
-                to: recipient,
-                value: ethers.utils.parseEther('0.1'),
-                nonce: provider.getTransactionCount(send_account, "latest"),
-                gasLimit: ethers.utils.hexlify(100000),
-                gasPrice: gas_price 
-            }
-            const hash = await provider.getSigner().sendTransaction(transaction)
+
+    		// try to figure out the expected parameters
+            // to build a transaction
+            const transaction = undefined 
+
+			// try to figure out the expected method 
+            const hash = undefined
             const receipt = await hash.wait()
             setHash(receipt.transactionHash)
             setFetching(false)
@@ -42,8 +39,8 @@ Transfering some token is one of the major feature of web3. In this challenge, w
 ```
 
 **Need some help?** Check out these two links  
-**→ Get an** [**account balance**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getBalance) **using ethers  
-**→ Format the balance using** [**ethers.utils.formatEther**](https://docs.ethers.io/v5/api/utils/display-logic/#unit-conversion)
+* [**A shor tutorial**](https://ethereum.org/fr/developers/tutorials/send-token-etherjs/) **using ethers  
+* [**send and sign a transaction**](https://docs.ethers.io/v5/api/signer/#Signer-sendTransaction)
 
 {% hint style="info" %}
 [Still not sure how to do this? **Join us on Discord** and someone will help!](https://discord.gg/fszyM7K)
@@ -84,15 +81,19 @@ Transfering some token is one of the major feature of web3. In this challenge, w
 
 What happened in the code above? Let's take a closer look!
 
-* For the duration of this function, `fetching` will be true so that we can conditionally render our UI. 
-* We await `provider.getBalance()` because it returns a Promise. That Promise returns a BigNumber, which is a specific data type for handling numbers which fall [outside the range of safe values](https://docs.ethers.io/v5/api/utils/bignumber/#BigNumber--notes-safenumbers) in JavaScript. A BigNumber cannot be displayed in the same way as a normal number. We must therefore format the balance to transform it into a string for display, using `ethers.utils.formatEther()`.
-* Before we exit the function, set `fetching` to false, which effects the conditional rendering happening in the return function of `3_Balance.tsx`.
-
+* We first need to fill our transaction object with:
+    * A from address
+    * A recipient address
+    * The amount
+    * nonce, the latest transaction numbering
+    * A default gas limit
+    * And the current gas price
+* Finaly we sign and send our transaction and wait it's confirmation
 -------------------------------------
 
 ## Make sure it works
 
-When you have completed the code, the 'Check Balance' button will function. Click it to view the balance of the connected account:
+Once the code above save you can click and this is what the UI should look like!
 
 ![](../../../.gitbook/assets/polygon-transfer-v2.gif)
 
