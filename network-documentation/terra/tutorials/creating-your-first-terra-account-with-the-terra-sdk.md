@@ -1,18 +1,12 @@
----
-description: Learn how to create an account to start building on Terra
----
-
-# Creating your first Terra account with the Terra SDK
-
-## Introduction
+# Introduction
 
 In this tutorial, we will be creating your first Terra account using the Terra SDK and [**DataHub**](https://figment.io/datahub-waitlist/). 
 
-## **Prerequisites** 
+## Prerequisites
 
 Please make sure that you completed tutorial \#1 of the Terra Pathway Tutorial, "Connecting to a Terra node with DataHub", before beginning. We will be building on top of the Nodejs application you created in the previous tutorial.
 
-## **Creating Account**
+## Creating Account
 
 Time to start building! We are finally ready to jump in and create our Terra account on the Tequila testnet.
 
@@ -70,7 +64,7 @@ MNEMONIC='<YOUR MNEMONIC>'
 
 Great! Now both `ADDRESS` and `MNEMONIC` will be available for use in our Nodejs scripts.
 
-## **Getting testnet tokens**
+## Getting testnet tokens
 
 Congratulations! You’ve just created your Tequila account.
 
@@ -94,13 +88,13 @@ That's it! Now head back to the Stake ID app, refresh the page and enjoy the vie
 
 Great work. You’ve earned it!
 
-## **Conclusion**
+## Conclusion
 
 You now have an account on the Terra Tequila testnet and your secret information stored in the `.env` file. You also made sure that your account balance is loaded with testnet LUNAs.
 
 The complete code for this tutorial can be found [**here**](https://github.com/figment-networks/tutorials/blob/main/terra/2_creating_account/create_account.js). 
 
-## **Next steps**
+## Next Steps
 
 In the next tutorial, we will be looking at different queries we can run against a Terra node to get the information such as:
 
@@ -109,5 +103,5 @@ In the next tutorial, we will be looking at different queries we can run against
 * Luna price
 * proposals
 
-If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [join our community today](https://discord.gg/fszyM7K)!
 

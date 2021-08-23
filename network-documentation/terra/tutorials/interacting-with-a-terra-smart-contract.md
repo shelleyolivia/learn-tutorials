@@ -1,16 +1,10 @@
----
-description: Learn how to interact with your own Terra smart contracts
----
+[**The original tutorial can be found in the official Terra documentation here**](https://docs.terra.money/contracts/tutorial/interacting.html#what-s-next). 
 
-# Interacting with a Terra smart contract
+# Introduction
 
-[**The original tutorial can be found in the official Terra documentation here**](https://docs.terra.money/contracts/tutorial/interacting.html#what-s-next).
+In this tutorial, we will learn how to interact with smart contracts on Terra. 
 
-## Introduction
-
-In this tutorial, we will learn how to interact with the smart contracts we create.
-
-### Requirements
+# Requirements
 
 Make sure you have set up **LocalTerra** and that it is up and running:
 
@@ -33,7 +27,7 @@ Using the mnemonic:
 satisfy adjust timber high purchase tuition stool faith fine install that you unaware feed domain license impose boss human eager hat rent enjoy dawn
 ```
 
-## Uploading Code
+# Uploading Code
 
 Make sure that the **optimized build** of `my-first-contract.wasm` that you created in the last section is in your current working directory.
 
@@ -84,7 +78,7 @@ codehash: KVR4SWuieLxuZaStlvFoUY9YXlcLLMTHYVpkubdjHEI=
 creator: terra1dcegyrekltswvyy0xy69ydgxn9x8x32zdtapd8
 ```
 
-## Creating the Contract
+# Creating the Contract
 
 We have now uploaded the code for our contract, but we still don't have a contract. Let's create it, with the following InitMsg:
 
@@ -153,7 +147,7 @@ By decoding the Base64 InitMsg:
 { "count": 0 }
 ```
 
-## Executing the Contract
+# Executing the Contract
 
 Let's do the following:
 
@@ -207,11 +201,11 @@ terracli query wasm contract-store terra18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5 
 
 Excellent! Congratulations, you've created your first smart contract, and now know how to get developing with the Terra dApp Platform.
 
-## What's Next?
+# What's Next?
 
 We've only walked through a simple example of a smart contract, that modifies a simple balance within its internal state. Although this is enough to make a simple dApp, we can power more interesting applications by **emitting messages**, which will enable us to interact with other contracts as well as the rest of the blockchain's module.
 
-Check out a couple more examples of smart contracts on Terra on this [repo](https://github.com/terra-project/cosmwasm-contracts).
+Check out a couple more examples of smart contracts on Terra on this [repo](https://github.com/terra-project/cosmwasm-contracts). 
 
 If you had any difficulties following this tutorial or simply want to discuss Terra and DataHub tech with us you can join [**our community**](https://discord.gg/fszyM7K) today!
 
