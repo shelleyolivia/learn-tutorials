@@ -1,10 +1,4 @@
----
-description: OysterPack SMART STAKE Pool Contract - NEAR Staking Game Changer
----
-
-# It's Time to Put a STAKE Pool in the Ground!
-
-In my last tutorial, [It's Time to Put a STAKE in the Ground!](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/7-stake-vision), I shared with you my STAKE vision. The time has arrived. Since then, I have been busy building the next generation staking pool contract as a gift for all in the NEAR community. The new OysterPack SMART STAKE Pool contract is ready for use on the NEAR testnet network. The project is fully open source and freely available on GitHub: [OysterPack SMART](https://github.com/oysterpack/oysterpack-smart). The new OysterPack SMART STAKE Pool contract also showcases the **OysterPack SMART NEAR Component Based Framework**. The agenda for this tutorial is:
+In my last tutorial, "It's Time to Put a STAKE in the Ground!"), I shared with you my STAKE vision. The time has arrived. Since then, I have been busy building the next generation staking pool contract as a gift for all in the NEAR community. The new OysterPack SMART STAKE Pool contract is ready for use on the NEAR testnet network. The project is fully open source and freely available on GitHub: [OysterPack SMART](https://github.com/oysterpack/oysterpack-smart). The new OysterPack SMART STAKE Pool contract also showcases the **OysterPack SMART NEAR Component Based Framework**. The agenda for this tutorial is:
 
 1. Show you the benefits that the OysterPack SMART STAKE pool provides 
 2. Show you how to deploy and use the STAKE pool contract as a **Validator**
@@ -12,35 +6,35 @@ In my last tutorial, [It's Time to Put a STAKE in the Ground!](https://learn.fig
 
 > "Stakers" are the delegators ... to me "Stakers" sounds better "delegators"
 
-## OysterPack SMART STAKE Benefits
+# OysterPack SMART STAKE Benefits
 
 Today there only lives a single staking pool contract in the NEAR wild. All validators on mainnet are using the [staking pool](https://github.com/near/core-contracts/tree/master/staking-pool) built by the NEAR core DEV team to bootstrap staking on NEAR's PoS blockchain. Staking on NEAR is permissionless, which enables staking to evolve. This illustrates the power and beauty of decentralization on the blockchain. There is nothing stopping any person with new ideas to build and create on the blockchain. The current staking pool on NEAR works, but there's always room for improvement - I call it the _"first generation"_ staking pool. Here's the list of improvements for the **"next generation"** **OysterPack SMART STAKE Pool** and how it compares to the first generation staking pool:
 
-### Locked staked NEAR is made mobile through **STAKE fungible tokens** provided by the STAKE pool
+## Locked staked NEAR is made mobile through **STAKE fungible tokens** provided by the STAKE pool
 
 This enables staked NEAR value to be transferred while still being staked. This opens the door to many new DeFi use cases for staked NEAR.
 
-### Staking Done Right - Maximizing Yield
+## Staking Done Right - Maximizing Yield
 
 The first generation staking pool will only stake deposited funds and restake earnings once every epoch. Earnings are composed of staking rewards plus any contract rewards earned from transaction gas fees. Because earnings are only restaked once per epoch, you lose some potential yield from less compounding. The compounding yield opportunity is lost for earnings outside staking rewards because the NEAR protocol only issues staking rewards once per epoch. Thus, today some yield is left on the table for contract earnings received from transaction gas fees, which impacts long term stakers the most because of less compounding. The next generation STAKE pool maximizes yield by checking for earnings in each pool transaction and restakes earnings as soon as they are received to maximize the power of the compounding yield effect.
 
-### Unstaking Done Right
+## Unstaking Done Right
 
 The following 2 improvements enable accounts to withdraw unstaked NEAR sooner:
 
 1. Unstaked NEAR is always available for withdrawal in **at most** 4 epochs per the NEAR protocol. Unstaked NEAR is locked for 4 epochs before it becomes available to be withdrawn, but is tracked per epoch. Thus, more funds can be unstaked without affecting funds that were unstaked in previous epochs. Compare this to the first generation staking pool, where each time you unstake, it resets the lockup period to 4 epochs for the total unstaked NEAR balance. For example, if 100 NEAR is unstaked in EPOCH 1 and 10 NEAR is unstaked in EPOCH 3. Then 100 NEAR is available for withdrawal in EPOCH 5 and 10 NEAR in EPOCH 7. In the first generation staking pool implementation, unstaking the 10 NEAR in EPOCH 3 would reset the lock period for the total unstaked, i.e., you would not be able to withdraw the 100 NEAR that was unstaked in EPOCH 1 until EPOCH 7. This issue has been resolved in the OysterPack SMART STAKE pool.
 2. Staking adds **liquidity** for withdrawing unstaked NEAR that is locked on a first come, first withdraw basis. For example, if you unstake 100 NEAR in EPOCH 1, normally you would not be able to withdraw the unstaked NEAR out of the pool until EPOCH 5. However, when other accounts stake while there are locked unstaked funds in the STAKE pool, then the new staked funds effectively add liquidity and unlock the unstaked funds. Think of it as the unstaked funds are being restaked. Thus, higher staking activity automatically provides more liquidity. 
 
-### Enhanced Financial Model
+## Enhanced Financial Model
 
 The goal is to provide more financial levers to validators in order to promote competition for staker business.
 
-#### More Flexible Fee Model
+## More Flexible Fee Model
 
 1. **Earnings based fee** The staking pool owner takes a percentage of the STAKE pool earnings. This matches the current commercial fee model implemented by the first generation staking pool. This fee keeps the financial incentives and interests aligned with all stakers. Owner earnings are directly aligned with the STAKE pool earnings.
 2. **Staking fee** This fee type is not supported by the first generation staking pool. The staking fee is a percentage of the amount staked. OysterPack SMART STAKE pools provide more commercial levers and can be configured to use a combination of earnings based fees and staking fees. For example, validators may choose to charge only a staking fee and pass on all earnings to delegators.
 
-#### Enables External Revenue Sources for Boosting EPS
+## Enables External Revenue Sources for Boosting EPS
 
 1. **External revenue distributions** External sources of revenue can be deposited into the STAKE pool and distributed to all current stakers simply by staking the funds. This immediately distributes the revenue earnings via the STAKE token. 
 2. **External revenue can be deposited into the treasury to distribute dividends** Dividends are distributed by the treasury by burning STAKE for earnings it receives. Thus, when STAKE is burned, the validator is effectively buying back shares funded by treasury earnings, which boosts the STAKE token value.
@@ -49,29 +43,32 @@ STAKE is modeled as a **dividend stock**. STAKE links the dividend yield directl
 
 ![](../../../../.gitbook/assets/oysterpack-smart-stake-earnings.png)
 
-## STAKE High Level Component Based Architecture
+# STAKE High Level Component Based Architecture
 
 ![](../../../../.gitbook/assets/oysterpack-smart-stake-deployment.png)
 
-### STAKE Pool Factory Contract
+## STAKE Pool Factory Contract
 
 The factory contract makes it easy for anyone to deploy a new instance of the STAKE pool contract. We'll see how to deploy new STAKE pool contracts using the NEAR CLI below.
 
 It currently costs a little just under 6 NEAR to deploy the STAKE pool contract to pay for contract storage usage. Thus, if you attach 6 NEAR, then you should be safe. Any extra will be transferred over to the owner's account storage balance. If deployment fails for any reason, then the factory contract is designed to refund the attached deposit.
 
-### STAKE Pool Contract
+## STAKE Pool Contract
 
 The STAKE Pool Contract is composed of 4 components, which are depicted on the right-hand side of the diagram. Each component provides multiple interfaces which are paired up in the diagram by the coloring scheme. The diagram also depicts the main actors and the key interfaces they depend on. In this tutorial, we will just be scratching the surface and focus on the core staking functionality to get started.
 
-> The STAKE pool contract is built using a component based architecture. If you happen to wander into the source code, you will probably notice that it follows a completely different design approach to build contracts on NEAR compared to what you are probably used to seeing. There's nothing special besides applying software engineering best practices. A component based approach enables component reuse across contracts - and I have plans for building many. My plan is to eventually publish them all to [https://crates.io](https://crates.io) to make it easy for developers to use them. Until then, if you are interested in using them, you'll need to pull them in from the GitHub project. I'll end the discussion on the benefits of a component based architecture here by putting it into context for web developers. If you prefer building web apps using React components, then you should also prefer building contracts using OysterPack SMART components for the same reasons.
+> The STAKE pool contract is built using a component based architecture. If you happen to wander into the source code, you will probably notice that it follows a completely different design approach to build contracts on NEAR compared to what you are probably used to seeing. 
+> There's nothing special besides applying software engineering best practices. A component based approach enables component reuse across contracts - and I have plans for building many. 
+> My plan is to eventually publish them all to [https://crates.io](https://crates.io) to make it easy for developers to use them. Until then, if you are interested in using them, you'll need to pull them in from the GitHub project. 
+> I'll end the discussion on the benefits of a component based architecture here by putting it into context for web developers. If you prefer building web apps using React components, then you should also prefer building contracts using OysterPack SMART components for the same reasons.
 >
 > You might also notice that I have built components that implement the NEAR standard APIs that I have covered in prior tutorials for account storage management and fungible tokens, but there's much more ...
 
-## How to Get Started as a Validator
+# How to Get Started as a Validator
 
 I will not be covering on how to setup and run your own validator node. If you are interested in running your own validator node, then I refer you to the NEAR [staking](https://docs.near.org/docs/validator/staking) docs.
 
-### How to deploy the STAKE pool contract
+# How to deploy the STAKE pool contract
 
 > To earn NEAR rewards for exercising the NEAR CLI commands, you will need to submit the NEAR requests through [DataHub](https://datahub.figment.io/) using your DataHub access key. If you have earned NEAR on previous NEAR tutorials, then you should already be set. Otherwise, follow the instructions in the following link on [how to obtain your DataHub access key](https://learn.figment.io/network-documentation/near/tutorials/intro-pathway-write-and-deploy-your-first-near-smart-contract/1.-connecting-to-a-near-node-using-datahub#configure-environment). We will use the NEAR CLI to submit the transactions. Plugin your DataHub API Key and NEAR account at the top, and then you should be all set to go.
 
@@ -146,7 +143,7 @@ The logs tell the story about what's happening during the deployment, which is i
 
 ![](../../../../.gitbook/assets/oysterpack-smart-stake-factory-deploy.png)
 
-#### Notes
+## Notes
 
 * **AccountManagementComponent** is designed to track and log \(**ACCOUNT\_STORAGE\_CHANGED**\) all account storage changes
 * The STAKE pool contract implements the NEAR standard [account storage management](https://nomicon.io/Standards/StorageManagement.html) interface. It measures dynamically how much account storage is required by the contract and configures the minimum storage usage bound accordingly.
@@ -157,13 +154,13 @@ The logs tell the story about what's happening during the deployment, which is i
 * Fees are specified in basis points \([BPS](https://www.investopedia.com/terms/b/basispoint.asp)\). An easy way to remember the unit conversion is 100 BPS = 1%. In the above example, the staking fee is 0.01%, and the earnings fee is 0.5%. At least one of the fees must be non-zero and the max fee is currently hard coded to be 1000 BPS \(10%\). Fees are configurable and can be changed after the STAKE pool is deployed by accounts that have the operator permission.
 * The **STAKE Pool Contract** implements the NEAR standard [fungible token](https://nomicon.io/Standards/FungibleToken/README.html]%28https://nomicon.io/Standards/FungibleToken/README.html) interfaces for the provided STAKE token.
 
-### How to operate the STAKE pool contract
+# How to operate the STAKE pool contract
 
 ![](../../../../.gitbook/assets/oysterpack-smart-stake-operator-usecases.png)
 
 The above diagram shows the role and responsibilities for the operator. In this tutorial, I will review the key APIs to be familiar with to get started. The rest is out of scope and will be covered in future tutorials and workshops.
 
-#### How to start and stop staking
+# How to start and stop staking
 
 When the STAKE pool contract is deployed, it's initial status is offline. You can check the pool status using the following NEAR CLI command:
 
@@ -193,7 +190,7 @@ near call  $STAKE.stake-v1.oysterpack.testnet ops_stake_operator_command --args 
 near call  $STAKE.stake-v1.oysterpack.testnet ops_stake_operator_command --args '{"command":"StopStaking"}' --accountId $NEAR_ACCOUNT
 ```
 
-#### How to query and update fees
+## Query and update fees
 
 Current fees can be queried via:
 
@@ -215,7 +212,7 @@ near call  $STAKE.stake-v1.oysterpack.testnet ops_stake_operator_command --args 
 
 * both fees must be specified and at least 1 must be non-zero
 
-#### How to query and update the staking public key
+## Query and update the staking public key
 
 The staking public key, i.e., the validator key, can be viewed and changed using the following NEAR CLI commands:
 
@@ -225,7 +222,7 @@ near view  $STAKE.stake-v1.oysterpack.testnet ops_stake_public_key
 near call  $STAKE.stake-v1.oysterpack.testnet ops_stake_operator_command --args '{"command":{"UpdatePublicKey":"ed25519:GTi3gtSio5ZYYKTT8WVovqJEob6KqdmkTi8KqGSfwqdm"}}' --accountId $NEAR_ACCOUNT
 ```
 
-## How to Get Started as a Staker
+# How to Get Started as a Staker
 
 ![](../../../../.gitbook/assets/oysterpack-smart-staker-usecases.png)
 
@@ -233,7 +230,7 @@ The STAKE Pool contract implements the NEAR standard [storage management](https:
 
 > account registration currently costs 0.000393 NEAR
 
-#### How to stake
+## How to stake
 
 When an account stakes any account storage available balance will be staked in addition to any attached deposit. The account storage management interface is leveraged to enable accounts to collect deposits to stake at a later time.
 
@@ -290,7 +287,7 @@ The account's updated stake balance is returned and looks like:
 * the current NEAR value for the account's STAKE token balance is returned
 * unstaked balance shows how much is available for withdrawal and locked - in the above example there is currently zero locked unstaked
 
-#### How to unstake
+## How to unstake
 
 ```text
 # unstakes all
@@ -314,7 +311,7 @@ Log [dev-1618770943926-8326158]: [INFO] [FT_BURN] account: alfio-zappala-oysterp
 
 the account balances now look like:
 
-```javascript
+```json
 {
   "storage_balance": {
     "total": "3930000000000000000001",
@@ -337,7 +334,7 @@ the account balances now look like:
 * the unstaked balance now shows that there is 1 NEAR locked and will become available for withdrawal in epoch 80
 * **NOTE**: if there is liquidity, then the account will be able to withdraw sooner 
 
-#### How to restake unstaked funds
+## How to restake unstaked funds
 
 In order to restake funds using the first generation staking pool, the account would first need to withdraw the funds out of the pool and then stake them again. The OysterPack SMART STAKE pool simplifies the restake process by enabling the staker to restake unstaked funds.
 
@@ -349,7 +346,7 @@ near call  $STAKE.stake-v1.oysterpack.testnet  ops_restake --accountId $NEAR_ACC
 near call  $STAKE.stake-v1.oysterpack.testnet  ops_restake --accountId $NEAR_ACCOUNT  -args '{"amount":"100000000000000000000000"}'
 ```
 
-#### How to withdraw unstaked funds
+## How to withdraw unstaked funds
 
 ```text
 # withdraws all available unstaked NEAR
@@ -359,7 +356,7 @@ near call  $STAKE.stake-v1.oysterpack.testnet  ops_stake_withdraw --accountId $N
 near call  $STAKE.stake-v1.oysterpack.testnet  ops_stake_withdraw --accountId $NEAR_ACCOUNT -args '{"amount":"100000000000000000000000"}'
 ```
 
-#### How to check STAKE pool balances
+## How to check STAKE pool balances
 
 ```text
 near view  $STAKE.stake-v1.oysterpack.testnet ops_stake_pool_balances
@@ -386,13 +383,13 @@ near view  $STAKE.stake-v1.oysterpack.testnet ops_stake_pool_balances
 * **current\_contract\_managed\_total\_balance** and **last\_contract\_managed\_total\_balance** - used to track changes in balances to collect earnings
 * **earnings** - amount of earnings that are waiting to be collected on the next staking action
 
-#### How to query staker account balances
+## How to query staker account balances
 
 ```text
 near view  $STAKE.stake-v1.oysterpack.testnet ops_stake_balance --args '{"account_id":"oysterpack.testnet"}'
 ```
 
-#### How to transfer STAKE tokens
+## How to transfer STAKE tokens
 
 The STAKE pool contract implements the NEAR standard \[fungible token\]\[9\] interface, and I defer to the NEAR docs for details. However, the STAKE Pool API offers 2 convenience transfer methods that enable stakers to transfer STAKE by specifying a NEAR amount. The amount of STAKE tokens transferred will be based on the current STAKE token value. The API's mirror NEAR standard `ft_transfer` and `ft_transfer_call` methods:
 
@@ -402,7 +399,7 @@ near call  $STAKE.stake-v1.oysterpack.testnet ops_stake_transfer --accountId $NE
 near call  $STAKE.stake-v1.oysterpack.testnet ops_stake_transfer_call --accountId $NEAR_ACCOUNT --args '{"receiver_id":"xxx.testnet","amount":"1000000000000000000000000","msg":""}' --amount 0.000000000000000000000001
 ```
 
-#### How to query the current STAKE token value
+## How to query the current STAKE token value
 
 ```text
 # returns the NEAR value for 1 STAKE token
@@ -441,7 +438,7 @@ https://explorer.testnet.near.org/transactions/FoQJ7kmNnjR6g8ew35sZq8snCMBHDQQGp
 '1041207983836766420575151'
 ```
 
-## It's a wrap folks
+# Conclusion
 
 The next generation STAKE Pool contract is ready and waiting for validators and stakers to use it. It's my gift to the NEAR community, and I hope you enjoy it. Staking is the bread and butter of any PoS blockchain like NEAR. OysterPack SMART mission is to build and provide the best staking solutions, products, and services to deliver the best and most profitable staking experience. The building never stops, and there's much more in the works ... so stay tuned folks.
 
