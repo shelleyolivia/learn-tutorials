@@ -1,29 +1,5 @@
 # 
 
-## Add the Mumbai testnet to Metamask
-
-{% hint style="danger" %}
-Make sure you have the Metamask extension installed on your browser! If not go back to the previous step.
-{% endhint %}
-
-The first task is to connect to the Polygon Mumbai testnet by adding it to the list of RPC endpoints in Metamask. Click on the Fox head icon in your web browser to open the popup, and then follow this workflow to complete the process :
-
-* Click on the current network at the top of the Metamask popup (by default is says "Ethereum Mainnet")
-* Scroll down and click on "Custom RPC"
-* Fill in the form:
-  * Network Name: `Polygon Mumbai`
-  * New RPC URL: `https://rpc-mumbai.maticvigil.com/`
-  * Chain ID: `80001`
-  * Currency Symbol: `MATIC`
-  * Block Explorer URL : `https://mumbai.polygonscan.com`
-* Double check the information, then click on the Save button.
-
-![](../../../.gitbook/assets/add_mumbai.png)
-
-We use the testnet for development before moving into production on the main network or "mainnet".
-
--------------------------------------
-
 ## Ethers.js
 
 To manage our connection with Polygon and interact with smart contracts, we can use a popular and [well-tested](https://docs.ethers.io/v5/testing/) JavaScript library called [**ethers.js**](https://docs.ethers.io/v5/api/). We can connect to and perform operations with Polygon using ethers' API with only a few lines of code. 
@@ -75,6 +51,43 @@ const checkConnection = async () => {
 {% hint style="info" %}
 [Still not sure how to do this? **Join us on Discord** and someone will help!](https://discord.gg/fszyM7K)
 {% endhint %}
+
+----------------------------------
+
+## The solution
+
+```typescript
+//...
+  if (provider) {
+    // Connect to Polygon using Web3Provider and Metamask
+    const web3provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    const signer = web3provider.getSigner();
+
+    // Define address and network    
+    const address = await signer.getAddress();
+    const network = ethers.providers.getNetwork(await signer.getChainId());
+
+    setAccount(address)
+    setNetwork(network)
+  } else {
+    alert("Please install Metamask at https://metamask.io")
+  }
+//...
+```
+
+**What happened in the code above?**
+* First, we need to define the provider by calling `Web3Provider` method of `providers`.
+* As said above the `signer` represent the current connected account. Then, calling the `getAddress` method will do the job.
+* Again using `signer` we can retrieve the current **chainId**, pass it to the `getNetwork` method and then deduce the network.
+
+
+-------------------------------------
+
+## Make sure it works
+
+Once the code above save you can click on **Check Metamask Connection** and let's the magic happen.
+
+![](../../../.gitbook/assets/polygon-connect.gif)
 
 -------------------------------------
 

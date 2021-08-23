@@ -84,7 +84,7 @@ Once you have the code above saved:
 
 And let's the magic happen
 
-![](../../../.gitbook/assets/solana-fund.gif)
+![](../../../.gitbook/assets/solana-fund-v3.gif)
 
 ----------------------------------
 

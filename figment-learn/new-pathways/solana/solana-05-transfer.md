@@ -16,23 +16,21 @@ In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
 
 ```typescript
 //..
-  try {
-    //... let's skip the beginning as it's should be familiar for you now.
-    // The secret key is stored in our state as a stingified array
-    const secretKey = Uint8Array.from(JSON.parse(secret as string));
+  //... let's skip the beginning as it's should be familiar for you now.
+  // The secret key is stored in our state as a stingified array
+  const secretKey = Uint8Array.from(JSON.parse(secret as string));
 
-    // Find the parameter to pass  
-    const instructions = SystemProgram.transfer
+  // Find the parameter to pass  
+  const instructions = SystemProgram.transfer
 
-    // How could you construct a signer array's
-    const signers = 
+  // How could you construct a signer array's
+  const signers = 
 
-    // Maybe adding someting to a Transaction could be interesting ?
-    const transaction = new Transaction()
+  // Maybe adding someting to a Transaction could be interesting ?
+  const transaction = new Transaction()
 
-    const hash =// You should now what is expected here.
-    res.status(200).json(hash);
-  };
+  const hash =// You should now what is expected here.
+  res.status(200).json(hash);
 //..
 ```
 
@@ -53,32 +51,30 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 //..
-  try {
-    //...
-    //... let's skip the beginning as it's should be familiar for you now.
-    const instructions = SystemProgram.transfer({
-      fromPubkey,
-      toPubkey,
-      lamports,
-    });
-    
-    const signers = [
-      {
-        publicKey: fromPubkey,
-        secretKey
-      }
-    ];
-    
-    const transaction = new Transaction().add(instructions);
-    
-    const hash = await sendAndConfirmTransaction(
-      connection,
-      transaction,
-      signers,
-    )
+  //...
+  //... let's skip the beginning as it's should be familiar for you now.
+  const instructions = SystemProgram.transfer({
+    fromPubkey,
+    toPubkey,
+    lamports,
+  });
+  
+  const signers = [
+    {
+      publicKey: fromPubkey,
+      secretKey
+    }
+  ];
+  
+  const transaction = new Transaction().add(instructions);
+  
+  const hash = await sendAndConfirmTransaction(
+    connection,
+    transaction,
+    signers,
+  )
 
-    res.status(200).json(hash);
-  };
+  res.status(200).json(hash);
 //..
 ```
 
@@ -94,9 +90,11 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ## Make sure it works
 
-Once you've filled in the form, press "Submit" and you should see:
+Once you've filled in the form: 
+* Press "Submit"
+* Let's the magic happen
 
-![](../../../.gitbook/assets/solana-transfer.gif)
+![](../../../.gitbook/assets/solana-transfer-v3.gif)
 
 **About the explorer**, it's very good practice to look over all the fields one by one to familiarize yourself with the structure of a transaction. This page features the transaction result (`SUCCESS`), status (`FINALIZED`), the amount sent, the `from` and `to` addresses, the block that included this transaction, the fee that was paid, etc.
 

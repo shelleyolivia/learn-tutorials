@@ -1,5 +1,9 @@
 # 
 
+{% hint style="info" %}
+Fell free to skip this section and start the challenges
+{% endhint %}
+
 ## **What is Solana?**
 
 Solana is an open-source project implementing a new, high-performance, permissionless blockchain. From [Messari's Solana profile](https://messari.io/asset/solana/profile), its goal is to provide a platform that enables developers to create DApps without needing to design around performance bottlenecks. Solana features a new timestamp system called Proof-of-History (PoH) that enables automatically ordered transactions. It also uses a Proof of Stake (PoS) consensus algorithm to help secure the network. Additional design goals include sub-second settlement times, low transaction costs, and support for all LLVM compatible smart contract languages.
@@ -39,7 +43,6 @@ Solana applications are built on Rust, but also support C and C++.
 ### **EVM compatibility**
 
 Solana is not EVM compatible but it offers [a bidirectional token bridge](https://solana.com/wormhole) between Solana and Ethereum so projects can move tokenized assets across blockchains.
-
 
 ### **Role of the SOL token**
 

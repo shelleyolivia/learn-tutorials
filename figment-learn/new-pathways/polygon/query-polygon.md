@@ -42,10 +42,6 @@ In the file `components/protocols/polygon/steps/2_Query.tsx` we have already wri
 [Still not sure how to do this? **Join us on Discord** and someone will help!](https://discord.gg/fszyM7K)
 {% endhint %}
 
-When complete, click on the button and you should see:
-
-![](../../../.gitbook/assets/query_success.png)
-
 -------------------------------------
 
 ## The solution
@@ -72,6 +68,14 @@ When complete, click on the button and you should see:
 * `blockHeight` can be taken directly from the returned value of `getBlockNumber()` 
 * `gasPriceAsGwei` gets the current gas price and then formats the value into a human-friendly number with the ethers utility function `formatUnits()`.
 * `blockInfo` must be a BlockWithTransactions type, which is what the function `getBlockWithTransactions()` returns.
+
+-------------------------------------
+
+## Make sure it works
+
+Once the code above save you can click on **Query Polygon** and let's the magic happen.
+
+![](../../../.gitbook/assets/query_success.png)
 
 -------------------------------------
 

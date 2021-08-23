@@ -17,7 +17,7 @@ In `pages/api/solana/balance.ts`, implement `balance`.
     const address = req.body.address as PublicKey;
     const url = getSafeUrl();
     const connection = new Connection(url, "confirmed");
-    const publicKey =undefined;
+    const publicKey = undefined;
     const balance = undefined;
     res.status(200).json(balance);
 //...
@@ -58,9 +58,11 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ## Make sure it works
 
-Enter the address just funded and click on **Check Balance**. You should see:
+Enter the address just funded:
+* Click on **Check Balance**
+* Let's the magic happen
 
-![](../../../.gitbook/assets/solana-balance.gif)
+![](../../../.gitbook/assets/solana-balance-v3.gif)
 
 ----------------------------------
 
