@@ -70,7 +70,7 @@ In the file `components/protocols/polygon/steps/Query.tsx` we have already writt
 
 Once the code above save you can click on **Query Polygon** and let's the magic happen.
 
-![](../../../.gitbook/assets/query_success.png)
+![](../../../.gitbook/assets/polygon-query-v2.gif)
 
 -------------------------------------
 

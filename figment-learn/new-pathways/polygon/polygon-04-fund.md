@@ -78,7 +78,7 @@ What happened in the code above? Let's take a closer look!
 
 When you have completed the code, the 'Check Balance' button will function. Click it to view the balance of the connected account:
 
-![](../../../.gitbook/assets/matic_balance.png)
+![](../../../.gitbook/assets/polygon-fund-v2.gif)
 
 -------------------------------------
 

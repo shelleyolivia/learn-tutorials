@@ -87,7 +87,7 @@ const checkConnection = async () => {
 
 Once the code above save you can click on **Check Metamask Connection** and let's the magic happen.
 
-![](../../../.gitbook/assets/polygon-connect.gif)
+![](../../../.gitbook/assets/polygon-connect-v2.gif)
 
 -------------------------------------
 

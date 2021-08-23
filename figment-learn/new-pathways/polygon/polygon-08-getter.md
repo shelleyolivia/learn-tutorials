@@ -2,7 +2,7 @@
 
 At this point we have deployed a smart contract on the Polygon testnet and we have a client side application that's ready to interact with it. We just need to wire up that last part.
 
-We built a simple page on the last step to help you interact with the smart contract. Since the contract has only two methods (`set` and `get`) that's all the UI will do: set a number through the smart contract and fetch it.
+We built a simple page on the last step to help you interact with the smart contract. Since the contract has only two methods (`set` and `get`) that's all the UI will do: fetch the number through the smart contract.
 
 As simple as it sounds, what's happening in the background is actually very powerful: we're using the Polygon blockchain to store information (here, a number) and we're using a smart contract as a interface to read and write that piece of information. And what's crucial is that all this is happening without having to spin up a database and an API... So let's go!
 
@@ -11,7 +11,7 @@ As simple as it sounds, what's happening in the background is actually very powe
 ## The Challenge
 
 {% hint style="warning" %}
-**Implement the `getValue` and `setValue` functions:**  
+**On the file `components/protocols/polygon/GeStorage.tsx` Implement the `getValue`**.    
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -21,8 +21,10 @@ As simple as it sounds, what's happening in the background is actually very powe
         try {
             setFetchingGet(true)        
             const provider = new ethers.providers.Web3Provider(window.ethereum)
+		    // try to figure out the expected parameters
             const contract = new ethers.Contract(undefined)
-            const storage = await contract.get();
+			// try to figure out the expected method 
+            const storage = undefined
             setContractNumber(storage.toString())
             setFetchingGet(false)
         } catch(error) {
@@ -76,7 +78,7 @@ What's happening in the code above?
 
 Once you've implemented those two functions, this is what the UI should look like!
 
-![](../../../.gitbook/assets/screen-shot-2021-07-28-at-1.10.23-pm.png)
+![](../../../.gitbook/assets/polygon-getter-v2.gif)
 
 -------------------------------------
 
