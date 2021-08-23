@@ -1,10 +1,4 @@
----
-description: Learn how to create a variable-cap asset on Avalanche
----
-
-# Creating A Variable-Cap Asset
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset).
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset). 
 
 ## Introduction
 

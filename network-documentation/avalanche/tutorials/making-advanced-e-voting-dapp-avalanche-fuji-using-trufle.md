@@ -1,10 +1,4 @@
----
-description: Learn how to use Truffle with the Avalanche C-Chain
----
-
-# Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite
-
-## Introduction
+# Introduction
 
 In the last tutorial on [Making a basic e-voting DApp on Avalanche's Fuji C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), we have learnt how to deploy a smart contract on Avalanche's Fuji C-Chain using Trufflesuite. Along with that we have also coded the client-side application, to easily interact with smart contracts.
 

@@ -1,12 +1,4 @@
----
-description: >-
-  Learn how to Transfer AVAX native tokens from Avalanche C-Chain to an Ethereum
-  address
----
-
-# Transfer AVAX tokens from the C-Chain to an ETH address
-
-## Introduction
+# Introduction
 
 In this tutorial, we are going to learn how to programatically transfer native AVAX tokens from the Avalanche C-Chain to an ETH wallet.
 

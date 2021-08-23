@@ -1,10 +1,4 @@
----
-description: Learn how to create an Avalanche based dApp with a ReactJS frontend.
----
-
-# Create a Voting dApp on Avalanche using ReactJS
-
-## Introduction
+# Introduction
 
 In the tutorial [Making advanced e-voting dApp](https://learn.figment.io/network-documentation/avalanche/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle) we have learned to build smart contracts, deploy them on Avalanche and interact with them using jQuery.
 

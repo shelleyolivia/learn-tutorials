@@ -1,14 +1,6 @@
----
-description: >-
-  Learn how to deploy and test a smart contract on Avalanche using Remix and
-  MetaMask
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask). 
 
-# Deploy a Smart Contract on Avalanche using Remix and MetaMask
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask). 
-
-## Introduction
+# Introduction
 
 ![](../../../../.gitbook/assets/image%20%2811%29.png)
 
@@ -16,7 +8,7 @@ Avalanche's Primary Network is a subnet that has three chains: P-Chain, X-Chain,
 
 Today, we will deploy and test a smart contract on Avalanche using Remix and MetaMask.
 
-## Step 1. Setting up MetaMask
+# Step 1. Setting up MetaMask
 
 Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
@@ -52,21 +44,21 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 * **Symbol**: `C-AVAX`
 * **Explorer**: N/A
 
-## Step 2. Funding your C-Chain address
+# Step 2. Funding your C-Chain address
 
-### **Funding your C-Chain address on FUJI** <a id="d718"></a>
+## Funding your C-Chain address on FUJI
 
  Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
 
-### Funding your C-Chain address on Mainnet <a id="1997"></a>
+## Funding your C-Chain address on Mainnet
 
 Funding your C-chain address on mainnet is done through a cross-chain swap from X-chain to C-chain. 
 
-### Funding your C-chain address on local testnet
+## Funding your C-chain address on local testnet
 
-Deploy your own faucet. [Tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146)
+Deploy your own faucet by following [this tutorial](https://medium.com/avalabs/the-ava-platform-tools-pt-2-the-ava-faucet-48f28da57146).
 
-## Step 3. Remix: Connect MetaMask and deploy a smart contract.
+# Step 3. Remix: Connect MetaMask and deploy a smart contract.
 
 Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity
 
@@ -106,5 +98,5 @@ The contract ABI and Bytecode are available on the compiler tab.
 
 ![](../../../../.gitbook/assets/image%20%2813%29.png)
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [join our community today](https://discord.gg/fszyM7K)!
 

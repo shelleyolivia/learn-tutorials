@@ -1,10 +1,4 @@
----
-description: Learn how to create a local test network on Avalanche
----
-
-# Create a Local Test Network
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network). 
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network). 
 
 ## Introduction
 

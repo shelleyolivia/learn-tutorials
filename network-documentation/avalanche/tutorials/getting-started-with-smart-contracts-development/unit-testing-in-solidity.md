@@ -1,12 +1,4 @@
----
-description: >-
-  How to write unit tests for Solidity smart contracts using Truffle's
-  Assertions
----
-
-# Unit Testing in Solidity
-
-## Introduction
+# Introduction
 
 Unit testing is a software testing method where individual units or components of the software are tested. The purpose of unit tests is to validate that each unit of the software performs as designed.
 
@@ -14,7 +6,7 @@ In smart contract development, a comprehensive set of unit tests for each functi
 
 A thorough understanding of the smart contract being tested is very important to the effectiveness of the test. Steps must be taken to document what the smart contract does and how it does it. The next task is to map out each test to correspond with the contract’s functionality. In this tutorial, we will follow these outlined steps to write unit tests that cover the complete functionality of our contract.
 
-## **Prerequisites**
+# Prerequisites
 
 This tutorial builds on a previously written tutorial on avalanche, so before we proceed any further make sure to complete [Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite](https://learn.figment.io/network-documentation/avalanche/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle).
 
@@ -87,7 +79,7 @@ when the contract is instantiated  with (["US Election", "Presidential Election"
 
 We have five test cases in total, two to validate that our constructor\(\) and addCandidate\(\) function work as expected, the other three to validate the functionality of the vote\(\) function.
 
-## Writing the unit-tests in Solidity.
+# Writing the unit tests in Solidity
 
 Running `truffle init` in the previous article created the basic directories necessary for smart contract development. One of these directories is the `test` directory. We'll need to navigate to this directory as it is the specialized directory for test files:
 
@@ -97,16 +89,10 @@ cd test
 
 Create a new file:
 
-For Linux/macOS Terminal -
-
-```javascript
+```text
 touch TestElection.sol
-```
-
-For Windows Terminal -
-
-```javascript
-type NUL > TestElection.sol
+// Or if you are on Windows, use:
+type nul > TestElection.sol
 ```
 
 Open the TestElection.sol file with your favourite code editor and add the following lines:
@@ -127,7 +113,7 @@ Truffle provides us with a default assertion library in `truffle/Assert.sol` whi
 
 On line 7, we declare the name of the test contract as `TestElection`. Preceding the name of the contract with `Test` lets the test runner \(in this case Truffle\) know this will be a test suite, or a collection of tests. Now we are ready to start writing our tests. Let's start with the constructor:
 
-{% code title="test/TestElection.sol" %}
+
 ```javascript
 function testConstructor() public {
     string[] memory nda = new string[](2);
@@ -144,7 +130,7 @@ function testConstructor() public {
     Assert.equal(election.description(), "US presidential election", "Name should be US presidential election");
 }
 ```
-{% endcode %}
+
 
 Test cases in Solidity are functions with one or more assert statements. As the case mapping in the [Breaking It Down](unit-testing-in-solidity.md#breaking-it-down) section suggested, we instantiate a new Election contract with the necessary values and then use the Truffle Assertion library to validate that the `name` and `description` variables of the contract have the same values as those used to instantiate the contract.
 
@@ -289,14 +275,12 @@ To test the exception:
 Congratulations! You've made it to the end of this short but informative tutorial on writing unit tests for Solidity smart contracts using Truffle's assertions.   
 You should now be able to identify Solidity functions which require testing and to come up with tests to examine their functionality. Truffle's assertions are only one method of unit testing Solidity code, and we encourage you to also look at testing using other tools such as [Jest](https://jestjs.io/) or [Mocha](https://mochajs.org/).
 
-## Next Steps
+# Next Steps
 
-Though this tutorial covers the basics involved in writing unit tests for smart contracts, nothing solidifies your knowledge of testing more than reading some existing code & coming up with test cases.  
-It is also recommended to head over to the project repository on [GitHub](https://github.com/Segun-Ogundipe/advance-voting-test), which also contains Javascript test files in case you're interested in writing tests in Javascript.
+Though this tutorial covers the basics involved in writing unit tests for smart contracts, nothing solidifies your knowledge of testing more than reading some existing code & coming up with test cases. It is also recommended to head over to the project repository on [GitHub](https://github.com/Segun-Ogundipe/advance-voting-test), which also contains Javascript test files in case you're interested in writing tests in Javascript.
 
-## About The **Author**
+# About The Author
 
 This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/segun-ogundipe) and on [GitHub](https://github.com/segun-ogundipe)
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
-

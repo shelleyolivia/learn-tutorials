@@ -1,26 +1,20 @@
----
-description: Learn how to create a fixed-cap asset on Avalanche
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/create-a-fix-cap-asset). 
 
-# Creating A Fixed-Cap Asset
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/create-a-fix-cap-asset). 
-
-## Introduction
+# Introduction
 
 This tutorial illustrates how Avalanche can be used to create and trade a fixed-cap, fungible asset. A quantity of the asset is created at the asset’s initialization, and then no more is ever created.
 
 Suppose there is an Income Sharing Agreement \(ISA\) with 10M shares, and no more shares are ever created. Let’s create an asset where one unit of the asset represents one share of the ISA.
 
-### Assumptions <a id="assumptions"></a>
+# Prerequisites
 
 We assume that you’re already familiar with [**DataHub**](https://datahub.figment.io/sign_up?service=avalanche) and connecting to the Avalanche services.
 
-## Create the Asset
+# Create the Asset
 
-Our asset will exist on the [X-Chain](https://docs.avax.network/learn/platform-overview#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API.](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api)
+Our asset will exist on the [X-Chain](https://docs.avax.network/learn/platform-overview#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain API](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api).
 
-The signature for this method is:
+The function signature for this method is:
 
 ```javascript
 avm.createFixedCapAsset({
@@ -42,7 +36,7 @@ avm.createFixedCapAsset({
 }
 ```
 
-#### Parameters <a id="parameters"></a>
+# Parameters
 
 * `name` is a human-readable name for the asset. Not necessarily unique.
 * `symbol` is a shorthand symbol for the asset. Between 0 and 4 characters. Not necessarily unique. May be omitted.
@@ -52,14 +46,14 @@ avm.createFixedCapAsset({
 * `from` are the addresses that you want to use for this operation. If omitted, uses any of your addresses as needed.
 * `changeAddr` is the address any change will be sent to. If omitted, change is sent to one of the addresses controlled by the user.
 
-#### Response <a id="response"></a>
+# Response
 
 * `assetID` is the ID of the new asset.
 * `changeAddr` in the result is the address where any change was sent.
 
 Now, on to creating the asset. You’ll want to replace `address` with an address your user controls so that you will hold all of the newly created asset and be able to send it later in this tutorial.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -84,7 +78,7 @@ curl -X POST --data '{
 
 The response contains the asset’s ID, which is also the ID of this transaction:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -95,15 +89,13 @@ The response contains the asset’s ID, which is also the ID of this transaction
 }
 ```
 
-## Trade the Asset
-
-#### Check a balance <a id="check-a-balance"></a>
+# Trade the Asset
 
 All 10,000,000 units of the asset \(shares\) are controlled by the address we specified in `initialHolders`.
 
 To verify this we call `avm.getBalance`:
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -117,7 +109,7 @@ curl -X POST --data '{
 
 The response confirms that our asset creation was successful, and that the expected address holds all 10,000,000 shares:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -127,13 +119,13 @@ The response confirms that our asset creation was successful, and that the expec
 }
 ```
 
-#### Send the asset <a id="send-the-asset"></a>
+# Send the asset
 
 Now, let’s send 100 shares by calling `avm.send`.
 
 To send the shares, we need to prove that we control the user the shares are being sent from. Therefore, this time we’ll need to fill in `username` and `password`.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -148,11 +140,11 @@ curl -X POST --data '{
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/X
 ```
 
-#### Check the transaction status <a id="check-the-transaction-status"></a>
+# Check the transaction status
 
 The response from the above call should look like this:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -167,7 +159,7 @@ The response from the above call should look like this:
 
 After a second or two, the transaction should be finalized. We can check the status of the transaction with `avm.getTxStatus`:
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -180,7 +172,7 @@ curl -X POST --data '{
 
 The response should look like this
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -194,7 +186,7 @@ You might also see that `status` is `Pending` if the network has not yet finaliz
 
 Now let’s check the balance of the `to` address:
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -208,7 +200,7 @@ curl -X POST --data '{
 
 The response should be:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -218,7 +210,7 @@ The response should be:
 }
 ```
 
-## Wrapping up
+# Conclusion
 
 In this tutorial, we:
 
