@@ -1,10 +1,4 @@
----
-description: Learn how to create a new virtual machine on Avalanche
----
-
-# Create a New Virtual Machine
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-virtual-machine-vm). 
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-virtual-machine-vm). 
 
 ## Note
 
