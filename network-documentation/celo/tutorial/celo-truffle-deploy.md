@@ -1,6 +1,4 @@
-
-
-# Deploying smart contracts on Celo with Truffle
+# Introduction
 
 Let’s say you have a smart contract you’ve written. How would you go about deploying it on the Celo network? 
 

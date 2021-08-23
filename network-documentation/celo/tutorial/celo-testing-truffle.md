@@ -1,14 +1,4 @@
----
-description: We will learn how to use Truffle in order to test smart contracts on Celo.
----
-
-# Testing Celo Smart Contracts with Truffle
-
-## About the Author
-
-This tutorial was created by [Alex Reyes](https://www.linkedin.com/in/alexreyes-tech). Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He previously completed internships at Facebook and Microsoft.
-
-## Introduction
+# Introduction
 
 In this tutorial we will write tests for a Celo smart contract.
 
@@ -220,3 +210,6 @@ After following this tutorial, you should have a basis for writing tests for sma
 * [New to unit testing, how to write great tests?](https://stackoverflow.com/questions/3258733/new-to-unit-testing-how-to-write-great-tests) - A stack overflow question with some great answers on writing great tests. 
 * [Testing deployed smart contracts](https://fulldecent.blogspot.com/2019/04/testing-deployed-ethereum-contracts.html) - This tutorial may come in handy if you're trying to test a contract which has been deployed to the Celo mainnet.
 
+## About the Author
+
+This tutorial was created by Alex Reyes. Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He has previously completed internships at Facebook and Microsoft.
