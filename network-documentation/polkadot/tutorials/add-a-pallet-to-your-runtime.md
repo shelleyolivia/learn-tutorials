@@ -1,6 +1,6 @@
 [The original tutorial can be found in Substrate's official documentation here. ](https://substrate.dev/docs/en/tutorials/add-a-pallet/)
 
-## Introduction
+# Introduction
 
 The [Substrate Developer Hub Node Template](https://github.com/substrate-developer-hub/substrate-node-template) provides a minimal working runtime which you can use to quickly get started building your own custom blockchain. The Node Template includes [a number of components](https://substrate.dev/docs/en/index#architecture), including a [runtime](https://substrate.dev/docs/en/knowledgebase/getting-started/glossary#runtime) that is constructed using the [FRAME](https://substrate.dev/docs/en/knowledgebase/runtime/frame) runtime development framework. However, in order to remain minimal, it does not include most of the modules \(called "pallets"\) from Substrate's set of core FRAME pallets.
 
@@ -406,7 +406,7 @@ In the `Cargo.toml` file of the Substrate node runtime, you will see an example 
 * Learn how to add a more complex pallet to the Node Template by completing the [Add the Contracts Pallet](https://substrate.dev/docs/en/tutorials/add-contracts-pallet) tutorial.
 * Complete the [Forkless Upgrade a Chain](https://substrate.dev/docs/en/tutorials/forkless-upgrade) tutorial to learn how Substrate enables forkless runtime upgrades and follow steps to perform two upgrades, each of which is performed by way of a distinct upgrade mechanism.
 
-#### References
+## References
 
 * [Nicks pallet docs](https://substrate.dev/rustdocs/v3.0.0/pallet_nicks/index.html)
 

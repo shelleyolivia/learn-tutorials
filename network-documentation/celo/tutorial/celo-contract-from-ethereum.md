@@ -258,7 +258,7 @@ A withdrawal from the faucet function would look like this. This code could be t
   }
 ```
 
-## Conclusion
+# Conclusion
 
 In this tutorial, we learned how to alter a smart contract originally written for Ethereum and customize it for use on the Celo network. We learned about the difference between a native token such as Ether or Celo, and an ERC-20 token such as cUSD. We altered some example Solidity code to illustrate the process generally used to prepare an Ethereum contract for use on another EVM compatible network, including specific mention of alternative tokens where necessary - such as inside the withdraw function, as part of a require statement.
 

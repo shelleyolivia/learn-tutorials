@@ -134,10 +134,10 @@ If you're attempting to get into a short position in the cUSD price of CELO beca
 3. Sell CELO / Buy cUSD  \(via Mento\)
 4. Deposit cUSD
 
-## Conclusion
+# Conclusion
 
 Moola is just getting started and is on the right path. Moola is experiencing exponential growth with over $1M locked. Many new features like Flash loans and uncollateralized loans are on the roadmap of this promising startup. Moola also received a funding of $1.4M in March,2021 which will help Moola accelerate it's growth. Moola will also release it's new UI soon.
 
-## About the author
+# About the author
 
 This tutorial was created by [Deepanshu Hooda](https://github.com/gitofdeepanshu/), who is a computer science junior and a blockchain developer with high interest in finance. He spends most of the his time studying new DeFi protocols and loves to travel.

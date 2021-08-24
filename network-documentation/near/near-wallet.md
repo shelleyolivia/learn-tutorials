@@ -104,7 +104,7 @@ To unstake, select the validator from “Current Validators” you would like to
 
 Once 3 epochs have completed, you will see them in “Ready to Withdraw” on the dashboard. Select the validator’s name again, and click the “Withdraw” button to withdraw your tokens from the validator’s account to your own account.
 
-### Next Steps
+# Next Steps
 
 Congratulations, you’ve setup a NEAR account, funded it, and successfully staked your NEAR! We will release more tutorials as we add additional functionality to the Wallet.
 

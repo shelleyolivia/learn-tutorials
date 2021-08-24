@@ -14,14 +14,14 @@ solana --help
 
 If you have any difficulty following this tutorial or simply want to discuss Solana tech with us you can [join our community today](https://discord.gg/fszyM7K)!
 
-## Prerequisites
+# Prerequisites
 
 * Basic familiarity with a [command-line interface](https://en.wikipedia.org/wiki/Command-line_interface)
 * Basic familiarity with Git & GitHub
 * Around $1 USD of [SOL](https://coinmarketcap.com/currencies/solana/) accessible. Get SOL through an exchange, such as [FTX](https://ftx.com/#a=13426316), or by swapping tokens on [Serum](https://projectserum.com/#/).
   * **NOTE:** FTX and Solana are closely linked. FTX's sister company Alameda Research is an investor in Solana, and FTX also operates its own decentralized exchange called Serum on the Solana blockchain.
 
-## Requirements
+# Requirements
 
 * [GitHub account](https://github.com/)
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed
@@ -373,11 +373,11 @@ Woohoo! If you made it through all the steps, you have successfully created your
 
 In this tutorial, we built our own token on the Solana blockchain using Solana's command-line interface or "CLI". Feel free to continue experimenting by attempting to mint more of the token, sending the token around to other wallets, creating a market for it, making a liquidity pool on [Raydium](https://raydium.io/liquidity/), etc. Check back in the future for a tutorial on how to make a [non-fungible token](https://www.blockchain-council.org/blockchain/a-quick-guide-to-fungible-vs-non-fungible-tokens/) on Solana as well.
 
-## About the Author
+# About the author
 
 This tutorial was created by Jacob Makarsky. He can be found on [Github](https://github.com/jacobmakarsky) or the [Figment Forum](https://community.figment.io/u/jacobmakarsky/summary).
 
-## References
+# References
 
 * [Solana Token Program](https://spl.solana.com/token)
 * [Loop Creative Andy](https://www.youtube.com/watch?v=1cn-HnG_yns)

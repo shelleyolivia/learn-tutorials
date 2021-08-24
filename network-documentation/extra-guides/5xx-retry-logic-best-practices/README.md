@@ -4,7 +4,7 @@ description: Review best practices to deal with 5XX errors
 
 # 5XX Retry Logic Best Practices
 
-## Introduction
+# Introduction
 
 Since DataHub is a proxy that passes through errors from full node software, our users will need to adopt defensive strategies for interacting with the API.
 

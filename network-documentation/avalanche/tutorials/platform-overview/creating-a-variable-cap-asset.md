@@ -12,7 +12,7 @@ The second reason is flexibility. It’s nice to be able to encode logic like, �
 
 Suppose that we want to issue an asset that represents shares of a corporation. No shares exist to start with, but more shares may be created later. Let’s create such an asset.
 
-## Prerequisites
+# Prerequisites
 
 We assume that you’re already familiar with [**DataHub**](https://datahub.figment.io/sign_up?service=avalanche) and connecting to the Avalanche services.
 

@@ -474,7 +474,7 @@ Run the Graph protocol [deployment script](subgraphs-on-celo.md#3-show-me-the-co
 # Conclusion
 
 We have learned how the Graph protocol is helpful, and how we can build and deploy our own subgraphs.
-## About the Author
+# About the author
 
 This tutorial was created by Shardul Aeer, a full stack developer exploring the brave new world of Web3 and blockchain. Follow his journey on:
 

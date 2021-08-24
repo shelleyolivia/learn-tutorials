@@ -4,11 +4,11 @@ For a high level introduction to Non-Fungible-Tokens see the [first installment 
 
 {% embed url="https://youtu.be/jRuSOos9ig4" %}
 
-## Prerequisites
+# Prerequisites
 
 This tutorial assumes that you have completed the [Secret Learn Pathway](https://learn.figment.io/network-documentation/secret/secret-pathway) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in section 5 of the Pathway.
 
-## Requirements
+# Requirements
 
 * The latest version of [NodeJS](https://nodejs.org/en/) installed \(use of nvm, the node version manager, is _encouraged_ for web3 developers\)
 * A code editor like [VSCode](https://code.visualstudio.com/Download), Theia, Atom, _etc_.
@@ -275,7 +275,7 @@ After this executed successfully you can take the program you created in the fir
 
 {% page-ref page="create-your-first-secret-nft.md" %}
 
-## Conclusion
+# Conclusion
 
 Congratulations! We have made it to the end of the first installment of this Secret NFT series. We have covered a lot of information, and I feel you can really be proud of what you have achieved. Just to recap:
 
@@ -285,11 +285,11 @@ Congratulations! We have made it to the end of the first installment of this Sec
 
 This is a solid foundation to play with and build upon!
 
-## About the Author
+# About the author
 
 This tutorial was created by [Florian Uhde](https://twitter.com/florianuhde), a software engineer and game developer with a passion for blockchain, creativity and systemic design. You can get in touch with the author on [Figment Forum](https://community.figment.io/u/floar) if you have any queries pertaining to the tutorial, secretNFTs, etc.
 
-## References
+# References
 
 snip721 Reference Implementation: [Github Repo](https://github.com/baedrik/snip721-reference-impl)
 

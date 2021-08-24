@@ -1,6 +1,6 @@
 [**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/starport-blog/tutorial/01-index.html). 
 
-## Introduction
+# Introduction
 
 By following this tutorial, you will learn how to create a simple blog app that is powered by the Cosmos SDK.
 

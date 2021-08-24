@@ -1,6 +1,6 @@
 [The original tutorial can be found in the official Substrate documentation here. ](https://substrate.dev/docs/en/tutorials/build-a-dapp/)
 
-## Introduction 
+# Introduction 
 
 In this tutorial, you will learn to create a custom ["Proof of Existence"](https://en.wikipedia.org/wiki/Proof_of_Existence) dApp using the Substrate blockchain development framework and [FRAME](https://substrate.dev/docs/en/knowledgebase/runtime/frame) runtime libraries.
 

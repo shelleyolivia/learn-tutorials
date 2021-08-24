@@ -95,7 +95,7 @@ I shared with you my vision. The case for STAKE can be summed up in 3 words: **M
 
 This is where I make my call for action to the community. I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
-## What's Next
+# Next Steps
 
 The game plan remains the same. As new NEAR standards are released, I plan to document them and provide reference implementations as tutorials. The rest of the time will be focused on the core mission, which is to build the [STAKE Token](https://github.com/oysterpack/oysterpack-near-stake-token) with the community and bring it to market.
 

@@ -6,11 +6,11 @@ Today, in this tutorial, we will be building a more advanced e-voting `dApp`, in
 
 For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dApps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM \(Ethereum Virtual Machine\).
 
-## Prerequisites
+# Prerequisites
 
 You've created an [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). Along with that, you've have followed the tutorial on [Making a basic e-voting DApp on Avalanche's Fuji C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), though for the sake of completeness, we will be covering everything from start.
 
-## Requirements
+# Requirements
 
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle, which you can install with `npm install -g truffle`
@@ -932,15 +932,15 @@ async function submitNewElection() {
 
 ![](https://i.imgur.com/nfdnbwz.gif)
 
-## Conclusion 
+# Conclusion 
 
 Congratulations! You have successfully built a full fledged dApp and deployed the smart contract on Fuji test network using Trufflesuite. Along with that, we have also built the client side application for interacting with the network.
 
-## What's next?
+# Next Steps
 
 The dApp which we built just now is an e-Voting application, as now we can make new elections, give them titles and descriptions & vote on them separately. For further learning, we recommend that you experiment and add a few more interesting features to it, like having start and end dates for elections, declaring winners after the election has ended or any other functionality you can think of!
 
-## About the author
+# About the author
 
 This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan). You can get in touch with the author on [Figment Forum](https://community.figment.io/u/rranjan01234/) and on [GitHub](https://github.com/rajranjan0608)
 

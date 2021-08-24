@@ -279,7 +279,7 @@ const transfer = async (from, to, amount) => {
 
 This is the basic setup to integrate the Celo Ledger App with a web application. You can also view the [Celo Ledger App example codebase](https://github.com/celo-org/celo-ledger-web-app) for some other examples of connecting to a Ledger Device from a web application.
 
-## Conclusion
+# Conclusion
 
 Congratulations! You have accomplished a lot in this short introduction to developing on Celo.
 

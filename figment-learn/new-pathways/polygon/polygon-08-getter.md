@@ -82,7 +82,7 @@ Once the code above save you can click and this is what the UI should look like!
 
 -------------------------------------
 
-## Conclusion
+# Conclusion
 
 Congratulations! We have gone from zero to **Polygon**, covering all the most fundamental concepts needed for developers to succeed in using **Polygon**. From connecting to the network to interacting with smart contracts, you have completed coding challenges and created a functional yet basic dApp.   
 

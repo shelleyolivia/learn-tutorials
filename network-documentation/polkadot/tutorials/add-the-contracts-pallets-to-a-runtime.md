@@ -1,6 +1,6 @@
 [The original tutorial can be found in Substrate's official documentation here. ](https://substrate.dev/docs/en/tutorials/add-contracts-pallet/)
 
-## Introduction
+# Introduction
 
 The [Substrate Node Template](https://github.com/substrate-developer-hub/substrate-node-template) provides a minimal working runtime which you can use to quickly get started with building your own custom blockchain. However, in the attempts to remain minimal, it does not include most of the pallets from [FRAME](https://substrate.dev/docs/en/knowledgebase/runtime/frame).
 

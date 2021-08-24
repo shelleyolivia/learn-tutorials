@@ -256,7 +256,7 @@ Understanding this unit of measurement: 1e16 = 0.01CUSD, 1e15 = 0.1CUSD, 1e14 = 
    
 ![image](https://user-images.githubusercontent.com/80616939/118338915-9c1aca80-b4d4-11eb-87b6-7970949923aa.png)
     
-## Conclusion
+# Conclusion
   The fullnode and light client should now be operational. Keep in mind this tutorial is not the only way to set up a full node. This node is now under your control so remember the keys and passwords to avoid losing any money. Please experiment with this setup and personalize it. The start_celo.sh and celo.env files are both easily customizable.
 #
  ###  About the Author 

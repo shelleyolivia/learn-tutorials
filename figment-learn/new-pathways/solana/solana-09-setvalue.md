@@ -78,7 +78,7 @@ Once you have the code above saved:
 
 ----------------------------------
 
-## Conclusion
+# Conclusion
 
 Congratulations on completing the Solana Pathway! We hope you had a fun time and learned a lot. Here are a few things you can check out to go further:
 

@@ -6,7 +6,7 @@ Writing tests is an important part of smart contract development because smart c
 
 This is a beginner friendly tutorial. Read on to learn about testing!
 
-## Prerequisites
+# Prerequisites
 
 For this tutorial you will need to install Truffle and Ganache. Truffle is a set of tools for smart contract development and Ganache is a tool for creating local blockchains.
 
@@ -195,7 +195,7 @@ And finally, let's run this last test:
 
 Woohoo! All our tests pass.
 
-## Conclusion
+# Conclusion
 
 Now we know how to write tests for our smart contracts. This skill will come in handy whenever you're working on a smart contract and need to verify that all of the functionality works. Although our tests were relatively simple, they should be enough to get you started on your testing journey.
 
@@ -210,6 +210,6 @@ After following this tutorial, you should have a basis for writing tests for sma
 * [New to unit testing, how to write great tests?](https://stackoverflow.com/questions/3258733/new-to-unit-testing-how-to-write-great-tests) - A stack overflow question with some great answers on writing great tests. 
 * [Testing deployed smart contracts](https://fulldecent.blogspot.com/2019/04/testing-deployed-ethereum-contracts.html) - This tutorial may come in handy if you're trying to test a contract which has been deployed to the Celo mainnet.
 
-## About the Author
+# About the author
 
 This tutorial was created by Alex Reyes. Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He has previously completed internships at Facebook and Microsoft.

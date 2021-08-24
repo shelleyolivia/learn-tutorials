@@ -70,7 +70,7 @@ Decentralized network platforms, such as NEAR, provide tremendous economic oppor
 
 NEAR is a super-fast smart contract platform with super low transaction fees that is user and developer-friendly for building real-world applications for the Open Web. I am excited about NEAR, and I hope I have inspired you to learn with me on this thrilling journey.
 
-## What's Next ...
+# Next Steps ...
 
 If you are wondering what is NEP-41, then you are in luck. In the next tutorial, we'll do a deep dive into the new and improved Fungible Token Core Standard NEP-141.
 

@@ -118,7 +118,7 @@ export const ProfilePage = ({ navigation }) => {
 }
 ```
 
-## Conclusion
+# Conclusion
 
 In this tutorial, you learned how to build a complete Charity DAO. We covered the complete smart contract code using the Solidity programming language. We scaffolded the App using React Native and then used Redux to tie the actions together!   
   
@@ -128,7 +128,7 @@ The App is available in an Open Source code repository on [Github](https://githu
 
 Congratulations for completing these tutorials. There are no limits to what you can build using the tools and techniques we have discussed.
 
-## About the Authors 
+# About the authors 
 
 This tutorial was created by [Segun Ogundipe](https://community.figment.io/u/segun-ogundipe) and [Emmanuel Oaikhenan](https://community.figment.io/u/odia.emma/).
 
