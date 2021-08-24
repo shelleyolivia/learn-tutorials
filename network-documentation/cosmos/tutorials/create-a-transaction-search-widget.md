@@ -8,7 +8,7 @@ This tutorial describes how to create a simple Javascript widget showing the las
 Note that we have removed the DataHub API key from the code snippets but they will be necessary to complete the tutorial. 
 {% endhint %}
 
-## Prerequisites 
+# Prerequisites 
 
 * Basic knowledge of Javascript \(fetch API\)
 * Basic knowledge of HTML \(templates\)

@@ -298,7 +298,7 @@ Now that you've finished the tutorial, you should have a basic understanding of 
 
 The complete source code for this tutorial can be found on [Github](https://github.com/alexreyes/Celo-Deploying-With-Truffle).
 
-# Next steps
+# What's Next?
 
 Now that you've learned how to deploy smart contracts on Celo, you can build new use cases for the cryptoeconomy on Celo. Feel free to learn more Solidity, or continue the tutorials on [Figment Learn](https://learn.figment.io).
 

@@ -579,7 +579,7 @@ const closeIcon = (props) => {
 };
 ```
 
-## Next Steps
+# What's Next?s
 
 All of our app pages are now complete!   
   

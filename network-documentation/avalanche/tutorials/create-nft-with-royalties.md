@@ -6,7 +6,7 @@ An NFT is represented by a discrete unit of data on a digital ledger known as a 
 
 Refer to the official Ethereum developer documentation to learn more about [ERC-721 tokens](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/).
 
-## Prerequisites
+# Prerequisites
 
 In preparation for the tutorial, you will need to have a basic understanding of [Remix IDE](https://remix.ethereum.org/) and Solidity [smart contracts](https://solidity-by-example.org/). Please refer to the Avalanche [smart contract tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) for more information on the Avalanche wallet.
 

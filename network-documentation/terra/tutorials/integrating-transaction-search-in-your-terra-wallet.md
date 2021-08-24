@@ -698,7 +698,7 @@ initialRequest() {
 > Narrowing down the search time range would significantly improve its performance and allow it to receive a response much faster. In such a case, both parameters \(pair `after_time` and `before_time` or `after_height` and `before_height` \) are required.
 
 
-## Conclusion
+# Conclusion
 
 Congratulations, you've built your first implementation of the Transaction Search API. You should now have what it takes to implement it in your DApp and leverage the full power of Transaction Search.
 

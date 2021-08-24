@@ -43,7 +43,7 @@ It is possible to process many transactions on Polygon and use relatively little
 
 In summary, Polygon is an attractive solution for developers who wish to keep much of the tooling and community of Ethereum, while leveraging the best scaling for their decentralized applications.
 
-## Requirements
+# Requirements
 
 * [Node.js](https://nodejs.org) v14+ installed \(we recommend using [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm)\)
 * [yarn](https://yarnpkg.com/) installed
@@ -59,7 +59,7 @@ If you **DO NOT** already have Metamask installed, welcome to the wonderful worl
 The first piece of advice we will give you is to make _absolutely sure that you write down the_ [_Secret Recovery Phrase_](https://community.metamask.io/t/what-is-a-secret-recovery-phrase-and-how-to-keep-your-crypto-wallet-secure/3440) that is generated during Metamask's initial setup. Do not store it in a digital format. Do not share it with anybody. Please do keep it accessible to yourself, because we will be using it during the pathway. 
 {% endhint %}
 
-## Prerequisites
+# Prerequisites
 
 * Readers are assumed to have a working knowledge of JavaScript/TypeScript.
   * [Eloquent Javascript](https://eloquentjavascript.net) is a very good starting point to learn the JavaScript language.

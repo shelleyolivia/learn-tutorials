@@ -275,7 +275,7 @@ To test the exception:
 Congratulations! You've made it to the end of this short but informative tutorial on writing unit tests for Solidity smart contracts using Truffle's assertions.   
 You should now be able to identify Solidity functions which require testing and to come up with tests to examine their functionality. Truffle's assertions are only one method of unit testing Solidity code, and we encourage you to also look at testing using other tools such as [Jest](https://jestjs.io/) or [Mocha](https://mochajs.org/).
 
-# Next Steps
+# What's Next?
 
 Though this tutorial covers the basics involved in writing unit tests for smart contracts, nothing solidifies your knowledge of testing more than reading some existing code & coming up with test cases. It is also recommended to head over to the project repository on [GitHub](https://github.com/Segun-Ogundipe/advance-voting-test), which also contains Javascript test files in case you're interested in writing tests in Javascript.
 

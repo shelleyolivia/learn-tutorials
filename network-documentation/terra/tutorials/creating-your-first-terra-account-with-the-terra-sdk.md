@@ -88,13 +88,13 @@ That's it! Now head back to the Stake ID app, refresh the page and enjoy the vie
 
 Great work. You’ve earned it!
 
-## Conclusion
+# Conclusion
 
 You now have an account on the Terra Tequila testnet and your secret information stored in the `.env` file. You also made sure that your account balance is loaded with testnet LUNAs.
 
 The complete code for this tutorial can be found [**here**](https://github.com/figment-networks/tutorials/blob/main/terra/2_creating_account/create_account.js). 
 
-## Next Steps
+# What's Next?s
 
 In the next tutorial, we will be looking at different queries we can run against a Terra node to get the information such as:
 

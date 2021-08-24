@@ -6,7 +6,7 @@ description: Learn how to create an NFT on Avalanche
 
 \*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-nft-part-1). 
 
-## Introduction
+# Introduction
 
 Avalanche is a global financial network for the issuance and trade of digital goods. On Avalanche, these digital goods are represented as tokens, which can be assets or utilities. Some tokens are **fungible**, which means that one token is interchangeable for any other one token. Real-world currency is fungible, for example; one $5 note is treated as being the same as any other $5 note.
 
@@ -14,7 +14,7 @@ Avalanche also supports non-fungible tokens \(NFTs\). By definition, each NFT is
 
 In this tutorial we’ll create and send NFTs using AvalancheGo’s API. In a future tutorial we’ll create a custom NFT family using [AvalancheJS](https://docs.avax.network/build/tools/avalanchejs) and explore NFTs in more detail.
 
-### Requirements <a id="requirements"></a>
+## Requirements <a id="requirements"></a>
 
 We assume that you’re already familiar with [**DataHub**](https://datahub.figment.io/sign_up?service=avalanche) and connecting to the Avalanche services. In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 

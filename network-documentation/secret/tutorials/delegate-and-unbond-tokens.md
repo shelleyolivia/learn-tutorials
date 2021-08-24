@@ -204,7 +204,7 @@ Copy the transaction's `hash` from the output and replace `<TRANSACTION HASH>` i
 
 The unbonding will be automatically completed when the unbonding period has passed.
 
-## Conclusion
+# Conclusion
 
 Congratulations! You now know how to delegate and unbond your tokens by crafting advanced transactions from scratch with SecretJS and DataHub. You will be able to make complex transactions and interactions on the Secret Network. More message types can be found in the [Cosmos SDK](https://docs.cosmos.network/master/modules/).
 

@@ -249,7 +249,7 @@ To test the exception:
 
 Congratulations! You've made it to the end of this short but informative tutorial on writing unit tests for smart contracts in Avalanche!
 
-## What's Next?
+# What's Next??
 
 Though this tutorial covers the basics involved in writing unit tests for smart contracts, nothing solidifies your knowledge of testing more than reading some existing code & coming up with test cases. It is also recommended to head over to the project repository on [Github](https://github.com/Segun-Ogundipe/advance-voting-test). The repo contains Javascript test files in case you're interested in writing test cases in Javascript.
 

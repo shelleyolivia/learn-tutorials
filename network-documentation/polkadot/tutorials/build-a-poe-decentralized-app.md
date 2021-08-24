@@ -1,6 +1,6 @@
 [The original tutorial can be found in the official Substrate documentation here. ](https://substrate.dev/docs/en/tutorials/build-a-dapp/)
 
-## Introduction 
+# Introduction 
 
 In this tutorial, you will learn to create a custom ["Proof of Existence"](https://en.wikipedia.org/wiki/Proof_of_Existence) dApp using the Substrate blockchain development framework and [FRAME](https://substrate.dev/docs/en/knowledgebase/runtime/frame) runtime libraries.
 
@@ -531,7 +531,7 @@ If all went well, you should see a new `ClaimCreated` event appear in the Events
 
 Remember, only the owner can revoke the claim! If you select another user account at the top, and you will see that the revoke option is disabled!
 
-# Next Steps
+# What's Next?
 
 This is the end of our journey into creating a Proof of Existence blockchain.
 

@@ -183,11 +183,11 @@ This is a swap message which will use our wallet account to exchange `1,000` LUN
 
 The complete code for this tutorial can be found [**here**](https://github.com/figment-networks/tutorials/tree/main/terra/4_transactions). 
 
-## Conclusion
+# Conclusion
 
 Great job! Now you not only know how to read from the Terra blockchain, but also how to interact with it by submitting transactions with [**DataHub**](https://figment.io/datahub-waitlist/). 
 
-## Next steps
+# What's Next?s
 
 Terra.js has a lot more to offer. We just scratched the surface of what this package can do. In order to learn more about it, please visit: [**Terra.js**](https://terra-project.github.io/terra.js/)
 

@@ -18,11 +18,11 @@ In these tutorials we will cover connecting to and interacting with Polygon usin
 
 By the end of the Pathway tutorials, you will be confidently interacting with Polygon, sending transactions which cost fractions of a cent and deploying smart contracts.
 
-## Next Steps
+# What's Next?s
 
 Now that we gave you a quick overview of Polygon ecosystem, we still need to set up our environment.
 
-## Conclusion
+# Conclusion
 
 Congratulations on completing the Solana Pathway! We hope you had a fun time and learned a lot. Here are a few things you can check out to go further:
 

@@ -103,6 +103,6 @@ Once the code above save you can click and this is what the UI should look like!
 
 -------------------------------------
 
-## Conclusion
+# Conclusion
 
 Now that we've set the storage of our contract, we can read it. We're going to learn how to do this in the next and last steps

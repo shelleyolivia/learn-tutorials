@@ -235,6 +235,6 @@ version = 'some-compatible-version'
 
 Compile one more time and notice that Cargo now grabs your pallet from GitHub or crates.io instead of using the local files.
 
-# Next Steps
+# What's Next?
 
 Congratulations! You've written a Substrate pallet in its own Rust crate, and published it. Other blockchain developers can now easily use your pallet in their runtime by simply including those same four lines of code in their runtime's `Cargo.toml` files and updating their runtime's `lib.rs` file.

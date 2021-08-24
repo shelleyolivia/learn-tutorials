@@ -4,7 +4,7 @@ How would you go about deploying an existing Solidity smart contract on the Celo
 
 Read on to learn how to deploy smart contracts on Celo with Truffle!
 
-## Prerequisites
+# Prerequisites
 
 This tutorial would be most helpful if you have a smart contract you've written which you'd like to deploy on Celo. If not, that's okay as we will be deploying the default Truffle Migrations contract.
 
@@ -288,7 +288,7 @@ You should see a successful contract deployment at that address!
 
 [![block explorer](https://camo.githubusercontent.com/2d23c68351d5f73727daf04dad01cc6efd9a82e5678789d61436c608865036eb/68747470733a2f2f692e696d6775722e636f6d2f6e6c32383869612e706e67)](https://camo.githubusercontent.com/2d23c68351d5f73727daf04dad01cc6efd9a82e5678789d61436c608865036eb/68747470733a2f2f692e696d6775722e636f6d2f6e6c32383869612e706e67)
 
-## Conclusion
+# Conclusion
 
 Congratulations! You've just deployed a smart contract on the Celo network using Truffle!
 
@@ -296,7 +296,7 @@ Now that you've finished the tutorial, you should have a basic understanding of 
 
 The complete source code for this tutorial can be found on [GitHub](https://github.com/alexreyes/Celo-Deploying-With-Truffle).
 
-## Next steps
+# What's Next?s
 
 Now that you've learned how to deploy smart contracts on Celo using Truffle, you can build new use cases for the cryptoeconomy on Celo! To learn more Solidity, check out Solidity by Example. You can also continue the other tutorials on [Figment Learn](https://learn.figment.io/).
 
@@ -330,7 +330,7 @@ Make sure your account isn't empty like this one!
 
 [![empty account](https://camo.githubusercontent.com/60a2da1b381d2d9f9c21ade38e54f3793ead7bf2162d4eb7ccb8297733494cbc/68747470733a2f2f692e696d6775722e636f6d2f795055594353442e706e67)](https://camo.githubusercontent.com/60a2da1b381d2d9f9c21ade38e54f3793ead7bf2162d4eb7ccb8297733494cbc/68747470733a2f2f692e696d6775722e636f6d2f795055594353442e706e67)
 
-## About the Author
+# About the author
 
 This tutorial was created by [Alex Reyes](https://www.linkedin.com/in/alexreyes-tech). Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He completed his previous internships at Facebook and Microsoft.
 

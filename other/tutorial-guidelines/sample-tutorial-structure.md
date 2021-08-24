@@ -7,7 +7,7 @@ description: >-
 
 # Sample Tutorial Structure
 
-## Introduction
+# Introduction
 
 Explain why this tutorial matter and what the context is, what we're going to build and learn in this tutorial.
 
@@ -65,7 +65,7 @@ Let's check for some common causes:
 
 The Section that summarizes what was learned, reinforces key points and also congratulates the learner. Max 5-6 lines.
 
-## What's Next? _\(Optional\)_
+# What's Next?? _\(Optional\)_
 
 Add if you're working on any other advanced tutorial, what can be done next after this tutorial.  
 Feel free to add recommended projects and articles here which are related to this tutorial

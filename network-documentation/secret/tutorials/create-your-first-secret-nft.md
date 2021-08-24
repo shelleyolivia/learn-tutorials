@@ -445,7 +445,7 @@ Congratulations! We have made it to the end of the first installment of this Sec
 
 This is a solid foundation to play with and build upon!
 
-## Next Steps
+# What's Next?s
 
 Of course, we are not yet at the end of our journey. In the coming tutorial, we will have a look together into interesting and more complex examples of NFT properties. You can look forward to:
 
@@ -456,6 +456,6 @@ Of course, we are not yet at the end of our journey. In the coming tutorial, we 
 
 Let's keep on building!
 
-## About the Author
+# About the author
 
 This tutorial was created by [Florian Uhde](https://twitter.com/florianuhde), a software engineer and game developer with a passion for blockchain, creativity and systemic design. You can get in touch with the author on [Figment Forum](https://community.figment.io/u/floar) if you have any queries pertaining to the tutorial, secretNFTs, etc.hello

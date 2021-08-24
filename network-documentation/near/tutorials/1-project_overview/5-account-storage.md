@@ -149,7 +149,7 @@ Overall, the Account Storage API itself is pretty straight forward. The key is t
 * We learned about how [storage staking](https://docs.near.org/docs/concepts/storage-staking) works on NEAR and how it impacts multi-user contracts.
 * We reviewed the new standard Account Storage API \(NEP-145\) in detail.
 
-# Next Steps
+# What's Next?
 
 Enough theoretical discussion for now ... in the next tutorial we will get back to coding where we will implement the Account Storage API for the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) token contract. Until next time, I leave you with these final words ...
 

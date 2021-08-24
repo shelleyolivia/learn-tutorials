@@ -23,7 +23,7 @@ The FA2 contract also associates some metadata with each token. This tutorial su
 * [Node.js](https://nodejs.org/) must be installed. The Node installation must also include `npm` \(Node package manager\).
 * [Docker](https://www.docker.com/) must be installed. You need docker to run Flextesa sandbox. You might skip docker installation if you plan to run this tutorial on the testnet \(Carthagenet\) only.
 
-## Requirements
+# Requirements
 
 You will need to install `tznft` CLI tool. After the installation, you can invoke various commands in the form of `tznft <command> [options]`. `tznft` provides the following commands:
 

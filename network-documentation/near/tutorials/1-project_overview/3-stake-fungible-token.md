@@ -372,11 +372,11 @@ near view $CONTRACT ft_balance_of --node_url $NEAR_NODE_URL --args "{\"account_i
 
 * **NOTE**: in case you wondering what **dev-1611907846758-1343432** is, it's a mock contract that implements the **TransferReceiver** contract interface. The `near dev-deploy` CLI command was used to deploy the contract, which automatically creates the account and auto-generated the contract account ID. For those that are even more curious about the mock contract, the code is located within the same STAKE project: [ft-transfer-receiver-mock](https://github.com/oysterpack/oysterpack-near-stake-token/tree/main/contract/ft-transfer-receiver-mock).
 
-### Conclusion
+## Conclusion
 
 That was longer than expected, but time flies by when you are having fun. We learned about staking on NEAR and how you can earn staking rewards as a delegator. I went over, at a high level, how the STAKE contract unlocks value in your staked NEAR by providing you with fungible tokens for your staked NEAR. We then implemented the Fungible Token Core Standard \(NEP-141\) for the STAKE contract. We did some design and coding. Along the way, we also got a little taste of how cross contract calls and promises work on NEAR using the NEAR Rust SDK. Finally, you got a chance to earn some NEAR while learning with us. I invite you to join the Figment and NEAR communities and embark on our common mission to take back the Internet together.
 
-### Next Steps
+## What's Next?s
 
 ![](../../../../.gitbook/assets/oysterpack-testing-code-meme.jpg)
 

@@ -602,7 +602,7 @@ function isContributor() public view returns (bool) {
 
 The `isContributor()` function returns true/false depending on whether the caller is a contributor or not.
 
-## Next Steps
+# What's Next?s
 
 Now that we have written the smart contract code, the next step is to build the React Native App!
 
@@ -1185,7 +1185,7 @@ const closeIcon = (props) => {
 };
 ```
 
-## Next Steps
+# What's Next?s
 
 All of our app pages are now complete!   
   

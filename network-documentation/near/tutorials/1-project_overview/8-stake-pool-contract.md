@@ -444,7 +444,7 @@ The next generation STAKE Pool contract is ready and waiting for validators and 
 
 I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
-## What's Next
+# What's Next?
 
 The focus will be providing the validators with more in-depth tutorials and workshops to help them get onboard.
 

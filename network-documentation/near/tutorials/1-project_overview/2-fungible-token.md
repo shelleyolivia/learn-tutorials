@@ -277,6 +277,6 @@ Returns amount that was refunded back to the sender.
 
 Money makes the world go round because it is the root source of all the functionality in the world. In reality, money is one of the crucial elements in human life. Getting money/tokens right on NEAR is crucial for adoption and success. NEP-141 is a step in the right direction, but the NEAR community has a lot more work ahead. I invite you to join the Figment and NEAR communities and embark on our common mission to take back the Internet together.
 
-# Next Steps
+# What's Next?
 
 Stay on the lookout for my next tutorial where I will show you how I implemented NEP-41 for the [STAKE token](https://github.com/oysterpack/oysterpack-near-stake-token) contract written in Rust.

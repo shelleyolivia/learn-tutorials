@@ -74,6 +74,6 @@ Once the code above save you can click on **Query Polygon** and let's the magic 
 
 -------------------------------------
 
-## Next Steps
+# What's Next?s
 
 Now that we have queried Polygon and retreived information from the blockchain, we will want to get **MATIC** tokens into our wallet so we can pay the fees to deploy a smart contract. In the next tutorial, we will cover how to fund an account with **MATIC** through the official faucet.

@@ -181,7 +181,7 @@ For this step to work, we will also need to make sure there is a valid secret re
 
 The ABI is considered an "[artifact](https://trufflesuite.github.io/artifact-updates/background.html#what-are-artifacts)" in relation to a compiled Solidity contract. Most commonly, developers will interact with an ABI in JSON format. Read more about [what this means](https://docs.soliditylang.org/en/v0.8.6/abi-spec.html#json).
 
-## Next Steps
+# What's Next?s
 
 Now that we have a deployed and functioning smart contract, let's interact with it!
 

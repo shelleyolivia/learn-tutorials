@@ -2,12 +2,12 @@
 
 Today we will build a decentralized chat application on Avalanche's Fuji test-network from scratch. The dApp will allow users to connect with other people and chat with them. We will develop our smart contract using Solidity which will be deployed on Avalanche's C-chain. We will have a basic, easy-to-use UI developed using ReactJS. So, let us begin!
 
-### Prerequisites
+## Prerequisites
 
 * Basic familiarity with Reactjs and Solidity
 * Should've completed [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) tutorial
 
-### Requirements
+## Requirements
 
 * [Node.js](https://nodejs.org/en/download/releases/) v10.18.0+
 * [Metamask extension](https://metamask.io/download.html) on your browser
@@ -940,7 +940,7 @@ Make sure your friend is also registered to the application before adding them a
 
 ![Chatting with a friend](https://i.imgur.com/LfkjLSK.gif)
 
-### Conclusion
+## Conclusion
 
 Congratulations! We have successfully deployed a decentralized chat application which can be deployed on Avalanche or other EVM-compatible blockchain. We also created a boilerplate React application to use as the frontend for our dApp.
 
@@ -962,16 +962,16 @@ Congratulations! We have successfully deployed a decentralized chat application 
 
 To resolve this error, doublecheck that you have updated the `CONTRACT_ADDRESS` variable in `src/index.js.`
 
-### What's Next
+## What's Next?
 
 This dApp has very limited functionality. We can improve it by adding functions to delete messages, block users, or create groups of friends.  
 We could also optimize the dApp interaction cost with functions to limit the maximum number of messages, or possibly using event log for short messages.
 
-### About the Author\(s\)
+# About the author\(s\)
 
 The tutorial was created by [Nimish Agrawal](https://github.com/realnimish) & [Sayan Kar](https://github.com/SayanKar). You can reach out to them on [Figment Forum](https://community.figment.io/u/nimishagrawal100.in/) or on LinkedIn [@Nimish Agrawal](https://www.linkedin.com/in/realnimish) and [@Sayan Kar](https://www.linkedin.com/in/sayan-kar-).
 
-### References
+# References
 
 * Smart contract deployment process - [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask)
 

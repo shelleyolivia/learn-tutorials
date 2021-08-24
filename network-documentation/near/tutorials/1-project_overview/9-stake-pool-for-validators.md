@@ -465,7 +465,7 @@ I will leave with one final thought ... I understand that DeFi is all the craze 
 
 That being said ... I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
-# What's Next
+# What's Next?
 
 Stay tuned for more tutorials on the OysterPack SMART component based framework to help contract developers build _**SMARTER**_, _**FASTER**_, and _**BETTER**_ on the [NEAR](https://near.org/) platform.
 

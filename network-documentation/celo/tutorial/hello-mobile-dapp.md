@@ -157,7 +157,7 @@ You can find more information about running and Android emulator [here.](https:/
 
 [Celo Savings Circle](https://github.com/celo-org/savings-circle-demo)
 
-## Conclusion
+# Conclusion
 
 You should now have the necessary skills to get started with developing mobile applications on Celo. In this tutorial we covered:
 

@@ -1,6 +1,6 @@
 # How to Build a Decentralized Autonomous Organization \(DAO\) on Celo
 
-## Introduction
+# Introduction
 
 In this tutorial, we will build a functioning DAO \(Distributed Autonomous Organization\) by first writing the Solidity smart contract code which will be deployed on the Celo network and then building a React Native App to interact with the smart contract.
 
@@ -16,7 +16,7 @@ Read more [here](https://ethereum.org/en/dao/).
 
 In this tutorial, you will learn how to build a functioning Charity DAO. The smart contract code is deployed on the Alfajores testnet of the Celo network. The contract allows its members to contribute to the DAO. Members can initiate charity proposals which Stakeholders will have to vote on within a specified period of time. After that time has elapsed, the DAO contract will disburse the pooled funds.
 
-## Prerequisites
+# Prerequisites
 
 These tutorials assume that you have basic knowledge of Solidity, JavaScript/TypeScript, and also how to start a React Native App using [expo](https://expo.io/). It is also assumed that you have read the expo documentation and have basic knowledge of the Celo Wallet.
 
@@ -26,7 +26,7 @@ These tutorials assume that you have basic knowledge of Solidity, JavaScript/Typ
 * The Celo dAppKit [documentation](https://docs.celo.org/developer-guide/dappkit/setup) is also going to be useful.
 * Learn about [Redux](https://redux.js.org/introduction/getting-started) as well.
 
-## Requirements
+# Requirements
 
 For this tutorial, following software needs to be installed:
 

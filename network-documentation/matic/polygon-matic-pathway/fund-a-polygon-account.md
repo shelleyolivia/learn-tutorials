@@ -103,7 +103,7 @@ What happened in the code above? Let's take a closer look!
 * We await `provider.getBalance()` because it returns a Promise. That Promise returns a BigNumber, which is a specific data type for handling numbers which fall [outside the range of safe values](https://docs.ethers.io/v5/api/utils/bignumber/#BigNumber--notes-safenumbers) in JavaScript. A BigNumber cannot be displayed in the same way as a normal number. We must therefore format the balance to transform it into a string for display, using `ethers.utils.formatEther()`.
 * Before we exit the function, set `fetching` to false, which effects the conditional rendering happening in the return function of `3_Balance.tsx`.
 
-## Next Steps
+# What's Next?s
 
 Now that we have a funded Polygon account, we can use our MATIC tokens to deploy a smart contract.  
 In the next tutorial, we will cover writing, testing and deploying the Solidity code using Truffle, a smart contract development suite.
