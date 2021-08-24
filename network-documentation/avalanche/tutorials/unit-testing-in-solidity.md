@@ -79,7 +79,7 @@ when the contract is instantiated  with (["US Election", "Presidential Election"
 
 We have five test cases in total, two to validate that our constructor\(\) and addCandidate\(\) function work as expected, the other three to validate the functionality of the vote\(\) function.
 
-## Writing the unit-tests in Solidity.
+# Writing the unit-tests in Solidity
 
 Running `truffle init` in the previous article created the basic directories necessary for smart contract development. One of these directories is the `test` directory. We'll need to navigate to this directory as it is the specialized directory for test files:
 
