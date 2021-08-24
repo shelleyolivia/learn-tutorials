@@ -17,7 +17,7 @@ npm install --save-dev Hardhat
 npm install --save-dev @nomiclabs/Hardhat-waffle ethereum-waffle chai @nomiclabs/Hardhat-ethers ethers web3 @celo/contractkit
 ```
 
-## Creating a new Hardhat project
+# Creating a new Hardhat project
 
 From within the project directory, run :
 
@@ -47,7 +47,7 @@ Welcome to Hardhat v2.1.2
 
 ERC1155 is a novel token standard that aims to take the best from previous standards to create a fungibility-agnostic and gas-efficient token contract. ERC1155 draws ideas from all of ERC20, ERC721, and ERC777. ERC1155s are commonly used in NFT collectible projects, although they are not typically viewed as 'fine art' it is not unreasonable to use this token standard for such purposes. We will examine the use case of a token meant specifically for use within our Tiny Village.
 
-## Install the OpenZeppelin contracts
+# Install the OpenZeppelin contracts
 
 This will install the OpenZeppelin contracts locally. The second command will create a new file called `TinyVillage.sol` in the `contracts` directory. The touch command is available on Linux and macOS. Windows users should use `type nul > contracts\TinyVillage.sol` instead, to create an empty file.
 
@@ -74,7 +74,7 @@ You'll need to add a license to your code `SPDX License Identifier: MIT`, the so
 }
 ```
 
-## Write the NFT part of the smart contract
+# Write the NFT part of the smart contract
 
 Inside the `contract TinyVillage is ERC1155` create the NFT's Identifiers with `uint256 public constant VILLAGE`. Create the list with our NFTs
 
@@ -176,7 +176,7 @@ To compile your smart contract just use the command: `npx Hardhat compile`.
 
 Verify the code was compiled properly in `artifacts\contracts\TinyVillage.sol\TinyVillage.json`, this JSON file has all the information necessary to deploy a smart contract.
 
-## Use Hardhat to test a smart contract
+# Use Hardhat to test a smart contract
 
 The best practice is test the smart contract on your machine before deploying. Create the test file in `test/tineyVillageTest.js`. The [Hardhat documentation](https://Hardhat.org/guides/truffle-testing.html) has more information about testing using other libraries.
 
@@ -235,7 +235,7 @@ Now we will run the tests using Hardhat, depending on your machine the test time
 ```
 See the complete code for [tineyVillageTest.js](https://github.com/lucasespinosa28/Celo-Tutorial/blob/main/demo/test/tineyVillageTest.js)
 
-## Create a Celo account with Hardhat
+# Create a Celo account with Hardhat
 
 To deploy your contract on Celo Testnet will need to create an account and save the privateKey to get an address for sent Celo test coin,In main folder create a file `celo_account.js`,We'll not use the default accounts, Because we'll need to save account to use later,
 
@@ -292,7 +292,7 @@ When run `npx hardhat celo-account`, The new account is created and the privateK
 
 If your code is already compiled and tested, It's time to deploy your smart contract. You will need to connect to the Celo blockchain. To do this you will need a server running the Celo network. To connect with Celo network and many other blockchain networks, one of the easiest ways is using Figment's DataHub service: Go to [datahub.figment.io](https://datahub.figment.io/) and chose Celo from the list of available protocols. ![Captura de Tela \(43\)](https://user-images.githubusercontent.com/52639395/114647928-46c08300-9cb4-11eb-90a4-5a8600c7696d.png).
 
-## Create the deploy task
+# Create the deploy task
 
 Create `celo_deploy.js` and add the code below. `@celo/contractkit` is a library to help developers and validators to interact with the celo blockchain. `TinyVillage()` is the function used to deploy TinyVillage contract, the `/artifacts/contracts/TinyVillage.sol/TinyVillage.json` is the file that contains all the information about our compiled contract.
 
