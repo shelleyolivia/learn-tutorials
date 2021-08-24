@@ -8,11 +8,9 @@ In this tutorial we'll write a smart contract using the Solidity language and a 
 * We must have NodeJS &gt;= v12.0 installed, preferably the latest version or an LTS release.
 * Knowledge of JavaScript, Solidity and React is beneficial.
 
-# Let's setup & start
+# Installing Hardhat
 
 Hardhat is a development environment that compiles, deploys, tests, and helps you to debug your Ethereum smart contracts. Hardhat can also be used to deploy to the Celo network because Celo also runs the EVM \(Ethereum Virtual Machine\). This means smart contracts which work on Ethereum will also work on Celo. For the purposes of this tutorial, we will assume that the reader understands how to initialize a new Node project with a package manager \(`npm` or `yarn`\). We will go over how to install and configure Hardhat now.
-
-## Installing Hardhat
 
 ```bash
 npm install --save-dev Hardhat
@@ -45,7 +43,7 @@ Welcome to Hardhat v2.1.2
   Quit
 ```
 
-## The OpenZeppelin ERC1155 library
+# The OpenZeppelin ERC1155 library
 
 ERC1155 is a novel token standard that aims to take the best from previous standards to create a fungibility-agnostic and gas-efficient token contract. ERC1155 draws ideas from all of ERC20, ERC721, and ERC777. ERC1155s are commonly used in NFT collectible projects, although they are not typically viewed as 'fine art' it is not unreasonable to use this token standard for such purposes. We will examine the use case of a token meant specifically for use within our Tiny Village.
 
@@ -58,7 +56,7 @@ npm install @openzeppelin/contracts
 touch contracts/TinyVillage.sol
 ```
 
-## Write your smart contract
+# Write your smart contract
 
 You'll need to add a license to your code `SPDX License Identifier: MIT`, the source code of the smart contract will be visible on the blockchain, it's a best practice to have a license on your code to avoid the problem if third parties use your code. with `pragma solidity ^0.8.0;` you'll set a compilation version, the compile version of your code and libraries must be compatible, the `import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol` will get the ERC1155.sol file in `node_modules` and other solidity files that ERC1155 will need to compile. Create the `contract TinyVillage is ERC1155` to give the name of the contract and tell to use the ERC1155 library using \`\`\`ìs\`\`\`\`
 
@@ -114,7 +112,7 @@ For token ID 1 and uri `https://gateway.pinata.cloud/ipfs/QmTN32qBKYqnyvatqfnU8r
 }
 ```
 
-## Write the function to mint the NFTs
+# Write the function to mint the NFTs
 
 Our function has 2 parts,the _**require**_ that get balance and if the user of contract does not have yet the Nft the contract vai let mint a NFT with the _**\_mint**_ function,What the mint does creates amount tokens of token type id, and assigns them to account.
 
@@ -157,7 +155,7 @@ function mintCastle() public{
 ```
 See the complete [TinyVillage.sol](https://github.com/lucasespinosa28/Celo-Tutorial/blob/main/demo/contracts/TinyVillage.sol).
 
-## Use Hardhat to compile
+# Use Hardhat to compile
 
 In order to transform our Solidity code into a working smart contract, we must compile it. After compilation, we will get bytecode and other information about the contract in `artifacts\contracts\TinyVillage.sol\TinyVillage.json`. An artifact is part of the result of compilation.
 
@@ -174,11 +172,11 @@ To compile your smart contract just use the command: `npx Hardhat compile`.
 
 🔺If you have not deleted the `contracts/Greeter.sol` file it will give an error because that contract doesn't specify the same compiler version.
 
-## Test and Deploy
+# Test and Deploy
 
 Verify the code was compiled properly in `artifacts\contracts\TinyVillage.sol\TinyVillage.json`, this JSON file has all the information necessary to deploy a smart contract.
 
-### Use Hardhat to test a smart contract
+## Use Hardhat to test a smart contract
 
 The best practice is test the smart contract on your machine before deploying. Create the test file in `test/tineyVillageTest.js`. The [Hardhat documentation](https://Hardhat.org/guides/truffle-testing.html) has more information about testing using other libraries.
 
@@ -290,7 +288,7 @@ task("celo-account", "Prints account address or create a new", async () => {
 
 When run `npx hardhat celo-account`, The new account is created and the privateKey will saved into .secret file. It is important save the address and go to the [Celo developer faucet](https://celo.org/developers/faucets) to get the coins needed to pay the fee to deploy.
 
-## Deploy
+# Deploy
 
 If your code is already compiled and tested, It's time to deploy your smart contract. You will need to connect to the Celo blockchain. To do this you will need a server running the Celo network. To connect with Celo network and many other blockchain networks, one of the easiest ways is using Figment's DataHub service: Go to [datahub.figment.io](https://datahub.figment.io/) and chose Celo from the list of available protocols. ![Captura de Tela \(43\)](https://user-images.githubusercontent.com/52639395/114647928-46c08300-9cb4-11eb-90a4-5a8600c7696d.png).
 
@@ -356,11 +354,11 @@ npx hardhat celo-deploy
 
 Remember to save the contract address: In this example it is 0x47A424A0975924C3d177470C519C8DBA37e16Ec9, but yours will be different.
 
-## Interact with the deployed contract
+# Interact with the deployed contract
 
 Marketplace sites like [opensea.io](https://opensea.io/) do not display NFTs on Celo yet. To be able to view NFTs on Celo, we can build a React app. A sample project is available on [github](https://github.com/lucasespinosa28/Celo-Tutorial/tree/main/demo/start). The complete app is available on [github](https://github.com/lucasespinosa28/Celo-Tutorial/tree/main/demo/final)
 
-## Show the images
+# Show the images
 
 Open the file `src/Images.js` and write the code in the place indicated by comment, the images are already saved in the app.
 
@@ -380,7 +378,7 @@ async function getBalance() {
 
 This code work accessing the smart contract using `kit.web3.eth.Contract...`,The code has 2 arrays one with user address and the other with list NFTs id , when call the function _**balance Of Batch**_ in contract will return an array with each NFT that the user has,Depends on the balance the code will show a specific image for each array combination,example: if balanceOfBatch returns _**\[1,0,0,0,0\]**_ the code will show this image ![village](https://user-images.githubusercontent.com/52639395/115546874-ee711e80-a27b-11eb-90e5-2febf733aabc.jpg)
 
-## Create a button to mint the NFT
+# Create a button to mint the NFT
 
 Open the file `src/MintNFT.js`, this code works similarly to getting the balance like the _**Images.js**_ component.
 
