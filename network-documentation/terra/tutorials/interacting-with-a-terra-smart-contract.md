@@ -201,7 +201,7 @@ terracli query wasm contract-store terra18vd8fpwxzck93qlwghaj6arh4p7c5n896xzem5 
 
 Excellent! Congratulations, you've created your first smart contract, and now know how to get developing with the Terra dApp Platform.
 
-# What's Next??
+# Next Steps
 
 We've only walked through a simple example of a smart contract, that modifies a simple balance within its internal state. Although this is enough to make a simple dApp, we can power more interesting applications by **emitting messages**, which will enable us to interact with other contracts as well as the rest of the blockchain's module.
 

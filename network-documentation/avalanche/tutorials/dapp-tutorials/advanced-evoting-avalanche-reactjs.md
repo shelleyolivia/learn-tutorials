@@ -1133,7 +1133,7 @@ You have successfully built a full-fledged e-voting dApp with advanced features 
 
 ![](https://imgur.com/bjdWr35.gif)
 
-# What's Next??
+# Next Steps
 
 Now that we have built and deployed a voting dApp, we can make new elections with a title and description, and vote on them separately. Some recommended features to add would be the ability to add start and end dates for an election, declaring the winner after the election has ended, or UI enhancements like modal windows and styled buttons.
 

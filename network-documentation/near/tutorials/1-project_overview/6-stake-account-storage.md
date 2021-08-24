@@ -199,7 +199,7 @@ The NEAR Rust ecosystem support for writing smart contracts is very young. For n
 
 This is where I make my call for action to the community. I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
-# What's Next?
+# Next Steps
 
 Here's my plan going forward. As new NEAR standards are released, I plan to document them and provide reference implementations as tutorials. The rest of the time will be spend focused on the core mission, which is to build the [STAKE Token](https://github.com/oysterpack/oysterpack-near-stake-token) with the community and bring it to market. In the next tutorial, I will share with you my vision for the [STAKE Token](https://github.com/oysterpack/oysterpack-near-stake-token) and how it can serve as a cornerstone to help bootstrap the NEAR DeFi ecosystem.
 

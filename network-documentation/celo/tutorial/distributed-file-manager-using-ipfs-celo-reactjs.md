@@ -1143,7 +1143,7 @@ If you find any difficulty in setting up the project, then feel free to clone th
 
 Congratulations! You have successfully built a Distributed File Manager by deploying the smart contract on **Celo** Alfajores test network using **Trufflesuite** and connecting your client-side made with **ReactJS**. The most interesting part is that we have used the **IPFS** protocol for uploading our files on the distributed network.
 
-# What's Next??
+# Next Steps
 
 We have built a Distributed File Manager with basic upload and view features. I want to encourage you to make a more scalable and sophisticated application by adding few more features like encrypting files before uploading by using the receiver's public key or their account address. Or if you want to keep the file to yourself, you might encrypt the file using your account address. Learn more on how to encrypt files before uploading them to IPFS [here](https://mycoralhealth.medium.com/learn-to-securely-share-files-on-the-blockchain-with-ipfs-219ee47df54c).
 

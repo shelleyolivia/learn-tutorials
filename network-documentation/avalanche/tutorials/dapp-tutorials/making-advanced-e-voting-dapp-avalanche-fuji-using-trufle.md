@@ -933,7 +933,7 @@ async function submitNewElection() {
 
 Congratulations! You have successfully built a full fledged dApp and deployed the smart contract on Fuji test network using Trufflesuite. Along with that, we have also built the client side application for interacting with the network.
 
-# What's Next??
+# Next Steps
 
 The dApp which we built just now is an e-Voting application, as now we can make new elections, give them titles and descriptions & vote on them separately. For further learning, we recommend that you experiment and add a few more interesting features to it, like having start and end dates for elections, declaring winners after the election has ended or any other functionality you can think of!
 

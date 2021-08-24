@@ -264,7 +264,7 @@ In this tutorial, we learned how to alter a smart contract originally written fo
 
 As long as we understand that both blockchains are EVM compatible and run the same bytecode, we can customize any existing Ethereum contract for the Celo network.
 
-# What's Next?
+# Next Steps
 
 I hope this tutorial helps to see the potential in looking at existing open source code and understanding how simple modifications can lead to efficient coding solutions. Please consider the following reading list to continue on your journey.
 

@@ -369,7 +369,7 @@ Once submitted, you should have a live market that can trade the tokens.
 
 Woohoo! If you made it through all the steps, you have successfully created your own token on the Solana blockchain. If you completed the bonus, you now have a tradable token 👍
 
-# What's Next?
+# Next Steps
 
 In this tutorial, we built our own token on the Solana blockchain using Solana's command-line interface or "CLI". Feel free to continue experimenting by attempting to mint more of the token, sending the token around to other wallets, creating a market for it, making a liquidity pool on [Raydium](https://raydium.io/liquidity/), etc. Check back in the future for a tutorial on how to make a [non-fungible token](https://www.blockchain-council.org/blockchain/a-quick-guide-to-fungible-vs-non-fungible-tokens/) on Solana as well.
 

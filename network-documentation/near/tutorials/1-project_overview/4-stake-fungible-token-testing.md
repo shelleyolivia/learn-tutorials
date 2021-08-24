@@ -692,7 +692,7 @@ That's all of the actual unit test code we'll look at in this tutorial. The rest
 
 The Internet is the greatest revolution in humanity's history. It provides the people of the world with an opportunity to connect and unite to build a global community that has no borders. I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
-# What's Next?
+# Next Steps
 
 Circling back to the [Fungible Token Core Standard NEP-141](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/2-fungible-token), I mentioned a need for account registration as part of the full FT solution. The NEAR community discussion on the account registration topic has been awesome. It has led to a different path that focuses on the storage staking problem specifically - we are now calling it the [Account Storage Standard](https://github.com/near/NEPs/discussions/145#discussioncomment-342580). I expect the standard to soon be finalized. Once the community has reached consensus and finalized the new standard, I'll follow up and write it all up here for you.
 

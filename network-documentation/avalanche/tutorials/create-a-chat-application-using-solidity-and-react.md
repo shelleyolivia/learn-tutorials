@@ -2,7 +2,8 @@
 
 Today we will build a decentralized chat application on Avalanche's Fuji test-network from scratch. The dApp will allow users to connect with other people and chat with them. We will develop our smart contract using Solidity which will be deployed on Avalanche's C-chain. We will have a basic, easy-to-use UI developed using ReactJS. So, let us begin!
 
-## Prerequisites
+# Prerequisites
+
 
 * Basic familiarity with Reactjs and Solidity
 * Should've completed [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) tutorial

@@ -531,7 +531,7 @@ If all went well, you should see a new `ClaimCreated` event appear in the Events
 
 Remember, only the owner can revoke the claim! If you select another user account at the top, and you will see that the revoke option is disabled!
 
-# What's Next?
+# Next Steps
 
 This is the end of our journey into creating a Proof of Existence blockchain.
 
