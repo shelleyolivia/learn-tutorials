@@ -20,4 +20,4 @@ fn main() {
     // Print debug struct
     println!("{:?}", peter);
 }
-'''
+```
