@@ -103,12 +103,12 @@ rand_seeder = "=0.2.1"
 
 [profile.release]
 codegen-units = 1
-# Tell `rustc` to optimize for small code size.
+#Tell `rustc` to optimize for small code size.
 opt-level = "z"
 lto = true
 debug = false
 panic = "abort"
-# Opt into extra safety checks on arithmetic operations https://stackoverflow.com/a/64136471/249801
+#Opt into extra safety checks on arithmetic operations https://stackoverflow.com/a/64136471/249801
 overflow-checks = true
 ```
 
