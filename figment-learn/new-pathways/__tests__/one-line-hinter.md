@@ -1,4 +1,6 @@
-# Info hinter
+# The test
+
+## Info hinter
 
 testing of hinter with `info` params and one line content
 
@@ -13,7 +15,7 @@ This is an info
 {% endhint %}
 ```
 
-# Warning hinter
+## Warning hinter
 
 testing of hinter with `warning` params and one line content
 
@@ -28,7 +30,7 @@ This is an warning
 {% endhint %}
 ```
 
-# Danger hinter
+## Danger hinter
 
 testing of hinter with `danger` params and one line content
 
@@ -42,3 +44,8 @@ This is an danger
 This is an danger
 {% endhint %}
 ```
+
+
+# The raw file
+
+[You can find the raw file he](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/__tests__/one-line-hinter.md)
