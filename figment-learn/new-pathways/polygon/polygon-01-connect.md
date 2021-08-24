@@ -108,7 +108,7 @@ This is an important topic to be comfortable with as both a user and blockchain 
 
 -------------------------------------
 
-# What's Next?s
+# Next Steps
 
 Now that we have a connected to Polygon, we can use ethers to query information from the blockchain.  
 In the next tutorial, we will cover how to query Polygon and display the information.

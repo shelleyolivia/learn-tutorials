@@ -623,7 +623,7 @@ You should see a successful contract deployment at that address in the block exp
 
 ![](https://i.imgur.com/IAENWP1.png)
 
-# What's Next?s 
+# Next Steps 
 
 Now that we've deployed our Celo crowdfunding smart contract on Celo, we can move on to interacting with it. In the next tutorial, we'll interact with our smart contract by creating new crowdfunding projects and donating to them.
 

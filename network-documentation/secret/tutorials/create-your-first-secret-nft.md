@@ -445,7 +445,7 @@ Congratulations! We have made it to the end of the first installment of this Sec
 
 This is a solid foundation to play with and build upon!
 
-# What's Next?s
+# Next Steps
 
 Of course, we are not yet at the end of our journey. In the coming tutorial, we will have a look together into interesting and more complex examples of NFT properties. You can look forward to:
 

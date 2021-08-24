@@ -77,6 +77,6 @@ We use the testnet for development before moving into production on the main net
 
 -------------------------------------
 
-# What's Next?s
+# Next Steps
 
 Now that we have our environment set up we can connect to the network.

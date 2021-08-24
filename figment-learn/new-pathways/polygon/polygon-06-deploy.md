@@ -166,6 +166,6 @@ The ABI is considered an "[artifact](https://trufflesuite.github.io/artifact-upd
 
 -------------------------------------
 
-# What's Next?s
+# Next Steps
 
 Now that we have a deployed and functioning smart contract, let's interact with it!

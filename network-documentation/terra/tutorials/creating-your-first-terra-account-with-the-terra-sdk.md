@@ -94,7 +94,7 @@ You now have an account on the Terra Tequila testnet and your secret information
 
 The complete code for this tutorial can be found [**here**](https://github.com/figment-networks/tutorials/blob/main/terra/2_creating_account/create_account.js). 
 
-# What's Next?s
+# Next Steps
 
 In the next tutorial, we will be looking at different queries we can run against a Terra node to get the information such as:
 

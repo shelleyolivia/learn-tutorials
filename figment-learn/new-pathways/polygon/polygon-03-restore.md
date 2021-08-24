@@ -85,6 +85,6 @@ When you have completed the code:
 
 -------------------------------------
 
-# What's Next?s
+# Next Steps
 
 The ability to restore an account whitout the need to depend on tier-party is a great feature from web3. Now, we're ready to fund our account with some **MATIC** the native token of the Polygon blockchain.

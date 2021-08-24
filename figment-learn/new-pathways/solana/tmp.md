@@ -18,7 +18,7 @@ In these tutorials we will cover connecting to and interacting with Polygon usin
 
 By the end of the Pathway tutorials, you will be confidently interacting with Polygon, sending transactions which cost fractions of a cent and deploying smart contracts.
 
-# What's Next?s
+# Next Steps
 
 Now that we gave you a quick overview of Polygon ecosystem, we still need to set up our environment.
 

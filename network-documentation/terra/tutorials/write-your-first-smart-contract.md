@@ -187,7 +187,7 @@ The complete code for this tutorial can be found [**here**](https://github.com/f
 
 Great job! Now you not only know how to read from the Terra blockchain, but also how to interact with it by submitting transactions with [**DataHub**](https://figment.io/datahub-waitlist/). 
 
-# What's Next?s
+# Next Steps
 
 Terra.js has a lot more to offer. We just scratched the surface of what this package can do. In order to learn more about it, please visit: [**Terra.js**](https://terra-project.github.io/terra.js/)
 

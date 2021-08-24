@@ -214,7 +214,7 @@ You can select Query interactions to read [the values present in your runtime's 
 
 Like many blockchains, Substrate chains use [events](https://substrate.dev/docs/en/knowledgebase/runtime/events) to report the results of asynchronous operations. If you have already used the Front-End Template to perform a balance transfer as described above, you should see an event for the transfer in the Event component next to the Pallet Interactor.
 
-## What's Next?s
+## Next Steps
 
 🎉 Congratulations!!! 🎉
 

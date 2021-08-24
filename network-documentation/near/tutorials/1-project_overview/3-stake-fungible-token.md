@@ -376,7 +376,7 @@ near view $CONTRACT ft_balance_of --node_url $NEAR_NODE_URL --args "{\"account_i
 
 That was longer than expected, but time flies by when you are having fun. We learned about staking on NEAR and how you can earn staking rewards as a delegator. I went over, at a high level, how the STAKE contract unlocks value in your staked NEAR by providing you with fungible tokens for your staked NEAR. We then implemented the Fungible Token Core Standard \(NEP-141\) for the STAKE contract. We did some design and coding. Along the way, we also got a little taste of how cross contract calls and promises work on NEAR using the NEAR Rust SDK. Finally, you got a chance to earn some NEAR while learning with us. I invite you to join the Figment and NEAR communities and embark on our common mission to take back the Internet together.
 
-## What's Next?s
+## Next Steps
 
 ![](../../../../.gitbook/assets/oysterpack-testing-code-meme.jpg)
 
