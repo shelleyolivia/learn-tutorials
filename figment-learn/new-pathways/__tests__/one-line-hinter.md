@@ -48,4 +48,4 @@ This is an danger
 
 # The raw file
 
-[You can find the raw file he](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/__tests__/one-line-hinter.md)
+[](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/__tests__/one-line-hinter.md)
