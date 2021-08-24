@@ -1,6 +1,4 @@
-# 
-
-## Ethers.js
+# Ethers.js
 
 To manage our connection with Polygon and interact with smart contracts, we can use a popular and [well-tested](https://docs.ethers.io/v5/testing/) JavaScript library called [**ethers.js**](https://docs.ethers.io/v5/api/). We can connect to and perform operations with Polygon using ethers' API with only a few lines of code. 
 
@@ -14,7 +12,7 @@ _It is important to note that throughout the Pathway, we will refer to the_ ethe
 
 -------------------------------------
 
-## The challenge
+# The challenge
 
 {% hint style="warning" %}
 **Imagine this scenario:** You're a fresh Web3 developer who just landed a sweet role at a promising new startup, eager to show off our skills. You've been asked to show users of our dApp which network they are connected to (to avoid any confusion) and store the account currently selected address in Metamask (so that we can reference it later). In **`components/protocols/polygon/steps/Connect.tsx`**, implement the`checkConnection`function.
@@ -54,7 +52,7 @@ const checkConnection = async () => {
 
 ----------------------------------
 
-## The solution
+# The solution
 
 ```typescript
 //...
@@ -83,7 +81,7 @@ const checkConnection = async () => {
 
 -------------------------------------
 
-## Make sure it works
+# Make sure it works
 
 Once the code above save you can click on **Check Metamask Connection** and let's the magic happen.
 
@@ -91,7 +89,7 @@ Once the code above save you can click on **Check Metamask Connection** and let'
 
 -------------------------------------
 
-## Addresses, Wallets, and Mnemonics
+# Addresses, Wallets, and Mnemonics
 
 Every account on Polygon or Ethereum has a private key, a public key, and a mnemonic associated with it (referred to as a "[Secret Recovery Phrase](https://community.metamask.io/t/what-is-a-secret-recovery-phrase-and-how-to-keep-your-crypto-wallet-secure/3440)" by Metamask as of Q2 2021 - you will likely encounter a lot of documentation which still refers to "mnemonic seed phrase"). 
 

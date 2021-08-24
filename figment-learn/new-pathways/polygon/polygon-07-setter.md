@@ -1,5 +1,3 @@
-# 
-
 At this point we have deployed a smart contract on the Polygon testnet and we have a client side application that's ready to interact with it. We just need to wire up that last part.
 
 We built a simple page on the last step to help you interact with the smart contract. Since the contract has only two methods (`set` and `get`) that's all the UI will do: set a number through the smart contract.
@@ -8,7 +6,7 @@ As simple as it sounds, what's happening in the background is actually very powe
 
 -------------------------------------
 
-## The Challenge
+# The Challenge
 
 {% hint style="warning" %}
 **On the file `components/protocols/polygon/SeStorage.tsx` Implement the `setValue`**.    
@@ -56,7 +54,7 @@ Need some help? Check out these two tips/links
 
 -------------------------------------
 
-## The solution
+# The solution
 
 ```typescript
 	const setValue = async () => {
@@ -95,7 +93,7 @@ What's happening in the code above?
 
 -----------------------------
 
-## Make sure it works
+# Make sure it works
 
 Once the code above save you can click and this is what the UI should look like!
 

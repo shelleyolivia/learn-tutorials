@@ -1,10 +1,8 @@
-# 
-
 At this point we have deployed a smart contract on the Polygon testnet we have set the value of its storage and we have a client side application that's ready to fetch some date from it. We just need to wire up that last part.
 
 -------------------------------------
 
-## The Challenge
+# The Challenge
 
 {% hint style="warning" %}
 **On the file `components/protocols/polygon/GeStorage.tsx` Implement the `getValue`**.    
@@ -42,7 +40,7 @@ Need some help? Check out these two tips/links
 
 -------------------------------------
 
-## The solution
+# The solution
 
 ```typescript
     const getValue = async () => {
@@ -74,7 +72,7 @@ What's happening in the code above?
 
 -----------------------------
 
-## Make sure it works
+# Make sure it works
 
 Once the code above save you can click and this is what the UI should look like!
 

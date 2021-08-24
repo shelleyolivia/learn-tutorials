@@ -1,5 +1,3 @@
-# 
-
 A **program** is to Solana what a **smart contract** is to other protocols. Once a program has been deployed, any app can interact with it by sending a transaction to a Solana cluster that will pass it to the program.
 
 {% hint style="info" %}
@@ -8,9 +6,9 @@ A **program** is to Solana what a **smart contract** is to other protocols. Once
 
 -----------------------------------------
 
-## Set up the Solana CLI
+# Set up the Solana CLI
 
-### Install Rust and Solana CLI
+## Install Rust and Solana CLI
 
 So far we've been using Solana's JS API to interact with the blockchain. In this chapter we're going to deploy a Solana program using another Solana developer tool: their CLI. We'll install it and use it through our Terminal.
 
@@ -30,7 +28,7 @@ sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
 
 -----------------------------------------
 
-### Set up Solana CLI
+## Set up Solana CLI
 
 Next, we're going to configure the Solana cluster, create an account, request airdrop and check that everything is alright.
 
@@ -63,14 +61,14 @@ solana account $(solana-keygen pubkey solana-wallet/keypair.json)
 ![](../../../.gitbook/assets/solana-deploy-01-v3.gif)
 
 -----------------------------------------
-## Deploy a Solana program
+# Deploy a Solana program
 
 {% hint style="info" %}
 The program we're going to deploy is an easy but pretty complete program. This program keep track  the number of times account sent greeting to it.
 {% endhint %}
 
 
-### Building the program
+## Building the program
 
 The first thing we're going to do is compile the Rust program to prepare it for the CLI. To do this we're going to use a custom script that's defined in `package.json`. Let's run the script and build the program by running the following command in the terminal (from the project root directory):
 
@@ -96,7 +94,7 @@ The `.so` extension does not stand for Solana! It stands for "shared object". Yo
 
 -----------------------------------------
 
-### Deploying the program
+## Deploying the program
 
 Next we're going to deploy the program to the devnet cluster. The CLI provides a very simple interface for this :
 
@@ -122,7 +120,7 @@ Program Id: 7KwpCaaYXRsjfCTvf85eCVuZDW894zZNN38UMxMpQoaQ
 
 -----------------------------------------
 
-## Challenge
+# Challenge
 
 {% hint style="warning" %}
 Before we move to the next step we need to check if our program have been correctly deploy! For this, we'll need the `programId` of the program previously generated. Copy paste it in the text input and try to figure out how to complete the code for `pages/api/solana/checkProgram.ts` to check if a program have correctly been deployed.
@@ -164,7 +162,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## The solution
+# The solution
 
 ```tsx
 //...
@@ -196,7 +194,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## Make sure it works
+# Make sure it works
 
 Once you have the code above saved:
 * Copy and paste the generated address in the text input.   
@@ -208,6 +206,6 @@ For the rest of the challenge we'll keep this programId into the storage of our 
 
 ----------------------------------
 
-## Next
+# Next
 
 So at this point, we've deployed our dummy smart contract to Solana's devnet cluster. Now it's time to create an account owned by our program. 

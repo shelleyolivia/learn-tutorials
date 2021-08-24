@@ -1,10 +1,8 @@
-# 
-
 In the following tutorials, we're going to interact with the Solana blockchain (and in particular its Devnet network) using the `@solana/web3.js` library. It's a convenient way to interface with the RPC API when building a Javascript application (under the hood it implements Solana's RPC methods and exposes them as Javascript objects). We will explore it together as we add features to our app.
 
 ----------------------------------
 
-## The challenge
+# The challenge
 
 {% hint style="warning" %}
 In `pages/api/solana/connect.ts`, implement `connect` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
@@ -35,7 +33,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## The solution
+# The solution
 
 ```typescript
 //...
@@ -54,7 +52,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * If the promise is fulfilled, we get a `version` object back, that we can store in our functional component's local state, using the `setVersion` exposed by the React hook `useState`.
 
 -----------------------------
-## Make sure it works
+
+# Make sure it works
 
 Once the code above save you can refresh the page to see the update
 
@@ -62,6 +61,6 @@ Once the code above save you can refresh the page to see the update
 
 -----------------------------
 
-## Next
+# Next
 
 We're going to use this `connection` instance every time we need to connect to Solana. We're going to want to move some tokens around but first we need an account to hold tokens. That's what we'll do next!

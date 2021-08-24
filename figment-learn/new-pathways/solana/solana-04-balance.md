@@ -1,10 +1,8 @@
-# 
-
 We must check the account balance to make sure we have sufficient **SOL** to perform a transfer. The `getBalance()` function takes a `publicKey` as input and will return the balance associated with that `publicKey`, if there is any.
 
 ----------------------------------
 
-## The challenge
+# The challenge
 
 {% hint style="warning" %}
 In `pages/api/solana/balance.ts`, implement `balance`.
@@ -35,7 +33,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## The solution
+# The solution
 
 ```typescript
 //...
@@ -56,7 +54,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## Make sure it works
+# Make sure it works
 
 Enter the address just funded:
 * Click on **Check Balance**
@@ -66,6 +64,6 @@ Enter the address just funded:
 
 ----------------------------------
 
-## Next
+# Next
 
 Now that we have an account and that this account has been funded with **SOL** tokens, we are ready to make a transfer!

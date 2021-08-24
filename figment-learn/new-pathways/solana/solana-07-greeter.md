@@ -1,5 +1,3 @@
-# 
-
 In Solana's world program are stateless, which mean they doesn't store the value they act on. Then how our program can count the number of times its have been greeted ? 
 
 We have to rely on another account to store data. Which why, we're going to create a new account, the **greeter account** owned by our program in order to store the `count` info.
@@ -10,7 +8,7 @@ Solana program are stateless to store value we use account
 
 ----------------------------------
 
-## The challenge
+# The challenge
 
 {% hint style="warning" %}
 In `pages/api/solana/greeter.ts`, implement `greteer`. We are going to first derive the **greeter** address from some values. Next, we create a transaction which instruct the blockchain to create the **greeter** account. 
@@ -49,7 +47,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## The solution
+# The solution
 
 ```typescript
 //...
@@ -95,7 +93,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## Make sure it works
+# Make sure it works
 
 Once you have the code above saved:
 * Click on **Create Greeter** 
@@ -105,7 +103,7 @@ Once you have the code above saved:
 
 ----------------------------------
 
-## Next
+# Next
 
 Now that we have an account owned by the program and dedicated to store the program data. We are ready to go forward and act on theses data.
 The first natural action is to read the data. Ready ?

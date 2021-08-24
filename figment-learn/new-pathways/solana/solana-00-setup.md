@@ -1,5 +1,3 @@
-# 
-
 The following software is required to set up and complete the Solana Pathway
 
 * [Node.js v14 or higher installed](https://nodejs.org/)
@@ -16,7 +14,7 @@ yarn
 
 ---------------------------
 
-## Set your key
+# Set your key
 
 Create an `.env.local` file at the root of the directory. Copy and paste the contents of the existing `.env.example` into the new file and save it to disk (alternatively, you can rename `.env.example` ).
 
@@ -30,7 +28,7 @@ The value for `DATAHUB_SOLANA_API_KEY` can be found on the [DataHub Services Das
 
 ---------------------------
 
-## Start the browser
+# Start the browser
 
 With the API key in place, save the `.env.local` file and start the React interface with :
 
@@ -48,6 +46,6 @@ You can change the default port if needed `yarn dev --port 1234`
 
 ---------------------------
 
-## Next
+# Next
 
 You can now move ahead to the next step by clicking on the "Next" button below on the right.

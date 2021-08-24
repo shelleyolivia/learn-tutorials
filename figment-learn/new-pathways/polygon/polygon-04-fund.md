@@ -1,6 +1,4 @@
-# 
-
-## Getting MATIC
+# Getting MATIC
 
 Next we will acquire some free **MATIC** on the testnet so we can deploy a smart contract and interact with it! Before dealing with actual value on the Polygon mainnet, it is wise to practice using the Polygon testnet (called Mumbai).
 
@@ -18,7 +16,7 @@ Once this transaction is confirmed, you will have 1 **MATIC** on the Mumbai test
 
 -------------------------------------
 
-## The challenge
+# The challenge
 
 {% hint style="warning" %}
 **Imagine this scenario:** You know you have a big balance. You need to show that balance so you can brag about it to all your awesome web3 developer friends! In `components/protocols/polygon/steps/Balance.tsx`, implement the`checkBlance`function :
@@ -52,7 +50,7 @@ const checkBalance = async () => {
 
 -------------------------------------
 
-## The solution
+# The solution
 
 ```typescript
   const checkBalance = async () => {
@@ -74,7 +72,7 @@ What happened in the code above? Let's take a closer look!
 
 -------------------------------------
 
-## Make sure it works
+# Make sure it works
 
 When you have completed the code, the 'Check Balance' button will function. Click it to view the balance of the connected account:
 

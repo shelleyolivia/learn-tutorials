@@ -1,12 +1,10 @@
-# 
-
 In order to transfer some value to another account, we need to create and send a signed transaction to the **cluster**. Once you understand how to do this, you will have a solid foundation on which to interact with other portions of the Solana API.
 
 When a transaction is submitted to the **cluster**, the Solana runtime will execute a program to process each of the instructions contained in the transaction, in order, and atomically. This means that if any of the instructions fail for any reason, the entire transaction will revert. 
 
 ----------------------------------
 
-## The challenge
+# The challenge
 
 {% hint style="warning" %}
 In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
@@ -47,7 +45,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## The solution
+# The solution
 
 ```typescript
 //..
@@ -88,7 +86,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## Make sure it works
+# Make sure it works
 
 Once you've filled in the form: 
 * Press "Submit"
@@ -100,6 +98,6 @@ Once you've filled in the form:
 
 ----------------------------------
 
-## Next
+# Next
 
 Next, we will look at how to deploy a program written in the Rust language to the Solana cluster.
