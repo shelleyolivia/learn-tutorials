@@ -6,11 +6,11 @@ In smart contract development, a comprehensive set of unit tests for each functi
 
 A thorough understanding of the smart contract being tested is very important to the effectiveness of the test. Steps must be taken to document what the smart contract does and how it does it. The next task is to map out each test to correspond with the contract’s functionality. In this tutorial, we will follow these outlined steps to write unit tests that cover the complete functionality of our contract.
 
-## **Prerequisites**
+# Prerequisites
 
 This tutorial builds on a previously written tutorial on avalanche, so before we proceed any further make sure to complete - [Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite](https://learn.figment.io/network-documentation/avalanche/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle).
 
-## Breaking It Down
+# Breaking It Down
 
 As pointed out above, a thorough understanding of the contract is required to write effective unit tests. Here, we'll break down our smart contract into separate units and map out each of our tests to correspond with the contract functions. If you followed the previous tutorial, you have a basic understanding of what the contract does and how. Let's go ahead and break down the contract to figure out what we need to test for.
 
@@ -245,7 +245,7 @@ To test the exception:
 * Encode the selector with `bytes memory data = abi.encodeWithSelector(selector, uint256(0))`
 * Then make an external call with the returned data from the second step with `(bool success, ) = address(election).call(data);`, lastly we validate that the transaction failed with `Assert.isFalse(success, "Should be false");`
 
-## **Conclusion**
+# **Conclusion**
 
 Congratulations! You've made it to the end of this short but informative tutorial on writing unit tests for smart contracts in Avalanche!
 
@@ -253,7 +253,7 @@ Congratulations! You've made it to the end of this short but informative tutoria
 
 Though this tutorial covers the basics involved in writing unit tests for smart contracts, nothing solidifies your knowledge of testing more than reading some existing code & coming up with test cases. It is also recommended to head over to the project repository on [Github](https://github.com/Segun-Ogundipe/advance-voting-test). The repo contains Javascript test files in case you're interested in writing test cases in Javascript.
 
-## About The **Author**
+# About the author
 
 This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/segun-ogundipe) and on [GitHub](https://github.com/segun-ogundipe)
 
