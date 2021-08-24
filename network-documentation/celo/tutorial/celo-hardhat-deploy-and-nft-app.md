@@ -3,6 +3,7 @@
 In this tutorial we'll write a smart contract using the Solidity language and a contract from the Openzeppelin library for ERC1155 tokens. Using nodejs along with [Hardhat]() we will compile the smart contract code and also test the contract before deploying it. After deploying the contract we will create a custom task within Hardhat to create a Celo account and deploy the contract to the Celo network using [DataHub](https://datahub.figment.io). Lastly, we are going to use a React application that will connect to the Celo wallet account and interact with the deployed smart contract.
 
 ![Captura de Tela \(39\)](https://user-images.githubusercontent.com/52639395/114646091-01e71d00-9cb1-11eb-8acc-214c255d2d4c.png)
+
 # Prerequisites
 
 * We must have NodeJS &gt;= v12.0 installed, preferably the latest version or an LTS release.
