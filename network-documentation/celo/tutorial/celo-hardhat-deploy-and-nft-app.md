@@ -438,6 +438,7 @@ npm start
 # Conclusion
 
 We learning how writer [ERC1155](https://docs.openzeppelin.com/contracts/3.x/erc1155) contracts, use [Hardhat](https://Hardhat.org/) to create custom tasks and [celo contractkit](https://github.com/celo-tools/use-contractkit)to intereact with Celo contracts.
+
 # About the author
 
 This tutorial was written by Lucas Espinosa, a C\#/Solidity developer.
