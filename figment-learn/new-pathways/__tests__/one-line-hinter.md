@@ -1,4 +1,4 @@
-# The test
+# The tests
 
 ## Info hinter
 
@@ -48,4 +48,6 @@ This is an danger
 
 # The raw file
 
-![](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/__tests__/one-line-hinter.md)
+{% hint style="info" %}
+[click here](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/__tests__/one-line-hinter.md)
+{% endhint %}
