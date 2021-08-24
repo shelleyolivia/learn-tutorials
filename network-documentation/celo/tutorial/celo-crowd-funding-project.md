@@ -18,7 +18,7 @@ Solidity and Celo make building the backend for this easy! Not to mention, 🌎 
 
 This three part tutorial series will take us through writing the smart contract, deploying it, and interacting with it using Javascript.
 
-# Prerequisites
+## Prerequisites
 
 Click the image below in order to watch the Youtube video for "Building a Crowdfunding Smart Contract in Celo".
 
@@ -59,7 +59,7 @@ Here's what a successful run of truffle init will look like:
 
 ![truffle init](https://i.imgur.com/JF6zdoT.png)
 
-# Writing the Contract
+## Writing the Contract
 
 First things first, open the newly created project in your favorite code editor and create a file called **CeloCrowdfund.sol** in your `contracts/` folder.
 
@@ -317,7 +317,7 @@ This function returns information about the project by returning the public vari
 
 That's it for the `Project` contract!
 
-# Back to the crowdfund contract
+## Back to the crowdfund contract
 
 ![Celo crowdfund contract back to the future image](https://i.imgur.com/UFqJB0z.png)
 
@@ -394,7 +394,7 @@ function returnProjects() external view returns(Project[] memory) {
 
 And that's it for our two contracts!
 
-# Conclusion
+## Conclusion
 
 Just like that, we've created two smart contracts which will allow for crowdfunding in Celo.
 
@@ -407,7 +407,7 @@ In the next section, we will discuss deploying the contracts we've written to th
 # 2. Deploying a Crowdfunding Smart Contract in Celo
 
 If you've done part 1 of this tutorial series, you have a crowdfunding contract written in Solidity. Now that we've got a crowdfunding contract, we'll need to deploy it to the Celo test network in order to interact with it. Let's do that now!
-# Prerequisites 
+## Prerequisites 
 
 This tutorial assumes that you have followed and completed part 1 \(Building a Crowdfunding Smart Contract in Celo\). If you have not, please go back and follow that tutorial first.
 
@@ -623,7 +623,7 @@ You should see a successful contract deployment at that address in the block exp
 
 ![](https://i.imgur.com/IAENWP1.png)
 
-# Next Steps 
+## Next Steps 
 
 Now that we've deployed our Celo crowdfunding smart contract on Celo, we can move on to interacting with it. In the next tutorial, we'll interact with our smart contract by creating new crowdfunding projects and donating to them.
 
@@ -662,7 +662,7 @@ Make sure your account isn't empty like this one!
 Welcome to the last tutorial in this three part series on creating a crowdfunding smart contract on Celo. In this last part, we're going to write Javascript code in order to interact with the smart contract we wrote and deployed in the previous two parts.
 
 Now that we have our smart contract on the Celo test network, it's time to use it!
-# Prerequisites
+## Prerequisites
 
 You will need the smart contracts we wrote in part 1, and the deployments you made in part 2. Therefore, for the code in this tutorial to work you will need to have completed the prior two tutorials.
 
@@ -944,7 +944,7 @@ Awesome! As we can see from the terminal output, our script creates a new projec
 
 It works!
 
-# Conclusion
+## Conclusion
 
 This three part series has shown you how to write a smart contract for Celo, deploy it, and then interact with the smart contract we created.
 
