@@ -27,6 +27,7 @@ Done! check your wallet, you'll see some Matic there.
 * `truffle.js` for Windows users
 
 The truffle-config file is an important file to understand. In this file, we must configure the path to the DTube Solidity file (smart contract), the contract ABI, and define the available **networks**.
+
 ```javascript
 const HDWalletProvider = require("@truffle/hdwallet-provider")
 require('dotenv').config(); // Load .env file
@@ -52,11 +53,15 @@ module.exports = {
   }
 }
 ```
+
 Ensure you create an `.env` file in the project root directory (`~/DTube/.env`) and paste into it the Secret Recovery Phrase (12 words) of your preferably newly generated and testnet-only MetaMask wallet with the variable name MNEMONIC. This will be loaded by truffle at runtime, and the environment variable can then be accessed with `process.env.MNEMONIC`.
+
 ```
 MNEMONIC= 12 secret words here..
 ```
+
 Now, let's add `matic` network in our truffle-config file which will contain our environment variable MNEMONIC and RPC URL.
+
 ```javascript
     matic: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, 
@@ -69,6 +74,7 @@ Now, let's add `matic` network in our truffle-config file which will contain our
       gasPrice: 10000000000,
     },
 ```
+
 You can set the gas price and gas limits for faster transactions as shown in the above code block.
 
 # Deploy Smart Contracts
@@ -79,6 +85,7 @@ If you're deploying it for the second time then deploy with this command just to
 * Command: `truffle migrate --network matic --reset`
 
 If everything worked fine, you'll see something like this:
+
 ```
 2_deploy_contracts.js
 =====================
@@ -113,12 +120,14 @@ Summary
 > Total deployments:   2
 > Final cost:          0 ETH
 ```
+
 *Code snippet from matic truffle docs.*
 
 # Deployment errors and solutions
 If you get any of these errors then follow these steps
 
 **Error**
+
 ```
 Error: PollingBlockTracker - encountered an error while attempting to update latest block:
 ```
@@ -127,6 +136,7 @@ Error: PollingBlockTracker - encountered an error while attempting to update lat
 Change the RPC endpoint URL in Metamask from 'https://rpc-mumbai.matic.today' to an [Infura RPC endpoint](https://infura.io/). This will require you to register for an Infura account and set up a Project, to get a Project ID. If you already have an Infura project ID, add it to the `.env` file => `PROJECT_ID=<your project ID>`
 
 `infura -> Create new project -> Settings -> Endpoints -> Polygon Mumbai`
+
 ```javascript
     matic: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, 
@@ -138,6 +148,7 @@ Change the RPC endpoint URL in Metamask from 'https://rpc-mumbai.matic.today' to
     },
   },
 ```
+
 Paste your PROJECT_ID there from .env file.
 * `truffle migrate --network matic --reset`
 
@@ -145,6 +156,7 @@ If the error still occurs, try another alternate RPC endpoint from [MaticVigil](
 
 **Fix_2**
 Change `https://rpc-mumbai.matic.today` by using [Matic custom RPC](https://rpc.maticvigil.com/).
+
 ```javascript
     matic: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, 
@@ -156,10 +168,12 @@ Change `https://rpc-mumbai.matic.today` by using [Matic custom RPC](https://rpc.
     },
   },
 ```
+
 Paste your PROJECT_ID there from .env file.
 * `truffle migrate --network matic --reset`
 
 **Error:**
+
 ```
 *** Deployment Failed ***
 
@@ -172,12 +186,15 @@ Paste your PROJECT_ID there from .env file.
 Truffle hdwallet-provider version 1.4.0 will fix this error.
 
 **Error:**
+
 ```
 Error:  *** Deployment Failed ***
 
 "Migrations" -- Transaction was not mined within 750 seconds, please make sure your transaction was properly sent. Be aware that it might still be mined!.
 ```
+
 **Fix:**
+
 ```javascript
     matic: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, 
@@ -190,6 +207,7 @@ Error:  *** Deployment Failed ***
     },
   },
 ```
+
 Just add `networkCheckTimeout: 100000`
 
 
