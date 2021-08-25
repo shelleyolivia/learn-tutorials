@@ -1958,6 +1958,6 @@ Our dApp currently has very minimalistic designs. We can use Consensys' Rimble U
 
 # About the author
 
-This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan), [Rakesh Singh](https://www.linkedin.com/in/iamrajranjan) and [Naman Gera](https://www.linkedin.com/in/namannimmo).
+This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan), [Rakesh Singh](https://github.com/iamrakeshsingh) and [Naman Gera](https://www.linkedin.com/in/namannimmo).
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
