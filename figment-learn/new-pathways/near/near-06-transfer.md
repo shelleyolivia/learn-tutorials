@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Like with most Web 3 protocols, transactions on Solana happen between **accounts**.  To create an account a client generates a **keypair**, which has a **public's key** (or **address**, used to identify and lookup an account) and a **secret's key** used to sign transactions.
 
 ----------------------------------
@@ -76,24 +75,3 @@ Once you have the code above saved, click on **Generate a Keypair** and you shou
 # Next
 
 Now that we have an account, we can fund it so we can start playing around with tokens!
-=======
-# Introduction
-
-Some stuff
-
-## Lesson
-
-Some stuff
-
-## Challenge
-
-Some stuff
-
-## Solution
-
-Some stuff
-
-## Next
-
-Some stuff
->>>>>>> e0bccae (setup pathways near-v2)
