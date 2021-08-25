@@ -28,6 +28,8 @@ If you have any difficulty following this tutorial or simply want to discuss Sol
 * [Rust](https://rustup.rs/) installed
 * [Solana Tool Suite](https://docs.solana.com/cli/install-solana-cli-tools) installed
 
+# Getting Started
+
 ## Create a SOL wallet
 
 First we are going to create a SOL wallet to handle our transactions, using the command line.
@@ -222,7 +224,7 @@ AQoKYV7tYpTrFZN6P5oUufbQKAUr9mNYGe1TTJC9wajM  1000000
 
 Check the wallet balance too if you'd like. It will show the difference after the transaction.
 
-### Transfer token to a browser wallet
+## Transfer token to a browser wallet
 
 _This step is optional_, but now we are going to send all of the token from our command-line-created wallet to our browser wallet. You must have some SOL in your browser wallet so it can automatically add the token.
 
@@ -253,7 +255,7 @@ Signature: 5a3qbvoJQnTAxGPHCugibZTbSu7xuTgkxvF4EJupRjRXGgZZrnWFmKzfEzcqKF2ogCaF4
 
 After the transaction is confirmed on the Solana cluster, you should see your new token in your browser wallet! However, there's an obvious problem! It has no name...
 
-### Submit a pull request to Solana to register token
+## Submit a pull request to Solana to register token
 
 Our token is created and live on Solana, but is not yet officially recognized. We need to get all the required information for the token ready for submission.
 
@@ -352,7 +354,7 @@ We are now ready to create the pull request.
 
 Congratulations! Your token is now on the way to being official. Only if we could actually trade the token though...
 
-# BONUS: Add a market for your token on Serum
+## BONUS: Add a market for your token on Serum
 
 You've made it! Your token is live and has a name. It can now be sent around and used for whatever its utility may be. But, there is no trading pair for the token to be traded on. I did not make a market for my social token as I do not want it to be traded.
 
