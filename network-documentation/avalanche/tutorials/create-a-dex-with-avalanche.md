@@ -13,7 +13,7 @@ You must have gone through this tutorial [Create a Local Test Network on Avalanc
 * Truffle, which you can install with `npm install -g truffle`
 * Install [Metamask extension](https://metamask.io/download.html) in your browser.
 
-**Create AvaSwap directory and install dependencies**
+# Create AvaSwap directory and install dependencies
 
 Open a new terminal tab so we can create a directory and install some further dependencies.
 First, navigate to the directory within which you intend to create your working directory:
