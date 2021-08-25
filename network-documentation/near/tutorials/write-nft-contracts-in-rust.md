@@ -81,7 +81,7 @@ Rust includes an extensive ecosystem of support libraries \(called [Crates](http
 
 Edit the file `contracts/rust/Cargo.toml`, and replace the entire contents with this:
 
-```text
+```toml
 [package]
 name = "nep4-rs"
 version = "0.1.0"
@@ -103,12 +103,12 @@ rand_seeder = "=0.2.1"
 
 [profile.release]
 codegen-units = 1
-#Tell `rustc` to optimize for small code size.
+# Tell `rustc` to optimize for small code size.
 opt-level = "z"
 lto = true
 debug = false
 panic = "abort"
-#Opt into extra safety checks on arithmetic operations https://stackoverflow.com/a/64136471/249801
+# Opt into extra safety checks on arithmetic operations https://stackoverflow.com/a/64136471/249801
 overflow-checks = true
 ```
 
