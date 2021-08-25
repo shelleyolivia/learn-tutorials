@@ -12,7 +12,7 @@ If you have not completed the [Developing your first secret contract tutorial](h
 
 If you get stuck at any point, the completed code for this tutorial can also be found on GitHub here: [https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial2/code](https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial2/code).
 
-# Step 1 - Preparing the build environment
+# Preparing the build environment
 
 To begin you will need to add the following packages to the `Cargo.toml` file:
 
@@ -24,11 +24,11 @@ hex = "0.4.2"
 sha2 = { version = "0.9.1", default-features = false }
 ```
 
-# Step 2 - Adding viewing key utility
+# Adding viewing key utility
 
 First we will import two source files that define the main ViewingKey struct as well as a couple of utility functions. This code is pulled directly from the [Secret SCRT contract](https://github.com/enigmampc/secretSCRT). Both of these files can be found on GitHub at the following link: [https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial2](https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial2). With slight modification you could easily combine these into one file if you wish.
 
-## Add `utils.rs`
+## Add utils.rs
 
 ```rust
 use crate::viewing_key::VIEWING_KEY_SIZE;
@@ -50,7 +50,7 @@ pub fn create_hashed_password(s1: &str) -> [u8; VIEWING_KEY_SIZE] {
 
 This utility crate defines two helper functions: `ct_slice_compare`, which will be used to test if two hashed passwords are the same; and `create_hashed_password`, which creates a hashed password from a random seed using the SHA-256 hash algorithm.
 
-## Add `viewing_key.rs`
+## Add viewing_key.rs
 
 ```rust
 use std::fmt;
@@ -162,7 +162,7 @@ Finally, in the `init` function in `contract.rs` update the initialization of th
     };
 ```
 
-## Step 3 - Generating a viewing key
+# Generating a viewing key
 
 Next we need to add a Handle function to generate a viewing key for a user. In `msg.rs` we add the following to `HandleMsg`:
 
@@ -216,7 +216,7 @@ pub fn try_generate_viewing_key<S: Storage, A: Api, Q: Querier>(
 }
 ```
 
-## Step 4 - Creating authenticated queries
+# Creating authenticated queries
 
 ## Updating msg.rs
 
