@@ -29,8 +29,8 @@ try {
 
 **Need some help?** Check out those two links
 * [Creating a `Connection` instance](https://near.github.io/near-api-js/modules/connect.html)  
-* [Provider property of **Connection** Class](https://near.github.io/near-api-js/classes/connection.connection-1.html#provider)
-* [Status method of **Provider** class](https://near.github.io/near-api-js/classes/providers_json_rpc_provider.jsonrpcprovider.html#status)
+* [Provider property of `Connection` Class](https://near.github.io/near-api-js/classes/connection.connection-1.html#provider)
+* [Status method of `Provider` class](https://near.github.io/near-api-js/classes/providers_json_rpc_provider.jsonrpcprovider.html#status)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)

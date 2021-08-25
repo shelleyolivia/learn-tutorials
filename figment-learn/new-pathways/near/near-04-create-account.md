@@ -22,7 +22,7 @@ try {
 
 **Need some help?** Check out those two links
 * [`createAccount` method](https://near.github.io/near-api-js/classes/near.near-1.html#createaccount)  
-* [NEAR Account](https://docs.near.org/docs/concepts/account)
+* [`NEAR Account`](https://docs.near.org/docs/concepts/account)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)

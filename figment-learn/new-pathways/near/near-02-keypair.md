@@ -20,7 +20,7 @@ In `pages/api/near/keypair.ts`, implement `keypair` and retrieve the string form
 
 **Need some help?** Check out those two links
 * [The `KeyPair` class](https://near.github.io/near-api-js/modules/utils_key_pair.html)  
-* [Retrieve the secret](https://near.github.io/near-api-js/classes/utils_key_pair.keypaired25519.html#tostring)
+* [Retrieve the `secret`](https://near.github.io/near-api-js/classes/utils_key_pair.keypaired25519.html#tostring)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)

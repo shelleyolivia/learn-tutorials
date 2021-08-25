@@ -24,7 +24,7 @@ In `pages/api/near/balance.ts`, complete the code of the function.
 
 **Need some help?** Check out those two links
 * [The `Account` class](https://near.github.io/near-api-js/classes/account.account-1.html)  
-* [Basic NEAR economic](https://docs.near.org/docs/concepts/gas)
+* [Basic `NEAR` economic](https://docs.near.org/docs/concepts/gas)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
