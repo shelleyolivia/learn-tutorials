@@ -103,14 +103,16 @@ rand_seeder = "=0.2.1"
 
 [profile.release]
 codegen-units = 1
-# Tell `rustc` to optimize for small code size.
+
 opt-level = "z"
 lto = true
 debug = false
 panic = "abort"
-# Opt into extra safety checks on arithmetic operations https://stackoverflow.com/a/64136471/249801
 overflow-checks = true
 ```
+> `opt-level = "z"` Tells `rustc` to optimize for small code size.
+>
+> `overflow-checks = true` Opts into extra safety checks on arithmetic operations as per https://stackoverflow.com/a/64136471/249801
 
 We've only made one change to the original file: in the `[dependencies]` section we've added the `rand`, `rand_chacha` and `rand_seeder` crates. Together they'll provide a random number generator that we will use to generate the unique DNA of our Flarns.
 
