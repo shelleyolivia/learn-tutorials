@@ -1,5 +1,3 @@
-# 
-
 Solidity is a high level language. It is partly designed after ECMAScript and therefore it is said to be **similar to JavaScript**. But the similarity ends there. It gets compiled (not interpreted) and usually deployed on Blockchains that understand the Ethereum Virtual Machine (EVM), like Polygon! When a smart contract is deployed, it becomes immutable. This has both benefits and drawbacks, which we will discuss below. 
 
 We can use [HardHat](https://hardhat.org) or [Truffle](https://trufflesuite.com) to ease development and deployment of our Solidity code. There are several existing guides for other EVM compatible networks available on Figment Learn (check out the tutorials for [Celo and Truffle](https://learn.figment.io/network-documentation/celo/tutorial/deploying-smart-contracts-on-celo-with-truffle), or [Celo and HardHat](https://learn.figment.io/network-documentation/celo/tutorial/celo-hardhat-deploy-and-nft-app) for example). We will focus on using Truffle in this tutorial. 
@@ -16,7 +14,7 @@ yarn
 Also be sure to rename the file **`contracts/polygon/SimpleStorage/.secret.example`** to **`.secret`** before continuing. This file is where we will store the secret recovery phrase used later in this step to deploy the smart contract. You will need to replace the text "your recovery phrase goes here" with your Metamask secret recovery phrase.
 {% endhint %}
 
-## The SimpleStorage Solidity contract
+# The SimpleStorage Solidity contract
 
 One of the most basic, non-trivial, types of smart contract is a **simple storage contract**.   
 This example was adapted from the [Solidity documentation](https://solidity.readthedocs.io/en/develop/introduction-to-smart-contracts.html).
@@ -56,7 +54,7 @@ Next we declare a function signature for the `set()` function, which has a [visi
 
 The `get()` function signature is slightly different, in that there is no argument being passed. It also has a visibility of public, is a [view](https://docs.soliditylang.org/en/v0.8.6/types.html?highlight=view#function-types) type of function, and specifies a return type of `uint`. Its function body will simply return the current value of `storedData`.
 
-## Test the smart contract
+# Test the smart contract
 
 This test uses the Truffle-provided `Assert` and `DeployedAddresses` contracts. These are built in to Truffle and the development blockchain. It is also important that we import the Solidity file we want to test! 
 
@@ -127,7 +125,7 @@ Compiling your contracts...
 If there is an error : `Error: Cannot find module '@truffle/hdwallet-provider'`. You need to install the dependencies in this sub-module with `yarn` as mentioned at the beginning of the tutorial.
 {% endhint %}
 
-## Deploy the smart contract
+# Deploy the smart contract
 
 {% hint style="info" %}
 Before we deploy, there is one last thing to prepare. Put the secret recovery phrase \(also known as a mnemonic seed phrase\) of the active Metamask account into the file **`contracts/polygon/SimpleStorage/.secret`**.   
@@ -158,7 +156,7 @@ For this step to work, we will also need to make sure there is a valid secret re
 
 -------------------------------------
 
-## Using the Application Binary Interface \(ABI\):
+# Using the Application Binary Interface (ABI):
 
 [The Solidity Contract ABI Specification](https://docs.soliditylang.org/en/v0.8.6/abi-spec.html) explains that an ABI is a standard way to interact with contracts in the Ethereum ecosystem, both from outside the blockchain and for contract-to-contract interaction. Data is encoded according to its type, as described in the specification. The encoding is not self describing and thus requires a schema in order to decode.
 
