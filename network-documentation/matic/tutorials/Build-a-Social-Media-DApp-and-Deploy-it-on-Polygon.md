@@ -1,9 +1,3 @@
----
-description: >-
-  Learn how to build a social media DApp like YouTube & Deploy it on Polygon (Matic) network.
----
-
-# Build a Social Media DApp & Deploy it on Polygon
 ![](../../../.gitbook/assets/dtube.png)
 
 # Introduction
@@ -582,6 +576,7 @@ Wow, that's a lot of code! You can run the React app locally with the command `n
 *The `<Footer>` component was created in bootstrap for hackathon purposes. It's not related to our DApp. You can simply modify that part as per your needs.*
   
 # Smart Contracts Deployment on Polygon (Matic)
+
 ### truffle-config
 * `truffle-config.js` for Mac users
 * `truffle.js` for Windows users
