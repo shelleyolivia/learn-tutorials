@@ -1,13 +1,13 @@
 # 
 
-Last but not least, we'll need to modify the stored data into **greeter**. Doing so, will change the state of the blockchain, then we'll have to create a transaction for this. In the challenge below we're going to show you how to achieve this.
+Last but certainly not least, we'll need to modify the data stored into **greeter**. Doing so will change the state of the blockchain, so we'll have to create a transaction. In the challenge below we're going to show you how to achieve this.
 
 ----------------------------------
 
 ## The challenge
 
 {% hint style="warning" %}
-In `pages/api/solana/callGreetings.ts`, complete `setGreetings`. At first you'll have to create an instruction, next you'll have to send and confirm a transaction storing the instruction.
+In `pages/api/solana/callGreetings.ts`, complete `setGreetings`. First you'll have to create an instruction, then you'll have to send and confirm a transaction to store the data from.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -27,8 +27,8 @@ In `pages/api/solana/callGreetings.ts`, complete `setGreetings`. At first you'll
 ```
 
 **Need some help?** Here are a few hints
-* [Read about TransactionInstruction](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getbalance)
-* [Read about sendAndConfirmTransaction](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#constructor)  
+* [Read about TransactionInstruction](https://solana-labs.github.io/solana-web3.js/classes/TransactionInstruction.html)
+* [Read about sendAndConfirmTransaction](https://solana-labs.github.io/solana-web3.js/modules.html#sendAndConfirmTransaction)  
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -60,19 +60,18 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 
-* First, we create a instruction for a transaction:
-  * With the greeter's keys, seeting **isWritable** flag to `true`
-  * With the address of the program we want to call
-  * With the data we want to pass to the call
-* Finally we send and await that the transaction confirm; payer being the account created during firsts' steps.
+* First, we create a `new` instance of the `TransactionInstruction` class:
+  * With the greeter's keys, setting the **isWritable** flag to `true`
+  * With the `programId` or address of the program we want to call: `programKey` ()
+  * With the data we want to pass to the call. In this case, there is only one kind of instruction we can send and `Buffer.alloc(0)` is like referring to the zero-index of an array. If there were multiple instructions, we would alter this value.
+* Then we send and await the transaction confirmation;
+  * `[payerKeypair]` being the account created during [second tutorial](https://learn.figment.io/tutorials/create-solana-keypair).
 
 ----------------------------------
 
 ## Make sure it works
 
-Once you have the code above saved:
-* Click on **Send A Greeting** 
-* Let's the magic happen
+Once you have the code above saved, click on **Send A Greeting** and watch the magic happen:
 
 ![](../../../.gitbook/assets/solana-set-v3.gif)
 
@@ -80,13 +79,13 @@ Once you have the code above saved:
 
 # Conclusion
 
-Congratulations on completing the Solana Pathway! We hope you had a fun time and learned a lot. Here are a few things you can check out to go further:
+Congratulations on completing the Solana Pathway! We hope you had a fun time and learned a lot. Here are a few things you can check out when you are ready to go further:
 
-* [Keep exploring the Solana JS API](https://solana-labs.github.io/solana-web3.js/modules.html#sendandconfirmtransaction)
+* [Keep exploring the Solana JS API](https://solana-labs.github.io/solana-web3.js/modules.html#sendAndConfirmTransaction)
 * [Solana's Hello World dApp](https://github.com/solana-labs/example-helloworld)
 * [Read some programs written by Solana devs](https://github.com/solana-labs/solana-program-library/tree/master/examples)
 * [Look at the Solana's Token Swap program](https://github.com/solana-labs/solana-program-library/tree/master/token-swap)
 
 {% hint style="info" %}
-If you had any difficulty with this tutorial or simply want to discuss Solana with other developers, [join our community](https://community.figment.io) today, or [join us on Discord](https://discord.gg/EBveT5xs9D)!
+If you had any difficulty with this tutorial or simply want to discuss Solana with other developers, [join our community Forums](https://community.figment.io) today, or [join us on Discord](https://discord.gg/EBveT5xs9D)!
 {% endhint %}

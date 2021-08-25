@@ -1,6 +1,6 @@
 # 
 
-Data are stored into account as **buffer**. If one want to read them he'll have to first unpack this blob of data into well defined structure. The code below allow our typescript program to achive this goal: deserializing a greeter's buffer into a typescript's class. 
+Data is stored into an account as a **buffer**. To access the data, we'll have to first unpack this blob of data into a well defined structure. The code below allows our TypeScript program to achieve this goal: deserializing a greeter's buffer into a TypeScript class. 
 
 ```typescript
 // The state of a greeting account managed by the hello world program
@@ -20,7 +20,7 @@ const GreetingSchema = new Map([
 ```
 
 {% hint style="info" %}
-[Learn more about borsh lib](https://npm.io/package/borsh)
+[Learn more about the borsh library](https://npm.io/package/borsh)
 {% endhint %}
 
 ----------------------------------
@@ -28,7 +28,7 @@ const GreetingSchema = new Map([
 ## The challenge
 
 {% hint style="warning" %}
-In `pages/api/solana/getGreetings.ts`, complete the code of `getGreetings`. First `deserialize` the greeter data to a typescript class and next access the counter value and pass it to response object using json method.
+In `pages/api/solana/getGreetings.ts`, complete the code for `getGreetings`. First deserialize the greeter data to a TypeScript class, then access the counter value and pass it to the response object using the `.json()` method as in all previous tutorials.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -42,16 +42,16 @@ In `pages/api/solana/getGreetings.ts`, complete the code of `getGreetings`. Firs
     // Find the expected parameters.
     const greeting = borsh.deserialize(undefined)
 
-    // A short helper
+    // A little helper
     console.log(greeting)
 
-    // Pass down the counter
+    // Pass the counter to the client-side as JSON
     res.status(200).json(undefined);
 //...
 ```
 
 **Need some help?** Here are a few hints
-* [Read about deserialize method](https://npm.io/package/borsh)
+* [Read about the deserialize method](https://npm.io/package/borsh)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -81,16 +81,14 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 
-* First, we pass the **Schema**, then the **Account**'s key (here key refer to the key of a map struct), and the the binary data stored into **greeter**.
-* Finaly, we just need to call the property counter of `greeting` to pass down the value. 
+* First, we pass the **Schema** and the **Account**'s key (here key refers to the key of a map struct, **not** a public or private key), and then the binary data stored into **greeter**.
+* Finally, we just need to call the property `counter` of `greeting` to pass the value as JSON back to the client-side. 
 
 ----------------------------------
 
 ## Make sure it works
 
-Once you have the code above saved:
-* Click on **Get Greeting** 
-* Let's the magic happen
+Once you have the code above saved, click on **Get Greeting** and watch the magic happen: 
 
 ![](../../../.gitbook/assets/solana-get-v3.gif)
 
@@ -98,4 +96,4 @@ Once you have the code above saved:
 
 ## Next
 
-Geeting the number of Greetings is not enough, we'd like to send a greeting to our contract. We're going to learn how to do it in the next step. Ready ?
+Simply getting the number of greetings is not enough, we'd like to also *send* a greeting to our contract. We're going to learn how to do it in the next step. Ready?

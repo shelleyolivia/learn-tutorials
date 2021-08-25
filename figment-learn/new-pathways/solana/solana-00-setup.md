@@ -6,7 +6,7 @@ The following software is required to set up and complete the Solana Pathway
 * [yarn installed](https://yarnpkg.com/getting-started/install)
 * [git installed](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-Start by cloning the repository and install the npm dependencies :
+Start by cloning the repository and installing the dependencies with yarn :
 
 ```bash
 git clone https://github.com/figment-networks/learn-web3-dapp.git
@@ -16,9 +16,9 @@ yarn
 
 ---------------------------
 
-## Set your key
+## Key in the ignition 
 
-Create an `.env.local` file at the root of the directory. Copy and paste the contents of the existing `.env.example` into the new file and save it to disk (alternatively, you can rename `.env.example` ).
+Create an `.env.local` file at the root of the directory. Copy and paste the contents of the existing `.env.example` into the new file and save it to disk (alternatively, you can rename `.env.example`).
 
 The value for `DATAHUB_SOLANA_API_KEY` can be found on the [DataHub Services Dashboard](https://datahub.figment.io/services/solana). Click on the Solana icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local` . This will authenticate you and enable you to make JSON-RPC requests to the Solana cluster via DataHub.
 
@@ -42,12 +42,12 @@ Once the development server loads and compiles the application, open your defaul
 
 ![](../../../.gitbook/assets/pathway-home.gif)
 
-{% hint style="warning" %}
-You can change the default port if needed `yarn dev --port 1234`
+{% hint style="info" %}
+You can change the port of the Next.js development server, if needed: `yarn dev --port 1234`.
 {% endhint %}
 
 ---------------------------
 
-## Next
+## You're in the drivers seat!
 
 You can now move ahead to the next step by clicking on the "Next" button below on the right.

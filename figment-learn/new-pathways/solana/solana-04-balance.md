@@ -1,13 +1,13 @@
 # 
 
-We must check the account balance to make sure we have sufficient **SOL** to perform a transfer. The `getBalance()` function takes a `publicKey` as input and will return the balance associated with that `publicKey`, if there is any.
+We must check our account balance to make sure we have sufficient **SOL** to perform a transfer. The `getBalance()` function takes a `publicKey` as input and will return the balance associated with that `publicKey`, if there is any.
 
 ----------------------------------
 
 ## The challenge
 
 {% hint style="warning" %}
-In `pages/api/solana/balance.ts`, implement `balance`.
+In `pages/api/solana/balance.ts`, implement `publicKey` & `balance`.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -50,17 +50,17 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 
-* We create a `PublicKey` using the string formated address
-* We call `connection.getBalance` with that `publicKey`
-* Be aware than the balance is on `LAMPORTS` (`console.log` is your friend ^^) 
+* We created an instance of the `PublicKey` using the string formatted address
+* Call `connection.getBalance` with that `publicKey`
+* Be aware than the balance is denominated in `LAMPORTS`. Remember, `console.log` is your friend 😁  
 
 ----------------------------------
 
 ## Make sure it works
 
-Enter the address just funded:
+* Save the code (Next.js will automatically rebuild the page)
+* Enter the address you just funded
 * Click on **Check Balance**
-* Let's the magic happen
 
 ![](../../../.gitbook/assets/solana-balance-v3.gif)
 
@@ -68,4 +68,4 @@ Enter the address just funded:
 
 ## Next
 
-Now that we have an account and that this account has been funded with **SOL** tokens, we are ready to make a transfer!
+Now that we have an account that has been funded with **SOL** tokens, we are ready to make a transfer to another account!

@@ -1,13 +1,13 @@
 # 
 
-Like with most Web 3 protocols, transactions on Solana happen between **accounts**.  To create an account a client generates a **keypair**, which has a **public's key** (or **address**, used to identify and lookup an account) and a **secret's key** used to sign transactions.
+Like with most Web 3 protocols, transactions on Solana happen between **accounts**. To create an account, a client generates a **keypair** which has a **public key** (or **address**, used to identify and lookup an account) and a **secret key** used to sign transactions.
 
 ----------------------------------
 
 ## The challenge
 
 {% hint style="warning" %}
-In`pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string and render it in the webpage
+In `pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -27,9 +27,9 @@ In`pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to ex
 //...
 ```
 
-**Need some help?** Check out those two links
-* [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
-* [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
+**Need some help?** Check out these links:
+* [Generate a `Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
+* [Convert a `PublicKey` to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -58,19 +58,20 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 
-* We used the JS API's `Keypair` to generate a keypair
-* Once React re-renders, we parse the keypair object to extract the public key using `keypair.publicKey`
-* But this value is a `Buffer` so we need to convert it to a string using `PublicKey.toString()`
+* We used the `Keypair` from `@solana/web3.js` to `generate()` a keypair 😁
+* Parse the keypair object to extract the public key (as a string) using `keypair?.publicKey.toString()`.
+* The secret key is kept in array format, so to send it back to the client-side we need to remember to use `JSON.stringify`.
+* There's the nullish coalescing operator and optional chaining operator `?.` again! We don't want to return undefined values to the client-side.
 
 ----------------------------------
 
 ## Make sure it works
 
-Once you have the code above saved, click on **Generate a Keypair** and you should see:
+Once the code is complete and the file is saved, Next.js will rebuild the API route. Now click on **Generate a Keypair** and you should see:
 
 ![](../../../.gitbook/assets/solana-keypair-v3.gif)
 
-**Try and click on "Generate a Keypair" again. And again. And again!** Every time it will generate a new one with virtually no risk that someone else creates the same one as you. That's cause the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
+**Click on "Generate a Keypair" again. And again. And again!** Each time it will generate a new one with virtually no risk that someone else creates the same one as you. That's because the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
 
 ----------------------------------
 
