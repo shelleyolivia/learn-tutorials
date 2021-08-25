@@ -13,7 +13,7 @@ You must have gone through this tutorial [Create a Local Test Network on Avalanc
 * Truffle, which you can install with `npm install -g truffle`
 * Install [Metamask extension](https://metamask.io/download.html) in your browser.
 
-# Create AvaSwap directory and install dependencies
+ Create AvaSwap directory and install dependencies
 
 Open a new terminal tab so we can create a directory and install some further dependencies.
 First, navigate to the directory within which you intend to create your working directory:
@@ -66,7 +66,7 @@ module.exports = {
 
 Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also, note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 
-## Add AvaSwap.sol
+# Add AvaSwap.sol
 
 In the contracts directory add a new file called `AvaSwap.sol` and add the following block of code:
 
@@ -139,7 +139,7 @@ contract AvaSwap {
 }
 ```
 
-## Add new migration
+# Add new migration
 
 Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `AvaSwap` smart contract to the blockchain.
 
@@ -158,7 +158,7 @@ module.exports = function (deployer) {
 };
 ```
 
-## Compile Contracts with Truffle
+# Compile Contracts with Truffle
 
 Any time you make a change to `AvaSwap.sol` you must compile the contracts again.
 
@@ -177,7 +177,7 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 
-## Create and unlock an account on the C-Chain
+# Create and unlock an account on the C-Chain
 
 When deploying smart contracts to the C-Chain, Truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations.
 
@@ -223,7 +223,7 @@ This returns:
 true
 ```
 
-## Run Migrations
+# Run Migrations
 
 Now everything is in place to run the migrations and deploy the contract:
 
@@ -312,7 +312,7 @@ Error:  *** Deployment Failed ***
 "Migrations" -- Returned error: authentication needed: password or unlock.
 ```
 
-## Interacting with your contract with React UI
+# Interacting with your contract with React UI
 
 To interact with the contract, we will be using `Main.js`, `BuyForm.js` & `SellForm.js` components. Here are the details of the components:
 
