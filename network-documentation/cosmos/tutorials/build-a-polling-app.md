@@ -50,7 +50,7 @@ starport type poll title options
 
 This command generated code that handles the creation of `poll` items. If we now run `starport serve` and visit [http://localhost:8080](http://localhost:8080/) we will see a form for creating polls. It may take a short while to rebuild the app, so give it a couple of seconds.
 
-![Application screenshot](https://tutorials.cosmos.network/assets/img/2.adfea286.png)
+![Application screenshot](https://tutorials.cosmos.network/assets/img/2.7f899a03.png)
 
 Sign in with one of the passwords printed in the console and try creating a poll. You should see a new object created and displayed above the form. You have successfully created an object and stored it on the blockchain!
 
