@@ -22,16 +22,19 @@ Node is a JavaScript runtime environment that executes JavaScript code outside a
 To install Node.js & npm on your computer, click on this [link](https://nodejs.org/en/download/) -> download the file as per your computer requirement -> Install the file.
 To check the successful installation type `npm -v` in cmd prompt or terminal, It'll show the version that means you've successfully installed it on your computer.
 
-### Truffle:
+### Truffle
+
 Truffle is the best development environment for developing blockchain applications. Truffle gives us boilerplate code (template code) to start building our DApp.
 
 To install truffle, open a terminal (windows cmd prompt or mac terminal) and run the following command:
 `npm install -g truffle`
 
-### Ganache (Optional for this tutorial):
+### Ganache (Optional for this tutorial)
+
 Ganache is a personal blockchain environment for DApp development. It provides a local blockchain with 10 default accounts, each already funded with 100 ETH. This can be very useful for testing and development, [check it out](https://www.trufflesuite.com/ganache) if you are interested.
 
-### MetaMask Setup:
+### MetaMask Setup
+
 MetaMask is used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.
 
 To install MetaMask extension, click on this [link](https://metamask.io/).
@@ -47,14 +50,16 @@ Done! check your wallet, you'll see some Matic there. *(We only need small amoun
 
 ![](../../../.gitbook/assets/deploy-and-debug-on-polygon-2.png)
 
-### Tech Stack:
+### Tech Stack
+
 * **Languages:** `Solidity, JavaScript, HTML5, CSS3`
 * **Libraries:** `React.js, Web3.js`
 * **Tools:** `IPFS`
 * **Network:** `Polygon (Matic)`
 * **Platforms:** `Ethereum, Fleek`
 
-### Roadmap:
+### Roadmap
+
 First, we'll setup our coding environment with the help of **Truffle**, after that we'll write **Smart Contracts** in **solidity**. 
 After writing Smart Contracts, To build the front-end of our DApp we'll use [React.js](https://reactjs.org/docs/getting-started.html) Javascript library plus some **HTML5, CSS3 & JavaScript**.
 
@@ -215,10 +220,12 @@ const ipfs = ipfsClient({
 ```
 About Async/Await Function in JavaScript:
 
-**Async:**
+**Async**
+
 It simply allows us to write promises based code as if it was synchronous and it checks that we are not breaking the execution thread. It operates asynchronously via the event-loop. Async functions will always return a value. It makes sure that a promise is returned and if it is not returned then javascript automatically wraps it in a promise which is resolved with its value.
 
-**Await:**
+**Await**
+
 Await function is used to wait for the promise. It could be used within the async block only. It makes the code wait until the promise returns a result. It only makes the async block wait.
 
 *You can find simple explanation of Async/Await function [here](https://www.geeksforgeeks.org/async-await-function-in-javascript/).*
