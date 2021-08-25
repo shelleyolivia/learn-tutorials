@@ -51,7 +51,7 @@ NEAR is the first blockchain platform truly built for the real world. It is a bu
    2. NFT marketplaces -- marketplaces like [Mintbase](https://mintbase.io), which transferred from Ethereum, allow creators of unique digital assets to easily implement marketplaces to buy and sell them. On NEAR, they have access to reasonable costs plus intuitive end-user experiences. 
    3. Gaming -- because NEAR allows for performant and usable apps, developers can create gaming experiences that hook into the blockchain without forcing end-users to suffer through wallets or tokens.
 
-(Take a look at these examples from a recent hackathon)[https://near.org/blog/winners-of-hack-the-rainbow](https://near.org/blog/winners-of-hack-the-rainbow](https://near.org/blog/winners-of-hack-the-rainbow](https://near.org/blog/winners-of-hack-the-rainbow)
+[Take a look at these examples from a recent hackathon](https://near.org/blog/winners-of-hack-the-rainbow)
 
 # Network Specifications
 
