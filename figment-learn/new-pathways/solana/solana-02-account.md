@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 Like with most Web 3 protocols, transactions on Solana happen between **accounts**. To create an account, a client generates a **keypair** which has a **public key** (or **address**, used to identify and lookup an account) and a **secret key** used to sign transactions.
-=======
-Like with most Web 3 protocols, transactions on Solana happen between **accounts**.  To create an account a client generates a **keypair**, which has a **public's key** (or **address**, used to identify and lookup an account) and a **secret's key** used to sign transactions.
->>>>>>> e0bccae6212b86ce5a24f02686227933f494b4b2
 
 ----------------------------------
 
