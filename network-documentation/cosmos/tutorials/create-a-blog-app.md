@@ -4,7 +4,7 @@
 
 By following this tutorial, you will learn how to create a simple blog app that is powered by the Cosmos SDK.
 
-## Getting Started
+# Getting Started
 
 Let's get started! The first step is to install the [`starport`](https://github.com/tendermint/starport) CLI tool.
 
@@ -26,7 +26,7 @@ This blog app will store data in a persistent [key-value store](https://docs.cos
 
 We’ll be creating a simple blog-like application, so let’s define the first type, the `Post`.
 
-## `x/blog/types/TypesPost.go`
+**`x/blog/types/TypesPost.go`**
 
 ```go
 package types
@@ -63,7 +63,7 @@ Right now the store is empty. Let's figure out how to add posts.
 
 With the Cosmos SDK, users can interact with your app with either a CLI \(`blogcli`\) or by sending HTTP requests. Let's define the CLI command first. Users should be able to type `blogcli tx blog create-post 'This is a post!' 'Welcome to my blog app.' --from=user1` to add a post to your store. The `create-post` subcommand hasn’t been defined yet--let’s do it now.
 
-## `x/blog/client/cli/tx.go`
+**`x/blog/client/cli/tx.go`**
 
 In the `import` block, make sure to import these five additional packages:
 
@@ -131,7 +131,7 @@ The function above defines what happens when you run the `create-post` subcomman
 
 This is a common pattern in the SDK: users make changes to the store by broadcasting [messages](https://docs.cosmos.network/master/building-modules/messages-and-queries.html#messages). Both CLI commands and HTTP requests create messages that can be broadcasted in order for state transition to occur.
 
-## `x/blog/types/MsgCreatePost.go`
+**`x/blog/types/MsgCreatePost.go`**
 
 Let’s define `NewMsgCreatePost` in a new file you should create as `x/blog/types/MsgCreatePost.go`.
 
@@ -299,7 +299,7 @@ Going back to `GetCmdCreatePost` in `x/blog/client/cli/tx.go`, you'll see `MsgCr
 
 After being broadcast, the messages are processed by an important part of the application, called [**handlers**](https://docs.cosmos.network/master/building-modules/handler.html).
 
-## `x/blog/handler.go`
+**`x/blog/handler.go`**
 
 Begin by importing your new blog types that we created:
 
@@ -370,7 +370,7 @@ In this handler you create a `Post` object \(post type was defined in the very f
 
 After creating a post object with creator, ID and title, the message handler calls `k.CreatePost(ctx, post)`. “k” stands for [Keeper](https://docs.cosmos.network/master/building-modules/keeper.html), an abstraction used by the SDK that writes data to the store. Let’s define the `CreatePost` keeper function.
 
-## `x/blog/keeper/keeper.go`
+**`x/blog/keeper/keeper.go`**
 
 Add a `CreatePost` function that takes two arguments: a [context](https://docs.cosmos.network/master/core/context.html#context-definition) and a post.
 
@@ -406,7 +406,7 @@ func listPost(ctx sdk.Context, k Keeper) ([]byte, error) {
 
 `CreatePost` creates a key by concatenating a post prefix with an ID. If you look back at how our store looks, you’ll notice keys have prefixes, which is why `post-0bae9f7d-20f8-4b51-9d5c-af9103177d66` contained the prefix `post-` . The reason for this is you have one store, but you might want to keep different types of objects in it, like posts and users. Prefixing keys with `post-` and `user-` allows you to share one storage space between different types of objects.
 
-## `x/blog/types/key.go`
+**`x/blog/types/key.go`**
 
 To define the post prefix add the following code:
 
@@ -436,7 +436,7 @@ const (
 )
 ```
 
-## `x/blog/types/codec.go`
+**`x/blog/types/codec.go`**
 
 Finally, `store.Set(key, value)` writes our post to the store. Two last things to do is tell our [encoder](https://docs.cosmos.network/master/core/encoding.html#amino) how our `MsgCreatePost` is converted to bytes.
 
@@ -530,7 +530,7 @@ ERROR: unknown command "create-post" for "blog"
 
 Make sure you’ve added `GetCmdCreatePost(cdc)`, to `func GetTxCmd` in `x/blog/client/cli/tx.go`.
 
-### Cannot encode unregistered concrete type
+## Cannot encode unregistered concrete type
 
 ```
 blogcli tx blog create-post Hello! --from=user1
