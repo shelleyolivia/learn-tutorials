@@ -54,7 +54,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 # Make sure it works
 
-Once the code above is saved in `pages/api/solana/connect.ts`, refresh the page to see it update & display the current version of the Solana software!
+Once the code above is saved, refresh the page to see it update & display the current version of the Solana software!
 
 ![](../../../.gitbook/assets/solana-connect.gif)
 

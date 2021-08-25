@@ -20,7 +20,7 @@ Create an `.env.local` file at the root of the directory. Copy and paste the con
 
 The value for `DATAHUB_NEAR_API_KEY` can be found on the [DataHub Services Dashboard](https://datahub.figment.io/services/near). Click on the **NEAR** icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local` . This will authenticate you and enable you to make JSON-RPC requests to the Solana cluster via DataHub.
 
-![](../../../.gitbook/assets/near-setup-00.gif)
+![](../../../.gitbook/assets/pathways/near/near-setup.gif)
 
 {% hint style="info" %}
 [**Join us on Discord**, if you encounter any issues with the tutorial or have any questions!](https://discord.gg/fszyM7K)
