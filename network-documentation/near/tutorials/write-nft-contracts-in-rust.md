@@ -110,6 +110,7 @@ debug = false
 panic = "abort"
 overflow-checks = true
 ```
+
 > `opt-level = "z"` Tells `rustc` to optimize for small code size.
 >
 > `overflow-checks = true` Opts into extra safety checks on arithmetic operations as per https://stackoverflow.com/a/64136471/249801
@@ -128,7 +129,7 @@ cargo verify-project --manifest-path contracts/rust/Cargo.toml
 
 If there are no errors in the file, you should see this result in JSON format:
 
-```text
+```json
 {"success":"true"}
 ```
 
