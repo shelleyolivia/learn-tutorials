@@ -62,13 +62,13 @@ Building the React Native App, in which we show you how to quickly put together 
 
 Connecting the React Native App to the Smart Contract using Redux, which brings it all together and allows our mobile dApp to utilize Celo efficiently.
 
-## 1. Writing the DAO Smart Contract in Solidity
+# Writing the DAO Smart Contract in Solidity
 
 In this tutorial, we are going to build the foundations of a functional DAO by writing the smart contract. 
 
 The smart contract is written using the [Solidity programming language](https://docs.soliditylang.org/en/v0.8.7/). Solidity is used on Ethereum as well as other Ethereum Virtual Machine \(EVM\) compatible blockchains like Celo.
 
-### Initial Setup
+## Initial Setup
 
 The first task is to initialize a basic Solidity project using Truffle. Most commonly, an empty directory somewhere under the users home directory is a good place to create the project files. Running the command `truffle init` in an empty directory will install the default files for the project.
 
@@ -602,11 +602,11 @@ function isContributor() public view returns (bool) {
 
 The `isContributor()` function returns true/false depending on whether the caller is a contributor or not.
 
-# Next Steps
+## Next Steps
 
 Now that we have written the smart contract code, the next step is to build the React Native App!
 
-# 2. Building the React Native App
+# Building the React Native App
 
 Note: If you have never built an app using React Native to connect to the Celo wallet before, you can follow the guide [here](https://learn.figment.io/network-documentation/celo/tutorial/how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp#project-setup%20).
 
@@ -688,9 +688,9 @@ export default function App() {
 
 We are making use of the eva dark theme and we have configured `IconRegistry` to use the `EvaIconsPack`. Now that we have UI Kitten set up, we can style our dApp as we build. Now let’s go ahead and build out the screens!
 
-# Screens
+## Screens
 
-## Welcome Screen
+### Welcome Screen
 
 The Welcome screen is the first thing users will see when loading the dApp. The UI is only one button which the user must click to connect to the DAO. Since our app is making use of the Celo protocol, we will have to connect to the Alfajores/Valora wallet.
 
@@ -733,13 +733,13 @@ const styles = StyleSheet.create({
 
 > Notice anything missing? Don't worry, we will add the functionality to connect this screen to the Wallet and carry out user actions in the Redux tutorial.
 
-## Side Menu Navigation
+### Side Menu Navigation
 
 This is based on React Navigation’s Drawer Navigation. To use the React Drawer navigation, you have to install and set up React Navigation following the instructions in the [docs](https://reactnavigation.org/docs/getting-started). The instructions for designing a Drawer based navigation can be found [here](https://reactnavigation.org/docs/drawer-based-navigation).
 
 ![](../../../.gitbook/assets/image%20%2828%29.png)
 
-## All Proposals Screen
+### All Proposals Screen
 
 The All Proposals screen contains all the DAO proposals that have been created. The UI is a button at the top which will open a modal window containing a form to be filled out by the user creating the proposal.
 
@@ -787,7 +787,7 @@ export const ProposalsPage = ({ navigation }) => {
 };
 ```
 
-## Create Proposal Modal
+### Create Proposal Modal
 
 The Create Proposal modal component is imported into the Proposals page and is displayed when the Create proposal Button is clicked.
 
@@ -968,7 +968,7 @@ In the return statement inside of `Layout` add the CreateProposalModal Component
 />
 ```
 
-## Profile Screen
+### Profile Screen
 
 The Profile screen contains an input field through which users can contribute some Celo tokens \(at least 5 Celo\) to become a Contributor. Below are the static elements of the Profile screen. We will be adding the user actions in the Redux tutorial ahead.
 
@@ -1103,7 +1103,7 @@ export const ProfilePage = ({ navigation }) => {
 };
 ```
 
-## View Proposal Modal
+### View Proposal Modal
 
 The View Proposal modal component is imported into the Profile page and is displayed when a Proposal Card is clicked.
 
@@ -1185,13 +1185,13 @@ const closeIcon = (props) => {
 };
 ```
 
-# Next Steps
+## Next Steps
 
 All of our app pages are now complete!   
   
 To be able to interact with the smart contract on Celo, we will use Redux actions and reducers to connect with the functions in the smart contract. The next tutorial covers Redux and how to make these connections between actions performed by users and the smart contract functionality.
 
-# 3. Bringing it together with Redux
+# Bringing it together with Redux
 
 In this tutorial, we will complete our DAO and its dApp interface, writing the Redux code to connect our React Native app to the smart contract on Celo. We will look into how to connect the mobile app to the smart contract on the Celo network. This section contains Redux action creators for connecting to the contract, contributing to the DAO and so forth.  
   
