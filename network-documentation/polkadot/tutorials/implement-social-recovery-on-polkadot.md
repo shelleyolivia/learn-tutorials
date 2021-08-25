@@ -1,10 +1,4 @@
----
-description: How I learned to stop worrying and love social recovery!
----
-
-# Implement Social Recovery on Polkadot
-
-## Introduction
+# Introduction
 
 In this tutorial we will cover how to set up and utilize social recovery for a Polkadot proxy account. This tutorial assumes the reader has a working knowledge of JavaScript and Node JS. Although not necessary, it would help to have gone through the Polkadot Pathway which introduces the Polkadot JS API.
 
@@ -19,34 +13,29 @@ Because this is a means by which access to your funds could become compromised, 
 
 For the purposes of this tutorial, we will assume the role of all involved parties as a means of demonstrating the relevant code. It is up to developers to transfer this knowledge to a production environment in a responsible manner, keeping best practices and end-user security in mind.
 
-{% hint style="info" %}
-Throughout this tutorial, when `...` appears in an output block, it indicates that the text has been trimmed for readability. The terminal output from running the code locally will differ slightly from the examples, so do not be overly concerned if they do not match.
-{% endhint %}
+> Throughout this tutorial, when `...` appears in an output block, it indicates that the text has been trimmed for readability. Also, the terminal output from running the code locally will differ slightly from the examples, so do not be overly concerned if they do not match.
 
-## Setup
+# Setup
 
 Performing these setup steps for the purposes of following the tutorial should not be construed as the only way to implement social recovery. This is solely intended to enable readers to reach a minimum viable product, touching on all the relevant transaction types. This tutorial has two dependencies :
 
 * [dotenv](https://www.npmjs.com/package/dotenv)
 * [@polkadot/api](https://www.npmjs.com/package/@polkadot/api)
 
-Enter these commands into a terminal
+When we copy and paste all four of these commands into a terminal, the first three will execute in sequence. `npm init -y` will output the contents of the default `package.json` to the terminal. `npm install` will be on the commandline, however we must still **press enter** to start the installation process.
 
-```text
+```
 mkdir polkadot_sr
 cd polkadot_sr
 npm init -y
 npm install --save dotenv @polkadot/api
 ```
 
-When we copy and paste all four of these commands into a terminal, the first three will execute in sequence. `npm init -y` will output the contents of the default `package.json` to the terminal. `npm install` will be on the commandline, however we must still **press enter** to start the installation process.
-
 Once the installation process is complete, Create an `.env` file in the working directory  
 \(`/polkadot_sr`\). For convenience, copy and paste the template below. Read more about `dotenv`in our handy [quick-reference guide](../../extra-guides/dotenv-and-.env.md). Also, remember to replace `API_KEY` with a valid DataHub API key from the [Polkadot Services Dashboard](https://datahub.figment.io/services/polkadot).
 
-Path - /polkadot\_sr/.env
 
-```text
+```
 DATAHUB_URL=http://polkadot-westend--rpc.datahub.figment.io/apikey/API_KEY
 
 # Alice
@@ -66,11 +55,9 @@ CHARLIE_ADDRESS=
 CHARLIE_MNEMONIC=
 ```
 
-### Create 4 accounts
+## Create 4 accounts
 
 Create a file called `create_account.js` and paste the following code :
-
-Path - /polkadot\_sr/create\_account.js
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -102,11 +89,9 @@ Get Alice some funding to afford the deposit fees by going to [https://faucet.fi
 
 ![](../../../.gitbook/assets/flow1_big.png)
 
-### Add a proxy account for Alice
+# Add a proxy account for Alice
 
 Create a file called `create_proxy.js` and paste the following code :
-
-Path - /polkadot\_sr/create\_proxy.js
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -158,21 +143,19 @@ const main = async () => {
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
 
-`DELAY` is the announcement period required of the initial proxy request. This will generally be zero.
+- `DELAY` is the announcement period required of the initial proxy request. This will generally be zero.
 
-`PROXY_TYPE` will be **Staking**, as the other types of proxy are not sufficient or our purposes. Learn more about the account structure and the various proxy types on the [Polkadot Wiki](https://wiki.polkadot.network/docs/en/learn-accounts).
+- `PROXY_TYPE` will be **Staking**, as the other types of proxy are not sufficient or our purposes. Learn more about the account structure and the various proxy types on the [Polkadot Wiki](https://wiki.polkadot.network/docs/en/learn-accounts).
 
-`AMOUNT_TO_SEND` is equal to the full 12 decimal number representing the amount.
+- `AMOUNT_TO_SEND` is equal to the full 12 decimal number representing the amount.
 
-`addProxy()` requires a deposit in the native currency \(i.e. WND or DOT\), to pay for the necessary storage space on-chain. `api.consts.proxy.proxyDepositBase` is the base amount of currency that must be reserved when creating a proxy list. For every additional proxy added to the list, an amount defined by the `api.consts.proxy.proxyDepositFactor` is reserved as well.
+- `addProxy()` requires a deposit in the native currency \(i.e. WND or DOT\), to pay for the necessary storage space on-chain. `api.consts.proxy.proxyDepositBase` is the base amount of currency that must be reserved when creating a proxy list. For every additional proxy added to the list, an amount defined by the `api.consts.proxy.proxyDepositFactor` is reserved as well.
 
-`transfer()` takes a destination address and an amount - we are sending enough WND to the proxy account so that it can afford the deposit to initiate the recovery attempt. We add a `tip` to the validator when sending multiple non-batched transactions. This is to avoid one of them being assigned a priority too low to be executed.
+- `transfer()` takes a destination address and an amount - we are sending enough WND to the proxy account so that it can afford the deposit to initiate the recovery attempt. We add a `tip` to the validator when sending multiple non-batched transactions. This is to avoid one of them being assigned a priority too low to be executed.
 
 Run the code with `node create_proxy.js`. The expected output will look similar to this example :
 
-Output of /polkadot\_sr/create\_proxy.js
-
-```javascript
+```
 Required values  : .transfer(destination, amount)
 Submitted values : .transfer(5FsyYpFCETZpmexY3FZuD5oxK3viQwcDenHa5hiHsVyaqvYA, 2.0000 WND)
 transfer() tx: https://westend.subscan.io/extrinsic/...
@@ -184,10 +167,9 @@ Submitted values : .addProxy(5FsyYpFCETZpmexY3FZuD5oxK3viQwcDenHa5hiHsVyaqvYA, S
 addProxy() tx: https://westend.subscan.io/extrinsic/...
 ```
 
-{% hint style="info" %}
-**About amounts** :
-
-Observant readers will notice that the deposit factor displays as `1.6500 mWND` - this is because `formatBalance()` automatically adds an amount qualifier and truncates the display to four decimal places. mWND stands for micro-WND at 10 decimal places, whereas the smallest unit of a WND token would be a pWND or pico-WND, at 12 decimal places.
+> **About amounts** :
+>
+> Observant readers will notice that the deposit factor displays as `1.6500 mWND` - this is because `formatBalance()` automatically adds an amount qualifier and truncates the display to four decimal places. mWND stands for micro-WND at 10 decimal places, whereas the smallest unit of a WND token would be a pWND or pico-WND, at 12 decimal places.
 
 ```javascript
 formatBalance.setDefaults({
@@ -205,13 +187,10 @@ The `formatBalance.setDefaults()` call specifies the symbol for each unit of cur
 // 5,000,000,000,000 = 5.00000 WND
 //             1,337 = 0.0000000001337 WND (1337 pWND)
 ```
-{% endhint %}
 
-### Fund Bob & Charlie
+# Fund Bob & Charlie
 
 Create a file called `fund_friends.js` and paste the following code :
-
-Path - /polkadot\_sr/fund\_friends.js
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -260,9 +239,8 @@ main().catch((err) => { console.error(err) }).finally(() => process.exit());
 
 This is an example of how simple it is to batch transactions with PolkadotJS. All we have done here is define an array of transfers, which will then be automatically processed, signed and sent to the network with just a couple of method calls. Go ahead and run the code in the terminal with `node fund_friends.js` . The output will be similar to this example \(some removed for display\) :
 
-Output of node fund\_friends.js
 
-```javascript
+```bash
 Required values  : .batch([transactions])
 Submitted values : .batch([
   "0xac040400004c5f5c983eaa1a5ce7cf4462b4f527f69c3b9cb284e2ae941d1b8b3a85a...",
@@ -279,19 +257,16 @@ The submitted values are the hashed data for the transfer functions we set in th
 
 At this point, we are set up and should have a funded main account with a reserved balance of just over 1 WND, a functioning proxy account, and two separate accounts with 0.5 WND each. The next step is to create a recovery configuration. 
 
-## Create a recovery configuration
+# Create a recovery configuration
 
-{% hint style="warning" %}
-This step must be completed _**before**_ a seed phrase is lost!
-{% endhint %}
+> **NOTE:** This step must be completed _**before**_ a seed phrase is lost!
+
 
 ![](../../../.gitbook/assets/flow2_big%20%281%29.png)
 
 Creating a recovery configuration in storage requires a deposit to be paid. The base amount is fixed, with an additional deposit fee based on the number of friends we set up to be our social recovery contacts. 
 
 Create a file called `create_recovery.js` and paste the following code :
-
-Path - /polkadot\_sr/create\_recovery.js
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -338,20 +313,18 @@ const main = async () => {
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
 
-`THRESHOLD` is the number of individual vouch transactions required for social recovery to be triggered.
+- `THRESHOLD` is the number of individual vouch transactions required for social recovery to be triggered.
 
-`DELAY_PERIOD` is the number of blocks required to pass after a recovery attempt is started, before the recovery configuration can be claimed.
+- `DELAY_PERIOD` is the number of blocks required to pass after a recovery attempt is started, before the recovery configuration can be claimed.
 
-`DEPOSIT_BASE` and `DEPOSIT_FACTOR` are the values from `api.consts.recovery` which inform us of the amount to be set as a reserved balance. Recovery configs require deposits in the native currency   
+- `DEPOSIT_BASE` and `DEPOSIT_FACTOR` are the values from `api.consts.recovery` which inform us of the amount to be set as a reserved balance. Recovery configs require deposits in the native currency   
 \(i.e. WND or DOT\) in order to be created. The deposit is required because we are adding data to the storage space on-chain, which must be replicated across every peer in the network.
 
-`friends` is an array containing the addresses of our social recovery contacts. They need to be sorted and this array cannot contain any duplicates. There is an `api.consts.recovery.maxFriends` which limits the number of addresses - it is set to 9.
+- `friends` is an array containing the addresses of our social recovery contacts. They need to be sorted and this array cannot contain any duplicates. There is an `api.consts.recovery.maxFriends` which limits the number of addresses - it is set to 9.
 
 Run the code in a terminal with the command `node create_recovery.js` :
 
-Output of /polkadot\_sr/create\_recovery.js
-
-```javascript
+```
 configDepositBase + ( friendDepositFactor * number of friends ) 
  : 5.0000 WND + 1.0000 WND = 6.0000 WND
 
@@ -365,21 +338,15 @@ createRecovery tx: https://westend.subscan.io/extrinsic/...
 
 Be aware that we may encounter an `Error: 1010: Invalid Transaction` if there is not a sufficient balance in the Alice account to pay the deposit and network fees. We need a minimum of around 6 WND available balance, which we should have after visiting the faucet during setup.
 
-{% hint style="info" %}
-On Polkadot `configDepositBase` is 20.008 and the `friendDepositFactor`is 0.033.  
-So the required deposit amount for new social recovery configurations on Polkadot equals   
-\(in DOT\): `20.008 + (0.033 * num_friends)` 
-{% endhint %}
+> On Polkadot `configDepositBase` is 20.008 and the `friendDepositFactor`is 0.033.  
+So the required deposit amount for new social recovery configurations on Polkadot equals \(in DOT\): `20.008 + (0.033 * num_friends)` 
 
 At this point, we have the option to either remove the recovery store to regain the deposit amount with `removeRecovery()`, or start the recovery process by calling `initiateRecovery()` .
-
-## Initiate recovery from the proxy account
+# Initiate recovery from the proxy account
 
 ![](../../../.gitbook/assets/flow3_big.png)
 
 Create a file called `initiate_recovery.js` and paste the following code :
-
-Path - /polkadot\_sr/initiate\_recovery.js
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -414,17 +381,15 @@ const main = async () => {
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
 
-`initiateRecovery()` creates an active recovery request in storage, which then needs to be vouched for by our social recovery contacts. 
+- `initiateRecovery()` creates an active recovery request in storage, which then needs to be vouched for by our social recovery contacts. 
 
-The `api.consts.recovery.recoveryDeposit` amount will be automatically reserved from the available balance of the AliceProxy account - this is why we transferred 5.2 WND to the AliceProxy during setup. If the `recoveryDeposit` amount is not available on the Proxy, this step will fail. If `closeRecovery()` is called at this stage, the active recovery request will be removed, also refunding the `recoveryDeposit` to the recoverable account, Alice.
+- The `api.consts.recovery.recoveryDeposit` amount will be automatically reserved from the available balance of the AliceProxy account - this is why we transferred 5.2 WND to the AliceProxy during setup. If the `recoveryDeposit` amount is not available on the Proxy, this step will fail. If `closeRecovery()` is called at this stage, the active recovery request will be removed, also refunding the `recoveryDeposit` to the recoverable account, Alice.
 
-After `initiateRecovery()` has been called, it is possible to use `closeRecovery()` to prematurely end the recovery process without completing it. Once `closeRecovery()` has been called on all active recovery configurations, it is possible to call `removeRecovery()` - This will delete the recovery configuration from storage. This is useful in cases where it is necessary to alter the list of social recovery contacts, as there is no means of updating the list in place.
+- After `initiateRecovery()` has been called, it is possible to use `closeRecovery()` to prematurely end the recovery process without completing it. Once `closeRecovery()` has been called on all active recovery configurations, it is possible to call `removeRecovery()` - This will delete the recovery configuration from storage. This is useful in cases where it is necessary to alter the list of social recovery contacts, as there is no means of updating the list in place.
 
 Run `node initiate_recovery.js` :
 
-Output of /polkadot\_sr/initiate\_recovery.js
-
-```javascript
+```
 Recovery deposit: 5.0000 WND
 initiateRecovery() tx: https://westend.subscan.io/extrinsic/...
 ```
@@ -435,13 +400,11 @@ The way to be sure it has completed successfully is to follow the link to the Su
 
 
 
-## Vouch for recovery
+# Vouch for recovery
 
 ![](../../../.gitbook/assets/vouchfix.png)
 
 Create a file called `vouch_recovery.js` and paste the following code :
-
-Path - /polkadot\_sr/vouch\_recovery.js
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -481,22 +444,19 @@ Without this part of the process, social recovery is impossible. This is why it 
 
 Run `node vouch_recovery.js` :
 
-Output of /polkadot\_sr/vouch\_recovery.js
 
-```javascript
+```bash
 Bob vouch tx: https://westend.subscan.io/extrinsic/...
 Charlie vouch tx: https://westend.subscan.io/extrinsic/...
 ```
 
 In a live scenario involving accounts with actual value \(DOT instead of WND\), these functions would be called by separate individuals at different times. It would therefore be preferable \(although not entirely necessary\) to communicate with our social recovery contacts _in real time_ to coordinate this process.
 
-## Claim a recovery configuration
+# Claim a recovery configuration
 
 ![](../../../.gitbook/assets/flow5_big.png)
 
 Create a file called `claim_recovery.js` and paste the following code :
-
-Path - /polkadot\_sr/claim\_recovery.js
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -523,11 +483,11 @@ const main = async () => {
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
 
- It is important to note that `claimRecovery()` will fail if it is called before the `THRESHOLD` of `vouchRecovery()` functions have been successful. We must wait for confirmation from our social recovery contacts that they have done their part before proceeding to claim the recovery configuration. Once we aware that the vouch transactions are complete, run `node claim_recovery.js` :
+ It is important to note that `claimRecovery()` will fail if it is called before the `THRESHOLD` of `vouchRecovery()` functions have been successful. We must wait for confirmation from our social recovery contacts that they have done their part before proceeding to claim the recovery configuration.
+ 
+Once we aware that the vouch transactions are complete, run `node claim_recovery.js` :
 
-Output of /polkadot\_sr/claim\_recovery.js
-
-```javascript
+```
 claimRecovery tx: https://westend.subscan.io/extrinsic/...
 ```
 
@@ -535,13 +495,11 @@ Follow the link in the terminal output to check that the AliceProxy has successf
 
 ![](../../../.gitbook/assets/rec_acct.png)
 
-## Send transactions as the recovered account
+# Send transactions as the recovered account
 
 ![](../../../.gitbook/assets/flow6_big.png)
 
 Create a file called `use_recovery.js` and paste the following code :
-
-Path - /polkadot\_sr/use\_recovery.js
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -587,9 +545,7 @@ There is also a `cancelRecovered()` function which revokes the ability of a regi
 
 Run `node use_recovery.js` :
 
-Output of /polkadot\_sr/use\_recovery.js
-
-```javascript
+```
 Required values  : asRecovered(address, function)
 Submitted values : asRecovered(
     5CwJrhV9DaLncybk2vHbvt62SfwDfqMmPHVbo83u3iPkSDkc,
@@ -597,11 +553,9 @@ Submitted values : asRecovered(
 asRecovered tx: https://westend.subscan.io/extrinsic/...
 ```
 
-## Clean up with removeRecovery\(\)
+# Clean up with removeRecovery\(\)
 
 Create a file called `remove_recovery.js` and paste the following code :
-
-Path - /polkadot\_sr/remove\_recovery.js
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -656,18 +610,18 @@ main().catch((err) => { console.error(err) }).finally(() => process.exit());
 We will clean up the recovery configuration by first calling `closeRecovery()` and then `removeRecovery()` . This will refund the deposit we placed earlier to Alice, then send the WND tokens back to the Figment Faucet so that we are not unnecessarily tying up tokens. It must be understood that `removeRecovery()` can only be called once `closeRecovery()` __has been called on any active recovery requests_._   
 Regarding `signAndSend(Alice, { nonce: -1 })` , when sending multiple API calls signed by the same account, we must set the nonce directly to avoid an error about transaction priority.
 
-{% hint style="warning" %}
-_**Before running this code:**_  
-Check the available balance of the Alice account on SubScan. After the `recoveryDeposit` and the recovery configuration deposit have been recouped, there should be approximately 11-12 WND available to return to the faucet. If the Reserved balance of Alice is above the 1 WND required for the proxy account, then the other deposits have not been processed. We would therefore need to alter `AMOUNT-TO-SEND` so that the transfer is successful.
+>_**Before running this code:**_ 
+>
+> Check the available balance of the Alice account on SubScan. After the `recoveryDeposit` and the recovery configuration deposit have been recouped, there should be approximately 11-12 WND available to return to the faucet. 
+> If the Reserved balance of Alice is above the 1 WND required for the proxy account, then the other deposits have not been processed. We would therefore need to alter `AMOUNT-TO-SEND` so that the transfer is successful.
+>
+> We only need to return the available balance from our Alice account when we are done with the tutorial. If further testing of social recovery is necessary, do not proceed with this step. 
 
-We only need to return the available balance from our Alice account when we are done with the tutorial. If further testing of social recovery is necessary, do not proceed with this step. 
-{% endhint %}
 
-Run `node remove_recovery.js` : 
+Run `node remove_recovery.js` :
 
-Output of /polkadot\_sr/remove\_recovery.js
 
-```javascript
+```
 Required values  : .batch([transactions])
 Submitted values : .batch([
   "0x8c041206a806dbe17a11f61c09bff38ef9a78cdd1fde311ff8ee09ef241a95052903be66",
@@ -681,7 +635,8 @@ The events for successful removal of the recovery configuration and refund of th
 
 ![](../../../.gitbook/assets/remove_events.png)
 
+# Conclusion
+
 Congratulations! In this tutorial, we learned how to configure social recovery on Polkadot using functions like `createRecovery()` as well as transferring the associated deposit fees. We learned how to use the `formatBalance()` helper function to display readable amounts. We covered how to create a Staking type proxy account, as well as batching multiple transactions.
 
 We are now empowered to protect important assets on Polkadot with an additional layer of security that involves our friends.
-

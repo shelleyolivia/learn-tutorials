@@ -50,18 +50,17 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 * We created a `connection` instance of the `Connection` class using the `new` constructor
-* We then call `getVersion` on that `connection` instance. The docs state that `connection.getVersion()` returns a Promise so we chain `.then()` and a `.catch()` to respectively handle the case where the promise is fulfilled and rejected.
-* If the promise is fulfilled, we get a `version` object back, that we can store in our functional component's local state, using the `setVersion` exposed by the React hook `useState`.
+* We then call `getVersion` on that `connection` instance. The docs state that `connection.getVersion()` returns a Promise so we need to handle this with either `.then()`, or in a more compact manner with the nullish coalescing operator and optional chaining operator: `?.` In this way, `version?.["solana-core"]` will provide a safe value other than `undefined` when getting `version`!
 
 -----------------------------
 ## Make sure it works
 
-Once the code above save you can refresh the page to see the update
+Once the code above is saved in `pages/api/solana/connect.ts`, refresh the page to see it update & display the current version of the Solana software!
 
-![](../../../.gitbook/assets/polygon-connect.gif)
+![](../../../.gitbook/assets/solana-connect.gif)
 
 -----------------------------
 
 ## Next
 
-We're going to use this `connection` instance every time we need to connect to Solana. We're going to want to move some tokens around but first we need an account to hold tokens. That's what we'll do next!
+We're going to use this `connection` instance every time we need to connect to Solana. Now we're going to want to move some tokens around, but first we need an account to hold tokens! That's what we'll do in the next tutorial, create a keypair on Solana so that we have an account.

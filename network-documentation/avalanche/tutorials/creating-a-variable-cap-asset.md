@@ -1,6 +1,6 @@
 [**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset). 
 
-## Introduction
+# Introduction
 
 This tutorial illustrates how to create a variable-cap, fungible asset. No units of the asset exist when the asset is initialized, but more units of the asset may be minted. On asset creation we specify which sets of addresses may mint more units.
 

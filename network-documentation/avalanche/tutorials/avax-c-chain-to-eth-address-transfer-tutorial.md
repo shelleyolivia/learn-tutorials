@@ -93,7 +93,7 @@ That’s it! This tutorial has taught you how to transfer AVAX native tokens fro
 
 Try transferring your Fuji AVAX tokens by running this script and see if it worked.
 
-## About the author
+# About the author
 
 This tutorial was created by [Seongwoo Oh](https://github.com/blackwidoq). He is a student and an Avalanche novice.
 

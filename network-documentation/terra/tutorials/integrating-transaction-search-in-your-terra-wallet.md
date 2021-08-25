@@ -1,40 +1,28 @@
----
-description: >-
-  Learn how to create a simple transaction search widget using Figment's
-  Transaction Search API and DataHub
----
+# Introduction 
 
-# Create a transaction search widget
+Figment's Transaction Search API allows users to filter and query by account, transaction type, and date range. Users can also search by memo field and logs. Developers can now manipulate transaction data the way they want to instead of the way the blockchain intended them to. 
 
-## Introduction
+This tutorial describes how to create a simple Javascript widget showing the last transactions for given accounts account with basic filtering and pagination. We will not be using any framework in order to focus on the bare API calls. You can find the full code example [**here**](https://github.com/figment-networks/tutorials/pull/1/commits/3d8577d7d88b20b33b72eb23ae468899ee55284e). 
 
-Figment's Transaction Search API allows users to filter and query by account, transaction type, and date range. Users can also search by memo field and logs. Developers can now manipulate transaction data the way they want to instead of the way the blockchain intended them to.
+> **Note that we have removed the DataHub API key from the code snippets but they will be necessary to complete the tutorial. 
 
-This tutorial describes how to create a simple Javascript widget showing the last transactions for given accounts account with basic filtering and pagination. We will not be using any framework in order to focus on the bare API calls. You can find the full code example [**here**](https://github.com/figment-networks/tutorials/pull/1/commits/3d8577d7d88b20b33b72eb23ae468899ee55284e).
-
-{% hint style="info" %}
-Note that we have removed the DataHub API key from the code snippets but they will be necessary to complete the tutorial.
-{% endhint %}
-
-## Prerequisites
+# Prerequisites 
 
 * Basic knowledge of Javascript \(fetch API\)
 * Basic knowledge of HTML \(templates\)
 * Basic knowledge of CSS \(to style the component\)
 * Datahub API key \(which you can get here\)
 
-## Step 1. Creation of Datahub proxy
+# Step 1. Creation of Datahub proxy
 
-{% hint style="info" %}
-TL;DR Just copy paste and run code at the end of this step.
-{% endhint %}
+> TL;DR Just copy paste and run code at the end of this step.
 
-To create a link between the frontend application and Datahub, we need to create a proxy. We need a proxy for two purposes:
+To create a link between the frontend application and Datahub, we need to create a proxy. We need a proxy for two purposes: 
 
 * Hiding our DataHub API key from third parties
 * Ability to make requests to DataHub while avoiding CORS issues
 
-In order to stick with one language in this tutorial, we will create a simple Nodejs application that will direct all requests to the DataHub endpoint.
+In order to stick with one language in this tutorial, we will create a simple Nodejs application that will direct all requests to the DataHub endpoint. 
 
 First, let's create a `server.js` file with a simple HTTP handler file scheme:
 
@@ -55,9 +43,9 @@ We can then run this file using:
 DATAHUB_KEY=YOUR_APIKEY node server.js
 ```
 
-This would run the service on [http://localhost:8080/](http://localhost:8080/).
+This would run the service on [http://localhost:8080/](http://localhost:8080/). 
 
-Now, let's extend the server function with two snippets. First, we'll need to add the CORS browser preflight for in-browser requests. We need to allow particular headers, origins, and methods requests directly from the browser.
+Now, let's extend the server function with two snippets. First, we'll need to add the CORS browser preflight for in-browser requests. We need to allow particular headers, origins, and methods requests directly from the browser. 
 
 For the local test it should look like this:
 
@@ -79,22 +67,22 @@ The other code snippet is a little bit more complex. It allows requests to be di
 
 ```javascript
 const hReq = https.request(options, (innerRes) => {
-    innerRes.headers['content-type'] = 'application/json';
-    res.writeHead(innerRes.statusCode, innerRes.headers);
-
-    innerRes.on("error", (error) => {
-      res.write(error);
-      res.end();
-    });
-    innerRes.on("data", (data) => {
-      res.write(data);
-    });
-    innerRes.on("end", () => {
-      res.end();
-      hReq.end();
-    });
+	innerRes.headers['content-type'] = 'application/json';
+	res.writeHead(innerRes.statusCode, innerRes.headers);
+	
+	innerRes.on("error", (error) => {
+	  res.write(error);
+	  res.end();
+	});
+	innerRes.on("data", (data) => {
+	  res.write(data);
+	});
+	innerRes.on("end", () => {
+	  res.end();
+	  hReq.end();
+	});
 });
-
+	
 req.on('data', data => {
   hReq.write(data)
 })
@@ -154,16 +142,16 @@ http.createServer(function (req, res) {
     })
 
   })
-  .listen(PORT);
+  .listen(PORT); 
 ```
 
-## Step 2. Creation of application scheme
+# Step 2. Creation of application scheme
 
 The first step for the frontend app will be to create three files: `index.html` `style.css` and `lib.js`
 
 ### `index.html`
 
-```markup
+```
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -237,15 +225,15 @@ class SearchRequest {
     addAccounts(accounts) {
         this.account = accounts;
     }
-
+ 
     addSenders(accounts) {
         this.sender = accounts;
     }
-
+ 
     addReceivers(accounts) {
         this.receiver = accounts;
     }
-
+ 
     addType(types) {
         this.type = types;
     }
@@ -278,11 +266,9 @@ class Widget {
 
 The `lib.js` file contains two classes `Widget` which will be our main class / controller for the widget, and `SearchRequest` which is a data structure for request parameters containment.
 
-In order to check if our script is working, let's add a javascript snippet at the bottom of the `index.html` file:
+To check if our script is working, let's add a javascript snippet inside a `<script>` tag at the bottom of the `index.html` file:
 
-```markup
-    ...
-
+```
    <script type="text/javascript">
         sr = new SearchRequest("terra", 30); 
         w = new Widget("transactions-container", sr);
@@ -292,7 +278,7 @@ In order to check if our script is working, let's add a javascript snippet at th
 </html>
 ```
 
-## Step 3. Simple request
+# Step 3. Simple request
 
 Let's now add a data request ability for the transactions widget. In order to do so, we will add a few methods to the `Widget` class:
 
@@ -343,7 +329,7 @@ function compareTransactions(a,b) {
 
 We will use `transactionsMap` as the filter for the transactions so we don't add the same transaction twice. We can do that based on the `tx.id` field that is guaranteed to be unique in the `network` scope.
 
-## Step 4. Rendering
+# Step 4. Rendering
 
 We will now call the `makeRequest(sr)` render function so that we can construct the widget contents. There are many different ways to handle this call, such as rendering cycles or event reducing processes, but for the sake of this tutorial, we will use the most straightforward approach.
 
@@ -440,9 +426,9 @@ linkTemplates() {
   }
 ```
 
-In this example, rendering works by copying template elements and injecting them into nodes.
+In this example, rendering works by copying template elements and injecting them into nodes. 
 
-Next, you'll see only a part of all the functions needed to create the list. You can find the rest of the code here.
+Next, you'll see only a part of all the functions needed to create the list. You can find the rest of the code here. 
 
 ```javascript
 function createTransactionElem(tx, templates) {
@@ -503,7 +489,7 @@ function createSubElem(sub, templates) {
             elm.classList.add("staking");
             elm.appendChild(createStakingElem(sub, templates));
             break;
-                // and all the other types we would like to support
+				// and all the other types we would like to support
         default:
 
     }
@@ -511,7 +497,7 @@ function createSubElem(sub, templates) {
 }
 ```
 
-We have added some extra information to the snippet but it remains optional.
+We have added some extra information to the snippet but it remains optional. 
 
 First, we'll shorten the sums of the long hashes:
 
@@ -576,13 +562,13 @@ reformatDates() {
   }
 ```
 
-## Step 5. Interaction
+# Step 5. Interaction
 
-To interact with the widget, users will need to attach external values to the initial state and resetting it.
+To interact with the widget, users will need to attach external values to the initial state and resetting it. 
 
-### 5.1 Initialization
+## 5.1 Initialization
 
-On the `init` widget, we would like to get the initial transaction values:
+On the `init` widget, we would like to get the initial transaction values: 
 
 ```javascript
 initialRequest() {
@@ -590,7 +576,7 @@ initialRequest() {
   }
 ```
 
-### 5.2 Load More
+## 5.2 Load More
 
 Then, the data can be paginated by storing the page variables in an external variable and incrementing it after every call. We also need to attach an event handler to the proper HTML elements:
 
@@ -608,7 +594,7 @@ attachEvents() {
   }
 ```
 
-### 5.3 Pick type
+## 5.3 Pick type
 
 To attach a type filter to the widget, we need to create HTML inputs, and then attach them to the change events.
 
@@ -671,7 +657,7 @@ attachEvents() {
 
 Finally, we need to clear the previous list before applying filters and make sure that we start from the first page. It can be done using some sophisticated caching mechanism, but for this tutorial, this approach will be sufficient.
 
-## Step 6. Initial Parameters
+# Step 6. Initial Parameters
 
 If we would like this widget to work in a narrow scope, we need to pass it through the initial request. Let's say that this widget is supposed to show data from only our account.
 
@@ -689,19 +675,19 @@ initialRequest() {
    <script type="text/javascript">
         sr = new SearchRequest("terra", 30); 
 
-                // any initial parameters you like
+				// any initial parameters you like
 
-                // cetrain account
-                sr.addAccounts("terra1fnsu4x447XXXXXXXXXXXXXXqudty");
+				// cetrain account
+				sr.addAccounts("terra1fnsu4x447XXXXXXXXXXXXXXqudty");
 
-                // given timerange
-                const now = Date.now();
+				// given timerange
+				const now = Date.now();
         sr.timeAfter(new Date(now - (1000 * 3600 * 24 * 7))); // a week ago
         sr.timeBefore(new Date(now));
 
         w = new Widget("transactions-container", sr);
         w.setRequest("http://localhost:8080"); 
-                w.liveDates();
+				w.liveDates();
         w.initialRequest();
         w.attachEvents();
    </script>
@@ -709,15 +695,13 @@ initialRequest() {
 </html>
 ```
 
-{% hint style="info" %}
-Narrowing down the search time range would significantly improve its performance and allow it to receive a response much faster. In such a case, both parameters \(pair `after_time` and `before_time` or `after_height` and `before_height` \) are required.
-{% endhint %}
+> Narrowing down the search time range would significantly improve its performance and allow it to receive a response much faster. In such a case, both parameters \(pair `after_time` and `before_time` or `after_height` and `before_height` \) are required.
 
-## Final Thoughts
+
+# Conclusion
 
 Congratulations, you've built your first implementation of the Transaction Search API. You should now have what it takes to implement it in your DApp and leverage the full power of Transaction Search.
 
-If you haven't done so already, remember to [**sign up now**](https://figment.io/datahub-waitlist/) \_\*\*\_to start building in minutes and discover the superpowers Datahub can offer you!
+If you haven't done so already, remember to [**sign up now**](https://figment.io/datahub-waitlist/) ****to start building in minutes and discover the superpowers Datahub can offer you!  
 
 If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
-

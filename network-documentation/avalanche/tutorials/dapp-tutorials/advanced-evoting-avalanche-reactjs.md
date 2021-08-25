@@ -1127,17 +1127,17 @@ Don't forget to set up Metamask with Fuji testnet and also fund the account with
 | Currency Symbol | AVAX-C |
 | Block Explorer URL | [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network) |
 
-## Conclusion
+# Conclusion
 
 You have successfully built a full-fledged e-voting dApp with advanced features like creating custom elections, voting in them and deployed the smart contract on the Fuji test network using Truffle Suite. Along with that, we have also built the client-side application using ReactJS for interacting with the network. From this tutorial, you have learned not only how to make make and deploy smart contracts but also how to integrate ReactJS with the blockchain using Truffle Suite.
 
 ![](https://imgur.com/bjdWr35.gif)
 
-## What's next?
+# Next Steps
 
 Now that we have built and deployed a voting dApp, we can make new elections with a title and description, and vote on them separately. Some recommended features to add would be the ability to add start and end dates for an election, declaring the winner after the election has ended, or UI enhancements like modal windows and styled buttons.
 
-## About the author
+# About the author
 
 This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/rranjan01234/) and [GitHub](https://github.com/rajranjan0608)
 

@@ -1,15 +1,15 @@
 # 
 
-With some protocols, different networks (testnet, mainnet, etc) have different tokens names. For example with Polkadot, the mainnet token is *DOT* and the testnet token is *WND*. But in the Solana world, the token is always called **SOL**, no matter what network (or **cluster**) you are on. But don't get too excited: the tokens you get for free on the devnet cannot be used on Solana's mainnet. Nice try though.
+With some protocols, different networks (testnet, mainnet, etc) have different tokens names. For example with Polkadot, the mainnet token is *DOT* and the testnet token is *WND*. In the Solana world, the token is always called **SOL**, no matter what network (or **cluster**) you are on. Don't get too excited: the tokens you get for free on the devnet cannot be used on Solana's mainnet. Nice try though 😉
 
 ----------------------------------
 
 ## Airdropping
 
-To fund an account, we will do what is called an **airdrop** some tokens will magically fall from the sky onto our wallets! This will provide us with some **SOL** so that we can test making transfers as well as view the transaction details on a block explorer.
+To fund an account, we will do what is called an **airdrop** - some tokens will magically fall from the sky into our wallets! The cluster will provide us with some **SOL** so that we can test making transfers as well as view the transaction details on a block explorer.
 
 {% hint style="info" %}
-1 **SOL** is equal to 1,000,000,000 **lamports**.The name of **lamports** is in honour of Solana's biggest technical influence, [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport).
+1 **SOL** is equal to 1,000,000,000 **lamports**. The name of **lamports** is in honour of Solana's biggest technical influence, [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport).
 {% endhint %}
 
 ----------------------------------
@@ -69,20 +69,20 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 
-* We created a `PublicKey` from the string formated address
-* We passed it to `requestAirdrop` together with a constant wich repesent one `SOL`
-* We verify than the transaction is confirmed
-* Then we return the hash of the transaction for the UI.
+* We created a `PublicKey` from the string formatted address.
+* We pass this to `requestAirdrop`, together with a constant which represents one `SOL`
+* We can then verify than the transaction is confirmed by passing the transaction hash to the `confirmTransaction` method.
+* Finally, we return the hash of the transaction to the client side in JSON format.
 
 ----------------------------------
 
 ## Make sure it works
 
 Once you have the code above saved:
-* Copy and paste the genrated address in the text input.   
+* Copy and paste the generated address into the text input.   
 * Click on **Fund this Address** 
 
-And let's the magic happen
+Let the magic happen: You're now 1 SOL richer on devnet!
 
 ![](../../../.gitbook/assets/solana-fund-v3.gif)
 
@@ -90,4 +90,4 @@ And let's the magic happen
 
 ## Next
 
-Before we make our first transfer, let's first check that that the account is correctly funded.
+Before we make our first transfer, let's check that that the account is actually funded by asking the cluster for our balance!

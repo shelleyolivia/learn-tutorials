@@ -1,6 +1,6 @@
 # 
 
-## Requirements
+# Requirements
 
 * [Node.js](https://nodejs.org) v14+ installed (we recommend using [nvm](https://github.com/nvm-sh/nvm))
 * [yarn](https://yarnpkg.com/) 
@@ -77,6 +77,6 @@ We use the testnet for development before moving into production on the main net
 
 -------------------------------------
 
-## Next Steps
+# Next Steps
 
 Now that we have our environment set up we can connect to the network.

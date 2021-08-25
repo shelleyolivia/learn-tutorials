@@ -4,7 +4,7 @@ description: Learn how to create an account to start building on Terra
 
 # Creating your first Terra account with the Terra SDK
 
-## Introduction
+# Introduction
 
 In this tutorial, we will be creating your first Terra account using the Terra SDK and [**DataHub**](https://figment.io/datahub-waitlist/).
 

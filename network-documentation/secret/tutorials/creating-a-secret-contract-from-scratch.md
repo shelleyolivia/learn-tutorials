@@ -1,6 +1,6 @@
 # Developing your first secret contract
 
-## Introduction
+# Introduction
 
 In this tutorial you will learn the basics of creating a new secret contract from scratch. You will learn the basics of handling messages and storing data for your contract on the chain. The contract that you make will allow individual users to store a private reminder on the secret network that can be read back at a later time. Using a secret contract for such a task is probably overkill, but it will teach you the basics of secret contract construction which provides a foundation for building more complex secret dapps using the same principles.
 
@@ -478,7 +478,7 @@ fn query_stats<S: Storage, A: Api, Q: Querier>(deps: &Extern<S, A, Q>) -> StdRes
 
 You now have a working reminder secret contract! The completed contract code can be found [here](https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial1/code).
 
-## Next steps
+# Next Steps
 
 Unlike a normal web service, there is no mechanism for a secret contract to repeatedly push information through an open socket connection in response to a handle or query message. Instead, if you want to support that behavior, then you must develop a pull mechanism where the client makes repeated executions of the contract. However, as our contract currently implements the functionality of reading a reminder as a handle execution that would very quickly cost the user a lot of `SCRT` due to gas fees! The solution is to create a private viewing key that allows a user to see their own reminder using a query instead of a handle message. In the next tutorial we will show how that can be done in the context of a simple React application.
 
@@ -488,10 +488,10 @@ Unlike a normal web service, there is no mechanism for a secret contract to repe
 
 **2**: These functions are based on the [Sealed Bid Auction contract code](https://github.com/baedrik/SCRT-sealed-bid-auction/blob/master/src/state.rs).[↩](creating-a-secret-contract-from-scratch.md#a2)
 
-## About the author
+# About the author
 
 This tutorial was written by Ben Adams, a senior lecturer in computer science and software engineering at the University of Canterbury in New Zealand.
 
-[![Creative Commons License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)  
+ [![Creative Commons License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)  
 This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
 

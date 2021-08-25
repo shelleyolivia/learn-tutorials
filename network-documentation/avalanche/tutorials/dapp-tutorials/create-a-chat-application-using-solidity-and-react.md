@@ -956,7 +956,7 @@ Congratulations! We have successfully deployed a decentralized chat application 
 
 To resolve this error, doublecheck that you have updated the `CONTRACT_ADDRESS` variable in `src/index.js.`
 
-# What's Next
+# Next Steps
 
 This dApp has very limited functionality. We can improve it by adding functions to delete messages, block users, or create groups of friends.  
 We could also optimize the dApp interaction cost with functions to limit the maximum number of messages, or possibly using event log for short messages.

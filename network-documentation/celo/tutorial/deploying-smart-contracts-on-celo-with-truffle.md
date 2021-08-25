@@ -1,22 +1,10 @@
----
-description: >-
-  We will learn how to use Truffle and ContractKit to deploy smart contracts to
-  Celo.
----
-
-# Deploying smart contracts on Celo with Truffle
-
-## About the Author
-
-This tutorial was created by [Alex Reyes](https://www.linkedin.com/in/alexreyes-tech). Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He completed his previous internships at Facebook and Microsoft.
-
-## Introduction
+# Introduction
 
 How would you go about deploying an existing Solidity smart contract on the Celo network? One answer is that you could do it with the help of Truffle -- a development environment that is designed to make deploying smart contracts much easier.
 
 Read on to learn how to deploy smart contracts on Celo with Truffle!
 
-## Prerequisites
+# Prerequisites
 
 This tutorial would be most helpful if you have a smart contract you've written which you'd like to deploy on Celo. If not, that's okay as we will be deploying the default Truffle Migrations contract.
 
@@ -75,12 +63,12 @@ contract Migrations {
 
   modifier restricted() {
     require(
-      msg.sender == owner,"This function is restricted to the contract's owner");
-      _;
+	  msg.sender == owner,"This function is restricted to the contract's owner");
+	  _;
   }
 
   function setCompleted(uint completed) public restricted {
-    last_completed_migration = completed;
+	last_completed_migration = completed;
   }
 }
 ```
@@ -159,16 +147,16 @@ require('dotenv').config();
 
 const main =  async  ()  =>  {
     const web3 =  new  Web3(process.env.REST_URL);
-    const client = ContractKit.newKitFromWeb3(web3);
+	const client = ContractKit.newKitFromWeb3(web3);
 
-    const account = web3.eth.accounts.create();
+	const account = web3.eth.accounts.create();
 
-    console.log('address: ', account.address);
+	console.log('address: ', account.address);
     console.log('privateKey: ', account.privateKey);
 };
 
 main().catch((err)  =>  {
-    console.error(err);
+	console.error(err);
 });
 ```
 
@@ -300,7 +288,7 @@ You should see a successful contract deployment at that address!
 
 [![block explorer](https://camo.githubusercontent.com/2d23c68351d5f73727daf04dad01cc6efd9a82e5678789d61436c608865036eb/68747470733a2f2f692e696d6775722e636f6d2f6e6c32383869612e706e67)](https://camo.githubusercontent.com/2d23c68351d5f73727daf04dad01cc6efd9a82e5678789d61436c608865036eb/68747470733a2f2f692e696d6775722e636f6d2f6e6c32383869612e706e67)
 
-## Conclusion
+# Conclusion
 
 Congratulations! You've just deployed a smart contract on the Celo network using Truffle!
 
@@ -308,7 +296,7 @@ Now that you've finished the tutorial, you should have a basic understanding of 
 
 The complete source code for this tutorial can be found on [GitHub](https://github.com/alexreyes/Celo-Deploying-With-Truffle).
 
-## Next steps
+# Next Steps
 
 Now that you've learned how to deploy smart contracts on Celo using Truffle, you can build new use cases for the cryptoeconomy on Celo! To learn more Solidity, check out Solidity by Example. You can also continue the other tutorials on [Figment Learn](https://learn.figment.io/).
 
@@ -341,4 +329,8 @@ If you want to double check that your account received the funds, go to the [Alf
 Make sure your account isn't empty like this one!
 
 [![empty account](https://camo.githubusercontent.com/60a2da1b381d2d9f9c21ade38e54f3793ead7bf2162d4eb7ccb8297733494cbc/68747470733a2f2f692e696d6775722e636f6d2f795055594353442e706e67)](https://camo.githubusercontent.com/60a2da1b381d2d9f9c21ade38e54f3793ead7bf2162d4eb7ccb8297733494cbc/68747470733a2f2f692e696d6775722e636f6d2f795055594353442e706e67)
+
+# About the author
+
+This tutorial was created by [Alex Reyes](https://www.linkedin.com/in/alexreyes-tech). Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He completed his previous internships at Facebook and Microsoft.
 

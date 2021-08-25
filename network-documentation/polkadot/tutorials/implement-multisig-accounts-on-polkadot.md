@@ -1,10 +1,4 @@
----
-description: Bring your friends along for the ride!
----
-
-# Implement Multisig Accounts on Polkadot
-
-## Introduction
+# Introduction
 
 In this tutorial we will cover the process of creating a multisig - an account which shares authority for transactions across multiple addresses. The word "multisig" stands for "multiple signature". For the purposes of this tutorial, we will generate two additional accounts and ensure they are both funded with enough WND to cover the existential deposit and to send a few transactions. These will be used to simulate the other signing parties of the multisig wallet.
 
@@ -16,24 +10,22 @@ Check out the [Polkadot API documentation](https://polkadot.js.org/docs/substrat
 
 ![](../../../.gitbook/assets/total_flow-fix.png)
 
-{% hint style="info" %}
-From the Polkadot JS API documentation:
+> From the Polkadot JS API documentation:
 
-_It is possible to create a multi-signature account in Substrate-based chains. A multi-signature account is composed of one or more addresses and a threshold. The threshold defines how many signatories \(participating addresses\) need to agree on the submission of an extrinsic in order for the call to be successful._
-
-_For example, Alice, Bob, and Charlie set up a multi-sig with a threshold of 2. This means Alice and Bob can execute any call even if Charlie disagrees with it. Likewise, Charlie and Bob can execute any call without Alice. A threshold is typically a number smaller than the total number of members but can also be equal to it, which means they all have to be in agreement._
+> _It is possible to create a multi-signature account in Substrate-based chains. A multi-signature account is composed of one or more addresses and a threshold. The threshold defines how many signatories \(participating addresses\) need to agree on the submission of an extrinsic in order for the call to be successful._
+>
+> _For example, Alice, Bob, and Charlie set up a multi-sig with a threshold of 2. This means Alice and Bob can execute any call even if Charlie disagrees with it. Likewise, Charlie and Bob can execute any call without Alice. A threshold is typically a number smaller than the total number of members but can also be equal to it, which means they all have to be in agreement._
 
 also:  
   
-_Multi-signature accounts **cannot be modified after being created**. Changing the set of members or altering the threshold is not possible and instead requires the dissolution of the current multi-sig and creation of a new one. As such, multi-sig account addresses are **deterministic**, i.e. you can always calculate the address of a multi-sig just by knowing the members and the threshold, without the account existing yet. This means one can send tokens to an address that does not exist yet, and if the entities designated as the recipients come together in a new multi-sig under a matching threshold, they will immediately have access to these tokens._
+> _Multi-signature accounts **cannot be modified after being created**. Changing the set of members or altering the threshold is not possible and instead requires the dissolution of the current multi-sig and creation of a new one. As such, multi-sig account addresses are **deterministic**, i.e. you can always calculate the address of a multi-sig just by knowing the members and the threshold, without the account existing yet. This means one can send tokens to an address that does not exist yet, and if the entities designated as the recipients come together in a new multi-sig under a matching threshold, they will immediately have access to these tokens._
 
 _also:_
 
-While Westend is meant to replicate the Polkadot mainnet as closely as possible, there are a few notable differences:
-
-* Existential deposit is equal to 0.01 WND \(Westies; Westend's native coin\) instead of 1 DOT.
-* The multi signature transaction deposit is equal to ~1 WND instead of ~20.2 DOT.
-{% endhint %}
+> While Westend is meant to replicate the Polkadot mainnet as closely as possible, there are a few notable differences:
+>
+> * Existential deposit is equal to 0.01 WND \(Westies; Westend's native coin\) instead of 1 DOT.
+> * The multi signature transaction deposit is equal to ~1 WND instead of ~20.2 DOT.
 
 ## Setup
 
@@ -49,26 +41,22 @@ This tutorial has the following two dependencies which must be installed via the
 * [dotenv](https://www.npmjs.com/package/dotenv)
 * [@polkadot/api](https://www.npmjs.com/package/@polkadot/api)
 
-### Initialize the project directory
+## Initialize the project directory
 
-{% tabs %}
-{% tab title="Enter these commands into a terminal" %}
-```bash
+```
 mkdir polkadot_ms
 cd polkadot_ms
 npm init -y
 npm install --save dotenv @polkadot/api
 ```
-{% endtab %}
-{% endtabs %}
 
 When we copy and paste all four of these commands into a terminal, the first three will execute in sequence because they have an invisible carriage return \(enter\) character at the end of the line. `mkdir polkadot_ms` will create a new sub-directory called `polkadot_ms`, then the `cd` command changes the working directory. `npm init -y` will output the contents of the default `package.json` to the terminal. At this point, the `npm install` portion will be on the commandline, however we must still **press enter** to start the installation process.
 
 Once the installation process is complete, create an `.env` file in the project directory. For convenience, copy and paste the template below. Read more about `dotenv`in our handy [quick-reference guide](../../extra-guides/dotenv-and-.env.md). Also, remember to replace `API_KEY` with a valid DataHub API key from the [Polkadot Services Dashboard](https://datahub.figment.io/services/polkadot).
 
-{% tabs %}
-{% tab title="/polkadot\_ms/.env" %}
-```javascript
+
+```bash
+# paste the following into your .env file
 DATAHUB_URL=https://polkadot-westend--rpc.datahub.figment.io/apikey/API_KEY
 
 MULTISIG_ADDRESS=
@@ -85,16 +73,14 @@ BOB_MNEMONIC=
 CHARLIE_ADDRESS= 
 CHARLIE_MNEMONIC=
 ```
-{% endtab %}
-{% endtabs %}
 
-### Create 3 accounts
+## Create 3 accounts
 
 Create a file called `create_account.js` and paste the following code :
 
-{% tabs %}
-{% tab title="/polkadot\_sr/create\_account.js" %}
+
 ```javascript
+// create_accoount.js
 const { ApiPromise, Keyring } = require('@polkadot/api');
 const { HttpProvider } = require('@polkadot/rpc-provider');
 const { mnemonicGenerate } = require('@polkadot/util-crypto');
@@ -113,8 +99,7 @@ const main = async () => {
 
 main().catch((err) => {console.error(err)}).finally(() => process.exit());
 ```
-{% endtab %}
-{% endtabs %}
+
 
 In a terminal window, run `node create_account.js` 3 \(_three_\) times in order to generate the data we require. Copy/paste the mnemonics & addresses for each new account into the supplied`.env` template. 
 
@@ -125,14 +110,12 @@ Fund the Alice account by visiting [https://faucet.figment.io](https://faucet.fi
 
 There are three types of actions to be taken with a multi-sig account. Executing a call, approving a call, or cancelling a call.
 
-## Create a Multisig account
+# Create a Multisig account
 
 ![Click to enlarge.](../../../.gitbook/assets/encode_flow-fix.png)
 
 Create a file called `create_multisig.js` and paste the following code :
 
-{% tabs %}
-{% tab title="/polkadot\_ms/create\_multisig.js" %}
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
 const { sortAddresses, encodeMultiAddress } = require('@polkadot/util-crypto');
@@ -189,8 +172,6 @@ const main = async () => {
 
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
-{% endtab %}
-{% endtabs %}
 
 `SS58PREFIX` is used to encode our address for use on different chains. The `0` value will encode our multisig address for the Polkadot relay chain, therefore the encoded address will begin with the number `1` . The Parity team maintains a [registry of the SS58 types](https://github.com/paritytech/substrate/blob/master/ss58-registry.json), which might come in handy when working with various para-chains.
 
@@ -204,9 +185,7 @@ main().catch((err) => { console.error(err) }).finally(() => process.exit());
 
 Run the code with `node create_multisig.js` :
 
-{% tabs %}
-{% tab title="Output from node create\_multisig.js" %}
-```bash
+```
 Multisig Address: 5CPnQhU8TCvtbaJQEYEPuYhgbwpeGqhx6uErZJ7QDcaD7aX9
 
 Other Signatories: [
@@ -218,14 +197,11 @@ Sending 1 WND from 5Ekc5BsbkAgSbSYwi4W1CnpYLFzwUDJ4WGvohSzNcau2ZDLp
 to 5GL63QD2HhXvBMcP9skdjq8H5Znhe7Fke83aWENHPGRMvJSA, 5GpDZiUMpdX2GcGJzAZVX36kSGoScraCLEjTTgvhufEokRCX
 transfer tx: https://westend.subscan.io/extrinsic/...
 ```
-{% endtab %}
-{% endtabs %}
 
-{% hint style="info" %}
-Remember to copy and paste the resulting value for Multisig Address into `.env` as`MULTISIG_ADDRESS` in preparation for the next step! 
-{% endhint %}
 
-## Fund a Multisig account
+> Remember to copy and paste the resulting value for Multisig Address into `.env` as `MULTISIG_ADDRESS` in preparation for the next step! 
+
+# Fund a Multisig account
 
 ![Click to enlarge.](../../../.gitbook/assets/transfer_flow-fix.png)
 
@@ -233,8 +209,6 @@ Funding the multisig wallet is an important step in this tutorial process, so th
 
 Create a file called `fund_multisig.js` and paste the following code :
 
-{% tabs %}
-{% tab title="/polkadot\_ms/fund\_multisig.js" %}
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
 const { HttpProvider } = require('@polkadot/rpc-provider');
@@ -270,8 +244,6 @@ const main = async () => {
 
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
-{% endtab %}
-{% endtabs %}
 
 The function `formatBalance.setDefaults()` enables us to specify a unit name and decimals. Since we are operating on the Westend testnet, WND is appropriate. As we can see, `AMOUNT_TO_SEND` will be specified as a big number - 2 trillion pWND ****\(**p** for **pico**, denoting a factor of , in this case\) - though we can display it in a readable and preformatted way using `formatBalance()` . It can be useful to visualize `amountToSend` at twelve decimal places like this : 
 
@@ -283,16 +255,12 @@ To complete the action of funding the specified multisig account, paying from th
 
 Run the code with `node fund_multisig.js` : 
 
-{% tabs %}
-{% tab title="Output from node fund\_multisig.js" %}
 ```bash
 Sending 2.0000 WND 
 from 5Ekc5BsbkAgSbSYwi4W1CnpYLFzwUDJ4WGvohSzNcau2ZDLp 
 to 5CPnQhU8TCvtbaJQEYEPuYhgbwpeGqhx6uErZJ7QDcaD7aX9
 transfer tx: https://westend.subscan.io/extrinsic/...
 ```
-{% endtab %}
-{% endtabs %}
 
 The [SubScan](https://westend.subscan.io/) page will include these 4 events. Refer to the following examples of successful events. 
 
@@ -304,14 +272,12 @@ The [SubScan](https://westend.subscan.io/) page will include these 4 events. Ref
 
 ![](../../../.gitbook/assets/system-newaccount.png)
 
-## Execute a Multisig transfer
+# Execute a Multisig transfer
 
 ![Click to enlarge.](../../../.gitbook/assets/approveasmulti_flow-fix.png)
 
 Create a file called `transfer_multisig.js` and paste the following code :
 
-{% tabs %}
-{% tab title="/polkadot\_ms/transfer\_multisig.js" %}
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
 const { HttpProvider } = require('@polkadot/rpc-provider');
@@ -373,15 +339,11 @@ const main = async () => {
   
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
-{% endtab %}
-{% endtabs %}
 
 `THRESHOLD` and `otherSignatories` should be familiar, `TIME_POINT` must be `null` if this is the first approval for the multisig. `call.method.hash` does what it says, returning a hashed representation of the method data of the transfer. `MAX_WEIGHT` refers to the maximum weight of the call, although this is not clearly stated in the API documentation, it has to do with fee calculation. Weight is a fixed number designed to manage block validation times. It can be supplemented with an optional tip. Read more about Polkadot transaction fees [here](https://wiki.polkadot.network/docs/en/learn-transaction-fees).
 
 Run the code with `node transfer_multisig.js` :
 
-{% tabs %}
-{% tab title="Output from node transfer\_multisig.js" %}
 ```bash
 depositBase   : 1.0044 WND
 depositFactor : 1.6000 mWND
@@ -396,19 +358,15 @@ Submitted values : approveAsMulti(2, otherSignatories: [
 
 approveAsMulti tx: https://westend.subscan.io/extrinsic/...
 ```
-{% endtab %}
-{% endtabs %}
 
 ![](../../../.gitbook/assets/multisig_action.png)
 
-## Approve a Multisig transfer
+# Approve a Multisig transfer
 
 ![Click to enlarge.](../../../.gitbook/assets/asmulti-flow.png)
 
 Create a new file called`approve_multisig.js` and paste the following code : 
 
-{% tabs %}
-{% tab title="/polkadot\_ms/approve\_multisig.js" %}
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
 const { HttpProvider } = require('@polkadot/rpc-provider');
@@ -467,8 +425,6 @@ const main = async () => {
 
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
-{% endtab %}
-{% endtabs %}
 
 `call.method.toHex()` differs from `call.method.hash` in that `toHex()` is only going to pass along a hexadecimal representation of the method, but not the full method hash.
 
@@ -476,8 +432,6 @@ If we encounter `Error: Option: unwrapping a None value` it means that the `unwr
 
 Run the code with `node approve_multisig.js` :
 
-{% tabs %}
-{% tab title="Output of node approve\_multisig.js" %}
 ```bash
 Time point is: {"height":5556711,"index":2}
 Sending 1.0000 WND 
@@ -485,15 +439,12 @@ from 5CPnQhU8TCvtbaJQEYEPuYhgbwpeGqhx6uErZJ7QDcaD7aX9
 to 5GpDZiUMpdX2GcGJzAZVX36kSGoScraCLEjTTgvhufEokRCX
 asMulti tx: https://westend.subscan.io/extrinsic/...
 ```
-{% endtab %}
-{% endtabs %}
 
-## Cancel a multisig transfer
+# Cancel a multisig transfer
 
 Create a new file called `cancel_multisig.js` and paste the following code :
 
-{% tabs %}
-{% tab title="/polkadot\_ms/cancel\_multisig.js" %}
+
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
 const { HttpProvider } = require('@polkadot/rpc-provider');
@@ -549,12 +500,10 @@ const main = async () => {
 
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
-{% endtab %}
-{% endtabs %}
 
 It is not necessary to run this code in the normal course of the tutorial, it is largely included here for the sake of completeness. This would useful in case a multisig approval transaction gets stuck or needs to be cancelled for any reason. Should it be necessary, or for testing purposes, run the code with `node cancel_multisig.js` :
 
-```bash
+```
 Time point is: {"height":5557129,"index":2}
 Sending 1.0000 WND 
 from 5CPnQhU8TCvtbaJQEYEPuYhgbwpeGqhx6uErZJ7QDcaD7aX9
@@ -568,7 +517,7 @@ Submitted values : cancelAsMulti(2, otherSignatories: [
 cancelAsMulti tx: https://westend.subscan.io/extrinsic/0x774822d10f1159f12491bf9351a7b043100ccac88f5ed2c34ab1eac07fe190fe
 ```
 
-## Conclusion
+# Conclusion
 
 Congratulations! This brief tutorial has covered the creation and usage of a multisig account using the Polkadot JS API. We are now able to initiate, approve and cancel transactions using an account that requires multiple authorizations. This functionality enables many other amazing things to be built on Polkadot, and we all look forward to seeing what you build using multisig accounts.
 

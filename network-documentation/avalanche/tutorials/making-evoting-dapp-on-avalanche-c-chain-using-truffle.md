@@ -2,11 +2,11 @@
 
 Today we will be learning how to code a decentralized application on Avalanche's Fuji network from scratch. It would be a simple dapp, in which we will be holding an election between the candidates. And users like you and me will be going to vote them. So, to vote easily and efficiently using the browser, we would also be writing client-side application to interact with the blockchain. For developing this dapplication we would be using Trufflesuite. [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dapps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
-## Prerequisites
+# Prerequisites
 
 You've created an [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain) tutorial to get funds to your C-Chain address.
 
-## Requirements
+# Requirements
 
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle, which you can install with `npm install -g truffle`
@@ -577,15 +577,15 @@ window.App = App;
 
 ![](https://j.gifs.com/A6qrxj.gif)
 
-## Conclusion 
+# Conclusion 
 
 Congratulations! You have successfully built a full fledged `dApp` and deployed the smart contract on `Fuji` test network using `Trufflesuite`. Along with that, we have also built the client side application for interacting with the network.
 
-## What's next?
+# Next Steps
 
 The dapp which we built just now is a very simple e-voting application, where for every new election, we need to update the smart contract with new candidates and deploy it on the Avalanche network. So, in order make it more scalable and sophisticated, we would adding more features like creating custom elections, adding new candidates, setting up starting and ending dates for each election and much more in the upcoming tutorials.
 
-## About the author
+# About the author
 
 This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/rranjan01234/) and on [GitHub](https://github.com/rajranjan0608)
 

@@ -16,8 +16,8 @@ In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
 
 ```typescript
 //..
-  //... let's skip the beginning as it's should be familiar for you now.
-  // The secret key is stored in our state as a stingified array
+  //... let's snip the beginning as it should be familiar for you by now!
+  // The secret key is stored in our state as a stringified array
   const secretKey = Uint8Array.from(JSON.parse(secret as string));
 
   // Find the parameter to pass  
@@ -52,7 +52,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```typescript
 //..
   //...
-  //... let's skip the beginning as it's should be familiar for you now.
+  //... let's snip the beginning as it should be familiar for you by now!
   const instructions = SystemProgram.transfer({
     fromPubkey,
     toPubkey,
@@ -79,20 +79,19 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above:**
-
-* We created a `signers` array with only one signer: the sender. It contains both the signer's `publicKey` and `secretKey`. 
-* The `secretKey` is used to sign the transaction. 
-* We create `instructions` for the transactions. From who, to who and what amount.
-* We create a `Transaction` object and add the instructions
-* Finaly, we send and await the confirmation of the signed transatcion using `sendAndConfirmTransaction`.
+ 
+* We create `instructions` for the transaction: From who, to who and what amount.
+* We also need a `signers` array with only one signer: the account sending the transaction. It contains both the signers `publicKey` & `secretKey`. 
+  * The `secretKey` is used to sign the transaction.
+* Create a `Transaction` object and `add()` the instructions to it.
+* Send and await the confirmation of the signed transaction using `sendAndConfirmTransaction`.
+* Finally, we return the transaction hash to the client-side as JSON.
 
 ----------------------------------
 
 ## Make sure it works
 
-Once you've filled in the form: 
-* Press "Submit"
-* Let's the magic happen
+Once you've filled in the form with a value, click **Submit Transfer**: 
 
 ![](../../../.gitbook/assets/solana-transfer-v3.gif)
 
@@ -102,4 +101,4 @@ Once you've filled in the form:
 
 ## Next
 
-Next, we will look at how to deploy a program written in the Rust language to the Solana cluster.
+Now that you are comfortable with accounts and tokens, we will look at how to deploy a program written in the Rust language to the Solana cluster. Don't worry, this process is not as scary as it sounds 😇

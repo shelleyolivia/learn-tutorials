@@ -47,6 +47,6 @@ In summary, **Polygon** is an attractive solution for developers who wish to kee
 
 -------------------------------------
 
-## Next Steps
+# Next Steps
 
 Now that we gave you a quick overview of Polygon ecosystem, we still need to set up our environment.
