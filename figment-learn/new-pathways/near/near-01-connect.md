@@ -2,7 +2,7 @@ The ability to establish a connection is the first step for anyone wanting to di
 
 ------------------------
 
-## Lesson
+# Lesson
 
 Connecting to a node works pretty much the same as for a standard web server. There are two actors: Client & server, with a protocol managing how data are transferred from one to the other.
 
@@ -12,7 +12,7 @@ The main difference here is in the protocol. To connect to NEAR, we'll be using 
 
 ------------------------
 
-## Challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/near/connect.ts`, implement `connection` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
@@ -45,7 +45,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ------------------------
 
-## Solution
+# Solution
 
 ```typescript
 try {
@@ -67,12 +67,12 @@ try {
 
 # Make sure it works
 
-Once the code above is saved in `pages/api/solana/connect.ts`, refresh the page to see it update & display the current version of the Solana software!
+Once the code above is saved, refresh the page to see it update & display the current version.
 
 ![](../../../.gitbook/assets/pathways/near/near-connect.gif)
 
 -----------------------------
 
-## Next
+# Next
 
 Well done! Your fluency in the NEAR dialect of web3 is growing. As a newcomer, building an identity is important so you can distinguish yourself from other users on the NEAR network. Ready to take the next step forward?
