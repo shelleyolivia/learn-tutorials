@@ -1,30 +1,19 @@
----
-description: >-
-  Learn how to deploy & debug the Smart Contracts on Polygon (Matic).
----
-
-# Deploying & Debugging the Smart Contracts on Polygon
-![](../../../.gitbook/assets/deploy-and-debug-on-polygon.png)
-
-
-## Introduction
+# Introduction
 In this tutorial, we will cover how to deploy smart contracts to the Polygon (Matic) Mumbai test network.
 We'll cover some of the possible errors which might occur during the deployment.
 So, grab a cup of coffee ☕️ and follow the steps.
 
-## Prerequisites
+# Prerequisites
 This tutorial assumes that you have some beginner-level experience in programming & blockchain understanding.
 
-## After this tutorial you will be able to:
-* Deploy the smart contracts on polygon (Matic) Mumbai Test Network.
-* Tackle the errors while deploying the smart contracts on polygon (Matic) Mumbai Test Network.
+# Requirements
 
-## MetaMask setup.
-To deploy the smart contracts on Matic you first have to create a Matic network in MetaMask wallet.
+* [Truffle](https://www.trufflesuite.com/)
+* MetaMask setup: 
+To deploy the smart contracts on Matic you first have to add an RPC endpoint in your MetaMask wallet.
 `Settings -> Networks -> Add network -> Save`
 
 ![](../../../.gitbook/assets/deploy-&-debug-on-polygon-1.png)
-
 
 To get test Matic for deployment and testing,
 * `go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network).
@@ -33,7 +22,7 @@ Done! check your wallet, you'll see some Matic there.
 
 ![](../../../.gitbook/assets/deploy-&-debug-on-polygon-2.png)
 
-## truffle-config
+# truffle-config
 * `truffle-config.js` for Mac users
 * `truffle.js` for Windows users
 
@@ -82,7 +71,7 @@ Now, let's add `matic` network in our truffle-config file which will contain our
 ```
 You can set the gas price and gas limits for faster transactions as shown in the above code block.
 
-## Deploy Smart Contracts
+# Deploy Smart Contracts
 * Command: `truffle migrate --network matic`
 
 If you're deploying it for the second time then deploy with this command just to **reset** and avoid JSON errors.
@@ -126,15 +115,15 @@ Summary
 ```
 *Code snippet from matic truffle docs.*
 
-## Deployment errors and solutions
+# Deployment errors and solutions
 If you get any of these errors then follow these steps
 
-### Error:
+**Error**
 ```
 Error: PollingBlockTracker - encountered an error while attempting to update latest block:
 ```
 
-### Fix_1:
+**Fix_1**
 Change the RPC endpoint URL in Metamask from 'https://rpc-mumbai.matic.today' to an [Infura RPC endpoint](https://infura.io/). This will require you to register for an Infura account and set up a Project, to get a Project ID. If you already have an Infura project ID, add it to the `.env` file => `PROJECT_ID=<your project ID>`
 
 `infura -> Create new project -> Settings -> Endpoints -> Polygon Mumbai`
@@ -154,7 +143,7 @@ Paste your PROJECT_ID there from .env file.
 
 If the error still occurs, try another alternate RPC endpoint from [MaticVigil](https://maticvigil.com/).
 
-### Fix_2:
+**Fix_2**
 Change `https://rpc-mumbai.matic.today` by using [Matic custom RPC](https://rpc.maticvigil.com/).
 ```javascript
     matic: {
@@ -170,25 +159,25 @@ Change `https://rpc-mumbai.matic.today` by using [Matic custom RPC](https://rpc.
 Paste your PROJECT_ID there from .env file.
 * `truffle migrate --network matic --reset`
 
-### Error:
+**Error:**
 ```
 *** Deployment Failed ***
 
 "Migrations" -- only replay-protected (EIP-155) transactions allowed over RPC.
 ```
 
-### Fix:
+**Fix:**
 * `npm install @truffle/hdwallet-provider@1.4.0`
 
 Truffle hdwallet-provider version 1.4.0 will fix this error.
 
-### Error:
+**Error:**
 ```
 Error:  *** Deployment Failed ***
 
 "Migrations" -- Transaction was not mined within 750 seconds, please make sure your transaction was properly sent. Be aware that it might still be mined!.
 ```
-### Fix:
+**Fix:**
 ```javascript
     matic: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, 
@@ -206,10 +195,15 @@ Just add `networkCheckTimeout: 100000`
 
 *If you discover any new errors and If you know the solution for it, then feel free to make a PR, we'll add your Error-Fix here.*
 
-## About the Author
+# Conclusion
+After this tutorial you will be able to:
+* Deploy the smart contracts on polygon (Matic) Mumbai Test Network.
+* Tackle the errors while deploying the smart contracts on polygon (Matic) Mumbai Test Network.
+
+# About the Author
 I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Development, Open-Source & Decentralization. Feel free to connect with me on [GitHub](https://github.com/AkhileshThite) & [Twitter](https://twitter.com/AkhileshThite_).
 
-## References
+# References
 * *Truffle docs: https://www.trufflesuite.com/docs/truffle/overview*
 * *Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started*
 * *GitHub repo: https://github.com/AkhileshThite/DTube*
