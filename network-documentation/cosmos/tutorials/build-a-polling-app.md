@@ -70,11 +70,11 @@ To write anything to a blockchain or perform any other state transition a client
 
 Going back to `MsgCreatePoll.go`, we need to make options to be stored as a list instead of a string. Replace `Options string` with `Options []string` in `MsgCreatePoll` struct and `options string` with `options []string` in the arguments of `NewMsgCreatePoll` function.
 
-### `x/voter/client/rest/txPoll.go` 
+**`x/voter/client/rest/txPoll.go`**
 
 Replace `Options string` with `Options []string` in `createPollRequest` struct.
 
-### `x/voter/client/cli/txPoll.go`
+**`x/voter/client/cli/txPoll.go`**
 
 A user can also interact with our application through a command line interface.
 
