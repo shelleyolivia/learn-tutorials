@@ -17,7 +17,8 @@ After this tutorial you will be able to:
 
 # Requirements
 We need the following things on your computer to build our DApp.
-### Node & npm:
+
+### Node & npm
 Node is a JavaScript runtime environment that executes JavaScript code outside a web browser and npm is a JavaScript package installer.
 To install Node.js & npm on your computer, click on this [link](https://nodejs.org/en/download/) -> download the file as per your computer requirement -> Install the file.
 To check the successful installation type `npm -v` in cmd prompt or terminal, It'll show the version that means you've successfully installed it on your computer.
