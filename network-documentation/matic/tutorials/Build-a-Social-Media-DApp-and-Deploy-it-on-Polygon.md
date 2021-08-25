@@ -696,6 +696,10 @@ Create a new repository on GitHub and push all the changes.
 
 That's it! you'll get the fleek link of your DApp after deploying the site, you can assign a domain and share your DApp link with anyone in the world. Congratulations! You've built a truly Decentralized Social Media Application.
 
+# Conclusion
+
+Congratulations! After completing this tutorial, you should have a good understanding of how to create a dApp for video content and how to deploy it on Polygon.
+
 # About the Author
 I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Development, Open-Source & Decentralization. Feel free to connect with me on [GitHub](https://github.com/AkhileshThite) & [Twitter](https://twitter.com/AkhileshThite_).
 
