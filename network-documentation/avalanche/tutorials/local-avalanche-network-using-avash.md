@@ -44,7 +44,7 @@ GO111MODULE=off go get -v -d github.com/ava-labs/avalanchego/...
 
 Now we change to the directory in which the project was downloaded and build it:
 
-```
+```text
 cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./scripts/build.sh
 ```
