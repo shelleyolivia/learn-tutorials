@@ -1,14 +1,14 @@
 [**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/starport-polling-app/). 
 
-## Polling app
+# Introduction
 
-![Application screenshot](https://tutorials.cosmos.network/assets/img/1.4d7ba008.png)
+![Application screenshot](https://tutorials.cosmos.network/assets/img/1.8c86df06.png)
 
 We will be creating a simple poll application, in which a user can sign in, create polls, cast votes and see voting results. Creating a poll will cost 200 tokens, voting is free, and both actions will be available only for signed in users.
 
 For this tutorial we will be using [Starport](https://github.com/tendermint/starport), an easy to use tool for building blockchains. [Install Starport](https://github.com/tendermint/starport#installation) and run the following command to create a voter project:
 
-```
+```text
 starport app github.com/alice/voter
 ```
 
@@ -23,11 +23,11 @@ Inside the `voter` directory we can see several files and directories:
 
 Our project's directory contains all the code required to build and launch a blockchain-based app. Let's try launching our app by running starport serve inside our project:
 
-```
+```text
 starport serve
 ```
 
-```
+```text
 📦 Installing dependencies...
 🚧 Building the application... 
 💫 Initializing the chain...
@@ -44,7 +44,7 @@ Our voting applications has two types of entities: polls and votes. A poll is a 
 
 ## Adding polls
 
-```
+```text
 starport type poll title options
 ```
 
@@ -100,11 +100,11 @@ We'll be mostly interested in `frontend/src/views` directory, which contains pag
 
 Inside `frontend/src/store/index.js` we import [CosmJS](https://github.com/cosmwasm/cosmjs), a library for handling wallets, creating, signing and broadcasting transactions and define a Vuex store. We'll use `entitySubmit` function for sending data to our blockchain \(like a JSON representing a newly created poll\), `entityFetch` for requesting a list of polls and `accountUpdate` to fetch information about our token balance.
 
-### `frontend/src/view/Index.vue`
+**`frontend/src/view/Index.vue`**
 
 Since we don't need the default form component replace `<type-list />` inside of `frontend/src/views/Index.vue` with a new component `<poll-form />` that will be created in a new file at `frontend/src/components/PollForm.vue`.
 
-### `frontend/src/components/PollForm.vue` 
+**`frontend/src/components/PollForm.vue`**
 
 ```javascript
 <template>
@@ -190,15 +190,15 @@ Refresh the page, sign in with a password and create a new poll. It takes a coup
 
 A vote type contains poll ID and a value \(string representation of the selected option\).
 
-```
+```text
 starport type vote pollID value
 ```
 
-### `frontend/src/views/Index.vue` 
+**`frontend/src/views/Index.vue`**
 
 Add `<poll-list />` into the `frontend/src/view/Index.vue` file after the poll form component. Then make a new component at `frontend/src/components/PollList.vue` and add the following:
 
-### `frontend/src/components/PollList.vue` 
+**`frontend/src/components/PollList.vue`**
 
 ```javascript
 <template>
@@ -250,7 +250,7 @@ The `PollList` component lists for every poll, all the options for that poll, as
 
 By now should be able to see the same UI as in the first screenshot. Try creating polls and casting votes. You may notice that it's possible to cast multiple votes for one poll. This is not what we want, so let's fix this behaviour.
 
-## Casting votes only once
+# Casting votes only once
 
 To fix this issue we first have to understand how data is stored in our application.
 
@@ -289,7 +289,7 @@ key := []byte(types.VotePrefix + vote.PollID + "-" + string(vote.Creator))
 
 Restart the application and try voting multiple times on a single poll, you'll see you can vote as many times as you want but only your most recent vote is counted.
 
-## Introducing a fee for creating polls
+# Introducing a fee for creating polls
 
 Let's make it so that creating a poll costs 200 tokens.
 
