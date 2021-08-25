@@ -18,7 +18,7 @@ You must have gone through this tutorial [Create a Local Test Network on Avalanc
 Open a new terminal tab so we can create a directory and install some further dependencies.
 First, navigate to the directory within which you intend to create your working directory:
 
-```
+```text
 cd /path/to/directory
 ```
 
@@ -162,12 +162,12 @@ module.exports = function (deployer) {
 
 Any time you make a change to `AvaSwap.sol` you must compile the contracts again.
 
-```
+```text
 truffle compile
 ```
 
 You should see:
-```bash
+```text
 Compiling your contracts...
 ===========================
 > Compiling ./contracts/Migrations.sol
@@ -183,43 +183,43 @@ When deploying smart contracts to the C-Chain, Truffle will default to the first
 
 Truffle has a very useful console that we can use to interact with the blockchain and our contract. Open the console:
 
-```
+```text
 truffle console --network development
 ```
 
 Then, in the console, create the account:
 
-```
+```text
 truffle(development)> let account = await web3.eth.personal.newAccount()
 ```
 
 This returns:
 
-```
+```text
 undefined
 ```
 
 Print the account:
 
-```
+```text
 truffle(development)> account
 ```
 
 This prints the account:
 
-```
+```text
 '0x090172CD36e9f4906Af17B2C36D662E69f162282'
 ```
 
 Unlock your account:
 
-```
+```text
 truffle(development)> await web3.eth.personal.unlockAccount(account)
 ```
 
 This returns:
 
-```
+```text
 true
 ```
 
@@ -227,13 +227,13 @@ true
 
 Now everything is in place to run the migrations and deploy the contract:
 
-```
+```text
 truffle(development)> migrate --network development
 ```
 
 You should see:
 
-```bash
+```text
 Compiling your contracts...
 ===========================
 > Everything is up to date, there is nothing to compile.
@@ -287,13 +287,13 @@ Summary
 
 If you didn't create an account on the C-Chain you'll see this error:
 
-```
+```text
 Error: Expected parameter 'from' not passed to function.
 ```
 
 If you didn't fund the account, you'll see this error:
 
-```bash
+```text
 Error:  *** Deployment Failed ***
 
 "Migrations" could not deploy due to insufficient funds
@@ -306,7 +306,7 @@ Error:  *** Deployment Failed ***
 
 If you didn't unlock the account, you'll see this error:
 
-```
+```text
 Error:  *** Deployment Failed ***
 
 "Migrations" -- Returned error: authentication needed: password or unlock.
@@ -402,7 +402,7 @@ export default Main;
 
 **Buy Tokens:**
 
-```
+```javascript
 result = await avaSwap.buyTokens({ from : investor, value: web3.utils.toWei('1', 'Ether')})
 ```
 
@@ -539,13 +539,13 @@ export default BuyForm;
 
 The investor must approve the token before transaction :
 
-```
+```javascript
 result = await Token.approve(avaSwap.address, tokens('100'), { from: investor})
 ```
 
 The investor sells tokens :
 
-```
+```javascript
 result = await avaSwap.sellToken(tokens('100'), { from: investor })
 ```
 
@@ -683,17 +683,17 @@ export default SellForm;
 
 Check AVAX balance:
 
-```
+```javascript
 let AvaxBalance = await web3.eth.getBalance(avaSwap.address)
 ```
 
 Check Token balance:
 
-```
+```javascript
 let TokenBalance = await Token.balanceOf(avaSwap.address)
 ```
 
-# Summary
+# Conclusion
 
 Now you know about creating a Decentralized Exchange (DEX) with Trufflesuite and ReactJS on the Avalanche network.
 
