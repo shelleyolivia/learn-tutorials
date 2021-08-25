@@ -1,33 +1,28 @@
-Like with most Web 3 protocols, transactions on Solana happen between **accounts**.  To create an account a client generates a **keypair**, which has a **public's key** (or **address**, used to identify and lookup an account) and a **secret's key** used to sign transactions.
+Unlike with most Web 3 protocols, NEAR uses human readable account IDs instead of a public key hash. You can link to a NEAR account as much `keypair` as you want. Here, we're going to Learn how to create an **NEAR** account. 
 
-----------------------------------
+------------------------
 
-# The challenge
+# Challenge
 
-{% hint style="warning" %}
-In`pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string and render it in the webpage
+{% hint style="tip" %}
+In `pages/api/near/create-account.ts`, complete the code of the function.
 {% endhint %}
 
-**Take a few minutes to figure this out.**
+**Take a few minutes to figure this out**
 
-```tsx
-//...
-  try {
-    const keypair = undefined
-    const address = undefined
-    const secret = JSON.stringify(Array.from(keypair?.secretKey))
-
-    res.status(200).json({
-        secret,
-        address,
-    });
-  }
-//...
+```typescript
+try {
+    const { freeAccountId, publicKey, network }: AccountReq = req.body
+    const config = configFromNetwork(network);
+    const near = await connect(config);
+    undefined;
+    return res.status(200).json(freeAccountId)
+}
 ```
 
 **Need some help?** Check out those two links
-* [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
-* [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
+* [`createAccount` method](https://near.github.io/near-api-js/classes/near.near-1.html#createaccount)  
+* [NEAR Account](https://docs.near.org/docs/concepts/account)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -35,43 +30,36 @@ In`pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to ex
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
-----------------------------------
+------------------------
 
-# The solution
+# Solution
 
-```tsx
-//...
-  try {
-    const keypair = Keypair.generate();
-    const address = keypair?.publicKey.toString()
-    const secret = JSON.stringify(Array.from(keypair?.secretKey))
-
-    res.status(200).json({
-        secret,
-        address,
-    });
-  }
-//...
+```typescript
+try {
+    const { freeAccountId, publicKey, network }: AccountReq = req.body
+    const config = configFromNetwork(network);
+    const near = await connect(config);
+    await near.createAccount(freeAccountId, publicKey);
+    return res.status(200).json(freeAccountId)
+}
 ```
 
 **What happened in the code above?**
+* First, we create an `near` object.
+* Next, we call the `createAccount`, method passing the `name` and the `public key` 
 
-* We used the JS API's `Keypair` to generate a keypair
-* Once React re-renders, we parse the keypair object to extract the public key using `keypair.publicKey`
-* But this value is a `Buffer` so we need to convert it to a string using `PublicKey.toString()`
-
-----------------------------------
+------------------------
 
 # Make sure it works
 
-Once you have the code above saved, click on **Generate a Keypair** and you should see:
+Once the code is complete and the file is saved, Next.js will rebuild the API route: 
+* Click on **Create Account** 
+You should see:
 
-![](../../../.gitbook/assets/solana-keypair-v3.gif)
+![](../../../.gitbook/assets/pathways/near/near-create-account.gif)
 
-**Try and click on "Generate a Keypair" again. And again. And again!** Every time it will generate a new one with virtually no risk that someone else creates the same one as you. That's cause the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
-
-----------------------------------
+-----------------------------
 
 # Next
 
-Now that we have an account, we can fund it so we can start playing around with tokens!
+When a new account is created on the `testnet` you'll end up with a free **airdrop** of 200 **NEAR** let's check this on the next step.

@@ -1,33 +1,34 @@
-Like with most Web 3 protocols, transactions on Solana happen between **accounts**.  To create an account a client generates a **keypair**, which has a **public's key** (or **address**, used to identify and lookup an account) and a **secret's key** used to sign transactions.
+Unlike with most Web 3 protocols, NEAR uses human readable account IDs instead of a public key hash. You can link to a NEAR account as much `keypair` as you want. Here, we're going to Learn how tho check the availability of a near account. As you can expected, **figment.testnet** is already taken.
 
-----------------------------------
+------------------------
 
-# The challenge
+# Challenge
 
-{% hint style="warning" %}
-In`pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string and render it in the webpage
+{% hint style="tip" %}
+In `pages/api/near/check-account.ts`, complete the code of the function.
 {% endhint %}
 
-**Take a few minutes to figure this out.**
+**Take a few minutes to figure this out**
 
-```tsx
-//...
+```typescript
   try {
-    const keypair = undefined
-    const address = undefined
-    const secret = JSON.stringify(Array.from(keypair?.secretKey))
-
-    res.status(200).json({
-        secret,
-        address,
-    });
+    const { freeAccountId, network } = req.body
+    const config = configFromNetwork(network);
+    const near = await connect(config);
+    // try to query the account info of the 
+    const accountInfo = undefined
+    try {
+        undefined;
+        return res.status(200).json(false)
+    } catch (error) {
+        return res.status(200).json(true)
+    }
   }
-//...
 ```
 
 **Need some help?** Check out those two links
-* [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
-* [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
+* [The `Account` class](https://near.github.io/near-api-js/classes/account.account-1.html)  
+* [NEAR Account](https://docs.near.org/docs/concepts/account)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -35,43 +36,43 @@ In`pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to ex
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
-----------------------------------
+------------------------
 
-# The solution
+# Solution
 
-```tsx
-//...
+```typescript
   try {
-    const keypair = Keypair.generate();
-    const address = keypair?.publicKey.toString()
-    const secret = JSON.stringify(Array.from(keypair?.secretKey))
-
-    res.status(200).json({
-        secret,
-        address,
-    });
+    const { freeAccountId, network } = req.body
+    const config = configFromNetwork(network);
+    const near = await connect(config);
+    const accountInfo = await near.account(freeAccountId);
+    try {
+        await accountInfo.state();
+        return res.status(200).json(false)
+    } catch (error) {
+        return res.status(200).json(true)
+    }
   }
-//...
 ```
 
 **What happened in the code above?**
+* First, we create an `Account` object.
+* Next, we query the `state` of this object if it's failed then the account doesn't exist.
 
-* We used the JS API's `Keypair` to generate a keypair
-* Once React re-renders, we parse the keypair object to extract the public key using `keypair.publicKey`
-* But this value is a `Buffer` so we need to convert it to a string using `PublicKey.toString()`
-
-----------------------------------
+------------------------
 
 # Make sure it works
 
-Once you have the code above saved, click on **Generate a Keypair** and you should see:
+Once the code is complete and the file is saved, Next.js will rebuild the API route: 
+* Choose an account Id.
+* Click on **Check it!** 
+You should see:
 
-![](../../../.gitbook/assets/solana-keypair-v3.gif)
 
-**Try and click on "Generate a Keypair" again. And again. And again!** Every time it will generate a new one with virtually no risk that someone else creates the same one as you. That's cause the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
+![](../../../.gitbook/assets/pathways/near/near-check-account.gif)
 
-----------------------------------
+-----------------------------
 
 # Next
 
-Now that we have an account, we can fund it so we can start playing around with tokens!
+Great you have test the avaibility of the choosen account name, now it's time to create it. Let's do this in the next step.

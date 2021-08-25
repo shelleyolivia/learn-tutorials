@@ -1,33 +1,52 @@
-Like with most Web 3 protocols, transactions on Solana happen between **accounts**.  To create an account a client generates a **keypair**, which has a **public's key** (or **address**, used to identify and lookup an account) and a **secret's key** used to sign transactions.
+In order to transfer some value to another account, we need to signed a transaction to the **network**. **NEAR** blockchain provide an abstract class to help us, **KeyStore**.
+
+Here you are going to learn how to set your keystore in order to sign your transfer of token.
 
 ----------------------------------
 
 # The challenge
 
 {% hint style="warning" %}
-In`pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string and render it in the webpage
+In`pages/api/near/transfer.ts`, complete the code of the function. They're a lot to fill here.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
 
 ```tsx
-//...
-  try {
-    const keypair = undefined
-    const address = undefined
-    const secret = JSON.stringify(Array.from(keypair?.secretKey))
+  const {
+    txSender,
+    txAmount,
+    txReceiver,
+    network,
+    secret,
+  } = req.body
 
-    res.status(200).json({
-        secret,
-        address,
-    });
-  }
+  try {
+    const config = configFromNetwork(network)
+
+    // recreate the keypair from secret
+    const keypair = undefined
+  
+    // Set the keystore with the expected method and args
+    config.keyStore?.undefined
+
+    // Here we convert the NEAR into yoctoNEAR using utilities from NEAR lib
+    const yoctoAmount = parseNearAmount(txAmount) as string
+    const amount = new BN(yoctoAmount) 
+
+    // Fill the Gap: connect, create an Account Object and send some money
+    const near = undefined
+    const account = undefined
+    const transaction = undefined
+
+    return res.status(200).json(transaction.transaction.hash)
+  } 
 //...
 ```
 
 **Need some help?** Check out those two links
-* [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
-* [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
+* [Manage `KeyStore`](https://near.github.io/near-api-js/classes/key_stores_in_memory_key_store.inmemorykeystore.html)  
+* [Check `sendMoney`](https://near.github.io/near-api-js/classes/account.account-1.html#sendmoney)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -41,34 +60,44 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```tsx
 //...
-  try {
-    const keypair = Keypair.generate();
-    const address = keypair?.publicKey.toString()
-    const secret = JSON.stringify(Array.from(keypair?.secretKey))
+  const {
+    txSender,
+    txAmount,
+    txReceiver,
+    network,
+    secret,
+  } = req.body
 
-    res.status(200).json({
-        secret,
-        address,
-    });
-  }
+  try {
+    const config = configFromNetwork(network)
+    const keypair = KeyPair.fromString(secret)
+    config.keyStore?.setKey(network, txSender, keypair) 
+
+    const yoctoAmount = parseNearAmount(txAmount) as string
+    const amount = new BN(yoctoAmount) 
+
+    const near = await connect(config)
+    const account = await near.account(txSender)
+    const transaction = await account.sendMoney(txReceiver, amount)
+    return res.status(200).json(transaction.transaction.hash)
+  } 
 //...
 ```
 
 **What happened in the code above?**
-
-* We used the JS API's `Keypair` to generate a keypair
-* Once React re-renders, we parse the keypair object to extract the public key using `keypair.publicKey`
-* But this value is a `Buffer` so we need to convert it to a string using `PublicKey.toString()`
+* First, we need to *rehydrate* our `KeyPair` using our secret
+* Next, we convert the **NEAR** into **yoctoNEAR** the smallest unit of money in **NEAR** blockchain
+* Next, we create using `sendMoney` method we submit the signed transaction to the network 
 
 ----------------------------------
 
 # Make sure it works
 
-Once you have the code above saved, click on **Generate a Keypair** and you should see:
+Once you have the code above saved:
+* Fill the amount in **NEAR** 
+* Click on **Submit Transfer**
 
-![](../../../.gitbook/assets/solana-keypair-v3.gif)
-
-**Try and click on "Generate a Keypair" again. And again. And again!** Every time it will generate a new one with virtually no risk that someone else creates the same one as you. That's cause the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
+![](../../../.gitbook/assets/near-transfer.gif)
 
 ----------------------------------
 

@@ -1,9 +1,4 @@
 The ability to establish a connection is the first step for anyone wanting to discover and travel through web3 space. Fasten your seat belt, it's time to take off 🚀!
-
-------------------------
-
-# Lesson
-
 Connecting to a node works pretty much the same as for a standard web server. There are two actors: Client & server, with a protocol managing how data are transferred from one to the other.
 
 The main difference here is in the protocol. To connect to NEAR, we'll be using `json-rpc`: 
@@ -69,7 +64,7 @@ try {
 
 Once the code above is saved, refresh the page to see it update & display the current version.
 
-![](../../../.gitbook/assets/pathways/near/near-connect.gif)
+![](../../../.gitbook/assets/pathways/near/near-connect-v2.gif)
 
 -----------------------------
 

@@ -1,11 +1,19 @@
-Like with most Web 3 protocols, transactions on Solana happen between **accounts**.  To create an account a client generates a **keypair**, which has a **public's key** (or **address**, used to identify and lookup an account) and a **secret's key** used to sign transactions.
+We won't go throught the process of reviewing the Smart Contract code base, compiling it and/or testing it. We will be more focus on how one can deploy a Smart Contract using the `near-js-api`. Then to fill this requirement, we're going to use a pre-compiled Smart Contract, you can find it under `./contract/nearout/main.wasm`.
+
+Our contract will be pretty basic. It's store a string and implement two function:
+* `get_gretting` function which take an **accountId** and return the string stored for a specific account id
+* `set_gretting` function which take an **accountId** and return the string stored for a specific account id
+
+{% hint style="working" %}
+If you want to learn more about **NEAR** Smart Contract take a look [here](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near)
+{% endhint %}
 
 ----------------------------------
 
 # The challenge
 
-{% hint style="warning" %}
-In`pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string and render it in the webpage
+{% hint style="tip" %}
+In`pages/api/near/deploy.ts`, complete the code of the function. And deploy your first Smart Contract on **NEAR** network.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -13,21 +21,25 @@ In`pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to ex
 ```tsx
 //...
   try {
-    const keypair = undefined
-    const address = undefined
-    const secret = JSON.stringify(Array.from(keypair?.secretKey))
+    const { network, accountId, secret } = req.body;
+    const config = configFromNetwork(network);
+    const keypair = KeyPair.fromString(secret);
 
-    res.status(200).json({
-        secret,
-        address,
-    });
+    // Again you will need to set your keystore
+    config.keyStore?.undefined;
+
+    const near = await connect(config);
+    const account = await near.account(accountId);
+
+    // Time to deploy the Smart Contract
+    const response = undefined;
+    return res.status(200).json(response.transaction.hash)
   }
 //...
 ```
 
 **Need some help?** Check out those two links
-* [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
-* [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
+* [Learn more about `deployContract`](https://near.github.io/near-api-js/classes/account.account-1.html#deploycontract)  
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -42,33 +54,31 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```tsx
 //...
   try {
-    const keypair = Keypair.generate();
-    const address = keypair?.publicKey.toString()
-    const secret = JSON.stringify(Array.from(keypair?.secretKey))
-
-    res.status(200).json({
-        secret,
-        address,
-    });
+    const { network, accountId, secret } = req.body;
+    const config = configFromNetwork(network);
+    const keypair = KeyPair.fromString(secret);
+    config.keyStore?.setKey(network, accountId, keypair);
+    const near = await connect(config);
+    const account = await near.account(accountId);
+    const response = await account.deployContract(fs.readFileSync(WASM_PATH));
+    return res.status(200).json(response.transaction.hash)
   }
 //...
 ```
 
 **What happened in the code above?**
-
-* We used the JS API's `Keypair` to generate a keypair
-* Once React re-renders, we parse the keypair object to extract the public key using `keypair.publicKey`
-* But this value is a `Buffer` so we need to convert it to a string using `PublicKey.toString()`
+* First, we need to *rehydrate* our `KeyPair` using our secret
+* Next, we're calling the `deployContract` method will the `WASM_PATH` pointing to the the location of the Smart Contract.
 
 ----------------------------------
 
 # Make sure it works
 
-Once you have the code above saved, click on **Generate a Keypair** and you should see:
+Once you have the code above saved:
+* Fill the amount in **NEAR** 
+* Click on **Submit Transfer**
 
-![](../../../.gitbook/assets/solana-keypair-v3.gif)
-
-**Try and click on "Generate a Keypair" again. And again. And again!** Every time it will generate a new one with virtually no risk that someone else creates the same one as you. That's cause the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
+![](../../../.gitbook/assets/near-transfer.gif)
 
 ----------------------------------
 
