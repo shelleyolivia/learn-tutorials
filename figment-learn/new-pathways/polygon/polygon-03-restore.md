@@ -6,7 +6,7 @@ Ready ?
 
 # The Challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 **On the file `components/protocols/steps/polygon/Restore.tsx` Implement the `restore`**. First using `ethers` look for `Wallet`, next when the wallet have been regenerated try do deduce which property we're going to call in order to display the address and the private key, finally verify than the generated key match the existing one.   
 {% endhint %}
 

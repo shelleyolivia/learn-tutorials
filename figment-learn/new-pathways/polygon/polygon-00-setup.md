@@ -38,7 +38,7 @@ Once the installation is complete, then start the local development server with:
 yarn dev
 ```
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 Also be sure to rename the file `.env.example` to `.env.local` before continuing with the Pathway. This file is where we define various endpoint URLs and related data like API keys.
 {% endhint %}
 

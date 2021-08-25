@@ -4,7 +4,7 @@ Last but certainly not least, we'll need to modify the data stored into **greete
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/solana/callGreetings.ts`, complete `setGreetings`. First you'll have to create an instruction, then you'll have to send and confirm a transaction to store the data from.
 {% endhint %}
 

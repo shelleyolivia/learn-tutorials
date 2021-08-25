@@ -4,7 +4,7 @@ Like with most Web 3 protocols, transactions on Solana happen between **accounts
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string.
 {% endhint %}
 

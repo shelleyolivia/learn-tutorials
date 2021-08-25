@@ -14,7 +14,7 @@ To fund an account, we will do what is called an **airdrop** - some tokens will 
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an address and use `requestAirdrop`to get 1 **SOL**.
 {% endhint %}
 

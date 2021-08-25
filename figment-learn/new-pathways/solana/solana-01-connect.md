@@ -4,7 +4,7 @@ In the following tutorials, we're going to interact with the Solana blockchain (
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/solana/connect.ts`, implement `connect` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
 {% endhint %}
 

@@ -4,7 +4,7 @@ We must check our account balance to make sure we have sufficient **SOL** to per
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/solana/balance.ts`, implement `publicKey` & `balance`.
 {% endhint %}
 

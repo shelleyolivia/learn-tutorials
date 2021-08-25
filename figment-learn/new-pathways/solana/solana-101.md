@@ -1,8 +1,8 @@
-# **What is Solana?**
+# What is Solana?
 
 Solana is an open-source project implementing a new, high-performance, permissionless blockchain. From [Messari's Solana profile](https://messari.io/asset/solana/profile), its goal is to provide a platform that enables developers to create DApps without needing to design around performance bottlenecks. Solana features a new timestamp system called Proof-of-History (PoH) that enables automatically ordered transactions. It also uses a Proof of Stake (PoS) consensus algorithm to help secure the network. Additional design goals include sub-second settlement times, low transaction costs, and support for all LLVM compatible smart contract languages.
 
-## **Why build on Solana?**
+## Why build on Solana?
 
 Solana ensures composability between ecosystem projects by maintaining a single global state as the network scales. Solana’s blazing speed and low fees scale as the ecosystem grows without sacrificing censorship resistance or security.
 
@@ -19,26 +19,26 @@ Solana offers a highly scalable platform for Web 3 applications which can now un
 
 -----------------------------------------
 
-# **Network Specifications**
+# Network Specifications
 
-## **Transaction Fees**
+## Transaction Fees
 
 The network Cluster sets transaction fees based on recent processing history. Transactions currently include a fee field that indicates the maximum fee field a slot leader can charge for processing a transaction.  
 Transaction fees on Solana are estimated at $10 for 1 million transactions.
 
-## **Transaction Speed & Finality**
+## Transaction Speed & Finality
 
 Solana’s built-in mechanism for synchronizing time across nodes helps the network support a theoretical peak capacity of 65,000 transactions per second and block times at 400ms. This makes Solana one of the fastest production blockchain available, and 4,000 times faster than Ethereum.
 
-## **Languages supported**
+## Languages supported
 
 Solana applications are built on Rust, but also support C and C++.
 
-## **EVM compatibility**
+## EVM compatibility
 
 Solana is not EVM compatible but it offers [a bidirectional token bridge](https://solana.com/wormhole) between Solana and Ethereum so projects can move tokenized assets across blockchains.
 
-## **Role of the SOL token**
+## Role of the SOL token
 
 There are two primary uses of the SOL token:
 

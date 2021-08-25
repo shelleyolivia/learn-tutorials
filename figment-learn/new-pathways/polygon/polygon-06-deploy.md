@@ -127,7 +127,7 @@ If there is an error : `Error: Cannot find module '@truffle/hdwallet-provider'`.
 
 # Deploy the smart contract
 
-{% hint style="info" %}
+{% hint style="tip" %}
 Before we deploy, there is one last thing to prepare. Put the secret recovery phrase \(also known as a mnemonic seed phrase\) of the active Metamask account into the file **`contracts/polygon/SimpleStorage/.secret`**.   
 It should look like this, with all 12 words on a single line, no quotation marks :
 

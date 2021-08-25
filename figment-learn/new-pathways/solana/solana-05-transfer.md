@@ -6,7 +6,7 @@ When a transaction is submitted to the **cluster**, the Solana runtime will exec
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
 {% endhint %}
 

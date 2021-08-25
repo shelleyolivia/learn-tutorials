@@ -4,7 +4,7 @@ Transfering some token is one of the major feature of web3. In this challenge, w
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 **Imagine this scenario:** You know you have a big balance and you want to eat some pizza. Then, you need to transfer **0.1** MATIC to buy one! In `components/protocols/polygon/steps/Transfer.tsx`, implement the `transfer` function :
 {% endhint %}
 

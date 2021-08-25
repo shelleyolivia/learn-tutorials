@@ -4,7 +4,7 @@ At this point we have deployed a smart contract on the Polygon testnet we have s
 
 # The Challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 **On the file `components/protocols/polygon/GeStorage.tsx` Implement the `getValue`**.    
 {% endhint %}
 

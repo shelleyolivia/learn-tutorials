@@ -122,7 +122,7 @@ Program Id: 7KwpCaaYXRsjfCTvf85eCVuZDW894zZNN38UMxMpQoaQ
 
 # Challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 Before moving to the next step, we need to check that our program has been correctly deployed! For this, we'll need the `programId` of the program. Copy & paste it into the text input, then try to figure out how to complete the code for `pages/api/solana/checkProgram.ts`.
 {% endhint %}
 

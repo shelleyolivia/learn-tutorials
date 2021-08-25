@@ -8,7 +8,7 @@ As simple as it sounds, what's happening in the background is actually very powe
 
 # The Challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 **On the file `components/protocols/polygon/SeStorage.tsx` Implement the `setValue`**.    
 {% endhint %}
 
