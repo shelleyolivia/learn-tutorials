@@ -73,7 +73,7 @@ cannot find package "github.com/decred/dcrd/dcrec/secp256k1/v3/ecdsa" in any of:
 cannot find package "github.com/hashicorp/hcl/hcl/printer" in any of:
 /snap/go/7416/src/github.com/hashicorp/hcl/hcl/printer (from $GOROOT)
 ~/go/src/github.com/hashicorp/hcl/hcl/printer (from $GOPATH)
-# cd .; git clone -- https://github.com/chzyer/readline /home/kevin/go/src/github.com/chzyer/readline
+#cd .; git clone -- https://github.com/chzyer/readline /home/kevin/go/src/github.com/chzyer/readline
 Cloning into '~/go/src/github.com/chzyer/readline'...
 fatal: unable to access 'https://github.com/chzyer/readline/': gnutls_handshake() failed: Error in the pull function.
 package github.com/chzyer/readline: exit status 128
