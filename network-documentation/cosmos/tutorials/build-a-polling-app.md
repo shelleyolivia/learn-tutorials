@@ -42,7 +42,7 @@ Congratulations! You now have a blockchain application running on your machine i
 
 Our voting applications has two types of entities: polls and votes. A poll is a type that has a `title` and a list of `options`.
 
-## Adding polls
+# Adding polls
 
 ```text
 starport type poll title options
@@ -58,11 +58,11 @@ This, however, does not look and work exactly like we need. We should be able to
 
 Let's take a look at some of the files modified by the `starport type` command.
 
-### `x/voter/types/TypePoll.go`
+**`x/voter/types/TypePoll.go`**
 
 This file contains definition of the `Poll` type. We can see that a poll has two fields \(creator and ID\), which will be created automatically, and two fields \(title and options\) defined by us. Since we want `Options` to be a list of strings, **replace `string` with `[]string`**
 
-### `x/voter/types/MsgCreatePoll.go` 
+**`x/voter/types/MsgCreatePoll.go`**
 
 This file defines a message that creates a poll.
 
@@ -295,7 +295,7 @@ Let's make it so that creating a poll costs 200 tokens.
 
 This feature is very easy to add. We already require users to have accounts registered, and each user has tokens on balance. The only thing we need to do is to send coins from user's account to a module account before we create a poll.
 
-### `x/voter/handlerMsgCreatePoll.go`
+ **`x/voter/handlerMsgCreatePoll.go`**
 
 ```go
 moduleAcct := sdk.AccAddress(crypto.AddressHash([]byte(types.ModuleName)))
