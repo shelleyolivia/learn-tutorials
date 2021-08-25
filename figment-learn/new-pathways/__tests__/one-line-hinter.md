@@ -46,6 +46,36 @@ This is an danger
 ```
 
 
+## Tip hinter
+
+testing of hinter with `tip` params and one line content
+
+{% hint style="tip" %}
+This is an tip
+{% endhint %}
+
+
+```text
+{% hint style="tip" %}
+This is an tip
+{% endhint %}
+```
+
+## Working hinter
+
+testing of hinter with `working` params and one line content
+
+{% hint style="working" %}
+This is an working
+{% endhint %}
+
+
+```text
+{% hint style="working" %}
+This is an working
+{% endhint %}
+```
+
 # The raw file
 
 {% hint style="info" %}
