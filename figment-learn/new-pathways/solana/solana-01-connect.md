@@ -51,6 +51,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * We then call `getVersion` on that `connection` instance. The docs state that `connection.getVersion()` returns a Promise so we need to handle this with either `.then()`, or in a more compact manner with the nullish coalescing operator and optional chaining operator: `?.` In this way, `version?.["solana-core"]` will provide a safe value other than `undefined` when getting `version`!
 
 -----------------------------
+
 # Make sure it works
 
 Once the code above is saved in `pages/api/solana/connect.ts`, refresh the page to see it update & display the current version of the Solana software!

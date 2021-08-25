@@ -13,7 +13,7 @@ Here are the advantages of the Solana network:
 3. **Capital efficient as the ecosystem grows:** Solana scales thanks to Moore’s Law — there's no need to integrate with multiple shards or layer 2 solutions.
 4. **Enterprise-grade security:** Audited by a Fortune 500-preferred security firm. Iron-clad immutability for global scale.
 
-## **What can you build on Solana?**
+## What can you build on Solana?
 
 Solana offers a highly scalable platform for Web 3 applications which can now unlock mainstream usage. There are already over 150 projects live on Solana, with a majority of DeFi projects, although NFTs, social apps, and games are starting to launch on the network.
 
