@@ -1,10 +1,10 @@
-The following software is required to set up and complete the **NEAR** Pathway
+The following software is required to set up and complete the **Secret** Pathway
 
-* [Node.js v14 or higher installed](https://nodejs.org/)
-* [`yarn` installed](https://yarnpkg.com/getting-started/install)
-* [`git` installed](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [**Node.js v14 or higher installed**](https://nodejs.org/)
+* [**`yarn` installed**](https://yarnpkg.com/getting-started/install)
+* [**`git` installed**](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-Start by [cloning](https://git-scm.com/docs/git-clone) the repository and installing the [dependencies](https://classic.yarnpkg.com/en/docs/managing-dependencies/) with `yarn` :
+Start by [**cloning**](https://git-scm.com/docs/git-clone) the repository and installing the [**dependencies**](https://classic.yarnpkg.com/en/docs/managing-dependencies/) with `yarn` :
 
 ```bash
 git clone https://github.com/figment-networks/learn-web3-dapp.git
@@ -18,12 +18,12 @@ yarn
 
 Create an `.env.local` file at the root of the directory. Copy and paste the contents of the existing `.env.example` into the new file and save it to disk (you could also rename `.env.example` to `.env.local`).
 
-The value for `DATAHUB_NEAR_API_KEY` can be found on the [DataHub Services Dashboard](https://datahub.figment.io/services/near). Click on the **NEAR** icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local`. This will authenticate you and enable you to make JSON-RPC requests to NEAR via DataHub.
+The value for `DATAHUB_NEAR_API_KEY` can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/services/secret). Click on the **Secret** icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local`. This will authenticate you and enable you to make JSON-RPC requests to Secret via DataHub.
 
-![](../../../.gitbook/assets/pathways/near/near-setup.gif)
+![](../../../.gitbook/assets/pathways/secret/secret-setup.gif)
 
 {% hint style="info" %}
-[**Join us on Discord**, if you encounter any issues with the tutorial or have any questions!](https://discord.gg/fszyM7K)
+[**Join us on Discord, if you encounter any issues with the tutorial or have any questions!**](https://discord.gg/fszyM7K)
 {% endhint %}
 
 ---------------------------

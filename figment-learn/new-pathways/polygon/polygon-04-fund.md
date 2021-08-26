@@ -41,7 +41,7 @@ const checkBalance = async () => {
 ```
 
 **Need some help?** Check out these two links  
-**→ Get an** [**account balance**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getBalance) **using ethers  
+**→ Get an** [**account balance**](https://docs.ethers.io/v5/api/providers/provider/#Provider-getBalance) using ethers  
 **→ Format the balance using** [**ethers.utils.formatEther**](https://docs.ethers.io/v5/api/utils/display-logic/#unit-conversion)
 
 {% hint style="info" %}

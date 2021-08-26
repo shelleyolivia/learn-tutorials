@@ -1,84 +1,60 @@
 {% hint style="info" %}
-Feel Free to skip this section and [start the challenges](https://learn.figment.io/tutorials/setup-the-near-project)
+Feel Free to skip this section and [**start the challenges**](https://learn.figment.io/tutorials/setup-the-secret-project)
 {% endhint %}
 
 ------------------------
 
-# What is NEAR?
+# What is Secret?
 
-NEAR is a decentralized application platform that makes blockchain accessible to everyday people who are excited for the future of the Open Web. A web that is more private, more secure, and puts people in control of their money, data, and identity. NEAR’s purpose is to enable community-driven innovation to benefit people around the world.
+Secret Network is the first blockchain with privacy-preserving smart contracts. That means applications built on Secret can utilize encrypted data without revealing it to anyone, even the nodes in the network. For the first time, Secret Network allows developers to build powerful, permissionless, privacy-preserving applications - Secret Apps.
 
-What makes NEAR special?
+Secret Apps - powered by “secret”, privacy-preserving smart contracts - are built with CosmWasm smart contracts that are written in the Rust programming language and deployed on the Secret Network.
 
-1. NEAR is the inevitable evolution of existing platforms 
-   1. Bitcoin made digital currency a reality, a global transfer of value programmed on a blockchain. Ethereum took it a step further and made it possible to create basic applications leveraging digital currency on blockchains, but has faced issues with scaling and prohibitive fees.  
-   2. NEAR solves these challenges and finally makes building the Open Web possible by introducing a breakthrough sharding design that creates opportunities for innovation never possible in blockchain before. 
-2. NEAR is made for the real world 
-   1. NEAR is the fastest path to market for builders to create blockchain applications that are as easy to use as they are to build. It uses common development patterns and programming languages that are immediately familiar to web developers. 
-   2. NEAR was built with pragmatism of a Silicon Valley tech startup by engineers who have shipped scalable solutions for the world’s leading technology companies. 
-   3. NEAR is secure enough for high value assets like Digital Currencies or Identities and performant enough to scale for DeFi or Gaming applications without prohibitively expensive fees or network latency. 
-3. NEAR is designed to be interoperable 
-   1. NEAR is designed to work with existing blockchain platforms and is easy for existing applications to migrate to. NEAR uses the Ethereum Virtual Machine and Web Assembly so that builders can seamlessly swap from Ethereum to NEAR (and back) on the NEAR Rainbow Bridge to leverage the performance, security, and favorable economics of NEAR without having to rebuild their applications or smart contracts. 
-   2. With NEAR, you don’t have to choose between NEAR and Ethereum or commit to only one blockchain. Interoperability and usability across platforms will be key to the mass adoption of blockchain.
+The Secret Network blockchain itself is based on Cosmos SDK / Tendermint, meaning the network has its own independent consensus, on-chain governance, and features like slashing and delegation.
 
-NEAR is the first blockchain platform truly built for the real world. It is a builder's fastest path to market to create blockchain applications that are as easy to use as they are to build.
+## Why build on Secret?
 
-# Why build on NEAR?
+Secret Network combines the best features of decentralized, open-source networks, and blockchains with the benefits of data privacy and improved usability. These improvements are critical for achieving mass adoption.
 
-**NEAR is easy to learn**. It uses familiar development patterns and languages for portability and ease of access for any web developers.
+Developers can enjoy the benefits of smart contracts and DApps: they are robust, unstoppable, censor-resistant, and transparent. But blockchains, and by extension smart contracts have one glaring problem that is often overlooked - all data stored on them is public. In that sense, blockchains are worse than existing Web 2 solutions when it comes to privacy.
 
-* “Writing smart contracts on Rust is awesome. It allows you to code error-free and fault-free. It’s a big reason why we chose NEAR. Other blockchains require you to learn less popular programming languages.” - _Carolin Wend, Co-Founder of Mintbase_
+Instead of trusting your data with a single organization, you now have to trust everyone. Secret contracts and Secret Apps combine these benefits of DApps but add the ability to keep data private, helping remove one of the biggest barriers to mass adoption of the decentralized web.
 
-**NEAR is versatile**. It's secure enough for high-value assets like money or identity, and performant enough to scale DeFi or Gaming apps. NEAR helps developers avoid high fees and slow speeds to deliver a delightful user experience.
+## What can you build on Secret?
 
-* “Augur gets $1B in volume and users burn $63M in gas fees. Flux gets $1B in volume and users burn only $10k in gas fees.” _Peter Mitchell, CEO of Flux_
+As the first blockchain to support encrypted inputs, encrypted outputs, and encrypted state for smart contracts, Secret Network allows for new kinds of powerful decentralized applications to be built. This can unlock substantial value across multiple verticals and industries, including the following:
 
-**NEAR is by builders for builders**. NEAR is built by a pragmatic team of engineers that have shipped scalable solutions for many of the world’s leading tech companies. They’ve earned the backing of leading investors including Coinbase Ventures, Andressen Horowitz, Pantera Capital and Naval Ravikant.
-
-* “NEAR approached us with a developer-first attitude hellbent on helping creators create seamless and memorable user experiences. We intuitively felt that NEAR could be the silver bullet that ZEST needed.” _Geoff Wellman, Founding Partner, CTO VHS_
-
-**NEAR works with existing blockchain platforms.** Builders can seamlessly swap from Ethereum to NEAR (and back) on the NEAR Rainbow Bridge to leverage the performance, security, and favorable economics of NEAR without having to rebuild their applications. With NEAR, there is no need to choose between chains. Builders and users get the best of both worlds.
-
-**NEAR makes applications easy to use**. In some cases, users don’t realize they’re using a blockchain application. NEAR Accounts combine human-readable names and a flexible contract-based permission structure that enables business models like recurring, free to play, or freemium that were never before possible using blockchain applications.
-
-**NEAR is fast and future proof**. The unique sharding techniques implemented to enable the NEAR protocol to maintain consensus while splitting the network into multiple pieces. This means that throughput and speed will increase exponentially as the number of nodes on the network increases. There is no theoretical limit on the NEAR network’s capacity. As the Open Web grows, NEAR scales to meet it.
-
-# What can you build on NEAR?
-
-1. Open (decentralized) Finance: NEAR provides both a synchronous environment for atomic transactions, which benefits fast-moving financial applications like decentralized exchanges, and an asynchronous environment which allows every other application to hook into these critical financial rails. This will be possible with the upcoming EVM support.  
-2. Open Web: because NEAR is basically the “builder’s blockchain”, it has been optimized to provide substantial flexibility and performance for developers to build great experiences for their end users. This means that consumer-facing blockchain-backed apps are finally possible and the use cases of the Open Web can finally be realized: 
-   1. Prediction markets -- markets like Augur have been handicapped by the difficulty of building smooth user experiences on Ethereum.  Apps like [Flux](https://flux.market) on NEAR provide much more user-friendly ways to set up programmatically enforceable bets with fast, easy payments. 
-   2. NFT marketplaces -- marketplaces like [Mintbase](https://mintbase.io), which transferred from Ethereum, allow creators of unique digital assets to easily implement marketplaces to buy and sell them. On NEAR, they have access to reasonable costs plus intuitive end-user experiences. 
-   3. Gaming -- because NEAR allows for performant and usable apps, developers can create gaming experiences that hook into the blockchain without forcing end-users to suffer through wallets or tokens.
-
-[Take a look at these examples from a recent hackathon](https://near.org/blog/winners-of-hack-the-rainbow)
+* Decentralized Finance: Support for privacy-preserving asset transfers, lending, and more
+* Data sharing: Sharing and monetizing data while keeping it secure
+* Machine learning: Discovering powerful insights while protecting underlying data
+* Healthcare: Allowing research over encrypted data, driving innovation
+* Gaming Industry: Enabling more open and more usable gaming experiences
 
 # Network Specifications
 
 ## Transaction Fees
 
-First, transaction fees on NEAR are a tiny fraction of the amount of fees paid on other blockchains. 1000 times lower transaction fees than Ethereum for users and developers earn 30% of transaction fees.
-
-NEAR keeps transaction fees low by dynamically resharding to optimize for performance and avoid congestion on the network. However, the most important feature of the NEAR token isn’t related to fees or rewards, it comes back to the usability and developer experience that truly sets NEAR apart.
-
-Complicated blockchain concepts like tokens, rewards, and fees can be almost entirely hidden from end-users of NEAR applications because smart contracts can be configured to pay fees on their behalf. This allows developers to build experiences which feel more like today’s web to their end-users, but still take advantage of the underlying innovations of blockchain.
+Transaction fees are currently paid in the native token, SCRT. Since the Secret Network can handle many transactions quickly and the demand for transactions is low, the current cost of Secret transactions is very low (ie. almost nothing).
 
 ## Transaction Speed & Finality
 
-The expected block time is around 1s and the expected time to finality is around 2s. 1,000 TPS benchmarked on a single shard for token transfers (contract ops are slower).
+Tendermint BFT typically have block times between 1 and 8 seconds, and can handle up to thousands of transactions per second. The Secret Network has a block time of about 7.25 seconds per block.
+
+A property of the Tendermint consensus algorithm is instant finality. This means that forks are never created as long as more than a third of the validators are honest [**Byzantine**](https://en.wikipedia.org/wiki/Byzantine_fault). Users can be sure that their transactions are finalized as soon as a block is created, unlike Proof-of-Work blockchains, like Bitcoin and Ethereum.
 
 ## Languages supported
 
-* **Contracts**: Rust and AssemblyScript
-* **Command line**: NEAR CLI
-* **API**: JavaScript and JSON RPC API
+Secret Contracts are developed with the Rust programming language and compiled to WASM binaries.
 
 ## EVM compatibility
 
-NEAR is fully compatible with the EVM and interoperable with Ethereum. NEAR does not want Ethereum developers to choose between the two networks and commit to only one. Developers can have the same asset on both blockchains and even have apps that seamlessly communicate across the boundary.
+The Secret Network has launched a bridge with Ethereum**,** bringing cheaper and more usable privacy to Ethereum and Ethereum-based assets. It allows users to create synthetic (wrapped) ETH and ERC-20 tokens on Secret Network that can be used with full privacy, at a lower cost.
 
-This is made possible by the [**Rainbow Bridge**](https://github.com/near/rainbow-bridge), which connects the Ethereum and NEAR blockchains by leveraging the Ethereum miners and NEAR validators. More info can be found [**here**](https://github.com/near/near-evm).
+The bridge is bidirectional, so Secret Tokens can then be redeemed for their Ethereum-based equivalent.
 
-## Role of the NEAR token
+## Role of the SCRT token
 
-The NEAR token is how people who use applications on the network pay to submit transactions to the nodes who actually run the network. The token is thus a utility — if you hold it, you can use applications hosted on the network.
+The SCRT is the token that: 
+1. secures the Secret Network as the asset at stake, which earns its stakers new issuance rewards and transaction fees.
+2. is used to pay for transactions on the network.
+3. is used by stakers to vote on-chain to set Secret Network policy.
