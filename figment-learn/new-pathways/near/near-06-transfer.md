@@ -97,7 +97,7 @@ Once you have the code above saved:
 * Fill in the amount of **NEAR** you want to send to `pizza.testnet`.
 * Click on **Submit Transfer**.
 
-![](../../../.gitbook/assets/near-transfer.gif)
+![](../../../.gitbook/assets/pathways/near/near-transfer.gif)
 
 ----------------------------------
 
