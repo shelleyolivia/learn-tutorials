@@ -169,7 +169,7 @@ contract Election {
 
 `Election` is a solidity smart contract which lets us view the name, description, about the candidates standing in an election and voting them. In this DApp, we will be accessing these runtime deployed election smart contracts using their `address` and `ABI`. This smart contract will be deployed to the blockchain, each time we create a new election.
 
-### Understanding the smart contract
+# Understanding the smart contract
 
 Solidity smart contracts are defined by the `contract` keyword, which is very similar to a function signature. Therefore, the code for this smart contract is everything within `contract Election { }`.
 
@@ -323,9 +323,9 @@ Compiling the smart contracts would create `.json` file in the `build/contracts`
 
 # Fund the account and run migrations on the C-Chain
 
-When deploying smart contracts to the C-Chain, it will require some deployment cost. As you can see inside `truffle-config.js`, HDWallet Provider will help us in deploying on Fuji C-chain and deployment cost will be managed by account whose mnemonic has been stored in the `.env` file. Therefore we need to fund the account.
+When deploying smart contracts to the C-Chain, it will require some deployment cost. As you can see inside `truffle-config.js`, HDWallet Provider will help us in deploying on Fuji C-chain and the deployment cost will be managed by the account whose mnemonic has been stored in the `.env` file. Therefore we need to fund the account.
 
-### Fund your account
+**Fund your account**
 
 Fund your account using the the faucet link [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and pasting your Fuji's C-Chain address in the input field. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here nAVAX refers to nano AVAX, which is one-billionth of an AVAX token. Minimum AVAX required for deployment, will vary from contract to contract, depending upon what variables and data structures our contract is using. Though funding through faucet would give you enough `AVAX` to run multiple deployments and transactions on the network.
 
@@ -942,3 +942,6 @@ This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranj
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
 
+# References
+
+* [Make an e-Voting dApp on Avalanche Fuji testnet](https://learn.figment.io/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle)
