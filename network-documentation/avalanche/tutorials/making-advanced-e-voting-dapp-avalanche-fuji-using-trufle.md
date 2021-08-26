@@ -1,42 +1,43 @@
 # Introduction
 
-In the last tutorial on [Making a basic e-voting DApp on Avalanche's Fuji C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), we have learnt how to deploy a smart contract on Avalanche's Fuji C-Chain using Trufflesuite. Along with that we have also coded the client-side application, to easily interact with smart contracts.
+In the last tutorial on [Make an e-Voting dApp on Avalanche Fuji testnet](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), we learned how to deploy a smart contract on Avalanche's Fuji C-Chain using Trufflesuite. Along with that we have also coded the client-side application, to easily interact with smart contracts.
 
-Today, in this tutorial, we will be building a more advanced e-voting `dApp`, in which we will not only interact with pre-deployed smart contracts, but will also deploy the contracts in runtime, and would interact with them using their contract address. For developing this dApp we will use the Trufflesuite framework.
+In this tutorial, we will be building a more advanced e-voting dApp, in which we will interact with pre-deployed smart contracts, deploy our own smart contracts, and  interact with them using their contract address. For developing this dApp we will continue to use the Trufflesuite framework.
 
-For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dApps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM \(Ethereum Virtual Machine\).
+For your information, [Trufflesuite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications (dApps) on EVM compatible blockchains. With Truffle you can write and compile smart contracts, run migrations to deploy contracts and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM (Ethereum Virtual Machine).
 
 # Prerequisites
 
-You've created an [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). Along with that, you've have followed the tutorial on [Making a basic e-voting DApp on Avalanche's Fuji C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), though for the sake of completeness, we will be covering everything from start.
+This tutorial assumes you are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). Also that you have followed the tutorial [Make an e-Voting dApp on Avalanche Fuji testnet](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle).
 
 # Requirements
 
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle, which you can install with `npm install -g truffle`
-* Metamask extension added to the browser, which you can add from [here](https://metamask.io/download.html)
-* `express`, `dotenv` and `@truffle/hdwallet-provider` \(instructions to install these will be added later\)
+* Metamask extension added to the browser, which you can install from [metamask.io](https://metamask.io/download.html).
+* You need to have a [DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and an Avalanche API key.
+* `express`, `dotenv` and `@truffle/hdwallet-provider` (instructions to install these are below).
 
-# Create truffle directory and install dependencies
+# Project setup
 
 Open a new terminal so that we can create an `advanced-evoting` directory and install the package dependencies.
 
 First, navigate to the directory within which you intend to create your `advanced-evoting` working directory:
 
-```bash
+```text
 cd /path/to/directory
 ```
 
 Create and enter a new directory named `advanced-evoting`:
 
-```bash
+```text
 mkdir advanced-evoting
 cd advanced-evoting
 ```
 
 Initialize the folder with `npm`:
 
-```bash
+```text
 npm init
 ```
 
@@ -44,19 +45,19 @@ This command would prompt the user to enter the details about the project like `
 
 Now use `npm` to install other dependencies
 
-```bash
+```text
 npm install express dotenv @truffle/hdwallet-provider --save
 ```
 
 Lastly, create a boilerplate Truffle project with:
 
-```bash
+```text
 truffle init
 ```
 
 This will setup our initial project structure. Smart contracts will be stored in the `contracts` folder, deployment functions for migrating smart contracts to the network will be stored in the `migrations` folder. And `build/contracts` folder would contain information about the deployed contract, ABI etc.
 
-# Update truffle-config.js
+**Update truffle-config.js**
 
 One of the files created when you ran `truffle init` is `truffle-config.js`. Replace the existing contents of that file with the following code :
 
@@ -98,13 +99,13 @@ module.exports = {
 
 Note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 
-# Add .env file
+**Add .env file**
 
 * First of all, we need to create an account on Avalanche network. Please visit [Avalanche Wallet](https://wallet.avax.network/) to create your account and save your mnemonics in the .env file.
 * Now copy your Datahub's Avalanche Fuji testnet API key in the .env file as shown below.
 * Never share or commit your `.env` file. It contains your credentials like `mnemonics` and `API` key. Therefore, it is advised to add `.env` to your `.gitignore` file.
 
-```bash
+```text
 MNEMONIC="<avalanche-wallet-mnemonic>"
 APIKEY=<your-api-key>
 ```
