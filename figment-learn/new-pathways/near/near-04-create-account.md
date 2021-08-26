@@ -36,7 +36,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```typescript
 try {
     const { freeAccountId, publicKey, network }: AccountReq = req.body;
-    const config = configFromNetworkId(network);
+    const config = configFromNetwork(network);
     const near = await connect(config);
     await near.createAccount(freeAccountId, publicKey);
     return res.status(200).json(freeAccountId);
@@ -45,7 +45,7 @@ try {
 
 **What happened in the code above?**
 * First, we need to [destructure](https://dmitripavlutin.com/javascript-object-destructuring/) the values from the request body so that we can use them in our code. We are also specifying a TypeScript type of `AccountReq` here.
-* Then we use `configFromNetworkId()`, passing the `network` from the request body - then we can create a connection, `near`.
+* Then we use `configFromNetwork()`, passing the `network` from the request body - now we can create a connection, `near`.
 * Next, we call the `createAccount()` method passing the `freeAccountId` and the `publicKey` from the request body.
 * Finally, we can return the name of the account to the client-side as JSON.
 

@@ -20,7 +20,7 @@ In `pages/api/near/connect.ts`, implement `connection` by creating a `Connection
 // Do not forget we're in an "async" world,
 // so you may need to "await" some results.
 try {
-  const config = configFromNetworkId(network);
+  const config = configFromNetwork(network);
   const near = undefined;
   const provider = undefined
   const status = undefined;
@@ -45,7 +45,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 try {
-  const config = configFromNetworkId(network);
+  const config = configFromNetwork(network);
   const near = await connect(config);
   const provider = near.connection.provider;
   const status = await provider.status();
@@ -54,7 +54,7 @@ try {
 ```
 
 **What happened in the code above?**
-* `configFromNetworkId()` takes the network identifier such as *mainnet* or *testnet* and returns a `config` object containing the correct URLs.
+* `configFromNetwork()` takes the network identifier such as *mainnet* or *testnet* and returns a `config` object containing the correct URLs.
 * `connect()` takes the `config` object and returns an instance of `Near`, which represents the connection.
 * `near.connection.provider` returns a `JsonRpcProvider` object allowing us to make JSON-RPC calls to DataHub.
 * The `status()` method allows us to retrieve the desired information from the properties of the object that it returns.

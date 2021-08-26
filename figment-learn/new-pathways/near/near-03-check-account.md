@@ -78,4 +78,4 @@ You should see:
 
 # Next
 
-Great you have test the avaibility of the choosen account name, now it's time to create it. Let's do this in the next step.
+Great, now that you know how to test the availability of a chosen account name, it's time to create it. Let's do this in the next step!
