@@ -1,35 +1,48 @@
-Our Contract is on-chain, and we're going to learn how to fetch the message stored on the contract. 
+Our Contract is on-chain, and we're going to learn how to fetch the count stored on the contract. 
 
 {% hint style="working" %}
-If you want to learn more about NEAR smart contracts, you can follow the tutorial [here](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near)
+If you want to learn more about Secret smart contracts, look at [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch)
 {% endhint %}
+
+
+{% hint style="danger" %}
+You can experience some issue with the availbility of the network [**To check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
+{% endhint %}
+
+Before, focusing on the deployement instuctions let's take a look fees payement object:
+
+```typescript
+const customFees = {
+  send: {
+    amount: [{ amount: '80000', denom: 'uscrt' }],
+    gas: '80000',
+  },
+}
+```
+* `customFees` object stored the predefined amount of fees to pay in order to **send** a query to the smart contract.  
 
 ----------------------------------
 
 # The challenge
 
 {% hint style="tip" %}
-In`pages/api/near/getter.ts`, complete the code of the default function. 
+In`pages/api/secret/getter.ts`, complete the code of the default function. 
 {% endhint %}
 
 **Take a few minutes to figure this out.**
 
 ```tsx
 //...
-  try {
-    const { network, accountId  } = req.body;
-    const config = configFromNetwork(network);
-    const near = await connect(config);
-    const account = await near.account(accountId);
-    // Using viewFunction, try to call the contract 
-    const response = undefined;
-    return res.status(200).json(response)
-  }
+  // Get the stored value
+  console.log('Querying contract for current count');
+  let response = undefined.
+  let count = response.count as number
 //...
 ```
 
 **Need some help?** Check out this link!
-* [Learn about `viewFunction`](https://near.github.io/near-api-js/classes/account.account-1.html#viewfunction)  
+* [**Contract example**](https://github.com/enigmampc/SecretJS-Templates/tree/master/5_contracts)  
+* [**Documentation of `secrectjs`**](https://github.com/enigmampc/SecretNetwork/tree/master/cosmwasm-js/packages/sdk)  
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -43,27 +56,17 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```tsx
 //...
-  try {
-    const { network, accountId  } = req.body;
-    const config = configFromNetwork(network);
-    const near = await connect(config);
-    const account = await near.account(accountId);
-    const response = await account.viewFunction(
-        accountId, 
-        "get_greeting", 
-        {account_id: accountId}
-    );
-    return res.status(200).json(response)
-  }
+  // Get the stored value
+  console.log('Querying contract for current count');
+  let response = await client.queryContractSmart(contract, { get_count: {} })
+  let count = response.count as number
 //...
 ```
 
 **What happened in the code above?**
-* We're calling the `viewFunction()` method of our account, passing to it:
-  * The `contractId`, which is the same as our account name. This is because the contract has been deployed to our account!
-  * The name of the method we want to call, here `get_greeting`
-  * The name of the argument expected by `get_greeting`, which is `account_id`.
-* Finally, we can send the `response` back to the client-side as JSON. 
+* We're calling the `queryContractSmart()` method of the client, passing to it:
+  * The `contract`, which is the contract address. 
+  * The `{ get_count: {} }` object which represent the name of the method we are calling and the parameters we're passing to it.
 
 ----------------------------------
 
@@ -71,7 +74,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once you have the code above saved, click the button and watch the magic happen:
 
-![](../../../.gitbook/assets/pathways/near/near-getter.gif)
+![](../../../.gitbook/assets/pathways/near/near-getter.png)
 
 ----------------------------------
 

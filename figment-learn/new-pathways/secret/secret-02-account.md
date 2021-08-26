@@ -61,7 +61,7 @@ Do not forget to the fund the newly create wallet using the secret faucet in ord
 
 Once the code is complete and the file is saved, Next.js will rebuild the API route. Now click on **Generate a Mnemonic** and you should see:
 
-![](../../../.gitbook/assets/pathways/secret/secret-keypair.gif)
+![](../../../.gitbook/assets/pathways/secret/secret-account.png)
 
 -----------------------------
 

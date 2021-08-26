@@ -59,7 +59,7 @@ try {
 
 Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
 
-![](../../../.gitbook/assets/pathways/secret/secret-connect.gif)
+![](../../../.gitbook/assets/pathways/secret/secret-connect.png)
 
 -----------------------------
 

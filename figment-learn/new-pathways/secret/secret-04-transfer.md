@@ -4,6 +4,10 @@ To realize such task, you'll need to make an encrypted transaction as in the **S
 
 Let's take a look at it.
 
+{% hint style="danger" %}
+You can experience some issue with the availbility of the network [**To check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
+{% endhint %}
+
 ----------------------------------
 
 # The challenge
@@ -94,7 +98,7 @@ Once you have the code above saved:
 * Fill in the amount of **Secret** you want to send to favorite pizza maker (and as you reallize it was yourself).
 * Click on **Submit Transfer**.
 
-![](../../../.gitbook/assets/pathways/secret/secret-transfer.gif)
+![](../../../.gitbook/assets/pathways/secret/secret-transfer.png)
 
 ----------------------------------
 

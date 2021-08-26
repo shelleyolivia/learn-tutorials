@@ -39,6 +39,10 @@ In `pages/api/secret/balance.ts`, complete the code of the default function.
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
+{% hint style="danger" %}
+You can experience some issue with the availbility of the network [**To check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
+{% endhint %}
+
 ------------------------
 
 # Solution
@@ -74,7 +78,7 @@ The amount returned by is denominated in **μSCRT**, so to convert it to **SCRT*
 
 Once the code is complete and the file is saved, Next.js will rebuild the API route. Click on **Check Balance** and you should see the balance displayed on the page:
 
-![](../../../.gitbook/assets/pathways/secret/secret-balance.gif)
+![](../../../.gitbook/assets/pathways/secret/secret-balance.png)
 
 -----------------------------
 
