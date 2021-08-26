@@ -1,5 +1,6 @@
 The ability to establish a connection is the first step for anyone wanting to discover and travel through web3 space. Fasten your seat belt, it's time to take off 🚀!
-Connecting to a node works pretty much the same as for a standard web server. There are two actors: Client & server, with a protocol managing how data are transferred from one to the other.
+
+Connecting to a node works pretty much the same as for a standard web server. There are two actors: Client & server, with a protocol managing how data is transferred from one to the other.
 
 The main difference here is in the protocol. To connect to NEAR, we'll be using `json-rpc`: 
 * `json`, stands for **J**ava**S**cript **O**bject **N**otation, which is a [text format for transferring data](https://www.w3schools.com/js/js_json_intro.asp).
@@ -44,9 +45,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 try {
-  const config = configFromNetwork(network);
+  const config = configFromNetworkId(network);
   const near = await connect(config);
-  const provider = near.connection.provider
+  const provider = near.connection.provider;
   const status = await provider.status();
   return res.status(200).json(status.version.version);
 }
@@ -54,15 +55,16 @@ try {
 
 **What happened in the code above?**
 * `configFromNetworkId()` takes the network identifier such as *mainnet* or *testnet* and returns a `config` object containing the correct URLs.
-* `connect` takes the `config` object and returns an instance of `Near`, which represents the connection.
-* `near.connection.provider` returns a `JsonRpcProvider` object allowing us to make json RPC call.
-* `status` method allow to retrieve the desired information.
+* `connect()` takes the `config` object and returns an instance of `Near`, which represents the connection.
+* `near.connection.provider` returns a `JsonRpcProvider` object allowing us to make JSON-RPC calls to DataHub.
+* The `status()` method allows us to retrieve the desired information from the properties of the object that it returns.
+* Finally, we can send back the `status.version.version` to the client-side as JSON.
 
 ------------------------
 
 # Make sure it works
 
-Once the code above is saved, refresh the page to see it update & display the current version.
+Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
 
 ![](../../../.gitbook/assets/pathways/near/near-connect-v2.gif)
 

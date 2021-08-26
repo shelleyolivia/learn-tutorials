@@ -1,11 +1,11 @@
-Unlike with most Web 3 protocols, NEAR uses human readable account IDs instead of a public key hash. You can link to a NEAR account as much `keypair` as you want. Here, we're going to Learn how tho check the availability of a near account. As you can expected, **figment.testnet** is already taken.
+Unlike many other Web 3 protocols, NEAR uses a human readable account ID instead of a public key hash. You can link as many `keypairs` to a NEAR account as you want. Here, we're going to Learn how to check the availability of a NEAR account name. As you might expect, **figment.testnet** is already taken.
 
 ------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/near/check-account.ts`, complete the code of the function.
+In `pages/api/near/checkAccountId.ts`, complete the code of the default function.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -15,7 +15,7 @@ In `pages/api/near/check-account.ts`, complete the code of the function.
     const { freeAccountId, network } = req.body
     const config = configFromNetwork(network);
     const near = await connect(config);
-    // try to query the account info of the 
+    // Query the account info of freeAccountId 
     const accountInfo = undefined
     try {
         undefined;
@@ -26,9 +26,10 @@ In `pages/api/near/check-account.ts`, complete the code of the function.
   }
 ```
 
-**Need some help?** Check out those two links
+**Need some help?** Check out these links
 * [The `Account` class](https://near.github.io/near-api-js/classes/account.account-1.html)  
-* [`NEAR Account`](https://docs.near.org/docs/concepts/account)
+* [An explanation of `NEAR Accounts`](https://docs.near.org/docs/concepts/account)
+* [RPC `view_account`](https://docs.near.org/docs/develop/front-end/rpc#view-account)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -56,8 +57,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we create an `Account` object.
-* Next, we query the `state` of this object if it's failed then the account doesn't exist.
+* First, we create an `Account` object from the `freeAccountId` being passed in the request body.
+* Next, we query the state of this object with the `state()` method:
+  * If it returns `true`, the account exists and we will return a `false` value to the client-side - indicating that the name is unavailable. 
+  * If `state()` returns `false`, the account doesn't exist - so we pass a `true` value back to the client-side, indicating that the name is available. Phew! Little bit of programming logic there.
 
 ------------------------
 

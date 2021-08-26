@@ -1,11 +1,11 @@
-We won't go throught the process of reviewing the Smart Contract code base, compiling it and/or testing it. We will be more focus on how one can deploy a Smart Contract using the `near-js-api`. Then to fill this requirement, we're going to use a pre-compiled Smart Contract, you can find it under `./contract/nearout/main.wasm`.
+We won't go through the process of reviewing the smart contract code base, compiling it or testing it. We will focus instead on how one can deploy a smart contract using the `near-js-api`. To do this, we're going to use a pre-compiled smart contract, you can find it under `./contract/nearout/main.wasm`.
 
-Our contract will be pretty basic. It's store a string and implement two function:
-* `get_gretting` function which take an **accountId** and return the string stored for a specific account id
-* `set_gretting` function which take an **accountId** and return the string stored for a specific account id
+Our contract will be pretty basic. It stores a string on the blockchain and implements two functions:
+* The `get_greeting` function, which takes an **accountId** and returns the string stored for a specific account.
+* The `set_greeting` function, which takes an **accountId** and stores the string for a specific account.
 
 {% hint style="working" %}
-If you want to learn more about **NEAR** Smart Contract take a look [here](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near)
+If you want to learn more about NEAR smart contracts, you can follow the tutorial [here](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near)
 {% endhint %}
 
 ----------------------------------
@@ -13,7 +13,7 @@ If you want to learn more about **NEAR** Smart Contract take a look [here](https
 # The challenge
 
 {% hint style="tip" %}
-In`pages/api/near/deploy.ts`, complete the code of the function. And deploy your first Smart Contract on **NEAR** network.
+In`pages/api/near/deploy.ts`, complete the code of the default function. Deploy your first smart contract on the **NEAR** testnet.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -38,7 +38,7 @@ In`pages/api/near/deploy.ts`, complete the code of the function. And deploy your
 //...
 ```
 
-**Need some help?** Check out those two links
+**Need some help?**
 * [Learn more about `deployContract`](https://near.github.io/near-api-js/classes/account.account-1.html#deploycontract)  
 
 {% hint style="info" %}
@@ -67,21 +67,20 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we need to *rehydrate* our `KeyPair` using our secret
-* Next, we're calling the `deployContract` method will the `WASM_PATH` pointing to the the location of the Smart Contract.
+* First, we need to *rehydrate* our `KeyPair` using our secret.
+* Next, we're calling the `deployContract` method with the `WASM_PATH` pointing to the location of the compiled smart contract.
+* Finally, we can send the transaction hash back to the client-side as JSON.
 
 ----------------------------------
 
 # Make sure it works
 
-Once you have the code above saved:
-* Fill the amount in **NEAR** 
-* Click on **Submit Transfer**
+Once you have the code above saved, click on **Deploy Contract**
 
-![](../../../.gitbook/assets/near-transfer.gif)
+![](../../../.gitbook/assets/near-deploy.gif)
 
 ----------------------------------
 
 # Next
 
-Now that we have an account, we can fund it so we can start playing around with tokens!
+Now that we have deployed a smart contract, let's interact with it. In the following tutorials, we will look at how to use both view and change functions.

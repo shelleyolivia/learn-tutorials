@@ -1,13 +1,13 @@
-In order to transfer some value to another account, we need to signed a transaction to the **network**. **NEAR** blockchain provide an abstract class to help us, **KeyStore**.
+In order to transfer some value to another account, we need to sign a transaction to the **network**. **NEAR** provides an abstract class to help us with this: **KeyStore**.
 
-Here you are going to learn how to set your keystore in order to sign your transfer of token.
+Here you are going to learn how to set your keystore in order to sign your transfer of tokens.
 
 ----------------------------------
 
 # The challenge
 
 {% hint style="warning" %}
-In`pages/api/near/transfer.ts`, complete the code of the function. They're a lot to fill here.
+In`pages/api/near/transfer.ts`, complete the code of the function. There is a lot to fill here, so be careful!
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -44,9 +44,9 @@ In`pages/api/near/transfer.ts`, complete the code of the function. They're a lot
 //...
 ```
 
-**Need some help?** Check out those two links
-* [Manage `KeyStore`](https://near.github.io/near-api-js/classes/key_stores_in_memory_key_store.inmemorykeystore.html)  
-* [Check `sendMoney`](https://near.github.io/near-api-js/classes/account.account-1.html#sendmoney)
+**Need some help?** Check out these links
+* [Manage a `KeyStore` in memory](https://near.github.io/near-api-js/classes/key_stores_in_memory_key_store.inmemorykeystore.html)  
+* [Check out the `sendMoney()` method](https://near.github.io/near-api-js/classes/account.account-1.html#sendmoney)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -85,17 +85,17 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we need to *rehydrate* our `KeyPair` using our secret
-* Next, we convert the **NEAR** into **yoctoNEAR** the smallest unit of money in **NEAR** blockchain
-* Next, we create using `sendMoney` method we submit the signed transaction to the network 
+* First, we need to *rehydrate* our `KeyPair` using our secret.
+* Next, we convert the **NEAR** into **yoctoNEAR**, the smallest unit of money on the **NEAR** blockchain.
+* Next, create our transaction using the `sendMoney()` method, with a receiver and an amount as arguments. This submits the signed transaction to the network, and returns the transaction hash, which is accessible as the `transaction.hash` property of the `transaction` variable. 
 
 ----------------------------------
 
 # Make sure it works
 
 Once you have the code above saved:
-* Fill the amount in **NEAR** 
-* Click on **Submit Transfer**
+* Fill in the amount of **NEAR** you want to send to `pizza.testnet`.
+* Click on **Submit Transfer**.
 
 ![](../../../.gitbook/assets/near-transfer.gif)
 
@@ -103,4 +103,4 @@ Once you have the code above saved:
 
 # Next
 
-Now that we have an account, we can fund it so we can start playing around with tokens!
+Now that we have funded our account and made a transfer, let's move on to deploying some code (known as a "smart contract") to the NEAR blockchain! Ready to take the plunge? Let's go... 

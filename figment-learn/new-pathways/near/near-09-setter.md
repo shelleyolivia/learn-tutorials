@@ -1,7 +1,7 @@
-Our Contract is on chain, and we-re going to learn how to modify stored message of the contract. 
+Our contract is on-chain, and we're going to learn how to modify the message stored in the state of the contract. 
 
 {% hint style="working" %}
-If you want to learn more about **NEAR** Smart Contract take a look [here](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near)
+If you want to learn more about NEAR smart contracts, you can follow the tutorial [here](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near)
 {% endhint %}
 
 ----------------------------------
@@ -9,7 +9,7 @@ If you want to learn more about **NEAR** Smart Contract take a look [here](https
 # The challenge
 
 {% hint style="tip" %}
-In`pages/api/near/setter.ts`, complete the code of the function. 
+In`pages/api/near/setter.ts`, complete the code of the default function. 
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -24,7 +24,7 @@ In`pages/api/near/setter.ts`, complete the code of the function.
 
     const near = await connect(config);
     const account = await near.account(accountId);
-    // Look at functionCall and pass the rexpected agrs
+    // Look at functionCall and pass the expected arguments
     // ... fill here
     return res.status(200).json(response.transaction.hash)
   }
@@ -68,17 +68,16 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* We're calling `functionCall` method of our account, passing to it:
-  * The `contractId` same as our account as the contract have been deployed to our account
-  * The name of the method we want to call, here `set_greeting`
-  * The name of the argument expected by `get_gretting` 
+* We're calling the `functionCall()` method of our account, passing to it:
+  * The `contractId` which is the same as our account name. This is because the contract has been deployed to our account.
+  * The name of the method we want to call, `set_greeting`
+  * The name of the argument expected by `get_greeting`, which is `message`.
+
 ----------------------------------
 
 # Make sure it works
 
-Once you have the code above saved:
-* Fill the amount in **NEAR** 
-* Click on **Submit Transfer**
+Once you have the code above saved, click the button and watch the magic happen:
 
 ![](../../../.gitbook/assets/near-setter.gif)
 
@@ -86,10 +85,10 @@ Once you have the code above saved:
 
 # Conclusion
 
-Congratulations! You have successfully created, deployed, and interacted with your smart contract on the NEAR Testnet using DataHub.
+Congratulations! You have successfully created, deployed, and interacted with a smart contract on the NEAR Testnet using DataHub.
 
-While we have only covered a very small area of contract development you are more than welcome to continue exploration and experiments on your own, feel free to check out [**NEAR Developer**](https://examples.near.org/) site for more examples and tutorials.
+While we have only covered a very small area of contract development, you are more than welcome to continue exploration and experiments on your own! Feel free to check out the [**NEAR Developer site**](https://examples.near.org/) for more examples and tutorials.
 
-The complete code for this tutorial can be found on [**Github**](https://github.com/figment-networks/tutorials/tree/main/near/5_contracts).
+The complete code for this tutorial can be found on [**GitHub**](https://github.com/figment-networks/tutorials/tree/main/near/5_contracts).
 
 If you had any difficulties following this tutorial or simply want to discuss NEAR and DataHub tech with us you can join [our community](https://discord.gg/fszyM7K) today!
