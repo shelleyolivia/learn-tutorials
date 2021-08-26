@@ -1,21 +1,23 @@
 # Introduction
 
-Today we will be learning how to code a decentralized application on Avalanche's Fuji network from scratch. It would be a simple dapp, in which we will be holding an election between the candidates. And users like you and me will be going to vote them. So, to vote easily and efficiently using the browser, we would also be writing client-side application to interact with the blockchain. For developing this dapplication we would be using Trufflesuite. [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dapps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
+Today we will be learning how to code a decentralized application on Avalanche's Fuji network from scratch. It will be a simple application, in which we will be holding an election between the candidates. Users will be able to vote for their chosen candidate. So, to vote easily and efficiently using the browser, we also need a client-side application to interact with the blockchain. For developing this project we will be using [Trufflesuite](https://www.trufflesuite.com), which is a toolkit for launching decentralized applications (dApps) on [EVM](https://en.wikipedia.org/wiki/Ethereum#Virtual_machine) compatible blockchains. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
 # Prerequisites
 
-You've created an [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain) tutorial to get funds to your C-Chain address.
+You will need a [DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and an API key for the Avalanche service.
+This tutorial assumes that you are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview).
 
 # Requirements
 
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle, which you can install with `npm install -g truffle`
 * Metamask extension added to the browser, which you can add from [here](https://metamask.io/download.html)
-* Express.js, dotenv and @truffle/hdwallet-provider \(instructions to install these will be added later\)
+* Express.js, dotenv and @truffle/hdwallet-provider (instructions to install these are below)
+* You will also need to have performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain) tutorial to get funds to your C-Chain address on the Fuji testnet.
 
-# Create truffle directory and install dependencies
+# Project setup
 
-Open a new terminal tab ,so that, we can create a `evoting` directory and install some further dependencies.
+Open a new terminal tab, so that we can create a `evoting` directory and install some further dependencies.
 
 First, navigate to the directory within which you intend to create your `evoting` working directory:
 
@@ -52,7 +54,7 @@ truffle init
 
 This will setup our initial project structure. Smart contracts will be stored in the `contracts` folder, deployment functions for migrating smart contracts to the network will be stored in the `migrations` folder. And `build/contracts` folder would contain information about the deployed contract, ABI etc.
 
-# Update truffle-config.js
+**Update truffle-config.js**
 
 One of the files created when you ran `truffle init` is `truffle-config.js`. Replace all of it with the following.
 
@@ -89,7 +91,7 @@ module.exports = {
 
 Note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 
-# Add .env file
+**Add .env file**
 
 * First of all, we need to create an account on Avalanche network. Please visit [Avalanche Wallet](https://wallet.avax.network/) to create your account and save your mnemonics in the .env file.
 * Now copy your Datahub's Avalanche Fuji testnet API key in the .env file as shown below.
@@ -101,8 +103,6 @@ APIKEY=<your-api-key>
 ```
 
 # Add Election.sol
-
-> **References** : This tutorial has been made by taking reference from [Dapp University](https://github.com/dappuniversity/election).
 
 In the `contracts` directory add a new file called `Election.sol` and add the following block of code:
 
@@ -150,7 +150,7 @@ contract Election {
 
 `Election` is a solidity smart contract which lets us view candidates standing in an election and voting them. This is a basic contract for election and we will advance to more sophisticated smart contract, in which we can even create new elections, add new candidates etc. in the next tutorial of this series.
 
-### Understanding the smart contract
+# Understanding the smart contract
 
 * **Structure to store candidates** - We are using `struct` to store the details of candidates like `name`, `id` and `voteCount`. And further store each candidate in a mapping between candidate's id and their structure.
 
@@ -243,7 +243,7 @@ When deploying smart contracts to the C-Chain, it will require some deployment c
 
 Fund your account using the the faucet link [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and pasting your Fuji's C-Chain address in the input field. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here `nAVAX` refers to nano AVAX, which is one-billionth of an AVAX token. Minimum AVAX required for deployment, will vary from contract to contract, depending upon what variables and data structures our contract is using. Though faucet will give you enough `AVAX` to deploy and transact multiple times on Avalanche's Fuji network.
 
-## Run Migrations
+# Run Migrations
 
 Now everything is in place to run migrations and deploy the `Election` contract:
 
@@ -582,3 +582,6 @@ This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranj
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
 
+# References 
+
+This tutorial has been made by taking reference from [Dapp University](https://github.com/dappuniversity/election).
