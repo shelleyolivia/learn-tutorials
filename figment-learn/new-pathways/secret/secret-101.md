@@ -44,7 +44,7 @@ A property of the Tendermint consensus algorithm is instant finality. This means
 
 ## Languages supported
 
-Secret Contracts are developed with the Rust programming language and compiled to WASM binaries.
+Secret Contracts are developed with the Rust programming language and compiled to WebAssembly ([WASM](https://rustwasm.github.io/docs/book/)) binaries.
 
 ## EVM compatibility
 

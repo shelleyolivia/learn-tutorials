@@ -1,15 +1,15 @@
 Our Contract is on-chain, and we're going to learn how to fetch the count stored on the contract. 
 
 {% hint style="working" %}
-If you want to learn more about Secret smart contracts, look at [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch)
+If you want to learn more about Secret smart contracts, follow the [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch) tutorial.
 {% endhint %}
 
 
 {% hint style="danger" %}
-You can experience some issue with the availbility of the network [**To check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
+You could experience some issues with the availability of the network [**Click here to check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
 {% endhint %}
 
-Before, focusing on the deployement instuctions let's take a look fees payement object:
+Before focusing on retrieving a value from the smart contract, let's take a look at the fees object:
 
 ```typescript
 const customFees = {
@@ -19,14 +19,14 @@ const customFees = {
   },
 }
 ```
-* `customFees` object stored the predefined amount of fees to pay in order to **send** a query to the smart contract.  
+* This `customFees` object stores the predefined amount of **uSCRT** to pay in order to **send** a query to the smart contract.  
 
 ----------------------------------
 
 # The challenge
 
 {% hint style="tip" %}
-In`pages/api/secret/getter.ts`, complete the code of the default function. 
+In `pages/api/secret/getter.ts`, complete the code of the default function. 
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -42,7 +42,7 @@ In`pages/api/secret/getter.ts`, complete the code of the default function.
 
 **Need some help?** Check out this link!
 * [**Contract example**](https://github.com/enigmampc/SecretJS-Templates/tree/master/5_contracts)  
-* [**Documentation of `secrectjs`**](https://github.com/enigmampc/SecretNetwork/tree/master/cosmwasm-js/packages/sdk)  
+* [**`queryContractSmart()`**](https://github.com/enigmampc/SecretNetwork/blob/7adccb9a09579a564fc90173cc9509d88c46d114/cosmwasm-js/packages/sdk/src/cosmwasmclient.ts#L400)  
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -66,7 +66,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 **What happened in the code above?**
 * We're calling the `queryContractSmart()` method of the client, passing to it:
   * The `contract`, which is the contract address. 
-  * The `{ get_count: {} }` object which represent the name of the method we are calling and the parameters we're passing to it.
+  * The `{ get_count: {} }` object which represents the name of the method we are calling and the parameters we're passing to it. In this case, there are no arguments passed to `get_count`, but we must still pass an empty object: `{}`.
 
 ----------------------------------
 

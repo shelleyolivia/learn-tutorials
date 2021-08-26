@@ -1,11 +1,11 @@
-Like with most Web 3 protocols, transactions on Secret happen between **accounts**. To create an account, a client generates a **mnemonic** from it we can (re)-create a **public key** and an address for our **wallet**. We're going to learn how to achive all of this in the next challenge.
+Like with most Web 3 protocols, transactions on Secret happen between **accounts**. To create an account, a client generates a **mnemonic** from which it can (re)-create a **public key** and a public address for use with a **wallet**. We're going to learn how to achieve all of this in the next challenge.
 
 ------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/secret/account.ts`,complete the code of the function and first create a **mnemonic** then deduce the wallet's address from it.
+In `pages/api/secret/account.ts`, complete the code of the function to first create a **mnemonic**, then produce an **address** from the **public key** belonging to the **mnemonic**.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -13,24 +13,24 @@ In `pages/api/secret/account.ts`,complete the code of the function and first cre
 ```typescript
 //...
   try {
-    const mnemonic = Bip39.encode(Random.getBytes(16)).toString();
-    const signingPen = await Secp256k1Pen.fromMnemonic(mnemonic)
-    const pubkey = encodeSecp256k1Pubkey(signingPen.pubkey);
-    const address = pubkeyToAddress(pubkey, 'secret');
+    const mnemonic = undefined;
+    const signingPen = await undefined;
+    const pubkey = undefined;
+    const address = undefined;
     res.status(200).json({mnemonic, address})
   }
 //...
 ```
 
-**Need some help?** Check out those two links
+**Need some help?** Check out these links
+* [**Documentation for `@iov/crypto`'s BIP39 implementation**](https://iov-one.github.io/iov-core-docs/latest/iov-crypto/classes/bip39.html)
 * [**Account example**](https://github.com/enigmampc/SecretJS-Templates/blob/master/2_creating_account/create_account.js)  
-* [**Documentation of `secrectjs`**](https://github.com/enigmampc/SecretNetwork/tree/master/cosmwasm-js/packages/sdk)  
 
 {% hint style="info" %}
 [**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
 {% endhint %}
 
-Still not sure how to do this ? No problem! The solution is below so you don't get stuck.
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
 ------------------------
 
@@ -47,12 +47,13 @@ Still not sure how to do this ? No problem! The solution is below so you don't g
 ```
 
 **What happened in the code above?**
-* First, we create a random **mnemonic** using `fromMnemonic` method of `Secp256k1Pen` class.
-* Next, we deduce the public key from it using `encodeSecp256k1Pubkey` method.
-* Next, we deduce the wallet address from it using `pubkeyToAddress` method.
+* First we create a random **mnemonic** using the `fromMnemonic()` method of the `Secp256k1Pen` class.
+* Next we deduce the public key from it using the `encodeSecp256k1Pubkey()` function.
+* Then we deduce the wallet address from it using the `pubkeyToAddress()` function.
+* Finally we send the mnemonic and address back to the client-side as a JSON object.
 
 {% hint style="tip" %}
-Do not forget to the fund the newly create wallet using the secret faucet in order to activate it!.
+Do not forget to fund the newly created wallet using the [secret faucet](https://faucet.secrettestnet.io/) in order to activate it!
 {% endhint %}
 
 ------------------------

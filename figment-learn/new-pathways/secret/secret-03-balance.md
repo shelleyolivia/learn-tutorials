@@ -1,7 +1,7 @@
-After the creation of your account on the **Secret** `holodeck-2` network, and funding it using the faucet. We're going to check the balance of our account to make sure everything went alright.
+Now that you have created an account on the **Secret** `holodeck-2` network, and funded it using the faucet - We're going to check the balance of our account to make sure everything went alright.
 
 {% hint style="info" %}
-The native token in **Secret** is **SCRT**
+The native token on the **Secret Network** is **SCRT**
 {% endhint %}
 
 ------------------------
@@ -31,7 +31,8 @@ In `pages/api/secret/balance.ts`, complete the code of the default function.
 
 **Need some help?** Check out these links
 * [**Query example**](https://github.com/enigmampc/SecretJS-Templates/blob/master/3_query_node/query.js)
-* [**Documentation of `secrectjs`**](https://github.com/enigmampc/SecretNetwork/tree/master/cosmwasm-js/packages/sdk)  
+* [**Check out the CosmWasmClient source to understand the `Account` interface**](https://github.com/enigmampc/SecretNetwork/blob/master/cosmwasm-js/packages/sdk/src/cosmwasmclient.ts) 
+* [**Also, look at `getAccount()` and what it returns**](https://github.com/enigmampc/SecretNetwork/blob/7adccb9a09579a564fc90173cc9509d88c46d114/cosmwasm-js/packages/sdk/src/cosmwasmclient.ts#L231)
 
 {% hint style="info" %}
 [**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
@@ -40,7 +41,7 @@ In `pages/api/secret/balance.ts`, complete the code of the default function.
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
 {% hint style="danger" %}
-You can experience some issue with the availbility of the network [**To check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
+You could experience some issues with the availability of the network. [**Click here to check the current status of `holodeck-2`**](https://secretnodes.com/secret/chains/holodeck-2)
 {% endhint %}
 
 ------------------------
@@ -61,11 +62,12 @@ You can experience some issue with the availbility of the network [**To check th
 ```
 
 **What happened in the code above?**
-* First, we return an `Account` from `getAccount` method.
-* Next, we return 
+* First, we return an instance of the `Account` class from the `getAccount()` method.
+* Next, we check the balance by accessing the `amount` property of the `Account.balance[0]`. The array attached to `balance` here is because the TypeScript definitions specify a `balance` as being a `ReadOnlyArray<Coin>`. The zero-index refers to the SCRT Coin.
+  * Take note of the use of the [optional chaining operator](https://www.codeisbae.com/typescript-optional-chaining-nullish-coalescing/): `?.` This effectively prevents passing an incorrect value back to the client-side, because if there is no balance property present the expression will not evaluate.
 
 {% hint style="info" %}
-If you want to know why not inspecting the `Account` Object directly in the terminal using `console.log(account)`
+If you want to see more info, why not inspect the `Account` Object directly in the terminal using `console.log(account)`?
 {% endhint %}
 
 {% hint style="tip" %}
@@ -84,4 +86,4 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 # Next
 
-100 **SCRT** available, hmmm ... I guess it's more than enough to do our first transfer. In the next step, we're going to buy a pizza!
+100 **SCRT** available, hmmm ... seems it's more than enough to do our first transfer. In the next step, we're going to buy a pizza which means making a transfer of tokens!
