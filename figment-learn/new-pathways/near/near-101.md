@@ -1,5 +1,5 @@
 {% hint style="info" %}
-Feel Free to skip this section and start the challenges
+Feel Free to skip this section and [start the challenges](https://learn.figment.io/tutorials/setup-the-near-project)
 {% endhint %}
 
 ------------------------

@@ -5,7 +5,7 @@ Like with most Web 3 protocols, transactions on NEAR happen between **accounts**
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/near/keypair.ts`, implement `keypair` and retrieve the string formatted representation of the `secret`.
+In `pages/api/near/keypair.ts`, implement `keypair` and retrieve the string formatted representation of the keypair into the variable `secret`.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -41,8 +41,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we create a random `keypair` using `ed25519` cryptographic curve.
-* Next, we retrieve the string formatted representaion of the `secret` key.
+* First, we create a random `keypair` using the `ed25519` cryptographic curve.
+* Next, we retrieve the string formatted representation of the `secret` key.
 
 ------------------------
 
