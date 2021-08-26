@@ -675,7 +675,7 @@ Now that we have our smart contract on the Celo test network, it's time to use i
 
 You will need the smart contracts we wrote in part 1, and the deployments you made in part 2. Therefore, for the code in this tutorial to work you will need to have completed the prior two tutorials.
 
-{% embed url="https://www.youtube.com/watch?v=C24prS3bk\_I" caption="Interacting with the Crowdfunding Smart Contracts" %}
+{% embed url="https://www.youtube.com/watch?v=C24prS3bk\_I" %}
 
 ## Setup
 
