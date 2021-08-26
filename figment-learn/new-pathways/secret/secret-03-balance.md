@@ -1,6 +1,6 @@
 After the creation of your account on the **Secret** `holodeck-2` network, and funding it using the faucet. We're going to check the balance of our account to make sure everything went alright.
 
-{% hint style="tip" %}
+{% hint style="info" %}
 The native token in **Secret** is **SCRT**
 {% endhint %}
 
@@ -60,7 +60,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * First, we return an `Account` from `getAccount` method.
 * Next, we return 
 
-{% hint style="tip" %}
+{% hint style="info" %}
 If you want to know why not inspecting the `Account` Object directly in the terminal using `console.log(account)`
 {% endhint %}
 

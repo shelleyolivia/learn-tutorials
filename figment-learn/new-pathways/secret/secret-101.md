@@ -48,7 +48,7 @@ Secret Contracts are developed with the Rust programming language and compiled t
 
 ## EVM compatibility
 
-The Secret Network has launched a bridge with Ethereum**,** bringing cheaper and more usable privacy to Ethereum and Ethereum-based assets. It allows users to create synthetic (wrapped) ETH and ERC-20 tokens on Secret Network that can be used with full privacy, at a lower cost.
+The Secret Network has launched a bridge with Ethereum, bringing cheaper and more usable privacy to Ethereum and Ethereum-based assets. It allows users to create synthetic (wrapped) ETH and ERC-20 tokens on Secret Network that can be used with full privacy, at a lower cost.
 
 The bridge is bidirectional, so Secret Tokens can then be redeemed for their Ethereum-based equivalent.
 
