@@ -5,14 +5,14 @@ Unlike many other Web 3 protocols, NEAR uses a human readable account ID instead
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/near/createAccountId.ts`, complete the code of the default function.
+In `pages/api/near/create-account.ts`, complete the code of the default function.
 {% endhint %}
 
 **Take a few minutes to figure this out**
 
 ```typescript
 try {
-    const { freeAccountId, publicKey, network }: AccountReq = req.body;
+    const { freeAccountId, publicKey, network } = req.body;
     const config = configFromNetwork(network);
     const near = await connect(config);
     undefined;

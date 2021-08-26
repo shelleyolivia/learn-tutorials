@@ -89,6 +89,4 @@ Congratulations! You have successfully created, deployed, and interacted with a 
 
 While we have only covered a very small area of contract development, you are more than welcome to continue exploration and experiments on your own! Feel free to check out the [**NEAR Developer site**](https://examples.near.org/) for more examples and tutorials.
 
-The complete code for this tutorial can be found on [**GitHub**](https://github.com/figment-networks/tutorials/tree/main/near/5_contracts).
-
 If you had any difficulties following this tutorial or simply want to discuss NEAR and DataHub tech with us you can join [our community](https://discord.gg/fszyM7K) today!
