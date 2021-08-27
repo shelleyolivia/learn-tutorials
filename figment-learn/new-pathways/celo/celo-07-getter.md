@@ -4,8 +4,6 @@ Our Contract is on-chain, and we're going to learn how to fetch the count stored
 If you want to learn more about Secret smart contracts, follow the [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch) tutorial.
 {% endhint %}
 
-
-
 ----------------------------------
 
 # The challenge

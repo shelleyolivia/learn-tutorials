@@ -1,32 +1,35 @@
-We won't go through the process of reviewing the smart contract code base, compiling it or testing it. We will focus instead on how one can deploy a smart contract using the `secretjs` library. To do this, we're going to use a pre-compiled smart contract, you can find it under `./contract/secret/contract.wasm`.
-
-Our contract implements a simple counter. The contract is created with a parameter for the initial count and allows subsequent incrementing:
-* The `get_count` function returns the value of the counter stored on the contract.
-* The `increment` function increases the value of the counter stored on the contract by 1.
-
-{% hint style="working" %}
-If you want to learn more about Secret smart contracts, follow the [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch) tutorial.
-{% endhint %}
-
+It’s time to submit another transactions. In this challenge, we will connect to a Celo node hosted by DataHub and we will swap 1 **cUSD** stable token against the expected amount of **CELO** token. As you remember from previous step, we funded our account on the `Alfajores` testnet with 5CELO and 10cUSD. Now let’s try to swap 1 **cUSD** token to **CELO**.
 
 ----------------------------------
 
 # The challenge
 
-{% hint style="tip" %}
-In `pages/api/celo/deploy.ts`, complete the code of the default function. Upload your first smart contract on the **Secret** network.
+{% hint style="warning" %}
+In `pages/api/celo/swap.ts`, complete the code of the **swap** function. Celo has a number of core Smart Contracts that are deployed to the network. In this challenge. we'll use StableToken and Exchange contract wrappers, which have all the expected functions allowing to swap our tokens. 
 {% endhint %}
 
 **Take a few minutes to figure this out.**
 
 ```tsx
 //...
+    // Get contract wrappers
+    // - StableTokenWrapper
+    // - ExchangeWrapper
+    const stableToken = undefined;
+    const exchange = undefined;
 
+    // Approve a user to transfer StableToken on behalf of another user.
+    const approveTx = undefined;
+
+    // Exchange cUSD for CELO
+    const goldAmount = undefined;
+    const sellTx = undefined;
 //...
 ```
 
 **Need some help?**
-* [**Contract example**](https://github.com/enigmampc/SecretJS-Templates/tree/master/5_contracts)  
+* [**We can access the cUSD contract with kit.contracts.getStableToken()**](https://docs.celo.org/developer-guide/contractkit/contracts-wrappers-registry#interacting-with-celo-and-cusd)
+* [**Buying all the CELO I can, with the cUSD in my account**](https://docs.celo.org/developer-guide/contractkit/usage#buying-all-the-celo-i-can-with-the-cusd-in-my-account)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -40,23 +43,40 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```tsx
 //...
+    // Get contract wrappers
+    const stableToken = await kit.contracts.getStableToken();
+    const exchange = await kit.contracts.getExchange();
 
+    // Approve a user to transfer StableToken on behalf of another user.
+    const approveTx = await stableToken.approve(exchange.address, OneCUSD).send({from: address})
+
+    // Exchange cUSD for CELO
+    const goldAmount = await exchange.quoteStableSell(OneCUSD)
+    const sellTx = await exchange.sellStable(OneCUSD, goldAmount).send({from: address})
+    const sellReceipt = await sellTx.waitReceipt();
 //...
 ```
 
 **What happened in the code above?**
-* First, we upload the contract using `upload` method of the `SigningCosmWasmClient`.
-
+* First, we store into `stableToken` variable the `StableTokenWrapper` contract interface calling `getStableToken`  
+* Next, we store into `exchange` variable the `ExchangeWrapper` contract interface calling `getExchange`  
+* Next, we approve the transfer between the address using `approve` method of `stableToken` from our `StableTokenWrapper` contract interface 
 ----------------------------------
 
 # Make sure it works
 
-Once you have the code above saved, click on **Deploy Contract**
+Once you have the code above saved, click on **Swap 1cUSD**
 
 ![](../../../.gitbook/assets/pathways/celo/celo-swap.png)
+
+
+{% hint style="info" %}
+Fun fact, if you take the inverse of the returned value you'll found the quotation displayed on [coinmarketcap](https://coinmarketcap.com/currencies/celo/)
+{% endhint %}
+
 
 ----------------------------------
 
 # Next
 
-Now that we have deployed a smart contract, let's interact with it! In the following tutorials, we will look at how to use both view and change functions.
+We now know how to query Celo network and how to submit transactions. So far we used only core Celo Smart Contracts but it’s time to deploy our own smart contract and interact with it.

@@ -1,61 +1,38 @@
-We won't go through the process of reviewing the smart contract code base, compiling it or testing it. We will focus instead on how one can deploy a smart contract using the `secretjs` library. To do this, we're going to use a pre-compiled smart contract, you can find it under `./contract/secret/contract.wasm`.
 
-Our contract implements a simple counter. The contract is created with a parameter for the initial count and allows subsequent incrementing:
-* The `get_count` function returns the value of the counter stored on the contract.
-* The `increment` function increases the value of the counter stored on the contract by 1.
-
-{% hint style="working" %}
-If you want to learn more about Secret smart contracts, follow the [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch) tutorial.
-{% endhint %}
-
-{% hint style="danger" %}
-You could experience some issues with the availability of the network [**Click here to check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
-{% endhint %}
-
-Before, focusing on the deployment instructions, let's take a look at some important global variables:
-
-```typescript
-const CONTRACT_PATH = './contracts/secret/contract.wasm' 
-
-const customFees = {
-  upload: {
-    amount: [{ amount: '2000000', denom: 'uscrt' }],
-    gas: '2000000',
-  },
-  init: {
-    amount: [{ amount: '500000', denom: 'uscrt' }],
-    gas: '500000',
-  }
-};
-```
-
-* `CONTRACT_PATH` is pointing to the location of the optimized **WebAssembly** version of the smart contract.  
-* The `customFees` object stores the predefined amount of fees to pay in order to **upload** and **initialize** the smart contract. [Click here](https://github.com/enigmampc/SecretNetwork/blob/7adccb9a09579a564fc90173cc9509d88c46d114/cosmwasm-js/packages/sdk/src/signingcosmwasmclient.ts#L48) to check out the default fee table in the `SigningCosmWasmClient` source. 
 
 ----------------------------------
 
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/secret/deploy.ts`, complete the code of the default function. Upload your first smart contract on the **Secret** network.
+In `pages/api/celo/deploy.ts`, complete the code of the default function. Upload your first smart contract on the **Celo** network.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
 
 ```tsx
 //...
-  // Upload the contract wasm
-  const wasm = fs.readFileSync(CONTRACT_PATH);
-  const uploadReceipt = await client.undefined;
-  if (!uploadReceipt) {
-    throw new Error("uploadReceipt error");
-  }
-  // Get the code ID from the receipt
-  const { codeId } = uploadReceipt;
+  try {
+    const { secret } = req.body
+    const url = getSafeUrl();
+    const kit = newKit(url);
 
-  // Create an instance of the Counter contract, providing a starting count
-  const initMsg = { count: 101 };
-  const receipt = undefined;
+    const account = kit.web3.eth.accounts.privateKeyToAccount(secret)
+    kit.addAccount(account.privateKey);
+
+    let tx = await kit.sendTransaction({
+        from: account.address,
+        data: HelloWorld.bytecode
+    })
+
+    const receipt = await tx.waitReceipt()
+    console.log(receipt)
+
+    res.status(200).json({
+        address: receipt?.contractAddress as string,
+        hash: receipt.transactionHash
+    })
+  }
 //...
 ```
 
@@ -75,30 +52,12 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```tsx
 //...
-  // Upload the contract wasm
-  const wasm = fs.readFileSync(CONTRACT_PATH);
-  const uploadReceipt = await client.upload(wasm, {});
-  if (!uploadReceipt) {
-    throw new Error("uploadReceipt error");
-  }
-  // Get the code ID from the receipt
-  const { codeId } = uploadReceipt;
 
-  // Create an instance of the Counter contract, providing a starting count
-  const initMsg = { count: 101 };
-  const receipt = await client.instantiate(codeId, initMsg, `My Counter${Math.ceil(Math.random() * 10000)}`);
-  } 
 //...
 ```
 
 **What happened in the code above?**
 * First, we upload the contract using `upload` method of the `SigningCosmWasmClient`.
-* Next, we destructure the `uploadReceipt` response object to get the `codeId` of the deployed contract
-* Finally, we instantiate the contract using `instantiate` method of the `SigningCosmWasmClient`, passing:
-  * The `codeId`.
-  * The `initMsg` contract method to instantiate the storage with a value of `101`.
-  * A label, which needs to be unique.
-  * Optionally, we could also include a memo, a transfer amount, fees, and a code hash. For this example, these arguments are unnecessary.
 
 ----------------------------------
 

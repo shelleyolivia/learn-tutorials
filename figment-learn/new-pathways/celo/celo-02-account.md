@@ -1,5 +1,5 @@
 Please make sure that you completed the previous step.
-It’s time to create your first Celo account on the Alfajores testnet. Without it, you won’t be able to fully take advantage of Celo's features.
+It’s time to create your first Celo account on the **Alfajores** testnet. Without it, you won’t be able to fully take advantage of Celo's features.
 
 ------------------------
 

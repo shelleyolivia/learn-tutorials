@@ -1,6 +1,6 @@
 Celo is an open platform that makes financial tools accessible to anyone with a mobile phone. There are one tools that is especially useful when it comes to developing DApps on the Celo network. ContractKit - This is a javascript package that makes it easy to interact with the Celo network and the core Celo Smart Contracts as well as custom ones built by the community.
 
-We are now all set up with our application and we can start writing some Javascript code. The first step here is to connect to the Celo **alfajores** network using ContractKit.
+We are now all set up with our application and we can start writing some Javascript code. The first step here is to connect to the Celo **Alfajores** network using ContractKit.
 
 ------------------------
 

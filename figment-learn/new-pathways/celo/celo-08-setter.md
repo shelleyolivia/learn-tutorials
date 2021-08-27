@@ -4,7 +4,6 @@ Our contract is on-chain, and we're going to learn how to modify the value store
 If you want to learn more about Secret smart contracts, follow the [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch) tutorial.
 {% endhint %}
 
-
 ----------------------------------
 
 # The challenge
@@ -17,13 +16,36 @@ In `pages/api/celo/setter.ts`, complete the code of the default function.
 
 ```tsx
 //...
+  try {
+    const { secret, newMessage, contract } = req.body;
+    const url = getSafeUrl();
+    const kit = newKit(url);
 
+    const account = kit.web3.eth.accounts.privateKeyToAccount(secret);
+    kit.addAccount(account.privateKey);
+
+    // Create a new contract instance with the HelloWorld contract info
+    const instance = new kit.web3.eth.Contract(
+        // @ts-ignore
+        HelloWorld.abi, 
+        contract
+    )
+
+    // Add your account to ContractKit to sign transactions
+    // This account must have a CELO balance to pay tx fees, get some https://celo.org/build/faucet
+    kit.connection.addAccount(account.privateKey);
+    const txObject = await instance.methods.setName(newMessage);
+    let tx = await kit.sendTransactionObject(txObject, { from: account.address });
+
+    let receipt = await tx.waitReceipt();
+
+    res.status(200).json(receipt.transactionHash);
+  }
 //...
 ```
 
 **Need some help?** Check out this link!
 * [**Contract example**](https://github.com/enigmampc/SecretJS-Templates/tree/master/5_contracts)  
-* [**`execute()`**](https://github.com/enigmampc/SecretNetwork/blob/7adccb9a09579a564fc90173cc9509d88c46d114/cosmwasm-js/packages/sdk/src/signingcosmwasmclient.ts#L409)  
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -43,8 +65,6 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 * We're calling the `execute` method of the `SigningCosmWasmClient`, passing to it:
-  * The `contract`, which is the contract address. 
-  * The `{ increment: {} }` object which represents the name of the method we are calling and the parameters we're passing to it. Again, we are passing an empty object as there are no arguments.
 
 ----------------------------------
 
@@ -58,10 +78,8 @@ Once you have the code above saved, click the button and watch the magic happen:
 
 # Conclusion
 
-Congratulations! You have successfully deployed and interacted with a smart contract on the Secret Network Testnet using DataHub.
+In this tutorial, we learned quite a lot! We took a quick look at one of Ethereum’s most powerful development tool - Truffle. We used it to compile our smart contract. Then we deployed our smart contract with few lines of Javascript code and called two methods on that smart contract.
 
-While we have only covered a very small area of contract development you are more than welcome to continue exploration and experiments on your own, feel free to check out the [**Secret Network Developers**](https://scrt.network/developers) site for more examples and tutorials.
+We have only covered a very small area of contract development. We invite you to keep experimenting on your own, and we will be providing more advanced Celo tutorials shortly to help you get to the next level.
 
-If you had any difficulties following this tutorial or simply want to discuss Secret Network and DataHub tech with us you can join [**our community**](https://discord.gg/fszyM7K) today!
-
-We also invite you to join the Secret community on their [Discord server](http://chat.scrt.network) and on the [Secret Forum](http://forum.scrt.network) to go deeper into Secret development.  
+If you had any difficulties following this tutorial or simply want to discuss Celo and DataHub tech with us you can[ join our community](https://discord.gg/Chhuv5zHy3) today!

@@ -37,8 +37,8 @@ In `pages/api/celo/balance.ts`, complete the code of the **balance** function.
 ```
 
 **Need some help?** Check out these links
-* [**We can access the CELO contract via the SDK with kit.contracts.getGoldToken()**](https://github.com/enigmampc/SecretJS-Templates/blob/master/3_query_node/query.js)
-* [**We can access the cUSD contract with kit.contracts.getStableToken()**](https://github.com/enigmampc/SecretJS-Templates/blob/master/3_query_node/query.js)
+* [**We can access the CELO contract via the SDK with kit.contracts.getGoldToken()**](https://docs.celo.org/developer-guide/contractkit/contracts-wrappers-registry#interacting-with-celo-and-cusd)
+* [**We can access the cUSD contract with kit.contracts.getStableToken()**](https://docs.celo.org/developer-guide/contractkit/contracts-wrappers-registry#interacting-with-celo-and-cusd)
 * [**code example**](https://docs.celo.org/developer-guide/start/hellocelo#reading-alfajores)
 
 {% hint style="info" %}
