@@ -92,7 +92,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we upload the contract using `upload()` method of the `SigningCosmWasmClient`.
+* First, we upload the contract using `upload` method of the `SigningCosmWasmClient`.
 * Next, we destructure the `uploadReceipt` response object to get the `codeId` of the deployed contract
 * Finally, we instantiate the contract using `instantiate` method of the `SigningCosmWasmClient`, passing:
   * The `codeId`.

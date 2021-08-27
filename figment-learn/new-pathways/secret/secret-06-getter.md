@@ -64,7 +64,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* We're calling the `queryContractSmart()` method of the client, passing to it:
+* We're calling the `queryContractSmart` method of the client, passing to it:
   * The `contract`, which is the contract address. 
   * The `{ get_count: {} }` object which represents the name of the method we are calling and the parameters we're passing to it. In this case, there are no arguments passed to `get_count`, but we must still pass an empty object: `{}`.
 

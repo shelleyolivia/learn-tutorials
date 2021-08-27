@@ -47,9 +47,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First we create a random **mnemonic** using the `fromMnemonic()` method of the `Secp256k1Pen` class.
-* Next we deduce the public key from it using the `encodeSecp256k1Pubkey()` function.
-* Then we deduce the wallet address from it using the `pubkeyToAddress()` function.
+* First we create a random **mnemonic** using the `fromMnemonic` method of the `Secp256k1Pen` class.
+* Next we deduce the public key from it using the `encodeSecp256k1Pubkey` function.
+* Then we deduce the wallet address from it using the `pubkeyToAddress` function.
 * Finally we send the mnemonic and address back to the client-side as a JSON object.
 
 {% hint style="tip" %}

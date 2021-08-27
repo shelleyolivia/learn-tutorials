@@ -50,7 +50,7 @@ try {
 
 **What happened in the code above?**
 * First, we instantiate a new `CosmWamClient` passing the url of the `holodeck-2` network.
-* Next, using the `nodeInfo()` method of the rest client returns a `NodeInfoResponse`. 
+* Next, using the `nodeInfo` method of the rest client returns a `NodeInfoResponse`. 
 * Inspecting the methods of our object will lead us naturally to reference the `application_version.version` property.
 * Finally, we send the `version` back to the client-side as JSON.
 

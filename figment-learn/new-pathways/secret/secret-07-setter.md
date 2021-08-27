@@ -62,7 +62,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* We're calling the `execute()` method of the `SigningCosmWasmClient`, passing to it:
+* We're calling the `execute` method of the `SigningCosmWasmClient`, passing to it:
   * The `contract`, which is the contract address. 
   * The `{ increment: {} }` object which represents the name of the method we are calling and the parameters we're passing to it. Again, we are passing an empty object as there are no arguments.
 
