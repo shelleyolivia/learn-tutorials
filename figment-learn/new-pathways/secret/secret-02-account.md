@@ -68,4 +68,4 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 # Next
 
-Now that we have an account, we're going to associate to an account name something almost only possible with NEAR. But before we need to find an available account name. Let's go!
+Before we make our first transfer, let's check that that the account is actually funded by asking the cluster for our balance!
