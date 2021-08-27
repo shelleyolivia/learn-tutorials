@@ -296,11 +296,13 @@ Start sample app:
 ```
 npm start
 ```
-You can now view AwaSwap in the browser.
+You can now view AvaSwap in the browser.
 
  ```
  Local: http://localhost:3000/
  ```
+
+![](/.gitbook/assets/avaswap.png)
 
 We will be using `Main.js`, `BuyForm.js` & `SellForm.js` components to build the UI and Smart Contract integration.
 
@@ -381,6 +383,9 @@ export default Main;
 ```
 
 **Buy Tokens:**
+
+![](/.gitbook/assets/avax-link-swap.png)
+
 ```
 result = await avaSwap.buyTokens({ from : investor, value: web3.utils.toWei('1', 'Ether')})
 ```
@@ -504,6 +509,8 @@ export default BuyForm;
 ```
 
 **Sell Tokens:**
+
+![](/.gitbook/assets/link-avax-swap.png)
 
 The investor must approve the token before transaction :
 ```
