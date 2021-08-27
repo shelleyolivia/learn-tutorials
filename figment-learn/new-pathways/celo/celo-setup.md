@@ -41,7 +41,7 @@ Once the development server loads and compiles the application, open your defaul
 ![](../../../.gitbook/assets/pathway-home.gif)
 
 {% hint style="warning" %}
-You can change the default port if needed `yarn dev --port 1234`
+You can change the default port if needed `yarn dev --port 1122`
 {% endhint %}
 
 ---------------------------

@@ -34,11 +34,9 @@ You can view some of the projects that are building on Celo [here](https://docs.
 
 ## Transaction Fees
 
-Celo uses a gas market based on EIP1559 to set gas prices ([https://docs.celo.org/celo-codebase/protocol/transactions/gas-pricing](https://docs.celo.org/celo-codebase/protocol/transactions/gas-pricing)).
-
-there are also gateway fees for light clients ([https://docs.celo.org/celo-codebase/protocol/transactions/full-node-incentives](https://docs.celo.org/celo-codebase/protocol/transactions/full-node-incentives)).
-
-Currently fees on the network are around $0.001/transaction.
+* [Celo uses a gas market based on EIP1559 to set gas prices](https://docs.celo.org/celo-codebase/protocol/transactions/gas-pricing)
+* [There are also gateway fees for light clients](https://docs.celo.org/celo-codebase/protocol/transactions/full-node-incentives)
+* Currently fees on the network are around $0.001/transaction
 
 ## Transaction Speed & Finality
 
