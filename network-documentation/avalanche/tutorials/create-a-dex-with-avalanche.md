@@ -278,9 +278,27 @@ Error:  *** Deployment Failed ***
 "Migrations" -- Returned error: authentication needed: password or unlock.
 ```
 
-## Interacting with your contract with React UI
+## Interacting with Smart Contract
 
-To interact with the contract, we will be using `Main.js`, `BuyForm.js` & `SellForm.js` components. Here are the details of the components:
+To interact with the contract, we will create a React app using [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html).
+
+Create a boileplate project:
+```
+npx create-react-app my-app
+```
+
+Go to the project directory:
+```
+cd my-app
+```
+
+Start sample app:
+```
+npm start
+```
+
+
+We will be using `Main.js`, `BuyForm.js` & `SellForm.js` components to build the UI and Smart Contract integration.
 
 **Main.js**
 
