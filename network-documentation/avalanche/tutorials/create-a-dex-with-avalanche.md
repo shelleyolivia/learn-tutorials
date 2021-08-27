@@ -296,7 +296,11 @@ Start sample app:
 ```
 npm start
 ```
+You can now view AwaSwap in the browser.
 
+ ```
+ Local: http://localhost:3000/
+ ```
 
 We will be using `Main.js`, `BuyForm.js` & `SellForm.js` components to build the UI and Smart Contract integration.
 
