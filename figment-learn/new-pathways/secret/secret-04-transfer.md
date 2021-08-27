@@ -1,11 +1,9 @@
-Of course, like everyone you like to eat pizza, but among pizza you do prefer the one made by yourself. Then, as you have already understand to simplify the process we're going to make a transfer from our account to our account again.
+Of course, everyone likes to eat pizza, but among all available pizzas you prefer the pizza you've made for yourself. So to simplify the transfer process we're going to make a transfer *from* our own account *to* our own account again.
 
-To realize such task, you'll need to make an encrypted transaction as in the **Secret** world everything is done with privacy in mind.
-
-Let's take a look at it.
+To do so, you'll need to make an encrypted transaction - in the **Secret** world everything is done with privacy in mind! Let's take a look at how to do this.
 
 {% hint style="danger" %}
-You can experience some issue with the availbility of the network [**To check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
+You could experience some issues with the availability of the network [**Click here to check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
 {% endhint %}
 
 ----------------------------------
@@ -13,7 +11,7 @@ You can experience some issue with the availbility of the network [**To check th
 # The challenge
 
 {% hint style="warning" %}
-In`pages/api/secret/transfer.ts`, complete the code of the function. There is a lot to fill here, so be careful!
+In `pages/api/secret/transfer.ts`, complete the code of the function. There is a lot to fill here, so be careful!
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -23,7 +21,7 @@ In`pages/api/secret/transfer.ts`, complete the code of the function. There is a 
   // 0. A very specific Secret features (allowing to made the transaction encrypted)
   const txEncryptionSeed = EnigmaUtils.GenerateNewSeed();
 
-  // 1. The fees you'll will to pay to realize the transaction
+  // 1. The fees you'll need to pay to complete the transaction
   const fees = {
     send: {
       amount: [{ amount: '80000', denom: 'uscrt' }],
@@ -31,11 +29,11 @@ In`pages/api/secret/transfer.ts`, complete the code of the function. There is a 
     },
   };
 
-  // 2. Initialise a secure's secret client TODO
+  // 2. Initialize a secure Secret client
   const client = new SigningCosmWasmClient(undefined);
 
   // 2. Send tokens
-  const memo = 'sendTokens example'; // optional memo
+  const memo = 'sendTokens example'; // Optional memo to identify the transaction
   const sent = await client.sendTokens(undefined);
  
   // 3. Query the tx result
@@ -60,7 +58,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```tsx
 //...
-  // 1. Initialise a secure's secret client
+  // 1. Initialize a secure Secret client
   const client = new SigningCosmWasmClient(
     url,
     address,
@@ -80,22 +78,22 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 * First, we create a secure connection using `SigningCosmWasmClient`, passing:
-  * `url` of the network
-  * `address` of our wallet
-  * A closure capturing our `sigingPen`, to sign transaction.
-  * A seed for privacy
-  * Some fees to reward the validator which will process our transaction
-* Next, we send the expected amount of token using `sendTokens`, passing: 
-  * The recipient `address`
-  * The amount, and token
-  * an optional `memo` working like a notice.
+  * The `url` of the network.
+  * The `address` of our wallet. 
+  * A closure capturing our `signingPen`, to sign the transaction.
+  * A randomized seed, for privacy - this was generated above by `EnigmaUtils.GenerateNewSeed()`
+  * Some fees to reward the validator which will process our transaction.
+* Next, we send the specified amount of token using `sendTokens`, passing: 
+  * The recipient `address`.
+  * The amount, and `denom` (denomination) of the token - in this case `uscrt`. Note that the format here is an object inside of an array: `[{}]`. This is because the `fees` amount is using the TypeScript definition for the `Coin` interface, which is a `ReadOnlyArray<Coin>` containing both the `denom` and `amount`.
+  * An optional `memo` to identify the transaction.
 
 ----------------------------------
 
 # Make sure it works
 
 Once you have the code above saved:
-* Fill in the amount of **Secret** you want to send to favorite pizza maker (and as you reallize it was yourself).
+* Fill in the amount of **SCRT** you want to send to your favorite pizza maker (and as you realize, it was yourself).
 * Click on **Submit Transfer**.
 
 ![](../../../.gitbook/assets/pathways/secret/secret-transfer.png)

@@ -7,7 +7,7 @@ Connecting to a node works pretty much the same as for a standard web server. Th
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/secret/connect.ts`, complete the code of the function and try to establish your first connection to the secret network. To verify your connection have been corretly establish try to return the current protocol version.
+In `pages/api/secret/connect.ts`, complete the code of the function and try to establish your first connection to the secret network. To verify your connection has been correctly established, try to return the current protocol version.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -24,9 +24,9 @@ try {
 //...
 ```
 
-**Need some help?** Check out those two links
+**Need some help?** Check out these links
 * [**Connection example**](https://github.com/enigmampc/SecretJS-Templates/tree/master/1_connecting_to_node)  
-* [**Documentation of `secrectjs`**](https://github.com/enigmampc/SecretNetwork/tree/master/cosmwasm-js/packages/sdk)  
+* [**Read the code for `secretjs` & `cosmwasm`**](https://github.com/enigmampc/SecretNetwork/tree/master/cosmwasm-js/packages/sdk)  
 
 {% hint style="info" %}
 [**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
@@ -49,9 +49,10 @@ try {
 ```
 
 **What happened in the code above?**
-* First, we instantiate a new `CosmWamClient` passing to the contructor the url of the `holodeck-2` network.
-* Next, using the `nodeInfo` method of the rest client we 
-* Finaly, inspecting the method of our object lead us naturally to call `application_version.version` property.
+* First, we instantiate a new `CosmWamClient` passing the url of the `holodeck-2` network.
+* Next, using the `nodeInfo()` method of the rest client returns a `NodeInfoResponse`. 
+* Inspecting the methods of our object will lead us naturally to reference the `application_version.version` property.
+* Finally, we send the `version` back to the client-side as JSON.
 
 ------------------------
 
@@ -65,4 +66,4 @@ Once the code is complete and the file has been saved, refresh the page to see i
 
 # Next
 
-Well done! Your fluency in the Secret dialect of web3 is growing. As a newcomer, creating an account is the mandatory step to explore more. Ready to take the next step forward?
+Well done! Your fluency in the Secret dialect of Web 3 is growing. As a newcomer, creating an account is the next step in your exploration. Ready to take the next step forward?

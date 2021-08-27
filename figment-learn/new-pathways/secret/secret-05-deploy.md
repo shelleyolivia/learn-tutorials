@@ -1,21 +1,22 @@
-We won't go through the process of reviewing the smart contract code base, compiling it or testing it. We will focus instead on how one can deploy a smart contract using the `secretjs` lib. To do this, we're going to use a pre-compiled smart contract, you can find it under `./contract/secret/contract.wasm`.
+We won't go through the process of reviewing the smart contract code base, compiling it or testing it. We will focus instead on how one can deploy a smart contract using the `secretjs` library. To do this, we're going to use a pre-compiled smart contract, you can find it under `./contract/secret/contract.wasm`.
 
 Our contract implements a simple counter. The contract is created with a parameter for the initial count and allows subsequent incrementing:
 * The `get_count` function returns the value of the counter stored on the contract.
-* The `increment` function returns the value of the counter stored on the contract, incremented by 1.
+* The `increment` function increases the value of the counter stored on the contract by 1.
 
 {% hint style="working" %}
-If you want to learn more about Secret smart contracts, look at [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch)
+If you want to learn more about Secret smart contracts, follow the [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch) tutorial.
 {% endhint %}
 
 {% hint style="danger" %}
-You can experience some issue with the availbility of the network [**To check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
+You could experience some issues with the availability of the network [**Click here to check the current status**](https://secretnodes.com/secret/chains/holodeck-2)
 {% endhint %}
 
-
-Before, focusing on the deployement instuctions let's take a look on some global variable:
+Before, focusing on the deployment instructions, let's take a look at some important global variables:
 
 ```typescript
+const CONTRACT_PATH = './contracts/secret/contract.wasm' 
+
 const customFees = {
   upload: {
     amount: [{ amount: '2000000', denom: 'uscrt' }],
@@ -28,15 +29,15 @@ const customFees = {
 };
 ```
 
-* `CONTRACT_PATH` is pointing to the locations of the optimized **wasm** version of the smart contract.  
-* `customFees` object stored the predfined amount of fees to pay in order to **upload** and **init** the smart contract.  
+* `CONTRACT_PATH` is pointing to the location of the optimized **WebAssembly** version of the smart contract.  
+* The `customFees` object stores the predefined amount of fees to pay in order to **upload** and **initialize** the smart contract. [Click here](https://github.com/enigmampc/SecretNetwork/blob/7adccb9a09579a564fc90173cc9509d88c46d114/cosmwasm-js/packages/sdk/src/signingcosmwasmclient.ts#L48) to check out the default fee table in the `SigningCosmWasmClient` source. 
 
 ----------------------------------
 
 # The challenge
 
 {% hint style="tip" %}
-In`pages/api/secret/deploy.ts`, complete the code of the default function. Upload your first smart contract on the **Secret** network.
+In `pages/api/secret/deploy.ts`, complete the code of the default function. Upload your first smart contract on the **Secret** network.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -55,13 +56,12 @@ In`pages/api/secret/deploy.ts`, complete the code of the default function. Uploa
   // Create an instance of the Counter contract, providing a starting count
   const initMsg = { count: 101 };
   const receipt = undefined;
-  } 
 //...
 ```
 
 **Need some help?**
 * [**Contract example**](https://github.com/enigmampc/SecretJS-Templates/tree/master/5_contracts)  
-* [**Documentation of `secrectjs`**](https://github.com/enigmampc/SecretNetwork/tree/master/cosmwasm-js/packages/sdk)  
+* [**The `upload()` function**](https://github.com/enigmampc/SecretNetwork/blob/7adccb9a09579a564fc90173cc9509d88c46d114/cosmwasm-js/packages/sdk/src/signingcosmwasmclient.ts#L208)  
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -92,11 +92,13 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we upload the contract using `upload` method.
+* First, we upload the contract using `upload()` method of the `SigningCosmWasmClient`.
 * Next, we destructure the `uploadReceipt` response object to get the `codeId` of the deployed contract
-* Finaly, we instantiate the contract using `instantiate` methode passing:
-  * The `codeId`
-  * The contract method to instantiate the storage here `initMsg`
+* Finally, we instantiate the contract using `instantiate` method of the `SigningCosmWasmClient`, passing:
+  * The `codeId`.
+  * The `initMsg` contract method to instantiate the storage with a value of `101`.
+  * A label, which needs to be unique.
+  * Optionally, we could also include a memo, a transfer amount, fees, and a code hash. For this example, these arguments are unnecessary.
 
 ----------------------------------
 
@@ -110,4 +112,4 @@ Once you have the code above saved, click on **Deploy Contract**
 
 # Next
 
-Now that we have deployed a smart contract, let's interact with it. In the following tutorials, we will look at how to use both view and change functions.
+Now that we have deployed a smart contract, let's interact with it! In the following tutorials, we will look at how to use both view and change functions.
