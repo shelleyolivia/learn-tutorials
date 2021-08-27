@@ -1,18 +1,12 @@
----
-description: Learn how to create a new Blockchain on Avalanche
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-new-blockchain). 
 
-# Create a New Blockchain
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-new-blockchain). 
-
-## Introduction
+# Introduction
 
 One of the core features of the Avalanche network is the ability to create new blockchains. Avalanche currently supports creation of new instances of the AVM \(the Virtual Machine the X-Chain runs\) and the Timestamp VM.
 
 In this tutorial we’ll create a new instance of the AVM.
 
-## Create the Subnet
+# Create the Subnet
 
 Every blockchain is validated by a [Subnet.](https://docs.avax.network/learn/platform-overview#subnets) Before you can create a blockchain, you’ll need a Subnet to validate it.
 
@@ -20,7 +14,7 @@ Every blockchain is validated by a [Subnet.](https://docs.avax.network/learn/pla
 
 You can also use a Subnet that already exists, if you have a sufficient number of its control keys.
 
-## Add Validators to the Subnet
+# Add Validators to the Subnet
 
 The Subnet needs validators in it to, well, validate blockchains.
 
@@ -28,13 +22,13 @@ Make sure the Subnet that will validate your blockchain has at least `snow-sampl
 
 [This tutorial](https://docs.avax.network/build/tutorials/platform/add-a-validator) will guide you through adding validators to the Subnet, if that’s necessary.
 
-## Create the Genesis Data
+# Create the Genesis Data
 
 Each blockchain has some genesis state when it’s created. Each Virtual Machine has a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state. \(This isn’t true for some VMs, like the Platform VM, because we disallow creation of new instances.\)
 
 The [AVM’s documentation](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api) specifies that the argument to `avm.buildGenesis` should look like this:
 
-```javascript
+```json
 {
 "genesisData":
     {
@@ -86,7 +80,7 @@ The [AVM’s documentation](https://learn.figment.io/network-documentation/avala
 
 To create the byte representation of this genesis state, call `avm.buildGenesis`. Your call should look like the one below. Note that this call is made to the AVM’s static API endpoint, `/ext/vm/avm`.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "id"     : 1,
@@ -95,7 +89,7 @@ curl -X POST --data '{
         "genesisData": {
             "asset1": {
                 "name": "myFixedCapAsset",
-                "symbol":"MFCA",
+                "symbol": "MFCA",
                 "initialState": {
                     "fixedCap" : [
                         {
@@ -147,7 +141,7 @@ curl -X POST --data '{
 
 This returns the byte representation of your blockchain’s genesis state:
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -157,11 +151,11 @@ This returns the byte representation of your blockchain’s genesis state:
 }
 ```
 
-## Create the Blockchain
+# Create the blockchain
 
 Now let’s create the new blockchain. To do so, we call `platform.createBlockchain`. Your call should look like the one below. You have to change `subnetID` to the subnet that will validate your blockchain, and supply a `username` that controls a sufficient number of the Subnet’s control keys. As a reminder, you can find out what a Subnet’s threshold and control keys are by calling `platform.getSubnet`.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc": "2.0",
     "method": "platform.createBlockchain",
@@ -179,7 +173,7 @@ curl -X POST --data '{
 
 The response contains the transaction ID:
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -190,13 +184,13 @@ The response contains the transaction ID:
 }
 ```
 
-## Verify Success
+# Verify success
 
 After a few seconds, the transaction to create our blockchain should have been accepted and the blockchain should exist \(assuming the request was well-formed, etc.\)
 
 To check, call `platform.getBlockchains`. This returns a list of all blockchains that exist.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -207,7 +201,7 @@ curl -X POST --data '{
 
 The response confirms that the blockchain was created:
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -254,7 +248,7 @@ The response confirms that the blockchain was created:
 }
 ```
 
-## Interact With the New Blockchain
+# Interact with the new blockchain
 
 You can interact with this new instance of the AVM almost the same way you’d interact with the X-Chain. There are two small differences:
 
@@ -263,7 +257,7 @@ You can interact with this new instance of the AVM almost the same way you’d i
 
 In the genesis data we specified that address `8UeduLccQuSmYiY3fGQEyotM9uXxoHoQQ` has 100,000 units of the asset with alias `asset1`. Let’s verify that:
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -273,6 +267,7 @@ curl -X POST --data '{
         "assetID":"asset1"
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/bc/zpFTwJwzPh3b9N6Ahccy4fXdJFHJJdhGah5z731J6ZspcYKpK
+```
 
 ```json
 {
@@ -285,4 +280,3 @@ curl -X POST --data '{
 ```
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
-

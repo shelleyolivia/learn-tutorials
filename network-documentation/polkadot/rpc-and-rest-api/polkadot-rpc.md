@@ -6,7 +6,7 @@ description: Learn how to interact with the Polkadot RPC
 
 ## Source documentation
 
-\*\*\*\*[**The Polkadot RPC's source documentation can be found here**](https://polkadot.js.org/docs/substrate/rpc/).  
+\*\*\*\*[**The Polkadot RPC's source documentation can be found here**](https://polkadot.js.org/docs/substrate/rpc/).
 
 The following sections contain RPC methods that are Remote Calls available by default and allow you to interact with the actual node, query, and submit.
 

@@ -1,13 +1,11 @@
-# How to run a Celo full node in a Virtual Machine
-
-## Introduction
+# Introduction
 
 In this tutorial, we will set up a Virtual Machines and install the necessary software to create a full node, then run a light client to monitor the network.  
 Full nodes are a major part of the Celo blockchain. A full node is a constantly running program that will help to write, and validate new changes in the network. Multiple full nodes work together, validating the blockchain in a decentralized way.
 
 Please watch the videos linked below and follow along with the written tutorial!
 
-## Prerequisites
+# Prerequisites
 
 * Have a basic understanding of Virtual Machines \(VM\), and the Linux terminal.
 * Install the Valora app on iOS or Android: [https://valoraapp.com/](https://valoraapp.com/)
@@ -15,7 +13,7 @@ Please watch the videos linked below and follow along with the written tutorial!
 * Download VirtualBox, the Oracle VM host: [https://www.virtualbox.org/](https://www.virtualbox.org/)
 * Download Signal for iOS or Android: [https://www.signal.org/](https://www.signal.org/)
 
-## Creating the VM
+# Creating the VM
 
 **Video 1 -** Creating the Virtual Machine in VirtualBox
 
@@ -59,7 +57,7 @@ The following commands are entered into the VM terminal:
 
 ![image](https://user-images.githubusercontent.com/80616939/120870817-2f38a480-c557-11eb-9fd0-5be9e710af8d.png)
 
-### Install Docker & utilities
+## Install Docker & utilities
 
 Curl will be used for inserting GitHub scripts into the terminal.
 
@@ -75,7 +73,7 @@ Vim is a tool used for editing files within the terminal. [Click here](https://w
 
 `sudo apt install vim`
 
-### Enable bi-directional copy/paste & and improve display resolution
+## Enable bi-directional copy/paste & and improve display resolution
 
 Run an external program called VBoxLinuxAdditions, which enables copy/paste between the VM and the host machine.
 
@@ -97,7 +95,7 @@ Linux headers provide many vital functions without installing unnecessary files,
 * Restart the VM 
 * Select "Adjust window size" under View on the menubar.
 
-### Install nvm and the Celo CLI
+## Install nvm and the Celo CLI
 
 This is the install script for [nvm](https://github.com/nvm-sh/nvm), the Node Version Manager. Remember to source files after adding them.
 
@@ -113,7 +111,7 @@ Install/use node version 10, then install the Celo CLI onto this client.
 
 `npm install -g @celo/celocli` : The `-g` flag here means we will [install the package globally](https://docs.npmjs.com/downloading-and-installing-packages-globally).
 
-### Join the Docker group
+## Join the Docker group
 
 Add your user account to the Docker group.
 
@@ -129,7 +127,7 @@ Docker is required for running the light client.
 
 * Close this terminal 
 
-### Use curl to fetch the script
+## Use curl to fetch the script
 
 To learn about `.env` files check out this [guide](https://learn.figment.io/network-documentation/extra-guides/dotenv-and-.env).
 
@@ -173,7 +171,7 @@ The command `mkdir` is for making a new directory, `cd` is for changing the curr
 
 The docker container should now be running.
 
-## **Starting the node**
+## Starting the node
 
 **Run this command from inside celo-data-dir :**
 
@@ -241,12 +239,12 @@ Understanding this unit of measurement: 1e16 = 0.01 CUSD, 1e15 = 0.1 CUSD, 1e14 
 
 ![image](https://user-images.githubusercontent.com/80616939/118338915-9c1aca80-b4d4-11eb-87b6-7970949923aa.png)
 
-## Conclusion
+# Conclusion
 
 Congratulations, the full node and light client should now be operational!  
 Keep in mind this is not the only way to set up a full node. This node is now under your control and part of the Celo blockchain, so remember to store all related keys and passwords safely to avoid losing any money. Please experiment with this setup and personalize it. The `start_celo.sh` and `celo.env` files can be altered to suit your needs. 
 
-## About the Author
+# About the Author
 
-This tutorial was put together by [Aidan Dedecker](https://github.com/Aidandedecker/Aidandedecker), a bright young member of the Learn community. You can contact him on the [community forums](https://community.figment.io/u/aidanbdedecker/summary).
+This tutorial was put together by [Aidan Dedecker](https://github.com/Aidandedecker/), a bright young member of the Learn community. You can contact him on the [community forums](https://community.figment.io/u/aidanbdedecker/summary).
 

@@ -1,10 +1,4 @@
----
-description: Learn how to test your AssemblyScript contracts
----
-
-# Simple AssemblyScript App
-
-\*\*\*\*[**The original tutorial can be found in the official NEAR documentation here**](https://docs.near.org/docs/tutorials/test-your-smart-contracts). 
+[The original tutorial can be found in the official NEAR documentation here](https://docs.near.org/docs/tutorials/test-your-smart-contracts). 
 
 ## A multiplayer "Place" game with shared world state.
 

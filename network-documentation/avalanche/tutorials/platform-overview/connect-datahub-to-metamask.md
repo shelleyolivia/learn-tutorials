@@ -1,12 +1,4 @@
----
-description: Learn how to leverage Avalanche DataHub for Metamask transactions
----
-
-# Connect DataHub to Metamask
-
-**Original Tutorial**
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/integrate-figment-and-metamask). 
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/integrate-figment-and-metamask). 
 
 **Video** 
 
@@ -72,7 +64,7 @@ After setting up all of the parameters, you should see this page, which shows yo
 
 ![](https://miro.medium.com/max/358/1*q0HIWcI3okakwYV2glos0A.png)
 
-## Conclusion
+# Conclusion
 
 You have successfully connected Metamask to Avalanche DataHub and can interact with the C-Chain seamlessly. 
 

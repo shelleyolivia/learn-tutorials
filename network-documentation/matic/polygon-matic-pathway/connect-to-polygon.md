@@ -97,7 +97,7 @@ The 12 words of a secret recovery phrase are taken from a specific wordlist. The
 This is an important topic to be comfortable with as both a user and blockchain developer. Spend some time experimenting with providers, signers and wallets to get acquainted with these fundamental blockchain concepts. There are many good explanations of the workings of [Hierarchical Deterministic](https://weteachblockchain.org/courses/bitcoin-for-developers/3/hd-wallets) \(HD\) wallets available online, just know that a secret recovery phrase/mnemonic is a critical piece of information which should be kept secret and secure at all times. 
 {% endhint %}
 
-## Next Steps
+# Next Steps
 
 Now that we have a connected to Polygon, we can use ethers to query information from the blockchain.  
 In the next tutorial, we will cover how to query Polygon and display the information.

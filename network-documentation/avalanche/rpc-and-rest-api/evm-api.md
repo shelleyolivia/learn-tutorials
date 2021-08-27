@@ -1,12 +1,4 @@
----
-description: Learn how to interact with Avalanche's C-Chain
----
-
-# C-Chain \(EVM\) API
-
-## Source documentation 
-
-\*\*\*\*[**The EVM API's source documentation can be found here**](https://docs.avax.network/build/apis/contract-chain-c-chain-api). 
+[**The EVM API's source documentation can be found here**](https://docs.avax.network/build/apis/contract-chain-c-chain-api). 
 
 The C-Chain is an instance of the  Ethereum Virtual Machine \(EVM\). This API allows clients to import their EVM-based projects and build like on Ethereum. 
 

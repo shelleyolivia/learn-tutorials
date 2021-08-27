@@ -1,12 +1,6 @@
----
-description: Learn how to deploy your own smart contracts on the Celo network
----
+[The original tutorial can be found in the Celo documentation here](https://docs.celo.org/developer-guide/start/hello-contract-remote-node). 
 
-# Deploy and Interact with Contracts \(Remotely\)
-
-\*\*\*\*[**The original tutorial can be found in the Celo documentation here**](https://docs.celo.org/developer-guide/start/hello-contract-remote-node). 
-
-## Introduction
+# Introduction
 
 This guide walks you through the basics of how to deploy your own smart contracts on Celo networks. As Celo is fully EVM compatible, we inherit the rich developer ecosystem and tooling of the Ethereum community. You will be deploying a typical hello world smart contract onto the Alfajores testnet with typical Ethereum tools like Truffle and Ganache.
 
@@ -22,9 +16,8 @@ npm install -g truffle
 [Learn more about the Truffle development framework here.](https://www.trufflesuite.com/docs/truffle/overview)
 {% endhint %}
 
-As you may know, Truffle is built for Ethereum developers. Because Celo has a similar network architecture and runs the Ethereum Virtual Machine, Celo developers are able to leverage many Ethereum developer tools. But it is important to keep in mind the differences. If you haven't already, please review the Celo overview.
+As you may know, Truffle is built for Ethereum developers. Because Celo has a similar network architecture and runs the Ethereum Virtual Machine, Celo developers are able to leverage many Ethereum developer tools. It is important to keep in mind the differences, however. If you haven't already, please review the Celo overview.
 
-{% page-ref page="../celo-101.md" %}
 
 [Clone this Truffle project from GitHub to get started](https://github.com/critesjosh/hello_contract-truffle).
 
@@ -74,9 +67,8 @@ truffle compile
 
 After compiling the contract, you need to create a migration to deploy the contract. For that, create a file in the `./migrations/` folder named `2_deploy_helloworld.js`:
 
-{% hint style="info" %}
-[Learn more about Truffle migrations here.](https://www.trufflesuite.com/docs/truffle/getting-started/running-migrations)
-{% endhint %}
+> [Learn more about Truffle migrations](https://www.trufflesuite.com/docs/truffle/getting-started/running-migrations).
+
 
 ```javascript
 var HelloWorld = artifacts.require('HelloWorld')
@@ -86,11 +78,9 @@ module.exports = function(deployer) {
 }
 ```
 
-{% hint style="info" %}
-You can [learn more about Truffle configuration options here.](https://www.trufflesuite.com/docs/truffle/reference/configuration)
-{% endhint %}
+> You can also learn more about [Truffle configuration options](https://www.trufflesuite.com/docs/truffle/reference/configuration).
 
-## Deploy to Alfajores \(Remotely\)
+## Deploy to Alfajores \(remotely\)
 
 When you deploy contracts to the Celo network with a remote node, you have to sign the contract deployment transaction locally before sending it to the remote node to be broadcast to the network. This presents some unique challenges when using Ethereum development tools \(like Truffle\) because Celo transaction objects are slightly different than Ethereum transaction objects.
 
@@ -178,9 +168,10 @@ Then, in the `networks` object, you can add the initialized `kit`provider to an 
       port: 7545,
       network_id: "*"
     },
+    // CeloProvider & Alfajores network ID
     alfajores: {
-      provider: kit.connection.web3.currentProvider, // CeloProvider
-      network_id: 44787                              // Alfajores network id
+      provider: kit.connection.web3.currentProvider,
+      network_id: 44787
     }
   }
 ```
@@ -191,14 +182,14 @@ Now, deploy the contracts to Alfajores with this command:
 truffle migrate --network alfajores
 ```
 
-#### Custom Node.js Deployment
+## Custom Node.js Deployment
 
 In this section, you will deploy a contract using a simple Node.js script to show how you can do it without using Truffle.
 
 You need to compile the `HelloWorld.sol` contract using \(if it isn't already\):
 
 ```javascript
-$ truffle compile
+truffle compile
 ```
 
 This command will generate a `HelloWorld.json` file in the `./build/contracts/` directory. `HelloWorld.json` contains a lot of data about the contract, compiler and low level details. Import this file into the deployment script with:
@@ -234,7 +225,8 @@ async function awaitWrapper(){
     let account = await getAccount()
     console.log(account.address)
 
-    kit.connection.addAccount(account.privateKey) // this account must have a CELO balance to pay transaction fees
+    // this account must have a CELO balance to pay transaction fees
+    kit.connection.addAccount(account.privateKey)
 
     let tx = await kit.connection.sendTransaction({
         from: account.address,
@@ -250,7 +242,7 @@ awaitWrapper()
 
 Congratulations! You have deployed your first contract onto Celo! You can verify your contract deployment on [Blockscout](https://alfajores-blockscout.celo-testnet.org/). You can get the transaction hash from the receipt and look it up on the block explorer.
 
-### Interacting with Custom Contracts
+## Interacting with Custom Contracts
 
 Now HelloWorld.sol is deployed onto the Alfajores testnet. How can you interact with the deployed contract using ContractKit? `helloWorld.js` includes some example code that shows how you can do this.
 
@@ -311,5 +303,5 @@ As you can see, all the goodies from Ethereum apply to Celo, so virtually all tu
 
 Check out [https://celo.org/build](https://celo.org/build) for more resources!
 
-f you had any difficulties following this tutorial or simply want to discuss Celo tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
+f you had any difficulties following this tutorial or simply want to discuss Celo tech with us you can [join our community today](https://discord.gg/fszyM7K)!
 

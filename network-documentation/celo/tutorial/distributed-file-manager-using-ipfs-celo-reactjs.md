@@ -1,20 +1,16 @@
-# Distributed File Manager \(DFM\) using Celo, IPFS and ReactJS
-
-## Distributed File Manager \(DFM\) using IPFS, Celo and ReactJS
-
-## Introduction
+# Introduction
 
 In this tutorial we will be making a **Distributed File Manager** using the **IPFS** protocol for storing our files, **Celo** network for storing the file references of each address to their uploaded files and **ReactJS** for the frontend code. For compiling and deploying our smart contracts, we will be using **Truffle Suite**.
 
 For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications dApps on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with the Celo network, which is an instance of the EVM.
 
-## Prerequisites
+# Prerequisites
 
 * You've created an account on [DataHub](https://datahub.figment.io/sign_up?service=celo)
 * Basic familarity with [Celo's architecture](https://docs.celo.org/) and smart contracts.
 * Basic familarity with [ReactJS](https://reactjs.org)
 
-## Requirements
+# Requirements
 
 * [NodeJS](https://nodejs.org/en). You’ll need to have Node &gt;= 10.16 and npm &gt;= 5.6 on your machine.
 * [Truffle](https://www.trufflesuite.com/truffle), which you can install with `npm install -g truffle`
@@ -154,7 +150,7 @@ Run the following command in the root directory, to create a boilerplate for the
 truffle init
 ```
 
-This will set up Truffle's initial project structure. Smart contracts will be stored in the `contracts` folder, deployment functions for migrating smart contracts to the network will be stored in the `migrations` folder. By default, the `/build/contracts` folder would contain information about the compiled and deployed contract, ABI etc in the `.json` format and these files are known as `artifiacts`.
+This will set up Truffle's initial project structure. Smart contracts will be stored in the `contracts` folder, deployment functions for migrating smart contracts to the network will be stored in the `migrations` folder. By default, the `/build/contracts` folder would contain information about the compiled and deployed contract, ABI etc in the `.json` format and these files are known as `artifacts`.
 
 There is also 1 **config** file created by the above command, which is, **truffle-config.js**. In this file, there is a lot of information regarding how to deploy contracts, how to choose a network to deploy them, and many others. Therefore, we should preserve this file for reference. So, use the below command to make a copy of this file. This would create a copy named `truffle-config-default.js`.
 
@@ -1143,15 +1139,15 @@ If you find any difficulty in setting up the project, then feel free to clone th
 
 ![](https://imgur.com/a6on3z4.gif)
 
-## Conclusion
+# Conclusion
 
 Congratulations! You have successfully built a Distributed File Manager by deploying the smart contract on **Celo** Alfajores test network using **Trufflesuite** and connecting your client-side made with **ReactJS**. The most interesting part is that we have used the **IPFS** protocol for uploading our files on the distributed network.
 
-## What's next?
+# Next Steps
 
 We have built a Distributed File Manager with basic upload and view features. I want to encourage you to make a more scalable and sophisticated application by adding few more features like encrypting files before uploading by using the receiver's public key or their account address. Or if you want to keep the file to yourself, you might encrypt the file using your account address. Learn more on how to encrypt files before uploading them to IPFS [here](https://mycoralhealth.medium.com/learn-to-securely-share-files-on-the-blockchain-with-ipfs-219ee47df54c).
 
-## About the author
+# About the author
 
 This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/rranjan01234/) and [GitHub](https://github.com/rajranjan0608)
 

@@ -1,16 +1,4 @@
----
-description: >-
-  This tutorial is a part of DeFi series where people can learn how to
-  participate in DeFi on the Celo Blockchain.
----
-
-# How to use Ubeswap DEX on Celo
-
-## About the Author
-
-This tutorial was created by [Deepanshu Hooda](https://github.com/gitofdeepanshu/), who is a computer science junior and a blockchain developer with high interest in finance. He spends most of the his time studying new DeFi protocols and loves to travel.
-
-## Introduction
+# Introduction
 
 This article is meant to act as a tutorial for new Ubeswap users or for people who are just discovering the benefits of DeFi altogether. Ubeswap is a DEX \(Decentralized EXchange\) and AMM \(Automated Market Maker\) protocol for Celo assets. Ubeswap is based on Sushiswap, which is a fork the popular Ethereum DEX called Uniswap. This is to ensure that the Ubeswap ecosystem can support as many existing tools and projects from the Ethereum ecosystem as possible.
 
@@ -26,14 +14,14 @@ All this information can be a bit overwhelming at first but we all can learn it 
 
 More information about AMMs can be found [here](https://blog.chain.link/challenges-in-defi-how-to-bring-more-capital-and-less-risk-to-automated-market-maker-dexs/). If you wish to learn about about the DeFi, you can visit [this](https://academy.ivanontech.com/blog/defi-encyclopedia-the-ultimate-list-of-decentralized-finance-terms) website.
 
-## Prerequisites
+# Prerequisites
 
 1. A Celo compatible wallet \(Example: Celo Extension Wallet, Valora or a Ledger device\)
 2. Funds to interact with UBESWAP.
 
-## How to use Ubeswap
+# How to use Ubeswap
 
-### 1. Mobile DeFI
+## 1. Mobile DeFI
 
 Celo focuses on mobile first approach so it has created a way for mobile defi users to use Ubeswap. Usera can set up their Valora app which is a custodian wallet on Celo blockchain. After setting up Valora, users can go to [UBESWAP](https://app.ubeswap.org/).
 
@@ -41,11 +29,11 @@ Celo focuses on mobile first approach so it has created a way for mobile defi us
 
 and select `Valora`. This will make a connection with Valora account and we will be able to use our funds in Valora app to interact with Ubeswap.
 
-### 2. Desktop version
+## 2. Desktop version
 
 We can connect with Ubeswap in a traditional way of using an extension wallet. On the Celo Blockchain, it is Celo Extension Wallet which can be downloaded from [here](https://chrome.google.com/webstore/detail/celoextensionwallet/kkilomkmpmkbdnfelcpgckmpcaemjcdh?hl=en). We will be using this way to connect with Ubeswap in this tutorial.
 
-## Connecting with Ubeswap
+# Connecting with Ubeswap
 
 It is always better to learn any new blockchain technology using a testnet so that we don't have to spend real crypto assets. Ubeswap has deployed all of it's contracts on `Alfajores` testnet so that users can first learn to use it's platform on testnet. We will be doing the same.
 
@@ -67,7 +55,7 @@ Then sign the transaction with the extension wallet. If everything went well, ou
 
 Now that we have connected our wallet, let's learn how we can swap tokens on Ubeswap.
 
-## Swap
+# Swap
 
 We will learn how we can swap one token for another. In this tutorial, we will swap cUSD to CELO.
 
@@ -103,9 +91,12 @@ That's it, we have supplied liquidity to a pool on Ubeswap. We can see out posit
 
 ![](https://imgur.com/wuXnaN8.png)
 
-## Conclusion
+# Conclusion
 
 Ubeswap recently announced that DeFi users will receive rewards for paticipating in DeFi on Ubeswap which makes it the best time to get involved!
 
 Ubeswap's goal is to increase liquidity for digital assets on Celo. A world where anyone can trade any asset from their phone or browser, without having to rely on decades-old clearinghouse technology or other centralized systems is more effective in the long-term. This is only possible if people can invest in good assets. Ubeswap seeks to bring in liquidity from all of DeFi by harnessing the fast transaction times, high block gas limit, and stablecoin system of Celo.
 
+# About the Author
+
+This tutorial was created by [Deepanshu Hooda](https://github.com/gitofdeepanshu/), who is a computer science junior and a blockchain developer with high interest in finance. He spends most of the his time studying new DeFi protocols and loves to travel.

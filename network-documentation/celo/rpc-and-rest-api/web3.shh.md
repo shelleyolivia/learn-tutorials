@@ -4,9 +4,9 @@ description: Learn how to interact with the web3.eth.shh package
 
 # Web3.shh
 
-## Source documentation 
+## Source documentation
 
-[**The web3.shh package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-shh.html). 
+[**The web3.shh package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-shh.html).
 
 ## web3.shh
 
@@ -1068,6 +1068,5 @@ web3.shh.getFilterMessages('2b47fbafb3cce24570812a82e6e93cd9e2551bbc4823f6548ff0
     "topic": "0x01020304",
     "ttl": 50
 },{...}]
-
 ```
 

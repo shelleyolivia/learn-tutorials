@@ -11,9 +11,6 @@ Next create a file within the `/types` directory called `expected_keepers.go`. I
 For example in the nameservice module we will be using the bank module to facilitate transfers between two parties. To make this happen we will rely on two functions from the bank module.
 
 * `SubtractCoins(ctx sdk.Context, addr sdk.AccAddress, amt sdk.Coins) (sdk.Coins, error)`
-
-
-
 * `SendCoins(ctx sdk.Context, fromAddr sdk.AccAddress, toAddr sdk.AccAddress, amt sdk.Coins) error`
 
 you can see below how the file is structured below:
@@ -22,16 +19,15 @@ you can see below how the file is structured below:
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
+    sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // When a module wishes to interact with an otehr module it is good practice to define what it will use
 // as an interface so the module can not use things that are not permitted.
 type BankKeeper interface {
-	SubtractCoins(ctx sdk.Context, addr sdk.AccAddress, amt sdk.Coins) (sdk.Coins, error)
-	SendCoins(ctx sdk.Context, fromAddr sdk.AccAddress, toAddr sdk.AccAddress, amt sdk.Coins) error
+    SubtractCoins(ctx sdk.Context, addr sdk.AccAddress, amt sdk.Coins) (sdk.Coins, error)
+    SendCoins(ctx sdk.Context, fromAddr sdk.AccAddress, toAddr sdk.AccAddress, amt sdk.Coins) error
 }
-
 ```
 
 If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!

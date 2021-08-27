@@ -111,7 +111,7 @@ By following the link to view the transaction on Solana Explorer, it is possible
 
 ![](../../../.gitbook/assets/screen-shot-2021-06-14-at-11.02.08-pm.png)
 
-## Conclusion
+# Conclusion
 
 Congratulations on completing the Solana Pathway! We hope you had a fun time and learned a lot. Here are a few things you can check out to go further:
 

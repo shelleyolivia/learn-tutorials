@@ -18,7 +18,7 @@ By connecting these dots, Polkadot serves as a foundational part of a decentrali
 
 Polkadot is a sharded blockchain, meaning it connects several chains together in a single network, allowing them to process transactions in parallel and exchange data between chains with security guarantees.
 
-Developers can build application-specific chains using [Substrate](https://www.substrate.io/) optimized for their unique use case. Here are the advantages of the Substrate framework and the Polkadot ecosystem: 
+Developers can build application-specific chains using [Substrate](https://www.substrate.io/) optimized for their unique use case. Here are the advantages of the Substrate framework and the Polkadot ecosystem:
 
 1. **Native Polkadot compatibility:** Any blockchain built with Substrate will be natively compatible with Polkadot, so when the mainnet comes you can connect to Polkadot as a parachain.
 2. **Interchain Connectivity:** By connecting your blockchain to Polkadot, your blockchain will be able to pass arbitrary messages to other chains in the Polkadot network.
@@ -29,7 +29,7 @@ Developers can build application-specific chains using [Substrate](https://www.s
 
 ### **What can you build on Polkadot?**
 
-Substrate comes with everything you need to build your blockchain. Use Substrate’s pallets to easily create what you want, or craft your own custom logic. The Polkadot ecosystem already hosts over 100 application-specific blockchains in development, focus on smart contracts, DeFi, IoT, governance, identity, privacy, and more. 
+Substrate comes with everything you need to build your blockchain. Use Substrate’s pallets to easily create what you want, or craft your own custom logic. The Polkadot ecosystem already hosts over 100 application-specific blockchains in development, focus on smart contracts, DeFi, IoT, governance, identity, privacy, and more.
 
 ## **Network Specifications**
 
@@ -47,9 +47,9 @@ The length fee is the product of a constant per-byte fee and the size of the tra
 
 ### **Transaction Speed & Finality**
 
-While custom consensus mechanics can be implemented for your application-specific blockchain, Polkadot's finality protocol finalizes batches of blocks based on availability and validity checks that happen as the proposed chain grows. 
+While custom consensus mechanics can be implemented for your application-specific blockchain, Polkadot's finality protocol finalizes batches of blocks based on availability and validity checks that happen as the proposed chain grows.
 
-The time to finality varies with the number of checks that need to be performed \(and invalidity reports cause the protocol to require extra checks\). The expected time to finality is 12-60 seconds on the relay chain. 
+The time to finality varies with the number of checks that need to be performed \(and invalidity reports cause the protocol to require extra checks\). The expected time to finality is 12-60 seconds on the relay chain.
 
 ### **Languages supported**
 

@@ -1,10 +1,4 @@
----
-description: See all tutorials currently available for Avalanche
----
-
-# 💡 Tutorials
-
-## Time to learn
+# Time to learn
 
 On this page you can find all tutorials currently available for Avalanche, including all tutorials created by the community.
 

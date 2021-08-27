@@ -44,5 +44,5 @@ Messages are contained in transactions. They trigger state transitions. Each mod
 
 When a transaction \(included in a block\) reaches a Tendermint node, it is passed to the application via the [ABCI](https://github.com/tendermint/tendermint/tree/master/abci) and decoded to get the message. The message is then routed to the appropriate module and handled there according to the logic defined in the `Handler`. If the state needs to be updated, the `Handler` calls the `Keeper` to perform the update. You will learn more about these concepts in the next steps of this tutorial.
 
-#### Now that you have decided on how your application functions from a high-level perspective, it is time to start implementing it. <a id="now-that-you-have-decided-on-how-your-application-functions-from-a-high-level-perspective-it-is-time-to-start-implementing-it"></a>
+### Now that you have decided on how your application functions from a high-level perspective, it is time to start implementing it. <a id="now-that-you-have-decided-on-how-your-application-functions-from-a-high-level-perspective-it-is-time-to-start-implementing-it"></a>
 

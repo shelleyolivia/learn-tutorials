@@ -1,12 +1,6 @@
----
-description: Learn how to create a Subnet on Avalanche
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-subnet). 
 
-# Create a Subnet
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-subnet). 
-
-## Introduction
+# Introduction
 
 A [**Subnet**](https://docs.avax.network/learn/platform-overview#subnets) is a set of validators. A Subnet validates a set of blockchains. Each blockchain is validated by exactly one Subnet, which is specified on blockchain creation. Subnets are a powerful primitive that allow blockchains to have custom validator sets, which means one can create permissioned blockchains.
 

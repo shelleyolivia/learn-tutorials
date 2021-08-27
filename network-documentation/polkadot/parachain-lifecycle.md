@@ -59,8 +59,6 @@ Polkadot uses a random beacon based on the [Vickrey auction](https://en.wikipedi
 
 Each slot lifecycle is **two years** and is divided into **four, 6 month lease periods.** _**An auction is for the right to occupy a parachain slot in each of four periods.**_ \[4\]
 
-### ![](../../../.gitbook/assets/parachain-auction.png)
-
 * Parachains can have their own local economies and their own form of governance. Chain autonomy is a focus for the Polkadot network.
   * Decisions in governance impact a chain's growth and development. 
   * Chains can reproduce in parallel while holding a parachain slot.

@@ -1,22 +1,10 @@
----
-description: >-
-  Learn how to successfully set up a Celo Wallet with a React Native DApp using
-  Redux
----
-
-# How to successfully connect to a Celo Wallet with a React Native DApp
-
-## About the Authors
-
-This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe) and [Emmanuel Oaikhenan](https://github.com/emmaodia).
-
-### Introduction
+# Introduction
 
 In this tutorial, you will learn how to successfully connect your React Native App to use the Celo Wallet and return a Wallet Address from the Alfajores Wallet.
 
 _To carry out transactions on the Celo Network, you have to connect your Wallet to be able to carry out transactions. When you start out building a dAPP using React Native, you will need this guide to demonstrate how you can install the required libraries to get your dApp up and running._
 
-## Prerequisite
+# Prerequisites
 
 This article assumes that you have basic knowledge of JavaScript \(TypeScript\) and how to start a React Native App using expo. It is also assumed that you have read the expo documentation and have basic knowledge of the Celo Wallet.
 
@@ -76,7 +64,7 @@ module.exports = {
 
 This should allow you to build the project, however some dependencies might expect certain invariants on the global environment. For that you should create a file `global.ts` with the content below:
 
-```javascript
+```typescript
 export interface Global {
   btoa: any
   self: any
@@ -119,7 +107,7 @@ Run the app using: `expo start`
 
 Find documentation how to run your app [here](how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp.md)
 
-## Code
+# Code
 
 After installing the required libraries, we can then build 2 simple screens in the React Native app.   
 The first screen will have one button. The button will be used to sign a User into the dApp.  
@@ -339,7 +327,10 @@ Run your app and Login to see the Wallet and Phone number returned to the Home S
 
 ![Home Screen](../../../.gitbook/assets/homescreen.png)
 
-## Conclusion
+# Conclusion
 
 This was a very interesting tutorial. In this tutorial, we learned: How to successfully connect your Redux based React Native App to use the Celo Wallet and return a Wallet Address from the Valora/Alfajores Wallet.
 
+# About the Authors
+
+This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe) and [Emmanuel Oaikhenan](https://github.com/emmaodia).

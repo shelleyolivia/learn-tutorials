@@ -1,12 +1,4 @@
----
-description: Learn how to interact with Avalanche's P-Chain
----
-
-# P-Chain API
-
-## Source documentation
-
-\*\*\*\*[**The Platform API's source documentation can be found here**](https://docs.avax.network/build/apis/platform-chain-p-chain-api). 
+[**The Platform API's source documentation can be found here**](https://docs.avax.network/build/apis/platform-chain-p-chain-api). 
 
 This API allows clients to interact with the P-Chain \(Platform Chain\), which maintains Avalanche’s validator set and handles blockchain creation.
 

@@ -1,16 +1,10 @@
----
-description: OysterPack SMART STAKE Pool Contract API Guide - For Validators
----
+In my last tutorial I introduced you to the **next generation** OysterPack SMART STAKE Pool contract as a getting started guide. In this tutorial, we'll be covering the rest of the contract APIs to help validators manage and operate the STAKE Pool contract. As a validator, it is fundamental to know your staking pool contract in depth because it is core to your validator business, and it impacts your bottom line.
 
-# OysterPack SMART STAKE Pool API Guide for Validators
+> Even though the main target audience are validators, contract developers will also benefit. 
+> You will learn about OysterPack SMART components and interfaces that you may leverage for your next contract to help you build smarter, faster, and better on the NEAR platform.
+> You will also benefit from my experience and gain insight into my thought process for contract design.
 
-## OysterPack SMART STAKE Pool API Guide for Validators
-
-In my last tutorial I introduced you to the **next generation** [OysterPack SMART STAKE Pool](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/8-stake-pool-contract#how-to-operate-the-stake-pool-contract) contract as a getting started guide. In this tutorial, we'll be covering the rest of the contract APIs to help validators manage and operate the STAKE Pool contract. As a validator, it is fundamental to know your staking pool contract in depth because it is core to your validator business, and it impacts your bottom line.
-
-> Even though the main target audience are validators, contract developers will also benefit. You will learn about OysterPack SMART components and interfaces that you may leverage for your next contract to help you build smarter, faster, and better on the NEAR platform. You will also benefit from my experience and gain insight into my thought process for contract design.
-
-## The Big Picture
+# The Big Picture
 
 ![](../../../../.gitbook/assets/oysterpack-smart-stake-deployment.png)
 
@@ -40,9 +34,9 @@ Below is the list of components used by the contract along with brief descriptio
 
 As you can see, there is much to cover. Here's the approach we will take. For each of the contract API interfaces, we'll review the Rust contract API and how to invoke the API via the [NEAR CLI](https://docs.near.org/docs/tools/near-cli). If you are interested in seeing how the APIs are implemented, then all the contract [source code](https://github.com/oysterpack/oysterpack-smart) is available on GitHub to study and explore.
 
-### Account Management Component
+## Account Management Component
 
-#### Storage Management API
+### Storage Management API
 
 The storage management API implements the NEAR standard NEP-145, which I have covered in depth my prior [Account Storage Standard](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/5-account-storage) tutorial. Proper storage management is crucial to safegaurd any multi-user contract from what I call a "Denial of Storage" attack. Storage management closes a big security vulnerability in the first generation staking pool contracts that are currently in use. The attack is very simple based on the facts:
 
@@ -101,7 +95,7 @@ near-figment call $CONTRACT storage_unregister --accountId oysterpack-2.testnet 
 near-figment call $CONTRACT storage_unregister --args '{"force":true}' --accountId oysterpack-2.testnet --amount 0.000000000000000000000001
 ```
 
-#### Account Storage Usage API
+### Account Storage Usage API
 
 As stated above, managing account storage usage properly is crucial. The storage management NEP-145 standard looks at it from the perspective of cost, i.e., storage balance. However, storage costs change overtime. Storage usage should be managed as storage usage - not storage balance. The storage management API provides a storage balance bounds, i.e., which is used by accounts to lookup how much it costs to register with the contract. The account management component is designed to dynamically compute account storage usage bounds when the contract is deployed. Then, storage balance bounds are derived from the storage usage bounds.
 
@@ -114,7 +108,7 @@ near-figment view $CONTRACT ops_storage_usage --args '{"account_id":"oysterpack.
 
 > If you are wondering what the "ops\_" prefix stands for, it stands for "OysterPack SMART". All contract APIs are hoisted to a global namespace. Thus, to avoid naming collisions, it's a best practice to namespace your contract API functions.
 
-#### Permissions Management API
+### Permissions Management API
 
 The permissions management API provides access control for permissioned contract APIs. For example, operator functions on the STAKE pool contract must be guarded to protect from allowing anyone to take the STAKE pool offline. The permission management implementation supports a basic permissioning scheme using permission 64 bit masks. This means, contracts support a maximum of 64 permissions \(0-63\) are supported, which should be sufficient to cover the majority of use cases. Two special permissions are pre-defined and reserved for the admin and operator. Permission bit 63 is reserved for the admin and permission bit 62 is reserved for the operator. Thus, the first 62 permission bits \(0-61\) can be used by contracts to define custom permissions.
 
@@ -176,9 +170,9 @@ If the admin permission is revoked from the contract owner, then the contract ow
 near-figment call $CONTRACT ops_owner_grant_admin --accountId $NEAR_ACCOUNT
 ```
 
-### Contract Component
+## Contract Component
 
-#### Contract Ownership API
+### Contract Ownership API
 
 The API supports the following use cases:
 
@@ -216,7 +210,7 @@ near -node_url $NEAR_NODE_URL call $CONTRACT ops_owner_finalize_transfer --accou
 near -node_url $NEAR_NODE_URL call $CONTRACT ops_owner_withdraw_balance --accountId $NEAR_ACCOUNT --amount 0.000000000000000000000001
 ```
 
-#### Contract Operator API
+### Contract Operator API
 
 The operator API enables storage balance to be locked based on expected contract storage usage. When the STAKE pool contract is deployed, it will automatically lock funds to reserve 10 KB of contract storage, which is a conservative amount. The STAKE pool contract should not require more than 10 KB storage. Locking the funds ensures that there is always enough balance available on the contract to pay for storage for the contract to be operational.
 
@@ -232,7 +226,7 @@ near -node_url $NEAR_NODE_URL call $CONTRACT ops_operator_lock_storage_balance -
 near-figment call $CONTRACT ops_owner_grant_admin --accountId $NEAR_ACCOUNT
 ```
 
-#### Contract Metrics API
+### Contract Metrics API
 
 The following metrics are tracked:
 
@@ -326,7 +320,7 @@ pub const TOTAL_UNSTAKED_BALANCE: BalanceId = BalanceId(195570546985981804312374
 pub const UNSTAKED_LIQUIDITY_POOL: BalanceId = BalanceId(1955784487678443851622222785149485288);
 ```
 
-### Fungible Token Component
+## Fungible Token Component
 
 Provides the API's that provide the STAKE token. These APIs are well documented, and I will defer the details to:
 
@@ -359,11 +353,11 @@ As stated above, the STAKE Pool contract also has a STAKE account, which serves 
 
   used to increase dividend yield through STAKE earnings
 
-### Staking Pool Component
+## Staking Pool Component
 
 Most of these APIs were covered in my last tutorial. I am also including them here for completeness as one-stop-shop API guide.
 
-#### Staking Pool API
+### Staking Pool API
 
 ![](../../../../.gitbook/assets/oysterpack-smart-staking-pool-api.png)
 
@@ -416,13 +410,13 @@ near-figment call $CONTRACT ops_stake_transfer --accountId $NEAR_ACCOUNT --args 
 near-figment call $CONTRACT ops_stake_transfer_call --accountId $NEAR_ACCOUNT--args '{"receiver_id":"oysterpack.testnet","amount":"1000000000000000000000000", "msg":""}' --amount 0.000000000000000000000001
 ```
 
-#### NEAR STaking Pool API
+### NEAR STaking Pool API
 
 This API mirrors the first generation staking pool API to make it easier for folks to migrate over. The only difference I want to call out is that when staking, accounts will be automatically registered. This means the account storage balance fees will be deducted from the attached deposit.
 
 ![](../../../../.gitbook/assets/oysterpack-smart-near-staking-pool-api.png)
 
-#### Staking Pool Treasury API
+### Staking Pool Treasury API
 
 The API provides convenience APIs to manage the treasurer permissions, which was discussed above. In addition, it provides APIs that affect overall STAKE yield:
 
@@ -451,13 +445,13 @@ near-figment call $CONTRACT ops_stake_treasury_distribution --accountId oysterpa
 near-figment call $CONTRACT ops_stake_treasury_transfer_to_owner --accountId oysterpack.testnet --args '{"amount":"1000000000000000000000000"}'
 ```
 
-#### Staking Pool Operator API
+### Staking Pool Operator API
 
 The staking pool operator APIs were well covered in the \[previous tutorial\]\[11\].
 
 ![](../../../../.gitbook/assets/oysterpack-smart-staking-pool-operator.png)
 
-### It's a wrap folks
+# Conclusion
 
 Congratulations if you made it to the end!
 
@@ -471,7 +465,7 @@ I will leave with one final thought ... I understand that DeFi is all the craze 
 
 That being said ... I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
-### What's Next
+# Next Steps
 
 Stay tuned for more tutorials on the OysterPack SMART component based framework to help contract developers build _**SMARTER**_, _**FASTER**_, and _**BETTER**_ on the [NEAR](https://near.org/) platform.
 

@@ -14,57 +14,57 @@ Go to `x/nameservice/genesis.go` and you will see that a few things are missing.
 package nameservice
 
 import (
-	"fmt"
+    "fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
+    sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type GenesisState struct {
-	WhoisRecords []Whois `json:"whois_records"`
+    WhoisRecords []Whois `json:"whois_records"`
 }
 
 func NewGenesisState(whoIsRecords []Whois) GenesisState {
-	return GenesisState{WhoisRecords: nil}
+    return GenesisState{WhoisRecords: nil}
 }
 
 func ValidateGenesis(data GenesisState) error {
-	for _, record := range data.WhoisRecords {
-		if record.Owner == nil {
-			return fmt.Errorf("invalid WhoisRecord: Value: %s. Error: Missing Owner", record.Value)
-		}
-		if record.Value == "" {
-			return fmt.Errorf("invalid WhoisRecord: Owner: %s. Error: Missing Value", record.Owner)
-		}
-		if record.Price == nil {
-			return fmt.Errorf("invalid WhoisRecord: Value: %s. Error: Missing Price", record.Value)
-		}
-	}
-	return nil
+    for _, record := range data.WhoisRecords {
+        if record.Owner == nil {
+            return fmt.Errorf("invalid WhoisRecord: Value: %s. Error: Missing Owner", record.Value)
+        }
+        if record.Value == "" {
+            return fmt.Errorf("invalid WhoisRecord: Owner: %s. Error: Missing Value", record.Owner)
+        }
+        if record.Price == nil {
+            return fmt.Errorf("invalid WhoisRecord: Value: %s. Error: Missing Price", record.Value)
+        }
+    }
+    return nil
 }
 
 func DefaultGenesisState() GenesisState {
-	return GenesisState{
-		WhoisRecords: []Whois{},
-	}
+    return GenesisState{
+        WhoisRecords: []Whois{},
+    }
 }
 
 func InitGenesis(ctx sdk.Context, keeper Keeper, data GenesisState) {
-	for _, record := range data.WhoisRecords {
-		keeper.SetWhois(ctx, record.Value, record)
-	}
+    for _, record := range data.WhoisRecords {
+        keeper.SetWhois(ctx, record.Value, record)
+    }
 }
 
 func ExportGenesis(ctx sdk.Context, k Keeper) GenesisState {
-	var records []Whois
-	iterator := k.GetNamesIterator(ctx)
-	for ; iterator.Valid(); iterator.Next() {
+    var records []Whois
+    iterator := k.GetNamesIterator(ctx)
+    for ; iterator.Valid(); iterator.Next() {
 
-		name := string(iterator.Key())
-		whois := k.GetWhois(ctx, name)
-		records = append(records, whois)
+        name := string(iterator.Key())
+        whois := k.GetWhois(ctx, name)
+        records = append(records, whois)
 
-	}
-	return GenesisState{WhoisRecords: records}
+    }
+    return GenesisState{WhoisRecords: records}
 }
 ```
 
@@ -74,36 +74,36 @@ Next we will define what the genesis state will be, the default genesis and a wa
 package types
 
 import (
-	"fmt"
+    "fmt"
 )
 
 type GenesisState struct {
-	WhoisRecords []Whois `json:"whois_records"`
+    WhoisRecords []Whois `json:"whois_records"`
 }
 
 func NewGenesisState(whoIsRecords []Whois) GenesisState {
-	return GenesisState{WhoisRecords: nil}
+    return GenesisState{WhoisRecords: nil}
 }
 
 func ValidateGenesis(data GenesisState) error {
-	for _, record := range data.WhoisRecords {
-		if record.Owner == nil {
-			return fmt.Errorf("invalid WhoisRecord: Value: %s. Error: Missing Owner", record.Value)
-		}
-		if record.Value == "" {
-			return fmt.Errorf("invalid WhoisRecord: Owner: %s. Error: Missing Value", record.Owner)
-		}
-		if record.Price == nil {
-			return fmt.Errorf("invalid WhoisRecord: Value: %s. Error: Missing Price", record.Value)
-		}
-	}
-	return nil
+    for _, record := range data.WhoisRecords {
+        if record.Owner == nil {
+            return fmt.Errorf("invalid WhoisRecord: Value: %s. Error: Missing Owner", record.Value)
+        }
+        if record.Value == "" {
+            return fmt.Errorf("invalid WhoisRecord: Owner: %s. Error: Missing Value", record.Owner)
+        }
+        if record.Price == nil {
+            return fmt.Errorf("invalid WhoisRecord: Value: %s. Error: Missing Price", record.Value)
+        }
+    }
+    return nil
 }
 
 func DefaultGenesisState() GenesisState {
-	return GenesisState{
-		WhoisRecords: []Whois{},
-	}
+    return GenesisState{
+        WhoisRecords: []Whois{},
+    }
 }
 ```
 
@@ -114,7 +114,7 @@ A few notes about the above code:
 * `InitGenesis()` is called on chain start, this function imports genesis state into the keeper.
 * `ExportGenesis()` is called after stopping the chain, this function loads application state into a GenesisState struct to later be exported to `genesis.json` alongside data from the other modules.
 
-#### Now your module has everything it needs to be incorporated into your Cosmos SDK application. <a id="now-your-module-has-everything-it-needs-to-be-incorporated-into-your-cosmos-sdk-application"></a>
+### Now your module has everything it needs to be incorporated into your Cosmos SDK application. <a id="now-your-module-has-everything-it-needs-to-be-incorporated-into-your-cosmos-sdk-application"></a>
 
 If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
 

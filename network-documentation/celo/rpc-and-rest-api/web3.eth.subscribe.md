@@ -6,7 +6,7 @@ description: Learn how to interact with the web3.eth.subscribe package
 
 ## Source Documentation
 
-[**The web3.eth.subscribe package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-eth-subscribe.html). 
+[**The web3.eth.subscribe package's source documentation can be found here**](https://web3js.readthedocs.io/en/v1.3.0/web3-eth-subscribe.html).
 
 ## web3.eth.subscribe
 
@@ -315,6 +315,5 @@ subscription.unsubscribe(function(error, success){
     if(success)
         console.log('Successfully unsubscribed!');
 });
-
 ```
 

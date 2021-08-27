@@ -1,22 +1,14 @@
----
-description: >-
-  In this installment of the secretNFT series you will deploy your very own
-  snip721 token contract and learn how to interact with it.
----
-
-# Deploy your own secret NFT
-
-## Introduction
+# Introduction
 
 For a high level introduction to Non-Fungible-Tokens see the [first installment of this series](https://learn.figment.io/network-documentation/secret/tutorials/create-your-first-secret-nft). In this tutorial we will download and compile the [snip721 reference implementation](https://github.com/baedrik/snip721-reference-impl), deploy it onto the secret testnet and interact with the contract, minting your own secret NFTs. Unlike the [previous tutorial](https://learn.figment.io/network-documentation/secret/tutorials/create-your-first-secret-nft) we will configure the contract ourselves and learn about access right management of secret contracts and tokens on the way.
 
 {% embed url="https://youtu.be/jRuSOos9ig4" %}
 
-## Prerequisites
+# Prerequisites
 
 This tutorial assumes that you have completed the [Secret Learn Pathway](https://learn.figment.io/network-documentation/secret/secret-pathway) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in section 5 of the Pathway.
 
-## Requirements
+# Requirements
 
 * The latest version of [NodeJS](https://nodejs.org/en/) installed \(use of nvm, the node version manager, is _encouraged_ for web3 developers\)
 * A code editor like [VSCode](https://code.visualstudio.com/Download), Theia, Atom, _etc_.
@@ -268,23 +260,22 @@ contract:  {
 } address: secret1g0t7sggeh89k27xa2vux5rnpc3ly4a9c0u8724
 ```
 
-{% hint style="info" %}
-**Unable to deploy your contract or initializing it using deploy-ft.js**
-
-Let's check for some common causes:
+> **Unable to deploy your contract or initializing it using deploy-ft.js**
+>
+> Let's check for some common causes:
 
 * First, make sure you have `.env` file saved and it's in the correct format as given in the tutorial.
 * If you're getting an error message like `UnauthorizedError: { "message":"Invalid authentication credentials"` then make sure to replace the &lt;API\_KEY&gt; with your correct API key which you copied from your DataHub Dashboard.
 * If you are getting `Error: Cannot find module 'secretjs'` make sure you installed the packages correctly using `npm install --save secretjs dotenv @iov/crypto`
 * If you see `Error: ENOENT: no such file or directory, open 'my-snip721/contract.wasm'` make sure that file path you are using in your deploy script points to the generated `contract.wasm`
 * If still, you're experiencing the same issue, for help reach out to us on [Discord](https://discord.gg/fszyM7K) or [Forum](https://community.figemnt.io)
-{% endhint %}
+
 
 After this executed successfully you can take the program you created in the first installment, change the contract address to the one of your contract and interact with it in the same way!
 
 {% page-ref page="create-your-first-secret-nft.md" %}
 
-## Conclusion
+# Conclusion
 
 Congratulations! We have made it to the end of the first installment of this Secret NFT series. We have covered a lot of information, and I feel you can really be proud of what you have achieved. Just to recap:
 
@@ -294,11 +285,11 @@ Congratulations! We have made it to the end of the first installment of this Sec
 
 This is a solid foundation to play with and build upon!
 
-## About the Author
+# About the author
 
 This tutorial was created by [Florian Uhde](https://twitter.com/florianuhde), a software engineer and game developer with a passion for blockchain, creativity and systemic design. You can get in touch with the author on [Figment Forum](https://community.figment.io/u/floar) if you have any queries pertaining to the tutorial, secretNFTs, etc.
 
-## References
+# References
 
 snip721 Reference Implementation: [Github Repo](https://github.com/baedrik/snip721-reference-impl)
 

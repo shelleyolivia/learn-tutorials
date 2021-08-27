@@ -1,12 +1,6 @@
----
-description: Learn how to write smart contracts that talk to each other
----
-
-# Cross-contract calls
-
 [The original tutorial can be found in the official NEAR documentation here](https://docs.near.org/docs/tutorials/contracts/cross-contract-calls). 
 
-## Introduction
+# Introduction
 
 At some point, you might want to call functions on existing contracts. This is called a _cross contract call_. There are plenty of reasons to do this:
 
@@ -18,7 +12,7 @@ Cross contract calls are really similar to calling an external API in the web 2.
 
 In this tutorial, we will build a very simple example to get you up and running with cross contract calls.
 
-## Description
+# Description
 
 We're going to create two simple contracts:
 
@@ -27,9 +21,7 @@ We're going to create two simple contracts:
 
 For this example, we'll only implement the `add` functionality, but already we've got a problem! The accounting department at Super Evil Mega Corp sent all these numbers as strings. To make things worse, we don't know how long these strings are going to be. Why this is a problem: the largest integer that JavaScript can deal with is [9007199254740991](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER). To help out everyone who wants to add long numbers together, we're going to deploy a contract that people can incorporate into their own calculators.
 
-#### Let's get started!
-
-## Step 1 - Create a new Token Contract Project in Gitpod
+# Step 1 - Create a new Token Contract Project in Gitpod
 
 In a new browser tab or window:
 
@@ -53,11 +45,9 @@ Once finished, the tests running in your terminal will appear like this:
 
 Note that `test-account-XXXXXXXXX_tTIMESTAMP-XXXXXXX` here is an automatically generated NEAR account for this particular project. Don't be distracted by these details, just compare the developer log output with the statements in the file `src/test.js`.
 
-{% hint style="info" %}
-We are not going to keep any of the code from this template. It's just there as a starting point.
-{% endhint %}
+> We are not going to keep any of the code from this template. It's just there as a starting point.
 
-## Step 2 - Write the `Calculator` contract
+# Step 2 - Write the `Calculator` contract
 
 We're interested in writing only one function for this example. A function that takes in two strings `a` and `b` and returns the result of adding them together as a string.
 
@@ -115,8 +105,6 @@ export function addLongNumbers(a: string, b: string): string {
   logging.log("-------------------------------------------------------")
   return reversedResultArray.join("");
 }
-
-Copy
 ```
 
 Now that we've modified files in our assembly folder we will need to re-deploy the contract.
@@ -129,7 +117,7 @@ In your terminal windows:
 
 That's it for our `Calculator` for now.
 
-## Step 3 - Write some tests for the contract
+# Step 3 - Write some tests for the contract
 
 It's a good habit to test code as soon as we've finished writing it, so that's exactly what we're going to do.
 
@@ -225,8 +213,6 @@ describe("Calculator", function() {
     });
   });
 });
-
-Copy
 ```
 
 Now lets run your new tests!
@@ -237,21 +223,20 @@ Once finished, the completed test in your terminal will appear like this:
 
 ![Jest tests running for Calculator Contract](https://docs.near.org/docs/assets/jest-tests-for-calculator-contract.png)
 
-{% hint style="info" %}
-Just make a mental note that the logs, "Contract Called" and the "Contract Signer" are the same. This will be important later.
-{% endhint %}
+
+> Just make a mental note that the logs, "Contract Called" and the "Contract Signer" are the same. This will be important later.
+
 
 Normally, we would create a UI at this point, but since we're calling this from elsewhere, let's move on the second contract.
 
-## Step 4 - Create a new contract for `Calculator Caller`
+# Step 4 - Create a new contract for `Calculator Caller`
 
-{% hint style="info" %}
-Keep the tab open that you've been working on, you're going to need the ID of the contract you just created later.
+> Keep the tab open that you've been working on, you're going to need the ID of the contract you just created later.
+>
+> The rest of the ID is the prefix "dev-" to be something like `dev-159372XXXX-XXXXXXX`. In fact the ID of the contract is just the NEAR account created for the contract by Gitpod automatically.
+>
+> You can read more about [accounts on the NEAR platform here](https://docs.near.org/docs/concepts/account).
 
-The rest of the ID is the prefix "dev-" to be something like `dev-159372XXXX-XXXXXXX`. In fact the ID of the contract is just the NEAR account created for the contract by Gitpod automatically.
-
-You can read more about [accounts on the NEAR platform here](https://docs.near.org/docs/concepts/account).
-{% endhint %}
 
 So let's make another smart contract. Following the same steps as before in a _new_ tab or window...
 
@@ -265,7 +250,7 @@ In a new browser tab or window
 
 We're doing this because we need to create an entirely separate contract deployed at a different address to demonstrate the capabilities of cross contract calls.
 
-## Step 5 - Write the `Calculator Caller` code
+# Step 5 - Write the `Calculator Caller` code
 
 We want to implement code that actually passes the numbers over to the contract we're calling. Here we're going to do this by creating a single `callAddNumbers` function and add the piping which allows us to make this function work.
 
@@ -292,23 +277,17 @@ export class AddArgs {
   a: string;
   b: string;
 }
-Copy
 ```
 
 This will allow us to encode arguments to send between contracts as a single value.
 
 Next we'll create the API that we can use to call the contract we've previously deployed.
 
-{% hint style="info" %}
-In the file `assembly/main.ts`
+> In the file `assembly/main.ts` replace the **entire contents of the file** with the following code:
 
-* Replace the **entire contents of the file** with the following code
-{% endhint %}
-
-```text
+```typescript
 import { context, storage, logging, ContractPromise } from "near-sdk-as";
 import { AddArgs } from "./model";
-Copy
 ```
 
 Notice that we're importing `AddArgs` from the model we just created using the syntax `"./model"` AND we're importing `ContractPromise` from `near-sdk-as`.
@@ -317,16 +296,14 @@ Here, we're creating a single method `add` that takes the strings we want to add
 
 We're also using the `AddArgs` model we created to package the strings we want to send to the other contract. When we call `args.encode()` it's a lot like something like `JSON.stringify(args)` to allow us to send this data.
 
-In the file `assembly/main.ts`
-
-* Append the following code to the file
-
 _In order to create this `ContractPromise`, we need to know:_
 
 * The ID of the contract that we created before. **You'll need to replace this with your own.**
 * Whatever function we're trying to call on the `Calculator` contract.
 
-```text
+> In the file `assembly/main.ts` append the following code to the file:
+
+```typescript
 const OTHER_CONTRACT = "dev-REPLACE_THIS_IDENTIFIER";
 
 export class CalculatorApi {
@@ -337,31 +314,26 @@ export class CalculatorApi {
     return promise;
   }
 }
-
-Copy
 ```
 
 _\(For more info on making cross-contract calls using `ContractPromise`, check out_ [_ContractPromise_](https://near.github.io/near-sdk-as/classes/_sdk_core_assembly_contract_.contractpromise.html) _and_ [_ContractPromiseResult_](https://near.github.io/near-sdk-as/classes/_sdk_core_assembly_contract_.contractpromiseresult.html)
 
-{% hint style="info" %}
-**As a reminder**, using the previous contract \(the tab you kept open earlier\), find the ID of the contract. You will use this to replace `dev-REPLACE_THIS_IDENTIFIER`.
+> As a reminder, using the previous contract \(the tab you kept open earlier\), find the ID of the contract. You will use this to replace `dev-REPLACE_THIS_IDENTIFIER`.
+>
+>You can find your contract ID stored in `neardev/dev-account.env`. In addition, you will see your contract ID displayed in the first terminal window with the running server.
+>Towards the bottom there will be a line that stats: "Done deploying to dev-1594333XXXXXX-XXXXXXX".
 
-You can find your contract ID stored in `neardev/dev-account.env`. In addition, you will see your contract ID displayed in the first terminal window with the running server. Towards the bottom there will be a line that stats: "Done deploying to dev-1594333XXXXXX-XXXXXXX".
-{% endhint %}
 
 Next, we're going to use the `CalculatorApi` we just created.
 
-In the file `assembly/main.ts`
+>In the file `assembly/main.ts` append the following code to the file:
 
-* Append the following code to the file
-
-```text
+```typescript
 export function calculate(a: string , b: string): void {
   let calculator = new CalculatorApi();
   let promise = calculator.add(a, b);
   promise.returnAsResult();
 }
-Copy
 ```
 
 You may notice this function returns `void`, which is a bit confusing because the contract is returning a promise. This is because it's calling a function elsewhere and the compiler thinks it's void.
@@ -378,7 +350,7 @@ Then navigate to your terminal windows
 * Hold `CTRL + C` to stop the server and display the command prompt
 * Type `yarn dev` to rebuild and redeploy your modified contract
 
-## Step 6 - More Tests!
+# Step 6 - More tests!
 
 Let's make sure things are working as expected.
 
@@ -386,7 +358,7 @@ In the file `src/test.js`
 
 * Replace the **entire contents of the file** with the code below
 
-```text
+```javascript
 const getConfig = require('./config');
 let nearConfig = getConfig("development");
 require('dotenv').config({ path: '/workspace/token-contract-as/neardev/dev-account.env' })
@@ -432,8 +404,6 @@ describe("CalculatorAPI", function() {
     });
   });
 });
-
-Copy
 ```
 
 After that is complete:
@@ -454,19 +424,17 @@ You should see a successful test that looks something like this:
 
 ![Cross contract call Jest test](https://docs.near.org/docs/assets/cross-contract-call-jest-test.png)
 
-{% hint style="info" %}
-Remember when we took a note that the 'Contract Called' and the 'Contract Signer' were the same in the test environment? Notice that they are different now! Can you figure out what this means?
-{% endhint %}
+> Remember when we took a note that the 'Contract Called' and the 'Contract Signer' were the same in the test environment? 
+> Notice that they are different now! Can you figure out what this means?
+
+# Conclusion
 
 And we're done!
 
 You can also view the details of your account & transactions by using the [Near Explorer](https://explorer.testnet.near.org/).
 
-This is a simple example of a contract that calls another contract, but this opens up a lot of opportunities.
-
-Now, see if you can figure out how to build the frontend by checking out our [other tutorials](https://docs.near.org/docs/roles/developer/tutorials/introduction) and modifying `src/main.js` and `src/index.html`.
+This is a simple example of a contract that calls another contract, but this opens up a lot of opportunities. Now, see if you can figure out how to build the frontend by checking out our [other tutorials](https://docs.near.org/docs/roles/developer/tutorials/introduction) and modifying `src/main.js` and `src/index.html`.
 
 You're ready to cross as many contracts as you want! Happy coding! 🚀
 
 If you had any difficulties following this tutorial or simply want to discuss NEAR tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
-

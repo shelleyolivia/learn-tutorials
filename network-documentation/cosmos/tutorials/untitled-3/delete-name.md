@@ -13,16 +13,16 @@ Now it is time to define the `Msg` for deleting names and add it to the `./x/nam
 ```javascript
 // MsgDeleteName defines a DeleteName message
 type MsgDeleteName struct {
-	Name  string         `json:"name"`
-	Owner sdk.AccAddress `json:"owner"`
+    Name  string         `json:"name"`
+    Owner sdk.AccAddress `json:"owner"`
 }
 
 // NewMsgDeleteName is a constructor function for MsgDeleteName
 func NewMsgDeleteName(name string, owner sdk.AccAddress) MsgDeleteName {
-	return MsgDeleteName{
-		Name:  name,
-		Owner: owner,
-	}
+    return MsgDeleteName{
+        Name:  name,
+        Owner: owner,
+    }
 }
 
 // Route should return the name of the module
@@ -33,23 +33,23 @@ func (msg MsgDeleteName) Type() string { return "delete_name" }
 
 // ValidateBasic runs stateless checks on the message
 func (msg MsgDeleteName) ValidateBasic() error {
-	if msg.Owner.Empty() {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, msg.Owner.String())
-	}
-	if len(msg.Name) == 0 {
-		return sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, "Name cannot be empty")
-	}
-	return nil
+    if msg.Owner.Empty() {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, msg.Owner.String())
+    }
+    if len(msg.Name) == 0 {
+        return sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, "Name cannot be empty")
+    }
+    return nil
 }
 
 // GetSignBytes encodes the message for signing
 func (msg MsgDeleteName) GetSignBytes() []byte {
-	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(msg))
+    return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(msg))
 }
 
 // GetSigners defines whose signature is required
 func (msg MsgDeleteName) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{msg.Owner}
+    return []sdk.AccAddress{msg.Owner}
 }
 ```
 
@@ -58,18 +58,18 @@ Next, in the `./x/nameservice/handler.go` file, add the `MsgDeleteName` handler 
 ```javascript
 // NewHandler returns a handler for "nameservice" type messages.
 func NewHandler(keeper Keeper) sdk.Handler {
-	return func(ctx sdk.Context, msg sdk.Msg) (*sdk.Result, error) {
-		switch msg := msg.(type) {
-		case MsgSetName:
-			return handleMsgSetName(ctx, keeper, msg)
-		case MsgBuyName:
-			return handleMsgBuyName(ctx, keeper, msg)
-		case MsgDeleteName:
-			return handleMsgDeleteName(ctx, keeper, msg)
-		default:
-			return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, fmt.Sprintf("Unrecognized nameservice Msg type: %v", msg.Type()))
-		}
-	}
+    return func(ctx sdk.Context, msg sdk.Msg) (*sdk.Result, error) {
+        switch msg := msg.(type) {
+        case MsgSetName:
+            return handleMsgSetName(ctx, keeper, msg)
+        case MsgBuyName:
+            return handleMsgBuyName(ctx, keeper, msg)
+        case MsgDeleteName:
+            return handleMsgDeleteName(ctx, keeper, msg)
+        default:
+            return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, fmt.Sprintf("Unrecognized nameservice Msg type: %v", msg.Type()))
+        }
+    }
 }
 ```
 
@@ -78,15 +78,15 @@ Finally, define the `DeleteName` `handler` function which performs the state tra
 ```javascript
 // Handle a message to delete name
 func handleMsgDeleteName(ctx sdk.Context, keeper Keeper, msg MsgDeleteName) (*sdk.Result, error) {
-	if !keeper.IsNamePresent(ctx, msg.Name) {
-		return nil, sdkerrors.Wrap(types.ErrNameDoesNotExist, msg.Name)
-	}
-	if !msg.Owner.Equals(keeper.GetOwner(ctx, msg.Name)) {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "Incorrect Owner")
-	}
+    if !keeper.IsNamePresent(ctx, msg.Name) {
+        return nil, sdkerrors.Wrap(types.ErrNameDoesNotExist, msg.Name)
+    }
+    if !msg.Owner.Equals(keeper.GetOwner(ctx, msg.Name)) {
+        return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "Incorrect Owner")
+    }
 
-	keeper.DeleteWhois(ctx, msg.Name)
-	return &sdk.Result{}, nil
+    keeper.DeleteWhois(ctx, msg.Name)
+    return &sdk.Result{}, nil
 }
 ```
 

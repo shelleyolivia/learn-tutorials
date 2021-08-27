@@ -17,12 +17,12 @@ import "strings"
 
 // QueryResResolve Queries Result Payload for a resolve query
 type QueryResResolve struct {
-	Value string `json:"value"`
+    Value string `json:"value"`
 }
 
 // implement fmt.Stringer
 func (r QueryResResolve) String() string {
-	return r.Value
+    return r.Value
 }
 
 // QueryResNames Queries Result Payload for a names query
@@ -30,7 +30,7 @@ type QueryResNames []string
 
 // implement fmt.Stringer
 func (n QueryResNames) String() string {
-	return strings.Join(n[:], "\n")
+    return strings.Join(n[:], "\n")
 }
 ```
 
@@ -48,83 +48,83 @@ You will see `NewQuerier` already defined, this function acts as a sub-router fo
 package keeper
 
 import (
-	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/cosmos/sdk-tutorials/nameservice/x/nameservice/types"
+    "github.com/cosmos/cosmos-sdk/codec"
+    "github.com/cosmos/sdk-tutorials/nameservice/x/nameservice/types"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	abci "github.com/tendermint/tendermint/abci/types"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    abci "github.com/tendermint/tendermint/abci/types"
 )
 
 // query endpoints supported by the nameservice Querier
 const (
-	QueryResolve = "resolve"
-	QueryWhois   = "whois"
-	QueryNames   = "names"
+    QueryResolve = "resolve"
+    QueryWhois   = "whois"
+    QueryNames   = "names"
 )
 
 // NewQuerier is the module level router for state queries
 func NewQuerier(keeper Keeper) sdk.Querier {
-	return func(ctx sdk.Context, path []string, req abci.RequestQuery) (res []byte, err error) {
-		switch path[0] {
-		case QueryResolve:
-			return queryResolve(ctx, path[1:], req, keeper)
-		case QueryWhois:
-			return queryWhois(ctx, path[1:], req, keeper)
-		case QueryNames:
-			return queryNames(ctx, req, keeper)
-		default:
-			return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, "unknown nameservice query endpoint")
-		}
-	}
+    return func(ctx sdk.Context, path []string, req abci.RequestQuery) (res []byte, err error) {
+        switch path[0] {
+        case QueryResolve:
+            return queryResolve(ctx, path[1:], req, keeper)
+        case QueryWhois:
+            return queryWhois(ctx, path[1:], req, keeper)
+        case QueryNames:
+            return queryNames(ctx, req, keeper)
+        default:
+            return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, "unknown nameservice query endpoint")
+        }
+    }
 }
 ```
 
-Now that the router is defined, define the inputs and responses for each query: 
+Now that the router is defined, define the inputs and responses for each query:
 
 ```javascript
 // nolint: unparam
 func queryResolve(ctx sdk.Context, path []string, req abci.RequestQuery, keeper Keeper) ([]byte, error) {
-	value := keeper.ResolveName(ctx, path[0])
+    value := keeper.ResolveName(ctx, path[0])
 
-	if value == "" {
-		return []byte{}, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, "could not resolve name")
-	}
+    if value == "" {
+        return []byte{}, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, "could not resolve name")
+    }
 
-	res, err := codec.MarshalJSONIndent(keeper.cdc, types.QueryResResolve{Value: value})
-	if err != nil {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error())
-	}
+    res, err := codec.MarshalJSONIndent(keeper.cdc, types.QueryResResolve{Value: value})
+    if err != nil {
+        return nil, sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error())
+    }
 
-	return res, nil
+    return res, nil
 }
 
 // nolint: unparam
 func queryWhois(ctx sdk.Context, path []string, req abci.RequestQuery, keeper Keeper) ([]byte, error) {
-	whois := keeper.GetWhois(ctx, path[0])
+    whois := keeper.GetWhois(ctx, path[0])
 
-	res, err := codec.MarshalJSONIndent(keeper.cdc, whois)
-	if err != nil {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error())
-	}
+    res, err := codec.MarshalJSONIndent(keeper.cdc, whois)
+    if err != nil {
+        return nil, sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error())
+    }
 
-	return res, nil
+    return res, nil
 }
 
 func queryNames(ctx sdk.Context, req abci.RequestQuery, keeper Keeper) ([]byte, error) {
-	var namesList types.QueryResNames
+    var namesList types.QueryResNames
 
-	iterator := keeper.GetNamesIterator(ctx)
+    iterator := keeper.GetNamesIterator(ctx)
 
-	for ; iterator.Valid(); iterator.Next() {
-		namesList = append(namesList, string(iterator.Key()))
-	}
+    for ; iterator.Valid(); iterator.Next() {
+        namesList = append(namesList, string(iterator.Key()))
+    }
 
-	res, err := codec.MarshalJSONIndent(keeper.cdc, namesList)
-	if err != nil {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error())
-	}
+    res, err := codec.MarshalJSONIndent(keeper.cdc, namesList)
+    if err != nil {
+        return nil, sdkerrors.Wrap(sdkerrors.ErrJSONMarshal, err.Error())
+    }
 
-	return res, nil
+    return res, nil
 }
 ```
 

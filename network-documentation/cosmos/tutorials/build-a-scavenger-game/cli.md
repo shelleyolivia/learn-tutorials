@@ -26,125 +26,125 @@ Each function takes parameters from the **Cobra** CLI tool to create a new msg, 
 package cli
 
 import (
-	"bufio"
-	"crypto/sha256"
-	"encoding/hex"
-	"fmt"
+    "bufio"
+    "crypto/sha256"
+    "encoding/hex"
+    "fmt"
 
-	"github.com/spf13/cobra"
+    "github.com/spf13/cobra"
 
-	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/cosmos/cosmos-sdk/client/context"
-	"github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/auth"
-	"github.com/cosmos/cosmos-sdk/x/auth/client/utils"
-	"github.com/cosmos/sdk-tutorials/scavenge/x/scavenge/types"
+    "github.com/cosmos/cosmos-sdk/client"
+    "github.com/cosmos/cosmos-sdk/client/context"
+    "github.com/cosmos/cosmos-sdk/client/flags"
+    "github.com/cosmos/cosmos-sdk/codec"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    "github.com/cosmos/cosmos-sdk/x/auth"
+    "github.com/cosmos/cosmos-sdk/x/auth/client/utils"
+    "github.com/cosmos/sdk-tutorials/scavenge/x/scavenge/types"
 )
 
 // GetTxCmd returns the transaction commands for this module
 func GetTxCmd(cdc *codec.Codec) *cobra.Command {
-	scavengeTxCmd := &cobra.Command{
-		Use:                        types.ModuleName,
-		Short:                      fmt.Sprintf("%s transactions subcommands", types.ModuleName),
-		DisableFlagParsing:         true,
-		SuggestionsMinimumDistance: 2,
-		RunE:                       client.ValidateCmd,
-	}
+    scavengeTxCmd := &cobra.Command{
+        Use:                        types.ModuleName,
+        Short:                      fmt.Sprintf("%s transactions subcommands", types.ModuleName),
+        DisableFlagParsing:         true,
+        SuggestionsMinimumDistance: 2,
+        RunE:                       client.ValidateCmd,
+    }
 
-	scavengeTxCmd.AddCommand(flags.PostCommands(
-		GetCmdCreateScavenge(cdc),
-		GetCmdCommitSolution(cdc),
-		GetCmdRevealSolution(cdc),
-	)...)
+    scavengeTxCmd.AddCommand(flags.PostCommands(
+        GetCmdCreateScavenge(cdc),
+        GetCmdCommitSolution(cdc),
+        GetCmdRevealSolution(cdc),
+    )...)
 
-	return scavengeTxCmd
+    return scavengeTxCmd
 }
 
 func GetCmdCreateScavenge(cdc *codec.Codec) *cobra.Command {
-	return &cobra.Command{
-		Use:   "createScavenge [reward] [solution] [description]",
-		Short: "Creates a new scavenge with a reward",
-		Args:  cobra.ExactArgs(3), // Does your request require arguments
-		RunE: func(cmd *cobra.Command, args []string) error {
+    return &cobra.Command{
+        Use:   "createScavenge [reward] [solution] [description]",
+        Short: "Creates a new scavenge with a reward",
+        Args:  cobra.ExactArgs(3), // Does your request require arguments
+        RunE: func(cmd *cobra.Command, args []string) error {
 
-			cliCtx := context.NewCLIContext().WithCodec(cdc)
-			inBuf := bufio.NewReader(cmd.InOrStdin())
-			txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
+            cliCtx := context.NewCLIContext().WithCodec(cdc)
+            inBuf := bufio.NewReader(cmd.InOrStdin())
+            txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
 
-			reward, err := sdk.ParseCoins(args[0])
-			if err != nil {
-				return err
-			}
+            reward, err := sdk.ParseCoins(args[0])
+            if err != nil {
+                return err
+            }
 
-			var solution = args[1]
-			var solutionHash = sha256.Sum256([]byte(solution))
-			var solutionHashString = hex.EncodeToString(solutionHash[:])
+            var solution = args[1]
+            var solutionHash = sha256.Sum256([]byte(solution))
+            var solutionHashString = hex.EncodeToString(solutionHash[:])
 
-			msg := types.NewMsgCreateScavenge(cliCtx.GetFromAddress(), args[2], solutionHashString, reward)
-			err = msg.ValidateBasic()
-			if err != nil {
-				return err
-			}
+            msg := types.NewMsgCreateScavenge(cliCtx.GetFromAddress(), args[2], solutionHashString, reward)
+            err = msg.ValidateBasic()
+            if err != nil {
+                return err
+            }
 
-			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
-		},
-	}
+            return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+        },
+    }
 }
 
 func GetCmdCommitSolution(cdc *codec.Codec) *cobra.Command {
-	return &cobra.Command{
-		Use:   "commitSolution [solution]",
-		Short: "Commits a solution for scavenge",
-		Args:  cobra.ExactArgs(1), // Does your request require arguments
-		RunE: func(cmd *cobra.Command, args []string) error {
+    return &cobra.Command{
+        Use:   "commitSolution [solution]",
+        Short: "Commits a solution for scavenge",
+        Args:  cobra.ExactArgs(1), // Does your request require arguments
+        RunE: func(cmd *cobra.Command, args []string) error {
 
-			cliCtx := context.NewCLIContext().WithCodec(cdc)
-			inBuf := bufio.NewReader(cmd.InOrStdin())
-			txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
+            cliCtx := context.NewCLIContext().WithCodec(cdc)
+            inBuf := bufio.NewReader(cmd.InOrStdin())
+            txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
 
-			var solution = args[0]
-			var solutionHash = sha256.Sum256([]byte(solution))
-			var solutionHashString = hex.EncodeToString(solutionHash[:])
+            var solution = args[0]
+            var solutionHash = sha256.Sum256([]byte(solution))
+            var solutionHashString = hex.EncodeToString(solutionHash[:])
 
-			var scavenger = cliCtx.GetFromAddress().String()
+            var scavenger = cliCtx.GetFromAddress().String()
 
-			var solutionScavengerHash = sha256.Sum256([]byte(solution + scavenger))
-			var solutionScavengerHashString = hex.EncodeToString(solutionScavengerHash[:])
+            var solutionScavengerHash = sha256.Sum256([]byte(solution + scavenger))
+            var solutionScavengerHashString = hex.EncodeToString(solutionScavengerHash[:])
 
-			msg := types.NewMsgCommitSolution(cliCtx.GetFromAddress(), solutionHashString, solutionScavengerHashString)
-			err := msg.ValidateBasic()
-			if err != nil {
-				return err
-			}
-			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
-		},
-	}
+            msg := types.NewMsgCommitSolution(cliCtx.GetFromAddress(), solutionHashString, solutionScavengerHashString)
+            err := msg.ValidateBasic()
+            if err != nil {
+                return err
+            }
+            return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+        },
+    }
 }
 
 func GetCmdRevealSolution(cdc *codec.Codec) *cobra.Command {
-	return &cobra.Command{
-		Use:   "revealSolution [solution]",
-		Short: "Reveals a solution for scavenge",
-		Args:  cobra.ExactArgs(1), // Does your request require arguments
-		RunE: func(cmd *cobra.Command, args []string) error {
+    return &cobra.Command{
+        Use:   "revealSolution [solution]",
+        Short: "Reveals a solution for scavenge",
+        Args:  cobra.ExactArgs(1), // Does your request require arguments
+        RunE: func(cmd *cobra.Command, args []string) error {
 
-			cliCtx := context.NewCLIContext().WithCodec(cdc)
-			inBuf := bufio.NewReader(cmd.InOrStdin())
-			txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
+            cliCtx := context.NewCLIContext().WithCodec(cdc)
+            inBuf := bufio.NewReader(cmd.InOrStdin())
+            txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
 
-			var solution = args[0]
+            var solution = args[0]
 
-			msg := types.NewMsgRevealSolution(cliCtx.GetFromAddress(), solution)
-			err := msg.ValidateBasic()
-			if err != nil {
-				return err
-			}
+            msg := types.NewMsgRevealSolution(cliCtx.GetFromAddress(), solution)
+            err := msg.ValidateBasic()
+            if err != nil {
+                return err
+            }
 
-			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
-		},
-	}
+            return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+        },
+    }
 }
 ```
 
@@ -166,112 +166,112 @@ After defining these commands, your `query.go` file should look like:
 package cli
 
 import (
-	"crypto/sha256"
-	"encoding/hex"
-	"fmt"
+    "crypto/sha256"
+    "encoding/hex"
+    "fmt"
 
-	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/cosmos/cosmos-sdk/client/context"
-	"github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/spf13/cobra"
+    "github.com/cosmos/cosmos-sdk/client"
+    "github.com/cosmos/cosmos-sdk/client/context"
+    "github.com/cosmos/cosmos-sdk/client/flags"
+    "github.com/cosmos/cosmos-sdk/codec"
+    "github.com/spf13/cobra"
 
-	"github.com/cosmos/sdk-tutorials/scavenge/x/scavenge/types"
+    "github.com/cosmos/sdk-tutorials/scavenge/x/scavenge/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module
 func GetQueryCmd(queryRoute string, cdc *codec.Codec) *cobra.Command {
-	// Group scavenge queries under a subcommand
-	scavengeQueryCmd := &cobra.Command{
-		Use:                        types.ModuleName,
-		Short:                      fmt.Sprintf("Querying commands for the %s module", types.ModuleName),
-		DisableFlagParsing:         true,
-		SuggestionsMinimumDistance: 2,
-		RunE:                       client.ValidateCmd,
-	}
+    // Group scavenge queries under a subcommand
+    scavengeQueryCmd := &cobra.Command{
+        Use:                        types.ModuleName,
+        Short:                      fmt.Sprintf("Querying commands for the %s module", types.ModuleName),
+        DisableFlagParsing:         true,
+        SuggestionsMinimumDistance: 2,
+        RunE:                       client.ValidateCmd,
+    }
 
-	scavengeQueryCmd.AddCommand(
-		flags.GetCommands(
-			GetCmdListScavenges(queryRoute, cdc),
-			GetCmdGetScavenge(queryRoute, cdc),
-			GetCmdGetCommit(queryRoute, cdc),
-		)...,
-	)
+    scavengeQueryCmd.AddCommand(
+        flags.GetCommands(
+            GetCmdListScavenges(queryRoute, cdc),
+            GetCmdGetScavenge(queryRoute, cdc),
+            GetCmdGetCommit(queryRoute, cdc),
+        )...,
+    )
 
-	return scavengeQueryCmd
+    return scavengeQueryCmd
 
 }
 
 func GetCmdListScavenges(queryRoute string, cdc *codec.Codec) *cobra.Command {
-	return &cobra.Command{
-		Use:   "list",
-		Short: "list",
-		// Args:  cobra.ExactArgs(1),
-		RunE: func(cmd *cobra.Command, args []string) error {
-			cliCtx := context.NewCLIContext().WithCodec(cdc)
+    return &cobra.Command{
+        Use:   "list",
+        Short: "list",
+        // Args:  cobra.ExactArgs(1),
+        RunE: func(cmd *cobra.Command, args []string) error {
+            cliCtx := context.NewCLIContext().WithCodec(cdc)
 
-			res, _, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/"+types.QueryListScavenges, queryRoute), nil)
-			if err != nil {
-				fmt.Printf("could not get scavenges\n%s\n", err.Error())
-				return nil
-			}
+            res, _, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/"+types.QueryListScavenges, queryRoute), nil)
+            if err != nil {
+                fmt.Printf("could not get scavenges\n%s\n", err.Error())
+                return nil
+            }
 
-			var out types.QueryResScavenges
-			cdc.MustUnmarshalJSON(res, &out)
-			return cliCtx.PrintOutput(out)
-		},
-	}
+            var out types.QueryResScavenges
+            cdc.MustUnmarshalJSON(res, &out)
+            return cliCtx.PrintOutput(out)
+        },
+    }
 }
 func GetCmdGetScavenge(queryRoute string, cdc *codec.Codec) *cobra.Command {
-	return &cobra.Command{
-		Use:   "get [solutionHash]",
-		Short: "Query a scavenge by solutionHash",
-		Args:  cobra.ExactArgs(1),
-		RunE: func(cmd *cobra.Command, args []string) error {
-			cliCtx := context.NewCLIContext().WithCodec(cdc)
-			solutionHash := args[0]
+    return &cobra.Command{
+        Use:   "get [solutionHash]",
+        Short: "Query a scavenge by solutionHash",
+        Args:  cobra.ExactArgs(1),
+        RunE: func(cmd *cobra.Command, args []string) error {
+            cliCtx := context.NewCLIContext().WithCodec(cdc)
+            solutionHash := args[0]
 
-			res, _, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/%s/%s", queryRoute, types.QueryGetScavenge, solutionHash), nil)
-			if err != nil {
-				fmt.Printf("could not resolve scavenge %s \n%s\n", solutionHash, err.Error())
+            res, _, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/%s/%s", queryRoute, types.QueryGetScavenge, solutionHash), nil)
+            if err != nil {
+                fmt.Printf("could not resolve scavenge %s \n%s\n", solutionHash, err.Error())
 
-				return nil
-			}
+                return nil
+            }
 
-			var out types.Scavenge
-			cdc.MustUnmarshalJSON(res, &out)
-			return cliCtx.PrintOutput(out)
-		},
-	}
+            var out types.Scavenge
+            cdc.MustUnmarshalJSON(res, &out)
+            return cliCtx.PrintOutput(out)
+        },
+    }
 }
 func GetCmdGetCommit(queryRoute string, cdc *codec.Codec) *cobra.Command {
-	return &cobra.Command{
-		Use:   "commited [solution] [scavenger]",
-		Short: "Query a commit by solution and address of scavenger",
-		Args:  cobra.ExactArgs(2),
-		RunE: func(cmd *cobra.Command, args []string) error {
-			cliCtx := context.NewCLIContext().WithCodec(cdc)
+    return &cobra.Command{
+        Use:   "commited [solution] [scavenger]",
+        Short: "Query a commit by solution and address of scavenger",
+        Args:  cobra.ExactArgs(2),
+        RunE: func(cmd *cobra.Command, args []string) error {
+            cliCtx := context.NewCLIContext().WithCodec(cdc)
 
-			var solution = args[0]
-			var solutionHash = sha256.Sum256([]byte(solution))
-			var solutionHashString = hex.EncodeToString(solutionHash[:])
+            var solution = args[0]
+            var solutionHash = sha256.Sum256([]byte(solution))
+            var solutionHashString = hex.EncodeToString(solutionHash[:])
 
-			var scavenger = args[1]
+            var scavenger = args[1]
 
-			var solutionScavengerHash = sha256.Sum256([]byte(solution + scavenger))
-			var solutionScavengerHashString = hex.EncodeToString(solutionScavengerHash[:])
+            var solutionScavengerHash = sha256.Sum256([]byte(solution + scavenger))
+            var solutionScavengerHashString = hex.EncodeToString(solutionScavengerHash[:])
 
-			res, _, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/%s/%s", queryRoute, types.QueryCommit, solutionScavengerHashString), nil)
-			if err != nil {
-				fmt.Printf("could not resolve commit %s for scavenge %s \n%s\n", solutionScavengerHashString, solutionHashString, err.Error())
-				return nil
-			}
+            res, _, err := cliCtx.QueryWithData(fmt.Sprintf("custom/%s/%s/%s", queryRoute, types.QueryCommit, solutionScavengerHashString), nil)
+            if err != nil {
+                fmt.Printf("could not resolve commit %s for scavenge %s \n%s\n", solutionScavengerHashString, solutionHashString, err.Error())
+                return nil
+            }
 
-			var out types.Commit
-			cdc.MustUnmarshalJSON(res, &out)
-			return cliCtx.PrintOutput(out)
-		},
-	}
+            var out types.Commit
+            cdc.MustUnmarshalJSON(res, &out)
+            return cliCtx.PrintOutput(out)
+        },
+    }
 }
 ```
 

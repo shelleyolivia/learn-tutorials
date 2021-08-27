@@ -1,22 +1,16 @@
----
-description: Learn how to transfer AVAX between chains
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain). 
 
-# Transfer AVAX Between the X-Chain and C-Chain
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain). 
-
-## Introduction
+# Introduction
 
 AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, where they can be provided as a stake when validating the Primary Network, and on the C-Chain, where they can be used in smart contracts or to pay for gas. In this tutorial, we’ll send AVAX tokens between the X-Chain and C-Chain.
 
-## Requirements
+# Requirements
 
 You've created your [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview).
 
 In order to send AVAX, you need to have some AVAX! You can get real AVAX by buying it on an exchange, or you can get testnet AVAX from the [AVAX Test Faucet](https://faucet.avax-test.network), which is a free and easy way to get to play around with Avalanche.
 
-## Transferring AVAX using the web wallet
+# Transferring AVAX using the web wallet
 
 The easiest way to transfer AVAX between chains is to use [the Avalanche Wallet](https://wallet.avax.network/) which is a non-custodial and secure way to access and move AVAX.
 
@@ -70,7 +64,7 @@ To return the AVAX back to the X-Chain, you need to do the transfer in the oppos
 
 Swap source and destination chain, by selecting them from the **Source** and **Destination** dropdown menu. The rest of the process is the same: enter the amount, confirm and transfer.
 
-## Transferring from the X-Chain to C-Chain with API Calls
+# Transferring from the X-Chain to C-Chain with API Calls
 
 If you're building an application on the Avalanche network, you may want to do the transfer programmatically as part of some broader functionality. You can do that by calling the appropriate APIs on an AvalancheGo node. The rest of the tutorial assumes you have access to an AvalancheGo node, AVAX tokens on the X-Chain, and user credentials [created]() and stored in the node's keystore.
 
@@ -260,7 +254,7 @@ The response should look like this:
 }
 ```
 
-## Wrapping Up
+# Wrapping Up
 
 That’s it! Now, you can swap AVAX back and forth between the X-Chain and C-Chain, both by using the Avalanche Wallet, and by calling the appropriate API calls on an Avalanche node.
 

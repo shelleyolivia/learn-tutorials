@@ -1,14 +1,6 @@
----
-description: >-
-  Learn how to deploy and test a smart contract on Avalanche using Remix and
-  MetaMask
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask). 
 
-# Deploy a Smart Contract on Avalanche using Remix and MetaMask
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask). 
-
-## Introduction
+# Introduction
 
 ![](../../../.gitbook/assets/image%20%2811%29.png)
 

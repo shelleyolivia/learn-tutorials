@@ -48,7 +48,7 @@ response = requests_retry_session(session=s).get(
 
 Get more details and examples [HERE](https://www.peterbe.com/plog/best-practice-with-retries-with-requests).
 
-## **Method 2** 
+## **Method 2**
 
 Using pip install retry.
 
@@ -164,7 +164,7 @@ if __name__ == '__main__':
     print(wrapped_test_func('hi', 'bye', hi='ciao'))
 ```
 
-Get the code [HERE](https://gist.github.com/FBosler/be10229aba491a8c912e3a1543bbc74e). 
+Get the code [HERE](https://gist.github.com/FBosler/be10229aba491a8c912e3a1543bbc74e).
 
-Get more details [HERE](https://towardsdatascience.com/are-you-using-python-with-apis-learn-how-to-use-a-retry-decorator-27b6734c3e6). 
+Get more details [HERE](https://towardsdatascience.com/are-you-using-python-with-apis-learn-how-to-use-a-retry-decorator-27b6734c3e6).
 

@@ -26,10 +26,10 @@ Available Commands:
   add-genesis-account Add genesis account to genesis.json
   start               Run the full node
   unsafe-reset-all    Resets the blockchain database, removes address book files, and resets priv_validator.json to the genesis state
-                      
+
   tendermint          Tendermint subcommands
   export              Export state to JSON
-                      
+
   version             Print the app version
   help                Help about any command
 
@@ -56,11 +56,11 @@ Available Commands:
   config      Create or query an application CLI configuration file
   query       Querying subcommands
   tx          Transactions subcommands
-              
+
   rest-server Start LCD (light-client daemon), a local REST server
-              
+
   keys        Add or view local private keys
-              
+
   version     Print the app version
   help        Help about any command
 

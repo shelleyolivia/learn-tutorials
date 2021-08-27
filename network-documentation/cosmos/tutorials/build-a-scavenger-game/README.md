@@ -4,7 +4,7 @@ description: Learn how to build a scavenger game using the Cosmos SDK
 
 # Build a scavenger game
 
-[**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/scavenge/tutorial/01-background.html). 
+[**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/scavenge/tutorial/01-background.html).
 
 ## Background
 

@@ -14,7 +14,7 @@ This Privacy Policy applies when you create a DataHub Account \("DataHub Account
 
 You require a DataHub Account to access DataHub and to complete a blockchain pathway on Figment Learn \("Pathway"\).
 
-By creating a DataHub Account or submitting any personal information to Figment, you automatically agree to the terms of this Privacy Policy. You cannot create a DataHub Account or submit any personal information to Figment unless you agree with this Privacy Policy. 
+By creating a DataHub Account or submitting any personal information to Figment, you automatically agree to the terms of this Privacy Policy. You cannot create a DataHub Account or submit any personal information to Figment unless you agree with this Privacy Policy.
 
 ## 1. What Data We Collect
 
@@ -24,13 +24,13 @@ We collect certain data from you directly, like information you enter yourself, 
 
 We may collect different data from or about you depending on how you access and use DataHub or Figment Learn. Below are some examples to help you better understand the data we collect.
 
-When you create a DataHub Account, access, and use DataHub or Figment Learn, including through a third-party platform \(as applicable\), we may collect any data you provide directly, including: 
+When you create a DataHub Account, access, and use DataHub or Figment Learn, including through a third-party platform \(as applicable\), we may collect any data you provide directly, including:
 
 | Data Type | Description |
 | :--- | :--- |
 | Account Data | When you create or update your DataHub Account, we collect and store the data you provide, including but not limited to your email address, password, and may assign you an identification number \("Account Data"\). |
 | Course Data | When you participate in DataHub or a Pathway, we collect certain data about your participation. |
-| Incentive Program | To receive cryptocurrency in connection with our voluntary Incentive Program for completing Pathways on Figment Learn, you must provide us with your cryptocurrency wallet address.  |
+| Incentive Program | To receive cryptocurrency in connection with our voluntary Incentive Program for completing Pathways on Figment Learn, you must provide us with your cryptocurrency wallet address. |
 | Contact and Support | If you contact us including to report a problem or concern \(regardless of whether you have created DataHub Account\), we may collect and store your contact information, messages, and other data about you like your name, email address, location, operating system, IP address, and any other data you provide or that we collect through automated means \(which we cover below\). We use this data to respond to you and research your question or concern and improve on and administer Figment Learn, in accordance with this Privacy Policy. |
 
 The data listed above is stored by us and associated with your DataHub Account.
@@ -42,20 +42,20 @@ When you create a DataHub Account, access or use DataHub or Figment Learn, we ma
 | Data Type | Description |
 | :--- | :--- |
 | System Data | Data about your computer or device, like your IP address, device type, operating system type and version, unique device identifiers, browser, language, domain and other systems data, and platform types \("System Data"\). |
-| Usage Data | Usage statistics about your use of DataHub or Figment Learn, including content accessed, time spent on pages or parts Figment Learn, pages visited, features used, click data, date and time, and other data regarding your use of DataHub or Figment Learn \("Usage Data"\).  |
+| Usage Data | Usage statistics about your use of DataHub or Figment Learn, including content accessed, time spent on pages or parts Figment Learn, pages visited, features used, click data, date and time, and other data regarding your use of DataHub or Figment Learn \("Usage Data"\). |
 | Approximate Geographic Data | An approximate geographic location, including information like country, city, and geographic coordinates, calculated based on your IP address. |
 
 The data listed above may be collected through server log files and tracking technologies, as detailed in the "Cookies and Collection Tools" section below. It may be stored by us and associated with your DataHub Account.
 
-## 2. How We Collect Your Data 
+## 2. How We Collect Your Data
 
 We may use tools like cookies, web beacons, analytics services, and advertising providers to gather the data listed above. Some of these tools may offer you the ability to opt-out of the data collection.
 
-### 2.1 Cookies and Data Collection 
+### 2.1 Cookies and Data Collection
 
-Figment and any service providers acting on our behalf \(like Google Analytics and third-party advertisers\) may use server log files and automated Collection Tools like cookies, tags, scripts, customized links, device or browser fingerprints, and web beacons \(together, "Collection Tools"\) when you access and use DataHub or Figment Learn. These Collection Tools track and collect certain System Data and Usage Data \(see Section 1\) when you use Figment Learn. In some cases, we tie data gathered through those Collection Tools to other data that we collect as described in this Privacy Policy. 
+Figment and any service providers acting on our behalf \(like Google Analytics and third-party advertisers\) may use server log files and automated Collection Tools like cookies, tags, scripts, customized links, device or browser fingerprints, and web beacons \(together, "Collection Tools"\) when you access and use DataHub or Figment Learn. These Collection Tools track and collect certain System Data and Usage Data \(see Section 1\) when you use Figment Learn. In some cases, we tie data gathered through those Collection Tools to other data that we collect as described in this Privacy Policy.
 
-We may use cookies for things like analyzing your use of DataHub or Figment Learn, personalizing your experience, making it easier to log into DataHub or Figment Learn, and recognizing you when you return. We may use web beacons for things like identifying whether a page was visited, identifying whether an email was opened, and advertising more efficiently by excluding current users from certain promotional messages or identifying the source of a new mobile app download. 
+We may use cookies for things like analyzing your use of DataHub or Figment Learn, personalizing your experience, making it easier to log into DataHub or Figment Learn, and recognizing you when you return. We may use web beacons for things like identifying whether a page was visited, identifying whether an email was opened, and advertising more efficiently by excluding current users from certain promotional messages or identifying the source of a new mobile app download.
 
 Figment may use the following types of cookies:
 
@@ -70,15 +70,15 @@ We may use third-party analytics services like Google Analytics on DataHub and F
 
 ### 2.3 Online Advertising
 
-We may use third-party advertising services to advertise about DataHub and Figment Learn on websites and applications you use. The ads may be based on things we know about you, like your Usage Data and System Data \(as detailed in Section 1\), and things that these ad service providers know about you based on their tracking data. The ads can be based on your recent activity or activity over time and across other sites and services, and may be tailored to you. 
+We may use third-party advertising services to advertise about DataHub and Figment Learn on websites and applications you use. The ads may be based on things we know about you, like your Usage Data and System Data \(as detailed in Section 1\), and things that these ad service providers know about you based on their tracking data. The ads can be based on your recent activity or activity over time and across other sites and services, and may be tailored to you.
 
 Depending on the types of advertising services we use, they may place cookies or other tracking technologies on your computer, phone, or other device to collect data about your use of DataHub and Figment Learn, and may access those tracking technologies to serve these tailored advertisements to you. To help deliver tailored advertising, we may provide these service providers with a hashed, anonymized version of your email address and content that you share on DataHub and Figment Learn.
 
-## 3. How We Use Your Data 
+## 3. How We Use Your Data
 
-We use your data to do things like provide DataHub and Figment Learn, communicate with you, troubleshoot issues, secure against fraud and misconduct, improve and update DataHub and Figment Learn, analyze how people use DataHub and Figment Learn, serve targeted advertising, and as may be otherwise required by law or necessary for safety and quality. 
+We use your data to do things like provide DataHub and Figment Learn, communicate with you, troubleshoot issues, secure against fraud and misconduct, improve and update DataHub and Figment Learn, analyze how people use DataHub and Figment Learn, serve targeted advertising, and as may be otherwise required by law or necessary for safety and quality.
 
-We may use the data we collect through your access to and use of DataHub and Figment Learn to: 
+We may use the data we collect through your access to and use of DataHub and Figment Learn to:
 
 * Provide and administer DataHub and Figment Learn;
 * Communicate with you about your DataHub Account by:
@@ -98,7 +98,7 @@ We may use the data we collect through your access to and use of DataHub and Fig
 
 ## 4. Sharing Your Data
 
-We may share data about you with companies performing services for us, our business partners, analytics and data enrichment providers, and advertising companies who help us promote DataHub and Figment Learn. We may also share your data as needed for security, legal compliance, or as part of a corporate restructuring. Lastly, we may share your data in other ways if it is aggregated or de-identified or if we get your consent. 
+We may share data about you with companies performing services for us, our business partners, analytics and data enrichment providers, and advertising companies who help us promote DataHub and Figment Learn. We may also share your data as needed for security, legal compliance, or as part of a corporate restructuring. Lastly, we may share your data in other ways if it is aggregated or de-identified or if we get your consent.
 
 We may share your data with third parties under the following circumstances or as otherwise described in this Privacy Policy:
 
@@ -120,21 +120,21 @@ We may share your data with third parties under the following circumstances or a
 
 ## 5. Security
 
-We may use security based on the type and sensitivity of data being stored. 
+We may use security based on the type and sensitivity of data being stored.
 
 Figment may take security measures to protect against unauthorized access, alteration, disclosure, or destruction of your personal data that we collect and store. These measures vary based on the type and sensitivity of the data. However, we cannot guarantee that communications between you and Figment or any information provided to us in connection with the data we collect through DataHub and Figment Learn will be free from unauthorized access by third parties. Your password is an important part of our security system, and it is your responsibility to protect it. You should not share your password with any third party, and if you believe your password or DataHub Account has been compromised, you should change it immediately and contact us.
 
 ## 6. Your Rights
 
-You have rights around the use of your data, including the ability to opt-out of some emails, cookies, and collection of your data by certain analytics providers. You can update or terminate your DataHub Account from within DataHub and Figment Learn, and can also contact us for individual rights requests about your personal data. Parents who believe we've unintentionally collected personal data about their underage child should contact us for help deleting that information. 
+You have rights around the use of your data, including the ability to opt-out of some emails, cookies, and collection of your data by certain analytics providers. You can update or terminate your DataHub Account from within DataHub and Figment Learn, and can also contact us for individual rights requests about your personal data. Parents who believe we've unintentionally collected personal data about their underage child should contact us for help deleting that information.
 
 Your Control Over Uses of Your Data
 
 To stop receiving promotional communications from us, you can opt-out by using the unsubscribe mechanism in the promotional communication you receive or by changing the email preferences in your DataHub Account. Note that regardless of your email preference settings, we may send you messages regarding Figment Learn.
 
-The browser or device you use may allow you to control cookies and other types of local data storage. Your wireless device may also allow you to control whether location or other data is collected and shared. 
+The browser or device you use may allow you to control cookies and other types of local data storage. Your wireless device may also allow you to control whether location or other data is collected and shared.
 
-To get information and control cookies used for tailored advertising from participating companies, see the consumer opt-out pages for the [Network Advertising Initiative](http://www.networkadvertising.org/choices) and [Digital Advertising Alliance](http://www.aboutads.info/choices/), or if you're located in the European Union, visit the [Your Online Choices](http://www.youronlinechoices.eu/) site. To opt-out of Google's display advertising or customize Google Display Network ads, visit the [Google Ads Settings page](https://www.google.com/settings/ads). 
+To get information and control cookies used for tailored advertising from participating companies, see the consumer opt-out pages for the [Network Advertising Initiative](http://www.networkadvertising.org/choices) and [Digital Advertising Alliance](http://www.aboutads.info/choices/), or if you're located in the European Union, visit the [Your Online Choices](http://www.youronlinechoices.eu/) site. To opt-out of Google's display advertising or customize Google Display Network ads, visit the [Google Ads Settings page](https://www.google.com/settings/ads).
 
 To opt-out of allowing Google Analytics to use your data for analytics or enrichment, see the [Google Analytics Opt-out Browser Add-on](https://tools.google.com/dlpage/gaoptout).
 
@@ -159,11 +159,11 @@ Parents who believe that Figment may have collected personal data from a child u
 
 ## 7. Jurisdiction-Specific Rules
 
-If you live in California, you have certain rights related to accessing and deleting your data, as well as learning who we share your data with. If you live in Australia, you have the right to make a formal complaint with the appropriate government agency. Users and Contributors outside of the United States should note that we may transfer data to the US and other areas outside of the European Economic Area. 
+If you live in California, you have certain rights related to accessing and deleting your data, as well as learning who we share your data with. If you live in Australia, you have the right to make a formal complaint with the appropriate government agency. Users and Contributors outside of the United States should note that we may transfer data to the US and other areas outside of the European Economic Area.
 
 ### 7.1 Users in California
 
-Users and Contributors who are California residents may have certain rights under the California Consumer Privacy Act, \("CCPA"\). If you are an eligible California User or Contributor, included in these rights are:  
+Users and Contributors who are California residents may have certain rights under the California Consumer Privacy Act, \("CCPA"\). If you are an eligible California User or Contributor, included in these rights are:
 
 * Right to Know — You have the right to request to know more about the categories and specific pieces of personal information that we have collected about you and access a copy of your personal information.
 * Right to Deletion — You have the right to request the deletion of personal information that we have collected about you.
@@ -203,7 +203,7 @@ When we make a material change to this Privacy Policy, we may notify users via e
 
 From time to time, we may update this Privacy Policy. If we make any material change to it, we will notify you via email, through a notification posted on DataHub or Figment Learn, or as required by applicable law. We will also include a summary of the key changes. Unless stated otherwise, modifications will become effective on the day they are posted.
 
-As permitted by applicable law, if you continue to use DataHub or Figment Learn after the effective date of any change, then your access and/or use will be deemed an acceptance of \(and agreement to follow and be bound by\) the revised Privacy Policy. The revised Privacy Policy supersedes all previous Privacy Policies. 
+As permitted by applicable law, if you continue to use DataHub or Figment Learn after the effective date of any change, then your access and/or use will be deemed an acceptance of \(and agreement to follow and be bound by\) the revised Privacy Policy. The revised Privacy Policy supersedes all previous Privacy Policies.
 
 ### 8.2 Interpretation
 

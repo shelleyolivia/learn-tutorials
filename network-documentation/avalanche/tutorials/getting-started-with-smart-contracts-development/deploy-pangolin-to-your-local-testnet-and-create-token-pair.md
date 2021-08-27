@@ -1,16 +1,4 @@
----
-description: >-
-  We will learn how to deploy Pangolin, a DEX which lives on C-Chain, to your
-  local Avalanche testnet.
----
-
-# Deploy Pangolin To Your Local Testnet And Create Token Pair
-
-## About the Author
-
-This Tutorial was created by [Cinque McFarlane-Blake](https://github.com/cinquemb). Cinque is a reluctant software engineer and he worked on projects at labs related to brain-computer interfaces, back office stuff for trading in futures markets, and academic publishing tools in developing markets. Overall, He is just trying to help build a more decentralized hyper-connected world while pushing on the boundaries of our existence.
-
-## Introduction
+# Introduction
 
 Whether you are looking to create your own token, provide liquidity for existing tokens or trade on Pangolin that is deployed on Avalanche's c-chain, you will need to create a token pair on Pangolin.
 
@@ -18,11 +6,11 @@ However, before that, we must familiarize ourselves with the functionality of to
 
 In this tutorial, we will illustrate how to create your own Pangolin exchange locally and also create a trading pair from any arbitrary ERC20 tokens.
 
-### About Pangolin
+## About Pangolin
 
 Pangolin is a fork of Uniswap V2 and the first decentralized exchange \(DEX\) on Avalanche c-chain where users can swap their [ERC20](https://eips.ethereum.org/EIPS/eip-20) tokens.
 
-### Prerequisites
+# Prerequisites
 
 If you have completed the Avalanche tutorial on [Using Truffle with the Avalanche C-Chain](https://docs.avax.network/build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain), you will have completed most of the prerequisites.
 
@@ -30,21 +18,19 @@ You have to be mindful that `avalanchego` is being constantly improved and thing
 
 In addition, you will need to:
 
-```javascript
 * install pangolindex exchange contracts
 
 ```bash
-	npm install --dev @pangolindex/exchange-contracts
+npm install --dev @pangolindex/exchange-contracts
 ```
 
 * install openzepplin contracts
 
 ```bash
-	npm install --dev @openzeppelin/contracts
-```
+npm install --dev @openzeppelin/contracts
 ```
 
-### Copy ERC20 Open Zeppelin Contracts to build directory
+## Copy ERC20 Open Zeppelin Contracts to build directory
 
 We now need to make sure we have access to ERC20 token contracts that we will use help create our token pair when we deploy it to pangolin.
 
@@ -61,7 +47,7 @@ Similarly, we need to copy the IPangolinFactory and IPangolinPair interface cont
 	cp node_modules/\@pangolindex/exchange-contracts/artifacts/contracts/pangolin-core/interfaces/IPangolinFactory.sol/IPangolinFactory.json build/contracts/
 ```
 
-### Create a new Migration file
+## Create a new Migration file
 
 We now need to create a new migration file called `3_deploy.js` with the content, following this; we will step through what is going on below:
 
@@ -123,7 +109,7 @@ The first thing we need to do is to import the ERC20 contracts as well as the by
 	const IPangolinPair = artifacts.require('IPangolinPair');
 ```
 
-### Deploy Mock Tokens
+## Deploy Mock Tokens
 
 Next, we need to deploy the mock ERC20 tokens.
 
@@ -134,7 +120,7 @@ These could be any other kind of ERC20 tokens, but for simplicity, we simply dep
 	const AnotherERC20 = await deployer.deploy(MockERC20);
 ```
 
-### Construct Zero Address Argument And Deploy Factory
+## Construct Zero Address Argument And Deploy Factory
 
 In order to construct any token pair on Pangolin, you will need to interact with the Factory contract and that means we need to deploy it to our local testnet first.
 
@@ -148,7 +134,7 @@ By appending a zero address to the bytecode of the contract, we make a transacti
 	const pangolinFactoryAddress = (await web3.eth.sendTransaction({from: accounts[0], gas: 8000000, data: PangolinFactoryBytecode + pangolinArg})).contractAddress;
 ```
 
-### WAVAX
+## WAVAX
 
 As with ETH, AVAX is not ERC20 compliant and since it's the native token on avalanche, it must be wrapped.
 
@@ -160,7 +146,7 @@ We need to create a transaction where we send the WAVAX bytecode and get back th
 	const wAVAXAddress = (await web3.eth.sendTransaction({from: accounts[0], gas: 8000000, data: WAVAXBytecode})).contractAddress;
 ```
 
-### Router
+## Router
 
 After we have deployed the bytecode for both the factory and WAVAX, we will take the address and append them as arguments to the router bytecode.
 
@@ -176,7 +162,7 @@ Not too different from what we have done for the router and WAVAX, we will creat
 	})).contractAddress;
 ```
 
-### Pangolin Factory interface \(IPangolinFactory\) and PangolinPair interface \(IPangolinPair\)
+## Pangolin Factory interface \(IPangolinFactory\) and PangolinPair interface \(IPangolinPair\)
 
 The interface for the factory and pair token contracts isn’t necessarily needed here because we are deploying both contracts themselves and we could use the contract ABI directly.
 
@@ -184,7 +170,7 @@ However, if we were going to access these through another contract, they would a
 
 For example, if you wanted to modify PangolinPair and PangolinRouter without changing the contracts you may have already deployed \(assuming they have a way to pull in the new address\), then you will easily be able to do this if you deployed your contracts with the interfaces.
 
-### Create Pair with router and pair interfaces
+## Create Pair with router and pair interfaces
 
 For the final step, we need to access the instance of the factory address through the interface.
 
@@ -201,9 +187,7 @@ Then if you wanted to later call functions on the pair address, you need to acce
 	const PangoPair = await IPangolinPair.at(PangoPairAddress);
 ```
 
-
-
-### Wrapping Up
+# Conclusion
 
 In this tutorial we have covered:
 
@@ -216,7 +200,8 @@ In this tutorial we have covered:
 * Deploying Pangolin Router
 * Creating a token pair with our mock ERC20 Tokens
 
-### Conclusion
-
 You have now deployed Pangolin to your local testnet with your two ERC20 tokens, created a pair token from the ERC20 tokens and now are ready to interact with pangolin through the router as you would on Uniswap v2.
 
+# About the Author
+
+This Tutorial was created by [Cinque McFarlane-Blake](https://github.com/cinquemb). Cinque is a reluctant software engineer and he worked on projects at labs related to brain-computer interfaces, back office stuff for trading in futures markets, and academic publishing tools in developing markets. Overall, He is just trying to help build a more decentralized hyper-connected world while pushing on the boundaries of our existence.

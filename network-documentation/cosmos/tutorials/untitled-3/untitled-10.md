@@ -12,25 +12,25 @@ To [register your types with Amino](https://github.com/tendermint/go-amino#regis
 package types
 
 import (
-	"github.com/cosmos/cosmos-sdk/codec"
+    "github.com/cosmos/cosmos-sdk/codec"
 )
 
 // ModuleCdc is the codec for the module
 var ModuleCdc = codec.New()
 
 func init() {
-	RegisterCodec(ModuleCdc)
+    RegisterCodec(ModuleCdc)
 }
 
 // RegisterCodec registers concrete types on the Amino codec
 func RegisterCodec(cdc *codec.Codec) {
-	cdc.RegisterConcrete(MsgSetName{}, "nameservice/SetName", nil)
-	cdc.RegisterConcrete(MsgBuyName{}, "nameservice/BuyName", nil)
-	cdc.RegisterConcrete(MsgDeleteName{}, "nameservice/DeleteName", nil)
+    cdc.RegisterConcrete(MsgSetName{}, "nameservice/SetName", nil)
+    cdc.RegisterConcrete(MsgBuyName{}, "nameservice/BuyName", nil)
+    cdc.RegisterConcrete(MsgDeleteName{}, "nameservice/DeleteName", nil)
 }
 ```
 
-#### Next you need to define CLI interactions with your module. <a id="next-you-need-to-define-cli-interactions-with-your-module"></a>
+### Next you need to define CLI interactions with your module. <a id="next-you-need-to-define-cli-interactions-with-your-module"></a>
 
 If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
 

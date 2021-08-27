@@ -1,24 +1,16 @@
----
-description: Learn how to build a polling app using the Cosmos SDK
----
-
-# Build a polling app
-
 [**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/starport-polling-app/). 
 
-## Polling app
+# Introduction
 
-![Application screenshot](https://tutorials.cosmos.network/assets/img/1.4d7ba008.png)
+![Application screenshot](https://tutorials.cosmos.network/assets/img/1.8c86df06.png)
 
 We will be creating a simple poll application, in which a user can sign in, create polls, cast votes and see voting results. Creating a poll will cost 200 tokens, voting is free, and both actions will be available only for signed in users.
 
 For this tutorial we will be using [Starport](https://github.com/tendermint/starport), an easy to use tool for building blockchains. [Install Starport](https://github.com/tendermint/starport#installation) and run the following command to create a voter project:
 
-```javascript
+```text
 starport app github.com/alice/voter
 ```
-
-starport app github.com/alice/voter
 
 Starport `app` command will scaffold a project structure for your application in a `voter` directory. Make sure to replace `alice` with your GitHub username.
 
@@ -31,11 +23,11 @@ Inside the `voter` directory we can see several files and directories:
 
 Our project's directory contains all the code required to build and launch a blockchain-based app. Let's try launching our app by running starport serve inside our project:
 
-```javascript
+```text
 starport serve
 ```
 
-```javascript
+```text
 📦 Installing dependencies...
 🚧 Building the application... 
 💫 Initializing the chain...
@@ -50,15 +42,15 @@ Congratulations! You now have a blockchain application running on your machine i
 
 Our voting applications has two types of entities: polls and votes. A poll is a type that has a `title` and a list of `options`.
 
-## Adding polls
+# Adding polls
 
-```javascript
+```text
 starport type poll title options
 ```
 
 This command generated code that handles the creation of `poll` items. If we now run `starport serve` and visit [http://localhost:8080](http://localhost:8080/) we will see a form for creating polls. It may take a short while to rebuild the app, so give it a couple of seconds.
 
-![Application screenshot](https://tutorials.cosmos.network/assets/img/2.adfea286.png)
+![Application screenshot](https://tutorials.cosmos.network/assets/img/2.7f899a03.png)
 
 Sign in with one of the passwords printed in the console and try creating a poll. You should see a new object created and displayed above the form. You have successfully created an object and stored it on the blockchain!
 
@@ -66,11 +58,11 @@ This, however, does not look and work exactly like we need. We should be able to
 
 Let's take a look at some of the files modified by the `starport type` command.
 
-#### `x/voter/types/TypePoll.go` <a id="x-voter-types-typepoll-go"></a>
+**`x/voter/types/TypePoll.go`**
 
 This file contains definition of the `Poll` type. We can see that a poll has two fields \(creator and ID\), which will be created automatically, and two fields \(title and options\) defined by us. Since we want `Options` to be a list of strings, **replace `string` with `[]string`**
 
-#### `x/voter/types/MsgCreatePoll.go` <a id="x-voter-types-msgcreatepoll-go"></a>
+**`x/voter/types/MsgCreatePoll.go`**
 
 This file defines a message that creates a poll.
 
@@ -78,16 +70,16 @@ To write anything to a blockchain or perform any other state transition a client
 
 Going back to `MsgCreatePoll.go`, we need to make options to be stored as a list instead of a string. Replace `Options string` with `Options []string` in `MsgCreatePoll` struct and `options string` with `options []string` in the arguments of `NewMsgCreatePoll` function.
 
-#### `x/voter/client/rest/txPoll.go` <a id="x-voter-client-rest-txpoll-go"></a>
+**`x/voter/client/rest/txPoll.go`**
 
 Replace `Options string` with `Options []string` in `createPollRequest` struct.
 
-#### `x/voter/client/cli/txPoll.go` <a id="x-voter-client-cli-txpoll-go"></a>
+**`x/voter/client/cli/txPoll.go`**
 
 A user can also interact with our application through a command line interface.
 
-```javascript
-votercli tx voter create-poll "Text editors" "Emacs" "Vim" --from user1Copyvotercli tx voter create-poll "Text editors" "Emacs" "Vim" --from user1
+```
+votercli tx voter create-poll "Text editors" "Emacs" "Vim" --from user1
 ```
 
 This command will generate a transaction with "create poll" message, sign it using a private key of `user1` \(one of two users created by default\) and broadcast it to the blockchain.
@@ -100,7 +92,7 @@ Now that we have made all the necessary changes to our app, let's take a look at
 starport serve
 ```
 
-## Front-end application
+# Front-end application
 
 Starport has generated a basic front-end for our application. For convenience [Vue.js](https://vuejs.org/) framework is used with [Vuex](https://vuex.vuejs.org/) for state management, but since all features of our application are exposed through an HTTP API, clients can be built using any language or framework.
 
@@ -108,11 +100,11 @@ We'll be mostly interested in `frontend/src/views` directory, which contains pag
 
 Inside `frontend/src/store/index.js` we import [CosmJS](https://github.com/cosmwasm/cosmjs), a library for handling wallets, creating, signing and broadcasting transactions and define a Vuex store. We'll use `entitySubmit` function for sending data to our blockchain \(like a JSON representing a newly created poll\), `entityFetch` for requesting a list of polls and `accountUpdate` to fetch information about our token balance.
 
-#### `frontend/src/view/Index.vue` <a id="frontend-src-view-index-vue"></a>
+**`frontend/src/view/Index.vue`**
 
-Since we don't need the default form component replace `<type-list />` inside of `frontent/src/views/Index.vue` with a new component `<poll-form />` that will be created in a new file at `frontend/src/components/PollForm.vue`.
+Since we don't need the default form component replace `<type-list />` inside of `frontend/src/views/Index.vue` with a new component `<poll-form />` that will be created in a new file at `frontend/src/components/PollForm.vue`.
 
-#### `frontend/src/components/PollForm.vue` <a id="frontend-src-components-pollform-vue"></a>
+**`frontend/src/components/PollForm.vue`**
 
 ```javascript
 <template>
@@ -154,14 +146,23 @@ export default {
 };
 </script>      
 ```
-
-add\(\) { this.options = \[...this.options, { title: "" }\]; }, async submit\(\) { const payload = { type: "poll", body: { title: this.title, options: this.options.map\(o =&gt; o.title\) } }; await this.$store.dispatch\("entitySubmit", payload\); await this.$store.dispatch\("entityFetch", payload\); await this.$store.dispatch\("accountUpdate"\); } } }; &lt;/script&gt;
+```javascript
+<script>
+  add() { 
+    this.options = [...this.options, { title: "" }]; 
+  }, 
+  async submit() { const payload = { type: "poll", body: { title: this.title, options: this.options.map(o => o.title) } }; 
+await this.$store.dispatch\("entitySubmit", payload\); 
+await this.$store.dispatch\("entityFetch", payload\); 
+await this.$store.dispatch\("accountUpdate"\); } } };
+</script>
+```
 
 Poll form component has an input for title and a list of inputs for options. Clicking "Add option" button adds an empty input and clicking "Create poll" sends, creates and broadcasts a transaction with a "create poll" message.
 
 Refresh the page, sign in with a password and create a new poll. It takes a couple of seconds to process a transaction. Now, if you visit [http://localhost:1317/voter/poll](http://localhost:1317/voter/poll) you should see a list of polls \(this endpoint is defined in `x/voter/rest/queryPoll.go`\):
 
-```javascript
+```json
 {
   "height": "0",
   "result": [
@@ -172,24 +173,32 @@ Refresh the page, sign in with a password and create a new poll. It takes a coup
       "options": ["First option", "The second option"]
     }
   ]
+},
+{ 
+  "height": "0", 
+  "result": [ 
+    { 
+      "creator": "cosmos19qqa7j73735w4pcx9mkkaxr00af7p432n62tv6", 
+      "id": "826477ab-0005-4e68-8031-19758d331681", 
+      "title": "A poll title", 
+      "options": ["First option", "The second option"]
+    } 
+  ] 
 }
 ```
-
-Copy{ "height": "0", "result": \[ { "creator": "cosmos19qqa7j73735w4pcx9mkkaxr00af7p432n62tv6", "id": "826477ab-0005-4e68-8031-19758d331681", "title": "A poll title", "options": \["First option", "The second option"\] } \] }
-
-## Adding votes
+# Adding votes
 
 A vote type contains poll ID and a value \(string representation of the selected option\).
 
-```javascript
+```text
 starport type vote pollID value
 ```
 
-#### `frontend/src/views/Index.vue` <a id="frontend-src-views-index-vue"></a>
+**`frontend/src/views/Index.vue`**
 
 Add `<poll-list />` into the `frontend/src/view/Index.vue` file after the poll form component. Then make a new component at `frontend/src/components/PollList.vue` and add the following:
 
-#### `frontend/src/components/PollList.vue` <a id="frontend-src-components-polllist-vue"></a>
+**`frontend/src/components/PollList.vue`**
 
 ```javascript
 <template>
@@ -241,13 +250,13 @@ The `PollList` component lists for every poll, all the options for that poll, as
 
 By now should be able to see the same UI as in the first screenshot. Try creating polls and casting votes. You may notice that it's possible to cast multiple votes for one poll. This is not what we want, so let's fix this behaviour.
 
-## Casting votes only once
+# Casting votes only once
 
 To fix this issue we first have to understand how data is stored in our application.
 
 We can think of our data storage as a lexicographically ordered key value store. You can loop through the entries, filter by key prefix, add, update and delete entries. It is easier to visualize the store as JSON:
 
-```javascript
+```json
 {
   "poll-1a266241-c58d-4cbc-bacf-aaf939c95de1": {
     "creator": "cosmos15c6g4v5yvq0hy3kjllyr9ytlx45r936y0m6dm6",
@@ -268,27 +277,27 @@ Both `poll-` and `vote-` are prefixes. They are added to keys for ease of filter
 
 Whenever a user casts a vote, a new "create vote" message is handled by a handler and is passed to a keeper. Keeper takes a `vote-` prefix, adds a UUID \(unique to every message\) and uses this string as a key. `x/voter/keeper/vote.go`:
 
-```javascript
+```go
 key := []byte(types.VotePrefix + vote.ID)
 ```
 
 These strings are unique and we get duplicate votes. To fix that we need to make sure a keeper records every vote only once by choosing the right key. In our case, we can use poll ID and creator address to make sure that one user can cast only one vote per poll.
 
-```javascript
+```go
 key := []byte(types.VotePrefix + vote.PollID + "-" + string(vote.Creator))
 ```
 
 Restart the application and try voting multiple times on a single poll, you'll see you can vote as many times as you want but only your most recent vote is counted.
 
-## Introducing a fee for creating polls
+# Introducing a fee for creating polls
 
 Let's make it so that creating a poll costs 200 tokens.
 
 This feature is very easy to add. We already require users to have accounts registered, and each user has tokens on balance. The only thing we need to do is to send coins from user's account to a module account before we create a poll.
 
-#### `x/voter/handlerMsgCreatePoll.go`
+ **`x/voter/handlerMsgCreatePoll.go`**
 
-```javascript
+```go
 moduleAcct := sdk.AccAddress(crypto.AddressHash([]byte(types.ModuleName)))
 payment, _ := sdk.ParseCoins("200token")
 if err := k.CoinKeeper.SendCoins(ctx, poll.Creator, moduleAcct, payment); err != nil {
@@ -300,5 +309,4 @@ Add the code above before `k.CreatePoll(ctx, poll)`. This way, if a user does no
 
 Now, restart the app and try creating several polls to see how this affects your token balance.
 
-If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
-
+If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [join our community today](https://discord.gg/fszyM7K)!

@@ -10,15 +10,15 @@ Secret Network is the first blockchain with privacy-preserving smart contracts. 
 
 Secret Apps - powered by “secret”, privacy-preserving smart contracts - are built with CosmWasm smart contracts that are written in the Rust programming language and deployed on the Secret Network.
 
-The Secret Network blockchain itself is based on Cosmos SDK / Tendermint, meaning the network has its own independent consensus, on-chain governance, and features like slashing and delegation. 
+The Secret Network blockchain itself is based on Cosmos SDK / Tendermint, meaning the network has its own independent consensus, on-chain governance, and features like slashing and delegation.
 
 ### **Why build on Secret?**
 
- Secret Network combines the best features of decentralized, open-source networks, and blockchains with the benefits of data privacy and improved usability. These improvements are critical for achieving mass adoption. 
+Secret Network combines the best features of decentralized, open-source networks, and blockchains with the benefits of data privacy and improved usability. These improvements are critical for achieving mass adoption.
 
-Developers can enjoy the benefits of smart contracts and DApps: they are robust, unstoppable, censor-resistant, and transparent. But blockchains, and by extension smart contracts have one glaring problem that is often overlooked - all data stored on them is public. In that sense, blockchains are worse than existing Web 2 solutions when it comes to privacy. 
+Developers can enjoy the benefits of smart contracts and DApps: they are robust, unstoppable, censor-resistant, and transparent. But blockchains, and by extension smart contracts have one glaring problem that is often overlooked - all data stored on them is public. In that sense, blockchains are worse than existing Web 2 solutions when it comes to privacy.
 
-Instead of trusting your data with a single organization, you now have to trust everyone. Secret contracts and Secret Apps combine these benefits of DApps but add the ability to keep data private, helping remove one of the biggest barriers to mass adoption of the decentralized web. 
+Instead of trusting your data with a single organization, you now have to trust everyone. Secret contracts and Secret Apps combine these benefits of DApps but add the ability to keep data private, helping remove one of the biggest barriers to mass adoption of the decentralized web.
 
 ### **What can you build on Secret?**
 
@@ -38,13 +38,13 @@ Transaction fees are currently paid in the native token, SCRT. Since the Secret 
 
 ### **Transaction Speed & Finality**
 
-Tendermint BFT typically have block times between 1 and 8 seconds, and can handle up to thousands of transactions per second. The Secret Network has a block time of about 7.25 seconds per block.   
-  
+Tendermint BFT typically have block times between 1 and 8 seconds, and can handle up to thousands of transactions per second. The Secret Network has a block time of about 7.25 seconds per block.
+
 A property of the Tendermint consensus algorithm is instant finality. This means that forks are never created as long as more than a third of the validators are honest \([Byzantine](https://en.wikipedia.org/wiki/Byzantine_fault)\). Users can be sure that their transactions are finalized as soon as a block is created, unlike Proof-of-Work blockchains, like Bitcoin and Ethereum.
 
 ### **Languages supported**
 
- Secret Contracts are developed with the Rust programming language and compiled to WASM binaries.
+Secret Contracts are developed with the Rust programming language and compiled to WASM binaries.
 
 ### **EVM compatibility**
 

@@ -1,12 +1,6 @@
----
-description: Learn how to create a fixed-cap asset on Avalanche
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/create-a-fix-cap-asset). 
 
-# Creating A Fixed-Cap Asset
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/create-a-fix-cap-asset). 
-
-## Introduction
+# Introduction
 
 This tutorial illustrates how Avalanche can be used to create and trade a fixed-cap, fungible asset. A quantity of the asset is created at the asset’s initialization, and then no more is ever created.
 

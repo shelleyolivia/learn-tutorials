@@ -1,9 +1,3 @@
----
-description: 'Learn how to design, build, and monetize smart contracts on the NEAR platform'
----
-
-# Show Me the Money: Learn How to Monetize NEAR Smart Contracts
-
 I invite you to join me In this tutorial series and learn how to design, build, and monetize smart contracts on the NEAR platform. Learning is fun, applying what you learn to build is more fun, and making money from what you have built is rewarding. I believe in the philosophy of the "proof is in the pudding". In this tutorial series, we will be building a real-world smart contract called the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) token. The goals for this tutorial series are:
 
 1. Showcase the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) token project on how to monetize NEAR smart contracts
@@ -76,7 +70,7 @@ Decentralized network platforms, such as NEAR, provide tremendous economic oppor
 
 NEAR is a super-fast smart contract platform with super low transaction fees that is user and developer-friendly for building real-world applications for the Open Web. I am excited about NEAR, and I hope I have inspired you to learn with me on this thrilling journey.
 
-## What's Next ...
+# Next Steps ...
 
 If you are wondering what is NEP-41, then you are in luck. In the next tutorial, we'll do a deep dive into the new and improved Fungible Token Core Standard NEP-141.
 

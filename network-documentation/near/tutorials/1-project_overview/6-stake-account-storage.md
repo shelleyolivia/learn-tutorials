@@ -1,14 +1,8 @@
----
-description: STAKE Account Storage NEP-145 Rust Implementation
----
-
-# Show me the Code: STAKE Account Storage NEP-145 Rust Implementation
-
 ![](../../../../.gitbook/assets/oysterpack-show-me-code.jpeg)
 
 In the last tutorial, we learned about the new NEAR [Account Storage API \(NEP-145\)](5-account-storage.md). As promised, in this tutorial we'll see how to code that up on the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) contract. As a bonus, you will get a chance to earn some NEAR at the end for taking the [Account Storage API \(NEP-145\)](5-account-storage.md) for a test drive on the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) contract.
 
-## Show me the Rust Interface
+# Show me the Rust Interface
 
 ```rust
 #[derive(Serialize, Default, PartialEq, Debug)]
@@ -33,17 +27,15 @@ pub trait AccountStorage {
 
 Overall, the Rust interface code is pretty straight forward. However, you may be asking, where is [YoctoNear](https://github.com/oysterpack/oysterpack-near-stake-token/blob/main/contract/src/interface/model/yocto_near.rs) coming from? It's one of my creations, currently residing within the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) project. Your follow up question may be, why not use [U128](https://docs.rs/near-sdk/2.0.1/near_sdk/json_types/struct.U128.html)? My answer is because I am a big fan of domain driven design. I prefer to model the domain and encode it into the type system. It keeps the code cleaner, easier to understand, safer, and smarter.
 
-{% hint style="info" %}
-My plan is to extract the reusable code from the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) into a shared library and publish it on [https://crates.io](https://crates.io) for the community to leverage. For example, it would be super useful to have reusable libraries for each of the NEAR standards. As I build more contracts, the last thing I want to do is copy and paste code from one project to another.
+> My plan is to extract the reusable code from the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) into a shared library and publish it on [https://crates.io](https://crates.io) for the community to leverage. For example, it would be super useful to have reusable libraries for each of the NEAR standards. As I build more contracts, the last thing I want to do is copy and paste code from one project to another.
+>
+> If there are folks from the NEAR community that are interested, then feel free to reach out to me.
 
-If there are folks from the NEAR community that are interested, then feel free to reach out to me.
-{% endhint %}
-
-## Show me the Rust Implementation
+# Show me the Rust Implementation
 
 We'll look at each function in turn and see how it fits into the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) picture.
 
-### storage\_deposit
+## storage\_deposit
 
 ```rust
 #[payable]
@@ -105,9 +97,9 @@ Let's walk through the code:
    }
    ```
 
-6. per the standard, if the account is not registered, then a zero balance is returned, which is the default implementation for `AccountStorageBalance`
+6. Per the standard, if the account is not registered, then a zero balance is returned, which is the default implementation for `AccountStorageBalance`
 
-### storage\_withdraw
+## storage\_withdraw
 
 ```rust
 #[payable]
@@ -149,12 +141,13 @@ fn storage_withdraw(&mut self, amount: Option<YoctoNear>) -> AccountStorageBalan
 2. Check if the requested withdrawal amount is less than or equal to the account's storage available balance. If an amount is not specified, then the total available storage balance will be withdrawn.
 3. Update the account storage balance, and persist the account change to storage. In the STAKE contract, accounts are stored using the [LookupMap](https://github.com/oysterpack/oysterpack-near-stake-token/blob/main/contract/src/lib.rs) provided by the NEAR Rust SDK. Any changes made to objects retrieved from the [LookupMap](https://github.com/oysterpack/oysterpack-near-stake-token/blob/main/contract/src/lib.rs) must be explicitly written back out to contract storage. For details on how that exactly works, look at the 
 
-   `self.predecessor_registered_account()` for reading and `self.save_registered_account(&account)` for writing to contract storage.
+   `self.predecessor_registered_account()` for reading and
+   `self.save_registered_account(&account)` for writing to contract storage.
 
 4. Then we get the updated account storage balance to return at the end.
 5. Before returning the updated account storage balance, the requested withdrawal amount is transferred back to the predecessor account.
 
-### And the Rest of the Code
+# And the rest of the code
 
 ```rust
 fn storage_minimum_balance(&self) -> YoctoNear {
@@ -168,11 +161,11 @@ fn storage_balance_of(&self, account_id: ValidAccountId) -> AccountStorageBalanc
 
 The above code is pretty simple. What you may find of useful is how the STAKE contract computes the account storage fee. When the contract is first deployed, it measures how much storage is allocated for a "mock" account that is temporarily created and then deleted during the contract initialization phase - see the [Contract::new\(\)](https://github.com/oysterpack/oysterpack-near-stake-token/blob/main/contract/src/lib.rs) init function for details.
 
-### Show Me the Demo: Earn Some NEAR
+# Show Me the Demo: Earn Some NEAR
 
 As a bonus, you can earn some NEAR by taking the STAKE token contract for a test drive on testnet and running through the demo below using the [NEAR CLI](https://github.com/near/near-cli). I have deployed the STAKE contract to `stake-demo.oysterpack.testnet` on testnet for the demo. To earn NEAR rewards for exercising the demo, you will need to submit the NEAR requests through [DataHub](https://datahub.figment.io/) using your DataHub access key. If you have earned NEAR on previous NEAR tutorials, then you should already be set. Otherwise, follow the instructions in the following link on [how to obtain your DataHub access key](https://learn.figment.io/network-documentation/near/tutorials/intro-pathway-write-and-deploy-your-first-near-smart-contract/1.-connecting-to-a-near-node-using-datahub#configure-environment). We will use the NEAR CLI to submit the transactions. Plugin your DataHub API Key and NEAR account at the top, and then you should be all set to go.
 
-```text
+```bash
 export DATAHUB_APIKEY=<DATAHUB_APIKEY>
 export NEAR_ACCOUNT=<YOUR-NEAR-ACCOUNT.testnet>
 
@@ -200,15 +193,14 @@ near call $CONTRACT storage_withdraw --node_url $NEAR_NODE_URL --accountId $NEAR
 near view $CONTRACT storage_balance_of --node_url $NEAR_NODE_URL --args "{\"account_id\":\"$NEAR_ACCOUNT\"}"
 ```
 
-### It's a wrap folks
+# Conclusion
 
 The NEAR Rust ecosystem support for writing smart contracts is very young. For now, all you have is the [NEAR Rust SDK](https://crates.io/crates/near-sdk). There is currently no library support for the new standards that are being developed in the ecosystem yet. Until there is, you will need to implement standard contract interfaces yourself. It's pretty straight forward, but much more time consuming for new developers coming onboard to NEAR to write Rust smart contracts. Until then, you have my tutorials and the reference code implementations within the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) project to help you get going faster.
 
 This is where I make my call for action to the community. I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
-### What's Next
+# Next Steps
 
 Here's my plan going forward. As new NEAR standards are released, I plan to document them and provide reference implementations as tutorials. The rest of the time will be spend focused on the core mission, which is to build the [STAKE Token](https://github.com/oysterpack/oysterpack-near-stake-token) with the community and bring it to market. In the next tutorial, I will share with you my vision for the [STAKE Token](https://github.com/oysterpack/oysterpack-near-stake-token) and how it can serve as a cornerstone to help bootstrap the NEAR DeFi ecosystem.
 
 ![](../../../../.gitbook/assets/oysterpack-stake-cornerstone.png)
-

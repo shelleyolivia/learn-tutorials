@@ -22,11 +22,7 @@ Don't forget that you can try them out [**via Datahub**](https://datahub.figment
 
 ## Build a scavenger game
 
-{% page-ref page="build-a-scavenger-game/" %}
-
 ## Build a nameservice application
-
-{% page-ref page="untitled-3/" %}
 
 
 

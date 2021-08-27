@@ -1,15 +1,9 @@
----
-description: How to create fungible tokens on Celo using Remix-IDE
----
-
-# How to mint your own fungible Celo Token
-
-## Prerequisite:
+# Prerequisite:
 
 1. Celo environment setup for Remix, tutorial for which can be found [here](https://github.com/figment-networks/datahub-learn/tree/297924b808c15ce2bb97c8963ea6d7640a4d3cf4/network-documentation/celo/tutorial/network-documentation/celo/tutorial/celo-for-remix.md)
 2. Basic knowledge of [Solidity](https://https://solidity-by-example.org/) and the [Remix IDE](https://remix.ethereum.org)
 
-## 1. What are tokens?
+# 1. What are tokens?
 
 Tokens are a unit of measurement in the virtual world. It can represent any value the creator wants it to have.
 
@@ -21,15 +15,15 @@ For Example:
 * `Piece of Art or Media`
 * `more ...`
 
-## 2. Types of Tokens
+# 2. Types of Tokens
 
 Broadly these digital tokens can be classified into two categories:
 
-### a. Fungible Tokens :
+## a. Fungible Tokens :
 
 Fungibility means **replaceable** by another identical item. In simple terms, tokens that have equal value and are interchangable. This is identical to `Fiat currency`. Every Dollar is equal to every other Dollar of same value.
 
-### b. Non-Fungible Tokens \(NFTs\):
+## b. Non-Fungible Tokens \(NFTs\):
 
 As you can guess, these are exactly the opposite of fungible tokens. Every non-fungible token is `unique` thus can't be interchanged. Examples can be Digital Art or Songs.
 
@@ -165,7 +159,7 @@ Our contract should be able to `Compile` now.
 
 We will deploy our contract on `Alfajores testnet`. We need to make sure that we have enough balance in our testnet account. We can get free testnet balance from [the Celo Developers faucet](https://celo.org/developers/faucet).
 
-### Procedure
+# Procedure
 
 a. Select the account on Celo Wallet with which we want to deploy the smart contract. Make sure to select the account on `Alfajores Test Network`!
 
@@ -218,9 +212,12 @@ Now we are able to see our token balance!
 
 After adding the token address to our wallet, simply click on the `Send` button and input the address of a recipient. Tokens will be transferred after signing the transaction and paying the `transaction fee`.
 
-## Conclusion
+# Conclusion
 
-This was a very interesting tutorial. In this tutorial, we learned: 1. Some different use cases of Fungible tokens 2. There are different types of tokens with different standards 3. How to deploy a custom Fungible token on the Celo blockchain 4. How to send tokens over Celo!
+In this tutorial, we learned: 
+1. Some different use cases of Fungible tokens 
+2. There are different types of tokens with different standards 
+3. How to deploy a custom Fungible token on the Celo blockchain 
+4. How to send tokens over Celo!
 
 We cannot wait to see what you create!
-

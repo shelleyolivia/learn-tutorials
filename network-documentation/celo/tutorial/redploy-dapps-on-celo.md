@@ -4,7 +4,7 @@ description: Learn how to re-deploy Ethereum Dapps on the Celo network
 
 # How to re-deploy your Ethereum DApp to Celo
 
-## Introduction
+# Introduction
 
 This tutorial is designed for developers who have deployed dapps on ethereum before and now want to learn how to do the same with the Celo blockchain.
 

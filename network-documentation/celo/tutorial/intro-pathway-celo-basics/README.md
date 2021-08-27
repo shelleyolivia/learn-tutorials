@@ -1,10 +1,4 @@
----
-description: Go from 0 to 1 by learning the basics of Celo development
----
-
-# Intro Pathway: Celo Basics
-
-## Celo Intro Pathway 
+# Celo Intro Pathway 
 
 Celo’s aim is to empower anyone with a smartphone anywhere in the world to have access to financial services, send money to phone numbers, and pay merchants -- on a decentralized platform that is operated by a community of users. Learn what makes it unique and build your first project! 
 

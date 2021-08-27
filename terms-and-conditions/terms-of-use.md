@@ -10,9 +10,9 @@ These Terms of Use \("Terms of Use"\) were last updated on 10/26/20.
 
 These Terms of Use are between you and Figment Networks Inc. \("Figment", "we", "us"\), a corporation organized under the laws of Ontario, Canada, having an office at 107 Galley Ave, Toronto, Ontario, M6R 1H2, Canada.
 
-Figment Learn is Figment's proprietary online blockchain community platform for accelerating the pace of innovation in Web 3 blockchain protocols \("Figment Learn"\). Figment Learn allows users \("Users"\) to view free content to learn about exciting new web 3 protocols or blockchains and also to start building or developing on these protocols by completing pathways \("Pathways"\). Figment Learn also enables contributors \("Contributors"\) to create and submit educational content \("Submitted Content"\) to Figment for posting on Figment Learn. 
+Figment Learn is Figment's proprietary online blockchain community platform for accelerating the pace of innovation in Web 3 blockchain protocols \("Figment Learn"\). Figment Learn allows users \("Users"\) to view free content to learn about exciting new web 3 protocols or blockchains and also to start building or developing on these protocols by completing pathways \("Pathways"\). Figment Learn also enables contributors \("Contributors"\) to create and submit educational content \("Submitted Content"\) to Figment for posting on Figment Learn.
 
-These Terms of Use apply to all your activities, as User of or Contributor to, Figment Learn. 
+These Terms of Use apply to all your activities, as User of or Contributor to, Figment Learn.
 
 Our Privacy Policy, which provides details about how we process and use your personal data, also applies to all Users and Contributors.
 
@@ -24,39 +24,39 @@ By accessing or using Figment Learn, you automatically agree to these Terms of U
 
 ## 1. Access to Figment Learn
 
-When you access Figment Learn, you get a license from us to view and access the content provided on Figment Learn and for no other use. You will not transfer or resell any Figment Learn content in any way. 
+When you access Figment Learn, you get a license from us to view and access the content provided on Figment Learn and for no other use. You will not transfer or resell any Figment Learn content in any way.
 
-In legal, more complete terms, Figment grants you \(as a User\) a limited, revocable, non-exclusive, non-transferable license to use the content available on Figment Learn, solely for your personal, non-commercial, educational purposes, in accordance with these Terms of Use \(including the Privacy Policy and any other terms of use provided by Figment\). All other uses are expressly prohibited. You may not reproduce, redistribute, transmit, assign, sell, broadcast, rent, share, lend, modify, adapt, edit, create derivative works of, sublicense, or otherwise transfer or use any content available on Figment Learn unless we give you explicit permission to do so in a written agreement signed by a Figment authorized representative. 
+In legal, more complete terms, Figment grants you \(as a User\) a limited, revocable, non-exclusive, non-transferable license to use the content available on Figment Learn, solely for your personal, non-commercial, educational purposes, in accordance with these Terms of Use \(including the Privacy Policy and any other terms of use provided by Figment\). All other uses are expressly prohibited. You may not reproduce, redistribute, transmit, assign, sell, broadcast, rent, share, lend, modify, adapt, edit, create derivative works of, sublicense, or otherwise transfer or use any content available on Figment Learn unless we give you explicit permission to do so in a written agreement signed by a Figment authorized representative.
 
 Users and Contributors must be above the required age for legal consent for using online services where you live. If your age is under the required age, then you may invite your parent or legal guardian to provide their consent to your access and use of Figment Learn and agreement to these Terms of Use, the Privacy Policy, and Contributor Terms, as applicable.
 
-We reserve the right to revoke or terminate all or part of your license at any time at our discretion.  
+We reserve the right to revoke or terminate all or part of your license at any time at our discretion.
 
 ## 2. DataHub Account
 
-You need a DataHub Account to access and complete Pathways. When setting up and maintaining your DataHub Account, you must provide \(and update, as required\) accurate and complete information, including a valid email address. 
+You need a DataHub Account to access and complete Pathways. When setting up and maintaining your DataHub Account, you must provide \(and update, as required\) accurate and complete information, including a valid email address.
 
-You may not transfer your DataHub Account to someone else, use someone else's DataHub Account, nor share or your login credentials with anyone. You must notify us immediately upon learning that someone else may be using your DataHub Account \(or if you suspect any other breach of security\) by contacting our Support Team. We may request information from you to confirm that the DataHub Account belongs to you. 
+You may not transfer your DataHub Account to someone else, use someone else's DataHub Account, nor share or your login credentials with anyone. You must notify us immediately upon learning that someone else may be using your DataHub Account \(or if you suspect any other breach of security\) by contacting our Support Team. We may request information from you to confirm that the DataHub Account belongs to you.
 
 You are responsible for all activity associated with your DataHub Account. You must comply with the laws of your jurisdiction when creating and using a DataHub Account including working on a Pathway. You have complete responsibility for your DataHub Account and everything that happens on it, including for any harm or damage \(to you, us, or anyone else\) caused by any use of your DataHub Account, even by someone using your DataHub Account without your permission.
 
-You can terminate your DataHub Account at any time by following the steps here. Check our Privacy Policy to see what happens when you terminate your DataHub Account.  
+You can terminate your DataHub Account at any time by following the steps here. Check our Privacy Policy to see what happens when you terminate your DataHub Account.
 
 See also Section 10 \(Incentive Program\) below.
 
 ## 3. Rules of Conduct
 
-You can only use Figment Learn for lawful purposes and in accordance with these Terms of Use. You are responsible for how you use Figment Learn as a User or Contributor. We can ban your account if we think you committed offenses. 
+You can only use Figment Learn for lawful purposes and in accordance with these Terms of Use. You are responsible for how you use Figment Learn as a User or Contributor. We can ban your account if we think you committed offenses.
 
 You must not create a DataHub Account, access, or use Figment Learn for unlawful purposes. Your use of Figment Learn must comply with applicable local or national laws or regulations of your jurisdiction. You are solely responsible for understanding and complying with all laws and regulations that are applicable to you.
 
-You must not create a DataHub Account, access or use Figment Learn if you are from a territory where Canadian or U.S. businesses or people are prohibited from engaging in business \(such as Cuba, Iran, North Korea, Sudan, or Syria\) or if you have been designated a Specially Designated National, Denied Person, or Denied Entity by the U.S. government. 
+You must not create a DataHub Account, access or use Figment Learn if you are from a territory where Canadian or U.S. businesses or people are prohibited from engaging in business \(such as Cuba, Iran, North Korea, Sudan, or Syria\) or if you have been designated a Specially Designated National, Denied Person, or Denied Entity by the U.S. government.
 
-You must always abide by the law and respect the rights of others. Figment complies with copyright laws.  You are solely responsible for any actions you take via Figment Learn and their consequences. Make sure you understand all the copyright restrictions set forth in the Contributor Terms before you submit any Submitted Content to Figment Learn. 
+You must always abide by the law and respect the rights of others. Figment complies with copyright laws. You are solely responsible for any actions you take via Figment Learn and their consequences. Make sure you understand all the copyright restrictions set forth in the Contributor Terms before you submit any Submitted Content to Figment Learn.
 
 You must not upload any content or technology \(including information on encryption\) whose export is specially controlled under the export regulations or other applicable regulations.
 
-If we are put on notice that your Submitted Content violates the law or the rights of others \(for example, if it is established that it violates intellectual property or image rights of others, or is about an illegal activity\), or if we believe your Submitted Content or behavior is unlawful, inappropriate, or objectionable, we may remove it from Figment Learn. 
+If we are put on notice that your Submitted Content violates the law or the rights of others \(for example, if it is established that it violates intellectual property or image rights of others, or is about an illegal activity\), or if we believe your Submitted Content or behavior is unlawful, inappropriate, or objectionable, we may remove it from Figment Learn.
 
 Figment has discretion in enforcing these Terms of Use. We may, in our sole discretion, terminate or suspend your permission to use Figment Learn or ban your DataHub Account at any time, with or without notice, for any or no reason, including for any violation of these Terms of Use, upon the request of law enforcement or government agencies, for extended periods of inactivity, for unexpected technical issues or problems, or if we suspect that you engage in fraudulent or illegal activities. Upon any such termination, we may delete your DataHub Account and/or Submitted Content, and we may prevent you from further access to and use of Figment Learn. You agree that we will have no liability to you or any third party for termination of your DataHub Account, removal of your Submitted Content, or blocking of your access to Figment Learn.
 
@@ -64,29 +64,29 @@ If you or one of our Contributors has provided Submitted Content that infringes 
 
 ## 4. Materials
 
-You transfer all ownership rights to Figment in all Submitted Content, messages, questions, answers, and other information \(together, "Materials"\) you submit, post, or transfer to Figment Learn. 
+You transfer all ownership rights to Figment in all Submitted Content, messages, questions, answers, and other information \(together, "Materials"\) you submit, post, or transfer to Figment Learn.
 
 In legal language, by submitting Materials to Figment Learn, you transfer and assign all right, title, and interest in and to Materials to Figment. You also waive any rights of privacy, publicity, moral rights, or other rights of a similar nature applicable to all these uses, to the extent permissible under applicable law. You represent and warrant that you have all the rights, power, and authority necessary to authorize us to use any Materials that you submit. You also agree to all such uses of your Materials with no compensation paid to you.
 
-If you are a Contributor, be sure to understand the Contributor Terms as you agree to be bound by them by providing Submitted Content to Figment Learn. Under our Contributor Terms, when Contributors publish Submitted Content on Figment Learn, they transfer full ownership of it to Figment, and Figment grants a license back to the Contributor to distribute that Submitted Content on educational non-commercial sites \(provided the distribution explicitly acknowledges the Submitted Content is associated with Figment Learn and owned by Figment \("Attribution"\)\). 
+If you are a Contributor, be sure to understand the Contributor Terms as you agree to be bound by them by providing Submitted Content to Figment Learn. Under our Contributor Terms, when Contributors publish Submitted Content on Figment Learn, they transfer full ownership of it to Figment, and Figment grants a license back to the Contributor to distribute that Submitted Content on educational non-commercial sites \(provided the distribution explicitly acknowledges the Submitted Content is associated with Figment Learn and owned by Figment \("Attribution"\)\).
 
 ## 5. Use At Your Own Risk
 
 You use Figment Learn and rely on information available on Figment Learn at your own risk.
 
-We do not necessarily review or edit the content on Figment Learn, including Submitted Content and Pathways, for legal or other issues, and we are not in a position to determine the legality of the same. We may, but have no obligation to, exercise any editorial control over the content on Figment Learn, including Submitted Content and Pathways and, as such, do not guarantee in any manner the reliability, validity, accuracy, or truthfulness of the same. 
+We do not necessarily review or edit the content on Figment Learn, including Submitted Content and Pathways, for legal or other issues, and we are not in a position to determine the legality of the same. We may, but have no obligation to, exercise any editorial control over the content on Figment Learn, including Submitted Content and Pathways and, as such, do not guarantee in any manner the reliability, validity, accuracy, or truthfulness of the same.
 
-By using Figment Learn, you may be exposed to content that you consider offensive, indecent, or objectionable. Figment has no responsibility to keep such content from you and no liability for your access to it. You acknowledge the inherent risks and dangers in the nature of any such content, and by accessing Figment Learn you choose to assume those risks voluntarily, including risk of property damage, illness, bodily injury, disability, or death. You assume full responsibility for the choices you make before, during, and after your access to Figment Learn.     
+By using Figment Learn, you may be exposed to content that you consider offensive, indecent, or objectionable. Figment has no responsibility to keep such content from you and no liability for your access to it. You acknowledge the inherent risks and dangers in the nature of any such content, and by accessing Figment Learn you choose to assume those risks voluntarily, including risk of property damage, illness, bodily injury, disability, or death. You assume full responsibility for the choices you make before, during, and after your access to Figment Learn.
 
 We are not liable for disputes, claims, losses, injuries, or damage of any kind that might arise out of or relate to the conduct of Users or Contributors.
 
 When you use Figment Learn, you may find links to other websites that we don't own or control. We are not responsible for the content or any other aspect of these third-party sites, including their collection of information about you. You should also read their terms and conditions and privacy policies.
 
-## 6. Figment's Rights 
+## 6. Figment's Rights
 
 We own \(or have rights to\) Figment Learn, including the website, Submitted Content, Pathways, present or future apps and services, intellectual property, logos, API, code, protocols, and other content created by our employees or contractors. You can't tamper with those or use them without authorization.
 
-All right, title, and interest in and to Figment Learn, including the website, Submitted Content, Pathways, present or future apps and services, intellectual property, logos, API, code, protocols, and the content our employees, contractors or partners submit or provide through Figment Learn are and will remain the exclusive property of Figment \(and its licensors, as applicable\). Figment Learn, its contents, and our services are protected by copyright, trademark, and other laws of Canada, the United States, and other countries. Nothing gives you a right to use the Figment name or any of the Figment trademarks, logos, domain names, other distinctive brand features except for Attribution. 
+All right, title, and interest in and to Figment Learn, including the website, Submitted Content, Pathways, present or future apps and services, intellectual property, logos, API, code, protocols, and the content our employees, contractors or partners submit or provide through Figment Learn are and will remain the exclusive property of Figment \(and its licensors, as applicable\). Figment Learn, its contents, and our services are protected by copyright, trademark, and other laws of Canada, the United States, and other countries. Nothing gives you a right to use the Figment name or any of the Figment trademarks, logos, domain names, other distinctive brand features except for Attribution.
 
 You may not do any of the following while accessing or using Figment Learn:
 
@@ -118,15 +118,15 @@ The following sections shall survive the expiration or termination of these Term
 
 ### 7.2 Disclaimers
 
-In legal, more complete language, Figment Learn and its content are provided on an "as is" and "as available" basis. We \(and our affiliates, suppliers, partners, agents, and Contributors\) make no representations or warranties about the suitability, reliability, availability, timeliness, security, lack of errors, or accuracy of Figment Learn or its content, and expressly disclaim any warranties or conditions \(express or implied\), including implied warranties of merchantability, fitness for a particular purpose, title, and non-infringement. We \(and our affiliates, suppliers, partners, agents, and Contributors\) make no warranty that you will obtain specific results from the use of Figment Learn. Your use of Figment Learn \(including any content\) is entirely at your own risk, as is your contribution of any content or information to it. Some jurisdictions don't allow the exclusion of implied warranties, so some of the above exclusions may not apply to you.   
+In legal, more complete language, Figment Learn and its content are provided on an "as is" and "as available" basis. We \(and our affiliates, suppliers, partners, agents, and Contributors\) make no representations or warranties about the suitability, reliability, availability, timeliness, security, lack of errors, or accuracy of Figment Learn or its content, and expressly disclaim any warranties or conditions \(express or implied\), including implied warranties of merchantability, fitness for a particular purpose, title, and non-infringement. We \(and our affiliates, suppliers, partners, agents, and Contributors\) make no warranty that you will obtain specific results from the use of Figment Learn. Your use of Figment Learn \(including any content\) is entirely at your own risk, as is your contribution of any content or information to it. Some jurisdictions don't allow the exclusion of implied warranties, so some of the above exclusions may not apply to you.
 
 We may decide to cease making available certain features of Figment Learn at any time and for any reason. Under no circumstances will Figment or its affiliates, suppliers, partners, or agents be held liable for any damages due to such interruptions or lack of availability of such features.
 
-We are not responsible for delay or failure of performance of Figment Learn caused by events beyond our reasonable control, like an act of war, hostility, or sabotage; natural disaster; electrical, internet, or telecommunication outage; or government restrictions. 
+We are not responsible for delay or failure of performance of Figment Learn caused by events beyond our reasonable control, like an act of war, hostility, or sabotage; natural disaster; electrical, internet, or telecommunication outage; or government restrictions.
 
 ### 7.3 Limitation of Liability
 
-There are risks inherent in using Figment Learn. You fully accept these risks and you agree that you will have no recourse to seek damages against, even if you suffer loss or damage from using Figment Learn. In legal, more complete language, to the extent permitted by law, we \(and our group companies, suppliers, partners, and agents\) will not be liable for any indirect, incidental, punitive, or consequential damages \(including loss of data, revenue, profits, or business opportunities, or personal injury or death\), whether arising in contract, warranty, tort, product liability, or otherwise, and even if we've been advised of the possibility of damages in advance. Our liability \(and the liability of each of our group companies, suppliers, partners, and agents\) to you or any third parties under any circumstance is limited to the greater of one hundred dollars \(CAD$100\). Some jurisdictions don't allow the exclusion or limitation of liability for consequential or incidental damages, so some of the above may not apply to you. 
+There are risks inherent in using Figment Learn. You fully accept these risks and you agree that you will have no recourse to seek damages against, even if you suffer loss or damage from using Figment Learn. In legal, more complete language, to the extent permitted by law, we \(and our group companies, suppliers, partners, and agents\) will not be liable for any indirect, incidental, punitive, or consequential damages \(including loss of data, revenue, profits, or business opportunities, or personal injury or death\), whether arising in contract, warranty, tort, product liability, or otherwise, and even if we've been advised of the possibility of damages in advance. Our liability \(and the liability of each of our group companies, suppliers, partners, and agents\) to you or any third parties under any circumstance is limited to the greater of one hundred dollars \(CAD$100\). Some jurisdictions don't allow the exclusion or limitation of liability for consequential or incidental damages, so some of the above may not apply to you.
 
 ### 7.4 Indemnification
 
@@ -154,7 +154,7 @@ You may not assign or transfer these Terms of Use \(or the rights or duties unde
 
 ## 8. Dispute Resolution
 
-If there's a dispute, our Support Team is happy to help resolve the issue.  
+If there's a dispute, our Support Team is happy to help resolve the issue.
 
 Most disputes can be resolved, so before bringing a formal legal case, please first try contacting our Support Team.
 
@@ -162,7 +162,7 @@ Most disputes can be resolved, so before bringing a formal legal case, please fi
 
 If any dispute or question \(a "dispute"\) arises concerning the interpretation of these Terms of Use, the Contributor Terms, the Privacy Policy, or otherwise, the parties to the dispute will attempt in good faith to resolve such dispute. If the parties to the dispute have not agreed to a settlement of the dispute within 30 days from the date on which the dispute first became known to both parties, then the dispute may be submitted to arbitration pursuant to the Arbitration Act, 1991 \(Ontario\) in accordance with the following:
 
-\(a\) The arbitration tribunal will consist of one arbitrator appointed by mutual agreement of the parties to the dispute, or in the event of failure to agree within 10 Business Days following delivery of the written notice to arbitrate, any party to the dispute may apply to a judge of the Ontario Superior Court of Justice to appoint an arbitrator. The arbitrator must be qualified by education and training to rule upon the particular matter to be decided. 
+\(a\) The arbitration tribunal will consist of one arbitrator appointed by mutual agreement of the parties to the dispute, or in the event of failure to agree within 10 Business Days following delivery of the written notice to arbitrate, any party to the dispute may apply to a judge of the Ontario Superior Court of Justice to appoint an arbitrator. The arbitrator must be qualified by education and training to rule upon the particular matter to be decided.
 
 \(b\) The arbitrator will be instructed that time is of the essence in the arbitration proceeding and that, in any event, the arbitration award must be made within 30 days of the submission of the dispute to arbitration.
 
@@ -178,7 +178,7 @@ If any dispute or question \(a "dispute"\) arises concerning the interpretation 
 
 \(h\) The parties to the dispute agree that the arbitration will be kept confidential and that the existence of the proceeding and any element of it \(including any pleadings, briefs or other documents submitted or exchanged, any testimony or other oral Materials, and any awards\) may not be disclosed beyond the arbitrator, the parties, their counsel and any person necessary to the conduct of the proceeding, except as may lawfully be required in judicial proceedings relating to the arbitration or otherwise or as may be required by applicable law or the rules of any applicable stock exchange.
 
-\(i\) Unless otherwise required by the arbitration tribunal, you agree with Figment that the following rules will apply to the proceedings: \(a\) the arbitration will be conducted by telephone, online, or based solely on written Materials \(at the choice of the party seeking relief\); \(b\) the arbitration must not involve any personal appearance by the parties or witnesses \(unless we and you agree otherwise\); and \(c\) any judgment on the arbitrator's rendered award may be entered in any court with competent jurisdiction.  
+\(i\) Unless otherwise required by the arbitration tribunal, you agree with Figment that the following rules will apply to the proceedings: \(a\) the arbitration will be conducted by telephone, online, or based solely on written Materials \(at the choice of the party seeking relief\); \(b\) the arbitration must not involve any personal appearance by the parties or witnesses \(unless we and you agree otherwise\); and \(c\) any judgment on the arbitrator's rendered award may be entered in any court with competent jurisdiction.
 
 ### 8.2 No Class Actions
 
@@ -198,9 +198,9 @@ Figment may terminate all or part of these Terms of Terms at any time in its sol
 
 ## 10. Incentive Program
 
-We may, but have no obligation to, incentivize \(i\) Users to use complete Pathways and \(ii\) Contributor to submit Submitted Content by, in each case, transferring protocol tokens \(cryptocurrency\) to Users and Contributors while supplies last upon successful completion  \(in our sole discretion\) of a Pathway or submission of Submitted Content that we post on Figment learn \("Incentive Program"\). Web 3 protocol blockchain providers \("Foundation"\) permit Figment to allocate a limited quantity of such tokens for this purpose. Figment does not create or issue such tokens, but simply is entitled to allocate the tokens to Users and Contributors on behalf of the applicable Foundation. For further details about how these tokens are created and their protocols, contact the applicable Foundations. It may take up to 60 days for tokens to be transferred to the User's or Contributor's wallet. Amounts of tokens given may change from time to time and without notice. In order to receive tokens, Users and Contributors must provide us with a public cryptocurrency wallet address through Figment Learn.     
+We may, but have no obligation to, incentivize \(i\) Users to use complete Pathways and \(ii\) Contributor to submit Submitted Content by, in each case, transferring protocol tokens \(cryptocurrency\) to Users and Contributors while supplies last upon successful completion \(in our sole discretion\) of a Pathway or submission of Submitted Content that we post on Figment learn \("Incentive Program"\). Web 3 protocol blockchain providers \("Foundation"\) permit Figment to allocate a limited quantity of such tokens for this purpose. Figment does not create or issue such tokens, but simply is entitled to allocate the tokens to Users and Contributors on behalf of the applicable Foundation. For further details about how these tokens are created and their protocols, contact the applicable Foundations. It may take up to 60 days for tokens to be transferred to the User's or Contributor's wallet. Amounts of tokens given may change from time to time and without notice. In order to receive tokens, Users and Contributors must provide us with a public cryptocurrency wallet address through Figment Learn.
 
-Users and Contributors agree to: accept cryptocurrency as distributed and release, discharge, and indemnify and hold harmless Figment, the applicable Foundations, and the Affiliates of Figment and the Foundations, respectively, from and against any and all manner of action, cause of action, claim or demand, loss or injury, related to the Incentive Program or Figment Learn, including legal fees and expenses, whatsoever, including but not limited to, claims based on negligence, breach of contract and fundamental breach, or failure of any third-party contractor or supplier, in connection with any aspect of the Incentive Program to deliver any cryptocurrency or other goods or perform any services, and any legal liabilities related with the tokens in any way. Figment, the Foundations, and their respective Affiliates are not responsible for incorrect or inaccurate calculations of tokens attributable to the completion of a Pathway. While we reserve the right to withhold payments, you understand and agree that you are ultimately responsible for all applicable taxes. You are responsible for determining whether you are eligible to receive tokens under the Incentive Program and to comply with all laws applicable to your participation in the Incentive Program and receipt of the tokens. 
+Users and Contributors agree to: accept cryptocurrency as distributed and release, discharge, and indemnify and hold harmless Figment, the applicable Foundations, and the Affiliates of Figment and the Foundations, respectively, from and against any and all manner of action, cause of action, claim or demand, loss or injury, related to the Incentive Program or Figment Learn, including legal fees and expenses, whatsoever, including but not limited to, claims based on negligence, breach of contract and fundamental breach, or failure of any third-party contractor or supplier, in connection with any aspect of the Incentive Program to deliver any cryptocurrency or other goods or perform any services, and any legal liabilities related with the tokens in any way. Figment, the Foundations, and their respective Affiliates are not responsible for incorrect or inaccurate calculations of tokens attributable to the completion of a Pathway. While we reserve the right to withhold payments, you understand and agree that you are ultimately responsible for all applicable taxes. You are responsible for determining whether you are eligible to receive tokens under the Incentive Program and to comply with all laws applicable to your participation in the Incentive Program and receipt of the tokens.
 
 In the sole discretion of Figment, Figment reserves the right to cancel the Incentive Program without notice and cause the return of any tokens to the Foundations.
 
@@ -210,6 +210,5 @@ The Incentive Program is void where prohibited by law and is subject to all appl
 
 You may get in touch with us by contacting our [Support Team](mailto:support@figment.io). We welcome your questions, concerns, and feedback about Figment Learn.
 
-Thank you for learning!  
-
+Thank you for learning!
 

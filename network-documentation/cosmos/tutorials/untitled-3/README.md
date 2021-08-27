@@ -4,7 +4,7 @@ description: Learn how to build a nameservice application with the Cosmos SDK
 
 # Build a nameservice application
 
-[**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/nameservice/tutorial/00-intro.html#). 
+[**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/nameservice/tutorial/00-intro.html#).
 
 ## Getting Started <a id="getting-started"></a>
 
@@ -14,7 +14,7 @@ By the end of this tutorial you will have a functional `nameservice` application
 
 All of the final source code for this tutorial project is in this directory \(and compiles\). However, it is best to follow along manually and try building the project yourself!
 
-## Requirements
+# Requirements
 
 * [`golang` &gt;1.13.0](https://golang.org/doc/install) installed
 * Github account and either [Github CLI](https://hub.github.com/) or [Github Desktop \(64-bit required\)](https://help.github.com/en/desktop/getting-started-with-github-desktop/installing-github-desktop)

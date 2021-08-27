@@ -10,7 +10,7 @@ Start by navigating to the `./x/nameservice/alias.go` file. The main reason for 
 
 First start by importing the "types" folder you have created.
 
-#### There are three kinds of types we will create in the alias.go file. <a id="there-are-three-kinds-of-types-we-will-create-in-the-alias-go-file"></a>
+### There are three kinds of types we will create in the alias.go file. <a id="there-are-three-kinds-of-types-we-will-create-in-the-alias-go-file"></a>
 
 * A constant, this is where you will define immutable variables.
 * A variable, which you will define to contain information such as your messages.
@@ -20,36 +20,36 @@ First start by importing the "types" folder you have created.
 package nameservice
 
 import (
-	"github.com/cosmos/sdk-tutorials/nameservice/x/nameservice/keeper"
-	"github.com/cosmos/sdk-tutorials/nameservice/x/nameservice/types"
+    "github.com/cosmos/sdk-tutorials/nameservice/x/nameservice/keeper"
+    "github.com/cosmos/sdk-tutorials/nameservice/x/nameservice/types"
 )
 
 const (
-	ModuleName   = types.ModuleName
-	RouterKey    = types.RouterKey
-	StoreKey     = types.StoreKey
-	QuerierRoute = types.QuerierRoute
+    ModuleName   = types.ModuleName
+    RouterKey    = types.RouterKey
+    StoreKey     = types.StoreKey
+    QuerierRoute = types.QuerierRoute
 )
 
 var (
-	NewKeeper        = keeper.NewKeeper
-	NewQuerier       = keeper.NewQuerier
-	NewMsgBuyName    = types.NewMsgBuyName
-	NewMsgSetName    = types.NewMsgSetName
-	NewMsgDeleteName = types.NewMsgDeleteName
-	NewWhois         = types.NewWhois
-	ModuleCdc        = types.ModuleCdc
-	RegisterCodec    = types.RegisterCodec
+    NewKeeper        = keeper.NewKeeper
+    NewQuerier       = keeper.NewQuerier
+    NewMsgBuyName    = types.NewMsgBuyName
+    NewMsgSetName    = types.NewMsgSetName
+    NewMsgDeleteName = types.NewMsgDeleteName
+    NewWhois         = types.NewWhois
+    ModuleCdc        = types.ModuleCdc
+    RegisterCodec    = types.RegisterCodec
 )
 
 type (
-	Keeper          = keeper.Keeper
-	MsgSetName      = types.MsgSetName
-	MsgBuyName      = types.MsgBuyName
-	MsgDeleteName   = types.MsgDeleteName
-	QueryResResolve = types.QueryResResolve
-	QueryResNames   = types.QueryResNames
-	Whois           = types.Whois
+    Keeper          = keeper.Keeper
+    MsgSetName      = types.MsgSetName
+    MsgBuyName      = types.MsgBuyName
+    MsgDeleteName   = types.MsgDeleteName
+    QueryResResolve = types.QueryResResolve
+    QueryResNames   = types.QueryResNames
+    Whois           = types.Whois
 )
 ```
 

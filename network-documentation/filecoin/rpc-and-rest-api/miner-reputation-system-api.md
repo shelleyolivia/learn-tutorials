@@ -10,9 +10,9 @@ The Miner Reputation System API provides users with all of the necessary informa
 
 By tracking storage capacity, sector faults and deal slashes of every storage miner, the API calculates a reputation score, which can be used by network participants to compare and choose a reliable miner.
 
-Additionally, the API allows users to look up account details \(such as balance\) or retrieve a list of transactions for a given account. It also keeps a history of miner-related events, such as storage capacity changes, sector faults, and deal slashes. 
+Additionally, the API allows users to look up account details \(such as balance\) or retrieve a list of transactions for a given account. It also keeps a history of miner-related events, such as storage capacity changes, sector faults, and deal slashes.
 
-Check out the API documentation below and sign up to [**DataHub**](https://datahub.figment.io/sign_up?service=filecoin) to test it out. 
+Check out the API documentation below and sign up to [**DataHub**](https://datahub.figment.io/sign_up?service=filecoin) to test it out.
 
 {% api-method method="get" host="https://filecoin--mainnet--miner-rep-api.datahub.figment.io" path="/miners" %}
 {% api-method-summary %}
@@ -600,46 +600,10 @@ The record count limit
 {% endapi-method %}
 
 {% api-method method="get" host="https://filecoin--mainnet--miner-rep-api.datahub.figment.io" path="/health" %}
-{% api-method-summary %}
-Get health
-{% endapi-method-summary %}
-
-{% api-method-description %}
-Checks if the service is working properly.
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```
-
-```
-{% endapi-method-response-example %}
-
-{% api-method-response-example httpCode=500 %}
-{% api-method-response-example-description %}
-
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-  "error": "driver: bad connection"
-}
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
 
 {% api-method method="get" host="https://filecoin--mainnet--miner-rep-api.datahub.figment.io" path="/status" %}
 {% api-method-summary %}
-Get status
+
 {% endapi-method-summary %}
 
 {% api-method-description %}

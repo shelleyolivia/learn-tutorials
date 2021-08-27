@@ -25,8 +25,8 @@ Inside this new file we will uncomment and follow the instructions of renaming v
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 // MsgCreateScavenge
@@ -35,20 +35,20 @@ var _ sdk.Msg = &MsgCreateScavenge{}
 
 // MsgCreateScavenge - struct for unjailing jailed validator
 type MsgCreateScavenge struct {
-	Creator      sdk.AccAddress `json:"creator" yaml:"creator"`           // address of the scavenger creator
-	Description  string         `json:"description" yaml:"description"`   // description of the scavenge
-	SolutionHash string         `json:"solutionHash" yaml:"solutionHash"` // solution hash of the scavenge
-	Reward       sdk.Coins      `json:"reward" yaml:"reward"`             // reward of the scavenger
+    Creator      sdk.AccAddress `json:"creator" yaml:"creator"`           // address of the scavenger creator
+    Description  string         `json:"description" yaml:"description"`   // description of the scavenge
+    SolutionHash string         `json:"solutionHash" yaml:"solutionHash"` // solution hash of the scavenge
+    Reward       sdk.Coins      `json:"reward" yaml:"reward"`             // reward of the scavenger
 }
 
 // NewMsgCreateScavenge creates a new MsgCreateScavenge instance
 func NewMsgCreateScavenge(creator sdk.AccAddress, description, solutionHash string, reward sdk.Coins) MsgCreateScavenge {
-	return MsgCreateScavenge{
-		Creator:      creator,
-		Description:  description,
-		SolutionHash: solutionHash,
-		Reward:       reward,
-	}
+    return MsgCreateScavenge{
+        Creator:      creator,
+        Description:  description,
+        SolutionHash: solutionHash,
+        Reward:       reward,
+    }
 }
 
 // CreateScavengeConst is CreateScavenge Constant
@@ -58,24 +58,24 @@ const CreateScavengeConst = "CreateScavenge"
 func (msg MsgCreateScavenge) Route() string { return RouterKey }
 func (msg MsgCreateScavenge) Type() string  { return CreateScavengeConst }
 func (msg MsgCreateScavenge) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
+    return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
 }
 
 // GetSignBytes gets the bytes for the message signer to sign on
 func (msg MsgCreateScavenge) GetSignBytes() []byte {
-	bz := ModuleCdc.MustMarshalJSON(msg)
-	return sdk.MustSortJSON(bz)
+    bz := ModuleCdc.MustMarshalJSON(msg)
+    return sdk.MustSortJSON(bz)
 }
 
 // ValidateBasic validity check for the AnteHandler
 func (msg MsgCreateScavenge) ValidateBasic() error {
-	if msg.Creator.Empty() {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
-	}
-	if msg.SolutionHash == "" {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "solutionScavengerHash can't be empty")
-	}
-	return nil
+    if msg.Creator.Empty() {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
+    }
+    if msg.SolutionHash == "" {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "solutionScavengerHash can't be empty")
+    }
+    return nil
 }
 ```
 
@@ -98,8 +98,8 @@ This message type should live in `./x/scavenge/types/MsgCommitSolution.go` and l
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 // MsgCommitSolution
@@ -108,18 +108,18 @@ var _ sdk.Msg = &MsgCommitSolution{}
 
 // MsgCommitSolution - struct for unjailing jailed validator
 type MsgCommitSolution struct {
-	Scavenger             sdk.AccAddress `json:"scavenger" yaml:"scavenger"`                         // address of the scavenger
-	SolutionHash          string         `json:"solutionhash" yaml:"solutionhash"`                   // solutionhash of the scavenge
-	SolutionScavengerHash string         `json:"solutionScavengerHash" yaml:"solutionScavengerHash"` // solution hash of the scavenge
+    Scavenger             sdk.AccAddress `json:"scavenger" yaml:"scavenger"`                         // address of the scavenger
+    SolutionHash          string         `json:"solutionhash" yaml:"solutionhash"`                   // solutionhash of the scavenge
+    SolutionScavengerHash string         `json:"solutionScavengerHash" yaml:"solutionScavengerHash"` // solution hash of the scavenge
 }
 
 // NewMsgCommitSolution creates a new MsgCommitSolution instance
 func NewMsgCommitSolution(scavenger sdk.AccAddress, solutionHash string, solutionScavengerHash string) MsgCommitSolution {
-	return MsgCommitSolution{
-		Scavenger:             scavenger,
-		SolutionHash:          solutionHash,
-		SolutionScavengerHash: solutionScavengerHash,
-	}
+    return MsgCommitSolution{
+        Scavenger:             scavenger,
+        SolutionHash:          solutionHash,
+        SolutionScavengerHash: solutionScavengerHash,
+    }
 }
 
 // CommitSolutionConst is CommitSolution Constant
@@ -129,27 +129,27 @@ const CommitSolutionConst = "CommitSolution"
 func (msg MsgCommitSolution) Route() string { return RouterKey }
 func (msg MsgCommitSolution) Type() string  { return CommitSolutionConst }
 func (msg MsgCommitSolution) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{sdk.AccAddress(msg.Scavenger)}
+    return []sdk.AccAddress{sdk.AccAddress(msg.Scavenger)}
 }
 
 // GetSignBytes gets the bytes for the message signer to sign on
 func (msg MsgCommitSolution) GetSignBytes() []byte {
-	bz := ModuleCdc.MustMarshalJSON(msg)
-	return sdk.MustSortJSON(bz)
+    bz := ModuleCdc.MustMarshalJSON(msg)
+    return sdk.MustSortJSON(bz)
 }
 
 // ValidateBasic validity check for the AnteHandler
 func (msg MsgCommitSolution) ValidateBasic() error {
-	if msg.Scavenger.Empty() {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
-	}
-	if msg.SolutionHash == "" {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "solutionHash can't be empty")
-	}
-	if msg.SolutionScavengerHash == "" {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "solutionScavengerHash can't be empty")
-	}
-	return nil
+    if msg.Scavenger.Empty() {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
+    }
+    if msg.SolutionHash == "" {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "solutionHash can't be empty")
+    }
+    if msg.SolutionScavengerHash == "" {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "solutionScavengerHash can't be empty")
+    }
+    return nil
 }
 ```
 
@@ -169,12 +169,12 @@ This message type should live in `./x/scavenge/types/MsgRevealSolution.go` and l
 package types
 
 import (
-	"crypto/sha256"
-	"encoding/hex"
-	"fmt"
+    "crypto/sha256"
+    "encoding/hex"
+    "fmt"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 // MsgRevealSolution
@@ -183,22 +183,22 @@ var _ sdk.Msg = &MsgRevealSolution{}
 
 // MsgRevealSolution - struct for unjailing jailed validator
 type MsgRevealSolution struct {
-	Scavenger    sdk.AccAddress `json:"scavenger" yaml:"scavenger"`       // address of the scavenger scavenger
-	SolutionHash string         `json:"solutionHash" yaml:"solutionHash"` // SolutionHash of the scavenge
-	Solution     string         `json:"solution" yaml:"solution"`         // solution of the scavenge
+    Scavenger    sdk.AccAddress `json:"scavenger" yaml:"scavenger"`       // address of the scavenger scavenger
+    SolutionHash string         `json:"solutionHash" yaml:"solutionHash"` // SolutionHash of the scavenge
+    Solution     string         `json:"solution" yaml:"solution"`         // solution of the scavenge
 }
 
 // NewMsgRevealSolution creates a new MsgRevealSolution instance
 func NewMsgRevealSolution(scavenger sdk.AccAddress, solution string) MsgRevealSolution {
 
-	var solutionHash = sha256.Sum256([]byte(solution))
-	var solutionHashString = hex.EncodeToString(solutionHash[:])
+    var solutionHash = sha256.Sum256([]byte(solution))
+    var solutionHashString = hex.EncodeToString(solutionHash[:])
 
-	return MsgRevealSolution{
-		Scavenger:    scavenger,
-		SolutionHash: solutionHashString,
-		Solution:     solution,
-	}
+    return MsgRevealSolution{
+        Scavenger:    scavenger,
+        SolutionHash: solutionHashString,
+        Solution:     solution,
+    }
 }
 
 // RevealSolutionConst is RevealSolution Constant
@@ -208,34 +208,34 @@ const RevealSolutionConst = "RevealSolution"
 func (msg MsgRevealSolution) Route() string { return RouterKey }
 func (msg MsgRevealSolution) Type() string  { return RevealSolutionConst }
 func (msg MsgRevealSolution) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{sdk.AccAddress(msg.Scavenger)}
+    return []sdk.AccAddress{sdk.AccAddress(msg.Scavenger)}
 }
 
 // GetSignBytes gets the bytes for the message signer to sign on
 func (msg MsgRevealSolution) GetSignBytes() []byte {
-	bz := ModuleCdc.MustMarshalJSON(msg)
-	return sdk.MustSortJSON(bz)
+    bz := ModuleCdc.MustMarshalJSON(msg)
+    return sdk.MustSortJSON(bz)
 }
 
 // ValidateBasic validity check for the AnteHandler
 func (msg MsgRevealSolution) ValidateBasic() error {
-	if msg.Scavenger.Empty() {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
-	}
-	if msg.SolutionHash == "" {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "solutionScavengerHash can't be empty")
-	}
-	if msg.Solution == "" {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "solutionHash can't be empty")
-	}
+    if msg.Scavenger.Empty() {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
+    }
+    if msg.SolutionHash == "" {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "solutionScavengerHash can't be empty")
+    }
+    if msg.Solution == "" {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "solutionHash can't be empty")
+    }
 
-	var solutionHash = sha256.Sum256([]byte(msg.Solution))
-	var solutionHashString = hex.EncodeToString(solutionHash[:])
+    var solutionHash = sha256.Sum256([]byte(msg.Solution))
+    var solutionHashString = hex.EncodeToString(solutionHash[:])
 
-	if msg.SolutionHash != solutionHashString {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("Hash of solution (%s) doesn't equal solutionHash (%s)", msg.SolutionHash, solutionHashString))
-	}
-	return nil
+    if msg.SolutionHash != solutionHashString {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprintf("Hash of solution (%s) doesn't equal solutionHash (%s)", msg.SolutionHash, solutionHashString))
+    }
+    return nil
 }
 ```
 
@@ -255,24 +255,24 @@ Once we have defined our messages, we need to describe to our encoder how they s
 package types
 
 import (
-	"github.com/cosmos/cosmos-sdk/codec"
+    "github.com/cosmos/cosmos-sdk/codec"
 )
 
 // RegisterCodec registers concrete types on codec
 func RegisterCodec(cdc *codec.Codec) {
-	cdc.RegisterConcrete(MsgCreateScavenge{}, "scavenge/CreateScavenge", nil)
-	cdc.RegisterConcrete(MsgCommitSolution{}, "scavenge/CommitSolution", nil)
-	cdc.RegisterConcrete(MsgRevealSolution{}, "scavenge/RevealSolution", nil)
+    cdc.RegisterConcrete(MsgCreateScavenge{}, "scavenge/CreateScavenge", nil)
+    cdc.RegisterConcrete(MsgCommitSolution{}, "scavenge/CommitSolution", nil)
+    cdc.RegisterConcrete(MsgRevealSolution{}, "scavenge/RevealSolution", nil)
 }
 
 // ModuleCdc defines the module codec
 var ModuleCdc *codec.Codec
 
 func init() {
-	ModuleCdc = codec.New()
-	RegisterCodec(ModuleCdc)
-	codec.RegisterCrypto(ModuleCdc)
-	ModuleCdc.Seal()
+    ModuleCdc = codec.New()
+    RegisterCodec(ModuleCdc)
+    codec.RegisterCrypto(ModuleCdc)
+    ModuleCdc.Seal()
 }
 ```
 
@@ -284,44 +284,44 @@ Now that we have these new message types, we'd like to make sure other parts of 
 package scavenge
 
 import (
-	"github.com/cosmos/sdk-tutorials/scavenge/x/scavenge/keeper"
-	"github.com/cosmos/sdk-tutorials/scavenge/x/scavenge/types"
+    "github.com/cosmos/sdk-tutorials/scavenge/x/scavenge/keeper"
+    "github.com/cosmos/sdk-tutorials/scavenge/x/scavenge/types"
 )
 
 const (
-	ModuleName        = types.ModuleName
-	RouterKey         = types.RouterKey
-	StoreKey          = types.StoreKey
-	DefaultParamspace = types.DefaultParamspace
-	// QueryParams       = types.QueryParams
-	QuerierRoute = types.QuerierRoute
+    ModuleName        = types.ModuleName
+    RouterKey         = types.RouterKey
+    StoreKey          = types.StoreKey
+    DefaultParamspace = types.DefaultParamspace
+    // QueryParams       = types.QueryParams
+    QuerierRoute = types.QuerierRoute
 )
 
 var (
-	// functions aliases
-	NewKeeper           = keeper.NewKeeper
-	NewQuerier          = keeper.NewQuerier
-	RegisterCodec       = types.RegisterCodec
-	NewGenesisState     = types.NewGenesisState
-	DefaultGenesisState = types.DefaultGenesisState
-	ValidateGenesis     = types.ValidateGenesis
+    // functions aliases
+    NewKeeper           = keeper.NewKeeper
+    NewQuerier          = keeper.NewQuerier
+    RegisterCodec       = types.RegisterCodec
+    NewGenesisState     = types.NewGenesisState
+    DefaultGenesisState = types.DefaultGenesisState
+    ValidateGenesis     = types.ValidateGenesis
 
-	// variable aliases
-	ModuleCdc = types.ModuleCdc
+    // variable aliases
+    ModuleCdc = types.ModuleCdc
 
-	NewMsgCreateScavenge = types.NewMsgCreateScavenge
-	NewMsgCommitSolution = types.NewMsgCommitSolution
-	NewMsgRevealSolution = types.NewMsgRevealSolution
+    NewMsgCreateScavenge = types.NewMsgCreateScavenge
+    NewMsgCommitSolution = types.NewMsgCommitSolution
+    NewMsgRevealSolution = types.NewMsgRevealSolution
 )
 
 type (
-	Keeper       = keeper.Keeper
-	GenesisState = types.GenesisState
-	Params       = types.Params
+    Keeper       = keeper.Keeper
+    GenesisState = types.GenesisState
+    Params       = types.Params
 
-	MsgCreateScavenge = types.MsgCreateScavenge
-	MsgCommitSolution = types.MsgCommitSolution
-	MsgRevealSolution = types.MsgRevealSolution
+    MsgCreateScavenge = types.MsgCreateScavenge
+    MsgCommitSolution = types.MsgCommitSolution
+    MsgRevealSolution = types.MsgRevealSolution
 )
 ```
 

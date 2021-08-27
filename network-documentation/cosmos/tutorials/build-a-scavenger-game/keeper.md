@@ -14,96 +14,96 @@ Our keeper stores all our data for our module. Sometimes a module will import th
 package keeper
 
 import (
-	"fmt"
+    "fmt"
 
-	"github.com/tendermint/tendermint/libs/log"
+    "github.com/tendermint/tendermint/libs/log"
 
-	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/bank"
-	"github.com/cosmos/sdk-tutorials/scavenge/x/scavenge/types"
+    "github.com/cosmos/cosmos-sdk/codec"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    "github.com/cosmos/cosmos-sdk/x/bank"
+    "github.com/cosmos/sdk-tutorials/scavenge/x/scavenge/types"
 )
 
 // Keeper of the scavenge store
 type Keeper struct {
-	CoinKeeper bank.Keeper
-	storeKey   sdk.StoreKey
-	cdc        *codec.Codec
+    CoinKeeper bank.Keeper
+    storeKey   sdk.StoreKey
+    cdc        *codec.Codec
 }
 
 // NewKeeper creates a scavenge keeper
 func NewKeeper(coinKeeper bank.Keeper, cdc *codec.Codec, key sdk.StoreKey) Keeper {
-	keeper := Keeper{
-		CoinKeeper: coinKeeper,
-		storeKey:   key,
-		cdc:        cdc,
-	}
-	return keeper
+    keeper := Keeper{
+        CoinKeeper: coinKeeper,
+        storeKey:   key,
+        cdc:        cdc,
+    }
+    return keeper
 }
 
 // Logger returns a module-specific logger.
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
-	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
+    return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
 
 // GetCommit returns the commit of a solution
 func (k Keeper) GetCommit(ctx sdk.Context, solutionScavengerHash string) (types.Commit, error) {
-	store := ctx.KVStore(k.storeKey)
-	var commit types.Commit
-	byteKey := []byte(types.CommitPrefix + solutionScavengerHash)
-	err := k.cdc.UnmarshalBinaryLengthPrefixed(store.Get(byteKey), &commit)
-	if err != nil {
-		return commit, err
-	}
-	return commit, nil
+    store := ctx.KVStore(k.storeKey)
+    var commit types.Commit
+    byteKey := []byte(types.CommitPrefix + solutionScavengerHash)
+    err := k.cdc.UnmarshalBinaryLengthPrefixed(store.Get(byteKey), &commit)
+    if err != nil {
+        return commit, err
+    }
+    return commit, nil
 }
 
 // GetScavenge returns the scavenge information
 func (k Keeper) GetScavenge(ctx sdk.Context, solutionHash string) (types.Scavenge, error) {
-	store := ctx.KVStore(k.storeKey)
-	var scavenge types.Scavenge
-	byteKey := []byte(types.ScavengePrefix + solutionHash)
-	err := k.cdc.UnmarshalBinaryLengthPrefixed(store.Get(byteKey), &scavenge)
-	if err != nil {
-		return scavenge, err
-	}
-	return scavenge, nil
+    store := ctx.KVStore(k.storeKey)
+    var scavenge types.Scavenge
+    byteKey := []byte(types.ScavengePrefix + solutionHash)
+    err := k.cdc.UnmarshalBinaryLengthPrefixed(store.Get(byteKey), &scavenge)
+    if err != nil {
+        return scavenge, err
+    }
+    return scavenge, nil
 }
 
 // SetCommit sets a scavenge
 func (k Keeper) SetCommit(ctx sdk.Context, commit types.Commit) {
-	solutionScavengerHash := commit.SolutionScavengerHash
-	store := ctx.KVStore(k.storeKey)
-	bz := k.cdc.MustMarshalBinaryLengthPrefixed(commit)
-	key := []byte(types.CommitPrefix + solutionScavengerHash)
-	store.Set(key, bz)
+    solutionScavengerHash := commit.SolutionScavengerHash
+    store := ctx.KVStore(k.storeKey)
+    bz := k.cdc.MustMarshalBinaryLengthPrefixed(commit)
+    key := []byte(types.CommitPrefix + solutionScavengerHash)
+    store.Set(key, bz)
 }
 
 // SetScavenge sets a scavenge
 func (k Keeper) SetScavenge(ctx sdk.Context, scavenge types.Scavenge) {
-	solutionHash := scavenge.SolutionHash
-	store := ctx.KVStore(k.storeKey)
-	bz := k.cdc.MustMarshalBinaryLengthPrefixed(scavenge)
-	key := []byte(types.ScavengePrefix + solutionHash)
-	store.Set(key, bz)
+    solutionHash := scavenge.SolutionHash
+    store := ctx.KVStore(k.storeKey)
+    bz := k.cdc.MustMarshalBinaryLengthPrefixed(scavenge)
+    key := []byte(types.ScavengePrefix + solutionHash)
+    store.Set(key, bz)
 }
 
 // DeleteScavenge deletes a scavenge
 func (k Keeper) DeleteScavenge(ctx sdk.Context, solutionHash string) {
-	store := ctx.KVStore(k.storeKey)
-	store.Delete([]byte(solutionHash))
+    store := ctx.KVStore(k.storeKey)
+    store.Delete([]byte(solutionHash))
 }
 
 // GetScavengesIterator gets an iterator over all scavnges in which the keys are the solutionHashes and the values are the scavenges
 func (k Keeper) GetScavengesIterator(ctx sdk.Context) sdk.Iterator {
-	store := ctx.KVStore(k.storeKey)
-	return sdk.KVStorePrefixIterator(store, []byte(types.ScavengePrefix))
+    store := ctx.KVStore(k.storeKey)
+    return sdk.KVStorePrefixIterator(store, []byte(types.ScavengePrefix))
 }
 
 // GetCommitsIterator gets an iterator over all commits in which the keys are the prefix and solutionHashes and the values are the scavenges
 func (k Keeper) GetCommitsIterator(ctx sdk.Context) sdk.Iterator {
-	store := ctx.KVStore(k.storeKey)
-	return sdk.KVStorePrefixIterator(store, []byte(types.CommitPrefix))
+    store := ctx.KVStore(k.storeKey)
+    return sdk.KVStorePrefixIterator(store, []byte(types.CommitPrefix))
 }
 ```
 
@@ -115,55 +115,55 @@ You may notice reference to `types.Commit` and `types.Scavenge` throughout the `
 package types
 
 import (
-	"fmt"
-	"strings"
+    "fmt"
+    "strings"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
+    sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // Scavenge is the Scavenge struct
 type Scavenge struct {
-	Creator      sdk.AccAddress `json:"creator" yaml:"creator"`           // address of the scavenger creator
-	Description  string         `json:"description" yaml:"description"`   // description of the scavenge
-	SolutionHash string         `json:"solutionHash" yaml:"solutionHash"` // solution hash of the scavenge
-	Reward       sdk.Coins      `json:"reward" yaml:"reward"`             // reward of the scavenger
-	Solution     string         `json:"solution" yaml:"solution"`         // the solution to the scagenve
-	Scavenger    sdk.AccAddress `json:"scavenger" yaml:"scavenger"`       // the scavenger who found the solution
+    Creator      sdk.AccAddress `json:"creator" yaml:"creator"`           // address of the scavenger creator
+    Description  string         `json:"description" yaml:"description"`   // description of the scavenge
+    SolutionHash string         `json:"solutionHash" yaml:"solutionHash"` // solution hash of the scavenge
+    Reward       sdk.Coins      `json:"reward" yaml:"reward"`             // reward of the scavenger
+    Solution     string         `json:"solution" yaml:"solution"`         // the solution to the scagenve
+    Scavenger    sdk.AccAddress `json:"scavenger" yaml:"scavenger"`       // the scavenger who found the solution
 }
 
 // implement fmt.Stringer
 func (s Scavenge) String() string {
-	return strings.TrimSpace(fmt.Sprintf(`Creator: %s
-	Description: %s
-	SolutionHash: %s
-	Reward: %s
-	Solution: %s
-	Scavenger: %s`,
-		s.Creator,
-		s.Description,
-		s.SolutionHash,
-		s.Reward,
-		s.Solution,
-		s.Scavenger,
-	))
+    return strings.TrimSpace(fmt.Sprintf(`Creator: %s
+    Description: %s
+    SolutionHash: %s
+    Reward: %s
+    Solution: %s
+    Scavenger: %s`,
+        s.Creator,
+        s.Description,
+        s.SolutionHash,
+        s.Reward,
+        s.Solution,
+        s.Scavenger,
+    ))
 }
 
 // Commit is the commit struct
 type Commit struct {
-	Scavenger             sdk.AccAddress `json:"scavenger" yaml:"scavenger"`                         // address of the scavenger scavenger
-	SolutionHash          string         `json:"solutionHash" yaml:"solutionHash"`                   // SolutionHash of the scavenge
-	SolutionScavengerHash string         `json:"solutionScavengerHash" yaml:"solutionScavengerHash"` // solution hash of the scavenge
+    Scavenger             sdk.AccAddress `json:"scavenger" yaml:"scavenger"`                         // address of the scavenger scavenger
+    SolutionHash          string         `json:"solutionHash" yaml:"solutionHash"`                   // SolutionHash of the scavenge
+    SolutionScavengerHash string         `json:"solutionScavengerHash" yaml:"solutionScavengerHash"` // solution hash of the scavenge
 }
 
 // implement fmt.Stringer
 func (c Commit) String() string {
-	return strings.TrimSpace(fmt.Sprintf(`Scavenger: %s
-	SolutionHash: %s
-	SolutionScavengerHash: %s`,
-		c.Scavenger,
-		c.SolutionHash,
-		c.SolutionScavengerHash,
-	))
+    return strings.TrimSpace(fmt.Sprintf(`Scavenger: %s
+    SolutionHash: %s
+    SolutionScavengerHash: %s`,
+        c.Scavenger,
+        c.SolutionHash,
+        c.SolutionScavengerHash,
+    ))
 }
 ```
 
@@ -179,19 +179,19 @@ When storing a `Scavenge` we use the key of the `SolutionHash` as a unique ID, f
 package types
 
 const (
-	// ModuleName is the name of the module
-	ModuleName = "scavenge"
+    // ModuleName is the name of the module
+    ModuleName = "scavenge"
 
-	// StoreKey to be used when creating the KVStore
-	StoreKey = ModuleName
+    // StoreKey to be used when creating the KVStore
+    StoreKey = ModuleName
 
-	// RouterKey to be used for routing msgs
-	RouterKey = ModuleName
+    // RouterKey to be used for routing msgs
+    RouterKey = ModuleName
 
-	QuerierRoute = ModuleName
+    QuerierRoute = ModuleName
 
-	ScavengePrefix = "sk-"
-	CommitPrefix   = "ck-"
+    ScavengePrefix = "sk-"
+    CommitPrefix   = "ck-"
 )
 ```
 

@@ -14,5 +14,3 @@ Learn about the APIs available via Cosmos [**DataHub**](https://datahub.figment.
 
 {% page-ref page="cosmos-lcd.md" %}
 
-
-

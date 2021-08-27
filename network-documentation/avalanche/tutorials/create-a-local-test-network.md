@@ -1,12 +1,6 @@
----
-description: Learn how to create a local test network on Avalanche
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network). 
 
-# Create a Local Test Network
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-local-test-network). 
-
-## Introduction
+# Introduction
 
 In the [quickstart tutorial](https://docs.avax.network/build/getting-started) we connect a node to the test network. You might find it useful to create a local test network.
 
@@ -14,11 +8,11 @@ We’ll show you how to launch a 5 node local test network. For both we’ll sho
 
 The 5 nodes will have HTTP ports \(where API calls should be sent\) `9650`, `9652`, `9654`, `9656` and `9658`.
 
-## Create a Local Test Network
+# Create a Local Test Network
 
 The below commands assume you have AvalancheGo installed at `$GOPATH/src/github.com/ava-labs/avalanchego`. Each of the five nodes created is a validator. The staking keys for these nodes are in `$GOPATH/src/github.com/ava-labs/avalanchego/staking/local/staker1.crt`, etc.
 
-#### Manually <a id="manually"></a>
+# Manually
 
 To start the network:
 
@@ -32,7 +26,7 @@ cd $GOPATH/src/github.com/ava-labs/avalanchego
 ./build/avalanchego --public-ip=127.0.0.1 --snow-sample-size=2 --snow-quorum-size=2 --http-port=9658 --staking-port=9659 --db-dir=db/node5 --staking-enabled=true --network-id=local --bootstrap-ips=127.0.0.1:9651 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg --staking-tls-cert-file=$(pwd)/staking/local/staker5.crt --staking-tls-key-file=$(pwd)/staking/local/staker5.key
 ```
 
-#### With Avash <a id="with-avash"></a>
+# With Avash
 
 We assume you’ve installed [Avash](https://docs.avax.network/build/tools/avash).
 
@@ -52,7 +46,7 @@ runscript scripts/five_node_staking.lua
 
 When you want to tear down the network, run `exit` to exit Avash.
 
-## Verifying Nodes are Connected
+# Verifying nodes are connected
 
 We can look at one of the node’s peers to ensure that the nodes are connected. To do so, call `info.peers`.
 
@@ -109,7 +103,7 @@ curl -X POST --data '{
 }
 ```
 
-## Getting AVAX
+# Getting AVAX
 
 When running a network with `--network-id=local`, as we’ve done, there is a pre-funded X-Chain address that you can import in order to get AVAX. The private key for this address is `PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN`. After you create a keystore user on a node, you can import this key, and the funds it holds, with:
 

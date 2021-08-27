@@ -65,7 +65,7 @@ Great! You now have the start of your application. Currently you have a working 
 
 As you have seen in the [application design](https://tutorials.cosmos.network/nameservice/tutorial/app-design.html) section, you need a few modules for your nameservice: `auth`, `bank`, `staking`, `distribution`, `slashing` and `nameservice`. The first five already exist, but not the last! The `nameservice` module will define the bulk of your state machine. The next step is to build it.
 
-#### In order to complete your application, you need to include modules. Go ahead and start building your nameservice module. You will come back to `app.go` later. <a id="in-order-to-complete-your-application-you-need-to-include-modules-go-ahead-and-start-building-your-nameservice-module-you-will-come-back-to-app-go-later"></a>
+### In order to complete your application, you need to include modules. Go ahead and start building your nameservice module. You will come back to `app.go` later. <a id="in-order-to-complete-your-application-you-need-to-include-modules-go-ahead-and-start-building-your-nameservice-module-you-will-come-back-to-app-go-later"></a>
 
 If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [**join our community today**](https://discord.gg/fszyM7K)![  
 ](https://tutorials.cosmos.network/nameservice/tutorial/01-app-design.html)

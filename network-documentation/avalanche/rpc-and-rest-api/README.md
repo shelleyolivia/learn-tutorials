@@ -1,10 +1,4 @@
----
-description: Learn what Avalanche APIs are available via DataHub and how to use them
----
-
-# 🎮 RPC & REST API
-
-## Time to play
+# Time to play
 
 Avalanche’s Primary Network contains three blockchains with unique APIs and methods.  
   
@@ -18,6 +12,3 @@ Avalanche’s Primary Network contains three blockchains with unique APIs and me
 {% page-ref page="avm-api.md" %}
 
 {% page-ref page="info-api.md" %}
-
-
-

@@ -1,12 +1,6 @@
----
-description: Learn how to create an NFT on Avalanche
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-nft-part-1). 
 
-# Creating An NFT—Part 1
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-nft-part-1). 
-
-## Introduction
+# Introduction
 
 Avalanche is a global financial network for the issuance and trade of digital goods. On Avalanche, these digital goods are represented as tokens, which can be assets or utilities. Some tokens are **fungible**, which means that one token is interchangeable for any other one token. Real-world currency is fungible, for example; one $5 note is treated as being the same as any other $5 note.
 
@@ -14,11 +8,11 @@ Avalanche also supports non-fungible tokens \(NFTs\). By definition, each NFT is
 
 In this tutorial we’ll create and send NFTs using AvalancheGo’s API. In a future tutorial we’ll create a custom NFT family using [AvalancheJS](https://docs.avax.network/build/tools/avalanchejs) and explore NFTs in more detail.
 
-### Requirements <a id="requirements"></a>
+# Requirements 
 
 We assume that you’re already familiar with [**DataHub**](https://datahub.figment.io/sign_up?service=avalanche) and connecting to the Avalanche services. In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
-## Create the NFT Family
+# Create the NFT Family
 
 Each NFT belongs to a **family**, which has a name and a symbol. Each family is composed of **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call `avm.createNFTAsset`, which is a method of the [X-Chain’s API.](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api)
 
@@ -63,7 +57,7 @@ avm.createNFTAsset({
 
 Later in this example we’ll mint an NFT, so be sure to replace at least 1 address in the minter set with an address which your user controls.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -87,7 +81,7 @@ curl -X POST --data '{
 
 The response should look like this:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -118,7 +112,7 @@ NFT outputs don’t show up in calls to `avm.getBalance` or `avm.getAllBalances`
 * `utxos` is an array of CB58 encoded strings.
 * `endIndex` This method supports pagination. `endIndex` denotes the last UTXO returned.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -131,7 +125,7 @@ curl -X POST --data '{
 
 The response contains a list of UTXOs:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -151,19 +145,19 @@ The response contains a list of UTXOs:
 
 `avm.getUTXOs` returns 2 UTXOs. Let’s take the first one and decode it to confirm that it’s an[ NFT Mint Output](https://docs.avax.network/build/references/avm-transaction-serialization#nft-mint-output). First we convert the Base58Check encoded string which is returned from `avm.getUTXOs` in to hex. The following CB58 string:
 
-```javascript
+```
 116VhGCxiSL4GrMPKHkk9Z92WCn2i4qk8qdN3gQkFz6FMEbHo82Lgg8nkMCPJcZgpVXZLQU6MfYuqRWfzHrojmcjKWbfwqzZoZZmvSjdD3KJFsW3PDs5oL3XpCHq4vkfFy3q1wxVY8qRc6VrTZaExfHKSQXX1KnC
 ```
 
 is expressed in hexadecimal as:
 
-```javascript
+```
 00 00 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
 Now we can decompose the hex in to the UTXO’s indivdual components by referring to the[ transaction serialization format](https://docs.avax.network/build/references/avm-transaction-serialization):
 
-```javascript
+```
 NFT Mint Output
 
 CodecID: 00 00
@@ -180,7 +174,7 @@ Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 
 Note that the `TypeID` is `00 00 00 0a` which is the correct type ID for an NFT Mint Output. Also note that the `GroupID` is `00 00 00 00`. This `GroupID` was created based on the number of `MinterSets` which I passed in to `avm.createNFTAsset`.
 
-## Mint the Asset
+# Mint the Asset
 
 Now that we have an NFT family and a group for the single `MinterSet` we’re able to creat NFTs belonging to this group. To do that we call avm.mintNFT:
 
@@ -201,7 +195,7 @@ Now that we have an NFT family and a group for the single `MinterSet` we’re ab
 * `txID` is the transaction ID.
 * `changeAddr` in the result is the address where any change was sent.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -218,7 +212,7 @@ curl -X POST --data '{
 
 The response contains the transaction’s ID:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -231,7 +225,7 @@ The response contains the transaction’s ID:
 
 Similar to the previous step, we can now confirm that an NFT was minted by calling `avm.getUTXOs` and parsing the UTXO to confirm that we now have an [NFT Transfer Output](https://docs.avax.network/build/references/avm-transaction-serialization#nft-transfer-output).
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     : 1,
@@ -244,7 +238,7 @@ curl -X POST --data '{
 
 This should give:
 
-```javascript
+```json
 {
     "jsonrpc": "2.0",
     "result": {
@@ -266,19 +260,19 @@ As in the previous step, we can now decode the CB58 encoded UTXO to hexidecimal 
 
 First we convert the Base58Check encoded string which is returned from `avm.getUTXOs` in to hex. The following CB58 string:
 
-```javascript
+```
 11Do4RK6FchGXeoycKujR7atm3tvBz3qc64uoipCc5J74Sj1U4orM6vbBGSES8hnjgjZava9oPgmnbHxh2mBKjeXdvAqTRtYMHEacrveSzKgk7F8h8xi8JB9CddoiX8nbjZMYt1keGo5Rvpjh8dGymDWwRbV1FdnG5uDiiyU8uidc3P24
 ```
 
 is expressed in hexadecimal as:
 
-```javascript
+```
 00 00 7d 07 0d 1e fe a6 4e 45 09 05 c6 11 ee b1 cf 61 9f 21 22 eb 17 db aa ea 9a fe 2d ff 17 be 27 6b 00 00 00 01 04 78 f2 39 8d d2 16 3c 34 13 2c e7 af a3 1f 0a c5 03 01 7f 86 3b f4 db 87 ea 55 53 c5 2d 7b 57 00 00 00 0b 00 00 00 00 00 00 00 08 41 56 41 20 4c 61 62 73 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 ```
 
 Now we can decompose the hex in to the UTXO’s indivdual components:
 
-```javascript
+```
 NFT Mint Output
 
 CodecID: 00 00
@@ -297,7 +291,7 @@ Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 
 Note that the `TypeID` is `00 00 00 0b` which is the correct type id for an [NFT Transfer Output.](https://docs.avax.network/build/references/avm-transaction-serialization#nft-transfer-output) Also note that the Payload is included.
 
-## Send the NFT
+# Send the NFT
 
 Now you can send the NFT to anyone. To do that, use AvalancheGo’s `avm.sendNFT` API method.
 
@@ -318,7 +312,7 @@ Now you can send the NFT to anyone. To do that, use AvalancheGo’s `avm.sendNFT
 * `txID` is the transaction ID.
 * `changeAddr` in the result is the address where any change was sent.
 
-```javascript
+```
 curl -X POST --data '{
     "jsonrpc":"2.0",
     "id"     :1,
@@ -335,7 +329,7 @@ curl -X POST --data '{
 
 The response confirms that our NFT Transfer Operation was successful:
 
-```javascript
+```json
 {
     "jsonrpc":"2.0",
     "id"     :1,
@@ -348,7 +342,7 @@ The response confirms that our NFT Transfer Operation was successful:
 
 You can call `avm.getUTXOs` for the address which you sent the NFT to and decompose the returned UTXO, after converting from CB58 to hex, to confirm that there is a UTXO with type id `00 00 00 0b` in hex or `11` in decimal.
 
-## Wrapping up
+# Conclusion
 
 Blockchain technology and tokenomics represent a radical new way of representing digital assets. Non-fungible tokens allow scarce assets to be tokenized. In this tutorial, we:
 
@@ -359,5 +353,5 @@ Blockchain technology and tokenomics represent a radical new way of representing
 
 In Part 2 of this series we’ll go more in depth by using AvalancheJS to create a protocol for our NFT payload and by issuing to multiple groups.
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [*oin our community today](https://discord.gg/fszyM7K)!
 

@@ -15,25 +15,25 @@ Now that you have the `Keeper` setup, it is time to build the `Msgs` and `Handle
 ```javascript
 // Transactions messages must fulfill the Msg
 type Msg interface {
-	// Return the message type.
-	// Must be alphanumeric or empty.
-	Type() string
+    // Return the message type.
+    // Must be alphanumeric or empty.
+    Type() string
 
-	// Returns a human-readable string for the message, intended for utilization
-	// within tags
-	Route() string
+    // Returns a human-readable string for the message, intended for utilization
+    // within tags
+    Route() string
 
-	// ValidateBasic does a simple validation check that
-	// doesn't require access to any other information.
-	ValidateBasic() Error
+    // ValidateBasic does a simple validation check that
+    // doesn't require access to any other information.
+    ValidateBasic() Error
 
-	// Get the canonical byte representation of the Msg.
-	GetSignBytes() []byte
+    // Get the canonical byte representation of the Msg.
+    GetSignBytes() []byte
 
-	// Signers returns the addrs of signers that must sign.
-	// CONTRACT: All signatures must be present to be valid.
-	// CONTRACT: Returns addrs in some deterministic order.
-	GetSigners() []AccAddress
+    // Signers returns the addrs of signers that must sign.
+    // CONTRACT: All signatures must be present to be valid.
+    // CONTRACT: Returns addrs in some deterministic order.
+    GetSigners() []AccAddress
 }
 ```
 

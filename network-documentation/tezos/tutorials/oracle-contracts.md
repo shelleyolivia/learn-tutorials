@@ -1,12 +1,6 @@
----
-description: Learn how to get started with Oracle Contracts on Tezos
----
-
-# Oracle Contracts
-
 [**The original tutorial can be found in the Tezos documentation here**](https://assets.tqtezos.com/docs/oracle/). 
 
-## Introduction
+# Introduction
 
 Smart contracts that require blockchain-external realtime data or events require a trusted _oracle_, i.e. a trusted smart contract that provides the data on-chain.
 
@@ -16,14 +10,14 @@ What is it useful for?
 * An oracle that provides weather data could allow a tsunami insurance contract: users purchase coverage from the contract, which pays out when there's a sufficiently severe tsunami in their area
 * A combination of different oracles could be used to provide consensus, for example, where only results published by a majority of the oracles are considered valid.
 
-## Setup
+# Setup
 
 * Follow instructions in [Client Setup](https://assets.tqtezos.com/docs/setup/1-tezos-client) to set up `tezos-client` and create a test network wallet
 * Clone [`lorentz-contract-oracle` repo](https://github.com/tqtezos/lorentz-contract-oracle) from GitHub and build from source using `stack`.
 
-### The CLI
+# The CLI
 
-```javascript
+```text
 ❯❯❯ lorentz-contract-oracle Oracle --help
 Usage: lorentz-contract-oracle Oracle COMMAND
   Oracle contract CLI interface
@@ -41,9 +35,9 @@ Available commands:
   update-admin             update admin
 ```
 
-## Originating the contract
+# Originating the contract
 
-#### Printing the contract
+## Printing the contract
 
 The print command takes a single argument: `valueType`, the type of the value provided by the oracle.
 
@@ -51,7 +45,7 @@ Note: Until [Issue \#6](https://github.com/tqtezos/lorentz-contract-oracle/issue
 
 For example, if `nat`'s are provided:
 
-```javascript
+```text
 ❯❯❯ lorentz-contract-oracle Oracle print --valueType "nat"
 
 parameter (or (pair %getValue unit
@@ -107,9 +101,9 @@ code { CAST (pair (or (pair unit (contract nat)) (or nat address)) (pair nat add
                            PAIR } } };
 ```
 
-#### Initial storage
+## Initial storage
 
-```javascript
+```text
 ❯❯❯ lorentz-contract-oracle Oracle init --help
 Usage: lorentz-contract-oracle Oracle init --initialValueType Michelson Type
                                            --initialValue Michelson Value
@@ -128,7 +122,7 @@ Available options:
 
 Since we're using `nat`, `initialValueType` is `nat` and `initialValue` can be `0`:
 
-```javascript
+```text
 ❯❯❯ lorentz-contract-oracle Oracle init \
   --initialValueType "nat" \
   --initialValue 3 \
@@ -136,11 +130,11 @@ Since we're using `nat`, `initialValueType` is `nat` and `initialValue` can be `
 Pair 3 "tz1R3vJ5TV8Y5pVj8dicBR23Zv8JArusDkYr"
 ```
 
-#### Running the origination
+## Running the origination
 
-NOTE: to use the annotated \(timestamped\) version, e.g. for `nat`:
+> **NOTE:** to use the annotated \(timestamped\) version, e.g. for `nat`:
 
-```javascript
+```text
 ❯❯❯ tezos-client --wait none originate contract NatOracle \
   transferring 0 from $ALICE_ADDRESS running \
   "$(lorentz-contract-oracle Oracle print-timestamped --valueType "nat")" \
@@ -149,11 +143,11 @@ NOTE: to use the annotated \(timestamped\) version, e.g. for `nat`:
   --admin $ALICE_ADDRESS)" --burn-cap 0.859 --force
 ```
 
-NOTE: the `nat_oracle.tz` contract may be found [here](https://github.com/tqtezos/lorentz-contract-oracle/blob/master/nat_oracle.tz)
+> **NOTE:** the `nat_oracle.tz` contract may be found [here](https://github.com/tqtezos/lorentz-contract-oracle/blob/master/nat_oracle.tz)
 
 Otherwise:
 
-```javascript
+```text
 ❯❯❯ tezos-client --wait none originate contract NatOracle \
   transferring 0 from $ALICE_ADDRESS running \
   "$(lorentz-contract-oracle Oracle print --valueType "nat")" \
@@ -205,17 +199,17 @@ Contract memorized as NatOracle.
 
 Make an alias for the resulting address:
 
-```javascript
+```text
 ❯❯❯ ORACLE_ADDRESS="KT1LVLUsC1WCo4yHzeoDEE8FxxoC7EW6bSyp"
 ```
 
-## Getting a value
+# Getting a value
 
-#### Preparing a view contract
+## Preparing a view contract
 
 Originate the contract:
 
-```javascript
+```text
 ❯❯❯ tezos-client --wait none originate contract nat_storage transferring 0 \
   from $ALICE_ADDRESS running "$(lorentz-contract print --name NatStorageContract)" \
   --init 0 --burn-cap 0.295
@@ -223,15 +217,15 @@ Originate the contract:
 
 Make an alias for its address:
 
-```javascript
+```text
 ❯❯❯ NAT_STORAGE_ADDRESS="KT1ShW17HERZgjUTxSxSc4W3tuWrfLCqBmEi"
 ```
 
 See the [`FA1.2` Quickstart](https://assets.tqtezos.com/docs/token-contracts/fa12/3-fa12-lorentz) for more info.
 
-#### Make the parameter
+## Make the parameter
 
-```javascript
+```text
 ❯❯❯ lorentz-contract-oracle Oracle get-value --help
 Usage: lorentz-contract-oracle Oracle get-value --callbackContract ADDRESS
   get value
@@ -243,14 +237,14 @@ Available options:
   -h,--help                Show this help text
 ```
 
-```javascript
+```text
 ❯❯❯ lorentz-contract-oracle Oracle get-value --callbackContract $NAT_STORAGE_ADDRESS
 Left (Pair Unit "KT1ShW17HERZgjUTxSxSc4W3tuWrfLCqBmEi")
 ```
 
-#### Get the value
+## Get the value
 
-```javascript
+```text
 ❯❯❯ tezos-client --wait none transfer 0 from $ALICE_ADDRESS to $ORACLE_ADDRESS \
   --arg "$(lorentz-contract-oracle Oracle get-value \
   --callbackContract $NAT_STORAGE_ADDRESS)" --burn-cap 0.000001
@@ -298,9 +292,9 @@ This sequence of operations was run:
         Consumed gas: 11324
 ```
 
-## Update the value
+# Update the value
 
-#### Make the parameter
+## Make the parameter
 
 ```javascript
 ❯❯❯ lorentz-contract-oracle Oracle update-value --help
@@ -317,11 +311,11 @@ Available options:
   -h,--help                Show this help text
 ```
 
-#### Update the value
+## Update the value
 
 To update the value to `4`:
 
-```javascript
+```text
 Waiting for the node to be bootstrapped before injection...
 Current head: BMLjQ5pgcmxd (timestamp: 2020-04-03T15:35:39-00:00, validation: 2020-04-03T15:35:44-00:00)
 Node is bootstrapped, ready for injecting operations.
@@ -369,19 +363,19 @@ This sequence of operations was run:
       Consumed gas: 19463
 ```
 
-## Setting up a server
+# Setting up a server
 
 While we have everything we need to originate and administer an oracle contract, we'd like to automatically push updates to the contract.
 
 Below are two simple examples of how you can periodically fetch some data and automatically push it to the oracle contract.
 
-#### Minimal Bash server
+## Minimal `bash` server
 
-A minimal server, written in Bash, could consist of:
+A minimal server written in bash shellscript could consist of:
 
 * A Bash script `update_value.sh` that gets the `NEW_VALUE` and then calls the `update-value` entrypoint:
 
-```javascript
+```bash
 ##!/bin/bash
 ## update_value.sh
 
@@ -394,11 +388,11 @@ tezos-client --wait none transfer 0 from $ALICE_ADDRESS to $ORACLE_ADDRESS \
 
 * A `crontab` job to run `update_value.sh` periodically \(in the example it's daily at `5:03 pm`\):
 
-```javascript
+```text
 03 05 * * * update_value.sh
 ```
 
-#### Docker Flask server
+## Docker Flask server
 
 There is an implementation of the above Bash server in Python, packaged as a Docker image, which:
 
@@ -412,7 +406,7 @@ You can find the project on Github [here](https://github.com/tqtezos/lorentz-con
 
 To get the image from [the DockerHub repo](https://hub.docker.com/r/tqtezos/oracle-stock-ticker), run:
 
-```javascript
+```text
 ❯❯❯ docker pull tqtezos/oracle-stock-ticker:2.1
 ```
 
@@ -422,7 +416,7 @@ The server is configured using environment variables:
 * You can get a free `ALPHA_VANTAGE_API_KEY` from [Alpha Vantage](https://www.alphavantage.co/support/#api-key)
 * Alpha Vantage's `Search Endpoint` may be used to find `ALPHA_VANTAGE_TICKER_SYMBOL`'s
 
-```javascript
+```
 TEZOS_USER_KEY=".."
 ORACLE_ADDRESS="KT1CUTjTqf4UMf6c9A8ZA4e1ntWbLVTnvrKG"
 ALPHA_VANTAGE_API_KEY=".."
@@ -449,4 +443,3 @@ You should be able to view the debug screen at `localhost:5000`, fetch the lates
 You can find a running example of the contract [on Carthage](https://you.better-call.dev/carthage/KT1CUTjTqf4UMf6c9A8ZA4e1ntWbLVTnvrKG/operations).
 
 If you had any difficulties following this tutorial or simply want to discuss Tezos tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
-

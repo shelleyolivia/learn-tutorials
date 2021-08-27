@@ -1,12 +1,4 @@
----
-description: >-
-  Learn how to create a simple transaction search widget using Figment's
-  Transaction Search API and DataHub
----
-
-# Create a transaction search widget
-
-## Introduction 
+# Introduction 
 
 Figment's Transaction Search API allows users to filter and query by account, transaction type, and date range. Users can also search by memo field and logs. Developers can now manipulate transaction data the way they want to instead of the way the blockchain intended them to. 
 
@@ -16,7 +8,7 @@ This tutorial describes how to create a simple Javascript widget showing the las
 Note that we have removed the DataHub API key from the code snippets but they will be necessary to complete the tutorial. 
 {% endhint %}
 
-## Prerequisites 
+# Prerequisites 
 
 * Basic knowledge of Javascript \(fetch API\)
 * Basic knowledge of HTML \(templates\)
@@ -709,11 +701,9 @@ initialRequest() {
 </html>
 ```
 
-{% hint style="info" %}
-Narrowing down the search time range would significantly improve its performance and allow it to receive a response much faster. In such a case, both parameters \(pair `after_time` and `before_time` or `after_height` and `before_height` \) are required.
-{% endhint %}
+> Narrowing down the search time range would significantly improve its performance and allow it to receive a response much faster. In such a case, both parameters \(pair `after_time` and `before_time` or `after_height` and `before_height` \) are required.
 
-## Final Thoughts
+# Conclusion
 
 Congratulations, you've built your first implementation of the Transaction Search API. You should now have what it takes to implement it in your DApp and leverage the full power of Transaction Search.
 

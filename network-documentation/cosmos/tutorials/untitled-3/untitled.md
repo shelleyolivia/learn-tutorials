@@ -82,7 +82,6 @@ nscli tx broadcast signedTx.json
 # Query whois for the name Alice just deleted
 $ curl -s http://localhost:1317/nameservice/names/jack1.id/whois
 # > {"value":"","owner":"","price":[{"denom":"STAKE","amount":"1"}]}
-
 ```
 
 ### Request Schemas:
@@ -132,7 +131,6 @@ $ curl -s http://localhost:1317/nameservice/names/jack1.id/whois
   "name": "string",
   "owner": "string"
 }
-
 ```
 
 If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!

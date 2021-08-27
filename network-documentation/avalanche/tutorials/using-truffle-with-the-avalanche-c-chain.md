@@ -1,26 +1,20 @@
----
-description: Learn how to use Truffle with the C-Chain
----
-
-# Using Truffle with the Avalanche C-Chain
-
 [**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-contracts/using-truffle-with-the-avalanche-c-chain). 
 
-## Introduction
+# Introduction
 
 [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dapps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
-## Requirements
+# Requirements
 
 You've created an [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). You've also performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain) tutorial to get funds to your C-Chain address.
 
-## Dependencies
+# Dependencies
 
 * [Avash](https://github.com/ava-labs/avash) is a tool for running a local Avalanche network. It's similar to Truffle's [Ganache](https://www.trufflesuite.com/ganache).
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle, which you can install with `npm install -g truffle`
 
-## Start up a local Avalanche network
+# Start up a local Avalanche network
 
 [Avash](https://github.com/ava-labs/avash) allows you to spin up private test network deployments with up to 15 AvalancheGo nodes out-of-the-box. Avash supports automation of regular tasks via lua scripts. This enables rapid testing against a wide variety of configurations. The first time you use avash you'll need to [install and build it](https://github.com/ava-labs/avash#quick-setup).
 
@@ -28,11 +22,11 @@ Start a local five node Avalanche network:
 
 ```javascript
 cd /path/to/avash
-# build Avash if you haven't done so
+// build Avash if you haven't done so
 go build
-# start Avash
+// start Avash
 ./avash
-# start a five node staking network
+// start a five node staking network
 runscript scripts/five_node_staking.lua
 ```
 
@@ -392,7 +386,7 @@ You should see the number you stored.
 1234
 ```
 
-## Summary
+# Summary
 
 Now you have the tools you need to launch a local Avalanche network, create a truffle project, as well as create, compile, deploy and interact with Solidity contracts.  
   

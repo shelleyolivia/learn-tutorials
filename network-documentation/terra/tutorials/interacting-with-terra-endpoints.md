@@ -1,10 +1,4 @@
----
-description: Learn how to start using the Terra SDK with DataHub
----
-
-# Connecting to a Terra node with DataHub
-
-## Introduction
+# Introduction
 
 In order to benefit from the full potential of the Terra blockchain, you will first need to connect to a Terra node. 
 

@@ -2,7 +2,7 @@
 description: Learn what makes NEAR unique and build your first NEAR smart contract
 ---
 
-# 🗺 NEAR Pathway
+# �� NEAR Pathway
 
 ## ![](../../.gitbook/assets/unnamed-1-.png) Welcome to the NEAR Pathway
 

@@ -10,7 +10,7 @@ Provenance exposes both the Tendermint RPC and the Provenance LCD which are both
 
 Learn about the APIs available via Provenance [**DataHub**](https://datahub.figment.io/services/provenance) below.
 
-{% page-ref page="tendermint-rpc.md" %}
+{% page-ref page="../../cosmos/rpc-and-rest-api/tendermint-rpc.md" %}
 
 {% page-ref page="provenance-lcd/" %}
 

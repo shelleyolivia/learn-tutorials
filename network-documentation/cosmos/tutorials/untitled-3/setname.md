@@ -14,25 +14,25 @@ The naming convention for the SDK `Msgs` is `Msg{ .Action }`. The first action t
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
+    sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 const RouterKey = ModuleName // this was defined in your key.go file
 
 // MsgSetName defines a SetName message
 type MsgSetName struct {
-	Name  string         `json:"name"`
-	Value string         `json:"value"`
-	Owner sdk.AccAddress `json:"owner"`
+    Name  string         `json:"name"`
+    Value string         `json:"value"`
+    Owner sdk.AccAddress `json:"owner"`
 }
 
 // NewMsgSetName is a constructor function for MsgSetName
 func NewMsgSetName(name string, value string, owner sdk.AccAddress) MsgSetName {
-	return MsgSetName{
-		Name:  name,
-		Value: value,
-		Owner: owner,
-	}
+    return MsgSetName{
+        Name:  name,
+        Value: value,
+        Owner: owner,
+    }
 }
 ```
 
@@ -57,13 +57,13 @@ The above functions are used by the SDK to route `Msgs` to the proper module for
 ```javascript
 // ValidateBasic runs stateless checks on the message
 func (msg MsgSetName) ValidateBasic() error {
-	if msg.Owner.Empty() {
-		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, msg.Owner.String())
-	}
-	if len(msg.Name) == 0 || len(msg.Value) == 0 {
-		return sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, "Name and/or Value cannot be empty")
-	}
-	return nil
+    if msg.Owner.Empty() {
+        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, msg.Owner.String())
+    }
+    if len(msg.Name) == 0 || len(msg.Value) == 0 {
+        return sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, "Name and/or Value cannot be empty")
+    }
+    return nil
 }
 ```
 
@@ -72,7 +72,7 @@ func (msg MsgSetName) ValidateBasic() error {
 ```javascript
 // GetSignBytes encodes the message for signing
 func (msg MsgSetName) GetSignBytes() []byte {
-	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(msg))
+    return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(msg))
 }
 ```
 
@@ -81,7 +81,7 @@ func (msg MsgSetName) GetSignBytes() []byte {
 ```javascript
 // GetSigners defines whose signature is required
 func (msg MsgSetName) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{msg.Owner}
+    return []sdk.AccAddress{msg.Owner}
 }
 ```
 
@@ -97,24 +97,24 @@ In the file \(`./x/nameservice/handler.go`\) start with the following code:
 package nameservice
 
 import (
-	"fmt"
+    "fmt"
 
-	"github.com/cosmos/sdk-tutorials/nameservice/x/nameservice/types"
+    "github.com/cosmos/sdk-tutorials/nameservice/x/nameservice/types"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+    sdk "github.com/cosmos/cosmos-sdk/types"
+    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 // NewHandler returns a handler for "nameservice" type messages.
 func NewHandler(keeper Keeper) sdk.Handler {
-	return func(ctx sdk.Context, msg sdk.Msg) (*sdk.Result, error) {
-		switch msg := msg.(type) {
-		case MsgSetName:
-			return handleMsgSetName(ctx, keeper, msg)
-		default:
-			return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, fmt.Sprintf("Unrecognized nameservice Msg type: %v", msg.Type()))
-		}
-	}
+    return func(ctx sdk.Context, msg sdk.Msg) (*sdk.Result, error) {
+        switch msg := msg.(type) {
+        case MsgSetName:
+            return handleMsgSetName(ctx, keeper, msg)
+        default:
+            return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, fmt.Sprintf("Unrecognized nameservice Msg type: %v", msg.Type()))
+        }
+    }
 }
 ```
 
@@ -127,11 +127,11 @@ Now, you need to define the actual logic for handling the `MsgSetName` message i
 ```javascript
 // Handle a message to set name
 func handleMsgSetName(ctx sdk.Context, keeper Keeper, msg MsgSetName) (*sdk.Result, error) {
-	if !msg.Owner.Equals(keeper.GetOwner(ctx, msg.Name)) { // Checks if the the msg sender is the same as the current owner
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "Incorrect Owner") // If not, throw an error
-	}
-	keeper.SetName(ctx, msg.Name, msg.Value) // If so, set the name to the value specified in the msg.
-	return &sdk.Result{}, nil                // return
+    if !msg.Owner.Equals(keeper.GetOwner(ctx, msg.Name)) { // Checks if the the msg sender is the same as the current owner
+        return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "Incorrect Owner") // If not, throw an error
+    }
+    keeper.SetName(ctx, msg.Name, msg.Value) // If so, set the name to the value specified in the msg.
+    return &sdk.Result{}, nil                // return
 }
 ```
 

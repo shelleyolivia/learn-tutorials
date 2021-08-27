@@ -6,9 +6,9 @@ description: Learn how to interact with the Terra LCD
 
 ## Source documentation
 
-[**The Terra LCD's source documentation can be found here**](https://lcd.terra.dev/swagger-ui/#/). 
+[**The Terra LCD's source documentation can be found here**](https://lcd.terra.dev/swagger-ui/#/).
 
-A REST interface for state queries, transaction generation, and broadcasting. 
+A REST interface for state queries, transaction generation, and broadcasting.
 
 ## **Transactions**
 
@@ -16,7 +16,7 @@ A REST interface for state queries, transaction generation, and broadcasting.
 
 ### `GET/txs/{hash}`
 
-**Description** 
+**Description**
 
 Get a transaction by hash
 
@@ -26,7 +26,7 @@ Get a transaction by hash
 | :--- | :--- | :--- |
 | **hash** | string \* required | Transaction hash |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -72,22 +72,22 @@ Get a transaction by hash
 
 ### `GET/txs`
 
-**Description** 
+**Description**
 
-Search Transactions 
+Search Transactions
 
 **Parameters**
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **message.action** | string | Transaction events such as 'message.action=send' which results in the following /txs?message.action=send'  |
+| **message.action** | string | Transaction events such as 'message.action=send' which results in the following /txs?message.action=send' |
 | **message.sender** | string | Transaction tags with sender: 'GET /txs message.action=send&message.sender=cosmos16xyempempp92x9hyzz9wrgf94r6j9h5f06pxxv' |
 | **page** | integer | Page number |
 | **limit** | integer | Maximum number of items per page |
 | **tx.minheight** | integer | Transactions on blocks with height greater or equal this value |
 | **tx.maxheight** | integer | Transactions on blocks with height less than or equal this value |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -142,15 +142,15 @@ Search Transactions
 
 ### `POST/txs`
 
-**Description** 
+**Description**
 
-Broadcast a signed transaction 
+Broadcast a signed transaction
 
 **Parameters**
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **txBroadcast** | object | The transaction must be signed **** StdTx. The supported broadcast modes include `"block"`\(return after tx commit\), `"sync"`\(return afer CheckTx\) and `"async"`\(return right away\). |
+| **txBroadcast** | object | The transaction must be signed _\*\*_ StdTx. The supported broadcast modes include `"block"`\(return after tx commit\), `"sync"`\(return afer CheckTx\) and `"async"`\(return right away\). |
 
 **Example Request**
 
@@ -184,7 +184,7 @@ Broadcast a signed transaction
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -219,9 +219,9 @@ Broadcast a signed transaction
 
 ### `POST/txs/encode`
 
-**Description** 
+**Description**
 
-Encode a transaction to the Amino wire format 
+Encode a transaction to the Amino wire format
 
 **Parameters**
 
@@ -260,7 +260,7 @@ Encode a transaction to the Amino wire format
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -270,9 +270,9 @@ Encode a transaction to the Amino wire format
 
 ### `POST/txs/estimate_fee`
 
-**Description** 
+**Description**
 
-Estimate fees and gas of a transaction 
+Estimate fees and gas of a transaction
 
 **Parameters**
 
@@ -318,7 +318,7 @@ Estimate fees and gas of a transaction
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -338,15 +338,15 @@ Estimate fees and gas of a transaction
 
 ### `GET/node_info`
 
-**Description** 
+**Description**
 
-The properties of the connected node 
+The properties of the connected node
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -381,15 +381,15 @@ no parameters
 
 ### `GET/syncing`
 
-**Description** 
+**Description**
 
-Syncing state of node 
+Syncing state of node
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -399,15 +399,15 @@ no parameters
 
 ### `GET/blocks/latest`
 
-**Description** 
+**Description**
 
-Get the latest block 
+Get the latest block
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -514,9 +514,9 @@ no parameters
 
 ### `GET/blocks/{height}`
 
-**Description** 
+**Description**
 
-Get a block at a certain height 
+Get a block at a certain height
 
 **Parameters**
 
@@ -524,7 +524,7 @@ Get a block at a certain height
 | :--- | :--- | :--- |
 | **height** | number \* required | Block height |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -631,15 +631,15 @@ Get a block at a certain height
 
 ### `GET/validatorsets/latest`
 
-**Description** 
+**Description**
 
-Get the latest validator set 
+Get the latest validator set
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -657,7 +657,7 @@ no parameters
 
 ### `GET/validatorsets/{height}`
 
-**Description** 
+**Description**
 
 Get a validator set a certain height
 
@@ -667,7 +667,7 @@ Get a validator set a certain height
 | :--- | :--- | :--- |
 | **height** | number \* required | Block height |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -689,9 +689,9 @@ Get a validator set a certain height
 
 ### `GET/auth/accounts/{address}`
 
-**Description** 
+**Description**
 
-Get the account information on blockchain __
+Get the account information on blockchain \_\_
 
 **Parameters**
 
@@ -699,7 +699,7 @@ Get the account information on blockchain __
 | :--- | :--- | :--- |
 | **address** | string \* required | Account address |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -773,9 +773,9 @@ Get the account information on blockchain __
 
 ### `POST/auth/accounts/{address}/multisign`
 
-**Description** 
+**Description**
 
-Generate multisig signatures for transactions generated offline 
+Generate multisig signatures for transactions generated offline
 
 **Parameters**
 
@@ -824,7 +824,7 @@ Generate multisig signatures for transactions generated offline
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -868,9 +868,9 @@ Generate multisig signatures for transactions generated offline
 
 ### `GET/bank/balances/{address}`
 
-**Description** 
+**Description**
 
-Get the account balances 
+Get the account balances
 
 **Parameters**
 
@@ -878,7 +878,7 @@ Get the account balances
 | :--- | :--- | :--- |
 | **address** | string \* required | Account address |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -891,9 +891,9 @@ Get the account balances
 
 ### `POST/bank/accounts/{address}/transfers`
 
-**Description** 
+**Description**
 
-Send coins from one account to another 
+Send coins from one account to another
 
 **Parameters**
 
@@ -931,7 +931,7 @@ Send coins from one account to another
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -966,7 +966,7 @@ Send coins from one account to another
 
 ### `GET/staking/delegators/{delegatorAddr}/delegations`
 
-**Description** 
+**Description**
 
 Get all delegations from a delegator
 
@@ -976,7 +976,7 @@ Get all delegations from a delegator
 | :--- | :--- | :--- |
 | **delegatorAddr** | string \* required | Bech32 AccAddress of Delegator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -991,7 +991,7 @@ Get all delegations from a delegator
 
 ### `POST/staking/delegators/{delegatorAddr}/delegations`
 
-**Description** 
+**Description**
 
 Submit delegation
 
@@ -999,7 +999,7 @@ Submit delegation
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **delegation** | object | The password of the account to remove from the KMS **** |
+| **delegation** | object | The password of the account to remove from the KMS _\*\*_ |
 | **delegatorAddr** | string \* required | Bech32 AccAddress of Delegator |
 
 **Example Request**
@@ -1031,7 +1031,7 @@ Submit delegation
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1066,9 +1066,9 @@ Submit delegation
 
 ### `GET/staking/delegators/{delegatorAddr}/delegations/{validatorAddr}`
 
-**Description** 
+**Description**
 
-Query the current delegation between a delegator and a validator 
+Query the current delegation between a delegator and a validator
 
 **Parameters**
 
@@ -1077,7 +1077,7 @@ Query the current delegation between a delegator and a validator
 | **delegatorAddr** | string \* required | Bech 32 AccAddress of Delegator |
 | **validatorAddr** | string \* required | Bech32 OperatorAddress of validator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1090,9 +1090,9 @@ Query the current delegation between a delegator and a validator
 
 ### `GET/staking/delegators/{delegatorAddr}/unbonding_delegations`
 
-**Description** 
+**Description**
 
-Get all unbonding delegations from a delegator.  
+Get all unbonding delegations from a delegator.
 
 **Parameters**
 
@@ -1100,7 +1100,7 @@ Get all unbonding delegations from a delegator.
 | :--- | :--- | :--- |
 | **delegatorAddr** | string \* required | Bech 32 AccAddress of Delegator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -1121,9 +1121,9 @@ Get all unbonding delegations from a delegator.
 
 ### `POST/staking/delegators/{delegatorAddr}/unbonding_delegations`
 
-**Description** 
+**Description**
 
-Submit an unbonding delegation  
+Submit an unbonding delegation
 
 **Parameters**
 
@@ -1165,7 +1165,7 @@ Submit an unbonding delegation
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1200,7 +1200,7 @@ Submit an unbonding delegation
 
 ### `GET/staking/delegators/{delegatorAddr}/unbonding_delegations/{validatorAddr}`
 
-**Description** 
+**Description**
 
 Query all unbonding delegations between a delegator and a validator
 
@@ -1211,7 +1211,7 @@ Query all unbonding delegations between a delegator and a validator
 | **delegatorAddr** | string \* required | Bech 32 AccAddress of Delegator |
 | **validatorAddr** | string \* required | Bech32 OperatorAddress of validator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1230,9 +1230,9 @@ Query all unbonding delegations between a delegator and a validator
 
 ### `GET/staking/redelegations`
 
-**Description** 
+**Description**
 
-Get all redelegations \(filter by query params\) 
+Get all redelegations \(filter by query params\)
 
 **Parameters**
 
@@ -1242,7 +1242,7 @@ Get all redelegations \(filter by query params\)
 | **validator\_from** | string | Bech32 ValAddress of SrcValidator |
 | **validator\_to** | string | Bech32 ValAddress of DstValidator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -1265,7 +1265,7 @@ Get all redelegations \(filter by query params\)
 
 ### `GET/staking/delegators/{delegatorAddr}/validators`
 
-**Description** 
+**Description**
 
 Query all validators that a delegator is bonded to
 
@@ -1275,7 +1275,7 @@ Query all validators that a delegator is bonded to
 | :--- | :--- | :--- |
 | **delegatorAddr** | string \* required | Bech32 AccAddress of Delegator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -1308,9 +1308,9 @@ Query all validators that a delegator is bonded to
 
 ### `GET/staking/delegators/{delegatorAddr}/validators/{validatorAddr}`
 
-**Description** 
+**Description**
 
-Query a validator that a delegator is bonded to 
+Query a validator that a delegator is bonded to
 
 **Parameters**
 
@@ -1319,7 +1319,7 @@ Query a validator that a delegator is bonded to
 | **delegatorAddr** | string \* required | Bech32 AccAddress of Delegator |
 | **validatorAddr** | string \* required | Bech32 ValAddress of Delegator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1350,9 +1350,9 @@ Query a validator that a delegator is bonded to
 
 ### `GET/staking/delegators/{delegatorAddr}/txs`
 
-**Description** 
+**Description**
 
-Get all staking transactions \(i.e. msgs\) from a delegator 
+Get all staking transactions \(i.e. msgs\) from a delegator
 
 **Parameters**
 
@@ -1360,7 +1360,7 @@ Get all staking transactions \(i.e. msgs\) from a delegator
 | :--- | :--- | :--- |
 | **delegatorAddr** | string \* required | Bech32 AccAddress of Delegator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -1417,19 +1417,19 @@ Get all staking transactions \(i.e. msgs\) from a delegator
 
 ### `GET/staking/validators`
 
-**Description** 
+**Description**
 
-Get all validator candidates. By default it returns only the bonded validators 
+Get all validator candidates. By default it returns only the bonded validators
 
 **Parameters**
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **status** | string | The validator bond status. Must be either 'bonded', 'unbonded', or 'unbonding'  |
+| **status** | string | The validator bond status. Must be either 'bonded', 'unbonded', or 'unbonding' |
 | **page** | integer | The page number |
 | **limit** | integer | The maximum number of items per page |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -1462,9 +1462,9 @@ Get all validator candidates. By default it returns only the bonded validators
 
 ### `GET/staking/validators/{validatorAddr}`
 
-**Description** 
+**Description**
 
-Query the information from a single validator 
+Query the information from a single validator
 
 **Parameters**
 
@@ -1472,7 +1472,7 @@ Query the information from a single validator
 | :--- | :--- | :--- |
 | **validatorAddr** | string \* required | Bech32 OperatorAddress of validator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1503,9 +1503,9 @@ Query the information from a single validator
 
 ### `GET/staking/validators/{validatorAddr}/delegations`
 
-**Description** 
+**Description**
 
-Get all delegations from a validator 
+Get all delegations from a validator
 
 **Parameters**
 
@@ -1513,7 +1513,7 @@ Get all delegations from a validator
 | :--- | :--- | :--- |
 | **validatorAddr** | string \* required | Bech32 OperatorAddress of validator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -1528,9 +1528,9 @@ Get all delegations from a validator
 
 ### `GET/staking/validators/{validatorAddr}/unbonding_delegations`
 
-**Description** 
+**Description**
 
-Get all unbonding delegations from a validator 
+Get all unbonding delegations from a validator
 
 **Parameters**
 
@@ -1538,7 +1538,7 @@ Get all unbonding delegations from a validator
 | :--- | :--- | :--- |
 | **validatorAddr** | string \* required | Bech32 OperatorAddress of validator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -1559,15 +1559,15 @@ Get all unbonding delegations from a validator
 
 ### `GET/staking/pool`
 
-**Description** 
+**Description**
 
-Get the current state of the staking pool 
+Get the current state of the staking pool
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1578,15 +1578,15 @@ no parameters
 
 ### `GET/staking/parameters`
 
-**Description** 
+**Description**
 
-Get the current staking parameter values 
+Get the current staking parameter values
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1603,9 +1603,9 @@ no parameters
 
 ### `POST/gov/proposals`
 
-**Description** 
+**Description**
 
-Submit a proposal 
+Submit a proposal
 
 **Parameters**
 
@@ -1646,7 +1646,7 @@ Submit a proposal
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1677,9 +1677,9 @@ Submit a proposal
 
 ### `GET/gov/proposals`
 
-**Description** 
+**Description**
 
-Query proposals 
+Query proposals
 
 **Parameters**
 
@@ -1689,7 +1689,7 @@ Query proposals
 | **depositor** | string | Depositor address |
 | **status** | string | Proposal status, valid values can be `"deposit_period"`, `"voting_period"`, `"passed"`, `"rejected"` |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -1717,9 +1717,9 @@ Query proposals
 ]
 ```
 
-### `POST/gov/proposals/param_change` 
+### `POST/gov/proposals/param_change`
 
-**Description** 
+**Description**
 
 Generate a parameter change proposal transaction
 
@@ -1769,7 +1769,7 @@ Generate a parameter change proposal transaction
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1800,9 +1800,9 @@ Generate a parameter change proposal transaction
 
 ### `POST/gov/proposals/community_pool_spend`
 
-**Description** 
+**Description**
 
-Grant community pool coins to contributor 
+Grant community pool coins to contributor
 
 **Parameters**
 
@@ -1849,7 +1849,7 @@ Grant community pool coins to contributor
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1880,9 +1880,9 @@ Grant community pool coins to contributor
 
 ### `POST/gov/proposals/tax_rate_update`
 
-**Description** 
+**Description**
 
-Tax rate update proposal 
+Tax rate update proposal
 
 **Parameters**
 
@@ -1923,7 +1923,7 @@ Tax rate update proposal
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -1954,9 +1954,9 @@ Tax rate update proposal
 
 ### `POST/gov/proposals/reward_weight_update`
 
-**Description** 
+**Description**
 
-Reward weight update proposal 
+Reward weight update proposal
 
 **Parameters**
 
@@ -1997,7 +1997,7 @@ Reward weight update proposal
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2028,9 +2028,9 @@ Reward weight update proposal
 
 ### `GET/gov/proposals/{proposalId}`
 
-**Description** 
+**Description**
 
-Query a proposal 
+Query a proposal
 
 **Parameters**
 
@@ -2038,7 +2038,7 @@ Query a proposal
 | :--- | :--- | :--- |
 | **proposalId** | string \* required | Proposal ID |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2066,9 +2066,9 @@ Query a proposal
 
 ### `GET/gov/proposals/{proposalId}/proposer`
 
-**Description** 
+**Description**
 
-Query proposer 
+Query proposer
 
 **Parameters**
 
@@ -2076,7 +2076,7 @@ Query proposer
 | :--- | :--- | :--- |
 | **proposalId** | string \* required | Proposal ID |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2087,9 +2087,9 @@ Query proposer
 
 ### `GET/gov/proposals/{proposalId}/deposits`
 
-**Description** 
+**Description**
 
-Query deposits 
+Query deposits
 
 **Parameters**
 
@@ -2097,7 +2097,7 @@ Query deposits
 | :--- | :--- | :--- |
 | **proposalId** | string \* required | Proposal ID |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -2116,9 +2116,9 @@ Query deposits
 
 ### `POST/gov/proposals/{proposalId}/deposits`
 
-**Description** 
+**Description**
 
-Deposit tokens to a proposal 
+Deposit tokens to a proposal
 
 **Parameters**
 
@@ -2157,7 +2157,7 @@ Deposit tokens to a proposal
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2192,18 +2192,18 @@ Deposit tokens to a proposal
 
 ### `GET/gov/proposals/{proposalId}/deposits/{depositor}`
 
-**Description** 
+**Description**
 
-Query deposit 
+Query deposit
 
 **Parameters**
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
 | **proposalId** | string \* required | Proposal ID |
-| **depositor** | string \* required  | Bech32 depositor address |
+| **depositor** | string \* required | Bech32 depositor address |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2220,7 +2220,7 @@ Query deposit
 
 ### `GET/gov/proposals/{proposalId}/votes`
 
-**Description** 
+**Description**
 
 Query voters
 
@@ -2230,7 +2230,7 @@ Query voters
 | :--- | :--- | :--- |
 | **proposalId** | string \* required | Proposal ID |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -2244,7 +2244,7 @@ Query voters
 
 ### `POST/gov/proposals/{proposalId}/votes`
 
-**Description** 
+**Description**
 
 Vote a proposal
 
@@ -2280,7 +2280,7 @@ Vote a proposal
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2315,9 +2315,9 @@ Vote a proposal
 
 ### `GET/gov/proposals/{proposalId}/votes/{voter}`
 
-**Description** 
+**Description**
 
-Query vote 
+Query vote
 
 **Parameters**
 
@@ -2326,7 +2326,7 @@ Query vote
 | **proposalId** | string \* required | Proposal ID |
 | **voter** | string \* required | Bech32 voter address |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2338,9 +2338,9 @@ Query vote
 
 ### `GET/gov/proposals/{proposalId}/tally`
 
-**Description** 
+**Description**
 
-Get a proposal's tally result at the current time 
+Get a proposal's tally result at the current time
 
 **Parameters**
 
@@ -2348,7 +2348,7 @@ Get a proposal's tally result at the current time
 | :--- | :--- | :--- |
 | **proposalId** | string \* required | Proposal ID |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2361,15 +2361,15 @@ Get a proposal's tally result at the current time
 
 ### `GET/gov/parameters/deposit`
 
-**Description** 
+**Description**
 
-Query governance deposit parameters 
+Query governance deposit parameters
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2385,15 +2385,15 @@ no parameters
 
 ### `GET/gov/parameters/tallying`
 
-**Description** 
+**Description**
 
-Query governance tally parameters 
+Query governance tally parameters
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2405,15 +2405,15 @@ no parameters
 
 ### `GET/gov/parameters/voting`
 
-**Description** 
+**Description**
 
-Query governance voting parameters 
+Query governance voting parameters
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2427,9 +2427,9 @@ no parameters
 
 ### `GET/slashing/validators/{validatorPubKey}/signing_info`
 
-**Description** 
+**Description**
 
-Get sign info of given validator 
+Get sign info of given validator
 
 **Parameters**
 
@@ -2438,7 +2438,7 @@ Get sign info of given validator
 | **page** | integer \* required | Page number |
 | **limit** | integer \* required | Maximum number of items per page |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2453,7 +2453,7 @@ Get sign info of given validator
 
 ### `GET/slashing/signing_infos`
 
-**Description** 
+**Description**
 
 Get sign info of all given validators
 
@@ -2464,7 +2464,7 @@ Get sign info of all given validators
 | **page** | integer \* required | Page number |
 | **limit** | integer \* required | Maximum number of items per page |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -2481,7 +2481,7 @@ Get sign info of all given validators
 
 ### `POST/slashing/validators/{validatorAddr}/unjail`
 
-**Description** 
+**Description**
 
 Unjail a jailed validator
 
@@ -2523,7 +2523,7 @@ Unjail a jailed validator
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2558,15 +2558,15 @@ Unjail a jailed validator
 
 ### `GET/slashing/parameters`
 
-**Description** 
+**Description**
 
-Get the current slashing parameters 
+Get the current slashing parameters
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2585,9 +2585,9 @@ no parameters
 
 ### `GET/distribution/delegators/{delegatorAddr}/rewards`
 
-**Description** 
+**Description**
 
-Get the total rewards balance from all delegations ****
+Get the total rewards balance from all delegations _\*\*_
 
 **Parameters**
 
@@ -2595,7 +2595,7 @@ Get the total rewards balance from all delegations ****
 | :--- | :--- | :--- |
 | **delegatorAddr** | string \* required | Bech32 AccAddress of Delegator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2621,9 +2621,9 @@ Get the total rewards balance from all delegations ****
 
 ### `POST/distribution/delegators/{delegatorAddr}/rewards`
 
-**Description** 
+**Description**
 
-Withdraw all the delegator's delegation rewards 
+Withdraw all the delegator's delegation rewards
 
 **Parameters**
 
@@ -2655,7 +2655,7 @@ Withdraw all the delegator's delegation rewards
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2690,7 +2690,7 @@ Withdraw all the delegator's delegation rewards
 
 ### `GET/distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}`
 
-**Description** 
+**Description**
 
 Query a delegation reward
 
@@ -2701,7 +2701,7 @@ Query a delegation reward
 | **delegatorAddr** | string \* required | Bech32 AccAddress of Delegator |
 | **validatorAddr** | string \* required | Bech32 OperatorAddress of validator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -2719,9 +2719,9 @@ Query a delegation reward
 
 ### `POST/distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}`
 
-**Description** 
+**Description**
 
-Withdraw a delegation reward 
+Withdraw a delegation reward
 
 **Parameters**
 
@@ -2754,7 +2754,7 @@ Withdraw a delegation reward
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2779,9 +2779,9 @@ Withdraw a delegation reward
 
 ### `GET/distribution/delegators/{delegatorAddr}/withdraw_address`
 
-**Description** 
+**Description**
 
-Get the rewards withdrawal address 
+Get the rewards withdrawal address
 
 **Parameters**
 
@@ -2790,7 +2790,7 @@ Get the rewards withdrawal address
 | **delegatorAddr** | string \* required | Bech32 AccAddress of Delegator |
 | **validatorAddr** | string \* required | Bech32 OperatorAddress of validator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 terra1wg2mlrxdmnnkkykgqg4znky86nyrtc45q336yv
@@ -2798,9 +2798,9 @@ terra1wg2mlrxdmnnkkykgqg4znky86nyrtc45q336yv
 
 ### `POST/distribution/delegators/{delegatorAddr}/withdraw_address`
 
-**Description** 
+**Description**
 
-Replace the rewards withdrawal address 
+Replace the rewards withdrawal address
 
 **Parameters**
 
@@ -2833,7 +2833,7 @@ Replace the rewards withdrawal address
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2868,7 +2868,7 @@ Replace the rewards withdrawal address
 
 ### `GET/distribution/validators/{validatorAddr}`
 
-**Description** 
+**Description**
 
 Validator distribution information
 
@@ -2878,7 +2878,7 @@ Validator distribution information
 | :--- | :--- | :--- |
 | **validatorAddr** | string \* required | Bech32 OperatorAddress of validator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -2900,9 +2900,9 @@ Validator distribution information
 
 ### `GET/distribution/validators/{validatorAddr}/outstanding_rewards`
 
-**Description** 
+**Description**
 
-Fee distribution outstanding rewards of a single validator 
+Fee distribution outstanding rewards of a single validator
 
 **Parameters**
 
@@ -2910,7 +2910,7 @@ Fee distribution outstanding rewards of a single validator
 | :--- | :--- | :--- |
 | **validatorAddr** | string \* required | Bech32 OperatorAddress of validator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -2923,9 +2923,9 @@ Fee distribution outstanding rewards of a single validator
 
 ### `GET/distribution/validators/{validatorAddr}/rewards`
 
-**Description** 
+**Description**
 
-Commission and self-delegation rewards of a single validator  
+Commission and self-delegation rewards of a single validator
 
 **Parameters**
 
@@ -2933,7 +2933,7 @@ Commission and self-delegation rewards of a single validator
 | :--- | :--- | :--- |
 | **validatorAddr** | string \* required | Bech32 OperatorAddres of validator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -2946,9 +2946,9 @@ Commission and self-delegation rewards of a single validator
 
 ### `POST/distribution/validators/{validatorAddr}/rewards`
 
-**Description** 
+**Description**
 
-Withdraw the validator's rewards 
+Withdraw the validator's rewards
 
 **Parameters**
 
@@ -2980,7 +2980,7 @@ Withdraw the validator's rewards
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3015,15 +3015,15 @@ Withdraw the validator's rewards
 
 ### `GET/distribution/community_pool`
 
-**Description** 
+**Description**
 
-Community pool parameters 
+Community pool parameters
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -3036,7 +3036,7 @@ no parameters
 
 ### `GET/distribution/params`
 
-**Description** 
+**Description**
 
 Fee distribution parameters
 
@@ -3044,7 +3044,7 @@ Fee distribution parameters
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3060,15 +3060,15 @@ no parameters
 
 ### `GET/supply/total`
 
-**Description** 
+**Description**
 
-Total supply of coins in the chain 
+Total supply of coins in the chain
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3083,9 +3083,9 @@ no parameters
 
 ### `GET/supply/total/{denomination}`
 
-**Description** 
+**Description**
 
-Total supply of a single coin denomination 
+Total supply of a single coin denomination
 
 **Parameters**
 
@@ -3093,7 +3093,7 @@ Total supply of a single coin denomination
 | :--- | :--- | :--- |
 | **denomination** | string \* required | Coin denomination |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 string
@@ -3105,9 +3105,9 @@ string
 
 ### `POST/market/swap`
 
-**Description** 
+**Description**
 
-Swap coin with another coin ****
+Swap coin with another coin _\*\*_
 
 **Parameters**
 
@@ -3144,7 +3144,7 @@ Swap coin with another coin ****
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3175,7 +3175,7 @@ Swap coin with another coin ****
 
 ### `GET/market/swap`
 
-**Description** 
+**Description**
 
 Query swap result amount
 
@@ -3186,7 +3186,7 @@ Query swap result amount
 | **offer\_coin** | string \* required | Coin expression you want to swap |
 | **ask\_denom** | string \* required | Then coin denomination you want to ask |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3197,15 +3197,15 @@ Query swap result amount
 
 ### `GET/market/terra_pool_delta`
 
-**Description** 
+**Description**
 
-Get Terra pool delta, the USDR amount used for swap operation from the TerraPool 
+Get Terra pool delta, the USDR amount used for swap operation from the TerraPool
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 10000000.00
@@ -3213,15 +3213,15 @@ no parameters
 
 ### `GET/market/parameters`
 
-**Description** 
+**Description**
 
-Get market parameters 
+Get market parameters
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3237,9 +3237,9 @@ no parameters
 
 ### `POST/oracle/denoms/{denom}/votes`
 
-**Description** 
+**Description**
 
-Generate oracle exchange rate vote message containing exchange rate and salt for a prevote 
+Generate oracle exchange rate vote message containing exchange rate and salt for a prevote
 
 **Parameters**
 
@@ -3274,7 +3274,7 @@ Generate oracle exchange rate vote message containing exchange rate and salt for
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3305,9 +3305,9 @@ Generate oracle exchange rate vote message containing exchange rate and salt for
 
 ### `GET/oracle/denoms/{denom}/votes`
 
-**Description** 
+**Description**
 
-Get the currently unelected outstanding exchange rate oracle vote 
+Get the currently unelected outstanding exchange rate oracle vote
 
 **Parameters**
 
@@ -3315,7 +3315,7 @@ Get the currently unelected outstanding exchange rate oracle vote
 | :--- | :--- | :--- |
 | **denom** | string \* required | The coin denomination to get |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -3324,14 +3324,14 @@ Get the currently unelected outstanding exchange rate oracle vote
     "denom": "ukrw",
     "voter": "terravaloper1wg2mlrxdmnnkkykgqg4znky86nyrtc45q7a85l"
   }
-] 
+]
 ```
 
 ### `GET/oracle/denoms/{denom}/votes/{validator}`
 
-**Description** 
+**Description**
 
-Get the currently unelected outstanding exchange rate oracle vote 
+Get the currently unelected outstanding exchange rate oracle vote
 
 **Parameters**
 
@@ -3340,7 +3340,7 @@ Get the currently unelected outstanding exchange rate oracle vote
 | **denom** | string \* required | The coin denomination to get |
 | **validator** | string \* required |  |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -3354,9 +3354,9 @@ Get the currently unelected outstanding exchange rate oracle vote
 
 ### `GET/oracle/voters/{validator}/votes`
 
-**Description** 
+**Description**
 
-Get the currently outstanding exchange rate oracle votes of a validator 
+Get the currently outstanding exchange rate oracle votes of a validator
 
 **Parameters**
 
@@ -3364,7 +3364,7 @@ Get the currently outstanding exchange rate oracle votes of a validator
 | :--- | :--- | :--- |
 | **validator** | string \* required |  |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -3378,9 +3378,9 @@ Get the currently outstanding exchange rate oracle votes of a validator
 
 ### `POST/oracle/denoms/{denom}/prevotes`
 
-**Description** 
+**Description**
 
-Generate oracle exchange rate prevote message containing hash of a vote 
+Generate oracle exchange rate prevote message containing hash of a vote
 
 **Parameters**
 
@@ -3416,7 +3416,7 @@ Generate oracle exchange rate prevote message containing hash of a vote
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3447,9 +3447,9 @@ Generate oracle exchange rate prevote message containing hash of a vote
 
 ### `GET/oracle/denoms/{denom}/prevotes`
 
-**Description** 
+**Description**
 
-Get the currently outstanding exchange rate oracle prevote 
+Get the currently outstanding exchange rate oracle prevote
 
 **Parameters**
 
@@ -3457,7 +3457,7 @@ Get the currently outstanding exchange rate oracle prevote
 | :--- | :--- | :--- |
 | **denom** | string \* required | The coin denomination to get |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -3472,18 +3472,18 @@ Get the currently outstanding exchange rate oracle prevote
 
 ### `GET/oracle/denoms/{denom}/prevotes/{validator}`
 
-**Description** 
+**Description**
 
-Get the currently outstanding exchange rate oracle prevote 
+Get the currently outstanding exchange rate oracle prevote
 
 **Parameters**
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
 | **denom** | string \* required | The coin denomination to get |
-| **validator** | string \* required  |  |
+| **validator** | string \* required |  |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -3498,9 +3498,9 @@ Get the currently outstanding exchange rate oracle prevote
 
 ### `GET/oracle/voters/{validator}/prevotes`
 
-**Description** 
+**Description**
 
-Get the currently outstanding exchange rate oracle prevotes of a validator 
+Get the currently outstanding exchange rate oracle prevotes of a validator
 
 **Parameters**
 
@@ -3508,7 +3508,7 @@ Get the currently outstanding exchange rate oracle prevotes of a validator
 | :--- | :--- | :--- |
 | **validator** | string \* required |  |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -3523,9 +3523,9 @@ Get the currently outstanding exchange rate oracle prevotes of a validator
 
 ### `GET/oracle/denoms/{denom}/exchange_rate`
 
-**Description** 
+**Description**
 
-Get the current effective exchange rate in LUNA for the asset 
+Get the current effective exchange rate in LUNA for the asset
 
 **Parameters**
 
@@ -3533,7 +3533,7 @@ Get the current effective exchange rate in LUNA for the asset
 | :--- | :--- | :--- |
 | **denom** | string \* required | The coin denomination to get |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 1872.000000000000000000
@@ -3541,15 +3541,15 @@ Get the current effective exchange rate in LUNA for the asset
 
 ### `GET/oracle/denoms/exchange_rates`
 
-**Description** 
+**Description**
 
-Get all activated exchange rates 
+Get all activated exchange rates
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -3562,15 +3562,15 @@ no parameters
 
 ### `GET/oracle/denoms/actives`
 
-**Description** 
+**Description**
 
-Get all activated denoms 
+Get all activated denoms
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -3581,9 +3581,9 @@ no parameters
 
 ### `POST/oracle/voters/{validator}/feeder`
 
-**Description** 
+**Description**
 
-Generate oracle feeder right delegation message 
+Generate oracle feeder right delegation message
 
 **Parameters**
 
@@ -3616,7 +3616,7 @@ Generate oracle feeder right delegation message
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3647,17 +3647,17 @@ Generate oracle feeder right delegation message
 
 ### `GET/oracle/voters/{validator}/feeder`
 
-**Description** 
+**Description**
 
-Get delegated oracle feeder of a validator 
+Get delegated oracle feeder of a validator
 
 **Parameters**
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **validator** | string \* required | Feeder right delegator  |
+| **validator** | string \* required | Feeder right delegator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 terra1wg2mlrxdmnnkkykgqg4znky86nyrtc45q336yv
@@ -3665,9 +3665,9 @@ terra1wg2mlrxdmnnkkykgqg4znky86nyrtc45q336yv
 
 ### `GET/oracle/voters/{validator}/miss`
 
-**Description** 
+**Description**
 
-Get the number of vote periods missed in this oracle slash window 
+Get the number of vote periods missed in this oracle slash window
 
 **Parameters**
 
@@ -3675,7 +3675,7 @@ Get the number of vote periods missed in this oracle slash window
 | :--- | :--- | :--- |
 | **validator** | string \* required | Oracle operator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 100
@@ -3683,7 +3683,7 @@ Get the number of vote periods missed in this oracle slash window
 
 ### **`POST/oracle/voters/`**`{validator}/aggregate_prevote`
 
-**Description** 
+**Description**
 
 Generate oracle aggregate exchange rate prevote message containing a hash
 
@@ -3692,7 +3692,7 @@ Generate oracle aggregate exchange rate prevote message containing a hash
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
 | **validator** | string \* required | Oracle operator |
-| **Aggregate prevote request body**  | object | Body |
+| **Aggregate prevote request body** | object | Body |
 
 **Example Request**
 
@@ -3720,7 +3720,7 @@ Generate oracle aggregate exchange rate prevote message containing a hash
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3751,9 +3751,9 @@ Generate oracle aggregate exchange rate prevote message containing a hash
 
 ### `GET/oracle/voters/{validator}/aggregate_prevote`
 
-**Description** 
+**Description**
 
-Get the currently outstanding aggregate exchange rate oracle prevote of a validator 
+Get the currently outstanding aggregate exchange rate oracle prevote of a validator
 
 **Parameters**
 
@@ -3761,7 +3761,7 @@ Get the currently outstanding aggregate exchange rate oracle prevote of a valida
 | :--- | :--- | :--- |
 | **validator** | string \* required | Oracle operator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3773,7 +3773,7 @@ Get the currently outstanding aggregate exchange rate oracle prevote of a valida
 
 ### **`POST/oracle/voters/`**`{validator}/aggregate_vote`
 
-**Description** 
+**Description**
 
 Generate oracle aggregate exchange rate vote message containing exchange rates to prove the aggregate prevote
 
@@ -3782,7 +3782,7 @@ Generate oracle aggregate exchange rate vote message containing exchange rates t
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
 | **validator** | string \* required | Oracle operator |
-| **Aggregate vote request body**  | object | Body |
+| **Aggregate vote request body** | object | Body |
 
 **Example Request**
 
@@ -3809,7 +3809,7 @@ Generate oracle aggregate exchange rate vote message containing exchange rates t
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3840,9 +3840,9 @@ Generate oracle aggregate exchange rate vote message containing exchange rates t
 
 ### `GET/oracle/voters/{validator}/aggregate_vote`
 
-**Description** 
+**Description**
 
-Get the currently outstanding aggregate exchange rate oracle vote of a validator 
+Get the currently outstanding aggregate exchange rate oracle vote of a validator
 
 **Parameters**
 
@@ -3850,7 +3850,7 @@ Get the currently outstanding aggregate exchange rate oracle vote of a validator
 | :--- | :--- | :--- |
 | **validator** | string \* required | Oracle operator |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3866,15 +3866,15 @@ Get the currently outstanding aggregate exchange rate oracle vote of a validator
 
 ### `GET/oracle/parameters`
 
-**Description** 
+**Description**
 
-Get oracle parameters 
+Get oracle parameters
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -3891,15 +3891,15 @@ no parameters
 
 ### `GET/treasury/tax_rate`
 
-**Description** 
+**Description**
 
-Get current tax rate 
+Get current tax rate
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 0.05
@@ -3907,9 +3907,9 @@ no parameters
 
 ### `GET/treasury/tax_cap/{denom}`
 
-**Description** 
+**Description**
 
-Get tax cap of the denom 
+Get tax cap of the denom
 
 **Parameters**
 
@@ -3917,7 +3917,7 @@ Get tax cap of the denom
 | :--- | :--- | :--- |
 | **denom** | string \* required | Denomination |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 100000
@@ -3925,15 +3925,15 @@ Get tax cap of the denom
 
 ### `GET/treasury/reward_weight`
 
-**Description** 
+**Description**
 
-Get current reward weight 
+Get current reward weight
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 0.05
@@ -3941,15 +3941,15 @@ no parameters
 
 ### `GET/treasury/tax_proceeds`
 
-**Description** 
+**Description**
 
-Get current tax proceeds 
+Get current tax proceeds
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -3962,15 +3962,15 @@ no parameters
 
 ### `GET/treasury/seigniorage_proceeds`
 
-**Description** 
+**Description**
 
-Retrieve the size of the seigniorage pool 
+Retrieve the size of the seigniorage pool
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 0
@@ -3978,15 +3978,15 @@ no parameters
 
 ### `GET/treasury/parameters`
 
-**Description** 
+**Description**
 
-Get treasury module parameters 
+Get treasury module parameters
 
 **Parameters**
 
 no parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4018,13 +4018,13 @@ no parameters
 }
 ```
 
-## Wasm 
+## Wasm
 
 **Wasm modules APIs**
 
 ### **`POST/wasm/codes`**
 
-**Description** 
+**Description**
 
 Generate wasm store code message
 
@@ -4032,7 +4032,7 @@ Generate wasm store code message
 
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
-| **Store code request body**  | object | Body |
+| **Store code request body** | object | Body |
 
 **Example Request**
 
@@ -4058,7 +4058,7 @@ Generate wasm store code message
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4089,9 +4089,9 @@ Generate wasm store code message
 
 ### `POST/wasm/codes/{codeID}`
 
-**Description** 
+**Description**
 
-Instantiate wasm contract message 
+Instantiate wasm contract message
 
 **Parameters**
 
@@ -4130,7 +4130,7 @@ Instantiate wasm contract message
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4161,9 +4161,9 @@ Instantiate wasm contract message
 
 ### `GET/wasm/codes/{codeID}`
 
-**Description** 
+**Description**
 
-Get code info of the code ID 
+Get code info of the code ID
 
 **Parameters**
 
@@ -4171,7 +4171,7 @@ Get code info of the code ID
 | :--- | :--- | :--- |
 | **codeID** | number \* required | code ID you want to instantiate |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4182,7 +4182,7 @@ Get code info of the code ID
 
 ### `POST/wasm/contracts/{contractAddress}`
 
-**Description** 
+**Description**
 
 Execute wasm contract message
 
@@ -4191,7 +4191,7 @@ Execute wasm contract message
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
 | **contractAddress** | string \* required | contract address you want to execute |
-| **Execute contract request body**  | object | Body |
+| **Execute contract request body** | object | Body |
 
 **Example Request**
 
@@ -4223,7 +4223,7 @@ Execute wasm contract message
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4254,9 +4254,9 @@ Execute wasm contract message
 
 ### `GET/wasm/contracts/{contractAddress}`
 
-**Description** 
+**Description**
 
-Get contract info of the contract Address 
+Get contract info of the contract Address
 
 **Parameters**
 
@@ -4264,7 +4264,7 @@ Get contract info of the contract Address
 | :--- | :--- | :--- |
 | **contractAddress** | string \* required | contract address you want to execute |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4277,7 +4277,7 @@ Get contract info of the contract Address
 
 ### `POST/wasm/contracts/{contractAddress}/migrate`
 
-**Description** 
+**Description**
 
 Migrate wasm contract to new code base
 
@@ -4286,7 +4286,7 @@ Migrate wasm contract to new code base
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
 | **contractAddress** | string \* required | contract address you want to migrate |
-| **Migrate contract request body**  | object | Body |
+| **Migrate contract request body** | object | Body |
 
 **Example Request**
 
@@ -4313,7 +4313,7 @@ Migrate wasm contract to new code base
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4344,7 +4344,7 @@ Migrate wasm contract to new code base
 
 ### `POST/wasm/contracts/{contractAddress}/owner`
 
-**Description** 
+**Description**
 
 Update wasm contract owner to new address
 
@@ -4353,7 +4353,7 @@ Update wasm contract owner to new address
 | **Parameters** | Type | Description |
 | :--- | :--- | :--- |
 | **contractAddress** | string \* required | contract address you want to update |
-| **Update contract request body**  | object | Body |
+| **Update contract request body** | object | Body |
 
 **Example Request**
 
@@ -4379,7 +4379,7 @@ Update wasm contract owner to new address
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4410,9 +4410,9 @@ Update wasm contract owner to new address
 
 ### `GET/wasm/contracts/{contractAddress}/store`
 
-**Description** 
+**Description**
 
-Retrieve the size of the seigniorage pool 
+Retrieve the size of the seigniorage pool
 
 **Parameters**
 
@@ -4421,7 +4421,7 @@ Retrieve the size of the seigniorage pool
 | **contractAddress** | string \* required | contract address you want to lookup |
 | **query\_msg** | string \* required | Get stored information with query msg |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 string
@@ -4429,9 +4429,9 @@ string
 
 ### `GET/wasm/contracts/{contractAddress}/store/raw`
 
-**Description** 
+**Description**
 
-Get stored information with store key 
+Get stored information with store key
 
 **Parameters**
 
@@ -4441,7 +4441,7 @@ Get stored information with store key
 | **key** | string \* required | Raw key you want to query |
 | **Subkey** | string | Raw subkey attached to the key |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 string
@@ -4449,15 +4449,15 @@ string
 
 ### `GET/wasm/parameters`
 
-**Description** 
+**Description**
 
-Get wasm module parameters 
+Get wasm module parameters
 
 **Parameters**
 
 No parameters
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4468,15 +4468,15 @@ No parameters
 }
 ```
 
-## Authorization 
+## Authorization
 
-Authorization  modules APIs
+Authorization modules APIs
 
 ### `GET/msgauth/granters/{granterAddress}/grantees/{granteeAddress}/grants`
 
-**Description** 
+**Description**
 
-Get stored information with store key 
+Get stored information with store key
 
 **Parameters**
 
@@ -4485,7 +4485,7 @@ Get stored information with store key
 | **granterAddress** | string \* required | Granter address you want to lookup |
 | **granteeAddress** | string \* required | Grantee address you want to lookup |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 [
@@ -4519,7 +4519,7 @@ Get stored information with store key
 
 ### `POST/msgauth/granters/{granterAddress}/grantees/{granteeAddress}/grants/{msgType}`
 
-**Description** 
+**Description**
 
 Grant message execute permission to grantee address
 
@@ -4562,7 +4562,7 @@ Grant message execute permission to grantee address
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4593,9 +4593,9 @@ Grant message execute permission to grantee address
 
 ### `GET/msgauth/granters/{granterAddress}/grantees/{granteeAddress}/grants/{msgType}`
 
-**Description** 
+**Description**
 
-Get grant about a specific msg type between the granter and the grantee 
+Get grant about a specific msg type between the granter and the grantee
 
 **Parameters**
 
@@ -4605,7 +4605,7 @@ Get grant about a specific msg type between the granter and the grantee
 | **granteeAddress** | string \* required | Grantee address you want to lookup |
 | **msgType** | string \* required | Message type you want to lookup |
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4637,9 +4637,9 @@ Get grant about a specific msg type between the granter and the grantee
 
 ### `POST/msgauth/granters/{granterAddress}/grantees/{granteeAddress}/grants/{msgType}/revoke`
 
-**Description** 
+**Description**
 
-Revoke grant from grantee address 
+Revoke grant from grantee address
 
 **Parameters**
 
@@ -4672,7 +4672,7 @@ Revoke grant from grantee address
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
@@ -4703,7 +4703,7 @@ Revoke grant from grantee address
 
 ### **`POST/msgauth/execute`**
 
-**Description** 
+**Description**
 
 Execute messages from grantee address
 
@@ -4739,7 +4739,7 @@ Execute messages from grantee address
 }
 ```
 
-**Example** __**JSON Output**
+**Example** \_\_**JSON Output**
 
 ```javascript
 {
