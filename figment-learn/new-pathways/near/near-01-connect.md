@@ -10,7 +10,7 @@ The main difference here is in the protocol. To connect to NEAR, we'll be using 
 
 # Challenge
 
-{% hint style="tip" %}
+{% hint style="warning" %}
 In `pages/api/near/connect.ts`, implement `connection` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
 {% endhint %}
 

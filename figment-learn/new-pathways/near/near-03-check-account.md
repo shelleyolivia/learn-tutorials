@@ -4,7 +4,7 @@ Unlike many other Web 3 protocols, NEAR uses a human readable account ID instead
 
 # Challenge
 
-{% hint style="tip" %}
+{% hint style="warning" %}
 In `pages/api/near/check-account.ts`, complete the code of the default function.
 {% endhint %}
 

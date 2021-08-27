@@ -8,7 +8,7 @@ If you want to learn more about NEAR smart contracts, you can follow the tutoria
 
 # The challenge
 
-{% hint style="tip" %}
+{% hint style="warning" %}
 In`pages/api/near/setter.ts`, complete the code of the default function. 
 {% endhint %}
 

@@ -4,7 +4,7 @@ After the creation of your account on the **NEAR** testnet, the Helper provides 
 
 # Challenge
 
-{% hint style="tip" %}
+{% hint style="warning" %}
 In `pages/api/near/balance.ts`, complete the code of the default function.
 {% endhint %}
 

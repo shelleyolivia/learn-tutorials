@@ -8,7 +8,7 @@ If you want to learn more about Celo smart contracts, follow the [**Deploy and I
 
 # The challenge
 
-{% hint style="tip" %}
+{% hint style="warning" %}
 In `pages/api/celo/setter.ts`, complete the code of the default function. 
 {% endhint %}
 
