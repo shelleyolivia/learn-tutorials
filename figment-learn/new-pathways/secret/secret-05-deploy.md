@@ -61,7 +61,7 @@ In `pages/api/secret/deploy.ts`, complete the code of the default function. Uplo
 
 **Need some help?**
 * [**Contract example**](https://github.com/enigmampc/SecretJS-Templates/tree/master/5_contracts)  
-* [**The `upload()` function**](https://github.com/enigmampc/SecretNetwork/blob/7adccb9a09579a564fc90173cc9509d88c46d114/cosmwasm-js/packages/sdk/src/signingcosmwasmclient.ts#L208)  
+* [**The `upload` function**](https://github.com/enigmampc/SecretNetwork/blob/7adccb9a09579a564fc90173cc9509d88c46d114/cosmwasm-js/packages/sdk/src/signingcosmwasmclient.ts#L208)  
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)

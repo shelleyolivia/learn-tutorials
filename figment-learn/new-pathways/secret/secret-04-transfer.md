@@ -32,11 +32,11 @@ In `pages/api/secret/transfer.ts`, complete the code of the function. There is a
   // 2. Initialize a secure Secret client
   const client = new SigningCosmWasmClient(undefined);
 
-  // 2. Send tokens
+  // 3. Send tokens
   const memo = 'sendTokens example'; // Optional memo to identify the transaction
   const sent = await client.sendTokens(undefined);
  
-  // 3. Query the tx result
+  // 4. Query the tx result
   const query = { id: sent.transactionHash };
   const transaction = await client.searchTx(query);
 //..
