@@ -642,7 +642,8 @@ If you're deploying it for the second time then deploy with this command just to
 * Command: `truffle migrate --network matic --reset`
 
 If everything worked fine, you'll see something like this:
-```
+
+```bash
 2_deploy_contracts.js
 =====================
 
