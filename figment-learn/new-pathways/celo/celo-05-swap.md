@@ -61,13 +61,17 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * First, we store into `stableToken` variable the `StableTokenWrapper` contract interface calling `getStableToken`  
 * Next, we store into `exchange` variable the `ExchangeWrapper` contract interface calling `getExchange`  
 * Next, we approve the transfer between the address using `approve` method of `stableToken` from our `StableTokenWrapper` contract interface 
+* Next, we approve the transfer between the address using `approve` method of `stableToken` from our `StableTokenWrapper` contract interface 
+* Next, we return the calculate the amount of **CELO** token to exchange from the amount of stable token expected to be exchange.
+* Finaly, we sell the amount of stable token, here 1 cUSD against **CELO** token 
+
 ----------------------------------
 
 # Make sure it works
 
 Once you have the code above saved, click on **Swap 1cUSD**
 
-![](../../../.gitbook/assets/pathways/celo/celo-swap.png)
+![](../../../.gitbook/assets/pathways/celo/celo-swap.gif)
 
 
 {% hint style="info" %}

@@ -59,7 +59,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
 
-![](../../../.gitbook/assets/pathways/celo/celo-connect.png)
+![](../../../.gitbook/assets/pathways/celo/celo-connect.gif)
 
 
 Congratulations, you have successfully made function that can connect to the Celo node!

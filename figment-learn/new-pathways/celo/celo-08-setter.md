@@ -1,7 +1,7 @@
 Our contract is on-chain, and we're going to learn how to modify the value stored in the state of the contract. 
 
 {% hint style="working" %}
-If you want to learn more about Secret smart contracts, follow the [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch) tutorial.
+If you want to learn more about Celo smart contracts, follow the [**Deploy and Interact with Contracts (Remotely)**](https://learn.figment.io/tutorials/hello-contracts) tutorial.
 {% endhint %}
 
 ----------------------------------
@@ -17,25 +17,17 @@ In `pages/api/celo/setter.ts`, complete the code of the default function.
 ```tsx
 //...
   try {
-    const { secret, newMessage, contract } = req.body;
+    const { secret, newMessage, contract, address } = req.body;
     const url = getSafeUrl();
     const kit = newKit(url);
-
-    const account = kit.web3.eth.accounts.privateKeyToAccount(secret);
-    kit.addAccount(account.privateKey);
+    kit.addAccount(secret);
 
     // Create a new contract instance with the HelloWorld contract info
-    const instance = new kit.web3.eth.Contract(
-        // @ts-ignore
-        HelloWorld.abi, 
-        contract
-    )
-
-    // Add your account to ContractKit to sign transactions
-    // This account must have a CELO balance to pay tx fees, get some https://celo.org/build/faucet
-    kit.connection.addAccount(account.privateKey);
-    const txObject = await instance.methods.setName(newMessage);
-    let tx = await kit.sendTransactionObject(txObject, { from: account.address });
+    const instance = undefined
+    // Call the setName function of our contract
+    const txObject = undefined;
+    // Send a transaction Object to modify the state of our contract
+    let tx = undefined;
 
     let receipt = await tx.waitReceipt();
 
@@ -45,7 +37,8 @@ In `pages/api/celo/setter.ts`, complete the code of the default function.
 ```
 
 **Need some help?** Check out this link!
-* [**Contract example**](https://github.com/enigmampc/SecretJS-Templates/tree/master/5_contracts)  
+* [**Interacting with Custom contracts**](https://docs.celo.org/developer-guide/contractkit/usage#interacting-with-custom-contracts)  
+* [**Web3.js eth contract interface**](https://web3js.readthedocs.io/en/v1.4.0/web3-eth-contract.html)  
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -59,12 +52,32 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```tsx
 //...
+  try {
+    const { secret, newMessage, contract, address } = req.body;
+    const url = getSafeUrl();
+    const kit = newKit(url);
+    kit.addAccount(secret);
 
+    // Create a new contract instance with the HelloWorld contract info
+    const instance = new kit.web3.eth.Contract(
+        HelloWorld.abi, 
+        contract
+    )
+
+    const txObject = await instance.methods.setName(newMessage);
+    let tx = await kit.sendTransactionObject(txObject, { from: address });
+
+    let receipt = await tx.waitReceipt();
+
+    res.status(200).json(receipt.transactionHash);
+  }
 //...
 ```
 
 **What happened in the code above?**
-* We're calling the `execute` method of the `SigningCosmWasmClient`, passing to it:
+* First, we create a new instance with the HelloWorld contract info
+* Next, we call the `setName` function of our smart conract
+* Finaly, we create a transaction to execute this function.
 
 ----------------------------------
 
@@ -72,7 +85,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once you have the code above saved, click the button and watch the magic happen:
 
-![](../../../.gitbook/assets/pathways/celo/celo-setter.png)
+![](../../../.gitbook/assets/pathways/celo/celo-setter.gif)
 
 ----------------------------------
 

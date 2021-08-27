@@ -77,7 +77,7 @@ Do not forget to fund the newly created wallet using the [celo faucet](https://c
 
 Once the code is complete and the file is saved, Next.js will rebuild the API route. Now click on **Generate a Keypair** and you should see:
 
-![](../../../.gitbook/assets/pathways/celo/celo-account.png)
+![](../../../.gitbook/assets/pathways/celo/celo-account.gif)
 
 -----------------------------
 

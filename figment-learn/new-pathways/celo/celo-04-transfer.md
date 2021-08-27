@@ -78,7 +78,7 @@ Once you have the code above saved:
 * Fill in the amount of **CELO** you want to send to your favorite pizza maker (and as you realize, it was yourself).
 * Click on **Submit Transfer**.
 
-![](../../../.gitbook/assets/pathways/celo/celo-transfer.png)
+![](../../../.gitbook/assets/pathways/celo/celo-transfer.gif)
 
 ----------------------------------
 

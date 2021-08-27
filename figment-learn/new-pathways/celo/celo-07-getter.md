@@ -1,7 +1,7 @@
 Our Contract is on-chain, and we're going to learn how to fetch the count stored on the contract. 
 
 {% hint style="working" %}
-If you want to learn more about Secret smart contracts, follow the [**Developing your first secret contract**](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch) tutorial.
+If you want to learn more about Celo smart contracts, follow the [**Deploy and Interact with Contracts (Remotely)**](https://learn.figment.io/tutorials/hello-contracts) tutorial.
 {% endhint %}
 
 ----------------------------------
@@ -16,12 +16,24 @@ In `pages/api/celo/getter.ts`, complete the code of the default function.
 
 ```tsx
 //...
+  try {
+    const { contract } = req.body
+    const url = getSafeUrl();
+    const kit = newKit(url);
+    
+    // Create a new contract instance with the HelloWorld contract info
+    const instance = undefined;
+    // call the getName function of the on-chain contract
+    const name = undefined;
 
+    res.status(200).json(name)
+  }
 //...
 ```
 
 **Need some help?** Check out this link!
-* [**Contract example**](https://github.com/enigmampc/SecretJS-Templates/tree/master/5_contracts)  
+* [**Interacting with Custom contracts**](https://docs.celo.org/developer-guide/contractkit/usage#interacting-with-custom-contracts)  
+* [**Web3.js eth contract interface**](https://web3js.readthedocs.io/en/v1.4.0/web3-eth-contract.html)  
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -35,12 +47,25 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```tsx
 //...
+  try {
+    const { contract } = req.body
+    const url = getSafeUrl();
+    const kit = newKit(url);
+    
+    const instance = new kit.web3.eth.Contract(
+        HelloWorld.abi, 
+        contract
+    )
+    const name = await instance.methods.getName().call()
 
+    res.status(200).json(name)
+  }
 //...
 ```
 
 **What happened in the code above?**
-* We're calling the `queryContractSmart` method of the client, passing to it:
+* First, we create a new instance with the HelloWorld contract info
+* Next, we call the `getName` function of our smart conract
 
 ----------------------------------
 
@@ -48,7 +73,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once you have the code above saved, click the button and watch the magic happen:
 
-![](../../../.gitbook/assets/pathways/celo/celo-getter.png)
+![](../../../.gitbook/assets/pathways/celo/celo-getter.gif)
 
 ----------------------------------
 
