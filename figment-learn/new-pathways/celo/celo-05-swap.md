@@ -1,11 +1,11 @@
-It’s time to submit another transactions. In this challenge, we will connect to a Celo node hosted by DataHub and we will swap 1 **cUSD** stable token against the expected amount of **CELO** token. As you remember from previous step, we funded our account on the `Alfajores` testnet with 5CELO and 10cUSD. Now let’s try to swap 1 **cUSD** token to **CELO**.
+It’s time to submit another transaction. In this challenge, we will connect to a Celo node hosted by DataHub and we will swap 1 **cUSD** stable token against the expected amount of **CELO** token. As you remember from a previous tutorial, we funded our account on the `Alfajores` testnet with 5 **CELO** and 10 **cUSD**. Now let’s try to swap 1 **cUSD** token to **CELO**.
 
 ----------------------------------
 
 # The challenge
 
 {% hint style="warning" %}
-In `pages/api/celo/swap.ts`, complete the code of the **swap** function. Celo has a number of core Smart Contracts that are deployed to the network. In this challenge. we'll use StableToken and Exchange contract wrappers, which have all the expected functions allowing to swap our tokens. 
+In `pages/api/celo/swap.ts`, complete the code of the **swap** function. Celo has a number of core smart contracts that are deployed to the network. In this challenge, we'll use the StableToken and Exchange contract wrappers, which have all the expected functions enabling us to swap tokens. 
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -29,7 +29,7 @@ In `pages/api/celo/swap.ts`, complete the code of the **swap** function. Celo ha
 
 **Need some help?**
 * [**We can access the cUSD contract with kit.contracts.getStableToken()**](https://docs.celo.org/developer-guide/contractkit/contracts-wrappers-registry#interacting-with-celo-and-cusd)
-* [**Buying all the CELO I can, with the cUSD in my account**](https://docs.celo.org/developer-guide/contractkit/usage#buying-all-the-celo-i-can-with-the-cusd-in-my-account)
+* [**Code example**](https://docs.celo.org/developer-guide/contractkit/usage#buying-all-the-celo-i-can-with-the-cusd-in-my-account)
 
 {% hint style="info" %}
 [You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
@@ -58,24 +58,23 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we store into `stableToken` variable the `StableTokenWrapper` contract interface calling `getStableToken`  
-* Next, we store into `exchange` variable the `ExchangeWrapper` contract interface calling `getExchange`  
-* Next, we approve the transfer between the address using `approve` method of `stableToken` from our `StableTokenWrapper` contract interface 
-* Next, we approve the transfer between the address using `approve` method of `stableToken` from our `StableTokenWrapper` contract interface 
-* Next, we return the calculate the amount of **CELO** token to exchange from the amount of stable token expected to be exchange.
-* Finaly, we sell the amount of stable token, here 1 cUSD against **CELO** token 
-
+* First, we store into the `stableToken` variable the `StableTokenWrapper` contract interface by calling `getStableToken`. 
+* Next, we store into the `exchange` variable the `ExchangeWrapper` contract interface by calling `getExchange`.
+* Next, we approve the transfer of **cUSD** from our address using the `approve` method of `stableToken` from our `StableTokenWrapper` contract interface.
+* Next, we return the calculated the amount of **CELO** token to exchange from the amount of **cUSD** expected to be exchanged as `goldAmount`.
+* Finally, we can sell the amount of stable token, in this example 1 **cUSD** against **CELO** token. 
+* We can get a receipt with the convenient `waitReceipt` method on the transaction. Note that because both of these functions return a Promise, `sellReceipt` will not return before `sellTx` as long as they are both prefaced with `await`. Asynchronous code is awesome!
 ----------------------------------
 
 # Make sure it works
 
-Once you have the code above saved, click on **Swap 1cUSD**
+Once you have the code above saved, click on **Swap 1 cUSD**
 
 ![](../../../.gitbook/assets/pathways/celo/celo-swap.gif)
 
 
 {% hint style="info" %}
-Fun fact, if you take the inverse of the returned value you'll found the quotation displayed on [coinmarketcap](https://coinmarketcap.com/currencies/celo/)
+Fun fact, if you take the inverse of the returned value you'll find the quotation displayed on [Coinmarketcap](https://coinmarketcap.com/currencies/celo/)
 {% endhint %}
 
 
@@ -83,4 +82,4 @@ Fun fact, if you take the inverse of the returned value you'll found the quotati
 
 # Next
 
-We now know how to query Celo network and how to submit transactions. So far we used only core Celo Smart Contracts but it’s time to deploy our own smart contract and interact with it.
+We now know how to query the Celo network and how to submit transactions. So far, we've only used core Celo smart contracts. Now it’s time to learn how to deploy our own smart contract and interact with it!

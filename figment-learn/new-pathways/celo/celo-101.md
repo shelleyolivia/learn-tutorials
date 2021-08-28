@@ -1,6 +1,6 @@
 # What is Celo?
 
-Celo is a smart contract blockchain network. The technology uses a phone-number-based identity system with address-based encryption and eigentrust-based reputation. Their first application is a social payments system that can be used on a smartphone.
+Celo is a smart contract blockchain network. The technology uses a phone-number-based identity system with address-based encryption and [eigentrust-based reputation](https://en.wikipedia.org/wiki/EigenTrust). Their first application is a social payments system that can be used on a smartphone.
 
 Celo is preparing to launch a variety of stable coins pegged to global fiat and crypto currencies, the first one being pegged to the US dollar (cUSD).
 
