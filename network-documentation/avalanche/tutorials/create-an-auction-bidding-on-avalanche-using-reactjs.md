@@ -843,7 +843,8 @@ setCacheKey({
 Once a method is cached, the Drizzle `store` creates a **key-value pair** representing hash-key and the real-time data associated with this call. In the above program, this data is accessed using the `subscriber` variable:
 
 ```javascript
-const realTimeIsRegistered = subscriber?.isRegistered[cacheKeys?.isRegistered]?.value;
+const realTimeIsRegistered =
+  subscriber?.isRegistered[cacheKeys?.isRegistered]?.value;
 ```
 
 In this component, we made a simple object of cached call variables named `cacheCall`, which implements the above code snippet. The cached version of `isRegistered` can be accessed as `cacheCalls.isRegistered`.
@@ -1059,13 +1060,13 @@ Don't forget to set up Metamask with the Fuji testnet and also fund the account 
 
 ![](https://imgur.com/NuhjUvF.png)
 
-| Info | Value |
-| :--- | :--- |
-| Network Name | Avalanche Fuji |
-| New RPC URL |  |
-| Chain ID | 43113 |
-| Currency Symbol | AVAX-C |
-| Block Explorer URL |  |
+| Info               | Value          |
+| :----------------- | :------------- |
+| Network Name       | Avalanche Fuji |
+| New RPC URL        |                |
+| Chain ID           | 43113          |
+| Currency Symbol    | AVAX-C         |
+| Block Explorer URL |                |
 
 # Conclusion
 
