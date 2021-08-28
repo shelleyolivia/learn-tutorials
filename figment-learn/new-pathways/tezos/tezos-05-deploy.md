@@ -44,7 +44,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
 
-![](../../../.gitbook/assets/pathways/tezos/tezos-deploy.gif)
+![](../../../.gitbook/assets/pathways/tezos/tezos-deploy.png)
 
 -----------------------------
 
