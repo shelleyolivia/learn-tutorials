@@ -1,3 +1,9 @@
+{% hint style="info" %}
+Feel Free to skip this section and [start the challenges](https://learn.figment.io/tutorials/setup-the-near-project)
+{% endhint %}
+
+------------------------
+
 # What is NEAR?
 
 NEAR is a decentralized application platform that makes blockchain accessible to everyday people who are excited for the future of the Open Web. A web that is more private, more secure, and puts people in control of their money, data, and identity. NEAR’s purpose is to enable community-driven innovation to benefit people around the world.
@@ -45,7 +51,7 @@ NEAR is the first blockchain platform truly built for the real world. It is a bu
    2. NFT marketplaces -- marketplaces like [Mintbase](https://mintbase.io), which transferred from Ethereum, allow creators of unique digital assets to easily implement marketplaces to buy and sell them. On NEAR, they have access to reasonable costs plus intuitive end-user experiences. 
    3. Gaming -- because NEAR allows for performant and usable apps, developers can create gaming experiences that hook into the blockchain without forcing end-users to suffer through wallets or tokens.
 
-Take a look at these examples from a recent hackathon: [https://near.org/blog/winners-of-hack-the-rainbow\*\*\]\(https://near.org/blog/winners-of-hack-the-rainbow](https://near.org/blog/winners-of-hack-the-rainbow**]%28https://near.org/blog/winners-of-hack-the-rainbow)\)
+[Take a look at these examples from a recent hackathon](https://near.org/blog/winners-of-hack-the-rainbow)
 
 # Network Specifications
 
@@ -59,7 +65,7 @@ Complicated blockchain concepts like tokens, rewards, and fees can be almost ent
 
 ## Transaction Speed & Finality
 
-The expected block time is around 1s and the expected time to finality is around 2s. 1,000 TPS benchmarked on a single shard for token transfers \(contract ops are slower\).
+The expected block time is around 1s and the expected time to finality is around 2s. 1,000 TPS benchmarked on a single shard for token transfers (contract ops are slower).
 
 ## Languages supported
 

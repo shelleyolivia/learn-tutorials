@@ -16,9 +16,9 @@ Check out [Awesome Polygon](https://awesomepolygon.com/dapps/) for many examples
 
 There are a few important sites that will be of interest to users of **Polygon**
 
-* [https://wallet.matic.network](https://wallet.matic.network) for bridging assets between **Polygon** and Ethereum.
-* [https://docs.matic.network](https://docs.matic.network/) for knowledge!
-* [https://faucet.matic.network](https://faucet.matic.network/) for free testnet assets.
+* [For bridging assets between **Polygon** and Ethereum](https://wallet.matic.network)
+* [For knowledge!](https://docs.matic.network/) 
+* [For free testnet assets](https://faucet.matic.network/)
 
 -------------------------------------
 
