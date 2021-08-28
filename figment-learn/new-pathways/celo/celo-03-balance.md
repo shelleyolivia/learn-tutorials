@@ -8,7 +8,7 @@ The Celo blockchain has two native assets, **CELO** (CELO) and the **Celo Dollar
 
 # Challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/celo/balance.ts`, complete the code of the **balance** function.
 {% endhint %}
 

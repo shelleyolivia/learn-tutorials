@@ -12,7 +12,7 @@ If you want to learn more about NEAR smart contracts, you can follow the tutoria
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In`pages/api/near/deploy.ts`, complete the code of the default function. Deploy your first smart contract on the **NEAR** testnet.
 {% endhint %}
 

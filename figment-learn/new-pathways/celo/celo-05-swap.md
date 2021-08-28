@@ -4,7 +4,7 @@ It’s time to submit another transaction. In this challenge, we will connect to
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/celo/swap.ts`, complete the code of the **swap** function. Celo has a number of core smart contracts that are deployed to the network. In this challenge, we'll use the StableToken and Exchange contract wrappers, which have all the expected functions enabling us to swap tokens. 
 {% endhint %}
 

@@ -6,7 +6,7 @@ Here you are going to learn how to set your keystore in order to sign your trans
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In`pages/api/near/transfer.ts`, complete the code of the function. There is a lot to fill here, so be careful!
 {% endhint %}
 

@@ -4,7 +4,7 @@ It’s time to submit your first transactions. In this challenge, we will connec
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/celo/transfer.ts`, complete the code of the **transfer** function. Celo has a number of core smart contracts that are deployed to the network. In this challenge, we'll use the GoldToken contract wrappers, which have a `transfer` and a `send` function allowing us to build a transfer transaction. 
 {% endhint %}
 

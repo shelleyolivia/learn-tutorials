@@ -6,7 +6,7 @@ We are now all set up with our application and we can start writing some JavaScr
 
 # Challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/celo/connect.ts`, complete the code of the function and try to establish your first connection to the celo network. 
 {% endhint %}
 

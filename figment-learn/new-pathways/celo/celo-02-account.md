@@ -6,7 +6,7 @@ It’s time to create your first Celo account on the **Alfajores** testnet. With
 
 # Challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/celo/account.ts`, complete the code of the function to first create a **mnemonic**, then produce an **address** from the **public key** belonging to the **mnemonic**.
 {% endhint %}
 

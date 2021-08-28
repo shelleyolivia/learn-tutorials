@@ -10,7 +10,7 @@ You could experience some issues with the availability of the network [**Click h
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/secret/transfer.ts`, complete the code of the function. There is a lot to fill here, so be careful!
 {% endhint %}
 

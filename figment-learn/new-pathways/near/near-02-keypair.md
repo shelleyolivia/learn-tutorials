@@ -4,7 +4,7 @@ Like with most Web 3 protocols, transactions on NEAR happen between **accounts**
 
 # Challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/near/keypair.ts`, implement `keypair` and retrieve the string formatted representation of the keypair into the variable `secret`.
 {% endhint %}
 

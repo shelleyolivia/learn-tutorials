@@ -12,7 +12,7 @@ If you want to learn more about Celo smart contracts, follow the [**Deploy and I
 
 # The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/celo/deploy.ts`, complete the code of the default function. Upload your first smart contract on the **Celo** network.
 {% endhint %}
 
