@@ -23,7 +23,7 @@ In `pages/api/celo/setter.ts`, complete the code of the default function.
     kit.addAccount(secret);
 
     // Create a new contract instance with the HelloWorld contract info
-    const instance = undefined
+    const instance = undefined;
     // Call the setName function of our contract
     const txObject = undefined;
     // Send a transaction Object to modify the state of our contract
@@ -62,7 +62,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
     const instance = new kit.web3.eth.Contract(
         HelloWorld.abi, 
         contract
-    )
+    );
 
     const txObject = await instance.methods.setName(newMessage);
     let tx = await kit.sendTransactionObject(txObject, { from: address });
@@ -75,9 +75,12 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we create a new instance with the HelloWorld contract info
-* Next, we call the `setName` function of our smart conract
-* Finaly, we create a transaction to execute this function.
+* First, we create a new instance with the HelloWorld contract info.
+* Next, we call the `setName` function of our smart contract
+* Finally, we create a transaction to execute this function with `sendTransactionObject`, passing in:
+  * The transaction object (`txObject`) containing the properly formatted call to the contract method.
+  * An object with the `from` property, the address which will pay the fees for the transaction.
+* Boom! Wait for confirmation with `waitReceipt` and return the transaction hash to the client-side as JSON.
 
 ----------------------------------
 
@@ -91,8 +94,8 @@ Once you have the code above saved, click the button and watch the magic happen:
 
 # Conclusion
 
-In this tutorial, we learned quite a lot! We took a quick look at one of Ethereum’s most powerful development tool - Truffle. We used it to compile our smart contract. Then we deployed our smart contract with few lines of Javascript code and called two methods on that smart contract.
+Congratulations! You've completed the Celo Pathway. In this series of tutorials, we learned quite a lot! We connected to Celo; created and funded an account on the Alfajores testnet; transferred and swapped tokens; then deployed a smart contract with few lines of JavaScript code and called two methods on that smart contract.
 
-We have only covered a very small area of contract development. We invite you to keep experimenting on your own, and we will be providing more advanced Celo tutorials shortly to help you get to the next level.
+We have only covered a very small portion of smart contract development, however there are many existing Solidity resources. We invite you to keep experimenting on your own, and we will be providing more advanced Celo tutorials shortly to help you bring your knowledge and skills to the next level.
 
-If you had any difficulties following this tutorial or simply want to discuss Celo and DataHub tech with us you can[ join our community](https://discord.gg/Chhuv5zHy3) today!
+If you had any difficulties following this tutorial or simply want to discuss Celo and DataHub tech with us you can [join our community](https://discord.gg/Chhuv5zHy3) today!

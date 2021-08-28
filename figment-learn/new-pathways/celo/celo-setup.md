@@ -1,6 +1,6 @@
 The following software is required to set up and complete the **Celo** Pathway
 
-* [**Node.js v14 or higher installed**](https://nodejs.org/)
+* [**Node.js v14.17.5 or higher installed**](https://nodejs.org/)
 * [**`yarn` installed**](https://yarnpkg.com/getting-started/install)
 * [**`git` installed**](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
@@ -15,6 +15,10 @@ yarn
 ---------------------------
 
 # Set your key
+
+{% hint style="info" %}
+If you have previously completed a Pathway, you may already have `.env.local`! Just add your Celo API key in the appropriate place and remember to save the file _before_ starting the development server.
+{% endhint %}
 
 Create an `.env.local` file at the root of the directory. Copy and paste the contents of the existing `.env.example` into the new file and save it to disk (you could also rename `.env.example` to `.env.local`).
 

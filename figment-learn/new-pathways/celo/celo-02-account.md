@@ -1,4 +1,5 @@
-Please make sure that you completed the previous step.
+Please make sure that you have completed the previous step, Connecting to Celo.
+
 It’s time to create your first Celo account on the **Alfajores** testnet. Without it, you won’t be able to fully take advantage of Celo's features.
 
 ------------------------
@@ -28,9 +29,8 @@ try {
 //...
 ```
 
-**Need some help?** Check out these links
-* [**To start working with contractkit you need a kit instance**](https://docs.celo.org/developer-guide/sdk-code-reference/summary-2/modules/_kit_#functions)  
-* [**Account documentation**](https://web3js.readthedocs.io/en/v1.4.0/web3-eth-accounts.html)  
+**Need some help?** 
+* [**Account documentation**](https://web3js.readthedocs.io/en/v1.4.0/web3-eth-accounts.html)
 
 {% hint style="info" %}
 [**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
@@ -61,14 +61,14 @@ try {
 
 **What happened in the code above?**
 * First, we create a new `kit` instance.
-* Next, using `web3.eth` we can acces a proxy of the [**web3.js - Ethereum Javascript API**](https://web3js.readthedocs.io/en/v1.4.0/)
-* Next, calling `create` of ``account` module we can create a new account.
-* Finaly to access: 
-    * The address use the `address` property.
-    * The private key use the `privateKey` property.
+* Next, using `web3.eth` we can access a proxy of the [**web3.js - Ethereum Javascript API**](https://web3js.readthedocs.io/en/v1.4.0/)
+* Next, calling `create` from the `account` module, we can create a new account.
+* Finally to access: 
+    * The address, using the `address` property.
+    * The private key, using the `privateKey` property.
 
 {% hint style="tip" %}
-Do not forget to fund the newly created wallet using the [celo faucet](https://celo.org/developers/faucet) in order to activate it!
+Do not forget to fund the newly created wallet using the [Celo developer faucet](https://celo.org/developers/faucet) in order to activate it!
 {% endhint %}
 
 ------------------------
@@ -83,4 +83,4 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 # Next
 
-Now that we have a Celo account created and funded with testnet tokens, let’s move on to querying a Celo node to get the current balance!
+Now that we have a Celo account created and funded with testnet tokens, let’s move on to querying a Celo node to get the current balance of our account!

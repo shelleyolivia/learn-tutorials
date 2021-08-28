@@ -1,4 +1,4 @@
-Our Contract is on-chain, and we're going to learn how to fetch the count stored on the contract. 
+Our Contract is on-chain, and we're going to learn how to fetch the data stored on the contract. 
 
 {% hint style="working" %}
 If you want to learn more about Celo smart contracts, follow the [**Deploy and Interact with Contracts (Remotely)**](https://learn.figment.io/tutorials/hello-contracts) tutorial.
@@ -17,16 +17,16 @@ In `pages/api/celo/getter.ts`, complete the code of the default function.
 ```tsx
 //...
   try {
-    const { contract } = req.body
+    const { contract } = req.body;
     const url = getSafeUrl();
     const kit = newKit(url);
     
     // Create a new contract instance with the HelloWorld contract info
     const instance = undefined;
-    // call the getName function of the on-chain contract
+    // Call the getName function of the on-chain contract
     const name = undefined;
 
-    res.status(200).json(name)
+    res.status(200).json(name);
   }
 //...
 ```
@@ -48,24 +48,24 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```tsx
 //...
   try {
-    const { contract } = req.body
+    const { contract } = req.body;
     const url = getSafeUrl();
     const kit = newKit(url);
     
     const instance = new kit.web3.eth.Contract(
         HelloWorld.abi, 
         contract
-    )
-    const name = await instance.methods.getName().call()
+    );
+    const name = await instance.methods.getName().call();
 
-    res.status(200).json(name)
+    res.status(200).json(name);
   }
 //...
 ```
 
 **What happened in the code above?**
-* First, we create a new instance with the HelloWorld contract info
-* Next, we call the `getName` function of our smart conract
+* First, we create a new instance with the HelloWorld contract info, including the ABI and the `contract` passed in via the request body.
+* Then, we call the `getName` function of our smart contract, chaining the `call` method, because this requires communication with the blockchain.
 
 ----------------------------------
 

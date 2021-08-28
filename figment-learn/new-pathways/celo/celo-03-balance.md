@@ -1,4 +1,4 @@
-Now we have our account created, but wouldn’t it be nice to keep track of cUSD and CELO balances. In this step, we will examine how we can do just that.
+Now that we have our account created, wouldn’t it be nice to keep track of our cUSD and CELO balances? In this step, we will examine how we can do just that!
 
 {% hint style="info" %}
 The Celo blockchain has two native assets, **CELO** (CELO) and the **Celo Dollar** (cUSD). Both of these assets implement the `ERC20` token standard from Ethereum. The CELO asset is managed by the CELO smart contract and Celo Dollars is managed by the cUSD contract. 
@@ -17,7 +17,7 @@ In `pages/api/celo/balance.ts`, complete the code of the **balance** function.
 ```typescript
 //...
   try {
-    const { address } = req.body
+    const { address } = req.body;
     const url = getSafeUrl();
     const kit = newKit(url);
 
@@ -31,7 +31,7 @@ In `pages/api/celo/balance.ts`, complete the code of the **balance** function.
     res.status(200).json({ 
         attoCELO: celoBalance.toString(), 
         attoUSD: cUSDBalance.toString() 
-    })
+    });
   }
 //...
 ```
@@ -39,7 +39,7 @@ In `pages/api/celo/balance.ts`, complete the code of the **balance** function.
 **Need some help?** Check out these links
 * [**We can access the CELO contract via the SDK with kit.contracts.getGoldToken()**](https://docs.celo.org/developer-guide/contractkit/contracts-wrappers-registry#interacting-with-celo-and-cusd)
 * [**We can access the cUSD contract with kit.contracts.getStableToken()**](https://docs.celo.org/developer-guide/contractkit/contracts-wrappers-registry#interacting-with-celo-and-cusd)
-* [**code example**](https://docs.celo.org/developer-guide/start/hellocelo#reading-alfajores)
+* [**Reading from Alfajores**](https://docs.celo.org/developer-guide/start/hellocelo#reading-alfajores)
 
 {% hint style="info" %}
 [**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
@@ -74,11 +74,11 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 * First, we create a new `kit` instance.
-* Next, we call `getGoldToken` method of `contracts` module to access CELO contract, then providing the input address to `balanceOf` return the balance of **CELO** token.
-* Next, we call `getStableToken` method of `contracts` module to access CELO contract, then providing the input address to `balanceOf` return the balance of **cUSD** token.
+* Next, we call the `getGoldToken` method of the `contracts` module to access CELO contract, then providing the input address to the `balanceOf` method, returning the balance of **CELO** token.
+* Next, we call the `getStableToken` method of the `contracts` module to access the cUSD contract, then providing the input address to the `balanceOf` method, returning the balance of **cUSD** token.
 
 {% hint style="tip" %}
-The amount returned by is denominated in **aCELO** and **acUSD**, so to convert it to **CELO** and **acUSD** you'll need to divide it by 10**18 (a stand for `atto`)
+The amount returned by these calls is denominated in **aCELO** and **acUSD**, which stands for "attoCELO" and "attocUSD" - representing [eighteen decimal places](https://en.wikipedia.org/wiki/Atto-). So to convert it to **CELO** and **cUSD** you'll need to divide it by 10**18 💪
 {% endhint %}
 
 ------------------------
@@ -93,4 +93,4 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 # Next
 
-Querying the balance information is fun, but being able to submit transactions and change the state of a blockchain is even better. In our next step, we will dive deeper and submit our first transactions on Celo.
+Querying the balance information is fun, but being able to submit transactions and change the state of a blockchain is even better! In the next step, we will dive deeper and submit our first transactions on Celo.

@@ -1,6 +1,6 @@
-Celo is an open platform that makes financial tools accessible to anyone with a mobile phone. There are one tools that is especially useful when it comes to developing DApps on the Celo network. ContractKit - This is a javascript package that makes it easy to interact with the Celo network and the core Celo Smart Contracts as well as custom ones built by the community.
+Celo is an open platform that makes financial tools accessible to anyone with a mobile phone. There are especially useful toolkits and code libraries when it comes to developing [dApps](https://en.wikipedia.org/wiki/Decentralized_application) on the Celo network. [ContractKit](https://github.com/celo-org/celo-monorepo/tree/master/packages/sdk/contractkit), for example - This is a JavaScript package that makes it easy to interact with the Celo network and the core Celo smart contracts as well as custom ones built by the community.
 
-We are now all set up with our application and we can start writing some Javascript code. The first step here is to connect to the Celo **Alfajores** network using ContractKit.
+We are now all set up with our application and we can start writing some JavaScript code. The first step here is to connect to the Celo **Alfajores** network using ContractKit.
 
 ------------------------
 
@@ -24,8 +24,8 @@ In `pages/api/celo/connect.ts`, complete the code of the function and try to est
 ```
 
 **Need some help?** Check out these links
-* [**To start working with contractkit you need a kit instance**](https://docs.celo.org/developer-guide/sdk-code-reference/summary-2/modules/_kit_#functions)  
-* [**To access web3 using the kit**](https://docs.celo.org/developer-guide/contractkit/usage)  
+* [**ContractKit usage**](https://docs.celo.org/developer-guide/contractkit/usage)  
+* [**To start working with ContractKit you need a kit instance**](https://docs.celo.org/developer-guide/sdk-code-reference/summary-2/modules/_kit_#functions) 
 
 {% hint style="info" %}
 [**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
@@ -50,8 +50,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 * First, we create a new `kit` instance.
-* Next, using `web3.eth` we can acces a proxy of the [**web3.js - Ethereum Javascript API**](https://web3js.readthedocs.io/en/v1.4.0/)
-* Finally, calling `getNodeInfo` method we can query the node to return the protocol version.
+* Next, using `web3.eth` we can access a proxy of the [**web3.js - Ethereum Javascript API**](https://web3js.readthedocs.io/en/v1.4.0/)
+* Finally, calling the `getNodeInfo` method we can query the node to return a slice of the protocol version.
 
 ------------------------
 
@@ -62,7 +62,7 @@ Once the code is complete and the file has been saved, refresh the page to see i
 ![](../../../.gitbook/assets/pathways/celo/celo-connect.gif)
 
 
-Congratulations, you have successfully made function that can connect to the Celo node!
+Congratulations, you have successfully made a function that can connect to the Celo node! This can be applied either on the client-side or server-side, depending on your needs.
 
 -----------------------------
 
