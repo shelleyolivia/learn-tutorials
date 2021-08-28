@@ -56,7 +56,7 @@ Quick overview:
 
 Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
 
-![](../../../.gitbook/assets/pathways/celo/celo-connect.gif)
+![](../../../.gitbook/assets/pathways/tezos/tezos-connect.gif)
 
 
 Congratulations, you have successfully made a function that can connect to the Celo node! This can be applied either on the client-side or server-side, depending on your needs.
