@@ -1,19 +1,4 @@
-# A first contact
-
-The ability to establish a connection is the first step for anyone wanting to discover and travel through web3 space. Fasten your seat belt, it's time to take off 🚀!
-
-------------------------
-
-## Lesson
-
-Connecting to a node works pretty much the same as for a standard web server. There are two actors: Client & server, with a protocol managing how data are transferred from one to the other.
-
-The main difference here is in the protocol. To connect to Tezos, we'll be using `json-rpc`: 
-* `json`, stands for **J**ava**S**cript **O**bject **N**otation, which is a [text format for transferring data](https://www.w3schools.com/js/js_json_intro.asp).
-* `rpc`, stands for **R**emote **P**rocedure **C**all - a way to [call a server-side function](https://en.wikipedia.org/wiki/Remote_procedure_call) from the client-side.
-
-
-Need more info? => [Tezos Toolkit](https://tezostaquito.io/)
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
 ------------------------
 
@@ -64,7 +49,20 @@ Quick overview:
 * `getTezosUrl()` is a helper function to generate a valid endpoint URL.
 * The `TezosToolkit` instance manages the connection.
 * Tezos does not expose a software version for nodes, so we will instead retrieve the Chain ID with `getChainId()`.
+
 ------------------------
+
+# Make sure it works
+
+Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
+
+![](../../../.gitbook/assets/pathways/celo/celo-connect.gif)
+
+
+Congratulations, you have successfully made a function that can connect to the Celo node! This can be applied either on the client-side or server-side, depending on your needs.
+
+-----------------------------
+
 
 ## Next
 
