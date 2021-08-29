@@ -1,5 +1,3 @@
-# A first contact
-
 The ability to establish a connection is the first step for anyone wanting to discover and travel through web3 space. Fasten your seat belt, it's time to take off 🚀!
 
 ------------------------
@@ -12,15 +10,15 @@ The main difference here is in the protocol. To connect to Avalanche, we'll be u
 * `json`, stands for **J**ava**S**cript **O**bject **N**otation, which is a [text format for transferring data](https://www.w3schools.com/js/js_json_intro.asp).
 * `rpc`, stands for **R**emote **P**rocedure **C**all - a way to [call a server-side function](https://en.wikipedia.org/wiki/Remote_procedure_call) from the client-side.
 
-
 Need more info? => [AvalancheGo APIs](https://docs.avax.network/build/avalanchego-apis)
 
 ------------------------
 
 ## Challenge
 
-You are stuck in the web2.0 waiting room and need to *connect* to the web3 world. On the wall, an instruction is engraved:   
-> Decode **pages/api/avalanche/connect.ts** and the door will open!
+{% hint style="tip" %}
+You are stuck in the web2.0 waiting room and need to *connect* to the web3 world. On the wall, an instruction is engraved: Decode **pages/api/avalanche/connect.ts** and the door will open!
+{% endhint %}
 
 ```typescript
 // Fill in the gaps to connect with Avalanche & be one of us =)
@@ -58,6 +56,14 @@ Quick overview:
 * `getNodeVersion` sends the request and retrieves the answer.
 
 ------------------------
+
+# Make sure it works
+
+Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
+
+![](../../../.gitbook/assets/pathways/avalanche/avalanche-connect.gif)
+
+-------------------------
 
 ## Next
 

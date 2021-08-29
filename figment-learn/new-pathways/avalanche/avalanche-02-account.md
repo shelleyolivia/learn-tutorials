@@ -1,10 +1,4 @@
-# Take your keys
-
 Whitout identity how could you expect to interact with any others entities populating the web3 space ? 
-
-------------------------
-
-## Lesson
 
 Conceptually an identity in web3 space is a keypair: 
 * A private one, only know by you. This is your ADN, a proof of your existence. One holding this key, will be a perfect clone of you. 
@@ -19,8 +13,9 @@ Here you learn how pratically set up a keypair.
 
 ## Challenge
 
-A crypto-punk police's officer ask for your identity:   
-> Decode **pages/api/account.ts** and you'll be released.
+{% hint style="tip" %}
+A crypto-punk police's officer ask for your identity: Decode **pages/api/avalanche/account.ts** and you'll be released.
+{% endhint %}
 
 ```typescript
 // fill the gap to obtain your identity :)
@@ -62,6 +57,14 @@ Quick overview:
 * `getAddressString` retrieve the string formated public key
 
 ------------------------
+
+# Make sure it works
+
+Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
+
+![](../../../.gitbook/assets/pathways/avalanche/avalanche-account.gif)
+
+-------------------------
 
 ## Next
 
