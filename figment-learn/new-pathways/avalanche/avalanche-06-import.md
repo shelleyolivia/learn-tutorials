@@ -138,6 +138,6 @@ Congratulations, you've made it this far and successfully completed an AVAX tran
 
 Avalanche team has put together a [good list of examples](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm), be sure to check them out if you need a bit more advanced experience with the Avalanche.js library.
 
-Ready for more? No problem! While the basic Pathway is complete at this point, you are more than welcome to explore other [Avalanche]https://learn.figment.io/protocols/avalanche) tutorials.
+Ready for more? No problem! While the basic Pathway is complete at this point, you are more than welcome to explore other [Avalanche](https://learn.figment.io/protocols/avalanche) tutorials.
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us, you can join [our community](https://discord.gg/fszyM7K) today!
