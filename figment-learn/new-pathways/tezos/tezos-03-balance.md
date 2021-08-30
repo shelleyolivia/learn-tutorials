@@ -1,7 +1,7 @@
 Now that we have our account created, wouldn’t it be nice to keep track of our **tez** balance? In this step, we will examine how we can do just that!
 
 {% hint style="info" %}
-The native token on the **Tezos Blockchain** is **tez** with **ꜩ** symbol
+The native token on the **Tezos Blockchain** is **tez** indicated by the **ꜩ** symbol.
 {% endhint %}
 
 ------------------------
@@ -17,7 +17,7 @@ In `pages/api/tezos/balance.ts`, complete the code of the function and try to re
 ```typescript
 //...
   try {
-    const { address } = req.body
+    const { address } = req.body;
     const url = getTezosUrl();
     const toolkit = new TezosToolkit(url);
     const balance = undefined;
@@ -43,10 +43,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```typescript
 //...
   try {
-    const { address } = req.body
+    const { address } = req.body;
     const url = getTezosUrl();
     const toolkit = new TezosToolkit(url);
-    const balance = await toolkit.tz.getBalance(address)
+    const balance = await toolkit.tz.getBalance(address);
     res.status(200).json(balance.toString());
   }
 //...
@@ -54,11 +54,11 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 * First, we create a new `TezosToolkit` instance.
-* Next, we call the `getBalance` method of `tz` module.
+* Next, we call the `getBalance` method of the `tz` module, passing the address of the account we want to know the balance of.
 
 
 {% hint style="tip" %}
-The amount returned by is denominated in **μꜩ** (mutez), so to convert it to **ꜩ** you'll need to divide it by 10**6 
+The amount returned by `getBalance` is denominated in **μꜩ** (mutez), so to convert it to **ꜩ** you'll need to divide it by 10**6 
 {% endhint %}
 
 

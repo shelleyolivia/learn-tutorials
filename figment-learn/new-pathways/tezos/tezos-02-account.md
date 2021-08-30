@@ -19,7 +19,7 @@ In `pages/api/tezos/account.ts`, complete the code of the function and try to ac
 ```typescript
 //...
   try {
-    const { mnemonic, email, password, secret } = req.body
+    const { mnemonic, email, password, secret } = req.body;
     const url = getTezosUrl();
     const tezos = new TezosToolkit(url);
 
@@ -84,4 +84,4 @@ Once the code is complete and the file has been saved:
 
 # Next
 
-We can now proceed to querying a Tezos node for specific information.In the next step, we will be querying a Tezos node using DataHub on the Florence Testnet, to determine the current balance of our account.
+Nice work! In the next tutorial, we will query a Tezos node using DataHub on the Florence testnet, to determine the current balance of our account.
