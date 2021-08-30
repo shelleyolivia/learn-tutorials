@@ -14,25 +14,25 @@ In `pages/api/avalanche/transfer.ts`, complete the code of the function and try 
 
 ```typescript
 //...
-    //  using keychain load the private key to sign transaction
-    undefined
+    // Using keychain, load the private key to sign transactions
+    undefined;
 
-    // Fetch UTXO (i.e unspent transaction outputs)
+    // Fetch UTXOs (unspent transaction outputs)
     const { utxos } = undefined;
 
     // Determine the real asset ID from its symbol/alias
-    const binTools = BinTools.getInstance()
-    const assetInfo = await chain.getAssetDescription("AVAX")
-    const assetID = binTools.cb58Encode(assetInfo.assetID)
+    const binTools = BinTools.getInstance();
+    const assetInfo = await chain.getAssetDescription("AVAX");
+    const assetID = binTools.cb58Encode(assetInfo.assetID);
 
     // Create a new transaction
-    const transaction = await chain.buildBaseTx(undefined)
+    const transaction = await chain.buildBaseTx(undefined);
 
-    // sign transaction and send
+    // Sign the transaction and send it to the network
     undefined;
     undefined;
 
-    res.status(200).json(hash)
+    res.status(200).json(hash);
   }
 //...
 ```
@@ -42,11 +42,9 @@ In `pages/api/avalanche/transfer.ts`, complete the code of the function and try 
 * [**Manage X-Chain Keys**](https://docs.avax.network/build/tools/avalanchejs/manage-x-chain-keys)
 * [**What The Heck is UTXO**](https://medium.com/bitbees/what-the-heck-is-utxo-ca68f2651819)
 
-
 {% hint style="success" %}
 [**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
 {% endhint %}
-
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
@@ -57,52 +55,52 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```typescript
 //...
   try {
-    const { secret, amount, recipeint, address } = req.body
-    const client = getAvalancheClient()
+    const { secret, amount, recipeint, address } = req.body;
+    const client = getAvalancheClient();
     const chain = client.XChain(); 
-    const keychain = chain.keyChain()
-    keychain.importKey(secret)
+    const keychain = chain.keyChain();
+    keychain.importKey(secret);
 
     // Fetch UTXO (i.e unspent transaction outputs)
-    const { utxos } = await chain.getUTXOs(address)
+    const { utxos } = await chain.getUTXOs(address);
 
     // Determine the real asset ID from its symbol/alias
     // We can also get the primary asset ID with chain.getAVAXAssetID() call
-    const binTools = BinTools.getInstance()
-    const assetInfo = await chain.getAssetDescription("AVAX")
-    const assetID = binTools.cb58Encode(assetInfo.assetID)
+    const binTools = BinTools.getInstance();
+    const assetInfo = await chain.getAssetDescription("AVAX");
+    const assetID = binTools.cb58Encode(assetInfo.assetID);
 
     // Create a new transaction
     const transaction = await chain.buildBaseTx(
-      utxos, // unspent outputs	
-      new BN(amount), // transaction amount formatted as a BigNumber
+      utxos, // Unspent transaction outputs	
+      new BN(amount), // Transaction amount, formatted as a BigNumber
       assetID, // AVAX asset
-      [recipeint], // addresses to send the funds
-      [address], // addresses being used to send the funds from the UTXOs provided
-      [address], // addresses that can spend the change remaining from the spent UTXOs
-    )
+      [recipient], // Addresses we are sending the funds to (receiver)
+      [address], // Addresses being used to send the funds from the UTXOs provided (sender)
+      [address], // Addresses that can spend the change remaining from the spent UTXOs (payer)
+    );
 
-    // sign transaction and send
-    const signedTx = transaction.sign(keychain)
-    const hash = await chain.issueTx(signedTx)
+    // Sign the transaction and send it to the network
+    const signedTx = transaction.sign(keychain);
+    const hash = await chain.issueTx(signedTx);
 
-    res.status(200).json(hash)
+    res.status(200).json(hash);
   }
 //...
 ```
 
 **What happened in the code above?**
-* First, calling `importKey(secret)` we pass allow keypair to sign transaction
+* First, calling `importKey()` we pass the private key (`secret`), this allows the keypair to sign transactions.
 * Next, we fetch the latest unspent transaction outputs with `getUTXOs`.
 * Next, we determine the **assetID** using `BinTools.cb58Encode` method.
-* Next, we build a base transaction using `buildBasTx` passing:
-  * The unspent outputs
-  * The transaction amout formatted as BigNumber
-  * The assetID
-  * The recipent address
-  * The sender address
-  * The payer address
-* Finaly, we sign and send the transaction and return the transaction hash
+* Next, we build a base transaction using `buildBaseTx` passing:
+  * The unspent outputs,
+  * The transaction amout formatted as BigNumber,
+  * The assetID,
+  * The recipent address,
+  * The sender address,
+  * The payer address. Note that the sender and payer in this example are the same, but this is not required.
+* Finally, we sign and send the transaction and return the transaction hash.
 
 {% hint style="success" %}
 A UTXO is an unspent transaction output. In an accepted transaction in a valid blockchain payment system, only unspent outputs can be used as inputs to a transaction. When a transaction takes place, inputs are deleted and outputs are created as new UTXOs that may then be consumed in future transactions.
@@ -110,7 +108,7 @@ A UTXO is an unspent transaction output. In an accepted transaction in a valid b
 
 
 {% hint style="tip" %}
-Remember, **AVAX** asset is using a 9-digit denomination and **AVAX** is the primary asset on the X chain.
+Remember, the **AVAX** asset is using a 9-digit denomination and **AVAX** is the primary asset on the X-Chain.
 {% endhint %}
 
 
@@ -129,4 +127,4 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 # Next
 
-We've learned how to prepare, sign and broadcast a simple transaction on Avalanche. With basically a few lines of code you can transfer funds on the network, though Avalanche.js provides a wide range of examples on how to construct a transaction with a bit more complex properties, for different use cases. Our next topic is the cross-chain transfers.
+We've learned how to prepare, sign and broadcast a simple transaction on Avalanche. With only a few lines of code, you can transfer funds on the network. AvalancheJS provides a range of examples on how to construct a transaction with more complex properties, for different use cases. In the next tutorial, we will examine the topic of cross-chain transfers.

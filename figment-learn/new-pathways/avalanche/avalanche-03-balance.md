@@ -1,7 +1,7 @@
-Now that you have created an account on the **Avalanche** `fuji` network, and funded it using the faucet - We're going to check the balance of our account to make sure everything went alright.
+Now that you have created an account on the Avalanche **Fuji** testnet and funded it using the faucet - We're going to check the balance of the account to make sure everything went alright.
 
 {% hint style="info" %}
-The native token on the **Avalanche blockchain** is **AVAX**
+The native token of the **Avalanche** blockchain is **AVAX**
 {% endhint %}
 
 ------------------------
@@ -15,17 +15,17 @@ In `pages/api/avalanche/balance.ts`, complete the code of the default function.
 ```typescript
 //...
   try {
-    const { address } = req.body
-    const client = getAvalancheClient()
+    const { address } = req.body;
+    const client = getAvalancheClient();
     const chain = client.XChain(); 
     const balance = undefined; 
-    res.status(200).json(balance.balance)
+    res.status(200).json(balance.balance);
   }
 //...
 ```
 
 **Need some help?** Check out these tips
-* `getBalance` method of `AVMAPI` module look like a good candidate
+* The `getBalance` method of the `AVMAPI` module looks like a good candidate!
 * [**Code examples**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm)  
 
 ------------------------
@@ -35,19 +35,17 @@ In `pages/api/avalanche/balance.ts`, complete the code of the default function.
 ```typescript
 //...
   try {
-    const { address } = req.body
-    const client = getAvalancheClient()
+    const { address } = req.body;
+    const client = getAvalancheClient();
     const chain = client.XChain(); 
     const balance = await chain.getBalance(address, "AVAX") as BalanceT; 
-    res.status(200).json(balance.balance)
+    res.status(200).json(balance.balance);
   }
 //...
 ```
 
 Quick review of the solution:
-* Calling `importKey` method will rebuild the expected keypair.
-* `getAddressString` retrieve the string formated public key.
-* `getBalance` method will give what you are looking for.
+* The `getBalance` method will return the current balance of the specified asset (like AVAX) for the specified address.
 
 {% hint style="tip" %}
 The amount returned by is denominated in **nAVAX**, so to convert it to **AVAX** you'll need to divide it by 10**9 
