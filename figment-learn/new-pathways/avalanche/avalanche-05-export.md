@@ -1,13 +1,13 @@
 Since Avalanche operates on 3 chains (X/P/C), it allows users to transfer tokens in each direction.
 
-AVAX tokens exist on the X-Chain, where they can be traded, on the P-Chain, where they can be provided as a stake when validating the Primary Network, and on the C-Chain, where they can be used in smart contracts or to pay for gas. Avalanche supports movement of AVAX between these chains.  We'll be concentrating our efforts on X->C swaps, with C-Chain being used for smart contract deployments. 
+AVAX tokens exist on the X-Chain, where they can be traded; on the P-Chain, where they can be provided as a stake when validating the Primary Network; and on the C-Chain, where they can be used in smart contracts or to pay for gas fees. Avalanche supports movement of AVAX between these chains. We'll be concentrating our efforts on X->C swaps, since the C-Chain is used for smart contract deployments. 
 
-Interchain transfers are performed via a 2-step process:
+Inter-chain transfers are performed via a 2-step process:
 
-* Create X-Chain export transaction
-* Create C-Chain import transaction
+* Create the X-Chain export transaction -> (this tutorial)
+* Create the C-Chain import transaction
 
-On this step we will focus on **X-Chain export transaction**
+Here we will focus on the first part, the **X-Chain export transaction**.
 
 ------------------------
 
@@ -22,11 +22,11 @@ In `pages/api/avalanche/export.ts`, complete the code of the function and try to
 ```typescript
 //...
   try {
-    const { secret } = req.body
-    const client = getAvalancheClient()
+    const { secret } = req.body;
+    const client = getAvalancheClient();
 
     // Total amount we're transferring = 0.05 AVAX
-    const amount = "50000000"
+    const amount = "50000000";
 
     // Taking inspiration for xChain do the same for cChain
     const [ xChain   , cChain    ] = [ client.XChain()            , undefined ];
@@ -34,7 +34,7 @@ In `pages/api/avalanche/export.ts`, complete the code of the function and try to
     const [ xKeypair , cKeypair  ] = [ xKeychain.importKey(secret), undefined ];
     const [ xAddress , cAddress  ] = [ xKeypair.getAddressString(), undefined ];
 
-    // Fetch UTXOs (i.e unspent transaction outputs)
+    // Fetch UTXOs (unspent transaction outputs)
     const { utxos } = await xChain.getUTXOs(xAddress)
 
     // Get the real ID for the cChain
@@ -54,7 +54,6 @@ In `pages/api/avalanche/export.ts`, complete the code of the function and try to
 **Need some help?** Check out these links
 * [**Code examples**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm)  
 * [**Manage X-Chain Keys**](https://docs.avax.network/build/tools/avalanchejs/manage-x-chain-keys)
-* [**What The Heck is UTXO**](https://medium.com/bitbees/what-the-heck-is-utxo-ca68f2651819)
 
 {% hint style="info" %}
 [**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
@@ -88,7 +87,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
     // Prepare the export transaction from X -> C chain
     const exportTx = await xChain.buildExportTx(
-        utxos, // Unspent transaction outpouts
+        utxos, // Unspent transaction outputs
         new BN(amount), // Transfer amount
         chainId, // Target chain ID (for C-Chain)
         [cAddress], // Addresses being used to send the funds from the UTXOs provided
@@ -105,12 +104,12 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we need to build our C-Chain keypair and it's working exactly the same way for X-Chain.
+* First, we need to build our C-Chain keypair. This works exactly the same way for X-Chain.
 * Next, we determine the chainId.
-* Next, we build our transaction the same way for a simple **AVAX** transfer:
+* Next, we build our transaction the same way as for a simple **AVAX** transfer:
   * `cAddress` replacing `sender`.
   * `chainId` replacing `assetId`.
-* Finaly, we sign and send the transaction and return the transaction hash.
+* Finally, we sign and send the transaction and return the transaction hash.
 
 ------------------------
 
@@ -124,4 +123,4 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 # Next
 
-Our next topic is to end the cross-chain transfers. Time to import to C-Chain!  Let's go
+Our next topic is to process the import of the cross-chain transfer. Time to import the AVAX we just sent to C-Chain. Let's go!

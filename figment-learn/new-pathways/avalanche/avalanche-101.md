@@ -71,18 +71,18 @@ The C-Chain gas price is 4.7e-7 AVAX/gas. The C-Chain gas limit is 10e8.
 
 Protocols in the Avalanche family are very fast. They can achieve irreversible finality in 1-2 seconds, quicker than a typical credit card transaction. They support many thousands of transactions per second, over Visa’s typical throughput.
 
-Avalanche protocols are lightweight and sustainable. Unlike Nakamoto protocols, they use very little energy, and when there is no work to do, the system quiesces (waits in a low-energy-consumption state.)
+Avalanche protocols are lightweight and sustainable. Unlike Nakamoto protocols, they use very little energy, and when there is no work to do, the system quiesces (waits in a low energy consumption state).
 
 ## Languages supported
 
-Avalanche's C-Chain is the standard Ethereum suite of tools.
+Avalanche's C-Chain uses the standard Ethereum suite of tools.
 
-The X-Chain and P-Chain use a Typescript library that supports native javascript cross-platform.
+The X-Chain and P-Chain use a Typescript library that supports native JavaScript cross-platform.
 
 ## EVM compatibility
 
-The C-Chain is fully compatible with the EVM and provides support for any Ethereum applications as the EVM API is identical to Geth’s API.
+The C-Chain is fully compatible with the EVM and provides support for any Ethereum applications as the EVM API is identical to Geth's API.
 
 ## Role of the AVAX token
 
-AVAX is the Avalanche network’s native token. When one issues a transaction to a blockchain on the Avalanche network they pay a fee denominated in AVAX.
+AVAX is the Avalanche network's native token. All transactions on the Avalanche network require a fee denominated in AVAX.

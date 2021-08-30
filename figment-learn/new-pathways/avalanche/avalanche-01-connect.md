@@ -1,29 +1,29 @@
-[Avalanche.js](https://github.com/ava-labs/avalanchejs) is a client Javascript package that makes it easy to interact with the Avalanche blockchain nodes, query data, submit transactions and offers plenty of other functionality. It's the official package developed by Avalanche, and is a preferred method of communicating with nodes on the private or public networks for development purposes.
+[Avalanche.js](https://github.com/ava-labs/avalanchejs) is a client JavaScript package that makes it easy to interact with Avalanche blockchain nodes, query data, submit transactions and offers plenty of other functionality. It's the official package developed by Avalanche, and is a preferred method of communicating with nodes on the private or public networks for development purposes.
 
 ------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/avalanche/connect.ts`, complete the code of the function and try to establish your first connection to the avalanche network. To verify your connection has been correctly established, try to return the current protocol version.
+In `pages/api/avalanche/connect.ts`, complete the code of the function and try to establish your first connection to the Avalanche network. To verify your connection has been correctly established, try to return the current protocol version.
 {% endhint %}
 
 ```typescript
 //...
   try {
-    const client = undefined
-    const info = undefined
-    const version = undefined
-    res.status(200).json(version)
+    const client = undefined;
+    const info = undefined;
+    const version = undefined;
+    res.status(200).json(version);
   }
 //...
 ```
 
 **Need some help?** Check out these tips
+* [**Check out the `AvalancheJS` library**](https://github.com/ava-labs/avalanchejs)
 * Use the `getAvalancheClient` helper function.
 * Use the `Info` method on the client.
 * Use the `getNodeVersion` method on the client info.
-* [**`avalanchejs` library**](https://github.com/ava-labs/avalanchejs)
 
 ------------------------
 
@@ -32,10 +32,10 @@ In `pages/api/avalanche/connect.ts`, complete the code of the function and try t
 ```typescript
 //...
   try {
-    const client = getAvalancheClient()
-    const info = client.Info()
-    const version = await info.getNodeVersion()
-    res.status(200).json(version)
+    const client = getAvalancheClient();
+    const info = client.Info();
+    const version = await info.getNodeVersion();
+    res.status(200).json(version);
   }
 //...
 ```
@@ -43,7 +43,7 @@ In `pages/api/avalanche/connect.ts`, complete the code of the function and try t
 **What happened in the code above?**
 * We instantiate an `Avalanche` object with `getAvalancheClient`.
 * Calling the `Info` method returns a reference to the Info RPC.
-* `getNodeVersion` sends the request and retrieves the answer.
+* `getNodeVersion` sends the request and retrieves the current version of Avalanche running on the node.
 
 ------------------------
 
@@ -57,5 +57,5 @@ Once the code is complete and the file has been saved, refresh the page to see i
 
 # Next
 
-Now that we have successfully connected to Avalanche node using DataHub, we are ready to move onto the next tutorial. We have also created the foundation for the next steps.
+Now that we have successfully connected to Avalanche node using DataHub, we are ready to move onto the next tutorial. We have also created the foundation for the next step, creating an account.
 
