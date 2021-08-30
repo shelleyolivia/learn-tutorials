@@ -215,6 +215,7 @@
     * [Build a PoE Decentralized App](network-documentation/polkadot/tutorials/build-a-poe-decentralized-app.md)
     * [Implement Social Recovery on Polkadot](network-documentation/polkadot/tutorials/implement-social-recovery-on-polkadot.md)
     * [Implement Multisig Accounts on Polkadot](network-documentation/polkadot/tutorials/implement-multisig-accounts-on-polkadot.md)
+    * [How to build Custom Pallets with Substrate and FRAME](network-documentation/polkadot/tutorials/custom-pallet.md)
 * [⛽ Polygon \(Matic\)](network-documentation/matic/README.md)
   * [✏ Polygon \(Matic\) 101](network-documentation/matic/matic-101.md)
   * [👀 Resources](network-documentation/matic/resources.md)
