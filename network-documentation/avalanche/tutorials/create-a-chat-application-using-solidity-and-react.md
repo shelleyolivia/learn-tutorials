@@ -5,8 +5,8 @@ Today we will build a decentralized chat application on Avalanche's Fuji test-ne
 # Prerequisites
 
 
-* Basic familiarity with Reactjs and Solidity
-* Should've completed [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) tutorial
+* Basic familiarity with React and Solidity
+* Should've completed [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://learn.figment.io/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) tutorial
 
 ## Requirements
 

@@ -685,7 +685,7 @@ That's all of the actual unit test code we'll look at in this tutorial. The rest
 * We saw how to leverage conditional Rust compilation to bridge the gap to be able to inject promise results and data dependencies to be able to unit test callback functions. Using conditional compilations, we were able to expose hooks when the code is compiled in test mode - with no impact to the release build.
 * We reviewed the basic pattern for working with the `VMContext`, provided by the NEAR Rust SDK, for setting up the context for contract function execution
 * We reviewed how to inspect transaction receipts to check that cross-contract workflows are correctly setup.
-* We went over the key ingredients for unit testing contract functions. We reviewed my approach with building a `TestContext`to help keep the test code cleaner.
+* We went over the key ingredients for unit testing contract functions. We reviewed my approach with building a `TestContext` to help keep the test code cleaner.
 
 
 > Contracts are dumb - it's up to us to be smart and responsible. Do not take any shortcuts or cut corners. Establish and follow best practices with strict discipline. Do not ignore risk - manage risk at all levels and layers. Be strategic and think long term. Do your homework and never stop learning. Learn from others and share your knowledge with the community.
@@ -694,7 +694,7 @@ The Internet is the greatest revolution in humanity's history. It provides the p
 
 # Next Steps
 
-Circling back to the [Fungible Token Core Standard NEP-141](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/2-fungible-token), I mentioned a need for account registration as part of the full FT solution. The NEAR community discussion on the account registration topic has been awesome. It has led to a different path that focuses on the storage staking problem specifically - we are now calling it the [Account Storage Standard](https://github.com/near/NEPs/discussions/145#discussioncomment-342580). I expect the standard to soon be finalized. Once the community has reached consensus and finalized the new standard, I'll follow up and write it all up here for you.
+Circling back to the [Fungible Token Core Standard NEP-141](https://learn.figment.io/tutorials/2-fungible-token), I mentioned a need for account registration as part of the full FT solution. The NEAR community discussion on the account registration topic has been awesome. It has led to a different path that focuses on the storage staking problem specifically - we are now calling it the [Account Storage Standard](https://github.com/near/NEPs/discussions/145#discussioncomment-342580). I expect the standard to soon be finalized. Once the community has reached consensus and finalized the new standard, I'll follow up and write it all up here for you.
 
 We still have only scratched the surface. My brain is full of ideas on how to monetize NEAR smart contracts using the STAKE token as a pillar for the DeFi ecosystem on NEAR. I would love to hear your ideas and thoughts from all the brains in the NEAR community. Until next time ...
 

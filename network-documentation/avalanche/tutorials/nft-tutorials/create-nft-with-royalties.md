@@ -8,13 +8,13 @@ Refer to the official Ethereum developer documentation to learn more about [ERC-
 
 # Prerequisites
 
-In preparation for the tutorial, you will need to have a basic understanding of [Remix IDE](https://remix.ethereum.org/) and Solidity [smart contracts](https://solidity-by-example.org/). Please refer to the Avalanche [smart contract tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) for more information on the Avalanche wallet.
+In preparation for the tutorial, you will need to have a basic understanding of [Remix IDE](https://remix.ethereum.org/) and Solidity [smart contracts](https://solidity-by-example.org/). Please refer to the Avalanche [smart contract tutorial](https://learn.figment.io/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) for more information on the Avalanche wallet.
 
 # Write a smart contract using Remix IDE
 
 In the Remix IDE, create a new file and paste this ERC721 smart contract which imports the token standard from OpenZeppelin. The `import` lines will be processed by the Solidity compiler being run by the Remix IDE, and all of the dependencies \(required files\) will be brought into the Remix workspace.
 
-```
+```js
 // contracts/GameItem.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -103,7 +103,7 @@ We can now compile the amended ERC721 smart contract and check for warnings, mak
 
 ![](../../../../.gitbook/assets/compile-ERC721.png)
 
-Next, download and install the Metamask wallet for your browser. Create a new wallet in Metamask, then [follow our quick guide](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask) to connect to the Avalanche Fuji C-Chain. You will need to have a valid DataHub API key for Avalanche. 
+Next, download and install the Metamask wallet for your browser. Create a new wallet in Metamask, then [follow our quick guide](https://learn.figment.io/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-meta-mask) to connect to the Avalanche Fuji C-Chain. You will need to have a valid DataHub API key for Avalanche. 
 
 Request AVAX from the test faucet for the deployment, from [https://faucet.avax-test.network/](https://faucet.avax-test.network/).
 
@@ -123,9 +123,9 @@ Congratulations! You have successfully added the NFT as collectible in the Avala
 
 # Conclusion
 
-Thank you for completing this tutorial, you should now know how to create an NFT with royalties on Avalanche using a simple Solidity smart contract. Have fun with it! If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out this [Avalanche NFT tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/create-mint-transfer-nft)!.
+Thank you for completing this tutorial, you should now know how to create an NFT with royalties on Avalanche using a simple Solidity smart contract. Have fun with it! If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out this [Avalanche NFT tutorial](https://learn.figment.io/tutorials/create-mint-transfer-nft)!
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our Discord**](https://discord.gg/fszyM7K)!
 
 # About the author
 

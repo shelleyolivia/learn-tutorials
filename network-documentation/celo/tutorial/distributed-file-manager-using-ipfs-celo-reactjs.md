@@ -269,7 +269,7 @@ Now we need a **Celo** wallet, where we would keep our funds, required for all t
 
 ### **Add .env file**
 
-Create a `.env` file in the project root folder. Please take a note that dot \(.\) is necessary for the `.env` file name. Now copy your Celo wallet's mnemonic in the .env file as shown below. In the .env file, **MNEMONIC** should be enclosed within double-quotes \(" "\). If you are facing any difficulty in setting up .env file then please refer to **Extra Guides** on [dotenv and .env](https://learn.figment.io/network-documentation/extra-guides/dotenv-and-.env).
+Create a `.env` file in the project root folder. Please take a note that dot \(.\) is necessary for the `.env` file name. Now copy your Celo wallet's mnemonic in the .env file as shown below. In the .env file, **MNEMONIC** should be enclosed within double-quotes \(" "\). If you are facing any difficulty in setting up .env file then please refer to **Extra Guides** on [dotenv and .env](https://docs.figment.io/network-documentation/extra-guides/dotenv-and-.env).
 
 ```bash
 DATAHUB_CELO_API=<your_datahub_api>

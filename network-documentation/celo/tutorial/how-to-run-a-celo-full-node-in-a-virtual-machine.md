@@ -129,7 +129,7 @@ Docker is required for running the light client.
 
 ## Use curl to fetch the script
 
-To learn about `.env` files check out this [guide](https://learn.figment.io/network-documentation/extra-guides/dotenv-and-.env).
+To learn about `.env` files check out this [guide](https://docs.figment.io/network-documentation/extra-guides/dotenv-and-.env).
 
 We are using `curl` to fetch the information stored on [Gist](https://docs.github.com/en/github/writing-on-github/editing-and-sharing-content-with-gists/creating-gists), a free site that GitHub provides for sharing code and other documents.
 

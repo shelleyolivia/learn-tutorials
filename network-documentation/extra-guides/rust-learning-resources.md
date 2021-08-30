@@ -66,5 +66,5 @@ The Rust Language Cheat Sheet has a good section of [Coding Guides](https://chea
   * Uses the `wasm32-unknown-unknown` target triple, compiles to WebAssembly `.wasm`
   * Check out the[ NEAR CLI](https://docs.near.org/docs/tools/near-cli)
   * Learn more about the [NEAR SDK](https://docs.near.org/docs/develop/contracts/rust/near-sdk-rs) \(see also: [docs.rs](https://docs.rs/near-sdk/3.1.0/near_sdk/)\)
-  * Check out the Learn tutorial - [Write and deploy a smart contract in Rust](https://learn.figment.io/network-documentation/near/tutorials/write-and-deploy-a-smart-contract-on-near)
+  * Check out the Learn tutorial - [Write and deploy a smart contract in Rust](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near)
 

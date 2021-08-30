@@ -12,7 +12,7 @@ We assume that you’re already familiar with [**DataHub**](https://datahub.figm
 
 # Create the Asset
 
-Our asset will exist on the [X-Chain](https://docs.avax.network/learn/platform-overview#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain API](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api).
+Our asset will exist on the [X-Chain](https://docs.avax.network/learn/platform-overview#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain API](https://docs.figment.io/network-documentation/avalanche/rpc-and-rest-api/).
 
 The function signature for this method is:
 

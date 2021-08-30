@@ -10,9 +10,9 @@ Delegation involves giving some of your staking power to a specific validator on
 
 If you have completed the Secret Pathway, you should have already taken care of these prerequisites. For this tutorial you must:
 
-* Install node.js and npm, and set up your DataHub environment [\(see Tutorial 1\)](https://learn.figment.io/network-documentation/secret/tutorials/1.-connecting-to-a-secret-node-using-datahub)
-* Create an account on the Secret testnet [\(see Tutorial 2\)](https://learn.figment.io/network-documentation/secret/tutorials/2.-setting-up-your-wallet)
-* Make sure you have testnet tokens in your account [\(see Tutorial 3\)](https://learn.figment.io/network-documentation/secret/tutorials/3.-querying-the-secret-blockchain)
+* Install node.js and npm, and set up your DataHub environment 
+* Create an account on the Secret testnet 
+* Make sure you have testnet tokens in your account 
 
 # Delegate to a Validator
 

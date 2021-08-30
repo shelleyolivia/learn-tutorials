@@ -88,7 +88,7 @@ main().catch((err) => {
 
 ## Wrapping Up
 
-That’s it! This tutorial has taught you how to transfer AVAX native tokens from the C-chain to an ETH wallet. Also, this has shown how Avalanche blockchain C-chain is compatible with the usual web3 library. This is a powerful aspect of the Avalanche blockchain, as it allows Ethereum devlopers to easily port their work over to the Avalanche side.
+That’s it! This tutorial has taught you how to transfer AVAX native tokens from the C-chain to an ETH wallet. Also, this has shown how Avalanche blockchain C-chain is compatible with the usual web3 library. This is a powerful aspect of the Avalanche blockchain, as it allows Ethereum developers to easily port their work over to the Avalanche side.
 
-Try transfering your Fuji AVAX tokens by running this script and see if it worked.
+Try transferring your Fuji AVAX tokens by running this script and see if it worked.
 

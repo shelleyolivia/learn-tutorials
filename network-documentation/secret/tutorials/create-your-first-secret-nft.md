@@ -8,10 +8,10 @@ At a high level, an NFT has a number of important properties. First we are inter
 
 # Prerequisites
 
-This tutorial assumes that you have completed the [Secret Learn Pathway](https://learn.figment.io/network-documentation/secret/secret-pathway) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in section 5 of the Pathway.
+This tutorial assumes that you have completed the [Secret Learn Pathway](https://learn.figment.io/pathways/secret-pathway) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in section 5 of the Pathway.
 # Requirements
 
-* The latest version of NodeJS installed \(use of nvm, the node version manager, is _encouraged_ for web3 developers\)
+* The latest version of NodeJS installed \(use of nvm, the node version manager, is _encouraged_ for Web 3 developers\)
 * A code editor like VSCode, Theia, Atom, _etc_.
 * Required JavaScript packages –
   * secretjs - for the Secret Network JavaScript API
@@ -32,7 +32,7 @@ We will connect to an already deployed instance of the [snip721 reference implem
 
 As we will be frequently communicating with the contract, the first thing we will do is add the contract address to our `.env` file:
 
-```
+```text
 SECRET_NFT_CONTRACT='secret166tjlgmahhjrl8ndegq8xmzjxfe6p6h4hdvx6a'
 ```
 

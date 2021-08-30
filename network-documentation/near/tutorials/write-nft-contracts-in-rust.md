@@ -20,14 +20,13 @@ The NEAR team recommends using Rust for any smart contracts of a financial natur
 
 If you have completed the NEAR Pathway, you should have already taken care of these prerequisites. For this tutorial you must:
 
-* Install node.js and npm, and set up your DataHub environment [\(see Tutorial 1\)](https://learn.figment.io/network-documentation/near/tutorials/1.-connecting-to-a-near-node-using-datahub)
-* Create an account on the NEAR Testnet [\(see Tutorial 2\)](https://learn.figment.io/network-documentation/near/tutorials/2.-creating-your-first-near-account-using-the-sdk)
-* Install the NEAR CLI [\(also in Tutorial 2\)](https://learn.figment.io/network-documentation/near/tutorials/2.-creating-your-first-near-account-using-the-sdk)
+* Install Node.js and npm, and set up your DataHub environment
+* Create an account on the NEAR Testnet
+* Install the NEAR CLI
 
 # Installing the Toolchain
 
 Before we can start working on the Rust contract, we need to install a few more tools.
-
 
 [rustup.rs](https://rustup.rs/) provides Rust installers for Unix and Windows platforms. If you're using Unix, run the following command to install `rustup`, the Rust meta-installer:
 
