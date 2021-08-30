@@ -2,7 +2,7 @@ In this steps we will learn how to connect to a Tezos node via DataHub, using fu
 
 ------------------------
 
-## Challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/tezos/connect.ts`, complete the code of the function and try to establish your first connection to the tezos network. To verify the connection is ok, try to return the chainId.
@@ -34,7 +34,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ------------------------
 
-## Solution
+# Solution
 
 ```typescript
   try {
@@ -63,6 +63,6 @@ Once the code is complete and the file has been saved, refresh the page to see i
 
 -----------------------------
 
-## Next
+# Next
 
 Congratulations! We have connected to the Tezos blockchain and queried an account balance with a few lines of JavaScript code. We can now proceed to creating an account for use on Florence, the Tezos testnet.
