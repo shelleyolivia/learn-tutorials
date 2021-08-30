@@ -1,7 +1,7 @@
 Our Contract is on-chain, and we're going to learn how to fetch the data stored on the contract. 
 
 {% hint style="info" %}
-If you want to learn more about Tezos smart contracts, follow the [**The Taco Shop Smart Contract**](https://ligolang.org/docs/tutorials/get-started/tezos-taco-shop-smart-contract) tutorial.
+If you want to learn more about Tezos smart contracts, follow [**The Taco Shop Smart Contract**](https://ligolang.org/docs/tutorials/get-started/tezos-taco-shop-smart-contract) tutorial.
 {% endhint %}
 
 ------------------------
@@ -9,7 +9,7 @@ If you want to learn more about Tezos smart contracts, follow the [**The Taco Sh
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/tezos/getter.ts`, complete the code of the function and try to read the value of the counter of the smart contract. 
+In `pages/api/tezos/getter.ts`, complete the code of the function and try to read the value of the counter stored in the smart contract. 
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -17,7 +17,7 @@ In `pages/api/tezos/getter.ts`, complete the code of the function and try to rea
 ```typescript
 //...
   try {
-    const { mnemonic, email, password, secret, contract } = req.body
+    const { mnemonic, email, password, secret, contract } = req.body;
     const url = getTezosUrl();
     const tezos = new TezosToolkit(url);
 
@@ -27,9 +27,9 @@ In `pages/api/tezos/getter.ts`, complete the code of the function and try to rea
       password,
       mnemonic,
       secret
-    )
+    );
 
-    // use the contract module to get the storage
+    // Use the contract module to get the storage
     const counter = undefined;
 
     // @ts-ignore
@@ -54,7 +54,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```typescript
 //...
   try {
-    const { mnemonic, email, password, secret, contract } = req.body
+    const { mnemonic, email, password, secret, contract } = req.body;
     const url = getTezosUrl();
     const tezos = new TezosToolkit(url);
 
@@ -64,9 +64,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
       password,
       mnemonic,
       secret
-    )
+    );
 
-    const counter = await tezos.contract.getStorage(contract)
+    const counter = await tezos.contract.getStorage(contract);
 
     // @ts-ignore
     res.status(200).json(counter.toString());
@@ -77,7 +77,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 **What happened in the code above?**
 * First, we create a new `TezosToolkit` instance.
 * Next, we import our wallet data using `importKey`.
-* Finaly, using `getStorage` function of `contract` module we return the counter stored on the contract.
+* Then, using the `getStorage` function of the `contract` module, we return the counter stored on the contract.
+* Finally, we send the `counter` value converted `toString` back to the client-side as JSON.
 
 ------------------------
 
@@ -91,4 +92,4 @@ Once you have the code above saved, click the button and watch the magic happen:
 
 # Next
 
-Now, time for the last challenge! Time to modify the state of the contract and thus the state of the blockchain. Let's go!
+Now it is time for the final challenge: Modify the state of the contract and thus the state of the blockchain. Let's go!

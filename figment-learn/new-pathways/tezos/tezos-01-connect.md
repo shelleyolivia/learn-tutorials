@@ -1,11 +1,11 @@
-In this steps we will learn how to connect to a Tezos node via DataHub, using functions from the Taquito JavaScript library. In the previous step, we set up the project directory and installed the Taquito library into our project using the node package manager.
+In this tutorial we will learn how to connect to a Tezos node via DataHub, using functions from the Taquito JavaScript library.
 
 ------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/tezos/connect.ts`, complete the code of the function and try to establish your first connection to the tezos network. To verify the connection is ok, try to return the chainId.
+In `pages/api/tezos/connect.ts`, complete the code of the function and try to establish your first connection to the Tezos network. To verify that the connection has been made, try to return the chainId.
 {% endhint %}
 
 ```typescript
@@ -49,15 +49,15 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* `getTezosUrl` is a helper function to generate a valid endpoint URL.
+* `getTezosUrl` is a helper function used to generate a valid endpoint URL.
 * The `TezosToolkit` instance manages the connection.
-* Tezos does not expose a software version for nodes, so we will instead retrieve the Chain ID with `getChainId`.
+* Unlike other blockchains, Tezos does not expose a software version for nodes. We will instead retrieve the Chain ID with `getChainId`.
 
 ------------------------
 
 # Make sure it works
 
-Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
+Once the code is complete and the file has been saved, refresh the page to see it update & display the Chain ID.
 
 ![](../../../.gitbook/assets/pathways/tezos/tezos-connect.gif)
 
@@ -65,4 +65,4 @@ Once the code is complete and the file has been saved, refresh the page to see i
 
 # Next
 
-Congratulations! We have connected to the Tezos blockchain and queried an account balance with a few lines of JavaScript code. We can now proceed to creating an account for use on Florence, the Tezos testnet.
+Congratulations! We have connected to the Tezos blockchain and queried the chain ID with a few lines of JavaScript code. We can now proceed to creating an account for use on Florence, the Tezos testnet.
