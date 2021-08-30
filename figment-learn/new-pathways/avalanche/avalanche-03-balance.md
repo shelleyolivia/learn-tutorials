@@ -6,7 +6,7 @@ The native token on the **Avalanche blockchain** is **AVAX**
 
 ------------------------
 
-## Challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/avalanche/balance.ts`, complete the code of the default function.
@@ -26,10 +26,11 @@ In `pages/api/avalanche/balance.ts`, complete the code of the default function.
 
 **Need some help?** Check out these tips
 * `getBalance` method of `AVMAPI` module look like a good candidate
+* [**Code examples**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm)  
 
 ------------------------
 
-## Solution
+# Solution
 
 ```typescript
 //...
@@ -62,6 +63,6 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 -----------------------------
 
-## Next
+# Next
 
 Querying the balance information is fun, but being able to submit transactions and change the state of a blockchain is even better! In the next step, we will dive deeper and submit our first transactions on Avalanche.
