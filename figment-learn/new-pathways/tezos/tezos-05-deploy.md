@@ -1,4 +1,18 @@
-Still not sure how to do this? No problem! The solution is below so you don't get stuck.
+Although it is beyond the scope of this step to teach the specific syntax of LIGO or Michelson, we will cover the deployment of compiled Michelson code to Tezos. Michelson is a human-readable, stack-based language. It is possible to write smart contracts in Michelson & it can also be compiled directly from LIGO.
+
+{% hint style="info" %}
+One of the properties of Michelson is that it has been designed to facilitate formal verification. Further reading on the specifics of formal verification is available[ here](https://runtimeverification.com/blog/formal-verification-framework-for-michelson/)
+{% endhint %}
+
+We won't go through the process of reviewing the smart contract code base, compiling it or testing it. We will focus instead on how one can deploy a smart contract using the **Taquito** library. To do this, we're going to use a pre-compiled smart contract, you can find its compiled Michelson code under `contracts/tezos/counter.js`.
+
+Our contract will be pretty basic. It stores a counter on the blockchain and implements two functions:
+* The `Increment(n)` function which increment by n the counter stored on the contract.
+* The `Decrement(n)` function which decrement by n the counter stored on the contract.
+
+{% hint style="info" %}
+If you want to learn more about Tezos smart contracts, follow the [**The Taco Shop Smart Contract**](https://ligolang.org/docs/tutorials/get-started/tezos-taco-shop-smart-contract) tutorial.
+{% endhint %}
 
 ------------------------
 
@@ -12,12 +26,36 @@ In `pages/api/tezos/connect.ts`, complete the code of the function and try to es
 
 ```typescript
 //...
+  try {
+    const { mnemonic, email, password, secret, amount } = req.body
+    const url = getTezosUrl();
+    const tezos = new TezosToolkit(url);
 
+    await importKey(
+      tezos,
+      email,
+      password,
+      mnemonic,
+      secret
+    )
+
+    const operation = await tezos.contract.originate({
+      code: CONTRACT_JSON,
+      storage: 0
+    })
+
+    const contract = await operation.contract()
+ 
+    res.status(200).json({
+      contractAddress: contract.address,
+      hash: operation.hash
+    });
+  }
 //...
 ```
 
 **Need some help?** Check out these links
-* [**ContractKit usage**](https://docs.celo.org/developer-guide/contractkit/usage)  
+* [**Interface ContractProvider method `originate`**](https://tezostaquito.io/typedoc/interfaces/_taquito_taquito.contractprovider.html#originate)  
 
 {% hint style="info" %}
 [**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
@@ -31,18 +69,43 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 //...
+  try {
+    const { mnemonic, email, password, secret, amount } = req.body
+    const url = getTezosUrl();
+    const tezos = new TezosToolkit(url);
 
+    await importKey(
+        tezos,
+        email,
+        password,
+        mnemonic,
+        secret
+      )
+    const operation = await tezos.contract
+      .originate({
+        code: CONTRACT_JSON,
+        storage: 0
+      })
+    const contract = await operation.contract()
+ 
+    res.status(200).json({
+      contractAddress: contract.address,
+      hash: operation.hash
+    });
+  }
 //...
 ```
 
 **What happened in the code above?**
-* First, we create a new `kit` instance.
+* `importKey()` has the side effect of setting the TezosToolkit instance to use the `InMemorySigner` provider.
+* Next, we execute the `Tezos.contract.originate()` function. This deploys the Michelson contract code to the Tezos blockchain, from the `CONTRACT_JSON` in `counter.js`. The storage property is also set to `0`.
+* Next, the resulting operation (`op`) object is used to provide the contract address of the newly originated contract.
 
 ------------------------
 
 # Make sure it works
 
-Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
+Once you have the code above saved, click on **Deploy Contract**
 
 ![](../../../.gitbook/assets/pathways/tezos/tezos-deploy.png)
 
@@ -50,4 +113,5 @@ Once the code is complete and the file has been saved, refresh the page to see i
 
 # Next
 
-Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
+Now that we have deployed a smart contract, let's interact with it! In the following tutorials, we will look at how to use both view and change functions.
+
