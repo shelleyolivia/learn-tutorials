@@ -1,13 +1,13 @@
-On substrate like blockchain an account can stay alive only is a minimal deposit is available. If an account balance fall under this minimal deposit then the system will erase the account and the dust token will be lost.
+On Substrate blockchains, an account can stay active only if it maintains a minimal amount known as the **existential deposit**. If an account balance falls below this amount, then the system will erase the account and the remaining token dust will be lost.
 
-We're going to learn how to query the sytem in order to retrieve the existencial deposit.
+In this tutorial, we'll learn how to query the system in order to retrieve the existential deposit.
 
 ------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/polkadot/deposit.ts`, complete the code of the function and try to determine the existencial deposit an account need to have in order to stay alive. 
+In `pages/api/polkadot/deposit.ts`, implement the function and try to determine the existential deposit an account needs to have in order to remain active. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -25,11 +25,11 @@ In `pages/api/polkadot/deposit.ts`, complete the code of the function and try to
 ```
 
 **Need some help?** Check out these links
-* [**Polkadot{.js} documentation**](https://polkadot.js.org/docs/)  
-* [**code examples**](https://polkadot.js.org/docs/api/examples/promise/)  
+* [**Polkadot.js documentation**](https://polkadot.js.org/docs/)  
+* [**Code examples**](https://polkadot.js.org/docs/api/examples/promise/)  
 
 {% hint style="info" %}
-[**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
+[**Join us on Discord**](https://discord.gg/fszyM7K)
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
@@ -51,20 +51,21 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we create a new instance of the api.
-* Next, we call `existentialDeposit`  of the `const.balances` module.
-* Finaly, we convert this porperty to a number.
+* First, we need to instantiate our connection to the Polkadot API.
+* Next, we call `existentialDeposit` of the `const.balances` module, converting the property to a number with `toNumber`.
+* Finally, we send the `deposit` amount back to the client-side as JSON.
 
 ------------------------
 
 # Make sure it works
 
-Once the code is complete and the file has been saved, and click on the button
+Once the code is complete and the file has been saved, Next.js will rebuild the API route. Click the button to display the existential deposit amount.
 
 ![](../../../.gitbook/assets/pathways/polkadot/polkadot-deposit.gif)
 
 -----------------------------
 
-# Next
+# Conclusion
 
-Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
+Now that we've learned about fees, balances and the existential deposit on Polkadot - we can move on to making a token transfer! In the next tutorial, we will learn how to send tokens to other accounts. Ready? Let's go!
+

@@ -1,13 +1,13 @@
-At the beginning of your this journey on Polkadot's world, we have generated a mnemonic. Now we're going to learn how to restore an wallet from a mnemonic and how derive the address and the private key when the wallet have been restored
+In this tutorial, we'll learn how to restore a wallet from a mnemonic and how to derive the address and the private key when the wallet has been restored.
 
-Ready ?
+Ready? Let's go!
 
 ------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/polkadot/restore.ts`, complete the code of the function and try to restore your account using your mnemonic. 
+In `pages/api/polkadot/restore.ts`, implement the function and try to restore your account using your mnemonic. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -15,7 +15,7 @@ In `pages/api/polkadot/restore.ts`, complete the code of the function and try to
 ```typescript
 //...
   try {
-    const { mnemonic } = req.body    
+    const { mnemonic } = req.body;
     const keyring = undefined;
     const account = undefined;
     const address = undefined;
@@ -25,11 +25,11 @@ In `pages/api/polkadot/restore.ts`, complete the code of the function and try to
 ```
 
 **Need some help?** Check out these links
-* [**Keyring Basic**](https://polkadot.js.org/docs/keyring/start/basics)  
+* [**Keyring Basics**](https://polkadot.js.org/docs/keyring/start/basics)  
 * [**Using address or publicKey**](https://polkadot.js.org/docs/keyring/start/sign-verify#verify-using-address-or-publickey)  
 
 {% hint style="info" %}
-[**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
+[**Join us on Discord**](https://discord.gg/fszyM7K)
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
@@ -41,7 +41,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```typescript
 //...
   try {
-    const { mnemonic } = req.body    
+    const { mnemonic } = req.body;  
     const keyring = new Keyring({type: 'sr25519'});
     const account = keyring.addFromUri(mnemonic);
     const address = account.address;
@@ -51,11 +51,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we need to call `fromMnemonic` method of `Wallet` class.
-* Next, we compare if the restored address match the existing one.
-* Next, we store the address to display it in the UI.
-* Last, we do the same for the private key.
-
+* First, we create a new `Keyring` instance of the `sr25519` type.
+* Then we can use the `addFromUri` method to add the supplied mnemonic to the keyring - this is the account.
+* We can now access the public address via the `address` property of the `account`.
+* Finally, we send the address of the account back to the client-side as JSON.
 ------------------------
 
 # Make sure it works
@@ -68,4 +67,4 @@ When you have completed the code, click on **Restore Account**
 
 # Next
 
-The ability to restore an account whitout the need to depend on tier-party is a great feature from **Polkadot**. Now, we're ready to got further and prepare our first transaction. In the next, step we're going to estimate the fees one has to paid to submit a simple transfer.
+The ability to restore an account without requiring a third party is a great feature of **Polkadot**. Now, we're ready to go further and prepare our first transaction. In the next tutorial, we're going to learn how to estimate the fees required to submit a simple transfer.
