@@ -32,11 +32,11 @@ Get started today by [signing up with DataHub](https://datahub.figment.io) and d
 
 # 👩‍🏫 What is Figment Learn?
 
-## 👓 Learn Overview
+## 👓 Overview
 
 Figment launched Learn to educate and onboard developers to Web 3 protocols. 
 With Learn, developers gain access to comprehensive practical tutorials developed by Figment and the community to foster the ecosystem’s growth.
-Tutorials, in the form of guided Pathways, can be completed seamlessly with DataHub which provides easy access to the protocols via our highly available full node infrastructure and suite of middleware. To foster its community, Figment is partnering with foundations to reward developers for building on Web 3 protocols and sharing their knowledge with others. Figment Learn is the Web 3 Knowledgebase!
+Tutorials, in the form of guided Pathways, can be completed seamlessly with DataHub which provides easy access to the protocols via our highly available full node infrastructure and suite of middleware. To foster its community, Figment is partnering with foundations to reward developers for building on Web 3 protocols and sharing their knowledge with others. Figment Learn is the Web 3 Knowledge Base!
 
 ## 🚦 The Problem Today
 
