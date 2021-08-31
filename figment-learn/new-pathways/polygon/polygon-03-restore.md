@@ -65,7 +65,6 @@ Need some help? Check out these two tips/links
 ```
 
 What happened in the code above? Let's take a closer look!
-
 * First, we need to call `fromMnemonic` method of `Wallet` class.
 * Next, we compare if the restored address match the existing one.
 * Next, we store the address to display it in the UI.
