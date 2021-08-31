@@ -17,7 +17,7 @@ This tutorial assumes that you have some beginner-level experience in programmin
 
 To be able to interact with the Mumbai testnet via MetaMask, you first have to add an RPC endpoint to your MetaMask wallet. This will allow you to view your MATIC balance, also to send and receive MATIC tokens. Open the extension in your browser by clicking on the Fox icon, then click on the Identicon at the top right of the extension window, then click through `Settings -> Networks -> Add network`. When you have entered the information as shown in the image below, click on **Save** to complete the process.
 
-![](../../../.gitbook/assets/deploy-&-debug-on-polygon-1.png)
+![<img src="../../../.gitbook/assets/deploy-&-debug-on-polygon-1.png" width="80" />](../../../.gitbook/assets/deploy-&-debug-on-polygon-1.png)
 
 To get Mumbai MATIC tokens so that you can pay the gas fees for smart contract deployment and testing, go to the Matic Faucet at [https://faucet.matic.network](https://faucet.matic.network). Select the Mumbai network, paste your account address into the textinput and click on **Submit**.
 
