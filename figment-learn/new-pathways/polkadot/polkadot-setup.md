@@ -21,7 +21,7 @@ The value for `DATAHUB_POLKADOT_API_KEY` can be found on the [**DataHub Services
 ![](../../../.gitbook/assets/pathways/polkadot/polkadot-setup.gif)
 
 {% hint style="info" %}
-[**Join us on Discord**](https://discord.gg/fszyM7K), if you encounter any issues with the tutorial or have any questions!](https://discord.gg/fszyM7K)
+[**Join us on Discord**](https://discord.gg/fszyM7K), if you encounter any issues with the tutorial or have any questions!**
 {% endhint %}
 
 ---------------------------
