@@ -4,7 +4,7 @@ The following software is required to set up and complete the **Pokadot** Pathwa
 * [**`yarn` installed**](https://yarnpkg.com/getting-started/install)
 * [**`git` installed**](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-Start by [**cloning**](https://git-scm.com/docs/git-clone) the repository and installing the [**dependencies**](https://classic.yarnpkg.com/en/docs/managing-dependencies/) with `yarn` :
+Start by cloning the repository and installing the dependencies with `yarn` :
 
 ```bash
 git clone https://github.com/figment-networks/learn-web3-dapp.git
@@ -14,13 +14,7 @@ yarn
 
 ---------------------------
 
-# Set your key
-
-{% hint style="info" %}
-If you have previously completed a Pathway, you may already have `.env.local`! Just add your Pokadot API key in the appropriate place and remember to save the file _before_ starting the development server.
-{% endhint %}
-
-Create an `.env.local` file at the root of the directory. Copy and paste the contents of the existing `.env.example` into the new file and save it to disk (you could also rename `.env.example` to `.env.local`).
+# Set your API Key
 
 The value for `DATAHUB_POLKADOT_API_KEY` can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/services/secret). Click on the **Pokadot** icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local`. This will authenticate you and enable you to make JSON-RPC requests to Secret via DataHub.
 
