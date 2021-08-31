@@ -1,54 +1,20 @@
-# A first contact
+We are going to connect to a Polkadot node hosted by [**DataHub**](https://datahub.figment.io/sign_up?service=near) using an WS Provider. We are going to code a few simple challenge applications, which will serve as practical tools to develop further understanding of using Polkadot and other Substrate based blockchains. In each challenge, we will cover a different aspect of interacting with Polkadot, from simply connecting to a node; to estimate fees; all the way through to searching historical block data for specific transactions with DataHub.
 
-The ability to establish a connection is the first step for anyone wanting to discover and travel through web3 space. Fasten your seat belt, it's time to take off 🚀!
-
-------------------------
-
-## Lesson
-
-Connecting to a node works pretty much the same as for a standard web server. There are two actors: Client & server, with a protocol managing how data are transferred from one to the other.
-
-The main difference here is in the protocol. To connect to Polkadot, we'll be using `json-rpc`, with a JavaScript wrapper to make all calls [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) based: 
-* `json`, stands for **J**ava**S**cript **O**bject **N**otation, which is a [text format for transferring data](https://www.w3schools.com/js/js_json_intro.asp).
-* `rpc`, stands for **R**emote **P**rocedure **C**all - a way to [call a server-side function](https://en.wikipedia.org/wiki/Remote_procedure_call) from the client-side.
-
-
-Need more info? => [Polkadot ApiPromise](https://polkadot.js.org/docs/api/examples/promise/simple-connect)
+Polkadot has built a [JavaScript library](https://github.com/polkadot-js/api) to help developers easily interface with its API. The documentation for Polkadot JS can be found at [https://polkadot.js.org/docs/](https://polkadot.js.org/docs/)
 
 ------------------------
 
-## Challenge
+# Challenge
 
-You are stuck in the web2.0 waiting room and need to *connect* to the web3 world. On the wall, an instruction is engraved:   
-> Decode **pages/api/polkadot/connect.ts** and the door will open!
+{% hint style="tip" %}
+In `pages/api/polkadot/connect.ts`, complete the code of the function and try to establish your first connection to the Polkadot network. 
+{% endhint %}
+
+**Take a few minutes to figure this out**
 
 ```typescript
-// Fill in the gaps to connect with Polkadot & be one of us :)
-// Do not forget we're in an "async" world,
-// so you may need to "await" some results.
- try {
-    const url = undefined
-    const provider = undefined
-    const api = undefined
-    const rawVersion = undefined
-    const version = undefined
-    res.status(200).json(version);
-  }
-```
-
-A footnote below the instruction reminds us to: 
-* Use the `getSafeUrl` helper function.
-* Instantiate a new Provider object using that `url`.
-* Create the connection by passing the provider to `ApiPromise.create` as an object.
-* Await the system version of the API.
-* Convert the raw version to a readable string.
-
-------------------------
-
-## Solution
-
-```typescript
- try {
+//...
+  try {
     const url = getSafeUrl();
     const provider = new WsProvider(url);
     const api = await ApiPromise.create({ provider: provider });
@@ -56,16 +22,52 @@ A footnote below the instruction reminds us to:
     const version = rawVersion.toHuman();
     res.status(200).json(version);
   }
+//...
 ```
 
-Quick overview:
-* The `getSafeUrl()` helper function returns a valid endpoint URL.
-* In this context, a [provider](https://polkadot.js.org/docs/api/start/create/#providers) is referring to the *type* of connection. The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) provider is the officially supported type on Polygon.
-* `ApiPromise.create()` returns a Promise containing the actual API instance.
-* `api.rpc.system.version()` queries the version from the node.
-* Then the method `toHuman()` can be used to make the version string reader friendly.
+**Need some help?** Check out these links
+* [**Basics & Metadata**](https://polkadot.js.org/docs/api/start/basics)  
+* [**Providers**](https://polkadot.js.org/docs/api/start/create#providers)  
+
+{% hint style="info" %}
+[**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
+{% endhint %}
+
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
+
 ------------------------
 
-## Next
+# Solution
 
-Well done! Your fluency in the Polkadot dialect of web3 is growing. As a newcomer, building an identity is important so you can distinguish yourself from other users on the Polkadot network. Ready to take the next step forward?
+```typescript
+//...
+  try {
+    const url = getSafeUrl();
+    const provider = new WsProvider(url);
+    const api = await ApiPromise.create({ provider: provider });
+    const rawVersion = await api.rpc.system.version();
+    const version = rawVersion.toHuman();
+    res.status(200).json(version);
+  }
+//...
+```
+
+**What happened in the code above?**
+* First, we create a new `WsProvider` instance.
+* Next, we create initialize the api with our provider.
+* Then, using the `rpc` module we query the system.version method 
+* Finaly, to display a human readable version of the version we use `toHuman` method
+
+------------------------
+
+# Make sure it works
+
+Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
+
+![](../../../.gitbook/assets/pathways/polkadot/polkadot-connect.gif)
+
+-----------------------------
+
+# Next
+
+In this tutorial you’ve learned how to use the [polkadot{.js}](https://polkadot.js.org/docs/) package and DataHub to connect to the Celo node. You also had a chance to run one simple query to test that connection.

@@ -61,7 +61,6 @@ Once the code is complete and the file has been saved, refresh the page to see i
 
 ![](../../../.gitbook/assets/pathways/celo/celo-connect.gif)
 
-
 Congratulations, you have successfully made a function that can connect to the Celo node! This can be applied either on the client-side or server-side, depending on your needs.
 
 -----------------------------
