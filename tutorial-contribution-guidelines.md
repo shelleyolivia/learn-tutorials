@@ -3,6 +3,8 @@
 So you've decided to write a tutorial for Figment Learn? We're excited to have you among our contributors! 
 Please take the time to read and understand the guidelines below to ensure your contributions follow the style and tone of our other tutorials.
 
+Please read and understand our [Contributor Terms](./terms-and-conditions/contributor-terms.md) before proceeding.
+
 When you are ready to submit your tutorial, open a Pull Request on the GitHub repository.
 
 # General
