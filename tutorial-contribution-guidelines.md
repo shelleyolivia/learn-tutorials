@@ -1,5 +1,4 @@
 # 👀 Tutorial Contribution Guidelines
-Some do's and dont's on how to write and submit a tutorial to Figment Learn
 
 So you've decided to write a tutorial for Figment Learn? We're excited to have you among our contributors! 
 Please take the time to read and understand the guidelines below to ensure your contributions follow the style and tone of our other tutorials.
@@ -7,6 +6,10 @@ Please take the time to read and understand the guidelines below to ensure your 
 When you are ready to submit your tutorial, open a Pull Request on the GitHub repository.
 
 # General
+
+Some do's and dont's on how to write and submit a tutorial to Figment Learn.
+
+---
 
 Do not copy and paste existing content. If the tutorial is inspired by some existing content (for example forking an ETH tutorial to convert it to Avalanche), reference it and link to it. When you link to other tutorials/resources, do it with Figment Learn resources as much as possible.
 
