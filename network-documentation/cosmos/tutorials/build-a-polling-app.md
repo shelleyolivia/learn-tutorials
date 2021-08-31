@@ -1,14 +1,14 @@
 [**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/starport-polling-app/). 
 
-## Polling app
+# Introduction
 
-![Application screenshot](https://tutorials.cosmos.network/assets/img/1.4d7ba008.png)
+![Application screenshot](https://tutorials.cosmos.network/assets/img/1.8c86df06.png)
 
 We will be creating a simple poll application, in which a user can sign in, create polls, cast votes and see voting results. Creating a poll will cost 200 tokens, voting is free, and both actions will be available only for signed in users.
 
 For this tutorial we will be using [Starport](https://github.com/tendermint/starport), an easy to use tool for building blockchains. [Install Starport](https://github.com/tendermint/starport#installation) and run the following command to create a voter project:
 
-```
+```text
 starport app github.com/alice/voter
 ```
 
@@ -23,11 +23,11 @@ Inside the `voter` directory we can see several files and directories:
 
 Our project's directory contains all the code required to build and launch a blockchain-based app. Let's try launching our app by running starport serve inside our project:
 
-```
+```text
 starport serve
 ```
 
-```
+```text
 📦 Installing dependencies...
 🚧 Building the application... 
 💫 Initializing the chain...
@@ -42,15 +42,15 @@ Congratulations! You now have a blockchain application running on your machine i
 
 Our voting applications has two types of entities: polls and votes. A poll is a type that has a `title` and a list of `options`.
 
-## Adding polls
+# Adding polls
 
-```
+```text
 starport type poll title options
 ```
 
 This command generated code that handles the creation of `poll` items. If we now run `starport serve` and visit [http://localhost:8080](http://localhost:8080/) we will see a form for creating polls. It may take a short while to rebuild the app, so give it a couple of seconds.
 
-![Application screenshot](https://tutorials.cosmos.network/assets/img/2.adfea286.png)
+![Application screenshot](https://tutorials.cosmos.network/assets/img/2.7f899a03.png)
 
 Sign in with one of the passwords printed in the console and try creating a poll. You should see a new object created and displayed above the form. You have successfully created an object and stored it on the blockchain!
 
@@ -58,11 +58,11 @@ This, however, does not look and work exactly like we need. We should be able to
 
 Let's take a look at some of the files modified by the `starport type` command.
 
-### `x/voter/types/TypePoll.go`
+**`x/voter/types/TypePoll.go`**
 
 This file contains definition of the `Poll` type. We can see that a poll has two fields \(creator and ID\), which will be created automatically, and two fields \(title and options\) defined by us. Since we want `Options` to be a list of strings, **replace `string` with `[]string`**
 
-### `x/voter/types/MsgCreatePoll.go` 
+**`x/voter/types/MsgCreatePoll.go`**
 
 This file defines a message that creates a poll.
 
@@ -70,11 +70,11 @@ To write anything to a blockchain or perform any other state transition a client
 
 Going back to `MsgCreatePoll.go`, we need to make options to be stored as a list instead of a string. Replace `Options string` with `Options []string` in `MsgCreatePoll` struct and `options string` with `options []string` in the arguments of `NewMsgCreatePoll` function.
 
-### `x/voter/client/rest/txPoll.go` 
+**`x/voter/client/rest/txPoll.go`**
 
 Replace `Options string` with `Options []string` in `createPollRequest` struct.
 
-### `x/voter/client/cli/txPoll.go`
+**`x/voter/client/cli/txPoll.go`**
 
 A user can also interact with our application through a command line interface.
 
@@ -100,11 +100,11 @@ We'll be mostly interested in `frontend/src/views` directory, which contains pag
 
 Inside `frontend/src/store/index.js` we import [CosmJS](https://github.com/cosmwasm/cosmjs), a library for handling wallets, creating, signing and broadcasting transactions and define a Vuex store. We'll use `entitySubmit` function for sending data to our blockchain \(like a JSON representing a newly created poll\), `entityFetch` for requesting a list of polls and `accountUpdate` to fetch information about our token balance.
 
-### `frontend/src/view/Index.vue`
+**`frontend/src/view/Index.vue`**
 
 Since we don't need the default form component replace `<type-list />` inside of `frontend/src/views/Index.vue` with a new component `<poll-form />` that will be created in a new file at `frontend/src/components/PollForm.vue`.
 
-### `frontend/src/components/PollForm.vue` 
+**`frontend/src/components/PollForm.vue`**
 
 ```javascript
 <template>
@@ -190,15 +190,15 @@ Refresh the page, sign in with a password and create a new poll. It takes a coup
 
 A vote type contains poll ID and a value \(string representation of the selected option\).
 
-```
+```text
 starport type vote pollID value
 ```
 
-### `frontend/src/views/Index.vue` 
+**`frontend/src/views/Index.vue`**
 
 Add `<poll-list />` into the `frontend/src/view/Index.vue` file after the poll form component. Then make a new component at `frontend/src/components/PollList.vue` and add the following:
 
-### `frontend/src/components/PollList.vue` 
+**`frontend/src/components/PollList.vue`**
 
 ```javascript
 <template>
@@ -250,7 +250,7 @@ The `PollList` component lists for every poll, all the options for that poll, as
 
 By now should be able to see the same UI as in the first screenshot. Try creating polls and casting votes. You may notice that it's possible to cast multiple votes for one poll. This is not what we want, so let's fix this behaviour.
 
-## Casting votes only once
+# Casting votes only once
 
 To fix this issue we first have to understand how data is stored in our application.
 
@@ -289,13 +289,13 @@ key := []byte(types.VotePrefix + vote.PollID + "-" + string(vote.Creator))
 
 Restart the application and try voting multiple times on a single poll, you'll see you can vote as many times as you want but only your most recent vote is counted.
 
-## Introducing a fee for creating polls
+# Introducing a fee for creating polls
 
 Let's make it so that creating a poll costs 200 tokens.
 
 This feature is very easy to add. We already require users to have accounts registered, and each user has tokens on balance. The only thing we need to do is to send coins from user's account to a module account before we create a poll.
 
-### `x/voter/handlerMsgCreatePoll.go`
+ **`x/voter/handlerMsgCreatePoll.go`**
 
 ```go
 moduleAcct := sdk.AccAddress(crypto.AddressHash([]byte(types.ModuleName)))

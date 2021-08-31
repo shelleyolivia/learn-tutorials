@@ -4,7 +4,7 @@ This tutorial has three parts:
 2. Deploying a Crowdfunding Smart Contract in Celo
 3. Interacting with the Crowdfunding Smart Contracts
 
-# 1. Building a Crowdfunding Smart Contract in Celo
+# Building a Crowdfunding Smart Contract in Celo
 
 We're going to write a smart contract in Solidity which facilitates crowdfunding \(like GoFundMe, Kickstarter, and Indiegogo\) on Celo in 172 lines of code.
 
@@ -24,7 +24,7 @@ Click the image below in order to watch the Youtube video for "Building a Crowdf
 
 {% embed url="https://youtu.be/uOso0av9gj4" caption="Building a Crowdfunding Smart Contract in Celo" %}
 
-This tutorial is meant for intermediate web3 developers. It assumes you have some experience programming in Javascript and Solidity, and an understanding of basic Ethereum and object oriented programming concepts.
+This tutorial is meant for intermediate Web 3 developers. It assumes you have some experience programming in Javascript and Solidity, and an understanding of basic Ethereum and object oriented programming concepts.
 
 Before we continue, make sure you have truffle installed. If you don't, run the following line of code in your terminal:
 
@@ -34,28 +34,32 @@ Before we continue, make sure you have truffle installed. If you don't, run the 
 
 First, open the terminal and make a new project folder. We’ll call it celo-crowdfunding:
 
-`mkdir celo-crowdfunding && cd celo-crowdfunding`
+```text
+mkdir celo-crowdfunding && cd celo-crowdfunding
+```
 
-Next, let’s initialize the project directory with NPM
+Next, let’s initialize the project directory with the Node package manager `npm`:
 
-`npm init -y`
+```text
+npm init -y
+```
 
-After it’s been initialized, we’ll need to install some additional packages for interacting with the smart contract in the next tutorial. Here’s an overview of them:
+After it has been initialized, we’ll need to install some additional packages for interacting with the smart contract in the next tutorial:
 
-* ContractKit is a package created by the Celo team to aid in Celo development
-* Dotenv is used for reading environment variables in our code
-* Web3 is a library which facilitates our interactions with the blockchain
-* OpenZeppelin contracts is a library of battle-tested solidity code snippets we will reuse
+* [ContractKit](https://docs.celo.org/developer-guide/contractkit) is a package created by the Celo team to aid in development
+* [dotenv](https://www.npmjs.com/package/dotenv) is used for reading environment variables in our code
+* [web3.js](https://github.com/ChainSafe/web3.js) is a library which facilitates our interactions with the blockchain
+* [OpenZeppelin contracts](https://www.npmjs.com/package/@openzeppelin/contracts) is a library of well-tested Solidity code that we will reuse
 
-Install all of the above using:
+Install all of the above using `npm`:
 
-`npm install -—save @celo/contractkit dotenv web3 @openzeppelin/contracts`
+```text
+npm install -—save @celo/contractkit dotenv web3 @openzeppelin/contracts
+```
 
-After all the NPM packages have installed, run this command to initialize Truffle:
+After all the `npm` packages have installed, run `truffle init` in the terminal to initialize Truffle.
 
-`truffle init`
-
-Here's what a successful run of truffle init will look like:
+Here's what a successful run of `truffle init` will look like:
 
 ![truffle init](https://i.imgur.com/JF6zdoT.png)
 
@@ -65,7 +69,7 @@ First things first, open the newly created project in your favorite code editor 
 
 At the top of the file, add the Solidity version and import the SafeMath contract and the [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) interface from OpenZeppelin:
 
-```text
+```javascript
 pragma solidity >=0.4.22 <0.9.0;
 
 // Importing OpenZeppelin's SafeMath Implementation
@@ -81,7 +85,7 @@ We also import the `ERC-20` contract interface since it implements the basic `ER
 
 Next, we're going to initialize our contract:
 
-```text
+```javascript
 contract CeloCrowdfund {
   // SafeMath for safe integer operations
   using SafeMath for uint256;
@@ -95,7 +99,7 @@ This is the start of the CeloCrowdfund contract. It includes a line to use SafeM
 
 In the same file as the `CeloCrowdfund` contract, create a `Project` contract and an `enum` called `ProjectState`:
 
-```text
+```javascript
 contract CeloCrowdfund {
   // SafeMath for safe integer operations
   using SafeMath for uint256;
@@ -122,11 +126,11 @@ We also create a private variable named `cUSDToken` which is of type `IERC20`. T
 
 ## Expanding the Project contract
 
-Next, we'll add some public variables which describe a `Project`. Public variables in soldity can be accessed by any other contract or dApp. We make these variables public in our contract because we will need it when we interact with the in order to get details about the `Project`. For more info on Solidity variable types, feel free to check out [this guide](https://www.bitdegree.org/learn/solidity-variables#control-variable-visibility).
+Next, we'll add some public variables which describe a `Project`. Public variables in Solidity can be accessed by any other contract or dApp. We make these variables public in our contract because we will need it when we interact with the contract in order to get details about the `Project`. For more info on Solidity variable types, be sure to check out [this guide](https://www.bitdegree.org/learn/solidity-variables#control-variable-visibility).
 
 It should look like this:
 
-```text
+```javascript
 contract Project {
   using SafeMath for uint256;
 
@@ -135,6 +139,7 @@ contract Project {
     Expired,
     Successful
   }
+
   IERC20 private cUSDToken;
 
   // Initialize public variables
@@ -154,11 +159,11 @@ contract Project {
 }
 ```
 
-After initializing the variables, we create a `state` variable to start at the fundraising state when the `Project` contract is initialized. Next we create a [mapping](https://docs.soliditylang.org/en/v0.4.21/types.html#mappings) from user addresses to to the amount they donate as a `uint` to keep track of the contributions made to the `Project` . A mapping is like a hash table or a dictionary for Solidity.
+After initializing the variables, we create a `state` variable to start as the fundraising state when the `Project` contract is initialized. Next, we create a [mapping](https://docs.soliditylang.org/en/latest/types.html#mapping-types) from user addresses to to the amount they donate as a `uint` to keep track of the contributions made to the `Project`. In Solidity, a mapping is like a hash table or a dictionary.
 
-Now, we'll add add some [events](https://docs.soliditylang.org/en/v0.5.3/contracts.html#events) and a `modifier` after the `mapping`:
+Now, we'll add add some [events](https://docs.soliditylang.org/en/latest/contracts.html#events) and a `modifier` after the `mapping`:
 
-```text
+```javascript
   // Event when funding is received
   event ReceivedFunding(address contributor, uint amount, uint currentTotal);
 
@@ -173,11 +178,11 @@ Now, we'll add add some [events](https://docs.soliditylang.org/en/v0.5.3/contrac
 
 We will use the `ReceivedFunding` and `CreatorPaid` events later on in our contract to store transaction logs on the blockchain. This is helpful for having a record of timestamps and transactions being made by our contract.
 
-We also use a [modifier](https://docs.soliditylang.org/en/v0.5.3/contracts.html#function-modifiers) in the contract to check that the state of the project is always of type `state`. `Modifiers` are a reusable way to check a condition before executing a function in Solidity. We'll use the `modifier` in a couple of functions later in our smart contract.
+We also use a [function modifier](https://docs.soliditylang.org/en/latest/contracts.html#function-modifiers) in the contract to check that the state of the project is always of type `state`. Modifiers are a reusable way to check a condition before executing a function in Solidity. We'll use the modifier in a couple of functions later in our smart contract.
 
 Next, we'll add a constructor for the `Project` contract after the modifier:
 
-```text
+```javascript
 constructor
 (
   IERC20 token,
@@ -201,11 +206,11 @@ constructor
 
 If you've done some object oriented programming in the past, constructors should be familiar to you. They're essentially the parameters we need to create a `Project` object.
 
-## The Contribute\(\) function
+**The contribute() function**
 
 Next, let's create a function in the `Project` contract for contributing money to a project:
 
-```text
+```javascript
 // Fund a project
 function contribute(uint256 amount) external theState(ProjectState.Fundraising) payable {
   cUSDToken.transferFrom(msg.sender, address(this), amount);
@@ -220,7 +225,7 @@ function contribute(uint256 amount) external theState(ProjectState.Fundraising) 
 
 The `contribute()` function is an external function. This means it can only be called from other smart contracts or transactions.
 
-The first thing the `contribute()` function does is use the `IERC20` transferFrom\(\) function in order to send the amount passed in the parameter from `msg.sender` \(the caller\) to `address(this)` \(the contract\):
+The first thing the `contribute()` function does is use the IERC20 `transferFrom()` function in order to send the amount passed in the parameter from `msg.sender` (the caller) to `address(this)` (the contract):
 
 `cUSDToken.transferFrom(msg.sender, address(this), amount);`
 
@@ -228,21 +233,21 @@ Next, it adds the user's address to the mapping of `contributions` with the user
 
 `contributions[msg.sender] = contributions[msg.sender].add(amount);`
 
-Then the function updates the project's current balance and emits a `ReceivedFunding()` log:
+Then the function updates the project's current balance and emits a `ReceivedFunding()` event:
 
-```text
+```javascript
 currentBalance = currentBalance.add(amount);
 
 emit ReceivedFunding(msg.sender, amount, currentBalance);
 ```
 
-## The checkIfFundingCompleteOrExpired\(\) function
+**The checkIfFundingCompleteOrExpired() function**
 
 At the bottom of `contribute()`, the function calls `checkIfFundingCompleteOrExpired();` which doesn't exist yet. Let's create that now!
 
 Write the following function in the `Project` contract:
 
-```text
+```javascript
 // check project state
 function checkIfFundingExpired() public {
   if (block.timestamp > raisingDeadline) {
@@ -255,11 +260,11 @@ This function checks if the deadline is past the `block.timestamp` \(the current
 
 Next, let's make the `payOut()` function.
 
-## The payOut\(\) function
+**The payOut() function**
 
 Below the `checkIfFundingCompleteOrExpired()` function, add the following for `payOut()`:
 
-```text
+```javascript
 function payOut() external returns (bool result) {
   require(msg.sender == creator);
 
@@ -286,11 +291,11 @@ Next, the `payOut()` function will send the full amount raised by a project back
 
 `transfer()` returns a boolean value. If it works, then the `CreatorPaid()` event is emitted and the state is updated. If not, we reset the `currentBalance` variable and update the state anyway.
 
-## The getDetails\(\) function
+**The getDetails() function**
 
 Finally, we're going to add the last function in our `Project` contract, the `getDetails()` function.
 
-```text
+```javascript
 function  getDetails() public  view  returns
 (
   address payable projectCreator,
@@ -325,7 +330,7 @@ It's time to get back to the `CeloCrowdfund` contract now that we've finished th
 
 We'll start by adding an `event` for when a project is started:
 
-```text
+```javascript
 contract CeloCrowdfund {
   // SafeMath for safe integer operations
   using SafeMath for uint256;
@@ -350,7 +355,7 @@ We've used `events` in a couple of places in the contract so far. We're going to
 
 Next, let's make the `startProject()` function to start a project:
 
-```text
+```javascript
 function startProject(
   IERC20 cUSDToken,
   string calldata title, 
@@ -402,9 +407,9 @@ Hopefully creating this smart contract has given you a sense of what's possible.
 
 In the next section, we will discuss deploying the contracts we've written to the Celo network!
 
-**Note**: This tutorial and smart contract is based on the [contracts for Coperacha](https://github.com/Alex-Neo-Projects/Coperacha-contracts) an app built by the tutorial author. If you want to see these contracts being used in a mobile app, you can see an example of that [here](https://github.com/Alex-Neo-Projects/Coperacha-app).
+**Note**: This tutorial and smart contract is based on the [contracts for Coperacha](https://github.com/Alex-Neo-Projects/Coperacha-contracts), an app built by the tutorial author. If you want to see these contracts being used in a mobile app, you can see an example of that [here](https://github.com/Alex-Neo-Projects/Coperacha-app).
 
-# 2. Deploying a Crowdfunding Smart Contract in Celo
+# Deploying a Crowdfunding Smart Contract in Celo
 
 If you've done part 1 of this tutorial series, you have a crowdfunding contract written in Solidity. Now that we've got a crowdfunding contract, we'll need to deploy it to the Celo test network in order to interact with it. Let's do that now!
 ## Prerequisites 
@@ -427,7 +432,7 @@ If there is already the `1_initial_migration.js` file in the folder, delete it.
 
 Next, create a new file named `1_celo_crowdfund.js` and write the following:
 
-```text
+```js
 const CeloCrowdfund = artifacts.require("CeloCrowdfund");
 
 module.exports = function (deployer) {
@@ -435,13 +440,13 @@ module.exports = function (deployer) {
 };
 ```
 
-Migrations in truffle are essentially deployment scripts. What we have written is a very simple deployment script which takes our contract \(`CeloCrowdfund`\) and deploy it.
+Migrations in Truffle are essentially deployment scripts. What we have written is a very simple deployment script which takes our contract (`CeloCrowdfund`) and deploys it.
 
 ## Connecting to a Testnet node 
 
-We're going to use [Datahub](https://figment.io/datahub/) to connect to the Celo test network. If you don't have an account, sign up on the [Datahub](https://figment.io/datahub/) website and resume this tutorial once you have your Celo API key.
+We're going to use DataHub to connect to the Celo test network. If you don't have an account, sign up on the [DataHub](https://datahub.figment.io) website and resume this tutorial once you have your Celo API key.
 
-Now that we have an API key for the Datahub node, we'll want to secure it. Anyone who obtains your API key will be able to use your Datahub account's node. To secure it, let's create a `.env` file in the **root directory** of the `celoSmartContract` folder. The `.env` file is used for environment secrets, which means its the perfect place to store the Datahub API key.
+Now that we have an API key for the DataHub node, we'll want to secure it. Anyone who obtains your API key will be able to use your DataHub account's node. To secure it, let's create a `.env` file in the **root directory** of the `celoSmartContract` folder. The `.env` file is used for environment secrets, which means its the perfect place to store the DataHub API key.
 
 To create this `.env` file, navigate to the root directory of the project and type the following command into the terminal:
 
@@ -451,7 +456,7 @@ Next, open the `.env` file in a text editor and add the following variable, maki
 
 `REST_URL=https://celo-alfajores--rpc.datahub.figment.io/apikey/<YOUR API KEY>/`
 
-**Note:** there needs to be a trailing `/` at the end for this to work!
+**Note:** there needs to be a trailing `/` at the end of the URL for it to work!
 
 **Note:** If the plan is to commit this repo into Github, you won't want to upload the contents of the `.env` file. To get Git to ignore the `.env` file, create a `.gitignore` file from the terminal like so:
 
@@ -501,19 +506,21 @@ Let's break this down.
 
 First, the script imports `ContractKit`, `Web3`, and `dotenv`. Next, it connects to the Celo network via the REST\_URL in the `.env` file using the following line:
 
-`const web3 = new Web3(process.env.REST_URL);`
+```js
+const web3 = new Web3(process.env.REST_URL);
+```
 
 Then it creates an account on that same testnet connection with the following line:
 
-`const account = web3.eth.accounts.create();`
+```js
+const account = web3.eth.accounts.create();
+```
 
 After that, we just print out the address and private key for future use.
 
 **Note:** The above code is from [\#2. Create your first Celo account](https://learn.figment.io/network-documentation/celo/tutorial/intro-pathway-celo-basics/2.account), so feel free to rewind if you need a review.
 
-Next, run the script in the terminal:
-
-`node getAccount.js`
+Next, run the script in the terminal with the command `node getAccount.js`.
 
 The output should print out the address and private key for you new Celo account. It will look like this:
 
@@ -521,11 +528,7 @@ The output should print out the address and private key for you new Celo account
 
 **Note:** It is important to keep your private key secure! Whoever has it can access all your funds on Celo.
 
-Copy the privateKey into the `.env` file by adding a line with the following:
-
-`PRIVATE_KEY=YOUR-PRIVATE-KEY`
-
-Where **YOUR-PRIVATE-KEY** is the private key you got from the script output.
+Copy the privateKey into the `.env` file by adding a line with `PRIVATE_KEY=YOUR-PRIVATE-KEY` - Where **YOUR-PRIVATE-KEY** is the private key you got from the script output.
 
 Now that you have a Celo account, take the address and paste it into the [Celo developer faucet](https://celo.org/developers/faucet). This will give you testnet funds you can use to deploy the smart contract. Fill out the form and wait a couple of seconds, and your account should be loaded up and ready to go.
 
@@ -576,21 +579,27 @@ module.exports = {
 
 First, the config file imports `ContractKit`, `Web3`, and `dotenv` just like the `getAccounts.js` file.
 
-It connects to our Celo node by getting the REST\_URL from `.env`:
+It connects to our Celo node by getting the `REST_URL` from `.env`:
 
-`const web3 = new Web3(process.env.REST_URL);`
+```js
+const web3 = new Web3(process.env.REST_URL);
+```
 
 Then it gets the account from the private key in the `.env` file in order to deploy from your account:
 
-`const account = web3.eth.accounts.privateKeyToAccount(process.env.PRIVATE_KEY);`
+```js
+const account = web3.eth.accounts.privateKeyToAccount(process.env.PRIVATE_KEY);
+```
 
-We also add the private key to `ContractKit` in order to sign transactions with the following:
+We also add the private key to `ContractKit` in order to sign transactions with:
 
-`client.addAccount(account.privateKey);`
+```js
+client.addAccount(account.privateKey);
+```
 
 And finally, in the `module.exports` function, we set the Solidity version we want to use under `compilers: {` and the network we want to deploy to under `networks: {`.
 
-The following block of code is what tells truffle to deploy to Alfajores \(Celo's test network\):
+The following block of code is what tells truffle to deploy to Alfajores \(Celo's testnet\):
 
 ```javascript
 alfajores: {
@@ -601,25 +610,25 @@ alfajores: {
 
 ## Deployment
 
-We’re almost there! Run the following to check that you did everything correctly:
-
-`truffle compile`If things are working, you should see the following output: image
+We’re almost there! Run `truffle compile` to check that you did everything correctly. If things are working, you should see the following output:
 
 ![](https://i.imgur.com/WqSM6mL.png)
 
 Now that we’ve compiled the smart contract, the last step is to deploy it. Run the following to deploy to the Alfajores testnet:
 
-`truffle migrate --network alfajores`
+```text
+truffle migrate --network alfajores
+```
 
 You should see the following deployment output:
 
 ![](https://i.imgur.com/9m66tCO.png)
 
-If you see something like the above, our code worked! To see the smart contract on the Celo network, open the [Alfajores block explorer](https://alfajores-blockscout.celo-testnet.org/) and paste in the address on the contract address line of the truffle output:
+If you see something like the above, the code works! To see the smart contract on the Celo network, open the [Alfajores block explorer](https://alfajores-blockscout.celo-testnet.org/) & paste in the address on the contract address line from the Truffle output:
 
 `> contract address: YOUR-CELO-ADDRESS`
 
-You should see a successful contract deployment at that address in the block explorer
+You should see a successful contract deployment at that address in the block explorer:
 
 ![](https://i.imgur.com/IAENWP1.png)
 
@@ -627,9 +636,9 @@ You should see a successful contract deployment at that address in the block exp
 
 Now that we've deployed our Celo crowdfunding smart contract on Celo, we can move on to interacting with it. In the next tutorial, we'll interact with our smart contract by creating new crowdfunding projects and donating to them.
 
-### Potential Errors & Solutions 
+## Potential Errors & Solutions 
 
-If you run into any problems, feel free to ask on the [Figment Learn Discord](https://discord.gg/f5YuEsQTAx). You can also view the source code [here](https://github.com/alexreyes/Celo-Crowdfunding-Tutorial-2). In any case, here are some common errors you may encounter.
+If you run into any problems, feel free to ask on the [Figment Learn Discord](https://discord.gg/f5YuEsQTAx). You can also view the source code [on GitHub](https://github.com/alexreyes/Celo-Crowdfunding-Tutorial-2). In any case, here are some common errors you may encounter.
 
 If you get the following error:
 
@@ -649,24 +658,28 @@ If the contract didn't deploy to the test network, the output might look like th
 
 Where the contracts were compiled but it didn't give you an address for where it was deployed to.
 
-To fix this, make sure you have your account loaded up with [testnet funds](https://celo.org/developers/faucet).
+To fix this, make sure you have your account loaded up with [testnet funds from the faucet](https://celo.org/developers/faucet).
 
-If you want to double-check that your account received the funds, go to the [Alfajores block explorer](https://alfajores-blockscout.celo-testnet.org/) and paste into your account's address.
+If you want to double-check that your account received the funds, go to the [Alfajores block explorer](https://alfajores-blockscout.celo-testnet.org/) and search for your account's address.
 
 Make sure your account isn't empty like this one!
 
 ​[​![empty account](https://camo.githubusercontent.com/60a2da1b381d2d9f9c21ade38e54f3793ead7bf2162d4eb7ccb8297733494cbc/68747470733a2f2f692e696d6775722e636f6d2f795055594353442e706e67)](https://camo.githubusercontent.com/60a2da1b381d2d9f9c21ade38e54f3793ead7bf2162d4eb7ccb8297733494cbc/68747470733a2f2f692e696d6775722e636f6d2f795055594353442e706e67)
 
-# 3. Interacting with the Crowdfunding Smart Contracts
+# Interacting with the Crowdfunding Smart Contracts
 
 Welcome to the last tutorial in this three part series on creating a crowdfunding smart contract on Celo. In this last part, we're going to write Javascript code in order to interact with the smart contract we wrote and deployed in the previous two parts.
 
 Now that we have our smart contract on the Celo test network, it's time to use it!
+
 ## Prerequisites
 
 You will need the smart contracts we wrote in part 1, and the deployments you made in part 2. Therefore, for the code in this tutorial to work you will need to have completed the prior two tutorials.
 
-{% embed url="https://www.youtube.com/watch?v=C24prS3bk\_I" caption="Interacting with the Crowdfunding Smart Contracts" %}
+Click the image below in order to watch the YouTube video for "Interacting with the Crowdfunding Smart Contracts". 
+
+{% embed url="https://youtu.be/C24prS3bk_I" caption="Interacting with the Crowdfunding Smart Contracts" %}
+
 
 ## Setup
 
@@ -674,11 +687,7 @@ The first step is to create a Javascript file to write our smart contract intera
 
 We will use the packages we installed via NPM in the first tutorial here. We will also need one additional module, BigNumber, in order to work with the large numbers the Celo blockchain uses.
 
-In the terminal, run:
-
-`npm install bignumber.js`
-
-And that's it for our setup!
+In the terminal, run `npm install bignumber.js`. That's it for the setup of this step!
 
 ![first step](https://i.imgur.com/Tn7z9oz.png)
 
@@ -688,7 +697,7 @@ The first step for interacting with our smart contracts is importing the modules
 
 At the top of the `interact.js` file, write the following:
 
-```text
+```js
 const Web3 = require('web3');
 const ContractKit = require('@celo/contractkit');
 const web3 = new Web3('https://alfajores-forno.celo-testnet.org');
@@ -708,7 +717,7 @@ The next thing we want to go is get our smart contract as a variable we can use.
 
 After the imports, write the following:
 
-```text
+```js
 // Get Celo account info
 
 let account = web3.eth.accounts.privateKeyToAccount(process.env.PRIVATE_KEY);
@@ -759,9 +768,9 @@ async function createProject(celoCrowdfundContract, stableToken)  {
 
 This function takes in the `celoCrowdfunding` contract, and a `stableToken` variable. It then creates a `projectGoal` using `BigNumber`.
 
-We create a number that's of size 1,000,000,000,000,000,000 or 1E18 because cUSD has a size of 18 decimals. Solidity doesn't have support for floating point numbers, so the workaround is to make really large numbers. 1E18 cUSD is equal to $1 cUSD.
+We create a number that's of size 1,000,000,000,000,000,000 or 1^18 because cUSD has a size of 18 decimals. Solidity doesn't have support for floating point numbers, so the workaround is to make really large numbers. 1^18 cUSD is equal to $1 cUSD.
 
-Next, we call the `startProject()` method in our crowdfunding contract and pass in the parameters it requires. If we go back to the `CeloCrowdfund.sol` contract, we'll see the createProject\(\) method takes in the following:
+Next, we call the `startProject()` method in our crowdfunding contract and pass in the parameters it requires. If we go back to the `CeloCrowdfund.sol` contract, we'll see the `createProject()` method takes in the following:
 
 ```javascript
 function startProject(
@@ -867,7 +876,7 @@ Back in our `interact()` function, let's call the `contribute()` helper function
   await contribute(stableToken, projectInstanceContract);
 ```
 
-## Printing our balances
+## Displaying our balances
 
 There are now two cUSD balances we care about: the balance of our Celo wallet, and the balance of our Project which the `contribute()` function sent 2 cUSD to.
 
@@ -930,11 +939,7 @@ Finally, let's call the `payOut()` helper function inside our `interact()` funct
 
 We'll want to wait 5 seconds before printing just to make sure the `payOut()` transaction has been confirmed on the blockchain.
 
-Now let's run the code! In your terminal, type:
-
-```javascript
-node interact.js
-```
+Now let's run the code! In your terminal, type: `node interact.js`
 
 The output should look something like this:
 
@@ -952,9 +957,8 @@ You can use this third tutorial as a jumping off point for interacting with any 
 
 If you run into any problems, feel free to ask on the [Figment Learn Discord](https://discord.gg/f5YuEsQTAx). You can also view the source code [here](https://github.com/alexreyes/Celo-Crowdfunding-Tutorial-3)
 
-## About the Authors
+# About the Authors
 
 The written tutorials were created by [Alex Reyes](https://www.linkedin.com/in/alexreyes-tech). Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He previously completed internships at Facebook and Microsoft.
 
 The videos were created by [Neo Cho](https://www.linkedin.com/in/neocho/). Neo is a student \(BS, Computer Science\) at the University of Central Florida. He enjoys learning about crypto and is excited about the future of web3.
-

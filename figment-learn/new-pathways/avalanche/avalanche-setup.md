@@ -16,10 +16,6 @@ yarn
 
 # Set your key
 
-{% hint style="info" %}
-If you have previously completed a Pathway, you may already have `.env.local`! Just add your Avalanche API key in the appropriate place and remember to save the file _before_ starting the development server.
-{% endhint %}
-
 Create an `.env.local` file at the root of the directory. Copy and paste the contents of the existing `.env.example` into the new file and save it to disk (you could also rename `.env.example` to `.env.local`).
 
 The value for `DATAHUB_AVALANCHE_API_KEY` can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/services/secret). Click on the **Avalanche** icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local`. This will authenticate you and enable you to make JSON-RPC requests to Secret via DataHub.
