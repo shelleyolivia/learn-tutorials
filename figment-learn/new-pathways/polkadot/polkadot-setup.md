@@ -1,4 +1,4 @@
-The following software is required to set up and complete the **Pokadot** Pathway
+The following software is required to set up and complete the **Polkadot** Pathway
 
 * [**Node.js v14.17.5 or higher installed**](https://nodejs.org/)
 * [**`yarn` installed**](https://yarnpkg.com/getting-started/install)
@@ -16,7 +16,7 @@ yarn
 
 # Set your API Key
 
-The value for `DATAHUB_POLKADOT_API_KEY` can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/services/secret). Click on the **Pokadot** icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local`. This will authenticate you and enable you to make JSON-RPC requests to Secret via DataHub.
+The value for `DATAHUB_POLKADOT_API_KEY` can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/services/secret). Click on the **Polkadot** icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local`. This will authenticate you and enable you to make JSON-RPC requests to Secret via DataHub.
 
 ![](../../../.gitbook/assets/pathways/polkadot/polkadot-setup.gif)
 
