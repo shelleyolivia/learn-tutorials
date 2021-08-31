@@ -20,7 +20,7 @@ For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit
 
 From the title, **Distributed File Manager**, you have got an idea that it's about making a dApp that will allow us to upload and manage files in a so-called **distributed** fashion. But you might be wondering, that what is **IPFS** and how will our files be distributed!!! Nothing to worry about, just go through the text, and all your doubts will be resolved.
 
-## **Decoding IPFS and how is it different?**
+## Decoding IPFS and how is it different?
 
 **IPFS** is an acronym that stands for **I**nter**P**lanetary **F**ile **S**ystem. It is a communication protocol and network for storing and sharing data. Theoretically, it aims to make a file-sharing system that can communicate among the planets, someday. Check out [Awesome IPFS](https://awesome.ipfs.io/) to learn more about projects built on IPFS.
 
@@ -44,7 +44,7 @@ Open a terminal and navigate to the directory where we will create the applicati
 cd ~
 ```
 
-## **Setting up the ReactJS project**
+## Setting up the ReactJS project
 
 Create a new react app using npx. npx is a npm package runner \(x stands for eXecute\). The typical use is to download and run a package temporarily or for trials. You can learn more about npx [here](https://www.npmjs.com/package/npx).
 
@@ -142,7 +142,7 @@ ReactDOM.render(
 
 React project setup is now complete.
 
-## **Setting up the Truffle project**
+## Setting up the Truffle project
 
 Run the following command in the root directory, to create a boilerplate for the `Truffle` project.
 
@@ -259,7 +259,7 @@ Celo wallets like **celowallet.app** use the path `m/44'/52752'/0'/0/0` for its 
 I would recommend you to read more about these keys, addresses and wallets on [O'Reilly](https://www.oreilly.com/library/view/mastering-bitcoin/9781491902639/ch04.html).
 {% endhint %}
 
-## **Get Celo credentials**
+## Get Celo credentials
 
 For deploying smart contracts we need two things: a node connected to the **Celo** network and an account with few **CELO** tokens. **Datahub** provides a Celo remote node, and to connect to the Datahub node, we need an API key. Visit [Celo Services Dashboard](https://datahub.figment.io/services/celo) on Datahub to get a Celo specific API key.
 
@@ -267,7 +267,7 @@ For deploying smart contracts we need two things: a node connected to the **Celo
 
 Now we need a **Celo** wallet, where we would keep our funds, required for all the transactions on the network. Visit the [Celo Wallet](https://celowallet.app/) and create an account. While creating your account you will see your public address and mnemonic. This public address will be required to transfer funds. Save the **mnemonic** in a secure place, we will need it later. Instructions to add funds will be provided later in the tutorial.
 
-## **Add .env file**
+## Add .env file
 
 Create a `.env` file in the project root folder. Please take a note that dot \(.\) is necessary for the `.env` file name. Now copy your Celo wallet's mnemonic in the .env file as shown below. In the .env file, **MNEMONIC** should be enclosed within double-quotes \(" "\). If you are facing any difficulty in setting up .env file then please refer to **Extra Guides** on [dotenv and .env](https://learn.figment.io/network-documentation/extra-guides/dotenv-and-.env).
 
@@ -363,7 +363,7 @@ function getFiles(address _account) public  view  returns (File[] memory) {
 }
 ```
 
-## **Make a new file for migrating smart contracts**
+**Make a new file for migrating smart contracts**
 
 Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `FileManager` smart contract to the blockchain.
 
@@ -375,7 +375,7 @@ module.exports = function (deployer) {
 };
 ```
 
-## **Compile Contracts with Truffle**
+## Compile Contracts with Truffle
 
 If we have altered the code within our Solidity source files or made new ones \(like `FileManager.sol`\), we need to run `truffle compile` in the terminal, from inside the project root directory.
 
@@ -408,7 +408,7 @@ Compiling the smart contracts would create `.json` file in the `src/build/contra
 `ABI` refers to Application Binary Interface, which is a standard for interacting with the smart contracts from outside the blockchain as well as contract-to-contract interaction. Please refer to the Solidity's documentation about ABI's [here](https://docs.soliditylang.org/en/v0.5.3/abi-spec.html#:~:text=The%20Contract%20Application%20Binary%20Interface,contract%2Dto%2Dcontract%20interaction.&text=This%20specification%20does%20not%20address,known%20only%20at%20run%2Dtime) to learn more.
 {% endhint %}
 
-## **Fund the account and run migrations on Celo's Alfjores test network.**
+**Fund the account and run migrations on Celo's Alfjores test network.**
 
 When deploying smart contracts to the Celo network, it will require some deployment cost. As you can see inside `truffle-config.js`, `@celo/contractkit` will help us in deploying on Celo and deployment cost will be managed by an account whose mnemonic has been stored in the `.env` file. Therefore we need to fund the account.
 
@@ -416,7 +416,7 @@ When deploying smart contracts to the Celo network, it will require some deploym
 
 Fund your account using the faucet link [https://celo.org/developers/faucet](https://celo.org/developers/faucet) and pasting your Celo's wallet address in the input field. You'll need to send at least `0.4 CELO`. Minimum CELO required for deployment, will vary from contract to contract, depending upon what variables and data structures our contract is using. Though funding through faucet would give you enough `CELO` to run multiple deployments and transactions on the network.
 
-# **Run Migrations**
+## Run Migrations
 
 Now everything is in place to run migrations and deploy the `FileManager`:
 
@@ -510,7 +510,7 @@ Deploying smart contracts is a transaction on the blockchain network. Therefore,
 
 You may also view your deployed smart contracts using their contract address as provided in the above output of `truffle migrate`.
 
-## **Possible Errors and Troubleshooting**
+## Possible Errors and Troubleshooting
 
 If you have not created an account on `CELO`, you would see this error :
 
