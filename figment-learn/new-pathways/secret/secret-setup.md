@@ -23,7 +23,7 @@ The value for `DATAHUB_SECRET_API_KEY` can be found on the [**DataHub Services D
 ![](../../../.gitbook/assets/pathways/secret/secret-setup.gif)
 
 {% hint style="info" %}
-[**Join us on Discord, if you encounter any issues with the tutorial or have any questions!**](https://discord.gg/fszyM7K)
+[**Join us on Discord**](https://discord.gg/fszyM7K), if you encounter any issues with the tutorial or have any questions!**
 {% endhint %}
 
 ---------------------------
