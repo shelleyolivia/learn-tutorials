@@ -4,7 +4,7 @@ Polkadot enables scalability by allowing specialized blockchains to communicate 
 
 Polkadot is built to connect and secure unique blockchains, whether they be public, permission-less networks, private consortium chains, or oracles and other Web3 technologies. It enables an internet where independent blockchains can exchange information under common security guarantees.
 
-Polkadot is a living network with the core pillars of governance and upgradability. The network has an advanced suite of governance tools and, using the [WebAssembly](https://webassembly.org/) standard as a "meta-protocol", can autonomously deploy network upgrades. Polkadot adapts to your growing needs without the risks of network forks.
+Polkadot is a living network with the core pillars of governance and upgradeability. The network has an advanced suite of governance tools and, using the [WebAssembly](https://webassembly.org/) standard as a "meta-protocol", can autonomously deploy network upgrades. Polkadot adapts to your growing needs without the risks of network forks.
 
 By connecting these dots, Polkadot serves as a foundational part of a decentralized web, where users control their data and are not limited by trust bounds within the network.
 
@@ -17,7 +17,7 @@ Developers can build application-specific chains using [Substrate](https://www.s
 1. Native Polkadot compatibility: Any blockchain built with Substrate will be natively compatible with Polkadot, so when the mainnet comes you can connect to Polkadot as a parachain.
 2. Interchain Connectivity: By connecting your blockchain to Polkadot, your blockchain will be able to pass arbitrary messages to other chains in the Polkadot network.
 3. Fork-free upgrades: Upgrade your blockchain without a hard fork. Your runtime is a Wasm binary stored on-chain and can be updated using your chain’s governance mechanism.
-4. Instant security: Simply by connecting your blockchain to Polkadot, your blockchain will be secured by Polkadot’s [pooled security](https://medium.com/polkadot-network/how-polkadot-tackles-the-biggest-problems-facing-blockchain-innovators-1affc1309b0f).
+4. Instant security: Simply by connecting your blockchain to Polkadot, your blockchain will be secured by Polkadot's [pooled security](https://medium.com/polkadot-network/how-polkadot-tackles-the-biggest-problems-facing-blockchain-innovators-1affc1309b0f).
 5. Plug-and-play modular framework: Substrate allows you to simply plug in the functionalities you need, while also giving you the freedom to customize as needed.
 6. Multiple Languages:** With Substrate, you can write your blockchain logic in any language that can compile to WebAssembly (Rust, C/C++, C#, Go, etc).
 
