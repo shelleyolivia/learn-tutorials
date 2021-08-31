@@ -56,7 +56,7 @@ module.exports = {
 
 Ensure you create an `.env` file in the project root directory (`~/DTube/.env`) and paste into it the Secret Recovery Phrase (12 words) of your preferably newly generated and testnet-only MetaMask wallet with the variable name MNEMONIC. This will be loaded by truffle at runtime, and the environment variable can then be accessed with `process.env.MNEMONIC`.
 
-```
+```text
 MNEMONIC= 12 secret words here..
 ```
 
@@ -86,7 +86,7 @@ If you're deploying it for the second time then deploy with this command just to
 
 If everything worked fine, you'll see something like this:
 
-```bash
+```text
 2_deploy_contracts.js
 =====================
 
@@ -133,14 +133,13 @@ Error: PollingBlockTracker - encountered an error while attempting to update lat
 ```
 
 **Fix_1**
-Change the RPC endpoint URL in Metamask from 'https://rpc-mumbai.matic.today' to an [DataHub RPC endpoint](https://datahub.figment.io/services/Polygon). This will require you to register for an Infura account and set up a Project, to get a Project ID. If you already have an Infura project ID, add it to the `.env` file => `PROJECT_ID=<your project ID>`
+Change the RPC endpoint URL in Metamask from 'https://rpc-mumbai.matic.today' to a [DataHub RPC endpoint](https://datahub.figment.io/services/Polygon). This will require you to register for an DataHub account and get a Polygon API key. If you already have a DataHub account, add your API key to the `.env` file => `DATAHUB_POLYGON_API_KEY`
 
-`infura -> Create new project -> Settings -> Endpoints -> Polygon Mumbai`
 
 ```javascript
     matic: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, 
-      `https://polygon-mumbai.infura.io/v3/process.env.PROJECT_ID`),
+      `https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/process.env.DATAHUB_POLYGON_API_KEY`),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,
@@ -153,21 +152,6 @@ Paste your PROJECT_ID there from .env file.
 * `truffle migrate --network matic --reset`
 
 If the error still occurs, try another alternate RPC endpoint from [MaticVigil](https://maticvigil.com/).
-
-**Fix_2**
-Change `https://rpc-mumbai.matic.today` by using [Matic custom RPC](https://rpc.maticvigil.com/).
-
-```javascript
-    matic: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, 
-      `https://rpc-mumbai.maticvigil.com/v1/process.env.PROJECT_ID`),
-      network_id: 80001,
-      confirmations: 2,
-      timeoutBlocks: 200,
-      skipDryRun: true,
-    },
-  },
-```
 
 Paste your PROJECT_ID there from .env file.
 * `truffle migrate --network matic --reset`
@@ -198,7 +182,7 @@ Error:  *** Deployment Failed ***
 ```javascript
     matic: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, 
-      `https://rpc-mumbai.maticvigil.com/v1/process.env.PROJECT_ID`),
+      `https://rpc-mumbai.maticvigil.com/v1/process.env.DATAHUB_POLYGON_API_KEY`),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,
