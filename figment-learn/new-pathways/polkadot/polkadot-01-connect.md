@@ -17,8 +17,8 @@ In `pages/api/polkadot/connect.ts`, complete the code of the function and try to
   try {
     const url = getSafeUrl();
     const provider = new WsProvider(url);
-    const api = await ApiPromise.create({ provider: provider });
-    const rawVersion = await api.rpc.system.version();
+    const api = undefined;
+    const rawVersion = undefined;
     const version = rawVersion.toHuman();
     res.status(200).json(version);
   }
