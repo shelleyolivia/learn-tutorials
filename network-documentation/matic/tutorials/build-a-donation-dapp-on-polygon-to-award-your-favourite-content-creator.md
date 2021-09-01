@@ -961,3 +961,7 @@ Summary
 In this tutorial, we have seen how to create a smart contract in solidity, have to use IPFS to upload images, how to interact with smart contracts in frontend applications using web3js and how to publish your smart contract to polygon testnet. Thank you so much for reading this far in this tutorial. This donation dapp is one of the endless possibilities of creating a dapp. If you end up creating something cool do let me know [@viral*sangani*](https://twitter.com/viral_sangani_), I would love to hear from you.
 
 That's all for this tutorial. 👋
+
+# About the Author
+
+I'm Viral Sangani, a tech enthusiast working on blockchain projects & love web3 community. Feel free to connect with me on [GitHub](https://github.com/viral-sangani) & [Twitter](https://twitter.com/viral_sangani_).
