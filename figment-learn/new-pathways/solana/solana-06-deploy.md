@@ -207,6 +207,6 @@ For the rest of the challenge we'll keep this programId in the localStorage of o
 
 ----------------------------------
 
-# Next
+# Conclusion
 
-So at this point, we've deployed our program to Solana's devnet cluster and checked that it ent smoothly. Now it's time to create an account that is owned by our program, to store some state! 
+So at this point, we've deployed our program to Solana's devnet cluster and checked that it went smoothly. Now it's time to create an account that is owned by our program, to store some data on the Solana cluster! 

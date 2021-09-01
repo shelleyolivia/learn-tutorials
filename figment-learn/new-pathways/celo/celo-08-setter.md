@@ -9,7 +9,7 @@ If you want to learn more about Celo smart contracts, follow the [**Deploy and I
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/celo/setter.ts`, complete the code of the default function. 
+In `pages/api/celo/setter.ts`, implement the default function. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -75,6 +75,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a new instance with the HelloWorld contract info.
 * Next, we call the `setName` function of our smart contract
 * Finally, we create a transaction to execute this function with `sendTransactionObject`, passing in:
@@ -98,4 +99,4 @@ Congratulations! You've completed the Celo Pathway. In this series of tutorials,
 
 We have only covered a very small portion of smart contract development, however there are many existing Solidity resources. We invite you to keep experimenting on your own, and we will be providing more advanced Celo tutorials shortly to help you bring your knowledge and skills to the next level.
 
-If you had any difficulties following this tutorial or simply want to discuss Celo and DataHub tech with us you can [join our community](https://discord.gg/Chhuv5zHy3) today!
+If you had any difficulties following this tutorial or simply want to discuss Celo with other developers you can join [our Discord](https://discord.gg/fszyM7K) or head over to our [community forums](https://community.figment.io).

@@ -1,13 +1,13 @@
-We already know that Avalanche is not your typical blockchain, with P/X/C chains supporting various operations. Each of these chains also has its own set of transaction types, however, we are looking to create a very simple one - a token transfer, and specifically on X-Chain.
+We already know that Avalanche is not your typical blockchain, with P/X/C chains supporting various operations. Each of these chains also has its own set of transaction types, however, we are looking to create a very simple one - a _token transfer_, and specifically on the X-Chain.
 
-In layman's terms: We will be sending some AVAX tokens from address A to address B to simulate a payment for goods/services. Simple as that.
+In simple terms: We will be sending some AVAX tokens from address A to address B to simulate a payment for goods/services.
 
 ------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/avalanche/transfer.ts`, complete the code of the function and try to make your first transfer on the Avalanche network. 
+In `pages/api/avalanche/transfer.ts`, implement the function and try to make your first transfer on the Avalanche network. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -90,14 +90,15 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, calling `importKey()` we pass the private key (`secret`), this allows the keypair to sign transactions.
 * Next, we fetch the latest unspent transaction outputs with `getUTXOs`.
 * Next, we determine the **assetID** using `BinTools.cb58Encode` method.
 * Next, we build a base transaction using `buildBaseTx` passing:
   * The unspent outputs,
-  * The transaction amout formatted as BigNumber,
+  * The transaction amount formatted as BigNumber,
   * The assetID,
-  * The recipent address,
+  * The recipient address,
   * The sender address,
   * The payer address. Note that the sender and payer in this example are the same, but this is not required.
 * Finally, we sign and send the transaction and return the transaction hash.

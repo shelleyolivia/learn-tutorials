@@ -86,6 +86,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a new `Keyring` instance of the `sr25519` type - This type parameter only applies to the default type of account created when no type is specified, it does not mean that the keyring can only store that type of account.
 * Next, we generate a new BIP39 mnemonic using the `mnemonicGenerate` method.
 * Next, we check if the mnemonic is valid using the `mnemonicValidate` method.

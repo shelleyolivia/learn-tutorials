@@ -1,11 +1,11 @@
-At this point we have deployed a smart contract on the Polygon testnet we have set the value of its storage and we have a client side application that's ready to fetch some date from it. We just need to wire up that last part.
+At this point, we have deployed a smart contract on the Polygon testnet & set the value of its storage. We have a client-side application that's ready to fetch some data from it. We just need to wire up that last part.
 
 -------------------------------------
 
 # The Challenge
 
 {% hint style="tip" %}
-**On the file `components/protocols/polygon/GeStorage.tsx` Implement the `getValue`**.    
+In the file `components/protocols/polygon/GeStorage.tsx`, implement the `getValue` function.   
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -64,9 +64,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
     }
 ```
 
-What's happening in the code above?
+**What happened in the code above?**
 
-* We create Contract objects using
+* We create `Contract` objects using
   * The contract json's address
   * The contract json's abi
   * A web3 provider
@@ -86,10 +86,8 @@ Once the code above save you can click and this is what the UI should look like!
 
 Congratulations! We have gone from zero to **Polygon**, covering all the most fundamental concepts needed for developers to succeed in using **Polygon**. From connecting to the network to interacting with smart contracts, you have completed coding challenges and created a functional yet basic dApp.   
 
-From here, there are many ways to increase your skills with web3 development. We recommend following some of the other Pathways on Learn, to learn about what makes the other netwrk protocols unique.
+From here, there are many ways to increase your skills with Web 3 development. We recommend following some of the other Tutorials and Pathways on Figment Learn, to discover what makes the other network protocols unique.
 
 If you are an experienced developer, you are welcome to contribute tutorials for **Polygon** and earn some **MATIC** tokens! Check out our tutorial [contribution guidelines](../../../other/tutorial-guidelines/) to get started.
 
-{% hint style="info" %}
-[**Please tell us what you think about this tutorial!**](https://docs.google.com/forms/d/e/1FAIpQLSc9taxobvDSdXprMEFhCXgfcwS_oA-lu-nbQdYEW6c57Ie6qg/viewform?usp=sf_link)
-{% endhint %}
+If you had any difficulties following this tutorial or simply want to discuss Polygon with other developers you can join [our Discord](https://discord.gg/fszyM7K) or head over to our [community forums](https://community.figment.io).

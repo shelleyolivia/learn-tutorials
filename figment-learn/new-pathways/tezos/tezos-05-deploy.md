@@ -96,6 +96,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a new `TezosToolkit` instance.
 * `importKey()` has the side effect of setting the TezosToolkit instance to use the `InMemorySigner` provider.
 * Next, we execute the `Tezos.contract.originate()` function. This deploys the Michelson contract code to the Tezos blockchain, from the `CONTRACT_JSON` in `counter.js`. The storage property is also set to `0`.
@@ -111,7 +112,7 @@ Once you have the code above saved, click on **Deploy Contract**
 
 -----------------------------
 
-# Next
+# Conclusion
 
 Now that we have deployed a smart contract on Tezos, let's interact with it! In the following tutorials, we will look at how to use both view and change functions.
 

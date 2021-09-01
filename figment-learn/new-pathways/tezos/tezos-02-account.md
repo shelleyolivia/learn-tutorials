@@ -66,6 +66,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a new `TezosToolkit` instance.
 * Next, we call the `importKey` method in order to activate the account.
 
@@ -82,6 +83,6 @@ Once the code is complete and the file has been saved:
 
 -----------------------------
 
-# Next
+# Conclusion
 
-Nice work! In the next tutorial, we will query a Tezos node using DataHub on the Florence testnet, to determine the current balance of our account.
+Nice work! You now have a Tezos account on the Florence testnet. In the next tutorial, we will query a Tezos node using DataHub, to determine the current balance of our account.

@@ -51,6 +51,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a new `Keyring` instance of the `sr25519` type.
 * Then we can use the `addFromUri` method to add the supplied mnemonic to the keyring - this is the account.
 * We can now access the public address via the `address` property of the `account`.
@@ -65,6 +66,6 @@ When you have completed the code, click on **Restore Account**
 
 -----------------------------
 
-# Next
+# Conclusion
 
 The ability to restore an account without requiring a third party is a great feature of **Polkadot**. Now, we're ready to go further and prepare our first transaction. In the next tutorial, we're going to learn how to estimate the fees required to submit a simple transfer.

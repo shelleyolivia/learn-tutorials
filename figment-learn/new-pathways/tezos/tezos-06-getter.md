@@ -42,7 +42,7 @@ In `pages/api/tezos/getter.ts`, complete the code of the function and try to rea
 * [**Interface ContractProvider method `getStorage`**](https://tezostaquito.io/typedoc/interfaces/_taquito_taquito.contractprovider.html#getstorage)  
 
 {% hint style="info" %}
-[**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
@@ -75,6 +75,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a new `TezosToolkit` instance.
 * Next, we import our wallet data using `importKey`.
 * Then, using the `getStorage` function of the `contract` module, we return the counter stored on the contract.
@@ -90,6 +91,6 @@ Once you have the code above saved, click the button and watch the magic happen:
 
 -----------------------------
 
-# Next
+# Conclusion
 
-Now it is time for the final challenge: Modify the state of the contract and thus the state of the blockchain. Let's go!
+Nicely done! You learned how to get a value from a smart contract's storage on the Tezos blockchain. Now it is time for the final challenge: Modify the state of the contract and thus the state of the blockchain. Let's go!

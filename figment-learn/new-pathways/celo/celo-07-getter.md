@@ -9,7 +9,7 @@ If you want to learn more about Celo smart contracts, follow the [**Deploy and I
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/celo/getter.ts`, complete the code of the default function. 
+In `pages/api/celo/getter.ts`, implement the default function. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -64,8 +64,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a new instance with the HelloWorld contract info, including the ABI and the `contract` passed in via the request body.
-* Then, we call the `getName` function of our smart contract, chaining the `call` method, because this requires communication with the blockchain.
+* Then we call the `getName` function of our smart contract, chaining the `call` method, because this requires communication with the blockchain.
 
 ----------------------------------
 

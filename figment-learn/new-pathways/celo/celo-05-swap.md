@@ -1,11 +1,12 @@
 It’s time to submit another transaction. In this challenge, we will connect to a Celo node hosted by DataHub and we will swap 1 **cUSD** stable token against the expected amount of **CELO** token. As you remember from a previous tutorial, we funded our account on the `Alfajores` testnet with 5 **CELO** and 10 **cUSD**. Now let’s try to swap 1 **cUSD** token to **CELO**.
+Celo has a number of core smart contracts that are deployed to the network. In this challenge, we'll use the StableToken and Exchange contract wrappers, which have all the expected functions enabling us to swap tokens. 
 
 ----------------------------------
 
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/celo/swap.ts`, complete the code of the **swap** function. Celo has a number of core smart contracts that are deployed to the network. In this challenge, we'll use the StableToken and Exchange contract wrappers, which have all the expected functions enabling us to swap tokens. 
+In `pages/api/celo/swap.ts`, implement the **swap** function. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -58,6 +59,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we store into the `stableToken` variable the `StableTokenWrapper` contract interface by calling `getStableToken`. 
 * Next, we store into the `exchange` variable the `ExchangeWrapper` contract interface by calling `getExchange`.
 * Next, we approve the transfer of **cUSD** from our address using the `approve` method of `stableToken` from our `StableTokenWrapper` contract interface.
@@ -68,7 +70,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 # Make sure it works
 
-Once you have the code above saved, click on **Swap 1 cUSD**
+Once you have the code above saved, click on **Swap 1 cUSD**:
 
 ![](../../../.gitbook/assets/pathways/celo/celo-swap.gif)
 

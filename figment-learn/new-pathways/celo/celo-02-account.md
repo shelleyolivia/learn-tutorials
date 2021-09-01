@@ -7,7 +7,7 @@ It’s time to create your first Celo account on the **Alfajores** testnet. With
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/celo/account.ts`, complete the code of the function to first create a **mnemonic**, then produce an **address** from the **public key** belonging to the **mnemonic**.
+In `pages/api/celo/account.ts`, implement the function to first create a **mnemonic**, then produce an **address** from the **public key** belonging to the **mnemonic**. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -60,8 +60,9 @@ try {
 ```
 
 **What happened in the code above?**
+
 * First, we create a new `kit` instance.
-* Next, using `web3.eth` we can access a proxy of the [**web3.js - Ethereum Javascript API**](https://web3js.readthedocs.io/en/v1.4.0/)
+* Next, using `web3.eth` we can access a proxy of the [**web3.js - Ethereum Javascript API**](https://web3js.readthedocs.io/en/v3.0.0-rc.5/)
 * Next, calling `create` from the `account` module, we can create a new account.
 * Finally to access: 
     * The address, using the `address` property.

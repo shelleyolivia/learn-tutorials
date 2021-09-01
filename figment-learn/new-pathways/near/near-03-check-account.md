@@ -5,7 +5,7 @@ Unlike many other Web 3 protocols, NEAR uses a human readable account ID instead
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/near/check-account.ts`, complete the code of the default function.
+In `pages/api/near/check-account.ts`, implement the default function. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -57,10 +57,11 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create an `Account` object from the `freeAccountId` being passed in the request body.
-* Next, we query the state of this object with the `state()` method:
+* Next, we query the state of this object with the `state` method:
   * If it returns `true`, the account exists and we will return a `false` value to the client-side - indicating that the name is unavailable. 
-  * If `state()` returns `false`, the account doesn't exist - so we pass a `true` value back to the client-side, indicating that the name is available. Phew! Little bit of programming logic there.
+  * If `state` returns `false`, the account doesn't exist - so we pass a `true` value back to the client-side, indicating that the name is available. Phew! Little bit of programming logic there.
 
 ------------------------
 

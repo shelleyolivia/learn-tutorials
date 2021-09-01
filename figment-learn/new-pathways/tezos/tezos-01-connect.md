@@ -49,6 +49,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * `getTezosUrl` is a helper function used to generate a valid endpoint URL.
 * The `TezosToolkit` instance manages the connection.
 * Unlike other blockchains, Tezos does not expose a software version for nodes. We will instead retrieve the Chain ID with `getChainId`.
@@ -63,6 +64,6 @@ Once the code is complete and the file has been saved, refresh the page to see i
 
 -----------------------------
 
-# Next
+# Conclusion
 
-Congratulations! We have connected to the Tezos blockchain and queried the chain ID with a few lines of JavaScript code. We can now proceed to creating an account for use on Florence, the Tezos testnet.
+Congratulations! You have connected to the Tezos blockchain and queried the chain ID with a few lines of JavaScript code. In the next tutorial, we will create an account for use on Florence, the Tezos testnet.

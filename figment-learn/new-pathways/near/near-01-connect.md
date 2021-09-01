@@ -11,7 +11,7 @@ The main difference here is in the protocol. To connect to NEAR, we'll be using 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/near/connect.ts`, implement `connection` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
+In `pages/api/near/connect.ts`, implement `connection` by creating a `Connection` instance and getting the API version. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -54,10 +54,11 @@ try {
 ```
 
 **What happened in the code above?**
-* `configFromNetwork()` takes the network identifier such as *mainnet* or *testnet* and returns a `config` object containing the correct URLs.
-* `connect()` takes the `config` object and returns an instance of `Near`, which represents the connection.
+
+* `configFromNetwork` takes the network identifier such as *mainnet* or *testnet* and returns a `config` object containing the correct URLs.
+* `connect` takes the `config` object and returns an instance of `Near`, which represents the connection.
 * `near.connection.provider` returns a `JsonRpcProvider` object allowing us to make JSON-RPC calls to DataHub.
-* The `status()` method allows us to retrieve the desired information from the properties of the object that it returns.
+* The `status` method allows us to retrieve the desired information from the properties of the object that it returns.
 * Finally, we can send back the `status.version.version` to the client-side as JSON.
 
 ------------------------
@@ -72,4 +73,4 @@ Once the code is complete and the file has been saved, refresh the page to see i
 
 # Next
 
-Well done! Your fluency in the NEAR dialect of web3 is growing. As a newcomer, building an identity is important so you can distinguish yourself from other users on the NEAR network. Ready to take the next step forward?
+Well done! Your fluency in the NEAR dialect of Web 3 is growing. As a newcomer, building an identity is important so you can distinguish yourself from other users on the NEAR network. Ready to take the next step forward?

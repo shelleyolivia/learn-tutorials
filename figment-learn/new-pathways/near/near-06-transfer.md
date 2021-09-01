@@ -1,13 +1,13 @@
 In order to transfer some value to another account, we need to sign a transaction to the **network**. **NEAR** provides an abstract class to help us with this: **KeyStore**.
 
-Here you are going to learn how to set your keystore in order to sign your transfer of tokens.
+In this tutorial you are going to learn how to set your keystore in order to sign your transfer of tokens.
 
 ----------------------------------
 
 # The challenge
 
 {% hint style="tip" %}
-In`pages/api/near/transfer.ts`, complete the code of the function. There is a lot to fill here, so be careful!
+In`pages/api/near/transfer.ts`, implement the function. You must replace any instances of `undefined` with working code to accomplish this. There is a lot to fill here, so be careful! 
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -19,27 +19,27 @@ In`pages/api/near/transfer.ts`, complete the code of the function. There is a lo
     txReceiver,
     network,
     secret,
-  } = req.body
+  } = req.body;
 
   try {
-    const config = configFromNetwork(network)
+    const config = configFromNetwork(network);
 
     // recreate the keypair from secret
-    const keypair = undefined
+    const keypair = undefined;
   
     // Set the keystore with the expected method and args
-    config.keyStore?.undefined
+    config.keyStore?.undefined;
 
     // Here we convert the NEAR into yoctoNEAR using utilities from NEAR lib
-    const yoctoAmount = parseNearAmount(txAmount) as string
-    const amount = new BN(yoctoAmount) 
+    const yoctoAmount = parseNearAmount(txAmount) as string;
+    const amount = new BN(yoctoAmount); 
 
     // Fill the Gap: connect, create an Account Object and send some money
-    const near = undefined
-    const account = undefined
-    const transaction = undefined
+    const near = undefined;
+    const account = undefined;
+    const transaction = undefined;
 
-    return res.status(200).json(transaction.transaction.hash)
+    return res.status(200).json(transaction.transaction.hash);
   } 
 //...
 ```
@@ -85,9 +85,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we need to *rehydrate* our `KeyPair` using our secret.
 * Next, we convert the **NEAR** into **yoctoNEAR**, the smallest unit of money on the **NEAR** blockchain.
-* Next, create our transaction using the `sendMoney()` method, with a receiver and an amount as arguments. This submits the signed transaction to the network, and returns the transaction hash, which is accessible as the `transaction.hash` property of the `transaction` variable. 
+* Next, create our transaction using the `sendMoney` method, with a receiver and an amount as arguments. This submits the signed transaction to the network, and returns the transaction hash, which is accessible as the `transaction.hash` property of the `transaction` variable. 
 
 ----------------------------------
 

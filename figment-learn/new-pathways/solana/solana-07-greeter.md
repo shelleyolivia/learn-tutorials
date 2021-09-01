@@ -104,6 +104,6 @@ Once you have the code above saved, click on **Create Greeter**:
 
 ----------------------------------
 
-# Next
+# Conclusion
 
 Now we have an account owned by the program and dedicated to storing the program data. We are ready to go ahead and act on the data: the first natural action is to read the data. Ready?

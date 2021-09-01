@@ -13,7 +13,7 @@ If you want to learn more about Celo smart contracts, follow the [**Deploy and I
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/celo/deploy.ts`, complete the code of the default function. Upload your first smart contract on the **Celo** network.
+In `pages/api/celo/deploy.ts`, implement the default function. Upload your first smart contract on the **Celo** network. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -76,6 +76,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * We send a transaction using the `sendTransaction` method passing:
   * `from`, the address which will pay the fees for the transaction
   * `data`, the bytecode of our compiled contract using the `bytecode` property of the ABI stored in `contracts/celo/HelloWorld.json`. 
@@ -84,7 +85,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 # Make sure it works
 
-Once you have the code above saved, click on **Deploy Contract**
+Once you have the code above saved, click on **Deploy Contract**:
 
 ![](../../../.gitbook/assets/pathways/celo/celo-deploy.gif)
 

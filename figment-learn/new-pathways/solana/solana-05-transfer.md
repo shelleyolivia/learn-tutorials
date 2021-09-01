@@ -97,6 +97,6 @@ Once you've filled in the form with a value, click **Submit Transfer**:
 
 ----------------------------------
 
-# Next
+# Conclusion
 
 Now that you are comfortable with accounts and tokens, we will look at how to deploy a program written in the Rust language to the Solana cluster. Don't worry, this process is not as scary as it sounds 😇

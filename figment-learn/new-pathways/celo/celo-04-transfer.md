@@ -1,11 +1,12 @@
 It’s time to submit your first transactions. In this challenge, we will connect to a Celo node hosted by DataHub and we will transfer our testnet token. As you remember from previous step, we funded our account on the `Alfajores` testnet with 5 **CELO** and 10 **cUSD**. Now let’s try to transfer some **CELO** tokens to another testnet account.
+Celo has a number of core smart contracts that are deployed to the network. In this challenge, we'll use the GoldToken contract wrappers, which have a `transfer` and a `send` function allowing us to build a transfer transaction.
 
 ----------------------------------
 
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/celo/transfer.ts`, complete the code of the **transfer** function. Celo has a number of core smart contracts that are deployed to the network. In this challenge, we'll use the GoldToken contract wrappers, which have a `transfer` and a `send` function allowing us to build a transfer transaction. 
+In `pages/api/celo/transfer.ts`, implement the **transfer** function. You must replace any instances of `undefined` with working code to accomplish this. 
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -66,6 +67,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we initialize the account using `addAccount` with our private key.
 * Next, we store into the `celoToken` variable the `GoldTokenWrapper` contract interface by calling `getGoldToken`. 
 * Finally, we can interact with the **CELO** token using this interface, chaining the `transfer` and `send` methods with the expected parameters:

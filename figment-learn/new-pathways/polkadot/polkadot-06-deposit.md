@@ -51,6 +51,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we need to instantiate our connection to the Polkadot API.
 * Next, we call `existentialDeposit` of the `const.balances` module, converting the property to a number with `toNumber`.
 * Finally, we send the `deposit` amount back to the client-side as JSON.

@@ -86,6 +86,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we must supply the address of our newly deployed contract to `tezos.contract.at`.
 * Next, using `contract.methods.increment(n).send()` will pass the value of `n` to the `increment` method of the deployed contract. Note: _if the contract functions are not annotated, they are still indexed by number._ 
 * Next, using the instruction `transaction.confirmation(3)` we wait for **3** block confirmations before returning.
@@ -103,8 +104,8 @@ Once you have the code above saved, click the button and watch the magic happen:
 
 # Conclusion
 
-Congratulations! You have completed the Tezos Pathway, all the way from connecting to Tezos to being able to deploy smart contracts. You are now empowered to learn and build on Tezos, using the dedicated infrastructure of DataHub.
+Congratulations! You have completed the Tezos Pathway, all the way from connecting to Tezos to being able to deploy smart contracts! You are now empowered to learn and build on Tezos, using the dedicated infrastructure of DataHub.
 
 Continue to explore the [LIGO API documentation](https://ligolang.org/docs/api/cheat-sheet), learn more about [Michelson](https://tezos.gitlab.io/michelson-reference/) or perhaps dive straight into the [JSON/RPC documentation](https://tezos.gitlab.io/developer/rpc.html). 
 
-If you had any difficulties following this tutorial or simply want to discuss Tezos with us you can join [our Discord](https://discord.gg/fszyM7K) or head over to our [community forums](https://community.figment.io).
+If you had any difficulties following this tutorial or simply want to discuss Tezos with other developers you can join [our Discord](https://discord.gg/fszyM7K) or head over to our [community forums](https://community.figment.io).

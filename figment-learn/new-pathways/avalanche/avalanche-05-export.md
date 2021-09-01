@@ -14,7 +14,7 @@ Here we will focus on the first part, the **X-Chain export transaction**.
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/avalanche/export.ts`, complete the code of the function and try to create an export transaction from X-Chain to C-Chain. 
+In `pages/api/avalanche/export.ts`, implement the function and try to create an export transaction from X-Chain to C-Chain. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -104,6 +104,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we need to build our C-Chain keypair. This works exactly the same way for X-Chain.
 * Next, we determine the chainId.
 * Next, we build our transaction the same way as for a simple **AVAX** transfer:

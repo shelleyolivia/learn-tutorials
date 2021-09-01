@@ -5,7 +5,7 @@ Like with most Web 3 protocols, transactions on Solana happen between **accounts
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string.
+In `pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -13,9 +13,9 @@ In `pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to e
 ```tsx
 //...
   try {
-    const keypair = undefined
-    const address = undefined
-    const secret = JSON.stringify(Array.from(keypair?.secretKey))
+    const keypair = undefined;
+    const address = undefined;
+    const secret = JSON.stringify(Array.from(keypair?.secretKey));
 
     res.status(200).json({
         secret,
@@ -43,8 +43,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 //...
   try {
     const keypair = Keypair.generate();
-    const address = keypair?.publicKey.toString()
-    const secret = JSON.stringify(Array.from(keypair?.secretKey))
+    const address = keypair?.publicKey.toString();
+    const secret = JSON.stringify(Array.from(keypair?.secretKey));
 
     res.status(200).json({
         secret,
@@ -56,7 +56,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 
-* We used the `Keypair` from `@solana/web3.js` to `generate()` a keypair 😁
+* We used the `Keypair` from `@solana/web3.js` to `generate()` a keypair.
 * Parse the keypair object to extract the public key (as a string) using `keypair?.publicKey.toString()`.
 * The secret key is kept in array format, so to send it back to the client-side we need to remember to use `JSON.stringify`.
 * There's the nullish coalescing operator and optional chaining operator `?.` again! We don't want to return undefined values to the client-side.
@@ -73,6 +73,6 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 ----------------------------------
 
-# Next
+# Conclusion
 
 Now that we have an account, we can fund it so we can start playing around with tokens!

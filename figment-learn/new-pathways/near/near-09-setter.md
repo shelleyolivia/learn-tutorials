@@ -9,7 +9,7 @@ If you want to learn more about NEAR smart contracts, you can follow the tutoria
 # The challenge
 
 {% hint style="tip" %}
-In`pages/api/near/setter.ts`, complete the code of the default function. 
+In`pages/api/near/setter.ts`, implement the default function. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -68,7 +68,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* We're calling the `functionCall()` method of our account, passing to it:
+
+* We're calling the `functionCall` method of our account, passing to it:
   * The `contractId` which is the same as our account name. This is because the contract has been deployed to our account.
   * The name of the method we want to call, `set_greeting`
   * The name of the argument expected by `get_greeting`, which is `message`.
@@ -89,4 +90,4 @@ Congratulations! You have successfully created, deployed, and interacted with a 
 
 While we have only covered a very small area of contract development, you are more than welcome to continue exploration and experiments on your own! Feel free to check out the [**NEAR Developer site**](https://examples.near.org/) for more examples and tutorials.
 
-If you had any difficulties following this tutorial or simply want to discuss NEAR and DataHub tech with us you can join [our community](https://discord.gg/fszyM7K) today!
+If you had any difficulties following this tutorial or simply want to discuss NEAR with other developers you can join [our Discord](https://discord.gg/fszyM7K) or head over to our [community forums](https://community.figment.io).
