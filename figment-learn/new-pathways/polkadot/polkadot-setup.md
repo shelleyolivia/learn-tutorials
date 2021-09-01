@@ -6,7 +6,7 @@ The following software is required to set up and complete the **Polkadot** Pathw
 
 Start by cloning the repository and installing the dependencies with `yarn` :
 
-```bash
+```text
 git clone https://github.com/figment-networks/learn-web3-dapp.git
 cd learn-web3-dapp
 yarn
@@ -39,7 +39,7 @@ Once the development server loads and compiles the application, open your defaul
 ![](../../../.gitbook/assets/pathway-home.gif)
 
 {% hint style="warning" %}
-You can change the default port if needed `yarn dev --port 1122`
+Did you know you can change the port? By default Next.js uses port 3000, but if you have another service already running on that port, use the `--port` flag, like `yarn dev --port 1122`.
 {% endhint %}
 
 ---------------------------

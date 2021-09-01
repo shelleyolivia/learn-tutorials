@@ -14,7 +14,7 @@ yarn
 
 ---------------------------
 
-# Set your key
+# Set your API key
 
 {% hint style="info" %}
 If you have previously completed a Pathway, you may already have `.env.local`! Just add your Tezos API key in the appropriate place and remember to save the file _before_ starting the development server.
@@ -45,7 +45,7 @@ Once the development server loads and compiles the application, open your defaul
 ![](../../../.gitbook/assets/pathway-home.gif)
 
 {% hint style="warning" %}
-You can change the default port if needed `yarn dev --port 1122`
+Did you know you can change the port? By default Next.js uses port 3000, but if you have another service already running on that port, use the `--port` flag, like `yarn dev --port 1122`.
 {% endhint %}
 
 ---------------------------
