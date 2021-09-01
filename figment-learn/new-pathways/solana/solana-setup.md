@@ -14,7 +14,7 @@ yarn
 
 ---------------------------
 
-# Key in the ignition 
+# Set your API key
 
 Create an `.env.local` file at the root of the directory. Copy and paste the contents of the existing `.env.example` into the new file and save it to disk (alternatively, you can rename `.env.example`).
 
@@ -28,7 +28,7 @@ The value for `DATAHUB_SOLANA_API_KEY` can be found on the [DataHub Services Das
 
 ---------------------------
 
-# Start the browser
+# Start the server
 
 With the API key in place, save the `.env.local` file and start the React interface with :
 
@@ -40,12 +40,12 @@ Once the development server loads and compiles the application, open your defaul
 
 ![](../../../.gitbook/assets/pathway-home.gif)
 
-{% hint style="info" %}
-You can change the port of the Next.js development server, if needed: `yarn dev --port 1234`.
+{% hint style="warning" %}
+Did you know you can change the port? By default Next.js uses port 3000, but if you have another service already running on that port, use the `--port` flag, like `yarn dev --port 1122`.
 {% endhint %}
 
 ---------------------------
 
-# You're in the drivers seat!
+# Next
 
-You can now move ahead to the next step by clicking on the "Next" button below on the right.
+You can now move ahead to the next step by clicking on the "Next" button below on the right. There are also links to the instructions for each step on the UI.

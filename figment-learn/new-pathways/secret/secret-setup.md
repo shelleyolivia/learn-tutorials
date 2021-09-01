@@ -14,7 +14,7 @@ yarn
 
 ---------------------------
 
-# Set your key
+# Set your API key
 
 Create an `.env.local` file at the root of the directory. Copy and paste the contents of the existing `.env.example` into the new file and save it to disk (you could also rename `.env.example` to `.env.local`).
 
@@ -41,7 +41,7 @@ Once the development server loads and compiles the application, open your defaul
 ![](../../../.gitbook/assets/pathway-home.gif)
 
 {% hint style="warning" %}
-You can change the default port if needed `yarn dev --port 1234`
+Did you know you can change the port? By default Next.js uses port 3000, but if you have another service already running on that port, use the `--port` flag, like `yarn dev --port 1122`.
 {% endhint %}
 
 ---------------------------

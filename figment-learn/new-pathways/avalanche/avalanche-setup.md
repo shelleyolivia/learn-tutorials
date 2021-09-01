@@ -41,7 +41,7 @@ Once the development server loads and compiles the application, open your defaul
 ![](../../../.gitbook/assets/pathway-home.gif)
 
 {% hint style="warning" %}
-You can change the default port if needed `yarn dev --port 1122`
+Did you know you can change the port? By default Next.js uses port 3000, but if you have another service already running on that port, use the `--port` flag, like `yarn dev --port 1122`.
 {% endhint %}
 
 ---------------------------
