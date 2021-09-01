@@ -1,12 +1,10 @@
-# 
-
 Transfering some token is one of the major feature of web3. In this challenge, we're going to learn how to transfer a know amount of **MATIC** to a choosen recipient. Each time, a transfert occurs, we'are going to re-query the new balance of our account.
 
 -------------------------------------
 
-## The challenge
+# The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 **Imagine this scenario:** You know you have a big balance and you want to eat some pizza. Then, you need to transfer **0.1** MATIC to buy one! In `components/protocols/polygon/steps/Transfer.tsx`, implement the `transfer` function :
 {% endhint %}
 
@@ -48,7 +46,7 @@ Transfering some token is one of the major feature of web3. In this challenge, w
 
 -------------------------------------
 
-## The solution
+# The solution
 
 ```javascript
     const transfer = async () => {
@@ -91,7 +89,7 @@ What happened in the code above? Let's take a closer look!
 * Finaly we sign and send our transaction and wait it's confirmation
 -------------------------------------
 
-## Make sure it works
+# Make sure it works
 
 Once the code above save you can click and this is what the UI should look like!
 

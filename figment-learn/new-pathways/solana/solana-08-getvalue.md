@@ -1,5 +1,3 @@
-# 
-
 Data is stored into an account as a **buffer**. To access the data, we'll have to first unpack this blob of data into a well defined structure. The code below allows our TypeScript program to achieve this goal: deserializing a greeter's buffer into a TypeScript class. 
 
 ```typescript
@@ -25,9 +23,9 @@ const GreetingSchema = new Map([
 
 ----------------------------------
 
-## The challenge
+# The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/solana/getGreetings.ts`, complete the code for `getGreetings`. First deserialize the greeter data to a TypeScript class, then access the counter value and pass it to the response object using the `.json()` method as in all previous tutorials.
 {% endhint %}
 
@@ -61,7 +59,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## The solution
+# The solution
 
 ```typescript
 //...
@@ -86,7 +84,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## Make sure it works
+# Make sure it works
 
 Once you have the code above saved, click on **Get Greeting** and watch the magic happen: 
 
@@ -94,6 +92,6 @@ Once you have the code above saved, click on **Get Greeting** and watch the magi
 
 ----------------------------------
 
-## Next
+# Next
 
 Simply getting the number of greetings is not enough, we'd like to also *send* a greeting to our contract. We're going to learn how to do it in the next step. Ready?

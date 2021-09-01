@@ -1,12 +1,10 @@
-# 
-
 In the following tutorials, we're going to interact with the Solana blockchain (and in particular its Devnet network) using the `@solana/web3.js` library. It's a convenient way to interface with the RPC API when building a Javascript application (under the hood it implements Solana's RPC methods and exposes them as Javascript objects). We will explore it together as we add features to our app.
 
 ----------------------------------
 
-## The challenge
+# The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/solana/connect.ts`, implement `connect` by creating a `Connection` instance and getting the API's version. Render it on the webpage.
 {% endhint %}
 
@@ -35,7 +33,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## The solution
+# The solution
 
 ```typescript
 //...
@@ -53,14 +51,15 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * We then call `getVersion` on that `connection` instance. The docs state that `connection.getVersion()` returns a Promise so we need to handle this with either `.then()`, or in a more compact manner with the nullish coalescing operator and optional chaining operator: `?.` In this way, `version?.["solana-core"]` will provide a safe value other than `undefined` when getting `version`!
 
 -----------------------------
-## Make sure it works
 
-Once the code above is saved in `pages/api/solana/connect.ts`, refresh the page to see it update & display the current version of the Solana software!
+# Make sure it works
+
+Once the code above is saved, refresh the page to see it update & display the current version of the Solana software!
 
 ![](../../../.gitbook/assets/solana-connect.gif)
 
 -----------------------------
 
-## Next
+# Next
 
 We're going to use this `connection` instance every time we need to connect to Solana. Now we're going to want to move some tokens around, but first we need an account to hold tokens! That's what we'll do in the next tutorial, create a keypair on Solana so that we have an account.

@@ -1,6 +1,4 @@
-# 🗺 Polygon (Matic) Pathway
-
-## What is Polygon?
+# What is Polygon?
 
 {% hint style="info" %}
 "_Polygon is a protocol and a framework for building and connecting Ethereum compatible blockchain networks. Aggregating scalable solutions on Ethereum, supporting a multi-chain Ethereum ecosystem._"
@@ -18,13 +16,13 @@ Check out [Awesome Polygon](https://awesomepolygon.com/dapps/) for many examples
 
 There are a few important sites that will be of interest to users of **Polygon**
 
-* [https://wallet.matic.network](https://wallet.matic.network) for bridging assets between **Polygon** and Ethereum.
-* [https://docs.matic.network](https://docs.matic.network/) for knowledge!
-* [https://faucet.matic.network](https://faucet.matic.network/) for free testnet assets.
+* [For bridging assets between **Polygon** and Ethereum](https://wallet.matic.network)
+* [For knowledge!](https://docs.matic.network/) 
+* [For free testnet assets](https://faucet.matic.network/)
 
 -------------------------------------
 
-### Heimdall & Bor
+## Heimdall & Bor
 
 For **Polygon**, the node is designed with a two layer implementation with Heimdall (the Validator layer) & Bor (the Block Producer layer) :
 
@@ -35,7 +33,7 @@ For **Polygon**, the node is designed with a two layer implementation with Heimd
 
 -------------------------------------
 
-### Bridging Polygon & Ethereum
+## Bridging Polygon & Ethereum
 
 Polygon's Validators continuously monitor a contract on Ethereum's mainnet called _**StateSender**_. Each time a registered contract on Ethereum calls this contract, it emits an event. Using this event, Polygon validators relay the data to another contract on the **Polygon** chain. This _**StateSync**_ mechanism is used to send data from Ethereum to **Polygon**.
 

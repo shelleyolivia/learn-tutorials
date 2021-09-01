@@ -1,7 +1,7 @@
 
 [**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/nameservice/tutorial/00-intro.html#). 
 
-## Getting Started
+# Getting Started
 
 In this tutorial, you will build a functional [Cosmos SDK](https://github.com/cosmos/cosmos-sdk/) application and, in the process, learn the basic concepts and structures of the SDK. The example will showcase how quickly and easily you can **build your own blockchain from scratch** on top of the Cosmos SDK.
 
@@ -16,7 +16,7 @@ All of the final source code for this tutorial project is in this directory \(an
 * Desire to create your own blockchain!
 * The [scaffold tool](https://github.com/cosmos/scaffold) will be used to go through this tutorial. Clone the repo and install with `git clone git@github.com:cosmos/scaffold.git && cd scaffold && make`. Check out the repo for more detailed instructions.
 
-## Tutorial
+# Tutorial
 
 Through the course of this tutorial you will create the following files that make up your application:
 
@@ -83,7 +83,7 @@ Here are the modules you will need for the nameservice application:
 
 Now, take a look at the two main parts of your application: the state and the message types.
 
-### State
+## State
 
 The state represents your application at a given moment. It tells how much token each account possesses, what are the owners and price of each name, and to what value each name resolves to.
 
@@ -91,7 +91,7 @@ The state of tokens and accounts is defined by the `auth` and `bank` modules, wh
 
 In the SDK, everything is stored in one store called the `multistore`. Any number of key/value stores \(called [`KVStores`](https://godoc.org/github.com/cosmos/cosmos-sdk/types#KVStore) in the Cosmos SDK\) can be created in this multistore. For this application, we will use one store to map `name`s to its respective `whois`, a struct that holds a name's value, owner, and price.
 
-### Messages
+## Messages
 
 Messages are contained in transactions. They trigger state transitions. Each module defines a list of messages and how to handle them. Here are the messages you need to implement the desired functionality for your nameservice application:
 
@@ -178,11 +178,11 @@ cd x/
 scaffold module [user] [repo] nameservice
 ```
 
-### `types.go` 
+**`types.go`**
 
 Now we can continue with creating a module. Start by creating the file `types.go`in `./x/nameservice/types` folder which will hold customs types for the module.
 
-### Whois
+## Whois
 
 Each name will have three pieces of data associated with it.
 
@@ -308,7 +308,7 @@ type BankKeeper interface {
 
 The main core of a Cosmos SDK module is a piece called the `Keeper`. It is what handles interaction with the store, has references to other keepers for cross-module interactions, and contains most of the core functionality of a module.
 
-### Keeper Struct
+## Keeper Struct
 
 To start your SDK module, define your `nameservice.Keeper` in the `./x/nameservice/keeper/keeper.go` file. Defined in this generated file are a few extra items that we will not cover at this time, for this reason we will start by clearing the `keeper.go` file in favor of following this tutorial.
 
@@ -343,7 +343,7 @@ A couple of notes about the above code:
   * [`*codec.Codec`](https://godoc.org/github.com/cosmos/cosmos-sdk/codec#Codec) - This is a pointer to the codec that is used by Amino to encode and decode binary structs.
   * [`sdk.StoreKey`](https://godoc.org/github.com/cosmos/cosmos-sdk/types#StoreKey) - This is a store key which gates access to a `sdk.KVStore` which persists the state of your application: the Whois struct that the name points to \(i.e. `map[name]Whois`\).
 
-### Getters and Setters
+## Getters and Setters
 
 Now it is time to add methods to interact with the stores through the `Keeper`. First, add a function to set the Whois a given name resolves to:
 
@@ -479,7 +479,7 @@ Next, its time to move onto describing how users interact with your new store us
 
 Now that you have the `Keeper` setup, it is time to build the `Msgs` and `Handlers` that actually allow users to buy names and set values for them.
 
-### `Msgs`
+**`Msgs`**
 
 `Msgs` trigger state transitions. `Msgs` are wrapped in [`Txs`](https://github.com/cosmos/cosmos-sdk/blob/master/types/tx_msg.go#L34-L41) that clients submit to the network. The Cosmos SDK wraps and unwraps `Msgs` from `Txs`, which means, as an app developer, you only have to define `Msgs`. `Msgs` must satisfy the following interface \(we'll implement all of these in the next section\):
 
@@ -528,7 +528,7 @@ type Msg interface {
 }
 ```
 
-### `Handlers`
+**`Handlers`**
 
 `Handlers` define the action that needs to be taken \(which stores need to get updated, how, and under what conditions\) when a given `Msg` is received.
 
@@ -538,7 +538,7 @@ Now that you have a better understanding of `Msgs` and `Handlers`, you can start
 
 ## SetName 
 
-### `MsgSetName`
+**`MsgSetName`**
 
 The naming convention for the SDK `Msgs` is `Msg{ .Action }`. The first action to implement is `SetName`, so we'll call it `MsgSetName`. This `Msg` allows the owner of a name to set the return value for that name within the resolver. Start by defining `MsgSetName` in the file called `./x/nameservice/types/msgs.go`:
 
@@ -619,7 +619,7 @@ func (msg MsgSetName) GetSigners() []sdk.AccAddress {
 
 `GetSigners` defines whose signature is required on a `Tx` in order for it to be valid. In this case, for example, the `MsgSetName` requires that the `Owner` signs the transaction when trying to reset what the name points to.
 
-### `Handler`
+**`Handler`**
 
 Now that `MsgSetName` is specified, the next step is to define what action\(s\) needs to be taken when this message is received. This is the role of the `handler`.
 
@@ -866,8 +866,9 @@ First check to see if the name currently exists in the store. If not, throw an e
 
 Now that you have your `Msgs` and `Handlers` defined it's time to learn about making the data from these transactions available for querying. 
 
-# Queriers 
-## Query Types 
+## Queriers 
+
+### Query Types 
 
 Start by navigating to `./x/nameservice/types/querier.go` file. This is where you will define your querier types.
 
@@ -1000,7 +1001,7 @@ Notes on the above code:
 
 Now that you have ways to mutate and view your module state it's time to put the finishing touches on it! Define the variables and types you would like to bring to the top level of the module. 
 
-# Alias 
+## Alias 
 
 Start by navigating to the `./x/nameservice/alias.go` file. The main reason for having this file is to prevent import cycles. You can read more about import cycles in go here: [Golang import cycles](https://stackoverflow.com/questions/28256923/import-cycle-not-allowed)
 
@@ -1053,7 +1054,7 @@ Now you have aliased your needed constants, variables, and types. We can move fo
 
 Register your types in the Amino encoding format next.
 
-# Codec File
+## Codec File
 
 To [register your types with Amino](https://github.com/tendermint/go-amino#registering-types) so that they can be encoded/decoded, there is a bit of code that needs to be placed in `./x/nameservice/types/codec.go`. Any interface you create and any struct that implements an interface needs to be declared in the `RegisterCodec` function. In this module the three `Msg` implementations \(`SetName`, `BuyName` and `DeleteName`\) need to be registered, but your `Whois` query return type does not. In addition, we define a module specific codec for use later.
 
@@ -1583,7 +1584,7 @@ Notes on the above code:
 
 Next its time to augment `nameservice` by implementing the AppModule interface.
 
-# AppModule Interface
+## AppModule Interface
 
 The Cosmos SDK provides a standard interface for modules. This [`AppModule`](https://github.com/cosmos/cosmos-sdk/blob/master/types/module.go) interface requires modules to provide a set of methods used by the `ModuleBasicsManager` to incorporate them into your application. First we will scaffold out the interface and implement **some** of its methods. Then we will incorporate our nameservice module alongside `auth` and `bank` into our app.
 
@@ -1717,7 +1718,7 @@ To see more examples of AppModule implementation, check out some of the other mo
 
 Next, we need to implement the genesis-specific methods called above. 
 
-# Genesis
+## Genesis
 
 The AppModule interface includes a number of functions for use in initializing and exporting GenesisState for the chain. The `ModuleBasicManager` calls these functions on each module when starting, stopping or exporting the chain. Here is a very basic implementation that you can expand upon.
 
@@ -1829,7 +1830,7 @@ A few notes about the above code:
 
 Now your module has everything it needs to be incorporated into your Cosmos SDK application.
 
-# Complete App
+## Complete App
 
 Now that your module is ready, it can be incorporated in the `./app.go` file. Let's begin by adding your new nameservice module to the imports:
 
@@ -2240,7 +2241,7 @@ func MakeCodec() *codec.Codec {
 
 Now that you have created an application that includes your module, it's time to build your entry points.
 
-# Entry points 
+## Entry points 
 
 In Golang the convention is to place files that compile to a binary in the `./cmd` folder of a project. For your application there are 2 binaries that you want to create:
 
@@ -2252,7 +2253,7 @@ To get started create two files in your project directory that will instantiate 
 * `./cmd/nsd/main.go`
 * `./cmd/nscli/main.go`
 
-### `nsd` 
+**`nsd`**
 
 Start by adding the following code to `cmd/nsd/main.go`:
 
@@ -2356,7 +2357,7 @@ Notes on the above code:
 
 * Most of the code above combines the CLI commands from Tendermint, Cosmos-SDK and your Nameservice module.
 
-### `nscli`
+**`nscli`**
 
 Finish up by building the `nscli` command:
 
@@ -2531,9 +2532,9 @@ Note:
 
 Now that you have your binaries defined its time to deal with dependency management and build your app.
 
-# go.mod and Makefile 
+## go.mod and Makefile 
 
-### `Makefile` 
+**`Makefile`**
 
 Help users build your application by writing a `./Makefile` in the root directory that includes common commands. The scaffolding tool has created a generic makefile that you will be able to use:
 
@@ -2631,7 +2632,7 @@ ifeq ($(LEDGER_ENABLED),true)
 endif
 ```
 
-### `go.mod`
+**`go.mod`**
 
 Golang has a few dependency management tools. In this tutorial you will be using [`Go Modules`](https://github.com/golang/go/wiki/Modules). `Go Modules` uses a `go.mod` file in the root of the repository to define what dependencies the application needs. Cosmos SDK apps currently depend on specific versions of some libraries. The below manifest contains all the necessary versions. To get started replace the contents of the `./go.mod` file with the `constraints` and `overrides` below:
 
@@ -2640,7 +2641,7 @@ Golang has a few dependency management tools. In this tutorial you will be using
 * You will have to run `go get ./...` to get all the modules the application is using. This command will get the dependency version stated in the `go.mod` file.
 * If you would like to use a specific version of a dependency then you have to run `go get github.com/<github_org>/<repo_name>@<version>`
 
-### Building the app 
+## Building the app 
 
 ```bash
 # Install the app into your $GOBIN
@@ -2653,7 +2654,7 @@ nscli help
 
 Congratulations, you have finished your nameservice application! Try running and interacting with it!
 
-# Run REST routes
+## Run REST routes
 
 Now that you tested your CLI queries and transactions, time to test same things in the REST server. Leave the `nsd` that you had running earlier and start by gathering your addresses:
 
@@ -2733,7 +2734,7 @@ $ curl -s http://localhost:1317/nameservice/names/jack1.id/whois
 # > {"value":"","owner":"","price":[{"denom":"STAKE","amount":"1"}]}
 ```
 
-# Request Schemas:
+## Request Schemas
 
 **POST /nameservice/names BuyName Request Body:**
 

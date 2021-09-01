@@ -1,12 +1,10 @@
-# 
-
 Like with most Web 3 protocols, transactions on Solana happen between **accounts**. To create an account, a client generates a **keypair** which has a **public key** (or **address**, used to identify and lookup an account) and a **secret key** used to sign transactions.
 
 ----------------------------------
 
-## The challenge
+# The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string.
 {% endhint %}
 
@@ -39,7 +37,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## The solution
+# The solution
 
 ```tsx
 //...
@@ -65,7 +63,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## Make sure it works
+# Make sure it works
 
 Once the code is complete and the file is saved, Next.js will rebuild the API route. Now click on **Generate a Keypair** and you should see:
 
@@ -75,6 +73,6 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 ----------------------------------
 
-## Next
+# Next
 
 Now that we have an account, we can fund it so we can start playing around with tokens!

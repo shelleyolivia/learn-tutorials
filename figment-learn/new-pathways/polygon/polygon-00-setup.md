@@ -1,5 +1,3 @@
-# 
-
 # Requirements
 
 * [Node.js](https://nodejs.org) v14+ installed (we recommend using [nvm](https://github.com/nvm-sh/nvm))
@@ -8,7 +6,7 @@
 * [Metamask](https://metamask.io/) browser extension installed. 
 
 
-## Safety disclaimers
+# Safety disclaimers
 
 {% hint style="info" %}
 If you **ALREADY** have Metamask installed and are using it for a hot wallet, we _**strongly recommend**_ creating an entirely new wallet in Metamask for the purposes of these tutorials. Figment Learn wants nothing to do with your personal keys. We do not want any accidents involving anybody's cryptocurrency! Again, you _must not_ _continue_ until you take care of this.  
@@ -21,7 +19,7 @@ The first piece of advice we will give you is to make _absolutely sure that you 
 
 -------------------------------------
 
-## Project Setup
+# Project Setup
 
 The **Polygon** Pathway is in the form of a Next.js app which can be run on your local machine. We will be interacting with it through the web browser, and making changes to the code to make it a basic dApp, using **Polygon**!
 
@@ -40,13 +38,13 @@ Once the installation is complete, then start the local development server with:
 yarn dev
 ```
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 Also be sure to rename the file `.env.example` to `.env.local` before continuing with the Pathway. This file is where we define various endpoint URLs and related data like API keys.
 {% endhint %}
 
 -------------------------------------
 
-## The Pathway UI
+# The Pathway UI
 
 Now visit the URL [`http://localhost:3000`](http://localhost:3000) in your web browser to see the home page:
 
@@ -57,7 +55,7 @@ In these tutorials we will cover connecting to and interacting with **Polygon** 
 -------------------------------------
 
 
-## Add the Mumbai testnet 
+# Add the Mumbai testnet 
 
 The first task is to connect to the Polygon Mumbai testnet by adding it to the list of RPC endpoints in Metamask. Click on the Fox head icon in your web browser to open the popup, and then follow this workflow to complete the process :
 

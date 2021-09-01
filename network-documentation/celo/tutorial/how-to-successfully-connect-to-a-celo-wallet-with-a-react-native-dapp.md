@@ -12,7 +12,7 @@ This article assumes that you have basic knowledge of JavaScript \(TypeScript\) 
 2. [React Native using expo](https://docs.expo.io/)
 3. [DappKit](https://docs.celo.org/developer-guide/dappkit/setup)
 
-## Project Setup
+# Project Setup
 
 You will need node version `^10.13.0`  
 Open the Celo documentation and follow the setup instructions:

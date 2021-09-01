@@ -1,12 +1,10 @@
-# 
-
 Last but certainly not least, we'll need to modify the data stored into **greeter**. Doing so will change the state of the blockchain, so we'll have to create a transaction. In the challenge below we're going to show you how to achieve this.
 
 ----------------------------------
 
-## The challenge
+# The challenge
 
-{% hint style="warning" %}
+{% hint style="tip" %}
 In `pages/api/solana/callGreetings.ts`, complete `setGreetings`. First you'll have to create an instruction, then you'll have to send and confirm a transaction to store the data from.
 {% endhint %}
 
@@ -38,7 +36,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## The solution
+# The solution
 
 ```typescript
 //...
@@ -69,7 +67,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-## Make sure it works
+# Make sure it works
 
 Once you have the code above saved, click on **Send A Greeting** and watch the magic happen:
 
