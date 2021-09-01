@@ -18,7 +18,7 @@ We assume that you’re already familiar with [**DataHub**](https://datahub.figm
 
 # Create the Asset
 
-Our asset will exist on the X-Chain, so to create our asset we’ll call `avm.createVariableCapAsset`, which is a method of the [X-Chain’s API.](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api)
+Our asset will exist on the X-Chain, so to create our asset we’ll call `avm.createVariableCapAsset`, which is a method of the [X-Chain’s API](https://docs.figment.io/network-documentation/avalanche/rpc-and-rest-api/).
 
 The signature for this method is:
 

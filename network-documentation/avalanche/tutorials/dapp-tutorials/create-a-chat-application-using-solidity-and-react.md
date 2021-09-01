@@ -4,15 +4,15 @@ Today we will build a decentralized chat application on Avalanche's Fuji test-ne
 
 # Prerequisites
 
-* Basic familiarity with Reactjs and Solidity
-* Should've completed [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) tutorial
+* Basic familiarity with React and Solidity
+* Should've completed [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://learn.figment.io/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) tutorial
 
 # Requirements
 
 * [Node.js](https://nodejs.org/en/download/releases/) v10.18.0+
 * [Metamask extension](https://metamask.io/download.html) on your browser
 
-## Implementing the smart contract
+# Implementing the smart contract
 
 Our chat dApp needs the basic functionality allowing users to connect with and share messages with friends. To accomplish this, we will write the functions responsible for creating an account, adding friends and sending messages.
 
@@ -202,7 +202,7 @@ Navigate to Deploy Tab and open the “ENVIRONMENT” drop-down. Select "Injecte
 
 Approve the transaction on Metamask pop-up interface. Once our contract is deployed successfully, Note down the `contract address`.
 
-> An Application Binary Interface \(ABI\) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html).
+> An Application Binary Interface (ABI) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html).
 
 # Creating a frontend in React
 

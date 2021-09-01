@@ -679,7 +679,7 @@ Summary
 ```
 *Code snippet from matic truffle docs.*
 
-**IMPORTANT: If you encounter any errors while deploying the Solidity contracts to Polygon (Matic) then check out the "Dealing with different errors" section of [Deploying and Debugging the Smart Contracts on Polygon](https://learn.figment.io/network-documentation/matic/tutorials/Deploying-and-Debugging-the-Smart-Contracts-on-Polygon) tutorial on Figment learn.**
+**IMPORTANT: If you encounter any errors while deploying the Solidity contracts to Polygon (Matic) then check out the "Dealing with different errors" section of [Deploying and Debugging the Smart Contracts on Polygon](https://learn.figment.io/tutorials/deploying-and-debugging-smart-contracts-on-polygon) tutorial on Figment learn.**
 
 Now let's run the React app on http://localhost:3000/ with the command `npm start`. You should see MetaMask pop up, asking if you would like to connect your MetaMask wallet with the site. Once connected, you can upload and share videos on your DApp which is deployed on Polygon (Matic) network!
 
@@ -722,4 +722,4 @@ I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Develo
 * *IPFS docs: https://docs.ipfs.io/concepts/what-is-ipfs/#decentralization*
 * *Async/Await: https://www.geeksforgeeks.org/async-await-function-in-javascript/*
 * *Dapp University YouTube: https://www.youtube.com/watch?v=OLsteD3xkPQ*
-* *Deploy & debug on polygon :https://learn.figment.io/network-documentation/matic/tutorials/Deploying-and-Debugging-the-Smart-Contracts-on-Polygon*
+* *Deploying & debugging smart contracts on Polygon :https://learn.figment.io/tutorials/deploying-and-debugging-smart-contracts-on-polygon*

@@ -6,7 +6,7 @@ This guide will focus on the lifecycle of Polkadot's parachains, an integral par
 
 ## **Prerequisites**
 
-It is recommended that you are have gone through the [Polkadot Blockchain Terms](https://learn.figment.io/network-documentation/polkadot/polkadot-blockchain-terms) guide and are familiar with the following:
+It is recommended that you are have gone through the [Polkadot Blockchain Terms](https://learn.figment.io/tutorials/polkadot-blockchain-terms) guide and are familiar with the following:
 
 * Polkadot Behind the Code, [Episode 1](https://www.youtube.com/watch?v=GcOKXAOh4Xw)
 * An understanding of Polkadot's architecture: [Polkadot: Are You Ready to Start Building?](https://www.youtube.com/watch?v=_-k0xkooSlA).

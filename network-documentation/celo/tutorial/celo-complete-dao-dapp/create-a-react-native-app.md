@@ -10,8 +10,7 @@ In this tutorial, we will continue to build a functional DAO by making a React N
 
 # Prerequisite
 
-If you have not built an app using React Native to connect to the Celo wallet before, you can follow the guide [here](https://learn.figment.io/network-documentation/celo/tutorial/how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp#project-setup
-) 
+If you have not built an app using React Native to connect to the Celo wallet before, you can follow the guide [here](https://learn.figment.io/tutorials/how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp) 
 
 # Building the React Native dApp
 We are building the dApp using Javascript and Redux. We will make use of the React Native [UI kitten library]((https://akveo.github.io/react-native-ui-kitten/)) to style the dApp. Following is an outline of the Pages and Components that make up the dApp and then the next section on Redux will be a deep dive into how to connect the dApp to the smart contract.

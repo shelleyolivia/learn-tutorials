@@ -8,7 +8,7 @@ A thorough understanding of the smart contract being tested is very important to
 
 # Prerequisites
 
-This tutorial builds on a previously written tutorial on avalanche, so before we proceed any further make sure to complete - [Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite](https://learn.figment.io/network-documentation/avalanche/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle).
+This tutorial builds on a previously written tutorial on avalanche, so before we proceed any further make sure to complete - [Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite](https://learn.figment.io/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle).
 
 # Breaking It Down
 

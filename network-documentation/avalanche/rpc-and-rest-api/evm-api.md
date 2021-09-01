@@ -6,7 +6,7 @@ Note: Ethereum has its own notion of `networkID` and `chainID`. These have no re
 
 ## Deploying a Smart Contract
 
-For a tutorial on deploying a Solidity smart contract on the C-Chain, see[ here](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask).
+For a tutorial on deploying a Solidity smart contract on the C-Chain, see[here](https://learn.figment.io/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask).
 
 ## Methods
 

@@ -343,7 +343,7 @@ curl -X POST --data '{
 
 Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `mint`.
 
-See [this tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/creating-a-fixed-cap-asset) for an example of usage.
+See [this tutorial](https://learn.figment.io/tutorials/creating-a-fixed-cap-asset) for an example of usage.
 
 **Signature**
 

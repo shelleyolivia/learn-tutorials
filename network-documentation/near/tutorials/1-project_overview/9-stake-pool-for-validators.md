@@ -38,7 +38,7 @@ As you can see, there is much to cover. Here's the approach we will take. For ea
 
 ### Storage Management API
 
-The storage management API implements the NEAR standard NEP-145, which I have covered in depth my prior [Account Storage Standard](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/5-account-storage) tutorial. Proper storage management is crucial to safegaurd any multi-user contract from what I call a "Denial of Storage" attack. Storage management closes a big security vulnerability in the first generation staking pool contracts that are currently in use. The attack is very simple based on the facts:
+The storage management API implements the NEAR standard NEP-145, which I have covered in depth my prior [Account Storage Standard](https://learn.figment.io/tutorials/5-account-storage) tutorial. Proper storage management is crucial to safeguard any multi-user contract from what I call a "Denial of Storage" attack. Storage management closes a big security vulnerability in the first generation staking pool contracts that are currently in use. The attack is very simple based on the facts:
 
 1. Storage is orders of magnitude more expensive than transaction gas cost
 2. The contract is ultimately responsible for paying for storage usage on the blockchain.
@@ -324,7 +324,7 @@ pub const UNSTAKED_LIQUIDITY_POOL: BalanceId = BalanceId(19557844876784438516222
 
 Provides the API's that provide the STAKE token. These APIs are well documented, and I will defer the details to:
 
-* [The New and Improved Fungible Token Standard \(NEP-141\) Has Arrived](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/2-fungible-token)
+* [The New and Improved Fungible Token Standard \(NEP-141\) Has Arrived](https://learn.figment.io/tutorials/2-fungible-token)
 * [NEAR Fungible Token Standard](https://nomicon.io/Standards/FungibleToken/README.html)
 
 In addition to the standard Fungible Token API interfaces, the contract also provides a Fungible Token Operator API interface, which is used to manage the fungible token metadata and transfer callback gas settings:
@@ -471,5 +471,5 @@ Stay tuned for more tutorials on the OysterPack SMART component based framework 
 
 ![](../../../../.gitbook/assets/oysterpack-smart-liberty.jpeg)
 
-\[11\]: [https://learn.figment.io/network-documentation/near/tutorials/1-project\_overview/8-stake-pool-contract\#how-to-operate-the-stake-pool-contract](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/8-stake-pool-contract#how-to-operate-the-stake-pool-contract)
+\[11\]: [https://learn.figment.io/tutorials/8-stake-pool-contract#how-to-operate-the-s-t-a-k-e-pool-contract](https://learn.figment.io/tutorials/8-stake-pool-contract#how-to-operate-the-s-t-a-k-e-pool-contract)
 

@@ -14,9 +14,9 @@ Make sure you have completed the [Secret Pathway Tutorials 1-5](https://learn.fi
 
 # Generating our project
 
-To generate a new project we follow the directions from the [Secret Pathway Tutorial 5](https://learn.figment.io/network-documentation/secret/tutorials/5.-writing-and-deploying-your-first-secret-contract#generate-the-smart-contract-project), however we choose a new name, in this case `reminder`.
+To generate a new project we follow the directions from the [Secret Pathway](https://learn.figment.io/tutorials/deploy-secret-contract), however we choose a new name, in this case `reminder`.
 
-```rust
+```text
 cargo generate --git https://github.com/enigmampc/secret-template --name reminder
 ```
 
@@ -30,7 +30,7 @@ There are three main functions that any secret contract can execute once it has 
 2. `handle` takes a handle message as input from a client, executes transactions based on the content of the message, and outputs a response message to the client.
 3. `query` takes a query message as input from a client, reads data from storage to answer the query, and outputs a response message to the client.
 
-The key difference between `handle` and `query` is that `handle` can execute transactions that change the state of the storage, whereas `query` is read-only. `handle` transactions therefore require a gas payment from the requester in order to succeed, but a `query` does not[1](creating-a-secret-contract-from-scratch.md#f1). You can see this in the `customFees` object created in the Figment Learn [Tutorial 5](https://learn.figment.io/network-documentation/secret/tutorials/5.-writing-and-deploying-your-first-secret-contract#deploying-the-contract).
+The key difference between `handle` and `query` is that `handle` can execute transactions that change the state of the storage, whereas `query` is read-only. `handle` transactions therefore require a gas payment from the requester in order to succeed, but a `query` does not. You can see this in the `customFees` object created in the Figment Learn [Pathway](https://learn.figment.io/tutorials/deploy-secret-contract).
 
 We define these three functions \(and any additional helper functions\) in our `src/contract.rs` file as follows:
 

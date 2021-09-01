@@ -1,6 +1,6 @@
 # Introduction
 
-In the last tutorial on [Make an e-Voting dApp on Avalanche Fuji testnet](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), we learned how to deploy a smart contract on Avalanche's Fuji C-Chain using Trufflesuite. Along with that we have also coded the client-side application, to easily interact with smart contracts.
+In the last tutorial on [Make an e-Voting dApp on Avalanche Fuji testnet](https://learn.figment.io/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), we learned how to deploy a smart contract on Avalanche's Fuji C-Chain using Trufflesuite. Along with that we have also coded the client-side application, to easily interact with smart contracts.
 
 In this tutorial, we will be building a more advanced e-voting dApp, in which we will interact with pre-deployed smart contracts, deploy our own smart contracts, and  interact with them using their contract address. For developing this dApp we will continue to use the Trufflesuite framework.
 
@@ -8,7 +8,7 @@ For your information, [Trufflesuite](https://www.trufflesuite.com) is a toolkit 
 
 # Prerequisites
 
-This tutorial assumes you are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). Also that you have followed the tutorial [Make an e-Voting dApp on Avalanche Fuji testnet](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle).
+This tutorial assumes you are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). Also that you have followed the tutorial [Make an e-Voting dApp on Avalanche Fuji testnet](https://learn.figment.io/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle).
 
 # Requirements
 
@@ -922,7 +922,7 @@ async function submitNewElection() {
 Now run the command `node server.js` in the `src` directory to start the server!
 
 * Visit [http://localhost:3000](http://localhost:3000) to interact with the dApp.
-* Don't forget to setup Metamask with the `Fuji` testnet and also fund the account with Fuji C-Chain test tokens in order to vote. Please refer to this tutorial on [Connecting Datahub to Metamask](https://learn.figment.io/network-documentation/avalanche/tutorials/connect-datahub-to-metamask). You may change to a different address in the Metamask wallet and fund it in order to vote again.
+* Don't forget to setup Metamask with the `Fuji` testnet and also fund the account with Fuji C-Chain test tokens in order to vote. Please refer to this tutorial on [Connecting Datahub to Metamask](https://learn.figment.io/tutorials/connect-datahub-to-metamask). You may change to a different address in the Metamask wallet and fund it in order to vote again.
 
 ![](https://i.imgur.com/nfdnbwz.gif)
 

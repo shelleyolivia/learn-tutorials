@@ -14,7 +14,7 @@ You should have the following requirements installed:
 
 * Rust \(Installation [guide](https://www.rust-lang.org/tools/install) and if you want to learn more about Rust, check this guide [HERE](https://doc.rust-lang.org/book/)\)
 * NEAR CLI \(Installation [guide](https://www.npmjs.com/package/near-cli)\)
-* NEAR Testnet account \(If you don't have testnet account, check this guide [HERE](https://learn.figment.io/network-documentation/near/near-wallet)\)
+* NEAR Testnet account \(If you don't have testnet account, check this guide [HERE](https://nearhelp.zendesk.com/hc/en-us/articles/1500002248242-Creating-a-NEAR-Wallet-account)\)
 
 # Setup
 

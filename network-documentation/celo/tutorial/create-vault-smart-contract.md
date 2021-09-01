@@ -15,30 +15,30 @@ This tutorial has 3 parts as mentioned below -
 
 - Go get a connection to Celo's Alfajores testnet through [DataHub](https://datahub.figment.io/services/celo) and come back when you have a Celo API key, this is required for the next steps in the tutorial.
 - Please make sure that you completed the tutorials:
-  - [Connect to Celo node with DataHub](https://learn.figment.io/network-documentation/celo/tutorial/1.connect)
-  - [Query the Celo Network](https://learn.figment.io/network-documentation/celo/tutorial/3.query)
-  - [Submit your first transactions](https://learn.figment.io/network-documentation/celo/tutorial/4.transactions)
-  - [Write and deploy your first Celo smart contract](https://learn.figment.io/network-documentation/celo/tutorial/intro-pathway-celo-basics/5.smart-contract)
+  - [Connect to Celo with DataHub](https://learn.figment.io/tutorials/connect-to-celo)
+  - [Query account balances on Celo](https://learn.figment.io/tutorials/get-the-celo-balance)
+  - [Transfer CELO tokens](https://learn.figment.io/tutorials/transfer-celo-token)
+  - [Deploy your first Celo smart contract](https://learn.figment.io/tutorials/deploy-celo-contract)
 
-# Creating Project \(Central Base\)
+# Creating Project (Central Base)
 
 Since Celo runs the Ethereum Virtual Machine, we can use Truffle to compile our smart contract. But just to do things right, let's first initialize a node project \(silently...\).
 
-```bash
+```text
 $ mkdir vault-dapp
 $ cd vault dapp
 $ npm init -y --silent
 ```
 
-Adding our dependencies \(for now\):
+Adding our dependencies (for now):
 
-```bash
+```text
 $ npm install --save @openzeppelin/contracts truffle @celo/contractkit dotenv web3
 ```
 
-Initialize a barebones truffle project, by running the following command.
+Initialize a bare-bones truffle project, by running the following command.
 
-```bash
+```text
 $ npx truffle init
 ```
 
@@ -63,7 +63,7 @@ $ git init
 
 OK, I'd love to congratulate you, we just initialized a node and a truffle project. We also added git and secured our key like a pro. Your directory tree should look like this:
 
-```
+```text
 04/17/2021  05:03 AM    <DIR>          .
 04/17/2021  05:03 AM    <DIR>          ..
 04/17/2021  05:03 AM    <DIR>          contracts
@@ -125,7 +125,7 @@ Here we initialized a provider using our environment variable `DATAHUB_NODE_URL`
 
 Now we can connect to Alfajores using `truffle console` . Run the following on your console.
 
-```bash
+```text
 $ npx truffle console --network alfajores
 ```
 
@@ -138,7 +138,7 @@ console.log(account);
 
 This is my output:
 
-```bash
+```text
 $ truffle console --network alfajores
 web3-shh package will be deprecated in version 1.3.5 and will no longer be supported.
 web3-bzz package will be deprecated in version 1.3.5 and will no longer be supported.
@@ -160,7 +160,7 @@ From here we need the address, and `privateKey` as I mentioned.
 
 Success! We got and account, before we forget let's save it into our `.env` as we will use it later. Your `.env` should look like this.
 
-```bash
+```text
 DATAHUB_NODE_URL=https://celo-alfajores--rpc.datahub.figment.io/apikey/<YOUR API KEY>/
 ADDRESS=0x7cdf6c19E5491EA23aB14132f8a76Ff1C74ccAFC # your address
 PRIVATE_KEY=0x167ed276fb95a17de53c6b0fa4737fc2f590f3e6c5b9de0793d9bcdf63140650 # your private key
@@ -184,7 +184,7 @@ We are finally done with this section. We are getting closer by the minute.
 
 Now that we have an account and funds, let's add a smart contract to our Truffle project. From the console, run the following:
 
-```bash
+```text
 npx truffle create contract Vault
 ```
 
@@ -200,7 +200,7 @@ Mode                 LastWriteTime         Length Name
 
 The code for the Vault Smart Contract its been cooked for us already. Copy, paste, read:
 
-```text
+```javascript
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
@@ -299,7 +299,7 @@ Let's go through the main sections of the our Vault Smart Contract:
 
 Structure to store our deposits:
 
-```text
+```javascript
 struct Items {
         IERC20 token;
         address withdrawer;
@@ -312,7 +312,7 @@ struct Items {
 
 `lockTokens` function accepts the following parameters when being invoked:
 
-```text
+```javascript
 lockTokens(IERC20, address, amount, time)
 ```
 
@@ -327,7 +327,7 @@ uint256 _unlockTimestamp => When to unlock deposit.
 
 The `withdrawTokens` function accepts an address and checks it's existence as a `_withdrawer` in our Structure. The function also checks if funds are past the `_unlockTimestamp`.
 
-```text
+```javascript
 withdrawTokens(address)
 ```
 
@@ -339,13 +339,13 @@ address _withdrawer => The address which was registered in our contract when the
 
 We are now ready to compile our solidity code using Truffle. From your terminal run the following:
 
-```bash
+```text
 npx truffle compile
 ```
 
 This is my output, all good if yours matches:
 
-```
+```text
 web3-shh package will be deprecated in version 1.3.5 and will no longer be supported.
 web3-bzz package will be deprecated in version 1.3.5 and will no longer be supported.
 
@@ -391,13 +391,13 @@ module.exports = function (deployer) {
 
 With this we are ready to run `npx truffle migrate --network alfajores`, this will hopefully deploy our Vault Smart Contract to the Celo Alfajores Network. In your console run.
 
-```
+```text
 npx truffle migrate --network alfajores
 ```
 
 A successful deployment looks like this:
 
-```
+```text
 Starting migrations...
 ======================
 > Network name:    'alfajores'
@@ -467,7 +467,7 @@ In this section, we’ve learned how to create our first Celo Vault contract, co
 
 # Create the React dApp
 
-Now that we have our vault contract, let's connect the methods with an interface
+Now that we have our vault contract, let's connect the methods with an interface.
 
 ## Interface with the Vault Smart Contract
 
@@ -475,14 +475,14 @@ First, let's initialize our react app, we can do this within our node/truffle pr
 
 One important thing, ensure that you have the latest version of `create-react-app` installed. If you have it installed already and encounter any errors, see [this article for help](https://reactgo.com/react-app-no-src-folder/).
 
-```
+```text
 npx create-react-app my-vault-interface
 cd my-vault-interface
 ```
 
 We need to add the following dependencies to our new react project:
 
-```
+```text
 npm install @celo/contractkit web3 dotenv
 ```
 
@@ -497,9 +497,9 @@ REACT_APP_VAULT_ADDRESS=0xB017aD96e31B43AFB670dAB020561dA8E2154C5B # the recentl
 
 This is how mine looks like, as you can see we still have the same variables, juts added the `REACT_APP` prefix.
 
-Next, let's transfer the json file where our contract bytecode and ABI resides \(VAULT.json file\), and paste inside a new `contract` folder into the root of our new React Project, see below:
+Next, let's transfer the json file where our contract bytecode and ABI resides (VAULT.json file), and paste inside a new `contract` folder into the root of our new React Project, see below:
 
-```
+```text
 Original Location (Truffle Compile)
 Directory: vault-dapp/build/contracts/Vault.json
 
@@ -580,10 +580,10 @@ const VaultO = new kit.web3.eth.Contract(
 
 function App() {
   const [balances, setBalances] = useState({ CELO: 0, cUSD: 0, Vault: 0 });
-  const [info, setinfo] = useState("");
-  const [lockAmount, setlockAmount] = useState("0.3");
+  const [info, setInfo] = useState("");
+  const [lockAmount, setLockAmount] = useState("0.3");
   const [idVault, setIdVault] = useState("0");
-  const [listOfVaults, setlistOfVaults] = useState([]);
+  const [listOfVaults, setListOfVaults] = useState([]);
 
   const update = () => {
     getBalanceHandle();
@@ -608,7 +608,7 @@ function App() {
   };
 
   const approve = async () => {
-    setinfo("");
+    setInfo("");
     // MAX ALLOWANCE
     const allowance = kit.web3.utils.toWei("1000000", "ether");
     // GAS ESTIMATOR
@@ -628,15 +628,15 @@ function App() {
       const receipt = await approveTx.waitReceipt();
       // PRINT TX RESULT
       console.log(receipt);
-      setinfo("Aproved!!");
+      setInfo("Approved!!");
     } catch (err) {
       console.log(err);
-      setinfo(err.toString());
+      setInfo(err.toString());
     }
   };
 
   const lock = async () => {
-    setinfo("");
+    setInfo("");
     try {
       // TIMESTAMP
       const lastBlock = await kit.web3.eth.getBlockNumber();
@@ -645,7 +645,7 @@ function App() {
       // TIME TO LOCK + 10 MINS
       var unlockTime =
         timestampObj.setMinutes(timestampObj.getMinutes() + 10) / 1000; // 10 minutes by default
-      // AMMOUNT TO LOCK
+      // AMOUNT TO LOCK
       const amount = kit.web3.utils.toWei(lockAmount + "", "ether");
       // ERC20 TO LOCK
       const goldtoken = await kit._web3Contracts.getGoldToken();
@@ -662,16 +662,16 @@ function App() {
       // PRINT TX RESULT
       const receipt = await tx.waitReceipt();
       update();
-      setinfo("Celo locked!");
+      setInfo("Celo locked!");
       console.log(receipt);
     } catch (err) {
       console.log(err);
-      setinfo(err.toString());
+      setInfo(err.toString());
     }
   };
 
   const withdraw = async () => {
-    setinfo("");
+    setInfo("");
     try {
       const txo = await VaultO.methods.withdrawTokens(idVault);
       const tx = await kit.sendTransactionObject(txo, {
@@ -680,15 +680,15 @@ function App() {
       const receipt = await tx.waitReceipt();
       update();
       console.log(receipt);
-      setinfo("Celo unlocked!");
+      setInfo("Celo unlocked!");
     } catch (err) {
       console.log(err);
-      setinfo(err.toString());
+      setInfo(err.toString());
     }
   };
 
   const getLockerIdsInfo = async () => {
-    setinfo("");
+    setInfo("");
     try {
       const ids = await VaultO.methods
         .getVaultsByWithdrawer(process.env.REACT_APP_ADDRESS)
@@ -697,10 +697,10 @@ function App() {
       for (let id of ids)
         vaults.push([id, ...(await VaultO.methods.getVaultById(id).call())]);
       console.log("IDS:", vaults);
-      setlistOfVaults(vaults);
+      setListOfVaults(vaults);
     } catch (err) {
       console.log(err);
-      setinfo(err.toString());
+      setInfo(err.toString());
     }
   };
 
@@ -719,12 +719,12 @@ function App() {
             type="number"
             value={lockAmount}
             min="0"
-            onChange={(e) => setlockAmount(e.target.value)}
+            onChange={(e) => setLockAmount(e.target.value)}
           />
           <button onClick={lock}>LOCK</button>
         </div>
         <div style={{ margin: "0.5rem" }}>
-          <h1>Widthdraw Celo Token:</h1>
+          <h1>Withdraw Celo Token:</h1>
           <input
             type="number"
             value={idVault}
@@ -801,17 +801,17 @@ We will be using `useState` to save, modify and display our balances \(wallet an
 
 ```jsx
 const [balances, setBalances] = useState({ CELO: 0, cUSD: 0, Vault: 0 });
-const [info, setinfo] = useState("");
-const [lockAmount, setlockAmount] = useState("0.3");
+const [info, setInfo] = useState("");
+const [lockAmount, setLockAmount] = useState("0.3");
 const [idVault, setIdVault] = useState("0");
-const [listOfVaults, setlistOfVaults] = useState([]);
+const [listOfVaults, setListOfVaults] = useState([]);
 ```
 
 Before we can interact with our new Vault Smart Contract, we need to approve the use of this smart contract by our wallet, setting a default `allowance`. The approve function creates and sends a `Transaction Object` indicating we are approving, though also setting a max allowance for this smart contract to use. After we `console.log` the receipt
 
 ```jsx
 const approve = async () => {
-  setinfo("");
+  setInfo("");
   // MAX ALLOWANCE
   const allowance = kit.web3.utils.toWei("1000000", "ether");
   // GAS ESTIMATOR
@@ -831,10 +831,10 @@ const approve = async () => {
     const receipt = await approveTx.waitReceipt();
     // PRINT TX RESULT
     console.log(receipt);
-    setinfo("Aproved!!");
+    setInfo("Approved!!");
   } catch (err) {
     console.log(err);
-    setinfo(err.toString());
+    setInfo(err.toString());
   }
 };
 ```
@@ -845,7 +845,7 @@ We await our receipt after, and `console.log` it.
 
 ```jsx
 const lock = async () => {
-  setinfo("");
+  setInfo("");
   try {
     // TIMESTAMP
     const lastBlock = await kit.web3.eth.getBlockNumber();
@@ -854,7 +854,7 @@ const lock = async () => {
     // TIME TO LOCK + 10 MINS
     var unlockTime =
       timestampObj.setMinutes(timestampObj.getMinutes() + 10) / 1000; // 10 minutes by default
-    // AMMOUNT TO LOCK
+    // AMOUNT TO LOCK
     const amount = kit.web3.utils.toWei(lockAmount + "", "ether");
     // ERC20 TO LOCK
     const goldtoken = await kit._web3Contracts.getGoldToken();
@@ -871,11 +871,11 @@ const lock = async () => {
     // PRINT TX RESULT
     const receipt = await tx.waitReceipt();
     update();
-    setinfo("Celo locked!");
+    setInfo("Celo locked!");
     console.log(receipt);
   } catch (err) {
     console.log(err);
-    setinfo(err.toString());
+    setInfo(err.toString());
   }
 };
 ```
@@ -884,7 +884,7 @@ Our next stop is the `withdraw` function, it uses the `withdrawTokens` method in
 
 ```jsx
 const withdraw = async () => {
-  setinfo("");
+  setInfo("");
   try {
     const txo = await VaultO.methods.withdrawTokens(idVault);
     const tx = await kit.sendTransactionObject(txo, {
@@ -893,10 +893,10 @@ const withdraw = async () => {
     const receipt = await tx.waitReceipt();
     update();
     console.log(receipt);
-    setinfo("Celo unlocked!");
+    setInfo("Celo unlocked!");
   } catch (err) {
     console.log(err);
-    setinfo(err.toString());
+    setInfo(err.toString());
   }
 };
 ```
@@ -905,7 +905,7 @@ const withdraw = async () => {
 
 ```jsx
 const getLockerIdsInfo = async () => {
-  setinfo("");
+  setInfo("");
   try {
     const ids = await VaultO.methods
       .getVaultsByWithdrawer(process.env.REACT_APP_ADDRESS)
@@ -914,10 +914,10 @@ const getLockerIdsInfo = async () => {
     for (let id of ids)
       vaults.push([id, ...(await VaultO.methods.getVaultById(id).call())]);
     console.log("IDS:", vaults);
-    setlistOfVaults(vaults);
+    setListOfVaults(vaults);
   } catch (err) {
     console.log(err);
-    setinfo(err.toString());
+    setInfo(err.toString());
   }
 };
 ```
@@ -936,7 +936,7 @@ The code repository is here: [Link](https://github.com/helpicelo/vault-dapp)
 
 # Conclusion
 
-This tutorial was aimed to provide a barebone implementation of a dApp in the Celo Ecosystem. We covered the Vault Smart Contract development and deployment, together with the bootstrapping of a React Application to interact with its basic functions \(approve, lock, withdraw\). We hope to continue extending this documentation.
+This tutorial was aimed to provide a bare-bones implementation of a dApp in the Celo Ecosystem. We covered the Vault Smart Contract development and deployment, together with the bootstrapping of a React Application to interact with its basic functions (approve, lock, withdraw). We hope to continue extending this documentation.
 
 The tutorial was a team effort by [Celo Helpi](https://github.com/helpicelo).
 
