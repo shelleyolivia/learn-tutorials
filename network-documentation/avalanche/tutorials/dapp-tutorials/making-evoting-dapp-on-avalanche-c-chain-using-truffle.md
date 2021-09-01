@@ -573,7 +573,7 @@ window.App = App;
   ```
 
 * Visit [http://localhost:3000](http://localhost:3000) to interact with built dApp.
-* Don't forget to setup Metamask with `Fuji` testnet and also fund the account with Fuji c-chain test tokens in order to vote. Please refer to this tutorial on [Connecting Datahub to Metamask](https://learn.figment.io/network-documentation/avalanche/tutorials/connect-datahub-to-metamask). You may change address in the Metamask wallet and fund them in order to vote again.
+* Don't forget to setup Metamask with `Fuji` testnet and also fund the account with Fuji c-chain test tokens in order to vote. Please refer to this tutorial on [Connecting Datahub to Metamask](https://learn.figment.io/tutorials/connect-datahub-to-metamask). You may change address in the Metamask wallet and fund them in order to vote again.
 
 ![](https://j.gifs.com/A6qrxj.gif)
 

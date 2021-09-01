@@ -2,7 +2,7 @@
 
 In the tutorial [Making advanced e-voting dApp](https://learn.figment.io/network-documentation/avalanche/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle) we have learned to build smart contracts, deploy them on Avalanche and interact with them using jQuery.
 
-We will generate [ReactJS](https://reactjs.org) boilerplate code using `create-react-app`, which we will modify for our dApp frontend. React is a good choice for efficient, developer-friendly blockchain interactions. For the backend, [Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts will be deployed to the [Avalanche](advanced-evoting-avalanche-reactjs.md) blockchain using [Truffle Suite](https://www.trufflesuite.com).
+We will generate [ReactJS](https://reactjs.org) boilerplate code using `create-react-app`, which we will modify for our dApp frontend. React is a good choice for efficient, developer-friendly blockchain interactions. For the backend, [Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts will be deployed to the Avalanche blockchain using [Truffle Suite](https://www.trufflesuite.com).
 
 Truffle Suite is a toolkit for launching decentralized applications \(dApps\) on Ethereum Virtual Machine \(EVM\) compatible blockchains like Avalanche. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 

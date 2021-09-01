@@ -1,6 +1,6 @@
 # Introduction
 
-In this tutorial we will demonstrate how to add Viewing Key code to the reminder secret contract that we built in the [Developing your first secret contract](https://learn.figment.io/network-documentation/secret/tutorials/creating-a-secret-contract-from-scratch) tutorial. In that tutorial we implemented code to store and read a private reminder for a user. As implemented, each read of the reminder costs gas, which is not ideal. We will show here how a *viewing key* can be used to implement the same functionality in way that does not require the user to send a gas payment every time they want to read the reminder. 
+In this tutorial we will demonstrate how to add Viewing Key code to the reminder secret contract that we built in the [Developing your first secret contract](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch) tutorial. In that tutorial we implemented code to store and read a private reminder for a user. As implemented, each read of the reminder costs gas, which is not ideal. We will show here how a *viewing key* can be used to implement the same functionality in way that does not require the user to send a gas payment every time they want to read the reminder. 
 
 A viewing key is simply a randomly generated password defined for an address that is stored in the contract. If a query sends a user's address and viewing key together as parameters in the query, then we can use that information to share read-only private data with the user without needed to incur any gas fees.
 
@@ -8,7 +8,7 @@ The viewing key code implemented in this tutorial is based on the implementation
 
 # Prerequisites
 
-If you have not completed the [Developing your first secret contract tutorial](https://learn.figment.io/network-documentation/secret/tutorials/creating-a-secret-contract-from-scratch), do that first. That tutorial also assumes you have completed the [Secret Pathway Tutorials 1-5](https://learn.figment.io/network-documentation/secret/secret-pathway#secret-pathway-tutorials). This tutorial builds on the contract that was used in that tutorial, the full code for which you can find on GitHub at this link: [https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial1/code](https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial1/code).
+If you have not completed the [Developing your first secret contract tutorial](https://learn.figment.io/tutorials/creating-a-secret-contract-from-scratch), do that first. That tutorial also assumes you have completed the [Secret Pathway](https://learn.figment.io/pathways/secret-pathway). This tutorial builds on the contract that was used in that tutorial, the full code for which you can find on GitHub at this link: [https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial1/code](https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial1/code).
 
 If you get stuck at any point, the completed code for this tutorial can also be found on GitHub here: [https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial2/code](https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial2/code).
 

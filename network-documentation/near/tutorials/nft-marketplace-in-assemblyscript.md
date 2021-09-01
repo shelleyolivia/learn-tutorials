@@ -10,14 +10,14 @@ In this tutorial we will be creating the smart contracts for a simple NFT Market
 
 This tutorial requires:
 
-* Install Node.js and NPM [\(see Tutorial 1\)](https://learn.figment.io/network-documentation/near/tutorials/1.-connecting-to-a-near-node-using-datahub)
-* Install the NEAR CLI [\(see Tutorial 2\)](https://learn.figment.io/network-documentation/near/tutorials/2.-creating-your-first-near-account-using-the-sdk)
-* Complete the first NEAR smart contract tutorial [\(see Tutorial 5\)](https://learn.figment.io/network-documentation/near/tutorials/5.-writing-and-deploying-your-first-near-smart-contract)
-* Complete the intro to NFTs on NEAR [\(see Tutorial\)](https://learn.figment.io/network-documentation/near/tutorials/write-nft-contracts-in-rust)
+* Install Node.js and NPM
+* Install the [NEAR CLI](https://github.com/near/near-cli) 
+* Complete the [NEAR smart contract tutorial](https://learn.figment.io/tutorials/deploy-near-contract)
+* Complete the [intro to NFTs on NEAR](https://learn.figment.io/tutorials/write-nft-contracts-in-rust)
 
 Not required but still valuable reference material can be found in the NEAR Docs [AssemblyScript Intro](https://docs.near.org/docs/develop/contracts/as/intro), as well as the [Data Storage](https://docs.near.org/docs/concepts/data-storage) page.
 
-## Installing Yarn
+# Installing Yarn
 
 If you haven't already, we need to install the `yarn` package manager. The example code we're working with uses `yarn` as its build tool. Run this command to install `yarn` as a global package using Node.js' bundled package manager `npm`:
 

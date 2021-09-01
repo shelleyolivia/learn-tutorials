@@ -1,6 +1,6 @@
 # Introduction
 
-In the tutorial [Making advanced e-voting dApp](https://learn.figment.io/network-documentation/avalanche/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle) we have learned to build smart contracts, deploy them on Avalanche and interact with them using jQuery.
+In the tutorial [Making advanced e-voting dApp](https://learn.figment.io/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle) we have learned to build smart contracts, deploy them on Avalanche and interact with them using jQuery.
 
 We will generate [ReactJS](https://reactjs.org) boilerplate code using `create-react-app`, which we will modify for our dApp frontend. React is a good choice for efficient, developer-friendly blockchain interactions. For the backend, [Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts will be deployed to the [Avalanche](advanced-evoting-avalanche-reactjs.md) blockchain using [Truffle Suite](https://www.trufflesuite.com).
 
@@ -186,7 +186,7 @@ Now we need an Avalanche wallet, where we would keep our funds, required for all
 
 ### **Add .env file**
 
-Create a `.env` file in the project root folder. Please take a note that dot \(.\) is necessary for the `.env` file name. Now copy your Datahub's Avalanche API key and the Avalanche wallet's mnemonic in the .env file as shown below. In the .env file, **MNEMONIC** should be enclosed within double-quotes \(" "\). If you are facing any difficulty in setting up .env file then please refer to **Extra Guides** on [dotenv and .env](https://learn.figment.io/network-documentation/extra-guides/dotenv-and-.env).
+Create a `.env` file in the project root folder. Please take a note that dot \(.\) is necessary for the `.env` file name. Now copy your Datahub's Avalanche API key and the Avalanche wallet's mnemonic in the .env file as shown below. In the .env file, **MNEMONIC** should be enclosed within double-quotes \(" "\). If you are facing any difficulty in setting up .env file then please refer to **Extra Guides** on [dotenv and .env](https://docs.figment.io/network-documentation/extra-guides/dotenv-and-.env).
 
 ```bash
 MNEMONIC="<avalanche-wallet-mnemonic>"

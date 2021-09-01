@@ -14,7 +14,7 @@ We assume that you’re already familiar with [**DataHub**](https://datahub.figm
 
 # Create the NFT Family
 
-Each NFT belongs to a **family**, which has a name and a symbol. Each family is composed of **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call `avm.createNFTAsset`, which is a method of the [X-Chain’s API.](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api)
+Each NFT belongs to a **family**, which has a name and a symbol. Each family is composed of **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call `avm.createNFTAsset`, which is a method of the [X-Chain API](https://docs.figment.io/network-documentation/avalanche/rpc-and-rest-api)
 
 The signature for this method is:
 

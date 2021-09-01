@@ -565,7 +565,7 @@ window.App = App;
 
 Now run `node server.js` in the `src` directory.
 * Visit [http://localhost:3000](http://localhost:3000) to interact with the dApp.
-* Don't forget to setup Metamask with the `Fuji` testnet and also fund the account with Fuji C-Chain test tokens in order to vote. Please refer to this tutorial on [Connecting DataHub to Metamask](https://learn.figment.io/network-documentation/avalanche/tutorials/connect-datahub-to-metamask). You may change to a different address in the Metamask wallet and fund it in order to vote again.
+* Don't forget to setup Metamask with the `Fuji` testnet and also fund the account with Fuji C-Chain test tokens in order to vote. Please refer to this tutorial on [Connecting DataHub to Metamask](https://learn.figment.io/tutorials/connect-datahub-to-metamask). You may change to a different address in the Metamask wallet and fund it in order to vote again.
 
 ![](https://j.gifs.com/A6qrxj.gif)
 

@@ -1,6 +1,6 @@
 # Introduction
 
-In the last tutorial on [Making a basic e-voting DApp on Avalanche's Fuji C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), we have learnt how to deploy a smart contract on Avalanche's Fuji C-Chain using Trufflesuite. Along with that we have also coded the client-side application, to easily interact with smart contracts.
+In the last tutorial on [Making a basic e-voting DApp on Avalanche's Fuji C-Chain](https://learn.figment.io/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), we have learnt how to deploy a smart contract on Avalanche's Fuji C-Chain using Trufflesuite. Along with that we have also coded the client-side application, to easily interact with smart contracts.
 
 Today, in this tutorial, we will be building a more advanced e-voting `dApp`, in which we will not only interact with pre-deployed smart contracts, but will also deploy the contracts in runtime, and would interact with them using their contract address. For developing this dApp we will use the Trufflesuite framework.
 
@@ -8,7 +8,7 @@ For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit
 
 # Prerequisites
 
-You've created an [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). Along with that, you've have followed the tutorial on [Making a basic e-voting DApp on Avalanche's Fuji C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), though for the sake of completeness, we will be covering everything from start.
+You've created an [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). Along with that, you've have followed the tutorial on [Making a basic e-voting DApp on Avalanche's Fuji C-Chain](https://learn.figment.io/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), though for the sake of completeness, we will be covering everything from start.
 
 # Requirements
 
@@ -925,7 +925,7 @@ async function submitNewElection() {
 * Now run `node server.js` in the `src` directory. This should stay running as long as you want to interact with the contract.
 
 * Visit [http://localhost:3000](http://localhost:3000) to interact with built dApp.
-* Don't forget to setup Metamask with `Fuji` testnet and also fund the account with Fuji c-chain test tokens in order to vote. Please refer to this tutorial on [Connecting Datahub to Metamask](https://learn.figment.io/network-documentation/avalanche/tutorials/connect-datahub-to-metamask). You may change address in the Metamask wallet and fund them in order to vote again.
+* Don't forget to setup Metamask with `Fuji` testnet and also fund the account with Fuji c-chain test tokens in order to vote. Please refer to this tutorial on [Connecting Datahub to Metamask](https://learn.figment.io/tutorials/connect-datahub-to-metamask). You may change address in the Metamask wallet and fund them in order to vote again.
 
 ![](https://i.imgur.com/nfdnbwz.gif)
 

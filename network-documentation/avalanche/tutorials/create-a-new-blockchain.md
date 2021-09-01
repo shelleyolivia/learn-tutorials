@@ -10,7 +10,7 @@ In this tutorial we’ll create a new instance of the AVM.
 
 Every blockchain is validated by a [Subnet.](https://docs.avax.network/learn/platform-overview#subnets) Before you can create a blockchain, you’ll need a Subnet to validate it.
 
-[This tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/create-a-subnet) will guide you through creating a Subnet.
+[This tutorial](https://learn.figment.io/tutorials/create-a-subnet) will guide you through creating a Subnet.
 
 You can also use a Subnet that already exists, if you have a sufficient number of its control keys.
 
@@ -26,7 +26,7 @@ Make sure the Subnet that will validate your blockchain has at least `snow-sampl
 
 Each blockchain has some genesis state when it’s created. Each Virtual Machine has a static API method named `buildGenesis` that takes in a JSON representation of a blockchain’s genesis state and returns the byte representation of that state. \(This isn’t true for some VMs, like the Platform VM, because we disallow creation of new instances.\)
 
-The [AVM’s documentation](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api) specifies that the argument to `avm.buildGenesis` should look like this:
+The [AVM’s documentation](https://docs.figment.io/network-documentation/avalanche/rpc-and-rest-api/) specifies that the argument to `avm.buildGenesis` should look like this:
 
 ```json
 {

@@ -705,7 +705,7 @@ If you had any difficulties following this tutorial or simply want to discuss Av
 
 # References
 
-- https://learn.figment.io/network-documentation/avalanche/tutorials/getting-started-with-smart-contracts-development/using-truffle-with-the-avalanche-c-chain
+- https://learn.figment.io/tutorials/using-truffle-with-the-avalanche-c-chain
 - https://github.com/OpenZeppelin/openzeppelin-contracts
 - https://github.com/makerdao/dss
 - https://github.com/smartcontractkit/LinkToken
