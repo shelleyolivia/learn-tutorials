@@ -1,18 +1,18 @@
 [**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/integrate-figment-and-metamask). 
 
-**Video** 
+# Video
 
-[The video walkthrough of this tutorial can be found here](https://www.youtube.com/watch?v=Q46YMR85ikc&feature=youtu.be&ab_channel=Avalanche).
+{% embed url="https://www.youtube.com/watch?v=Q46YMR85ikc&feature=youtu.be&ab_channel=Avalanche" caption="Connect DataHub to Matamask" %}
 
-## Setup
+# Setup
 
 First, [create an account](https://datahub.figment.io/sign_up?service=avalanche) on DataHub. You'll get an email with a verification link. When you click it, you'll be signed into your DataHub dashboard.
 
-## DataHub Dashboard 
+# DataHub Dashboard 
 
 Once you're logged in to your [DataHub dashboard](https://datahub.figment.io/), find the `Available protocols` section and select Avalanche. This will bring you to the Avalanche dashboard. Our free tier for Avalanche has a limit of 200,000 requests per day. If you want to make more requests per day, you can upgrade to one of our [paid options](https://datahub.figment.io/services/avalanche/prices).
 
-## Avalanche Dashboard 
+# Avalanche Dashboard 
 
 On the Avalanche dashboard, you'll data about your plan and your usage of Avalanche APIs.
 
@@ -20,7 +20,7 @@ Next, you'll see your API key. It will look something like this: `f81e193b9412a6
 
 As the table on the dashboard says, you can make an API call to Avalanche's mainnet at `avalanche--mainnet--rpc.datahub.figment.io`. You can make an API call to the Fuji testnet at `avalanche--fuji--rpc.datahub.figment.io`.
 
-### Try it Out
+# Try it Out
 
 Paste the following command into your computer's terminal to confirm that you can access the Avalanche API hosted by Figment. This `curl` is asking for the blockchainID of the X-Chain on the Fuji tesnet. Replace `APIKEYGOESHERE` with the API key you see on the Avalanche dashboard.
 
@@ -38,7 +38,7 @@ If you are successfully able to POST to DataHub's full nodes then you should get
 }
 ```
 
-## Set up Metamask
+# Set up Metamask
 
 Let's connect our Metamask wallet to the Avalanche API hosted by Figment. Open Metamask and select the network drop-down menu. Then, select `Custom RPC`:
 
@@ -46,7 +46,7 @@ Let's connect our Metamask wallet to the Avalanche API hosted by Figment. Open M
 
 Now, fill in the boxes with the following values, depending on whether you want to connect to mainnet or the Fuji testnet. Again, replace `APIKEYGOESHERE` with your API key from Figment.
 
-## Mainnet Settings
+# Mainnet Settings
 
 * **Network Name**: Figment C-Chain Mainnet
 * **New RPC URL**: `https://avalanche--mainnet--rpc.datahub.figment.io/apikey/APIKEYGOESHERE/ext/bc/C/rpc`
@@ -54,7 +54,7 @@ Now, fill in the boxes with the following values, depending on whether you want 
 * **Symbol**: AVAX
 * **Explorer**: `https://cchain.explorer.avax.network`
 
-## Fuji Settings 
+# Fuji Settings 
 
 * **Network Name**: Figment C-Chain Fuji
 * **New RPC URL**: `https://avalanche--fuji--rpc.datahub.figment.io/apikey/APIKEYGOESHERE/ext/bc/C/rpc`
