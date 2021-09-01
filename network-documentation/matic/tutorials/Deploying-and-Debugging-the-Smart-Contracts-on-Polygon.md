@@ -1,32 +1,33 @@
 # Introduction
-In this tutorial, we will cover how to deploy smart contracts to the Polygon (Matic) Mumbai test network.
-We'll cover some of the possible errors which might occur during the deployment.
-So, grab a cup of coffee ☕️ and follow the steps.
+
+In this tutorial, you will learn how to deploy smart contracts to the Polygon (Matic) Mumbai test network.
+We'll also cover some of the possible errors which might occur during the deployment, and how to fix them.
+So, grab a cup of coffee ☕️ and follow along!
 
 # Prerequisites
+
 This tutorial assumes that you have some beginner-level experience in programming & blockchain understanding.
 
 # Requirements
 
 * [Truffle](https://www.trufflesuite.com/)
-* MetaMask setup: 
-To deploy the smart contracts on Matic you first have to add an RPC endpoint in your MetaMask wallet.
-`Settings -> Networks -> Add network -> Save`
+* [MetaMask](https://metamask.io)
 
-![](../../../.gitbook/assets/deploy-&-debug-on-polygon-1.png)
+# Getting started
 
-To get test Matic for deployment and testing,
-* `go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network).
+To be able to interact with the Mumbai testnet via MetaMask, you first have to add an RPC endpoint to your MetaMask wallet. This will allow you to view your MATIC balance, also to send and receive MATIC tokens. Open the extension in your browser by clicking on the Fox icon, then click on the Identicon at the top right of the extension window, then click through `Settings -> Networks -> Add network`. When you have entered the information as shown in the image below, click on **Save** to complete the process.
 
-Done! check your wallet, you'll see some Matic there.
+![<img src="../../../.gitbook/assets/deploy-&-debug-on-polygon-1.png" width="80" />](../../../.gitbook/assets/deploy-&-debug-on-polygon-1.png)
+
+To get Mumbai MATIC tokens so that you can pay the gas fees for smart contract deployment and testing, go to the Matic Faucet at [https://faucet.matic.network](https://faucet.matic.network). Select the Mumbai network, paste your account address into the textinput and click on **Submit**.
+
+When you are done, open MetaMask and check your wallet - you'll see the MATIC tokens there. Keep in mind that MATIC tokens on the Mumbai testnet have no value, and cannot be exchanged with Mainnet MATIC.
 
 ![](../../../.gitbook/assets/deploy-&-debug-on-polygon-2.png)
 
 # truffle-config
-* `truffle-config.js` for Mac users
-* `truffle.js` for Windows users
 
-The truffle-config file is an important file to understand. In this file, we must configure the path to the DTube Solidity file (smart contract), the contract ABI, and define the available **networks**.
+The truffle-config file is an important file to understand. In this file, we must configure the paths to the Solidity files (`contracts_directory`) and the contract Application Binary Interface (`contracts_build_directory`). We also need to define the available **networks**.
 
 ```javascript
 const HDWalletProvider = require("@truffle/hdwallet-provider")
@@ -41,7 +42,7 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
     },
   },
-  contracts_directory: './src/contracts/', // path to Smart Contracts
+  contracts_directory: './src/contracts/', // Path to smart contracts
   contracts_build_directory: './src/abis/', // Path to ABIs
   compilers: {
     solc: {
@@ -54,13 +55,14 @@ module.exports = {
 }
 ```
 
-Ensure you create an `.env` file in the project root directory (`~/DTube/.env`) and paste into it the Secret Recovery Phrase (12 words) of your preferably newly generated and testnet-only MetaMask wallet with the variable name MNEMONIC. This will be loaded by truffle at runtime, and the environment variable can then be accessed with `process.env.MNEMONIC`.
+Ensure you create an `.env` file in your project root directory and paste into it the 12 word Secret Recovery Phrase of your (_preferably newly generated and testnet-only_) MetaMask wallet with the variable name `MNEMONIC`. This will be loaded by truffle at runtime, and the environment variable can then be accessed with `process.env.MNEMONIC`.
 
-```
-MNEMONIC= 12 secret words here..
+```text
+MNEMONIC=for example put your twelve word BIP39 secret recovery phrase here
 ```
 
-Now, let's add `matic` network in our truffle-config file which will contain our environment variable MNEMONIC and RPC URL.
+Now, let's add the `matic` network in the `truffle-config.js` file which will contain our environment variable MNEMONIC and the RPC endpoint URL we want to use.
+The network ID for Mumbai is `80001`. Here you can also set the gas limit and gas price for faster transactions.
 
 ```javascript
     matic: {
@@ -75,18 +77,17 @@ Now, let's add `matic` network in our truffle-config file which will contain our
     },
 ```
 
-You can set the gas price and gas limits for faster transactions as shown in the above code block.
+# Deploy smart contracts with Truffle
 
-# Deploy Smart Contracts
 * Command: `truffle migrate --network matic`
 
-If you're deploying it for the second time then deploy with this command just to **reset** and avoid JSON errors.
+If you're deploying a contract multiple times, then deploy with the `--reset` flag to avoid JSON errors.
 
 * Command: `truffle migrate --network matic --reset`
 
 If everything worked fine, you'll see something like this:
 
-```bash
+```text
 2_deploy_contracts.js
 =====================
 
@@ -106,8 +107,7 @@ If everything worked fine, you'll see something like this:
 
    Pausing for 2 confirmations...
    ------------------------------
-   > confirmation number: 5 (block: 2371262)
-initialised!
+   > confirmation number: 5 (block: 2371262) initialized!
 
    > Saving migration to chain.
    > Saving artifacts
@@ -121,107 +121,80 @@ Summary
 > Final cost:          0 ETH
 ```
 
-*Code snippet from matic truffle docs.*
-
 # Deployment errors and solutions
-If you get any of these errors then follow these steps
-
-**Error**
-
-```
-Error: PollingBlockTracker - encountered an error while attempting to update latest block:
-```
-
-**Fix_1**
-Change the RPC endpoint URL in Metamask from 'https://rpc-mumbai.matic.today' to an [Infura RPC endpoint](https://infura.io/). This will require you to register for an Infura account and set up a Project, to get a Project ID. If you already have an Infura project ID, add it to the `.env` file => `PROJECT_ID=<your project ID>`
-
-`infura -> Create new project -> Settings -> Endpoints -> Polygon Mumbai`
-
-```javascript
-    matic: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, 
-      `https://polygon-mumbai.infura.io/v3/process.env.PROJECT_ID`),
-      network_id: 80001,
-      confirmations: 2,
-      timeoutBlocks: 200,
-      skipDryRun: true,
-    },
-  },
-```
-
-Paste your PROJECT_ID there from .env file.
-* `truffle migrate --network matic --reset`
-
-If the error still occurs, try another alternate RPC endpoint from [MaticVigil](https://maticvigil.com/).
-
-**Fix_2**
-Change `https://rpc-mumbai.matic.today` by using [Matic custom RPC](https://rpc.maticvigil.com/).
-
-```javascript
-    matic: {
-      provider: () => new HDWalletProvider(process.env.MNEMONIC, 
-      `https://rpc-mumbai.maticvigil.com/v1/process.env.PROJECT_ID`),
-      network_id: 80001,
-      confirmations: 2,
-      timeoutBlocks: 200,
-      skipDryRun: true,
-    },
-  },
-```
-
-Paste your PROJECT_ID there from .env file.
-* `truffle migrate --network matic --reset`
+If you encounter any of these errors, follow the instructions to solve them:
 
 **Error:**
 
+```text
+Error: PollingBlockTracker - encountered an error while attempting to update latest block:
 ```
+
+**Solution:**
+
+Change the RPC endpoint URL in `truffle-config` from 'https://rpc-mumbai.matic.today' to a [DataHub RPC endpoint](https://datahub.figment.io/services/Polygon). This will require you to register for an DataHub account and get a Polygon API key. If you already have a DataHub account, add your API key to the `.env` file as something descriptive such as `DATAHUB_POLYGON_API_KEY`.
+
+```javascript
+    matic: {
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, 
+      `https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/${process.env.DATAHUB_POLYGON_API_KEY}`),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
+```
+
+**Error:**
+
+```text
 *** Deployment Failed ***
 
 "Migrations" -- only replay-protected (EIP-155) transactions allowed over RPC.
 ```
 
-**Fix:**
-* `npm install @truffle/hdwallet-provider@1.4.0`
+**Solution:**
 
-Truffle hdwallet-provider version 1.4.0 will fix this error.
+Truffle's `hdwallet-provider` version 1.4.0 will fix this error.
+
+You will need to run `npm install @truffle/hdwallet-provider@1.4.0` (or `yarn add @truffle/hdwallet-provider@1.4.0` if your project is using `yarn` instead of `npm`)
 
 **Error:**
 
-```
+```text
 Error:  *** Deployment Failed ***
 
-"Migrations" -- Transaction was not mined within 750 seconds, please make sure your transaction was properly sent. Be aware that it might still be mined!.
+"Migrations" -- Transaction was not mined within 750 seconds, please make sure your transaction was properly sent. Be aware that it might still be mined!
 ```
 
-**Fix:**
+**Solution:**
+
+Just add `networkCheckTimeout: 100000`:
 
 ```javascript
     matic: {
       provider: () => new HDWalletProvider(process.env.MNEMONIC, 
-      `https://rpc-mumbai.maticvigil.com/v1/process.env.PROJECT_ID`),
+      `https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/${process.env.DATAHUB_POLYGON_API_KEY}`),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,
       skipDryRun: true,
       networkCheckTimeout: 100000,
     },
-  },
 ```
-
-Just add `networkCheckTimeout: 100000`
-
 
 *If you discover any new errors and If you know the solution for it, then feel free to make a PR, we'll add your Error-Fix here.*
 
 # Conclusion
+
 After this tutorial you will be able to:
-* Deploy the smart contracts on polygon (Matic) Mumbai Test Network.
-* Tackle the errors while deploying the smart contracts on polygon (Matic) Mumbai Test Network.
+* Deploy smart contracts on Polygon (Matic) Mumbai testnet using Truffle.
+* Solve any errors that occur while deploying the smart contracts.
 
 # About the Author
-I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Development, Open-Source & Decentralization. Feel free to connect with me on [GitHub](https://github.com/AkhileshThite) & [Twitter](https://twitter.com/AkhileshThite_).
+
+Akhilesh Thite is an Indian tech enthusiast with a passion for Software Development, Open-Source & Decentralization. You can connect with him on [GitHub](https://github.com/AkhileshThite).
 
 # References
-* *Truffle docs: https://www.trufflesuite.com/docs/truffle/overview*
-* *Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started*
-* *GitHub repo: https://github.com/AkhileshThite/DTube*
+* Truffle docs: https://www.trufflesuite.com/docs/truffle/overview
+* Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started
