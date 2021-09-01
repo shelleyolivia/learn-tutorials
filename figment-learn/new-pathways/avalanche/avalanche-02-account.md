@@ -50,6 +50,12 @@ In `pages/api/avalanche/account.ts`, complete the code of the function to create
 * On the keypair instance, call a method to retrieve the `Address` in string format.
 * [**`AvalancheJS` create keypair example**](https://github.com/ava-labs/avalanchejs/blob/master/examples/evm/createKeypair.ts)
 
+{% hint style="info" %}
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
+{% endhint %}
+
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
+
 ------------------------
 
 # Solution

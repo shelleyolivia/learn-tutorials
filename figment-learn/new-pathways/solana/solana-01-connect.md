@@ -26,7 +26,7 @@ In `pages/api/solana/connect.ts`, implement `connect` by creating a `Connection`
 * [Getting the API's `version`](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getversion)
 
 {% hint style="info" %}
-[You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.

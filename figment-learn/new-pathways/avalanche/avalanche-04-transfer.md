@@ -42,8 +42,8 @@ In `pages/api/avalanche/transfer.ts`, complete the code of the function and try 
 * [**Manage X-Chain Keys**](https://docs.avax.network/build/tools/avalanchejs/manage-x-chain-keys)
 * [**What The Heck is UTXO**](https://medium.com/bitbees/what-the-heck-is-utxo-ca68f2651819)
 
-{% hint style="success" %}
-[**You can join us on Discord, if you have questions**](https://discord.gg/fszyM7K)
+{% hint style="info" %}
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.

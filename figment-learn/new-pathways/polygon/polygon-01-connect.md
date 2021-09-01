@@ -42,13 +42,15 @@ const checkConnection = async () => {
 
 * **Connect to Polygon** using ethers' Web3Provider and the Metamask wallet  
   * [Ethers' docs for creating a Web3Provider instance](https://docs.ethers.io/v5/api/providers/other/#Web3Provider)  
-  * [Stackoverflow post about connecting Metamask to Ethers](https://stackoverflow.com/questions/60785630/how-to-connect-ethers-js-with-metamask)  
+  * [StackOverflow post about connecting Metamask to Ethers](https://stackoverflow.com/questions/60785630/how-to-connect-ethers-js-with-metamask)  
 * **Display the connected network**  
   * [Get the Network from a Ethers provider](https://docs.ethers.io/v5/api/providers/)
 
 {% hint style="info" %}
-[Still not sure how to do this? **Join us on Discord** and someone will help!](https://discord.gg/fszyM7K)
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
+
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
 ----------------------------------
 

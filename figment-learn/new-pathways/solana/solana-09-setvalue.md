@@ -29,7 +29,7 @@ In `pages/api/solana/callGreetings.ts`, complete `setGreetings`. First you'll ha
 * [Read about sendAndConfirmTransaction](https://solana-labs.github.io/solana-web3.js/modules.html#sendAndConfirmTransaction)  
 
 {% hint style="info" %}
-[You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.

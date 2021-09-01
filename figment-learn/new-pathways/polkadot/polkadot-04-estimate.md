@@ -39,7 +39,7 @@ In `pages/api/polkadot/estimate.ts`, implement the function and try to estimate 
 * [**How do I estimate the transaction fees?**](https://polkadot.js.org/docs/api/cookbook/tx#how-do-i-estimate-the-transaction-fees)  
 
 {% hint style="info" %}
-[**Join us on Discord**](https://discord.gg/fszyM7K)
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.

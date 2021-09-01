@@ -49,7 +49,7 @@ In `pages/api/polkadot/account.ts`, implement the function and try to create you
 * [**Using address or publicKey**](https://polkadot.js.org/docs/keyring/start/sign-verify#verify-using-address-or-publickey)  
 
 {% hint style="info" %}
-[**Join us on Discord**](https://discord.gg/fszyM7K)
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.

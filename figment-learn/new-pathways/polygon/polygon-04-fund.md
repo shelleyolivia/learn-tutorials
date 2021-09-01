@@ -45,8 +45,10 @@ const checkBalance = async () => {
 **→ Format the balance using** [**ethers.utils.formatEther**](https://docs.ethers.io/v5/api/utils/display-logic/#unit-conversion)
 
 {% hint style="info" %}
-[Still not sure how to do this? **Join us on Discord** and someone will help!](https://discord.gg/fszyM7K)
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
+
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
 -------------------------------------
 

@@ -35,8 +35,10 @@ Need some help? Check out these two tips/links
 * To read from the blockchain you don't need to spend any tokens so you can just use a provider to create a Contract instance. But to write you will need to create and sign a transaction through Metamask. Use a `signer` to create the Contract object!
 
 {% hint style="info" %}
-[Still not sure how to do this? **Join us on Discord** and someone will help!](https://discord.gg/fszyM7K)
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
+
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
 -------------------------------------
 

@@ -26,7 +26,13 @@ In `pages/api/avalanche/balance.ts`, complete the code of the default function.
 
 **Need some help?** Check out these tips
 * The `getBalance` method of the `AVMAPI` module looks like a good candidate!
-* [**Code examples**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm)  
+* [**Code examples**](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm)
+
+{% hint style="info" %}
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
+{% endhint %}
+
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
 ------------------------
 

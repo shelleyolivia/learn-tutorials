@@ -30,7 +30,7 @@ In `pages/api/polkadot/connect.ts`, implement the function and try to establish 
 * [**Providers**](https://polkadot.js.org/docs/api/start/create#providers)  
 
 {% hint style="info" %}
-[**Join us on Discord**](https://discord.gg/fszyM7K)
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.

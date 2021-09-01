@@ -19,7 +19,6 @@ Also be sure to rename the file **`contracts/polygon/SimpleStorage/.secret.examp
 One of the most basic, non-trivial, types of smart contract is a **simple storage contract**.   
 This example was adapted from the [Solidity documentation](https://solidity.readthedocs.io/en/develop/introduction-to-smart-contracts.html).
 
-{% code title="contracts/polygon/SimpleStorage/contracts/SimpleStorage.sol" %}
 ```javascript
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -40,7 +39,6 @@ contract SimpleStorage {
     }
 }
 ```
-{% endcode %}
 
 The first line of a Solidity file should contain a comment which describes the type of license governing the source code. The `SPDX-License-Identifier` will most commonly be the MIT licence, although a comprehensive list can be found at [https://spdx.org/licenses/](https://spdx.org/licenses/). The Solidity compiler will issue a [warning](https://docs.soliditylang.org/en/v0.8.6/security-considerations.html#take-warnings-seriously) if this line is not present at compilation time.
 

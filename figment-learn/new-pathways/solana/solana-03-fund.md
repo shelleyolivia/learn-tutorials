@@ -41,7 +41,7 @@ In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an 
 
 
 {% hint style="info" %}
-[You can **join us on Discord**, if you have questions](https://discord.gg/fszyM7K)
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
