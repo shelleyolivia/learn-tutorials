@@ -9,7 +9,7 @@ If you want to learn more about NEAR smart contracts, you can follow the tutoria
 # The challenge
 
 {% hint style="tip" %}
-In`pages/api/near/getter.ts`, complete the code of the default function. 
+In`pages/api/near/getter.ts`, implement the default function. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -59,7 +59,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* We're calling the `viewFunction()` method of our account, passing to it:
+
+* We're calling the `viewFunction` method of our account, passing to it:
   * The `contractId`, which is the same as our account name. This is because the contract has been deployed to our account!
   * The name of the method we want to call, here `get_greeting`
   * The name of the argument expected by `get_greeting`, which is `account_id`.

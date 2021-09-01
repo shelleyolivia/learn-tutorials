@@ -1,15 +1,12 @@
-Now that you have created an account on the Avalanche **Fuji** testnet and funded it using the faucet - We're going to check the balance of the account to make sure everything went alright.
+Now that you have created an account on the Avalanche **Fuji** testnet and funded it using the faucet - We're going to check the balance of the account to make sure everything went alright. The native token of the **Avalanche** blockchain is **AVAX**, so we will want to start on the X-Chain.
 
-{% hint style="info" %}
-The native token of the **Avalanche** blockchain is **AVAX**
-{% endhint %}
 
 ------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/avalanche/balance.ts`, complete the code of the default function.
+In `pages/api/avalanche/balance.ts`, implement the default function. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 ```typescript
@@ -50,7 +47,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 //...
 ```
 
-Quick review of the solution:
+**What happened in the code above?**
+
 * The `getBalance` method will return the current balance of the specified asset (like AVAX) for the specified address.
 
 {% hint style="tip" %}

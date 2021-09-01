@@ -92,6 +92,6 @@ Once you have the code above saved, click on **Get Greeting** and watch the magi
 
 ----------------------------------
 
-# Next
+# Conclusion
 
 Simply getting the number of greetings is not enough, we'd like to also *send* a greeting to our contract. We're going to learn how to do it in the next step. Ready?

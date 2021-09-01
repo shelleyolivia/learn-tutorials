@@ -1,8 +1,6 @@
-# Avalanche Architecture
+In this tutorial we will be creating an Avalanche account on the X-Chain using the Avalanche JavaScript API and DataHub.
 
-In this step we will be creating an Avalanche account on the X-Chain using the Avalanche JavaScript API and DataHub.
-
-Unlike other popular blockchains, Avalanche comes with a set of different chains, each for its own purposes:
+Unlike other popular blockchains, Avalanche comes with a set of different chains, each with its own purpose:
 
 * Exchange Chain or **X-Chain** which handles asset transfers.
 * Platform Chain or **P-Chain** is for network validators and staking.
@@ -10,24 +8,24 @@ Unlike other popular blockchains, Avalanche comes with a set of different chains
 
 ## X-Chain
 
-The X-Chain acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource (such as equity or bonds) with a set of rules that govern its behavior, like "can’t be traded until tomorrow" or "can only be sent to US citizens."
+The X-Chain acts as a decentralized platform for creating and trading digital smart assets, a representation of a real-world resource (such as equity or bonds) with a set of rules that govern its behavior, like "can’t be traded until tomorrow" or "can only be sent to US citizens".
 
 One asset traded on the X-Chain is AVAX. When you issue a transaction to a blockchain on Avalanche, you pay a fee denominated in AVAX.
 
 ## P-Chain
 
-The P-Chain is the metadata blockchain on Avalanche and coordinates validators, keeps track of active subnets, and enables the creation of new subnets. The P-Chain implements the [Snowman consensus protocol](https://docs.avax.network/learn/platform-overview/avalanche-consensus).
+The P-Chain is the metadata blockchain on Avalanche and coordinates validators, keeps track of active [subnets](https://support.avax.network/en/articles/4064861-what-is-a-subnet), and enables the creation of new subnets. The P-Chain implements the Snowman [consensus protocol](https://docs.avax.network/learn/platform-overview/avalanche-consensus).
 
 ## C-Chain
 
-The C-Chain allows for the creation of smart contracts using the C-Chain’s API, and is an instance of the Ethereum Virtual Machine powered by Avalanche.
+The C-Chain allows for the creation of smart contracts using the C-Chain’s API, and is an instance of the [Ethereum Virtual Machine](https://ethereum.stackexchange.com/questions/268/ethereum-block-architecture/6413#6413) (EVM) powered by Avalanche.
 
 ------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/avalanche/account.ts`, complete the code of the function to create our private key. A private key is used to sign transactions on any Avalanche chain (X/P/C), and for educational purposes we'll use a single private key during the Pathway. To manage the keys we first configure the Keychain, a component for managing private/public key pairs and addresses.
+In `pages/api/avalanche/account.ts`, implement the function to create our private key. A private key is used to sign transactions on any Avalanche chain (X/P/C), and for educational purposes we'll use a single private key during the Pathway. To manage the keys we first configure the Keychain, a component for managing private/public key pairs and addresses. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 ```typescript
@@ -75,6 +73,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * Calling the `makeKey` method will give us a usable keypair.
 * `getPrivateKeyString` retrieves the string-formatted private key.
 * `getAddressString` retrieves the string-formatted public key.

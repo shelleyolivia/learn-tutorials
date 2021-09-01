@@ -1,11 +1,11 @@
-Like with most Web 3 protocols, transactions on NEAR happen between **accounts**. To create an account, one first need to generate a **keypair** which has a **public key** (or **address**, used to identify and lookup an account) and a **secret key** used to sign transactions.
+Like with most Web 3 protocols, transactions on NEAR happen between **accounts**. To create an account, one first need to generate a **keypair** which has a **public key** (or **address**, used to identify and lookup an account) and a **private key** used to sign transactions.
 
 ------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/near/keypair.ts`, implement `keypair` and retrieve the string formatted representation of the keypair into the variable `secret`.
+In `pages/api/near/keypair.ts`, implement `keypair` and retrieve the string formatted representation of the keypair into the variable `secret`. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -41,6 +41,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a random `keypair` using the `ed25519` cryptographic curve.
 * Next, we retrieve the string formatted representation of the `secret` key.
 
@@ -56,4 +57,4 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 # Next
 
-Now that we have an account, we're going to associate to an account name something almost only possible with NEAR. But before we need to find an available account name. Let's go!
+Now that we have a keypair, we're going to associate it to an account name. Unlike other blockchains, support for human-readable addresses "out of the box" is possible with NEAR. Before we register an account name however, we need to find out if the name we want is available. Let's go!

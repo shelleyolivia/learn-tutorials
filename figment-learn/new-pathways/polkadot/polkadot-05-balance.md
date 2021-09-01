@@ -52,6 +52,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we need instantiate our connection to the Polkadot API.
 * Next, we destructure the data returned by the `query.system.account` method as `balance`.
 * Then we can access the available balance of our account via the `free` property, converting it into a number with `toNumber`.

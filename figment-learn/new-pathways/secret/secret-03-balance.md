@@ -9,7 +9,7 @@ The native token on the **Secret Network** is **SCRT**
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/secret/balance.ts`, complete the code of the default function.
+In `pages/api/secret/balance.ts`, implement the default function. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -62,6 +62,7 @@ You could experience some issues with the availability of the network. [**Click 
 ```
 
 **What happened in the code above?**
+
 * First, we return an instance of the `Account` class from the `getAccount()` method.
 * Next, we check the balance by accessing the `amount` property of the `Account.balance[0]`. The array attached to `balance` here is because the TypeScript definitions specify a `balance` as being a `ReadOnlyArray<Coin>`. The zero-index refers to the SCRT Coin.
   * Take note of the use of the [optional chaining operator](https://www.codeisbae.com/typescript-optional-chaining-nullish-coalescing/): `?.` This effectively prevents passing an incorrect value back to the client-side, because if there is no balance property present the expression will not evaluate.
@@ -84,6 +85,6 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 -----------------------------
 
-# Next
+# Conclusion
 
-100 **SCRT** available, hmmm ... seems it's more than enough to do our first transfer. In the next step, we're going to buy a pizza which means making a transfer of tokens!
+100 **SCRT** available, hmmm ... seems it's more than enough to do our first transfer. In the next step, we're going to buy an imaginary pizza which means making a transfer of tokens!

@@ -9,7 +9,7 @@ The Celo blockchain has two native assets, **CELO** (CELO) and the **Celo Dollar
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/celo/balance.ts`, complete the code of the **balance** function.
+In `pages/api/celo/balance.ts`, implement the **balance** function. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -73,6 +73,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a new `kit` instance.
 * Next, we call the `getGoldToken` method of the `contracts` module to access CELO contract, then providing the input address to the `balanceOf` method, returning the balance of **CELO** token.
 * Next, we call the `getStableToken` method of the `contracts` module to access the cUSD contract, then providing the input address to the `balanceOf` method, returning the balance of **cUSD** token.

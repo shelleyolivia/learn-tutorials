@@ -84,6 +84,5 @@ Congratulations on completing the Solana Pathway! We hope you had a fun time and
 * [Read some programs written by Solana devs](https://github.com/solana-labs/solana-program-library/tree/master/examples)
 * [Look at the Solana's Token Swap program](https://github.com/solana-labs/solana-program-library/tree/master/token-swap)
 
-{% hint style="info" %}
-If you had any difficulty with this tutorial or simply want to discuss Solana with other developers, [join our community Forums](https://community.figment.io) today, or [join us on Discord](https://discord.gg/EBveT5xs9D)!
-{% endhint %}
+
+If you had any difficulties following this tutorial or simply want to discuss Solana with other developers you can join [our Discord](https://discord.gg/fszyM7K) or head over to our [community forums](https://community.figment.io).

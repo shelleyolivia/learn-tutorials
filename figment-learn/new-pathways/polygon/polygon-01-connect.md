@@ -15,7 +15,7 @@ _It is important to note that throughout the Pathway, we will refer to the_ ethe
 # The challenge
 
 {% hint style="tip" %}
-**Imagine this scenario:** You're a fresh Web3 developer who just landed a sweet role at a promising new startup, eager to show off our skills. You've been asked to show users of our dApp which network they are connected to (to avoid any confusion) and store the account currently selected address in Metamask (so that we can reference it later). In **`components/protocols/polygon/steps/Connect.tsx`**, implement the`checkConnection`function.
+**Imagine this scenario:** You're a fresh Web3 developer who just landed a sweet role at a promising new startup, eager to show off your skills. You've been asked to show users of our dApp which network they are connected to (to avoid any confusion) and store the account currently selected address in Metamask (so that we can reference it later). In **`components/protocols/polygon/steps/Connect.tsx`**, implement the`checkConnection` function.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -28,14 +28,14 @@ const checkConnection = async () => {
     // TODO
     // Connect to Polygon using Web3Provider and Metamask
     // Define address and network
-    const web3provider = undefined
-    const address = undefined
-    const network = undefined
+    const web3provider = undefined;
+    const address = undefined;
+    const network = undefined;
 
-    setAccount(address)
-    setNetwork(network)
+    setAccount(address);
+    setNetwork(network);
   } else {
-    alert("Please install Metamask at https://metamask.io")
+    alert("Please install Metamask at https://metamask.io");
   }
 }
 ```
@@ -76,6 +76,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we need to define the provider by calling `Web3Provider` method of `providers`.
 * As said above the `signer` represent the current connected account. Then, calling the `getAddress` method will do the job.
 * Again using `signer` we can retrieve the current **chainId**, pass it to the `getNetwork` method and then deduce the network.
@@ -108,7 +109,7 @@ This is an important topic to be comfortable with as both a user and blockchain 
 
 -------------------------------------
 
- Next Steps
+# Conclusion
 
 Now that we have a connected to Polygon, we can use ethers to query information from the blockchain.  
 In the next tutorial, we will cover how to query Polygon and display the information.

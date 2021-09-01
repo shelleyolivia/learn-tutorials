@@ -1,4 +1,4 @@
-With some protocols, different networks (testnet, mainnet, etc) have different tokens names. For example with Polkadot, the mainnet token is *DOT* and the testnet token is *WND*. In the Solana world, the token is always called **SOL**, no matter what network (or **cluster**) you are on. Don't get too excited: the tokens you get for free on the devnet cannot be used on Solana's mainnet. Nice try though 😉
+With some protocols, different networks (testnet, mainnet, etc) have different token names. For example with Polkadot, the mainnet token is **DOT** and the testnet token is **WND**. In the Solana world, the token is always called **SOL**, no matter what network (or **cluster**) you are on. Don't get too excited: the tokens you get for free on the devnet cannot be used on Solana's mainnet. Nice try though 😉
 
 ----------------------------------
 
@@ -15,7 +15,7 @@ To fund an account, we will do what is called an **airdrop** - some tokens will 
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an address and use `requestAirdrop`to get 1 **SOL**.
+In `pages/api/solana/fund.ts`, implement the `fund` function. Convert the text input to an address and use `requestAirdrop` to get 1 **SOL**. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -24,12 +24,12 @@ In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an 
 //..
   try {
     const url = getSafeUrl();
-    const connection = new Connection(url, "confirmed")
+    const connection = new Connection(url, "confirmed");
     const address = req.body.address as PublicKey;
-    const publicKey = undefined  
-    const hash = undefined
-    await undefined
-    res.status(200).json(hash)
+    const publicKey = undefined;
+    const hash = undefined;
+    await undefined;
+    res.status(200).json(hash);
   }
 //..
 }
@@ -37,7 +37,7 @@ In `pages/api/solana/fund.ts`, implement `fund()`. Convert the text input to an 
 
 **Need some help?** Here are a few hints.
 * [Create a publicKey from a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#constructor)  
-* [`requestAirdrop()`documentation](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#requestairdrop)
+* [`requestAirdrop` documentation](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#requestairdrop)
 
 
 {% hint style="info" %}
@@ -86,6 +86,6 @@ Let the magic happen: You're now 1 SOL richer on devnet!
 
 ----------------------------------
 
-# Next
+# Conclusion
 
 Before we make our first transfer, let's check that that the account is actually funded by asking the cluster for our balance!

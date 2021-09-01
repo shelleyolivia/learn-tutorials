@@ -7,7 +7,7 @@ We are now all set up with our application and we can start writing some JavaScr
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/celo/connect.ts`, complete the code of the function and try to establish your first connection to the celo network. 
+In `pages/api/celo/connect.ts`, implement the function and try to establish your first connection to the Celo network. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -49,8 +49,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
-* First, we create a new `kit` instance.
-* Next, using `web3.eth` we can access a proxy of the [**web3.js - Ethereum Javascript API**](https://web3js.readthedocs.io/en/v1.4.0/)
+
+* First, we create a new `kit` instance. This is our connection to Celo, which we will use throughout the Pathway.
+* Next, using `web3.eth` we can access a proxy of the [**web3.js - Ethereum Javascript API**](https://web3js.readthedocs.io/en/v3.0.0-rc.5/)
 * Finally, calling the `getNodeInfo` method we can query the node to return a slice of the protocol version.
 
 ------------------------

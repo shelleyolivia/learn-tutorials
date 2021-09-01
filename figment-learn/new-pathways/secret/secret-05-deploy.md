@@ -37,7 +37,7 @@ const customFees = {
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/secret/deploy.ts`, complete the code of the default function. Upload your first smart contract on the **Secret** network.
+In `pages/api/secret/deploy.ts`, implement the default function. Upload your first smart contract on the **Secret** network. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -92,6 +92,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we upload the contract using `upload` method of the `SigningCosmWasmClient`.
 * Next, we destructure the `uploadReceipt` response object to get the `codeId` of the deployed contract
 * Finally, we instantiate the contract using `instantiate` method of the `SigningCosmWasmClient`, passing:
@@ -110,6 +111,6 @@ Once you have the code above saved, click on **Deploy Contract**
 
 ----------------------------------
 
-# Next
+# Conclusion
 
 Now that we have deployed a smart contract, let's interact with it! In the following tutorials, we will look at how to use both view and change functions.

@@ -73,6 +73,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a new `TezosToolkit` instance.
 * Next, we import our wallet data using `importKey`.
 * Next, we create an transaction using the method `transfer` of the `contract` module, passing:
@@ -93,6 +94,6 @@ Once you have the code above saved:
 
 -----------------------------
 
-# Next
+# Conclusion
 
 Now that we have created our account and made a transfer, let's move on to deploying some code (known as a "smart contract") to the **Tezos** blockchain! Ready to take the plunge? Let's go... 

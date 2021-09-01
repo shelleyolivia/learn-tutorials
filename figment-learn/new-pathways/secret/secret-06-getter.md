@@ -26,7 +26,7 @@ const customFees = {
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/secret/getter.ts`, complete the code of the default function. 
+In `pages/api/secret/getter.ts`, complete the code of the default function. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -64,6 +64,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * We're calling the `queryContractSmart` method of the client, passing to it:
   * The `contract`, which is the contract address. 
   * The `{ get_count: {} }` object which represents the name of the method we are calling and the parameters we're passing to it. In this case, there are no arguments passed to `get_count`, but we must still pass an empty object: `{}`.
@@ -78,6 +79,6 @@ Once you have the code above saved, click the button and watch the magic happen:
 
 ----------------------------------
 
-# Next
+# Conclusion
 
 Now, time for the last challenge! Time to modify the state of the contract and thus the state of the blockchain. Let's go!

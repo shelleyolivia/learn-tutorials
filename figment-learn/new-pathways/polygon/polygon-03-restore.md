@@ -1,13 +1,13 @@
-At the beginning of your this journey on Polygon's world, we have generated a mnemonic. Now we're going to learn how to restore an wallet from a mnemonic and how derive the address and the private key when the wallet have been restored
+At the beginning of this journey into Polygon, we generated a mnemonic. Now we're going to learn how to restore a wallet from a mnemonic and how to derive the address and the private key when the wallet has been restored.
 
-Ready ?
+Ready? Let's go!
 
 -------------------------------------
 
 # The Challenge
 
 {% hint style="tip" %}
-**On the file `components/protocols/steps/polygon/Restore.tsx` Implement the `restore`**. First using `ethers` look for `Wallet`, next when the wallet have been regenerated try do deduce which property we're going to call in order to display the address and the private key, finally verify than the generated key match the existing one.   
+In the file `components/protocols/steps/polygon/Restore.tsx`, implement the `restore` function. Using `ethers`, look for `Wallet`, then when the wallet has been regenerated try to deduce which property we're going to call in order to display the address and the private key, finally verify than the generated key matches the existing one.   
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -66,11 +66,12 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
     }
 ```
 
-What happened in the code above? Let's take a closer look!
+**What happened in the code above?**
+
 * First, we need to call `fromMnemonic` method of `Wallet` class.
-* Next, we compare if the restored address match the existing one.
-* Next, we store the address to display it in the UI.
-* Last, we do the same for the private key.
+* Next, we compare if the restored address matches the existing one.
+* Next, we store the address in the component state using `setAddress` to display it in the UI.
+* Finally, we do the same for the private key - storing it in the component state with `setSecret`.
 
 -------------------------------------
 
@@ -84,6 +85,6 @@ When you have completed the code:
 
 -------------------------------------
 
-# Next Steps
+# Conclusion
 
-The ability to restore an account whitout the need to depend on tier-party is a great feature from web3. Now, we're ready to fund our account with some **MATIC** the native token of the Polygon blockchain.
+The ability to restore an account without the need to depend on a third-party is a great feature of Web 3. Now, we're ready to fund our account with some **MATIC**, the native token of the Polygon blockchain.

@@ -11,14 +11,14 @@ You could experience some issues with the availability of the network [**Click h
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/secret/transfer.ts`, complete the code of the function. There is a lot to fill here, so be careful!
+In `pages/api/secret/transfer.ts`, implement the default function. There is a lot to fill here, so be careful!
 {% endhint %}
 
 **Take a few minutes to figure this out.**
 
 ```tsx
 //..
-  // 0. A very specific Secret features (allowing to made the transaction encrypted)
+  // 0. A very specific Secret feature (this allows us to make the transaction encrypted)
   const txEncryptionSeed = EnigmaUtils.GenerateNewSeed();
 
   // 1. The fees you'll need to pay to complete the transaction
@@ -77,6 +77,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a secure connection using `SigningCosmWasmClient`, passing:
   * The `url` of the network.
   * The `address` of our wallet. 
@@ -100,6 +101,6 @@ Once you have the code above saved:
 
 ----------------------------------
 
-# Next
+# Conclusion
 
 Now that we have funded our account and made a transfer, let's move on to deploying some code (known as a "smart contract") to the **Secret** blockchain! Ready to take the plunge? Let's go... 

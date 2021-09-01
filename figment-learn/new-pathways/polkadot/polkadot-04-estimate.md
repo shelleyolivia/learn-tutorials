@@ -72,6 +72,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we create a new transaction for a transfer using the `tx.balances.transfer` method, passing the `recipient` and `transferAmount`.
 * Next, we call the `paymentInfo` method on the transaction object.
 * Then we convert the `partialFee` property to a number with `toNumber`.

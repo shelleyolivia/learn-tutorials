@@ -53,6 +53,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * The `getSafeUrl` helper function constructs a DataHub URL for either Mainnet or the Westend testnet using the API key provided in `.env.local` - It can also be used with the `force` option to return the public Westend RPC endpoint as a fallback.  
 * With the endpoint URL, we can create a new `WsProvider` instance.
 * Then we use `ApiPromise.create` to initialize the API, passing the provider as an object.

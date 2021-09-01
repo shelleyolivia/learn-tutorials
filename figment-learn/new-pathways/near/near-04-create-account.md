@@ -5,7 +5,7 @@ Unlike many other Web 3 protocols, NEAR uses a human readable account ID instead
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/near/create-account.ts`, complete the code of the default function.
+In `pages/api/near/create-account.ts`, implement the default function. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -44,9 +44,10 @@ try {
 ```
 
 **What happened in the code above?**
+
 * First, we need to [destructure](https://dmitripavlutin.com/javascript-object-destructuring/) the values from the request body so that we can use them in our code. We are also specifying a TypeScript type of `AccountReq` here.
-* Then we use `configFromNetwork()`, passing the `network` from the request body - now we can create a connection, `near`.
-* Next, we call the `createAccount()` method passing the `freeAccountId` and the `publicKey` from the request body.
+* Then we use `configFromNetwork`, passing the `network` from the request body - now we can create a connection, `near`.
+* Next, we call the `createAccount` method passing the `freeAccountId` and the `publicKey` from the request body.
 * Finally, we can return the name of the account to the client-side as JSON.
 
 ------------------------

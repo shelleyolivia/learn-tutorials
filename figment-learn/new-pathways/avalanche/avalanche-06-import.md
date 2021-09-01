@@ -14,7 +14,7 @@ Here we will focus on the second part, the **C-Chain import transaction**.
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/avalanche/import.ts`, complete the code of the function and try to import the AVAX sent in the previous tutorial to C-Chain. 
+In `pages/api/avalanche/import.ts`, implement the function and try to import the AVAX sent in the previous tutorial to C-Chain. You must replace any instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -112,6 +112,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First, we need to build our C-Chain keypair. This works exactly the same way for X-Chain.
 * Next, we determine the chainId.
 * Next, we fetch the latest `UTXOS`.
@@ -133,10 +134,10 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 # Conclusion
 
-Congratulations, you've made it this far and successfully completed an AVAX transfer from the X-Chain to the C-Chain. The same approach works in reverse (C -> X), or for any other inter-chain transfers (X -> P or P -> C for example).
+Congratulations, you've made it this far and successfully completed an AVAX transfer from the X-Chain to the C-Chain. The same approach works in reverse (C-Chain -> X-Chain), or for any other inter-chain transfers (X-Chain -> P-Chain or P-Chain -> C-Chain for example).
 
 The Avalanche team has put together a [good list of examples](https://github.com/ava-labs/avalanchejs/tree/master/examples/avm), be sure to check them out if you need a more advanced look at the AvalancheJS library.
 
 Ready for more? No problem! While the basic Pathway is complete at this point, you are more than welcome to explore other [Avalanche tutorials](https://learn.figment.io/protocols/avalanche).
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us, you can join [our community](https://discord.gg/fszyM7K) today!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche with other developers you can join [our Discord](https://discord.gg/fszyM7K) or head over to our [community forums](https://community.figment.io).

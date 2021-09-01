@@ -5,7 +5,7 @@ Like with most Web 3 protocols, transactions on Secret happen between **accounts
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/secret/account.ts`, complete the code of the function to first create a **mnemonic**, then produce an **address** from the **public key** belonging to the **mnemonic**.
+In `pages/api/secret/account.ts`, implement the function to first create a **mnemonic**, then produce an **address** from the **public key** belonging to the **mnemonic**. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -47,6 +47,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```
 
 **What happened in the code above?**
+
 * First we create a random **mnemonic** using the `fromMnemonic` method of the `Secp256k1Pen` class.
 * Next we deduce the public key from it using the `encodeSecp256k1Pubkey` function.
 * Then we deduce the wallet address from it using the `pubkeyToAddress` function.
@@ -66,6 +67,5 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 -----------------------------
 
-# Next
-
+# Conclusion
 Before we make our first transfer, let's check that that the account is actually funded by asking the cluster for our balance!
