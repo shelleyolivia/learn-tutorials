@@ -1,5 +1,5 @@
 # Introduction
-In this tutorial, we will be building a custom pallet using the Substrate development framework and FRAME v1. We will start with an overview to understand pallets and the FRAME framework. We will then take a look at the Substrate pallet template, using it to build our own custom pallet, write test cases, publish using git and finally add the published pallet to our runtime.
+In this tutorial, we will be building a custom pallet using the Substrate development framework and FRAME v1. We will start with an overview to understand pallets and the FRAME framework. We will then take a look at the Substrate pallet template, using it to build our custom pallet, write test cases, publish using git and finally add the published pallet to our runtime.
 
 # Pre-requisite
 This tutorial assumes the reader is somewhat familiar with the Rust programming language and has a basic understanding of the Substrate framework.
@@ -51,12 +51,12 @@ This defines the `Module` struct that is ultimately exported from this pallet. I
 ```rust
 decl_module! { ... }
 ```
-We will now take a look at how to build our own pallet within this framework.
+We will now take a look at how to build our pallet within this framework.
 
 [More details about FRAME](​​https://substrate.dev/docs/en/knowledgebase/runtime/frame)
 
 # Using the Template Pallet
-We can start off using the Substrate pallet template, which provides provides the starter code using Frame v1
+We can start off using the Substrate pallet template, which provides the starter code using Frame v1
 
 Check out the [Substrate Pallet Template](https://github.com/substrate-developer-hub/substrate-pallet-template)
 
