@@ -1055,7 +1055,7 @@ export default CreateAuction;
 
 Now go to the project root directory, i.e. `avalanche-voting`, and run the command `npm start`. The React development server will start automatically. Visit http://localhost:3000 in a web browser to interact with the dApp frontend.
 
-Don't forget to set up Metamask with the Fuji testnet and also fund the account with Fuji C-Chain test tokens to be able to vote. In the Metamask extension, add a custom RPC endpoint by clicking the network dropdown in the centre of the extension. Fill in the details as shown in the image below.
+Don't forget to set up Metamask with the Fuji testnet and also fund the account with Fuji C-Chain test tokens to be able to vote. In the Metamask extension, add a custom RPC endpoint by clicking the network dropdown in the centre of the extension. Fill in the details as shown in the table below.
 
 | Info               | Value          |
 | :----------------- | :------------- |
