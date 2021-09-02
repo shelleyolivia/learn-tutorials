@@ -1,10 +1,10 @@
 The following software is required to set up and complete the **NEAR** Pathway
 
-* [Node.js v14 or higher installed](https://nodejs.org/)
-* [`yarn` installed](https://yarnpkg.com/getting-started/install)
-* [`git` installed](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed
+* [Node.js](https://nodejs.org/) v14.17.0 or higher installed
+* [yarn](https://yarnpkg.com/getting-started/install) installed
 
-Start by [cloning](https://git-scm.com/docs/git-clone) the repository and installing the [dependencies](https://classic.yarnpkg.com/en/docs/managing-dependencies/) with `yarn` :
+Start by cloning the repository and installing the dependencies with yarn :
 
 ```text
 git clone https://github.com/figment-networks/learn-web3-dapp.git
