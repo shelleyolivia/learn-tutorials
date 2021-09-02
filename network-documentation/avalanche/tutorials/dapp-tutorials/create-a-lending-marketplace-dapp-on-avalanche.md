@@ -1,26 +1,38 @@
-# Ava Lending Marketplace dapp on Avalanche.
+# Create a Lending Marketplace dapp on Avalanche with Truffle Suite.
 
 ## Introduction
 
-Ava Lending Marketplace has been created to provide a secure, flexible, open-source foundation for a decentralized loan marketplace on the A blockchain. We provide the pieces necessary to create a decentralized lending exchange, including the requisite lending assets, clearing, and collateral pool infrastructure, enabling third parties to build applications for lending.
+A Lending Marketplace provides a secure, flexible, open-source foundation for a decentralized loan marketplace on the Avalanche blockchain. It provides the pieces necessary to create a decentralized lending exchange, including the requisite lending assets, clearing, and collateral pool infrastructure, enabling third parties to build applications for lending.
 
 ## Prerequisites
 
-MetaMask is a browser-based blockchain wallet that can be used to store any kind of digital assets and cryptocurrency.
+[MetaMask](https://metamask.io/) is a browser-based blockchain wallet that can be used to store any kind of digital assets and cryptocurrency.
  
-Avalanche is a blockchain that is EVM compatible.
+[Avalanche](https://www.avax.network/) is a blockchain that is EVM compatible.
 
-How to run an avalanche node, truffle with c-chain
+[Create a Local Test Network](https://learn.figment.io/tutorials/create-a-local-test-network), [Using Truffle with the Avalanche C-Chain](https://learn.figment.io/network-documentation/tutorials/using-truffle-with-the-avalanche-c-chain)
 
 ## Requirement
 
-Node.js enables the development of fast web servers in JavaScript by bringing event-driven programming to web servers.
+[Node.js](https://nodejs.org/en/) enables the development of fast web servers in JavaScript by bringing event-driven programming to web servers.
 
-Truffle is a development environment and testing framework for EVM-based blockchains.
+[Truffle Suite](https://www.trufflesuite.com/) is a development environment and testing framework for EVM-based blockchains.
 
-React.js is an open-source JavaScript library that is used to create single-page applications' user interfaces.
+[React.js](https://reactjs.org/) is an open-source JavaScript library that is used to create single-page applications' user interfaces.
 
-Added the smart contract code here a bit:
+## Create a truffle project 
+
+Install Truffle:
+```
+npm i -g truffle
+```
+
+Create a sample boilerplate:
+```
+truffle init
+```
+
+Add the smart contract code below:
 
 LoanContract.sol
 
@@ -452,47 +464,13 @@ contract LoanCreator is Ownable, Pausable {
 }
 ```
 
-## Smart contract interaction
-Loan request
-```
-const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
-LoanBook.createNewLoanRequest(params);
-```
-
-Loan Offer
-```
-const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
-LoanBook.createNewLoanOffer(params);
-```
-
-Get All loan data
-```
-const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
-LoanBook.getAllLoans(params);
-})
-``` 
-
-Get collateral price
-```
-const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
-LoanBook.getCollateralPrice(params.collateralAddress);
-```
-
-Standard Token
-```
-const ERC20 = web3.eth.contract(StandardTokenABI).at(params.ERC20Token);
-ERC20.approve(params.loanContractAddress, web3.toWei(params.tokenAmount));
-```
-
 ## Compile Contracts with Truffle
 
 ```
-truffle(develop)> truffle(develop)> compile
+truffle(develop)> compile
 
 Compiling your contracts...
 ===========================
-> Compiling .\contracts\Finocial.sol
-> Compiling .\contracts\FinocialLoan.sol
 > Compiling .\contracts\LoanContract.sol
 > Compiling .\contracts\LoanCreator.sol
 > Compiling .\contracts\LoanProduct.sol
@@ -512,62 +490,15 @@ Compiling your contracts...
 > Compiling openzeppelin-solidity\contracts\token\ERC20\IERC20.sol
 > Compilation warnings encountered:
 
-    project:/contracts/LoanContract.sol:306:31: Warning: Unused local variable.
-        (uint256 _repayAmount,uint256 interest,uint256 fees) = getRepaymentAmount(repaymentNumber);
-                              ^--------------^
-,project:/contracts/LoanContract.sol:171:5: Warning: Function state mutability can be restricted to pure
-    function toString(address x) public returns (string memory) {
-    ^ (Relevant source part starts here and spans across multiple lines).
-
 > Artifacts written to C:\Users\hp\cryptolend\build\contracts
 > Compiled successfully using:
    - solc: 0.5.0+commit.1d4f565a.Emscripten.clang
-
-(node:6544) V8: C:\Users\hp\.config\truffle\compilers\node_modules\soljson-v0.5.0+commit.1d4f565a.js:3 Invalid asm.js: Invalid member of stdlib
-(Use `node --trace-warnings ...` to show where the warning was created)
-
-> Duplicate contract names found for LoanContract.
-> This can cause errors and unknown behavior. Please rename one of your contracts.
 ```
 
 ## Run Migrations
 
 ```
-truffle(develop)> truffle(develop)> migrate
-
-Compiling your contracts...
-===========================
-> Compiling .\contracts\LoanContract.sol
-> Compiling .\contracts\LoanCreator.sol
-> Compiling .\contracts\LoanProduct.sol
-> Compiling .\contracts\Migrations.sol
-> Compiling .\contracts\StandardToken.sol
-> Compiling .\contracts\libs\DateTime\DateTime.sol
-> Compiling .\contracts\libs\DateTime\api.sol
-> Compiling .\contracts\libs\LoanMath.sol
-> Compiling .\contracts\libs\LoanMethods.sol
-> Compiling .\contracts\libs\String.sol
-> Compiling openzeppelin-solidity\contracts\GSN\Context.sol
-> Compiling openzeppelin-solidity\contracts\access\Roles.sol
-> Compiling openzeppelin-solidity\contracts\access\roles\PauserRole.sol
-> Compiling openzeppelin-solidity\contracts\lifecycle\Pausable.sol
-> Compiling openzeppelin-solidity\contracts\math\SafeMath.sol
-> Compiling openzeppelin-solidity\contracts\ownership\Ownable.sol
-> Compiling openzeppelin-solidity\contracts\token\ERC20\IERC20.sol
-> Compilation warnings encountered:
-
-    project:/contracts/LoanContract.sol:306:31: Warning: Unused local variable.
-        (uint256 _repayAmount,uint256 interest,uint256 fees) = getRepaymentAmount(repaymentNumber);
-                              ^--------------^
-,project:/contracts/LoanContract.sol:171:5: Warning: Function state mutability can be restricted to pure
-    function toString(address x) public returns (string memory) {
-    ^ (Relevant source part starts here and spans across multiple lines).
-
-> Artifacts written to C:\Users\hp\cryptolend\build\contracts
-> Compiled successfully using:
-   - solc: 0.5.0+commit.1d4f565a.Emscripten.clang
-
-
+truffle(develop)> migrate
 
 Starting migrations...
 ======================
@@ -622,7 +553,50 @@ Summary
 - Saving migration to chain.
 ```
 
-## Summary
+## Smart contract interaction
 
-## References
+Loan request
+```
+const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
+LoanBook.createNewLoanRequest(params);
+```
 
+Loan Offer
+```
+const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
+LoanBook.createNewLoanOffer(params);
+```
+
+Get All loan data
+```
+const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
+LoanBook.getAllLoans(params);
+})
+``` 
+
+Get collateral price
+```
+const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
+LoanBook.getCollateralPrice(params.collateralAddress);
+```
+
+Standard Token
+```
+const ERC20 = web3.eth.contract(StandardTokenABI).at(params.ERC20Token);
+ERC20.approve(params.loanContractAddress, web3.toWei(params.tokenAmount));
+```
+
+# Conclusion
+
+Now you know about creating a Lending Marketplace with Trufflesuite and ReactJS on the Avalanche network.
+
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
+
+# About the author
+
+[Devendra Yadav](https://community.figment.io/u/dev.koold)
+
+# References
+- https://learn.figment.io/tutorials/create-a-local-test-network
+- https://learn.figment.io/tutorials/using-truffle-with-the-avalanche-c-chain
+- https://github.com/crypto-lend
