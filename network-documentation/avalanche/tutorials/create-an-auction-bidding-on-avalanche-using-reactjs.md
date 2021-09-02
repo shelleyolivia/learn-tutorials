@@ -111,14 +111,13 @@ Replace the existing contents of `truffle-config.js` with the following:
 require("dotenv").config();
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
-//Account credentials from which our contract will be deployed
+// Account credentials from which our contract will be deployed
 const mnemonic = process.env.MNEMONIC;
 
-//API key of your Datahub account for Avalanche Fuji test network
+// API key of your Datahub account for Avalanche Fuji test network
 const APIKEY = process.env.APIKEY;
 
-const RPCURL = `https://api.avax-test.network/ext/bc/C/rpc`;
-const DATAHUB_RPC_URL = `https://avalanche--fuji--rpc.datahub.figment.io/apikey/${APIKEY}/ext/bc/C/rpc/`;
+const DATAHUB_RPC_URL = `https://api.avax-test.network/ext/bc/C/rpc`;
 
 module.exports = {
   contracts_build_directory: "./client/src/build/contracts/",
@@ -127,7 +126,7 @@ module.exports = {
       provider: function () {
         return new HDWalletProvider({
           mnemonic,
-          providerOrUrl: RPCURL,
+          providerOrUrl: DATAHUB_RPC_URL,
           chainId: "0xa869",
         });
       },
@@ -149,7 +148,7 @@ Here we are setting the `gas` and `gasprice` to appropriate values for the Avala
 
 ## Receive Avalanche Credentials
 
-For the deployment of smart contract we need to takecare of two thing:
+For the deployment of the smart contracts we need to take care of two things:
 
 1. A node connected to the Avalanche network and an account with some AVAX.
 2. An Avalanche API key is required to access the DataHub Avalanche node through RPC (Remote Procedure Call). Visit the [Avalanche Services Dashboard](https://datahub.figment.io/services/avalanche) on DataHub to get an Avalanche specific API key.
@@ -162,7 +161,7 @@ Next, we need to create a new Avalanche wallet to make transactions on the netwo
 
 Create a new file named `.env` in the project root folder. Copy your Avalanche API key from DataHub and the Avalanche wallet's mnemonic into the `.env` file as shown below. If you have any difficulty in setting up the `.env` file then please refer to the Figment Learn guide on [dotenv and .env](https://docs.figment.io/network-documentation/extra-guides/dotenv-and-.env).
 
-```bash
+```text
 DATAHUB_API_KEY=<your-api-key>
 MNEMONIC="<avalanche-wallet-mnemonic>"
 ```
@@ -683,7 +682,7 @@ function Auction() {
   const [auctionAnalyticsCacheKey, setAuctionAnalyticsCacheKey] =
     useState(null);
 
-  // Setting up cache calls for requried functions
+  // Setting up cache calls for required functions
   const cacheCalls = {
     isRegistered: subscriber?.isRegistered[cacheKeys?.isRegistered]?.value,
     user: subscriber?.users[cacheKeys?.uId]?.value,
@@ -1057,8 +1056,6 @@ export default CreateAuction;
 Now go to the project root directory, i.e. `avalanche-voting`, and run the command `npm start`. The React development server will start automatically. Visit http://localhost:3000 in a web browser to interact with the dApp frontend.
 
 Don't forget to set up Metamask with the Fuji testnet and also fund the account with Fuji C-Chain test tokens to be able to vote. In the Metamask extension, add a custom RPC endpoint by clicking the network dropdown in the centre of the extension. Fill in the details as shown in the image below.
-
-![](https://imgur.com/NuhjUvF.png)
 
 | Info               | Value          |
 | :----------------- | :------------- |
