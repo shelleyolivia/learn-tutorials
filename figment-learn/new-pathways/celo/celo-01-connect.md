@@ -66,6 +66,6 @@ Congratulations, you have successfully made a function that can connect to the C
 
 -----------------------------
 
-# Next
+# Conclusion
 
 In this tutorial you’ve learned how to use the ContractKit package and DataHub to connect to the Celo node. You also had a chance to run one simple query to test that connection.

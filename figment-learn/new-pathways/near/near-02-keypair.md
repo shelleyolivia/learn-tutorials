@@ -55,6 +55,6 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 -----------------------------
 
-# Next
+# Conclusion
 
 Now that we have a keypair, we're going to associate it to an account name. Unlike other blockchains, support for human-readable addresses "out of the box" is possible with NEAR. Before we register an account name however, we need to find out if the name we want is available. Let's go!

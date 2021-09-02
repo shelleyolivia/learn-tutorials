@@ -9,7 +9,7 @@ If you want to learn more about Tezos smart contracts, follow [**The Taco Shop S
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/tezos/setter.ts`, complete the code of the function and try to increment the value stored in the smart contract by one. 
+In `pages/api/tezos/setter.ts`, implement the function and try to increment the value stored in the smart contract by one. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**

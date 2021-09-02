@@ -9,7 +9,7 @@ The native token on the **Tezos Blockchain** is **tez** indicated by the **ꜩ**
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/tezos/balance.ts`, complete the code of the function and try to return the current balance of the account.
+In `pages/api/tezos/balance.ts`, implement the function and try to return the current balance of the account. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**

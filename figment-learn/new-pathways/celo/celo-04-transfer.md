@@ -87,7 +87,6 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 ----------------------------------
 
-# Next
-
+# Conclusion
 Now that we have funded our account and made a transfer, let's move on to perform a more advanced kind of transfer: a **Swap**. 
 With ContractKit, you can always exchange your **cUSD** to **CELO** and the other way around. Let’s learn how we can do that in the next tutorial!

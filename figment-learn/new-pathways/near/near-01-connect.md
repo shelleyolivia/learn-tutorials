@@ -71,6 +71,6 @@ Once the code is complete and the file has been saved, refresh the page to see i
 
 -----------------------------
 
-# Next
+# Conclusion
 
 Well done! Your fluency in the NEAR dialect of Web 3 is growing. As a newcomer, building an identity is important so you can distinguish yourself from other users on the NEAR network. Ready to take the next step forward?

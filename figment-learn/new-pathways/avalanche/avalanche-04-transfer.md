@@ -126,6 +126,6 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 -----------------------------
 
-# Next
+# Conclusion
 
 We've learned how to prepare, sign and broadcast a simple transaction on Avalanche. With only a few lines of code, you can transfer funds on the network. AvalancheJS provides a range of examples on how to construct a transaction with more complex properties, for different use cases. In the next tutorial, we will examine the topic of cross-chain transfers.

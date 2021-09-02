@@ -82,6 +82,5 @@ Once you have the code above saved, click on **Deploy Contract**
 
 ----------------------------------
 
-# Next
-
+# Conclusion
 Now that we have deployed a smart contract, let's interact with it. In the following tutorials, we will look at how to use both view and change functions.

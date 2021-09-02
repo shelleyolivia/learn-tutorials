@@ -76,6 +76,5 @@ Once you have the code above saved, click the button and watch the magic happen:
 
 ----------------------------------
 
-# Next
-
+# Conclusion
 Now, time for the last challenge! Time to modify the state of the contract and thus the state of the blockchain. Let's go!

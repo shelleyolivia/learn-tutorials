@@ -19,7 +19,7 @@ If you want to learn more about Tezos smart contracts, follow [**The Taco Shop S
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/tezos/deploy.ts`, complete the code of the function and try to deploy the compiled smart contract. 
+In `pages/api/tezos/deploy.ts`, implement the function and try to deploy the compiled smart contract. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**
@@ -98,8 +98,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 **What happened in the code above?**
 
 * First, we create a new `TezosToolkit` instance.
-* `importKey()` has the side effect of setting the TezosToolkit instance to use the `InMemorySigner` provider.
-* Next, we execute the `Tezos.contract.originate()` function. This deploys the Michelson contract code to the Tezos blockchain, from the `CONTRACT_JSON` in `counter.js`. The storage property is also set to `0`.
+* `importKey` has the side effect of setting the TezosToolkit instance to use the `InMemorySigner` provider.
+* Next, we execute the `Tezos.contract.originate` function. This deploys the Michelson contract code to the Tezos blockchain, from the `CONTRACT_JSON` in `counter.js`. The storage property is also set to `0`.
 * Next, the resulting operation ([`op`](https://opentezos.com/tezos-basics/operations/)) object is used to provide the contract address of the newly originated contract.
 
 ------------------------

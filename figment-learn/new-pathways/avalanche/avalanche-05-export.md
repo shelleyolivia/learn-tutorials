@@ -122,6 +122,6 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 -----------------------------
 
-# Next
+# Conclusion
 
 Our next topic is to process the import of the cross-chain transfer. Time to import the AVAX we just sent to C-Chain. Let's go!

@@ -62,7 +62,7 @@ Now click on **Create Account** and you should see:
 
 -----------------------------
 
-# Next
+# Conclusion
 
 Every new account created on the testnet is given a free **airdrop** of 200 NEAR tokens. So cool! 
 Ready to move on? Let's check the account balance in the next step.

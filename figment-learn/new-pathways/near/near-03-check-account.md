@@ -77,6 +77,6 @@ You should see:
 
 -----------------------------
 
-# Next
+# Conclusion
 
 Great, now that you know how to test the availability of a chosen account name, it's time to create it. Let's do this in the next step!
