@@ -6,7 +6,7 @@ The following software is required to set up and complete the **Tezos** Pathway
 
 Start by cloning the repository and installing the dependencies with yarn :
 
-```bash
+```text
 git clone https://github.com/figment-networks/learn-web3-dapp.git
 cd learn-web3-dapp
 yarn

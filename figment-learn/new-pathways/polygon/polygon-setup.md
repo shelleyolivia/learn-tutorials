@@ -1,9 +1,9 @@
-# Requirements
+The following software is required to set up and complete the **Polygon** Pathway
 
 * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed
 * [Node.js](https://nodejs.org/) v14.17.0 or higher installed
 * [yarn](https://yarnpkg.com/getting-started/install) installed
-* [Metamask](https://metamask.io/) browser extension installed. 
+* [Metamask](https://metamask.io/) browser extension installed 
 
 Start by cloning the repository and installing the dependencies with yarn :
 

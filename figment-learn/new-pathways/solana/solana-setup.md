@@ -1,4 +1,4 @@
-The following software is required to set up and complete the Solana Pathway
+The following software is required to set up and complete the **Solana** Pathway
 
 * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed
 * [Node.js](https://nodejs.org/) v14.17.0 or higher installed
@@ -6,7 +6,7 @@ The following software is required to set up and complete the Solana Pathway
 
 Start by cloning the repository and installing the dependencies with yarn :
 
-```bash
+```text
 git clone https://github.com/figment-networks/learn-web3-dapp.git
 cd learn-web3-dapp
 yarn
