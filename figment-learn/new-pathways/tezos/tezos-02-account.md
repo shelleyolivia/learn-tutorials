@@ -11,7 +11,7 @@ Visit the [faucet](https://faucet.tzalpha.net/) to generate a mnemonic and get s
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/tezos/account.ts`, complete the code of the function and try to activate your first account on the Tezos network. 
+In `pages/api/tezos/account.ts`, implement the function and try to activate your first account on the Tezos network. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**

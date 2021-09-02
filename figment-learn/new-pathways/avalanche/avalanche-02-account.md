@@ -93,7 +93,7 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 -------------------------
 
-# Next
+# Conclusion
 
 Nice! Now that you have an identity, it's time to interact with the blockchain. 
 You want to know the amount of tokens your account holds? Good, this is exactly what the next challenge is - querying Avalanche for an account balance. 

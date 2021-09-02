@@ -102,6 +102,6 @@ Once you have the code above saved:
 
 ----------------------------------
 
-# Next
+# Conclusion
 
 Now that we have funded our account and made a transfer, let's move on to deploying some code (known as a "smart contract") to the NEAR blockchain! Ready to take the plunge? Let's go... 

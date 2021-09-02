@@ -5,7 +5,7 @@ In this tutorial we will learn how to connect to a Tezos node via DataHub, using
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/tezos/connect.ts`, complete the code of the function and try to establish your first connection to the Tezos network. To verify that the connection has been made, try to return the chainId.
+In `pages/api/tezos/connect.ts`, implement the function and try to establish your first connection to the Tezos network. To verify that the connection has been made, try to return the chainId. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 ```typescript

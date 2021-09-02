@@ -9,7 +9,7 @@ If you want to learn more about Tezos smart contracts, follow [**The Taco Shop S
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/tezos/getter.ts`, complete the code of the function and try to read the value of the counter stored in the smart contract. 
+In `pages/api/tezos/getter.ts`, implement the function and try to read the value of the counter stored in the smart contract. You must replace the instances of `undefined` with working code to accomplish this. 
 {% endhint %}
 
 **Take a few minutes to figure this out**

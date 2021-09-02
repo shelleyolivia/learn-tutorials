@@ -11,7 +11,7 @@ Solana programs are stateless. To store values we must use a separate account.
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/solana/greeter.ts`, implement `greeter`. First, derive the **greeter** address from some values. Then create a transaction which instructs the blockchain to create the **greeter** account. 
+In `pages/api/solana/greeter.ts`, implement `greeter`. First, derive the **greeter** address from some values. Then create a transaction which instructs the blockchain to create the **greeter** account. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**

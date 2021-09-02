@@ -82,6 +82,6 @@ Fun fact, if you take the inverse of the returned value you'll find the quotatio
 
 ----------------------------------
 
-# Next
+# Conclusion
 
 We now know how to query the Celo network and how to submit transactions. So far, we've only used core Celo smart contracts. Now it’s time to learn how to deploy our own smart contract and interact with it!

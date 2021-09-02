@@ -7,7 +7,7 @@ The role of TezosToolkit here is to provide a simplified way of dealing with the
 # Challenge
 
 {% hint style="tip" %}
-In `pages/api/tezos/transfer.ts`, complete the code of the function and try to make your first transfer on the tezos network. 
+In `pages/api/tezos/transfer.ts`, implement the function and try to make your first transfer on the Tezos network. You must replace the instances of `undefined` with working code to accomplish this.
 {% endhint %}
 
 **Take a few minutes to figure this out**

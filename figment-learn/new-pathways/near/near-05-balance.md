@@ -68,6 +68,6 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 -----------------------------
 
-# Next
+# Conclusion
 
 200 **NEAR** available, hmmm ... More than enough to do our first transfer. In the next tutorial, we're going to buy an imaginary pizza with our testnet NEAR! Transferring tokens is generally done as an exchange for goods or services.
