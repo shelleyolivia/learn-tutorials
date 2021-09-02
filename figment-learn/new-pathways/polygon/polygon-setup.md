@@ -1,11 +1,11 @@
 # Requirements
 
-* [Node.js](https://nodejs.org) v14+ installed (we recommend using [nvm](https://github.com/nvm-sh/nvm))
-* [yarn](https://yarnpkg.com/) 
 * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed
+* [Node.js](https://nodejs.org/) v14.17.0 or higher installed
+* [yarn](https://yarnpkg.com/getting-started/install) installed
 * [Metamask](https://metamask.io/) browser extension installed. 
 
-Start by [cloning](https://git-scm.com/docs/git-clone) the repository and installing the [dependencies](https://classic.yarnpkg.com/en/docs/managing-dependencies/) with `yarn` :
+Start by cloning the repository and installing the dependencies with yarn :
 
 ```text
 git clone https://github.com/figment-networks/learn-web3-dapp.git
