@@ -1056,7 +1056,7 @@ Don't forget to set up Metamask with the Fuji testnet and also fund the account 
 | Info               | Value          |
 | :----------------- | :------------- |
 | Network Name       | Avalanche Fuji |
-| New RPC URL        |                |
+| New RPC URL        | https://avalanche--fuji--rpc.datahub.figment.io/apikey/<YOUR_DATAHUB_API_KEY>/ext/bc/C/rpc               |
 | Chain ID           | 43113          |
 | Currency Symbol    | AVAX-C         |
 | Block Explorer URL |                |
