@@ -10,47 +10,59 @@ Pallets are domain-specific runtime modules, which allow us to have a modular de
 For reference, some of the most popular prebuilt pallets can be found [on the Substrate developer site](https://substrate.dev/docs/en/knowledgebase/runtime/frame#prebuilt-pallets).
 
 ## FRAME v1
-FRAME is the framework to develop pallets, it comes with set of libraries and modules to get started. Following is the skeleton of a FRAME based pallet:
+FRAME is the framework used to develop pallets, it comes with set of libraries and modules to get us started. Following is the skeleton of a FRAME based pallet:
 1. Imports and Dependencies
 
 The pallet supports the use of any Rust library which compiles with the `no_std` flag.
+
 ``` rust
 use support::{decl_module, decl_event, decl_storage, ...}
 ```
+
 2. Runtime Config Trait
 
 All of the runtime types and consts will go in here. If the pallet is dependent on other pallets, then their configuration traits should be added to the inherited traits list.
+
 ```rust
 pub trait Config: frame_system::Config { ... }
 ```
+
 3. Runtime Events
 
 Events are a simple means of reporting specific events that have happened which users, dApps and/or block explorers would find interesting and otherwise would be difficult to detect.
 
 Read more about [Runtime Events](https://substrate.dev/docs/en/knowledgebase/runtime/events)
+
 ```rust
 decl_event! { ... }
 ```
+
 4. Runtime Storage 
 
 This allows for type-safe usage of the Substrate storage database, so you can keep things around between blocks.
 
 Read more about [Runtime Storage](https://substrate.dev/docs/en/knowledgebase/runtime/storage)
+
 ```rust
 decl_storage! { ... }
 ```
+
 5. Runtime Errors
 
 This is an enum that allows us to define custom error types which could be called from the runtime module.
+
 ```rust
 decl_error! { ... }
 ```
+
 6. Runtime Module 
 
 This defines the `Module` struct that is ultimately exported from this pallet. It defines the callable functions that this pallet exposes and orchestrates actions this pallet takes throughout block execution.
+
 ```rust
 decl_module! { ... }
 ```
+
 We will now take a look at how to build our pallet within this framework.
 
 [More details about FRAME](​​https://substrate.dev/docs/en/knowledgebase/runtime/frame)
@@ -72,9 +84,11 @@ git clone https://github.com/<YOUR_GITHUB_USERNAME>/pallet-identity.git
 ![](https://raw.githubusercontent.com/prasad-kumkar/pallet-identity/master/resources/3.png)
 
 ## Understanding the template code
-First we are importing the rust macros from frame_support library, which are required to build our runtime module `decl_module`, storage `decl_storage`, events `decl_event`, errors `decl_error`, `dispatch` for DispatchResult and `Get` trait is used by storage to convert types.
+
+First we are importing the rust macros from the frame_support library, which are required to build our runtime module: `decl_module`, storage: `decl_storage`, events: `decl_event`, errors: `decl_error`, `dispatch` for DispatchResult and the `Get` trait that is used by storage to convert types. We must also import ensure_signed from frame_system to check if transactions are signed.
 
 We have also been importing `ensure_signed` from `frame_system` to check if transactions are signed.
+
 ```rust
 #![cfg_attr(not(feature = "std"), no_std)]
 
@@ -87,7 +101,9 @@ mod mock;
 #[cfg(test)]
 mod tests;
 ```
+
 ## Configuration
+
 ```rust
 pub trait Config: frame_system::Config {
 	/// Because this pallet emits events, it depends on the runtime's definition of an event.
@@ -95,13 +111,14 @@ pub trait Config: frame_system::Config {
 }
 
 ```
+
 ## Declaring Storage
 
 Here the pallet's storage name `TemplateModule` should be different from other pallets' storage name. 
 
-`Something` is a storage item, which can store an optional unsigned 32bit integer. This storage item can be accessed from the runtime module using the `something()` function. We can define more storage items if we want.
+`Something` is a storage item, which can store an optional unsigned 32-bit integer. This storage item can be accessed from the runtime module using the `something()` function. We can define more storage items if we want.
 
-[Heres more about Storage Items](https://substrate.dev/docs/en/knowledgebase/runtime/storage#declaring-storage-items)
+Read more about declaring [Storage Items](https://substrate.dev/docs/en/knowledgebase/runtime/storage#declaring-storage-items)
 
 ```rust
 decl_storage! {
@@ -110,9 +127,11 @@ decl_storage! {
 	}
 }
 ```
-Runtime supports emitting specified events on method calls. We can pass in arguments with each event, here `SomethingStored` emit a unsigned 32bit integer and an AccountId
+
+Runtime supports emitting specified events on method calls. We can pass in arguments with each event, here `SomethingStored` emits an unsigned 32-bit integer and an AccountId
 
 Declaration of the events would be done here:
+
 ```rust
 decl_event!(
 	pub enum Event<T> where AccountId = <T as frame_system::Config>::AccountId {
@@ -121,7 +140,8 @@ decl_event!(
 );
 ```
 
-We can declare events here with this enum, which can be called from the module calls. This informs the user that something went wrong
+We can declare events with the Error enum, which can be called from the module calls. This informs the user that something went wrong.
+
 ```rust
 decl_error! {
 	pub enum Error for Module<T: Config> {
@@ -130,9 +150,9 @@ decl_error! {
 	}
 }
 ```
+
 ## Runtime Module
 This is where we declare method calls (transactions) which could be used to modify/query chain state, they could also emit events and errors. For each dispatchable function, Weight must be mentioned and it must return a `DispatchResult`
-
 
 ```rust
 decl_module! {
@@ -182,37 +202,43 @@ decl_module! {
 	}
 }
 ```
+
 # Designing a Custom Pallet
 In our example we are designing an identity pallet, where:
 - Users could generate a new identity
 - Add/remove attributes to that identity
 - Delete the identity
 
-## Storage Items
-Identity map: Identity => AccountId <br>
-Attribute map: (Identity, Attribute_Key) => Attribute_Value
+**Storage Items**
 
-## Events
-IdentityCreated(Identity, AccountId)<br>
-AttributeAdded(Identity, Attribute_Key, Attribute_Value)<br>
-AttributeRemoved(Identity, Attribute_Key),
+- Identity map: Identity => AccountId 
+- Attribute map: (Identity, Attribute_Key) => Attribute_Value
 
-## Error
-IdentityAlreadyClaimed<br>
-IdentityNotFound<br>
-NotAuthorized<br>
-AttributeNotFound
+**Events**
 
-## Function Calls
-create_identity( Identity ) <br>
-add_attribute( Identity, Attribute_Key, Attribute_Value ) <br>
-remove_attribute( Identity, Attribute_Key )
+- IdentityCreated(Identity, AccountId)
+- AttributeAdded(Identity, Attribute_Key, Attribute_Value)
+- AttributeRemoved(Identity, Attribute_Key),
 
-# Implementing Pallet
-[Link to code](https://github.com/prasad-kumkar/pallet-identity/blob/master/src/lib.rs)
+**Errors**
+
+- IdentityAlreadyClaimed
+- IdentityNotFound
+- NotAuthorized
+- AttributeNotFound
+
+**Function Calls**
+
+- create_identity( Identity ) 
+- add_attribute( Identity, Attribute_Key, Attribute_Value ) 
+- remove_attribute( Identity, Attribute_Key )
+
+
+# Implementing the pallet
+Have a look at this [example code](https://github.com/prasad-kumkar/pallet-identity/blob/master/src/lib.rs)
 
 ## Storage
-For this we have create `Identity` mapping from Identity to AccountId. `Identity` here would be a string transformed into a vector of size u8.
+For storage, we have created an `Identity` mapping from Identity to AccountId. `Identity` here would be a string transformed into a vector of size u8.
 
 Another storage item would be `Attribute` which is a mapping from a tuple of `identity vector` and `attribute key vector` to `attribute value vector`.
 
@@ -226,7 +252,9 @@ decl_storage! {
 	}
 }
 ```
+
 ## Events
+
 ```rust
 decl_event!(
 	pub enum Event<T> where AccountId = <T as frame_system::Config>::AccountId {
@@ -241,7 +269,9 @@ decl_event!(
 	}
 );
 ```
+
 ## Errors
+
 ```rust
 // Errors inform users that something went wrong.
 decl_error! {
@@ -259,6 +289,7 @@ decl_error! {
 1. Create Identity
 
 Allows user to choose a unique identity. Should throw error when Identity is alreaedy claimed.
+
 ```rust
 #[weight = 10_000 + T::DbWeight::get().reads_writes(1, 1)]
 pub fn create_identity(
@@ -283,9 +314,11 @@ pub fn create_identity(
 	
 }
 ```
+
 2. Add attribute
 
-Allows identity owner to add attribute key-value to their own identity. Should throw error when trying to add attribute to someone else's identity or if identity is not found
+Allows the identity owner to add attribute key-values to their own identity. This should throw an error when trying to add attributes to someone else's identity or if identity is not found.
+
 ```rust
 // Allows identity owners to add attribute to their identity (key, value)
 #[weight = 10_000 + T::DbWeight::get().reads_writes(1,1)]
@@ -313,7 +346,9 @@ pub fn add_attribute(
 	}
 }
 ```
+
 3. Remove Attribute
+
 ```rust
 // Allows identity owners to remove identity
 #[weight = 10_000 + T::DbWeight::get().reads_writes(1,1)]
@@ -342,13 +377,15 @@ pub fn remove_attribute(
 ```
 
 # Writing Test Cases
-[Link to code](https://github.com/prasad-kumkar/pallet-identity/blob/master/src/tests.rs)
-We have implemented two test case 
+Check out the [example tests](https://github.com/prasad-kumkar/pallet-identity/blob/master/src/tests.rs).
 
-1.
+We have implemented two test cases:
+
+
 - Create Identity, 
 - Add attributes and 
 - Remove attribute
+
 ```rust
 #[test]
 fn should_not_throw_errors() {
@@ -377,10 +414,10 @@ fn should_not_throw_errors() {
 }
 ```
 
-2. 
-- Create identity 'prasad' by account 1, 
-- Throw `IdentityAlreadyClaimed` error while creating the same identity 'prasad' by account 2
-- Throw `Not Authorized Error` error while 
+
+- `Account 1` creates identity 'prasad',
+- Throw `IdentityAlreadyClaimed` when `Account 2` creates the same identity
+- Throw `Not Authorized Error` error while adding attributes to `Account 1`'s identity from `Account 2`
 
 ```rust
 #[test]
@@ -403,7 +440,7 @@ fn check_for_errors() {
 		);
 
 		// add_attribute signed by different identity (2)
-		// should throw NotAuthrized error
+		// should throw NotAuthorized error
 		assert_noop!(
 			IdentityModule::add_attribute(
 				Origin::signed(2), 
@@ -420,20 +457,18 @@ fn check_for_errors() {
 }
 ```
 
-## Building and Testing
-### Build
-```text
-cargo build --release
-```
-### Test
-```text
-cargo test
-```
+# Building and Testing
+
+To build the completed pallet with cargo, run `cargo build --release`.
+
+To run the tests against the compiled code, run `cargo test`.
 
 ![](https://raw.githubusercontent.com/prasad-kumkar/pallet-identity/master/resources/4.png)
 
-## Releasing the pallet
-Before we release, we need to update the pallet details. Here you would need to update the pallet name to `pallet-identity` and repository
+# Releasing the pallet
+
+Before releasing our pallet, we need to update the pallet details. Here you would need to update the pallet name to `pallet-identity` and change the repository link.
+
 ```toml
 [package]
 authors = ['Prasad-Kumkar <https://github.com/prasad-kumkar>']
@@ -445,15 +480,18 @@ name = 'pallet-identity'
 repository = 'https://github.com/prasad-kumkar/pallet-identity'
 version = '3.0.0'
 ```
-After that, you can publish the code using git
-```bash
+
+After that, you can publish the code using git:
+
+```text
 git add .
 git commit -am "commit message"
 git push origin master
 ```
 
 ## Adding to Runtime
-To add this pallet to your runtime, simply include the following to your runtime's `Cargo.toml` file:
+
+To add this pallet to your runtime, simply include the following section in your runtime's `Cargo.toml` file (remember to update the git link):
 
 ```toml
 [dependencies.pallet-identity]
@@ -463,7 +501,7 @@ git = 'https://github.com/prasad-kumkar/pallet-identity.git'
 
 Also update your runtime's std feature to include this pallet:
 
-```TOML
+```toml
 std = [
     # --snip--
     'pallet-identity/std',
@@ -489,12 +527,12 @@ IdentityPallet: pallet_identity::{Module, Call, Storage, Event<T>},
 ```
 
 # Conclusion
-To sum up our learning, we have understood FRAME by reviewing the substrate pallet template. Then we went ahead to build our custom pallet (identity pallet) and we saw how to design, implement, test the pallet. We then looked at publishing the pallet and implementing that in our substrate runtime. I hope this would be helpful towards building any custom pallet.
+to recap the knowledge gained during the tutorial, we have understood FRAME by reviewing the substrate pallet template. Then we went ahead to build our custom pallet (identity pallet) and we saw how to design, implement, test the pallet. We then looked at publishing the pallet and implementing that in our substrate runtime. I hope this would be helpful towards building any custom pallet.
 
-# About the Author
-[Prasad Kumkar](https://github.com/prasad-kumkar) is a blockchain engineer with over 2 years of experience, co-founder of [chainvote.co](https://chainvote.co) (a decentralized corporate governance protocol) 
+# Author
+[Prasad Kumkar](https://github.com/prasad-kumkar) is a blockchain engineer with over 2 years of experience, co-founder of [Chainvote](https://chainvote.co), a blockchain based corporate governance solution. His work has been across various blockchain architectures such as Substrate, Hyperledger Fabric, EVM-based chains, Solana and Near Protocol. His team was the winner at WyoHackathon 2020 and ETH Denver.
 
-Email - prasad@chainvote.co
+Contact - prasad@chainvote.co
 
 # References
 [Substrate KnowledgeBase](https://substrate.dev/docs/en/knowledgebase)
