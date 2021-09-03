@@ -1,7 +1,3 @@
-# Create an Auction Bidding on Avalanche using ReactJS
-
-Learn how to create an Avalanche based auction bidding with a ReactJS frontend.
-
 # Introduction
 
 We will learn how to build smart contracts by making an auction on which users can place bids, and deploy the smart contracts on Avalanche. We will then be able to interact with them using ReactJS and Drizzle.
