@@ -55,7 +55,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```typescript
 //...
   try {
-    const { secret, amount, recipeint, address } = req.body;
+    const { secret, amount, recipient, address } = req.body;
     const client = getAvalancheClient();
     const chain = client.XChain(); 
     const keychain = chain.keyChain();
