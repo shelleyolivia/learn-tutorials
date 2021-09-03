@@ -530,7 +530,7 @@ IdentityPallet: pallet_identity::{Module, Call, Storage, Event<T>},
 To recap the knowledge gained during the tutorial, we have understood FRAME by reviewing the substrate pallet template. Then we went ahead to build our custom pallet (identity pallet) and we saw how to design, implement, test the pallet. We then looked at publishing the pallet and implementing that in our substrate runtime. I hope this would be helpful towards building any custom pallet.
 
 # Author
-[Prasad Kumkar](https://github.com/prasad-kumkar) is a blockchain engineer with over 2 years of experience, co-founder of [Chainvote](https://chainvote.co), a blockchain based corporate governance solution. His work has been across various blockchain architectures such as Substrate, Hyperledger Fabric, EVM-based chains, Solana and Near Protocol. His team was the winner at WyoHackathon 2020 and ETH Denver.
+[Prasad Kumkar](https://github.com/prasad-kumkar) is a blockchain engineer with over 2 years of experience, co-founder of [Chainvote](https://chainvote.co), a blockchain based corporate governance solution. His work has been across various blockchain architectures such as Substrate, Hyperledger Fabric, EVM-based chains, Solana and Near Protocol. His team was the winner at WyoHackathon 2020 and ETH Denver 2021.
 
 Contact - prasad@chainvote.co
 
