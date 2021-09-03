@@ -117,7 +117,7 @@ const mnemonic = process.env.MNEMONIC;
 // API key of your Datahub account for Avalanche Fuji test network
 const APIKEY = process.env.APIKEY;
 
-const DATAHUB_RPC_URL = `https://api.avax-test.network/ext/bc/C/rpc`;
+const DATAHUB_RPC_URL = `https://avalanche--fuji--rpc.datahub.figment.io/apikey/${process.env.APIKEY}/ext/bc/C/rpc`;
 
 module.exports = {
   contracts_build_directory: "./client/src/build/contracts/",
