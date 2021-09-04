@@ -1,7 +1,6 @@
 # Part I: Basic set-up
 
-> This tutorial assumes that you have already installed the prerequisites for building with Substrate on your machine.
-> If you haven't already, head over to our [installation guide][installation].
+> This tutorial assumes that you have already installed the prerequisites for building with Substrate on your machine. If you haven't already, head over to our [installation guide][installation].
 
 ## Overview
 
@@ -15,9 +14,9 @@ Before we can start making Kitties, we first need to do a little groundwork. Thi
 
 :arrow_right: Create a storage item to keep track of a single `u64` value.
 
-## Steps
+# Steps
 
-### 1. Set-up your template node
+## Set-up your template node
 
 The [Substrate Node Template][substrate-node-template] provides us with an "out-of-the-box" blockchain node. Our biggest advantage
 in using it are that both networking and consensus layers are already built and all we need to focus on is building out
@@ -27,7 +26,7 @@ We'll use a CLI tool called [kickstart][kickstart-tool] to easily rename our nod
 
 In the root directory of your local workspace, run the following command:
 
-```bash
+```text
 kickstart https://github.com/sacha-l/kickstart-substrate
 ```
 
@@ -80,12 +79,12 @@ Assuming that your node builds successfully, launch it in development mode to ma
 
 You should see blocks being created in your terminal. The `--tmp` and `--dev` flags mean we're running a temporary node in development mode. 
 
-### 2. Write out `pallet_kitties` scaffold
+## Write out `pallet_kitties` scaffold
 
 We'll be spending most of this tutorial in the `pallets` directory of our template node.
 Let's take a glance at the folder structure in our workspace:
 
-```bash
+```text
 kitties-tutorial           <--  The name of our project directory
 |
 +-- node
@@ -107,9 +106,7 @@ kitties-tutorial           <--  The name of our project directory
 +-- Cargo.toml              
 ```
 
-> You can go ahead and remove `mock.rs` and `tests.rs`. **We won't be learning about
-> using these in this tutorial. Have a look at [this how-to guide](https://substrate.dev/substrate-how-to-guides/docs/testing/test-transfer) if
-> you're curious to learn how testing works.**
+> You can go ahead and remove `mock.rs` and `tests.rs`. **We won't be learning about using these in this tutorial.** Have a look at [this how-to guide](https://substrate.dev/substrate-how-to-guides/docs/testing/test-transfer) if you're curious to learn how testing works.
 
 [Pallets][pallets-kb] in Substrate are used to define runtime logic. In our case, we'll be creating a single pallet that manages all of the
 logic of our Substrate Kitties application.
@@ -206,12 +203,8 @@ pub mod pallet {
 }
 ```
 
-<!-- :::tip Your turn!
-Copy over the bare-bones of the Kitties pallet into `mykitties/src/lib.rs`.
+> Your turn! Copy over the bare-bones of the Kitties pallet into `mykitties/src/lib.rs`.
 
-**Hint:** Each part of this tutorial has a file with code containing comments to guide you to complete each part.
-Download the [template code here][template-code] locally and use it to help you progress through each step!
-::: -->
 
 Now try running the following command to rebuild your chain:
 
@@ -223,7 +216,7 @@ Get an error about dependencies? That's normal! Our pallet structure is using FR
 but these aren't part of the node template we used so we must specify them ourselves. In `pallets/mykitties/Cargo.toml`, 
 add the following:
 
-```TOML
+```toml
 [dependencies.sp-core]
 default-features = false
 git = 'https://github.com/paritytech/substrate.git'
@@ -237,8 +230,7 @@ tag = 'monthly-2021-08'
 version = '4.0.0-dev'
 ```
 
-> WARNING  
-> Check that you're using the correct `monthly-*` tag and `version` otherwise you will get a dependency error.
+> WARNING! Check that you're using the correct `monthly-*` tag and `version` otherwise you will get a dependency error.
 Here, we're using the most up-to-date tag as of the writing of this tutorial.
 
 Now run `cargo +nightly build --release` again to make sure it builds without errors.
@@ -247,14 +239,14 @@ Now run `cargo +nightly build --release` again to make sure it builds without er
 
 In the next step we will include the first storage item our Kitty application will require.
 
-### 3. Include a storage item to track all Kitties
+## Include a storage item to track all Kitties
 
 Let's start by adding the most simple logic we can to our runtime: a function which stores a variable in runtime.
 
 To do this we'll use [`StorageValue`][storagevalue-rustdocs] from Substrate's [storage API][storage-api-rustdocs] which is a trait that depends
 on the [storage macro][storage-macro-kb].
 
-All that means for our purposes is that for any storage item we want to declare, we must include the `#[pallet::storage]`  macro beforehand. Learn more about declaring storage items [here](https://substrate.dev/docs/en/knowledgebase/runtime/storage#declaring-storage-items). 
+All that means for our purposes is that for any storage item we want to declare, we must include the `#[pallet::storage]`  macro beforehand. Learn more about declaring storage items [click here](https://substrate.dev/docs/en/knowledgebase/runtime/storage#declaring-storage-items). 
 
 In `mykitties/src/lib.rs`, replace the ACTION line with: 
 
@@ -271,13 +263,12 @@ In `mykitties/src/lib.rs`, replace the ACTION line with:
 This creates a storage item for our pallet to keep track of a counter that will correspond to the total amount of Kitties
 in existence.
 
-### 4. Build pallet
+## Build pallet
 
 From the previous step, your pallet should contain a storage item called `AllKittiesCount` which keeps track of a
 single `u64` value. As part of the basic setup, we're doing great!
 
-> Info
-> As mentioned in the [overview of this tutorial series](./overview), you'll be implementing a total of 9 storage items which you'll discover as you write out your pallet's logic in the next parts.
+>As mentioned in the [overview of this tutorial series](./overview), you'll be implementing a total of 9 storage items which you'll discover as you write out your pallet's logic in the next parts.
 
 Before we move on, let's make sure everything compiles. We don't need to rebuild our entire node each time we update our pallet.
 Instead, we can use a command that only builds our pallet. From inside your pallet directory, run the following:
@@ -289,14 +280,13 @@ cargo build -p pallet-mykitties
 Does your pallet compile without error? Well done if it does! If not, go back and check that all the macros are in place and that 
 you've included the FRAME dependencies.
 
-> Congratulations!
-> You've completed the first part of this series. At this stage, you've learnt the various patterns for:
+> Congratulations! You've completed the first part of this series. At this stage, you've learnt the various patterns for:
 >
 > - Customizing the Substrate node template and including a custom pallet.
 > - Building a Substrate chain and checking that a target pallet compiles.
 > - Declaring a single value `u64` storage item.
 
-## Next steps
+# Next steps
 
 - Writing a struct in a `StorageMap` to store details about our Kitties
 - Using the Randomness trait to create unique Kitties

@@ -27,9 +27,9 @@ At the end of this part, we'll check that everything compiles without error and 
 
 :arrow_right: Use PolkadotJS Apps UI to test pallet functionality.
 
-## Steps
+# Steps
 
-### 1. Public and private functions
+## Public and private functions
 
 Before we dive right in, it's important to understand the pallet design decisions we'll be making around coding up our Kitty pallet's minting and ownership management
 capabilities.
@@ -59,12 +59,12 @@ Before jumping into implementing this approach, let's first paint the big pictur
 - update the new total Kitty count for storage and the new owner's account
 - deposit an Event to signal that a Kitty has succesfully been created
 
-### 2. Write the `create_kitty` dispatchable
+## Write the `create_kitty` dispatchable
 
 A [dispatchable][dispatchable-kb] in FRAME always follows the same structure. All pallet dispatchables live under the `#[pallet::call]` macro which requires declaring the dispatchables section with ` impl<T: Config> Pallet<T> {}`. Read the
 [documentation][frame-macros-kb] on these FRAME macros to learn how they work. All we need to know here is that they're a useful feature of FRAME that minimizes the code required to write for pallets to be properly integrated in a Substrate chain's runtime.
 
-#### Weights
+### Weights
 
 As per the requirement for `#[pallet::call]` described in the its documentation, every dispatchable function must have an associated weight to it. Weights are
 an important part of developing with Substrate as they provide safe-guards around the amount of computation to fit in a block at execution time.
@@ -73,7 +73,7 @@ a node will account for it's worst case, avoiding lagging the network with extri
 
 For this simple application, we're going to default all weights to 100.
 
-Find ACTION #1 and replace it with the following code:
+Find ACTION number 1 and replace it with the following code:
 
 ```rust
 #[pallet::weight(100)]
@@ -95,7 +95,7 @@ pub fn create_kitty(origin: OriginFor<T>) -> DispatchResultWithPostInfo {
 }
 ```
 
-### 3. Write the `mint()` function
+## Write the `mint()` function
 
 As seen when we wrote `create_kitty` in the previous section, we'll need to create `mint()` for
 writing our new unique Kitty object to the various storage items declared in Part II of this tutorial.
@@ -112,7 +112,7 @@ And it will return `DispatchResult`.
 > Why "DispatchResult" and not "DispatchResultWithPostInfo" ?
 > In `create_kitty` our return was of type `DispatchResultWithPostInfo`. Since `mint()` is a helper for `create_kitty`, we don't need to overwrite `PostDispatchInfo`, so we can use a return type of [`DispatchResult`][dispatchresult-rustdocs] &mdash; its unaugmented version.
 
-Paste in the following code snippet to write the beginning of the `mint` function, replacing ACTION #2 in the working codebase:
+Paste in the following code snippet to write the beginning of the `mint` function, replacing ACTION number 2 in the working codebase:
 
 ```rust
 // Helper to mint a Kitty.
@@ -175,25 +175,25 @@ Finally, we compute a few variables to update our storage items that keep track 
 
 All this requires us to do is add 1 to the current values held by `<AllKittiesCount<T>>` and `<OwnedKittiesCount<T>>`. We can use the same pattern as we did in the previous part [when we created `increment_nonce`](/create-kitties#nonce), using Rust's `checked_add` and `ok_or`. Generically, this looks like:
 
-```rust
+```text
 let new_value = previous_value.checked_add(1).ok_or("Overflow error!");
 ```
 
-> A quick recap of our storage items
->
-> - **`<Kitties<T>>`**: Stores a Kitty's unique traits and price, by storing the Kitty object.
-> - **`<KittyOwner<T>>`**: Keeps track of what accounts own what Kitty.
-> - **`<AllKittiesArray<T>>`**: An index to track of all Kitties.
-> - **`<AllKittiesCount<T>>`**: Stores the total amount of Kitties in existence.
-> - **`<AllKittiesIndex<T>>`**: Keeps track of all the Kitties.
-> - **`<OwnedKittiesArray<T>>`**: Keep track of who a Kitty is owned by.
-> - **`<OwnedKittiesCount<T>>`**: Keeps track of the total amount of Kitties owned.
-> - **`<OwnedKittiesIndex<T>>`**: Keeps track of all owned Kitties by index.
+A quick recap of our storage items
+
+- **`<Kitties<T>>`**: Stores a Kitty's unique traits and price, by storing the Kitty object.
+- **`<KittyOwner<T>>`**: Keeps track of what accounts own what Kitty.
+- **`<AllKittiesArray<T>>`**: An index to track of all Kitties.
+- **`<AllKittiesCount<T>>`**: Stores the total amount of Kitties in existence.
+- **`<AllKittiesIndex<T>>`**: Keeps track of all the Kitties.
+- **`<OwnedKittiesArray<T>>`**: Keep track of who a Kitty is owned by.
+- **`<OwnedKittiesCount<T>>`**: Keeps track of the total amount of Kitties owned.
+- **`<OwnedKittiesIndex<T>>`**: Keeps track of all owned Kitties by index.
 
 > Note
 > There's 8 storage items in total and each type of storage exposes a number of different methods. Have a glance at the [methods `StorageValue`][storage-value-rustdocs] and [`StorageMap` expose][storagemap-rustdocs] to learn more.
 
-### 4. Implement pallet Events
+## Implement pallet Events
 
 In Substrate, even though a transaction may be finalized, it does not necessarily imply that the function executed by that 
 transaction fully succeeded. To verify this, we make our pallet emit an [Event][events-kb] at the end of the function. This not only 
@@ -201,7 +201,7 @@ reports the success of a function's execution, but also tells the "off-chain wor
 
 FRAME helps us easily manage and declare our pallet's events using the [`#[pallet::event]`][events-rustdocs] macro. With FRAME macros, events are just an enum declared like this:
 
-```rust
+```text
 #[pallet::event]
 #[pallet::generate_deposit(pub(super) fn deposit_event)]
 pub enum Event<T: Config>{
@@ -255,7 +255,7 @@ Bought(T::AccountId, T::AccountId, T::Hash, T::Balance),
 
 We'll be using most of these events in Part IV of this tutorial. For now let's use the relevant event for our `mint` function.
 
-In order to complete our `mint` function, replace the ACTION #4 line with:
+In order to complete our `mint` function, replace the ACTION number 4 line with:
 
 ```rust
 Self::deposit_event(Event::Created(to, kitty_id));
@@ -263,7 +263,7 @@ Self::deposit_event(Event::Created(to, kitty_id));
 > Note
 > If you're building your codebase from the previous part (and haven't been using the helper file for this part) you'll need to add `Ok(())` and properly close the `mint` function.
 
-### 5. Error handling 
+## Error handling 
 
 In [Part II when we created the `increment_nonce`](/docs/tutorials/Kitties/create-kitties#nonce) function, we specified the error message _"Overflow"_ using Rust's `ok_or` function. 
 FRAME provides us with an error handling system using [`[#pallet::errors]`][errors-kb] which allows us to specify errors for our pallet and use them across our pallet's functions. 
@@ -277,7 +277,7 @@ First, declare the error using the provided FRAME macro under `#[pallet::error]`
 NonceOverflow,
 ```
 
-Then, use it on `ok_or` inside `increment_nonce` (replace line ACTION #5b):
+Then, use it on `ok_or` inside `increment_nonce` (replace line ACTION number 5b):
 
 ```rust
 let next = nonce.checked_add(1).ok_or(Error::<T>::NonceOverflow)?;
@@ -285,7 +285,7 @@ let next = nonce.checked_add(1).ok_or(Error::<T>::NonceOverflow)?;
 
 Now's a good time to see if your chain can compile. Instead of only checking if your pallet compiles, run the following command to see if everything can build:
 
-```rust
+```
 cargo +nightly build --release
 ```
 > Tip
@@ -295,7 +295,7 @@ is giving an error and check whether you've followed each step correctly. Someti
 Did that build fine? Congratulations! That's the core functionality of our Kitties pallet. In the next step you'll be able to 
 see everything you've built so far in action.
 
-### 6. Testing with PolkadotJS Apps
+## Testing with PolkadotJS Apps
 
 Assuming that you successfully built your chain, let's run it and use the [PolkadotJS Apps UI](https://polkadot.js.org/apps/#/explorer) to interact with it.
 
@@ -316,7 +316,7 @@ Assuming that blocks are being finalized (which you should be able to see from y
 This requires you to paste them into the "_Settings_" -> "_Developers_" section.
 3. Go to "_Developer_" -> "_Extrinsics_". Paste this in the JSON code editor:
 
-```json
+```text
 {
   "AccountInfo": {
     "nonce": "Index",
@@ -363,19 +363,19 @@ substrateKitties.kitties: Kitty
 
 5. Check that other storage items correctly reflect the creation of additional Kitties.
 
-> Congratulations!
-> You're pretty much able to take it from here at this point! We've learnt how to implement the key parts of what powers a FRAME pallet and how to put them to use. All part IV of this tutorial covers is adding more capabilities to our pallet by taking what we've learnt in this part.
-> 
-> To recap, in this part of the tutorial you've learnt how to:
-> 
-> - Distinguish between implementing a dispatchable function and a private helper function.
-> - Use `#[pallet::call]`, `#[pallet::events]` and `#[pallet::error]`.
-> - Implement basic error checking with FRAME.
-> - Update values in storage with safety checks.
-> - Implement FRAME events and use them in a function.
-> - Query storage items and chain state using the PolkadotJS Apps UI.
+**Congratulations!**
+You're pretty much able to take it from here at this point! We've learnt how to implement the key parts of what powers a FRAME pallet and how to put them to use. All part IV of this tutorial covers is adding more capabilities to our pallet by taking what we've learnt in this part.
+ 
+ To recap, in this part of the tutorial you've learnt how to:
+ 
+- Distinguish between implementing a dispatchable function and a private helper function.
+- Use `#[pallet::call]`, `#[pallet::events]` and `#[pallet::error]`.
+- Implement basic error checking with FRAME.
+- Update values in storage with safety checks.
+- Implement FRAME events and use them in a function.
+- Query storage items and chain state using the PolkadotJS Apps UI.
 
-## Next steps
+# Next steps
 
 - Create a dispatchable to buy a Kitty
 - Create a dispatchable to transfer a Kitty
