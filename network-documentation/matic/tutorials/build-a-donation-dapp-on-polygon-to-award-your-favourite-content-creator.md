@@ -1,21 +1,21 @@
 # Introduction
 
-In this tutorial, you will learn how to create Donation Dapp on Polygon to award your favorite content creator and how to deploy your smart contract on the Polygon network.
+In this tutorial, you will learn how to create a Donation dApp on Polygon to award your favorite content creator with MATIC tokens and how to deploy your smart contract on the Polygon network.
 
-This is the app we will be creating at the end of this tutorial.
+This is what the dApp we will be creating looks like:
 
 ![Dapp Demo](../../../.gitbook/assets/dapp-demo.gif)
 
 # Prerequisites
 
-To follow along with this tutorial you will need basic knowledge and understanding of Blockchain, Smart contracts and React(NextJS) framework for frontend.
+To successfully follow along with this tutorial, you will need a basic knowledge and understanding of blockchain, Solidity smart contracts and React (we will use the Next.js framework) for frontend.
 
-## Requirements
+# Requirements
 
-- We will need Metamask installed in our browser from [HERE](https://metamask.io/).
-- Make sure to have NodeJS 12.0.1+ version installed.
+- You will need Metamask installed in your browser from the official site <https://metamask.io>.
+- We recommend using the LTS version due to security vulnerabilities in the 12.x branch. 12.0.1 would be affected.
 
-#### Techstack used in this tutorial
+### Other technologies used in this tutorial
 
 - [Solidity](https://docs.soliditylang.org/en/v0.8.7/) - For writing smart contracts
 - [Truffle](https://github.com/trufflesuite/truffle) - Truffle provides development environment for developing blockchain applications locally
@@ -24,7 +24,7 @@ To follow along with this tutorial you will need basic knowledge and understandi
 - [Polygon Network](https://polygon.technology/) - For deploying our smart contract
 - [IPFS](https://ipfs.io/) - To store image and videos uploaded by content creators
 
-# Things we will be covering in this article
+Topics covered in this tutorial:
 
 - Setting up development for Solidity and NextJs
 - Creating smart contracts using Solidity
@@ -35,9 +35,9 @@ To follow along with this tutorial you will need basic knowledge and understandi
 - Using IPFS to upload images'
 - Publishing the smart contract to Polygon Testnet
 
-## Setting up development for Solidity and NextJs
+# Project setup
 
-To set up solidity and nextjs we will have to install few packages using `npm`. Make sure you have `npm` installed in your system and then run the following commands to install the packages and create project directories.
+To set up the project files, we will have to install a few packages using the node package manager npm. This software comes bundled with recent versions of Node.js, but you will still want to make sure it is installed with the command npm -v. Run the following commands in order to install the packages and create the project directories:
 
 ```bash
 npm install -g truffle # Install truffle globally so that you can use truffle from any directory
@@ -49,100 +49,98 @@ cd polygon-dapp
 truffle init # Create truffle-config.js test/ and contracts/ directory
 ```
 
-This is how folder structure will be after the setup.
+This is how the folder structure will be after initial setup:
 
 ![Folder Structure](../../../.gitbook/assets/folder-structure.png)
 
-`truffle init` command will create the following directories,
+The `truffle init` command creates the following directories:
 
-- `contracts/` : All the smart contracts are created in `contracts/` directory.
-- `migrations/`: All migrations scripts used by truffle to deploy smart contracts are stored in the `migrations/` directory.
-- `test/`: All the test scripts for smart contracts are places in the `test` directory.
+- `contracts/` : : All the smart contracts are stored in this directory.
+- `migrations/`: All the scripts used by Truffle to deploy smart contracts are stored in this directory.
+- `test/`: All the test scripts for smart contracts are stored in this directory.
 - `truffle-config.js`: Contains configuration settings for truffle.
 
-## Creating smart contract using Solidity
+# Creating smart contract using Solidity
 
-Create the `DonationContract.sol` file in the `contracts/` directory and add the following code to the same file.
+Create a new file called `DonationContract.sol` in the `contracts` directory and add the following code:
 
-```sol
+```javascript
 // SPDX-License-Identifier: GPL-3.0
-pragma  solidity  ^0.5.16;
+pragma solidity ^0.5.16;
 
-contract  DonationContract {
+contract DonationContract {
   // Keep track of total number of images in contract
-  uint256  public imageCount =  0;
+  uint256 public imageCount =  0;
 
   // Data structure to store images data
-  struct  Image {
+  struct Image {
     uint256 id;
-    string  hash;
+    string hash;
     string description;
     uint256 donationAmount;
-    address  payable author;
+    address payable author;
   }
 
-  mapping(uint256  => Image) public images;
+  mapping(uint256 => Image) public images;
 
   // Event emitted when image is created
-  event  ImageCreated(
-    uint256  id,
-    string  hash,
-    string  description,
-    uint256  donationAmount,
-    address  payable  author
+  event ImageCreated(
+    uint256 id,
+    string hash,
+    string description,
+    uint256 donationAmount,
+    address payable author
   );
 
   // Event emitted when an there is a donation
-  event  DonateImage(
-    uint256  id,
-    string  hash,
-    string  description,
-    uint256  donationAmount,
-    address  payable  author
+  event DonateImage(
+    uint256 id,
+    string hash,
+    string description,
+    uint256 donationAmount,
+    address payable author
   );
 }
 ```
 
-- `imageCount` is an unsigned public integer that stores the total number of images in a smart contract.
-- `struct Image` is a data structure to store image hash and metadata related to that image. `Image` struct contains the id of the image, IPFS hash for that image, description added by the content creator, total donation amount received on that image, and the author address where the donation will be sent to.
-- `mapping(uint256 => Image) public images` is a map that stores all the images, where the key is the `id` and value is the `Image struct`.
-- `ImageCreated` and `DonateImage` are the events emitted by blockchain so that our Dapps can listen to it and function accordingly.
+- `imageCount` is an unsigned public integer that stores the total number of images in the smart contract.
+- `struct Image` is a data structure to store information (metadata) about each image. This includes the id of the image, an IPFS hash for that image, a description added by the content creator, a total donation amount received on that image, and the author address where the donation will be sent to.
+- `mapping(uint256 => Image) public images` is a mapping that stores all the images, where the key is the `id` and value is the `Image` struct.
+- `ImageCreated` and `DonateImage` are the events emitted on the blockchain that our dApp can listen for, and function accordingly.
 
 ```
 // Create an Image
-function  uploadImage(string  memory  _imgHash, string  memory  _description) public {
-  require(bytes(_imgHash).length >  0);
-  require(bytes(_description).length >  0);
-  require(msg.sender !=  address(0x0));
-
+function uploadImage(string memory _imgHash, string memory _description) public {
+  require(bytes(_imgHash).length > 0);
+  require(bytes(_description).length > 0);
+  require(msg.sender != address(0x0));
   imageCount++;
-  images[imageCount] =  Image(
+  images[imageCount] = Image(
     imageCount,
     _imgHash,
     _description,
     0,
     msg.sender
   );
-
-  emit  ImageCreated(imageCount, _imgHash, _description, 0, msg.sender);
+  emit ImageCreated(imageCount, _imgHash, _description, 0, msg.sender);
 }
 ```
 
-- `uploadImage` function accepts image hash and description as parameters. In the function first, we make sure the `imageHash` and `description` are not empty and the sender address is not empty. Then we increment the `imageCount` by one and create a new Image struct object and store it in the `images` map with `imageCount` as key.
+- `uploadImage` accepts an image hash and description as parameters. In the function, we make sure the `imageHash` and `description` are not empty and the sender address is not empty. Then we increment the `imageCount` by one and create a new Image struct object and store it in the `images` map with `imageCount` as key.
 - `msg` is a global variable that contains the address of the person who called the function and in our case the author of the content. So to store the address of `author` we can directly use `msg.sender`
 - Once the object is stored in the map we can emit the `ImageCreated` event with relevant data.
 
-```
-function  donateImageOwner(uint256  _id) public  payable {
-  require(_id >  0  && _id <= imageCount);
+```javascript
+function donateImageOwner(uint256 _id) public payable {
+  require(_id > 0 && _id <= imageCount);
 
   Image memory _image = images[_id];
-  address  payable _author = _image.author;
+  address payable _author = _image.author;
   address(_author).transfer(msg.value);
-  _image.donationAmount = _image.donationAmount +  msg.value;
+  _image.donationAmount = _image.donationAmount + msg.value;
   images[_id] = _image;
 
-  emit  DonateImage(
+  emit DonateImage(
     _id,
     _image.hash,
     _image.description,
@@ -153,28 +151,28 @@ function  donateImageOwner(uint256  _id) public  payable {
 ```
 
 - `donateImageOwner` is a public payable function that accepts the id of the image. Since the function is `payable`, the global variable `msg` contains a field called `value` that has the number of coins which is sent for the donation.
-- In the function first, we check `id` parameter is valid. Then we extract the image from the `images` map and store it in the `_image` variable, and from the `_image` variable we extract the address of the author where we will send the donation amount.
-- Then we call the `transfer()` function on the `_author` address and pass in the `msg.value` which will transfer the amount of donation to the author's account.
+- In the function body, we check the `id` parameter to make sure it is not zero, or outside the bounds of the curent `imageCount`. Then we extract the image from the `images` map by its `_id` (this was passed in as the function argument) and store it in the `_image` variable, so from the `_image` variable we extract the address of the author - where we will send the donation amount.
+- Then we call the `transfer` function on the `_author`'s address and pass in the `msg.value`, which will transfer the amount of MATIC donated to the author's account.
 - `images[_id] = _image` - After the donation is transfered to author's account, we can increment the `donationAmount` in `_image` struct and save the `_image` back to `images` map to update the data.
 - Once everything is done we have to emit the `DonateImage` event.
 
 That's all for the smart contract, now we can move forward with the compilation and migration process.
 
-## Compiling and migrating smart contracts using truffle
+# Compiling and deploying with Truffle
 
-To compile, open the terminal and run the following command,
+Now that we have our smart contract written, it's time to compile it. Open your terminal and run the following command:
 
-```bash
+```text
 truffle compile
 ```
 
-- After running the command, you should the output similar to the image below,
+- Truffle will compile the Solidity file and you should see output similar to:
 
 ![Truffle Compile](../../../.gitbook/assets/truffle-compile.png)
 
-- For the migration of our contact to the blockchain, go to the `migrations/` directory, create a file `2_donation_contract_migration.js` and add the following code.
+- For the migration of our contact to the blockchain, go to the `migrations` directory, create a new file called `2_donation_contract_migration.js` and add the following code:
 
-```
+```javascript
 const DonationContract = artifacts.require("DonationContract");
 
 module.exports = function (deployer) {
@@ -182,8 +180,8 @@ module.exports = function (deployer) {
 };
 ```
 
-- If you notice in the `migrations/` directory, there is a file called `1_initial_migration.js` which handles the migration for the `Migrations.sol` contract which is created by default when we initialize truffle. Each contract needs a migration file to migrate it to blockchains.
-- Before running the migration there are a couple of things that you have to set up. Firstly you need to install [Ganache](https://www.trufflesuite.com/ganache) on your system. Ganache is a GUI app that provides a local blockchain for you to work on. If you don't want a GUI app then you can install [Ganache CLI](https://www.npmjs.com/package/ganache-cli) instead. After installing start the Ganache on your system. Secondly, you have to modify the `truffle-config.js` file in the root directory of your project. You can delete all the content of `truffle-config.js` and replace it with the code below.
+- If you notice in the `migrations` directory, there is a file called `1_initial_migration.js` which handles the migration for the `Migrations.sol` contract. This is created by default when we initialize truffle. Each contract needs a migration file to migrate (deploy) it to the blockchain.
+- Before deploying the smart contract, there are a couple of things that you will want to have set up for testing purposes. Install [Ganache](https://www.trufflesuite.com/ganache) on your system. Ganache is a GUI app that provides a local blockchain for you to work on. If you don't want to use a GUI app for this, then you can install the [Ganache CLI](https://www.npmjs.com/package/ganache-cli) instead. After installing, start Ganache on your system. You will also need to modify the `truffle-config.js` file in the root directory of your project. You can delete all the existing contents of `truffle-config.js` and replace it with the code below.
 
 ```js
 module.exports = {
@@ -211,32 +209,32 @@ module.exports = {
 };
 ```
 
-- Here we are defining the basic configuration which truffle will use to deploy/migrate our smart contract. Currently, we will be deploying to `localhost:7545` where our ganache blockchain is running.
-- To Deploy to the development network, run the following command from the root directory of your project.
+- Here we are defining the basic configuration which truffle will use to deploy/migrate our smart contract. Currently, we will be deploying to `localhost:7545` where our Ganache blockchain is running.
+- To deploy to the development network (Ganache), run the following command from the root directory of your project:.
 
-```bash
+```text
 truffle migrate
 ```
 
-This command will deploy your contract ganache, and will give you output that looks similar to this -
+This command will deploy your contract to Ganache, and will give you output that looks similar to this:
 
 ![Output Image](../../../.gitbook/assets/truffle-migrate.png)
 
-## Writing tests for our smart contract
+# Writing tests for the smart contract
 
-Writing a test for your smart contract is a very crucial and critical task. Once a block is added in blockchain it cannot be modified, if anything goes wrong then all the subsequent blocks will have issues, this makes it very important to test your code before deploying it to the mainnet.
+Writing tests for your smart contract is a very crucial task. Once a smart contract is added to the blockchain it cannot be modified, so if anything goes wrong because of a bug in the code then all the subsequent interactions with the contract will have issues. This makes it very important to test your code thoroughly before deploying it to the mainnet.
 
-When we ran `truffle init`, truffle had created `test/` directory in the root directory of our project. In the `test/` directory you can create a file with whatever name you prefer, let's go with `donation-contract-tests.js`.
+When we ran `truffle init`, truffle created a `test` subdirectory in the root directory of our project. In the `test` directory, you can create a file with whatever name you prefer, let's go with `donation-contract-tests.js`.
 
-> Note that truffle uses [chai](https://www.npmjs.com/package/chai) library to write tests.
+> Note that truffle uses the [chai](https://www.npmjs.com/package/chai) library to write tests.
 
 Before starting with the test, you will need to install a couple of packages.
 
-```bash
+```text
 npm install chai chai-as-promised
 ```
 
-Now in `test/donation-contract-tests.js` file add the following code,
+Now in the `test/donation-contract-tests.js` file add the following code,
 
 ```js
 const { assert } = require("chai");
@@ -297,32 +295,32 @@ contract("DonationContract", ([deployer, author, donator]) => {
       donateImageOwner = web3.utils.toWei("1", "Ether");
       donateImageOwner = new web3.utils.BN(donateImageOwner);
 
-      const expactedBalance = oldAuthorBalance.add(donateImageOwner);
-      assert.equal(newAuthorBalance.toString(), expactedBalance.toSting());
+      const expectedBalance = oldAuthorBalance.add(donateImageOwner);
+      assert.equal(newAuthorBalance.toString(), expectedBalance.toString());
     });
   });
 });
 ```
 
-- These tests are pretty much self-explanatory. Here we are describing two different tests, `deployment` and `Images`.
-- In `deployment`, we are checking whether the contract is deployed properly and the address of the contract is valid.
-- In the `Images` test, first, we are creating a sample image with an author, and then in the `Check Image` test case, we are fetching the image by passing `id` as 1 in `donationContract.images(1)` function. Then we can assert the values received by the event to check if every value is valid and correct.
-- In the `Allow users to donate` test case, first, we are fetching the account balance of a user and then donating to the author of an image. After the donation is sent, we again fetch the updated balance of that user. Now we can check if the old balance and new balance should only the defer by the amount donated to the author.
-- If you have noticed at the top of the test script, we have added an artifact code - `const DonationContract = artifacts.require("DonationContract.sol");`. These artifacts are added at the runtime by truffle, hence it is important to run our test using truffle. To run tests, execute the following command,
+- Chai tests are usually written to be self-explanatory through the describe function. Here we are describing two different tests, "deployment" and "Images".
+- In the "deployment" test, we are checking whether the contract is deployed properly and the address of the contract is valid.
+- In the "Images" test, first we create a sample image with an author. Then in the "Check Image" test case, we are fetching the image by passing `id` as 1 into the `donationContract.images` function. Then we can assert the values received by the event to check if the value is correct.
+- In the "Allow users to donate" test case, we are fetching the account balance of a user and then donating to the author of an image. After the donation is sent, we again fetch the updated balance of that user. Now we can check if the old balance and new balance should only differ by the amount donated to the author.
+- You will notice at the top of the test script, we have added an artifact - `const DonationContract = artifacts.require("DonationContract.sol");`. These artifacts are created at runtime by truffle and include important information relating to the contract such as the Application Binary Interface (ABI), hence it is important to run our test using truffle. To run tests, execute the following command:
 
-```bash
+```text
 truffle test
 ```
 
-The output of the above command should be similar to this -
+The output of the command should be similar to this: -
 
 ![Output image](../../../.gitbook/assets/truffle-test.png)
 
-## Linking smart contract to frontend using web3js
+# Connecting to a frontend with web3js
 
-Now we are done with Smart contracts and tests, it's time to integrate our smart contracts with the frontend application.
+Now the smart contract and tests are dealt with, it's time to integrate our smart contracts with the frontend application.
 
-For contract calls, we will create a context and provide all the data and functions through it. Create a folder `contexts/` in the root directory of your project and create a file called `DataContext.tsx` in that folder.
+For contract calls, we will create a context and provide all the data and functions through it. Create a folder `contexts` in the root directory of your project and create a file called `DataContext.tsx` in that folder.
 
 `context/DataContext.tsx`
 
@@ -352,13 +350,13 @@ export const DataProvider: React.FC = ({ children }) => {
 export const useData = () => useContext<DataContextProps | null>(DataContext);
 ```
 
-- At the top we are setting the type of `window` object to null, so that typescript would allow us to use functions like `window.web3` and `window.ethereum`.
+- At the top we are setting the type of the `window` object to null, so that TypeScript will allow us to use functions like `window.web3` and `window.ethereum`.
 - After that, we make necessary imports. If you don't have the `web3` package installed, you can install it by running - `npm install web3`.
-- In the 4th line, we are fetching `DonationContract`, which is a JSON object that contains the ABI of our contract. This ABI and JSON file is created by truffle when we run the `truffle migrate` command. The ABI contains all the information like, address of your contract in blockchain, what are the functions present in the contract, and the parameters and returns types of these functions.
+- In the 4th line, we are fetching `DonationContract`, which is a JSON object that contains the ABI of our contract. This ABI and JSON file is created by truffle when we run the `truffle compile` command. The ABI contains all the information like the address of your contract on the blockchain, what functions are present in the contract, and the parameters and returns types of these functions.
 - Next, we have declared an interface for our DataContext, which contains all the variables and functions type which will be provided by DataContext.
-- Then we have to create `DataContext` and `DataProvider`. We can also create a custom hook called `use data which we can later use in our components to easily access values from context.
+- Then we have to create `DataContext` and `DataProvider`. We can also create a custom hook called `useData` which we can later use in our components to easily access values from context.
 
-- > If you want to learn about React Context and how it works, you can follow [this](https://reactjs.org/docs/context.html) from the official documentation of React.
+- If you want to learn about React Context and how it works, you can follow [this guide](https://reactjs.org/docs/context.html) from the official documentation of React.
 
 ```typescript
 export const useProviderData = () => {
@@ -413,13 +411,13 @@ export const useProviderData = () => {
 ```
 
 - Create a function called `useProviderData` in the same `DataContext.tsx` file. `useProviderData` is being called inside `DataProvider`, hence everytime page loads `useProviderData` is called.
-- In this function, first, we are declaring all the state variables that we required and then in the `useEffect` we are making two function call, `loadWeb3` and `loadBlockchainData`.
-- In `loadWeb3`, we are first checking if `window.ethereum` is present which is usually injected by the wallet extension you are using. If window.ethereum is present then we set `window.web3` as the object of `Web3(window.ethereum)`, where `window.ethereum` is the provider for web3.
+- In this function, we are declaring all the state variables that we require and then in the `useEffect` we are making two function calls, `loadWeb3` and `loadBlockchainData`.
+- In `loadWeb3`, we are first checking if `window.ethereum` is present which is usually injected by the Metamask wallet extension. If window.ethereum is present then we set `window.web3` as the object of `Web3(window.ethereum)`, where `window.ethereum` is the provider for web3.
 - If `window.ethereum` is not present then we check if `window.web3` is present, if yes then set `window.web3` as an object of `Web3(window.web3)`, where `window.web3` is the provider for web3.
 - If none of these is present then it means the user does not have a wallet installed in their browser and in such case, we can show an alert.
-- In the `loadBlockchainData` function, we are fetching all the necessary data we require like, the user's account number, contract object using ABI from the `DonationContract.json` file. Once we have the contract object, we can make necessary contract calls. In this function, we are fetching the total image count and all the images from our contract.
+- In the `loadBlockchainData` function, we are fetching all the necessary data we require such as the user account number, a contract object using the ABI from `DonationContract.json`. Once we have the contract object, we can make calls to the contract. In this function, we are fetching the total image count and all the images from our contract.
 
-In the same `useProviderData` function add following functions.
+In the `useProviderData` function, add the following functions:
 
 ```typescript
 const updateImages = async () => {
@@ -461,11 +459,11 @@ return {
 
 Now we have add `DataProvider` in `_app.tsx` file. Head over to `pages/_app.tsx` and wrap `<Component {...pageProps} />` component with `<DataProvider>` component.
 
-```tyepscript
-import  "tailwindcss/tailwind.css";
-import { DataProvider } from  "../contexts/DataContext";
+```typescript
+import "tailwindcss/tailwind.css";
+import { DataProvider } from "../contexts/DataContext";
 
-function  MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }) {
   return (
     <>
       <DataProvider>
@@ -475,16 +473,16 @@ function  MyApp({ Component, pageProps }) {
   );
 }
 
-export  default  MyApp;
+export default MyApp;
 ```
 
 Now we can access all context variables in any of our components.
 
-## Creating UI using TailwindCSS in NextJs
+# Creating UI using TailwindCSS in NextJs
 
-For UI we will be using [`tailwindcss`](https://tailwindcss.com/) and [`headlessui`](https://headlessui.dev/). To install these packages run the following command,
+> For the UI we will be using [TailwindCSS](https://tailwindcss.com/) and [HeadlessUI](https://headlessui.dev/). To install these packages run the following command:
 
-```bash
+```text
 npm install tailwindcss @headlessui/react
 ```
 
@@ -534,8 +532,8 @@ export default function Home() {
 }
 ```
 
-- Here we are fetching the `loading` variable from the `useData()` hook and checking if it's loading then show `Loading...` text or else show `<Body />` component.
-- Now we will have to create three components, so create folder `components/` and create three files `Body.tsx`, `UploadImage.tsx`, and `Header.tsx`.
+- Here we are fetching the `loading` variable from the `useData` hook and checking the loading state: If loading is true, show `Loading...` text or else show the `<Body />`. component.
+- Now we will have to create three `components`, so create a new folder called components and create three files inside of it: `Body.tsx`, `UploadImage.tsx`, and `Header.tsx`.
 
 `Body.tsx`
 
@@ -602,37 +600,37 @@ const BodyItem = ({ address, description, totalDonationss, hash, id }) => {
 };
 ```
 
-- Here we are getting all the images from the `useData()` hook, looping over each image and displaying them.
-- Each image has an option to donate 0.1 MATIC to the author or the content. Clicking on `DONATE: 0.1 MATIC` , we are calling `donationImageOwner()` fuction from `useData()` hook, that will evantually call `donationImageOwner` function of out smart contract.
+- Here we are getting all the images from the `useData` hook, looping over each image and displaying them.`
+- Each image has an option to donate 0.1 MATIC to the author or the content. Clicking on `DONATE: 0.1 MATIC` , we are calling the `donationImageOwner` function from the `useData` hook, that will eventually call the `donationImageOwner` function of our smart contract.
 
 `Header.tsx`
 
-```typescipt
-import Identicon from  "identicon.js";
-import React, { useEffect } from  "react";
-import { useData } from  "../../contexts/DataContext";
+```typescript
+import Identicon from "identicon.js";
+import React, { useEffect } from "react";
+import { useData } from "../../contexts/DataContext";
 
-function  Header() {
-  const { account } =  useData();
-  const [data, setData] =  React.useState();
+function Header() {
+  const { account } = useData();
+  const [data, setData] = React.useState();
   useEffect(() => {
-    if (account  !==  "0x0") {
-      setData(new  Identicon(account, 200).toString());
+    if (account !== "0x0") {
+      setData(new Identicon(account, 200).toString());
     }
   }, [account]);
   return (
-    <div  className="container items-center">
-      <div  className="flex flex-col md:flex-row items-center md:justify-between border py-3 px-5 rounded-xl">
-        <span  className="font-mono">Polygon MATIC</span>
-        <div  className="flex flex-row space-x-2 items-center">
-          <div  className="h-5 w-5 rounded-full bg-blue-500"></div>
-          <span  className="font-mono text-xl font-bold">Decentagram</span>
+    <div className="container items-center">
+      <div className="flex flex-col md:flex-row items-center md:justify-between border py-3 px-5 rounded-xl">
+        <span className="font-mono">Polygon MATIC</span>
+        <div className="flex flex-row space-x-2 items-center">
+          <div className="h-5 w-5 rounded-full bg-blue-500"></div>
+          <span className="font-mono text-xl font-bold">Decentagram</span>
         </div>
-        <div  className="flex flex-row space-x-2 items-center">
-          <span  className="font-mono overflow-ellipsis w-52 overflow-hidden">
+        <div className="flex flex-row space-x-2 items-center">
+          <span className="font-mono overflow-ellipsis w-52 overflow-hidden">
             {account}
           </span>
-          {account  &&  data  && (
+          {account && data && (
             <img
               width={35}
               height={35}
@@ -645,15 +643,15 @@ function  Header() {
   );
 }
 
-export  default  Header;
+export default Header;
 ```
 
-- In the header, we are showing the account number of the current user which we can get from `useData()`.
-- Just to make UI a bit better, we are also showing a [identicon](https://github.com/stewartlord/identicon.js/tree/master) based on account number.
+- In the header, we are showing the account number of the current user which we can get from `useData`.
+- To improve the UI, we are also showing an [identicon](https://github.com/stewartlord/identicon.js/tree/master) based on the users account number.
 
 `UploadImage.tsx`
 
-For uploading an image, we have a popup model, where the author can choose the image from their system and upload it to IPFS.
+For uploading an image, we have a modal dialog where the author can choose the image from their system and upload it to IPFS.
 
 ```typescript
 import { Dialog, Transition } from "@headlessui/react";
@@ -784,7 +782,7 @@ export const UploadImage: React.FC<Props> = ({ isOpen, closeModal }) => {
 };
 ```
 
-## Using IPFS to upload images
+# Using IPFS to upload images
 
 In the `UploadImage.tsx` we are using IPFS to upload the image. For this, we have to install a package.
 
@@ -792,21 +790,19 @@ In the `UploadImage.tsx` we are using IPFS to upload the image. For this, we hav
 npm install ipfs-http-client
 ```
 
-Before using IPFS to upload images, we have to create an IPFS client.
+Before using IPFS to upload images, we have to create an IPFS client. In this example we are using the Infura IPFS service, but there are others available.
 
 ```typescript
 const client = create({ url: "https://ipfs.infura.io:5001/api/v0" });
 ```
 
-> Here we are using a URL provided by [Infura](https://infura.io/product/ipfs).
-
 ```javascript
 const added = await client.add(file);
 ```
 
-To upload a file, call the `add` function on the client object. Add function will return an object that contains the hash of the image uploaded. Once we have the `hash`, we can store the hash in our smart contract.
+To upload a file, call the `add` function on the client object. The `add` function will return an object that contains the hash of the uploaded image. Once we have the hash value (or CID - content identifier), we can store that hash in our smart contract.
 
-This hash can later be used to access the image from IPFS by appending the hash to the URL provided by infura.
+This hash can later be used to access the image from IPFS by appending the hash to the URL of a valid IPFS node. For example:
 
 ```txt
 https://ipfs.infura.io/ipfs/${hash}
@@ -816,10 +812,11 @@ https://ipfs.infura.io/ipfs/${hash}
 
 Publishing your smart contract is relatively simple. You will have to add provider details for Matic testnet in your `truffle-config.js`.
 
-- First, you have to connect your metamask wallet to Matic mumbai-testnet. You can follow [this](https://docs.matic.network/docs/develop/metamask/config-polygon-on-metamask/) instructions by polygon docs to connect. Once you have connected metamask to Matic mumbai-testnet, you have to get the `mnemonic` of your metamask that you would have received when you created the metamask account. If you don't have those `mnemonics` then follow [these](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase) steps to get the `mnemonics`.
-- Now create a file `.secret` at the root of your project directory and paste your `mnemonic` in that file. This is the `mnemonic` of the account that will have to pay gas fees for contract deployment.
-- **NOTE - Since we are deploying to testnet we don't have to pay actual MATIC token, we can use [Matic Faucet](https://faucet.matic.network/) to receive 1 MATIC in your account in the mumbai-testnet network.**
-- **Make sure you have added .secret file in your .gitignore and never share your mnemonics with anyone.**
+- First, you have to connect your Metamask wallet to the Matic Mumbai testnet. You can follow [these instructions](https://docs.matic.network/docs/develop/metamask/config-polygon-on-metamask/) to connect. Once you have connected Metamask to the Mumbai testnet, you will need to get the Secret Recovery Phrase from Metamask that you would have received when you created the Metamask account. If you are unsure how to do this, follow [these instructions](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase) to get the Secret Recovery Phrase (also commonly referred to as a mnemonic).
+
+- Now create a file called `.secret` at the root of your project directory and paste your mnemonic in that file. This is the Secret Recovery Phrase of the account that will have to pay gas fees for contract deployment.
+- **NOTE** : Since we are deploying to a testnet we don't have to pay actual MATIC tokens, we can use the [Matic Faucet](https://faucet.matic.network/) to receive 1 MATIC in your account on the Mumbai testnet.
+- **Make sure you have added the `.secret` file in your `.gitignore` and never share your Secret Recovery Phrase (mnemonic) with anyone!**
 - Now we will have to install `hdwallet-provider` to pay gas fees while deploying.
 
 ```bash
@@ -846,7 +843,7 @@ module.exports = {
           mnemonic: {
             phrase: mnemonic,
           },
-          providerOrUrl: `https://matic-mumbai.chainstacklabs.com`,
+          providerOrUrl: `https://matic-mumbai--rpc.datahub.figment.io/apikey/{DATAHUB_API_KEY}}/health`,
           chainId: 80001,
         }),
       network_id: 80001,
@@ -872,17 +869,17 @@ module.exports = {
 };
 ```
 
-Here, we are adding another network `matic`, and adding `providerOrUrl`, `chainId`, and `network_id` of Polygon mumbai-testnet. You can find this information on [Polygon docs](https://docs.matic.network/docs/develop/network-details/network/).
+Here, we are adding another network matic, and adding providerOrUrl, chainId, and network_id of Polygon's Mumbai testnet. You can find this information on the [Polygon docs](https://docs.matic.network/docs/develop/network-details/network/).
 
 After editing `truffle-config.js`, you just have to run the following command to deploy your contract to polygon testnet.
 
-```bash
+```text
 truffle migrate --network matic
 ```
 
-After running the above code, you should get output similar to this -
+Truffle will deploy the contract to Mumbai, you should see output similar to:
 
-```
+```text
 Compiling your contracts...
 ===========================
 > Everything is up to date, there is nothing to compile.
@@ -956,12 +953,14 @@ Summary
 > Final cost:          0.001063173 ETH
 ```
 
+This is how our Dapp will look like at the end:
+
+![Demo GIF](../../../.gitbook/assets/donation-demo-dapp.gif)
+
 # Conclusion
 
-In this tutorial, we have seen how to create a smart contract in solidity, have to use IPFS to upload images, how to interact with smart contracts in frontend applications using web3js and how to publish your smart contract to polygon testnet. Thank you so much for reading this far in this tutorial. This donation dapp is one of the endless possibilities of creating a dapp. If you end up creating something cool do let me know [@viral*sangani*](https://twitter.com/viral_sangani_), I would love to hear from you.
-
-That's all for this tutorial. 👋
+Congratulations on finishing the tutorial! Thank you for taking the time to complete it. In this tutorial, you have learned how to create a smart contract in Solidity, how to use IPFS to upload images, how to interact with smart contracts in frontend applications using web3js and how to publish your smart contract to the Polygon testnet. This donation dApp is one of the endless possibilities of Web 3 development.
 
 # About the Author
 
-I'm Viral Sangani, a tech enthusiast working on blockchain projects & love web3 community. Feel free to connect with me on [GitHub](https://github.com/viral-sangani) & [Twitter](https://twitter.com/viral_sangani_).
+I'm Viral Sangani, a tech enthusiast working on blockchain projects & love Web3 community. Feel free to connect with me on [GitHub](https://github.com/viral-sangani).
