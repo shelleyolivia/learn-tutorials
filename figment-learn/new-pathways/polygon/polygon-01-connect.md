@@ -60,6 +60,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 //...
   if (provider) {
     // Connect to Polygon using Web3Provider and Metamask
+    await provider.send("eth_requestAccounts", []);
     const web3provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     const signer = web3provider.getSigner();
 
@@ -78,8 +79,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 **What happened in the code above?**
 
 * First, we need to define the provider by calling `Web3Provider` method of `providers`.
-* As said above the `signer` represent the current connected account. Then, calling the `getAddress` method will do the job.
-* Again using `signer` we can retrieve the current **chainId**, pass it to the `getNetwork` method and then deduce the network.
+* We need to ensure that Metamask connects to the page, and that we can query the currently selected account in Metamask. This is done by using one of the following methods: `send`, `sendAsync` or `request` on the provider, to send the `eth_requestAccounts` query. This will bring up a Metamask dialog, asking the user to unlock their Metamask if it is locked, or to connect an account to the page if Metamask is unlocked - this account functions as a `signer`.
+* As said above the `signer` represents the current connected account. Then, calling the `getAddress` method will do the job of querying the address of the current connected account.
+* Again, using `signer` we can retrieve the current **chainId**, pass it to the `getNetwork` method and then deduce the network we are connected to.
+  * Mumbai has a chainId of `80001`.
 
 
 -------------------------------------
