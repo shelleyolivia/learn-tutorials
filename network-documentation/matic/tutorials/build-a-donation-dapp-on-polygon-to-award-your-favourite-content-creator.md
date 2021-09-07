@@ -55,7 +55,7 @@ This is how the folder structure will be after initial setup:
 
 The `truffle init` command creates the following directories:
 
-- `contracts/` : : All the smart contracts are stored in this directory.
+- `contracts/`: All the smart contracts are stored in this directory.
 - `migrations/`: All the scripts used by Truffle to deploy smart contracts are stored in this directory.
 - `test/`: All the test scripts for smart contracts are stored in this directory.
 - `truffle-config.js`: Contains configuration settings for truffle.
@@ -813,7 +813,6 @@ https://ipfs.infura.io/ipfs/${hash}
 Publishing your smart contract is relatively simple. You will have to add provider details for Matic testnet in your `truffle-config.js`.
 
 - First, you have to connect your Metamask wallet to the Matic Mumbai testnet. You can follow [these instructions](https://docs.matic.network/docs/develop/metamask/config-polygon-on-metamask/) to connect. Once you have connected Metamask to the Mumbai testnet, you will need to get the Secret Recovery Phrase from Metamask that you would have received when you created the Metamask account. If you are unsure how to do this, follow [these instructions](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase) to get the Secret Recovery Phrase (also commonly referred to as a mnemonic).
-
 - Now create a file called `.secret` at the root of your project directory and paste your mnemonic in that file. This is the Secret Recovery Phrase of the account that will have to pay gas fees for contract deployment.
 - **NOTE** : Since we are deploying to a testnet we don't have to pay actual MATIC tokens, we can use the [Matic Faucet](https://faucet.matic.network/) to receive 1 MATIC in your account on the Mumbai testnet.
 - **Make sure you have added the `.secret` file in your `.gitignore` and never share your Secret Recovery Phrase (mnemonic) with anyone!**
