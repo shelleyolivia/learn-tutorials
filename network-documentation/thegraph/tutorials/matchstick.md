@@ -22,7 +22,7 @@ If you have any difficulty following this tutorial or simply want to discuss Sol
 ```sh
 $ git clone https://github.com/sushiswap/sushiswap-subgraph
 ```  
-Sushiswap has a couple of different subgraphs. For this tutorial, we wil go through the MasterChefV2 subgraph.  
+SushiSwap has a couple of different subgraphs. For this tutorial, we will go through the MasterChefV2 subgraph.  
 ```sh
 $ cd sushiswap-subgraph/subgraphs/masterchefV2
 ```
@@ -135,7 +135,7 @@ Create a folder in the current directory called tests
 ```sh
 $ mkdir tests && cd tests && touch masterchefV2.test.ts
 ```  
-Your testfile(masterchefV2.test.ts) should be the same name as the mappingfile  
+Your test file (masterchefV2.test.ts) should be the same name as the mappingfile  
 ```
 dataSources:
   - kind: ethereum/contract
@@ -197,7 +197,7 @@ All tests passed! 😎
 1 tests executed in 18.472016ms.
 ```
 
-## Short Understanding of this Uniswap subgraph
+## Short Understanding of this SushiSwap subgraph
 - MasterChefV2 is a contract at ```0xEF0881eC094552b2e128Cf945EF17a6752B4Ec5d```.
 - Refer to template.yaml for the ```eventHandlers``` that are hooked.
 ```yaml
@@ -222,7 +222,7 @@ For this tutorial, We will go through the deposit event handler function.
 
 ## Writing Tests for the Deposit Function
 
-### Sushiswap's Deposit's ABI
+### SushiSwap's Deposit's ABI
 From the handler function in SushiSwap, we know that the handler function looks like this.
 ```js
 export function deposit(event: Deposit): void { ... }
