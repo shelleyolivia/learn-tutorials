@@ -8,6 +8,7 @@ If you have any difficulty following this tutorial or simply want to discuss any
 - Basic familiarity with a command-line interface.
 - Basic familiarity with Git & GitHub.
 - Basic familiarity with how TheGraph works.
+- Basic understanding of why unit tests are important.
 
 # Requirements
 ## Tools Used
@@ -335,7 +336,7 @@ export function deposit(event: Deposit): void {
   ])
 
   const masterChef = getMasterChef(event.block)
-  const pool = getPool(event.params.pid, event.block)
+  const pool = getPool(event.params.pid, event.block) // getPool is called here!
   const user = getUser(event.params.to, event.params.pid, event.block)
 
   pool.slpBalance = pool.slpBalance.plus(event.params.amount)
@@ -348,11 +349,11 @@ export function deposit(event: Deposit): void {
 ```
 In the ```deposit``` handler function, we can see that there are calls to ```getPool```.  
 In the getPool function, we see that a Pool entity is created.
-```
+```js
 export function getPool(pid: BigInt, block: ethereum.Block): Pool {
   const masterChef = getMasterChef(block)
 
-  let pool = Pool.load(pid.toString())
+  let pool = Pool.load(pid.toString()) // pid is saved here!
 
   if (pool === null) {
     pool = new Pool(pid.toString())
@@ -372,8 +373,9 @@ export function getPool(pid: BigInt, block: ethereum.Block): Pool {
   return pool as Pool
 }
 ```
-Since the Pool object saves its id as pid, we can check if the pool created during the deposit function matches our variable.
-```
+Since the Pool object saves the input of pid into its id, we can check if the id of the pool created during the deposit function matches the pid.
+```js
+// This function takes in 4 variables (GraphObjectName, GraphObjectID, GraphObjectParamName, GraphObjectParamValue)
 assert.fieldEquals("Pool", "1000", "id", "1000");
 ```
 
@@ -405,7 +407,7 @@ All tests passed! 😎
 ```
 
 Here's the finalized ```masterchefV2.test.ts``` if you couldn't get it to work
-```
+```js
 import { Address, ethereum, BigInt } from "@graphprotocol/graph-ts";
 import { clearStore, test, assert, newMockEvent } from "matchstick-as/assembly/index";
 
@@ -461,12 +463,13 @@ export function runTests(): void {
 
 # Conclusion
 1. We went through how to setup, prepare and build the MasterChefV2 Subgraph.
-1. We went through how to install matchstick for unit testing.
-1. We went through how to figure out the parameters for the ethereum events.
-1. We went through how to write a simple unit test for the deposit function.
+2. We went through how to install matchstick for unit testing.
+3. We went through how to figure out the parameters for the ethereum events.
+4. We went through how to write a simple unit test for the deposit function.
 
 # Next Steps
-- Try writing more unit tests
+1. Try changing ``` assert.fieldEquals("Pool", "1000", "id", "1000"); ``` to make the test fail.
+2. Try writing more unit tests.
 
 # About the author
 - This tutorial was created by antonyip. He can be found on [Github](https://github.com/antonyip).
