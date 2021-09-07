@@ -2,7 +2,7 @@
 In this tutorial we'll take a look at how to setup matchstick and write unit tests for the MasterChefV2 subgraph.  
 This tutorial will typically show a call to action in the form of a squarebox with a $.  
 Please note that if you need help with or would like to explore the usage of any command referenced in this tutorial, add the --help flag after the command.  
-If you have any difficulty following this tutorial or simply want to discuss Solana tech with us you can join our community today!  
+If you have any difficulty following this tutorial or simply want to discuss any tech with us you can join our community today!  
 
 # Prerequisites
 - Basic familiarity with a command-line interface.
@@ -130,7 +130,7 @@ ARGS:
     <DATASOURCE>    Sets the name of the datasource to use.
 ```
 
-Creating Tests
+### Creating Tests
 Create a folder in the current directory called tests  
 ```sh
 $ mkdir tests && cd tests && touch masterchefV2.test.ts
