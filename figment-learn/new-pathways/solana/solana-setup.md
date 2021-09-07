@@ -18,7 +18,8 @@ There are known compatibility issues with Microsoft Windows and also Apple Silic
 > Please **STOP** and read the following information carefully:
 >
 > **Windows Users:** please refer to a detailed installation guide [here](https://docs.figment.io/network-documentation/extra-guides/solana-setup-for-windows). 
-> macOS Users: If you are using any of the Apple Silicon products (M1 processor), you may need to build from source. [Refer to this GitHub PR for more information](https://github.com/solana-labs/solana/pull/16346/)
+>
+> **macOS Users:** If you are using any of the Apple Silicon products (M1 processor), you may need to build from source. [Refer to this GitHub PR for more information](https://github.com/solana-labs/solana/pull/16346/)
 
 
 ---------------------------
