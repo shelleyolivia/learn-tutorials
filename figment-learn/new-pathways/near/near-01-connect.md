@@ -67,7 +67,7 @@ try {
 
 Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
 
-![](../../../.gitbook/assets/pathways/near/near-connect-v2.gif)
+![](../../../.gitbook/assets/pathways/near/near-connect.gif)
 
 -----------------------------
 
