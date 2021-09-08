@@ -3,9 +3,14 @@
 Welcome to the Substrate Kitties tutorial. This 4 part tutorial series will teach you everything you need to know to build a blockchain designed to handle the creation and ownership management of Substrate Kitties. Before jumping into the next section, let's have a look at what we'll be doing.
 
 _This is a 4 part tutorial series that steps you through building a dApp for managing Substrate Kitties from scratch. Each part could take 30-60 minutes to complete depending on your level of experience._
-_This tutorial only cover basic blockchain part and not include the front-end part._
+_This tutorial only covers the blockchain part and does not include the front-end part._
 
 > You may find it useful to come back to this page as you progress through each part &mdash; just to keep track of the bigger picture.
+
+[**Part I**: Basic setup](https://learn.figment.io/tutorials/substrate-kitties-setup)
+[**Part II**: Uniqueness, custom types & storage maps](https://learn.figment.io/tutorials/substrate-kitties-create-kitties)
+[**Part III**: Dispatchables, Events and Errors](https://learn.figment.io/tutorials/substrate-kitties-dispatchables-and-events)
+[**Part IV**: Interacting with your Kitties](https://learn.figment.io/tutorials/substrate-kitties-interacting-functions)
 
 # Learning outcomes
 
@@ -50,8 +55,6 @@ Bringing things down to a more granular level, this translates to the following 
 
 5. [**Helper functions**](https://learn.figment.io/tutorials/substrate-kitties-interacting-functions). We'll write 2 helper functions for our dispatchable functions: `mint` and `transfer_from`.
 
-> Follow each step at your own pace &mdash; the goal is for you to learn and the best way to do that is to try it yourself! Before moving on from one section to the next, make sure your pallet builds without any error.
-> 
-> You'll be writing most of the code yourself! Use the template files [here](https://github.com/substrate-developer-hub/substrate-how-to-guides/tree/main/static/code/kitties-tutorial) to help you complete each part.
+> Follow each step at your own pace &mdash; the goal is for you to learn and the best way to do that is to try it yourself! Before moving on from one section to the next, make sure your pallet builds without any error. You'll be writing most of the code yourself! Use the template files [here](https://github.com/substrate-developer-hub/substrate-how-to-guides/tree/main/static/code/kitties-tutorial) to help you complete each part.
 
 [Click here](https://learn.figment.io/tutorials/substrate-kitties-setup) to go to get started with the project setup!
