@@ -9,7 +9,8 @@ This part of the tutorial dives into some pillar concepts for developing pallets
 how to use existing types and traits, you'll learn how create your own types like providing your pallet with
 a Gender type.
 At the end of this part, you will have implemented all remaining storage items according to the logic outlined for the Substrate Kitty 
-application [in the overview of this tutorial](./overview).
+application [in the overview of this tutorial](https://learn.figment.io/tutorials/substrate-kitties-overview).
+
 ## Learning outcomes
 
 ➡️ Writing a custom struct and using it in storage.
