@@ -32,7 +32,7 @@ The following fall outside the scope of this tutorial:
 
  - Writing tests for our pallet.
  - Declaring a configuration for the genesis of our chain.
- - Customize frontend fot our Substrate Kitties.
+ - Customize frontend for our Substrate Kitties.
 
  You can refer to the [Substrate how-to guides](https://substrate.dev/substrate-how-to-guides/docs/intro/) on how to do this once you've completed this tutorial series.
 
