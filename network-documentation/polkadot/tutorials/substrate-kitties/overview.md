@@ -39,17 +39,19 @@ The following fall outside the scope of this tutorial:
 
 Bringing things down to a more granular level, this translates to the following application design:
 
-1. [**Basic setup**](https://learn.figment.io/tutorials/substrate-kitties/basic-setup). We'll need to spin up a Substrate node and create a custom pallet
+1. [**Basic setup**](https://learn.figment.io/tutorials/substrate-kitties-setup). We'll need to spin up a Substrate node and create a custom pallet
 
-2. [**Runtime storage**](https://learn.figment.io/tutorials/substrate-kitties/basic-setup). We'll need a total of 9 storage items in our pallet to keep track of the amount of Kitties; their index; their owners and their
+2. [**Runtime storage**](https://learn.figment.io/tutorials/substrate-kitties-setup). We'll need a total of 9 storage items in our pallet to keep track of the amount of Kitties; their index; their owners and their
    owner account IDs.
 
-3. [**Dispatchable functions**](https://learn.figment.io/tutorials/substrate-kitties/dispatchables-and-events). We'll need a total of 5 dispatchable functions: `create`, `set_price`, `transfer`, `buy_kitty` and `breed_kitty`
+3. [**Dispatchable functions**](https://learn.figment.io/tutorials/substrate-kitties-dispatchables-and-events). We'll need a total of 5 dispatchable functions: `create`, `set_price`, `transfer`, `buy_kitty` and `breed_kitty`
 
-4. [**Private functions**](https://learn.figment.io/tutorials/substrate-kitties/create-kitties). We'll write 2 helper functions to handle randomness: `increment_nonce` and `random_hash`
+4. [**Private functions**](https://learn.figment.io/tutorials/substrate-kitties-create-kitties). We'll write 2 helper functions to handle randomness: `increment_nonce` and `random_hash`
 
-5. [**Helper functions**](https://learn.figment.io/tutorials/substrate-kitties/interacting-functions). We'll write 2 helper functions for our dispatchable functions: `mint` and `transfer_from`.
+5. [**Helper functions**](https://learn.figment.io/tutorials/substrate-kitties-interacting-functions). We'll write 2 helper functions for our dispatchable functions: `mint` and `transfer_from`.
 
 > Follow each step at your own pace &mdash; the goal is for you to learn and the best way to do that is to try it yourself! Before moving on from one section to the next, make sure your pallet builds without any error.
 > 
 > You'll be writing most of the code yourself! Use the template files [here](https://github.com/substrate-developer-hub/substrate-how-to-guides/tree/main/static/code/kitties-tutorial) to help you complete each part.
+
+[Click here](https://learn.figment.io/tutorials/substrate-kitties-setup) to go to get started with the project setup!
