@@ -82,7 +82,7 @@ Once you have the code above saved:
 
 Let the magic happen: You're now 1 SOL richer on devnet!
 
-![](../../../.gitbook/assets/solana-fund-v3.gif)
+![](../../../.gitbook/assets/pathways/solana/solana-fund.gif)
 
 ----------------------------------
 
