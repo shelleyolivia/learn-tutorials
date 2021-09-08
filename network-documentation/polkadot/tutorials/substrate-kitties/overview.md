@@ -5,8 +5,7 @@ Welcome to the Substrate Kitties tutorial. This 4 part tutorial series will teac
 _This is a 4 part tutorial series that steps you through building a dApp for managing Substrate Kitties from scratch. Each part could take 30-60 minutes to complete depending on your level of experience._
 _This tutorial only cover basic blockchain part and not include the front-end part._
 
-> You may find it useful to come back to this page
-as you progress through each part &mdash; just to keep track of the bigger picture.
+> You may find it useful to come back to this page as you progress through each part &mdash; just to keep track of the bigger picture.
 
 ## Learning outcomes
 
