@@ -97,7 +97,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once the code above has been saved, you can click and this is what the UI should look like!
 
-![](../../../.gitbook/assets/polygon-setter-v21.gif)
+![](../../../.gitbook/assets/pathways/polygon/polygon-setter.gif)
 
 -------------------------------------
 

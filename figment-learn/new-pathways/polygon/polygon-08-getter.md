@@ -78,7 +78,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once the code above save you can click and this is what the UI should look like!
 
-![](../../../.gitbook/assets/polygon-getter-v2.gif)
+![](../../../.gitbook/assets/pathways/polygon/polygon-getter.gif)
 
 -------------------------------------
 
