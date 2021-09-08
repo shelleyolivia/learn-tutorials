@@ -2,21 +2,19 @@
 
 _Add pallet capabilities that unleash the potential of your Substrate Kitty application._
 
-## Overview
+# Overview
 
-Up until this point in the tutorial, we've built a chain capable of only creating and tracking the ownership of Kitties. In this part of the tutorial, we want to make our runtime more
-like a game by introducing other functions like buying and
-selling Kitties. In order to achieve this, we'll first need to enable users
-to update the price of their Kitty. Then we can add functionality to enable users to transfer, buy and breed Kitties.
+Up until this point in the tutorial, we've built a chain capable of only creating and tracking the ownership of Kitties. In this part of the tutorial, we want to make our runtime more like a game by introducing other functions like buying and selling Kitties. In order to achieve this, we'll first need to enable users to update the price of their Kitty. Then we can add functionality to enable users to transfer, buy and breed Kitties.
+
 ## Learning outcomes
 
-:arrow_right: Learn how to create a dispatchable that updates an object in storage.
+➡️ Learn how to create a dispatchable that updates an object in storage.
 
-:arrow_right: Getting a value from a struct in storage.
+➡️ Getting a value from a struct in storage.
 
-:arrow_right: How to use the `transfer` from FRAME's Currency trait.
+➡️ How to use the `transfer` from FRAME's Currency trait.
 
-:arrow_right: How to write sanity check using `ensure!()`.
+➡️ How to write sanity check using `ensure!()`.
 
 # Steps
 
@@ -189,14 +187,9 @@ Kitties. But, in the event that the Kitty was bought or sold, we never actually 
 In this step we'll learn how to use [FRAME's Currency trait][currency-frame-rustdocs] to adjust account balances
 using its very own [`transfer` method][transfer-currency-rustdocs]. It's useful to understand why it's important to use the `transfer` method in particular and how we'll be accessing it:
 
-- The reason we'll be using it is to ensure our runtime has the same understanding of currency throughout the pallets
-  it interacts with. The way that we ensure this is to use the `Currency` trait
-  from `frame_support`.
+- The reason we'll be using it is to ensure our runtime has the same understanding of currency throughout the pallets it interacts with. The way that we ensure this is to use the `Currency` trait from `frame_support`.
 
-- Conveniently, it handles a
-  [`Balance`][currency-balances-rustdocs] type, making it compatible with [`pallet_balances`][balances-frame] which we've been
-  using in our pallet's configuration trait. Take a look at how the `transfer`
-  function we'll be using is structured (from the [Rust docs][currency-transfer-rustdocs]):
+- Conveniently, it handles a [`Balance`][currency-balances-rustdocs] type, making it compatible with [`pallet_balances`][balances-frame] which we've been using in our pallet's configuration trait. Take a look at how the `transfer` function we'll be using is structured (from the [Rust docs][currency-transfer-rustdocs]):
 
 ```rust
 fn transfer(
@@ -207,8 +200,7 @@ fn transfer(
 ) -> DispatchResult
 ```
 
-Now we can finally make use of the  `frame_support` imports &ndash; `Currency` and `ExistenceRequirement` &ndash; that we 
-[initially started with in Part I](/docs/tutorials/Kitties/basic-setup#2-write-out-pallet_kitties-scaffold).
+Now we can finally make use of the  `frame_support` imports &ndash; `Currency` and `ExistenceRequirement` &ndash; that we [initially started with in Part I](/docs/tutorials/Kitties/basic-setup#2-write-out-pallet_kitties-scaffold).
 
 **Feeling confident?**
 
@@ -243,9 +235,7 @@ Here's how you would write `buy_Kitty` from scratch.
   )?;
 ```
 
-Now that that the `transfer` method from FRAME's Currency trait has been called, we can call a private helper function 
-called `transfer_from` (which we'll write later) to write the new changes in ownership to storage. Replace this with what's on 
-line ACTION number 7:
+Now that that the `transfer` method from FRAME's Currency trait has been called, we can call a private helper function called `transfer_from` (which we'll write later) to write the new changes in ownership to storage. Replace this with what's on line ACTION number 7:
 
 ```rust
 // Transfer ownership of Kitty.
@@ -303,9 +293,9 @@ let new_kitty = Kitty {
 Self::mint(sender, random_hash, new_kitty)?;
 Self::increment_nonce()?;
 ```
-And ofcourse, after calling the `mint` function, we call `increment_nonce()` to maintain maximum entropy as described in [Part II](./create-kitties#nonce).
+Of course, after calling the `mint` function, we call `increment_nonce()` to maintain maximum entropy as described in [Part II](./create-kitties#nonce).
 
-## Write the `transfer_from` helper 
+## Write the transfer_from helper 
 
 Similar to writing the `mint` function, the `transfer_from` function is a helper called by the public `buy_kitty` dipatchable to perform all storage updates once a Kitty has been bought and sold.
 
@@ -365,7 +355,7 @@ fn transfer_from(
 }
 ```
 
-## Write the `transfer` dispatchable
+## Write the transfer dispatchable
 
 Now that we've included the `transfer_from` helper function, let's write out the `transfer` dispatchable. This will allow 
 any user to attempt to transfer a Kitty to another account (it's important to _verify first and write last_!). 
@@ -392,6 +382,7 @@ pub fn transfer(
 }
 ```
 By now the above pattern should be familiar. We always check that the transaction is signed; then we verify that the Kitty is owned by the sender of this transaction; and last we call the `transfer_from` helper which will update all storage items appropriately.
+
 ## Genesis configuration
 
 The final step before our pallet is ready to be used is to set the genesis state of our storage items. We'll make use of
@@ -429,14 +420,14 @@ impl<T: Config> GenesisBuild<T> for GenesisConfig<T> {
     }
 }
 ```
-## Update `runtime/lib.rs` and interact with your Kitties
+## Update runtime/lib.rs and interact with your Kitties
 
 If you've completed all of the preceding parts and steps of this tutorial, you're
 all geared up to run your chain and start interacting with all the new capabilities of your Kitties pallet.
 
 Build and run your chain using the following commands:
 
-```bash
+```text
 cargo build --release
 ./target/release/node-kitties --dev
 ```
@@ -454,13 +445,14 @@ Now check your work using the Polkadot-JS Apps UI just like [we did in the previ
 
 After all of these actions, confirm that all users have the right number of Kitties, the total Kitty count is correct, and any other storage variables are correctly represented
 
-## Conclusion
+# Conclusion
 
 **Congratulations!** You've successfully created the backend of a fully functional Substrate chain capable of creating and managing Substrate Kitties. It could also be abstracted to other NFT-like use cases. Most importantly, at this point in the tutorial you should have all the knowledge you need to start creating your own pallet logic and dispatchable functions.
 
-## About the Author
+# About the Author
 Contributed by [Kresna Sucandra](https://github.com/SHA888), a medical doctor turned programmer and a Substrate ecosystem contributor.
-## References
+
+# References
 This tutorial is part of [Substrate Developer Hub's How-to Guides](https://substrate.dev/substrate-how-to-guides/) tutorial by [Sacha Lansky](https://github.com/sacha-l)
 
 [transfer-currency-rustdocs]: https://crates.parity.io/frame_support/traits/tokens/currency/trait.Currency.html#tymethod.transfer
