@@ -7,10 +7,13 @@ _This tutorial only covers the blockchain part and does not include the front-en
 
 > You may find it useful to come back to this page as you progress through each part &mdash; just to keep track of the bigger picture.
 
-[**Part I**: Basic setup](https://learn.figment.io/tutorials/substrate-kitties-setup)
-[**Part II**: Uniqueness, custom types & storage maps](https://learn.figment.io/tutorials/substrate-kitties-create-kitties)
-[**Part III**: Dispatchables, Events and Errors](https://learn.figment.io/tutorials/substrate-kitties-dispatchables-and-events)
-[**Part IV**: Interacting with your Kitties](https://learn.figment.io/tutorials/substrate-kitties-interacting-functions)
+[**Part I**:](https://learn.figment.io/tutorials/substrate-kitties-setup) Basic setup
+
+[**Part II**:](https://learn.figment.io/tutorials/substrate-kitties-create-kitties) Uniqueness, custom types & storage maps
+
+[**Part III**:](https://learn.figment.io/tutorials/substrate-kitties-dispatchables-and-events) Dispatchables, Events and Errors
+
+[**Part IV**:](https://learn.figment.io/tutorials/substrate-kitties-interacting-functions) Interacting with your Kitties
 
 # Learning outcomes
 
