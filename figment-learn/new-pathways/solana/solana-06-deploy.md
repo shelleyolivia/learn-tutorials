@@ -210,7 +210,7 @@ Commitment: confirmed
 Program Id: 7KwpCaaYXRsjfCTvf85eCVuZDW894zZNN38UMxMpQoaQ
 ```
 
-![](../../../.gitbook/assets/pathways/solana/solana-deploy.gif)
+![](../../../.gitbook/assets/solana-deploy-02-v3.gif)
 
 
 -----------------------------------------
