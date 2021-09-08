@@ -100,7 +100,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once you have the code above saved, click on **Create Greeter**:
 
-![](../../../.gitbook/assets/pathways/pathways/solana/solana-greeter.gif)
+![](../../../.gitbook/assets/pathways/solana/solana-greeter.gif)
 
 ----------------------------------
 
