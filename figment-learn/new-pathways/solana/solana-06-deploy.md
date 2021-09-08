@@ -296,7 +296,7 @@ Once you have the code above saved:
 * Copy and paste the generated address in the text input.   
 * Click on **Check ProgramId** 
 
-![](../../../.gitbook/assets/pathways/solana/solana-deploy-03-v3.gif)
+![](../../../.gitbook/assets/pathways/solana/solana-deploy.gif)
 
 For the rest of the challenge we'll keep this programId in the localStorage of our application.
 
