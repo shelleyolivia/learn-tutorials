@@ -8,11 +8,11 @@ Before we can start making Kitties, we first need to do a little groundwork. Thi
 
 ## Learning outcomes
 
-:arrow_right: Renaming a Substrate Node Template using the Kickstart tool.
+➡️ Renaming a Substrate Node Template using the Kickstart tool.
 
-:arrow_right: Basic patterns for building and running a Substrate node.
+➡️ Basic patterns for building and running a Substrate node.
 
-:arrow_right: Create a storage item to keep track of a single `u64` value.
+➡️ Create a storage item to keep track of a single `u64` value.
 
 # Steps
 
@@ -63,7 +63,7 @@ construct_runtime!(
 
 We can already build the node as is by navigating to directory `kitties` in terminal and running this command:
 
-```bash
+```text
 cargo +nightly build --release
 ```
 
@@ -73,13 +73,13 @@ won't need to rebuild all the crates when we build subsequent times.
 
 Assuming that your node builds successfully, launch it in development mode to make sure it works:
 
-```bash
+```text
 ./target/release/node-kitties --tmp --dev
 ```
 
 You should see blocks being created in your terminal. The `--tmp` and `--dev` flags mean we're running a temporary node in development mode. 
 
-## Write out `pallet_kitties` scaffold
+## Write out pallet_kitties scaffold
 
 We'll be spending most of this tutorial in the `pallets` directory of our template node.
 Let's take a glance at the folder structure in our workspace:
@@ -208,7 +208,7 @@ pub mod pallet {
 
 Now try running the following command to rebuild your chain:
 
-```bash
+```text
 cargo +nightly build --release
 ```
 
@@ -230,12 +230,11 @@ tag = 'monthly-2021-08'
 version = '4.0.0-dev'
 ```
 
-> WARNING! Check that you're using the correct `monthly-*` tag and `version` otherwise you will get a dependency error.
-Here, we're using the most up-to-date tag as of the writing of this tutorial.
+> WARNING! Check that you're using the correct `monthly-*` tag and `version` otherwise you will get a dependency error. Here, we're using the most up-to-date tag as of the writing of this tutorial.
 
 Now run `cargo +nightly build --release` again to make sure it builds without errors.
 
-> You'll notice the Rust compiler giving you warnings about unused imports. That's fine! Just ignore them &mdash; we're going to be using those imports in the later parts of the tutorial.
+You'll notice the Rust compiler giving you warnings about unused imports. That's fine! Just ignore them &mdash; we're going to be using those imports in the later parts of the tutorial.
 
 In the next step we will include the first storage item our Kitty application will require.
 
@@ -268,12 +267,12 @@ in existence.
 From the previous step, your pallet should contain a storage item called `AllKittiesCount` which keeps track of a
 single `u64` value. As part of the basic setup, we're doing great!
 
->As mentioned in the [overview of this tutorial series](./overview), you'll be implementing a total of 9 storage items which you'll discover as you write out your pallet's logic in the next parts.
+>As mentioned in the [overview of this tutorial series](https://learn.figment.io/tutorials/substrate-kitties-overview), you'll be implementing a total of 9 storage items which you'll discover as you write out your pallet's logic in the next parts.
 
 Before we move on, let's make sure everything compiles. We don't need to rebuild our entire node each time we update our pallet.
 Instead, we can use a command that only builds our pallet. From inside your pallet directory, run the following:
 
-```bash
+```text
 cargo build -p pallet-mykitties
 ```
 
@@ -291,6 +290,8 @@ you've included the FRAME dependencies.
 - Writing a struct in a `StorageMap` to store details about our Kitties
 - Using the Randomness trait to create unique Kitties
 - Creating our pallet's remaining storage items
+
+[Click here](https://learn.figment.io/tutorials/substrate-kitties-dispatchables-and-events) to go to the next part of this tutorial series.
 
 [installation]: https://substrate.dev/docs/en/knowledgebase/getting-started/
 [substrate-node-template]: https://github.com/substrate-developer-hub/substrate-node-template
