@@ -9,21 +9,21 @@ _This tutorial only cover basic blockchain part and not include the front-end pa
 
 ## Learning outcomes
 
-:arrow_right: Write and integrate a custom FRAME pallet to your runtime.
+➡️ Write and integrate a custom FRAME pallet to your runtime.
 
-:arrow_right: Use structs in storage and how to create and update storage items.
+➡️ Use structs in storage and how to create and update storage items.
 
-:arrow_right: Write extrinsics and helper functions.
+➡️ Write extrinsics and helper functions.
 
 ## What we're building
 
 In this tutorial, we'll intentionally keep things simple so that you can decide on how you'd like to improve your Substrate Kitties chain. For the purposes of what we're building, Kitties really can only do the following things:
 
-:smiley_cat: Be created either by some original source or by being bred using existing Kitties.
+😺 Be created either by some original source or by being bred using existing Kitties.
 
-:smirk_cat: Be sold at a price set by their owner.
+😼 Be sold at a price set by their owner.
 
-:pouting_cat: Be transferred from one owner to another.
+😿 Be transferred from one owner to another.
 
 ## What we won't cover
 
