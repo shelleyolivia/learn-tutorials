@@ -6,7 +6,7 @@ The major difference between centralised and decentralised exchanges is that the
 
 # Prerequisites
 
-You must have gone through this tutorial [Create a Local Test Network on Avalanche](https://learn.figment.io/network-documentation/avalanche/tutorials/platform-overview/create-a-local-test-network) and have performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/token-transfer-tutorials/transfer-avax-between-the-x-chain-and-c-chain) tutorial to get AVAX test tokens to your C-Chain address.
+You must have gone through this tutorial [Create a Local Test Network on Avalanche](https://learn.figment.io/tutorials/create-a-local-test-network) and have performed a cross-chain swap via the [Transfer AVAX Between X-Chain and C-Chain](https://learn.figment.io/tutorials/transfer-avax-between-the-x-chain-and-c-chain) tutorial to get AVAX test tokens to your C-Chain address.
 
 # Requirements
 
@@ -737,7 +737,7 @@ If you had any difficulties following this tutorial or simply want to discuss Av
 
 # References
 
-- https://learn.figment.io/network-documentation/avalanche/tutorials/getting-started-with-smart-contracts-development/using-truffle-with-the-avalanche-c-chain
+- https://learn.figment.io/tutorials/using-truffle-with-the-avalanche-c-chain
 - https://github.com/OpenZeppelin/openzeppelin-contracts
 - https://github.com/makerdao/dss
 - https://github.com/smartcontractkit/LinkToken
