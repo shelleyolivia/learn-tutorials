@@ -19,27 +19,25 @@ At the end of this part, we'll check that everything compiles without error and 
 
 ## Learning outcomes
 
-:arrow_right: Write a dispatchable function that updates storage items using a helper function.
+➡️ Write a dispatchable function that updates storage items using a helper function.
 
-:arrow_right: Write a private helper function with error handling
+➡️ Write a private helper function with error handling
 
-:arrow_right: Write and use pallet Events and Errors.
+➡️ Write and use pallet Events and Errors.
 
-:arrow_right: Use PolkadotJS Apps UI to test pallet functionality.
+➡️ Use PolkadotJS Apps UI to test pallet functionality.
 
 # Steps
 
 ## Public and private functions
 
-Before we dive right in, it's important to understand the pallet design decisions we'll be making around coding up our Kitty pallet's minting and ownership management
-capabilities.
+Before we dive right in, it's important to understand the pallet design decisions we'll be making around coding up our Kitty pallet's minting and ownership management capabilities.
 
 As developers, we want to make sure the code we write is efficient and elegant. Oftentimes, optimizing for one optimizes for the other.
 The way we're going to set up our pallet up to optimize for both will be to break-up the "heavy lifting" dispatchable
 functions into private helper functions. This improves code readability and reusability too. As we'll see, we can
 create private functions which can be called by multiple dispatchable functions without compromizing on security. In fact, building this way can be considered an additive security feauture.
 
-> Info
 > Check out [this how-to guide](https://substrate.dev/substrate-how-to-guides/docs/basics/basic-pallet-integration/) about writing and using helper functions to learn more.
 
 Before jumping into implementing this approach, let's first paint the big picture of what combining dispatchables and helper functions looks like:
@@ -153,13 +151,9 @@ fn mint(
 
 Let's go over what the above code is doing.
 
-The first thing we're doing is to check whether the Kitty being passed in doesn't already exist. To accomplish this, we use the built-in `ensure!` macro that Rust provides us, along with
-a method provided by FRAME's `StorageMap` called `contains_key`.
+The first thing we're doing is to check whether the Kitty being passed in doesn't already exist. To accomplish this, we use the built-in `ensure!` macro that Rust provides us, along with a method provided by FRAME's `StorageMap` called `contains_key`.
 
-:::note
- [`contains_key`][contains-key-rustdocs] will check if a key matches the Hash value in an existing Kitty object. And `ensure!` will return an error if the storage map already
- contains the given Kitty ID.
-:::
+[`contains_key`][contains-key-rustdocs] will check if a key matches the Hash value in an existing Kitty object. And `ensure!` will return an error if the storage map already contains the given Kitty ID.
 
 Once we've done the check, we proceed with updating our storage items with the Kitty object passed into our function call. To do this, we make use of
 the [`insert`][insert-rustdocs] method from our StorageMap API, using the following pattern:
@@ -175,7 +169,7 @@ Finally, we compute a few variables to update our storage items that keep track 
 
 All this requires us to do is add 1 to the current values held by `<AllKittiesCount<T>>` and `<OwnedKittiesCount<T>>`. We can use the same pattern as we did in the previous part [when we created `increment_nonce`](/create-kitties#nonce), using Rust's `checked_add` and `ok_or`. Generically, this looks like:
 
-```text
+```rust
 let new_value = previous_value.checked_add(1).ok_or("Overflow error!");
 ```
 
@@ -201,7 +195,7 @@ reports the success of a function's execution, but also tells the "off-chain wor
 
 FRAME helps us easily manage and declare our pallet's events using the [`#[pallet::event]`][events-rustdocs] macro. With FRAME macros, events are just an enum declared like this:
 
-```text
+```rust
 #[pallet::event]
 #[pallet::generate_deposit(pub(super) fn deposit_event)]
 pub enum Event<T: Config>{
@@ -220,11 +214,9 @@ This allows us to deposit a specifc event using the pattern below:
 Self::deposit_event(Event::Success(var_time, var_day));
 ```
 
-In order to use events inside our pallet, we need to have the `Event` type declared inside our pallet's configuration trait, `Config`. Additionally &mdash; just as
-when adding any type to our pallet's `Config` trait &mdash; we need to let our runtime know about it. 
+In order to use events inside our pallet, we need to have the `Event` type declared inside our pallet's configuration trait, `Config`. Additionally &mdash; just as when adding any type to our pallet's `Config` trait &mdash; we need to let our runtime know about it. 
 
-This pattern is the same as when
-we added the `KittyRandomness` type in [Part II of this tutorial](/docs/Tutorials/Kitties/create-kitties#2-implementing-randomness) and has already been included from the initial scaffolding of our codebase: 
+This pattern is the same as when we added the `KittyRandomness` type in [Part II of this tutorial](/docs/Tutorials/Kitties/create-kitties#2-implementing-randomness) and has already been included from the initial scaffolding of our codebase: 
 
 ```rust
   /// Configure the pallet by specifying the parameters and types it depends on.
@@ -265,8 +257,7 @@ Self::deposit_event(Event::Created(to, kitty_id));
 
 ## Error handling 
 
-In [Part II when we created the `increment_nonce`](/docs/tutorials/Kitties/create-kitties#nonce) function, we specified the error message _"Overflow"_ using Rust's `ok_or` function. 
-FRAME provides us with an error handling system using [`[#pallet::errors]`][errors-kb] which allows us to specify errors for our pallet and use them across our pallet's functions. 
+In [Part II when we created the `increment_nonce`](/docs/tutorials/Kitties/create-kitties#nonce) function, we specified the error message _"Overflow"_ using Rust's `ok_or` function. FRAME provides us with an error handling system using [`[#pallet::errors]`][errors-kb] which allows us to specify errors for our pallet and use them across our pallet's functions. 
 
 In this case, let's declare a single error for when checking for overflow in the `increment_nonce` function. 
 
@@ -288,9 +279,9 @@ Now's a good time to see if your chain can compile. Instead of only checking if 
 ```
 cargo +nightly build --release
 ```
+
 > Tip
-> If you ran into errors, scroll to the first error message in your terminal, identify what line
-is giving an error and check whether you've followed each step correctly. Sometimes a mismatch of curly brackets will unleash a whole bunch of errors that are difficult to understand &mdash; double check your code!
+> If you ran into errors, scroll to the first error message in your terminal, identify what line is giving an error and check whether you've followed each step correctly. Sometimes a mismatch of curly brackets will unleash a whole bunch of errors that are difficult to understand &mdash; double check your code!
 
 Did that build fine? Congratulations! That's the core functionality of our Kitties pallet. In the next step you'll be able to 
 see everything you've built so far in action.
@@ -301,7 +292,7 @@ Assuming that you successfully built your chain, let's run it and use the [Polka
 
 In your chain's project directory, run:
 
-```bash
+```text
 ./target/release/node-kitties --tmp --dev
 ```
 
@@ -364,7 +355,7 @@ substrateKitties.kitties: Kitty
 5. Check that other storage items correctly reflect the creation of additional Kitties.
 
 **Congratulations!**
-You're pretty much able to take it from here at this point! We've learnt how to implement the key parts of what powers a FRAME pallet and how to put them to use. All part IV of this tutorial covers is adding more capabilities to our pallet by taking what we've learnt in this part.
+You're pretty much able to take it from here at this point! We've learned how to implement the key parts of what powers a FRAME pallet and how to put them to use. All part IV of this tutorial covers is adding more capabilities to our pallet by taking what we've learnt in this part.
  
  To recap, in this part of the tutorial you've learnt how to:
  
