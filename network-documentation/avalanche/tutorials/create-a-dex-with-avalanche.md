@@ -432,10 +432,6 @@ export default Main;
 
 ![](/.gitbook/assets/avax-link-swap.png)
 
-```javascript
-result = await avaSwap.buyTokens({ from : investor, value: web3.utils.toWei('1', 'Ether')})
-```
-
 In the BuyForm component, import the logos and ABIs of the AVAX, Dai & ChainLink tokens.
 
 BuyForm.js
@@ -568,18 +564,6 @@ export default BuyForm;
 **Sell Tokens:**
 
 ![](/.gitbook/assets/link-avax-swap.png)
-
-The investor must approve the token before transaction:
-
-```javascript
-result = await Token.approve(avaSwap.address, tokens('100'), { from: investor})
-```
-
-The investor sells tokens:
-
-```javascript
-result = await avaSwap.sellToken(tokens('100'), { from: investor })
-```
 
 SellForm.js:
 
