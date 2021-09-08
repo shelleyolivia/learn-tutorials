@@ -17,6 +17,8 @@ You must have gone through this tutorial [Create a Local Test Network on Avalanc
 
 **Create AvaSwap directory and install dependencies**
 
+Avaswap is a decentralized exchange on the Avalanche protocol that enables peer-to-peer (P2P) cryptocurrency trades which get executed without order books or any centralized intermediary.
+
 Open a new terminal tab so we can create a directory and install some further dependencies.
 First, navigate to the directory within which you intend to create your working directory:
 
