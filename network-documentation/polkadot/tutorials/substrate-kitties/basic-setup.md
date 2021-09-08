@@ -291,7 +291,7 @@ you've included the FRAME dependencies.
 - Using the Randomness trait to create unique Kitties
 - Creating our pallet's remaining storage items
 
-[Click here](https://learn.figment.io/tutorials/substrate-kitties-dispatchables-and-events) to go to the next part of this tutorial series.
+[Click here](https://learn.figment.io/tutorials/substrate-kitties-create-kitties) to go to the next part of this tutorial series.
 
 [installation]: https://substrate.dev/docs/en/knowledgebase/getting-started/
 [substrate-node-template]: https://github.com/substrate-developer-hub/substrate-node-template
