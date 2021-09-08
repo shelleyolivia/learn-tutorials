@@ -50,7 +50,6 @@ Bringing things down to a more granular level, this translates to the following 
 
 5. [**Helper functions**](https://learn.figment.io/tutorials/substrate-kitties/interacting-functions). We'll write 2 helper functions for our dispatchable functions: `mint` and `transfer_from`.
 
-> Follow each step at your own pace &mdash; the goal is for you to learn and the best way to do that is to try it yourself! Use the side panel to write your code as you follow along (coming soon). Before moving on from one section to the next, make sure your pallet builds without any error.
+> Follow each step at your own pace &mdash; the goal is for you to learn and the best way to do that is to try it yourself! Before moving on from one section to the next, make sure your pallet builds without any error.
 > 
-> You'll be writing most of the code yourself! Use the template files [here](https://github.com/substrate-developer-hub/substrate-how-to-guides/tree/main/static/code/kitties-tutorial)
-to help you complete each part.
+> You'll be writing most of the code yourself! Use the template files [here](https://github.com/substrate-developer-hub/substrate-how-to-guides/tree/main/static/code/kitties-tutorial) to help you complete each part.
