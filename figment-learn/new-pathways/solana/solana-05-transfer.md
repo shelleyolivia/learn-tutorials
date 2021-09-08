@@ -91,7 +91,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once you've filled in the form with a value, click **Submit Transfer**: 
 
-![](../../../.gitbook/assets/solana-transfer-v3.gif)
+![](../../../.gitbook/assets/pathways/solana/solana-transfer.gif)
 
 **About the explorer**, it's very good practice to look over all the fields one by one to familiarize yourself with the structure of a transaction. This page features the transaction result (`SUCCESS`), status (`FINALIZED`), the amount sent, the `from` and `to` addresses, the block that included this transaction, the fee that was paid, etc.
 
