@@ -7,7 +7,7 @@ _This tutorial only cover basic blockchain part and not include the front-end pa
 
 > You may find it useful to come back to this page as you progress through each part &mdash; just to keep track of the bigger picture.
 
-## Learning outcomes
+# Learning outcomes
 
 ➡️ Write and integrate a custom FRAME pallet to your runtime.
 
@@ -15,7 +15,7 @@ _This tutorial only cover basic blockchain part and not include the front-end pa
 
 ➡️ Write extrinsics and helper functions.
 
-## What we're building
+# What we're building
 
 In this tutorial, we'll intentionally keep things simple so that you can decide on how you'd like to improve your Substrate Kitties chain. For the purposes of what we're building, Kitties really can only do the following things:
 
@@ -25,7 +25,7 @@ In this tutorial, we'll intentionally keep things simple so that you can decide 
 
 😿 Be transferred from one owner to another.
 
-## What we won't cover
+# What we won't cover
 
 The following fall outside the scope of this tutorial:
 
