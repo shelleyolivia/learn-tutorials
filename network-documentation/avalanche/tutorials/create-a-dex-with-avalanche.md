@@ -1,6 +1,8 @@
 # Introduction
+A decentralised exchange is a network that allows anybody to swap cryptocurrency tokens over the blockchain by performing a transaction between two tokens, such as the AVAX-LINK pair. Centralized exchanges (CEX), such as [Binance](https://www.binance.com/en), are online trading platforms that use an orderbook to match buyers and sellers. They work in a similar fashion to online brokerage accounts, which is why they're so popular with investors.
+Decentralized exchanges (DEX), such as [PancakeSwap](https://pancakeswap.finance/) or [Uniswap](https://uniswap.org/), are self-contained financial protocols powered by smart contracts that let cryptocurrency traders to convert their holdings.
 
-A decentralized exchange is a network, where anyone can exchange cryptocurrency tokens over blockchain by executing a transaction between two respective tokens, say AVAX with LINK, DAI or DevToken.
+The major difference between centralised and decentralised exchanges is that the former maintains control over your funds while you interact on the trading platform, whereas the latter allows you to keep control of your cash when trading.
 
 # Prerequisites
 
@@ -738,3 +740,4 @@ If you had any difficulties following this tutorial or simply want to discuss Av
 - https://github.com/makerdao/dss
 - https://github.com/smartcontractkit/LinkToken
 - https://github.com/devilla/Avaswap
+- https://trustwallet.com/blog/trading-on-cex-vs-dex
