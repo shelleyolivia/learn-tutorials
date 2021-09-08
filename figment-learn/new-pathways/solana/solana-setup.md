@@ -11,11 +11,8 @@ git clone https://github.com/figment-networks/learn-web3-dapp.git
 cd learn-web3-dapp
 yarn
 ```
-{% hint style="danger" %}
-There are known compatibility issues with Microsoft Windows and also Apple Silicon products! 
-{% endhint %}
 
-> Please **STOP** and read the following information carefully:
+> There are known compatibility issues with Microsoft Windows and also Apple Silicon products! :
 >
 > **Windows Users:** please refer to a detailed installation guide [here](https://docs.figment.io/network-documentation/extra-guides/solana-setup-for-windows). 
 >
