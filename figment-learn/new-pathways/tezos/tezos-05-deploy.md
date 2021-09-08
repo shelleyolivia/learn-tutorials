@@ -108,7 +108,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once you have the code above saved, click on **Deploy Contract**
 
-![](../../../.gitbook/assets/pathways/tezos/tezos-deploy.png)
+![](../../../.gitbook/assets/pathways/tezos/tezos-deploy.gif)
 
 -----------------------------
 
