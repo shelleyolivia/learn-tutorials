@@ -68,7 +68,7 @@ The STAKE token project is fairly complex and showcases the following
 
 Decentralized network platforms, such as NEAR, provide tremendous economic opportunity. To put it into perspective, Amazon's market capitalization is currently valued at 1.56 trillion USD and 2021 revenue estimates are in the 411 - 488 billion USD range. That is just scratching the service. How much do you think the global economy is worth? Decentralized and scalable global cloud platforms such as NEAR provides an opportunity for all to participate in the global economy.
 
-# It's a wrap, folks ...
+# Conclusion
 
 NEAR is a super-fast smart contract platform with super low transaction fees that is user and developer-friendly for building real-world applications for the Open Web. I am excited about NEAR, and I hope I have inspired you to learn with me on this thrilling journey.
 
