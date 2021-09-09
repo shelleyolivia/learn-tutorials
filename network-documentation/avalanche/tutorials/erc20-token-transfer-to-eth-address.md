@@ -259,7 +259,7 @@ To run the script `ERC20_fromC_to_ETH_address.js`, type `node ERC20_fromC_to_ETH
 
 The output of the script in the terminal should look similar to what is shown below.
 
-![example_output](https://i.imgur.com/hVX9aJA.png)
+![example_output](https://i.imgur.com/i0ysO5Q.png)
 
 You can confirm the result by looking at the change of the balance on Metamask as well.
 
@@ -267,9 +267,22 @@ As you can see in the image below, my metamask balance did change to 5.97.
 
 ![metamask_balance](https://i.imgur.com/CTIA5eu.png)
 
-## Wrapping Up
+# Conclusion
 
-That’s it! This tutorial has taught you how to transfer ERC-20 tokens from the C-chain to an ETH wallet. Remember that the C-chain uses the Ethereum Virtual Machine and is compatible with all of the key Ethereum tools.
+This tutorial has taught you how to transfer ERC-20 tokens from the C-chain to a Metamask wallet. Note that the C-chain uses the Ethereum Virtual Machine and is compatible with all of the key Ethereum tools.
+
+# Troubleshooting
+
+## Transaction Failure
+
+If you have enough AVAX on the C-chain but not enough AVAXDATAHUB token (or any ERC20 token that you intend to transfer), you may end up getting an error in the terminal. Such an error message would be as shown below.
+
+![example](https://i.imgur.com/eB5ERwh.png)
+
+Then, make sure that you have enough ERC20 token balance on the C-chain of your AVAX wallet.
+
+Conversely, if you have enough AVAXDATAHUB balance, but not enough AVAX 
+
 
 ## About the author
 
