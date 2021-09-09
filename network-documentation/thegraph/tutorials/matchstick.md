@@ -11,6 +11,7 @@ If you have any difficulty following this tutorial, you can join our [discord](h
 - Basic understanding of why [unit-tests](https://en.wikipedia.org/wiki/Unit_testing) are important.
 
 # Requirements
+The following software must be installed:
 - [nodejs](https://nodejs.org/en/) v14+ (a minimum of 14.17.6 LTS is recommended)
 - [curl](https://curl.se/)
 - [git](https://git-scm.com/)
