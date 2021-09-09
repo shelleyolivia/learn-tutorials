@@ -43,7 +43,7 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 [4/4] Building fresh packages...
 Done in 51.76s.
 ```  
-Next, we all yarn prepare:mainnet in order to load the configurations into subgraph.yaml  
+Next, we will use a script from `package.json` to load the configurations into subgraph.yaml. Run the command:  
 ```text
 yarn prepare:mainnet
 ```  
@@ -166,7 +166,7 @@ dataSources:
       file: ./src/mappings/masterchefV2.ts # This line right here!
 ```  
 Now we can create a simple test case to see if empty tests work.
-Write the following code in ```masterchefV2.test.ts```:  
+Write the following code in `masterchefV2.test.ts`:  
 ```typescript
 import { clearStore, test, assert, newMockEvent } from "matchstick-as/assembly/index";
 export function runTests(): void {
