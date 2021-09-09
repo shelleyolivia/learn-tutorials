@@ -18,21 +18,22 @@ The following software must be installed:
 - [yarn](https://yarnpkg.com/)
 - [mustache](https://mustache.github.io/)
 
-## Getting the SushiSwap Subgraph
-```sh
+Getting the SushiSwap Subgraph  
+```text
 git clone https://github.com/sushiswap/sushiswap-subgraph
 ```  
 SushiSwap has a couple of different subgraphs. For this tutorial, we will go through the MasterChefV2 subgraph.  
-```sh
+```text
 cd sushiswap-subgraph/subgraphs/masterchefV2
-```
+```  
 
-# Tutorial
-## Installing and Building the MasterChefV2 SushiSwap Subgraph
-```sh
+# Getting Started
+We will begin by installing and building the MasterChefV2 SushiSwap subgraph. From the root directory of the cloned repository, run yarn to install the dependencies:  
+```text
 yarn
-```
-```sh
+```  
+This will output something similar:  
+```text
 yarn install v1.22.11
 [1/4] Resolving packages...
 [2/4] Fetching packages...
@@ -41,19 +42,23 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 [3/4] Linking dependencies...
 [4/4] Building fresh packages...
 Done in 51.76s.
-```
-```sh
+```  
+Next, we all yarn prepare:mainnet in order to load the configurations into subgraph.yaml  
+```text
 yarn prepare:mainnet
-```
-```sh
+```  
+Your output should be:  
+```text
 yarn run v1.22.11
 mustache config/mainnet.json template.yaml > subgraph.yaml
 Done in 0.09s.
-```
-```sh
+```  
+Then, we will generate the classes needed for the subgraph to work correctly.  
+```text
 yarn codegen
-```
-```sh
+```  
+Your output should look like:  
+```text
 .
 .
 .
@@ -77,44 +82,49 @@ yarn codegen
 Types generated successfully
 
 Done in 2.04s.
-```
+```  
+**There's an issue with capitalization in this file: ```sushiswap-subgraph/subgraphs/masterchefV2/src/entities/user.ts```**  
+You will need to change line 4 of this file to the following:  
+```typescript
+import { getMasterChef } from './masterchef'
+```  
 
-## There's an issue (Capital Letter) in this file.  
-```sushiswap-subgraph/subgraphs/masterchefV2/src/entities/user.ts```  
-Change line 4 to ```import { getMasterChef } from './masterchef'```
-
-## Continue Building the Subgraph
-```sh
+Lastly, we will build the subgraph.  
+```text
 yarn build
-```
-```sh
+```  
+The final line of your output should be:  
+```text
 Build completed: /home/user/sushiswap-subgraph/subgraphs/masterchefV2/build/subgraph.yaml
-```
+```  
 
 
-## Installing the Testing Framework - matchstick
-Follow the instructions at https://github.com/LimeChain/matchstick  
-I'm using Ubuntu 20.04 so this is the command I will use. Please use the command that suits your operating system.
-```curl
+# Installing the "matchstick" testing framework
+Follow the [installation instructions](https://github.com/LimeChain/matchstick) for matchstick.  
+I'm using Ubuntu 20.04 so this is the command I will use.  
+```text
 curl -OL https://github.com/LimeChain/matchstick/releases/download/0.1.2/binary-linux-20 && mv binary-linux-20 matchstick && chmod a+x matchstick
-```
+```  
 
 ### Install postgressql  
-```sh 
+Install postgressql, it is required for our testing framework.  
+```text 
 sudo apt install postgresql
-```
+```  
 
 ### Installing Helpers  
+Now we can install the matchstick helpers, with the command:  
 ```
 yarn add matchstick-as
-```
+```  
 
-### To check if matchstick is working correctly run
-```sh
+To check that matchstick is working correctly, use the command:  
+```text
 ./matchstick --help
-```
+```  
 
-```sh
+This should output:  
+```text
 Matchstick 🔥 0.1.2
 Limechain <https://limechain.tech>
 Unit testing framework for Subgraph development on The Graph protocol.
@@ -128,15 +138,19 @@ FLAGS:
 
 ARGS:
     <DATASOURCE>    Sets the name of the datasource to use.
-```
+```  
 
-### Creating Tests
+# Creating Tests
 Create a folder in the current directory called tests  
-```sh
+```text
 mkdir tests && cd tests && touch masterchefV2.test.ts
 ```  
+If you're on Windows, you can use this command instead  
+```text
+mkdir tests && cd tests && type nul > masterchefV2.test.ts
+```  
 Your test file (masterchefV2.test.ts) should be the same name as the mappingfile  
-```
+```yaml
 dataSources:
   - kind: ethereum/contract
     name: MasterChefV2
@@ -149,34 +163,32 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
-      file: ./src/mappings/masterchefV2.ts <-- This line right here!
-```
-
-Create a simple testcase to test if empty tests works.
-Write the following code in ```masterchefV2.test.ts```
-```js
+      file: ./src/mappings/masterchefV2.ts # This line right here!
+```  
+Now we can create a simple test case to see if empty tests work.
+Write the following code in ```masterchefV2.test.ts```:  
+```typescript
 import { clearStore, test, assert, newMockEvent } from "matchstick-as/assembly/index";
 export function runTests(): void {
   test("EmptyTest", () => {
   }
 }
-```
+```  
 
-Add the export to ```src/masterchefV2.ts``` at the bottom of the file
-```js
+Add the export to `src/masterchefV2.ts` at the bottom of the file  
+```typescript
 export { runTests } from '../../tests/masterchefV2.test'
-```
-### Known issues
+```  
+**Known issues**  
 When runTests() is imported in the mappings file the deployment to the hosted service will break.  
 For now, it's required to remove/comment out the import.
 
-
-Run the Unit-Testing Framework
-```sh
+Run the Unit-Testing Framework  
+```text
 yarn build && ./matchstick MasterChefV2
-```
+```  
 
-You should see this appear on your screen.
+You should see similar output:  
 ```text
 Build completed: /home/user/sushiswap-subgraph/subgraphs/masterchefV2/build/subgraph.yaml
 
@@ -195,11 +207,11 @@ Igniting tests 🔥
 
 All tests passed! 😎
 1 tests executed in 18.472016ms.
-```
+```  
 
-## Short Understanding of this SushiSwap subgraph
+# Understanding the SushiSwap subgraph
 - MasterChefV2 is a contract at ```0xEF0881eC094552b2e128Cf945EF17a6752B4Ec5d```.
-- Refer to template.yaml for the ```eventHandlers``` that are hooked.
+- Refer to template.yaml for the ```eventHandlers``` that are hooked.  
 ```yaml
 eventHandlers:
     - event: Deposit(indexed address,indexed uint256,uint256,indexed address)
@@ -216,31 +228,31 @@ eventHandlers:
         handler: logSetPool
     - event: LogUpdatePool(indexed uint256,uint64,uint256,uint256)
         handler: logUpdatePool
-```
-These are the list of functions that should be tested.  
+```  
+This is the list of functions that should be tested.  
 For this tutorial, We will go through the deposit event handler function.  
 
-## Writing Tests for the Deposit Function
+## Testing the Deposit Function
 
-### SushiSwap's Deposit's ABI
-From the handler function in SushiSwap, we know that the handler function looks like this.
+### SushiSwap's Deposit ABI
+From the handler function in SushiSwap, we know that the handler function looks like this.  
 ```js
 export function deposit(event: Deposit): void { ... }
-```
+```  
 
-We need to figure out how does the ```(event: Deposit)``` part of the code works...
+How does the `(event: Deposit)` part of the code work? Let's take a closer look:  
 
-From the EventHandler, we know that the signature of the function looks like this.
+From the EventHandler, we know that the signature of the function looks like this.  
 ```yaml
 eventHandlers:
 - event: Deposit(indexed address,indexed uint256,uint256,indexed address)
     handler: deposit
-```
+```  
 
 We then look at the abi that is in the package to figure out the function signature.  
-```
+```text
 build/MasterChefV2/packages/abis/MasterChefV2.json
-```
+```  
 ```json
   {
     "anonymous": false,
@@ -273,13 +285,13 @@ build/MasterChefV2/packages/abis/MasterChefV2.json
     "name": "Deposit",
     "type": "event"
   }
-```
-From the above, we know the signature of the DepositEvent looks like this...
+```  
+From the above, we know the signature of the DepositEvent looks like this...  
 ```js
 DepositEvent(userAddress:string, pid:BigInt, amount:BigInt, toAddress:string)
-```
+```  
 
-So... To create a deposit event, we need 4 parameters.
+So... To create a deposit event, we need 4 parameters.  
 ```js
 function createDepositEvent(userAddress:string, pid:BigInt, amount:BigInt, toAddress:string): Deposit {
   // Create the Deposit Event -- Remember to Import
@@ -305,9 +317,9 @@ function createDepositEvent(userAddress:string, pid:BigInt, amount:BigInt, toAdd
   depositEvent.parameters.push(toAddressParam);
   return depositEvent;
 }
-```
+```  
 
-Then, we write a test...
+Then, we write a test...  
 ```js
 test("Deposit Test", () => {
     // DepositEvent Signature
@@ -322,9 +334,9 @@ test("Deposit Test", () => {
     // Check for Logic Correctness
     assert.fieldEquals("Pool", "1000", "id", "1000");
   });
-```
+```  
 
-Lastly, we check if the logic works correctly...
+Lastly, we check if the logic works correctly...  
 ```js
 export function deposit(event: Deposit): void {
   log.info('[MasterChefV2] Log Deposit {} {} {} {}', [
@@ -345,9 +357,9 @@ export function deposit(event: Deposit): void {
   user.rewardDebt = user.rewardDebt.plus(event.params.amount.times(pool.accSushiPerShare).div(ACC_SUSHI_PRECISION))
   user.save()
 }
-```
-In the ```deposit``` handler function, we can see that there are calls to ```getPool```.  
-In the getPool function, we see that a Pool entity is created.
+```  
+In the `deposit` handler function, we can see that there are calls to `getPool`.  
+In the getPool function, we see that a Pool entity is created.  
 ```js
 export function getPool(pid: BigInt, block: ethereum.Block): Pool {
   const masterChef = getMasterChef(block)
@@ -371,18 +383,18 @@ export function getPool(pid: BigInt, block: ethereum.Block): Pool {
 
   return pool as Pool
 }
-```
-Since the Pool object saves the input of pid into its id, we can check if the id of the pool created during the deposit function matches the pid.
+```  
+Since the Pool object saves the input of pid into its id, we can check if the id of the pool created during the deposit function matches the pid.  
 ```js
 // This function takes in 4 variables (GraphObjectName, GraphObjectID, GraphObjectParamName, GraphObjectParamValue)
 assert.fieldEquals("Pool", "1000", "id", "1000");
-```
+```  
 
-Run the tests again and you can see that our newly created test passes!
-```sh
+Run the tests again and you can see that our newly created test passes!  
+```text
 yarn build && ./matchstick MasterChefV2
-```
-
+```  
+Your output should look like this:  
 ```text
 Build completed: /home/user/sushiswap-subgraph/subgraphs/masterchefV2/build/subgraph.yaml
 
@@ -403,9 +415,8 @@ INFO [MasterChefV2] Log Deposit 0x89205a3a3b2a69de6dbf7f01ed13b2108b2c43e7 1000 
 
 All tests passed! 😎
 2 tests executed in 21.93132ms.
-```
-
-Here's the finalized ```masterchefV2.test.ts```, in case you couldn't get it to work:
+```  
+Here's the finalized ```masterchefV2.test.ts```, in case you couldn't get it to work:  
 ```js
 import { Address, ethereum, BigInt } from "@graphprotocol/graph-ts";
 import { clearStore, test, assert, newMockEvent } from "matchstick-as/assembly/index";
@@ -458,7 +469,7 @@ export function runTests(): void {
     assert.fieldEquals("Pool", "1000", "id", "1000");
   });
 }
-```
+```  
 
 # Conclusion
 1. We went through how to setup, prepare and build the MasterChefV2 Subgraph.
