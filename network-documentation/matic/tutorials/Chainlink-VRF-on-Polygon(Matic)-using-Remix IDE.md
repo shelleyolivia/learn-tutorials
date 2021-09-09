@@ -1,45 +1,47 @@
 #  Chainlink VRF on Polygon (Matic) using Remix IDE 
 Learn how to generate random numbers in your smart contracts on Polygon (Matic)
 
-## Introduction
-This tutorial is a brief introduction to generating random numbers in your smart contracts using Chainlink VRF (Verifiable Random Function). Chainlink VRF is used for verifiable source of randomness.  We will be using Polygon \(Matic\) Mumbai Testnet and Remix IDE.
+# Introduction
+This tutorial will introduce you to generating random numbers in Solidity smart contracts using Chainlink VRF ([Verifiable Random Function](https://docs.chain.link/docs/chainlink-vrf/#generate-random-numbers-in-your-smart-contracts)). Chainlink VRF is used as a verifiable source of randomness. We will be using the Polygon (Matic) Mumbai testnet and the Remix IDE.
 
-## Why used Chainlink VRF?
-Solidity contracts are deterministic. Anyone who figures out how your contract produces randomness can predictable its results. Chainlink VRF generates a random number offchain with cryptographic proof.
+# Why use Chainlink VRF?
+Solidity contracts are deterministic, therefore anyone who figures out how your contract produces randomness could predict its results. Chainlink VRF generates a random number off-chain with a cryptographic proof used to verify the result.
 
-## Prerequisites
-You should have some basic understanding of Solidity [smart contracts](https://solidity-by-example.org/), [Remix IDE](https://remix.ethereum.org/), and completed [Polygon (Matic) Pathway](https://learn.figment.io/network-documentation/matic/polygon-matic-pathway).
+# Prerequisites
+To follow this tutorial, you should have a basic understanding of Solidity [smart contracts](https://solidity-by-example.org/) & the [Remix IDE](https://remix.ethereum.org/). You should also complete the [Polygon (Matic) Pathway](https://learn.figment.io/network-documentation/matic/polygon-matic-pathway).
 
-## Requirements
-* [MetaMask](https://metamask.io)
+# Requirements
+* You will need to have the [MetaMask](https://metamask.io) browser extension installed.
 
-## Using Chainlink VRF 
+# Using Chainlink VRF 
 
-### 1. Getting testnet tokens
-You will need testnet MATIC and LINK for this tutorial. MATIC token will be used to pay for contract deployment and making transaction.  LINK token will be used to pay chainlink oracle for randomness.  
+## Getting testnet tokens
+You will need some testnet MATIC and LINK. These can be acquired from the [Polygon Faucet](https://faucet.polygon.technology/). MATIC token will be used to pay for contract deployment and making transactions. LINK token will be used to pay the Chainlink oracle for randomness.
 
-Open your Metamask and change the network to Polygon \(Matic\) Mumbai Testnet and copy your address.  If you do not have Polygon \(Matic\) Mumbai Testnet on your Metamask, here is a link [Configure Polygon on Metamask](https://docs.matic.network/docs/develop/metamask/config-polygon-on-metamask) on how to add it and make sure you select `Mumbai Testnet` tab to see the configuration.
+Open your Metamask and change the active network to Polygon (Matic) Mumbai testnet and copy your wallet address by clicking on it in the Metamask window. If you do not have the Mumbai testnet set up in your Metamask, read the article [Configure Polygon on Metamask](https://docs.matic.network/docs/develop/metamask/config-polygon-on-metamask). Make sure you select the Mumbai Testnet tab to see the configuration details.
 
-Go to the [Matic Faucet](https://faucet.matic.network/) to get some MATIC and LINK testnet tokens by pasting your address.
+Go to the [Polygon Faucet](https://faucet.polygon.technology/) to get some MATIC and LINK testnet tokens by pasting your wallet address and clicking on "Submit".
 
 You can go to this URL [https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/) to check your balances by entering your address on the search bar.
 
-To see `LINK` token on your Metamask:
-1) Click on `Add Token` button
-2) Enter `0x326C977E6efc84E512bB9C30f76E30c160eD06FB` on `Token Contract Address` text field.  `Token Symbol` and `Token Decimal` text fields will be prefilled when you enter the Token Contract Address.
-3) Click on `Next` button
-4) Click on `Confirm` button to add `LINK` token to your Metamask
+You can view your current MATIC and LINK balances in Metamask or by going to [https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/) & entering your address in the search bar.
+
+To see LINK tokens in your Metamask:
+1) Click on the Add Token button
+2) Enter `0x326C977E6efc84E512bB9C30f76E30c160eD06FB` in the Token Contract Address text field. Token Symbol and Token Decimal text fields will be pre-filled when you enter the Token Contract Address.
+3) Click the Next button
+4) Click the Confirm button to add LINK tokens to your list of assets in Metamask
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img1.png)
 
-### 2. Using Remix IDE
-We will use the Remix IDE - an online IDE to develop smart contracts.
+## Using the Remix IDE
+We will use the Remix IDE - an online development environment for smart contracts, provided by the Ethereum Foundation.
 
-Head over to [https://remix.ethereum.org](https://remix.ethereum.org/). Click on the `File Icon` to create a file and named it `RandomNumber.sol`.
+Head over to [https://remix.ethereum.org](https://remix.ethereum.org/). Click on the File Icon to create a new file and name it `RandomNumber.sol`.
 
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img2.png)
 
-### 3. Coding smart contract
-On RandomNumber.sol, copy the entire smart contract code and paste it in the editor.
+## Creating the smart contract
+In `RandomNumber.sol`, copy the entire smart contract code below and paste it into the Remix editor panel.
 
 ```javascript
 // SPDX-License-Identifier: MIT
@@ -88,9 +90,9 @@ contract RandomNumber is VRFConsumerBase {
 }
 ```
 
-This will inherit from VRFConsumerBase contract for randomness.  VRFConsumerBase takes it two parameters (VRF Coordinator, LINK Token).  We will use `0x8C7382F9D8f56b33781fE506E897a4F1e2d17255` for VRF Coordinator and `0x326C977E6efc84E512bB9C30f76E30c160eD06FB` for LINK Token which will work on Polygon (Matic) Mumbai Testnet.
+This will inherit from the VRFConsumerBase contract. The VRFConsumerBase constructor takes two parameters: An address for the VRF Coordinator and an address for the LINK Token. We will use `0x8C7382F9D8f56b33781fE506E897a4F1e2d17255` for VRF Coordinator and `0x326C977E6efc84E512bB9C30f76E30c160eD06FB` for the LINK Token which will work on the Mumbai testnet.
 
-We will use `0x6e75b569a01ef56d18cab6a8e71e6600d6ce853834d4a5748b720d06f878b3a4` for specific chainlink oracle and set the fee to 0.0001 LINK to pay the that chainlink oracle for randomness.
+We will use the contract hash `0x6e75b569a01ef56d18cab6a8e71e6600d6ce853834d4a5748b720d06f878b3a4` to specify the Chainlink oracle to use and set the fee to 0.0001 LINK to pay the oracle for its verifiable random output.
 
 ```javascript
 constructor() 
@@ -104,7 +106,7 @@ constructor()
 }
 ```
 
-This will get a random number from the chainlink oracle.  `requestRandomness()` comes from `VRFConsumerBase` contract that we imported.
+This will get a random number from the chainlink oracle. `requestRandomness()` comes from the `VRFConsumerBase` contract that we imported at the top of our smart contract.
 
 ```javascript
 function getRandomNumber() public returns (bytes32 requestId) {
@@ -113,80 +115,78 @@ function getRandomNumber() public returns (bytes32 requestId) {
 }
 ```
 
-This is a callback function used by VRF Coordinator to determine if the number is really random
+This is a callback function used by the VRF Coordinator to determine if the number is actually random.
+
 ```javascript
 function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
     randomResult = randomness;
 }
 ```
 
-### 4. Deploy the contract with Remix
-On Remix, click on Solidity Compiler icon on the Sidebar
+## Deploy the contract with Remix
+In Remix, click on the Solidity Compiler icon on the sidebar:
 
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img3.png)
 
-Select `0.6.6+commit.6c089d02` as the compiler and click `Compile RandomNumber.sol` button to compile the smart contract. Once compiled, the smart contract is ready to be deployed onto the Polygon \(Matic\) Mumbai Testnet.
+Select` 0.6.6+commit.6c089d02` as the compiler and click the `Compile RandomNumber.sol` button to compile the contract. Once compiled, it is ready to be deployed onto the Mumbai testnet.
 
-Click on `Solidity Compiler` icon on the Sidebar.
+Click the Solidity Compiler icon on the sidebar again:
 
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img4.png)
 
-Select `Injected Web3 as the environment` in the dropdown. It will connect to your Metamask and find the network ID and account address.  80001 is the network ID for Polygon \(Matic\) Mumbai Testnet.
+Select "Injected Web3" as the environment in the dropdown. It will connect to your Metamask and find the network ID and account address. 80001 is the network ID for the Mumbai testnet.
 
-Select `RandomNumberConsumer - RandomNumber.sol` as the contract in the dropdown and click Deploy button.
+Now, select `RandomNumberConsumer - RandomNumber.sol` as the contract in the dropdown and click the Deploy button.
 
-Metamask should popup and click Confirm button to confirm the transaction.  This should deploy the contract to the 
-Polygon \(Matic\) Mumbai Testnet.
+Metamask should popup, allowing you to click the Confirm button to complete the transaction. This should deploy the contract to the Mumbai testnet.
 
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img5.png)
 
-You should see your deployed contract and transaction information.
-
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img6.png)
 
-### 5. Fund your contract with Link
-You will need to fund your contract with LINK token for random number to work.  Click on `Copy Icon` to copy your contract address.
+## Fund the contract with LINK
+You will need to fund your contract with LINK tokens to pay the Chainlink oracle for VRF to work. Click on the Copy Icon to copy your contract address.
 
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img7.png)
 
 Go to your Metamask:
-1) Click on the `Link` token
-2) Click on `Send` button
-3) Paste your contract address on the search bar
-4) Set Amount to `1` Link
-5) Click on `Next` button
-6) Click on `Confirm` button to confirm the transaction
+1) Click on the LINK token
+2) Click the Send button
+3) Paste your contract address into the search bar
+4) Set Amount to 1 LINK
+5) Click on the Next button
+6) Click the Confirm button to confirm the transaction
 
-You can go to this URL [https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/) to check your contract balances by entering your contract address on the search bar.
+You can go to the Mumbai block explorer [https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/) to check your contract balances by entering your contract address in the search bar.
 
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img8.png)
 
-### 6. Trying contract
-Click on this `Arrow Icon` to see your contract methods
+## Using the contract
+Click on the Arrow Icon to see your contract methods
 
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img9.png)
 
-Click on `getRandomNumber` button.  You should see a metamask popup.  Click on `Confirm` button to confirm the transaction.
+Click on the `getRandomNumber` button. You should see a Metamask popup. Click on Confirm to confirm the transaction.
 
-When the transaction is success, click on `randomResult` button and you should see a random number that is not zero.
+When the transaction is successful, click on the `randomResult` button and you should see a random number that is not zero!
 
 **Note:** It may take around 1 min for random number to change.
 
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img10.png)
 
-## Common Error
-If you get this error, it mean that your contract does not have enough `LINK` token and you should send some `LINK` token to your contract.
+# Possible errors & solutions
+If you get this error, it means that your contract does not have enough LINK token to pay the oracle fee. To solve this, you should send some LINK token to your contract address.
+
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img11.png)
 
+# Conclusion
+Congratulations! This tutorial introduced you to Chainlink Verifiable Random Function (VRF). Now you can generate random numbers in your smart contracts using the Chainlink oracle.
 
-## Conclusion
-Congratulates! This tutorial was aimed give introduction to Chainlink VRF.  Now you can generate random numbers in your smart contracts using Chainlink VRF.
+To learn more about Chainlink VRF, visit the [Chainlink docs](https://docs.chain.link/docs/chainlink-vrf/).
 
-To learn more about Chainlink VRF, visit [Chainklink Doc](https://docs.chain.link/docs/chainlink-vrf/).
+# About The Author
+This tutorial was created by [You Song Hou](https://github.com/ysongh) who is a full stack developer.
 
-## About The Author
-This tutorial was created by You Song Hou who is a full stack developer.
-
-## References
+# References
 - Chainlink VRF Documentation: https://docs.chain.link/docs/chainlink-vrf/
 - Polygon (Matic) Documentation: https://docs.matic.network/docs/develop/getting-started
