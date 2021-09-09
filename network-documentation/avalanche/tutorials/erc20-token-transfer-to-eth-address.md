@@ -4,35 +4,25 @@ description: Teaching how to Transfer ERC-20 tokens from C-chain to ETH address
 
 # Transfer ERC-20 tokens from the C-chain of your AVAX wallet to an ETH address
 
-## Introduction
+# Introduction
 
-Continuing the theme of transfers of tokens, in this tutorial, we are going to learn how to programmatically transfer ERC-20 tokens from the C-chain to an ETH wallet.
+Continuing the theme of transfers of tokens, in this tutorial, we are going to learn how to programmatically transfer ERC-20 tokens from the C-chain to a Metamask wallet
+
+# Prerequisites
+
+* [Create an Avalanche wallet](https://wallet.avax.network/create)
+* [Fund your Avalanche wallet with the FUJI Faucet](https://docs.avax.network/build/tutorials/platform/fuji-workflow#get-a-drip-from-the-fuji-faucet)
+* [Transfer FUJI Avax tokens from X-chain to C-chain](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain)
+* Having an integrated development environment, such as [Visual Studio Code](https://code.visualstudio.com/download)
+
+# Requirements
+
+* [NodeJS](https://nodejs.org/en)
+* [Ethers](https://docs.ethers.io/v5/) , which you can install with `npm install ethers`
+* Install [Metamask extension](https://metamask.io/download.html) in your browser.
+* [Configure your Metamask to add Avalanche FUJI testnet](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask)  
 
 ## Getting things set up
-
-Simply put, ERC-20 tokens are the tokens that meet the technical standards of the Ethereum blockchain. So, they natively reside on the Ethereum blockchain. Thanks to the C-chain's full Ethereum compatibility, one can transfer ERC-20 token using the Avalanche-Ethereum bridge, which can be found [here](https://aeb.xyz/#/transfer).
-
-However, for the tutorial, in order not to use tokens of real monetary value, we are going to do everything on the Fuji testnet. 
-
-So, before we proceed, we have to configure your Metamask wallet to work with the Fuji testnet of Avalanche. Also, we have to get on the [AVAX Fuji Testnet Faucet](https://faucet.avax-test.network/) and send some AVAX tokens to your Metamask wallet and the C-chain address of your private Avalanche wallet (the Fuji AVAX tokens are needed to pay transaction fees later on). 
-
-To configure your Metamask wallet, click to metamask icon on the browser and select the network drop-down menu. Here we should connect to C-Chain. Click to “Custom RPC”, as shown in the image below.
-
-![metamask_settings](https://miro.medium.com/max/408/0*0HGM4O_J5iF3943S) 
-
-Then, you will see several boxes (image below), which we need to fill with correct values for the Fuji testnet. 
-
-![boxes_empty](https://miro.medium.com/max/989/1*Y7O1bBeTWnuQBAqTnwmqUQ.png)
-
-Now, we need to set these boxes with correct values.
-
-For `Network Name`, type in `Avalanche FUJI C-Chain`. For `New RPC URL`, type in `https://api.avax-test.network/ext/bc/C/rpc`. For `ChainID`, type in `43113`. For `Symbol`, type in `AVAX`. For `Explorer`, type in `https://cchain.explorer.avax-test.network`. All this information could also be found from [here](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#fuji-testnet-settings).  
-
-Using the faucet to fund your wallets is simple. Refer to the image below in case you are confused. 
-
-![funding](https://i.imgur.com/Uj6zZr8.png)
-
-At this point, you should have AVAX both on the C-chain of your Avalanche private wallet and in your metamask wallet.
 
 For the purpose of this tutorial, I have created an ERC-20 token named AVAXDATAHUB and created an AVAXDATAHUB - AVAX liquidity pool on [Pangolin](https://app.pangolin.exchange/#/swap) on the Fuji testnet. Pangolin is a decentralized exchange built on Avalanche and it is compatible with the Fuji testnet as well, for testing purposes. 
 
