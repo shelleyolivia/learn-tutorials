@@ -1,37 +1,35 @@
 # Introduction
 In this tutorial we'll take a look at how to setup matchstick and write unit tests for the MasterChefV2 subgraph.  
-This tutorial will typically show a call to action in the form of a squarebox with a $.  
+This tutorial will typically show a call to action in the form of a codebox.  
 Please note that if you need help with or would like to explore the usage of any command referenced in this tutorial, add the --help flag after the command.  
-If you have any difficulty following this tutorial or simply want to discuss any tech with us you can join our community today!  
+If you have any difficulty following this tutorial, you can join our [discord](https://discord.gg/fszyM7K) for help!  
 
 # Prerequisites
 - Basic familiarity with a command-line interface.
 - Basic familiarity with Git & GitHub.
 - Basic familiarity with how TheGraph works.
-- Basic understanding of why unit tests are important.
+- Basic understanding of why [unit-tests](https://en.wikipedia.org/wiki/Unit_testing) are important.
 
 # Requirements
-## Tools Used
-
-- [git](https://git-scm.com/)
-- [nodejsv14+](https://nodejs.org/en/)
-- [mustache](https://mustache.github.io/)
-- [yarn](https://yarnpkg.com/)
+- [nodejs](https://nodejs.org/en/) v14+ (a minimum of 14.17.6 LTS is recommended)
 - [curl](https://curl.se/)
+- [git](https://git-scm.com/)
+- [yarn](https://yarnpkg.com/)
+- [mustache](https://mustache.github.io/)
 
 ## Getting the SushiSwap Subgraph
 ```sh
-$ git clone https://github.com/sushiswap/sushiswap-subgraph
+git clone https://github.com/sushiswap/sushiswap-subgraph
 ```  
 SushiSwap has a couple of different subgraphs. For this tutorial, we will go through the MasterChefV2 subgraph.  
 ```sh
-$ cd sushiswap-subgraph/subgraphs/masterchefV2
+cd sushiswap-subgraph/subgraphs/masterchefV2
 ```
 
 # Tutorial
 ## Installing and Building the MasterChefV2 SushiSwap Subgraph
 ```sh
-$ yarn
+yarn
 ```
 ```sh
 yarn install v1.22.11
@@ -44,15 +42,15 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 Done in 51.76s.
 ```
 ```sh
-$ yarn prepare:mainnet
+yarn prepare:mainnet
 ```
 ```sh
 yarn run v1.22.11
-$ mustache config/mainnet.json template.yaml > subgraph.yaml
+mustache config/mainnet.json template.yaml > subgraph.yaml
 Done in 0.09s.
 ```
 ```sh
-$ yarn codegen
+yarn codegen
 ```
 ```sh
 .
@@ -86,7 +84,7 @@ Change line 4 to ```import { getMasterChef } from './masterchef'```
 
 ## Continue Building the Subgraph
 ```sh
-$ yarn build
+yarn build
 ```
 ```sh
 Build completed: /home/user/sushiswap-subgraph/subgraphs/masterchefV2/build/subgraph.yaml
@@ -102,17 +100,17 @@ curl -OL https://github.com/LimeChain/matchstick/releases/download/0.1.2/binary-
 
 ### Install postgressql  
 ```sh 
-$ sudo apt install postgresql
+sudo apt install postgresql
 ```
 
 ### Installing Helpers  
 ```
-$ yarn add matchstick-as
+yarn add matchstick-as
 ```
 
 ### To check if matchstick is working correctly run
 ```sh
-$ ./matchstick --help
+./matchstick --help
 ```
 
 ```sh
@@ -134,7 +132,7 @@ ARGS:
 ### Creating Tests
 Create a folder in the current directory called tests  
 ```sh
-$ mkdir tests && cd tests && touch masterchefV2.test.ts
+mkdir tests && cd tests && touch masterchefV2.test.ts
 ```  
 Your test file (masterchefV2.test.ts) should be the same name as the mappingfile  
 ```
@@ -174,11 +172,11 @@ For now, it's required to remove/comment out the import.
 
 Run the Unit-Testing Framework
 ```sh
-$ yarn build && ./matchstick MasterChefV2
+yarn build && ./matchstick MasterChefV2
 ```
 
 You should see this appear on your screen.
-```sh
+```text
 Build completed: /home/user/sushiswap-subgraph/subgraphs/masterchefV2/build/subgraph.yaml
 
 Done in 4.16s.
@@ -381,7 +379,7 @@ assert.fieldEquals("Pool", "1000", "id", "1000");
 
 Run the tests again and you can see that our newly created test passes!
 ```sh
-$ yarn build && ./matchstick MasterChefV2
+yarn build && ./matchstick MasterChefV2
 ```
 
 ```sh
@@ -406,7 +404,7 @@ All tests passed! 😎
 2 tests executed in 21.93132ms.
 ```
 
-Here's the finalized ```masterchefV2.test.ts``` if you couldn't get it to work
+Here's the finalized ```masterchefV2.test.ts```, in case you couldn't get it to work:
 ```js
 import { Address, ethereum, BigInt } from "@graphprotocol/graph-ts";
 import { clearStore, test, assert, newMockEvent } from "matchstick-as/assembly/index";
@@ -468,11 +466,11 @@ export function runTests(): void {
 4. We went through how to write a simple unit test for the deposit function.
 
 # Next Steps
-1. Try changing ``` assert.fieldEquals("Pool", "1000", "id", "1000"); ``` to make the test fail.
-2. Try writing more unit tests.
+1. Try changing ```assert.fieldEquals("Pool", "1000", "id", "1000");``` to make the test fail!
+2. What other tests cases can you think of? Try writing more unit tests.
 
 # About the author
-- This tutorial was created by antonyip. He can be found on [Github](https://github.com/antonyip).
+- This tutorial was created by Anton Yip. He can be found on [Github](https://github.com/antonyip).
 
 # References
 - https://github.com/sushiswap/sushiswap-subgraph
