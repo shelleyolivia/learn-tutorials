@@ -263,7 +263,7 @@ The output of the script in the terminal should look similar to what is shown be
 
 You can confirm the result by looking at the change of the balance on Metamask as well.
 
-As you can see in the image below, my metamask balance did change to 5.97.
+As you can see in the image below, my metamask balance did change from 4.97 to 5.97.
 
 ![metamask_balance](https://i.imgur.com/CTIA5eu.png)
 
@@ -279,9 +279,9 @@ If you have enough AVAX on the C-chain but not enough AVAXDATAHUB token (or any 
 
 ![example](https://i.imgur.com/eB5ERwh.png)
 
-Then, make sure that you have enough ERC20 token balance on the C-chain of your AVAX wallet.
+Although the error message says something along the lines of gas cost estimate issues, the issue is not having sufficient balance of AVAXDATAHUB. Make sure that you have enough ERC20 token balance on the C-chain of your AVAX wallet.
 
-Conversely, if you have enough AVAXDATAHUB balance, but not enough AVAX 
+Conversely, if you have enough AVAXDATAHUB balance, but not enough AVAX token to pay for the transaction, the same error message is produced. Similarily, make sure that you have sufficient AVAX balance to pay for the transaction. 
 
 
 ## About the author
