@@ -304,8 +304,6 @@ As you can see in the image below, my metamask balance did change to 5.97.
 ## Wrapping Up
 
 That’s it! This tutorial has taught you how to transfer ERC-20 tokens from the C-chain to an ETH wallet. Remember that the C-chain uses the Ethereum Virtual Machine and is compatible with all of the key Ethereum tools.
-<<<<<<< HEAD
-=======
 
 ## About the author
 

@@ -1,7 +1,5 @@
 ---
-description: >-
-  Learn how to Transfer AVAX native tokens from Avalanche C-Chain to an Ethereum
-  address
+description: Learn how to Transfer AVAX native tokens from Avalanche C-Chain to an Ethereum address
 ---
 
 # Transfer AVAX tokens from the C-Chain to an ETH address
@@ -23,7 +21,6 @@ $ npm install ethers web3
 After installing the libraries, we are going to create a new file called `AVAX_C_chain_to_ETH_address.js` in the root directory of your project. Once you create a .js file under the specified name, we will type in the following blocks of code in. 
 
 First, we need to import them in order to use the libraries to interact with the Avalanche C chain.
-=======
 After installing the dependencies, we need to import them in order to use their functionality to interact with the Avalanche C-Chain:
 
 
