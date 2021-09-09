@@ -39,6 +39,11 @@ This code below is pointing to the Fuji network. Alternatively, we can point it 
 const web3 = new Web3(new Web3.providers.HttpProvider("https://api.avax-test.network/ext/bc/C/rpc"))
 ```
 
+Alternatively, the Datahub version would look as follows:
+
+```javascript
+const web3 = new Web3(new Web3.providers.HttpProvider(`https://avalanche--fuji--rpc.datahub.figment.io/apikey/${process.env.DATAHUB_AVALANCHE_API_KEY}/ext/bc/C/rpc`))
+```
 
 
 The private key is needed to execute a transfer later on. With the mnemonic phrase provided earlier, we can obtain the private key to your AVAX wallet in the ETH address format with the colde below.
