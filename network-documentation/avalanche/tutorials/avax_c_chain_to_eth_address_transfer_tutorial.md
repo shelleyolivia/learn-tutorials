@@ -26,7 +26,7 @@ After installing the libraries, we are going to create a new file called `AVAX_C
 First, we need to import them in order to use the libraries to interact with the Avalanche C chain.
 =======
 After installing the dependencies, we need to import them in order to use their functionality to interact with the Avalanche C-Chain:
->>>>>>> upstream/master
+
 
 ```javascript
 const Web3 = require("web3")
