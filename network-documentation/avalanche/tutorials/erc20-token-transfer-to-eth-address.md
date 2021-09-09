@@ -1,5 +1,5 @@
 ---
-description: Teaching how to Transfer ERC-20 tokens from C-chain to ETH address
+description: Learn ow to Transfer ERC-20 tokens from C-chain to ETH address
 ---
 
 # Transfer ERC-20 tokens from the C-chain of your AVAX wallet to an ETH address
@@ -64,19 +64,9 @@ What we have done up to this point has taught you that any ERC-20 token can be s
 
 ## Transfer of ERC-20 tokens from C-chain to ETH address
 
-Now, we are finally ready to start the actual tutorial on ERC-2O token transfer from the C-chain of an AVAX wallet to an ETH wallet.
+We are going to create a new file called `ERC20_fromC_to_ETH_address.js` in the root directory of your project. Once you create a .js file under the specified name, we will type in the following blocks of code in. 
 
-Similar to the previous C-chain to ETH address transfer of AVAX token transfer tutorial, we will start by installing an Ethereum library called `ethers`.
-
-```bash
-$ npm install ethers
-```
-
-If `ethers` is already installed from the previous tutorial, you can skip the installation. 
-
-After installing the library, we are going to create a new file called `ERC20_fromC_to_ETH_address.js` in the root directory of your project. Once you create a .js file under the specified name, we will type in the following blocks of code in. 
-
-First, we need to import the library installed earlier to interact with the Avalanche C chain
+First, we need to import `ethers` interact with the Avalanche C chain
 
 ```bash
 const { ethers } = require('ethers');
@@ -104,7 +94,7 @@ const wallet = new ethers.Wallet(pvtKey, provider);
 Transferring tokens from one wallet to another is a transaction. In order to perform a transaction, certain information needs to be provided. The token address \(also known as contract address\) of the ERC-20 token \(AVAXDATAHUB in this case\) needs to be provided. So, we are going to store the contract address and the ticker below. The token ticker is not needed, but we are adding it for our own use. A lot of the token contract addresses for Avalanche can be found [here](https://github.com/pangolindex/tokenlists/blob/main/aeb.tokenlist.json).
 
 ```bash
-const tokenAddress = "0x6089f3b5f97eCDc8d31f317C7b442580E4258ef7";  
+const tknAddr = "0x6089f3b5f97eCDc8d31f317C7b442580E4258ef7";  
 const token_name = "AVAXDATAHUB";
 ```
 Logically, we also need provide the destination address. Put the destination address between the quotation marks.
@@ -182,13 +172,6 @@ getBalance()
     sendToken()
       .then(_tx => {
         console.log("Transfer successful!");
-
-        // Log final destination address balance
-        getBalance()
-          .then(finalBalance => {
-            console.log("Final destination balance: ", finalBalance);
-          })
-          .catch(console.error);
       })
       .catch(console.error);
   })
@@ -206,7 +189,7 @@ const walletMnemonic = new ethers.Wallet.fromMnemonic(mnemonic);
 const pvtKey  = walletMnemonic.privateKey;
 const wallet = new ethers.Wallet(pvtKey, provider);
 
-const tokenAddress = "0x6089f3b5f97eCDc8d31f317C7b442580E4258ef7";  
+const tknAddr = "0x6089f3b5f97eCDc8d31f317C7b442580E4258ef7";  
 const token_name = "AVAXDATAHUB";
 const toAddr = "";
 
@@ -266,13 +249,6 @@ getBalance()
     sendToken()
       .then(_tx => {
         console.log("Transfer successful!");
-
-        // Log final destination address balance
-        getBalance()
-          .then(finalBalance => {
-            console.log("Final destination balance: ", finalBalance);
-          })
-          .catch(console.error);
       })
       .catch(console.error);
   })
