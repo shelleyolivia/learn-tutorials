@@ -11,7 +11,7 @@ In this tutorial, we are going to learn how to programatically transfer native A
 # Requirements
 
 * [NodeJS](https://nodejs.org/en)
-* Ethers and Web3, which you can install with `npm install ethers web3`
+* [Ethers](https://docs.ethers.io/v5/) and [web3](https://web3js.readthedocs.io/en/v1.5.2/), which you can install with `npm install ethers web3`
 * Install [Metamask extension](https://metamask.io/download.html) in your browser.
 
 # Transfer AVAX 
