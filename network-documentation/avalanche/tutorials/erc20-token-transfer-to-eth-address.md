@@ -1,12 +1,6 @@
----
-description: Learn ow to Transfer ERC-20 tokens from C-chain to ETH address
----
-
-# Transfer ERC-20 tokens from the C-chain of your AVAX wallet to an ETH address
-
 # Introduction
 
-Continuing the theme of transfers of tokens, in this tutorial, we are going to learn how to programmatically transfer ERC-20 tokens from the C-chain to a Metamask wallet
+Continuing with the theme of token transfers, in this tutorial we are going to learn how to programmatically transfer ERC-20 tokens from the Avalanche C-chain to a Metamask wallet.
 
 # Prerequisites
 
@@ -33,7 +27,7 @@ Go on [Pangolin](https://app.pangolin.exchange/#/swap) and swap AVAX on your Met
 
 ![AVAXDATAHUB](https://i.imgur.com/CCUNU5z.png) 
 
-After the swap, go back to Metamask, click on `Add Token` and type in the contract address as shown in the image below. Without manually adding the AVAXDATAHUB token, it will not show up on your Metamask.  
+After the swap, go back to Metamask, click on "Add Token" and type in the contract address as shown in the image below. Without manually adding the AVAXDATAHUB token, it will not show up on your Metamask.
 
 ![AVAXDATAHUB_IN_METAMASK](https://i.imgur.com/K8YgMrY.png)
 
@@ -53,7 +47,7 @@ However, when logging into your Avalanche wallet, you will not be able to see th
 
 In order to view those tokens, you have to add the token contract address.
 
-Click on `Add Token` below the coin list of the wallet and type in the AVAXDATAHUB contract address, then the rest of the information should automatically be loaded, as shown in the image below.
+Click on "Add Token" below the coin list of the wallet and type in the AVAXDATAHUB contract address, then the rest of the information should automatically be loaded, as shown in the image below.
 
 ![contract_address_typed](https://i.imgur.com/r8aglQ9.png)
 
@@ -67,46 +61,46 @@ What we have done up to this point has taught you that any ERC-20 token can be s
 
 We are going to create a new file called `ERC20_fromC_to_ETH_address.js` in the root directory of your project. Once you create a .js file under the specified name, we will type in the following blocks of code in. 
 
-First, we need to import `ethers` interact with the Avalanche C chain
+First, we need to import the `ethers` library to interact with the Avalanche C chain
 
-```bash
+```javascript
 const { ethers } = require('ethers');
 ```
 
 The mnemonic key from your AVAX wallet needs to go between the quotation marks below. This is later used to extract the C chain wallet address.
 
-```bash
+```javascript
 const mnemonic = "";
 ```
 
 The code below is pointing to AVAX mainnet.
 
-```bash
+```javascript
 const provider = new ethers.providers.JsonRpcProvider('https://api.avax-test.network/ext/bc/C/rpc');
 ```
 
 With the mnemonic phrase provided earlier, we can extract the corresponding ETH wallet private key. With this, we can unlock the Avalanche C-chain wallet and sign transactions, which is accomplished with the code below.
 
-```bash
+```javascript
 const walletMnemonic = new ethers.Wallet.fromMnemonic(mnemonic);
 const pvtKey  = walletMnemonic.privateKey;
 const wallet = new ethers.Wallet(pvtKey, provider);
 ```
 Transferring tokens from one wallet to another is a transaction. In order to perform a transaction, certain information needs to be provided. The token address \(also known as contract address\) of the ERC-20 token \(AVAXDATAHUB in this case\) needs to be provided. So, we are going to store the contract address and the ticker below. The token ticker is not needed, but we are adding it for our own use. A lot of the token contract addresses for Avalanche can be found [here](https://github.com/pangolindex/tokenlists/blob/main/aeb.tokenlist.json).
 
-```bash
+```javascript
 const tknAddr = "0x6089f3b5f97eCDc8d31f317C7b442580E4258ef7";  
 const token_name = "AVAXDATAHUB";
 ```
 Logically, we also need provide the destination address. Put the destination address between the quotation marks.
 
-```bash
+```javascript
 const toAddr = "";
 ```
 
 Another piece needed for issuing a transaction is what's called the ABI. The Contract Application Binary Interface \(ABI\) is the standard way to interact with contracts in the Ethereum ecosystem. The format of the ABI is provided [here](https://docs.ethers.io/v5/getting-started/#getting-started--contracts).
 
-```bash
+```javascript
 const tknAbi = [
   // Some details about the token
   "function name() view returns (string)",
@@ -124,7 +118,7 @@ const tknAbi = [
 ```
 Although it is not necessary to print the AVAXDATAHUB balance of the destination wallet address to perform a transfer, we will show here how to read the balance of a certain token. 
 
-```bash
+```javascript
 const getBalance = async () => {
   // Create Contract object connected to provider
   const tknContract = new ethers.Contract(tknAddr, tknAbi, provider);
@@ -141,9 +135,9 @@ const getBalance = async () => {
 }
 ```
 
-Now, we are going to define `sendToken` function, which will execute a transfer of 1 AVAXDATAHUB token from the C-chain of the Avalanche wallet to the ETH destination address.
+Now, we are going to define the `sendToken` function, which will execute a transfer of 1 AVAXDATAHUB token from the C-chain of the Avalanche wallet to the ETH destination address.
 
-```bash
+```javascript
 const sendToken = async () => {
   if (provider === null || wallet === null) {
     console.error("Encountered null object, unable to send token.");
@@ -164,7 +158,7 @@ const sendToken = async () => {
 ```
 Now that we have the functions to read the balance and execute a transfer, we are ready to implement them. The code below reads the balance before and after the transfer of 1 AVAXDATAHUB token. 
 
-```bash
+```javascript
 getBalance()
   .then(initBalance => {
     console.log("Initial destination balance: ", initBalance);
@@ -176,12 +170,12 @@ getBalance()
       })
       .catch(console.error);
   })
-  .catch(console.error);
+.catch(console.error);
   ```
 At this point, you have gone through the entire script.
 
 The finished script should look as follows:
-```bash
+```javascript
 const { ethers } = require('ethers');
 const mnemonic = "";
 const provider = new ethers.providers.JsonRpcProvider('https://api.avax-test.network/ext/bc/C/rpc');
@@ -253,10 +247,10 @@ getBalance()
       })
       .catch(console.error);
   })
-  .catch(console.error);
+.catch(console.error);
 ```
 
-To run the script `ERC20_fromC_to_ETH_address.js`, type `node ERC20_fromC_to_ETH_address.js` and run it in your terminal (`node` before the file name is for NodeJs runtime.environment).
+To run the script `ERC20_fromC_to_ETH_address.js`, type `node ERC20_fromC_to_ETH_address.js` and run it in your terminal (node before the file name is the way to invoke the NodeJS runtime environment).
 
 The output of the script in the terminal should look similar to what is shown below.
 
@@ -264,7 +258,7 @@ The output of the script in the terminal should look similar to what is shown be
 
 You can confirm the result by looking at the change of the balance on Metamask as well.
 
-As you can see in the image below, my metamask balance did change from 4.97 to 5.97.
+As you can see in the image below, the balance did change from 4.97 to 5.97.
 
 ![metamask_balance](https://i.imgur.com/CTIA5eu.png)
 
@@ -285,6 +279,6 @@ Although the error message says something along the lines of gas cost estimate i
 Conversely, if you have enough AVAXDATAHUB balance, but not enough AVAX token to pay for the transaction, the same error message is produced. Similarily, make sure that you have sufficient AVAX balance to pay for the transaction. 
 
 
-# About the author
+# About the Author
 
 This tutorial was created by [Seongwoo Oh](https://github.com/blackwidoq). He is a student and an Avalanche novice.
