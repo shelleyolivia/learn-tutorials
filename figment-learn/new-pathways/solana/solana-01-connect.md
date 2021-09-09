@@ -57,7 +57,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once the code above is saved, refresh the page to see it update & display the current version of the Solana software!
 
-![](../../../.gitbook/assets/solana-connect.gif)
+![](../../../.gitbook/assets/pathways/solana/solana-connect.gif)
 
 -----------------------------
 

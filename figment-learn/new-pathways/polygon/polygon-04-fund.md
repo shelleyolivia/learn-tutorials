@@ -76,11 +76,11 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 When you have completed the code, the **Check Balance** button will function. Click it to view the balance of the connected account:
 
-![](../../../.gitbook/assets/polygon-fund-v2.gif)
+![](../../../.gitbook/assets/pathways/polygon/polygon-balance.gif)
 
 -------------------------------------
 
 # Conclusion
 
-Now that we have a funded Polygon account, we can use our MATIC tokens to deploy a smart contract.  
-In the next tutorial, we will cover writing, testing and deploying the Solidity code using Truffle - a popular smart contract development suite.
+Now that we have an account that has been funded with **MATIC** tokens, we are ready to make a transfer to another account!
+

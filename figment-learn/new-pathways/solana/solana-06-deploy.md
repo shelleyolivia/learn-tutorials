@@ -4,6 +4,101 @@ A **program** is to Solana what a **smart contract** is to other protocols. Once
 [You can learn more about Solana's programs here](https://docs.solana.com/developing/on-chain-programs/overview).
 {% endhint %}
 
+# Smart contract review
+
+There is a `program` folder at the app's root. It contains the Rust program `contracts/solana/program/src/lib.rs` and some configuration files to help us compile and deploy it.
+
+**It's a simple program, all it does is increment a number every time it's called.**
+
+Let’s dissect what each part does.
+
+```rust
+use borsh::{BorshDeserialize, BorshSerialize};
+use solana_program::{
+    account_info::{next_account_info, AccountInfo},
+    entrypoint,
+    entrypoint::ProgramResult,
+    msg,
+    program_error::ProgramError,
+    pubkey::Pubkey,
+};
+```
+
+[`use` declarations](https://doc.rust-lang.org/reference/items/use-declarations.html) are convenient shortcuts to other code. In this case, the serialize and de-serialize functions from the [borsh](https://borsh.io/) crate. borsh stands for _**B**inary **O**bject **R**epresentation **S**erializer for **H**ashing_.  
+A [crate](https://learning-rust.github.io/docs/a4.cargo,crates_and_basic_project_structure.html#Crate) is a collection of source code which can be distributed and compiled together. Learn more about [Cargo, Crates and basic project structure](https://learning-rust.github.io/docs/a4.cargo,crates_and_basic_project_structure.html).
+
+We also `use` portions of the `solana_program` crate :
+
+* A function to return the next `AccountInfo` as well as the  struct for `AccountInfo` ;
+* The `entrypoint` macro and related `entrypoint::ProgramResult` ;
+* The `msg` macro, for low-impact logging on the blockchain ;
+* `program_error::ProgramError` which allows on-chain programs to implement program-specific error types and see them returned by the Solana runtime. A program-specific error may be any type that is represented as or serialized to a u32 integer ;
+* The `pubkey::Pubkey` struct.
+
+Next we will use the `derive` macro to generate all the necessary boilerplate code to wrap our `GreetingAccount` struct. This happens behind the scenes during compile time [with any `#[derive()]` macros](https://doc.rust-lang.org/reference/procedural-macros.html#derive-macros). Rust macros are a rather large topic to take in, but well worth the effort to understand. For now, just know that this is a shortcut for boilerplate code that is inserted at compile time.
+
+The struct declaration itself is simple, we are using the `pub` keyword to declare our struct publicly accessible, meaning other programs and functions can use it. The `struct` keyword is letting the compiler know that we are defining a struct named `GreetingAccount` , which has a single field : `counter` with a type of `u32` , an unsigned 32-bit integer. This means our counter cannot be larger than [`4,294,967,295`](https://en.wikipedia.org/wiki/4,294,967,295).
+
+```rust
+#[derive(BorshSerialize, BorshDeserialize, Debug)]
+pub struct GreetingAccount {
+    pub counter: u32,
+}
+```
+
+Next, we declare an entry point - the `process_instruction` function :
+
+```rust
+entrypoint!(process_instruction);
+
+pub fn process_instruction(
+    program_id: &Pubkey, 
+    accounts: &[AccountInfo],
+    _instruction_data: &[u8],
+) -> ProgramResult {
+    msg!("Hello World Rust program entrypoint");
+    let accounts_iter = &mut accounts.iter();
+    let account = next_account_info(accounts_iter)?;
+```
+
+* The return value of the `process_instruction` entrypoint will be a `ProgramResult` .  
+[`Result`](https://doc.rust-lang.org/std/result/enum.Result.html) comes from the `std` crate and is used to express the possibility of error.
+* For [debugging](https://docs.solana.com/developing/on-chain-programs/debugging), we can print messages to the Program Log [with the `msg!()` macro](https://docs.rs/solana-program/1.7.3/solana_program/macro.msg.html), rather than use `println!()` which would be prohibitive in terms of computational cost for the network.
+* The `let` keyword in Rust binds a value to a variable. By looping through the `accounts` using an [iterator](https://doc.rust-lang.org/book/ch13-02-iterators.html), `accounts_iter` is taking a [mutable reference](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#mutable-references) of each value in `accounts`. Then `next_account_info(accounts_iter)?`will return the next `AccountInfo` or a `NotEnoughAccountKeys` error. Notice the `?` at the end, this is a [shortcut expression](https://doc.rust-lang.org/std/result/#the-question-mark-operator-) in Rust for [error propagation](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#propagating-errors).
+
+```rust
+if account.owner != program_id {
+  msg!("Greeted account does not have the correct program id");
+  return Err(ProgramError::IncorrectProgramId);
+}
+```
+
+We will perform a security check to see if the account owner has permission. If the `account.owner` public key does not equal the `program_id` we will return an error.
+
+```rust
+let mut greeting_account = GreetingAccount::try_from_slice(&account.data.borrow())?;
+greeting_account.counter += 1;
+greeting_account.serialize(&mut &mut account.data.borrow_mut()[..])?;
+
+msg!("Greeted {} time(s)!", greeting_account.counter);
+
+Ok(())
+```
+
+Finally we get to the good stuff where we "borrow" the existing account data, increase the value of `counter` by one and write it back to storage.
+
+* The `GreetingAccount` struct has only one field - `counter`. To be able to modify it, we need to borrow the reference to `account.data` with the `&`[borrow operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#borrow-operators). 
+* The `try_from_slice()` function from `BorshDeserialize`will mutably reference and deserialize the `account.data`. 
+* The `borrow()` function comes from the Rust core library, and exists to immutably borrow the wrapped value. 
+
+Taken together, this is saying that we will borrow the account data and pass it to a function that will deserialize it and return an error if one occurs. Recall that `?` is for error propagation.
+
+Next, incrementing the value of `counter` by `1` is simple, using the addition assignment operator : `+=` .
+
+With the `serialize()` function from `BorshSerialize`, the new `counter` value is sent back to Solana in the correct format. The mechanism by which this occurs is the [Write trait](https://doc.rust-lang.org/std/io/trait.Write.html) from the `std::io` crate.
+
+We can then show in the Program Log how many times the count has been incremented by using the `msg!()` macro.
+
 -----------------------------------------
 
 # Set up the Solana CLI
@@ -201,7 +296,7 @@ Once you have the code above saved:
 * Copy and paste the generated address in the text input.   
 * Click on **Check ProgramId** 
 
-![](../../../.gitbook/assets/solana-deploy-03-v3.gif)
+![](../../../.gitbook/assets/pathways/solana/solana-deploy.gif)
 
 For the rest of the challenge we'll keep this programId in the localStorage of our application.
 

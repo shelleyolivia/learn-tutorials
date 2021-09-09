@@ -81,7 +81,7 @@ When you have completed the code:
 * Copy-Paste your **mnemonic**
 * Click on **Restore Account**
 
-![](../../../.gitbook/assets/polygon-restore-v2.gif)
+![](../../../.gitbook/assets/pathways/polygon/polygon-restore.gif)
 
 -------------------------------------
 

@@ -81,7 +81,7 @@ The amount returned by is denominated in **μSCRT**, so to convert it to **SCRT*
 
 Once the code is complete and the file is saved, Next.js will rebuild the API route. Click on **Check Balance** and you should see the balance displayed on the page:
 
-![](../../../.gitbook/assets/pathways/secret/secret-balance.png)
+![](../../../.gitbook/assets/pathways/secret/secret-balance.gif)
 
 -----------------------------
 

@@ -58,7 +58,7 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 Now click on **Create Account** and you should see:
 
-![](../../../.gitbook/assets/pathways/near/near-create-account.gif)
+![](../../../.gitbook/assets/pathways/near/near-account.gif)
 
 -----------------------------
 

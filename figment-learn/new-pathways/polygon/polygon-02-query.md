@@ -67,7 +67,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once the code above save you can click on **Query Polygon** and let's the magic happen.
 
-![](../../../.gitbook/assets/polygon-query-v2.gif)
+![](../../../.gitbook/assets/pathways/polygon/polygon-query.gif)
 
 -------------------------------------
 
