@@ -13,6 +13,7 @@ In this tutorial, we are going to learn how to programatically transfer native A
 * [NodeJS](https://nodejs.org/en)
 * [Ethers](https://docs.ethers.io/v5/) and [web3](https://web3js.readthedocs.io/en/v1.5.2/), which you can install with `npm install ethers web3`
 * Install [Metamask extension](https://metamask.io/download.html) in your browser.
+* [Configure your Metamask to add Avalanche FUJI testnet](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask)  
 
 # Transfer AVAX 
 
@@ -81,9 +82,6 @@ Moving on, copy and paste your ETH destination address beween the quotation mark
 ```javascript
            to:"",
 ```
-You should be able to get your Metamask wallet address as shown in the image below.
-
-![example](https://metamask.zendesk.com/hc/article_attachments/360083558531/blobid0.png)
 
 Below, we need to input how many tokens are to be transferred out of your AVAX wallet off the C chain. Currently the amount is arbitrarily set to 0.15 AVAX tokens as an example \(0.15 tokens in the line below\).
 
@@ -159,6 +157,10 @@ This tutorial has taught you how to transfer AVAX native tokens from the C chain
 
 Try transferring your Fuji AVAX tokens by running this script and see if it worked.
 
+When everything was run as expected, the output in the terminal should look similar to what we have below.
+
+![example](https://i.imgur.com/yr6nkto.png)
+
 # Troubleshooting
 
 ## Transaction Failure
@@ -168,6 +170,10 @@ Try transferring your Fuji AVAX tokens by running this script and see if it work
 Not having sufficient balance would result in the following error in your terminal. 
 
 ![example](https://i.imgur.com/Jh2a6Yl.png)  
+
+Make sure that your balance on the C-chain is sufficient as shown below
+
+![example](https://i.imgur.com/d2QFBU0.png)
 
 ## About the author
 
