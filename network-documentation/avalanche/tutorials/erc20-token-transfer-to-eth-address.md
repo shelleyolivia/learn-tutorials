@@ -310,5 +310,3 @@ That’s it! This tutorial has taught you how to transfer ERC-20 tokens from the
 ## About the author
 
 This tutorial was created by [Seongwoo Oh](https://github.com/blackwidoq). He is a student and an Avalanche novice.
-
->>>>>>> upstream/master
