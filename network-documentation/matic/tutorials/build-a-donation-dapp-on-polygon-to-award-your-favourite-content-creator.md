@@ -8,12 +8,12 @@ This is what the dApp we will be creating looks like:
 
 # Prerequisites
 
-To successfully follow along with this tutorial, you will need a basic knowledge and understanding of blockchain, Solidity smart contracts and React (we will use the Next.js framework) for frontend.
+To successfully follow along with this tutorial, you will need a basic knowledge and understanding of blockchain, Solidity smart contracts and React.
 
 # Requirements
 
 - You will need Metamask installed in your browser from the official site <https://metamask.io>.
-- We recommend using the LTS version due to security vulnerabilities in the 12.x branch. 12.0.1 would be affected.
+- You must have a recent version of Node.js installed. We recommend using v14.17.6 LTS for compatibility.
 
 ### Other technologies used in this tutorial
 
@@ -37,7 +37,7 @@ Topics covered in this tutorial:
 
 # Project setup
 
-To set up the project files, we will have to install a few packages using the node package manager npm. This software comes bundled with recent versions of Node.js, but you will still want to make sure it is installed with the command npm -v. Run the following commands in order to install the packages and create the project directories:
+To set up the project files, we will have to install a few packages using the node package manager npm. This software comes bundled with recent versions of Node.js, but you will still want to make sure it is installed with the command `npm -v`. Run the following commands in order to install the packages and create the project directories:
 
 ```bash
 npm install -g truffle # Install truffle globally so that you can use truffle from any directory
@@ -108,7 +108,7 @@ contract DonationContract {
 - `mapping(uint256 => Image) public images` is a mapping that stores all the images, where the key is the `id` and value is the `Image` struct.
 - `ImageCreated` and `DonateImage` are the events emitted on the blockchain that our dApp can listen for, and function accordingly.
 
-```
+```javascript
 // Create an Image
 function uploadImage(string memory _imgHash, string memory _description) public {
   require(bytes(_imgHash).length > 0);
