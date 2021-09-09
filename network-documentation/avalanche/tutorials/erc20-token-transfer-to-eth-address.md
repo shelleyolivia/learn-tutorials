@@ -14,6 +14,7 @@ Continuing the theme of transfers of tokens, in this tutorial, we are going to l
 * [Fund your Avalanche wallet with the FUJI Faucet](https://docs.avax.network/build/tutorials/platform/fuji-workflow#get-a-drip-from-the-fuji-faucet)
 * [Transfer FUJI Avax tokens from X-chain to C-chain](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain)
 * Having an integrated development environment, such as [Visual Studio Code](https://code.visualstudio.com/download)
+* Familiarity with the use of a DEX such as Pangolin and [the concept of token swap](https://www.youtube.com/watch?v=kNQp4t03lOQ)
 
 # Requirements
 
