@@ -20,7 +20,6 @@ We will install the ethers.js library by entering the following line into the te
 $ npm install ethers web3
 ```
 
-<<<<<<< HEAD
 After installing the libraries, we are going to create a new file called `AVAX_C_chain_to_ETH_address.js` in the root directory of your project. Once you create a .js file under the specified name, we will type in the following blocks of code in. 
 
 First, we need to import them in order to use the libraries to interact with the Avalanche C chain.
@@ -109,7 +108,7 @@ main().catch((err) => {
     console.error(err)
 })
 ```
-At this point, the transfer should have completed. `console.log(`Transaction successful with hash: ${createReceipt.transactionHash}`)` outputs the transaction has in your terminal. This is your transaction record. An example output is shown below.
+At this point, the transfer should have completed. `Transaction successful with hash: ${createReceipt.transactionHash}` outputs the transaction has in your terminal. This is your transaction record. An example output is shown below.
 
 ![example](https://i.imgur.com/6uoCE6w.png)  
 
