@@ -106,6 +106,8 @@ main().catch((err) => {
 ```
 At this point, the transfer should have completed. `Transaction successful with hash: ${createReceipt.transactionHash}` outputs the transaction has in your terminal. This is your transaction record. 
 
+At this point, the transfer should have completed. \`Transaction successful with hash: ${createReceipt.transactionHash}\` outputs the transaction hash to the terminal. This is your transaction record.
+
 At this point, you have gone through the entire script. 
 
 The finished script should look as follows:
