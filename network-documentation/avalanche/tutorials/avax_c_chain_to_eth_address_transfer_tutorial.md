@@ -57,11 +57,7 @@ async function main(){
         }
     })
 ```
-`console.log(web3.utils.fromWei(result, "ether") + " AVAX")` is what outputs the current balance on the C-chain of the sender's wallet. An example output is shown below.
-
-![example](https://i.imgur.com/x5yIjun.png)
-
-1.2765651 is the AVAX balance I had in my wallet at the time.
+`console.log(web3.utils.fromWei(result, "ether") + " AVAX")` is what outputs the current balance on the C-chain of the sender's wallet. 
 
 The block below is to view the \# of transactions associated with the wallet address \(not necessary for the purpose of AVAX transfer from C chain to an ETH address\) but could be useful when you later want to transfer an ERC20 token.
 
@@ -73,11 +69,9 @@ The block below is to view the \# of transactions associated with the wallet add
            gas: 21000,
 ```
 
-`web3.eth.getTransactionCount(wallet.address).then(console.log)` is the portion of the script that outputs the number of transactions that have happened in the account so far. An example output is shown below.
+`web3.eth.getTransactionCount(wallet.address).then(console.log)` is the portion of the script that outputs the number of transactions that have happened in the account so far. 
 
-![example](https://i.imgur.com/YMrtSdZ.png)  
-
-Moving on, copy and paste your ETH destination address beween the quotation marks below
+Moving on, copy and paste your Metamask wallet address (or any ETH format address) beween the quotation marks below
 
 ```javascript
            to:"",
@@ -102,9 +96,7 @@ main().catch((err) => {
     console.error(err)
 })
 ```
-At this point, the transfer should have completed. `Transaction successful with hash: ${createReceipt.transactionHash}` outputs the transaction has in your terminal. This is your transaction record. An example output is shown below.
-
-![example](https://i.imgur.com/6uoCE6w.png)  
+At this point, the transfer should have completed. `Transaction successful with hash: ${createReceipt.transactionHash}` outputs the transaction has in your terminal. This is your transaction record. 
 
 At this point, you have gone through the entire script. 
 
