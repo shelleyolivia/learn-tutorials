@@ -13,6 +13,7 @@ In this tutorial, we are going to learn how to programatically transfer native A
 * [Create an Avalanche wallet](https://wallet.avax.network/create)
 * [Fund your Avalanche wallet with the FUJI Faucet](https://docs.avax.network/build/tutorials/platform/fuji-workflow#get-a-drip-from-the-fuji-faucet)
 * [Transfer FUJI Avax tokens from X-chain to C-chain](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain)
+* [Having an integrated development environment, such as Visual Studio Code](https://code.visualstudio.com/download)
 
 # Requirements
 
@@ -23,7 +24,7 @@ In this tutorial, we are going to learn how to programatically transfer native A
 
 # Transfer AVAX 
 
-After installing the libraries, we are going to create a new file called `AVAX_C_chain_to_ETH_address.js` in the root directory of your project. Once you create a .js file under the specified name, we will type in the following blocks of code in. 
+We are going to start by creating a new file called `AVAX_C_chain_to_ETH_address.js` in the root directory of your project. Once you create a .js file under the specified name, we will type in the following blocks of code in. 
 
 First, we need to import Ethers and Web3 libraries mentioned under requirements in order to interact with the Avalanche C chain.
 
