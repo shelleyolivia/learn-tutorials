@@ -6,7 +6,13 @@ description: Learn how to Transfer AVAX native tokens from Avalanche C-Chain to 
 
 # Introduction
 
-In this tutorial, we are going to learn how to programatically transfer native AVAX tokens from the Avalanche C-Chain to an ETH wallet.
+In this tutorial, we are going to learn how to programatically transfer native AVAX tokens from the Avalanche C-Chain to a Metamask wallet.
+
+# Prerequisites
+
+* [Create an Avalanche wallet](https://wallet.avax.network/create)
+* [Fund your Avalanche wallet with the FUJI Faucet](https://docs.avax.network/build/tutorials/platform/fuji-workflow#get-a-drip-from-the-fuji-faucet)
+* [Transfer FUJI Avax tokens from X-chain to C-chain](https://docs.avax.network/build/tutorials/platform/transfer-avax-between-x-chain-and-c-chain)
 
 # Requirements
 
