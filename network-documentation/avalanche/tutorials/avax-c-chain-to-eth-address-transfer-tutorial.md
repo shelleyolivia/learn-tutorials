@@ -104,7 +104,6 @@ main().catch((err) => {
     console.error(err)
 })
 ```
-At this point, the transfer should have completed. `Transaction successful with hash: ${createReceipt.transactionHash}` outputs the transaction has in your terminal. This is your transaction record. 
 
 At this point, the transfer should have completed. \`Transaction successful with hash: ${createReceipt.transactionHash}\` outputs the transaction hash to the terminal. This is your transaction record.
 
@@ -151,11 +150,11 @@ main().catch((err) => {
 })
 ```
 
-To run the script `AVAX_C_chain_to_ETH_address.js`, type `node AVAX_C_chain_to_ETH_address.js` and run it in your terminal (`node` before the file name is for NodeJs runtime.environment).
+To run the script `AVAX_C_chain_to_ETH_address.js`, type `node AVAX_C_chain_to_ETH_address.js` and run it in your terminal (`node` before the file name is the way to invoke the NodeJS runtime environment).
 
 # Conclusion
 
-This tutorial has taught you how to transfer AVAX native tokens from the C chain to an ETH wallet. Also, this has shown how Avalanche blockchain C chain is compatible with the usual web3 library. This is a powerful aspect of the Avalanche blockchain, as it allows Ethereum developers to easily port their work over to the Avalanche side.
+This tutorial has taught you how to transfer AVAX native tokens from the C chain to an ETH wallet. Also, this has shown how Avalanche blockchain C chain is compatible with the popular web3.js library. This is a powerful aspect of the Avalanche blockchain, as it allows Ethereum developers to easily port their work over to Avalanche.
 
 Try transferring your Fuji AVAX tokens by running this script and see if it worked.
 
