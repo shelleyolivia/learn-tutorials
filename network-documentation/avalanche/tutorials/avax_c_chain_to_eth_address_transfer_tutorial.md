@@ -81,6 +81,9 @@ Moving on, copy and paste your ETH destination address beween the quotation mark
 ```javascript
            to:"",
 ```
+You should be able to get your Metamask wallet address as shown in the image below.
+
+![example](https://metamask.zendesk.com/hc/article_attachments/360083558531/blobid0.png)
 
 Below, we need to input how many tokens are to be transferred out of your AVAX wallet off the C chain. Currently the amount is arbitrarily set to 0.15 AVAX tokens as an example \(0.15 tokens in the line below\).
 
