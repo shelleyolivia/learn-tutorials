@@ -1,9 +1,3 @@
----
-description: Learn how to Transfer AVAX native tokens from Avalanche C-Chain to an Ethereum address
----
-
-# Transfer AVAX tokens from the C-Chain to an ETH address
-
 # Introduction
 
 In this tutorial, we are going to learn how to programatically transfer native AVAX tokens from the Avalanche C-Chain to a Metamask wallet.
@@ -44,6 +38,8 @@ This code below is pointing to the Fuji network. Alternatively, we can point it 
 ```javascript
 const web3 = new Web3(new Web3.providers.HttpProvider("https://api.avax-test.network/ext/bc/C/rpc"))
 ```
+
+
 
 The private key is needed to execute a transfer later on. With the mnemonic phrase provided earlier, we can obtain the private key to your AVAX wallet in the ETH address format with the colde below.
 
@@ -109,7 +105,7 @@ At this point, you have gone through the entire script.
 
 The finished script should look as follows:
 
-```bash
+```javascript
 const Web3 = require("web3")
 const { ethers } = require('ethers')
 let mnemonic = "";
