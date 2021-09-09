@@ -383,7 +383,7 @@ Run the tests again and you can see that our newly created test passes!
 yarn build && ./matchstick MasterChefV2
 ```
 
-```sh
+```text
 Build completed: /home/user/sushiswap-subgraph/subgraphs/masterchefV2/build/subgraph.yaml
 
 Done in 4.16s.
