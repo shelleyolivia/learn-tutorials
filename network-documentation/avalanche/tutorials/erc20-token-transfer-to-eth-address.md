@@ -285,6 +285,6 @@ Although the error message says something along the lines of gas cost estimate i
 Conversely, if you have enough AVAXDATAHUB balance, but not enough AVAX token to pay for the transaction, the same error message is produced. Similarily, make sure that you have sufficient AVAX balance to pay for the transaction. 
 
 
-## About the author
+# About the author
 
 This tutorial was created by [Seongwoo Oh](https://github.com/blackwidoq). He is a student and an Avalanche novice.

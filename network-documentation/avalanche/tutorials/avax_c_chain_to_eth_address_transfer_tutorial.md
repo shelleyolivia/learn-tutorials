@@ -174,7 +174,7 @@ Make sure that your balance on the C-chain is sufficient as shown below
 
 ![example](https://i.imgur.com/d2QFBU0.png)
 
-## About the author
+# About the author
 
 This tutorial was created by [Seongwoo Oh](https://github.com/blackwidoq). He is a student and an Avalanche novice.
 
