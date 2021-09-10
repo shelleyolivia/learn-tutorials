@@ -23,9 +23,10 @@ In `pages/api/solana/fund.ts`, implement the `fund` function. Convert the text i
 ```typescript
 //..
   try {
-    const url = getSafeUrl();
+    const {network, address} = req.body;
+    const url = getNodeURL(network);
     const connection = new Connection(url, "confirmed");
-    const address = req.body.address as PublicKey;
+    const publicKey = new PublicKey(address);
     const publicKey = undefined;
     const hash = undefined;
     await undefined;
@@ -53,13 +54,13 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```typescript
 //..
   try {
-    const url = getSafeUrl();
-    const connection = new Connection(url, "confirmed")
-    const address = req.body.address as PublicKey;
-    const publicKey = new PublicKey(address)  
-    const hash = await connection.requestAirdrop(publicKey, LAMPORTS_PER_SOL)
+    const {network, address} = req.body;
+    const url = getNodeURL(network);
+    const connection = new Connection(url, 'confirmed');
+    const publicKey = new PublicKey(address);
+    const hash = await connection.requestAirdrop(publicKey, LAMPORTS_PER_SOL);
     await connection.confirmTransaction(hash);
-    res.status(200).json(hash)
+    res.status(200).json(hash);
   }
 //..
 }
