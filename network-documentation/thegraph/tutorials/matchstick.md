@@ -267,7 +267,7 @@ This is the list of functions that should be tested. For this tutorial, we will 
 
 # Testing the Deposit Function
 
-### SushiSwap's Deposit ABI
+**SushiSwap's Deposit ABI**
 
 From the handler function in SushiSwap, we know that the handler function looks like this: 
 
@@ -429,8 +429,7 @@ export function getPool(pid: BigInt, block: ethereum.Block): Pool {
 Since the Pool object saves the input of pid into its id, we can check if the id of the pool created during the deposit function matches the pid:
 
 ```js
-// This function takes in 4 variables
-(GraphObjectName, GraphObjectID, GraphObjectParamName, GraphObjectParamValue)
+// This function takes in 4 variables: (GraphObjectName, GraphObjectID, GraphObjectParamName, GraphObjectParamValue)
 assert.fieldEquals("Pool", "1000", "id", "1000");
 ```  
 
