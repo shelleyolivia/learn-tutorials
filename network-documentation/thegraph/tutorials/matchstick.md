@@ -114,7 +114,7 @@ The final line of your output should be:
 Build completed: /home/user/sushiswap-subgraph/subgraphs/masterchefV2/build/subgraph.yaml
 ```  
 
-# Installing the "matchstick" testing framework
+# Installing the matchstick testing framework
 
 Follow the [installation instructions](https://github.com/LimeChain/matchstick) for matchstick.  
 I'm using Ubuntu 20.04 so this is the command I will use.  
@@ -123,7 +123,7 @@ I'm using Ubuntu 20.04 so this is the command I will use.
 curl -OL https://github.com/LimeChain/matchstick/releases/download/0.1.2/binary-linux-20 && mv binary-linux-20 matchstick && chmod a+x matchstick
 ```  
 
-# Install postgressql  
+**Install postgressql**  
 
 Install postgressql, it is required for our testing framework.  
 
@@ -131,7 +131,7 @@ Install postgressql, it is required for our testing framework.
 sudo apt install postgresql
 ```  
 
-# Install matchstick helpers
+**Install matchstick helpers**
 
 Now we can install the matchstick helpers, with the command: 
 
