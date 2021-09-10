@@ -45,16 +45,18 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```tsx
 //...
     // Get contract wrappers
-    const stableToken = await kit.contracts.getStableToken();
-    const exchange = await kit.contracts.getExchange();
-
     // Approve a user to transfer StableToken on behalf of another user.
-    const approveTx = await stableToken.approve(exchange.address, OneCUSD).send({from: address})
+    const approveReceipt = await stableToken
+        .approve(exchange.address, OneCUSD)
+        .send({from: address, feeCurrency: stableToken.address})
+        .then(receipt => receipt.waitReceipt());
 
     // Exchange cUSD for CELO
     const goldAmount = await exchange.quoteStableSell(OneCUSD)
-    const sellTx = await exchange.sellStable(OneCUSD, goldAmount).send({from: address})
-    const sellReceipt = await sellTx.waitReceipt();
+    const sellReceipt = await exchange
+        .sellStable(OneCUSD, goldAmount)
+        .send({from: address, feeCurrency: stableToken.address})
+        .then(receipt => receipt.waitReceipt());
 //...
 ```
 
@@ -71,6 +73,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # Make sure it works
 
 Once you have the code above saved, click on **Swap 1 cUSD**:
+To make it works click two times.
 
 ![](../../../.gitbook/assets/pathways/celo/celo-swap.gif)
 
