@@ -1,8 +1,5 @@
-#  Chainlink VRF on Polygon (Matic) using Remix IDE 
-Learn how to generate random numbers in your smart contracts on Polygon (Matic)
-
 # Introduction
-This tutorial will introduce you to generating random numbers in Solidity smart contracts using Chainlink VRF ([Verifiable Random Function](https://docs.chain.link/docs/chainlink-vrf/#generate-random-numbers-in-your-smart-contracts)). Chainlink VRF is used as a verifiable source of randomness. We will be using the Polygon (Matic) Mumbai testnet and the Remix IDE.
+This tutorial will introduce you to generating random numbers in Solidity smart contracts using Chainlink VRF ([Verifiable Random Function](https://docs.chain.link/docs/chainlink-vrf/#generate-random-numbers-in-your-smart-contracts)). Chainlink VRF is used as a verifiable source of randomness on-chain. We will be using the Polygon (Matic) Mumbai testnet and the Remix IDE.
 
 # Why use Chainlink VRF?
 Solidity contracts are deterministic, therefore anyone who figures out how your contract produces randomness could predict its results. Chainlink VRF generates a random number off-chain with a cryptographic proof used to verify the result.
@@ -150,12 +147,12 @@ You will need to fund your contract with LINK tokens to pay the Chainlink oracle
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img7.png)
 
 Go to your Metamask:
-1) Click on the LINK token
-2) Click the Send button
-3) Paste your contract address into the search bar
-4) Set Amount to 1 LINK
-5) Click on the Next button
-6) Click the Confirm button to confirm the transaction
+1. Click on the LINK token
+2. Click the Send button
+3. Paste your contract address into the search bar
+4. Set Amount to 1 LINK
+5. Click on the Next button
+6. Click the Confirm button to confirm the transaction
 
 You can go to the Mumbai block explorer [https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/) to check your contract balances by entering your contract address in the search bar.
 
