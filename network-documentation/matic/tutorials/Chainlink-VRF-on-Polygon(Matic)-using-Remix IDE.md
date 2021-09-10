@@ -128,7 +128,7 @@ In Remix, click on the Solidity Compiler icon on the sidebar:
 
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img3.png)
 
-Select` 0.6.6+commit.6c089d02` as the compiler and click the `Compile RandomNumber.sol` button to compile the contract. Once compiled, it is ready to be deployed onto the Mumbai testnet.
+Select `0.6.6+commit.6c089d02` as the compiler and click the "Compile RandomNumber.sol" button to compile the contract. Once compiled, it is ready to be deployed onto the Mumbai testnet.
 
 Click the Solidity Compiler icon on the sidebar again:
 
@@ -166,9 +166,9 @@ Click on the Arrow Icon to see your contract methods
 
 ![](../../../.gitbook/assets/matic-chainlinkvrf-tutorial-img9.png)
 
-Click on the `getRandomNumber` button. You should see a Metamask popup. Click on Confirm to confirm the transaction.
+Click on the "getRandomNumber" button. You should see a Metamask popup. Click on Confirm to confirm the transaction.
 
-When the transaction is successful, click on the `randomResult` button and you should see a random number that is not zero!
+When the transaction is successful, click on the "randomResult" button and you should see a random number that is not zero!
 
 **Note:** It may take around 1 min for random number to change.
 
