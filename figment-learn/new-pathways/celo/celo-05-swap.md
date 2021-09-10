@@ -45,18 +45,22 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```tsx
 //...
     // Get contract wrappers
-    // Approve a user to transfer StableToken on behalf of another user.
-    const approveReceipt = await stableToken
+    // - StableTokenWrapper
+    // - ExchangeWrapper
+    const stableToken = await kit.contracts.getStableToken();
+    const exchange = await kit.contracts.getExchange();
+
+    await stableToken
         .approve(exchange.address, OneCUSD)
         .send({from: address, feeCurrency: stableToken.address})
         .then(receipt => receipt.waitReceipt());
-
     // Exchange cUSD for CELO
     const goldAmount = await exchange.quoteStableSell(OneCUSD)
     const sellReceipt = await exchange
         .sellStable(OneCUSD, goldAmount)
         .send({from: address, feeCurrency: stableToken.address})
-        .then(receipt => receipt.waitReceipt());
+    await sellReceipt.waitReceipt();
+    const hash = await sellReceipt.getHash();
 //...
 ```
 
