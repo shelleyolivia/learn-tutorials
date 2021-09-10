@@ -33,12 +33,6 @@ mkdir AvaSwap
 cd AvaSwap
 ```
 
-We'll be using the web3.js library to set up an HTTP provider so we can "talk" to the EVM. Install it as a dependency with the command:
-
-```text
-npm install web3 -s
-```
-
 Then, create a boilerplate truffle project:
 
 ```text
@@ -47,25 +41,37 @@ truffle init
 
 **Update truffle-config.js**
 
-`truffle-config.js` is the configuration file created when you run `truffle init`. Add the following to `truffle-config.js` to set up the web3.js connection to Avalanche:
+`truffle-config.js` is the configuration file created when you run `truffle init`. Add the following to `truffle-config.js` to set up the `HDWalletProvider` and DataHub Avalanche RPC connection.
 
 ```javascript
-const Web3 = require('web3');
-const protocol = "http";
-const ip = "localhost";
-const port = 9650;
+require('dotenv').config();
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+
+//Account credentials from which our contract will be deployed
+const mnemonic = process.env.MNEMONIC;
+
+//API key of your Datahub account for Avalanche Fuji test network
+const APIKEY = process.env.APIKEY;
+
 module.exports = {
   networks: {
-   development: {
-     provider: function() {
-      return new Web3.providers.HttpProvider(`${protocol}://${ip}:${port}/ext/bc/C/rpc`)
-     },
-     network_id: "*",
-     gas: 3000000,
-     gasPrice: 225000000000
-   }
+    fuji: {
+      provider: function() {
+            return new HDWalletProvider({mnemonic, providerOrUrl: `https://avalanche--fuji--rpc.datahub.figment.io/apikey/${APIKEY}/ext/bc/C/rpc`, chainId: "0xa869"})
+      },
+      network_id: "*",
+      gas: 3000000,
+      gasPrice: 470000000000,
+      skipDryRun: true
+    }
+  },
+  solc: {
+    optimizer: {
+      enabled: true,
+      runs: 200
+    }
   }
-};
+}
 ```
 
 Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also, note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
