@@ -1,8 +1,8 @@
 # Introduction
 In this tutorial we'll take a look at how to setup matchstick and write unit tests for the MasterChefV2 subgraph.  
 This tutorial will typically show a call to action in the form of a codebox.  
-Please note that if you need help with or would like to explore the usage of any command referenced in this tutorial, add the --help flag after the command.  
-If you have any difficulty following this tutorial, you can join our [discord](https://discord.gg/fszyM7K) for help!  
+Please note that if you need help with or would like to explore the usage of any command referenced in this tutorial, add the `--help` flag after the command.  
+If you have any difficulty following this tutorial, you can join the Figment Learn [discord](https://discord.gg/fszyM7K) for help!  
 
 # Prerequisites
 - Basic familiarity with a command-line interface.
@@ -18,21 +18,27 @@ The following software must be installed:
 - [yarn](https://yarnpkg.com/)
 - [mustache](https://mustache.github.io/)
 
-Getting the SushiSwap Subgraph  
+Getting the SushiSwap Subgraph 
+
 ```text
 git clone https://github.com/sushiswap/sushiswap-subgraph
-```  
-SushiSwap has a couple of different subgraphs. For this tutorial, we will go through the MasterChefV2 subgraph.  
+``` 
+
+SushiSwap has a couple of different subgraphs. For this tutorial, we will go through the MasterChefV2 subgraph. 
+
 ```text
 cd sushiswap-subgraph/subgraphs/masterchefV2
 ```  
-
 # Getting Started
+
 We will begin by installing and building the MasterChefV2 SushiSwap subgraph. From the root directory of the cloned repository, run yarn to install the dependencies:  
+
 ```text
 yarn
-```  
+``` 
+
 This will output something similar:  
+
 ```text
 yarn install v1.22.11
 [1/4] Resolving packages...
@@ -43,25 +49,30 @@ info "fsevents@2.3.2" is an optional dependency and failed compatibility check. 
 [4/4] Building fresh packages...
 Done in 51.76s.
 ```  
+
 Next, we will use a script from `package.json` to load the configurations into subgraph.yaml. Run the command:  
+
 ```text
 yarn prepare:mainnet
 ```  
+
 Your output should be:  
+
 ```text
 yarn run v1.22.11
 mustache config/mainnet.json template.yaml > subgraph.yaml
 Done in 0.09s.
 ```  
-Then, we will generate the classes needed for the subgraph to work correctly.  
+
+Then, we will generate the classes needed for the subgraph to work correctly. 
+
 ```text
 yarn codegen
 ```  
+
 Your output should look like:  
+
 ```text
-.
-.
-.
 ✔ Generate types for contract ABIs
   Generate types for data source template CloneRewarderTime
   Generate types for data source template StakingRewardsSushi
@@ -83,37 +94,47 @@ Types generated successfully
 
 Done in 2.04s.
 ```  
-**There's an issue with capitalization in this file: ```sushiswap-subgraph/subgraphs/masterchefV2/src/entities/user.ts```**  
+
+**There's an issue with capitalization in this file: 
+`sushiswap-subgraph/subgraphs/masterchefV2/src/entities/user.ts`**  
 You will need to change line 4 of this file to the following:  
+
 ```typescript
 import { getMasterChef } from './masterchef'
 ```  
 
-Lastly, we will build the subgraph.  
+Lastly, we will build the subgraph.
+
 ```text
 yarn build
 ```  
 The final line of your output should be:  
+
 ```text
 Build completed: /home/user/sushiswap-subgraph/subgraphs/masterchefV2/build/subgraph.yaml
 ```  
 
-
 # Installing the "matchstick" testing framework
+
 Follow the [installation instructions](https://github.com/LimeChain/matchstick) for matchstick.  
 I'm using Ubuntu 20.04 so this is the command I will use.  
+
 ```text
 curl -OL https://github.com/LimeChain/matchstick/releases/download/0.1.2/binary-linux-20 && mv binary-linux-20 matchstick && chmod a+x matchstick
 ```  
 
-### Install postgressql  
+# Install postgressql  
+
 Install postgressql, it is required for our testing framework.  
+
 ```text 
 sudo apt install postgresql
 ```  
 
-### Installing Helpers  
-Now we can install the matchstick helpers, with the command:  
+# Install matchstick helpers
+
+Now we can install the matchstick helpers, with the command: 
+
 ```
 yarn add matchstick-as
 ```  
@@ -123,7 +144,8 @@ To check that matchstick is working correctly, use the command:
 ./matchstick --help
 ```  
 
-This should output:  
+This should output: 
+
 ```text
 Matchstick 🔥 0.1.2
 Limechain <https://limechain.tech>
@@ -141,15 +163,20 @@ ARGS:
 ```  
 
 # Creating Tests
-Create a folder in the current directory called tests  
+
+Create a folder in the current directory called `tests`:
+
 ```text
 mkdir tests && cd tests && touch masterchefV2.test.ts
-```  
-If you're on Windows, you can use this command instead  
-```text
-mkdir tests && cd tests && type nul > masterchefV2.test.ts
-```  
-Your test file (masterchefV2.test.ts) should be the same name as the mappingfile  
+``` 
+
+> If you're using Microsoft Windows, you can use this command instead 
+> ```text
+> mkdir tests && cd tests && type nul > masterchefV2.test.ts
+> ```  
+
+Your test file (`masterchefV2.test.ts`) should have the same name as the mapping file:
+
 ```yaml
 dataSources:
   - kind: ethereum/contract
@@ -165,8 +192,9 @@ dataSources:
       language: wasm/assemblyscript
       file: ./src/mappings/masterchefV2.ts # This line right here!
 ```  
-Now we can create a simple test case to see if empty tests work.
-Write the following code in `masterchefV2.test.ts`:  
+
+Now we can create a simple test case to see if empty tests work. Write the following code in `masterchefV2.test.ts`:
+
 ```typescript
 import { clearStore, test, assert, newMockEvent } from "matchstick-as/assembly/index";
 export function runTests(): void {
@@ -175,20 +203,23 @@ export function runTests(): void {
 }
 ```  
 
-Add the export to `src/masterchefV2.ts` at the bottom of the file  
+Add the export to the file `src/masterchefV2.ts` at the end of the file:  
+
 ```typescript
 export { runTests } from '../../tests/masterchefV2.test'
 ```  
-**Known issues**  
-When runTests() is imported in the mappings file the deployment to the hosted service will break.  
-For now, it's required to remove/comment out the import.
 
-Run the Unit-Testing Framework  
+> **Known issue**  
+> When runTests() is imported in the mappings file, the deployment to the hosted service will break. For now, it's required to remove/comment out the import.
+
+Now it is time to run the unit testing framework:
+
 ```text
 yarn build && ./matchstick MasterChefV2
 ```  
 
 You should see similar output:  
+
 ```text
 Build completed: /home/user/sushiswap-subgraph/subgraphs/masterchefV2/build/subgraph.yaml
 
@@ -210,8 +241,10 @@ All tests passed! 😎
 ```  
 
 # Understanding the SushiSwap subgraph
+
 - MasterChefV2 is a contract at ```0xEF0881eC094552b2e128Cf945EF17a6752B4Ec5d```.
 - Refer to template.yaml for the ```eventHandlers``` that are hooked.  
+
 ```yaml
 eventHandlers:
     - event: Deposit(indexed address,indexed uint256,uint256,indexed address)
@@ -229,30 +262,32 @@ eventHandlers:
     - event: LogUpdatePool(indexed uint256,uint64,uint256,uint256)
         handler: logUpdatePool
 ```  
-This is the list of functions that should be tested.  
-For this tutorial, We will go through the deposit event handler function.  
 
-## Testing the Deposit Function
+This is the list of functions that should be tested. For this tutorial, we will go through the deposit event handler function.  
+
+# Testing the Deposit Function
 
 ### SushiSwap's Deposit ABI
-From the handler function in SushiSwap, we know that the handler function looks like this.  
+
+From the handler function in SushiSwap, we know that the handler function looks like this: 
+
 ```js
 export function deposit(event: Deposit): void { ... }
 ```  
 
 How does the `(event: Deposit)` part of the code work? Let's take a closer look:  
 
-From the EventHandler, we know that the signature of the function looks like this.  
+From the EventHandler, we know that the signature of the function looks like this:
+
 ```yaml
 eventHandlers:
 - event: Deposit(indexed address,indexed uint256,uint256,indexed address)
     handler: deposit
 ```  
 
-We then look at the abi that is in the package to figure out the function signature.  
-```text
-build/MasterChefV2/packages/abis/MasterChefV2.json
-```  
+We then look at the ABI that is in the package (`build/MasterChefV2/packages/abis/MasterChefV2.json
+`) to figure out the function signature.
+
 ```json
   {
     "anonymous": false,
@@ -285,13 +320,16 @@ build/MasterChefV2/packages/abis/MasterChefV2.json
     "name": "Deposit",
     "type": "event"
   }
-```  
-From the above, we know the signature of the DepositEvent looks like this...  
+``` 
+
+From the above, we know the signature of the DepositEvent looks like this:
+
 ```js
 DepositEvent(userAddress:string, pid:BigInt, amount:BigInt, toAddress:string)
 ```  
 
-So... To create a deposit event, we need 4 parameters.  
+So, to create a deposit event we need 4 parameters:
+
 ```js
 function createDepositEvent(userAddress:string, pid:BigInt, amount:BigInt, toAddress:string): Deposit {
   // Create the Deposit Event -- Remember to Import
@@ -319,7 +357,8 @@ function createDepositEvent(userAddress:string, pid:BigInt, amount:BigInt, toAdd
 }
 ```  
 
-Then, we write a test...  
+Then, we write a test case:
+
 ```js
 test("Deposit Test", () => {
     // DepositEvent Signature
@@ -336,7 +375,8 @@ test("Deposit Test", () => {
   });
 ```  
 
-Lastly, we check if the logic works correctly...  
+Lastly, we check if the logic works correctly:
+
 ```js
 export function deposit(event: Deposit): void {
   log.info('[MasterChefV2] Log Deposit {} {} {} {}', [
@@ -357,9 +397,10 @@ export function deposit(event: Deposit): void {
   user.rewardDebt = user.rewardDebt.plus(event.params.amount.times(pool.accSushiPerShare).div(ACC_SUSHI_PRECISION))
   user.save()
 }
-```  
-In the `deposit` handler function, we can see that there are calls to `getPool`.  
-In the getPool function, we see that a Pool entity is created.  
+```
+
+In the deposit handler function, we can see that there are calls to getPool. In the getPool function, we see that a Pool entity is created:
+
 ```js
 export function getPool(pid: BigInt, block: ethereum.Block): Pool {
   const masterChef = getMasterChef(block)
@@ -383,18 +424,24 @@ export function getPool(pid: BigInt, block: ethereum.Block): Pool {
 
   return pool as Pool
 }
-```  
-Since the Pool object saves the input of pid into its id, we can check if the id of the pool created during the deposit function matches the pid.  
+``` 
+
+Since the Pool object saves the input of pid into its id, we can check if the id of the pool created during the deposit function matches the pid:
+
 ```js
-// This function takes in 4 variables (GraphObjectName, GraphObjectID, GraphObjectParamName, GraphObjectParamValue)
+// This function takes in 4 variables
+(GraphObjectName, GraphObjectID, GraphObjectParamName, GraphObjectParamValue)
 assert.fieldEquals("Pool", "1000", "id", "1000");
 ```  
 
-Run the tests again and you can see that our newly created test passes!  
+Run the tests again and you can see that our newly created test passes! 
+
 ```text
 yarn build && ./matchstick MasterChefV2
 ```  
+
 Your output should look like this:  
+
 ```text
 Build completed: /home/user/sushiswap-subgraph/subgraphs/masterchefV2/build/subgraph.yaml
 
@@ -416,7 +463,9 @@ INFO [MasterChefV2] Log Deposit 0x89205a3a3b2a69de6dbf7f01ed13b2108b2c43e7 1000 
 All tests passed! 😎
 2 tests executed in 21.93132ms.
 ```  
-Here's the finalized ```masterchefV2.test.ts```, in case you couldn't get it to work:  
+
+Here's the finalized `masterchefV2.test.ts`, in case you couldn't get it to work:
+
 ```js
 import { Address, ethereum, BigInt } from "@graphprotocol/graph-ts";
 import { clearStore, test, assert, newMockEvent } from "matchstick-as/assembly/index";
@@ -472,18 +521,22 @@ export function runTests(): void {
 ```  
 
 # Conclusion
+
 1. We went through how to setup, prepare and build the MasterChefV2 Subgraph.
 2. We went through how to install matchstick for unit testing.
 3. We went through how to figure out the parameters for the ethereum events.
 4. We went through how to write a simple unit test for the deposit function.
 
 # Next Steps
-1. Try changing ```assert.fieldEquals("Pool", "1000", "id", "1000");``` to make the test fail!
+
+1. Try changing `assert.fieldEquals("Pool", "1000", "id", "1000");` to make the test fail! What happens?
 2. What other tests cases can you think of? Try writing more unit tests.
 
 # About the author
+
 - This tutorial was created by Anton Yip. He can be found on [Github](https://github.com/antonyip).
 
 # References
+
 - https://github.com/sushiswap/sushiswap-subgraph
 - https://github.com/LimeChain/matchstick
