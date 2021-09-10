@@ -320,7 +320,7 @@ The output of the command should be similar to this: -
 
 Now the smart contract and tests are dealt with, it's time to integrate our smart contracts with the frontend application.
 
-For contract calls, we will create a context and provide all the data and functions through it. Create a folder `contexts` in the root directory of your project and create a file called `DataContext.tsx` in that folder.
+For contract calls, we will create a context and provide all the data and functions through it. Create a folder `context` in the root directory of your project and create a file called `DataContext.tsx` in that folder.
 
 `context/DataContext.tsx`
 
@@ -374,11 +374,13 @@ export const useProviderData = () => {
   const loadWeb3 = async () => {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
-      await window.ethereum.enable();
+      ethereum.request({ method: 'eth_requestAccounts', [] })
     } else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
     } else {
-      window.alert("Non-Eth browser detected. Please consider using MetaMask.");
+      window.alert(
+        "No compatible wallet detected. Please install the Metamask browser extension to continue."
+      );
     }
   };
 
