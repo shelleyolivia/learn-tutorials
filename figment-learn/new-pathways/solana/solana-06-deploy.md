@@ -153,8 +153,6 @@ solana config get
 solana account $(solana-keygen pubkey solana-wallet/keypair.json)
 ```
 
-![](../../../.gitbook/assets/solana-deploy-01-v3.gif)
-
 -----------------------------------------
 # Deploy a Solana program
 
@@ -209,9 +207,6 @@ Default Signer Path: solana-wallet/keypair.json
 Commitment: confirmed
 Program Id: 7KwpCaaYXRsjfCTvf85eCVuZDW894zZNN38UMxMpQoaQ
 ```
-
-![](../../../.gitbook/assets/solana-deploy-02-v3.gif)
-
 
 -----------------------------------------
 
@@ -306,7 +301,7 @@ Once you have the code above saved:
 * Copy and paste the generated address in the text input.   
 * Click on **Check ProgramId** 
 
-![](../../../.gitbook/assets/pathways/solana/solana-deploy-03-v3.gif)
+![](../../../.gitbook/assets/pathways/solana/solana-deploy.gif)
 
 For the rest of the challenge we'll keep this programId in the localStorage of our application.
 

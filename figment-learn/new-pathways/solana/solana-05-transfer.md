@@ -14,21 +14,20 @@ In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
 
 ```typescript
 //..
-  //... let's snip the beginning as it should be familiar for you by now!
-  // The secret key is stored in our state as a stringified array
-  const secretKey = Uint8Array.from(JSON.parse(secret as string));
+    //... let's snip the beginning as it should be familiar for you by now!
+    // The secret key is stored in our state as a stringified array
+    const secretKey = Uint8Array.from(JSON.parse(secret as string));
 
-  // Find the parameter to pass  
-  const instructions = SystemProgram.transfer
+    // Find the parameter to pass
+    const instructions = SystemProgram.transfer;
 
-  // How could you construct a signer array's
-  const signers = 
+    // How could you construct a signer array's
+    const signers = undefined;
 
-  // Maybe adding someting to a Transaction could be interesting ?
-  const transaction = new Transaction()
+    // Maybe adding someting to a Transaction could be interesting ?
+    const transaction = new Transaction();
 
-  const hash =// You should now what is expected here.
-  res.status(200).json(hash);
+    const hash = res.status(200).json(hash); // You should now what is expected here.
 //..
 ```
 
