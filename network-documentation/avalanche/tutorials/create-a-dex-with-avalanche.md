@@ -76,20 +76,100 @@ module.exports = {
 
 Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also, note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 
+# Add DevToken.sol
+
+In the contracts directory create `Devtoken.sol` and add the following block of code:
+
+```javascript
+// SPDX-License-Identifier: MIT
+
+pragma solidity >=0.5.0;
+
+// Define a contract named DevToken as per the ERC20 token standards
+contract DevToken {
+    string public name = "Dev Token";
+    string public symbol = "DEV";
+    uint256 public totalSupply = 1000000000000000000000000; // 1 million tokens
+    uint8 public decimals = 18;
+
+// Create an event which will be emitted when a token is tranferred 
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+// Create an event which will be emitted when a token is approved 
+    event Approval(
+        address indexed _owner,
+        address indexed _spender,
+        uint256 _value
+    );
+
+    mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
+
+// Create a contructor and set `balance = totalSuppy` i.e. 1 million tokens
+constructor() public {
+        balanceOf[msg.sender] = totalSupply;
+    }
+
+// Create a transfer function as per the ERC20 token standards
+    function transfer(address _to, uint256 _value)
+        public
+        returns (bool success)
+    {
+        require(balanceOf[msg.sender] >= _value);
+        balanceOf[msg.sender] -= _value;
+        balanceOf[_to] += _value;
+        emit Transfer(msg.sender, _to, _value);
+        return true;
+    }
+    
+// Create an approve function as per the ERC20 token standards
+    function approve(address _spender, uint256 _value)
+        public
+        returns (bool success)
+    {
+        allowance[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+        return true;
+    }
+
+// Create a transferFrom function as per the ERC20 token standards
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        require(_value <= balanceOf[_from]);
+        require(_value <= allowance[_from][msg.sender]);
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+        allowance[_from][msg.sender] -= _value;
+        emit Transfer(_from, _to, _value);
+        return true;
+    }
+}
+```
+
 # Add AvaSwap.sol
 
 In the contracts directory add a new file called `AvaSwap.sol` and add the following block of code:
 
 ```javascript
+// SPDX-License-Identifier: MIT
+
 pragma solidity 0.6.7;
+
+// import the required contracts
 import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 import './DevToken.sol';
+
+// Define a contract named Avaswap
 contract AvaSwap {
   string public name = "AvaSwap Network Exchange";
   DevToken public Token;
   uint public rate;
   AggregatorV3Interface internal priceFeed;
 
+// Create event which will be emitted when a token is purchased 
   event TokenPurchase(
     address account,
     address token,
@@ -97,6 +177,7 @@ contract AvaSwap {
     uint rate
   );
 
+// Create event which will be emitted when a token is sold
   event TokenSold(
     address account,
     address token,
@@ -104,13 +185,14 @@ contract AvaSwap {
     uint rate
   );
 
+// Create a contructor and pass `DevToken _Token` as parameter
   constructor(DevToken _Token) public {
     Token = _Token;
-    priceFeed = AggregatorV3Interface(0x22B58f1EbEDfCA50feF632bD73368b2FdA96D541);
+    priceFeed = AggregatorV3Interface(0x5498BB86BC934c8D34FDA08E81D444153d0D06aD);
     rate = uint256(getLatestPrice());
   }
 
-  // Returns the latest price
+  // Returns the latest price from Chainlink PriceFeed Oracle
   function getLatestPrice() public view returns (int) {
     (
       uint80 roundID,
@@ -124,6 +206,7 @@ contract AvaSwap {
     return 1e18/price;
   }
 
+// Calculate and buy token as per the token price
   function buyTokens() public payable {
     // Calculate number of tokens to buy:
     // Avax Amount * Redemption rate 
@@ -133,6 +216,7 @@ contract AvaSwap {
     emit TokenPurchase(msg.sender, address(Token), tokenAmount, rate);
   }
 
+// Calculate and sell token as per the token price
   function sellToken(uint _amount) public {
     // User can't sell more tokens than they have
     require(Token.balanceOf(msg.sender) >= _amount);
