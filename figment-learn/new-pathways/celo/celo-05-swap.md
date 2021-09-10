@@ -77,7 +77,6 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # Make sure it works
 
 Once you have the code above saved, click on **Swap 1 cUSD**:
-To make it works click two times.
 
 ![](../../../.gitbook/assets/pathways/celo/celo-swap.gif)
 
