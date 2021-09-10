@@ -12,16 +12,9 @@ In `pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to e
 
 ```tsx
 //...
-  try {
-    const keypair = undefined;
-    const address = undefined;
-    const secret = JSON.stringify(Array.from(keypair?.secretKey));
-
-    res.status(200).json({
-        secret,
-        address,
-    });
-  }
+  const keypair = undefined;
+  const address = undefined;
+  const secret = JSON.stringify(Array.from(keypair?.secretKey));
 //...
 ```
 
@@ -41,16 +34,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```tsx
 //...
-  try {
-    const keypair = Keypair.generate();
-    const address = keypair?.publicKey.toString();
-    const secret = JSON.stringify(Array.from(keypair?.secretKey));
-
-    res.status(200).json({
-        secret,
-        address,
-    });
-  }
+  const keypair = Keypair.generate();
+  const address = keypair?.publicKey.toString();
+  const secret = JSON.stringify(Array.from(keypair?.secretKey));
 //...
 ```
 

@@ -53,16 +53,18 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 //...
-  const greetedPubkey = await PublicKey.createWithSeed(
+    const greetedPubkey = await PublicKey.createWithSeed(
       payer.publicKey,
       GREETING_SEED,
       programId,
     );
 
-  const lamports = await connection.getMinimumBalanceForRentExemption(GREETING_SIZE);
+    const lamports = await connection.getMinimumBalanceForRentExemption(
+      GREETING_SIZE,
+    );
 
-  const transaction = new Transaction().add(
-    SystemProgram.createAccountWithSeed({
+    const transaction = new Transaction().add(
+      SystemProgram.createAccountWithSeed({
         fromPubkey: payer.publicKey,
         basePubkey: payer.publicKey,
         seed: GREETING_SEED,
@@ -70,9 +72,11 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
         lamports,
         space: GREETING_SIZE,
         programId,
-    }),
-  );
-  const hash = await sendAndConfirmTransaction(connection, transaction, [payer])
+      }),
+    );
+    const hash = await sendAndConfirmTransaction(connection, transaction, [
+      payer,
+    ]);
 //...
 ```
 

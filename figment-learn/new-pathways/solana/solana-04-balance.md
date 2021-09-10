@@ -12,12 +12,14 @@ In `pages/api/solana/balance.ts`, implement `publicKey` & `balance`.
 
 ```typescript
 //...
-    const address = req.body.address as PublicKey;
-    const url = getSafeUrl();
-    const connection = new Connection(url, "confirmed");
+  try {
+    const {network, address} = req.body;
+    const url = getNodeURL(network);
+    const connection = new Connection(url, 'confirmed');
     const publicKey = undefined;
     const balance = undefined;
     res.status(200).json(balance);
+  }
 //...
 ```
 
@@ -37,12 +39,14 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 //...
-    const address = req.body.address as PublicKey;
-    const url = getSafeUrl();
-    const connection = new Connection(url);
+  try {
+    const {network, address} = req.body;
+    const url = getNodeURL(network);
+    const connection = new Connection(url, 'confirmed');
     const publicKey = new PublicKey(address);
     const balance = await connection.getBalance(publicKey);
     res.status(200).json(balance);
+  }
 //...
 ```
 
