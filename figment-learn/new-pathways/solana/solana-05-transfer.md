@@ -48,8 +48,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 //..
-  //...
   //... let's snip the beginning as it should be familiar for you by now!
+  // The secret key is stored in our state as a stringified array
+  const secretKey = Uint8Array.from(JSON.parse(secret as string));
   const instructions = SystemProgram.transfer({
     fromPubkey,
     toPubkey,
