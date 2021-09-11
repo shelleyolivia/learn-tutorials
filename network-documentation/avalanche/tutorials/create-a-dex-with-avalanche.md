@@ -439,10 +439,12 @@ We will be using `Main.js`, `BuyForm.js` & `SellForm.js` components to build the
 In this file, we must import the `BuyForm` and `SellForm` components, then render them.
 
 ```javascript
+// Import required components and libraries
 import React, { Component } from "react";
 import BuyForm from "./BuyForm";
 import SellForm from "./SellForm";
 
+// Create a class named `Main` which inhherits `Component` imorted from `react`
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -451,10 +453,12 @@ class Main extends Component {
     };
   }
 
+// method to handle token change when tokens are switched like Link, Dai and DevToken
   handleTokenChange = (token) => {
     this.props.handleTokenChange(token);
   };
 
+// Display the components in render method and pass the required params
   render() {
     let content;
     if (this.state.currentForm === "buy")
@@ -527,12 +531,14 @@ In the BuyForm component, import the logos and ABIs of the AVAX, Dai & ChainLink
 BuyForm.js
 
 ```javascript
+// Import required components, assets and libraries
 import React, { Component } from "react";
 import avaxLogo from "../avax-logo.png";
 import tokenLogo from "../token-logo.png";
 import daiLogo from "../dai-logo.png";
 import chainLinkLogo from "../chainlink-link-logo.png";
 
+// Create a class named `BuyForm` which inhherits `Component` imorted from `React`
 class BuyForm extends Component {
   constructor(props) {
     super(props);
@@ -543,11 +549,13 @@ class BuyForm extends Component {
     };
   }
 
+// method to handle token change when tokens are switched like Link, Dai and DevToken
   handleChange = (event) => {
     this.setState({ selected: event.target.value });
     this.props.handleTokenChange(event.target.value);
   };
 
+// Display the form components in render method and pass the required states and props
   render() {
     let { selected, rate } = this.state;
     return (
@@ -658,12 +666,14 @@ export default BuyForm;
 SellForm.js:
 
 ```javascript
+// Import required components, assets and libraries
 import React, { Component } from "react";
 import avaxLogo from "../avax-logo.png";
 import tokenLogo from "../token-logo.png";
 import daiLogo from "../dai-logo.png";
 import chainLinkLogo from "../chainlink-link-logo.png";
 
+// Create a class named `SellForm` which inhherits `Component` imorted from `react`
 class SellForm extends Component {
   constructor(props) {
     super(props);
@@ -673,11 +683,13 @@ class SellForm extends Component {
     };
   }
 
+// method to handle token change when tokens are switched like Link, Dai and DevToken
   handleChange = (event) => {
     this.setState({ selected: event.target.value });
     this.props.handleTokenChange(event.target.value);
   };
 
+// Display the form components in render method and pass the required states and props
   render() {
     let { selected } = this.state;
     return (
