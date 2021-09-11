@@ -787,17 +787,9 @@ class SellForm extends Component {
 export default SellForm;
 ```
 
-Check AVAX balance:
+**Example Demo:**
 
-```javascript
-let AvaxBalance = await web3.eth.getBalance(avaSwap.address)
-```
-
-Check Token balance:
-
-```javascript
-let TokenBalance = await Token.balanceOf(avaSwap.address)
-```
+![](/.gitbook/assets/Awaswap_demo.gif)
 
 # Conclusion
 
