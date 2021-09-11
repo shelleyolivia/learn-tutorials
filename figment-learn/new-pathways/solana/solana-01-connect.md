@@ -17,7 +17,7 @@ In `pages/api/solana/connect.ts`, implement `connect` by creating a `Connection`
     const url = getNodeURL(network);
     const connection = undefined;
     const version = undefined;
-    res.status(200).json(version?.["solana-core"]);
+    res.status(200).json(version.["solana-core"]);
   }
  //...
 ```
@@ -43,7 +43,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
     const url = getNodeURL(network);
     const connection = new Connection(url, 'confirmed');
     const version = await connection.getVersion();
-    res.status(200).json(version?.['solana-core']);
+    res.status(200).json(version.['solana-core']);
   }
 //...
 ```
