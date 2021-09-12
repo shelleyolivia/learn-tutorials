@@ -26,7 +26,6 @@ In `pages/api/solana/fund.ts`, implement the `fund` function. Convert the text i
     const {network, address} = req.body;
     const url = getNodeURL(network);
     const connection = new Connection(url, "confirmed");
-    const publicKey = new PublicKey(address);
     const publicKey = undefined;
     const hash = undefined;
     await undefined;
