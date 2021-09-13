@@ -12,10 +12,10 @@ To successfully follow along with this tutorial, you will need a basic knowledge
 
 # Requirements
 
-- You will need Metamask installed in your browser from the official site <https://metamask.io>.
+- You will need Metamask installed in your browser from the official site [https://metamask.io](https://metamask.io).
 - You must have a recent version of Node.js installed. We recommend using v14.17.6 LTS for compatibility.
 
-### Other technologies used in this tutorial
+**Other technologies used in this tutorial:**
 
 - [Solidity](https://docs.soliditylang.org/en/v0.8.7/) - For writing smart contracts
 - [Truffle](https://github.com/trufflesuite/truffle) - Truffle provides development environment for developing blockchain applications locally
@@ -24,7 +24,7 @@ To successfully follow along with this tutorial, you will need a basic knowledge
 - [Polygon Network](https://polygon.technology/) - For deploying our smart contract
 - [IPFS](https://ipfs.io/) - To store image and videos uploaded by content creators
 
-Topics covered in this tutorial:
+**Topics covered in this tutorial:**
 
 - Setting up development for Solidity and NextJs
 - Creating smart contracts using Solidity
@@ -43,13 +43,11 @@ To set up the project files, we will have to install a few packages using the no
 npm install -g truffle # Install truffle globally so that you can use truffle from any directory
 
 npx create-next-app --typescript # Install nextjs and setup typescript for your project
-# When asked put project-name as polygon-dapp so that it would be easy for you to follow along with this tutorial
 
 cd polygon-dapp
 truffle init # Create truffle-config.js test/ and contracts/ directory
 ```
-
-This is how the folder structure will be after initial setup:
+When asked during the `create-next-app` setup, use "polygon-dapp" as the project name so that it will be easy for you to follow along with this tutorial. This is how the folder structure will be after initial setup:
 
 ![Folder Structure](../../../.gitbook/assets/folder-structure.png)
 
@@ -60,7 +58,7 @@ The `truffle init` command creates the following directories:
 - `test/`: All the test scripts for smart contracts are stored in this directory.
 - `truffle-config.js`: Contains configuration settings for truffle.
 
-# Creating smart contract using Solidity
+# Creating the Solidity smart contract
 
 Create a new file called `DonationContract.sol` in the `contracts` directory and add the following code:
 
@@ -480,15 +478,15 @@ export default MyApp;
 
 Now we can access all context variables in any of our components.
 
-# Creating UI using TailwindCSS in NextJs
+# Creating the UI using TailwindCSS in Next.js
 
-> For the UI we will be using [TailwindCSS](https://tailwindcss.com/) and [HeadlessUI](https://headlessui.dev/). To install these packages run the following command:
+For the User Interface (UI) we will be using [TailwindCSS](https://tailwindcss.com/) and [HeadlessUI](https://headlessui.dev/). To install these packages run the following command:
 
 ```text
 npm install tailwindcss @headlessui/react
 ```
 
-Now in `pages/index.tsx` delete all the code and replace it with -
+When these packages have been installed successfully, open the file `pages/index.tsx` to delete all the code and replace it with this:
 
 ```typescript
 import Head from "next/head";
@@ -537,7 +535,7 @@ export default function Home() {
 - Here we are fetching the `loading` variable from the `useData` hook and checking the loading state: If loading is true, show `Loading...` text or else show the `<Body />`. component.
 - Now we will have to create three `components`, so create a new folder called components and create three files inside of it: `Body.tsx`, `UploadImage.tsx`, and `Header.tsx`.
 
-`Body.tsx`
+Paste the following code into `Body.tsx`:
 
 ```typescript
 declare let window: any;
@@ -605,7 +603,7 @@ const BodyItem = ({ address, description, totalDonationss, hash, id }) => {
 - Here we are getting all the images from the `useData` hook, looping over each image and displaying them.`
 - Each image has an option to donate 0.1 MATIC to the author or the content. Clicking on `DONATE: 0.1 MATIC` , we are calling the `donationImageOwner` function from the `useData` hook, that will eventually call the `donationImageOwner` function of our smart contract.
 
-`Header.tsx`
+Paste the following code into `Header.tsx`:
 
 ```typescript
 import Identicon from "identicon.js";
@@ -651,9 +649,9 @@ export default Header;
 - In the header, we are showing the account number of the current user which we can get from `useData`.
 - To improve the UI, we are also showing an [identicon](https://github.com/stewartlord/identicon.js/tree/master) based on the users account number.
 
-`UploadImage.tsx`
-
 For uploading an image, we have a modal dialog where the author can choose the image from their system and upload it to IPFS.
+
+Paste the following code into `UploadImage.tsx`:
 
 ```typescript
 import { Dialog, Transition } from "@headlessui/react";
@@ -786,7 +784,7 @@ export const UploadImage: React.FC<Props> = ({ isOpen, closeModal }) => {
 
 # Using IPFS to upload images
 
-In the `UploadImage.tsx` we are using IPFS to upload the image. For this, we have to install a package.
+In `UploadImage.tsx`, we are using IPFS as decentralized file storage to upload the user images. For this, we have to install another package.
 
 ```bash
 npm install ipfs-http-client
@@ -802,15 +800,15 @@ const client = create({ url: "https://ipfs.infura.io:5001/api/v0" });
 const added = await client.add(file);
 ```
 
-To upload a file, call the `add` function on the client object. The `add` function will return an object that contains the hash of the uploaded image. Once we have the hash value (or CID - content identifier), we can store that hash in our smart contract.
+To upload a file, call the `add` function on the client object. The `add` function will return an object that contains the hash of the uploaded image. Once we have the hash value (also known as a CID - **C**ontent **ID**entifier), we can store that hash in our smart contract.
 
-This hash can later be used to access the image from IPFS by appending the hash to the URL of a valid IPFS node. For example:
+This hash value can later be used to access the image on IPFS by appending the hash to the URL of a valid IPFS node. For example:
 
-```txt
+```text
 https://ipfs.infura.io/ipfs/${hash}
 ```
 
-## Publishing the smart contract to Polygon Testnet
+# Publishing the smart contract to Mumbai testnet
 
 Publishing your smart contract is relatively simple. You will have to add provider details for Matic testnet in your `truffle-config.js`.
 
@@ -820,7 +818,7 @@ Publishing your smart contract is relatively simple. You will have to add provid
 - **Make sure you have added the `.secret` file in your `.gitignore` and never share your Secret Recovery Phrase (mnemonic) with anyone!**
 - Now we will have to install `hdwallet-provider` to pay gas fees while deploying.
 
-```bash
+```text
 npm install @truffle/hdwallet-provider
 ```
 
