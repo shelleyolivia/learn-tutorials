@@ -76,7 +76,7 @@ module.exports = {
 
 Note that you can change the `protocol`, `ip` and `port` if you want to direct API calls to a different AvalancheGo node. Also, note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 
-## Add DevToken.sol
+# Add DevToken.sol
 
 In the contracts directory create `Devtoken.sol` and add the following block of code:
 
@@ -149,7 +149,7 @@ constructor() public {
 }
 ```
 
-## Add AvaSwap.sol
+# Add AvaSwap.sol
 
 In the contracts directory add a new file called `AvaSwap.sol` and add the following block of code:
 
@@ -233,7 +233,7 @@ contract AvaSwap {
 }
 ```
 
-## Add new migration
+# Add a new migration
 
 Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `AvaSwap` smart contract to the blockchain.
 
@@ -252,7 +252,7 @@ module.exports = function (deployer) {
 };
 ```
 
-## Compile Contracts with Truffle
+# Compile contracts with Truffle
 
 Any time you make a change to `AvaSwap.sol` you must compile the contracts again.
 
@@ -271,7 +271,7 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 
-## Create and unlock an account on the C-Chain
+# Create and unlock an account on the C-Chain
 
 When deploying smart contracts to the C-Chain, Truffle will default to the first available account provided by your C-Chain client as the `from` address used during migrations.
 
@@ -317,7 +317,7 @@ This returns:
 true
 ```
 
-## Run Migrations
+# Run migrations
 
 Now everything is in place to run the migrations and deploy the contract:
 
@@ -406,7 +406,7 @@ Error:  *** Deployment Failed ***
 "Migrations" -- Returned error: authentication needed: password or unlock.
 ```
 
-## UI interaction with Smart Contract
+## UI interaction with smart contracts
 
 To interact with the contract, we will create a React app using [create-react-app](https://reactjs.org/docs/create-a-new-react-app.html).
 
