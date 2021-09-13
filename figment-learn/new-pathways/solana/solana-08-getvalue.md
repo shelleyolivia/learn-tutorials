@@ -26,7 +26,7 @@ const GreetingSchema = new Map([
 # The challenge
 
 {% hint style="tip" %}
-In `pages/api/solana/getGreetings.ts`, complete the code for `getGreetings`. First deserialize the greeter data to a TypeScript class, then access the counter value and pass it to the response object using the `.json()` method as in all previous tutorials.
+In `pages/api/solana/getter.ts`, complete the code for `getter`. First deserialize the greeter data to a TypeScript class, then access the counter value and pass it to the response object using the `.json()` method as in all previous tutorials.
 {% endhint %}
 
 **Take a few minutes to figure this out**
