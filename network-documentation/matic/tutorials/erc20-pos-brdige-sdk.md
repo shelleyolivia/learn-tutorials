@@ -3,7 +3,6 @@ How to transfer ERC20 tokens to Polygon Network using PoS bridge SDK/maticjs
 **Polygon PoS Bridge** is a mechanism and set of contracts on both child and root chains that will help us in moving assets between **Ethereum** and **Polygon**.
 
 In this tutorial, step by step we go through transferring `ERC20` assets or an `ERC20` custom token to the polygon chain, using **PoS SDK**.  
-
 We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and a custom `ERC20` token I have deployed and verified. [Here is the step by step guide](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC20)
 
 ## Table of content
