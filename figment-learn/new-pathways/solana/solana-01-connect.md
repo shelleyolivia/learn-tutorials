@@ -1,5 +1,9 @@
 In the following tutorials, we're going to interact with the Solana blockchain (and in particular its Devnet network) using the `@solana/web3.js` library. It's a convenient way to interface with the RPC API when building a Javascript application. Under the hood it implements Solana's RPC methods and exposes them as Javascript objects. We will explore it together as we add features to our app.
 
+You can choose which cluster to connect to using the dropdown located in the top right of the UI, as shown below. Normally, you will want to connect to Datahub. If you are using a Test Validator, select the Localhost option.
+
+![](../../../.gitbook/assets/pathways/solana/solana-dropdown.png)
+
 ----------------------------------
 
 # The challenge
