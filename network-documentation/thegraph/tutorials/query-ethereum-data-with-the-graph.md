@@ -44,7 +44,7 @@ Click on the **Connect Wallet** button. Choose a Metamask wallet to login with. 
 
 ![Create your first subgraph](../../../.gitbook/assets/graph_create_subgraph.png)
 
-Next, you need to give your subgraph a name. Give the name as vending. Once that's done, you will see this screen:
+Next, you need to give your subgraph a name. Give the name as **vending**. Once that's done, you will see this screen:
 
 ![Subgraph dashboard](../../../.gitbook/assets/graph_subgraph_created.png)
 
@@ -52,15 +52,15 @@ On this screen, you can see details about the subgraph like your deploy key, the
 
 # Creating and deploying the subgraph
 
-- Run the following command to create the subgraph by downloading the contract ABI from the Rinkeby testnet. A new directory called vending will be created, and all node dependencies will be installed automatically.
+- Run the following command to create the subgraph by downloading the contract ABI from the Rinkeby testnet. A new directory called `vending` will be created, and all node dependencies will be installed automatically.
 
 ```text
 graph init --contract-name VendingMachine --index-events --studio --from-contract 0x4006c82FfB71933160948626dB3Ff8D8aaad6510 --network rinkeby vending
 ```
 
-This will fetch the ABI from the Rinkeby smart contract passed as an argument to --from-contract, and store it in the ./vending/abis directory. The Graph CLI will auto-generate the mappings from the smart contract ABI. You can view the mapping in ./vending/src/mapping.ts.
+This will fetch the ABI from the Rinkeby smart contract passed as an argument to `--from-contract`, and store it in the `./vending/abis` directory. The Graph CLI will auto-generate the mappings from the smart contract ABI. You can view the mapping in `./vending/src/mapping.ts`.
 
-> By passing in --index-events the CLI will automatically populate some code for us in both schema.graphql as well as src/mapping.ts based on the events emitted from the contract.
+> By passing in `--index-events` the CLI will automatically populate some code for us in both schema.graphql as well as src/mapping.ts based on the events emitted from the contract.
 
 Output:
 
@@ -283,7 +283,7 @@ Go to https://rinkeby.etherscan.io/address/0x4006c82ffb71933160948626db3ff8d8aaa
 
 ![Rinkeby Smart Contract](../../../.gitbook/assets/graph_rinkeby_contract.png)
 
-Click on the Connect to Web3 button. Choose Metamask from the wallet options. After authenticatng with Metamask, you shall see Connected - Web3[address] instead of the earlier button. Make sure you are connected to the Rinkeby test network.
+Click on the **Connect to Web3** button. Choose **Metamask** from the wallet options. After authenticatng with Metamask, you shall see **Connected - Web3[address]** instead of the earlier button. Make sure you are connected to the **Rinkeby** test network.
 
 Click on the **purchase** row. You need to fill in **purchase** and **amount** fields.
 
@@ -291,7 +291,7 @@ Click on the **purchase** row. You need to fill in **purchase** and **amount** f
 
 Fill in **purchase** as **0.2** and **amount** as **20**. Click on the **Write** button.
 
-It will open up the Metamask prompt. Make sure you are on the Rinkeby test network.
+It will open up the Metamask prompt. Make sure you are on the **Rinkeby** test network.
 
 ![Metamask](../../../.gitbook/assets/graph_metamask.png)
 
