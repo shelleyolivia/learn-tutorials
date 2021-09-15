@@ -11,7 +11,7 @@ To successfully complete this tutorial, you will need to have a basic understand
 # Requirements
 
 - You will need Metamask installed in your browser. You can install it from <https://metamask.io/>
-- You need to have a recent version of Node.js installed. We recommend using v14.17.6 LTS version for compatibility.
+- You need to have a recent version of Node.js installed. We recommend using v14.17.6 LTS for compatibility.
 
 Topics covered in this tutorial:
 
