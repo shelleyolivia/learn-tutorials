@@ -1,12 +1,12 @@
 # Introduction
 
-In this tutorial, you will learn how to create a subgraph from an already deployed smart contract on Rinkeby testnet, deploy it to the Subgraph Studio, and then use the Subgraph Studio Playground to query the subgraph.
+In this tutorial, you will learn how to create a subgraph from an already deployed smart contract on the Ethereum Rinkeby testnet, deploy it to the Subgraph Studio, and then use the Subgraph Studio Playground to query the subgraph.
 
 ![Subgraph Studio](../../../.gitbook/assets/graph.png)
 
 # Prerequisites
 
-To successfully master this tutorial, you will need to have some basic understanding of Ethereum, Metamask and npm/node ecosystem.
+To successfully complete this tutorial, you will need to have a basic understanding of Ethereum, the Metamask wallet and the NodeJS ecosystem.
 
 # Requirements
 
@@ -30,13 +30,13 @@ Topics not covered in this tutorial:
 Run the below commands to install the npm dependencies globally. These are required to build and deploy your subgraph.
 
 ```text
-$ npm i -g yarn
-$ npm i -g @graphprotocol/graph-cli
+npm i -g yarn
+npm i -g @graphprotocol/graph-cli
 ```
 
 # Creating the graph project in Subgraph Studio
 
-First, headover to the Subgraph Studio at https://thegraph.com/studio/.
+First, you will want to head over to the Subgraph Studio at https://thegraph.com/studio/.
 
 ![Login to Subgraph Studio](../../../.gitbook/assets/graph_connect.png)
 
@@ -44,23 +44,23 @@ Click on the **Connect Wallet** button. Choose a Metamask wallet to login with. 
 
 ![Create your first subgraph](../../../.gitbook/assets/graph_create_subgraph.png)
 
-Next, you need to give your subgraph a name. Give the name as **vending**. Once that's done, you shall see the below screen.
+Next, you need to give your subgraph a name. Give the name as vending. Once that's done, you will see this screen:
 
 ![Subgraph dashboard](../../../.gitbook/assets/graph_subgraph_created.png)
 
-On this screen, you can see details like your deploy key, subgraph slug and status.
+On this screen, you can see details about the subgraph like your deploy key, the subgraph slug and status.
 
 # Creating and deploying the subgraph
 
-- Run the below command to create the subgraph by downloading the contract abi from rinkeby testnet. A new directory called `vending` shall be created, and all node dependencies will be installed automatically.
+- Run the following command to create the subgraph by downloading the contract ABI from the Rinkeby testnet. A new directory called vending will be created, and all node dependencies will be installed automatically.
 
 ```text
-$ graph init --contract-name VendingMachine --index-events --studio --from-contract 0x4006c82FfB71933160948626dB3Ff8D8aaad6510 --network rinkeby vending
+graph init --contract-name VendingMachine --index-events --studio --from-contract 0x4006c82FfB71933160948626dB3Ff8D8aaad6510 --network rinkeby vending
 ```
 
-This will fetch the abi from rinkeby smart contract passed as an argument to `--from-contract`, and store it under `./vending/abis` directory. The Graph CLI will auto-generate the mappings from the smart contract abi. You can see the mapping under `./vending/src/mapping.ts`.
+This will fetch the ABI from the Rinkeby smart contract passed as an argument to --from-contract, and store it in the ./vending/abis directory. The Graph CLI will auto-generate the mappings from the smart contract ABI. You can view the mapping in ./vending/src/mapping.ts.
 
-> By passing in --index-events the CLI will automatically populate some code for us both in schema.graphql as well as src/mapping.ts based on the events emitted from the contract.
+> By passing in --index-events the CLI will automatically populate some code for us in both schema.graphql as well as src/mapping.ts based on the events emitted from the contract.
 
 Output:
 
@@ -93,18 +93,18 @@ Make sure to visit the documentation on https://thegraph.com/docs/ for further i
 ```
 
 
-- Run the below command to set the deploy key. Replace <DEPLOY_KEY> in the below command with the key you got from https://thegraph.com/studio/subgraph/vending/
+- Run the following command to set the deploy key. Replace <DEPLOY_KEY> with the key you got from https://thegraph.com/studio/subgraph/vending/
 
 ```text
-$ graph auth --studio <DEPLOY_KEY>
+graph auth --studio <DEPLOY_KEY>
 Deploy key set for https://api.studio.thegraph.com/deploy/
 ```
 
-- Run the below command to create the subgraph. Your new subgraph will be created in `subgraph.yaml` file.
+- To create the subgraph, run the following command. Your new subgraph will be created in a subgraph.yaml file.
 
 ```text
-$ cd vending
-$ graph codegen && graph build
+cd vending
+graph codegen && graph build
 ```
 
 This will generate a `build` directory under `vending/build`.
@@ -148,10 +148,10 @@ Write subgraph manifest build/subgraph.yaml
 Build completed: /temp/vending/build/subgraph.yaml
 ```
 
-- Run the below command to deploy the subgraph to Subgraph Studio.
+- The following command will deploy the subgraph to Subgraph Studio:
 
 ```text
-$ graph deploy --studio vending
+graph deploy --studio vending
 ```
 
 You shall be prompted for a version label. You can choose `1.0.1`.
@@ -189,9 +189,9 @@ Queries (HTTP):     https://api.studio.thegraph.com/query/8676/vending/v1.0.1
 Subscriptions (WS): https://api.studio.thegraph.com/query/8676/vending/v1.0.1
 ```
 
-Subgraph Studio might take few minutes to sync the graph from rinkeby testnet. Wait until the syncing process is complete.
+Subgraph Studio might take few minutes to sync the graph from the Rinkeby testnet. Wait until the syncing process is complete.
 
-Once the sync is complete, you shall have access to the Playground to run your queries.
+Once the sync is complete, you can access the subgraph on the Playground to run your queries.
 
 # Querying the graph
 
@@ -277,13 +277,13 @@ Or filter the results by certain conditions using the `where` clause:
 }
 ```
 
-### Creating data and querying it
+## Creating data and querying it
 
-Headover to https://rinkeby.etherscan.io/address/0x4006c82ffb71933160948626db3ff8d8aaad6510#writeContract to see the rinkeby smart contract.
+Go to https://rinkeby.etherscan.io/address/0x4006c82ffb71933160948626db3ff8d8aaad6510#writeContract to see the Rinkeby smart contract.
 
 ![Rinkeby Smart Contract](../../../.gitbook/assets/graph_rinkeby_contract.png)
 
-Click on the **Connect to Web3** button. Choose **Metamask** from the wallet options. After authenticatng with Metamask, you shall see **Connected - Web3[address]** instead of the earlier button. Make sure you are on the **Rinkeby** test network.
+Click on the Connect to Web3 button. Choose Metamask from the wallet options. After authenticatng with Metamask, you shall see Connected - Web3[address] instead of the earlier button. Make sure you are connected to the Rinkeby test network.
 
 Click on the **purchase** row. You need to fill in **purchase** and **amount** fields.
 
@@ -291,7 +291,7 @@ Click on the **purchase** row. You need to fill in **purchase** and **amount** f
 
 Fill in **purchase** as **0.2** and **amount** as **20**. Click on the **Write** button.
 
-It will open up the metamask prompt. Make sure you are on the **Rinkeby** test network.
+It will open up the Metamask prompt. Make sure you are on the Rinkeby test network.
 
 ![Metamask](../../../.gitbook/assets/graph_metamask.png)
 
@@ -314,7 +314,7 @@ Then come back to Playground, and run the below query (after replacing `<YOUR_AD
 }
 ```
 
-You shall get purchase you just created!
+You will see the information about the purchase you just created!
 
 ```json
 {
@@ -333,7 +333,7 @@ You shall get purchase you just created!
 
 # Conclusion
 
-Congratulations on finishing this tutorial! You have now learnt how to create and deploy your first subgraph, as well as query the subgraph using Subgraph Studio Playground.
+Congratulations on finishing this tutorial! You have learned how to create and deploy your first subgraph, as well as query the subgraph using the Subgraph Studio Playground.
 
 # About the Author
 
