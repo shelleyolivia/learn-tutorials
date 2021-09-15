@@ -60,7 +60,7 @@ graph init --contract-name VendingMachine --index-events --studio --from-contrac
 
 This will fetch the ABI from the Rinkeby smart contract passed as an argument to `--from-contract`, and store it in the `./vending/abis` directory. The Graph CLI will auto-generate the mappings from the smart contract ABI. You can view the mapping in `./vending/src/mapping.ts`.
 
-> By passing in `--index-events` the CLI will automatically populate some code for us in both schema.graphql as well as src/mapping.ts based on the events emitted from the contract.
+> By passing in `--index-events` the CLI will automatically populate some code for us in both `schema.graphql` as well as `src/mapping.ts` based on the events emitted from the contract.
 
 Output:
 
@@ -100,7 +100,7 @@ graph auth --studio <DEPLOY_KEY>
 Deploy key set for https://api.studio.thegraph.com/deploy/
 ```
 
-- To create the subgraph, run the following command. Your new subgraph will be created in a subgraph.yaml file.
+- To create the subgraph, run the following command. Your new subgraph will be created in a `subgraph.yaml` file.
 
 ```text
 cd vending
