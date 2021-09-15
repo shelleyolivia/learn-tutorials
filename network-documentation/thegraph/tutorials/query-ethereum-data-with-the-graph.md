@@ -10,7 +10,7 @@ To successfully complete this tutorial, you will need to have a basic understand
 
 # Requirements
 
-- You will need Metamask installed in your browser. You can install it from https://metamask.io/
+- You will need Metamask installed in your browser. You can install it from <https://metamask.io/>
 - You need to have a recent version of Node.js installed. We recommend using v14.17.6 LTS version for compatibility.
 
 Topics covered in this tutorial:
@@ -36,7 +36,7 @@ npm i -g @graphprotocol/graph-cli
 
 # Creating the graph project in Subgraph Studio
 
-First, you will want to head over to the Subgraph Studio at https://thegraph.com/studio/.
+First, you will want to head over to the Subgraph Studio at <https://thegraph.com/studio/>.
 
 ![Login to Subgraph Studio](../../../.gitbook/assets/graph_connect.png)
 
@@ -93,7 +93,7 @@ Make sure to visit the documentation on https://thegraph.com/docs/ for further i
 ```
 
 
-- Run the following command to set the deploy key. Replace <DEPLOY_KEY> with the key you got from https://thegraph.com/studio/subgraph/vending/
+- Run the following command to set the deploy key. Replace <DEPLOY_KEY> with the key you got from <https://thegraph.com/studio/subgraph/vending/>
 
 ```text
 graph auth --studio <DEPLOY_KEY>
@@ -195,7 +195,7 @@ Once the sync is complete, you can access the subgraph on the Playground to run 
 
 # Querying the graph
 
-Head over to https://thegraph.com/studio/subgraph/vending/ to start querying data with the Playground.
+Head over to <https://thegraph.com/studio/subgraph/vending/> to start querying data with the Playground.
 
 ![Subgraph Studio Playground](../../../.gitbook/assets/graph_playground.png)
 
@@ -279,7 +279,7 @@ Or filter the results by certain conditions using the `where` clause:
 
 ## Creating data and querying it
 
-Go to https://rinkeby.etherscan.io/address/0x4006c82ffb71933160948626db3ff8d8aaad6510#writeContract to see the Rinkeby smart contract.
+Go to <https://rinkeby.etherscan.io/address/0x4006c82ffb71933160948626db3ff8d8aaad6510#writeContract> to see the Rinkeby smart contract.
 
 ![Rinkeby Smart Contract](../../../.gitbook/assets/graph_rinkeby_contract.png)
 
