@@ -148,7 +148,7 @@ Write subgraph manifest build/subgraph.yaml
 Build completed: /temp/vending/build/subgraph.yaml
 ```
 
-- The following command will deploy the subgraph to Subgraph Studio:
+The following command will deploy the subgraph to Subgraph Studio:
 
 ```text
 graph deploy --studio vending
@@ -198,6 +198,8 @@ Once the sync is complete, you can access the subgraph on the Playground to run 
 Head over to <https://thegraph.com/studio/subgraph/vending/> to start querying data with the Playground.
 
 ![Subgraph Studio Playground](../../../.gitbook/assets/graph_playground.png)
+
+This is a basic GraphQL query for the subgraph we have created:
 
 ```graphql
 {
