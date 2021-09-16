@@ -1,44 +1,8 @@
-How to transfer ERC20 tokens to Polygon Network using PoS bridge SDK/maticjs
-===
-**Polygon PoS Bridge** is a mechanism and set of contracts on both child and root chains that will help us in moving assets between **Ethereum** and **Polygon**.
-
-In this tutorial, step by step we go through transferring `ERC20` assets or an `ERC20` custom token to the polygon chain, using **PoS SDK**.  
-We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and a custom `ERC20` token I have deployed and verified. [Here is the step by step guide](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC20)
-
-# Table of content
-* [High-level flow](#high-level-flow)
-* [Glossary](#glossary)
-* [Requirements](#requirements)
-* [MetaMask](#metamask)
-	* [Goerli](#goerli)
-	* [Mumbai](#mumbai)
-* [MLB ERC20 Contract](#mlb-erc20-contract)
-* [Mapping](#mapping)
-* [Transfer using SDK](#transfer-using-sdk)
-	* [Providers](#providers)
-	* [Installing SDK](#installing-sdk)
-	* [Approve](#approve)
-	* [Deposit](#deposit)
-* [Transfer using Web UI](#transfer-using-web-ui)
-* [Conclusion](#conclusion)
- 
-
-# High-level flow
-1. In order to transfer assets between **root** and **child** contracts, they should be mapped first. If the token you intend to transfer is already in **Polygon**, means you don't have to `map` them again. If it is your own `ERC20` token, we need to `map`.
-2. Now that contracts are mapped. it's time to transfer the assets. We can either use [web UI](https://wallet.polygon.technology/login/) or the **SDK**
-	* We use the **SDK** for **our** `ERC20` token that is in **Goerli**
-	* And **Web UI** for a mainnet real token
-
-# Glossary
-* **Root chain**: The chain you want to transfer your asset `from` (Ethereum main/test net)
-* **Root token**: The token in the root chain (`ERC20` in Ethereum main/test net)
-* **Child chain**: The chain you want to transfer your asset `to` (Polygon)
-* **Child token**: The token in the child chain (`ERC20` in Polygon main/test net)
-* **PoS Bridge**: Polygon Proof of Stake bridge
-* **Goerli**: Ethereum testnet
-* **Mumbai**: Polygon testnet
-* **MLB**: Symbole name of the custom `ERC20` token written in **Solidity/Openzeppelin**. [more](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC20)
-
+# Introduction
+In this tutorial, we will go through the process of transferring an ERC-20 custom token to the Polygon (Matic) chain, using the Polygon PoS SDK.  
+We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and a custom `ERC-20` token that has been deployed and verified. Here is [the step by step guide](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC20) written by the author of this tutorial.  
+**Polygon PoS Bridge** is a mechanism and set of contracts on both child and root chains that will help us in moving assets between **Ethereum** and **Polygon**.  
+In contrast with [Plasma Bridge](https://docs.matic.network/docs/develop/ethereum-matic/plasma/getting-started/), **Proof of Stake bridge** `exit` is much **faster** and makes it a better option for DApps that are looking for **faster withdrawals**.
 
 # Requirements
 
@@ -47,27 +11,27 @@ We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and 
 * **npm**: `7.6.3`
 * [**Geth**](https://geth.ethereum.org/docs/install-and-build/installing-geth): `1.10.8`
 
-# Metamask
-Before we go technical, let's set up **Metamask** so we can check our **ETH/MLB** token amounts.
+
+# Getting started
+1. In order to transfer assets between **root** (Ethereum) and **child** (Polygon) contracts, they should be mapped first. This is a process by which an existing token contract is mirrored between the root and child chain.  
+If the token you intend to transfer already exists on **Polygon**, this means you don't need to perform the **mapping**.  
+check the [official doc](https://docs.matic.network/docs/develop/ethereum-matic/submit-mapping-request) to see how the mapping procces done.
+2. Now that contracts are mapped. it's time to transfer the assets. We can either use the [Polygon Wallet UI](https://wallet.polygon.technology/login/) or the [Polygon SDK](https://polygon.technology/polygon-sdk/)
+	* We use the SDK for our ERC-20 token that is deployed on the  **Goerli** testnet
+	* We use the [Polygon Wallet UI](https://wallet.polygon.technology/login/) for tokens that are deployed on Ethereum mainnet
+
+# Setting up Metamask
+Before we get into the details of moving the tokens, let's set up **Metamask** so we can check our **ETH**, **MATIC** and **MLB** token balances.
 
 ## Goerli
-It is pre-configured on **Metamask**, in case it was not, sign up here [infura](https://infura.io) and get your own **Goerli** API keys.  
-Then click on `Add Network` in metamsk and put the keys & info.  
+The Goerli testnet is pre-configured in Metamask's list of available networks. You can select it from the dropdown list at the top of the Metamask interface.  
 
-* Network Info
-
-	![metamask goerli](../../../.gitbook/assets/erc20-pos-metamask-goerli.png)
-
-* Fund
-
-	![metamask goerli fund](../../../.gitbook/assets/erc20-pos-metamask-goerli-fund.png)
-
-You can fund your **Goerli** account [here](https://faucet.goerli.mudit.blog/)
+You can fund your account with testnet Ether from the [Goerli Authenticated faucet](https://faucet.goerli.mudit.blog/) as long as you are willing to make a post on a valid Twitter or Facebook account. If this is not something you wish to do, there is an alternative faucet at [goerli-faucet.slock.it](https://goerli-faucet.slock.it/)
 
 ## Mumbai
-You can either open [mumbai.polygonscan.com](https://mumbai.polygonscan.com/) and click on `Add Mumbai Network` at the bottom of the page. **or** add it yourself:
+You can either open [mumbai.polygonscan.com](https://mumbai.polygonscan.com/) and click on "Add Mumbai Network" in the footer at the bottom of the page, *or* add it manually using the following information:
 
-* **Network Name:** Polygon Testnet
+* **Network Name:** Polygon Mumbai testnet
 * **RPC URL:** https://rpc-mumbai.maticvigil.com/
 * **Chain ID:** 80001
 * **Currency Symbol:** MATIC
@@ -79,86 +43,96 @@ You can fund your **Mumbai** account with MATIC [here](https://faucet.polygon.te
 
 
 # MLB ERC20 Contract
-The token we'll **map** and transfer. A standard **openzeppelin** `ERC20` token. I deployed before in **Goerli**.  
-You can find the [step by step guide here](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC20)  
+**MLB** is the symbol of the token (deployed on the Goerli testnet) that we'll map and transfer, which is a standard OpenZeppelin ERC-20 token.  
+You can find a step by step guide to creating an ERC-20 token [here](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC20)  
+
 Token info:
-```
+
+```text
 Name: Mlibre
-Symbole: MLB
+Symbol: MLB
 Owner: 0xD8f24D419153E5D03d614C5155f900f4B5C8A65C
 Contract Address: 0xd2d40892B3EebdA85e4A2742A97CA787559BF92f
 Goerli etherscan: https://goerli.etherscan.io/address/0xd2d40892B3EebdA85e4A2742A97CA787559BF92f
 ```
-Gather this information for the **token** you intent to **map**.
+
+Gather this information for the token you intend to map.
 
 # Mapping
 Now that everything is ready. Let's map our `MLB` token.
-* Open [mapper.matic.today](https://mapper.matic.today/map/) and fill the form
-* Make sure the token you want to map is [verfied](https://etherscan.io/verifyContract)
-* Choose **Gorli Testnet - Mumbai testnet**
+* Go to [mapper.matic.today](https://mapper.matic.today/map/) and complete the form
+* Make sure the token you want to map has had its [contract verfied](https://etherscan.io/verifyContract) on Etherscan
+* Choose **Gorli Testnet -> Mumbai testnet**
 
 	![map image](../../../.gitbook/assets/erc20-pos-map.png)
 
-* Right now the mapping process is not instantly, It takes up to 3 days to confirm.  
+* At this time the mapping process is not immediate, it can take up to 3 days to be confirmed.  
+
 Then open [mapper.matic.today](https://mapper.matic.today/), and enter the contract address. see if it is added. 
 
 	![mapped image](../../../.gitbook/assets/erc20-pos-mapped.png)
 
-As you may notice the contract address in **Gorli** and **Mumbai** are not the same. so let's add it to **Metamask** as well
+As you may notice, the contract address in Goerli and Mumbai are not the same. Let's remember to add it to Metamask so it shows up when we are connected to Mumbai as well.
 
-1. Open **Metamask**
-2. Choose Polygon testnet
+1. Open Metamask
+2. Select the Mumbai testnet from the list of available networks
 3. Add Token
-4. put the contract address there (`0x0F6886ca4476D3aAb965F2D1b9185F2dd857E653`)
+4. Paste the contract address there (`0x0F6886ca4476D3aAb965F2D1b9185F2dd857E653`)
 
 Now it should be something like:
 
 ![metamask after map](../../../.gitbook/assets/erc20-pos-metamask-after-map.png)
 
-We don't have any `MLB` tokens there yet. now let's transfer some and check our **metamask** again.
+We don't yet have any MLB tokens on Mumbai. We can transfer some across the bridge and check our Metamask balance again afterward.
 
 # Transfer using SDK
-Let's take a look at transferring cycle:
+Let's take a look at the workflow for transferring tokens with the SDK:
 
-1. **Approve:** Owner of the token has to **approve** the `Ethereum Predicate Contract` which will **lock** the amount of token we want to transfer to Polygon.
-2. **Deposit:** Then a function has to be called on the `RootChainManger` contract which will trigger the `ChildChainManager` contract on **Mumbai**. And the `ChildChainManager` contract will call the **deposit** function of the `Child token` contract.
+1. **Approve:** The owner of the token has to approve the **Ethereum Predicate Contract** which will **lock** the amount of token they want to transfer to Polygon.
+2. **Deposit:** Then a function has to be called on the `RootChainManger` contract which will trigger the `ChildChainManager` contract on the Mumbai testnet. The `ChildChainManager` contract will then call the **deposit** function of the `Child token` contract.  
+> **Child** contract is the copy of the **Goerli** token contract in **Mumbai**.  
 
 ## Providers
-To Interact with **Goerli** and **Mumbai** we either should run a local node or use providers' **RPC APIs**.  
-For **Goerli**, we will run a local `Geth` node. you can also use [infura](https://infura.io).  
-For **Mumbai**, we will use [figment](https://auth.figment.io/)
+To Interact with **Goerli** and **Mumbai** we can either run a local node (which is slightly more difficult) or use the RPC endpoints of infrastructure providers like DataHub or Infura (which is much simpler).
+
+For **Goerli**, we will run a local Geth node. You can also use [infura](https://infura.io).  
+For **Mumbai**, we will use [DataHub](https://datahub.figment.io/)
 
 ### Goerli
-Install `Geth` if you have not it already. and run:
-```bash
+[Install the Geth client](https://geth.ethereum.org/docs/install-and-build/installing-geth), if you have not installed it already, then run:
+
+```text
 geth --goerli --http --syncmode=light --http.api="eth,net,web3,personal,txpool" --allow-insecure-unlock  --http.corsdomain "*"
 ```
+
 The default endpoint is `127.0.0.1:8545`.  
 You can get attached and see if everything is fine:
-```bash
+
+```text
 geth attach http://127.0.0.1:8545
 eth.getBalance("0xD8f24D419153E5D03d614C5155f900f4B5C8A65C")
 ```
 
 ### Mumbai
-* Sign up [figment](https://auth.figment.io/)  
-* Choose **Polygon** service
-* Find `Matic Mumbai Testnet JSONRPC`. It is probably located [here](https://datahub.figment.io/services/Polygon/matic-mumbai--jsonrpc)
-* Copy the **URL**. It is something like: 
-```
-https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/a434343/
-```
+* Sign up for a [DataHub](https://datahub.figment.io/) 
+* Choose the Polygon service from the [DataHub Services Dashboard](https://datahub.figment.io/services/Polygon/)
+* Scroll down to see the Polygon endpoint URLs
+* Copy the Mumbai Testnet JSONRPC URL. It is probably located [here](https://datahub.figment.io/services/Polygon/matic-mumbai--jsonrpc)
+* Form the URL like so, replacing the text YOUR_API_KEY with the API key you got from DataHub:
+`https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/YOUR_API_KEY/`
 
-## Installing SDK
-It's finally time to code :)  
+# Installing helpers
+Now that we have the information we need and the other important pieces in place, we can write some useful code using the maticjs client library and the HDWalletProvider class from Truffle.  
+
 Install **Polygon** SDK
-```bash
+
+```text
 npm install @maticnetwork/maticjs --save
 npm install @truffle/hdwallet-provider --save
 ```
 
 ## Approve
-To **approve** the **Ethereum Predicate Contract** we just simply need to call `approveERC20ForDeposit`  
+To **approve** the **Ethereum Predicate Contract** we just need to call the `approveERC20ForDeposit` function. The code for this is straightforward: 
 
 ```javascript
 await maticPOSClient.approveERC20ForDeposit(rootToken, amount.toString(), {
@@ -168,7 +142,8 @@ await maticPOSClient.approveERC20ForDeposit(rootToken, amount.toString(), {
 ```
 
 ## Deposit
-Now we should call `depositERC20ForUser`
+Next, we would call the `depositERC20ForUser` function of the **Ethereum Predicate Contract**:
+
 ```javascript
 await maticPOSClient.depositERC20ForUser(rootToken, from, amount.toString(), {
 	from,
@@ -176,90 +151,115 @@ await maticPOSClient.depositERC20ForUser(rootToken, from, amount.toString(), {
 });
 ```
 
-And it's done. The whole code is pretty simple:
+To bring it all together in JavaScript that can be executed either in a web browser or on the commandline, we can add some constants and use an external file to hold the sensitive API keys and wallet seed phrases. This is a complete example of how to use maticjs and the HDWalletProvider class to communicate with a deployed smart contract on Polygon. Use the following code as a guide for building your own solution!
+
 ```javascript
-const HDWalletProvider = require('@truffle/hdwallet-provider')
-const {MaticPOSClient} = require('@maticnetwork/maticjs')
-const secrets = require('./secrets.json')
+// main.js
+import { HDWalletProvider } from '@truffle/hdwallet-provider';
+import { MaticPOSClient } from '@maticnetwork/maticjs');
+import { secrets } from './secrets.json'
 
-let from = "0xD8f24D419153E5D03d614C5155f900f4B5C8A65C";
-let rootToken = "0xd2d40892B3EebdA85e4A2742A97CA787559BF92f";
-let amount = 999 * (10 ** 18);
+const from = "0xD8f24D419153E5D03d614C5155f900f4B5C8A65C";
+const rootToken = "0xd2d40892B3EebdA85e4A2742A97CA787559BF92f";
+const amount = 999 * (10 ** 18);
 
-const parentProvider = new HDWalletProvider(secrets.seed, 'http://127.0.0.1:8545')
-const maticProvider = new HDWalletProvider(secrets.seed, secrets.mumbai)
+const parentProvider = new HDWalletProvider(secrets.seed, 'http://127.0.0.1:8545'); // Local Geth client address
+const maticProvider = new HDWalletProvider(secrets.seed, secrets.mumbai)  // DataHub Mumbai Testnet JSONRPC URL
 
 const maticPOSClient = new MaticPOSClient({
-	network: "testnet",
-	version: "mumbai",
-	parentProvider,
-	maticProvider
+  network: "testnet",
+  version: "mumbai",
+  parentProvider,
+  maticProvider,
 });
 
-
 (async () => {
-	try
-	{
-		let result = await maticPOSClient.approveERC20ForDeposit(rootToken, amount.toString(), {
-			from,
-			gasPrice: "10000000000"
-		});
-		let result_2 = await maticPOSClient.depositERC20ForUser(rootToken, from, amount.toString(), {
-			from,
-			gasPrice: "10000000000",
-		 });
-		console.log(result);
-		console.log(result_2);
-	}
-	catch (error)
-	{
-		console.log(error);
-	}
-})()
+  try {
+    let result = await maticPOSClient.approveERC20ForDeposit(
+      rootToken,
+      amount.toString(),
+      {
+        from,
+        gasPrice: "10000000000",
+      }
+    );
+    let result_2 = await maticPOSClient.depositERC20ForUser(
+      rootToken,
+      from,
+      amount.toString(),
+      {
+        from,
+        gasPrice: "10000000000",
+      }
+    );
+    console.log(result);
+    console.log(result_2);
+  } catch (error) {
+    console.log(error);
+  }
+})();
 ```
 
 Just a few things to mention:
-* `secrets.json`: contains **Seed**, **privateKey** of the address (0xd8f2). And **Mumbai API URL**
+* `secrets.json`: contains **Seed**, **privateKey** of the address (0xd8f2). And **Mumbai API URL**. ex:
+
+```json
+{
+	"privateKey": "Goerli account private key ",
+	"seed": "Goerli account seed",
+	"mumbai": "Datahub HTTP JSONRPC URL"
+}
+```
+
 * `@truffle/hdwallet-provider`: Handles signing transactions proccess
 * `from`: The Goerli address we created token and want to send transactions with
-* `rootToken`: The `ERC20` contract address in **Goerli**
+* `rootToken`: The ERC-20 contract address on the Goerli testnet
 * `amount`: the amount of **token** we want transfer. By default, **open zeppelin** V4 `ERC20` contract uses a value of **18** for **decimals**. That is why **999** is multiplied by **(10 ** 18)**
 
-## Not able to run `main.js` 
+## Not able to run main.js 
 * If you are facing an error message like
-	```bash
-	Error: execution reverted: ERC20: approve to the zero address
-	```
-	The contract probably has not mapped yet.
+
+```text
+Error: execution reverted: ERC20: approve to the zero address
+```
+
+The contract probably has not mapped yet.
 
 ## Sync & Confirmation
 
-It takes up to 5 min, so that **Polygon** read data from the **Goerli** chain and `sync` itself. Then we can check your balance on **Metamask**
+It takes up to 5 minutes for Mumbai to read data from the Goerli chain and sync itself. Once it has synced, then we can check the token balance in Metamask.
 
 ![MLB Metamask](../../../.gitbook/assets/erc20-MLB-token.png)
 
 # Transfer using Web UI
-Transferring assets through **Web UI** is pretty simple. We will transfer some **DAI** tokens from **Ethereum** mainnet to **Polygon**.  
+Transferring assets through **Web UI** is pretty simple.  
+**Note** that we can't use **Goerli** to **Mumbai** here. Because **Web UI** only supports Ethereum and Polygon **mainnets**.  
+So I am going to transfer some **real tokens** from my **Ethereum** account to **Polygon** and pay the fees.  you may just follow the images below.
 
-1. Open [wallet.polygon.technology](https://wallet.polygon.technology/login?next=%2Fbridge)
-2. Make sure **Ethereum Maninet** is selected
+1. Open [wallet.polygon.technology](https://wallet.polygon.technology/login)
+2. Make sure Ethereum Mainnet is selected in Metamask
 
 	![Metamask Ethereum](../../../.gitbook/assets/erc20-pos-metamask-eth-mainnet.png)
 
 3. Click on **Metamask**. first login option
-4. You will be asked to sign a **Signature Request**
-5. Now enter the amount of `DAI` you want to transfer
+4. You will be asked to sign a **Signature Request** to make sure you have access to the wallet. It costs no fees
+
+	![pos web ui login](../../../.gitbook/assets/erc20-pos-web-ui-login.png)
+	
+5. I chose `DAI` token from Ethereum
 
 	![DAI](../../../.gitbook/assets/erc20-pos-web-ui-dai.png)
 
 6. Click on **Transfer**
-7. Then you confirm all the **information**, **fees** and other details
+7. Then review the transaction details, like gas fees and the smart contract you are sending tokens to - before clicking on **Confirm**
 
 	![transfer](../../../.gitbook/assets/erc20-pos-web-ui-transfer.png)
 
-8. And that is it! it takes up to 7 min to complete the transfer
+8. Once the transaction is mined, the process is complete! It takes about 7 minutes to complete the transfer, as mentioned before Polygon needs about 5 minutes to sync.
 
 # Conclusion
-Congratulations! You learned how to use `Pos Bridge SDK`.  
-We have configured `Metamask` and `Geth`, then we `mapped` our `ERC20` token.  
-And finally, we called `PoS Bridge` contracts, and moved our assets to **Polygon**.  
+Congratulations! By completing this tutorial you learned how to use the **Polygon PoS Bridge**. We have configured **Metamask** and **Geth**, to communicate with the **Goerli** testnet and the **Mumbai** testnet. We then **mapped** an **ERC-20** token between the networks so it can be transferred via the bridge. Finally, we called functions on the PoS Bridge contracts, and moved our assets from Ethereum to Polygon.
+
+# About The Author
+I'm mlibre, a random guy from the solar galaxy. I am interested in blockchain tech. and find it very useful in lots of things.  
+Feel free to check my [Github](https://github.com/mlibre)
