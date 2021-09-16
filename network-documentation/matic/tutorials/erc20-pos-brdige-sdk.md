@@ -70,7 +70,7 @@ Now that everything is ready. Let's map our `MLB` token.
 
 Then open [mapper.matic.today](https://mapper.matic.today/), and enter the contract address. see if it is added. 
 
-	![mapped image](../../../.gitbook/assets/erc20-pos-mapped.png)
+![mapped image](../../../.gitbook/assets/erc20-pos-mapped.png)
 
 As you may notice, the contract address in Goerli and Mumbai are not the same. Let's remember to add it to Metamask so it shows up when we are connected to Mumbai as well.
 
