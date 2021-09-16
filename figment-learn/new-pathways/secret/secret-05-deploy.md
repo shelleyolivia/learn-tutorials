@@ -87,7 +87,6 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
   // Create an instance of the Counter contract, providing a starting count
   const initMsg = { count: 101 };
   const receipt = await client.instantiate(codeId, initMsg, `My Counter${Math.ceil(Math.random() * 10000)}`);
-  } 
 //...
 ```
 
