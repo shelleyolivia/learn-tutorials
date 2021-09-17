@@ -1,21 +1,24 @@
 # Introduction
 In this tutorial, we will go through the process of transferring an ERC-20 custom token to the Polygon (Matic) chain, using the Polygon PoS SDK.  
-We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and a custom `ERC-20` token that has been deployed and verified. Here is [the step by step guide](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC20) written by the author of this tutorial.  
-**Polygon PoS Bridge** is a mechanism and set of contracts on both child and root chains that will help us in moving assets between **Ethereum** and **Polygon**.  
-In contrast with [Plasma Bridge](https://docs.matic.network/docs/develop/ethereum-matic/plasma/getting-started/), **Proof of Stake bridge** `exit` is much **faster** and makes it a better option for DApps that are looking for **faster withdrawals**.
+We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and a custom ERC-20 token that has been deployed and had its source code verified on Etherscan. There is [a step by step guide](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC20) written by the author of this tutorial.  
+The Polygon Proof of Stake (PoS) Bridge is a mechanism and set of contracts on both Ethereum and Polygon that will help us in moving assets between the **root** chain and **child** chain.    
+In contrast with the [Plasma Bridge](https://docs.matic.network/docs/develop/ethereum-matic/plasma/getting-started/), the Polygon PoS bridge is much faster and makes it a better option for dApps that are looking for faster withdrawals.
 
 # Requirements
 
 * [**Metamask**](https://metamask.io/)
-* [**Nodejs**](https://nodejs.org/en/download/): `v14.17.4`
-* **npm**: `7.6.3`
-* [**Geth**](https://geth.ethereum.org/docs/install-and-build/installing-geth): `1.10.8`
+* [**Nodejs**](https://nodejs.org/en/download/) v14.17.6 LTS or higher installed
+* [**Geth**](https://geth.ethereum.org/docs/install-and-build/installing-geth): version 1.10.8
 
+# Prerequisites
+In this tutorial, We will use Metamask as our wallet. If you are not familiar with it or don't know how to use it, check [this video on youtube](https://www.youtube.com/watch?v=Af_lQ1zUnoM).  
+When you are creating a metamask wallet, it gives you a Secret Recovery Phrase (Seed). With this seed, you can recover **all** of your accounts in metamask.  
+We will use this seed later in this tutorial. here is an article about [How to reveal your Secret Recovery Phrase](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase)  
 
 # Getting started
 1. In order to transfer assets between **root** (Ethereum) and **child** (Polygon) contracts, they should be mapped first. This is a process by which an existing token contract is mirrored between the root and child chain.  
 If the token you intend to transfer already exists on **Polygon**, this means you don't need to perform the **mapping**.  
-check the [official doc](https://docs.matic.network/docs/develop/ethereum-matic/submit-mapping-request) to see how the mapping procces done.
+Check the [official docs](https://docs.matic.network/docs/develop/ethereum-matic/submit-mapping-request) to learn about the mapping process.
 2. Now that contracts are mapped. it's time to transfer the assets. We can either use the [Polygon Wallet UI](https://wallet.polygon.technology/login/) or the [Polygon SDK](https://polygon.technology/polygon-sdk/)
 	* We use the SDK for our ERC-20 token that is deployed on the  **Goerli** testnet
 	* We use the [Polygon Wallet UI](https://wallet.polygon.technology/login/) for tokens that are deployed on Ethereum mainnet
@@ -68,7 +71,7 @@ Now that everything is ready. Let's map our `MLB` token.
 
 * At this time the mapping process is not immediate, it can take up to 3 days to be confirmed.  
 
-Then open [mapper.matic.today](https://mapper.matic.today/), and enter the contract address. see if it is added. 
+Then open [mapper.matic.today](https://mapper.matic.today/), and enter the contract address to see if it has been added.
 
 ![mapped image](../../../.gitbook/assets/erc20-pos-mapped.png)
 
@@ -90,7 +93,7 @@ Let's take a look at the workflow for transferring tokens with the SDK:
 
 1. **Approve:** The owner of the token has to approve the **Ethereum Predicate Contract** which will **lock** the amount of token they want to transfer to Polygon.
 2. **Deposit:** Then a function has to be called on the `RootChainManger` contract which will trigger the `ChildChainManager` contract on the Mumbai testnet. The `ChildChainManager` contract will then call the **deposit** function of the `Child token` contract.  
-> **Child** contract is the copy of the **Goerli** token contract in **Mumbai**.  
+**Child** contract is the copy of the **Goerli** token contract in **Mumbai**.  
 
 ## Providers
 To Interact with **Goerli** and **Mumbai** we can either run a local node (which is slightly more difficult) or use the RPC endpoints of infrastructure providers like DataHub or Infura (which is much simpler).
@@ -200,14 +203,88 @@ const maticPOSClient = new MaticPOSClient({
 })();
 ```
 
+Expected output for **approveERC20ForDeposit** is something like this:
+
+```javascript
+{
+  blockHash: '0x9616fab5f19fb93580fe5dc71da9062168f1f1f5a4a5297094cad0b2b3e2dceb',
+  blockNumber: 5513011,
+  contractAddress: null,
+  cumulativeGasUsed: 46263,
+  effectiveGasPrice: '0x2540be400',
+  from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
+  gasUsed: 46263,
+  logsBloom: '0x0000000000000000000000000000000000000000000000800000000000000000000080000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000010000000000000000000000',
+  status: true,
+  to: '0xd2d40892b3eebda85e4a2742a97ca787559bf92f',
+  transactionHash: '0x3aba80ae8938ed1abbb18560cb061f4915d202a731e5e2ec443aded67169e28a',
+  transactionIndex: 0,
+  type: '0x0',
+  events: {
+    Approval: {
+      address: '0xd2d40892B3EebdA85e4A2742A97CA787559BF92f',
+      blockNumber: 5513011,
+      transactionHash: '0x3aba80ae8938ed1abbb18560cb061f4915d202a731e5e2ec443aded67169e28a',
+      transactionIndex: 0,
+      blockHash: '0x9616fab5f19fb93580fe5dc71da9062168f1f1f5a4a5297094cad0b2b3e2dceb',
+      logIndex: 0,
+      removed: false,
+      id: 'log_0e714fbf',
+      returnValues: [Result],
+      event: 'Approval',
+      signature: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925',
+      raw: [Object]
+    }
+  }
+}
+```
+
+And for **depositERC20ForUser**:
+
+```javascript
+{
+  blockHash: '0x622989e0d1097ea59c557663bf4fa19b3064cfb858706021a6eecb11bb1c19b2',
+  blockNumber: 5513012,
+  contractAddress: null,
+  cumulativeGasUsed: 89761,
+  effectiveGasPrice: '0x2540be400',
+  from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
+  gasUsed: 89761,
+  logsBloom: '0x0200000000000000000000000000000800000040000000800000000000000000000080000000000000040008000000000000200000000000008000100020000000000000000000001000000a000000000000000000000100000000000000000000000000000008000000000400000014000000000000000000000010200000000000000000000000000000000200000000000000000000000000020000080000020000000200008000000000000000040000000000000800000000000000000000000002000000000000000000000002000000140000000000200000000000000010000000000000000000000000000000000000010000000000000000000000',
+  status: true,
+  to: '0xbbd7cbfa79faee899eaf900f13c9065bf03b1a74',
+  transactionHash: '0x58a7f01edc2b9772f87fca57789f0912152615813e6231ab137e4759c8f6415f',
+  transactionIndex: 0,
+  type: '0x0',
+  events: {
+    '0': {
+      address: '0xdD6596F2029e6233DEFfaCa316e6A95217d4Dc34',
+      blockNumber: 5513012,
+      transactionHash: '0x58a7f01edc2b9772f87fca57789f0912152615813e6231ab137e4759c8f6415f',
+      transactionIndex: 0,
+      blockHash: '0x622989e0d1097ea59c557663bf4fa19b3064cfb858706021a6eecb11bb1c19b2',
+      logIndex: 0,
+      removed: false,
+      id: 'log_20b9b372',
+      returnValues: Result {},
+      event: undefined,
+      signature: null,
+      raw: [Object]
+    },
+    '1': {
+      .
+      .
+      .
+```
+
 Just a few things to mention:
 * `secrets.json`: contains **Seed**, **privateKey** of the address (0xd8f2). And **Mumbai API URL**. ex:
 
 ```json
 {
-	"privateKey": "Goerli account private key ",
-	"seed": "Goerli account seed",
-	"mumbai": "Datahub HTTP JSONRPC URL"
+	"privateKey": "This should be the private key of an account specifically made for use on the Goerli testnet",
+	"seed": "This should be a Secret Recovery Phrase from Metamask and ONLY used on Ethereum testnets",
+	"mumbai": "https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/YOUR_API_KEY/"
 }
 ```
 
@@ -225,6 +302,30 @@ Error: execution reverted: ERC20: approve to the zero address
 
 The contract probably has not mapped yet.
 
+* If you have not run Geth, you will get an error like this
+
+```text
+(node:3962) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
+(node:3962) [DEP0018] DeprecationWarning: Unhandled terminate the Node.js process with a non-zero exit code.
+node_modules/safe-event-emitter/index.js:74
+      throw err
+      ^
+
+Error: PollingBlockTracker - encountered an error while attempting to update latest block:
+Error: connect ECONNREFUSED 127.0.0.1:8545
+```
+
+* If you get an error like this
+
+```javascript
+{
+  code: -32000,
+  message: 'getDeleteStateObject (0000000000000000000000000000000000000000) error: no suitable peers available'
+}
+```
+
+Wait a bit and try again
+
 ## Sync & Confirmation
 
 It takes up to 5 minutes for Mumbai to read data from the Goerli chain and sync itself. Once it has synced, then we can check the token balance in Metamask.
@@ -234,7 +335,7 @@ It takes up to 5 minutes for Mumbai to read data from the Goerli chain and sync 
 # Transfer using Web UI
 Transferring assets through **Web UI** is pretty simple.  
 **Note** that we can't use **Goerli** to **Mumbai** here. Because **Web UI** only supports Ethereum and Polygon **mainnets**.  
-So I am going to transfer some **real tokens** from my **Ethereum** account to **Polygon** and pay the fees.  you may just follow the images below.
+So I am going to transfer some **real tokens** from my **Ethereum** account to **Polygon** and pay the fees. You may just follow the images below to see how the process works.
 
 1. Open [wallet.polygon.technology](https://wallet.polygon.technology/login)
 2. Make sure Ethereum Mainnet is selected in Metamask
@@ -261,5 +362,5 @@ So I am going to transfer some **real tokens** from my **Ethereum** account to *
 Congratulations! By completing this tutorial you learned how to use the **Polygon PoS Bridge**. We have configured **Metamask** and **Geth**, to communicate with the **Goerli** testnet and the **Mumbai** testnet. We then **mapped** an **ERC-20** token between the networks so it can be transferred via the bridge. Finally, we called functions on the PoS Bridge contracts, and moved our assets from Ethereum to Polygon.
 
 # About The Author
-I'm mlibre, a random guy from the solar galaxy. I am interested in blockchain tech. and find it very useful in lots of things.  
+I'm mlibre, a random guy from the solar galaxy. I am interested in blockchain tech and find it very useful in lots of things.  
 Feel free to check my [Github](https://github.com/mlibre)
