@@ -24,7 +24,8 @@ In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
     // Maybe adding someting to a Transaction could be interesting ?
     const transaction = new Transaction();
 
-    const hash = res.status(200).json(hash); // You should now what is expected here.
+    // We can send and confirm a transaction in one row.
+    const hash = undefined; 
 //..
 ```
 
