@@ -205,13 +205,13 @@ function mint(string memory _tokenURI) public {
 
 `msg.sender` is a special keyword which returns the address of the account calling the smart contract. In this case it would return the account currently calling the mint function. Hence the account calling the mint function will be passed as first argument and therefore the minted NFT will be owned by this account. 
 
-The `_setTokenURI()` is not yet defined so please ignore it for the moment. This function will be used for setting the tokenURI for the minted NFT. This function was present in the ERC721 library but have been discontinued after version 0.8.0 and hence we will be writing it ourselves.
+The `_setTokenURI()` function is not yet defined so just ignore it for the moment. This function will be used for setting the tokenURI for the minted NFT. This function was present in the ERC721 library but has been discontinued after Solidity version 0.8.0 and so we will need to implement it ourselves.
 
-Once the token is minted and tokenURI is set we increment the tokenCounter by 1 so that the next minted token have a new token id.
+Once the token is minted and its tokenURI is set, we increment the tokenCounter by 1 so that the next minted token has a new token id.
 
 ## Creating the _setTokenURI() function
 
-Our NFT smart contract must store all the valid token id with their respective tokenURI. For this we can use the `mapping` datatype in solidity. In solidity mapping is just like how hashmap works in other programming languages like Java. We can define a mapping from a `uint256` number to a `string` which will signify that each token id is *mapped* to its respective tokenURI. Just after the declaration of tokenCounter variable, define the mapping.
+Our NFT smart contract must store all the valid token id's with their respective tokenURI. For this we can use the `mapping` data type in Solidity. Mappings work similarly to hashmaps in other programming languages like Java. We can define a mapping from a `uint256` number to a `string` which will signify that each token id is mapped to its respective tokenURI. Just after the declaration of the tokenCounter variable, define the mapping:
 
 ```jsx
 mapping (uint256 => string) private _tokenURIs;
@@ -221,26 +221,26 @@ Now let's write the _setTokenURI function:
 
 ```jsx
 function _setTokenURI(uint256 _tokenId, string memory _tokenURI) internal virtual {
-        require(
-            _exists(_tokenId),
-            "ERC721Metadata: URI set of nonexistent token"
-        );  // Checks if the tokenId exists
-        _tokenURIs[_tokenId] = _tokenURI;
-    }
+  require(
+      _exists(_tokenId),
+      "ERC721Metadata: URI set of nonexistent token"
+  );  // Checks if the tokenId exists
+  _tokenURIs[_tokenId] = _tokenURI;
+}
 ```
 
 There are many new terms defined here so let's deal with them one-by-one:
 
-- **internal:** The function is defined with internal keyword. It means this function can be called only by other functions in this smart contract or other smart contracts inheriting this smart contract. This function `CAN'T` be called by an external user.
-- **virtual:** This keyword means that this function can be override by any contract that is inheriting this smart contract
-- **require:** The first thing inside the function body is the `require` keyword. It takes in a conditional statement. If this statement returns `true` then only rest of the smart contract is executed. If the conditional statement returns `false` , then it will generate an error. The second parameter is the generated error message and it is optional.
-- **_exists():** This function returns true if there is a token minted with the passed tokenId else returns `false`.
+- **internal:** The function is defined with internal keyword. It means this function can be called only by other functions in this smart contract or other smart contracts inheriting this smart contract. This function cannot be called by an external user.
+- **virtual:** This keyword means that the function can be overriden by any contract that is inheriting this smart contract.
+- **require:** The first thing inside the function body is the `require` keyword. It takes in a conditional statement. If this statement returns true then the rest of the function body is executed. If the conditional statement returns false, then it will generate an error. The second parameter is the generated error message and it is optional.
+- **_exists():** This function returns **true** if there is a token minted with the passed tokenId, otherwise it returns **false**.
 
-Therefore, this function first makes sure that the tokenId for which we are trying to set the tokenURI is already minted and if so, it will add the tokenURI to the mapping along with the respective tokenId.
+**In summary**: This function first makes sure that the tokenId for which we are trying to set the tokenURI is already minted. If it is, it will add the tokenURI to the mapping, along with the respective tokenId.
 
-## Creating tokenURI() function
+## Creating the tokenURI() function
 
-The last function which we have to create is called the tokenURI() function. It will be a publicly callable function which will take tokenId as a parameter and return its respective tokenURI. This is a standard function which is called by various NFT based platforms like [OpenSea](https://opensea.io/). Platforms like this use the tokenURI returned from this function to display various information about the NFT like its properties and the display image. 
+The last function which we have to create is the `tokenURI()` function. It will be a publicly callable function which takes a tokenId as a parameter and returns its respective tokenURI. This is a standard function which is called by various NFT based platforms like [OpenSea](https://opensea.io/). Platforms like this use the tokenURI returned from this function to display various information about the NFT like its properties and the display image. 
 
 Let's write the tokenURI function:
 
@@ -255,7 +255,7 @@ function tokenURI(uint256 _tokenId) public view virtual override returns(string 
 ```
 
 - **public:** This function is public which means any outside user can call it.
-- **view:** Since this function doesn't change the state of the blockchain, i.e. it doesn't change any value in the smart contract, executing this function will not require any Gas. Since no state change will take place, this function is defined as `view` .
+- **view:** Since this function doesn't change the state of the blockchain, i.e. it doesn't change any value in the smart contract, executing this function will not require any Gas. Since no state change will take place, this function is defined as **view**.
 - **override:** We already have a tokenURI() function in the ERC721 contract we have inherited which uses the concept of `baseURI + tokenId` to return the tokenURI. Since we need a different logic hence we had to "over wright" the inherited function by using this keyword.
 - **returns(string memory):** Since this function returns a string value we have to define it while declaring the function.
 
