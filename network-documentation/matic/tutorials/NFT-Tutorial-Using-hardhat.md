@@ -2,45 +2,44 @@
 
 # Introduction
 
-In this tutorial we are going to learn how to use HardHat which is a popular framework used for Smart Contract Development. It is also a javascript based framework like truffle but have certain advantages over truffle which we will eventually cover. In this tutorial we will build an awesome NFT project where we can convert anything into an NFT. We will also learn how to write smart contracts, test them and they deploy and verify them using Hardhat framework.
+In this tutorial we will learn how to use HardHat which is a popular framework used for smart contract development. It is a JavaScript based framework like Truffle but has certain advantages over Truffle which we will go over in the tutorial. The goal of this tutorial is to build an awesome NFT project where we can convert anything into an NFT. We will also learn how to write, test and deploy smart contracts using the Hardhat framework.
 
-# Prerequisite
+# Prerequisites
 
-I assume you have some basic understanding of what smart contracts are how they are used for building various DeFi projects. You also know and have used MetaMask and is familiar with the concept of Public and Private Key. Familiarity with Solidity and Javascript along with Nodejs will also be very helpful.
+This tutorial assumes you have a basic understanding of what smart contracts are & how they are used for building dApp projects. Ideally, you also know about and have used Metamask and are familiar with the concept of public and private keys. Familiarity with Solidity and Javascript along with Node.js will also be very helpful.
 
-# Requirement
+# Requirements
 
-Please make sure you have the following installed in your device:
+Please make sure you have the following software installed:
 
-- [Node.js](https://nodejs.org/en/) for installing HardHat and other node packages.
-- [MetaMask](https://metamask.io/) for interacting with the blockchain. Install MetaMask and [connect MetaMask with mumbai testnet](https://docs.matic.network/docs/develop/metamask/config-polygon-on-metamask).
-- Get you MetaMask account funded with testnet tokens using the [faucet](https://faucet.polygon.technology/).
+- [Node.js](https://nodejs.org/en/) v14.17.6 LTS or higher, for installing HardHat and other node packages.
+- [MetaMask](https://metamask.io/) for interacting with the blockchain. 
+  - Once you have installed MetaMask, add a connection with the [Polygon Mumbai testnet](https://docs.matic.network/docs/develop/metamask/config-polygon-on-metamask).
+- Remember to get your account funded with testnet MATIC tokens using the [Polygon faucet](https://faucet.polygon.technology/).
 
-# Getting Started
+# Creating Polygonscan API key
 
-## Creating Polygonscan API key
+When we deploy our contract to the blockchain (either mainnet or testnet), it is a good practice to verify the code of our smart contract after deploying it. If our smart contract is **verified**, then the smart contract code will be visible on the block explorer and users will be able to interact with the smart contract directly from the block explorer (such as Polygonscan). Verifying the source code is highly encouraged as it makes our project more transparent, and users are more likely to interact with it.
 
-When we deploy our contract to the blockchain (mainnet or testnet), it is a good practice to verify our smart contract while deploying it. If our smart contract is **Verified**, then the smart contract code will be visible in the block explorer and also users will be able to interact with the smart contract directly from the block explorer. Getting our contract verified is highly encouraged as it makes our project more transparent and users are more likely to trust it.
-
-For getting our smart contract verified while we deploy it, we will need  an Polygonscan API key. Follow the following steps to get your key:
+Using a HardHat plugin, smart contracts can be verified automatically during the deployment process. To do this, we will need a Polygonscan API key. Follow these steps to get your own API key:
 
 1. Open [Polygonscan](https://polygonscan.com/).
-2. Click on **SignIn** in the upper right corner.
-3. If you already have an account, enter your username and password to login else create your new account by [clicking here](https://polygonscan.com/register).
-4. Once you are logged in, go to the API-KEYs section.
-5. Click on the `Add` button, give it a name and click on continue.
+2. Click on **SignIn** in the upper right corner of the page.
+3. If you already have an account, enter your username and password to login, or else create your new account by visiting [https://polygonscan.com/register](https://polygonscan.com/register).
+4. Once you are logged in, go to the API-KEYs section on the left sidebar.
+5. Click on the "Add" button, give it a name and click on continue.
 
-Now you will have an API Key. This key will be same for both mainnet and testnet.
+You now have an API key which will allow you to access the Polygonscan API features such as contract verification. This key will be same for both mainnet and testnet.
 
-## Creating Hardhat project
+# Creating Hardhat project
 
-To install hardhat type the following command:
+To install HardHat, run the command:
 
 ```bash
 npm install -g hardhat
 ```
 
-This is going to install hardhat globally and later we can make use of `npx` command to create hardhat projects. 
+This will install HardHat globally so that later we can make use of the `npx` command to create HardHat projects. 
 
 Now to create our project, we will use the following code
 
@@ -60,7 +59,7 @@ We can either start with a basic sample project so that it is easier for us to u
 
 **Congrats** 🎊🎊🎊 you have created your first Hardhat project.
 
-## Understanding the code
+# Understanding the code
 
 Now let's open our project and take a cursory look at what's in it. I will be using VSCode as my editor of choice but feel free to use any other editor of choice.
 
@@ -105,6 +104,8 @@ While developing our project we are also doing to write our own custom tasks.
 In the end is `module.export` , this is where we are going to list various parameters like compiler version, networks to use, API keys, etc. Please note, here we have defined the solidity version as `0.8.4` .
 
 # Writing the Smart Contract
+
+In this section we are going to write our first smart contract which will be an NFT Creation Smart contract. The smart contract will ask for a tokenURI and will convert it into an NFT. We will also learn about how to install various libraries and how to use them in our smart contract.
 
 ## Installing Openzeppelin library
 
