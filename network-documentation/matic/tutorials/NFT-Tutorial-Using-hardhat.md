@@ -45,7 +45,7 @@ Now to create our project, we will use the following code
 
 ```bash
 mkdir art_gallery # I am naming my project folder as art_gallery but any other name works
-cd art_gallery    # mode into the folder
+cd art_gallery    # move into the directory
 npx hardhat
 ```
 
@@ -53,21 +53,21 @@ On typing the last command, something similar to this should appear on your scre
 
 ![Hardhat Initializing](../../../.gitbook/assets/HardHatInitializing.png)
 
-We can either start with a basic sample project so that it is easier for us to understand, so let's hit enter. After this we will be asked to set our project root. Hit Enter to keep the default value. Next it will ask if we want a .gitignore file. Hit enter to keep the default value of yes or type n for no. It will then ask if we want to install the dependencies for our sample project. Hit enter to keep the default of yes. Now it is going to create a sample project for us and install the dependencies. Once done it will look something like this:
+We can start with a basic sample project so that it is easier to understand the project layout, so let's just press Enter. After this we will be asked to set our project root - Press Enter to keep the default value. Next it will ask if we want a .gitignore file. Press Enter again to keep the default value of "yes" or type n for "no". It will then ask if we want to install the dependencies for our sample project. Press Enter to accept the default of yes. Now HardHat will create a sample project for us and install the dependencies. Once complete, it will look something like this:
 
 ![Hardhat Initialized](../../../.gitbook/assets/HardhatInstalled.png)
 
-**Congrats** 🎊🎊🎊 you have created your first Hardhat project.
+**Congrats** 🎊🎊🎊 you have created your first HardHat project!
 
 # Understanding the code
 
-Now let's open our project and take a cursory look at what's in it. I will be using VSCode as my editor of choice but feel free to use any other editor of choice.
+Now let's open our project and take a look at what it contains. I will be using VSCode as my editor of choice but feel free to use any other code editor you are comfortable with.
 
 ![Initial File Structure](../../../.gitbook/assets/InitialFileStructure.png)
 
-What we get is a very simple project. The folder names are quite self explanatory. All our smart contracts, script files and test scripts are going to be in their respective folders. 
+What we get is a very simple project scaffold. The directory names are quite self explanatory. All our smart contracts, script files and test scripts are going to be kept in their respective directories (folders).
 
-`hardhat.config.js` is the file which contains all the configurations specific to hardhat.
+`hardhat.config.js` is the file which contains all the configuration details specific to HardHat.
 
 Before we start writing our smart contract, let's look at the `hardhat.config.js` file which is the heart of our HardHat project. The contents of this file by default are:
 
@@ -91,35 +91,29 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: "0.6.6",
+  solidity: "0.8.4",
 };
 ```
 
 We start by importing the `@nomiclabs/hardhat-waffle` package which will give us access to the `hre` class. HRE is short for **Hardhat Runtime Environment** which is an object that contains all the functionality that Hardhat exposes. You can think of it as "Hardhat *is* hre".
 
-Next is where we define various tasks. This tasks can be ran by typing `npx hardhat <TASK_NAME>`
+NNext is where we define various tasks which can be run by typing `npx hardhat <TASK_NAME>`
 
 While developing our project we are also doing to write our own custom tasks.
 
-In the end is `module.export` , this is where we are going to list various parameters like compiler version, networks to use, API keys, etc. Please note, here we have defined the solidity version as `0.8.4` .
+At the end of the file is `module.export` , this is where we are going to list various parameters like compiler version, networks to use, API keys, etc. Please note, here we have defined the solidity version as `0.8.4` .
 
-# Writing the Smart Contract
-
-In this section we are going to write our first smart contract which will be an NFT Creation Smart contract. The smart contract will ask for a tokenURI and will convert it into an NFT. We will also learn about how to install various libraries and how to use them in our smart contract.
-
-## Installing Openzeppelin library
+# Installing Openzeppelin library
 
 While writing any program, we always prefer using various libraries so that we don't have to write everything from scratch. Since we are going to build an NFT based project we are going to follow the standards defined in EIP721. The best way to do so, is to import the ERC721 contract present in Openzeppelin/contracts library and only making the necessary changes. To install the package, open terminal and type
 
-```bash
+```text
 npm install @openzeppelin/contracts
 ```
 
-## Starting our smart contract
+# Starting our smart contract
 
-Let's create a new file names `Artwork.sol` inside the contracts directory. This is going to be our first smart contract which will help us in creating NFTs.
-
- 
+Let's create a new file named `Artwork.sol` inside the `contracts` directory. This is going to be our first smart contract which will help us in creating NFTs.
 
 ```jsx
 //SPDX-License-Identifier: Unlicense
@@ -128,11 +122,11 @@ pragma solidity 0.8.4;
 contract Artwork {}
 ```
 
-We start by defining the License of our smart contract. For this tutorial we are keeping it unlicensed. If we don't define the license, it is going to give an error during the compile time. `pragma` keyword is used to define the solidity version we are going to use. Make sure you are using the same solidity version as defined in the `hardhat.config.js` file.
+We start by defining the License of our smart contract. For this tutorial we are keeping it unlicensed. If we don't define the license, it will cause a warning during compile time. The `pragma` keyword is used to define the Solidity version used to compile the code. Make sure you are using the same Solidity version as defined in the `hardhat.config.js` file.
 
-## Importing contract
+# Importing the OpenZeppelin contract
 
-Next we are going to import the ERC721 smart contract from openzeppelin library which we just installed. After the line defining the solidity version and before defining the contract, import the ERC721 contract
+Next we are going to import the ERC721 smart contract from the OpenZeppelin library which we just installed. After the line defining the Solidity version and before defining the contract, import the ERC721 contract:
 
 ```jsx
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -160,13 +154,13 @@ contract Artwork is ERC721 {
 
 Here we are doing the following things:
 
-- Inheriting the ERC721 smart contract into our Artwork smart contract using the `is` keyword.
-- Constructor is always the first function that is called while deploying a smart contract. Since we are inheriting another smart contract, we have to pass in the values for the constructor of that smart contract while defining our constructor. Here we taking name and symbol as constructor arguments and are passing them to the constructor of ERC721.
+- Inheriting the OpenZeppelin ERC721 smart contract into our `Artwork.sol` smart contract using the `is` keyword.
+- The constructor is always the first function that is called while deploying a smart contract. Since we are inheriting another smart contract, we have to pass in the values for the constructor of that smart contract while defining our constructor. Here we take a name and symbol as constructor arguments and are passing them to the constructor of ERC721.
 - `name` and `symbol` are going to be the name and symbol of our NFT respectively.
 
 ## Defining tokenCounter
 
-NFTs are called Non-Fungible because all of them are unique. What makes them unique is the token id assigned to them. We are going to define a global variable called tokenCounter and use it for calculating the token id. It will start with zero and increment by 1 for every new NFT that is minted. The value of tokenCounter is set to 0 in the constructor.
+NFTs are called Non-Fungible Tokens because each one is unique. What makes them unique is the token id assigned to them. We are going to define a global variable called tokenCounter and use it for calculating the token id. It will start with zero and increment by 1 for every new NFT that is created (or "minted"). The value of tokenCounter is set to 0 in the constructor.
 
 ```jsx
 //SPDX-License-Identifier: Unlicense
@@ -190,23 +184,26 @@ contract Artwork is ERC721 {
 
 ## Creating the mint function
 
-Now we are going to define a mint function which can be called by any user in order to mint new NFTs. Each NFT have certain data associated with it. In our case we are trying to convert images or other collectibles into NFT and hence the image should be somehow stored in the smart contract. Since storing data on blockchain costs gas, it won't be financially feasible if the entire image and other associated data is stored. So, we host the image separately along with a JSON file which contains all the details about the NFT. The image and JSON file can be hosted separately either decentralised (using IPFS) or centrally using traditional methods. The JSON file contains the link to the image as well. Once the JSON file is hosted, the link pointing to that JSON file is stored in the blockchain in the as tokenURI. tokenURI roughly translates to "token Universal Resource Identifier". [This](https://opensea-creatures-api.herokuapp.com/api/creature/2) is an example of centrally hosted tokenURI. The mint function will be:
+Now we are going to define a mint function which can be called by any user in order to mint new NFTs. Each NFT will have certain data associated with it. In our case, we are using images or other collectibles as the basis of the NFT and hence the image should be somehow stored in the smart contract. Since storing data directly on a blockchain has an associated cost, it won't be financially feasible if the entire image and other associated data (metadata) is stored.
+So, we will need to host the image separately along with a JSON file containing all the details about the NFT. The image and JSON file can be hosted separately either decentralised (using IPFS) or centrally using traditional methods. The JSON file contains the link to the image as well. Once the JSON file is hosted, the link pointing to that JSON file is stored in the blockchain in the as tokenURI. URI stands for "Universal Resource Identifier". [This](https://opensea-creatures-api.herokuapp.com/api/creature/2) is an example of centrally hosted tokenURI. 
+
+With that in mind, the mint function is how we create each NFT associated with the smart contract:
 
 ```jsx
 function mint(string memory _tokenURI) public {
-        _safeMint(msg.sender, tokenCounter);
-        _setTokenURI(tokenCounter, _tokenURI);
+  _safeMint(msg.sender, tokenCounter);
+  _setTokenURI(tokenCounter, _tokenURI);
 
-				tokenCounter++;
-    }
+  tokenCounter++;
+}
 ```
 
-_safeMint is another function present in the ERC721 contract which is used to mint new NFTs. It takes to parameters:
+`_safeMint` is another function present in the OpenZeppelin ERC721 contract which is used to mint new NFTs. It takes two parameters:
 
-- to: This is the first parameter and this takes address of account which will own the NFT after it is minted.
-- tokenId: This will be the tokenId of the new minted NFT.
+- to: The first parameter is the address of an account which will own the NFT after it is minted.
+- tokenId: The second parameter is the tokenId of the newly minted NFT.
 
-`msg.sender` is a special keyword which returns the account calling the smart contract. In this this case it will return the account calling the mint function. Hence the account calling the mint function will be passed as first argument and therefore the minted NFT will be owned by this account. 
+`msg.sender` is a special keyword which returns the address of the account calling the smart contract. In this case it would return the account currently calling the mint function. Hence the account calling the mint function will be passed as first argument and therefore the minted NFT will be owned by this account. 
 
 The `_setTokenURI()` is not yet defined so please ignore it for the moment. This function will be used for setting the tokenURI for the minted NFT. This function was present in the ERC721 library but have been discontinued after version 0.8.0 and hence we will be writing it ourselves.
 
