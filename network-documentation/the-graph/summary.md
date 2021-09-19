@@ -125,10 +125,10 @@ var requestOptions = {
 #### Building the javascript function in Sheets:
 ##### We want to have floating parameters in the function in order to filter new pairs based on our different parameters:
 
-##### 1. Number of days since the pair was created : [createdAtTimestamp_gte]
-##### 2. Minimum volume in USD threshold : [volumeUSD_gte]
-##### 3. Minimum liquidity in USD threshold : [totalValueLockedUSD_gte]
-##### 4. Minimum number of transactions since creation date : [txCount_gte]
+##### * Number of days since the pair was created : [createdAtTimestamp_gte]
+##### * Minimum volume in USD threshold : [volumeUSD_gte]
+##### * Minimum liquidity in USD threshold : [totalValueLockedUSD_gte]
+##### * Minimum number of transactions since creation date : [txCount_gte]
 
 ##### Let's define an asynchroneous function with those 4 parameters as inputs
 ```javascript
@@ -136,7 +136,9 @@ async function UNISWAP(days,volume,liquidity,tx_count){
 }
 ```
 
-##### In order to make the TheGraph post request, we need a threshold date (createdAtTimestamp_gte) in UNIX timestamp format. We can compute it as shown in the below code. [1] Then we just need to change the fixed parameters from the model with the floating parameters (making sure they are in string) in the variable graphql. Afterwards we can copy/paste the requestOptions variable from Postman and then call the URLfetch using the ImportJSON function that was created for Google sheets.
+##### [1] In order to make the TheGraph post request, we need a threshold date (createdAtTimestamp_gte) in UNIX timestamp format. We can compute it as shown in the below code. ##### [2] Then we just need to change the fixed parameters from the model with the floating parameters (making sure they are in string) in the variable graphql. 
+##### [3] Afterwards we can copy/paste the requestOptions variable from Postman
+##### [4] Finally we call the URLfetch using the ImportJSON function that was created for Google sheets.
 ```javascript
 async function UNISWAP(days,volume,liquidity,tx_count){
 	// [1] Computing the threshold date (createdAtTimestamp_gte) in UNIX timestamp format
