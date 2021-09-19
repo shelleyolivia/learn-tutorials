@@ -94,22 +94,22 @@ query{
 ##### Once you download Postman, you can open a new window like shown below:
 ##### <img width="1437" alt="postmanclean" src="https://user-images.githubusercontent.com/53000607/133645104-1099b76f-41cd-4637-94e9-79b965dcce92.png">
 ##### To get the data in Postman, you will need to:
-1. Insert in the URL box the HTTP Query url from the Uniswap V3 subgraph (https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3)
-2. Change the GET into a POST request
-3. Copy/paste the above GraphQL query in Body and select GraphQL
-4. Click Send
+##### 1. Insert in the URL box the HTTP Query url from the Uniswap V3 subgraph (https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3)
+##### 2. Change the GET into a POST request
+##### 3. Copy/paste the above GraphQL query in Body and select GraphQL
+##### 4. Click Send
 
-You should get the same JSON table as on TheGraph.
-<img width="1100" alt="potman_query" src="https://user-images.githubusercontent.com/53000607/133658202-670210a1-4509-4754-a164-1e22514d4594.png">
+##### You should get the same JSON table as on TheGraph.
+##### <img width="1100" alt="potman_query" src="https://user-images.githubusercontent.com/53000607/133658202-670210a1-4509-4754-a164-1e22514d4594.png">
 
 
 ### Connecting the model through Google Sheet
-Once you confirmed that the query is functionning in Postman, you can transform the code into a Javascript Fetch request (for Google Sheet) using the Code button underneath the Save button.
+##### Once you confirmed that the query is functionning in Postman, you can transform the code into a Javascript Fetch request (for Google Sheet) using the Code button underneath the Save button.
 
-<img width="977" alt="javascript_postman" src="https://user-images.githubusercontent.com/53000607/133802683-9462b554-06f8-4d52-9533-35491102f006.png">
+##### <img width="977" alt="javascript_postman" src="https://user-images.githubusercontent.com/53000607/133802683-9462b554-06f8-4d52-9533-35491102f006.png">
 
 
-#### This is the important part to save for the App Script in Google:
+#### The important part to save for the App Script in Google is:
 ```graphql
 var graphql = JSON.stringify({
   query: "query{\n  \n  pools( where: {\n      volumeUSD_gte:20000\n      totalValueLockedUSD_gte: 30000\n      txCount_gte:100\n      createdAtTimestamp_gte: 1625575864\n    } \n		) {\n  \n    token0 {\n      symbol\n    }\n    token0Price\n    token1 {\n      symbol\n    }\n    token1Price\n    id\n    volumeUSD\n    createdAtTimestamp\n    totalValueLockedUSD\n    txCount\n  }}",
@@ -121,6 +121,42 @@ var requestOptions = {
   body: graphql,
   redirect: 'follow'
 };
+```
+#### Building the javascript function in Sheets:
+##### We want to have floating parameters in the function in order to filter new pairs based on our different parameters:
+
+##### 1. Number of days since the pair was created : [createdAtTimestamp_gte]
+##### 2. Minimum volume in USD threshold : [volumeUSD_gte]
+##### 3. Minimum liquidity in USD threshold : [totalValueLockedUSD_gte]
+##### 4. Minimum number of transactions since creation date : [txCount_gte]
+
+##### Let's define an asynchroneous function with those 4 parameters as inputs
+```javascript
+async function UNISWAP(days,volume,liquidity,tx_count){
+}
+```
+
+##### In order to make the TheGraph post request, we need a threshold date (createdAtTimestamp_gte) in UNIX timestamp format. We can compute it as shown in the below code. [1] Then we just need to change the fixed parameters from the model with the floating parameters (making sure they are in string) in the variable graphql. Afterwards we can copy/paste the requestOptions variable from Postman and then call the URLfetch using the ImportJSON function that was created for Google sheets.
+```javascript
+async function UNISWAP(days,volume,liquidity,tx_count){
+	// [1] Computing the threshold date (createdAtTimestamp_gte) in UNIX timestamp format
+	unix_day=Math.floor(Date.now() / 1000-parseFloat(days)*86400);
+	
+	// [2] Changing the fixed parameters from the model with the floating parameters (making sure they are in string format)
+	var graphql = JSON.stringify({
+      query: "query{\n  \n  pools( where: {\n      volumeUSD_gte:"+String(volume)+"\n      totalValueLockedUSD_gte: "+String(liquidity)+"\n      txCount_gte:"+String(tx_count)+"\n      createdAtTimestamp_gte: "+String(unix_day)+"\n    } \n		) {\n  \n    token0 {\n      symbol\n    }\n    token0Price\n    token1 {\n      symbol\n    }\n    token1Price\n    id\n    volumeUSD\n    createdAtTimestamp\n    totalValueLockedUSD\n    txCount\n  }}",
+        variables: {}
+      })
+      // [3] Copy/Pasting the requestOptions variable from Postman javascript code
+      var requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        payload: graphql,
+        redirect: 'follow'
+      };
+      // [4] Calling the URLfetch using the ImportJSONAdvanced function (by Brad Jasper and Trevor Lohrbeer version 1.5) that was created for Google sheets
+      return ImportJSONAdvanced('https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',requestOptions,'','noInherit',includeXPath_,defaultTransform_);
+}
 ```
 ### Google Sheet Formula
 
