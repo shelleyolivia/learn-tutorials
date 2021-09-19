@@ -41,7 +41,6 @@
  **/
 
 async function UNISWAP(days,volume,liquidity,tx_count){
-  Utilities.sleep(Math.random() * 100)
   
       unix_day=Math.floor(Date.now() / 1000-parseFloat(days)*86400);
       
