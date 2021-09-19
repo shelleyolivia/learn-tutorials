@@ -136,9 +136,10 @@ async function UNISWAP(days,volume,liquidity,tx_count){
 }
 ```
 
-##### [1] In order to make the TheGraph post request, we need a threshold date (createdAtTimestamp_gte) in UNIX timestamp format. We can compute it as shown in the below code. ##### [2] Then we just need to change the fixed parameters from the model with the floating parameters (making sure they are in string) in the variable graphql. 
+##### [1] In order to make the TheGraph post request, we need a threshold date (createdAtTimestamp_gte) in UNIX timestamp format. We can compute it as shown in the below code.
+##### [2] Then we just need to change the fixed parameters from the model with the floating parameters (making sure they are in string) in the variable graphql. 
 ##### [3] Afterwards we can copy/paste the requestOptions variable from Postman
-##### [4] Finally we call the URLfetch using the ImportJSONAdvanced function that was created for Google sheets, using the API endpoint from the Uniswap V3 subgraph, and the requestOptions as well as the standard parameters of the ImportJSONAdvanced function. 
+##### [4] Finally we call the URLfetch using the ImportJSONAdvanced function that was created for Google sheets (by Brad Jasper and Trevor Lohrbeer version 1.5), using the API endpoint from the Uniswap V3 subgraph, and the requestOptions as well as the standard parameters of the ImportJSONAdvanced function. 
 ```javascript
 async function UNISWAP(days,volume,liquidity,tx_count){
 
@@ -164,7 +165,8 @@ async function UNISWAP(days,volume,liquidity,tx_count){
 }
 ```
 #### Copy/Pasting the code in Google Sheet
-##### Open a Google sheet where you wish to use the Uniswap function
+##### Open a Google sheet where you wish to use the Uniswap function -> Go to Tools › Script edito
+##### <img width="330" alt="gs1" src="https://user-images.githubusercontent.com/53000607/133906614-c8cf356d-6fa2-4440-8e10-1b42b9e5f540.png"><img width="330" alt="gs2" src="https://user-images.githubusercontent.com/53000607/133906613-2aba9315-8328-47c3-b0d6-0e17f98f50cc.png"><img width="330" alt="gs3" src="https://user-images.githubusercontent.com/53000607/133906612-438908c5-2e53-4dbb-aadf-86ebd61e8ffd.png">
 ![gs1](https://user-images.githubusercontent.com/53000607/133906614-c8cf356d-6fa2-4440-8e10-1b42b9e5f540.png)
 ##### Go to Tools › Script editor
 ![gs2](https://user-images.githubusercontent.com/53000607/133906613-2aba9315-8328-47c3-b0d6-0e17f98f50cc.png) ![gs3](https://user-images.githubusercontent.com/53000607/133906612-438908c5-2e53-4dbb-aadf-86ebd61e8ffd.png)
