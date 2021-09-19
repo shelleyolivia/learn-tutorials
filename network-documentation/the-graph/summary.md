@@ -168,9 +168,10 @@ async function UNISWAP(days,volume,liquidity,tx_count){
 ##### Open a Google sheet where you wish to use the Uniswap function -> Go to Tools › Script editor
 ##### <img width="330" alt="gs1" src="https://user-images.githubusercontent.com/53000607/133906614-c8cf356d-6fa2-4440-8e10-1b42b9e5f540.png"><img width="350" alt="gs2" src="https://user-images.githubusercontent.com/53000607/133906613-2aba9315-8328-47c3-b0d6-0e17f98f50cc.png"><img width="330" alt="gs3" src="https://user-images.githubusercontent.com/53000607/133906612-438908c5-2e53-4dbb-aadf-86ebd61e8ffd.png">
 
-##### Replace the empty function with the [code we just created](https://raw.githubusercontent.com/Eloise1988/datahub-learn/master/network-documentation/the-graph/uniswap_new_pairs.gs) + Add the [ImportJSON script by Brad Jasper and Trevor Lohrbeer version 1.5](https://raw.githubusercontent.com/Eloise1988/ImportJSON/master/ImportJSON.gs)
-
-##### [<img width="900" alt="uniswapgs" src="https://user-images.githubusercontent.com/53000607/133931771-5a5d71a4-623f-4aa9-9ce5-6714d7e4a84f.png">](https://raw.githubusercontent.com/Eloise1988/datahub-learn/master/network-documentation/the-graph/uniswap_new_pairs.gs)[<img width="900" alt="imporjson" src="https://user-images.githubusercontent.com/53000607/133931777-50713ca0-b096-474e-93f6-1d8e93a31441.png">](https://raw.githubusercontent.com/Eloise1988/ImportJSON/master/ImportJSON.gs)
+##### Replace the empty function with the [code we just created](https://raw.githubusercontent.com/Eloise1988/datahub-learn/master/network-documentation/the-graph/uniswap_new_pairs.gs) 
+##### [<img width="900" alt="uniswapgs" src="https://user-images.githubusercontent.com/53000607/133931771-5a5d71a4-623f-4aa9-9ce5-6714d7e4a84f.png">](https://raw.githubusercontent.com/Eloise1988/datahub-learn/master/network-documentation/the-graph/uniswap_new_pairs.gs)
+#####  Add the [ImportJSON script by Brad Jasper and Trevor Lohrbeer version 1.5](https://raw.githubusercontent.com/Eloise1988/ImportJSON/master/ImportJSON.gs)
+##### [<img width="900" alt="imporjson" src="https://user-images.githubusercontent.com/53000607/133931777-50713ca0-b096-474e-93f6-1d8e93a31441.png">](https://raw.githubusercontent.com/Eloise1988/ImportJSON/master/ImportJSON.gs)
 
 ```javascript
 /**
