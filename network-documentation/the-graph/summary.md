@@ -196,8 +196,8 @@ async function UNISWAP(days,volume,liquidity,tx_count){
 
 ### [HERE IS THE ACCESS TO THE LIVE TEMPLATE SHEET](https://docs.google.com/spreadsheets/d/1tME9nMh79KzZP4Wmld7lezom6je4BOw_0T9ABf5GKXE/edit?usp=sharing)
 
-##### For example, if I want to get the new Uniswap pairs where the pool was launched in the last 5 Days, the daily Volume is greater than $20'000, the Liquidity is above $30'000 and there has been more than 100 Transactions since the launch. The formula is:
-##### =UNISWAP(5,20000,30000,100)
+##### For example, if I want to get the new Uniswap pairs where the pool was launched in the last 2 days, the daily Volume is greater than $1'000, the Liquidity is above $10'000 and there has been more than 10 Transactions since the launch. The formula is:
+##### =UNISWAP(2,1000,10000,10)
 
 
 #####  which returns a table (see GIF above) with all new tradable pairs on Uniswap and their number of days since active, volume ($), liquidity ($), the number of transactions, prices and coin symbols. There are plenty more functionalities that can be added through the TheGraph API.
