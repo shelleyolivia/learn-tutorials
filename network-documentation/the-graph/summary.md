@@ -166,10 +166,8 @@ async function UNISWAP(days,volume,liquidity,tx_count){
 ```
 #### Copy/Pasting the code in Google Sheet
 ##### Open a Google sheet where you wish to use the Uniswap function -> Go to Tools › Script edito
-##### <img width="330" alt="gs1" src="https://user-images.githubusercontent.com/53000607/133906614-c8cf356d-6fa2-4440-8e10-1b42b9e5f540.png"><img width="330" alt="gs2" src="https://user-images.githubusercontent.com/53000607/133906613-2aba9315-8328-47c3-b0d6-0e17f98f50cc.png"><img width="330" alt="gs3" src="https://user-images.githubusercontent.com/53000607/133906612-438908c5-2e53-4dbb-aadf-86ebd61e8ffd.png">
-![gs1](https://user-images.githubusercontent.com/53000607/133906614-c8cf356d-6fa2-4440-8e10-1b42b9e5f540.png)
-##### Go to Tools › Script editor
-![gs2](https://user-images.githubusercontent.com/53000607/133906613-2aba9315-8328-47c3-b0d6-0e17f98f50cc.png) ![gs3](https://user-images.githubusercontent.com/53000607/133906612-438908c5-2e53-4dbb-aadf-86ebd61e8ffd.png)
+##### <img width="330" alt="gs1" src="https://user-images.githubusercontent.com/53000607/133906614-c8cf356d-6fa2-4440-8e10-1b42b9e5f540.png"><img width="350" alt="gs2" src="https://user-images.githubusercontent.com/53000607/133906613-2aba9315-8328-47c3-b0d6-0e17f98f50cc.png"><img width="330" alt="gs3" src="https://user-images.githubusercontent.com/53000607/133906612-438908c5-2e53-4dbb-aadf-86ebd61e8ffd.png">
+
 ```javascript
 /**
 * @OnlyCurrentDoc
