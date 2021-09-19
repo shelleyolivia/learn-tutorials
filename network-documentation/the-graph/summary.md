@@ -141,6 +141,10 @@ async function UNISWAP(days,volume,liquidity,tx_count){
 ##### [3] Afterwards we can copy/paste the requestOptions variable from Postman
 ##### [4] Finally we call the URLfetch using the ImportJSONAdvanced function that was created for Google sheets (by Brad Jasper and Trevor Lohrbeer version 1.5), using the API endpoint from the Uniswap V3 subgraph, and the requestOptions as well as the standard parameters of the ImportJSONAdvanced function. 
 ```javascript
+// only for access to files in which the add-on or script is used, rather than all of a user's spreadsheets
+/**
+* @OnlyCurrentDoc
+*/
 async function UNISWAP(days,volume,liquidity,tx_count){
 
 	// [1] Computing the threshold date (createdAtTimestamp_gte) in UNIX timestamp format
