@@ -209,7 +209,7 @@ They will learn how to make data requests, write models, interact with the block
 
 ### About me
 ##### I gather cryptocurrency data to help users import and value their crypto portfolio in Google Sheets. I publish all of my work in [Medium](https://eloise88.medium.com/) and hope you can benefit from it. And for developers who wish to directly check my work on [Github](https://github.com/Eloise1988), I've built the [COINGECKO](https://github.com/Eloise1988/COINGECKO) repository for pricing as well as the [CRYPTOBALANCE](https://github.com/Eloise1988/CRYPTOBALANCE) repository for balances, staking, dex prices etc..
-##### If you find errors, please do not hesitate to let me know. Feedback is very welcomed. A [telegram chat](https://t.me/TheCryptoCurious) is also available for support. If this project adds any value to you and/or are looking for personalized coding on your Google Sheets, don’t hesitate to leave a message.
+##### If you find errors, please do not hesitate to let me know. Feedback is very welcomed. A [TELEGRAM chat](https://t.me/TheCryptoCurious) is also available for support. If this project adds any value to you and/or are looking for personalized coding on your Google Sheets, don’t hesitate to leave a message.
 ##### Thank you so much for investing your time in reading this article. Take care of yourself & your family in these challenging times!
 
 
