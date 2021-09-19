@@ -190,22 +190,17 @@ async function UNISWAP(days,volume,liquidity,tx_count){
 ##### When running the code, you will probably be asked to give permission to the code. Here are the steps:
 #### [<img width="32%" alt="goog_auth_5" src="https://user-images.githubusercontent.com/53000607/132861811-0d7c4712-8f8c-4f4b-892c-2779a4035036.png"> <img width="32%" alt="goog_auth_4" src="https://user-images.githubusercontent.com/53000607/132861818-d9d927d6-c230-4924-9c35-1bf528afbe72.png"> <img width="32%" alt="goog_auth_3" src="https://user-images.githubusercontent.com/53000607/132861821-62440a1f-99b3-4891-80a0-3f6b2c6365d3.png"> <img width="32%" alt="goog_auth_2" src="https://user-images.githubusercontent.com/53000607/132861825-6da9adbc-6bf2-4733-bf9b-4d5476b8f19f.png"> <img width="32%" alt="goog_auth" src="https://user-images.githubusercontent.com/53000607/132861831-8dbba6ee-617f-44ec-938c-7a922b498f76.png"> <img width="32%" alt="postman" src="https://user-images.githubusercontent.com/53000607/132861836-9fe4bd08-9ad1-42ee-893d-70c89d9d9dd8.png">](https://developers.google.com/apps-script/guides/services/authorization)
 
-
+### Uniswap Formula
 ##### Once all of these steps are done, you should be able to request the newest tradable pairs on Uniswap, giving constraints on the Number of Days the pair has been active, the Volume ($), the Liquidity ($), and the number of Transactions.
 ##### [<img width="1381" alt="gif_uni" src="https://user-images.githubusercontent.com/53000607/133595220-6e918166-cfc9-4d9c-9b5b-5bc4395852ce.gif">](https://docs.google.com/spreadsheets/d/1tME9nMh79KzZP4Wmld7lezom6je4BOw_0T9ABf5GKXE/edit?usp=sharing)
 
 ### [HERE IS THE ACCESS TO THE LIVE TEMPLATE SHEET](https://docs.google.com/spreadsheets/d/1tME9nMh79KzZP4Wmld7lezom6je4BOw_0T9ABf5GKXE/edit?usp=sharing)
 
-##### For example, if I want to get the new Uniswap pairs where:
-##### the pool was launched in the last 5 Days
-##### the daily Volume is greater than $20'000
-##### the Liquidity is above $30'000
-##### and there has been more than 100 Transactions since the launch
-##### The formula becomes:
+##### For example, if I want to get the new Uniswap pairs where the pool was launched in the last 5 Days, the daily Volume is greater than $20'000, the Liquidity is above $30'000 and there has been more than 100 Transactions since the launch. The formula is:
 ##### =UNISWAP(5,20000,30000,100)
 
 
-#####  @return a table (see GIF above) with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions, prices and coin symbols. There are plenty more functionalities that can be added through the TheGraph API.
+#####  which returns a table (see GIF above) with all new tradable pairs on Uniswap and their number of days since active, volume ($), liquidity ($), the number of transactions, prices and coin symbols. There are plenty more functionalities that can be added through the TheGraph API.
 
 
 # Conclusion
