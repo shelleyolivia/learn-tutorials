@@ -122,7 +122,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 ```
-#### Building the javascript function in Sheets:
+### Building the javascript function in Sheets
 ##### We want to have floating parameters in the function in order to filter new pairs based on our different parameters:
 
 ##### * Number of days since the pair was created : [createdAtTimestamp_gte]
@@ -138,7 +138,7 @@ async function UNISWAP(days,volume,liquidity,tx_count){
 
 ##### [1] In order to make the TheGraph post request, we need a threshold date (createdAtTimestamp_gte) in UNIX timestamp format. We can compute it as shown in the below code. ##### [2] Then we just need to change the fixed parameters from the model with the floating parameters (making sure they are in string) in the variable graphql. 
 ##### [3] Afterwards we can copy/paste the requestOptions variable from Postman
-##### [4] Finally we call the URLfetch using the ImportJSON function that was created for Google sheets.
+##### [4] Finally we call the URLfetch using the ImportJSONAdvanced function that was created for Google sheets, using the API endpoint from the Uniswap V3 subgraph, and the requestOptions as well as the standard parameters of the ImportJSONAdvanced function. 
 ```javascript
 async function UNISWAP(days,volume,liquidity,tx_count){
 
@@ -163,12 +163,10 @@ async function UNISWAP(days,volume,liquidity,tx_count){
       return ImportJSONAdvanced('https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',requestOptions,'','noInherit',includeXPath_,defaultTransform_);
 }
 ```
-### Google Sheet Formula
-
-How to :
-Open a Google sheet where you wish to use CRYPTOTOOL’s functions
+#### Copy/Pasting the code in Google Sheet
+##### Open a Google sheet where you wish to use the Uniswap function
 ![gs1](https://user-images.githubusercontent.com/53000607/133906614-c8cf356d-6fa2-4440-8e10-1b42b9e5f540.png)
-2. Go to Tools › Script editor
+##### Go to Tools › Script editor
 ![gs2](https://user-images.githubusercontent.com/53000607/133906613-2aba9315-8328-47c3-b0d6-0e17f98f50cc.png) ![gs3](https://user-images.githubusercontent.com/53000607/133906612-438908c5-2e53-4dbb-aadf-86ebd61e8ffd.png)
 ```javascript
 /**
