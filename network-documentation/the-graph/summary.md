@@ -1,0 +1,250 @@
+# Scan the latest pairs added on UniswapV3 using TheGraph in Google Sheets 
+[<img width="1381" alt="gif_uni" src="https://user-images.githubusercontent.com/53000607/133595220-6e918166-cfc9-4d9c-9b5b-5bc4395852ce.gif">](https://docs.google.com/spreadsheets/d/1tME9nMh79KzZP4Wmld7lezom6je4BOw_0T9ABf5GKXE/edit?usp=sharing)
+
+# Introduction
+##### This tutorial is built to help non-technical people get a sense of how to interact with TheGraph and connect onchain data into Google Sheets. I've been working on gathering crypto data in Google Sheets for a couple of years now and I found that sheets is a useful interface when filtering for new listed pairs on decentralized exchanges. In this tutorial you'll learn how to find a UniswapV3 subgraph on The Graph, make a GraphQL request, translate the query in Javascript (Google Sheet's programming language) using Postman, and finally retrieve the pairs in the Sheet with a user-defined formula.
+
+### Prerequisites
+##### For beginners with basic coding skills. This training assumes that you have a Gmail/Google account as we will be building upon Google Sheets. Also it would help if you have access to Postman to get an easier view on how to test a GraphQL request from TheGraph and transform it into Javascript code which is  the Official programming language of Google Sheet . 
+
+* GraphQL & Javascript knowledge are a plus. Code can be written directly with the help of Postman and The Graph's website.
+* Postman's software makes API development easier.
+* Code :
+  * uniswap.gs - for retrieving Uniswap's latest pair through The Graph API (later explained in the tutorial)
+  * importJson.gs - for working with JSON objects in Google Sheets (later explained in the tutorial)
+
+
+### First, what is Uniswap?
+##### [Uniswap](https://academy.binance.com/en/articles/what-is-uniswap-and-how-does-it-work) is a decentralized exchange protocol built on Ethereum. To be more precise, it is an automated liquidity protocol. There is no order book or any centralized party required to make trades. Uniswap allows users to trade without intermediaries, with a high degree of decentralization and censorship-resistance.
+
+#### This is how Uniswap’s Decentralized Exchange looks like:
+[<img src=https://user-images.githubusercontent.com/53000607/132863640-4889463d-0e54-4a9e-b7ca-3a71017f8fc7.png width="450">](https://uniswap.exchange/swap)   <img src=https://user-images.githubusercontent.com/53000607/132863582-dd3c9ea6-e1e4-43f2-b42b-c27254631006.png width="550">    
+
+
+### Getting familiar with TheGraph and GraphQL queries
+##### [The Graph](https://thegraph.com/) is a decentralized protocol for indexing and querying data from blockchains. It is able to query networks like Ethereum and since Uniswap is built on Ethereum, it will allow us to get its onchain data. 
+ 
+#### Finding Uniswap V3 subgraph on Thegraph
+##### In this tutorial, we will be focusing on getting blockchain data on Version 3 of Uniswap. All you need to do is to search in TheGraph's explorer bar for Uniswap V3. The following picture shows you what TheGraph looks like and which subgraph we will be using:
+
+* https://thegraph.com/legacy-explorer/subgraph/uniswap/uniswap-v3
+
+##### [<img width="490" alt="thegraph" src="https://user-images.githubusercontent.com/53000607/133580577-56cecc0a-79c3-473d-83f9-6e9420ec6afd.png">](https://thegraph.com/legacy-explorer/) [<img width="510" alt="thegraph_uni2" src="https://user-images.githubusercontent.com/53000607/132865398-6227fe0c-d447-408d-9e67-5767d8125744.png">](https://thegraph.com/legacy-explorer/subgraph/uniswap/uniswap-v3)
+
+#### Building the GraphQL query
+##### [GraphQL](https://en.wikipedia.org/wiki/GraphQL) is an open-source data query and manipulation language for APIs, and a runtime for fulfilling queries with existing data. GraphQL was developed internally by Facebook in 2012 before being publicly released in 2015. 
+
+##### On TheGraph interface in playgroud mode, there is an example of a GraphQL query. This query gets the first 5 factories with id, poolCount, txCount and totalVolumeUSD, as well as the first 5 bundles with their id and ethPriceUSD. 
+<img width="660" alt="std_graph_query" src="https://user-images.githubusercontent.com/53000607/133599485-8dd9fa85-f20c-4c29-9f04-cd843d593511.png"> <img width="340" alt="parameters_graph" src="https://user-images.githubusercontent.com/53000607/133599807-0d6c666f-5a02-44ca-a70c-fbf5e485fb64.png">
+
+##### For our purpose, we will just need to adjust a little the query to request pool pairs. We will be interested in filtering by constraints on the Number of Days the coin is active, the Volume ($), the Liquidity ($), and the number of Transactions. When you look at the pool parameters, you will find the following correspondence needed to build our constraints:
+##### * Number of Days -> createdAtTimestamp
+##### * Volume ($) -> volumeUSD
+##### * Liquidity ($) -> totalValueLockedUSD
+##### * Number of Transactions -> txCount
+
+##### Now instead of using the standard (first:5) clause, we will need to build our GraphQL constraint there with the above variables. In order to do that we need to build a "where" clause where we tell the matching engine that we are looking for pool pairs created after a certain date (timestamp), with liquidity, volumes and number of transactions all greater than the amounts defined by the user. 
+
+##### In GraphQL to signal you need an amount greater than, you need to add ___gte__ at the end of your variable.
+
+#### This is an example of how the constraint clause will look with theoritical values:
+```graphql
+where: {
+      volumeUSD_gte:20000
+      totalValueLockedUSD_gte:30000
+      txCount_gte:100
+      createdAtTimestamp_gte: 1625575864
+    } 
+```
+
+##### Subsequently in order to create the rest of the query, you need to display the symbols of the pair's tokens, prices, id (contract address), volume, liquidity, number of transactions and timestamp.
+
+#### This is how the final graphQL query looks:
+```graphql
+query{
+  
+  pools( where: {
+      volumeUSD_gte:20000
+      totalValueLockedUSD_gte: 30000
+      txCount_gte:100
+      createdAtTimestamp_gte: 1625575864
+    } 
+		) {
+  
+    token0 {
+      symbol
+    }
+    token0Price
+    token1 {
+      symbol
+    }
+    token1Price
+    id
+    volumeUSD
+    createdAtTimestamp
+    totalValueLockedUSD
+    txCount
+  }}
+```
+##### You can replace the example query with this new query and press play in the playground. You should see the results.
+##### [<img width="630" alt="thegraph_code" src="https://user-images.githubusercontent.com/53000607/132865391-1d131a43-7973-47d1-a182-a4fb5bfec97c.png">](https://thegraph.com/legacy-explorer/subgraph/uniswap/uniswap-v3)  <img width="370" alt="parameters_graph" src="https://user-images.githubusercontent.com/53000607/133599807-0d6c666f-5a02-44ca-a70c-fbf5e485fb64.png">
+
+### Testing model & translating the query into javascript using Postman
+##### [Download Postman](https://www.postman.com/downloads/)
+##### Once you download Postman, you can open a new window like shown below:
+##### <img width="1437" alt="postmanclean" src="https://user-images.githubusercontent.com/53000607/133645104-1099b76f-41cd-4637-94e9-79b965dcce92.png">
+##### To get the data in Postman, you will need to:
+1. Insert in the URL box the HTTP Query url from the Uniswap V3 subgraph (https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3)
+2. Change the GET into a POST request
+3. Copy/paste the above GraphQL query in Body and select GraphQL
+4. Click Send
+
+You should get the same JSON table as on TheGraph.
+<img width="1100" alt="potman_query" src="https://user-images.githubusercontent.com/53000607/133658202-670210a1-4509-4754-a164-1e22514d4594.png">
+
+
+### Connecting the model through Google Sheet
+Once you confirmed that the query is functionning in Postman, you can transform the code into a Javascript Fetch request (for Google Sheet) using the Code button underneath the Save button.
+
+<img width="977" alt="javascript_postman" src="https://user-images.githubusercontent.com/53000607/133802683-9462b554-06f8-4d52-9533-35491102f006.png">
+
+
+#### This is the important part to save for the App Script in Google:
+```graphql
+var graphql = JSON.stringify({
+  query: "query{\n  \n  pools( where: {\n      volumeUSD_gte:20000\n      totalValueLockedUSD_gte: 30000\n      txCount_gte:100\n      createdAtTimestamp_gte: 1625575864\n    } \n		) {\n  \n    token0 {\n      symbol\n    }\n    token0Price\n    token1 {\n      symbol\n    }\n    token1Price\n    id\n    volumeUSD\n    createdAtTimestamp\n    totalValueLockedUSD\n    txCount\n  }}",
+  variables: {}
+})
+var requestOptions = {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: graphql,
+  redirect: 'follow'
+};
+```
+### Google Sheet Formula
+
+How to :
+Open a Google sheet where you wish to use CRYPTOTOOL’s functions
+![gs1](https://user-images.githubusercontent.com/53000607/133906614-c8cf356d-6fa2-4440-8e10-1b42b9e5f540.png)
+2. Go to Tools › Script editor
+![gs2](https://user-images.githubusercontent.com/53000607/133906613-2aba9315-8328-47c3-b0d6-0e17f98f50cc.png) ![gs3](https://user-images.githubusercontent.com/53000607/133906612-438908c5-2e53-4dbb-aadf-86ebd61e8ffd.png)
+```javascript
+/**
+* @OnlyCurrentDoc
+*/
+/*====================================================================================================================================*
+  CryptoTools Google Sheet Feed by Eloise1988
+  ====================================================================================================================================
+  Version:      1.0.0
+  Project Page: https://github.com/Eloise1988/THEGRAPH
+  Copyright:    (c) 2021 by Eloise1988
+                
+  License:      GNU License
+               
+  ------------------------------------------------------------------------------------------------------------------------------------
+  A library for importing Uniswap's V3 latest pairs using TheGraph:
+
+     UNISWAP               For use by end users to retrieve Uniswap's V3 latest pairs
+    
+  For bug reports see https://github.com/Eloise1988/TEHGRAPH/issues
+
+  ------------------------------------------------------------------------------------------------------------------------------------
+  Changelog:
+  
+  2.1.0   Creation Uniswap function  *====================================================================================================================================*/
+  
+
+/**UNISWAP
+ * Returns new tradable pairs on Uniswap, giving constraints on the number of Days Active, the Volume ($), the Liquidity ($), the number of Transactions 
+ *
+ * By default, data gets transformed into a table 
+ * For example:
+ *
+ * =UNISWAP(5,10000,10000,100)
+ *
+ * @param {days}                    the number of Days since the pair is active
+ * @param {volume}                  the minimum Volume ($)
+ * @param {liquidity}               the minimum Liquidity ($)
+ * @param {tx_count}                the number of Transactions existant since creation
+ * @param {parseOptions}           an optional fixed cell for automatic refresh of the data
+ * @customfunction
+ *
+ * @return a table with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions 
+ **/
+ 
+async function UNISWAP(days,volume,liquidity,tx_count){
+  Utilities.sleep(Math.random() * 100)
+  
+      unix_day=Math.floor(Date.now() / 1000-parseFloat(days)*86400);
+      
+      var graphql = JSON.stringify({
+      query: "query{\n  \n  pools( where: {\n      volumeUSD_gte:"+String(volume)+"\n      totalValueLockedUSD_gte: "+String(liquidity)+"\n      txCount_gte:"+String(tx_count)+"\n      createdAtTimestamp_gte: "+String(unix_day)+"\n    } \n		) {\n  \n    token0 {\n      symbol\n    }\n    token0Price\n    token1 {\n      symbol\n    }\n    token1Price\n    id\n    volumeUSD\n    createdAtTimestamp\n    totalValueLockedUSD\n    txCount\n  }}",
+        variables: {}
+      })
+      var requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        payload: graphql,
+        redirect: 'follow'
+      };
+
+      return ImportJSONAdvanced('https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3',requestOptions,'','noInherit',includeXPath_,defaultTransform_);      
+
+    
+}
+
+
+```
+
+### [Manual authorization scopes for Sheets](https://developers.google.com/apps-script/guides/services/authorization)
+When building an add-on or other script that uses the Spreadsheet service, you can force the authorization dialog to ask only for access to files in which the add-on or script is used, rather than all of a user's spreadsheets, documents, or forms. To do so, include the following JsDoc annotation in a file-level comment:
+```javascript
+/**
+* @OnlyCurrentDoc
+*/
+```
+#### [<img width="32%" alt="goog_auth_5" src="https://user-images.githubusercontent.com/53000607/132861811-0d7c4712-8f8c-4f4b-892c-2779a4035036.png"> <img width="32%" alt="goog_auth_4" src="https://user-images.githubusercontent.com/53000607/132861818-d9d927d6-c230-4924-9c35-1bf528afbe72.png"> <img width="32%" alt="goog_auth_3" src="https://user-images.githubusercontent.com/53000607/132861821-62440a1f-99b3-4891-80a0-3f6b2c6365d3.png"> <img width="32%" alt="goog_auth_2" src="https://user-images.githubusercontent.com/53000607/132861825-6da9adbc-6bf2-4733-bf9b-4d5476b8f19f.png"> <img width="32%" alt="goog_auth" src="https://user-images.githubusercontent.com/53000607/132861831-8dbba6ee-617f-44ec-938c-7a922b498f76.png"> <img width="32%" alt="postman" src="https://user-images.githubusercontent.com/53000607/132861836-9fe4bd08-9ad1-42ee-893d-70c89d9d9dd8.png">](https://developers.google.com/apps-script/guides/services/authorization)
+
+
+
+### [ACCESS LIVE TEMPLATE SHEET HERE](https://docs.google.com/spreadsheets/d/1tME9nMh79KzZP4Wmld7lezom6je4BOw_0T9ABf5GKXE/edit?usp=sharing)
+#### The sheet returns all new tradable pairs on Uniswap, giving constraints on the Number of Days the pair has been active, the Volume ($), the Liquidity ($), and the number of Transactions.
+
+
+UNISWAP FUNCTION IN GOOGLE SHEETS:
+Returns new tradable pairs on Uniswap, 
+![UNISWAP](https://user-images.githubusercontent.com/53000607/132866211-131dc269-638f-4328-ad7d-f8ef8d9f3651.gif)
+
+For example, if I want to get the new Uniswap pairs where:
+the pool was launched in the last 5 Days
+the daily Volume is greater than $20'000
+the Liquidity is above $30'000
+and there has been more than 100 Transactions since the launch
+The formula becomes:
+=UNISWAP(5,20000,30000,100)
+
+@param {days} the number of Days since the pair is active
+@param {volume} the minimum Volume ($)
+@param {liquidity} the minimum Liquidity ($)
+@param {tx_count} the number of Transactions existant since creation
+
+
+* @return a table (see GIF above)with all new tradable pairs on Uniswap and their number of Days since Active, the Volume ($), the Liquidity ($), the number of Transactions
+There are plenty more functionalities that can be added through the TheGraph API. Don’t hesitate to have a look at all available end points like:
+
+* totalSupply
+* untrackedVolumeUSD
+* liquidityProviderCount
+* and other ...
+
+# Conclusion
+A user-friendly interface that interacts with The Graph protocols
+They will learn how to make data requests, write models, interact with the blockchain data
+
+
+
+
+
+
+
