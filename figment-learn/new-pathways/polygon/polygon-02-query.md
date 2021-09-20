@@ -15,6 +15,7 @@ In the file `components/protocols/polygon/steps/Query.tsx` we have already writt
 **Take a few minutes to figure this out.**
 
 ```typescript
+//...
  try {
     const networkName = await provider.getNetwork().then(res => { return res.name })
 
@@ -24,7 +25,15 @@ In the file `components/protocols/polygon/steps/Query.tsx` we have already writt
     const gasPriceAsGwei = undefined;
     const blockInfo = undefined;
 
- }
+    res.status(200).json({
+      networkName,
+      chainId,
+      blockHeight,
+      gasPriceAsGwei,
+      blockInfo,
+    });
+  }
+//...
 ```
 
 **Need some help?** Check out these links  
@@ -44,12 +53,28 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # The solution
 
 ```typescript
-  const chainId = provider.network.chainId;
-  const blockHeight = await provider.getBlockNumber();
-  const gasPriceAsGwei = await provider.getGasPrice().then(res => {
-    return ethers.utils.formatUnits(res, "gwei");
-  });
-  const blockInfo = await provider.getBlockWithTransactions(blockHeight);
+//...
+  try {
+    const networkName = await provider.getNetwork().then((res) => {
+      return res.name;
+    });
+
+    const chainId = provider.network.chainId;
+    const blockHeight = await provider.getBlockNumber();
+    const gasPriceAsGwei = await provider.getGasPrice().then((res) => {
+      return ethers.utils.formatUnits(res, 'gwei');
+    });
+    const blockInfo = await provider.getBlockWithTransactions(blockHeight);
+
+    res.status(200).json({
+      networkName,
+      chainId,
+      blockHeight,
+      gasPriceAsGwei,
+      blockInfo,
+    });
+  }
+//...
 ```
 
 **What happened in the code above?**

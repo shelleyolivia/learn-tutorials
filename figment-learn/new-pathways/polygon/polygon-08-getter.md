@@ -11,21 +11,21 @@ In the file `components/protocols/polygon/GeStorage.tsx`, implement the `getValu
 **Take a few minutes to figure this out.**
 
 ```typescript
-    const getValue = async () => {
-        try {
-            setFetchingGet(true)        
-            const provider = new ethers.providers.Web3Provider(window.ethereum)
-		    // try to figure out the expected parameters
-            const contract = new ethers.Contract(undefined)
+  const getValue = async () => {
+    try {
+      setFetching(true);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+		  // try to figure out the expected parameters
+      const contract = new ethers.Contract(undefined);
 			// try to figure out the expected method 
-            const storage = undefined
-            setContractNumber(storage.toString())
-            setFetchingGet(false)
-        } catch(error) {
-            console.log(error)
-            setFetchingGet(false)
-        }
+      const storage = undefined;
+      setContractNumber(storage.toString());
+      setFetching(false);
+    } catch (error) {
+      console.log(error);
+      setFetching(false);
     }
+  };
 ```
 
 Need some help? Check out these two tips/links  
@@ -45,23 +45,23 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # The solution
 
 ```typescript
-    const getValue = async () => {
-        try {
-            setFetchingGet(true)        
-            const provider = new ethers.providers.Web3Provider(window.ethereum)
-            const contract = new ethers.Contract(
-                SimpleStorageJson.networks['80001'].address,
-                SimpleStorageJson.abi,
-                provider
-            )
-            const storage = await contract.get();
-            setContractNumber(storage.toString())
-            setFetchingGet(false)
-        } catch(error) {
-            console.log(error)
-            setFetchingGet(false)
-        }
+  const getValue = async () => {
+    try {
+      setFetching(true);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const contract = new ethers.Contract(
+        SimpleStorageJson.networks['80001'].address,
+        SimpleStorageJson.abi,
+        provider,
+      );
+      const storage = await contract.get();
+      setContractNumber(storage.toString());
+      setFetching(false);
+    } catch (error) {
+      console.log(error);
+      setFetching(false);
     }
+  };
 ```
 
 **What happened in the code above?**

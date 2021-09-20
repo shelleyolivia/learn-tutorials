@@ -11,23 +11,22 @@ In the file `components/protocols/steps/polygon/Restore.tsx`, implement the `res
 **Take a few minutes to figure this out.**
 
 ```tsx
-    const restore = () => {
-        console.log(value)
-        try {
-            const wallet = undefined
-            const selectedAddress = window.ethereum.selectedAddress;
-            if (undefined === selectedAddress) {
-                setAddress(undefined)
-                setSecret(undefined)
-            } else {
-                setError('Unable to restore account')
-            }
-        } catch (error) {
-            setAddress(null)
-            setSecret(null)
-            setError('Invalid mnemonic')
-        }
+  const restore = () => {
+    try {
+      const wallet = undefined;
+      const selectedAddress = window.ethereum.selectedAddress;
+      if (undefined === selectedAddress) {
+        setAddress(undefined);
+        setSecret(undefined);
+      } else {
+        setError('Unable to restore account');
+      }
+    } catch (error) {
+      setAddress(null);
+      setSecret(null);
+      setError('Invalid mnemonic');
     }
+  };
 ```
 
 Need some help? Check out these two tips/links  
@@ -45,23 +44,22 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # The solution
 
 ```javascript
-    const restore = () => {
-        console.log(value)
-        try {
-            const wallet = ethers.Wallet.fromMnemonic(value.trim())
-            const selectedAddress = window.ethereum.selectedAddress;
-            if (wallet.address.toLocaleLowerCase() === selectedAddress) {
-                setAddress(wallet.address.toLocaleLowerCase())
-                setSecret(wallet.privateKey.toLocaleLowerCase())
-            } else {
-                setError('Unable to restore account')
-            }
-        } catch (error) {
-            setAddress(null)
-            setSecret(null)
-            setError('Invalid mnemonic')
-        }
+  const restore = () => {
+    try {
+      const wallet = ethers.Wallet.fromMnemonic(value.trim());
+      const selectedAddress = window.ethereum.selectedAddress;
+      if (wallet && wallet.address.toLocaleLowerCase() === selectedAddress) {
+        setAddress(wallet.address.toLocaleLowerCase());
+        setSecret(wallet.privateKey.toLocaleLowerCase());
+      } else {
+        setError('Unable to restore account');
+      }
+    } catch (error) {
+      setAddress(null);
+      setSecret(null);
+      setError('Invalid mnemonic');
     }
+  };
 ```
 
 **What happened in the code above?**
