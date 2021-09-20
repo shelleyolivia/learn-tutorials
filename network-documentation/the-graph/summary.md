@@ -224,7 +224,7 @@ A user-friendly interface that interacts with The Graph protocols using Google S
 4. Retrieve the latest pairs in the Sheet with a user-defined formula under your specific constraints
 
 
-### About me
+## About me
 I gather cryptocurrency data to help users import and value their crypto portfolio in Google Sheets. I publish all of my work in [Medium](https://eloise88.medium.com/) and hope you can benefit from it. 
 
 And for developers who wish to directly check my work on [Github](https://github.com/Eloise1988), I've built the [COINGECKO](https://github.com/Eloise1988/COINGECKO) repository for pricing as well as the [CRYPTOBALANCE](https://github.com/Eloise1988/CRYPTOBALANCE) repository for balances, staking, dex prices etc...
@@ -233,7 +233,7 @@ If you find errors, please do not hesitate to let me know. Feedback is very welc
 
 Thank you so much for investing your time in reading this article. Take care of yourself & your family in these challenging times!
 
-### References
+## References
 * https://github.com/bradjasper/ImportJSON
 
 
