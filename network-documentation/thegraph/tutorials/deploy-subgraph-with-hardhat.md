@@ -1,8 +1,15 @@
 # Introduction
 
-In this tutorial, you will learn how to deploy a Solidity smart contract to Ethereum Rinkeby testnet using Hardhat, create and deploy it's subgraph to the Subgraph Studio.
+In this tutorial you will learn how to deploy a Solidity smart contract to the Ethereum Rinkeby testnet using HardHat, then create and deploy its subgraph to the Subgraph Studio.
 
 ![Subgraph Studio](../../../.gitbook/assets/graph.png)
+
+Topics covered in this tutorial:
+
+- Deploying the smart contract to Rinkeby testnet using Hardhat
+- Creating a subgraph in the Subgraph Studio
+- Downloading the contract abi and then creating a subgraph from it
+- Deploying the subgraph to Subgraph Studio
 
 # Prerequisites
 
@@ -13,23 +20,16 @@ To successfully complete this tutorial, you will need to have a basic understand
 - You will need Metamask installed in your browser. You can install it from <https://metamask.io/>
 - You need to have a recent version of Node.js installed. We recommend using v14.17.6 LTS for compatibility.
 
-Topics covered in this tutorial:
-
-- Deploying the smart contract to Rinkeby testnet using Hardhat
-- Creating a subgraph in the Subgraph Studio
-- Downloading the contract abi and then creating a subgraph from it
-- Deploying the subgraph to Subgraph Studio
-
 # Project setup
 
-Run the below commands to install the npm dependencies globally. These are required to build and deploy your subgraph.
+Run these commands to install the yarn package manager and the graph CLI globally. These are required to build and deploy your subgraph.
 
 ```text
 npm i -g yarn
 npm i -g @graphprotocol/graph-cli
 ```
 
-Run the below commands to create new directory called `vendingMachine`, create a new npm package inside it, and then install hardhat.
+Then run the following commands to create a new directory called vendingMachine, create a new npm package inside it, and then install HardHat as a dev-dependency of the project (meaning that it is a package that is only needed for local development and testing).
 
 ```text
 mkdir vendingMachine
@@ -38,13 +38,7 @@ npm init --yes
 npm install --save-dev hardhat
 ```
 
-Then run:
-
-```text
-npx hardhat
-```
-
-You shall get the below output:
+Then run `npx hardhat` to initialize the HardHat project. This will output:
 
 ```text
 888    888                      888 888               888
@@ -65,9 +59,7 @@ Welcome to Hardhat v2.6.4
   Quit
 ```
 
-Select `Create an empty hardhat.config.js` with your keyboard and hit enter key.
-
-It shall create a `hardhat.config.js` file in the root of `vendingMachine` directory, with the below content:
+Select "Create an empty hardhat.config.js" by scrolling down the menu with the arrow keys on your keyboard and press Enter. This will create a `hardhat.config.js` file in the root of the vendingMachine directory, with the following contents:
 
 ```javascript
 /**
@@ -78,7 +70,7 @@ module.exports = {
 };
 ```
 
-Run the below command to install few hardhat plugins necessary to compile and deploy your contract:
+The following command will install the HardHat plugins necessary to compile and deploy your contract:
 
 ```text
 npm install --save-dev @nomiclabs/hardhat-ethers ethers @nomiclabs/hardhat-waffle
@@ -86,9 +78,9 @@ npm install --save-dev @nomiclabs/hardhat-ethers ethers @nomiclabs/hardhat-waffl
 
 # Writing the smart contract
 
-Create a new directory called `contracts` inside `vendingMachine` directory, and create a file inside it called `VendingMachine.sol`.
+Create a new directory called `contracts` inside the `vendingMachine` directory, then create a file inside the `contracts` directory called `VendingMachine.sol`.
 
-Paste the below solidity code into that file.
+Paste this Solidity code into that file:
 
 ```javascript
 // SPDX-License-Identifier: MIT
@@ -97,7 +89,7 @@ pragma solidity 0.7.3;
 
 contract VendingMachine {
 
-    // store the oener of this smart contract
+    // Store the owner of this smart contract
     address owner;
 
     // A mapping is a key/value store. Here we store cupcake balance of this smart contract.
@@ -140,24 +132,24 @@ contract VendingMachine {
 
 # Compiling the smart contract
 
-To compile the smart contract, run:
+To compile the smart contract via HardHat (which will still use the solc compiler), run:
 
 ```text
 npx hardhat compile
 ```
 
-You shall get the below output:
+Assuming there are no errors or warnings, this will output:
 
 ```text
 Compiling 1 file with 0.7.3
 Compilation finished successfully
 ```
 
-The smart contract has been compiled successfully.
+The `VendingMachine.sol` smart contract has now been compiled successfully.
 
 # Deploying the smart contract
 
-To deploy to `Rinkeby` Ethereum testnet, you need to add a `network` entry to your `hardhat.config.js` file.
+To deploy to the Ethereum Rinkeby testnet with HardHat, you need to add a network entry to your `hardhat.config.js` file:
 
 ```javascript
 require("@nomiclabs/hardhat-waffle");
@@ -224,7 +216,7 @@ Finally, run:
 npx hardhat run scripts/deploy.js --network rinkeby
 ```
 
-You shall get the below output:
+This will output:
 
 ```text
 Deploying contracts with the account: <YOUR RINKEBY WALLET ADDRESS>
@@ -236,7 +228,7 @@ Yay! You just deployed your smart contract successfully to Rinkeby testnet!
 
 We will need the smart contract address later.
 
-# Creating the graph project in Subgraph Studio
+# Creating the project in Subgraph Studio
 
 First, you will want to head over to the Subgraph Studio at <https://thegraph.com/studio/>.
 
@@ -260,9 +252,9 @@ Run the following command to create the subgraph by downloading the contract ABI
 graph init --contract-name VendingMachine --index-events --studio --from-contract <YOUR RINKEBY SMART CONTRACT ADDRESS> --network rinkeby vending
 ```
 
-Replace `<YOUR RINKEBY SMART CONTRACT ADDRESS>` with your deployed VendingMachine smart contract address from above.
+Replace with your deployed VendingMachine smart contract address from above.
 
-**Output:**
+This will output:
 
 ```text
 ✔ Subgraph slug · vending
@@ -306,9 +298,7 @@ cd vending
 graph codegen && graph build
 ```
 
-This will generate a build directory under `vending/build`.
-
-**Output:**
+This will generate a build directory under `vending/build`. You should also see the following output:
 
 ```text
 Skip migration: Bump mapping apiVersion from 0.0.1 to 0.0.2
@@ -353,9 +343,7 @@ The following command will deploy the subgraph to Subgraph Studio:
 graph deploy --studio vending
 ```
 
-You shall be prompted for a version label. You can choose `1.0.0`.
-
-**Output:**
+You shall be prompted for a version label. You can choose `1.0.0`. You should see the following output:
 
 ```text
 ✔ Version Label (e.g. v0.0.1) · v1.0.0
@@ -394,7 +382,7 @@ Once the sync is complete, you can access the subgraph on the Playground to run 
 
 # Conclusion
 
-Congratulations on finishing this tutorial! You have learned how to deploy a smart contract using hardhat, as well as create and deploy its subgraph.
+Congratulations on finishing this tutorial! You have learned how to deploy a smart contract to the Rinkeby testnet using HardHat. You also learned how to create and deploy a subgraph for the smart contract on Subgraph Studio.
 
 # About the Author
 
