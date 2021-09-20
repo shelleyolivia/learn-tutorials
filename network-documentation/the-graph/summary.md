@@ -221,7 +221,7 @@ A user-friendly interface that interacts with The Graph protocols using Google S
 1. Find a UniswapV3 subgraph on The Graph
 2. Make a GraphQL request
 3. Translate the query in Javascript (Google Sheet's programming language) using Postman
-4. Retrieve the pairs in the Sheet with a user-defined formula.
+4. Retrieve the latest pairs in the Sheet with a user-defined formula under your specific constraints
 
 
 ### About me
