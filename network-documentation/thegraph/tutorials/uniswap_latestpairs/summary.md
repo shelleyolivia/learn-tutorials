@@ -21,7 +21,6 @@ For beginners with basic coding skills. This training assumes that you have a Gm
 
 [<img src=https://user-images.githubusercontent.com/53000607/132863640-4889463d-0e54-4a9e-b7ca-3a71017f8fc7.png width="450">](https://uniswap.exchange/swap)   <img src=https://user-images.githubusercontent.com/53000607/132863582-dd3c9ea6-e1e4-43f2-b42b-c27254631006.png width="550">    
 
-
 ### Getting familiar with TheGraph and GraphQL queries
 [The Graph](https://thegraph.com/) is a **decentralized protocol for indexing and querying data** from blockchains. It is able to query networks like Ethereum and since Uniswap is built on Ethereum, it will allow us to get its onchain data. 
  
