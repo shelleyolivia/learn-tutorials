@@ -15,6 +15,14 @@ Topics covered in this tutorial:
 
 To successfully complete this tutorial, you will need to have a basic understanding of Ethereum, Solidity, and the NodeJS ecosystem.
 
+You will also need some Rinkeby Ether in your Metamask wallet. Follow the instructions below:
+
+- Login to your Twitter account at <https://twitter.com/>
+- Tweet the following: `Requesting funds into <YOUR RINKEBY WALLET ADDRESS> on the #Rinkeby #Ethereum test network.`
+- Go to <https://faucet.rinkeby.io/>, and paste the link to your tweet
+- Click on the `Give me Ether` button
+- You shall receive some Rinkeby Ether once your transaction is mined
+
 # Requirements
 
 - You will need Metamask installed in your browser. You can install it from <https://metamask.io/>
