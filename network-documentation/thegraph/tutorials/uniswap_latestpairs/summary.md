@@ -229,14 +229,13 @@ A user-friendly interface that interacts with The Graph protocols using Google S
 3. Translate the query in Javascript (Google Sheet's programming language) using Postman
 4. Retrieve the latest pairs in the Sheet with a user-defined formula under your specific constraints
 
-Feedback is very welcomed. A [TELEGRAM chat](https://t.me/TheCryptoCurious) is also available for support. If this project adds any value to you and/or are looking for personalized coding on your Google Sheets, don’t hesitate to leave a message.
-
-Thank you so much for investing your time in reading this article. Take care of yourself & your family in these challenging times!
-
 
 ## About the author
 Eloise gathers cryptocurrency data to help users import and value their crypto portfolio in Google Sheets. She publishes her work in [Medium](https://eloise88.medium.com/) and hopes you can benefit from it. 
+
 And for developers who wish to directly check her work on [Github](https://github.com/Eloise1988), she built the [COINGECKO](https://github.com/Eloise1988/COINGECKO) repository for pricing as well as the [CRYPTOBALANCE](https://github.com/Eloise1988/CRYPTOBALANCE) repository for balances, staking, dex prices etc...
+
+Feedback is very welcomed. A [TELEGRAM chat](https://t.me/TheCryptoCurious) is also available for support. If this project adds any value to you and/or are looking for personalized coding on your Google Sheets, don’t hesitate to leave a message. Thank you so much for investing your time in reading this article. Take care of yourself & your family in these challenging times!
 
 ## References
 * https://github.com/Eloise1988/THEGRAPH
