@@ -10,30 +10,29 @@ Transferring some token is one of the major feature of Web 3. In this challenge,
 
 **Take a few minutes to figure this out.**
 
-```tsx
-    const transfer = async () => {
-        setFetching(true)
-        try {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const send_account = provider.getSigner().getAddress();
-    
-            const currentGasPrice = await provider.getGasPrice();
-            const gas_price = ethers.utils.hexlify(parseInt(currentGasPrice.toString()));
+```typescript
+  const transfer = async () => {
+    setFetching(true);
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const send_account = provider.getSigner().getAddress();
 
-    		// try to figure out the expected parameters
-            // to build a transaction
-            const transaction = undefined;
+      const currentGasPrice = await provider.getGasPrice();
+      const gas_price = ethers.utils.hexlify(
+        parseInt(currentGasPrice.toString()),
+      );
 
-			// try to figure out the expected method 
-            const hash = undefined;
-            const receipt = await hash.wait();
-            setHash(receipt.transactionHash);
-            setFetching(false);
-        } catch (error) {
-            setError(error);
-            setFetching(false);
-        }
-	}
+      const transaction = undefined;
+
+      const hash =undefined;
+      const receipt = await hash.wait();
+      setHash(receipt.transactionHash);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setFetching(false);
+    }
+  };
 ```
 
 **Need some help?** Check out these two links  
@@ -50,33 +49,35 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 # The solution
 
-```javascript
-    const transfer = async () => {
-        setFetching(true)
-        try {
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const send_account = provider.getSigner().getAddress();
-    
-            const currentGasPrice = await provider.getGasPrice();
-            const gas_price = ethers.utils.hexlify(parseInt(currentGasPrice.toString()));
-    
-            const transaction = {
-                from: send_account,
-                to: recipient,
-                value: ethers.utils.parseEther('0.1'),
-                nonce: provider.getTransactionCount(send_account, "latest"),
-                gasLimit: ethers.utils.hexlify(100000),
-                gasPrice: gas_price 
-            }
-            const hash = await provider.getSigner().sendTransaction(transaction);
-            const receipt = await hash.wait();
-            setHash(receipt.transactionHash);
-            setFetching(false);
-        } catch (error) {
-            setError(error);
-            setFetching(false);
-        }
-	}
+```typescript
+  const transfer = async () => {
+    setFetching(true);
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const send_account = provider.getSigner().getAddress();
+
+      const currentGasPrice = await provider.getGasPrice();
+      const gas_price = ethers.utils.hexlify(
+        parseInt(currentGasPrice.toString()),
+      );
+
+      const transaction = {
+        from: send_account,
+        to: recipient,
+        value: ethers.utils.parseEther('0.1'),
+        nonce: provider.getTransactionCount(send_account, 'latest'),
+        gasLimit: ethers.utils.hexlify(100000),
+        gasPrice: gas_price,
+      };
+      const hash = await provider.getSigner().sendTransaction(transaction);
+      const receipt = await hash.wait();
+      setHash(receipt.transactionHash);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setFetching(false);
+    }
+  };
 ```
 
 **What happened in the code above?**

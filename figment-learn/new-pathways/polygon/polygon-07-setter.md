@@ -13,30 +13,32 @@ In the file `components/protocols/polygon/SeStorage.tsx`, implement the `setValu
 **Take a few minutes to figure this out.**
 
 ```typescript
-	const setValue = async () => {
-		setFetchingSet(true);
-		setTxHash(null);
-	
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		const signer = provider.getSigner();
-		// Try to figure out the expected parameters
-		const contract = new ethers.Contract(undefined);
-		
-		try {
-			// Try to figure out the expected method 
-			const transactionResult = undefined;
+  const setValue = async () => {
+    setFetchingSet(true);
+    setTxHash(null);
 
-			setFetchingSet(false);
-			setInputNumber(0);
-			setConfirming(true);
-			const receipt = await transactionResult.wait();
-			setTxHash(receipt.transactionHash);
-			setConfirming(false);
-		} catch(error) {
-			console.log(error);
-			setFetchingSet(false);
-		}
-	}
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    // Try to figure out the expected parameters
+    // @ts-ignore
+    const contract = new ethers.Contract(undefined);
+
+    try {
+      // Try to figure out the expected method
+      // @ts-ignore
+      const transactionResult = undefined;
+
+      setFetchingSet(false);
+      setInputNumber(0);
+      setConfirming(true);
+      const receipt = await transactionResult.wait();
+      setTxHash(receipt.transactionHash);
+      setConfirming(false);
+    } catch (error) {
+      setFetchingSet(false);
+    }
+  };
 ```
 
 
@@ -57,30 +59,29 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # The solution
 
 ```typescript
-	const setValue = async () => {
-		setFetchingSet(true);
-		setTxHash(null);
-	
-		const provider = new ethers.providers.Web3Provider(window.ethereum);
-		const signer = provider.getSigner();
-		const contract = new ethers.Contract(
-			SimpleStorageJson.networks['80001'].address,
-			SimpleStorageJson.abi,
-			signer
-		);
-		try {
-			const transactionResult = await contract.set(inputNumber);
-			setFetchingSet(false);
-			setInputNumber(0);
-			setConfirming(true);
-			const receipt = await transactionResult.wait();
-			setTxHash(receipt.transactionHash);
-			setConfirming(false);
-		} catch(error) {
-			console.log(error);
-			setFetchingSet(false);
-		}
-	}
+  const setValue = async () => {
+    setFetchingSet(true);
+    setTxHash(null);
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      SimpleStorageJson.networks['80001'].address,
+      SimpleStorageJson.abi,
+      signer,
+    );
+    try {
+      const transactionResult = await contract.set(inputNumber);
+      setFetchingSet(false);
+      setInputNumber(0);
+      setConfirming(true);
+      const receipt = await transactionResult.wait();
+      setTxHash(receipt.transactionHash);
+      setConfirming(false);
+    } catch (error) {
+      setFetchingSet(false);
+    }
+  };
 ```
 
 **What happened in the code above?**

@@ -153,8 +153,6 @@ solana config get
 solana account $(solana-keygen pubkey solana-wallet/keypair.json)
 ```
 
-![](../../../.gitbook/assets/solana-deploy-01-v3.gif)
-
 -----------------------------------------
 # Deploy a Solana program
 
@@ -210,38 +208,40 @@ Commitment: confirmed
 Program Id: 7KwpCaaYXRsjfCTvf85eCVuZDW894zZNN38UMxMpQoaQ
 ```
 
-![](../../../.gitbook/assets/solana-deploy-02-v3.gif)
-
-
 -----------------------------------------
 
 # Challenge
 
 {% hint style="tip" %}
-Before moving to the next step, we need to check that our program has been correctly deployed! For this, we'll need the `programId` of the program. Copy & paste it into the text input, then try to figure out how to complete the code for `pages/api/solana/checkProgram.ts`.
+Before moving to the next step, we need to check that our program has been correctly deployed! For this, we'll need the `programId` of the program. Copy & paste it into the text input, then try to figure out how to complete the code for `pages/api/solana/deploy.ts`.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
 
 ```tsx
 //...
-  // Re-create publicKeys from params
-  const publicKey = undefined;
-  const programInfo = undefined;
+  try {
+    const {network, programId} = req.body;
+    const url = getNodeURL(network);
+    const connection = new Connection(url, 'confirmed');
+    // Re-create publicKeys from params
+    const publicKey = undefined;
+    const programInfo = undefined;
 
-  if (programInfo === null) {
+    if (programInfo === null) {
       if (fs.existsSync(PROGRAM_SO_PATH)) {
-          throw new Error(
-            'Program needs to be deployed with `solana program deploy`',
-          );
+        throw new Error(
+          'Program needs to be deployed with `solana program deploy`',
+        );
       } else {
         throw new Error('Program needs to be built and deployed');
       }
-  } else if (!programInfo.executable) {
-    throw new Error(`Program is not executable`);
-  }
+    } else if (!programInfo.executable) {
+      throw new Error(`Program is not executable`);
+    }
 
-  res.status(200).json(true);
+    res.status(200).json(true);
+  }
 //...
 ```
 
@@ -261,22 +261,27 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```tsx
 //...
-  const publicKey = new PublicKey(programId);
-  const programInfo = await connection.getAccountInfo(publicKey);
+  try {
+    const {network, programId} = req.body;
+    const url = getNodeURL(network);
+    const connection = new Connection(url, 'confirmed');
+    const publicKey = new PublicKey(programId);
+    const programInfo = await connection.getAccountInfo(publicKey);
 
-  if (programInfo === null) {
+    if (programInfo === null) {
       if (fs.existsSync(PROGRAM_SO_PATH)) {
-          throw new Error(
-            'Program needs to be deployed with `solana program deploy`',
-          );
+        throw new Error(
+          'Program needs to be deployed with `solana program deploy`',
+        );
       } else {
         throw new Error('Program needs to be built and deployed');
       }
-  } else if (!programInfo.executable) {
-    throw new Error(`Program is not executable`);
-  }
+    } else if (!programInfo.executable) {
+      throw new Error(`Program is not executable`);
+    }
 
-  res.status(200).json(true);
+    res.status(200).json(true);
+  }
 //...
 ```
 

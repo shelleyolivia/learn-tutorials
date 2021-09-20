@@ -23,19 +23,20 @@ Once this transaction is confirmed, you will have 1 **MATIC** on the Mumbai test
 **Take a few minutes to figure this out.**
 
 ```typescript
-const checkBalance = async () => {
-  setFetching(true)
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const selectedAddress = window.ethereum.selectedAddress;
-
-  // TODO
-  // Define those two variables
-  const selectedAddressBalance = undefined
-  const balanceToDisplay = undefined
-
-  setBalance(balanceToDisplay);
-  setFetching(false)
-}
+  const checkBalance = async () => {
+    setFetching(true);
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const selectedAddress = window.ethereum.selectedAddress;
+      const selectedAddressBalance = undefined;
+      const balanceToDisplay = undefined;
+      setBalance(balanceToDisplay);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setFetching(false);
+    }
+  };
 ```
 
 **Need some help?** Check out these two links  
@@ -55,13 +56,20 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```typescript
   const checkBalance = async () => {
     setFetching(true);
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const selectedAddress = window.ethereum.selectedAddress;
-    const selectedAddressBalance = await provider.getBalance(selectedAddress);
-    const balanceToDisplay = ethers.utils.formatEther(selectedAddressBalance.toString());
-    setBalance(balanceToDisplay);
-    setFetching(false);
-  }
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const selectedAddress = window.ethereum.selectedAddress;
+      const selectedAddressBalance = await provider.getBalance(selectedAddress);
+      const balanceToDisplay = ethers.utils.formatEther(
+        selectedAddressBalance.toString(),
+      );
+      setBalance(balanceToDisplay);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setFetching(false);
+    }
+  };
 ```
 
 **What happened in the code above?**

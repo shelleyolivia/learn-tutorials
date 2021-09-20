@@ -14,21 +14,18 @@ In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
 
 ```typescript
 //..
-  //... let's snip the beginning as it should be familiar for you by now!
-  // The secret key is stored in our state as a stringified array
-  const secretKey = Uint8Array.from(JSON.parse(secret as string));
+    //... let's snip the beginning as it should be familiar for you by now!
+    // Find the parameter to pass
+    const instructions = SystemProgram.transfer;
 
-  // Find the parameter to pass  
-  const instructions = SystemProgram.transfer
+    // How could you construct a signer array's
+    const signers = undefined;
 
-  // How could you construct a signer array's
-  const signers = 
+    // Maybe adding someting to a Transaction could be interesting ?
+    const transaction = new Transaction();
 
-  // Maybe adding someting to a Transaction could be interesting ?
-  const transaction = new Transaction()
-
-  const hash =// You should now what is expected here.
-  res.status(200).json(hash);
+    // We can send and confirm a transaction in one row.
+    const hash = undefined; 
 //..
 ```
 
@@ -49,30 +46,29 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 //..
-  //...
-  //... let's snip the beginning as it should be familiar for you by now!
-  const instructions = SystemProgram.transfer({
-    fromPubkey,
-    toPubkey,
-    lamports,
-  });
-  
-  const signers = [
-    {
-      publicKey: fromPubkey,
-      secretKey
-    }
-  ];
-  
-  const transaction = new Transaction().add(instructions);
-  
-  const hash = await sendAndConfirmTransaction(
-    connection,
-    transaction,
-    signers,
-  )
+    //... let's snip the beginning as it should be familiar for you by now!
+    const instructions = SystemProgram.transfer({
+      fromPubkey,
+      toPubkey,
+      lamports,
+    });
 
-  res.status(200).json(hash);
+    const signers = [
+      {
+        publicKey: fromPubkey,
+        secretKey,
+      },
+    ];
+
+    const transaction = new Transaction().add(instructions);
+
+    const hash = await sendAndConfirmTransaction(
+      connection,
+      transaction,
+      signers,
+    );
+
+    res.status(200).json(hash);
 //..
 ```
 

@@ -1,7 +1,5 @@
 At the beginning of this journey into Polygon, we generated a mnemonic. Now we're going to learn how to restore a wallet from a mnemonic and how to derive the address and the private key when the wallet has been restored.
 
-Ready? Let's go!
-
 -------------------------------------
 
 # The Challenge
@@ -13,23 +11,22 @@ In the file `components/protocols/steps/polygon/Restore.tsx`, implement the `res
 **Take a few minutes to figure this out.**
 
 ```tsx
-    const restore = () => {
-        console.log(value)
-        try {
-            const wallet = undefined
-            const selectedAddress = window.ethereum.selectedAddress;
-            if (undefined === selectedAddress) {
-                setAddress(undefined)
-                setSecret(undefined)
-            } else {
-                setError('Unable to restore account')
-            }
-        } catch (error) {
-            setAddress(null)
-            setSecret(null)
-            setError('Invalid mnemonic')
-        }
+  const restore = () => {
+    try {
+      const wallet = undefined;
+      const selectedAddress = window.ethereum.selectedAddress;
+      if (undefined === selectedAddress) {
+        setAddress(undefined);
+        setSecret(undefined);
+      } else {
+        setError('Unable to restore account');
+      }
+    } catch (error) {
+      setAddress(null);
+      setSecret(null);
+      setError('Invalid mnemonic');
     }
+  };
 ```
 
 Need some help? Check out these two tips/links  
@@ -47,23 +44,22 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # The solution
 
 ```javascript
-    const restore = () => {
-        console.log(value)
-        try {
-            const wallet = ethers.Wallet.fromMnemonic(value.trim())
-            const selectedAddress = window.ethereum.selectedAddress;
-            if (wallet.address.toLocaleLowerCase() === selectedAddress) {
-                setAddress(wallet.address.toLocaleLowerCase())
-                setSecret(wallet.privateKey.toLocaleLowerCase())
-            } else {
-                setError('Unable to restore account')
-            }
-        } catch (error) {
-            setAddress(null)
-            setSecret(null)
-            setError('Invalid mnemonic')
-        }
+  const restore = () => {
+    try {
+      const wallet = ethers.Wallet.fromMnemonic(value.trim());
+      const selectedAddress = window.ethereum.selectedAddress;
+      if (wallet && wallet.address.toLocaleLowerCase() === selectedAddress) {
+        setAddress(wallet.address.toLocaleLowerCase());
+        setSecret(wallet.privateKey.toLocaleLowerCase());
+      } else {
+        setError('Unable to restore account');
+      }
+    } catch (error) {
+      setAddress(null);
+      setSecret(null);
+      setError('Invalid mnemonic');
     }
+  };
 ```
 
 **What happened in the code above?**
@@ -87,4 +83,11 @@ When you have completed the code:
 
 # Conclusion
 
-The ability to restore an account without the need to depend on a third-party is a great feature of Web 3. Now, we're ready to fund our account with some **MATIC**, the native token of the Polygon blockchain.
+
+Congratulations! We have gone from zero to **Polygon**, covering all the most fundamental concepts needed for developers to succeed in using **Polygon**. From connecting to the network to interacting with smart contracts, you have completed coding challenges and created a functional yet basic dApp.   
+
+From here, there are many ways to increase your skills with Web 3 development. We recommend following some of the other Tutorials and Pathways on Figment Learn, to discover what makes the other network protocols unique.
+
+If you are an experienced developer, you are welcome to contribute tutorials for **Polygon** and earn some **MATIC** tokens! Check out our tutorial [contribution guidelines](../../../other/tutorial-guidelines/) to get started.
+
+If you had any difficulties following this tutorial or simply want to discuss Polygon with other developers you can join [our Discord](https://discord.gg/fszyM7K) or head over to our [community forums](https://community.figment.io).
