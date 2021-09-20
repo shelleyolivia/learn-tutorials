@@ -216,8 +216,13 @@ which returns a table (see GIF above) with all new tradable pairs on Uniswap and
 
 
 # Conclusion
-A user-friendly interface that interacts with The Graph protocols
-They will learn how to make data requests, write models, interact with the blockchain data
+A user-friendly interface that interacts with The Graph protocols using Google Sheet. In this tutorial you have learned how to :
+
+1. Find a UniswapV3 subgraph on The Graph
+2. Make a GraphQL request
+3. Translate the query in Javascript (Google Sheet's programming language) using Postman
+4. Retrieve the pairs in the Sheet with a user-defined formula.
+
 
 ### About me
 I gather cryptocurrency data to help users import and value their crypto portfolio in Google Sheets. I publish all of my work in [Medium](https://eloise88.medium.com/) and hope you can benefit from it. And for developers who wish to directly check my work on [Github](https://github.com/Eloise1988), I've built the [COINGECKO](https://github.com/Eloise1988/COINGECKO) repository for pricing as well as the [CRYPTOBALANCE](https://github.com/Eloise1988/CRYPTOBALANCE) repository for balances, staking, dex prices etc..
