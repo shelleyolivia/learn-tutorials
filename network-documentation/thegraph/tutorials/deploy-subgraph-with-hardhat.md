@@ -33,17 +33,16 @@ You will also need some Rinkeby Ether in your Metamask wallet. Follow the instru
 Run these commands to install the yarn package manager and the graph CLI globally. These are required to build and deploy your subgraph.
 
 ```text
-npm i -g yarn
-npm i -g @graphprotocol/graph-cli
+npm i -g yarn @graphprotocol/graph-cli
 ```
 
-Then run the following commands to create a new directory called vendingMachine, create a new npm package inside it, and then install HardHat as a dev-dependency of the project (meaning that it is a package that is only needed for local development and testing).
+Then run the following commands to create a new directory called vendingMachine, create a new yarn package inside it, and then install HardHat as a dev-dependency of the project (meaning that it is a package that is only needed for local development and testing).
 
 ```text
 mkdir vendingMachine
 cd vendingMachine
-npm init --yes
-npm install --save-dev hardhat
+yarn init --yes
+yarn add --dev hardhat
 ```
 
 Then run `npx hardhat` to initialize the HardHat project. This will output:
@@ -81,7 +80,7 @@ module.exports = {
 The following command will install the HardHat plugins necessary to compile and deploy your contract:
 
 ```text
-npm install --save-dev @nomiclabs/hardhat-ethers ethers @nomiclabs/hardhat-waffle
+yarn add --dev @nomiclabs/hardhat-ethers ethers @nomiclabs/hardhat-waffle
 ```
 
 # Writing the smart contract
