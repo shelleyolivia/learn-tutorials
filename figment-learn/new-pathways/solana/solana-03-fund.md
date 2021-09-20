@@ -32,7 +32,6 @@ In `pages/api/solana/fund.ts`, implement the `fund` function. Convert the text i
     res.status(200).json(hash);
   }
 //..
-}
 ```
 
 **Need some help?** Here are a few hints.
