@@ -129,8 +129,14 @@ contract VendingMachine {
         emit Purchase(msg.sender, amount, cupcakeBalances[address(this)], block.timestamp, block.number);
     }
 
+    // Function modifiers are used to modify the behaviour of a function.
+    // When "onlyOwner" modifier is added to a function, only the owner of this smart contract can execute that function.
     modifier onlyOwner {
+        // verifying that the owner is same as the one who called the functioon.
         require(msg.sender == owner, "Only owner callable");
+
+        // this is called the "nerge wildcard".
+        // It will be replaced with the body of the function (to which we added the modifier),
         _;
     }
 }
