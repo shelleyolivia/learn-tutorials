@@ -1,5 +1,3 @@
-# NFT-Tutorial-Using-Hardhat
-
 # Introduction
 
 In this tutorial we will learn how to use HardHat which is a popular framework used for smart contract development. It is a JavaScript based framework like Truffle but has certain advantages over Truffle which we will go over in the tutorial. The goal of this tutorial is to build an awesome NFT project where we can convert anything into an NFT. We will also learn how to write, test and deploy smart contracts using the Hardhat framework.
@@ -31,7 +29,7 @@ Using a HardHat plugin, smart contracts can be verified automatically during the
 
 You now have an API key which will allow you to access the Polygonscan API features such as contract verification. This key will be same for both mainnet and testnet.
 
-# Creating Hardhat project
+# Creating a HardHat project
 
 To install HardHat, run the command:
 
@@ -103,9 +101,9 @@ While developing our project we are also doing to write our own custom tasks.
 
 At the end of the file is `module.export` , this is where we are going to list various parameters like compiler version, networks to use, API keys, etc. Please note, here we have defined the solidity version as `0.8.4` .
 
-# Installing Openzeppelin library
+# Install the OpenZeppelin library
 
-While writing any program, we always prefer using various libraries so that we don't have to write everything from scratch. Since we are going to build an NFT based project we are going to follow the standards defined in EIP721. The best way to do so, is to import the ERC721 contract present in Openzeppelin/contracts library and only making the necessary changes. To install the package, open terminal and type
+While writing any program, we always prefer using various libraries so that we don't have to write everything from scratch. Since we are going to build an NFT based project, we will follow the standards defined in [EIP-721](https://eips.ethereum.org/EIPS/eip-721). The best way to do this is to import the ERC721 contract present in the OpenZeppelin contracts library and only making the necessary changes for our project. To install this package, open a terminal and run the command:
 
 ```text
 npm install @openzeppelin/contracts
@@ -123,8 +121,6 @@ contract Artwork {}
 ```
 
 We start by defining the License of our smart contract. For this tutorial we are keeping it unlicensed. If we don't define the license, it will cause a warning during compile time. The `pragma` keyword is used to define the Solidity version used to compile the code. Make sure you are using the same Solidity version as defined in the `hardhat.config.js` file.
-
-# Importing the OpenZeppelin contract
 
 Next we are going to import the ERC721 smart contract from the OpenZeppelin library which we just installed. After the line defining the Solidity version and before defining the contract, import the ERC721 contract:
 
@@ -334,7 +330,7 @@ We are going to test our smart contract for the following:
 - **An NFT is minted successfully:** After an account calls the mint function, an NFT is minted for that account and its balance increases.
 - **The tokenURI is set successfully:** For two tokens minted with different tokenURIs, both tokens have their own respective tokenURI and the data can be retrieved properly.
 
-## Getting started with writing test cases
+## Writing the test cases
 
 In the `test` folder there will be a script called `sample-test.js`. We will delete this file and create a new file called `artwork-test.js` in the same `test` directory. The filename is unimportant but to keep it organized the test file should be somehow related to the contract being tested. In this new file, add the following code:
 
@@ -557,7 +553,7 @@ We are now ready to deploy our contract to testnet. Run the following command:
 npx hardhat deploy --network mumbai
 ```
 
-Now we have to wait for few minutes as the contract is deployed and verified. 🤞🤞🤞
+Now we have to wait for a few minutes as the contract is deployed and verified. 🤞🤞🤞
 
 If everything is correct you should get an output similar to this:
 
@@ -567,28 +563,19 @@ You can now view your contract at the link provided in the output. You can check
 
 ## Potential errors while deploying
 
-**Insufficient Fund**
+**Insufficient Funds**
 
 If the private key you passed belongs to an account which doesn't have sufficient MATIC tokens to deploy the contract, you will get this error:
 
 ```text
-An unexpected error occurred:
-
 Error: insufficient funds for intrinsic transaction cost (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=INSUFFICIENT_FUNDS, version=providers/5.4.5)
-    at Logger.makeError (/Volumes/Samsung_T5/Work/eth-project/tutorials/figment-polygon-tutorials/art_gallery_take1/art_gallery/node_modules/@ethersproject/logger/src.ts/index.ts:225:28)
-    at Logger.throwError (/Volumes/Samsung_T5/Work/eth-project/tutorials/figment-polygon-tutorials/art_gallery_take1/art_gallery/node_modules/@ethersproject/logger/src.ts/index.ts:237:20)
-    at checkError (/Volumes/Samsung_T5/Work/eth-project/tutorials/figment-polygon-tutorials/art_gallery_take1/art_gallery/node_modules/@ethersproject/providers/src.ts/json-rpc-provider.ts:53:16)
-    at /Volumes/Samsung_T5/Work/eth-project/tutorials/figment-polygon-tutorials/art_gallery_take1/art_gallery/node_modules/@ethersproject/providers/src.ts/json-rpc-provider.ts:215:24
-    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
-  reason: 'insufficient funds for intrinsic transaction cost',
-  code: 'INSUFFICIENT_FUNDS',
-  error: ProviderError: insufficient funds for gas * price + value
-      at HttpProvider.request (/Volumes/Samsung_T5/Work/eth-project/tutorials/figment-polygon-tutorials/art_gallery_take1/art_gallery/node_modules/hardhat/src/internal/core/providers/http.ts:49:19)
-      at LocalAccountsProvider.request (/Volumes/Samsung_T5/Work/eth-project/tutorials/figment-polygon-tutorials/art_gallery_take1/art_gallery/node_modules/hardhat/src/internal/core/providers/accounts.ts:162:36)
-      at processTicksAndRejections (node:internal/process/task_queues:96:5)
-      at EthersProviderWrapper.send (/Volumes/Samsung_T5/Work/eth-project/tutorials/figment-polygon-tutorials/art_gallery_take1/art_gallery/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
-  method: 'sendTransaction',
-  transaction: undefined
+...
+reason: 'insufficient funds for intrinsic transaction cost',
+code: 'INSUFFICIENT_FUNDS',
+error: ProviderError: insufficient funds for gas * price + value
+...
+method: 'sendTransaction',
+transaction: undefined
 ```
 
 In this case, please remember to fund your deployment account using the [faucet](https://faucet.polygon.technology/).
@@ -639,4 +626,4 @@ I found the following very helpful while learning:
 
 - [Hardhat Official Documentation](https://hardhat.org/)
 - [Matic Official Documentation](https://docs.matic.network/docs/develop/getting-started)
-- [OpenZeppelin Forun Page](https://forum.openzeppelin.com/t/function-settokenuri-in-erc721-is-gone-with-pragma-0-8-0/5978/3) about the setTokenURI change in Solidity 0.8.0.
+- [OpenZeppelin Forum Page](https://forum.openzeppelin.com/t/function-settokenuri-in-erc721-is-gone-with-pragma-0-8-0/5978/3) about the setTokenURI change in Solidity 0.8.0.
