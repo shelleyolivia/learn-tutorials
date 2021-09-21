@@ -132,10 +132,10 @@ contract VendingMachine {
     // Function modifiers are used to modify the behaviour of a function.
     // When "onlyOwner" modifier is added to a function, only the owner of this smart contract can execute that function.
     modifier onlyOwner {
-        // verifying that the owner is same as the one who called the functioon.
+        // Verifying that the owner is same as the one who called the function.
         require(msg.sender == owner, "Only owner callable");
 
-        // this is called the "nerge wildcard".
+        // This underscore character is called the "merge wildcard".
         // It will be replaced with the body of the function (to which we added the modifier),
         _;
     }
@@ -359,7 +359,7 @@ Queries (HTTP):     https://api.studio.thegraph.com/query/8676/vending/v1.0.0
 Subscriptions (WS): https://api.studio.thegraph.com/query/8676/vending/v1.0.0
 ```
 
-You have now deployed the subgraph to your Subgraph Studio account. It will now start the syncing process, where data is extracted from the historical blocks in Rinkeby Ethereum testnet by The Graph node. Depending on the amount of data, this process can take anywhere between a few minutes to a few hours. New blocks will be inspected by The Graph node as soon as they are minded.
+You have now deployed the subgraph to your Subgraph Studio account. It will now start the syncing process, where data is extracted from the historical blocks in Rinkeby Ethereum testnet by The Graph node. Depending on the amount of data, this process can take anywhere between a few minutes to a few hours. New blocks will be inspected by The Graph node as soon as they are mined.
 
 Once the sync is complete, you can access the subgraph on the Playground to run your queries.
 
