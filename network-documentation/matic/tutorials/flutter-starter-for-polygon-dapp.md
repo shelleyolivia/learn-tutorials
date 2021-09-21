@@ -2,30 +2,21 @@
 
 In this tutorial, we will learn how to perform CRUD (Create, Read, Update and Delete) operations in a Flutter Dapp on the Polygon network by creating a To-do app.
 
-This is what the dapp we will be creating looks like:
+This is what the dApp we will be creating looks like:
 
 ![App Demo](../../../.gitbook/assets/flutter-todo-dapp-demo.gif)
 
 # Prerequisites
 
-To successfully follow along with this tutorial, you will need basic knowledge and understanding of Blockchain, Solidity smart contracts, and the Flutter framework.
+To successfully follow along with this tutorial, you will need basic knowledge and understanding of Blockchain technology, the Solidity programming language for smart contracts, and the Flutter framework.
 
 # Requirements
 
-- [Truffle](https://github.com/trufflesuite/truffle) - Truffle provides a development environment for developing blockchain applications locally.
-- [Flutter](https://flutter.dev/docs/get-started/install) - To create Android/IOS Dapp.
-- IDE/VSCode - VSCode is recommended for Flutter development.
+- [Truffle](https://github.com/trufflesuite/truffle) - Truffle provides a local development environment for creating and testing blockchain applications.
+- [Flutter](https://flutter.dev/docs/get-started/install) - used to create an Android/iOS dApp.
+- A code editor or IDE - VSCode is recommended for Flutter development.
 
-We will be using [web3dart](https://pub.dev/packages/web3dart) to interact with blockchain in our flutter application. web3dart is an alternative to `web3js` for the flutter ecosystem.
-
-Topics covered in this tutorial:
-
-- Setting up the development environment for Solidity and Flutter
-- Setting up Truffle project
-- Creating smart contract in Solidity
-- Compiling and deploying a smart contract
-- Integrating smart contract to Flutter application
-- Creating UI for Flutter application
+We will be using [web3dart](https://pub.dev/packages/web3dart) to interact with the blockchain in our Flutter application. web3dart is an alternative to the commonly used web3js for the Flutter ecosystem.
 
 # Project Setup
 
@@ -38,29 +29,31 @@ cd todo_dapp
 mkdir smartcontract
 cd smartcontract
 
-npm install -g truffle # Install Truffle globally so that you can use Truffle from any directory
+npm install -g truffle
 
 truffle init
 ```
+
+The command `npm install -g truffle` will install Truffle globally so that you can use Truffle from any directory.
 
 This is how the folder structure will be after initial setup:
 
 ![Folder Structure](../../../.gitbook/assets/flutter-todo-dapp-demo.gif)
 
-The `Truffle init` command creates the following directories:
+The `truffle init` command creates the following directories:
 
 - `contracts`: All the smart contracts are stored in this directory.
 - `migrations`: All the scripts used by Truffle to deploy smart contracts are stored in this directory.
 - `test`: All the test scripts for smart contracts are stored in this directory.
 - `truffle-config.js`: Contains configuration settings for Truffle.
 
-# Creating smart contract using Solidity
+# Creating the smart contract
 
-Create a new file called `TodoContract.sol` in the `smartcontract/contracts` directory and add the following code:
+Create a new file called `TodoContract.sol` in the `contracts` directory and add the following code:
 
 ```javascript
 // SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.4.22 <0.9.0;
+pragma solidity ^0.8.6;
 
 contract TodoContract {
   uint256 public taskCount = 0;
@@ -88,12 +81,11 @@ contract TodoContract {
 function createTask(string memory _taskName) public {
   todos[taskCount] = Task(taskCount, _taskName, false);
   taskCount++;
-  // emit event
   emit TaskCreated(_taskName, taskCount - 1);
 }
 ```
 
-- `createTask` function will accept the \_taskName for the to-do. We can create a new Task struct with `taskCount` and `_taskName`, and assign it to the current `taskCount` value in the `todos` map.
+- The `createTask` function will accept the `_taskName` for the to-do. We can create a new `Task` struct with `taskCount` and `_taskName`, and assign it to the current `taskCount` value in the `todos` map.
 - Increment `taskCount`'s value by one for the next to-do.
 - Once everything is done, we have to emit the `TaskCreated` event.
 
@@ -101,32 +93,28 @@ function createTask(string memory _taskName) public {
 function updateTask(uint256 _taskId, string memory _taskName) public {
   Task memory currTask = todos[_taskId];
   todos[_taskId] = Task(_taskId, _taskName, currTask.isComplete);
-
-  // emit event
   emit TaskUpdated(_taskName, _taskId);
 }
 ```
 
-- `updateTask` function accepts `_taskId` of a to-do to be updated along with updated `taskName`. We can create a new `Task` struct with these values and assign it to the `todos` map corresponding to the `_taskId` received.
-- Note that while updating, we have to retain the `isComplete` value of that to-do, and for that, we first fetch the current task from the map, store it in a variable, and then use its `isComplete` value for the new Task object.
+- The `updateTask` function accepts a `_taskId` of a to-do to be updated along with an updated `taskName`. We can create a new `Task` struct with these values and assign it to the `todos` map corresponding to the `_taskId` received.
+- Note that while updating, we have to retain the `isComplete` value of that to-do. First, fetch the current task from the map, then store it in a variable, then use its `isComplete` value for the new Task object.
 - Once everything is done, we have to emit the `TaskUpdated` event.
 
 ```javascript
 function deleteTask(uint256 _taskId) public {
   delete todos[_taskId];
-  // emit event
   emit TaskDeleted(_taskId);
 }
 ```
 
-- `deleteTask` accepts `_task` of the to-do to be deleted as the parameter. In this, first, remove the `Task` object from the `todos` map corresponding to the `_task` received and then emit the `TaskDeleted` event.
+- `deleteTask` accepts `_task` of the to-do to be deleted as the parameter. First, remove the `Task` object from the `todos` map corresponding to the `_task` received, then emit the `TaskDeleted` event.
 
 ```javascript
 function toggleComplete(uint256 _taskId) public {
   Task memory currTask = todos[_taskId];
   todos[_taskId] = Task(_taskId, currTask.taskName, !currTask.isComplete);
 
-  // emit event
   emit TaskIsCompleteToggle(
     currTask.taskName,
     _taskId,
@@ -147,7 +135,7 @@ Now that we have our smart contract written, it's time to compile it. Open your 
 truffle compile
 ```
 
-Truffle with compile your smart contract, and you should see the output similar to -
+Truffle will compile the smart contract, and you should see the output similar to:
 
 ![Truffle Compile](../../../.gitbook/assets/flutter-dapp-truffle-compile.png)
 
@@ -161,7 +149,7 @@ module.exports = function (deployer) {
 };
 ```
 
-- Before starting with the migration process, make sure you have [ganache](https://www.trufflesuite.com/ganache) installed. Start the ganache GUI app in your system.
+- Before starting with the migration process, make sure you have [Ganache](https://www.trufflesuite.com/ganache) installed. Start the Ganache GUI app in your system.
 - Delete all the existing contents of `truffle-config.js` and replace it with the code below.
 
 ```javascript
@@ -189,22 +177,22 @@ module.exports = {
 };
 ```
 
-- In `truffle-config.js`, we are defining the basic configuration for Truffle. Currently, we will be deploying to `localhost:7545` where our Ganache blockchain is running.
-- To deploy the smart contract on ganache, run the following code.
+- In `truffle-config.js`, we are defining the basic configuration for Truffle. Currently, we will be deploying the smart contract to localhost:7545 where our Ganache blockchain is running.
+- To deploy the smart contract on Ganache, run the command:
 
 ```text
 truffle migrate
 ```
 
-This command will deploy your contract to the development blockchain and will give you output that looks similar to this:
+This will deploy the contract to the Ganache development blockchain and will give you output that looks similar to this:
 
 ![Contract Migration](../../../.gitbook/assets/flutter-dapp-truffle-migrate.png)
 
 # Connecting to a Flutter application with web3dart
 
-The smart contract is created and deployed; we can start integrating the smart contract with our Flutter application.
+The smart contract is created and deployed; we can start integrating it with our Flutter application.
 
-Open your `pubspec.yaml` file and add the following dependencies:
+Open the `pubspec.yaml` file and add the following dependencies:
 
 ```yaml
 dependencies:
@@ -231,6 +219,14 @@ To get started with UI and data controllers, we will have to create three files 
 `lib/TodoListModel.dart`
 
 ```dart
+import 'dart:convert';
+import 'dart:core';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart';
+import 'package:web3dart/web3dart.dart';
+import 'package:web_socket_channel/io.dart';
+
 class TodoListModel extends ChangeNotifier {
   List<Task> todos = [];
   bool isLoading = true;
@@ -259,19 +255,14 @@ class TodoListModel extends ChangeNotifier {
 
 - On top, we are importing all the required packages.
 - Creating a class `TodoListModel` extending from `ChangeNotifier` class from `Provider` package.
-- Setting ganache's `_rpcUrl` and `_wsUrl` for the local environment.
-- Setting the private key of any account from ganache by clicking on the Key icon.
+- Setting Ganache's `_rpcUrl` and `_wsUrl` for the local environment.
+- Setting the private key of any account from Ganache (you can get this by clicking on the Key icon in the Ganache UI).
 
 ![Ganache Private Key](../../../.gitbook/assets/flutter-dapp-ganache-privatekey-demo.jpeg)
 
-- `Web3Client _client` used to connect to polygon blockchain with WebSockets.
-- `String _abiCode` is used to store the ABI of our smart contract.
-- `Credentials _credentials` contains the `Credential` object of the logged-in player.
-- `EthereumAddress _ownAddress` store the public key of the logged-in user.
-- `DeployedContract _contract` is an instance of our smart contract, which will be eventually used to communicate with the smart contract.
-- `_taskCount`, `_todos`, `_createTask`, `_updateTask`, `_deleteTask` and `_toggleComplete` are the functions deployed on our smart contract.
+`Web3Client _client` is used to connect to the Polygon blockchain with WebSockets. `String _abiCode` is used to store the ABI of our smart contract. `Credentials _credentials` contains the `Credential` object of the logged-in user. `EthereumAddress _ownAddress` is used to store the public key of the logged-in user. `DeployedContract _contract` is an instance of our smart contract, which will be eventually used to communicate with the smart contract. `_taskCount`, `_todos`, `_createTask`, `_updateTask`, `_deleteTask` and `_toggleComplete` are the functions of our deployed smart contract.
 
-After all the variable decleration add following functions in `TodoListModel` class :
+After all the variable declarations, add the following functions in the `TodoListModel` class :
 
 ```dart
 TodoListModel() {
@@ -316,12 +307,13 @@ Future<void> getDeployedContract() async {
 
 ```
 
-- In the constructor of the `TodoListModel` class, we are calling the asynchronous `init` function.
-- `init` function contains the initialization of `_client` object followed by calling `getAbi`, `getCredentials` and `getDeployedContract` functions.
-- In the `getAbi` function, we are fetching the ABI of our smart contract and extracting the address of deployed contract.
-- In the `getCredentials` function, we create an instance of the `Credentials` class by passing in our private key.
-- **Note** - It's recommended to store the private key in encrypted form in Flutter. For the simplicity of this tutorial, we are keeping the private key in a string format.
-- In the `getCredentials`function, first, we will create an instance of our smart contract using `_abiCode` and `_contractAddress`. Once we have a contract instance, we can create an instance of all the functions we have in the smart contract, as shown above in the code.
+In the constructor of the `TodoListModel` class, we are calling the asynchronous `init` function. `init` function contains the initialization of `_client` object followed by calling `getAbi`, `getCredentials` and `getDeployedContract` functions.
+
+In the `getAbi` function, we are fetching the ABI of our smart contract and extracting the address of deployed contract. In the `getCredentials` function, we create an instance of the `Credentials` class by passing in our private key.
+
+**Note** - It's recommended to store the private key in encrypted form in Flutter. For the simplicity of this tutorial, we are keeping the private key in a string format.
+
+In the `getCredentials` function, we will create an instance of our smart contract using `_abiCode` and `_contractAddress`. Once we have a contract instance, we can create an instance of all the functions we have in the smart contract, as shown above in the code.
 
 Now that we have initialized all our variables, it's time to implement CRUD operations. In the `TodoListModel` add following functions:
 
@@ -406,12 +398,11 @@ toggleComplete(int id) async {
 }
 ```
 
-- `getTodos` function is used to fetch all the to-do items present in our smart contract. In `getTodos`, we shall call the `_taskCount` function, which gives us the total number of to-dos, and then we run a loop and fetch all to-do and add it to a list. Once we have all the to-dos, we can set `isLoading` to `false` and call `notifyListeners` from the `Provider` package to update our UI.
-- In `addTask`, we accept the task name as a parameter, set `isLoading` to `true`, and then call `_createTask` function using `_contract` object and passing `taskNameData` as parameter.
-- In `updateTask`, we accept the `id` of the task and the updated `taskNameData` and make a transaction using our credentials to the smart contract. Notice that we are sending `id` as an instance of `BigInt` because the web3dart package requires all the numbers in `BigInt` format.
-- `deleteTask` function will accept the `id` of the task to be deleted and call the `_deleteTask` function of our contract to delete that particular task from `todos` mapping in the smart contract.
-- `toggleComplete` function will accept the `id` of a task, and it will toggle the value of the `isComplete` boolean value in our smart contract.
-- At the end of the `addTask`, `updateTask`, `deleteTask`, and `toggleComplete` function we are calling `getTodos` to fetch the updated list of todos to update the UI. Alternatively, you can also update the local to-do list before calling the smart contract function to show the result instantaneously and update the list in the background.
+In `getTodos`, we call the `_taskCount` function which gives us the total number of to-dos, and then we use a loop to fetch all to-do items and add them to a list. Once we have all the to-dos, we can set `isLoading` to false and call `notifyListeners` from the `Provider` package to update our UI.
+
+In `addTask`, we accept the task name as a parameter, set `isLoading` to true, and then call the `_createTask` function using `_contract` object and passing `taskNameData` as a parameter. `updateTask` accepts the `id` of the task and the updated `taskNameData` to make a transaction using our credentials to the smart contract. Notice that we are sending `id` as an instance of `BigInt` because the web3dart package requires all the numbers in `BigInt` format. The `deleteTask` function will accept the `id` of the task to be deleted and call the `_deleteTask` function of our contract to delete that particular task from the `todos` mapping in the smart contract.
+
+The `toggleComplete` function will accept the `id` of a task, and it will toggle the value of the `isComplete` boolean value in our smart contract. At the end of the `addTask`, `updateTask`, `deleteTask`, and `toggleComplete` function we are calling `getTodos` to fetch the updated list of todos to update the UI. Alternatively, you can also update the local to-do list before calling the smart contract function to show the result instantaneously and update the list in the background.
 
 Create a `Task` model class in `TodoListModel` to store the list of to-dos.
 
@@ -424,7 +415,7 @@ class Task {
 }
 ```
 
-Now that we are done with the logic part in Flutter let's move forward and create UI for our app.
+Now that we are done with the logic part in Flutter let's move forward and create the UI for our app.
 
 `lib/TodoList.dart`
 
@@ -495,10 +486,9 @@ class TodoList extends StatelessWidget {
 }
 ```
 
-- Here we are creating a stateless widget, `TodoList`. In the build function, we are listening to `TodoListModel` and rendering the UI accordingly.
-- If the `isLoading` form `TodoListModel` is true, we are rendering the Loading widget; else, we are creating a `ListView` and looping over the length of `todos` in `TodoListModel`. In the `ListView`, we return a checkbox to toggle the `isComplete` value of the to-do and a container with the task name.
-- We are also creating a floating action button to add a new task to the to-do list.
-- This is how our list of to-dos will look like -
+Here we are creating a stateless widget, `TodoList`. In the build function, we are listening to `TodoListModel` and rendering the UI accordingly. If the `isLoading` form `TodoListModel` is true, we are rendering the Loading widget; else, we are creating a `ListView` and looping over the length of `todos` in `TodoListModel`. In the `ListView`, we return a checkbox to toggle the `isComplete` value of the to-do and a container with the task name. We are also creating a floating action button to add a new task to the to-do list.
+
+- This is how our list of to-dos should look:
 
 ![Todo List](../../../.gitbook/assets/flutter-todolist-home.png)
 
@@ -598,12 +588,13 @@ TextButton buildButton(String text, Function onPressed) {
 }
 ```
 
-- We are creating two functions, `showTodoBottomSheet` and `buildButton`. `showTodoBottomSheet` shows a bottom sheet where users can create, update and delete a task, and `buildButton` is a typical widget that returns a specifically designed button.
-- In `showTodoBottomSheet`, we are accepting an optional parameter `task`, and based on the value of `task`, we are rendering the bottom sheet UI.
-- If the value of `task` is null, we are rending UI to create a new Todo task, and if the `task` is not null, we will render the update and delete UI.
-- When the user taps on the floating action button, then we will call `showTodoBottomSheet` with `task` value as null, and when the user taps on and task item from `ListView`, we are calling `showTodoBottomSheet` with task value being the task object user tapped on.
-- When `Create`, `Update`, and `Delete` buttons are pressed, we call the respective smart contract function from our `TodoListModel` class.
-- This is how the bottom sheet will look like -
+We are creating two functions, `showTodoBottomSheet` and `buildButton`. `showTodoBottomSheet` shows a bottom sheet where users can create, update and delete a task, and `buildButton` is a typical widget that returns a specifically designed button.
+
+In `showTodoBottomSheet`, we are accepting an optional parameter `task`, and based on the value of `task`, we are rendering the bottom sheet UI. If the value of `task` is null, we are rending UI to create a new Todo task, and if the `task` is not null, we will render the update and delete UI. When the user taps on the floating action button, then we will call `showTodoBottomSheet` with `task` value as null, and when the user taps on and task item from `ListView`, we are calling `showTodoBottomSheet` with task value being the task object user tapped on.
+
+When `Create`, `Update`, and `Delete` buttons are pressed, we call the respective smart contract function from our `TodoListModel` class.
+
+This is how the bottom sheet should look:
 
 ![Bottom sheet GIF](../../../.gitbook/assets/flutter-todolist-bottomsheet.png)
 
@@ -630,11 +621,78 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-You can find the source code of this project [here](https://github.com/viral-sangani/flutter-todo-dapp).
+# Publishing the smart contract to Mumbai testnet
+
+We can publish our smart contract to Polygon Mumbai testnet by adding provider details of testnet in `truffle-config.js`.
+
+- Connect your Metamask to Matic Mumbai testnet and get the Secret Recovery Phrase from the Metamask.
+- Create a `.secret` file in the `smartcontract` directory and paste your Secret Recovery Phrase in that file. Make sure you have added the `.secret` file in your `.gitignore`.
+- **NOTE** - Deploying a smart contract requires paying gas fees, but since we are deploying to testnet, you can get 0.1 Matic token from [Matic Faucet](Matic Faucet) in your account.
+
+Run the following command to install `hdwallet-provider` to pay gas fees via your account.
+
+```text
+npm install @truffle/hdwallet-provider
+```
+
+Once you have everything set up correctly, delete the content of `truffle-config.js` and add the following code.
+
+```javascript
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const fs = require("fs");
+const mnemonic = fs.readFileSync(".secret").toString().trim();
+
+module.exports = {
+  networks: {
+    development: {
+      host: "localhost",
+      port: 7545,
+      network_id: "*",
+    },
+    matic: {
+      provider: () =>
+        new HDWalletProvider({
+          mnemonic: {
+            phrase: mnemonic,
+          },
+          providerOrUrl: `https://matic-mumbai--rpc.datahub.figment.io/apikey/{DATAHUB_API_KEY}}/health`,
+          chainId: 80001,
+        }),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+      chainId: 80001,
+    },
+  },
+  contracts_directory: "./contracts",
+  compilers: {
+    solc: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
+  db: {
+    enabled: false,
+  },
+};
+```
+
+After modifying `truffle-config.js`, run the following command to deploy your smart contract on Polygon testnet.
+
+```text
+truffle migrate --network matic
+```
+
+Truffle will deploy the contract to Mumbai using your account from Metamask.
+
+You can find the complete source code of this project [on Github](https://github.com/viral-sangani/flutter-todo-dapp).
 
 # Conclusion
 
-Congratulations on finishing the tutorial! Thank you for taking the time to complete it. In this tutorial, you have learned how to create a Flutter dapp from scratch using `web3dart`. Since Flutter is a multi-platform framework and the `web3dart` package supports all the platforms - Android, IOS, Linux, macOS, Web, and Windows you can use the same codebase to build multi-platform dapps very quickly.
+Congratulations on finishing the tutorial! Thank you for taking the time to complete it. In this tutorial, you have learned how to create a Flutter dApp from scratch using `web3dart`. Since Flutter is a multi-platform framework and the web3dart package supports all the platforms - Android, iOS, Linux, macOS, Web, and Windows you can use the same codebase to build multi-platform dApps very quickly.
 
 # About the Author
 
