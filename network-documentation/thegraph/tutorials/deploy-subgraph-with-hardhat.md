@@ -257,7 +257,7 @@ Next, you need to give your subgraph a name. Give the name as **vending**. Once 
 
 On this screen, you can see details about the subgraph like your deploy key, the subgraph slug and status.
 
-# Creating and deploying your subgraph
+# Creating the subgraph
 
 Run the following command to create the subgraph by downloading the contract ABI from the Rinkeby testnet. A new directory called `vending` will be created, and all node dependencies will be installed automatically.
 
@@ -297,63 +297,33 @@ Next steps:
 Make sure to visit the documentation on https://thegraph.com/docs/ for further information.
 ```
 
-Run the following command to set the deploy key. Replace <DEPLOY_KEY> with the key you got from <https://thegraph.com/studio/subgraph/vending/>
+It shall create three files:
+
+- `subgraph.yaml`: This stores the [subgraph manifest](https://thegraph.academy/developers/working-with-the-graph/)
+- `schema.graphql`: This defines the data to be stored and how it can be queried using GraphQL
+- `src/mapping.ts`: This defines the mapping between blockchain events to the entities defined in the schema
+
+# Deploying the subgraph
+
+Before you can deploy your subgraph, you need to get your deploy key from <https://thegraph.com/studio/subgraph/vending/>.
+
+Run the following command to set the deploy key for this yarn project.
 
 ```text
 graph auth --studio <DEPLOY_KEY>
+```
+
+You should see the following output:
+
+```text
 Deploy key set for https://api.studio.thegraph.com/deploy/
 ```
 
-To create the subgraph, run the following command. Your new subgraph will be created in a `subgraph.yaml` file.
+Once that is done, we can run the following commands to deploy the subgraph to Subgraph Studio:
 
 ```text
 cd vending
-graph codegen && graph build
-```
-
-This will generate a build directory under `vending/build`. You should also see the following output:
-
-```text
-Skip migration: Bump mapping apiVersion from 0.0.1 to 0.0.2
-Skip migration: Bump mapping apiVersion from 0.0.2 to 0.0.3
-Skip migration: Bump mapping apiVersion from 0.0.3 to 0.0.4
-Skip migration: Bump mapping specVersion from 0.0.1 to 0.0.2
-✔ Apply migrations
-✔ Load subgraph from subgraph.yaml
-Load contract ABI from abis/VendingMachine.json
-✔ Load contract ABIs
-Generate types for contract ABI: VendingMachine (abis/VendingMachine.json)
-Write types to generated/VendingMachine/VendingMachine.ts
-✔ Generate types for contract ABIs
-✔ Generate types for data source templates
-✔ Load data source template ABIs
-✔ Generate types for data source template ABIs
-✔ Load GraphQL schema from schema.graphql
-Write types to generated/schema.ts
-✔ Generate types for GraphQL schema
-
-Types generated successfully
-
-Skip migration: Bump mapping apiVersion from 0.0.1 to 0.0.2
-Skip migration: Bump mapping apiVersion from 0.0.2 to 0.0.3
-Skip migration: Bump mapping apiVersion from 0.0.3 to 0.0.4
-Skip migration: Bump mapping specVersion from 0.0.1 to 0.0.2
-✔ Apply migrations
-✔ Load subgraph from subgraph.yaml
-Compile data source: VendingMachine => build/VendingMachine/VendingMachine.wasm
-✔ Compile subgraph
-Copy schema file build/schema.graphql
-Write subgraph file build/VendingMachine/abis/VendingMachine.json
-Write subgraph manifest build/subgraph.yaml
-✔ Write compiled subgraph to build/
-
-Build completed: /temp/vending/build/subgraph.yaml
-```
-
-The following command will deploy the subgraph to Subgraph Studio:
-
-```text
-graph deploy --studio vending
+yarn deploy
 ```
 
 You shall be prompted for a version label. You can choose `1.0.0`. You should see the following output:
@@ -389,7 +359,7 @@ Queries (HTTP):     https://api.studio.thegraph.com/query/8676/vending/v1.0.0
 Subscriptions (WS): https://api.studio.thegraph.com/query/8676/vending/v1.0.0
 ```
 
-Subgraph Studio might take few minutes to sync the graph from the Rinkeby testnet. Wait until the syncing process is complete.
+You have now deployed the subgraph to your Subgraph Studio account. It will now start the syncing process, where data is extracted from the historical blocks in Rinkeby Ethereum testnet by The Graph node. Depending on the amount of data, this process can take anywhere between a few minutes to a few hours. New blocks will be inspected by The Graph node as soon as they are minded.
 
 Once the sync is complete, you can access the subgraph on the Playground to run your queries.
 
