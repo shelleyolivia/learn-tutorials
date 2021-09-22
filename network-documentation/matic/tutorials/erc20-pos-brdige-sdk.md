@@ -126,8 +126,7 @@ eth.getBalance("0xD8f24D419153E5D03d614C5155f900f4B5C8A65C")
 
 # Installing helpers
 Now that we have the information we need and the other important pieces in place, we can write some useful code using the maticjs client library and the HDWalletProvider class from Truffle.  
-
-Install **Polygon** SDK
+We will need to install both of these packages on the commandline with the node package manager. Use these commands to install the packages and save them in the project manifest, `package.json`:
 
 ```text
 npm install @maticnetwork/maticjs --save
