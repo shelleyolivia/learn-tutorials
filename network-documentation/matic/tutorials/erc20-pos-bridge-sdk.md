@@ -133,7 +133,7 @@ npm install @maticnetwork/maticjs --save
 npm install @truffle/hdwallet-provider --save
 ```
 
-## Approve
+# Approve ERC20 for deposit
 To **approve** the **Ethereum Predicate Contract** we just need to call the `approveERC20ForDeposit` function. The code for this is straightforward: 
 
 ```javascript
@@ -143,7 +143,7 @@ await maticPOSClient.approveERC20ForDeposit(rootToken, amount.toString(), {
 });
 ```
 
-## Deposit
+# Deposit ERC20
 Next, we would call the `depositERC20ForUser` function of the **Ethereum Predicate Contract**:
 
 ```javascript
@@ -292,8 +292,11 @@ Just a few things to mention:
 * `rootToken`: The ERC-20 contract address on the Goerli testnet
 * `amount`: the amount of **token** we want transfer. By default, **open zeppelin** V4 `ERC20` contract uses a value of **18** for **decimals**. That is why **999** is multiplied by **(10 ** 18)**
 
-## Not able to run main.js 
-* If you are facing an error message like
+# Potential errors
+
+**Not able to run main.js**
+
+If you are facing an error message like this:
 
 ```text
 Error: execution reverted: ERC20: approve to the zero address
@@ -301,7 +304,9 @@ Error: execution reverted: ERC20: approve to the zero address
 
 The contract probably has not mapped yet.
 
-* If you have not run Geth, you will get an error like this
+** Geth not running**
+
+If you have not run Geth, you will get an error like this:
 
 ```text
 (node:3962) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
@@ -314,7 +319,9 @@ Error: PollingBlockTracker - encountered an error while attempting to update lat
 Error: connect ECONNREFUSED 127.0.0.1:8545
 ```
 
-* If you get an error like this
+**No peers available**
+
+If you get an error like this:
 
 ```javascript
 {
@@ -323,9 +330,9 @@ Error: connect ECONNREFUSED 127.0.0.1:8545
 }
 ```
 
-Wait a bit and try again
+Wait a few minutes and try again.
 
-## Sync & Confirmation
+# Sync & Confirmation
 
 It takes up to 5 minutes for Mumbai to read data from the Goerli chain and sync itself. Once it has synced, then we can check the token balance in Metamask.
 
