@@ -15,6 +15,9 @@ To successfully follow along with this tutorial, you will need basic knowledge a
 - [Truffle](https://github.com/trufflesuite/truffle) - Truffle provides a local development environment for creating and testing blockchain applications.
 - [Flutter](https://flutter.dev/docs/get-started/install) - used to create an Android/iOS dApp.
 - A code editor or IDE - VSCode is recommended for Flutter development.
+- [Figment DataHub](https://figment.io/datahub/) account - We will be using DataHub's Polygon RPC URL to deploy the smart contract.
+
+If you don't have a DataHub account, you can create a free account and get the API key for Polygon from the dashboard.
 
 We will be using [web3dart](https://pub.dev/packages/web3dart) to interact with the blockchain in our Flutter application. web3dart is an alternative to the commonly used web3js for the Flutter ecosystem.
 
@@ -642,6 +645,8 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 const fs = require("fs");
 const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+var DATAHUB_API_KEY = "YOU-DATAHUB-API-KEY-FOR-POLYGON";
+
 module.exports = {
   networks: {
     development: {
@@ -655,7 +660,7 @@ module.exports = {
           mnemonic: {
             phrase: mnemonic,
           },
-          providerOrUrl: `https://matic-mumbai--rpc.datahub.figment.io/apikey/{DATAHUB_API_KEY}}/health`,
+          providerOrUrl: `https://matic-mumbai--rpc.datahub.figment.io/apikey/${DATAHUB_API_KEY}/health`,
           chainId: 80001,
         }),
       network_id: 80001,
