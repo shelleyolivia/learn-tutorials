@@ -4,16 +4,16 @@ We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and 
 The Polygon Proof of Stake (PoS) Bridge is a mechanism and set of contracts on both Ethereum and Polygon that will help us in moving assets between the **root** chain and **child** chain.    
 In contrast with the [Plasma Bridge](https://docs.matic.network/docs/develop/ethereum-matic/plasma/getting-started/), the Polygon PoS bridge is much faster and makes it a better option for dApps that are looking for faster withdrawals.
 
+# Prerequisites
+In this tutorial, We will use Metamask as our wallet. If you are not familiar with it or don't know how to use it, check [this video on youtube](https://www.youtube.com/watch?v=Af_lQ1zUnoM).  
+When you are creating a Metamask wallet, it gives you a Secret Recovery Phrase (Seed). With this seed, you can recover **all** of your accounts in Metamask.  
+We will use this seed later in this tutorial. here is an article about [How to reveal your Secret Recovery Phrase](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase)  
+
 # Requirements
 
 * [**Metamask**](https://metamask.io/)
 * [**Nodejs**](https://nodejs.org/en/download/) v14.17.6 LTS or higher installed
 * [**Geth**](https://geth.ethereum.org/docs/install-and-build/installing-geth): version 1.10.8
-
-# Prerequisites
-In this tutorial, We will use Metamask as our wallet. If you are not familiar with it or don't know how to use it, check [this video on youtube](https://www.youtube.com/watch?v=Af_lQ1zUnoM).  
-When you are creating a metamask wallet, it gives you a Secret Recovery Phrase (Seed). With this seed, you can recover **all** of your accounts in metamask.  
-We will use this seed later in this tutorial. here is an article about [How to reveal your Secret Recovery Phrase](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase)  
 
 # Getting started
 1. In order to transfer assets between **root** (Ethereum) and **child** (Polygon) contracts, they should be mapped first. This is a process by which an existing token contract is mirrored between the root and child chain.  
