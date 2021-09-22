@@ -5,7 +5,7 @@ At this point, we have deployed a smart contract on the Polygon testnet & set th
 # The Challenge
 
 {% hint style="tip" %}
-In the file `components/protocols/polygon/GeStorage.tsx`, implement the `getValue` function.   
+In the file `components/protocols/polygon/components/steps/Getter.tsx`, implement the `getValue` function.   
 {% endhint %}
 
 **Take a few minutes to figure this out.**

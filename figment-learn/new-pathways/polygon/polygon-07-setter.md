@@ -7,7 +7,7 @@ As simple as it sounds, what's happening in the background is actually very powe
 # The Challenge
 
 {% hint style="tip" %}
-In the file `components/protocols/polygon/SeStorage.tsx`, implement the `setValue` function.    
+In the file `components/protocols/polygon/components/steps/Setter.tsx`, implement the `setValue` function.    
 {% endhint %}
 
 **Take a few minutes to figure this out.**

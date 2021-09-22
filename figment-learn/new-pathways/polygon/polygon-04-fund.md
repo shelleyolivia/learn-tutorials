@@ -17,7 +17,7 @@ Once this transaction is confirmed, you will have 1 **MATIC** on the Mumbai test
 # The challenge
 
 {% hint style="tip" %}
-**Imagine this scenario:** You know you have a big balance. You need to show that balance so you can brag about it to all your awesome Web 3 developer friends! In `components/protocols/polygon/steps/Balance.tsx`, implement the`checkBalance` function :
+**Imagine this scenario:** You know you have a big balance. You need to show that balance so you can brag about it to all your awesome Web 3 developer friends! In `components/protocols/polygon/components/steps/Balance.tsx`, implement the`checkBalance` function :
 {% endhint %}
 
 **Take a few minutes to figure this out.**

@@ -5,7 +5,7 @@ At the beginning of this journey into Polygon, we generated a mnemonic. Now we'r
 # The Challenge
 
 {% hint style="tip" %}
-In the file `components/protocols/steps/polygon/Restore.tsx`, implement the `restore` function. Using `ethers`, look for `Wallet`, then when the wallet has been regenerated try to deduce which property we're going to call in order to display the address and the private key, finally verify than the generated key matches the existing one.   
+In the file `components/protocols/polygon/components/steps/Restore.tsx`, implement the `restore` function. Using `ethers`, look for `Wallet`, then when the wallet has been regenerated try to deduce which property we're going to call in order to display the address and the private key, finally verify than the generated key matches the existing one.   
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -68,6 +68,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 * Next, we compare if the restored address matches the existing one.
 * Next, we store the address in the component state using `setAddress` to display it in the UI.
 * Finally, we do the same for the private key - storing it in the component state with `setSecret`.
+* **IMPORTANT**: If you have selected any address in Metamask other than the first address, the if statement will be false.
 
 -------------------------------------
 

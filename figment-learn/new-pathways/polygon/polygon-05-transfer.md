@@ -5,7 +5,7 @@ Transferring some token is one of the major feature of Web 3. In this challenge,
 # The challenge
 
 {% hint style="tip" %}
-**Imagine this scenario:** You know you have a big balance and you want to eat some pizza. Then, you need to transfer **0.1** MATIC to buy one! In `components/protocols/polygon/steps/Transfer.tsx`, implement the `transfer` function.
+**Imagine this scenario:** You know you have a big balance and you want to eat some pizza. Then, you need to transfer **0.1** MATIC to buy one! In `components/protocols/polygon/components/steps/Transfer.tsx`, implement the `transfer` function.
 {% endhint %}
 
 **Take a few minutes to figure this out.**

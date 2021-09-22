@@ -2,7 +2,7 @@
 
 In order to gather information from the blockchain, we will use ethers again. For basic interaction with Polygon, the [provider](https://docs.ethers.io/v5/api/providers/provider/) methods are often most useful. 
 
-In the file `components/protocols/polygon/steps/Query.tsx` we have already written the `getQuery` function which will send a network request to the node server. [By convention of Next.js routing](https://nextjs.org/docs/api-routes/introduction), a client-side request to `http://localhost:3000/api/polygon/query` will get routed to the file `query.js` in `/pages/api/polygon` and be executed by the default imported function.
+In the file `components/protocols/polygon/components/steps/Query.tsx` we have already written the `getQuery` function which will send a network request to the node server. [By convention of Next.js routing](https://nextjs.org/docs/api-routes/introduction), a client-side request to `http://localhost:3000/api/polygon/query` will get routed to the file `query.js` in `/pages/api/polygon` and be executed by the default imported function.
 
 -------------------------------------
 
