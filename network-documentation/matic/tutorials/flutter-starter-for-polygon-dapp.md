@@ -660,7 +660,7 @@ module.exports = {
           mnemonic: {
             phrase: mnemonic,
           },
-          providerOrUrl: `https://matic-mumbai--rpc.datahub.figment.io/apikey/${DATAHUB_API_KEY}/health`,
+          providerOrUrl: `https://matic-mumbai--rpc.datahub.figment.io/apikey/${DATAHUB_API_KEY}/`,
           chainId: 80001,
         }),
       network_id: 80001,
