@@ -34,7 +34,7 @@ Head over to [OpenSea](https://opensea.io/assets), the largest NFT marketplace.
 
 As you can see from the screenshot above, there are over 20 million NFTs on sale!
 
-Click on the **Collections** tab on the left. There we can see many of the popular NFT collections like CryptoPunks, Art Blocks Curated, Galaxy-Eggs, and so on. Let's choose the **Galaxy-Eggs** NFT collection for this tutorial. Click on the **Galaxy-Eggs** link, which will take you to https://opensea.io/collection/galaxyeggs9999.
+Click on the **Collections** tab on the left. There we can see many of the popular NFT collections like CryptoPunks, Art Blocks Curated, Galaxy-Eggs, and so on. Let's choose the **Galaxy-Eggs** NFT collection for this tutorial. Click on the **Galaxy-Eggs** link, which will take you to <https://opensea.io/collection/galaxyeggs9999>.
 
 ![OpenSea Galaxy-Eggs](../../../.gitbook/assets/opensea_galaxyeggs.png)
 
@@ -42,11 +42,11 @@ Click on any of the NFTs to view its display page:
 
 ![OpenSea Galaxy-Eggs #7836](../../../.gitbook/assets/opensea_galaxyeggs_7836.png)
 
-From here you can click on the **Details** tab, to view the contract address for the NFT: https://etherscan.io/address/0xa08126f5e1ed91a635987071e6ff5eb2aeb67c48.
+From here you can click on the **Details** tab, to view the contract address for the NFT: <https://etherscan.io/address/0xa08126f5e1ed91a635987071e6ff5eb2aeb67c48>.
 
 # Creating the project in Subgraph Studio
 
-Now that you have the address of a smart contract that you want to index using the Graph Protocol, you can head over to the Subgraph Studio at https://thegraph.com/studio/.
+Now that you have the address of a smart contract that you want to index using the Graph Protocol, you can head over to the Subgraph Studio at <https://thegraph.com/studio/>.
 
 ![Login to Subgraph Studio](../../../.gitbook/assets/graph_connect.png)
 
@@ -129,7 +129,7 @@ Run the following command to set the deploy key for your subgraph project:
 graph auth --studio <DEPLOY_KEY>
 ```
 
-Replace `<DEPLOY_KEY>` with the deploy key from the Studio page https://thegraph.com/studio/subgraph/galaxyeggnft/. You should see the following output:
+Replace `<DEPLOY_KEY>` with the deploy key from the Studio page <https://thegraph.com/studio/subgraph/galaxyeggnft/>. You should see the following output:
 
 ```text
 Deploy key set for https://api.studio.thegraph.com/deploy/
