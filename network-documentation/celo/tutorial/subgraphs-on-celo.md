@@ -47,10 +47,11 @@ We will create a subgraph for a gravatar contract deployed on the Celo mainnet. 
 
 1. Install Graph CLI using NPM or Yarn.
 
-```
+```bash
 npm install -g @graphprotocol/graph-cli
-
-# or
+```
+**OR**
+```bash
 yarn global add @graphprotocol/graph-cli
 ```
 
@@ -58,17 +59,21 @@ yarn global add @graphprotocol/graph-cli
 
 ```bash
 git clone https://github.com/secretshardul/the-graph-celo.git
+```
 
-# Install node dependencies using
+**Install node dependencies using**
+
+```bash
 yarn
-
-# or
+```
+**OR**
+```bash
 npm install
 ```
 
 3. Deploying
 
-```
+```bash
 # Authenticate Graph CLI. The access token is displayed on your subgraph dashboard.
 graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>
 
@@ -82,7 +87,7 @@ graph deploy \
 
 You should get an output similar to
 
-```
+```bash
 ✔ Apply migrations
 ✔ Load subgraph from subgraph.yaml
 Compile data source: Gravity => build/Gravity/Gravity.wasm
