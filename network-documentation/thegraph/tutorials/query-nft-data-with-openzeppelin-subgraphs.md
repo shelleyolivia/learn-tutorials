@@ -60,7 +60,7 @@ Click the "Create a Subgraph" button to begin. You need to give your subgraph a 
 
 # Creating the subgraph
 
-On your local machine or remote development environment, create a directory called `galaxyEggsNFT`, change into that directory, then initialize it as a new npm project by running:
+On your local machine or remote development environment, create a directory called `galaxyEggsNFT`, change into that directory, then initialize it as a new **npm** project by running:
 
 ```text
 mkdir galaxyEggsNFT
@@ -260,7 +260,7 @@ You will get an output like:
 }
 ```
 
-The value of each id is a valid transaction hash on Ethereum mainnet. As an example, if you view the first transaction hash (0x0003b95db...) on the Etherscan block explorer, you can see it is a purchase transaction of the NFT Galaxy Egg #8331!
+The value of each id is a valid transaction hash on Ethereum mainnet. As an example, if you view the first transaction hash ([0x0003b95db...](https://etherscan.io/tx/0x0003b95db41b4bdadddb234d4d932fdc26bf9890267073e488e4b6f9fdb27400)) on the Etherscan block explorer, you can see it is a purchase transaction of the NFT **Galaxy Egg #8331**!
 
 You can get the details from the Playground using the query:
 
@@ -305,7 +305,7 @@ You shall get the below output:
 }
 ```
 
-You can view the transaction on Etherscan (0x31663947a...). As you can see it's the sale of Galaxy Eggs #2174 made by the account `0x98c2...05d1`, which is exactly what is in the output!
+You can view the transaction on Etherscan ([0x31663947a...](https://etherscan.io/tx/0x31663947a5619c75217d127caa7c128d868c5b4cc3d8145d9b78e0e9a6e4a155)). As you can see it's the sale of **Galaxy Eggs #2174** made by the account `0x98c2...05d1`, which is exactly what is in the output!
 
 # Conclusion
 
