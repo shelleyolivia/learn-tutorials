@@ -41,7 +41,7 @@ The command `npm install -g truffle` will install Truffle globally so that you c
 
 This is how the folder structure will be after initial setup:
 
-![Folder Structure](../../../.gitbook/assets/flutter-todo-dapp-demo.gif)
+![Folder Structure](../../../.gitbook/assets/flutter-dapp-folder-structure.png)
 
 The `truffle init` command creates the following directories:
 
