@@ -162,7 +162,7 @@ Press the code button on the right side. Select the language of your choice to g
 
 ![Postman generated code results](../../../.gitbook/assets/celo-subgraph-05-postman-generated-code.png)
 
-```
+```bash
 curl --location --request POST 'https://api.thegraph.com/subgraphs/name/secretshardul/the-graph-celo' \
     --header 'Content-Type: application/json' \
     --data-raw '{"query":"{\n  gravatars(first: 5) {\n    id\n    owner\n    displayName\n    imageUrl\n  }\n}\n","variables":{}}'
