@@ -193,6 +193,8 @@ You shall also have access to the Playground, where you can run your queries, li
 
 Publishing meaning pushing your subgraph on-chain to either Ethereum mainnet or Ethereum Rinkeny testnet. This will allow you to see how your subgraph works in the [Graph Explorer](https://thegraph.com/explorer/).
 
+For now, let's skip publishing this subgraph.
+
 # Querying the NFT data
 
 Your subgraph is composed of schema types called `Entities`, defined in `schema.graphql` file. For each Entity, The Graph will generate an `entity` and `entities` fields, as seen in <https://thegraph.com/studio/subgraph/galaxyeggnft>.
