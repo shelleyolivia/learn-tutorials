@@ -1,16 +1,16 @@
-# Create a Lending Marketplace dapp on Avalanche with Truffle Suite.
+# Create a Lending Marketplace dapp on Polygon with Truffle Suite.
 
 ## Introduction
 
-A Lending Marketplace provides a secure, flexible, open-source foundation for a decentralized loan marketplace on the Avalanche blockchain. It provides the pieces necessary to create a decentralized lending exchange, including the requisite lending assets, clearing, and collateral pool infrastructure, enabling third parties to build applications for lending.
+A Lending Marketplace provides a secure, flexible, open-source foundation for a decentralized loan marketplace on the Polygon blockchain. It provides the pieces necessary to create a decentralized lending exchange, including the requisite lending assets, clearing, and collateral pool infrastructure, enabling third parties to build applications for lending.
 
 ## Prerequisites
 
 [MetaMask](https://metamask.io/) is a browser-based blockchain wallet that can be used to store any kind of digital assets and cryptocurrency.
- 
-[Avalanche](https://www.avax.network/) is a blockchain that is EVM compatible.
 
-[Create a Local Test Network](https://learn.figment.io/tutorials/create-a-local-test-network), [Using Truffle with the Avalanche C-Chain](https://learn.figment.io/network-documentation/tutorials/using-truffle-with-the-avalanche-c-chain)
+[Polygon](https://www.avax.network/) is a blockchain that is EVM compatible.
+
+[Create a Local Test Network](https://learn.figment.io/tutorials/create-a-local-test-network), [Using Truffle with the Polygon](https://learn.figment.io/network-documentation/tutorials/using-truffle-with-the-avalanche-c-chain)
 
 ## Requirement
 
@@ -20,7 +20,7 @@ A Lending Marketplace provides a secure, flexible, open-source foundation for a 
 
 [React.js](https://reactjs.org/) is an open-source JavaScript library that is used to create single-page applications' user interfaces.
 
-## Create a truffle project 
+## Create a truffle project
 
 Install Truffle:
 ```
@@ -134,7 +134,7 @@ contract LoanContract {
     event FundTransferToLoanSuccessful(address, uint256);
     event FundTransferToBorrowerSuccessful(address, uint256);
     event LoanRepaid(address, uint256);
-    event LoanStarted(uint256 _value); // watch for this event 
+    event LoanStarted(uint256 _value); // watch for this event
     event CollateralTransferReturnedToBorrower(address, uint256);
     event CollateralClaimedByLender(address, uint256);
     event CollateralSentToLenderForDefaultedRepayment(uint256,address,uint256);
@@ -144,19 +144,19 @@ contract LoanContract {
         require(msg.sender == loan.borrower, "Not Authorised");
         _;
     }
-    
+
      modifier OnlyAdmin {
         require(msg.sender == admin, "Only Admin");
         _;
     }
-    
+
     modifier OnlyLender {
         require(msg.sender == loan.lender, "Not Authorised");
         _;
     }
-    
-    
-    
+
+
+
     // watch for this event  LoanStartedOn during two transactions approveLoanRequest & transferCollateralToLoan
 
     constructor(uint256 _loanAmount, uint128 _duration, string memory _acceptedCollateralsMetadata,
@@ -184,7 +184,7 @@ contract LoanContract {
           //status changed OFFER -> FUNDED
          emit FundTransferToLoanSuccessful(msg.sender, msg.value);
     }
-    
+
     function toString(address x) public returns (string memory) {
         bytes memory b = new bytes(20);
         for (uint i = 0; i < 20; i++)
@@ -204,7 +204,7 @@ contract LoanContract {
         }
 
         loan.collateral.collateralStatus = CollateralStatus.ARRIVED;
-        
+
         // We check the latest price of the collateral using the oracle
         // Here we need to change CollateralAddress to String
         /**
@@ -216,10 +216,10 @@ contract LoanContract {
         // We make the price call and then we check the price using .price () method
         //price.update.value(msg.value)(contractAddress);
         // what is msg.value?
-        
+
         // this would need to be called after price is fed!
         //loan.collateral.collateralPrice = price.price();
-        
+
         ERC20.transferFrom(msg.sender, address(this), loan.collateral.collateralAmount);
 
         emit CollateralTransferToLoanSuccessful(msg.sender, loan.collateral.collateralAmount, loan.collateral.collateralPrice);
@@ -259,7 +259,7 @@ contract LoanContract {
 
         emit FundTransferToLoanSuccessful(msg.sender, msg.value);
         loan.startedOn = now;
-        
+
         address(uint160(loan.borrower)).transfer(loan.loanAmount);
         //loan.loanStatus = LoanStatus.ACTIVE;
         emit FundTransferToBorrowerSuccessful(loan.borrower, loan.loanAmount);
@@ -304,21 +304,21 @@ contract LoanContract {
     }
 
     // this func to be called when any repayment due date is passed
-    
-    
+
+
     // based on nth duration it is triggered we pass repayment number from UI
     function makeFailedRepayments(uint256 _repaymentNumberMissed) public OnlyAdmin {
-    
+
     // UI checks if anytime now > due date of repayment n
     //uint256 totalLoanRepayments = LoanMath.getTotalNumberOfRepayments(loan.duration);
     // can be done in UI
     //this is not handled properly
-    
+
     uint256 repaymentNumber = _repaymentNumberMissed;
-    
+
    // cheks if repayment n was added in paid repayments array
         require(loan.repayments[repaymentNumber] == false,"repayment was already paid");
-    
+
         // initates transfer according to repayment amount and current value of collateral1
         (uint256 _repayAmount,uint256 interest,uint256 fees) = getRepaymentAmount(repaymentNumber);
          uint256 collateralAmountToTrasnfer = LoanMath.calculateCollateralAmountToDeduct((_repayAmount.sub(fees)).mul(SOME_THINGS.div(100)), loan.collateral.collateralPrice);
@@ -572,7 +572,7 @@ Get All loan data
 const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
 LoanBook.getAllLoans(params);
 })
-``` 
+```
 
 Get collateral price
 ```
@@ -652,7 +652,7 @@ export function getAccounts() {
 export const fetchMinedTransactionReceipt = (transactionHash) => {
 
   return new Promise((resolve, reject) => {
-    
+
     const { web3 } = window;
 
     var timer = setInterval(()=> {
@@ -663,7 +663,7 @@ export const fetchMinedTransactionReceipt = (transactionHash) => {
         }
       });
     }, 2000)
-   
+
   })
 }
 ```
@@ -3941,9 +3941,9 @@ For complete source code and implementation visit - https://github.com/crypto-le
 
 # Conclusion
 
-Now you know about creating a Lending Marketplace with Truffle Suite and ReactJS on the Avalanche network.
+Now you know about creating a Lending Marketplace with Truffle Suite and ReactJS on the Polygon network.
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Polygon tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
 
 # About the author
 
