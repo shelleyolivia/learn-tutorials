@@ -4,13 +4,11 @@ In this tutorial you will learn how to create a subgraph from an ERC-721 smart c
 
 ![Subgraph Studio](../../../.gitbook/assets/graph.png)
 
-Topics covered in this tutorial:
+OpenZeppelin Subgraphs is a powerful library for easily indexing activity of OpenZeppelin Contracts. It simplies building subgraphs by supporting some of the most popular modules in OpenZeppelin Contracts, like `erc20`, `erc721`, `ownable` and so on. We shall be using `erc721` and `ownable` modules in this tutorial.
 
-- Retrieving an NFT smart contract address from OpenSea
-- Creating a subgraph in the Subgraph Studio
-- Creating a subgraph from an NFT smart contract
-- Deploying the subgraph to Subgraph Studio
-- Querying the subgraph using Subgraph Studio Playground
+You can build a subgraph schema if you know the address of the smart contract. In this tutorial, you shall learn how to retrieve the smart contract address of some popular NFT collection using the OpenSea NFT marketplace.
+
+The Subgraph Studio is where you can build and create subgraphs. You can add metadata to your graphs (even after deploying your subgraphs), deploy multiple versions of your subgraphs, as well as publish them to the decentralized Graph Explorer. You can also test your subgraphs in the Playground, where you can run graphql queries without incurring any querying fees. In this tutorial, you shall also learn how to create and deploy your subgraph to Subgraph Studio as well as query it using the Playground.
 
 # Requirements
 
