@@ -189,7 +189,9 @@ You shall also have access to the Playground, where you can run your queries, li
 
 # Querying the NFT data
 
-To retrieve the NFTs, use the below query in the Playground:
+Your subgraph is composed of schema types called `Entities`, defined in `schema.graphql` file. For each Entity, The Graph will generate an `entity` and `entities` fields, as seen in <https://thegraph.com/studio/subgraph/galaxyeggnft>.
+
+To retrieve all the Galaxy-Eggs NFTs created (along with their identifier and uri), use the below query in the Playground:
 
 ```graphql
 {
@@ -210,6 +212,10 @@ You will get an output like:
         "identifier": "0",
         "uri": "ipfs://QmfB3KH8GuZA9xoTCNwwiMEMk9hZBUaUZnMMWKra57oUse/0.json"
       },
+      {
+        "identifier": "1",
+        "uri": "ipfs://QmfB3KH8GuZA9xoTCNwwiMEMk9hZBUaUZnMMWKra57oUse/1.json"
+      },
 
       ...
 
@@ -218,7 +224,34 @@ You will get an output like:
 }
 ```
 
-If you visit the above IPFS link, you shall get the below json details:
+Here `identifier` denotes the unique id used for an NFT. For example, in NFT **Galaxy-Eggs #2074**, **2074** is the identifier.
+
+Note that we are using `erc721Tokens` and not `erc721Token` in the query. If we want to retrieve a specific NFT, we have to use `erc721Token`:
+
+```graphql
+{
+  erc721Token(id: "0xa08126f5e1ed91a635987071e6ff5eb2aeb67c48/0x0") {
+    identifier
+    uri
+  }
+}
+```
+
+But in this case `id` field is mandatory and must be a string. It will output:
+
+```json
+{
+  "data": {
+    "erc721Token": {
+      "id": "0xa08126f5e1ed91a635987071e6ff5eb2aeb67c48/0x0",
+      "identifier": "0",
+      "uri": "ipfs://QmfB3KH8GuZA9xoTCNwwiMEMk9hZBUaUZnMMWKra57oUse/0.json"
+    }
+  }
+}
+```
+
+If you visit the above IPFS link, you will get the details of **Galaxy-Eggs #0** NFT:
 
 ```json
 {
@@ -228,7 +261,7 @@ If you visit the above IPFS link, you shall get the below json details:
 }
 ```
 
-To retrieve the NFT purchases, run the below query:
+To retrieve the NFT purchases, we shall use the `transactions` entity (along with its `id` field). Run the below query:
 
 ```graphql
 {
@@ -258,7 +291,7 @@ You will get an output like:
 }
 ```
 
-The value of each id is a valid transaction hash on Ethereum mainnet. As an example, if you view the first transaction hash ([0x0003b95db...](https://etherscan.io/tx/0x0003b95db41b4bdadddb234d4d932fdc26bf9890267073e488e4b6f9fdb27400)) on the Etherscan block explorer, you can see it is a purchase transaction of the NFT **Galaxy Egg #8331**!
+The value of each `id` is a valid transaction hash on Ethereum mainnet. As an example, if you view the first transaction hash ([0x0003b95db...](https://etherscan.io/tx/0x0003b95db41b4bdadddb234d4d932fdc26bf9890267073e488e4b6f9fdb27400)) on the Etherscan block explorer, you can see it is a purchase transaction of the NFT **Galaxy Egg #8331**!
 
 You can get the details from the Playground using the query:
 
@@ -277,6 +310,10 @@ You can get the details from the Playground using the query:
   }
 }
 ```
+
+`orderBy` and `orderDirection` attributes can be used to sort the results by a specific field. In this example, let's sort it based on the purchase timestamps in descending order, meaning last purchases will come first in the result.
+
+`id` field inside the `to` field, denotes the address to which the NFT is transferred.
 
 You shall get the below output:
 
