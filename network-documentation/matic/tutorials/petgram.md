@@ -1,153 +1,84 @@
 
 # Introduction
 
-In this tutorial, you will learn how to build a Social Media DApp (Decentralized Application) like Instagram and how to Deploy it on the Polygon (Matic) Mumbai test network. So grab your favorite drink ☕️ and let's get started!
+In this tutorial, you will learn how to build a Social Media dApp (Decentralized Application) similar to Instagram and how to deploy it on the Polygon (Matic) Mumbai test network. So grab your favorite drink and let's get started ☕️!
 
-PetGram is a decentralized version of the Instagram platform for pets where users can browse cute photos of their favorite pets, see details of a specific pet, create a post and earn NFTS.
+PetGram is a decentralized version of the Instagram platform for pets where users can browse cute photos of their favorite pets, see details of a specific pet, create a post and earn NFTs.
 
-# Important Notes
-
-All the data is stored on IPFS and it will generate a hash that can be used to mint NFTS.
-All the resources used to create this DApp are linked in the "References" section at the end of this tutorial.
 
 # Prerequisites
-
-This tutorial assumes that you have some beginner-level experience in programming & blockchain understanding.
-
-After this tutorial you will be able to:
-
-- Build a Full Stack Decentralized Application on top of Ethereum Blockchain.
-- Deploy smart contracts on the Polygon (Matic) Mumbai test network.
-- Use Truffle & MetaMask.
-- Understand Web3 concepts.
-- Upload and store files to IPFS NFTStorage [IPFS](https://nft.storage/) platform.
-- Build a simple Solidity smart contract.
-- Use OpenZeppelin Library to customize smart contracts.
-- Develop, deploy, and run tests the application with Ganache (local blockchain).
-- Build and use React Js to create components for single-page applications.
-- Add Material-UI to build faster, beautiful, and more accessible React applications.
+For this tutorial, it is recommendable to complete the [Polygon pathway](https://learn.figment.io/protocols/polygon).
 
 # Requirements
+You will need the following software on your computer to build this dApp:
+- [Node.js](https://nodejs.org/en/download/) v14.17.6 LTS or higher installed
+- [Truffle](https://www.trufflesuite.com/truffle) latest version installed
+- [Ganache](https://www.trufflesuite.com/ganache) latest version installed
+- [Metamask](https://metamask.io/) installed in your browser
+- You will also need a [GitHub](https://github.com/) account
 
-We need the following things on your computer to build our DApp.
+It is strongly recommended to create a new MetaMask account for testing. You will want to keep the Secret Recovery Phrase for this fresh account handy because it is needed for deployment of the smart contract.
 
-### Node & npm
-
-Node is a JavaScript runtime environment that executes JavaScript code outside a web browser and npm is a JavaScript package installer.
-To install Node.js & npm on your computer, click on this [link](https://nodejs.org/en/download/) -> download the file as per your computer requirement -> Install the file.
-To check the successful installation type `npm -v` in your terminal, it'll show the npm version and that means you've successfully installed it on your computer.
-
-### Truffle
-
-Truffle is the best development environment for developing blockchain applications. Truffle gives us boilerplate code (template code) to start building our DApp.
-
-To install truffle, open a terminal (windows cmd prompt or mac terminal) and run the following command:
-`npm install -g truffle`
-
-### Ganache
-
-Ganache is a personal blockchain environment for DApp development. It provides a local blockchain with 10 default accounts, each already funded with 100 ETH. This can be very useful for testing and development, [check it out](https://www.trufflesuite.com/ganache) if you are interested.
-
-### MetaMask Setup
-
-MetaMask is used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.
-
-To install the MetaMask extension, click on this [link](https://metamask.io/).
-Now, `Create a MetaMask account -> save the mnemonics (12 secret words) because we need those mnemonics at the time of deployment`
-
-To interact with Polygon via Metamask we first have to add a new RPC endpoint. Open the Metamask extension by clicking on the Fox icon in your browser toolbar then select `Settings -> Networks -> Add network -> Save`. Fill out the information as given in the image below.
+To interact with Polygon via Metamask, you first have to add a new RPC endpoint. Open the Metamask extension by clicking on the Fox icon in your browser toolbar then select Settings -> Networks -> Add network -> Save. Fill out the information as given in the image below:
 
 ![](../../../.gitbook/assets/deploy-and-debug-on-polygon-1.png)
 
-Now you'll notice zero balance (0 MATIC) in your wallet, To get test Matic for deployment and testing,
-`go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network).
-Done! check your wallet, you'll see some Matic there. _(We only need a small amount of Matic (5-10 Matic) to deploy and test our DApp.)_
+Now you'll notice zero balance (0 MATIC) in your wallet, to get test Matic for deployment and testing go to the Matic Faucet [link](https://faucet.matic.network) -> Select Mumbai -> Paste your wallet address -> Click "Submit".
+
+When this is complete, check your Metamask & you'll see some MATIC tokens there. We only need a small amount of MATIC (about 5-10) to deploy and test our dApp.
 
 ![](../../../.gitbook/assets/deploy-and-debug-on-polygon-2.png)
 
-### Tech Stack
 
-- **Languages:** `Solidity, JavaScript, HTML5, CSS3`
-- **Libraries:** `React.js, Web3.js`
-- **Tools:** `IPFS`
-- **Network:** `Polygon (Matic)`
-- **Platforms:** `Ethereum, NFTStorage`
-
-### Roadmap
-
-First, we'll set up our coding environment with the help of **Truffle**, after that we'll write **Smart Contracts** in **solidity**.
-After writing Smart Contracts, To build the front-end of our DApp we'll use [React.js](https://reactjs.org/docs/getting-started.html) Javascript library plus some **Material-UI**.
-
-We're going to use **IPFS** (InterPlanetary File System) to store the hashes of our photos to the blockchain and later we'll be able to browse those photos by calling those photos hashes.
-
-To connect our Smart Contracts with the front-end we'll use [Web3.js](https://web3js.readthedocs.io/en/v1.4.0/) and then we'll deploy our Smart Contracts on **Mumbai testnet**.
-
-What are **Smart Contracts?**
-
-Smart Contracts are peer-to-peer digital user agreements on the blockchain. To write Smart contracts in Ethereum we use solidity programming language.
-
-What is [Web3.js](https://web3js.readthedocs.io/en/v3.0.0-rc.5/)?
-
-Web3.js is a set of JavaScript libraries that acts as a port to the blockchain world. Web3 is a medium to connect our Smart Contracts to the front-end of the DApp.
-<br/>
 
 # Project Setup
 
-To avoid dealing with any annoying version errors & instead of installing the supporting code libraries (dependencies) one-by-one, we'll start building our DApp by cloning a GitHub repository that contains the project files and installing all the necessary dependencies.
+To avoid potential version related errors & instead of installing the supporting code libraries (dependencies) one-by-one, we'll start building the Petgram dApp by cloning a GitHub repository that contains the project files and installing all the necessary dependencies.
 
-- `Fork` the [repository](https://github.com/electrone901/tutorial-petgram), this will make a copy of this project in your account.
+- Fork the repository located at https://github.com/electrone901/tutorial-petgram, this will make a copy of this project in your own GitHub account.
 
-- Clone the GitHub repository with the command `git clone https://github.com/<YourGitHubUsername>/petgram-tutorial.git`
+- Clone the GitHub repository with the command  `git clone https://github.com/<YourGitHubUsername>/petgram-tutorial.git`.
   This will copy the project files from GitHub to your computer.
 
-Now, open the project with your favorite code editor or IDE, [VS Code](https://code.visualstudio.com). If you browse the project directory, you’ll notice a basic react app project structure by ([Create React App](https://github.com/facebook/create-react-app)). It ​​contains our front-end React code and we’ll need to make changes to our front-end once our contracts have been deployed.
 
-- Open the project in your terminal and type `npm install` to install all the dependencies
+Now you can open the project with your favorite code editor or IDE, such as [VS Code](https://code.visualstudio.com). If you browse the project directory, you’ll notice a basic React app project structure from ([Create React App](https://github.com/facebook/create-react-app)). This ​​contains our front-end React code and we’ll need to make changes to it once our smart contracts have been deployed.
 
   ![](../../../.gitbook/assets/petgram-img2.png)
 
-Run the application
-
-- `npm start`
-
+Run the React front-end with the command `npm start`.
 
   ![](../../../.gitbook/assets/petgram-img1.png)
 
-Note: As you move forward with this tutorial, make sure your project is reflecting similar results at a given point. I added screenshots as checkpoints for almost every step.
-<br/>
+Note: As you move forward with this tutorial, make sure your project is reflecting similar results at a given point. There are screenshots as checkpoints for almost every step.
+
 
 # Smart Contracts in Solidity
 
-Now let’s start coding the smart contract. We are going to use ([truffle](https://www.npmjs.com/package/truffle)), truffle is a development environment, testing framework and asset pipeline for Ethereum.
-To get started install truffle:
+Now let’s start setting up the environment for coding the smart contract. We are going to use Truffle which is a development environment, testing framework and asset pipeline for Ethereum and other EVM compatible blockchains like Polygon.
 
-- `npm install -g truffle`
+If you do not already have it installed, install truffle with the command `npm install -g truffle`.
 
-For a default set of contracts and tests, run the following within the root project directory:
 
-- `truffle init`
+For a default set of contracts and tests, run `truffle init` within the project root directory.
 
-Truffle init created three directories (contracts/, migrations/, and test/) along with three files (Migrations.sol, 1_initial_migrations.js, and truffle-config.js).
+The Truffle initialization process creates three directories: `contracts`, `migrations`, and `test` along with three files `Migrations.sol`, `1_initial_migrations.js`, and `truffle-config.js`.
 
-- `contract/` is where our Solidity smart contract code is stored. You’ll notice that there is already one smart contract in here called `Migrations.sol` It is used during the migration process.
 
-* `migrations/` will store truffle "deployer" Javascript files. Every time you want to deploy a contract, you will need to tell truffle which one, and what constructor arguments you may need. 1_initial_migration.js is the script that deploys our Migration contract. It is the most basic type of deployment because it requires no library linking, or constructor arguments.
+* `contract/` is where our Solidity smart contract code is stored. You’ll notice that there is already one smart contract in here called `Migrations.sol` which is used during the migration process.
 
-* `test/` is where we can write test cases for our app. It can contain .js or .sol files, depending on your choice of testing language.
-  truffle-config.js is the main configuration for your Truffle project. This is where we define what networks to use, gas usages, addresses to deploy with, and a few other variables.
+* `migrations/` will store Truffle's "deployer" Javascript files. Every time you want to deploy a contract, you will need to tell Truffle which one, and what constructor arguments you may need. `1_initial_migration.js` is the script that deploys our Migration contract. It is the most basic type of deployment because it requires no library linking, or constructor arguments.
 
-### truffle-config.js
+* `test/` is where we can write test cases for our dApp. It can contain .`js` or `.sol` files, depending on your choice of testing language.
 
-Let’s configure the truffle-config.js. Let’s start by removing all the existing code and start fresh.
-We need to install `dotenv` and `hdwallet-provider`.
+* `truffle-config.js` is the main configuration file for your Truffle project. This is where we define which networks to use, how much gas to use, addresses to deploy with and a few other variables.
 
-- `npm install dotenv`
+**truffle-config.js**
 
-- `npm install @truffle/hdwallet-provider`
+Before we can set up some configuration details in `truffle-config.js`, let’s start by removing the existing contents of the file so we have a blank slate. We also need to install the npm packages dotenv and hdwallet-provider. Use the command `npm install dotenv @truffle/hdwallet-provider`.
 
-`Dotenv` is a dependency module that loads environment variables from a .env file into process.env. We will use it for storing and hiding our mnemonic secret key. The mnemonic is a special secret created for you by Ganache. It's used to generate the addresses available during development as well as sign transactions sent from those addresses.
+dotenv is a module that loads environment variables from a `.env` file into JavaScript's process.env. We will use dotenv to store the Secret Recovery Phrase (mnemonic) from Metamask. This is used to generate the addresses available during development on Ganache as well as sign transactions sent from those addresses.
 
-`HDWalletProvider` enables the Web3 provider and is used to sign transactions for addresses derived from a 12 or 24 word mnemonic.
+The HDWalletProvider class from Truffle enables the Web3 provider and is used to sign transactions for addresses derived from a 12 or 24 word Secret Recovery Phrase (mnemonic).
 
 Let’s import them to our truffle-config.js:
 
@@ -156,24 +87,23 @@ require('dotenv').config()
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 ```
 
-<br/>
 
-### .env File
+We'll also need a `.env` file to store the mnemonic - the twelve word phrase. To create it follow [this guide](https://docs.figment.io/network-documentation/extra-guides/dotenv-and-.env).
 
-We'll also need a mnemonic - the twelve word phrase the wallet uses to generate
-public/private key pairs. In the root directory, create `.env` and copy your mnemonic phrase from ganache. Don’t forget to add this file to the .gitignored file so it doesn't accidentally become public. Your file should look similar to this:
+Your file should look similar to this:
  ![](../../../.gitbook/assets/petgram-img5.png)
 
-### truffle-config.js
-
-Let’s initialize the mnemonic variable by using our `Dotenv` dependency module.
+Let’s initialize the mnemonic variable by using dotenv: `dotenv` dependency module.
 
 ```javascript
 const mnemonic = process.env.MNEMONIC.toString().trim()
 ```
 
-Now we need to define the networks we want to use. Networks specify how we connect to our ethereum client and let us set the defaults for web3 which are used to send transactions. For this project, we will use the development and the matic network.
-The `development network` is a special network that Truffle uses by default generally for testing. The basic setup requires a host, a port number, and a network id. More information about the configuration can be found at [truffle-docs](https://www.trufflesuite.com/docs/truffle/reference/configuration).
+Now we need to define the networks we want to use. Networks specify how we connect Truffle to our Ethereum client and let us set the defaults for web3 which is used to send transactions. For this project, we will use the development and the matic network.
+
+
+The development network is a special network that Truffle uses by default, generally for testing. The basic setup requires a host, a port number, and a network id. More information about the configuration can be found in the [truffle-docs](https://www.trufflesuite.com/docs/truffle/reference/configuration).
+
 
 Add the following code to your truffle-config.js.
 
@@ -201,12 +131,12 @@ module.exports = {
 }
 ```
 
-We also need to specify the contracts build directory, the Solidity version and the Solidity compiler(solc) defaults.
+We also need to specify the contracts build directory, the Solidity version and the Solidity compiler (solc) defaults.
 
-The `contracts build directory` is the default output directory path for compiled contracts. In our case, we want the output to be on the frontend of our project.
-As for Solidity, we can use the Solidity compiler version 0.6.0 and default setup. The number of runs will affect the tradeoff between contract creation gas and subsequent function call gas. If you don't mind a large upfront cost, you should have more runs of the compiler. Check solidity docs for more info https://docs.soliditylang.org/en/develop/using-the-compiler.html#using-the-compiler
+The contracts build directory is the default output directory path for compiled contracts. In our case, we want the output to be on the frontend of our project.
+We can use the Solidity compiler version 0.6.0 and default setup. The number of runs will affect the tradeoff between contract creation gas cost and subsequent function call gas cost. If you don't mind a large upfront cost, you should have more runs of the compiler. Check out the Solidity docs for more info https://docs.soliditylang.org/en/develop/using-the-compiler.html#using-the-compiler.
 
-Add to your file these solc defaults:
+Add these solc defaults to your truffle-config.js file:
 
 ```javascript
 module.exports = {
@@ -224,19 +154,14 @@ module.exports = {
 }
 ```
 
-<br/>
 
-### Pet.sol
+# Pet.sol
 
-Now let’s start coding the smart contract. Create a new file in the root folder, you can open your project in a new terminal and type in:
-
-- `touch ./contracts/Pet.sol`
-
-- Path:`/src/contracts/Pet.sol`
+Now let’s start coding the smart contract. Create a new file in the contracts folder, you can open your project in a new terminal and use the command touch `./contracts/Pet.sol` on Linux/macOS or `type nul > contracts\Pet.sol` on Windows.
 
  ![](../../../.gitbook/assets/petgram-img6.png)
 
-This is the file where we’ll write all the Pet's token source code with the Solidity programming language. We are going to design our smart contract to store photos off-chain using NFT data. NFT Data is decentralized storage by IPFS and Filecoin. NFT Data allows us to upload data and to receive an IPFS hash of the content (a CID) that can be used in on-chain NFT data as a pointer to the content.
+This is the file where we’ll write all the Pet's token source code with the Solidity programming language. We are going to design our smart contract to store photos off-chain using IPFS for storing the data. NFT metadata often uses decentralized storage like IPFS or Filecoin. Using NFT metadata allows us to upload data and to receive an IPFS hash of the content (a CID) that can be referenced on-chain as a pointer to the content.
 
 Let’s create the basic structure for the smart contract like this:
 
@@ -251,32 +176,31 @@ contract Pet is ERC721 {
 
 First, we start off by declaring the version of the Solidity programming language that we’ll use to code the smart contract, in this case, version 0.6.0.
 
-Then, we imported `OpenZeppelin`. OpenZeppelin is a solidity library, we need to install it in our project before continuing:
+Then, we import the OpenZeppelin Solidity library. We need to install it in our project before continuing:
 
 - `npm i @openzeppelin/contracts@3.4.1`
 
-We have created the smart contract and called `Pet`. Notice that our contract is inhering functions and behaviors from the `openzeppelin ERC721` library:
+We have created the smart contract called Pet. Notice that our contract is inhering functions and behaviors from the OpenZeppelin ERC721 library:
 
 ```javascript
 contract Pet is ERC721 {}
 ```
 
-The remaining code for our contract will go inside of the curly braces. Next, we can customize our token by giving it a name and a symbol like this:
+The remaining code for our contract will go inside of the curly braces. We can customize our token by giving it a name and a symbol like this:
 
 ```javascript
 contract Pet is ERC721 {
   constructor() ERC721("Pet", "PET") public  {}
 }
 ```
+In this step, we added a constructor function to customize the token. The constructor is a function that takes arguments like the name ”Pet" and the symbol “PET". The constructor function runs once and only once when the contract is deployed. Whenever the smart contract is created we'll be able to refer to this contract by the name "Pet" with the help of an ABI ([Application Binary Interface](https://docs.soliditylang.org/en/latest/abi-spec.html)).
 
-In this step, we added a constructor function to customize the token. The constructor is a function that takes arguments like the name ”Pet" and the symbol“PET". The constructor function runs once and only once. Whenever the smart contract is created we'll be able to refer to this contract by the name "Pet" with the help of an ABI ([Application Binary Interface](https://docs.soliditylang.org/en/latest/abi-spec.html)).
+Note that we are using the OpenZeppelin ERC-721 standard to create our token. The ERC-721 standard is a set of rules that specifies what functions and behavior smart contracts should have. To learn more, read the [OpenZeppelin docs](https://docs.openzeppelin.com/contracts/4.x/erc721).
 
-Note that we are using the openzeppelin ERC-721 standard to create our token. The ERC-721 standard is a set of rules that specifies what functions and behavior smart contracts should have. To learn more go to ([openzeppelin](https://docs.openzeppelin.com/contracts/4.x/erc721)).
-
-Now add the mintPetNFT function that will allow us to create new Pet tokens like this:
+Now we can add the mintPetNFT function that will allow us to create new Pet tokens like this:
 
 ```javascript
-pragma solidity ^0.6.12;
+pragma solidity ^0.6.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract Pet is ERC721 {
@@ -293,13 +217,11 @@ contract Pet is ERC721 {
  }
 ```
 
-This is the basic structure of the function. It will accept one argument of string data type, which will be a path for the IPFS image (where the image is located). The tokenId variable is declared as a uint data type which means unsigned integer data type that can only be a number 0 or above. This variable holds an identifier unique number for every Pet token.
+This is the basic structure of the function. It will accept one argument of string data type, which will be a path for the IPFS image (where the image is located). The tokenId variable is declared as a uint data type which means unsigned integer (can only be a number 0 or above, not a negative number). This variable holds an unique identifier number for every Pet token.
 
-- The `_safeMint` is a function that takes the user wallet address and the tokenId to set ownership of NTFS.
+The `_safeMint` function takes the user's wallet address and the tokenId to create and set ownership of the NFT. The `_setTokenURI` function takes the tokenId and the tokenURI (the location of the image) and links them together. We do this so that every token has an identifier, an owner, and an image path.
+Then we emit an event with the tokenId, tokenURI, timestamp and user wallet address by calling the `emit` function and naming it "PetNFTCreated".
 
-* The `_setTokenURI` function takes the tokenId and the tokenURI(imagePath) and links them together. We do this so that every token has an id , an owner, and an image path.
-
-- Then we emit an event with the tokenId, imagePath, time and user wallet address by calling the `PetNFTCreated`.
 
 Lastly, we need to define the PetNFTCreated event. This event is really helpful for transaction confirmations, everytime we mint an NFT it will return the NFT tokenId, the imagePath, the time, and user wallet address.
 
@@ -308,32 +230,33 @@ pragma solidity ^0.6.12;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract Pet is ERC721 {
+
   constructor() ERC721("Pet", "PET") public  {}
 
   event PetNFTCreated (
-      uint tokenId,
-      string imageURL,
-      uint date,
-      address payable from
+    uint tokenId,
+    string imageURL,
+    uint date,
+    address payable from
   );
 
-  function mintPetNFT(string memory _tokenURI) external { }
+  function mintPetNFT(string memory _tokenURI) external {
+    uint _tokenId = totalSupply().add(1);
+    _safeMint(msg.sender, _tokenId);
+    _setTokenURI(_tokenId, _tokenURI);
+    emit PetNFTCreated(_tokenId, _tokenURI, now, msg.sender);
+  };
 }
 ```
 
-Before we continue, let's ensure that everything is working properly. In your terminal type the following, make sure you are in the root directory:
+Before we continue, let's ensure that everything is working properly. In your terminal, make sure you are in the project root directory and run the command `truffle compile`.
 
-- `truffle compile`
 
    ![](../../../.gitbook/assets/petgram-img7.png)
 
-YAY! It worked. If you experience errors in this step, go back and ensure that your code matches the final project.
+Now we must deploy the smart contract to the blockchain. First, make sure that Ganache is running (in its own terminal window/tab). Then, create a new migration file in the `migrations` directory called `2_deploy_contracts.js`.
 
-Now we have one final step before we continue. We must deploy the smart contract to the blockchain. First, make sure that Ganache is running. Then, create a new migrations file like this:
-
-- `touch migrations/2_deploy_contracts.js`
-
-Then add the following code:
+Add the following code to this new file:
 
 ```javascript
 const MyPet = artifacts.require('Pet')
@@ -342,44 +265,41 @@ module.exports = function (deployer) {
 }
 ```
 
-This file is responsible for taking the smart contract and deploying it to the blockchain. We can execute this file, and put the smart contract on the blockchain, by running the migration like this:
+This simple JavaScript file is responsible for deploying the smart contract to the blockchain. We can execute this file, and put the smart contract on the blockchain by running the Truffle migration like this:
 
-- `truffle migrate`
+```text
+truffle migrate
+```
 
 You should see similar results.
 
  ![](../../../.gitbook/assets/petgram-img8.png)
 
-<br/>
 
-# Front-end with React.js
+# Building the React front-end
 
 Path: `/src/components/`
 
 React applications consist of various components, for example, a navigation bar, main page, footer, etc.
 
 React loads a single HTML page (`/public/index.html`) which is then populated with all the components that are defined in the project. If you open the components folder you will see the general structure for our project that contains the following folders:
+- `commons/`: Contains the CircularProgress component that renders whenever a page is loading.
+- `create-post/`: This directory is where we will add our functionality to create new posts
+- `home-container/`: Has three subfolders
+  - `home/`: This directory is a container for the Gallery (PetGallery) and it contains HTML for our labels and buttons.
+  - `gallery/`: This directory is where we will keep code related to fetching all Pets from nft.storage and rendering them with their basic information.
+  - `pet-details/`: This ditrectory holds the component we will use to display all the information of a pet, as well as mint NFTs.
 
-- `commons/`: contains the CircularProgress component that renders whenever a page is loading.
 
-- `create-post/`t: is where we will add our functionality to create new posts
-- `home-container/`: it has three subfolders
-  - `home/`: it is a container for the Gallery (PetGallery) and it contains html for our labels buttons.
-  - `gallery/`: is where we will fetch all pets from nft.storage and render them with their basic information.
-  - `pet-details/`: in this component, we will display all the information of a pet, as well as mint NFTs.
+# App.js
 
-<br/>
+Let’s work on the main file of our React UI: `App.js` will contain all of the components that make up our React application (navbar, main, footer, home, etc).
 
-### App.js
+When you open the `App.js` file, you'll notice that we are using the React Router DOM module to implement dynamic routing in our web app. Unlike the traditional routing architecture in which the routing is handled in a configuration outside of a running app, React Router DOM facilitates component-based routing according to the needs of the app and platform.
 
-Let’s work on the app.js file. Our main `App.js` file should contain all the components of our app(navbar, main, footer, home, etc).
+So far we have defined our routes and we wrapped them with the Router element that contains components (called children). A child component can take any properties (more about this later).
 
-If you open the `App.js` file, you'll notice that we are using the React Router DOM module to implement dynamic routing in our web app. Unlike the traditional routing architecture in which the routing is handled in a configuration outside of a running app, React Router DOM facilitates component-based routing according to the needs of the app and platform.
-
-So far we have defined our routes and we wrapped them with the Router element that contains components(called children). A child component can take any properties(more of this later).
-
-A route specifies a path on our app, and the component to be displayed.
-Notice that anything outside the Switch will be displayed on the main page, the main purpose of react router is to serve a different component for each path.
+Notice that anything outside the switch statement will be displayed on the main page, the main purpose of React router is to serve a different component for each path.
 
 ```javascript
 import React from 'react'
@@ -410,16 +330,16 @@ function App() {
 }
 ```
 
-Next, we need to connect it to the blockchain network so it can interact with the smart contract. Let's start by importing web3 and our smart contract.json:
+Next, we need to connect our React front-end to the blockchain network so it can interact with the smart contract. Let's start by importing web3 and our smart contract's ABI (in .json format):
 
 ```javascript
 import Web3 from 'web3'
 import MyPet from './abis/Pet.json'
 ```
 
-Web3 is a collection of libraries that allow us to interact with a local or remote ethereum node using HTTP, IPC, or WebSocket.
+Web3 is a collection of libraries that allow us to interact with a local or remote Ethereum node using HTTP, IPC, or WebSockets.
 
-Now, paste the exact default code which MetaMask instructs us to load web3. It takes Ethereum provider from MetaMask and injects it to your DApp, if your browser does not have MetaMask installed then it will show a pop up "Non-Ethereum browser detected. You should consider trying MetaMask!" message.
+This code is an example of how to load web3 properly using `request` and specifying the `eth_requestAccounts` method. It takes the Ethereum provider from Metamask and injects it to your dApp, if your browser does not have Metamask installed then it will show a pop-up message: "Non-Ethereum browser detected. You should consider trying Metamask!"
 
 ```javascript
 const loadWeb3 = async () => {
@@ -430,13 +350,13 @@ const loadWeb3 = async () => {
     window.web3 = new Web3(window.web3.currentProvider)
   } else {
     window.alert(
-      'Non-Ethereum browser detected. You should consider trying MetaMask!',
+        'Non-Ethereum browser detected. You should consider trying Metamask!',
     )
   }
 }
 ```
 
-Let's add the functionality to connect to the contract:
+Now we can add the functionality to connect to the contract:
 
 ```javascript
 const getContract = async () => {
@@ -459,26 +379,26 @@ const getContract = async () => {
 }
 ```
 
-In the `getContract` function, we're going to load the ETH accounts, connect them with the network ID. If the smart contracts are not deployed to the respective network, then it'll show a pop up "Contract not deployed to detected network." message.
+In the `getContract` function, we're going to load the connected account & connect it with the network ID. If the smart contracts are not deployed to the respective network, then it will display a pop-up "Contract not deployed to the detected network. Connect to the correct network!"
 
-Notice that `setAccount(accounts[0])` we are using React useState to keep track of the app state, the useState function is a built-in hook that can be imported from the react package. It allows you to add state to your functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components that have a built-in state object.
+Notice `setAccount(accounts[0])`? We are using the React useState hook to keep track of the app state. Using this hook inside a functional component, you can create a piece of state without switching to class components that have a built-in state object.
 
-<br/>
-
-Inside the function App add these variables:
+Inside the function App, add these variables:
 
 ```javascript
+import { useState } from 'react'
 function App() {
-  const [account, setAccount] = React.useState('')
-  const [contractData, setContractData] = React.useState('')
+  const [account, setAccount] = useState('')
+  const [contractData, setContractData] = useState('')
 }
 ```
 
-Let me explain this line:
+Let's examine this variable declaration:
+```javascript
+const [account, setAccount] = useState('')
+```
 
-- `const [account, setAccount] = React.useState('')`
-
-The first part of this statement (account) is a variable that is initialized as an empty string and setAccount is a function that sets new values to the account variable. For example, in the getContract function we are getting an array of accounts and then we take the first one and we set it to be the user account. Similarly, with the contract, we get it and then we save it.
+The first part of this statement (account) is a variable that is initialized as an empty string. setAccount is a function that sets new values to the account variable. For example, in the getContract function we are getting an array of accounts and then we take the first one and we set it to be the user account. Similarly, with the contract, we get it and then we define the name of the function used to set the value: `const [contractData, setContractData] = useState('')`
 
 Now we need to use these functions so let's create the connectWallet function inside our app component:
 
@@ -503,21 +423,20 @@ Oh yes! The Async/Await Function in JavaScript: **Async**
 It simply allows us to write promises based code as if it was synchronous and it checks that we are not breaking the execution thread. It operates asynchronously via the event-loop. ​​
 Await can be put in front of any async promise-based function to pause your code on that line until the promise fulfills, then return the resulting value. You can use await when calling any function that returns a Promise, including web API functions. _You can find a simple explanation of Async/Await function [here](https://www.geeksforgeeks.org/async-await-function-in-javascript/)._
 
-<br />
 
-### navbar.js
+# navbar.js
 
 - path: `src/components/layouts/navbar/navbar.js`
 
-In the Navbar component, we're displaying the brand logo, brand name, user account address, and a link to create new posts. We're using Material-ui to create the basic structure for the Navbar and Footer components. If you want to learn more about the HTML structure please check out [Material-ui Components ](https://material-ui.com/).
+In the Navbar component, we're displaying the brand logo, brand name, user account address, and a link to create new posts. We're using [Material UI](https://material-ui.com/) to create the basic structure for the Navbar and Footer components.
+
 
 Let's move to the important stuff, remember that we are passing some props(account, loadWeb3) to our navbar component? Let's add them into our component:
 
 ```javascript
-export const Navbar = withRouter(({ account, loadWeb3 }) => {}
+export const Navbar = withRouter(({ account, loadWeb3 }) => {})
 ```
-
-We are using withRouter that was already imported at the top of the file. WithRouter is a higher order component that will pass the closest route's match, current location, and history props to the wrapped component whenever it renders. Simply it connects our component to the router and passes properties to this file.
+WithRouter will wrap the Navbar component so add a closing parenthesis at the end and the Navbar body inside the curly brackets. We are using withRouter that was already imported at the top of the file. withRouter is a higher order component that will pass the closest route's match, current location, and history props to the wrapped component whenever it renders. Simply put, it connects our component to the router and passes properties to this file.
 
 Now that we have the wallet address we can display it on the navbar, under the sectionDesktop add the following:
 
@@ -550,84 +469,89 @@ Now that we have the wallet address we can display it on the navbar, under the s
     )}
     // the rest of code...
 ```
+In this snippet of code, we are checking if the account exists then we display the wallet address. Otherwise, we display the button with the label `Connect Wallet`. At this point, whenever you click the `Connect Wallet` button it should prompt you to connect your Metamask.
 
-In this snippet of code, we are checking if the account exists then we display the wallet address otherwise we display the button with the label `connect wallet`. At this point, whenever you click the `connect wallet` button it should prompt you to connect your metamask.
 
-<br/>
+# CreatePet.js
 
-### CreatePet.js
+To get this file working, we need to install and import nft.storage, which is a client library that provides a convenient interface for working with the Raw HTTP API from a web browser or Node.js.
 
-In this file, we need to install and import nft.storage. Nft storage is a client library that provides a convenient interface for working with the Raw HTTP API from a web browser or Node.js.
+First, install the package with the command `npm install nft.storage`.
 
-First install:
 
-- `npm install nft.storage`
-
-Now, let's import them into our file:
+Then we can import the important parts of the package into our component:
 
 ```javascript
 import { NFTStorage, File } from 'nft.storage'
 import { apiKey } from '../../APIKEYS'
 ```
+To get your API key, go to [nft.storage](https://nft.storage), sign up for an account, create a new API key and then add it to your APIKEYS.js file.
 
-To get your api keys go to [nft.storage](https://nft.storage), sign up, create a new key and added it to your APIKEYS.js file.
 ![](../../../.gitbook/assets/petgram-img9.png)
 
 
-- Don’t forget to create your APIKEYS.js inside src, it should look something like this:
+Don’t forget to create your APIKEYS.js inside src, it should look something like this:
 
-To create a new pet, we need a few variables and functions. First let's add all the functions to collect the user input like the pet name, owner name, image type , etc. Add the following code:
+![](../../../.gitbook/assets/petgram-img10.png)
+
+To create a new pet, we will still need a few variables and functions. First let's add all the functions to collect the user input like the pet name, the owner name, the image type, etc. Add the following code to `CreatePet.js`:
 
 ```javascript
+import { createRef } from 'react'
 function CreatePet() {
- const history = useHistory()
- const [image, setImage] = useState('')
- const petTypeRef = React.createRef()
- const [petName, setPetName] = useState('')
- const [loading, setLoading] = useState(false)
- const [ownerName, setOwnerName] = useState('')
- const [imageName, setImageName] = useState('')
- const [imageType, setImageType] = useState('')
- const [petType, setPetType] = useState('')
+  const history = useHistory()
+  const [image, setImage] = useState('')
+  const petTypeRef = createRef()
+  const [petName, setPetName] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [ownerName, setOwnerName] = useState('')
+  const [imageName, setImageName] = useState('')
+  const [imageType, setImageType] = useState('')
+  const [petType, setPetType] = useState('')
+}
 ```
 
-Notice that almost every variable starts empty, as the user types in the input we will save it into state. Then, we will pass them to our API call to store them in IPFS. Again to keep track of the state we are using react hooks.
+Notice that almost every variable starts as an empty string. As the user types in the input we will save it into our component state. Then, we will pass them to our API call to store them in IPFS. Remember, to keep track of the state we are using the useState React hook.
 
-We still need two functions:
+We still need two more functions:
 
-- The `handleImage` function that will be responsible for updating the variables with the user input.
-  ```javascript
-  const handleImage = (event) => {
-    setImage(event.target.files[0])
-    setImageName(event.target.files[0].name)
-    setImageType(event.target.files[0].type)
-  }
-  ```
-- And the `handleSubmit` function that will be responsible for uploading the data to IPFS.
-  ```javascript
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      setLoading(true)
-      const client = new NFTStorage({ token: apiKey })
-      const metadata = await client.store({
-        name: petName,
-        description: `${ownerName}, ${petType}`,
-        image: new File([image], imageName, { type: imageType }),
-      })
-      if (metadata) {
+- The `handleImage` function that will be responsible for updating the variables with the user input:
+
+
+```javascript
+const handleImage = (event) => {
+  setImage(event.target.files[0])
+  setImageName(event.target.files[0].name)
+  setImageType(event.target.files[0].type)
+}
+```
+
+- The `handleSubmit` function that will be responsible for uploading the data to IPFS with nft.storage:
+
+```javascript
+const handleSubmit = async (e) => {
+  e.preventDefault()
+  try {
+    setLoading(true)
+    const client = new NFTStorage({ token: apiKey })
+    const metadata = await client.store({
+      name: petName,
+      description: `${ownerName}, ${petType}`,
+      image: new File([image], imageName, { type: imageType }),
+    })
+    if (metadata) {
         history.push('/')
-      }
-    } catch (error) {
-      console.log(error)
-      setLoading(false)
     }
+  } catch (error) {
+    console.log(error)
+    setLoading(false)
   }
-  ```
+}
+```
 
 In the `handleSubmit` function, we are using the NFTStorage client library to upload our data. This client library takes our api keys, and it requires us to format the data into an object with name, description, and image. Then we check if our data was successfully saved, then we redirect the user to the main page.
 
-Now let’s add the form, under the comment `Display image to be upload`:
+Now let’s add the form, under the comment `Display image to be uploaded`:
 
 ```javascript
 {
@@ -637,8 +561,7 @@ Now let’s add the form, under the comment `Display image to be upload`:
     ''
   )
 }
-
-;<div className="form-container">
+<div className="form-container">
   <form className="form" noValidate autoComplete="off">
     <input
       accept="image/*"
@@ -700,17 +623,17 @@ Now let’s add the form, under the comment `Display image to be upload`:
 </div>
 ```
 
-For a good user experience, we are adding a preview of the image to upload. In this part, we are saying that if the image exists then create an image and render it, otherwise display an empty space.
+For a good user experience, we are adding a preview of the image being uploaded. In this part, we are saying that if the image exists then create an image and render it, otherwise display an empty space.
 
 Then we added a simple form with an image field, a text field for petName, ownerName and a drop down menu for the pet type. All of them are bound to a variable and to the onChange function. We also have the submit button bound to the handleSubmit function. Now you try to create a new post. The final result for this component should look like this:
 
 ![](../../../.gitbook/assets/petgram-img11.png)
 
-<br/>
 
-### PetGallery.js
 
-First, let’s import all the libraries, files and APIKeys we need for this file.
+ # PetGallery.js
+
+First, let’s import all the libraries, files and API keys we need for this file.
 
 ```javascript
 import React, { useEffect, useState } from 'react'
@@ -726,9 +649,9 @@ import { apiKey } from '../../APIKEYS'
 ```
 
 The CircularStatic static is just a component that renders whenever our page is loading.
-<br/>
 
-Now we're going to prepare the file to fetch pets data from IPFS and display them. Let’s add the following:
+
+Now we're going to prepare the file to fetch Pets data from IPFS and display them. Let’s add the following:
 
 ```javascript
 function PetGallery() {
@@ -777,17 +700,17 @@ function PetGallery() {
  }, [])
 ```
 
-First, we declare the petsData variable which is initialized as an empty array, as well as the setPetsData function. We do this by using useEffect hook and we basically telling React that our component needs to do something after rendering.
+First, we declare the petsData variable which is initialized as an empty array, as well as the `setPetsData` function. We do this with the useEffect React hook which is telling React that our component needs to do something after rendering.
 
-Notice that we are calling the `loadPets` function at the end of useEffect. The loadPets function it takes your APIKeys, fetches the pet's information from IPFS storage, and returns the hash of the cid that contains the NFT information. We loop through the cids array, find its id and create the data variable that will hold the NFT metadata, then we call the getImage function.
+Notice that we are calling the `loadPets` function at the end of useEffect. The `loadPets` function takes your API key, fetches the pet's information from IPFS storage, then returns the content identifier that contains the NFT information. We loop through the cids array, find its id and create the data variable that will hold the NFT metadata, then we call the `getImage` function.
 
-Lastly, we need to attach the image, the cid, and the time to the data variable. Then, we push it into a temporary array and at the end we set it to be the PetsData.
+Lastly, we need to attach the image, the content identifier (CID), and the timestamp to the data variable. Then, we push it into a temporary array and at the end we set it to be the state variable petsData.
 
-The function getImage takes the url path and splits it by this character '://'. The split is a JavaScript function that returns an array of elements. Then, the getImage function returns the correct path by adding the second element of the array. We need to do this because an IPFS URL does not retain the original path, but instead requires a conversion step to/from URI representation. To learn more read [check ipfs docs](https://docs.ipfs.io/how-to/address-ipfs-on-web/#native-urls).
+The function `getImage` takes the URL path and splits it by this character '://'. Split is a JavaScript function that returns an array of elements. Then, `getImage` returns the correct path by adding the second element of the array. We need to do this because an IPFS URL does not retain the original path, but instead requires a conversion step to/from URI representation. To learn more, check the [IPFS docs](https://docs.ipfs.io/how-to/address-ipfs-on-web/#native-urls).
 
 Note: CIDs reference immutable content so you can be sure the content you access is the content referenced in the NFT.
 
-Now let’s render this data. In the return add this:
+Now let’s render this data. In the return statement, add the following code:
 
 ```javascript
 return (
@@ -835,16 +758,16 @@ return (
 )
 ```
 
-In this part, we are checking if loading exists then display the loading component otherwise loop through the petsData a grid item with the pet image, name, and a button to see more details. If everything works correctly you should see a similar gallery of pets.
+Here we are checking if the variable loading is true. If it is, then display the loading component. Otherwise loop through the petsData a grid item with the pet image, name, and a button to see more details. If everything works correctly you should see a similar gallery of pets:
 
 
 ![](../../../.gitbook/assets/petgram-cover.png)
 
-<br/>
 
-### PetDetails.js
 
-In this file, we will add: pet's details, functionality to mint NFTs, a transaction confirmation to mint tokens, and a simple React form to add comments. For the scope of this tutorial, we are not going to implement the comments or number of likes functionality but feel free to expand.
+ # PetDetails.js
+
+In this file, we will add each pets details, functionality to mint NFTs, a transaction confirmation to mint tokens, and a simple React form to add comments. For the scope of this tutorial, we are not going to implement the comments or number of likes functionality but feel free to expand on it yourself.
 
 To implement this we need a few things. Let's start by importing all the libraries and files we need:
 
@@ -872,15 +795,15 @@ import {
 import { apiKey } from '../../APIKEYS'
 ```
 
-Notice that we are using useState and useEffect. They are React hooks that help us to manage the state of the app.
+Notice that we are still using useState and useEffect - React hooks that help us to manage the state of the app.
 
-UseState allows our functional components to become stateful and useEffect allows our functional component to leverage the component lifecycle hooks which were, in the past, only supported for class components. In simple words, useEffect is like a combination of componentDidMount , componentDidUpdate , and componentWillUnmount . To learn more check [React hooks.](https://reactjs.org/docs/hooks-effect.html)
+useState allows our functional components to become stateful and useEffect allows our functional component to leverage the component lifecycle hooks which were, in the past, only supported for class components. Simply put, useEffect is like a combination of componentDidMount, componentDidUpdate and componentWillUnmount. To learn more, check out the documentation on [React hooks](https://reactjs.org/docs/hooks-effect.html).
 
 We use `useParams` to access the parameters of the current route. In this case, we need the pet id to fetch the pet's data from IPFS.
 
 The `StylesProvider` is a Material-UI component that helps us change how styles are applied to our component. The rest of the imports are just regular elements from Material-UI
 
-We need a few variables to hold the pet's information. Add the following code:
+We need a few variables to hold the pet's information. Add the following function:
 
 ```javascript
 function PetDetails({ account, contractData }) {
@@ -893,9 +816,9 @@ function PetDetails({ account, contractData }) {
  const [codeHash, setCodeHash] = useState('')
 ```
 
-Notice `{ petId }` we are just extracting the petId value from the useParams object. As for the rest of the variables, all of them are initialized as an empty string. For instance `[image, setPetImage] = useState('')` the variable image is equal to an empty string and the setPetImage function will be used to set new values to it. Similarly the other variables.
+Notice `{ petId }` we are just extracting the petId value from the useParams object. As for the rest of the variables, all of them are initialized as an empty string.
 
-Now to fetch the pet's data we are going to use useEffect and it will contain two functions: getImage and getMetadata. Add the following code snippet to your project:
+Now to fetch the pet's data we are going to use useEffect and it will contain two functions: `getImage` and `getMetadata`. Add the following code snippet to `PetDetails.js`:
 
 ```javascript
 function PetDetails({ account, contractData }) {
@@ -924,9 +847,9 @@ function PetDetails({ account, contractData }) {
  }, [petId, contractData])
 ```
 
-The function getImage takes the url path and splits it by this character`'://'`. The split is a JavaScript function that returns an array of elements. Then, the getImage function returns the correct path by adding the second element of the array. We need to do this because an IPFS URL does not retain the original path, but instead requires a conversion step to/from URI representation.
 
-The function getMetadata fetches the metadata from IPSf by providing the petId, and saves it to the variables.
+
+The function `getMetadata` fetches the metadata from IPFS by providing the petId, and saves it to the relevant state variables.
 
 To mint tokens, we need the mintNFT function:
 
@@ -944,9 +867,9 @@ function PetDetails({ account, contractData }) {
  }
 ```
 
-The PetDetails component is getting some props for the account and for the contractData, we can use them to interact with the smart contract. All we need to do is to call the `mintPetNFT` contract method. This function takes in the petId, calls the contract's `mintPetNFT` method with the pet id, and the user account and then saves the returned data.
+The PetDetails component is getting some props for the account and for the contractData, we can use them to interact with the smart contract. All we need to do is to call the `mintPetNFT` contract method. This function takes in the petId, calls the contract's `mintPetNFT` method with the pet id and the user account, then saves the returned data to the component state with setCodeHash.
 
-Awesome! Now we just need to display this information. Let's add it in the section `Add pet's details here`:
+Awesome! Now we just need to display this information. Let's add it in the section "Add pet's details here":
 
 ```javascript
 <Grid item xs={12} sm={6} className="grid-container">
@@ -990,8 +913,7 @@ Awesome! Now we just need to display this information. Let's add it in the secti
 </Grid>
 ```
 
-The `Mint NFT` button will call the `mintNFT function` that will mint NFTs for users.
- Then, inside the grid, we insert React values.
+The "Mint NFT" button will call the `mintNFT` function which will mint NFTs for users. Then, inside the grid, we insert React values. Whenever we mint NFTs we need a confirmation that notifies us if our transaction was successful or not. Let's add this functionality under the section "Add Transaction Confirmation":
 
 Whenever we mint NFTS we need a confirmation that notifies us if our transaction was successful or not. Let's add this functionality under the section `Add Transaction Confirmation`:
 
@@ -1021,27 +943,27 @@ Whenever we mint NFTS we need a confirmation that notifies us if our transaction
 }
 ```
 
-Remember our `mintPetNFT function`? This function returns an object data, inside this object is the transaction hash. A transaction hash is a unique string of characters that is given to every transaction that is verified and added to the blockchain. So all we need to do is to add the polygonscan link plus the `transactionHash`. Now, whenever we mint an NFT we will get this confirmation and we will be able to see the whole transaction on polygonscan.
+Remember our `mintPetNFT` function? This function returns an object data, inside this object is the transaction hash. A transaction hash is a unique string of characters that is given to every transaction that is verified and added to the blockchain. So all we need to do is to add the Polygonscan link plus the `transactionHash`. Now, whenever we mint an NFT we will get this confirmation and we will be able to view the transaction details on Polygonscan.
 
-Let's add the last part under the section `Add form comments`:
+Let's add the last part under the section "Add form comments":
 
 ```javascript
- <form noValidate autoComplete="off">
-    <TextField
-      id="outlined-basic"
-      label="Comment"
-      variant="outlined"
-      value={comment}
-      onChange={handleChange}
-      className="text-field"
-    />
+<form noValidate autoComplete="off">
+  <TextField
+    id="outlined-basic"
+    label="Comment"
+    variant="outlined"
+    value={comment}
+    onChange={handleChange}
+    className="text-field"
+   />
 </form>
 <Button type="submit" variant="contained" onClick={handleSubmit}>
   Add comment
 </Button>
 ```
 
-This is a simple form to add comments. Notice the `TextField` requires the handleChange and handleSubmit function, let's add them as well:
+This is a simple form to add comments. Notice the TextField requires the `handleChange` and `handleSubmit` functions, so let's add them as well:
 
 ```javascript
 const handleChange = (event) => {
@@ -1049,7 +971,7 @@ const handleChange = (event) => {
 }
 ```
 
-The `handleChange function` sets the user input to the comment variable.
+The `handleChange` function sets the user input to the comment variable:
 
 ```javascript
 const handleSubmit = (event) => {
@@ -1061,7 +983,7 @@ const handleSubmit = (event) => {
 }
 ```
 
-The `handleSubmit function` creates an object with the user input so that React can render it. Now, we need to display them on our page to do this add the following code under the section `Display Comments`:
+The `handleSubmit` function creates an object with the user input so that React can render it. Now, we need to display them on our page. To do this, add the following code under the section "Display Comments":
 
 ```javascript
 {
@@ -1092,29 +1014,25 @@ The `handleSubmit function` creates an object with the user input so that React 
 }
 ```
 
-Here we added the user's account and the comment to the screen.
+Here we added the user's account and the comment to the UI.
 
-<br/>
+# Deploying the smart contracts
+Now that we have completed the React front-end, let's deploy the smart contracts on the Polygon Mumbai testnet. The command to do this is:
 
-### Deploy Smart Contracts
+```javascript
+truffle migrate --network matic
+```
 
-Let's deploy our Solidity contracts on Polygon (Matic) Network next.
+If you're deploying it for the second time or more, use the `--reset` flag to avoid JSON errors: `truffle migrate --network matic --reset`.
 
-- Command: `truffle migrate --network matic`
 
-If you're deploying it for the second time then deploy with this command just to **reset** and avoid JSON errors.
-
-- Command: `truffle migrate --network matic --reset`
-
-If everything worked fine, you'll see something like this:
+As long as the deployment was successful, the output should be similar:
 ![](../../../.gitbook/assets/petgram-img8.png)
 
 
 # Conclusion
 
-Congratulations!
-
-Congratulations! You have created your own fullstack dApp😎🦄!! After completing this tutorial, you should have a good understanding of how to create a dApp for NFTs.
+Congratulations! You have created your own fullstack dApp😎🦄!! After completing this tutorial, you should have a good understanding of how to create a dApp for creating and managing NFTs.
 
 # About the Author
 
@@ -1122,13 +1040,13 @@ Albert Carbajal is a web developer, blockchain enthusiast with a passion for Sof
 
 # References
 
-- _Truffle docs: https://www.trufflesuite.com/docs/truffle/overview_
-- _Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started_
-- _MetaMask docs: https://docs.metamask.io/guide/#why-metamask_
-- _Web3 docs: https://web3js.readthedocs.io/en/v1.4.0/_
-- _React docs: https://reactjs.org/docs/getting-started.html_
-- _IPFS docs: https://docs.ipfs.io/concepts/what-is-ipfs/#decentralization_
-- _Async/Await: https://www.geeksforgeeks.org/async-await-function-in-javascript/_
-- _Material-ui components: https://material-ui.com_
-- _React Hooks: https://reactjs.org/docs/hooks-effect.html_
+- Truffle docs: https://www.trufflesuite.com/docs/truffle/overview_
+- Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started_
+- MetaMask docs: https://docs.metamask.io/guide/#why-metamask_
+- Web3 docs: https://web3js.readthedocs.io/en/v1.4.0/_
+- React docs: https://reactjs.org/docs/getting-started.html_
+- IPFS docs: https://docs.ipfs.io/concepts/what-is-ipfs/#decentralization_
+- Async/Await: https://www.geeksforgeeks.org/async-await-function-in-javascript/_
+- Material-ui components: https://material-ui.com_
+- React Hooks: https://reactjs.org/docs/hooks-effect.html_
 
