@@ -416,12 +416,15 @@ contract LoanContract {
 LoanCreator.sol
 
 ```
+// Define solidity compiler version
 pragma solidity ^0.5.0;
 
+// Import the required smart contracts
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "openzeppelin-solidity/contracts/lifecycle/Pausable.sol";
 import "./LoanContract.sol";
 
+// Create a contract named LoanCreator
 contract LoanCreator is Ownable, Pausable {
 
   address[] public loans;
@@ -431,6 +434,7 @@ contract LoanCreator is Ownable, Pausable {
 
  }
 
+// Emit the Loan offer/request on creation
  event LoanOfferCreated(address, address);
  event LoanRequestCreated(address, address);
 
@@ -446,6 +450,7 @@ contract LoanCreator is Ownable, Pausable {
          return _loanContractAddress;
  }
 
+// Method for creating a new Loan Request
  function createNewLoanRequest(uint256 _loanAmount, uint128 _duration, uint256 _interest, address _collateralAddress, uint256 _collateralAmount, uint256 _collateralPriceInETH)
  public returns(address _loanContractAddress) {
 
@@ -458,6 +463,7 @@ contract LoanCreator is Ownable, Pausable {
          return _loanContractAddress;
  }
 
+// Method for getting all the loan addresses
  function getAllLoans() public view returns(address[] memory){
      return loans;
  }
