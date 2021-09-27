@@ -81,7 +81,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
     const [ xChain   , cChain    ] = [ client.XChain()            , client.CChain()             ];
     const [ xKeychain, cKeychain ] = [ xChain.keyChain()          , cChain.keyChain()           ];
     const [ xKeypair , cKeypair  ] = [ xKeychain.importKey(secret), cKeychain.importKey(secret) ];
-    const [ _xAddress , cAddress ] = [ xKeypair.getAddressString(), cKeypair.getAddressString() ];
+    const [ cAddress ] = [ cKeypair.getAddressString() ];
 
     // Get the real ID for X-Chain
     const xChainId = await client.Info().getBlockchainID("X");
