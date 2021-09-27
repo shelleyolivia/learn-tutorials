@@ -21,7 +21,7 @@ This is how Uniswap’s Decentralized Exchange looks like:
 ![UNISWAPEXCHANGE](../../../.gitbook/assets/Uniswap_exchange.gif)
     
 
-# Getting familiar with TheGraph and GraphQL queries
+# Getting familiar with TheGraph and GraphQL
 [The Graph](https://graphql.org/) is a **decentralized protocol for indexing and querying data** from blockchains. It is able to query networks like Ethereum and since Uniswap is built on Ethereum, it will allow us to get its on-chain data. 
  
 ## Finding Uniswap V3 subgraph on Thegraph
