@@ -187,7 +187,8 @@ contract LoanContract {
 
          emit FundTransferToLoanSuccessful(msg.sender, msg.value);
     }
-
+    
+    // Method to convert address to string
     function toString(address x) public returns (string memory) {
         bytes memory b = new bytes(20);
         for (uint i = 0; i < 20; i++)
@@ -197,19 +198,26 @@ contract LoanContract {
 
     // After loan request created transfer Collateral to Loan
     function transferCollateralToLoan() payable public OnlyBorrower  {
-
+        
+        // Define the ERC20 token
         ERC20 = IERC20(loan.collateral.collateralAddress);
+        
+        // Loan status updated
         LoanStatus prevStatus = loan.loanStatus;
 
+        // Emit event if collateral transfer is failed
         if(loan.collateral.collateralAmount > ERC20.allowance(msg.sender, address(this))) {
             emit CollateralTransferToLoanFailed(msg.sender, loan.collateral.collateralAmount);
             revert();
         }
 
+        // Loan Collateral Status updated
         loan.collateral.collateralStatus = CollateralStatus.ARRIVED;
 
+        // Transfer the ERC20 token
         ERC20.transferFrom(msg.sender, address(this), loan.collateral.collateralAmount);
 
+        // Event CollateralTransferToLoanSuccessful is emitted
         emit CollateralTransferToLoanSuccessful(msg.sender, loan.collateral.collateralAmount, loan.collateral.collateralPrice);
 
         // contract will also be transferring funds to borrower (only in case of loan offer)
@@ -224,6 +232,7 @@ contract LoanContract {
         }
     }
 
+    // Method for accepting Loan Offer
     function acceptLoanOffer(uint256 _interestRate, address _collateralAddress, uint256 _collateralAmount, uint256 _collateralPriceInETH, uint256 _ltv) public {
 
         require(loan.loanStatus == LoanStatus.FUNDED, "Incorrect loan status");
@@ -235,6 +244,7 @@ contract LoanContract {
         // to be done in UI
     }
 
+    // Method for approving Loan Request
    function approveLoanRequest() public payable {
 
         require(msg.value >= loan.loanAmount, "Sufficient funds not transferred");
@@ -253,7 +263,7 @@ contract LoanContract {
         emit FundTransferToBorrowerSuccessful(loan.borrower, loan.loanAmount);
     }
 
-
+    // Method for getting Loan Data
     function getLoanData() view public returns (
         uint256 _loanAmount, uint128 _duration, uint256 _interest, string memory _acceptedCollateralsMetadata, uint256 startedOn, LoanStatus _loanStatus,
         address _collateralAddress, uint256 _collateralAmount, uint256 _collateralPrice, uint256 _ltv, CollateralStatus _collateralStatus,
@@ -271,10 +281,12 @@ contract LoanContract {
       return loan.repayments;
     } */
 
+    // Method for getting Current Repayment Number
     function getCurrentRepaymentNumber() view public returns(uint256) {
       return LoanMath.getRepaymentNumber(loan.startedOn, loan.duration);
     }
 
+    // Method for getting Repayment amount
     function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256 amount, uint256 monthlyInterest, uint256 fees){
 
         uint256 totalLoanRepayments = LoanMath.getTotalNumberOfRepayments(loan.duration);
@@ -315,7 +327,7 @@ contract LoanContract {
          emit CollateralSentToLenderForDefaultedRepayment(repaymentNumber,loan.lender,collateralAmountToTrasnfer);
   }
 
-
+    // Method for Repayment of loan
     function repayLoan() public payable {
 
         require(now <= loan.startedOn + loan.duration * 1 minutes, "Loan Duration Expired");
@@ -344,25 +356,26 @@ contract LoanContract {
         emit LoanRepaid(msg.sender, amount);
     }
 
+    // Method for transferring fees to Wallet1 address
     function transferToWallet1(uint256 fees) private {
         address(uint160(WALLET_1)).transfer(fees);
     }
 
+    // Method for transferring Collateral to Wallet1
     function transferCollateralToWallet1 (uint256 fees) private {
         uint256 feesInCollateralAmount = LoanMath.calculateCollateralAmountToDeduct(fees, loan.collateral.collateralPrice);
         ERC20 = IERC20(loan.collateral.collateralAddress);
         ERC20.transfer(WALLET_1, feesInCollateralAmount);
     }
 
-
-  /// I will update this one after take on outstanding amount and discussion with lloyd
- /*   function returnCollateralToBorrower() public OnlyBorrower {
+    // Method for returning Collateral to Borrower
+    function returnCollateralToBorrower() public OnlyBorrower {
 
         require(now > loan.startedOn + loan.duration * 1 minutes, "Loan Still Active");
         require(loan.collateral.collateralStatus != CollateralStatus.RETURNED, "Collateral Already Returned");
 
         ERC20 = IERC20(loan.collateral.collateralAddress);
-    /// I will update this one after take on outstanding amount and discussion with lloyd
+        
         uint256 collateralAmountToDeduct = LoanMath.calculateCollateralAmountToDeduct(loan.outstandingAmount, loan.collateral.collateralPrice);
 
         loan.collateral.collateralStatus = CollateralStatus.RETURNED;
@@ -372,10 +385,10 @@ contract LoanContract {
         ERC20.transfer(msg.sender, loan.collateral.collateralAmount.sub(collateralAmountToDeduct));
 
         emit CollateralTransferReturnedToBorrower(msg.sender, loan.collateral.collateralAmount.sub(collateralAmountToDeduct));
-  /// I will update this one after take on outstanding amount and discussion with lloyd
-    } */
+    }
 
-/*    function claimCollateralByLender() public OnlyLender {
+    // Method for claiming Collateral by Lender 
+    function claimCollateralByLender() public OnlyLender {
 
         require(now > loan.startedOn + loan.duration * 1 minutes, "Loan Still Active");
         require(loan.loanStatus != LoanStatus.DEFAULT, "Collateral Claimed Already");
@@ -395,7 +408,7 @@ contract LoanContract {
 
             emit CollateralClaimedByLender(msg.sender, collateralAmountToTransfer);
         }
-    } */
+    }
 
 }
 ```
