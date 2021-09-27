@@ -17,6 +17,9 @@ In `pages/api/avalanche/connect.ts`, implement the function and try to establish
     const client = undefined;
     const info = undefined;
     const version = undefined;
+    if (version === undefined) {
+      throw new Error('Connection failed: Complete the code');
+    }
     res.status(200).json(version);
   }
 //...
@@ -46,6 +49,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
     const client = getAvalancheClient(network);
     const info = client.Info();
     const version = await info.getNodeVersion();
+    if (version === undefined) {
+      throw new Error('Connection failed: Complete the code');
+    }
     res.status(200).json(version);
   }
 //...
