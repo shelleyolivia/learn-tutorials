@@ -291,7 +291,7 @@ contract LoanContract {
         return (amount, monthlyInterest, fees);
     }
 
-    // this func to be called when any repayment due date is passed
+    // this method to be called when any repayment due date is passed
 
 
     // based on nth duration it is triggered we pass repayment number from UI
