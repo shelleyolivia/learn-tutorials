@@ -1,12 +1,12 @@
-# How to create an NFT Marketplace on Solana
+# How to create an NFT Marketplace and NFT on Solana
 
-## Minting a non-fungible token on the Solana blockchain
+## Minting a non-fungible token on our own marketplace
 
 ## Introduction
 
-In this tutorial we will be creating a [non-fungible token](https://www.blockchain-council.org/blockchain/a-quick-guide-to-fungible-vs-non-fungible-tokens/#:~:text=Non%2DFungible%20are%20Non%2DInterchangeable,token%20of%20the%20same%20type.) marketplace, otherwise known as an NFT, using the **Solana** blockchain. Since NFT's are 1 of 1, they can represent real-world objects like music, art, in-game items and videos.
+In this tutorial we will be creating a [non-fungible token](https://www.blockchain-council.org/blockchain/a-quick-guide-to-fungible-vs-non-fungible-tokens/#:~:text=Non%2DFungible%20are%20Non%2DInterchangeable,token%20of%20the%20same%20type.) marketplace and a non-fungible token, otherwise known as an NFT, using the **Solana** blockchain. Since NFT's are 1 of 1, they can represent real-world objects like music, art, in-game items and videos.
 
-We are going to create our NFT on our own marketplace. Refer to this [existing marketplace](https://jacobmakarsky.github.io/metaplex#/art/create) I created for example, built with [Metaplex](https://github.com/metaplex-foundation/metaplex).
+We are going to create our NFT on our own marketplace. Refer to this [existing marketplace](https://jacobmakarsky.github.io/metaplex#/art/create) I created as an example, built with [Metaplex](https://github.com/metaplex-foundation/metaplex).
 
 Once we create the NFT, we will be able to list it for sale on larger marketplaces such as [DigitalEyes](https://digitaleyes.market/) or [Solanart](https://solanart.io/).
 
@@ -29,7 +29,7 @@ Since minting an NFT on the blockchain causes a change in the data on the blockc
 
 Follow the steps on Phantom's website here on how to deposit SOL to your wallet: [How to deposit SOL](https://help.phantom.app/hc/en-us/articles/4406393831187-How-to-deposit-SOL).
 
-### ** 1) Fork the Metaplex repository to your Github
+### **1) Fork the Metaplex repository to your Github**
 
 First, we are going to fork the metaplex repository to our Github so we can host it on Github pages. 
 
@@ -37,7 +37,7 @@ First, we are going to fork the metaplex repository to our Github so we can host
 
 ![metaplexRepo](../../../.gitbook/assets/metaplexRepo.png)
 
-### ** 2) Clone the repository to your desktop
+### **2) Clone the repository to your desktop**
 
 Now, we need to copy all of the Metaplex files over to our computer.
 
@@ -59,9 +59,11 @@ cd /Users/yourusername/Desktop/myNftMarketplace
 git clone https://github.com/yourusername/metaplex.git
 ```
 
-### ** 3) Change the default addresses
+All of the files from the Metaplex repository will now be downloaded into our folder.
 
-Whenever we deploy the application, we want it to save to the forked Metaplex repository that we created. This will allow us to easily get our own live marketplace online.
+### **3) Change the default addresses**
+
+When we deploy the website, we want it to save in the Metaplex repository we forked on Github. This will allow us to easily get our own live marketplace online.
 
 * Change the deployment address to your Github username
 
@@ -73,9 +75,9 @@ Notice where my name is. This should be where our Github username goes. Make sur
 
 ![storeWalletAddress](../../../.gitbook/assets/storeWalletAddress.png)
 
-This is where we add the public address of our browser wallet, so the store knows who to give administrative access to. Make sure to follow the path taken, on the left of the picture, to get to the `.env` file.
+This is where we add the public address of our browser wallet, so the store knows who to give administrative access. Make sure to follow the path taken, on the left of the picture, to get to the `.env` file.
 
-### ** 4) Setup and deploy our store
+### **4) Setup and deploy our store**
 
 We are in the final stages of making our store live! Now, we will download all of the necessary packages that will allow us to deploy our marketplace website. 
 
@@ -89,13 +91,17 @@ We should still have our terminal open from before, when we changed directory in
 
 * Run the `yarn` command to download all of the dependencies
 
+```bash
+yarn
+```
+
 ![cdJsSol](../../../.gitbook/assets/cdJsSol.png)
 
 This command will begin downloading all of the dependencies that are required to work with the code. When we cloned the Metaplex repository, it didn't download the packages for us, it only downloaded the code that says what packages/dependencies are required. 
 
 The command will take awhile to finish downloading everything. Once it's done, we will see a `Done` line at the end. 
 
-![yarnPackagesSol](../../../.gitbook/assets/cdJsSol.png)
+![yarnPackagesSol](../../../.gitbook/assets/yarnPackagesSol.png)
 
 * Run the `yarn bootstrap` command to check that all of the dependencies are working.
 
@@ -114,6 +120,10 @@ yarn start
 It may take several minutes for everything to compile. Once the terminal says `compiled successfully`, we can visit `http://localhost:3000/#/` to view our brand new marketplace! But, this is only good for browsing around. Wait until we get it live online to connect a wallet and mint something.
 
 * Run the `yarn build` command
+
+```bash
+yarn build
+```
 
 ![yarnBuildSol](../../../.gitbook/assets/yarnBuildSol.png)
 
@@ -239,11 +249,11 @@ Go ahead and click on the NFT that's listed. You'll see the option to unlist it 
 
 # Conclusion
 
-Woohoo! If you made it through all the steps, you have successfully created your own NFT on the Solana blockchain. If you completed the bonus, you now have an NFT on the worldwide marketplace 👍
+Woohoo! If you made it through all the steps, you have successfully created your own NFT marketplace and NFT on the Solana blockchain. If you completed the bonus, you now have an NFT on a popular worldwide marketplace 👍
 
 # Next Steps
 
-In this tutorial, we created our own NFT on the Solana blockchain using Metaplex for minting and DigitalEyes for listing. Feel free to continue experimenting by attempting to mint more NFT's, sending the token around to other wallets, creating a collection, etc.
+In this tutorial, we created our own NFT marketplace and NFT on the Solana blockchain, using Metaplex for minting and DigitalEyes for listing. Feel free to continue experimenting by attempting to mint more NFT's, listing them on our own marketplace, sending the token around to other wallets, creating a collection, etc.
 
 # About the author
 
