@@ -1,4 +1,3 @@
-# Scan the latest pairs added on UniswapV3 using TheGraph in Google Sheets 
 ![UNISWAP](../../../.gitbook/assets/UNISWAP.gif)
 
 
@@ -15,14 +14,14 @@ For beginners with basic coding skills. This training assumes that you have a Gm
   * importJson.gs - for working with JSON objects in Google Sheets (later explained in the tutorial)
 
 
-## First, what is Uniswap?
+# First, what is Uniswap?
 [Uniswap](https://academy.binance.com/en/articles/what-is-uniswap-and-how-does-it-work) is a **decentralized exchange protocol built on Ethereum.** To be more precise, it is an automated liquidity protocol. There is no order book or any centralized party required to make trades. Uniswap allows users to trade without intermediaries, with a high degree of decentralization and censorship-resistance.
 
 This is how Uniswap’s Decentralized Exchange looks like:
 ![UNISWAPEXCHANGE](../../../.gitbook/assets/Uniswap_exchange.gif)
     
 
-## Getting familiar with TheGraph and GraphQL queries
+# Getting familiar with TheGraph and GraphQL queries
 [The Graph](https://graphql.org/) is a **decentralized protocol for indexing and querying data** from blockchains. It is able to query networks like Ethereum and since Uniswap is built on Ethereum, it will allow us to get its on-chain data. 
  
 ## Finding Uniswap V3 subgraph on Thegraph
@@ -92,7 +91,7 @@ You can replace the example query with this new query and press play in the play
 
 ![PLAYGROUNDCONSTRAINTS](../../../.gitbook/assets/PLAYGROUNDCONSTRAINTS.png)
 
-## Testing model & translating the query into javascript using Postman
+## Testing model and translating the query into javascript using Postman
 
 * [Download Postman](https://www.postman.com/downloads/)
 
@@ -111,7 +110,7 @@ You should get the same JSON table as on TheGraph.
 ![POSTMANQUERY](../../../.gitbook/assets/postmanconstraints.png)
 
 
-## Connecting the model through Google Sheet
+# Connecting the model through Google Sheet
 Once you confirmed that the query is functioning in Postman, you can transform the code into a Javascript Fetch request (for Google Sheet) using the Code button underneath the Save button.
 
 ![POSTMANJAVASCRIPT](../../../.gitbook/assets/postmanjavascript.png)
