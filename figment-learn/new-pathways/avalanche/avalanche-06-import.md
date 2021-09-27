@@ -29,7 +29,7 @@ In `pages/api/avalanche/import.ts`, implement the function and try to import the
     const [ xChain   , cChain    ] = [ client.XChain()            , client.CChain()             ];
     const [ xKeychain, cKeychain ] = [ xChain.keyChain()          , cChain.keyChain()           ];
     const [ xKeypair , cKeypair  ] = [ xKeychain.importKey(secret), cKeychain.importKey(secret) ];
-    const [ _xAddress , cAddress ] = [ xKeypair.getAddressString(), cKeypair.getAddressString() ];
+    const [ cAddress ] = [ cKeypair.getAddressString() ];
 
     // Get the real ID for X-Chain
     const xChainId = undefined;
