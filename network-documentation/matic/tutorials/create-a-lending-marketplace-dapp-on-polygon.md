@@ -2,15 +2,13 @@
 
 ## Introduction
 
-A Lending Marketplace provides a secure, flexible, open-source foundation for a decentralized loan marketplace on the Polygon blockchain. It provides the pieces necessary to create a decentralized lending exchange, including the requisite lending assets, clearing, and collateral pool infrastructure, enabling third parties to build applications for lending.
+A Lending Marketplace provides a secure, flexible, open-source foundation for a decentralized loan marketplace on the Polygon blockchain. It provides the pieces necessary to create a decentralized lending exchange, including the requisite lending assets, repayments, and collateral infrastructure, enabling third parties to build applications for lending.
 
 ## Prerequisites
 
 [MetaMask](https://metamask.io/) is a browser-based blockchain wallet that can be used to store any kind of digital assets and cryptocurrency.
 
-[Polygon](https://www.avax.network/) is a blockchain that is EVM compatible.
-
-[Create a Local Test Network](https://learn.figment.io/tutorials/create-a-local-test-network), [Using Truffle with the Polygon](https://learn.figment.io/network-documentation/tutorials/using-truffle-with-the-avalanche-c-chain)
+[Polygon](https://docs.polygon.technology/) is a blockchain that is EVM compatible.
 
 ## Requirement
 
@@ -37,8 +35,10 @@ Add the smart contract code below:
 LoanContract.sol
 
 ```
+// Define the solidity compiler version
 pragma solidity ^0.5.0;
 
+// Import the required smart contracts and libraries
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "openzeppelin-solidity/contracts/lifecycle/Pausable.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
@@ -46,20 +46,25 @@ import "./libs/LoanMath.sol";
 import "./External/PriceFeeder.sol";
 import "./libs/String.sol";
 
-/*import "github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
-import "github.com/OpenZeppelin/openzeppelin-solidity/contracts/math/SafeMath.sol";
-import "./LoanMath.sol";
-import "./PriceFeeder.sol";*/
-
+// Create a contract named LoanContract which defines the loan methods
 contract LoanContract {
+
+// Define the variables and contants
 
     using SafeMath for uint256;
 
-    uint256 constant PLATFORM_FEE_RATE = 100;
-    address constant WALLET_1 = 0x88347aeeF7b66b743C46Cb9d08459784FA1f6908;
-    uint256 constant SOME_THINGS = 105;
-    address admin = 0x95FfeBC06Bb4b7DeDfF961769055C335542E1dBF;
+// Exchange rate between two selected tokens
+    uint256 constant PLATFORM_FEE_RATE;
 
+// First account address for loan creation
+    address constant WALLET_1 = "YOUR FIRST ACCOUNT ADDRESS";
+
+// Address of owner for smart contract deployment
+    address admin = "OWNER ADDRESS";
+    
+    uint256 constant SOME_THINGS = 105;
+    
+// Predefined values for Loan Status
     enum LoanStatus {
         OFFER,
         REQUEST,
@@ -68,7 +73,8 @@ contract LoanContract {
         REPAID,
         DEFAULT
     }
-
+    
+// Predefined values for Collateral Status
     enum CollateralStatus {
         WAITING,
         ARRIVED,
@@ -76,8 +82,8 @@ contract LoanContract {
         DEFAULT
     }
 
+// Structure for Collateral Data
     struct CollateralData {
-
         address collateralAddress;
         uint256 collateralAmount;
         uint256 collateralPrice; // will have to subscribe to oracle
@@ -85,8 +91,8 @@ contract LoanContract {
         CollateralStatus collateralStatus;
     }
 
+// Structure for Loan Data
     struct LoanData {
-
         uint256 loanAmount;
         uint256 loanCurrency;
         uint256 interestRate; // will be updated on acceptance in case of loan offer
@@ -101,7 +107,8 @@ contract LoanContract {
         LoanStatus loanStatus;
         CollateralData collateral; // will be updated on accepance in case of loan offer
     }
-
+    
+// Method for loan enrichment
     function enrichLoan(uint256 _interestRate, address _collateralAddress, uint256 _collateralAmount, uint256 _collateralPriceInETH, uint256 _ltv) public {
         loan.interestRate = _interestRate;
         loan.collateral.collateralAddress = _collateralAddress;
@@ -112,23 +119,16 @@ contract LoanContract {
         emit LoanContractUpdated(_interestRate, _collateralAddress, _collateralPriceInETH, _collateralAmount, _ltv);
     }
 
+// Loan Data object
     LoanData loan;
 
-    //PriceFeeder price;
-
+// Declare a public ERC20 token 
     IERC20 public ERC20;
 
+// Initialize the remaining collateral ammount variable
     uint256 public remainingCollateralAmount = 0;
 
-    /* struct Repayment {
-        bytes32 id;
-        uint256 repaidOn;
-        uint256 amount;
-        uint256 repaymentNumber;
-    } */
-
-    //mapping (uint256 => bool) internal repayments;
-
+// Events for different loan and collateral status
     event CollateralTransferToLoanFailed(address, uint256);
     event CollateralTransferToLoanSuccessful(address, uint256, uint256);
     event FundTransferToLoanSuccessful(address, uint256);
@@ -139,6 +139,8 @@ contract LoanContract {
     event CollateralClaimedByLender(address, uint256);
     event CollateralSentToLenderForDefaultedRepayment(uint256,address,uint256);
     event LoanContractUpdated(uint256, address, uint256, uint256, uint256);
+    
+    // Modifiers for Borrower, Admin and Lender
 
     modifier OnlyBorrower {
         require(msg.sender == loan.borrower, "Not Authorised");
@@ -157,7 +159,7 @@ contract LoanContract {
 
 
 
-    // watch for this event  LoanStartedOn during two transactions approveLoanRequest & transferCollateralToLoan
+    // Watch for this event LoanStartedOn during two transactions approveLoanRequest & transferCollateralToLoan
 
     constructor(uint256 _loanAmount, uint128 _duration, string memory _acceptedCollateralsMetadata,
         uint256 _interestRate, address _collateralAddress,
@@ -177,11 +179,12 @@ contract LoanContract {
         // later this will be filled when borrower accepts the loan
     }
 
-    // after loan offer created
+    // After loan offer created transfer Funds to Loan
     function transferFundsToLoan() public payable OnlyLender {
          require(msg.value >= loan.loanAmount, "Sufficient funds not transferred");
+    // Status changed OFFER -> FUNDED
           loan.loanStatus = LoanStatus.FUNDED;
-          //status changed OFFER -> FUNDED
+
          emit FundTransferToLoanSuccessful(msg.sender, msg.value);
     }
 
@@ -192,7 +195,7 @@ contract LoanContract {
         return string(b);
     }
 
-    // after loan request created
+    // After loan request created transfer Collateral to Loan
     function transferCollateralToLoan() payable public OnlyBorrower  {
 
         ERC20 = IERC20(loan.collateral.collateralAddress);
@@ -204,21 +207,6 @@ contract LoanContract {
         }
 
         loan.collateral.collateralStatus = CollateralStatus.ARRIVED;
-
-        // We check the latest price of the collateral using the oracle
-        // Here we need to change CollateralAddress to String
-        /**
-        *    We need to use the string
-        */
-        // Before we send address for price we need to convert it into the string
-
-        //string memory contractAddress = toString(loan.collateral.collateralAddress);
-        // We make the price call and then we check the price using .price () method
-        //price.update.value(msg.value)(contractAddress);
-        // what is msg.value?
-
-        // this would need to be called after price is fed!
-        //loan.collateral.collateralPrice = price.price();
 
         ERC20.transferFrom(msg.sender, address(this), loan.collateral.collateralAmount);
 
