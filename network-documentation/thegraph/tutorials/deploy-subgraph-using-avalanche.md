@@ -1,14 +1,14 @@
 # Introduction
 
-In this tutorial you will learn how to deploy a Solidity smart contract to the Avalanche FUJI testnet using HardHat, then create and deploy its subgraph to the Subgraph Studio.
+In this tutorial you will learn how to deploy a Solidity smart contract to the Avalanche Fuji testnet using HardHat, then create and deploy its subgraph to the Subgraph Studio.
 
 ![Subgraph Studio](../../../.gitbook/assets/graph.png)
-
-You can build a subgraph schema if you know the address of the smart contract, assuming that the contract is verified on etherscan. If not, you can provide the local path of the ABI to the graph CLI to create the subgraph schema. Hardhat by default, do not export the ABI after compilation of the smart contract. But we can edit the configuration, so that the ABI shall be exported.
 
 The Subgraph Studio is where you can build and create subgraphs. You can add metadata to your graphs (even after deploying your subgraphs), deploy multiple versions of your subgraphs, as well as publish them to the decentralized Graph Explorer. Do note that publishing a subgraph is different from deploying a subgraph. When you deploy a subgraph, you alone can access it. But when you publish it, it's created on-chain, and everyone can access it.
 
 You can also test your subgraphs in the Playground, where you can run graphql queries without incurring any querying fees. In this tutorial, you shall also learn how to create and deploy your subgraph to Subgraph Studio using an Avalanche smart contract.
+
+When you know the address of a smart contract, assuming that the contract is verified on etherscan, you can easily build a subgraph schema for it. If not, you can provide the local path of the Application Binary Interface (ABI) to the Graph CLI in order to create a subgraph schema. By default, HardHat does not export the ABI after compilation of the smart contract. However it is possible to use a HardHat plugin to automatically export the ABI when a smart contract is compiled.
 
 # Prerequisites
 
@@ -73,7 +73,7 @@ module.exports = {
 };
 ```
 
-Since Avalanche network is compatible with Ethereum EVM, you can use ethereum hardhat plugins to compile and deploy your contract:
+Since Avalanche network is compatible with Ethereum's Virtual Machine (EVM), you can use any available HardHat plugins to compile and deploy your contract:
 
 ```text
 yarn add --dev @nomiclabs/hardhat-ethers ethers @nomiclabs/hardhat-waffle
@@ -140,7 +140,7 @@ contract VendingMachine {
 
 # Compiling the smart contract
 
-You need to install `hardhat-abi-exporter` so that hardhat will export the smart contract ABIs after compilation:
+We will install the `hardhat-abi-exporter` plugin so that HardHat will export the smart contract ABI after compilation:
 
 ```text
 yarn add --dev hardhat-abi-exporter
@@ -149,11 +149,11 @@ yarn add --dev hardhat-abi-exporter
 Update your `hardhat.config.js` file to use the abi exporter:
 
 ```javascript
-require("@nomiclabs/hardhat-waffle");
+require('@nomiclabs/hardhat-waffle');
 require('hardhat-abi-exporter');
 
 module.exports = {
-  solidity: "0.7.3",
+  solidity: '0.7.3',
   abiExporter: {
     path: './abi/',
     clear: true,
@@ -161,10 +161,10 @@ module.exports = {
 };
 ```
 
-- **path**: path to ABI export directory (relative to Hardhat root). The directory will be created if it does not exist.
-- **clear**: whether to delete old files in above path on compilation
+- **path**: The path to your ABI export directory (relative to the HardHat project's root). The directory will be created if it does not exist.
+- **clear**: A boolean value that determines whether to delete old files from the specified path on compilation.
 
-Hardhat will use `solc v0.7.3` to compile your smart contract. Run:
+HardHat will use the specified version of solc (v0.7.3) to compile your smart contract. Run:
 
 ```text
 npx hardhat compile
@@ -181,9 +181,9 @@ The `vending.sol` smart contract has now been compiled successfully. The ABI wil
 
 # Deploying the smart contract
 
-Though this step is not necessary for creating your subgraph, you can still deploy your smart contract to learn about the Avalanche network and Datahub.
+Though this step is not necessary for creating your subgraph, you can still deploy your smart contract to learn about the Avalanche network and DataHub.
 
-Add a `network` entry in your `hardhat.config.js` file:
+Add the constants `FUJI_PRIVATE_KEY` and `DATAHUB_API_KEY` as well as a **networks** entry in your hardhat.config.js file:
 
 ```javascript
 require("@nomiclabs/hardhat-waffle");
@@ -220,13 +220,13 @@ Click on the verification link you shall receive in your email. After email veri
 
 ![Datahub Avalanche](../../../.gitbook/assets/datahub_avalanche.png)
 
-Click on `Avalanche`, and you shall see the below page at <https://datahub.figment.io/services/avalanche>. You can copy your api key by clicking on the `copy` button.
+Click on the `Avalanche` button to view the Avalanche Services Dashboard at <https://datahub.figment.io/services/avalanche>. You can copy your API key to the clipboard by clicking on the **copy** button.
 
 ![Datahub Avalanche API Key](../../../.gitbook/assets/datahub_avalanche_api.png)
 
 ## Getting your Metamask private key
 
-You need to add FUJI testnet to your Metamask by following the instructions below:
+You need to add a connection to the Avalanche Fuji testnet to your Metamask by following the instructions below (remember to replace `<YOUR DATAHUB_API_KEY>` in the RPC URL with your actual DataHub API key):
 
 - Login in to Metamask
 - Click on the `Network` drop-down
@@ -250,7 +250,7 @@ To get your `FUJI_PRIVATE_KEY`, open your browser and open Metamask. Select **Av
 
 **Never ever share your private key with anyone!**
 
-Create a directory called `scripts`, and paste the below code into a new file `deploy.js` inside scripts directory.
+Create a subdirectory inside the HardHat project called `scripts`, and paste the following code into a new file `deploy.js` inside the `scripts` directory:
 
 ```javascript
 async function main() {
@@ -273,7 +273,7 @@ main()
   });
 ```
 
-Finally, run:
+To deploy the smart contract to the Fuji testnet using HardHat, run the command:
 
 ```text
 npx hardhat run scripts/deploy.js --network fuji
@@ -287,40 +287,32 @@ Account balance: <YOUR FUJI WALLET BALANCE>
 Contract address: <YOUR FUJI SMART CONTRACT ADDRESS>
 ```
 
-Yay! You just deployed your smart contract successfully to Fuji testnet!
-
-We will need the smart contract address later.
+Congratulations! You just deployed your smart contract successfully to Fuji testnet! We will need the contract address when creating the subgraph, so remember to copy it.
 
 # Creating the subgraph
 
 Run the following command to create the subgraph by downloading the contract ABI from the Fuji testnet. A new directory called `vending` will be created, and all node dependencies will be installed automatically.
 
 ```text
-graph init --contract-name VendingMachine --index-events --studio --from-contract <YOUR FUJI SMART CONTRACT ADDRESS> --network fuji vending
+graph init \
+  --contract-name VendingMachine \
+  --index-events \
+  --studio \
+  --from-contract <YOUR FUJI SMART CONTRACT ADDRESS> \
+  --abi abi/contracts/vending.sol/VendingMachine.json \
+  --network fuji \
+  vending
 ```
 
-Replace with your deployed VendingMachine smart contract address from above.
+Replace `<YOUR FUJI SMART CONTRACT ADDRESS>` with your deployed VendingMachine smart contract address from above.
 
 This will output:
 
 ```text
 ✔ Subgraph slug · vending
 ✔ Directory to create the subgraph in · vending
-✔ Ethereum network · rinkeby
+✔ Ethereum network · fuji
 ✔ Contract address · <YOUR FUJI SMART CONTRACT ADDRESS>
-```
-
-It's possible that you will get the below error:
-
-```text
-✖ Failed to fetch ABI from Etherscan: request to https://api-fuji.etherscan.io/api?module=contract&action=getabi&address=<YOUR FUJI SMART CONTRACT ADDRESS> failed, reason: getaddrinfo ENOTFOUND api-fuji.etherscan.io
-```
-
-Fret not! We can provide a local path for the ABI: `abi/contracts/vending.sol/VendingMachine.json`
-
-This will output:
-
-```text
 ✔ ABI file (path) · abi/contracts/vending.sol/VendingMachine.json
 ✔ Contract Name · VendingMachine
 ———
