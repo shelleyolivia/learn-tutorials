@@ -19,9 +19,7 @@ We will use this seed later in this tutorial. Here is an article about [How to r
 1. In order to transfer assets between **root** (Ethereum) and **child** (Polygon) contracts, they should be mapped first. This is a process by which an existing token contract is mirrored between the root and child chain.  
 If the token you intend to transfer already exists on **Polygon**, this means you don't need to perform the **mapping**.  
 Check the [official docs](https://docs.matic.network/docs/develop/ethereum-matic/submit-mapping-request) to learn about the mapping process.
-2. After we mapped the contract, it's time to transfer the assets. We can either use the [Polygon Wallet UI](https://wallet.polygon.technology/login/) or the [Polygon SDK](https://polygon.technology/polygon-sdk/)
-	* We use the SDK for our ERC-1155 token that is deployed on the  **Goerli** testnet
-	* We use the [Polygon Wallet UI](https://wallet.polygon.technology/login/) for tokens that are deployed on the Ethereum mainnet
+2. After we mapped the contract, it's time to transfer the assets. We can either use the [Mintnft](https://bridge.mintnft.today/) or the [Polygon SDK](https://polygon.technology/polygon-sdk/). We will use both of them
 
 # Setting up Metamask
 Before we get into the details of moving the tokens, let's set up **Metamask** so we can check our **ETH**, **MATIC**, and **MLBs** token balances.
