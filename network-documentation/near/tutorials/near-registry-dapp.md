@@ -115,7 +115,7 @@ In the `addEntry` function, we create a new Entry and add it to the entries Pers
 
 # Unit tests 
 
-**assembly/__tests__/registry.spec.ts**
+**assembly/\_\_tests\_\_/registry.spec.ts**
 
 To make sure our smart contract works as expected, we have written the following unit tests. They test various cases like adding an entry, upvoting an entry, retrieving entries and attaching a deposit to a contract call. Use the command `yarn test` to run the test suite, it will then show the results on the console.
 
