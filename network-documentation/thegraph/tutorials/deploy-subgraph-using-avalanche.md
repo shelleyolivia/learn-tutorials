@@ -183,10 +183,10 @@ The `vending.sol` smart contract has now been compiled successfully. The ABI wil
 
 Though this step is not necessary for creating your subgraph, you can still deploy your smart contract to learn about the Avalanche network and DataHub.
 
-Add the constants `FUJI_PRIVATE_KEY` and `DATAHUB_API_KEY` as well as a **networks** entry in your hardhat.config.js file:
+Add the constants `FUJI_PRIVATE_KEY` and `DATAHUB_API_KEY` as well as a **networks** entry in your `hardhat.config.js` file:
 
 ```javascript
-require("@nomiclabs/hardhat-waffle");
+require('@nomiclabs/hardhat-waffle');
 require('hardhat-abi-exporter');
 
 // Replace this private key with your Fuji wallet private key
@@ -196,7 +196,7 @@ const FUJI_PRIVATE_KEY = 'YOUR_FUJI_PRIVATE_KEY';
 const DATAHUB_API_KEY = 'YOUR_DATAHUB_API_KEY';
 
 module.exports = {
-  solidity: "0.7.3",
+  solidity: '0.7.3',
   abiExporter: {
     path: './abi/',
     clear: true,
