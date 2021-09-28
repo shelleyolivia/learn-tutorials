@@ -26,7 +26,7 @@ To get your alchemy API key you:
 - Create a simple dapps.
 - Copy and paste your API key in safe place.
 
-![](../../../.gitbook/assets/pathways/the_graph/graph-alchemy-setup.gif)
+![](../../../.gitbook/assets/pathways/the-graph/graph-alchemy-setup.gif)
 
 ---
 
@@ -40,7 +40,7 @@ yarn dev
 
 Once the development server loads and compiles the application, open your default browser and navigate to `http://localhost:3000`:
 
-![](../../../.gitbook/assets/pathways/pathway-home.gif)
+![](../../../.gitbook/assets/pathway-home.gif)
 
 {% hint style="warning" %}
 Did you know you can change the port? By default Next.js uses port 3000, but if you have another service already running on that port, use the `--port` flag, like `yarn dev --port 1122`.
