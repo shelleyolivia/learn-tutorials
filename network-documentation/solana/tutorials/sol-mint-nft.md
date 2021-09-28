@@ -1,8 +1,6 @@
-# How to create an NFT Marketplace and NFT on Solana
+# Minting a non-fungible token on our own marketplace
 
-## Minting a non-fungible token on our own marketplace
-
-## Introduction
+# Introduction
 
 In this tutorial we will be creating a [non-fungible token](https://www.blockchain-council.org/blockchain/a-quick-guide-to-fungible-vs-non-fungible-tokens/#:~:text=Non%2DFungible%20are%20Non%2DInterchangeable,token%20of%20the%20same%20type.) marketplace and a non-fungible token, otherwise known as an NFT, using the **Solana** blockchain. Since NFT's are 1 of 1, they can represent real-world objects like music, art, in-game items and videos.
 
@@ -10,34 +8,30 @@ We are going to create our NFT on our own marketplace. Refer to this [existing m
 
 Once we create the NFT, we will be able to list it for sale on larger marketplaces such as [DigitalEyes](https://digitaleyes.market/) or [Solanart](https://solanart.io/).
 
-## Prerequisites
+Note: Bullet points in this tutorial are calls to action. 
+
+# Prerequisites
 
 * Around $2 USD of [SOL](https://coinmarketcap.com/currencies/solana/) accessible, which we will send to a browser wallet. You can get some SOL through an exchange, such as [FTX](https://ftx.com/#a=13426316).
 * Something to upload in the NFT, such as an image, video, audio file or an AR/3D file (.glb).
 * [Github account](https://github.com/)
 * [Git](https://git-scm.com/) installed
 
-### **1) Create an SOL wallet**
+## Create and fund an SOL wallet
 
-First, we are going to create a wallet on Solana using [Phantom wallet](https://phantom.app/).
-
-Follow the steps on Phantom's website on how to create a wallet: [How to create a new wallet](https://help.phantom.app/hc/en-us/articles/4406388623251-How-to-create-a-new-wallet)
-
-### **2) Fund the wallet**
+We are going to create a wallet on Solana using Phantom wallet. Follow the steps on Phantom's website on [how to create a browser wallet](https://help.phantom.app/hc/en-us/articles/4406388623251-How-to-create-a-new-wallet).
 
 Since minting an NFT on the blockchain causes a change in the data on the blockchain, we will have to pay for the transaction. Solana uses [SOL token](https://coinmarketcap.com/currencies/solana/) to pay for their transactions, so we will need to fund our new phantom wallet with SOL token. 
 
-Follow the steps on Phantom's website here on how to deposit SOL to your wallet: [How to deposit SOL](https://help.phantom.app/hc/en-us/articles/4406393831187-How-to-deposit-SOL).
+Follow the steps on Phantom's website here on [how to deposit SOL](https://help.phantom.app/hc/en-us/articles/4406393831187-How-to-deposit-SOL).
 
-### **1) Fork the Metaplex repository to your Github**
+# Fork and clone the Metaplex repository
 
-First, we are going to fork the metaplex repository to our Github so we can host it on Github pages. 
+We are going to fork the Metaplex repository to our own Github account so that we can host it easily on Github pages.
 
 * Fork the [Metaplex repository](https://github.com/metaplex-foundation/metaplex)
 
 ![metaplexRepo](../../../.gitbook/assets/metaplexRepo.png)
-
-### **2) Clone the repository to your desktop**
 
 Now, we need to copy all of the Metaplex files over to our computer.
 
@@ -47,7 +41,7 @@ Now, we need to copy all of the Metaplex files over to our computer.
 
 * Change directory to your marketplace folder in the command line
 
-```bash
+```text
 cd /Users/yourusername/Desktop/myNftMarketplace 
 ```
 
@@ -55,13 +49,13 @@ cd /Users/yourusername/Desktop/myNftMarketplace
 
 * Clone the repository to your marketplace folder
 
-```bash
+```text
 git clone https://github.com/yourusername/metaplex.git
 ```
 
 All of the files from the Metaplex repository will now be downloaded into our folder.
 
-### **3) Change the default addresses**
+# Change the default addresses
 
 When we deploy the website, we want it to save in the Metaplex repository we forked on Github. This will allow us to easily get our own live marketplace online.
 
@@ -77,21 +71,21 @@ Notice where my name is. This should be where our Github username goes. Make sur
 
 This is where we add the public address of our browser wallet, so the store knows who to give administrative access. Make sure to follow the path taken, on the left of the picture, to get to the `.env` file.
 
-### **4) Setup and deploy our store**
+# Setup and deploy our store
 
 We are in the final stages of making our store live! Now, we will download all of the necessary packages that will allow us to deploy our marketplace website. 
 
 * Change directory to the `js` folder in the command line
 
-```bash
-cd metaplex-master/js
+```text
+cd metaplex/js
 ```
 
 We should still have our terminal open from before, when we changed directory into our marketplace folder. Now, we changed directory to the `js` folder. 
 
 * Run the `yarn` command to download all of the dependencies
 
-```bash
+```text
 yarn
 ```
 
@@ -99,53 +93,51 @@ yarn
 
 This command will begin downloading all of the dependencies that are required to work with the code. When we cloned the Metaplex repository, it didn't download the packages for us, it only downloaded the code that says what packages/dependencies are required. 
 
-The command will take awhile to finish downloading everything. Once it's done, we will see a `Done` line at the end. 
+The command will take a moment to finish downloading everything. When it is complete, it will output `Done` at the end.
 
 ![yarnPackagesSol](../../../.gitbook/assets/yarnPackagesSol.png)
 
 * Run the `yarn bootstrap` command to check that all of the dependencies are working.
 
-```bash
+```text
 yarn bootstrap
 ```
 
-We can now locally test our new NFT marketplace before we upload it to the internet. 
+We can now test our new NFT marketplace locally before we upload it to Github Pages.
 
-* Run the `yarn start` command to check out our marketplace locally
+* Run the following command to check that all the dependencies are in place and working as intended:
 
-```bash
+```text
 yarn start
 ```
 
 It may take several minutes for everything to compile. Once the terminal says `compiled successfully`, we can visit `http://localhost:3000/#/` to view our brand new marketplace! But, this is only good for browsing around. Wait until we get it live online to connect a wallet and mint something.
 
-* Run the `yarn build` command
+* Run the following command to build the project files:
 
-```bash
+```text
 yarn build
 ```
 
 ![yarnBuildSol](../../../.gitbook/assets/yarnBuildSol.png)
 
-After a bit of time, we should see a `Done` line, indicating the build has finished. We will now see a `build` folder inside the `js` folder. 
+When it is complete, we should see it output `Done`, indicating the build has finished. We will now be able to see the `build` folder that was created inside the `js` folder.
 
 * Change directory to the `web` folder
 
-```bash
+```text
 cd packages/web
 ```
 
 * Run the `yarn deploy` command
 
-We should again see a `Done` line, indicating the deployment has finished. This command has deployed our marketplace to our Github repository, which means... our marketplace is live!
-
-* Go check out our fresh new NFT marketplace on Solana
+Once complete, we should again see the output `Done`, indicating the deployment has finished. This command has deployed the marketplace site to our Github repository, which means... our marketplace is live! Now we can go check out the fresh new NFT marketplace operating on Solana, hosted on Github Pages.
 
 Congratulations! The URL for our marketplace will most likely be located at `https://yourusername.github.io/metaplex#/`, unless you changed the URL for your website in the Github repository's settings. For example, my marketplace is located at `https://jacobmakarsky.github.io/metaplex#/`. 
 
-Now, we can move on to creating our own NFT on Solana by using our marketplace. 
+Now, we can move on to creating our own NFT on Solana by using the marketplace UI.
 
-### **5) Mint an NFT on a marketplace**
+# Mint an NFT on a marketplace
 
 There are many marketplaces on Solana for listing NFT's, but only very recently was a tool created that allows the everyday user to mint their own NFT, called [Metaplex](https://www.metaplex.com/).
 
@@ -183,7 +175,7 @@ The attributes, for example, would be "background: blue", "eyes: closed", "mouth
 
 ![nftInfoPage](../../../.gitbook/assets/nftInfoPage.png)
 
-Metaplex allows us to modify the royalties and amount to split of the intiial sale. 
+Metaplex allows us to modify the royalties and amount to split of the initial sale. 
 
 * Set a royalties percentage, so the creators will recieve part of every future sale that happens of the NFT.
 
@@ -213,7 +205,7 @@ If you've been using a Phantom browser wallet, go ahead and check your "Collecti
 
 ![phantomCollectibles](../../../.gitbook/assets/phantomCollectibles.png)
 
-### **6) BONUS: List the NFT for sale**
+# BONUS: List the NFT for sale
 
 Awesome, we now have our own NFT that we can view inside our wallet. We certainly don't have to list our fresh NFT for sale if we don't want to, but for the sake of education, let's go ahead and try listing it. 
 
