@@ -1,25 +1,18 @@
 # Introduction
 
-In this tutorial we will be building a complete Dapp for the Near Registry. Near Registry will allow you to track popular 
-content just like Hacker News. Anyone can post an entry to the Near Registry. Upvoting the content requires you to 
-attach NEAR. The registry is sorted based on the NEAR attached to the entries. Same logic can be extended for any 
-other type of registry.
-
-
-# Prerequisites:
-
-Install Nodejs (≥ 14) and yarn 
-```bash
-npm install --global yarn
-```
+In this tutorial we will be building a complete dApp for the NEAR Registry. NEAR Registry will allow you to track popular content just like Hacker News. Anyone can post an entry to the Registry. Upvoting the content requires you to connect using your NEAR wallet and attach NEAR to the entry. The Registry is sorted based on the NEAR attached to the entries. The same logic can be extended for any other type of registry.
 
 # Requirements
 
-NEAR testnet account - https://wallet.testnet.near.org/
+1. NEAR testnet account - https://wallet.testnet.near.org/
+2. Install Nodejs (≥ 14) and yarn 
+   ```text
+   npm install --global yarn
+   ```
 
 # Setup
 
-```bash
+```text
 git clone https://github.com/viraja1/near-registry.git
 cd near-registry
 yarn install
@@ -28,28 +21,17 @@ yarn test
 
 # Exploring The Code
 
-1. The backend code is present in the `/assembly` folder and gets deployed to
-   the NEAR blockchain when you run `yarn deploy`. This sort of
-   code that runs on a blockchain is called a "smart contract". [Learn more
-   about NEAR smart contracts][smart contract docs].
-2. The backend test code is present in the `/assembly/__tests__/` folder. 
-    We can test the backend code using `yarn test` command.
-3. The frontend code is present in the `/src` folder. It uses near-api-js which is a JavaScript/TypeScript library for 
-   development of decentralized applications on the NEAR platform. It works in conjunction with NEAR RPC endpoints 
-   to help you connect your application to the NEAR blockchain. [Learn more
-    about NEAR Frontend][NEAR Frontend]. 
+1. The backend code is present in the `/assembly` folder and gets deployed to the NEAR blockchain when you run `yarn deploy`. This sort of code that runs on a blockchain is called a "smart contract". [Learn more about NEAR smart contracts][smart contract docs].
+2. The backend test code is present in the `/assembly/__tests__/` folder. We can test the backend code using the command `yarn test`.
+3. The frontend code is present in the `/src` folder. It uses near-api-js which is a JavaScript/TypeScript library for development of decentralized applications on the NEAR platform. It works in conjunction with NEAR RPC endpoints to help you connect your application to the NEAR blockchain. [Learn more about NEAR Frontend][NEAR Frontend]. 
 
-We can write NEAR smart contracts in Rust or AssemblyScript. For Near Registry we will be using AssemblyScript. 
-AssemblyScript is a dialect of TypeScript that compiles to Wasm. 
+NEAR smart contracts can be written in Rust or AssemblyScript. For NEAR Registry we will be using AssemblyScript, which is a dialect of TypeScript that compiles to WebAssembly (WASM).
 
-Contracts are a named collection of (exported) functions that have access (via near-sdk-as) to their execution 
-context (sender, receiver, block height, etc) as well as storage services (key-value pair and convenience collections 
-like Map, Vector and Deque), logging services and some utility functions.
+Contracts are a named collection of exported functions that have access (via **near-sdk-as**) to their execution context (sender, receiver, block height, etc.) as well as storage services (key-value pair and convenience collections like Map, Vector and Dequeue), logging services and some utility functions.
 
-To keep things organized, contracts can use one or more data objects which are commonly added to the model.ts file.
-All contracts and models must explicitly import features of the NEAR they intend to use. 
+To keep things organized, contracts can use one or more data objects which are commonly added to the model.ts file. All contracts and models must explicitly import the features of the NEAR SDK they intend to use.
 
-#### assembly/model.ts
+## assembly/model.ts
 
 ```typescript
 import {context, u128, PersistentVector} from "near-sdk-as";
@@ -75,21 +57,12 @@ export class Entry {
 export const entries = new PersistentVector<Entry>("entries");
 ```
 
-In the above models.ts file, we define a new custom type named Entry (primitive types like integers, strings and 
-bool are always available by default). Since models are just AssemblyScript classes, they support custom constructors. 
-Each entry has sender, title, description, url, id and votes. Each of these is associated with a specific type 
-and is declared as public. In the constructor, we define the sender as  context.sender. The context object provides 
-context for contract execution including information about the transaction sender, blockchain height, and attached 
-deposit available for use during contract execution, etc.
+In the above `models.ts` file, we define a new custom type named Entry (primitive types like integers, strings and bool are always available by default). Since models are just AssemblyScript classes, they support custom constructors. Each entry has sender, title, description, url, id and votes. Each of these is associated with a specific type and is declared as public. In the constructor, we define the sender as **context.sender**. The context object provides context for contract execution including information about the transaction sender, blockchain height, and attached deposit available for use during contract execution.
                                                               
-At the end, we define that entries is a PersistentVector (collection) of type Entry. The PersistentVector writes and reads 
-from storage abstracting away a lot of what you might want to add to the storage object. They wrap 
-the Storage class with convenience methods so you must always use a unique storage prefix for different collections 
-to avoid data collision. PersistentVector acts like an array. To create entries, we use the synthax 
-`new PersistentVector<Entry>("entries")`. The vector supports the methods like push, pop and length.
+At the end, we define that entries is a PersistentVector (collection) of type Entry. The PersistentVector writes and reads from storage, abstracting away a lot of what you might want to add to the storage object. It wraps the Storage class with convenience methods so you must always use a unique storage prefix for different collections to avoid data collision. PersistentVector acts like an array. To create entries, we use the syntax `new PersistentVector<Entry>("entries")`. The vector supports the methods like push, pop and length.
 
 
-#### assembly/main.ts
+## assembly/main.ts
 
 ```typescript
 import {Entry, entries} from './model';
@@ -98,8 +71,8 @@ import {context, u128} from "near-sdk-as";
 // --- contract code goes below
 
 /**
- * Adds a new entry under the name of the sender's account id.\
- * NOTE: This is a change method. Which means it will modify the state.\
+ * Adds a new entry under the name of the sender's account id.
+ * NOTE: This is a change method, which means it will modify the state.
  * But right now we don't distinguish them with annotations yet.
  */
 export function addEntry(title: string, description: string, url: string): void {
@@ -111,8 +84,8 @@ export function addEntry(title: string, description: string, url: string): void 
 
 
 /**
- * Up vote an entry using attachedDeposit\
- * NOTE: This is a change method. Which means it will modify the state.\
+ * Up vote an entry using attachedDeposit
+ * NOTE: This is a change method, which means it will modify the state.
  * But right now we don't distinguish them with annotations yet.
  */
 export function upVoteEntry(index: i32): void {
@@ -122,8 +95,8 @@ export function upVoteEntry(index: i32): void {
 }
 
 /**
- * Returns an array of entries.\
- * NOTE: This is a view method. Which means it should NOT modify the state.
+ * Returns an array of entries.
+ * NOTE: This is a view method, which means it does not modify the state.
  */
 export function getEntries(): Entry[] {
   const result = new Array<Entry>(entries.length);
@@ -134,21 +107,17 @@ export function getEntries(): Entry[] {
 }
 ```
 
-Contract function calls are stateless. Any state that you want to save to the blockchain needs to be explicitly 
-saved by interacting with the storage object e.g. entries. In the main.ts file, the contract functions like 
-`addEntry`, `upVoteEntry` and `getEntries` are defined. Function declarations follow standard AssemblyScript conventions, 
-including the parameters they take, optional arguments and return values. 
+Contract function calls are stateless. Any state that you want to save to the blockchain needs to be explicitly saved by interacting with the storage object (such as **entries**). In the `main.ts` file, the contract functions like `addEntry`, `upVoteEntry` and `getEntries` are defined. Function declarations follow standard AssemblyScript conventions, including the parameters they take, optional arguments and return values. 
 
-There are two types of functions that can interact with the blockchain -- "view" functions and "change" functions. 
-The difference, however, does not exist on the contract level. 
-View functions like `getEntries` do not actually change the state of the blockchain. Change functions 
-like `addEntry` and `upVoteEntry` modify the state.
+There are two types of functions that can interact with the blockchain -- "view" functions and "change" functions. The difference, however, does not exist on the contract level. View functions like `getEntries` do not modify the state of the blockchain. Change functions like `addEntry` and `upVoteEntry` do modify the state.
 
-In the addEntry function, we create a new Entry and add it to the entries PersistentVector using the push method. 
-In the upVoteEntry function, we first fetch the entry from the entries PersistentVector using the index. Then we 
-increment the entry votes using context.attachedDeposit. Then we update the entries PersistentVector using the index.
+In the `addEntry` function, we create a new Entry and add it to the entries PersistentVector using the push method. In the `upVoteEntry` function, we first fetch the entry from the entries PersistentVector using the index. Then we increment the entry votes using context.attachedDeposit. Then we update the entries PersistentVector using the index.
 
-#### assembly/__tests__/registry.spec.ts
+# Unit tests 
+
+**assembly/__tests__/registry.spec.ts**
+
+To make sure our smart contract works as expected, we have written the following unit tests. They test various cases like adding an entry, upvoting an entry, retrieving entries and attaching a deposit to a contract call. Use the command `yarn test` to run the test suite, it will then show the results on the console.
 
 ```typescript
 import {addEntry, getEntries, upVoteEntry} from '../main';
@@ -239,70 +208,73 @@ describe('attached deposit tests', () => {
 });
 ```
 
-To make sure our smart contract works as expected, we have written the above JavaScript tests. It tests various cases
-like add an entry, upvote an entry, retrieve entries and attach a deposit to a contract call. To run the tests, we use
-`yarn test` command. It then prints the results to the console.
+# Deploying the smart contract
 
-# Deploy Smart Contract
-
-Every smart contract in NEAR has its [own associated account][NEAR accounts]. 
-When you run `yarn dev`, your smart contracts get deployed to the live NEAR testnet with a throwaway account. 
-To make it permanent, use the following steps.
+Every smart contract on NEAR has its [own associated account][NEAR accounts]. When running `yarn dev` to deploy, the smart contracts are deployed to the live NEAR testnet with a throwaway account. To make the deployment permanent, use the following steps:
 
 
-#### 1) Install near-cli
+## Install the NEAR CLI
 
-Install near-cli globally
+This command will install the NEAR CLI globally:
 
-```bash
+```text
 npm install --global near-cli
 ```
 
 Then ensure that it is installed properly using the following command
 
-```bash
+```text
 near --version
 ```
     
-
-
-#### 2) Create an account for the contract
+## Create an account for the contract
 
 Visit [NEAR Wallet] and make a new account. You'll be deploying these smart contracts to this new account.
 
-Now authorize NEAR CLI for this new account, and follow the instructions it gives you:
+Now authorize via NEAR CLI for this new account, then follow the instructions to complete the process:
 
-```bash
+```text
 near login
 ```
 
-#### 3) Deploy the smart contracts
+## Deploy with yarn
 
-```bash
+```text
 yarn deploy
 ```
 
 As you can see in `package.json`, this builds & deploys smart contracts to NEAR testnet.
 
-Note down the smart contract account id from the console and update it in src/config.js:1
+```json
+{
+    "build": "yarn build:contract",
+    "build:contract": "asb",
+    "build:contract:debug": "asb --target debug",
+    "deploy": "yarn build && near deploy",
+    "dev": "yarn build:contract:debug && near dev-deploy",
+    "test": "yarn build:contract:debug && asp"
+}
+```
+
+Take note of the smart contract account id from the console and update it in `src/config.js`.
 
 # Run the Frontend locally
 
-Run the following commands from the near-registry folder
+To see the frontend as it will appear after deployment, we need to use the local development server. Run the following commands from the `near-registry` directory:
 
-```bash
+```text
 cd src
 yarn install
 yarn start
 ```
 
-Then visit http://localhost:1234 from your browser to test the Near Registry
+Now you can visit http://localhost:1234 in your browser to test the NEAR Registry frontend and smart contracts deployed on the NEAR testnet.
 
 # Deploy the Frontend using netlify
 
-Run the following commands from the near-registry folder
+When you are happy with the looks and functionality of the dApp, you can deploy to a remote server. Run the following commands from the `near-registry` directory:
 
-```bash
+```text
 cd src
 yarn build
 yarn global add netlify-cli
@@ -310,7 +282,7 @@ netlify login
 netlify deploy --prod
 ```
 
-Then follow the instructions given by the netlify cli and specify `./dist` as the publish directory
+You must follow the instructions given by the netlify CLI and specify `./dist` as the publish directory.
 
 
 # Screenshots
@@ -326,8 +298,7 @@ Then follow the instructions given by the netlify cli and specify `./dist` as th
 https://near-registry.netlify.app/
 
 # Conclusion
-Congratulations! We have successfully deployed the NEAR Registry smart contract on the NEAR testnet. We have also tested the smart 
-contracts by writing the test cases. We have then interacted with the smart contracts using the React frontend. 
+Congratulations! We have successfully deployed the NEAR Registry smart contract on the NEAR testnet. We have also tested the smart contracts by writing the test cases. We have then interacted with the smart contracts using the React frontend.
 
 # References
 * NEAR Guest Book - https://github.com/near-examples/guest-book/
