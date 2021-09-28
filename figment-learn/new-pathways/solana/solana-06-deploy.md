@@ -143,7 +143,7 @@ solana-keygen new --outfile solana-wallet/keypair.json
 You will need **SOL** available in the account to deploy the program, so get an airdrop with:
 
 ```bash
-solana airdrop 5 $(solana-keygen pubkey solana-wallet/keypair.json)
+solana airdrop 1 $(solana-keygen pubkey solana-wallet/keypair.json)
 ```
 
 Verify that everything is ok:
