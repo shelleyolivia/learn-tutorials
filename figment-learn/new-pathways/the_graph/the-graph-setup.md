@@ -26,7 +26,7 @@ To get your alchemy API key you:
 - Create a simple dapps.
 - Copy and paste your API key in safe place.
 
-![](../../../.gitbook/assets/graph-alchemy-setup.png
+![](../../../.gitbook/assets/pathways/graph-alchemy-setup.gif)
 
 ---
 
