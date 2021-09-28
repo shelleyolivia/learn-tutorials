@@ -18,7 +18,7 @@ We will use this seed later in this tutorial. Here is an article about [How to r
 # Getting started
 1. In order to transfer assets between **root** (Ethereum) and **child** (Polygon) contracts, they should be mapped first. This is a process by which an existing token contract is mirrored between the root and child chain.  
 If the token you intend to transfer already exists on **Polygon**, this means you don't need to perform the **mapping**.  
-Check the [official docs](https://docs.matic.network/docs/develop/ethereum-matic/submit-mapping-request) to learn about the mapping process.
+Check the [official docs](https://docs.polygon.technology/docs/develop/ethereum-matic/submit-mapping-request/) to learn about the mapping process.
 2. After we mapped the contract, it's time to transfer the assets. We can either use the [Mintnft](https://bridge.mintnft.today/) or the [Polygon SDK](https://polygon.technology/polygon-sdk/). We will use both of them
 
 # Setting up Metamask
@@ -74,14 +74,13 @@ ERC-1155 contracts have a `balanceOf` function. It takes two arguments:
 If you have already configured a provider and the truffle-hdwallet-provider,  you can use this function to check your ERC-1155 tokens. 
 
 ```javascript
-async function getTokenBalance(web3, address, contractABI, contractAddress)
-{
+async function getTokenBalance(web3, address, contractABI, contractAddress) {
 	let contractInstanse = new web3.eth.Contract(contractABI, contractAddress);
 	let result = await contractInstanse.methods.balanceOf(address, 0).call() // 0 is a tokenID
-	console.log(`TokenID ${0}:` , result);
-  
+	console.log(`TokenID ${0}:`, result);
+
 	result = await contractInstanse.methods.balanceOf(address, 1).call() // 1 is a tokenID
-	console.log(`TokenID ${1}:` , result);
+	console.log(`TokenID ${1}:`, result);
 }
 ```
 
@@ -109,10 +108,20 @@ const secrets = require('./secrets.json')
 let address = "0xD8f24D419153E5D03d614C5155f900f4B5C8A65C"; // The address to check balance of
 
 let contractAddressInMumbai = "0x7242B6E18F85DB7b2A19d027e0b81Dcf6637C68b"; // Mumbai Contract Address
-let contractABIMumbai = [{"inputs":[{"internalType":"uint256","name":"MLBF......."}]}]
+let contractABIMumbai = [{
+	"inputs": [{
+		"internalType": "uint256",
+		"name": "MLBF......."
+	}]
+}]
 
 let contractAddressGoerli = "0x11C47A4F19cc52923b9C495080ADB441ADe38883"; // Goerli Contract Address
-let contractABIGoerli = [{"inputs":[{"internalType":"uint256","name":"MLBF......."}]}]
+let contractABIGoerli = [{
+	"inputs": [{
+		"internalType": "uint256",
+		"name": "MLBF......."
+	}]
+}]
 
 const provider = new HDWalletProvider(secrets.privateKey, secrets.mumbai); // mumbai Provider
 // const provider = new HDWalletProvider(secrets.privateKey, secrets.localGeth); // Goerli Provider
@@ -120,12 +129,9 @@ const provider = new HDWalletProvider(secrets.privateKey, secrets.mumbai); // mu
 const web3 = new Web3(provider);
 
 (async () => {
-	try
-	{
+	try {
 		await getBalance()
-	}
-	catch (e)
-	{
+	} catch (e) {
 		console.log(e)
 	}
 })()
@@ -133,10 +139,10 @@ const web3 = new Web3(provider);
 async function getBalance() {
 	let contractInstanse = new web3.eth.Contract(contractABIMumbai, contractAddressInMumbai);
 	let result = await contractInstanse.methods.balanceOf(address, 0).call()
-	console.log(`TokenID ${0}:` , result);
+	console.log(`TokenID ${0}:`, result);
 
 	result = await contractInstanse.methods.balanceOf(address, 1).call()
-	console.log(`TokenID ${1}:` , result);
+	console.log(`TokenID ${1}:`, result);
 }
 ```
 
@@ -224,7 +230,8 @@ To **approve** the **Ethereum Predicate Contract** we just need to call the `app
 
 ```javascript
 let result = await maticPOSClient.approveERC1155ForDeposit(rootToken, {
-  from: user, gasPrice: "10000000000"
+	from: user,
+	gasPrice: "10000000000"
 });
 ```
 
@@ -233,12 +240,14 @@ Next, we would call the `depositERC20ForUser` function of the **Ethereum Predica
 
 ```javascript
 let result_2 = await maticPOSClient.depositSingleERC1155ForUser(
-  rootToken,
-  user,
-  tokenId.toString(),
-  amount,
-  data,
-  { from: user, gasPrice: "10000000000" }
+	rootToken,
+	user,
+	tokenId.toString(),
+	amount,
+	data, {
+		from: user,
+		gasPrice: "10000000000"
+	}
 )
 ```
 
@@ -247,7 +256,9 @@ To bring it all together in JavaScript that can be executed either in a web brow
 ```javascript
 // main.js
 const HDWalletProvider = require("@truffle/hdwallet-provider")
-const { MaticPOSClient } = require("@maticnetwork/maticjs")
+const {
+	MaticPOSClient
+} = require("@maticnetwork/maticjs")
 const secrets = require("./secrets.json")
 
 let user = "0xD8f24D419153E5D03d614C5155f900f4B5C8A65C"
@@ -267,26 +278,25 @@ const maticPOSClient = new MaticPOSClient({
 });
 
 
-(async () =>
-{
-	try
-	{
+(async () => {
+	try {
 		let result = await maticPOSClient.approveERC1155ForDeposit(rootToken, {
-			from: user, gasPrice: "10000000000"
+			from: user,
+			gasPrice: "10000000000"
 		})
 		let result_2 = await maticPOSClient.depositSingleERC1155ForUser(
 			rootToken,
 			user,
 			tokenId.toString(),
 			amount,
-			data,
-			{ from: user, gasPrice: "10000000000" }
+			data, {
+				from: user,
+				gasPrice: "10000000000"
+			}
 		)
 		console.log(result)
 		console.log(result_2)
-	}
-	catch (error)
-	{
+	} catch (error) {
 		console.log(error)
 	}
 })()
@@ -434,9 +444,6 @@ And for Mumbai:
 TokenID 0: 999
 TokenID 1: 0
 ```
-
-
-
 
 # Transfer using Web UI
 Transferring assets through **Web UI** is pretty simple. Just like the SDK, there is the **Approve** and a **Deposit** steps.
