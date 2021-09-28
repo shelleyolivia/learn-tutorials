@@ -1,8 +1,8 @@
-# Why should I consider running a local graph node?
+# Why running a local graph node?
 
 Developers are familiar with the idea of running a local webserver at the early stage of their work. Following the same principe we're going to do the same for the **THE GRAPH**. To sum up local graph node can be seen as a local webserver.
 
-# Then How could I setup my local graph node?
+# How to setup a local graph node?
 
 If you have follow up the setup, you should now have:
 
@@ -30,7 +30,7 @@ A graph node is deliver with two storages' solutions and one API endpoints.
 - An GraphQL API endpoints (more on this later).
 
 {% hint style="warning" %}
-Linux's users have to run a script before running the above commands: `chmod +x ./scripts.sh && sudo ./script.sh`
+Linux's users have to run a script before all: `sudo ./script.sh`
 {% endhint %}
 
 # Time to verify your work
