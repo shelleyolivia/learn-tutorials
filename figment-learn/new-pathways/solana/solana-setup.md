@@ -2,9 +2,6 @@
 
 The following software is required to set up and complete the **Solana** Pathway :
 
-* [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed
-* [Node.js](https://nodejs.org/) v14.17.0 or higher installed
-* [yarn](https://yarnpkg.com/getting-started/install) installed
 * [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools) latest release installed
 
 > **Windows Users:** There are known compatibility issues with the Solana BPF toolchain. You will need to use the Windows Subsystem for Linux. Please refer to the [installation guide](https://docs.figment.io/network-documentation/extra-guides/solana-setup-for-windows) we have provided. 
