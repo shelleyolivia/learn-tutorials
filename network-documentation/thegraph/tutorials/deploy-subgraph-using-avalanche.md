@@ -306,6 +306,8 @@ graph init \
 
 Replace `<YOUR FUJI SMART CONTRACT ADDRESS>` with your deployed VendingMachine smart contract address from above.
 
+If you are using Windows, replace the `\` characters in the above command with `^`.
+
 This will output:
 
 ```text
