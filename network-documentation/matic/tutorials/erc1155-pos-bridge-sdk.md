@@ -396,29 +396,30 @@ Just a few things to mention:
 * `rootToken`: The ERC-1155 contract address on the Goerli testnet
 * `amount`: the amount of **token** we want to transfer.
 
-## Not able to run main.js 
-* If you are facing an error message like
+# Potential errors and solutions
+
+**Not able to run main.js**
+
+If you are facing an error message like
 
 ```text
-Error: execution reverted: ERC1155: approve to the zero address
+Error: execution reverted: RootChainManager: TOKEN_NOT_MAPPED
 ```
 
-The contract probably has not been mapped yet.
+The contract has not been mapped yet.
 
-* If you have not run Geth, you will get an error like this
+**Geth not running**
+
+If you have not run Geth, you will get an error like this
 
 ```text
-(node:3962) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)
-(node:3962) [DEP0018] DeprecationWarning: Unhandled terminate the Node.js process with a non-zero exit code.
-node_modules/safe-event-emitter/index.js:74
-      throw err
-      ^
-
 Error: PollingBlockTracker - encountered an error while attempting to update latest block:
 Error: connect ECONNREFUSED 127.0.0.1:8545
 ```
 
-* If you get an error like this
+**No peers available**
+
+If you get an error like this
 
 ```javascript
 {
@@ -429,7 +430,7 @@ Error: connect ECONNREFUSED 127.0.0.1:8545
 
 Wait a bit and try again
 
-## Sync & Confirmation
+# Sync & Confirmation
 
 It takes up to 5 minutes for Mumbai to read data from the Goerli chain and sync itself. Once it has synced, then we can check the token balance via `web3js`.
 
@@ -449,7 +450,7 @@ TokenID 1: 0
 # Transfer using Web UI
 Transferring assets through **Web UI** is pretty simple. Just like the SDK, there is the **Approve** and a **Deposit** steps.
 
-1. Open [mintnft](https://bridge.mintnft.today/)
+1. Open [MintNFT Bridge](https://bridge.mintnft.today/)
 2. Make sure Goerli Testnet is selected in Metamask
 
   ![Metamask Goerli](../../../.gitbook/assets/erc1155-pos-metamask-eth-goerli.png)
