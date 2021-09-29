@@ -1,13 +1,10 @@
 # Introduction
 
-This tutorial demonstrates and teaches how to build a graph for a dapp with multiple smart contracts. It uses the Uniswap AMM market contracts as an example of a dapp with multiple smart contracts.
+Most dapps span across multiple smart contracts with many of them being created dynamically. This tutorial demonstrates how to build a subgraph for a complex multi smart contract dapp with contracts deployed at runtime.
+
+It uses the Uniswap AMM market contracts as an example as the reader might be familiar with it. We will start with the factory contract which deploys uniswap pairs and then use events to be able to add the newly created pairs to our subgraph.
 
 ![Subgraph Studio](../../../.gitbook/assets/graph.png)
-
-Topics covered in this tutorial:
-- Creating a subgraph for multi smartcontract dapp
-- Adding dynamic data sources from assemblyScript
-- Deploying subgraph to graph studio
 
 
 # Prerequisites
@@ -16,17 +13,19 @@ To successfully complete this tutorial, you will need to have a basic understand
 
 # Requirements
 
-As the previous tutorial, please make sure you have graph-cli installed in your computer.
+As the previous tutorial, to complete this tutorial, you will need the Graph CLI installed: https://www.npmjs.com/package/@graphprotocol/graph-cli
 
 # Creating a Graph Project
 
 After you have graph-cli installed, you can create a new subgraph using the `graph init command`
 
 ```bash
-yarn exec graph init uni-subgraph
+graph init uni-subgraph
 ```
 
-![Init](../../../.gitbook/assets/pathways/thegraph/init.png)
+For newer Macbooks you might need `yarn exec graph init uni-subgraph` depending upon your system permissions.
+
+![Init](../../../.gitbook/assets/graphinit.png)
 
 For the network, put mainnet. The contract address for Uniswap Factory Contract is "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f" and it remains the same across all test networks as well.
 
@@ -37,7 +36,7 @@ Graph will fetch the ABI of this contract for you and also initialize some of th
 In this tutorial, we are going to keep track of the reserves of tokens in uniswap pairs.
 As you know, pairs in uniswap are created dynamically by the factory contract. The factory contract deploys the pair contract and then users can add liquidity to these contracts. Since the pair contract address is not known in advance, we will be dynamically taking the address of the pairs from the events emitted by the Factory contract. Whenever a new pair is created PairCreated event is emitted. We will be listening to this event and add the new pair contracts as data sources when they are created.
 
-![Uniswap Diagram](../../../.gitbook/assets/pathways/thegraph/uniswap.png)
+![Uniswap Diagram](../../../.gitbook/assets/graphuniswap.png)
 
 # Downloading the ABIs
 
@@ -271,17 +270,19 @@ For this we will need to go to the studio https://thegraph.com/studio/ and get t
 
 Then in the subgraph studio, try to copy the deploy key from the dashboard.
 
-In the cli, do 
+In the cli, now you can authenticate using the following command.
+
 ```bash 
 graph auth --product subgraph-studio uni-subgraph
 ```
 
+After authentication is done, you can deploy your graph to subgraph studio.
 
 ```bash
 yarn deploy
 ```
 
-And enter the version. You should see the graph deployed.
+You can now enter any version you like in the `vmajor.minor.patch` format. You should see the subgraph deployment success on your terminal.
 
 ```text
 yarn run v1.22.10
@@ -326,14 +327,14 @@ Queries (HTTP):     https://api.studio.thegraph.com/query/4570/uni-subgraph/v0.1
 Subscriptions (WS): https://api.studio.thegraph.com/query/4570/uni-subgraph/v0.1.0
 ```
 
-You can now go to https://thegraph.com/studio/subgraph/uni-subgraph/ to play with your graph. You should see a `syncing` status and you can start making queries once the progress reached 100. 
+You can now go to https://thegraph.com/studio/subgraph/uni-subgraph/ to play with your subgraph. You should see a `syncing` status and you can start making queries once the progress reaches 100. 
 
-![Init](../../../.gitbook/assets/pathways/thegraph/playground.png)
+![Playground](../../../.gitbook/assets/graphplayground.png)
 
 
 # Conclusion
 
-Congratulations on finishing this tutorial! You also learned how to create a multi smart contract subgraph and adding dynamic data sources to the subgraph.
+Congratulations on finishing this tutorial! You learned how to create a subgraph for a dapp with multiple smartcontracts and how to add smartcontracts to your subgraph that are dynamically created.
 
 # About the Author
 
