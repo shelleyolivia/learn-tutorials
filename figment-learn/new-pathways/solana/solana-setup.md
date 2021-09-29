@@ -1,24 +1,14 @@
 # Requirements
 
-The following software is required to set up and complete the **Solana** Pathway :
-
-* [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools) latest release installed
+Make sure you've installed the [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools)'s latest release.
 
 > **Windows Users:** There are known compatibility issues with the Solana BPF toolchain. You will need to use the Windows Subsystem for Linux. Please refer to the [installation guide](https://docs.figment.io/network-documentation/extra-guides/solana-setup-for-windows) we have provided. 
 >
 > **macOS Users:** If you are using any of the Apple Silicon products (M1 processor), you may need to build from source. [Refer to this GitHub PR for more information](https://github.com/solana-labs/solana/pull/16346/).
 
-Start by cloning the repository and installing the dependencies with yarn :
-
-```text
-git clone https://github.com/figment-networks/learn-web3-dapp.git
-cd learn-web3-dapp
-yarn
-```
-
 ---------------------------
 
-# Set your API key
+# Set your Datahub API key
 
 Create an `.env.local` file at the root of the directory by copying the existing `.env.example` file with the terminal command `cp .env.example .env.local`.
 
@@ -29,25 +19,6 @@ The value for `DATAHUB_SOLANA_API_KEY` can be found on the [DataHub Services Das
 {% hint style="info" %}
 [**Join us on Discord**](https://discord.gg/fszyM7K), if you encounter any issues with the tutorial or have any questions!
 {% endhint %}
-
----------------------------
-
-# Start the server
-
-With the API key in place, save the `.env.local` file and start the React interface with :
-
-```text
-yarn dev
-```
-
-Once the development server loads and compiles the application, open your default browser and go to `http://localhost:3000` :
-
-![](../../../.gitbook/assets/pathway-home.gif)
-
-
-> Did you know you can change the port? By default Next.js uses port 3000, but if you have another service already running on that port, use the `--port` flag, like `yarn dev --port 1122`.
-
---------------------------
 
 # Using a Test Validator
 
@@ -80,7 +51,5 @@ During the Pathway, you will need to generate a keypair for use in the tutorials
 ---------------------------
 
 # Next
-
-**NOTE**: The "Next Step" button on the pathway UI will be disabled until you have successfully performed the action of the curent step.
 
 You can now move ahead to the instructions of the first tutorial step by clicking on the "Next" button below on the right. There are also links to the instructions for each step on the UI, for your convenience.
