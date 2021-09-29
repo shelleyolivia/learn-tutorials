@@ -2,7 +2,7 @@
 In this tutorial, we will go through the process of transferring ERC-1155 tokens to the Polygon (Matic) chain, using the Polygon PoS SDK.  
 We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and a custom ERC-1155 that has been deployed and its source code has been verified on Etherscan. There is [a step-by-step guide](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC1155) written by the author of this tutorial.  
 The Polygon Proof of Stake (PoS) Bridge is a mechanism and a set of contracts on both Ethereum and Polygon that will help us in moving assets between the **root** chain and **child** chain.    
-In contrast to the [Plasma Bridge](https://docs.matic.network/docs/develop/ethereum-matic/plasma/getting-started/), the Polygon PoS bridge is much faster and making it a better choice for DApps that are looking for faster withdrawals.
+In contrast to the [Plasma Bridge](https://docs.matic.network/docs/develop/ethereum-matic/plasma/getting-started/), the Polygon PoS bridge is much faster, making it a better choice for dApps that are looking for faster withdrawals.
 
 # Prerequisites
 In this tutorial, we will use Metamask as our wallet. If you are not familiar with it or don't know how to use it, check [this video on Youtube](https://www.youtube.com/watch?v=Af_lQ1zUnoM).  
@@ -24,7 +24,7 @@ Check the [official docs](https://docs.polygon.technology/docs/develop/ethereum-
 # Setting up Metamask
 Before we get into the details of moving the tokens, let's set up **Metamask** so we can check our **ETH**, **MATIC**, and **MLBs** token balances.
 
-> Note: At the time of writing this article Metamask desktop version is not supporting ERC-1155 very well. It does not show the balance but provides a link to the balance. So we will check balances using `web3js`.
+> Note: At the time of writing this tutorial, Metamask desktop version is not supporting ERC-1155 very well. It does not show the balance but provides a link to the balance. So we will check balances using `web3js`.
 
 ## Goerli
 The Goerli testnet is pre-configured in Metamask's list of available networks. You can select it from the dropdown list at the top of the Metamask interface.  
@@ -46,7 +46,7 @@ You can fund your **Mumbai** account with MATIC [here](https://faucet.polygon.te
 
 # MLBs ERC-1155 Contract
 ERC-1155 is a token standard where you can have multiple fungible and non-fungible tokens in **one** smart contract.  
-`MLBs` is the contract we have already deployed on the Goerli testnet. An standdard OpenZeppelin ERC-1155.  
+`MLBs` is the contract we have already deployed on the Goerli testnet. It is a standard OpenZeppelin ERC-1155.  
 This contract contains two tokens only:
 * `MLBFun` which is a fungible token with id 0
 * `MLBNFun` which is a non-fungible token with id 1
@@ -75,12 +75,12 @@ If you have already configured a provider and the truffle-hdwallet-provider,  yo
 
 ```javascript
 async function getTokenBalance(web3, address, contractABI, contractAddress) {
-	let contractInstanse = new web3.eth.Contract(contractABI, contractAddress);
-	let result = await contractInstanse.methods.balanceOf(address, 0).call() // 0 is a tokenID
-	console.log(`TokenID ${0}:`, result);
+  let contractInstance = new web3.eth.Contract(contractABI, contractAddress);
+  let result = await contractInstance.methods.balanceOf(address, 0).call() // 0 is a tokenID
+  console.log(`TokenID ${0}:`, result);
 
-	result = await contractInstanse.methods.balanceOf(address, 1).call() // 1 is a tokenID
-	console.log(`TokenID ${1}:`, result);
+  result = await contractInstance.methods.balanceOf(address, 1).call() // 1 is a tokenID
+  console.log(`TokenID ${1}:`, result);
 }
 ```
 
@@ -109,18 +109,18 @@ let address = "0xD8f24D419153E5D03d614C5155f900f4B5C8A65C"; // The address to ch
 
 let contractAddressInMumbai = "0x7242B6E18F85DB7b2A19d027e0b81Dcf6637C68b"; // Mumbai Contract Address
 let contractABIMumbai = [{
-	"inputs": [{
-		"internalType": "uint256",
-		"name": "MLBF......."
-	}]
+  "inputs": [{
+    "internalType": "uint256",
+    "name": "MLBF......."
+  }]
 }]
 
 let contractAddressGoerli = "0x11C47A4F19cc52923b9C495080ADB441ADe38883"; // Goerli Contract Address
 let contractABIGoerli = [{
-	"inputs": [{
-		"internalType": "uint256",
-		"name": "MLBF......."
-	}]
+  "inputs": [{
+    "internalType": "uint256",
+    "name": "MLBF......."
+  }]
 }]
 
 const provider = new HDWalletProvider(secrets.privateKey, secrets.mumbai); // mumbai Provider
@@ -129,20 +129,20 @@ const provider = new HDWalletProvider(secrets.privateKey, secrets.mumbai); // mu
 const web3 = new Web3(provider);
 
 (async () => {
-	try {
-		await getBalance()
-	} catch (e) {
-		console.log(e)
-	}
+  try {
+    await getBalance()
+  } catch (e) {
+    console.log(e)
+  }
 })()
 
 async function getBalance() {
-	let contractInstanse = new web3.eth.Contract(contractABIMumbai, contractAddressInMumbai);
-	let result = await contractInstanse.methods.balanceOf(address, 0).call()
-	console.log(`TokenID ${0}:`, result);
+  let contractInstance = new web3.eth.Contract(contractABIMumbai, contractAddressInMumbai);
+  let result = await contractInstance.methods.balanceOf(address, 0).call()
+  console.log(`TokenID ${0}:`, result);
 
-	result = await contractInstanse.methods.balanceOf(address, 1).call()
-	console.log(`TokenID ${1}:`, result);
+  result = await contractInstance.methods.balanceOf(address, 1).call()
+  console.log(`TokenID ${1}:`, result);
 }
 ```
 
@@ -150,10 +150,10 @@ async function getBalance() {
 
 ```json
 {
-	"privateKey": "This should be the private key of an account specifically made for use on the Goerli testnet",
-	"seed": "This should be a Secret Recovery Phrase from Metamask and ONLY used on Ethereum testnets",
-	"mumbai": "https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/YOUR_API_KEY/",
-	"localGeth": "http://127.0.0.1:8545"
+  "privateKey": "This should be the private key of an account specifically made for use on the Goerli testnet",
+  "seed": "This should be a Secret Recovery Phrase from Metamask and ONLY used on Ethereum testnets",
+  "mumbai": "https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/YOUR_API_KEY/",
+  "localGeth": "http://127.0.0.1:8545"
 }
 ```
 
@@ -163,7 +163,7 @@ Now that everything is ready. Let's map our `MLBs` contract.
 * Make sure the token you want to map has had its [contract verified](https://etherscan.io/verifyContract) on Etherscan
 * Choose **Gorli Testnet -> Mumbai testnet**
 
-	![map image](../../../.gitbook/assets/erc1155-pos-map.png)
+  ![map image](../../../.gitbook/assets/erc1155-pos-map.png)
 
 * At this time the mapping process is not immediate. It can take up to 3 days to be confirmed.  
 
@@ -184,8 +184,8 @@ We don't yet have any tokens in Mumbai. We can transfer some across the bridge a
 Let's take a look at the workflow for transferring tokens with the SDK:
 
 1. **Approve:** The owner of the token has to approve the **Ethereum Predicate Contract** which will **lock** the amount of token they want to transfer to Polygon.
-2. **Deposit:** Then a function has to be called on the `RootChainManger` contract which will trigger the `ChildChainManager` contract on the Mumbai testnet. The `ChildChainManager` contract will then call the **deposit** function of the `Child token` contract.  
-**Child** contract is the copy of the **Goerli** token contract in **Mumbai**.  
+2. **Deposit:** Then a function has to be called on the **RootChainManger** contract which will trigger the **ChildChainManager** contract on the Mumbai testnet. The **ChildChainManager** contract will then call the **deposit** function of the **Child token** contract.  
+The **Child** contract is the copy of the **Goerli** testnet token contract in **Mumbai** testnet.  
 
 ## Providers
 To interact with **Goerli** and **Mumbai** we can either run a local node (which is slightly more difficult) or use the RPC endpoints of infrastructure providers like DataHub or Infura (which is much simpler).
@@ -193,7 +193,8 @@ To interact with **Goerli** and **Mumbai** we can either run a local node (which
 For **Goerli**, we will run a local Geth node. You can also use [infura](https://infura.io).  
 For **Mumbai**, we will use [DataHub](https://datahub.figment.io/)
 
-### Goerli
+**Goerli**:
+
 [Install the Geth client](https://geth.ethereum.org/docs/install-and-build/installing-geth), if you have not installed it already, then run:
 
 ```text
@@ -208,11 +209,11 @@ geth attach http://127.0.0.1:8545
 eth.getBalance("0xD8f24D419153E5D03d614C5155f900f4B5C8A65C")
 ```
 
-### Mumbai
+**Mumbai**:
+
 * Sign up for a [DataHub](https://datahub.figment.io/) 
 * Choose the Polygon service from the [DataHub Services Dashboard](https://datahub.figment.io/services/Polygon/)
 * Scroll down to see the Polygon endpoint URLs
-* Copy the Mumbai Testnet JSONRPC URL. It is probably located [here](https://datahub.figment.io/services/Polygon/matic-mumbai--jsonrpc)
 * Form the URL like so, replacing the text YOUR_API_KEY with the API key you got from DataHub:
 `https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/YOUR_API_KEY/`
 
@@ -230,8 +231,8 @@ To **approve** the **Ethereum Predicate Contract** we just need to call the `app
 
 ```javascript
 let result = await maticPOSClient.approveERC1155ForDeposit(rootToken, {
-	from: user,
-	gasPrice: "10000000000"
+  from: user,
+  gasPrice: "10000000000"
 });
 ```
 
@@ -240,14 +241,14 @@ Next, we would call the `depositERC20ForUser` function of the **Ethereum Predica
 
 ```javascript
 let result_2 = await maticPOSClient.depositSingleERC1155ForUser(
-	rootToken,
-	user,
-	tokenId.toString(),
-	amount,
-	data, {
-		from: user,
-		gasPrice: "10000000000"
-	}
+  rootToken,
+  user,
+  tokenId.toString(),
+  amount,
+  data, {
+    from: user,
+    gasPrice: "10000000000"
+  }
 )
 ```
 
@@ -257,13 +258,13 @@ To bring it all together in JavaScript that can be executed either in a web brow
 // main.js
 const HDWalletProvider = require("@truffle/hdwallet-provider")
 const {
-	MaticPOSClient
+  MaticPOSClient
 } = require("@maticnetwork/maticjs")
 const secrets = require("./secrets.json")
 
 let user = "0xD8f24D419153E5D03d614C5155f900f4B5C8A65C"
 let rootToken = "0x11C47A4F19cc52923b9C495080ADB441ADe38883" // Goerli Contract Address
-let amount = 999 // amount of token we want to trasnfer
+let amount = 999 // Amount of token we want to transfer
 let tokenId = 0 // Token ID
 let data = "0x0" // Additional data
 
@@ -271,34 +272,34 @@ const parentProvider = new HDWalletProvider(secrets.seed, "http://127.0.0.1:8545
 const maticProvider = new HDWalletProvider(secrets.seed, secrets.mumbai) // DataHub Mumbai Testnet JSONRPC URL
 
 const maticPOSClient = new MaticPOSClient({
-	network: "testnet",
-	version: "mumbai",
-	parentProvider,
-	maticProvider
+  network: "testnet",
+  version: "mumbai",
+  parentProvider,
+  maticProvider
 });
 
 
 (async () => {
-	try {
-		let result = await maticPOSClient.approveERC1155ForDeposit(rootToken, {
-			from: user,
-			gasPrice: "10000000000"
-		})
-		let result_2 = await maticPOSClient.depositSingleERC1155ForUser(
-			rootToken,
-			user,
-			tokenId.toString(),
-			amount,
-			data, {
-				from: user,
-				gasPrice: "10000000000"
-			}
-		)
-		console.log(result)
-		console.log(result_2)
-	} catch (error) {
-		console.log(error)
-	}
+  try {
+    let result = await maticPOSClient.approveERC1155ForDeposit(rootToken, {
+      from: user,
+      gasPrice: "10000000000"
+    })
+    let result_2 = await maticPOSClient.depositSingleERC1155ForUser(
+      rootToken,
+      user,
+      tokenId.toString(),
+      amount,
+      data, {
+        from: user,
+        gasPrice: "10000000000"
+      }
+    )
+    console.log(result)
+    console.log(result_2)
+  } catch (error) {
+    console.log(error)
+  }
 })()
 ```
 
@@ -384,9 +385,9 @@ Just a few things to mention:
 
 ```json
 {
-	"privateKey": "This should be the private key of an account specifically made for use on the Goerli testnet",
-	"seed": "This should be a Secret Recovery Phrase from Metamask and ONLY used on Ethereum testnets",
-	"mumbai": "https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/YOUR_API_KEY/"
+  "privateKey": "This should be the private key of an account specifically made for use on the Goerli testnet",
+  "seed": "This should be a Secret Recovery Phrase from Metamask and ONLY used on Ethereum testnets",
+  "mumbai": "https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/YOUR_API_KEY/"
 }
 ```
 
@@ -451,8 +452,8 @@ Transferring assets through **Web UI** is pretty simple. Just like the SDK, ther
 1. Open [mintnft](https://bridge.mintnft.today/)
 2. Make sure Goerli Testnet is selected in Metamask
 
-	![Metamask Goerli](../../../.gitbook/assets/erc1155-pos-metamask-eth-goerli.png)
-	
+  ![Metamask Goerli](../../../.gitbook/assets/erc1155-pos-metamask-eth-goerli.png)
+  
 3. Enter the contract address in Goerli and Mumbai, and ID of the token you want to transfer. We put 0 (MLBFun)
 
 4. Click on **Approve**
