@@ -18,7 +18,7 @@ You have very basic knowledge about Rust language and Substrate framework.
 
 During the tutorial we are going to make following steps:
 1. build the simplest Substrate based blockchain
-2. build runtime part where is implement logic (ewasm file)
+2. build runtime part where is implement logic (wasm file)
 3. run locally the blockchain
 4. check version already installed runtime
 5. upgrade runtime
@@ -55,6 +55,43 @@ Execute following command in order to build runtime wasm file: `WASM_TARGET_DIRE
 After successfully build a new file should appear in current directory:
 
 ![](./assets/ewasm.png)
+
+### Ad. 3: Run locally blockchain
+
+`make run`
+
+```
+Running `target/debug/node-template --dev -lruntime=debug`
+Sep 29 18:18:09.106  WARN Running in --dev mode, RPC CORS has been disabled.    
+Sep 29 18:18:09.106  INFO Substrate Node    
+Sep 29 18:18:09.106  INFO ✌️  version 2.0.0-73d7748-x86_64-linux-gnu    
+Sep 29 18:18:09.106  INFO ❤️  by Substrate DevHub <https://github.com/substrate-developer-hub>, 2017-2021    
+Sep 29 18:18:09.106  INFO 📋 Chain specification: Development    
+Sep 29 18:18:09.106  INFO 🏷  Node name: frantic-insect-7496    
+Sep 29 18:18:09.106  INFO 👤 Role: AUTHORITY    
+Sep 29 18:18:09.107  INFO 💾 Database: RocksDb at /home/tomek/.local/share/node-template/chains/dev/db    
+Sep 29 18:18:09.107  INFO ⛓  Native runtime: node-template-1 (node-template-1.tx1.au1)    
+Sep 29 18:18:10.070  INFO 🔨 Initializing Genesis block/state (state: 0x0f2a…c2cc, header-hash: 0x1e1d…f017)    
+Sep 29 18:18:10.073  INFO 👴 Loading GRANDPA authority set from genesis on what appears to be first startup.    
+Sep 29 18:18:10.294  INFO ⏱  Loaded block-time = 2000 milliseconds from genesis on first-launch    
+Sep 29 18:18:10.295  WARN Using default protocol ID "sup" because none is configured in the chain specs    
+Sep 29 18:18:10.296  INFO 🏷  Local node identity is: 12D3KooWNo1348XGxpiA9uFJn4GJdptp7NcX72pFXsGZXghPKLYa (legacy representation: 12D3KooWNo1348XGxpiA9uFJn4GJdptp7NcX72pFXsGZXghPKLYa)    
+Sep 29 18:18:10.618  INFO 📦 Highest known block at #0    
+Sep 29 18:18:10.620  INFO 〽️ Prometheus server started at 127.0.0.1:9615    
+Sep 29 18:18:10.624  INFO Listening for new connections on 127.0.0.1:9944.    
+Sep 29 18:18:12.249  INFO 🙌 Starting consensus session on top of parent 0x1e1dd820c46a22dbd297afd5a62e73511208bafe64c6dc9e6a171562c443f017    
+Sep 29 18:18:12.397  INFO 🎁 Prepared block for proposing at 1 [hash: 0x3b7c2d4f453358a70095cc0ad55a5f157a5be3d145c42213ea88c419b48966bf; parent_hash: 0x1e1d…f017; extrinsics (1): [0xff0f…0d06]]    
+Sep 29 18:18:12.515  INFO 🔖 Pre-sealed block for proposal at 1. Hash now 0xc61a8f6ea035c0fd2e8acef986a60ec92abbaaa1f30c4781603d4ec83591b216, previously 0x3b7c2d4f453358a70095cc0ad55a5f157a5be3d145c42213ea88c419b48966bf.    
+Sep 29 18:18:12.517  INFO ✨ Imported #1 (0xc61a…b216)    
+Sep 29 18:18:14.123  INFO 🙌 Starting consensus session on top of parent 0xc61a8f6ea035c0fd2e8acef986a60ec92abbaaa1f30c4781603d4ec83591b216
+```
+
+Access frontend of running locally node via: https://polkadot.js.org/apps/#/extrinsics?rpc=ws://127.0.0.1:9944
+
+![](./assets/frontend-before-upgrade.png)
+
+We can see that kitties has only `create()` function
+
 
 ## Troubleshooting
 
@@ -124,9 +161,3 @@ rustc 1.47.0-nightly (663d2f5cd 2020-08-22)
 ``
 
 Twitter's thread to the most possible issues: https://twitter.com/tomaszwaszczyk/status/1343512637909458944
-
-<!-- https://www.youtube.com/watch?v=MQgDV37JrIY
-
-https://substrate.dev/docs/en/tutorials/forkless-upgrade/
-
-https://www.notion.so/Sample-Tutorial-Structure-667ac2aad36f4f94a3ebaca053180b2d -->
