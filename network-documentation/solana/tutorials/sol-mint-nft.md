@@ -1,8 +1,6 @@
-# Minting a non-fungible token on our own marketplace
-
 # Introduction
 
-In this tutorial we will be creating a marketplace and a [non-fungible token](https://www.blockchain-council.org/blockchain/a-quick-guide-to-fungible-vs-non-fungible-tokens/#:~:text=Non%2DFungible%20are%20Non%2DInterchangeable,token%20of%20the%20same%20type.), otherwise known as an NFT, using the **Solana** blockchain. Since NFTs can be made as single or multiple editions, they can be used to represent real-world objects like music, art, in-game items and videos.
+In this tutorial we will be creating a marketplace and a [non-fungible token](https://www.blockchain-council.org/blockchain/a-quick-guide-to-fungible-vs-non-fungible-tokens/), otherwise known as an NFT, using the **Solana** blockchain. Since NFTs can be made as single or multiple editions, they can be used to represent real-world objects like music, art, in-game items and videos.
 
 We are going to create our NFT on our own marketplace. Refer to this [existing marketplace](https://jacobmakarsky.github.io/metaplex#/art/create) I created as an example, built with [Metaplex](https://github.com/metaplex-foundation/metaplex).
 
