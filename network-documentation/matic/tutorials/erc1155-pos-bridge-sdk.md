@@ -1,13 +1,11 @@
 # Introduction
 In this tutorial, we will go through the process of transferring ERC-1155 tokens to the Polygon (Matic) chain, using the Polygon PoS SDK.  
-We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and a custom ERC-1155 that has been deployed and its source code has been verified on Etherscan. There is [a step-by-step guide](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC1155) written by the author of this tutorial.  
-The Polygon Proof of Stake (PoS) Bridge is a mechanism and a set of contracts on both Ethereum and Polygon that will help us in moving assets between the **root** chain and **child** chain.    
-In contrast to the [Plasma Bridge](https://docs.matic.network/docs/develop/ethereum-matic/plasma/getting-started/), the Polygon PoS bridge is much faster, making it a better choice for dApps that are looking for faster withdrawals.
+We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and a custom ERC-1155 that has been deployed and its source code has been verified on Etherscan. The Polygon Proof of Stake (PoS) Bridge is a mechanism and a set of contracts on both Ethereum and Polygon that will help us in moving assets between the **root** chain and **child** chain. In contrast to the [Plasma Bridge](https://docs.matic.network/docs/develop/ethereum-matic/plasma/getting-started/), the Polygon PoS bridge is much faster, making it a better choice for dApps that are looking for faster withdrawals.
 
 # Prerequisites
-In this tutorial, we will use Metamask as our wallet. If you are not familiar with it or don't know how to use it, check [this video on Youtube](https://www.youtube.com/watch?v=Af_lQ1zUnoM).  
-When you are creating a Metamask wallet, it gives you a Secret Recovery Phrase (Seed). With this seed, you can recover **all** of your accounts in Metamask.  
-We will use this seed later in this tutorial. Here is an article about [How to reveal your Secret Recovery Phrase](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase)  
+In this tutorial, we will use Metamask as our wallet. If you are not familiar with it or don't know how to use it, check [this video on YouTube](https://www.youtube.com/watch?v=Af_lQ1zUnoM).  
+
+When you are creating a Metamask wallet, it gives you a Secret Recovery Phrase. With this phrase, you can recover **all** of your accounts in Metamask. We will use it later in this tutorial. Here is an article about [How to reveal your Secret Recovery Phrase](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase).
 
 # Requirements
 
@@ -19,7 +17,7 @@ We will use this seed later in this tutorial. Here is an article about [How to r
 1. In order to transfer assets between **root** (Ethereum) and **child** (Polygon) contracts, they should be mapped first. This is a process by which an existing token contract is mirrored between the root and child chain.  
 If the token you intend to transfer already exists on **Polygon**, this means you don't need to perform the **mapping**.  
 Check the [official docs](https://docs.polygon.technology/docs/develop/ethereum-matic/submit-mapping-request/) to learn about the mapping process.
-2. After we mapped the contract, it's time to transfer the assets. We can either use the [Mintnft](https://bridge.mintnft.today/) or the [Polygon SDK](https://polygon.technology/polygon-sdk/). We will use both of them
+2. After we mapped the contract, it's time to transfer the assets. We can either use the [Mintnft](https://bridge.mintnft.today/) or the [Polygon SDK](https://polygon.technology/polygon-sdk/). In this tutorial, we will use both of them.
 
 # Setting up Metamask
 Before we get into the details of moving the tokens, let's set up **Metamask** so we can check our **ETH**, **MATIC**, and **MLBs** token balances.
@@ -45,16 +43,15 @@ You can either open [mumbai.polygonscan.com](https://mumbai.polygonscan.com/) an
 You can fund your **Mumbai** account with MATIC [here](https://faucet.polygon.technology)
 
 # MLBs ERC-1155 Contract
-ERC-1155 is a token standard where you can have multiple fungible and non-fungible tokens in **one** smart contract.  
-`MLBs` is the contract we have already deployed on the Goerli testnet. It is a standard OpenZeppelin ERC-1155.  
-This contract contains two tokens only:
-* `MLBFun` which is a fungible token with id 0
-* `MLBNFun` which is a non-fungible token with id 1
 
-We'll map this contract and transfer some tokens.  
-You can find a step-by-step guide to creating an ERC-1155 token [here](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC1155)  
+> You can find a step-by-step guide to creating your own ERC-1155 token [here](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC1155).
 
-Contract info:
+ERC-1155 is a token standard where you can have multiple fungible and non-fungible tokens in **one** smart contract. `MLBs` is the contract we have already deployed on the Goerli testnet. It is a standard OpenZeppelin ERC-1155.  
+This contract only contains two tokens:
+* `MLBFun` which is a fungible token with id 0.
+* `MLBNFun` which is a non-fungible token with id 1.
+
+We'll map the following contract and transfer some tokens. This is the contract info:
 
 ```text
 Name: MLBs
@@ -68,10 +65,10 @@ Gather this information for the contract you intend to map.
 
 # Wallet Balance using Web3js
 ERC-1155 contracts have a `balanceOf` function. It takes two arguments:
-* Wallet Address: The address, for example, the contract owner (`0xD8f24D419153E5D03d614C5155f900f4B5C8A65C`)
-* TokenID: The token ID. For example, **0** refers to the `MLBFun` token in our ERC-1155 contract  
+* Wallet Address: The address, for example, the contract owner (`0xD8f24D419153E5D03d614C5155f900f4B5C8A65C`).
+* TokenID: The token ID. For example, **0** refers to the `MLBFun` token in our ERC-1155 contract.
 
-If you have already configured a provider and the truffle-hdwallet-provider,  you can use this function to check your ERC-1155 tokens. 
+If you have already configured a provider and the Truffle hdwallet-provider, you can use this function to check your ERC-1155 tokens:
 
 ```javascript
 async function getTokenBalance(web3, address, contractABI, contractAddress) {
@@ -93,7 +90,7 @@ TokenID 1: 1
 
 And for Mumbai:
 
-```
+```text
 TokenID 0: 0
 TokenID 1: 0
 ```
@@ -123,8 +120,11 @@ let contractABIGoerli = [{
   }]
 }]
 
-const provider = new HDWalletProvider(secrets.privateKey, secrets.mumbai); // mumbai Provider
-// const provider = new HDWalletProvider(secrets.privateKey, secrets.localGeth); // Goerli Provider
+// Mumbai Provider
+const provider = new HDWalletProvider(secrets.privateKey, secrets.mumbai);
+
+// Goerli Provider
+// const provider = new HDWalletProvider(secrets.privateKey, secrets.localGeth);
 
 const web3 = new Web3(provider);
 
@@ -161,7 +161,7 @@ async function getBalance() {
 Now that everything is ready. Let's map our `MLBs` contract.
 * Go to [mapper.matic.today](https://mapper.matic.today/map/) and complete the form
 * Make sure the token you want to map has had its [contract verified](https://etherscan.io/verifyContract) on Etherscan
-* Choose **Gorli Testnet -> Mumbai testnet**
+* Choose **Goerli Testnet -> Mumbai testnet**
 
   ![map image](../../../.gitbook/assets/erc1155-pos-map.png)
 
@@ -171,12 +171,12 @@ Then open [mapper.matic.today](https://mapper.matic.today/), and enter the contr
 
 ![mapped image](../../../.gitbook/assets/erc1155-pos-mapped.png)
 
-As you may notice, the contract address in Goerli and Mumbai is not the same. Let's remember to add it to Metamask so it shows up when we are connected to Mumbai as well.
+As you may notice, the contract addresses on Goerli and Mumbai are different. Let's remember to add it to Metamask so it shows up when we are connected to Mumbai as well.
 
-1. Open Metamask
-2. Select the Mumbai testnet from the list of available networks
-3. Add Token
-4. Paste the contract address there (`0x7242B6E18F85DB7b2A19d027e0b81Dcf6637C68b`)
+1. Open Metamask.
+2. Select the Mumbai testnet from the list of available networks.
+3. Add Token.
+4. Paste the contract address there (`0x7242B6E18F85DB7b2A19d027e0b81Dcf6637C68b`).
 
 We don't yet have any tokens in Mumbai. We can transfer some across the bridge and check our balance again afterward.
 
@@ -190,8 +190,8 @@ The **Child** contract is the copy of the **Goerli** testnet token contract in *
 ## Providers
 To interact with **Goerli** and **Mumbai** we can either run a local node (which is slightly more difficult) or use the RPC endpoints of infrastructure providers like DataHub or Infura (which is much simpler).
 
-For **Goerli**, we will run a local Geth node. You can also use [infura](https://infura.io).  
-For **Mumbai**, we will use [DataHub](https://datahub.figment.io/)
+For **Goerli**, we will run a local Geth node. You can also use [Infura](https://infura.io).  
+For **Mumbai**, we will use [DataHub](https://datahub.figment.io/).
 
 **Goerli**:
 
@@ -387,14 +387,15 @@ Just a few things to mention:
 {
   "privateKey": "This should be the private key of an account specifically made for use on the Goerli testnet",
   "seed": "This should be a Secret Recovery Phrase from Metamask and ONLY used on Ethereum testnets",
-  "mumbai": "https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/YOUR_API_KEY/"
+  "mumbai": "https://matic-mumbai--jsonrpc.datahub.figment.io/apikey/YOUR_API_KEY/",
+  "localGeth": "http://127.0.0.1:8545"
 }
 ```
 
-* `@truffle/hdwallet-provider`: Handles signing transactions process
-* `from`: The Goerli address we created token and want to send transactions with
-* `rootToken`: The ERC-1155 contract address on the Goerli testnet
-* `amount`: the amount of **token** we want to transfer.
+* `@truffle/hdwallet-provider`: Handles the process of signing transactions.
+* `from`: The Goerli address where we hold the token and want to send transactions with.
+* `rootToken`: The ERC-1155 contract address on the Goerli testnet.
+* `amount`: The amount of **token** we want to transfer.
 
 # Potential errors and solutions
 
@@ -448,22 +449,22 @@ TokenID 1: 0
 ```
 
 # Transfer using Web UI
-Transferring assets through **Web UI** is pretty simple. Just like the SDK, there is the **Approve** and a **Deposit** steps.
+Transferring assets through a **Web UI** is pretty simple. Just like the SDK, there are the **Approve** and **Deposit** steps:
 
-1. Open [MintNFT Bridge](https://bridge.mintnft.today/)
-2. Make sure Goerli Testnet is selected in Metamask
+1. Open [MintNFT Bridge](https://bridge.mintnft.today/).
+2. Make sure Goerli Testnet is selected in Metamask.
 
   ![Metamask Goerli](../../../.gitbook/assets/erc1155-pos-metamask-eth-goerli.png)
   
-3. Enter the contract address in Goerli and Mumbai, and ID of the token you want to transfer. We put 0 (MLBFun)
+3. Enter the contract address in Goerli and Mumbai, and ID of the token you want to transfer. We put 0 (MLBFun).
 
-4. Click on **Approve**
+4. Click on **Approve**.
 
   ![Approve](../../../.gitbook/assets/erc1155-pos-ui.png)
 
-5. Then review the transaction details, like gas fees and the smart contract you are sending tokens to - before clicking on **Confirm**
+5. Then review the transaction details, like gas fees and the smart contract you are sending tokens to - before clicking on **Confirm**.
 6. Now, wait until you receive confirmations. Metamask and the website both will send a notification.
-7. Now Click on **Deposit**
+7. Now Click on **Deposit**.
 
   ![Deposit](../../../.gitbook/assets/erc1155-pos-ui-deposit.png)
 
@@ -475,5 +476,4 @@ Transferring assets through **Web UI** is pretty simple. Just like the SDK, ther
 Congratulations! By completing this tutorial you learned how to use the **Polygon PoS Bridge**. We have configured **Metamask** and **Geth**, to communicate with the **Goerli** testnet and the **Mumbai** testnet. We then **mapped** an **ERC-1155** contract between the networks so it can be transferred via the bridge. Finally, we called functions on the PoS Bridge contracts and moved our assets from Ethereum to Polygon.
 
 # About The Author
-I'm mlibre, a random guy from the solar galaxy. I am interested in blockchain tech and find it very useful for lots of things.  
-Feel free to check my [Github](https://github.com/mlibre)
+I'm mlibre, a random guy from the solar galaxy. I am interested in blockchain tech and find it very useful for lots of things. Feel free to check my [Github](https://github.com/mlibre)
