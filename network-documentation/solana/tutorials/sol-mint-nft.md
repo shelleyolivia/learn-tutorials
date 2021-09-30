@@ -2,7 +2,7 @@
 
 # Introduction
 
-In this tutorial we will be creating a [non-fungible token](https://www.blockchain-council.org/blockchain/a-quick-guide-to-fungible-vs-non-fungible-tokens/#:~:text=Non%2DFungible%20are%20Non%2DInterchangeable,token%20of%20the%20same%20type.) marketplace and a non-fungible token, otherwise known as an NFT, using the **Solana** blockchain. Since NFT's are 1 of 1, they can represent real-world objects like music, art, in-game items and videos.
+In this tutorial we will be creating a marketplace and a [non-fungible token](https://www.blockchain-council.org/blockchain/a-quick-guide-to-fungible-vs-non-fungible-tokens/#:~:text=Non%2DFungible%20are%20Non%2DInterchangeable,token%20of%20the%20same%20type.), otherwise known as an NFT, using the **Solana** blockchain. Since NFTs can be made as single or multiple editions, they can be used to represent real-world objects like music, art, in-game items and videos.
 
 We are going to create our NFT on our own marketplace. Refer to this [existing marketplace](https://jacobmakarsky.github.io/metaplex#/art/create) I created as an example, built with [Metaplex](https://github.com/metaplex-foundation/metaplex).
 
@@ -12,9 +12,9 @@ Note: Bullet points in this tutorial are calls to action.
 
 # Prerequisites
 
-* Around $2 USD of [SOL](https://coinmarketcap.com/currencies/solana/) accessible, which we will send to a browser wallet. You can get some SOL through an exchange, such as [FTX](https://ftx.com/#a=13426316).
+* You will need around $2 USD of [SOL](https://coinmarketcap.com/currencies/solana/) accessible, which we will send to a browser wallet. You can get some SOL through an exchange, such as [FTX](https://ftx.com/#a=13426316).
 * Something to upload in the NFT, such as an image, video, audio file or an AR/3D file (.glb).
-* [Github account](https://github.com/)
+* A [Github account](https://github.com/)
 * [Git](https://git-scm.com/) installed
 
 ## Create and fund an SOL wallet
@@ -44,8 +44,6 @@ Now, we need to copy all of the Metaplex files over to our computer.
 ```text
 cd /Users/yourusername/Desktop/myNftMarketplace 
 ```
-
-![cdMarketplaceSol](../../../.gitbook/assets/cdMarketplaceSol.png)
 
 * Clone the repository to your marketplace folder
 
@@ -83,21 +81,17 @@ cd metaplex/js
 
 We should still have our terminal open from before, when we changed directory into our marketplace folder. Now, we changed directory to the `js` folder. 
 
-* Run the `yarn` command to download all of the dependencies
+* Run the following command to install all of the dependencies:
 
 ```text
 yarn
 ```
 
-![cdJsSol](../../../.gitbook/assets/cdJsSol.png)
-
 This command will begin downloading all of the dependencies that are required to work with the code. When we cloned the Metaplex repository, it didn't download the packages for us, it only downloaded the code that says what packages/dependencies are required. 
 
 The command will take a moment to finish downloading everything. When it is complete, it will output `Done` at the end.
 
-![yarnPackagesSol](../../../.gitbook/assets/yarnPackagesSol.png)
-
-* Run the `yarn bootstrap` command to check that all of the dependencies are working.
+* Run the following command to check that all of the dependencies are working:
 
 ```text
 yarn bootstrap
@@ -129,7 +123,11 @@ When it is complete, we should see it output `Done`, indicating the build has fi
 cd packages/web
 ```
 
-* Run the `yarn deploy` command
+* Run the following command while inside the `packages/web` folder to deploy:
+
+```text
+yarn deploy
+```
 
 Once complete, we should again see the output `Done`, indicating the deployment has finished. This command has deployed the marketplace site to our Github repository, which means... our marketplace is live! Now we can go check out the fresh new NFT marketplace operating on Solana, hosted on Github Pages.
 
