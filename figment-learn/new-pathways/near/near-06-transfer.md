@@ -71,7 +71,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
   try {
     const config = configFromNetwork(network)
     const keypair = KeyPair.fromString(secret)
-    config.keyStore?.setKey(network, txSender, keypair) 
+    config.keyStore?.setKey("testnet", txSender, keypair) 
 
     const yoctoAmount = parseNearAmount(txAmount) as string
     const amount = new BN(yoctoAmount) 
