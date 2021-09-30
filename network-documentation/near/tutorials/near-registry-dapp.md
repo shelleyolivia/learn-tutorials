@@ -4,11 +4,9 @@ In this tutorial we will be building a complete dApp for the NEAR Registry. NEAR
 
 # Requirements
 
-1. NEAR testnet account - https://wallet.testnet.near.org/
-2. Install Nodejs (≥ 14) and yarn 
-   ```text
-   npm install --global yarn
-   ```
+- A NEAR testnet account: <https://wallet.testnet.near.org/>
+- [Nodejs](https://nodejs.org/en/download/) v14 LTS or higher installed
+- [yarn](https://yarnpkg.com/) installed
 
 # Setup
 
@@ -31,7 +29,7 @@ Contracts are a named collection of exported functions that have access (via **n
 
 To keep things organized, contracts can use one or more data objects which are commonly added to the model.ts file. All contracts and models must explicitly import the features of the NEAR SDK they intend to use.
 
-## assembly/model.ts
+**assembly/model.ts**
 
 ```typescript
 import {context, u128, PersistentVector} from "near-sdk-as";
@@ -62,7 +60,7 @@ In the above `models.ts` file, we define a new custom type named Entry (primitiv
 At the end, we define that entries is a PersistentVector (collection) of type Entry. The PersistentVector writes and reads from storage, abstracting away a lot of what you might want to add to the storage object. It wraps the Storage class with convenience methods so you must always use a unique storage prefix for different collections to avoid data collision. PersistentVector acts like an array. To create entries, we use the syntax `new PersistentVector<Entry>("entries")`. The vector supports the methods like push, pop and length.
 
 
-## assembly/main.ts
+**assembly/main.ts**
 
 ```typescript
 import {Entry, entries} from './model';
@@ -306,8 +304,7 @@ Congratulations! We have successfully deployed the NEAR Registry smart contract 
 * NEAR Frontend Docs - https://docs.near.org/docs/api/naj-quick-reference
 
 # About the Author
-This tutorial was created by [Viraj](https://github.com/viraja1/).
-
+This tutorial was created by [Viraj Anjan](https://github.com/viraja1/).
 
   [NEAR]: https://nearprotocol.com/
   [yarn]: https://yarnpkg.com/
