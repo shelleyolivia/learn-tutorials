@@ -35,7 +35,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 try {
-    const { freeAccountId, publicKey, network }: AccountReq = req.body;
+    const { freeAccountId, publicKey, network }  = req.body;
     const config = configFromNetwork(network);
     const near = await connect(config);
     await near.createAccount(freeAccountId, publicKey);
