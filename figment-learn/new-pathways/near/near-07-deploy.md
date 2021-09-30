@@ -57,7 +57,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
     const { network, accountId, secret } = req.body;
     const config = configFromNetwork(network);
     const keypair = KeyPair.fromString(secret);
-    config.keyStore?.setKey(network, accountId, keypair);
+    config.keyStore?.setKey("testnet", accountId, keypair);
     const near = await connect(config);
     const account = await near.account(accountId);
     const response = await account.deployContract(fs.readFileSync(WASM_PATH));
