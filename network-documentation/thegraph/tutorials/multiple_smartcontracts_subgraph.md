@@ -19,7 +19,7 @@ As the previous tutorial, to complete this tutorial, you will need the Graph CLI
 
 After you have graph-cli installed, you can create a new subgraph using the `graph init command`
 
-```bash
+```text
 graph init uni-subgraph
 ```
 
@@ -27,20 +27,20 @@ For newer Macbooks you might need `yarn exec graph init uni-subgraph` depending 
 
 ![Init](../../../.gitbook/assets/graphinit.png)
 
-For the network, put mainnet. The contract address for Uniswap Factory Contract is "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f" and it remains the same across all test networks as well.
+For the network, select mainnet. The contract address for Uniswap Factory Contract is "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f" and it remains the same across all test networks as well.
 
 Graph will fetch the ABI of this contract for you and also initialize some of the files.
 
 # Uniswap Pair Creation and Volume Tracking
 
-In this tutorial, we are going to keep track of the reserves of tokens in uniswap pairs.
+In this tutorial, we are going to keep track of the reserves of tokens in Uniswap pairs.
 As you know, pairs in uniswap are created dynamically by the factory contract. The factory contract deploys the pair contract and then users can add liquidity to these contracts. Since the pair contract address is not known in advance, we will be dynamically taking the address of the pairs from the events emitted by the Factory contract. Whenever a new pair is created PairCreated event is emitted. We will be listening to this event and add the new pair contracts as data sources when they are created.
 
 ![Uniswap Diagram](../../../.gitbook/assets/graphuniswap.png)
 
 # Downloading the ABIs
 
-For this tutorial you will also need the ABI of the pair contract as we will be listening to events in the pair contracts as well as the factory contract. The official abis are aviailable [here](https://github.com/Uniswap/v2-subgraph/blob/master/abis/pair.json)
+For this tutorial you will also need the ABI (Application Binary Interface) of the pair contract, as we will be listening to events in the pair contracts as well as the factory contract. The official abis are aviailable [here](https://github.com/Uniswap/v2-subgraph/blob/master/abis/pair.json)
 
 # Defining the Data Schema
 
@@ -141,7 +141,7 @@ In this tutorial, we will be handling the Sync event, which provides the reserve
 
 Before writing the assemblyscript mapping file, we will need to generate the types for the contracts and data sources. You can do this using:-
 
-```bash
+```text
 yarn codegen
 ```
 
@@ -272,13 +272,13 @@ Then in the subgraph studio, try to copy the deploy key from the dashboard.
 
 In the cli, now you can authenticate using the following command.
 
-```bash 
+```text
 graph auth --product subgraph-studio uni-subgraph
 ```
 
 After authentication is done, you can deploy your graph to subgraph studio.
 
-```bash
+```text
 yarn deploy
 ```
 
