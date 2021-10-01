@@ -2,7 +2,7 @@
 
 Most dapps span across multiple smart contracts with many of them being created dynamically. This tutorial demonstrates how to build a subgraph for a complex multi smart contract dapp with contracts deployed at runtime.
 
-It uses the Uniswap AMM market contracts as an example as the reader might be familiar with it. We will start with the factory contract which deploys uniswap pairs and then use events to be able to add the newly created pairs to our subgraph.
+It uses the Uniswap AMM market contracts as an example as the reader might be familiar with it. We will start with the factory contract which deploys Uniswap pairs and then use events to be able to add the newly created pairs to our subgraph.
 
 ![Subgraph Studio](../../../.gitbook/assets/graph.png)
 
@@ -34,18 +34,17 @@ Graph will fetch the ABI of this contract for you and also initialize some of th
 # Uniswap Pair Creation and Volume Tracking
 
 In this tutorial, we are going to keep track of the reserves of tokens in Uniswap pairs.
-As you know, pairs in uniswap are created dynamically by the factory contract. The factory contract deploys the pair contract and then users can add liquidity to these contracts. Since the pair contract address is not known in advance, we will be dynamically taking the address of the pairs from the events emitted by the Factory contract. Whenever a new pair is created PairCreated event is emitted. We will be listening to this event and add the new pair contracts as data sources when they are created.
+As you know, pairs in Uniswap are created dynamically by the factory contract. The factory contract deploys the pair contract and then users can add liquidity to these contracts. Since the pair contract address is not known in advance, we will be dynamically taking the address of the pairs from the events emitted by the Factory contract. Whenever a new pair is created PairCreated event is emitted. We will be listening to this event and add the new pair contracts as data sources when they are created.
 
 ![Uniswap Diagram](../../../.gitbook/assets/graphuniswap.png)
 
 # Downloading the ABIs
 
-For this tutorial you will also need the ABI (Application Binary Interface) of the pair contract, as we will be listening to events in the pair contracts as well as the factory contract. The official abis are aviailable [here](https://github.com/Uniswap/v2-subgraph/blob/master/abis/pair.json)
+For this tutorial you will also need the ABI (Application Binary Interface) of the pair contract, as we will be listening to events in the pair contracts as well as the factory contract. The official ABIs are aviailable [here](https://github.com/Uniswap/v2-subgraph/blob/master/abis/pair.json).
 
 # Defining the Data Schema
 
-We will first define the schema of the data that we are indexing. This is done in the `schema.graphql` file.
-
+We must define the schema of the data that we want to index. This is done in the `schema.graphql` file
 
 ```graphql
 type Pair @entity {
@@ -57,20 +56,19 @@ type Pair @entity {
   reserve1: BigInt!
 }
 ```
-The pair entity represents one token pair and maps directly to one single smart contract on the blockchain.
-`ID` - address of the pair contract
-`count` - no of times this pair was added liquidity to using PairCreated event
-`token0` - address of first token
-`token1` - address of second token
-`reserve0` - total reserves of first token in the contract
-`reserve1` - total reserves of second token in the contract 
+
+The pair entity represents one token pair and maps directly to a single smart contract on ethereum.
+`ID` - The address of the pair contract
+`count` - The number of times this pair had liquidity added to it (uses the PairCreated event)
+`token0` - The address of first token
+`token1` - The address of second token
+`reserve0` - The total reserves of first token in the pair contract
+`reserve1` - The total reserves of second token in the pair contract
 
 
-# Creating the Subgraph Config File 
+# Creating the Subgraph Config File
 
-We will start with the `subgraph.yaml` file.The graph will automatically initialize some settings for you in the subgraph file. This will be taken from the ABI that it will download from EtherScan. 
-
-Now we will add the factory contract as a source. This is how it will look.
+We will start with the `subgraph.yaml` file. The Graph CLI will automatically initialize some settings for you in this file. This information will be taken from the ABI that it will download from Etherscan. We will add the factory contract as a datasource. This is how it will look:
 
 ```yaml
 specVersion: 0.0.2
@@ -101,13 +99,15 @@ dataSources:
 
 For this tutorial we will set the start block to a recent value. This is so that we can quickly test our graph in the graph studio. It can take many hours to index all the pairs in the entire ethereum chain.
 
-Put the address of the smart contract, the startBlock and the abi in the source field.
+For this tutorial we will set the start block to a recent value. This is so that we can quickly test our graph in the graph studio. Without specifying a recent block height to start from, it can take a very long time to index all of the token pairs in the entire Ethereum chain.
+
+Put the address of the smart contract, the startBlock and the ABI in the source field.
 
 In the mapping section, we will be listening to the PairCreated event, so we need to mention it in the entities section as well as the ABIs we will be using.
 
-In the eventHandlers, add the event as in the ABI and then the handler. This is the assemblyScript function which will create new pairs and add them as data source.
+In the eventHandlers, add the event as in the ABI and then the handler. This is the AssemblyScript function which will create new pairs and add them as data source.
 
-Since we will only know the address of the pair when the PairCreated event is emitted, we will have to create a datasource Template. This template is like a skeleton for each pair and it will be initialized dynamically using assemblyScript.
+Since we will only know the address of the pair when the PairCreated event is emitted, we will have to create a datasource Template. This template is like a skeleton for each pair and it will be initialized dynamically using AssemblyScript.
 
 ```yaml
 templates:
@@ -135,7 +135,7 @@ templates:
 
 Notice that the format for template is exactly the same as a normal datasource but it does not have the source contract and address which binds it to a specific instance.
 
-In this tutorial, we will be handling the Sync event, which provides the reserves of both tokens in the pair contract. It is fired everytime, a swap or other operation happens in the pair contract.
+For the purposes of this tutorial, we will be handling the `Sync` event which provides the reserves of both tokens in the pair contract. It is fired every time a swap or other operation happens in the pair contract.
 
 # Generating Types
 
@@ -184,9 +184,7 @@ This should create a generated folder with all the generated types.
 
 # Write AssemblyScript Mapping
 
-In the mapping file, we need to write two functions. One for handling New Pair and one for handling the sync event of each pair. Let's start with the `handleNewPair` Event.
-
-Let's import the types from the generated folder as well the BigInt type
+In the mapping file, we need to write two functions. One for handling new Pair and one for handling the `Sync` event of each pair. Let's start with the `handleNewPair` Event. Let's import the types from the generated folder as well the `BigInt` type:
 
 ```typescript
 import { BigInt } from "@graphprotocol/graph-ts"
@@ -197,7 +195,7 @@ import {
 import {
   Pair as PairTemplate
 } from "../generated/templates"
-````
+```
 
 Notice that the datasource template is also called Pair, the same as our graphql schema type. So we import it as PairTemplate.
 
@@ -232,14 +230,17 @@ export function handlePairCreated(event: PairCreated): void {
 
 }
 ```
-Let's look at each line of our function. The first line tries to load the Pair from the subgraph. If found null, it will then create a new pair with the address taken from the event. Since our datatype is an `ID`, we need to use the `toHex()` function to convert it into an `ID` type. The `BigInt.fromI32(0)` initializes count to 0.
+
+Let's look at each line of our function. The first line tries to load the Pair from the subgraph. If the Pair is null, it will then create a new Pair with the address taken from the event. Since our datatype is an `ID`, we need to use the `toHex()` function to convert it into an `ID` type. The `BigInt.fromI32(0)` initializes `count` to 0.
+
 Next we simply store the address of the tokens taken from the event params into our token values.
 
 For now we simply set the reserves to 0, as it is not possible to get the reserves from the PairCreated Event.
 
-The line `PairTemplate.create(event.params.pair)` is crucial. Without this, the subgraph will not know that it has to start listening to events from this smart contract. It adds the Pair at `event.params.pair` as a data source.
+The line `PairTemplate.create(event.params.pair)` is crucial. Without this, the subgraph will not know that it has to start listening to events from this smart contract. It adds the Pair at `event.params.pair` as a datasource.
 
-For the handleSync Event we first import the required types.
+For the `handleSync` Event, we first import the required types.
+
 ```typescript
 import {
   Sync
@@ -264,11 +265,11 @@ export function handleSync(event: Sync): void {
 
 # Deploying the Subgraph
 
-Now we are ready to deploy our subgraph. To deploy the subgraph to the graph, we will first be deploying it to the graph studio and testing it there.
+Now we are ready to deploy our subgraph. To deploy the subgraph to the graph, we will first deploy it to graph studio and test it.
 
 For this we will need to go to the studio https://thegraph.com/studio/ and get the deploy key.
 
-Then in the subgraph studio, try to copy the deploy key from the dashboard.
+From the subgraph studio, copy the deploy key from the dashboard.
 
 In the cli, now you can authenticate using the following command.
 
