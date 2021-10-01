@@ -10,18 +10,19 @@ A good understanding of the Rust programming language and React is very importan
 
 # Requirements
 
-- Install rust from [HERE](https://rustup.rs/) and
+- Install rust from [HERE](https://rustup.rs/)
+- [Git](https://git-scm.com/downloads) and
 - Solana CLI [HERE](https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool)
 
 # Building the mail program
 
 ## Project setup
 
-Head over to this [template](https://github.com/mvines/solana-bpf-program-template) and click on `use this template`, and then set up the repo. Now clone the repo to your local machine.
+Head over to [this template](https://github.com/mvines/solana-bpf-program-template) on Github and click on **Use this template** button, which will allow you to create a new repository. Give your repo a new name and check the 'Include all branches' box, then click on **Create repository from template** button. Now clone the repository to your local machine with your preferred method, or simply by using `git clone https://github.com/<your Github username>/<what you named the repo>`.
 
 Open `Cargo.toml` in your favourite editor and remove the crates under `[dev-dependencies]`. It should now look like this:
 
-```rust
+```toml
 [package]
 name = "solana-mail"
 version = "0.1.0"
@@ -45,68 +46,68 @@ Open `lib.rs` in the `src` folder. It currently contains:
 
 ```rust
 use solana_program::{
-    account_info::AccountInfo, entrypoint, entrypoint::ProgramResult, msg, pubkey::Pubkey,
+  account_info::AccountInfo, entrypoint, entrypoint::ProgramResult, msg, pubkey::Pubkey,
 };
 
 entrypoint!(process_instruction);
 fn process_instruction(
-    program_id: &Pubkey,
-    accounts: &[AccountInfo],
-    instruction_data: &[u8],
+  program_id: &Pubkey,
+  accounts: &[AccountInfo],
+  instruction_data: &[u8],
 ) -> ProgramResult {
-    msg!(
-        "process_instruction: {}: {} accounts, data={:?}",
-        program_id,
-        accounts.len(),
-        instruction_data
-    );
-    Ok(())
+  msg!(
+    "process_instruction: {}: {} accounts, data={:?}",
+    program_id,
+    accounts.len(),
+    instruction_data
+  );
+  Ok(())
 }
 
 #[cfg(test)]
 mod test {
-    use {
-        super::*,
-        assert_matches::*,
-        solana_program::instruction::{AccountMeta, Instruction},
-        solana_program_test::*,
-        solana_sdk::{signature::Signer, transaction::Transaction},
-    };
+  use {
+    super::*,
+    assert_matches::*,
+    solana_program::instruction::{AccountMeta, Instruction},
+    solana_program_test::*,
+    solana_sdk::{signature::Signer, transaction::Transaction},
+  };
 
-    #[tokio::test]
-    async fn test_transaction() {
-        let program_id = Pubkey::new_unique();
+  #[tokio::test]
+  async fn test_transaction() {
+    let program_id = Pubkey::new_unique();
 
-        let (mut banks_client, payer, recent_blockhash) = ProgramTest::new(
-            "bpf_program_template",
-            program_id,
-            processor!(process_instruction),
-        )
-        .start()
-        .await;
+    let (mut banks_client, payer, recent_blockhash) = ProgramTest::new(
+      "bpf_program_template",
+      program_id,
+      processor!(process_instruction),
+    )
+    .start()
+    .await;
 
-        let mut transaction = Transaction::new_with_payer(
-            &[Instruction {
-                program_id,
-                accounts: vec![AccountMeta::new(payer.pubkey(), false)],
-                data: vec![1, 2, 3],
-            }],
-            Some(&payer.pubkey()),
-        );
-        transaction.sign(&[&payer], recent_blockhash);
+    let mut transaction = Transaction::new_with_payer(
+      &[Instruction {
+        program_id,
+        accounts: vec![AccountMeta::new(payer.pubkey(), false)],
+        data: vec![1, 2, 3],
+      }],
+      Some(&payer.pubkey()),
+    );
+    transaction.sign(&[&payer], recent_blockhash);
 
-        assert_matches!(banks_client.process_transaction(transaction).await, Ok(()));
-    }
+    assert_matches!(banks_client.process_transaction(transaction).await, Ok(()));
+  }
 }
 ```
 
-The crates used by this file are brought into scope using [use](https://doc.rust-lang.org/stable/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html). Then the `entrypoint!` [macro](https://doc.rust-lang.org/stable/book/ch19-06-macros.html) was used to declare `process_instruction` as the [entrypoint](https://docs.solana.com/developing/on-chain-programs/developing-rust#program-entrypoint) to the program. Entrypoint as the name suggests, is our programs point of entry, all calls to the program goes through the `process_instruction` function.
+The crates used by this file are brought into scope with the [use](https://doc.rust-lang.org/stable/book/ch07-04-bringing-paths-into-scope-with-the-use-keyword.html) keyword. Then the `entrypoint!` [macro](https://doc.rust-lang.org/stable/book/ch19-06-macros.html) is used to declare `process_instruction` as the [entrypoint](https://docs.solana.com/developing/on-chain-programs/developing-rust#program-entrypoint) to the program. As the name suggests, entrypoint is our program's point of entry, all calls to the program goes through the `process_instruction` function.
 
 The function takes three arguments:
 
-- `program_id` - the [public key](https://docs.solana.com/terminology#public-key-pubkey) of our program, the program's identifier
-- `instruction_data` - the data passed to the program by the calling code, and
-- `accounts` - used to store states. Solana programs are stateless, they don't store data between transactions themselves. To store state, we use [Accounts](https://docs.solana.com/developing/programming-model/accounts)
+- `program_id` - This is the [public key](https://docs.solana.com/terminology#public-key-pubkey) of our program, the program's identifier
+- `accounts` - Solana programs are stateless, the programs themselves don't store data between transactions. To store state, we use [accounts](https://docs.solana.com/developing/programming-model/accounts)
+- `instruction_data` - This is the data passed to the program by the calling code
 
 ## Code structure
 
@@ -133,13 +134,13 @@ Using this structure, our program's flow will look like this:
 3. After decoding the data, the `processor` will then use one of the prepared functions to handle the request
 4. `state.rs` contains models of the data used in the project.
 
-To put it more succinctly, say Alice creates an account on our program. What that means for us is to generate a [Program Derived Address (PDA)](https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses) from her wallet's public key, a seed phrase, and our program's public key. The PDA will act as Alice's account id which she will use to send and receive mails. The PDA doesn't only act as her account id but also as a store for her data, this is where all the mail she has sent and received will be stored.
+For ecample, say Alice creates an account on our program. What that means for us is to generate a [Program Derived Address (PDA)](https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses) from her wallet's public key, a seed phrase, and our program's public key. The PDA will act as Alice's account id which she will use to send and receive mails. The PDA doesn't only act as her account id but also as a store for her data, this is where all the mail she has sent and received will be stored.
 
 {% hint style="info" %}
 Accounts in Solana are owned by programs. A program can only manipulate the data in an account that it owns, hence the need for generating a PDA account owned by our program as our user's account id.
 {% endhint %}
 
-If Alice wants to send a mail to Bob, she sends the mail data as a request to our program, the program's `entrypoint` function fowards the request and all its data to the `processor`, the processor decodes the data with the help of `instruction.rs` and the decoding logic in `state.rs`, then the `processor` call a function that saves the mail data sent in the request to the inbox of the receiver's account sent along with the request. Easy right?
+If Alice wants to send a mail to Bob, she sends the mail data as a request to our program, the program's `entrypoint` function fowards the request and all its data to the `processor`. Then the `processor` decodes the data with the help of `instruction.rs` and the decoding logic in `state.rs`. Finally the `processor` calls a function to save the mail data sent in the request to the inbox of the receiver's account (which was sent along with the request).
 
 Create the following files in the src folder:
 
@@ -149,9 +150,9 @@ Create the following files in the src folder:
 - processor.rs
 - state.rs
 
-## state part 1
+# State, part 1
 
-Open `lib.rs`, delete its content then paste in the following lines:
+Open the file `lib.rs`, remove the existing content then add the following code, which defines the modules we will use:
 
 ```rust
 pub mod entrypoint;
@@ -161,7 +162,7 @@ pub mod processor;
 pub mod state;
 ```
 
-The next thing we need to do here is open `state.rs` and start off by declaring our models. Open `state.rs` and paste:
+The next thing we need to do here is open `state.rs` and declare our models. In the file `state.rs`, add the following struct:
 
 ```rust
 pub struct Mail {
@@ -174,15 +175,13 @@ pub struct Mail {
 }
 ```
 
-What we just did here is declare a struct that will represent our mail objects. Our mail objects will have a `from_address` and `to_address` `String` fields that hold the base58 representations of the sender's and receiver's public key, a `subject` field representing the subject of the mail, `body` field that is the content of the mail and finally, the date the mail was sent. We are using the `String` data-type for the `sent_date` field because the date date we will really be saving is going to be the string value of the specified date.
+What we just did here is declare a struct that will represent our mail objects. Each mail object will have a `from_address` and `to_address`, fields of type String that hold a base58 representations of the sender's and receiver's public key. A `subject` field representing the subject of the mail, a `body` field that is the content of the mail and finally `sent_Date`, the date the mail was sent. We are using the `String` data-type for the `sent_date` field because the date we will really be saving is going to be the string value of the specified date.
 
-{% hint style="info" %}
-One other thing to note here is that data in Accounts are stored in `Uint8Array` format. What this means is, say we want to store the string "Solana is awesome" in an Account's data, we will need to serialize the string. We do this by converting each character in the string to decimals following the [UTF-8](https://en.wikipedia.org/wiki/UTF-8) format. In our case, the string "Solana is awesome" will be serialized as "[83, 111, 108, 97, 110, 97, 32, 105, 115, 32, 97, 119, 101, 115, 111, 109, 101]"
-{% endhint %}
+One other thing to note here is that data in accounts are stored in `Uint8Array` format. What this means is, if we want to store the string "Solana is awesome" in an account's data, we will need to serialize the string. We do this by converting each character in the string to decimals following the [UTF-8](https://en.wikipedia.org/wiki/UTF-8) format. In this case, the string "Solana is awesome" will be serialized into a `Uint8Array` as "[83, 111, 108, 97, 110, 97, 32, 105, 115, 32, 97, 119, 101, 115, 111, 109, 101]"
 
-With the above hint in mind, we know we need to serialize our mail before we can store it on the network. For this we will need [Borsh](https://borsh.io/). Open `Cargo.toml` and add the following dependencies
+Keeping this in mind, we now know we need to serialize our mail data before we can store it on the network. For this we will need to use the [Borsh](https://borsh.io/) crate. Open `Cargo.toml` and add the following dependencies:
 
-```rust
+```toml
 ...
 [dependencies]
 solana-program = "=1.7.10"
@@ -195,7 +194,7 @@ borsh-derive = "0.9.1"
 Three dots ... on a line by themselves indicate the presence of other code which we have trimmed for display purposes.
 {% endhint %}
 
-And the following code to `state.rs`
+Then add the following code to `state.rs`
 
 ```rust
 use borsh::{BorshDeserialize, BorshSerialize};
@@ -205,11 +204,11 @@ pub struct Mail{
 ...
 ```
 
-What we just did here is provide basic implementations for `BorshDeserialize`, `BorshSerialize`, and the `Debug` traits using the `derive` macro. The `Debug` trait allows us to print the content of a mail object to the console using the`"{:?}"`formatter.`BorshDeserialize`adds an associated method named`try_from_slice()`that we can use to construct a Mail object from a reference to a slice of `u8`. Finally, `BorshSerialize` provides a basic implementation of a method name`serialize()`, this allows us to serialize the content of a Mail object into a slice of `u8`.
+What we just did here is provide basic implementations for `BorshDeserialize`, `BorshSerialize`, and the `Debug` traits using the `derive` macro. The `Debug` trait allows us to print the content of a mail object to the console using the `"{:?}" debug `formatter. `BorshDeserialize`adds an associated method named`try_from_slice()`that we can use to construct a Mail object from a reference to a slice of `u8`. Finally, `BorshSerialize` provides a basic implementation of a method named `serialize()`, this allows us to serialize the content of a Mail object into a slice of `u8`.
 
 Now that we have a `struct` that we can build mail objects from, lets add another `struct` that will serve as the state of our user's Account data. This `struct` will have two fields, `inbox` and `sent`, the two fields will be vectors of `Mail` representing the lists of mails the user has in their Account.
 
-Still in `state.rs`, add the following after the Mail struct declaration
+Still in `state.rs`, add the following after the Mail struct declaration:
 
 ```rust
 #[derive(BorshDeserialize, BorshSerialize, Debug)]
@@ -219,11 +218,11 @@ pub struct MailAccount {
 }
 ```
 
-With this, we are don with `state.rs`. For now :)
+With this, we are done with `state.rs` for now.
 
 ## entrypoint
 
-Open `entrypoint.rs` in the editor and paste the following:
+Open the file `entrypoint.rs` in the editor and paste the following:
 
 ```rust
 use crate::processor::Processor;
@@ -245,11 +244,11 @@ The first two lines here import the `Processor` struct from the processor module
 
 The `process_instruction()` serves as the entrypoint of our program, every request sent to the program will be handled by this function. The function takes as arguments:
 
-- `program_id` - a reference to a `Pubkey (Public key)` of the deployed program
-- `accounts` - a reference to a slice of `AccountInfo` and
-- `instruction_data` - a reference to a slice of `u8` containing the data passed to the program to process, this will contain the mail object among other things.
+- `program_id` - As mentioned before, this is a reference to a public key of the deployed program which acts as a way to identify the program
+- `accounts` - This a reference to a slice of `AccountInfo`
+- `instruction_data` - This is a reference to a slice of `u8` containing the data passed to the program to be processed, this will contain the mail object among other things.
 
-In the body of the `process_instruction()` function, we have just one line of code, a call to a yet to be declared function, `process()`, of the `Processor` struct from the processor module. This function is going to be handling all the request that comes to our program.
+In the body of the `process_instruction()` function, we have just one line of code, a call to a yet to be declared function, `process()`, of the `Processor` struct from the processor module. This function is going to be handling all the requests that come to our program.
 
 ## instruction part 1
 
@@ -267,7 +266,7 @@ pub enum MailInstruction {
 }
 ```
 
-The `instruction` module defines an enum `MailInstruction`, the enum currently declares one endpoint, `InitAccount`. `InitAccount` indicates through its comment that it takes a writable `Account` which is the PDA generated for the user (We'll see how this works when we start building the UI).
+The `instruction` module defines an enum `MailInstruction`. This enum currently declares one endpoint, `InitAccount`. The comment above it indicates that it takes a writable `account` which is the PDA generated for the user. We'll see how this works when we start building the UI.
 
 ```rust
 use crate::error::MailError::InvalidInstruction;
@@ -286,7 +285,9 @@ impl MailInstruction {
 }
 ```
 
-Still in the instuction module, we add an associated method to the MailInstruction enum named `unpack()`. The method expects a reference to a slice of `u8` - this will be the `instruction_data` argument passed to our entrypoint function. In the first line of the `unpack()` method, we call the `split_first()` method on the slice of `u8`. The `split_first()` method returns an `Option()` enum with the first and all the rest of the elements of the slice. The first element serve as a tag that determines how we decode the rest of the instruction. Note the `ok_or()` call on the returned `Option()` from the `split_first()` call? You should look up the methods yourself to get a deeper understanding of what's going on with the calls. What's most important here is that you understand that we provide a custom error `InvalidInstruction` to `ok_or()` method in case the call to `split_first()` fails.
+Still in the instruction module, we add an associated method to the MailInstruction enum named `unpack()`. The method expects a reference to a slice of `u8` - this will be the `instruction_data` argument passed to our entrypoint function.
+
+In the first line of the `unpack()` method, we call the [split_first()](https://doc.rust-lang.org/std/primitive.slice.html#method.split_first) method on the slice of `u8`. The `split_first()` method returns an [Option()](https://doc.rust-lang.org/std/option/enum.Option.html) enum with the first and all the rest of the elements of the slice. The first element serves as a tag that determines how we decode the rest of the instruction. Note the [ok_or()](https://doc.rust-lang.org/std/option/enum.Option.html#method.ok_or) call on the returned `Option()` from the `split_first()` call? You should look up the methods yourself to get a deeper understanding of what's going on with the calls. What's most important here is that you understand that we provide a custom error `InvalidInstruction` to `ok_or()` method in case the call to `split_first()` fails.
 
 This code won't compile because we have yet to define the custom error.
 
@@ -308,17 +309,16 @@ pub enum MailError {
 Update the dependencies in `Cargo.toml` with:
 
 ```rust
-...
 thiserror = "1.0.24"
 ```
 
 We [defined an error type](https://doc.rust-lang.org/rust-by-example/error/multiple_error_types/define_error_type.html) in `error.rs` and then use the `Error` trait from the [thiserror](https://docs.rs/thiserror/latest/thiserror/) library to implement `fmt::Display` for our custom error.
 
-Still one more thing left to do here. We are not completely done with our error module just yet. If you look at our `unpack()` method in `instruction.rs`, it's supposed to return a `ProgramError` in case of an error but the error we just declared is not implemented for `ProgramError`. Let's do just that with:
+Still one more thing left to do here. We are not completely done with our error module just yet. If you look at our `unpack()` method in `instruction.rs`, it's supposed to return a `ProgramError` in case of an error but the error we just declared is not implemented for `ProgramError`. Let's take care of that with:
 
 ```rust
 use solana_program::program_error::ProgramError;
-...
+
 impl From<MailError> for ProgramError {
   fn from(e: MailError) -> Self {
     ProgramError::Custom(e as u32)
@@ -362,13 +362,12 @@ impl Processor {
 }
 ```
 
-Back in our `entrypoint.rs` module, we said the `process()` method was going to handle every request sent to our program. Well this is how it does that.
-
-We pass the reference to the slice holding the `instruction_data` from the `process_instruction()` function in the `entrypoint.rs` module to the `unpack()` method of `MailInstruction`. We then use `match` to decide which request we are ressponding to and the right method to call using the enum returned from the call to `unpack()`. In the case of `InitAccount` we call the `process_init_account()` function:
+Back in our `entrypoint.rs` module, we said the `process()` method was going to handle every request sent to our program. This is how we accomplish it. We pass the reference to the slice holding the `instruction_data` from the `process_instruction()` function in the `entrypoint.rs` module to the `unpack()` method of `MailInstruction`. We then use `match` to decide which request we are responding to, and the right method to call using the enum returned from the call to `unpack()`. In the case of `InitAccount` we call the `process_init_account()` function:
 
 ```rust
 /// inside the Processor implementation, right after the process function
 ...
+
 fn process_init_account(
     account: &AccountInfo,
     program_id: &Pubkey
@@ -392,7 +391,9 @@ use solana_program::{
   program_error::ProgramError,
   pubkey::Pubkey,
 };
+
 ...
+
 fn process_init_account(
     account: &AccountInfo,
     program_id: &Pubkey
@@ -409,11 +410,11 @@ fn process_init_account(
 }
 ```
 
-The first `if statement` checks if the account is writable, returns an error if it's not. `NotWritable` is a custom error and should be added to the `MailError` struct in the `error.rs` module. You should do that before moving on.
+The first `if statement` checks wether the account is writable and returns an error if it's not. `NotWritable` is a custom error and should be added to the `MailError` struct in the `error.rs` module. You should do that before moving on.
 
-The second `if statement` confirms that the public key in the owner's field of account is the same as program key.
+The second `if statement` confirms that the account owner is the same as program id. If they are not the same, it will return an error.
 
-Update the import section to this:
+Update the import section in `proessor.rs`:
 
 ```rust
 use crate::error::MailError::NotWritable;
@@ -429,7 +430,7 @@ use solana_program::{
 };
 ```
 
-Next, we compose a welcome mail and add it to the accounts data. Inside the `process_init_account` method, right after the two `if statements`, add:
+Next, we compose a welcome mail and add it to the accounts data. Inside the `process_init_account` method, right after the two if statements, add:
 
 ```rust
 ...
@@ -454,7 +455,7 @@ mail_account.serialize(&mut &mut account.data.borrow_mut()[..])?;
 
 We instantiated an instance of the `Mail` struct, and then filled in data for its fields. We also instantiated a `MailAccount` object, added the welcome mail instance to the inbox field using the `vec!` macro and then assigned an empty vector object to the sent field. In the last line, we serialized the mail_account instance and then write the serialized data to the user's account data by calling the `serialize()` method of the `mail_account` instance with a mutably borrowed data from the user's account data.
 
-You might notice the tricky `&mut &mut account.data.borrow_mut()[..]` expression. The `serialize()` method takes a reference to a mutable slice of u8 as an argument, the `borrow_mut()` method returns a `RefMut`. We can't pass `RefMut` to a method that expects a slice, so we take a mutable slice of `RefMut` which returns a mutable slice of u8. The [repo](todo) on Github has some sanity test for the methods here.
+You might notice the tricky `&mut &mut account.data.borrow_mut()[..]` expression. The `serialize()` method takes a reference to a mutable slice of `u8` as an argument, the `borrow_mut()` method returns a `RefMut`. We can't pass `RefMut` to a method that expects a slice, so we take a mutable slice of `RefMut` which returns a mutable slice of `u8`. The [repo](todo) on Github has some sanity test for the methods here.
 
 We are done with our account initialization, we can now move on to adding the logic to handle requests for sending mails between two accounts.
 
@@ -489,7 +490,7 @@ impl MailInstruction {
 }
 ```
 
-We had one endpoint, the InitAccount endpoint. We now need to add another endpoint, the `SendMail` endpoint. This endpoint is going to be responsible for deserializing a mail instance and returning it to the `process` method.
+We had one endpoint, the InitAccount endpoint. We now need to add another endpoint, the `SendMail` endpoint. This endpoint will be responsible for deserializing a mail instance and returning it to the `process` method.
 
 Update the `MailInstruction` enum declaration to:
 
@@ -541,7 +542,7 @@ MailInstruction::SendMail { mail } => {
 
 The case gets the mail instance from the `MailInstruction` enum then call the associated `process_send_mail()` method. The method is responsible for writing the mail instance to the inbox array of mails already in the `inbox` field of the receiver's account data, do the same for the sender's account data but to the `sent` field instead.
 
-Inside the `process()` method, right after the the process_init_account method, declare:
+Inside the `process()` method, right after the `process_init_account` method, declare:
 
 ```rust
 fn process_send_mail(accounts: &[AccountInfo], mail: &Mail, program_id: &Pubkey) -> ProgramResult {
@@ -551,7 +552,7 @@ fn process_send_mail(accounts: &[AccountInfo], mail: &Mail, program_id: &Pubkey)
 
 The method takes a reference to a slice of `AccountInfo`, a reference to a `Mail` instance and the program_id as arguments.
 
-Paste this into the body of the mathod right before `Ok(())`:
+Paste this into the body of the method right before `Ok(())`:
 
 ```rust
 ...
@@ -577,11 +578,9 @@ if receiver_account.owner != program_id {
 ...
 ```
 
-As declared by the endpoint in `MailInstruction`, the endpoint takes two `AccountInfo` objects as arguments, the `sender` and `receiver's` respectively.
+As declared by the endpoint in `MailInstruction`, the endpoint takes two `AccountInfo` objects as arguments, the `sender` and `receiver` respectively.
 
-To start this method, we validate the accounts. Same as we did at the start of the `process_init_account()` method
-
-Next, update the import section:
+To start this method, we validate the accounts. Same as we did at the start of the `process_init_account()` method. Next, update the import section:
 
 ```rust
 use crate::error::MailError::NotWritable;
@@ -612,7 +611,7 @@ receiver_data.serialize(&mut &mut receiver_account.data.borrow_mut()[..])?;
 ...
 ```
 
-Here, we used the `try_from_slice()` associated method we got from implemeting the `BorshDeSerialize` trait on the `MaiAccount` struct. `try_from_slice()` constructs and return an instance of the object it was called on from the serialized slice it was passed.
+Here, we used the `try_from_slice()` associated method we got from implementing the `BorshDeSerialize` trait on the `MaiAccount` struct. `try_from_slice()` constructs and returns an instance of the object it was called on from the serialized slice it was passed.
 
 We then add the mail instance that was deserialized from the request data to the `sent` field of the `MailAccount` instance of the sender, serialized and write the sender's `MailAccount` instance back to their accounts data.
 
@@ -622,7 +621,7 @@ Notice the `clone()` call on the mail reference?, `mail` is a reference to a `ma
 
 With this, users will be able to send and receive mails to/from other users.
 
-The `process_send_mail()` method will fail if we were to leave it in its current state and here's why: The `serialize()` method that we called on the `mail_account` instance is derived from implementing `BorshSerialize` in the `MailAccount's` struct declaration. The method takes a reference to a slice of u8 argument, serializes the data of the instance it's called on, `mail_account` in our case, and then writes the serialized data to the slice it was called with. The method will try to read all the bytes in the slice it was passed. The method will fail to construct an object from the slice if the slice has more bytes in total than the actual bytes of the object.
+The `process_send_mail()` method will fail if we were to leave it in its current state and here's why: The `serialize()` method that we called on the `mail_account` instance is derived from implementing `BorshSerialize` in the `MailAccount's` struct declaration. The method takes a reference to a slice of `u8` argument, serializes the data of the instance it's called on (`mail_account` in our case), then writes the serialized data to the slice it was called with. The method will try to read all the bytes in the slice it was passed. The method will fail to construct an object from the slice if the slice has more bytes in total than the actual bytes of the object.
 
 To better understand this, let's shift our focus from this project to the following example:
 
@@ -664,7 +663,7 @@ With the above example in mind, lets focus back on our program. We now know the 
 
 ## state part 2
 
-Ww need to add another struct to the state module:
+We need to add another struct to the state module:
 
 ```rust
 #[derive(BorshDeserialize, BorshSerialize, Debug)]
@@ -673,11 +672,11 @@ pub struct DataLength {
 }
 ```
 
-This struct has one `u32` field, `length`. We will use an instance of this struct to store the length of the serialized `MailAccount` instance stored in the user's account data everytime we update the data
+This struct has one `u32` field, `length`. We will use an instance of this struct to store the length of the serialized `MailAccount` instance stored in the user's account data every time we update the data
 
 ## processor part 3
 
-By adding the `DataLength` struct, we now have what we need to fix the bug in `process_send_mail()`. Update the `process_send_mail()` method from the `processor part 2` section to:
+By adding the `DataLength` struct, we now have what we need to fix the bug in `process_send_mail()`. Update the `process_send_mail()` method from the **processor part 2** section to:
 
 ```rust
 /// Update the import
@@ -742,7 +741,7 @@ fn proess_send_mail(
 }
 ```
 
-If you compare this edit to the one in the `process part 2`, you should see the changes we made. We are storing two struct instances in the user's account data now, the user's `MailAccount` instance and the `DataLength` of the `MAilAccount` instance.
+If you compare this edit to the one in the **process part 2** section, you should see the changes we made. We are storing two struct instances in the user's account data now, the user's `MailAccount` instance and the `DataLength` of the `MailAccount` instance.
 
 The state of a user account data would now look like:
 
@@ -752,7 +751,7 @@ The state of a user account data would now look like:
 
 A `data_length` instance is 4 bytes in length so the `MailAccount` instance will start from the third index of the array. We initialized the `offset` variable to `4` with `let offset = 4`, we made the type of the variable `usize` because that's the type we need to index into a slice.
 
-We grabbed the `data_length` instance from the account's data making sure to pass only the required slice with `let data_length = DataLength::try_from_slice(&sender_account.data.borrow()[..offset])?;`. With an if statement, we checked the length of the data instance is more than `0`. If true, we get the length of the instance and then deserialized it from the data:
+We grabbed the `data_length` instance from the account's data making sure to pass only the required slice with `let data_length = DataLength::try_from_slice(&sender_account.data.borrow()[..offset])?;`. With an if statement, we checked the length of the data instance is more than `0`. If true, we get the length of the `MailAccount` instance and then deserialize it from the data:
 
 ```rust
 let length = usize::try_from(data_length.length + u32::try_from(offset).unwrap()).unwrap();
@@ -768,7 +767,7 @@ sender_data = MailAccount {
 };
 ```
 
-Next, we added the `mail` instance to the sender account's `MailAccount` instance, got the length of the said instance with the `get_instance_packed_len()` method, used that to instantiate a new `DataLength` object. We then proceeded to serialize and write both instances to the user's data:
+Next, we added the `mail` instance to the sender account's `MailAccount` instance, got the length of the serialized form of the instance with the [get_instance_packed_len()](https://docs.rs/solana-program/1.7.3/solana_program/borsh/fn.get_instance_packed_len.html) method, used that to instantiate a new `DataLength` object. We then proceeded to serialize and write both instances to the user's data:
 
 ```rust
 sender_data.sent.push(mail.clone());
@@ -781,7 +780,7 @@ sender_data.serialize(&mut &mut sender_account.data.borrow_mut()[offset..])?;
 
 We did the same for the logic that handles the addition of the mail instance to the receiver's account.
 
-With the new change in how our code works now, we need to edit our `process_init_account()` method, specificaly, the part that reads and write data. In the `process_init_account()` method, edit:
+With this change in how our code works, we need to edit our `process_init_account()` method, specificaly the part that reads and write data. In the `process_init_account()` method, edit:
 
 ```rust
 let mail_account = MailAccount {
@@ -809,9 +808,9 @@ data_length.serialize(&mut &mut account.data.borrow_mut()[..offset])?;
 mail_account.serialize(&mut &mut account.data.borrow_mut()[offset..])?;
 ```
 
-With this we've come to the end of the program's chapter. In the next chapter, we will write the code for the user-interface, deploy the program to local network as well as the devnet and connect both projects.
+With this we've come to the end of the program chapter. In the next chapter, we will write the code for the User Interface, deploy the program to a local Solana cluster (test validator) as well as the Devnet, then connect them to complete the project.
 
-Note: The code in the Github repo won't be an exact match of this one as some edit have been made to clean up the program. Do give it a check.
+Note: The code in the Github repo won't be an exact match of the code in the tutorial as some edits have been made to clean up the program. Please have a look at the Github repo for the latest code!
 
 # Building the web UI
 
