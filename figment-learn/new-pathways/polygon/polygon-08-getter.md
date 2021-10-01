@@ -2,7 +2,7 @@ At this point, we have deployed a smart contract on the Polygon testnet & set th
 
 -------------------------------------
 
-# The Challenge
+# Challenge
 
 {% hint style="tip" %}
 In the file `components/protocols/polygon/components/steps/Getter.tsx`, implement the `getValue` function.   
@@ -42,9 +42,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 -------------------------------------
 
-# The solution
+# Solution
 
 ```typescript
+// solution
   const getValue = async () => {
     try {
       setFetching(true);

@@ -3,7 +3,7 @@ Celo has a number of core smart contracts that are deployed to the network. In t
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/celo/transfer.ts`, implement the **transfer** function. You must replace any instances of `undefined` with working code to accomplish this. 
@@ -44,9 +44,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```tsx
+// solution
 //...
   try {
     const { secret, amount, recipient, address } = req.body;

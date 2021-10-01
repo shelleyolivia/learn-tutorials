@@ -23,7 +23,7 @@ const GreetingSchema = new Map([
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/getter.ts`, complete the code for `getter`. First deserialize the greeter data to a TypeScript class, then access the counter value and pass it to the response object using the `.json()` method as in all previous tutorials.
@@ -59,9 +59,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```typescript
+// solution
 //...
     if (accountInfo === null) {
       throw new Error('Error: cannot find the greeted account');

@@ -34,7 +34,7 @@ const customFees = {
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/secret/deploy.ts`, implement the default function. Upload your first smart contract on the **Secret** network. You must replace the instances of `undefined` with working code to accomplish this.
@@ -71,9 +71,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```tsx
+// solution
 //...
   // Upload the contract wasm
   const wasm = fs.readFileSync(CONTRACT_PATH);

@@ -4,7 +4,7 @@ When a transaction is submitted to the **cluster**, the Solana runtime will exec
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
@@ -42,9 +42,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```typescript
+// solution
 //..
     //... let's snip the beginning as it should be familiar for you by now!
     const instructions = SystemProgram.transfer({
