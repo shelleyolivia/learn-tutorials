@@ -304,7 +304,7 @@ Congratulations! We have successfully deployed the NEAR Registry smart contract 
 * NEAR Frontend Docs - https://docs.near.org/docs/api/naj-quick-reference
 
 # About the Author
-This tutorial was created by [Viraj Anjan](https://github.com/viraja1/).
+This tutorial was created by [Viraj Anchan](https://github.com/viraja1/).
 
   [NEAR]: https://nearprotocol.com/
   [yarn]: https://yarnpkg.com/
