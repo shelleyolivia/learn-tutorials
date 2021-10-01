@@ -24,7 +24,7 @@ So Head on over to [SmartPy.io](https://smartpy.io/) and let us begin writing ou
 
 When you reach SmartPy.io , You will have a screen like below
 
-![SmartPy](smartpy1.png)
+![SmartPy](../../../.gitbook/assets/smartpy1.png)
 
 Here we have two important links namely 
 - [Online Editor](https://smartpy.io/ide)
@@ -34,7 +34,7 @@ The Online Editor will help us write , execute and test our Smart Contract befor
 
 Click on Online Editor Button and you will get a screen like below
 
-![SmartPy](smartpy2.png)
+![SmartPy](../../../.gitbook/assets/smartpy2.png)
 
 Here SmartPy has provided us with various Template and sample contracts. It includes Games , Token Contracts and some basic Utility Contracts.
 We will be coding our own version of Calculator Contract that is present as one of the Examples.
@@ -220,17 +220,17 @@ Before we go on with the deployment Let's first get some Testnet ꜩ from [Tezos
 
 Head on over to the above link and complete CAPTCHA Verification and you will have a screen like:
 
-![Faucet](faucet1.png)
+![Faucet](../../../.gitbook/assets/faucet1.png)
 
 Download and keep this json file in a secure location as it contains the Secret Key and Mnemonic which will be used ahead.
 
 Now Open your Temple Wallet and Click on Settings > Import Account. *See Below*
 
-![Temple](temple1.png)
+![Temple](../../../.gitbook/assets/temple1.png)
 
 Now select Faucet File as the Source and Upload the JSON file you downloaded from the Faucet. *See Below*
 
-![Temple](temple2.png)
+![Temple](../../../.gitbook/assets/temple2.png)
 
 We are now done with this section and can move on to Deployment
 
@@ -286,7 +286,7 @@ class Calculator(sp.Contract):
 
 Go Ahead and run the above code in SmartPy IDE and on the Output Panel you will see the option to **Deploy Michelson Contract** . *See Below*
 
-![Deploy](deploy1.png)
+![Deploy](../../../.gitbook/assets/deploy1.png)
 
 You will be be redirected to the Origination Page of the Contract. 
 
@@ -294,11 +294,11 @@ On this page we have to select on which Node we wish to deploy our Contract. Che
 Then Click on the Temple Wallet Option and connect your wallet to SmartPy.io *See Below*
 
 
-![Deploy](deploy2_1.png)
+![Deploy](../../../.gitbook/assets/deploy2_1.png)
 
 Scroll Down and Click **Estimate Call From RPC** and then click on **Deploy Contract**. *See Below*
 
-![Deploy](deploy3.png)
+![Deploy](../../../.gitbook/assets/deploy3.png)
 
 Then in the POP-UP that appears click on **ACCEPT** and then Temple Wallet will open up and you need to click on **SIGN** button.
 
@@ -306,7 +306,7 @@ After this step your Contract will successfully be deployed on Tezos's Granada T
 
 Copy the Contract Address as seen on the screen and Wait for atleast 3 Block Confirmations. *See Below*
 
-![Deploy](deploy4.png)
+![Deploy](../../../.gitbook/assets/deploy4.png)
 
 ## Section 5 : Exploring and Interacting With the Contract
 
@@ -316,16 +316,16 @@ Copy your Contract Address and head on over to [Better Call Dev](https://better-
 
 Paste the contract address in the search box and press Enter. *See Below*
 
-![Interact](interact1.png)
+![Interact](../../../.gitbook/assets/interact1.png)
 
 You will be able to see your contract. If not wait for some time and then refresh the page as it takes some time for the Block Confirmations to arrive.
 
-![Interact](interact2.png)
+![Interact](../../../.gitbook/assets/interact2.png)
 
 
 Now Head on over to **Interact** Tab and you will be able to see all your EntryPoints available there with the input parameters that we specified.
 
-![Interact](interact3.png)
+![Interact](../../../.gitbook/assets/interact3.png)
 
 Now We will call our ```Add``` EntryPoint!
 
@@ -333,13 +333,13 @@ Now We will call our ```Add``` EntryPoint!
 2. Then put integer values in **X** and **Y** fields.
 3. Add your wallet address as **Source** and leave the **amount** field blank.
 
-![Interact](interact4.png)
+![Interact](../../../.gitbook/assets/interact4.png)
 
 One of the best features of Better Call Dev is that we can simulate any transaction without having to spend any XTZ.
 So Click on **EXECUTE** and choose **Simulate**
 BetterCallDev will simulate the transaction and tell us if it is valid or will it fail and also what changes will it do to the Contract's Storage.
 
-![Interact](interact5.png)
+![Interact](../../../.gitbook/assets/interact5.png)
 
 
 Finally it is time that we complete our First Interaction!!
@@ -348,11 +348,11 @@ This time Click on **Execute** and Select **Temple - Tezos Wallet** instead of *
 
 It will pop up your Temple Wallet and ask you to Sign the Transaction. It will also tell you the Gas Fee you are paying to complete the Transaction. *See Below*
 
-![Interact](interact6.png)
+![Interact](../../../.gitbook/assets/interact6.png)
 
 Finally head on over to the **Operations** Tab on Better Call Dev and you will be able to see your Transaction and all it's details
 
-![Interact](interact7.png)
+![Interact](../../../.gitbook/assets/interact7.png)
 
 As we can see our transaction changed the *value* in Storage of Contract to sum of our parameters i.e. 16.
 
