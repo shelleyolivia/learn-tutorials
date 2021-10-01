@@ -6,7 +6,7 @@ You can choose which cluster to connect to using the dropdown located in the top
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/connect.ts`, implement `connect` by creating a `Connection` instance and getting the API version. You must replace the instances of `undefined` with working code to accomplish this.
@@ -38,7 +38,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```typescript
 // solution

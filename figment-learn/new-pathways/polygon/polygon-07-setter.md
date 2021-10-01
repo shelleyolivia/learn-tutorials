@@ -4,7 +4,7 @@ As simple as it sounds, what's happening in the background is actually very powe
 
 -------------------------------------
 
-# The Challenge
+# Challenge
 
 {% hint style="tip" %}
 In the file `components/protocols/polygon/components/steps/Setter.tsx`, implement the `setValue` function.    
@@ -56,7 +56,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 -------------------------------------
 
-# The solution
+# Solution
 
 ```typescript
 // solution

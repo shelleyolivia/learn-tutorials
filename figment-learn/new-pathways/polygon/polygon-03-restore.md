@@ -2,7 +2,7 @@ At the beginning of this journey into Polygon, we generated a mnemonic. Now we'r
 
 -------------------------------------
 
-# The Challenge
+# Challenge
 
 {% hint style="tip" %}
 In the file `components/protocols/polygon/components/steps/Restore.tsx`, implement the `restore` function. Using `ethers`, look for `Wallet`, then when the wallet has been regenerated try to deduce which property we're going to call in order to display the address and the private key, finally verify than the generated key matches the existing one.   
@@ -41,7 +41,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 -------------------------------------
 
-# The solution
+# Solution
 
 ```javascript
 // solution

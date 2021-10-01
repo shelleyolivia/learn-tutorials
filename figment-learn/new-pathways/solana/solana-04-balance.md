@@ -2,7 +2,7 @@ We must check our account balance to make sure we have sufficient **SOL** to per
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/balance.ts`, implement `publicKey` & `balance`.
@@ -38,7 +38,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```typescript
 // solution
