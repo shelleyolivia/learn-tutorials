@@ -54,6 +54,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # The solution
 
 ```typescript
+// solution
   const checkBalance = async () => {
     setFetching(true);
     try {

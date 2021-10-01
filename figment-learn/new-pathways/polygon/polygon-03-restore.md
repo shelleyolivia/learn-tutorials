@@ -44,6 +44,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # The solution
 
 ```javascript
+// solution
   const restore = () => {
     try {
       const wallet = ethers.Wallet.fromMnemonic(value.trim());

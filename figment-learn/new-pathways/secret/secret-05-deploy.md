@@ -74,6 +74,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # The solution
 
 ```tsx
+// solution
 //...
   // Upload the contract wasm
   const wasm = fs.readFileSync(CONTRACT_PATH);

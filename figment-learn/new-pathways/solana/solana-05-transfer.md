@@ -45,6 +45,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # The solution
 
 ```typescript
+// solution
 //..
     //... let's snip the beginning as it should be familiar for you by now!
     const instructions = SystemProgram.transfer({

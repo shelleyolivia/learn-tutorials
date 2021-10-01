@@ -57,6 +57,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # The solution
 
 ```tsx
+// solution
 //...
   // 1. Initialize a secure Secret client
   const client = new SigningCosmWasmClient(
