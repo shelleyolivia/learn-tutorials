@@ -16,7 +16,7 @@ A good understanding of the Rust programming language and React is very importan
 
 # Building the mail program
 
-## Project setup
+# Project setup
 
 Head over to [this template](https://github.com/mvines/solana-bpf-program-template) on Github and click on **Use this template** button, which will allow you to create a new repository. Give your repo a new name and check the 'Include all branches' box, then click on **Create repository from template** button. Now clone the repository to your local machine with your preferred method, or simply by using `git clone https://github.com/<your Github username>/<what you named the repo>`.
 
@@ -40,7 +40,7 @@ test-bpf = []
 crate-type = ["cdylib", "lib"]
 ```
 
-## entrypoint, programs, and accounts
+# entrypoint, programs, and accounts
 
 Open `lib.rs` in the `src` folder. It currently contains:
 
@@ -109,7 +109,7 @@ The function takes three arguments:
 - `accounts` - Solana programs are stateless, the programs themselves don't store data between transactions. To store state, we use [accounts](https://docs.solana.com/developing/programming-model/accounts)
 - `instruction_data` - This is the data passed to the program by the calling code
 
-## Code structure
+# Code structure
 
 We are going to structure our code using the following format:
 
@@ -220,7 +220,7 @@ pub struct MailAccount {
 
 With this, we are done with `state.rs` for now.
 
-## entrypoint
+# Entrypoint
 
 Open the file `entrypoint.rs` in the editor and paste the following:
 
@@ -250,7 +250,7 @@ The `process_instruction()` serves as the entrypoint of our program, every reque
 
 In the body of the `process_instruction()` function, we have just one line of code, a call to a yet to be declared function, `process()`, of the `Processor` struct from the processor module. This function is going to be handling all the requests that come to our program.
 
-## instruction part 1
+# Instruction, part 1
 
 The `instruction.rs` module will contain the API definition of our program. The first endpoint we are going to define here is the `InitAccount` endpoint.
 
@@ -291,7 +291,7 @@ In the first line of the `unpack()` method, we call the [split_first()](https://
 
 This code won't compile because we have yet to define the custom error.
 
-## error
+# Error
 
 In the `error.rs` module:
 
@@ -330,7 +330,7 @@ Here, we implement the [From](https://doc.rust-lang.org/std/convert/trait.From.h
 
 Now that we have a basic setup for our error, entrypoint and instruction, we are now ready to code `processor.rs`
 
-## processor part 1
+# Processor, part 1
 
 In the `processor.rs` module, paste:
 
@@ -459,7 +459,7 @@ You might notice the tricky `&mut &mut account.data.borrow_mut()[..]` expression
 
 We are done with our account initialization, we can now move on to adding the logic to handle requests for sending mails between two accounts.
 
-## instruction part 2
+# Instruction, part 2
 
 In the `instruction.rs` module, we stopped at:
 
@@ -529,7 +529,7 @@ Ok(match tag {
 
 This case matches instances where the value of the first element of the instruction data is `1`. If the value is `1`, the function returns a `SendMail` enum with the mail instance that was deserialized from the rest of the `data`.
 
-## processor part 2
+# Processor, part 2
 
 In the `process()` method, add another case to the match expression:
 
@@ -661,7 +661,7 @@ msg!("{:?}", data_length);
 
 With the above example in mind, lets focus back on our program. We now know the reason the `process_send_mail()` method will fail, we need to pass a slice that holds only the bytes of a serialized `MailAccount` struct instance to the `try_from_slice()`. To do this, we need to store the length of the `MailAccount` instance in a user's account.
 
-## state part 2
+# State, part 2
 
 We need to add another struct to the state module:
 
@@ -674,7 +674,7 @@ pub struct DataLength {
 
 This struct has one `u32` field, `length`. We will use an instance of this struct to store the length of the serialized `MailAccount` instance stored in the user's account data every time we update the data
 
-## processor part 3
+# Processor, part 3
 
 By adding the `DataLength` struct, we now have what we need to fix the bug in `process_send_mail()`. Update the `process_send_mail()` method from the **processor part 2** section to:
 
