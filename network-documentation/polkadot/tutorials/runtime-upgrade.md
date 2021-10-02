@@ -8,7 +8,7 @@ Decentralization of blockchains has advantages and disadvantages, one of the maj
 
 ## Solution to the problem
 
-The unique and newest solution how to make upgrade of decentralized system based on Substrate framework is called `runtime-upgrade`. The solution works smoothly and in the article I will show you how you can upgrade your Substrate based chain on your machine, locally and be honest - it is quite easy
+The unique and newest solution how to make upgrade of decentralized system based on Substrate framework is called `runtime-upgrade`. The solution works smoothly and in the article I will show you how you can upgrade your Substrate based chain on your machine, locally and be honest - it is quite easy. This is how adaptability is implemented in Substrate.
 
 ## Prerequisites
 
@@ -20,9 +20,8 @@ During the tutorial we are going to make following steps:
 1. build the simplest Substrate based blockchain
 2. build runtime part where is implement logic (wasm file)
 3. run locally the blockchain
-4. check version already installed runtime
-5. upgrade runtime
-6. verify of the upgrade
+4. upgrade runtime
+5. verify of the upgrade - check version
 
 Upgrading runtime blockchains consists of following steps: 
 
@@ -33,7 +32,7 @@ Upgrading runtime blockchains consists of following steps:
 
 ### Ad. 1: Building the simplest Substrate based blockchain
 
-Execute `make init` and after around 10 minutes (depends on performance of your machine) you should see something like:
+Checkout https://github.com/TomaszWaszczyk/substrate-runtime-upgrade-tutorial (master branch) then execute `make init` and after around 10 minutes (depends on performance of your machine) you should see something like:
 
 ```
 Compiling sc-finality-grandpa v0.8.0
@@ -90,7 +89,64 @@ Access frontend of running locally node via: https://polkadot.js.org/apps/#/extr
 
 ![](./assets/frontend-before-upgrade.png)
 
-We can see that kitties has only `create()` function
+We can see that kitties pallet has only `create()` function, it is out current state transition - runtime. What we are going now is to show how adaptable Substrate based blockchains are, we add new feature (breed function)  
+
+## Ad 4: Upgrade runtime
+
+Before upgrade `spec_version` was equal to `1`, now while makeing upgrade we have incremented the field into `2` like below
+
+```rust
+pub const VERSION: RuntimeVersion = RuntimeVersion {
+	spec_name: create_runtime_str!("node-template"),
+	impl_name: create_runtime_str!("node-template"),
+	authoring_version: 1,
+	spec_version: 2, // incremented version
+	impl_version: 1,
+	apis: RUNTIME_API_VERSIONS,
+	transaction_version: 1,
+};
+```
+
+Our upgrade will add new function to `kitties` pallet called `breed`, here is the implementation:
+
+```rust
+/// Breed kitties
+#[weight = 1000]
+pub fn breed(origin, kitty_id_1: u32, kitty_id_2: u32) {
+  let sender = ensure_signed(origin)?;
+  let kitty1 = Self::kitties(&sender, kitty_id_1).ok_or(Error::<T>::InvalidKittyId)?;
+  let kitty2 = Self::kitties(&sender, kitty_id_2).ok_or(Error::<T>::InvalidKittyId)?;
+
+  ensure!(kitty1.gender() != kitty2.gender(), Error::<T>::SameGender);
+    
+  let kitty_id = Self::get_next_kitty_id()?;
+
+  let kitty1_dna = kitty1.0;
+  let kitty2_dna = kitty2.0;
+
+  let selector = Self::random_value(&sender);
+  let mut new_dna = [0u8; 16];
+
+  // Combine parents and selector to create new kitty
+  for i in 0..kitty1_dna.len() {
+    new_dna[i] = combine_dna(kitty1_dna[i], kitty2_dna[i], selector[i]);
+  }
+
+  let new_kitty = Kitty(new_dna);
+
+  Kitties::<T>::insert(&sender, kitty_id, &new_kitty);
+  Self::deposit_event(RawEvent::KittyBred(sender, kitty_id, new_kitty));
+}
+```
+
+Here is a link to the whole new implementation: https://github.com/TomaszWaszczyk/substrate-runtime-upgrade-tutorial/blob/after-runtime-upgrade/pallets/kitties/src/lib.rs
+
+After making upgrade we expect that `kitties` pallet will have `breed` function without stopping running chain. Real adaptability of the blockchain.
+
+## Ad 6: Verify of the upgrade - check version
+
+We have running node with version `1` and upgrade runtime into version `2`, we expect that version should change to version `2`. If it will happen it will prove that we have upgrade working chain. Let's check it.
+
 
 
 ## Troubleshooting
