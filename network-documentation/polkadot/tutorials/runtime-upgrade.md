@@ -4,11 +4,11 @@
 
 ## Explaining the problem
 
-Decentralization of blockchains has advantages and disadvantages, one of the major advantage is that there is no one central unit which has the whole power over a system. From the other side disadvantage is that in the environment without one central unit upgrading is hard due to coordination so many nodes at one time. One of the well known solution of upgrading blockchains is so called `hard fork` but as I have written has many potential vectors of attack and is hard to coordinate.
+Decentralization of blockchains has advantages and disadvantages, one of the major advantage is that there is no one central unit which has the whole power over a system. From the other side, disadvantage is that in the environment without one central unit upgrading is hard due to coordination so many nodes at one time. One of the well known solution of upgrading blockchains is so called `hard fork` but as I have written has many potential vectors of attack and is hard to coordinate.
 
 ## Solution to the problem
 
-The unique and newest solution how to make upgrade of decentralized system based on Substrate framework is called `runtime-upgrade`. The solution works smoothly and in the article I will show you how you can upgrade your Substrate based chain on your machine, locally and be honest - it is quite easy. This is how adaptability is implemented in Substrate.
+The unique and newest solution how to make upgrade of decentralized system based on Substrate framework is called `runtime-upgrade`. The solution works smoothly and in the article I will show you how you can upgrade your Substrate based chain on your machine, locally and be honest - it is quite easy. This is how adaptability is implemented in Substrate framework.
 
 ## Prerequisites
 
@@ -45,7 +45,7 @@ Compiling frame-benchmarking-cli v2.0.0
 Finished dev [unoptimized + debuginfo] target(s) in 13m 01s
 ```
 
-Hint: If you want build optimized version of the project execute `cargo build --release`
+> Hint: If you want build optimized version of the project execute `cargo build --release`
 
 ### Ad. 2: Run locally blockchain
 
@@ -81,7 +81,7 @@ Access frontend of running locally node via: `https://polkadot.js.org/apps/#/ext
 
 ![](./assets/before-upgrade.png)
 
-We can see that kitties pallet has only `create()` function, it is out current state transition - runtime. What we are going now is to show how adaptable Substrate based blockchains are, we add new feature (breed function)  
+We can see that `kitties` pallet has only `create()` function, it is our current state transition function - runtime. What we are going now is to show how adaptable Substrate based blockchains are, we add new feature (breed function).
 
 ## Ad 3: Add a new feature to runtime
 
@@ -139,7 +139,7 @@ After making upgrade we expect that `kitties` pallet will have `breed` function 
 
 ### Ad. 4: Build WASM file - runtime
 
-Execute following command in order to build runtime wasm file: `WASM_TARGET_DIRECTORY="$(pwd)" cargo build`
+Execute following command in order to build runtime wasm file: `WASM_TARGET_DIRECTORY="$(pwd)" cargo build`.
 
 After successfully build we expect to have a new file should appear in current directory:
 
@@ -153,7 +153,7 @@ In order to make upgrade go to `Developer` tab, select `Sudo`. Then make sure th
 
 ![](./assets/upgrade.png)
 
-After successfuly upgrade you should see updated `spec_version` and have access to our new function:
+After successfully upgrade you should see updated `spec_version` and have access to our new function:
 
 ![](./assets/after-upgrade.png)
 
