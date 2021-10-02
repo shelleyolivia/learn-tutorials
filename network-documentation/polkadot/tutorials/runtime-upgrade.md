@@ -23,7 +23,7 @@ During the tutorial we are going to make following steps:
 4. build WASM file
 5. verify of the upgrade - check version
 
-Upgrading runtime blockchains consists of following steps: 
+Upgrading runtime state transition function consists of following steps: 
 
 - bump spec_version
 - build wasm file
