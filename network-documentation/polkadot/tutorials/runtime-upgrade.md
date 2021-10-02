@@ -4,7 +4,7 @@
 
 ## Explaining the problem
 
-Decentralization of blockchains has advantages and disadvantages, one of the major advantage is that there is no one central unit which has the whole power of over the system. From the other side disadvantage is that in the environment without one central unit upgrading is hard due to coordination so many nodes at one time. One of the well known solution of upgrading blockchains is so called `hard fork` but as I have written is hard and has many potential vectors of attack. 
+Decentralization of blockchains has advantages and disadvantages, one of the major advantage is that there is no one central unit which has the whole power over a system. From the other side disadvantage is that in the environment without one central unit upgrading is hard due to coordination so many nodes at one time. One of the well known solution of upgrading blockchains is so called `hard fork` but as I have written has many potential vectors of attack and is hard to coordinate.
 
 ## Solution to the problem
 
@@ -18,16 +18,16 @@ You have very basic knowledge about Rust language and Substrate framework.
 
 During the tutorial we are going to make following steps:
 1. build the simplest Substrate based blockchain
-2. build runtime part where is implement logic (wasm file)
-3. run locally the blockchain
-4. upgrade runtime
+2. run locally the blockchain
+3. add a new feature to runtime
+4. build WASM file
 5. verify of the upgrade - check version
 
 Upgrading runtime blockchains consists of following steps: 
 
 - bump spec_version
 - build wasm file
-  - WASM_TARGET_DIRECTORY="$(pwd)" cargo build
+  - `WASM_TARGET_DIRECTORY="$(pwd)" cargo build`
 - Use sudo to perform runtime
 
 ### Ad. 1: Building the simplest Substrate based blockchain
@@ -47,17 +47,9 @@ Finished dev [unoptimized + debuginfo] target(s) in 13m 01s
 
 Hint: If you want build optimized version of the project execute `cargo build --release`
 
-### Ad. 2: Build ewasm - runtime
+### Ad. 2: Run locally blockchain
 
-Execute following command in order to build runtime wasm file: `WASM_TARGET_DIRECTORY="$(pwd)" cargo build`
-
-After successfully build a new file should appear in current directory:
-
-![](./assets/ewasm.png)
-
-### Ad. 3: Run locally blockchain
-
-`make run`
+Execute `make run` command:
 
 ```
 Running `target/debug/node-template --dev -lruntime=debug`
@@ -85,15 +77,15 @@ Sep 29 18:18:12.517  INFO ✨ Imported #1 (0xc61a…b216)
 Sep 29 18:18:14.123  INFO 🙌 Starting consensus session on top of parent 0xc61a8f6ea035c0fd2e8acef986a60ec92abbaaa1f30c4781603d4ec83591b216
 ```
 
-Access frontend of running locally node via: https://polkadot.js.org/apps/#/extrinsics?rpc=ws://127.0.0.1:9944
+Access frontend of running locally node via: `https://polkadot.js.org/apps/#/extrinsics?rpc=ws://127.0.0.1:9944`
 
-![](./assets/frontend-before-upgrade.png)
+![](./assets/before-upgrade.png)
 
 We can see that kitties pallet has only `create()` function, it is out current state transition - runtime. What we are going now is to show how adaptable Substrate based blockchains are, we add new feature (breed function)  
 
-## Ad 4: Upgrade runtime
+## Ad 3: Add a new feature to runtime
 
-Before upgrade `spec_version` was equal to `1`, now while makeing upgrade we have incremented the field into `2` like below
+Before upgrade `spec_version` was equal to `1`, now while making upgrade we have incremented the field into `2` like below:
 
 ```rust
 pub const VERSION: RuntimeVersion = RuntimeVersion {
@@ -107,7 +99,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 };
 ```
 
-Our upgrade will add new function to `kitties` pallet called `breed`, here is the implementation:
+Our upgrade will add a new function to `kitties` pallet called `breed`, here is the implementation:
 
 ```rust
 /// Breed kitties
@@ -139,15 +131,33 @@ pub fn breed(origin, kitty_id_1: u32, kitty_id_2: u32) {
 }
 ```
 
+After addition of `breed` function in `kitties` pallet we need to build WASM file.
+
 Here is a link to the whole new implementation: https://github.com/TomaszWaszczyk/substrate-runtime-upgrade-tutorial/blob/after-runtime-upgrade/pallets/kitties/src/lib.rs
 
 After making upgrade we expect that `kitties` pallet will have `breed` function without stopping running chain. Real adaptability of the blockchain.
 
-## Ad 6: Verify of the upgrade - check version
+### Ad. 4: Build WASM file - runtime
 
-We have running node with version `1` and upgrade runtime into version `2`, we expect that version should change to version `2`. If it will happen it will prove that we have upgrade working chain. Let's check it.
+Execute following command in order to build runtime wasm file: `WASM_TARGET_DIRECTORY="$(pwd)" cargo build`
 
+After successfully build we expect to have a new file should appear in current directory:
 
+![](./assets/wasm.png)
+
+## Ad 5: Upgrade runtime and verify version
+
+We have running node with version `1` and upgrade runtime into version `2`, we expect that version should change to version `2`. If it will happen it proves that we have upgraded working chain. Proof of successfully making upgrade runtime will be our freshly added `breed` function. Let's check it.
+
+In order to make upgrade go to `Developer` tab, select `Sudo`. Then make sure that you have selected `system` pallet and `setCode(code)`, check in `file upload` and select freshly created WASM file made in previous step `node_template_runtime.wasm` then check in `with weight override` and in the field `unchecked weight for this call` type example value like `100`. To confirm making upgrade click on `Submit Sudo Unchecked`.
+
+![](./assets/upgrade.png)
+
+After successfuly upgrade you should see updated `spec_version` and have access to our new function:
+
+![](./assets/after-upgrade.png)
+
+On the screenshot we can see successfully upgrade, take into consideration that the version of `spec_version` has been changed to incremented value `2`.
 
 ## Troubleshooting
 
@@ -215,5 +225,4 @@ active toolchain
 nightly-2020-08-23-x86_64-unknown-linux-gnu (default)
 rustc 1.47.0-nightly (663d2f5cd 2020-08-22)
 ``
-
-Twitter's thread to the most possible issues: https://twitter.com/tomaszwaszczyk/status/1343512637909458944
+### 2. Twitter's thread to the most possible issues: https://twitter.com/tomaszwaszczyk/status/1343512637909458944
