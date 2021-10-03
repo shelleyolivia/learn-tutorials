@@ -1,63 +1,105 @@
-# Manifest so what?
+# Manifest, so what?
 
-To capture and process information's from blockchain, we need:
+To capture and process information from a blockchain, we must:
 
-- To define which information we're looking at
-- To know from what this information is made-up
-- To define the shape of the processed information should end
+- Define which information we're looking for
+- Know what this information is made of
+- Define the shape of the processed information when we are finished with it
 
-The right place to do so is under `subgraph.yaml` the manifest of our subgraph.
+The right place to do so is within the `subgraph.yaml` file, the manifest of our subgraph.
 
 # Defining the manifest
 
-## Install the graph client
+## The scaffolded subgraph.yaml
 
-Fortunately, we won't have to start from scratch, there is a nice tool to scaffold a new subgraph. To install it, run:
-
-```text
-npm install -g @graphprotocol/graph-cli
+```yaml
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: punks
+    network: mainnet
+    source:
+      address: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB"
+      abi: punks
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Assign
+        - Transfer
+        - PunkTransfer
+        - PunkOffered
+        - PunkBidEntered
+        - PunkBidWithdrawn
+        - PunkBought
+        - PunkNoLongerForSale
+      abis:
+        - name: punks
+          file: ./abis/punks.json
+      eventHandlers:
+        - event: Assign(indexed address,uint256)
+          handler: handleAssign
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: PunkTransfer(indexed address,indexed address,uint256)
+          handler: handlePunkTransfer
+        - event: PunkOffered(indexed uint256,uint256,indexed address)
+          handler: handlePunkOffered
+        - event: PunkBidEntered(indexed uint256,uint256,indexed address)
+          handler: handlePunkBidEntered
+        - event: PunkBidWithdrawn(indexed uint256,uint256,indexed address)
+          handler: handlePunkBidWithdrawn
+        - event: PunkBought(indexed uint256,uint256,indexed address,indexed address)
+          handler: handlePunkBought
+        - event: PunkNoLongerForSale(indexed uint256)
+          handler: handlePunkNoLongerForSale
+      file: ./src/mapping.ts
 ```
 
-To check if everything is ok:
+Let's have a look at what this all means. Firstly, `.yaml` is the file extension for YAML ([**Y**AML **A**in't **M**arkup **L**anguage](https://www.cloudbees.com/blog/yaml-tutorial-everything-you-need-get-started)) which is an easy to read file format commonly used for configuration files. 
 
-```text
-graph --version
-```
+In order to save time when indexing the datasource, we must specify a starting block (or else the node would start indexing from the genesis block, which would take a very long time and not be useful to us). To specify a sensible starting block, insert the line `startBlock: 3914495` into the `subgraph.yaml` file for the datasource of the "punks" contract. Block 3914495 occurred on June 22, 2017 - and contained the deployment of the CryptoPunksMarket contract.
 
-It should output the version of the graph-cli, here for me it was `0.22.1`
+Next, we need to make sure the datasource mapping includes the entities "Punk" and "Account".
 
-## Scaffold your subgraph
+Finally, we will want to include an event handler for the **Assign( indexed address, uint256)** event.
 
-For learning purpose we're going to use more options than needed, but all of them will be explained. To scaffold your subgraph, run :
+## The changed subgraph.yaml
 
-```text
-$ graph init --allow-simple-name --from-contract 0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB \
-  --index-events --contract-name punks --network mainnet --node http://localhost:8020/ punks
-```
-
-Quick overview:
-
-- `graph init` will initialize an empty subgraph
-- `--allow-simple-name` option will simply the naming convention of our local graph
-- `--from-contract` option allow us to select an already deployed contract
-- `--index-event` option will create entity from event (not a good idea)
-- `--contract-name punk` rename the contract punks
-- `--network mainnet` tell to look at mainnet ethereum to find the contract abi
-- `--node http://localhost:8020/` will prepare our script to deploy to our local graph node
-- `punk` is the name of the folder under which the files are created
-
-Curious reader have notice the argument passed to `--from-contract` option. The argument here is an Ethereum address. You guessed right! It's the address of the [CryptoPunk](https://www.larvalabs.com/cryptopunks) smart-contract.
-
-Now we can go into the newly created folder, install dependencies and start hacking our subgraph.
-
-```bash
-cd punks
-yarn
+```yaml
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: punks
+    network: mainnet
+    source:
+      address: '0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB'
+      abi: punks
+      startBlock: 3914495
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Account
+        - Punk
+      abis:
+        - name: punks
+          file: ./abis/punks.json
+      eventHandlers:
+        - event: Assign(indexed address,uint256)
+          handler: handleAssign
+      file: ./src/mapping.ts
 ```
 
 # Time to verify your work
 
-Now, it's time for you to verify if you have follow carefully our instruction, click on the button `Test subgraph scaffold` and see if magic happen.
+Now, it's time for you to verify if you have followed the instructions carefully, click on the button **Test manifest** to check the manifest file. 
 
 {% hint style="info" %}
 You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
@@ -65,4 +107,4 @@ You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questi
 
 # Conclusion
 
-Nice you made it, you scaffolded directory from the [CryptoPunk](https://www.larvalabs.com/cryptopunks) smart-contract. As is, it far to be enough, we need to
+Nice, you made it! You were able to add the correct information to the manifest to get the subgraph working from the [CryptoPunk](https://www.larvalabs.com/cryptopunks) smart contract.

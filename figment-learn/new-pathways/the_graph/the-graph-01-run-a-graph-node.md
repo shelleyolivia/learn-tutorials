@@ -1,18 +1,22 @@
-# Why running a local graph node?
+# Why run a local graph node?
 
-Developers are familiar with the idea of running a local webserver at the early stage of their work. Following the same principe we're going to do the same for the **THE GRAPH**. To sum up local graph node can be seen as a local webserver.
+Many Developers are familiar with the idea of running a local webserver in the early stages of their project. This helps them to rapidly design, write and test their code without needing to rely on external servers. Following this principle, we're going to do the same for the **The Graph Protocol**. A local graph node can be seen as loosely equivalent to a webserver, it will listen for requests and respond to the clients which connect to it.
 
 # How to setup a local graph node?
 
-If you have follow up the setup, you should now have:
+If you have followed up the setup, you should now have:
 
 - A working installation of docker
-- An API key for your alchemy application
+- An API key for your Alchemy application
 
 Now we can:
 
 - Run a containerized version of a graph node
-- Connect it to Ethereum mainnet using alchemy as a provider
+- Connect it to Ethereum mainnet using Alchemy as a provider
+
+{% hint style="warning" %}
+Linux and macOS users can run a script to ensure the necessary software is installed: `sudo ./script.sh`
+{% endhint %}
 
 From the root directory of the project, run:
 
@@ -21,21 +25,37 @@ cd docker
 sudo ETHEREUM_RPC=mainnet:https://eth-mainnet.alchemyapi.io/v2/<API-KEY> docker-compose up
 ```
 
-As for local webserver, local graph node are listening on **localhost**. Contrary to most of local webserver, by default the opening port is **8020**.
+If you encounter an error such as:
 
-A graph node is deliver with two storages' solutions and one API endpoints.
+```text
+FileNotFoundError: [Errno 2] No such file or directory
+```
 
-- An ready to use IPFS swarm: A cutting-edge protocol emulating Distributed File's system.
-- A Postgres database: A popular free and open-source **RDBMS**
-- An GraphQL API endpoints (more on this later).
+Make sure that you have the latest version of Docker Desktop and that it is currently running on your system.
 
-{% hint style="warning" %}
-Linux's users have to run a script before all: `sudo ./script.sh`
-{% endhint %}
+Similarly to a local webserver, our local graph node is listening for connections on **localhost**, however the default port for the graph node is **8020**. `docker-compose` will output logging information to the terminal such as the following:
+
+```text
+Starting docker_ipfs_1     ... done
+Starting docker_postgres_1 ... done
+Starting docker_graph-node_1 ... done
+Attaching to docker_postgres_1, docker_ipfs_1, docker_graph-node_1
+```
+
+A graph node comes with two storage solutions and one API endpoint.
+
+- A ready to use IPFS swarm: IPFS is a distributed system for storing and accessing files, websites, applications, and data.
+- A Postgres database: A popular free and open-source **RDBMS** (**R**elational **D**ata**B**ase **M**anagement **S**ystem)
+- A GraphQL API endpoint (more on this later).
 
 # Time to verify your work
 
-Now, it's time for you to verify if you have follow carefully our instruction, click on the button `Test local graph node` and see if magic happen.
+Now, it's time for you to verify that you have followed the instructions carefully, click on the button **Test local graph node** to detect the presence of a local graph node listening on **port 8020**!
+
+If the node is not running, you will see the following error modal:
+
+![](../assets/the_graph-no-local-node.png)
+
 
 {% hint style="info" %}
 You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
@@ -43,4 +63,4 @@ You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questi
 
 # Conclusion
 
-Nice you made it, a local graph node is running on your computer. A graph node without subgraph sound like a forest without any trees it doesn't make sense. Click next to fill this gap.
+Nice! You made it. A local graph node is running on your computer. A graph node without a subgraph to index sounds like a forest without any trees. It doesn't make sense! Click Next Step to fill this gap by creating a subgraph.

@@ -17,14 +17,16 @@ yarn
 
 # Get an alchemy API-KEY
 
-We could have used [public Ethereum RPC's endpoints](https://docs.linkpool.io/docs/public_rpc), but we have chosen to rely on [alchemy](https://www.alchemy.com/). Alchemy provides one of the leading blockchain development platform, and thus it's provide endpoints to Ethereum mainnet. We need one as later our local graph node will be listen on event on the Ethereum mainnet.
+We could have used [public Ethereum RPC endpoints](https://docs.linkpool.io/docs/public_rpc), however we have chosen to rely on [Alchemy](https://www.alchemy.com/). 
+
+Alchemy provides one of the leading blockchain development platform, and thus it's provide endpoints to Ethereum mainnet. We need one as later our local graph node will be listen on event on the Ethereum mainnet.
 
 To get your alchemy API key you:
 
-- Go to [alchemy](https://www.alchemy.com/)
-- Create a Free account
-- Create a simple dapps.
-- Copy and paste your API key in safe place.
+- Go to Alchemy's website: <https://www.alchemy.com/>, and create an account if you do not already have one
+
+- Create a new App on Alchemy.
+- From the Dashboard, click on **View Details** and then click on **View Key**. You can then click to copy your new Alchemy API, including the endpoint URL. Paste this API key in a safe place.
 
 ![](../../../.gitbook/assets/pathways/the-graph/graph-alchemy-setup.gif)
 
@@ -34,7 +36,7 @@ To get your alchemy API key you:
 
 With the API key in place, start the Next.js development server with:
 
-```bash
+```text
 yarn dev
 ```
 
