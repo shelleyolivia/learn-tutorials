@@ -1,18 +1,18 @@
 # What's a subgraph?
 
-If a graph node is a Christmas tree then subgraph are garland. They represent structured datasets, tied up to a graph node, and easily accessible using the GraphQL query language for APIs. The same way you can add garlands to your Christmas tree you can also add subgraphs to your local graph node. Any subgraphs you add, can be customized:
+If a Graph node is a Christmas tree then subgraphs are like garlands. They represent structured datasets, tied up to a Graph node, and easily accessible using the GraphQL query language for APIs. The same way you can add garlands to your Christmas tree you can also add subgraphs to your local Graph node. Any subgraphs you add can be customized:
 
-- By their shape: The way your structure your data
-- By adding decorations: We call them entities (more about this later)
+- By their shape: The way you structure your data.
+- By adding decorations: We call them Entities (more about this later).
 - The way you connect your decorations reflects how they are related, your entities upkeep.
 
-As the garland are made by _staking_ fil, subgraphs are built up by _staking_ events triggered from smart contracts residing on a blockchain. This means we need at least one smart contract to build up a subgraph for.
+As the garlands are made by _staking_ fil, subgraphs are built up by _staking_ events triggered from smart contracts residing on a blockchain. This means we need at least one smart contract to build up a subgraph for.
 
 Here, we'll use the [CryptoPunk](https://www.larvalabs.com/cryptopunks) smart contract, as CryptoPunks are a well known example of NFTs.
 
 # Initialize an empty subgraph
 
-## Install the graph client
+## Install the Graph client
 
 Fortunately, we won't have to start from scratch, there are tools to scaffold a new subgraph. To install the Graph CLI, run:
 
@@ -20,7 +20,7 @@ Fortunately, we won't have to start from scratch, there are tools to scaffold a 
 yarn global add @graphprotocol/graph-cli
 ```
 
-After the install process is complete, check for the presence of the graph binary in your PATH by running: 
+After the install process is complete, check for the presence of the Graph CLI binary in your PATH by running: 
 
 ```text
 graph --version

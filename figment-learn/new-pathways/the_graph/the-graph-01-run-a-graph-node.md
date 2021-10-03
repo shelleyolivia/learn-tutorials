@@ -4,14 +4,14 @@ Many Developers are familiar with the idea of running a local webserver in the e
 
 # How to setup a local graph node?
 
-If you have followed up the setup, you should now have:
+If you have followed the setup instructions, you should now have:
 
 - A working installation of docker
 - An API key for your Alchemy application
 
 Now we can:
 
-- Run a containerized version of a graph node
+- Run a containerized version of a Graph node
 - Connect it to Ethereum mainnet using Alchemy as a provider
 
 {% hint style="warning" %}
@@ -22,7 +22,7 @@ From the root directory of the project, run:
 
 ```text
 cd docker
-sudo ETHEREUM_RPC=mainnet:https://eth-mainnet.alchemyapi.io/v2/<API-KEY> docker-compose up
+ETHEREUM_RPC=mainnet:https://eth-mainnet.alchemyapi.io/v2/<API-KEY> docker compose up
 ```
 
 If you encounter an error such as:
@@ -33,7 +33,8 @@ FileNotFoundError: [Errno 2] No such file or directory
 
 Make sure that you have the latest version of Docker Desktop and that it is currently running on your system.
 
-Similarly to a local webserver, our local graph node is listening for connections on **localhost**, however the default port for the graph node is **8020**. `docker-compose` will output logging information to the terminal such as the following:
+Similarly to a local webserver, our local Graph node is listening for connections on **localhost**, however the default port for the 
+Graph node is **8020**. `docker compose` will output logging information to the terminal such as the following:
 
 ```text
 Starting docker_ipfs_1     ... done
@@ -42,7 +43,7 @@ Starting docker_graph-node_1 ... done
 Attaching to docker_postgres_1, docker_ipfs_1, docker_graph-node_1
 ```
 
-A graph node comes with two storage solutions and one API endpoint.
+A Graph node comes with two storage solutions and one API endpoint.
 
 - A ready to use IPFS swarm: IPFS is a distributed system for storing and accessing files, websites, applications, and data.
 - A Postgres database: A popular free and open-source **RDBMS** (**R**elational **D**ata**B**ase **M**anagement **S**ystem)
@@ -63,4 +64,4 @@ You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questi
 
 # Conclusion
 
-Nice! You made it. A local graph node is running on your computer. A graph node without a subgraph to index sounds like a forest without any trees. It doesn't make sense! Click Next Step to fill this gap by creating a subgraph.
+Nice! You made it. A local Graph node is running on your computer. A Graph node without a subgraph to index sounds like a forest without any trees, it doesn't make sense! Click Next Step to fill this gap by creating a subgraph.
