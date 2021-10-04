@@ -12,7 +12,7 @@ _It is important to note that throughout the Pathway, we will refer to the_ ethe
 
 -------------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 **Imagine this scenario:** You're a fresh Web3 developer who just landed a sweet role at a promising new startup, eager to show off your skills. You've been asked to show users of our dApp which network they are connected to (to avoid any confusion) and store the account currently selected address in Metamask (so that we can reference it later). In **`components/protocols/polygon/components/steps/Connect.tsx`**, implement the`checkConnection` function.
@@ -54,9 +54,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```typescript
+// solution
 //...
   if (provider) {
     // Connect to Polygon using Web3Provider and Metamask
