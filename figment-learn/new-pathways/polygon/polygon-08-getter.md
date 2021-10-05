@@ -17,9 +17,9 @@ In the file `components/protocols/polygon/components/steps/Getter.tsx`, implemen
     try {
       setFetching(true);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-		  // try to figure out the expected parameters
+      // try to figure out the expected parameters
       const contract = new ethers.Contract(undefined);
-			// try to figure out the expected method 
+      // try to figure out the expected method 
       const storage = undefined;
       setContractNumber(storage.toString());
       setFetching(false);
