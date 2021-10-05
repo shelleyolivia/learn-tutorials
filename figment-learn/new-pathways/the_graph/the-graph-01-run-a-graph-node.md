@@ -1,40 +1,26 @@
-# Why run a local graph node?
+## What's a Graph node?
 
-Many Developers are familiar with the idea of running a local webserver in the early stages of their project. This helps them to rapidly design, write and test their code without needing to rely on external servers. Following this principle, we're going to do the same for the **The Graph Protocol**. A local graph node can be seen as loosely equivalent to a webserver, it will listen for requests and respond to the clients which connect to it.
+You're probably familiar with the idea of running a local web server in the early stages of a project, or while developing on it. It allows you to rapidly design, write and test your code. Then when you're ready you can deploy it and in production users will interact with that deployed version of your server.
 
-# How to setup a local graph node?
+We're going to follow the same pattern here. Think of our local Graph node as loosely equivalent to a web server: it will run on your machine, listen to Ethereum events and listen to clients' requests and respond with data.
 
-If you have followed the setup instructions, you should now have:
+A Graph node comes with the following components:
+- An IPFS swarm for ......
+- A Postgres database for storing the data output of those processed events
+- A GraphQL API to allow clients to query this data
 
-- A working installation of docker
-- An API key for your Alchemy application
+## Setting up a local Graph node
 
-Now we can:
-
-- Run a containerized version of a Graph node
-- Connect it to Ethereum mainnet using Alchemy as a provider
-
-{% hint style="warning" %}
-Linux and macOS users can run a script to ensure the necessary software is installed: `sudo ./script.sh`
-{% endhint %}
+We don't need to worry about installing and running them: we'll use Docker for this. We defined a Docker configuration in `docker/docker-compose.yaml` and it will tell Docker what to do for each of those three components. Our Graph node will run inside a Docker container and connect it to Ethereum mainnet using Alchemy as a provider (you'll need that Alchemy API key soon).
 
 From the root directory of the project, run:
 
 ```text
 cd docker
-ETHEREUM_RPC=mainnet:https://eth-mainnet.alchemyapi.io/v2/<API-KEY> docker compose up
+ETHEREUM_RPC=mainnet:https://eth-mainnet.alchemyapi.io/v2/<ALCHEMY_API_KEY> docker compose up
 ```
 
-If you encounter an error such as:
-
-```text
-FileNotFoundError: [Errno 2] No such file or directory
-```
-
-Make sure that you have the latest version of Docker Desktop and that it is currently running on your system.
-
-Similarly to a local webserver, our local Graph node is listening for connections on **localhost**, however the default port for the 
-Graph node is **8020**. `docker compose` will output logging information to the terminal such as the following:
+You should see a bunch of white and blue commands and then the following:
 
 ```text
 Starting docker_ipfs_1     ... done
@@ -43,25 +29,18 @@ Starting docker_graph-node_1 ... done
 Attaching to docker_postgres_1, docker_ipfs_1, docker_graph-node_1
 ```
 
-A Graph node comes with two storage solutions and one API endpoint.
+>  If you encounter the error "FileNotFoundError: [Errno 2] No such file or directory", make sure you have the latest version of Docker Desktop and that it's currently running on your system.
 
-- A ready to use IPFS swarm: IPFS is a distributed system for storing and accessing files, websites, applications, and data.
-- A Postgres database: A popular free and open-source **RDBMS** (**R**elational **D**ata**B**ase **M**anagement **S**ystem)
-- A GraphQL API endpoint (more on this later).
+>  If you encounter the error "Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?", well... make sure Docker is running ;)
 
-# Time to verify your work
+> Linux and macOS users can run a script to ensure the necessary software is installed: `sudo ./script.sh`
 
-Now, it's time for you to verify that you have followed the instructions carefully, click on the button **Test local graph node** to detect the presence of a local graph node listening on **port 8020**!
+## Make sure it works
 
-If the node is not running, you will see the following error modal:
+The same way that a local web server usually listens for connections on `localhost://3000`, our local Graph node is listening for connections on `localhost://8020`.
 
-![](../assets/the_graph-no-local-node.png)
+Click on the button **Test local Graph node** to make sure it's running!
 
+## Conclusion
 
-{% hint style="info" %}
-You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
-{% endhint %}
-
-# Conclusion
-
-Nice! You made it. A local Graph node is running on your computer. A Graph node without a subgraph to index sounds like a forest without any trees, it doesn't make sense! Click Next Step to fill this gap by creating a subgraph.
+Nice! A Graph node is now running on your computer but... it's not doing much. Let's give it some code to run for us...
