@@ -32,6 +32,9 @@ Once this transaction is confirmed, you will have 1 **MATIC** on the Mumbai test
       const selectedAddress = window.ethereum.selectedAddress;
       const selectedAddressBalance = undefined;
       const balanceToDisplay = undefined;
+      if (!balanceToDisplay) {
+        throw new Error('Please complete the code');
+      }
       setBalance(balanceToDisplay);
     } catch (error) {
       setError(error.message);
@@ -68,6 +71,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
       const balanceToDisplay = ethers.utils.formatEther(
         selectedAddressBalance.toString(),
       );
+      if (!balanceToDisplay) {
+        throw new Error('Please complete the code');
+      }
       setBalance(balanceToDisplay);
     } catch (error) {
       setError(error.message);
