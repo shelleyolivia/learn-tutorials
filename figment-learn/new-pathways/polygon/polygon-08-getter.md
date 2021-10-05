@@ -12,6 +12,8 @@ In the file `components/protocols/polygon/components/steps/Getter.tsx`, implemen
 
 ```typescript
   const getValue = async () => {
+    setFetching(true);
+    setContractNumber(null);
     try {
       setFetching(true);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -22,7 +24,6 @@ In the file `components/protocols/polygon/components/steps/Getter.tsx`, implemen
       setContractNumber(storage.toString());
       setFetching(false);
     } catch (error) {
-      console.log(error);
       setFetching(false);
     }
   };
@@ -49,6 +50,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
   const getValue = async () => {
     try {
       setFetching(true);
+      setContractNumber(null);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const contract = new ethers.Contract(
         SimpleStorageJson.networks['80001'].address,
@@ -59,7 +61,6 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
       setContractNumber(storage.toString());
       setFetching(false);
     } catch (error) {
-      console.log(error);
       setFetching(false);
     }
   };
