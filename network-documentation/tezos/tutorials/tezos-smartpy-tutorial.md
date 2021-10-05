@@ -32,7 +32,7 @@ The Online Editor will help us write , execute and test our code before it is de
 
 Click the Online Editor button to go to the IDE page:
 
-![SmartPy](../../../.gitbook/assets/smartpy2.png)
+![SmartPy](../../../.gitbook/assets/smartpy2_1.png)
 
 Here SmartPy has provided us with various templates and sample contracts including games, token contracts and some basic utility contracts.
 We will be coding our own version of a Calculator contract that is present as one of the examples.
