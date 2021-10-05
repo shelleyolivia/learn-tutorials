@@ -25,6 +25,10 @@ In the file `components/protocols/polygon/components/steps/Query.tsx` we have al
     const gasPriceAsGwei = undefined;
     const blockInfo = undefined;
 
+    if (!chainId || !blockHeight || !gasPriceAsGwei || !blockInfo) {
+      throw new Error('Please complete the code');
+    }
+    
     res.status(200).json({
       networkName,
       chainId,
@@ -67,6 +71,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
     });
     const blockInfo = await provider.getBlockWithTransactions(blockHeight);
 
+    if (!chainId || !blockHeight || !gasPriceAsGwei || !blockInfo) {
+      throw new Error('Please complete the code');
+    }
+    
     res.status(200).json({
       networkName,
       chainId,
