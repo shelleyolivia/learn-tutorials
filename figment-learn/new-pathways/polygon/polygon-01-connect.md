@@ -21,23 +21,33 @@ _It is important to note that throughout the Pathway, we will refer to the_ ethe
 **Take a few minutes to figure this out.**
 
 ```typescript
-const checkConnection = async () => {
-  const provider = await detectEthereumProvider();
+  const connect = async () => {
+    setAddress(null);
+    setNetwork(undefined);
+    setError(undefined);
+    try {
+      const provider = await detectEthereumProvider();
 
-  if (provider) {
-    // TODO
-    // Connect to Polygon using Web3Provider and Metamask
-    // Define address and network
-    const web3provider = undefined;
-    const address = undefined;
-    const network = undefined;
+      if (provider) {
+        // Connect to Polygon using Web3Provider and Metamask
+        // Define address and network
+        const web3provider = undefined;
+        const signer = undefined;
+        const address = null;
+        const network = undefined;
 
-    setAccount(address);
-    setNetwork(network);
-  } else {
-    alert("Please install Metamask at https://metamask.io");
-  }
-}
+        if (!network) {
+          throw new Error('Please complete the code');
+        }
+        setAddress(address);
+        setNetwork(network);
+      } else {
+        alert('Please install Metamask at https://metamask.io');
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 ```
 
 * **Connect to Polygon** using ethers' Web3Provider and the Metamask wallet  
@@ -58,26 +68,39 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 // solution
-//...
-  if (provider) {
-    // Connect to Polygon using Web3Provider and Metamask
-    // @ts-ignore
-    await provider.request({method: 'eth_requestAccounts'});
-    const web3provider = new ethers.providers.Web3Provider(
-      window.ethereum,
-      'any',
-    );
-    const signer = web3provider.getSigner();
+  const connect = async () => {
+    setAddress(null);
+    setNetwork(undefined);
+    setError(undefined);
+    try {
+      const provider = await detectEthereumProvider();
 
-    // Define address and network
-    const address = await signer.getAddress();
-    const network = ethers.providers.getNetwork(await signer.getChainId());
+      if (provider) {
+        // Connect to Polygon using Web3Provider and Metamask
+        // @ts-ignore
+        await provider.request({method: 'eth_requestAccounts'});
+        const web3provider = new ethers.providers.Web3Provider(
+          window.ethereum,
+          'any',
+        );
+        const signer = web3provider.getSigner();
 
-    setNetwork(network);
-    setAddress(address);
-  } else {
-    alert('Please install Metamask at https://metamask.io');
-  }
+        // Define address and network
+        const address = await signer.getAddress();
+        const network = ethers.providers.getNetwork(await signer.getChainId());
+
+        if (!network) {
+          throw new Error('Please complete the code');
+        }
+        setNetwork(network);
+        setAddress(address);
+      } else {
+        alert('Please install Metamask at https://metamask.io');
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 //...
 ```
 
