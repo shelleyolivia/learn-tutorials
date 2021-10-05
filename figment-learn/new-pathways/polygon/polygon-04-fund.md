@@ -25,6 +25,7 @@ Once this transaction is confirmed, you will have 1 **MATIC** on the Mumbai test
 ```typescript
   const checkBalance = async () => {
     setFetching(true);
+    setBalance(null);
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const selectedAddress = window.ethereum.selectedAddress;
@@ -57,6 +58,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 // solution
   const checkBalance = async () => {
     setFetching(true);
+    setBalance(null);
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const selectedAddress = window.ethereum.selectedAddress;
