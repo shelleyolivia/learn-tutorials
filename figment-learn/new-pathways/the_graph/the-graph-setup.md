@@ -28,7 +28,7 @@ To get your alchemy API key you:
 - Create a new App on Alchemy.
 - From the Dashboard, click on **View Details** and then click on **View Key**. You can then click to copy your new Alchemy API, including the endpoint URL. Paste this API key in a safe place.
 
-![](../assets/the-graph/graph-alchemy-setup.gif)
+![](../../../.gitbook/assets/pathways/the-graph/graph-alchemy-setup.gif)
 
 ---
 
