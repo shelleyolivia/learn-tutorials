@@ -14,6 +14,7 @@ Transferring some token is one of the major feature of Web 3. In this challenge,
   const transfer = async () => {
     setFetching(true);
     setError(null);
+    setHash(null);
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const send_account = provider.getSigner().getAddress();
@@ -55,6 +56,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
   const transfer = async () => {
     setFetching(true);
     setError(null);
+    setHash(null);
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const send_account = provider.getSigner().getAddress();
