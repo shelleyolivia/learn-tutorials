@@ -12,6 +12,8 @@ In the file `components/protocols/polygon/components/steps/Restore.tsx`, impleme
 
 ```tsx
   const restore = () => {
+    setError(null);
+    setAddress(null);
     try {
       const wallet = undefined;
       const selectedAddress = window.ethereum.selectedAddress;
@@ -22,8 +24,6 @@ In the file `components/protocols/polygon/components/steps/Restore.tsx`, impleme
         setError('Unable to restore account');
       }
     } catch (error) {
-      setAddress(null);
-      setSecret(null);
       setError('Invalid mnemonic');
     }
   };
@@ -46,6 +46,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 ```javascript
 // solution
   const restore = () => {
+    setAddress(null);
+    setSecret(null);
     try {
       const wallet = ethers.Wallet.fromMnemonic(value.trim());
       const selectedAddress = window.ethereum.selectedAddress;
@@ -56,8 +58,6 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
         setError('Unable to restore account');
       }
     } catch (error) {
-      setAddress(null);
-      setSecret(null);
       setError('Invalid mnemonic');
     }
   };
