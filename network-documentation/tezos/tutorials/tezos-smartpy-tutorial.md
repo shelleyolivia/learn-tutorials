@@ -347,5 +347,5 @@ This tutorial was written by Udit Kapoor, who is a Tezos India 2.0 Fellow and a 
 # References
 
 - Calculator example code from SmartPy.io
-- OpenTezos.com
+- [OpenTezos](https://opentezos.com/)
 
