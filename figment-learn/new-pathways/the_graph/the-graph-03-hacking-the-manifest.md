@@ -1,4 +1,4 @@
-# Manifest, so what?
+## Manifest, so what?
 
 To capture and process information from a blockchain, we must:
 
@@ -7,8 +7,6 @@ To capture and process information from a blockchain, we must:
 - Define the shape of the processed information when we are finished with it
 
 The right place to do so is within the `subgraph.yaml` file, the manifest of our subgraph.
-
-# Defining the manifest
 
 ## The scaffolded subgraph.yaml
 
@@ -97,7 +95,7 @@ dataSources:
       file: ./src/mapping.ts
 ```
 
-# Time to verify your work
+## Time to verify your work
 
 Now, it's time for you to verify if you have followed the instructions carefully, click on the button **Test manifest** to check the manifest file. 
 
@@ -105,6 +103,6 @@ Now, it's time for you to verify if you have followed the instructions carefully
 You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
 {% endhint %}
 
-# Conclusion
+## Conclusion
 
 Nice, you made it! You were able to add the correct information to the manifest to get the subgraph working from the [CryptoPunk](https://www.larvalabs.com/cryptopunks) smart contract.
