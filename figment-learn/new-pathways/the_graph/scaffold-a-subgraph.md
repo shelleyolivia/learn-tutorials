@@ -99,13 +99,6 @@ Next steps:
 Make sure to visit the documentation on https://thegraph.com/docs/ for further information.
 ```
 
-Now we can go into the newly created folder, install the dependencies and then start changing the subgraph template.
-
-```bash
-cd punks
-yarn
-```
-
 ## Make sure it works
 
 Now, it's time for you to verify if you have followed the instructions carefully, click on the button **Test subgraph scaffold** to check for the presence of a scaffolded subgraph.

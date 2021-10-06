@@ -6,7 +6,7 @@ To capture and process information from a blockchain, we must:
 - Know what this information is made of
 - Define the shape of the processed information when we are finished with it
 
-The right place to do so is within the `subgraph.yaml` file, the manifest of our subgraph.
+The right place to do so is within the `punks/subgraph.yaml` file, the manifest of our subgraph.
 
 ## The scaffolded subgraph.yaml
 
