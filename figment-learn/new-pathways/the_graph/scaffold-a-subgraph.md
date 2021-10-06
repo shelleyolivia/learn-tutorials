@@ -38,9 +38,15 @@ This should output the current version of the graph-cli, `0.22.1` at the time of
 
 Scaffolding a subgraph will create a subgraph template. It will have the right shape but will be incomplete.
 
-For learning purposes, we're going to use more options than strictly necessary to explain them all. To scaffold your subgraph from the existing smart contract, run this command in your terminal:
+Let's first cd into the folder that will hold out subgraphs
 
-```text
+```sh
+cd subgraphs
+```
+
+Then run this command in your terminal to generate a subgraph scaffold:
+
+```sh
 graph init \
   --allow-simple-name \
   --from-contract 0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB \
@@ -50,7 +56,7 @@ graph init \
   --node http://localhost:8020/ punks
 ```
 
-What does this code do?
+That's a mouthful! What does this code do?
 
 - `graph init` is the CLI command that will initialize an empty subgraph.
 - `--allow-simple-name` simplifies the naming convention of our local graph.
