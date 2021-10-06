@@ -307,8 +307,8 @@ On the **Interact** tab, you will be able to see all your available entrypoints 
 Now we will call our `add` EntryPoint!
 
 1. Select **add** from the right-side pane (the list of entrypoints).
-3. Put integer values in **x** and **y** fields.
-4. Add your wallet address as the **source** and leave the **amount** field blank.
+2. Put integer values in **x** and **y** fields.
+3. Add your wallet address as the **source** and leave the **amount** field blank.
 
 ![Interact](../../../.gitbook/assets/interact4.png)
 
