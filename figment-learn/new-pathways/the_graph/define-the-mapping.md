@@ -45,7 +45,7 @@ otherwise, we only need to increment the number of owned punk
 
 ```typescript
 else {
-  account.numberOfPunksOwned ==
+  account.numberOfPunksOwned =
     account.numberOfPunksOwned.plus(BigInt.fromI32(1));
 }
 ```
@@ -74,7 +74,7 @@ export function handleAssign(event: AssignEvent): void {
     account.id = event.params.to.toHexString();
     account.numberOfPunksOwned = BigInt.fromI32(1);
   } else {
-    account.numberOfPunksOwned ==
+    account.numberOfPunksOwned =
       account.numberOfPunksOwned.plus(BigInt.fromI32(1));
   }
   account.LastMvtAt = event.block.timestamp;

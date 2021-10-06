@@ -17,7 +17,7 @@ From the root directory of the project, run:
 
 ```text
 cd docker
-ETHEREUM_RPC=mainnet:https://eth-mainnet.alchemyapi.io/v2/<ALCHEMY_API_KEY> docker compose up
+ETHEREUM_RPC=mainnet:https://eth-mainnet.alchemyapi.io/v2/<ALCHEMY_API_KEY> docker-compose up
 ```
 
 You should see a bunch of white and blue commands and then the following:
