@@ -1,18 +1,10 @@
----
-description: >-
-  Learn how to deploy and test a smart contract on Avalanche using Remix and
-  MetaMask
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask). 
 
-# Deploy a Smart Contract on Avalanche using Remix and MetaMask
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask).
-
-## Introduction
+# Introduction
 
 ![](../../../.gitbook/assets/image%20%2811%29.png)
 
-Avalanche's Primary Network is a subnet that has three chains: P-Chain, X-Chain, and C-Chain. The C-Chain is an instance of the Ethereum Virtual Machine powered by Avalanche’s Snowman consensus protocol. The [C-Chain RPC](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/evm-api) can do anything a typical Ethereum client can by using the Ethereum-standard RPC calls. The immediate benefits of using the C-Chain rather than Ethereum are all of the benefits of using Avalanche. These properties could considerably improve the performance of DApps and the user experience.
+Avalanche's Primary Network is a subnet that has three chains: P-Chain, X-Chain, and C-Chain. The C-Chain is an instance of the Ethereum Virtual Machine powered by Avalanche’s Snowman consensus protocol. The [C-Chain RPC](https://docs.figment.io/network-documentation/avalanche/rpc-and-rest-api) can do anything a typical Ethereum client can by using the Ethereum-standard RPC calls. The immediate benefits of using the C-Chain rather than Ethereum are all of the benefits of using Avalanche. These properties could considerably improve the performance of DApps and the user experience.
 
 Today, we will deploy and test a smart contract on Avalanche using Remix and MetaMask.
 
@@ -25,7 +17,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 **FUJI Testnet Settings:**
 
 * **Network Name**: Avalanche FUJI C-Chain
-* **New RPC URL**:
+* **New RPC URL**: 
 
   `https://avalanche--fuji--rpc.datahub.figment.io/apikey/APIKEYGOESHERE/ext/bc/C/rpc`
 
@@ -36,7 +28,7 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 **Avalanche Mainnet Settings:**
 
 * **Network Name**: Avalanche Mainnet C-Chain
-* **New RPC URL**:
+* **New RPC URL**: 
 
   `https://avalanche--mainnet--rpc.datahub.figment.io/apikey/APIKEYGOESHERE/ext/bc/C/rpc`
 
@@ -56,11 +48,11 @@ Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
 ### **Funding your C-Chain address on FUJI** <a id="d718"></a>
 
-Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
+ Navigate to [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and paste your C-AVAX address. All you need to do is add a “C-” prefix and the faucet will switch from AVAX to C-AVAX.
 
 ### Funding your C-Chain address on Mainnet <a id="1997"></a>
 
-Funding your C-chain address on mainnet is done through a cross-chain swap from X-chain to C-chain.
+Funding your C-chain address on mainnet is done through a cross-chain swap from X-chain to C-chain. 
 
 ### Funding your C-chain address on local testnet
 

@@ -1,10 +1,4 @@
----
-description: Go from 0 to 1 by learning the basics of Secret development
----
-
-# Intro Pathway: Secret basics
-
-## Secret Intro Pathway
+# Secret Intro Pathway
 
 Secret Network is the first blockchain with privacy-preserving smart contracts. That means applications built on Secret can utilize encrypted data without revealing it to anyone, even the nodes in the network. For the first time, Secret Network allows developers to build powerful, permissionless, privacy-preserving applications - Secret Apps. Learn what makes it unique and build your first project.
 
@@ -16,11 +10,11 @@ There are currently no rewards for completing the intro Pathway. Advanced Pathwa
 
 {% page-ref page="1.-connecting-to-a-secret-node-using-datahub.md" %}
 
-### 💡 2. Create your first Secret account
+### 💡 2. Create your first Secret account 
 
 {% page-ref page="2.-setting-up-your-wallet.md" %}
 
-### 💡 3. Query the Secret Network
+### 💡 3. Query the Secret Network 
 
 {% page-ref page="3.-querying-the-secret-blockchain.md" %}
 

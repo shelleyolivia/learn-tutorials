@@ -1,12 +1,4 @@
----
-description: Learn how to interact with Avalanche's X-Chain
----
-
-# X-Chain \(AVM\) API
-
-## Source documentation
-
-\*\*\*\*[**The AVM API's source documentation can be found here**](https://docs.avax.network/build/apis/exchange-chain-x-chain-api).
+[**The AVM API's source documentation can be found here**](https://docs.avax.network/build/apis/exchange-chain-x-chain-api). 
 
 The X-Chain, Avalanche’s native platform for creating and trading assets, is an instance of the Avalanche Virtual Machine \(AVM\). This API allows clients to create and trade assets on the X-Chain and other instances of the AVM.
 
@@ -351,7 +343,7 @@ curl -X POST --data '{
 
 Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using `mint`.
 
-See [this tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/creating-a-fixed-cap-asset) for an example of usage.
+See [this tutorial](https://learn.figment.io/tutorials/creating-a-fixed-cap-asset) for an example of usage.
 
 **Signature**
 

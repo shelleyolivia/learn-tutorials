@@ -1,14 +1,4 @@
----
-description: Creating simple counter dapp with celo dappkit
----
-
-# Introduction to DappKit
-
-## About the Author
-
-This tutorial was created by [Nikhil Bhintade](https://www.linkedin.com/in/nikbhintade). Nikhil is a student \(BE, Electrical\) and crypto enthusiast who's learning all about the world of web3 and want to document what he learned.
-
-## Introduction
+# Introduction
 
 Celo offers mobile friendly development environment which includes mainnet and testnet wallet, mobile SDK. In this tutorial we are going to make counter dapp with expo \(react native\). This dapp will be able to do following things:
 
@@ -16,7 +6,7 @@ Celo offers mobile friendly development environment which includes mainnet and t
 * Create transaction
 * Sign transaction
 
-### Prerequisite
+# Prerequisite
 
 You should have some basic knowledge of javascript, react and solidity. Also, have following requirements installed:
 
@@ -28,7 +18,7 @@ You should have some basic knowledge of javascript, react and solidity. Also, ha
 
 As we are going to work with mobile app you should install expo mobile client and alfajores \(celo testnet wallet for mobile devices\). Make sure to fund your wallet with faucet.
 
-### Setup
+# Setup
 
 For setting up our development environment, create a new folder and run following command in that folder:
 
@@ -46,7 +36,7 @@ cd client
 yarn // isntalls dependencies for expo
 ```
 
-### Smart Contract
+# Smart Contract
 
 Copy the following smart contract code into `HelloWorld.sol` file inside of `contracts` folder and then rename the file to `Counter.sol`. We will not cover writing smart contracts or the Solidity language in this tutorial. The [Solidity documentation](https://docs.soliditylang.org/) is available as a resource to get started.
 
@@ -92,7 +82,7 @@ contract Counter {
 }
 ```
 
-#### Deploy smart contract
+# Deploy smart contract
 
 For deployment, we need to create a migration for the counter smart contract. Inside of the `migrations` folder go to `2_deploy_contracts.js` and change every `HelloWorld` to `Counter`.
 
@@ -207,7 +197,7 @@ Summary
 
 There should be two additional files now, inside of the `contracts` subdirectory of `client`: `Counter.json` and `Migrations.json`.
 
-### Mobile Dapp
+# Mobile Dapp
 
 As we have completed our smart contract part of tutorial, we can move to creating mobile dapp.
 
@@ -532,9 +522,12 @@ Click on allow. After reaching our dapp screen we can see the count has increase
 
 Congratulations for completing this tutorial, Introduction to DappKit! We have now created a functioning mobile dapp on the Celo testnet. This same methodology can be applied to the Celo mainnet as well, to produce functioning distributed applications.
 
-### Wrapping Up
+# Conclusion
 
 In this tutorial, we have covered some parts of DappKit, how it connects with the Celo mobile wallet, how we can connect our dapp with the mobile wallet and how to do some basic things like getting account addresses, balance of accounts, phone number connected to Celo mobile wallet, and signing transactions.
 
 Thank you for following along with this tutorial, now take this knowledge and build amazing things on Celo!
 
+# About the Author
+
+This tutorial was created by [Nikhil Bhintade](https://www.linkedin.com/in/nikbhintade). Nikhil is a student \(BE, Electrical\) and crypto enthusiast who's learning all about the world of web3 and want to document what he learned.

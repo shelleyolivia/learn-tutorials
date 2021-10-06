@@ -1,8 +1,6 @@
-# Create Your First Substrate Chain
-
 [The original tutorial can be found in Substrate's official documentation here. ](https://substrate.dev/docs/en/tutorials/create-your-first-substrate-chain/)
 
-## Introduction <a id="__docusaurus"></a>
+# Introduction
 
 In this tutorial, you will learn how to compile and launch the Substrate Developer Hub Node Template and interact with it using the Substrate Developer Hub Front-End Template.
 
@@ -34,7 +32,8 @@ Normally, we would teach you more about the Substrate blockchain development fra
 
 To optimize your time, we will have you start the setup process. While things are compiling, you can continue to the next section to learn more about Substrate and what we are building.
 
-## Prerequisites
+# Prerequisites
+
 
 You will probably need to do some set-up to prepare your computer for Substrate development.
 
@@ -216,7 +215,7 @@ You can select Query interactions to read [the values present in your runtime's 
 
 Like many blockchains, Substrate chains use [events](https://substrate.dev/docs/en/knowledgebase/runtime/events) to report the results of asynchronous operations. If you have already used the Front-End Template to perform a balance transfer as described above, you should see an event for the transfer in the Event component next to the Pallet Interactor.
 
-### Next Steps
+# Next Steps
 
 🎉 Congratulations!!! 🎉
 

@@ -1,9 +1,3 @@
----
-description: STAKE Token Vision - NEAR Game Changer
----
-
-# It's Time to Put a STAKE in the Ground!
-
 ![](../../../../.gitbook/assets/oysterpack-stake-in-the-ground.jpg)
 
 My vision for STAKE can be summed up in 3 words:
@@ -26,7 +20,7 @@ The financial incentive to stake NEAR is to earn staking rewards. The problem is
 
 ## The STAKE Solution
 
-The [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) Token provides a solution by issuing fungible tokens for your staked NEAR, which I covered in my prior [You Can Have Your Stake and Trade It Too](https://learn.figment.io/network-documentation/near/tutorials/1-project_overview/3-stake-fungible-token).
+The [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) Token provides a solution by issuing fungible tokens for your staked NEAR, which I covered in my prior [You Can Have Your Stake and Trade It Too](https://learn.figment.io/tutorials/3-stake-fungible-token).
 
 However, [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) offers much more than simply providing tradeable fungible tokens for your staked NEAR. It captures more value by combining staking rewards and contract rewards, transforming [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) into **Internet Money with Super Powers**. Contract rewards are a percentage of the transaction fees that are provided back to the contracts that were run during that transaction. The percentage of fees which are allocated to this reward is set to a minimum value of initially 30%. The super powers are provided by the contract rewards coupled with the power of compounding that boost the overall yield for [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) tokens:
 
@@ -101,7 +95,7 @@ I shared with you my vision. The case for STAKE can be summed up in 3 words: **M
 
 This is where I make my call for action to the community. I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
-## What's Next
+# Next Steps
 
 The game plan remains the same. As new NEAR standards are released, I plan to document them and provide reference implementations as tutorials. The rest of the time will be focused on the core mission, which is to build the [STAKE Token](https://github.com/oysterpack/oysterpack-near-stake-token) with the community and bring it to market.
 

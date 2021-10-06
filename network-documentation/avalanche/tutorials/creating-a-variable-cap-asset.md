@@ -1,12 +1,6 @@
----
-description: Learn how to create a variable-cap asset on Avalanche
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset). 
 
-# Creating A Variable-Cap Asset
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-variable-cap-asset).
-
-## Introduction
+# Introduction
 
 This tutorial illustrates how to create a variable-cap, fungible asset. No units of the asset exist when the asset is initialized, but more units of the asset may be minted. On asset creation we specify which sets of addresses may mint more units.
 
@@ -18,13 +12,13 @@ The second reason is flexibility. It’s nice to be able to encode logic like, �
 
 Suppose that we want to issue an asset that represents shares of a corporation. No shares exist to start with, but more shares may be created later. Let’s create such an asset.
 
-### Assumptions <a id="assumptions"></a>
+### Assumptions 
 
 We assume that you’re already familiar with [**DataHub**](https://datahub.figment.io/sign_up?service=avalanche) and connecting to the Avalanche services.
 
 ## Create the Asset
 
-Our asset will exist on the X-Chain, so to create our asset we’ll call `avm.createVariableCapAsset`, which is a method of the [X-Chain’s API.](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api)
+Our asset will exist on the X-Chain, so to create our asset we’ll call `avm.createVariableCapAsset`, which is a method of the [X-Chain’s API](https://docs.figment.io/network-documentation/avalanche/rpc-and-rest-api/).
 
 The signature for this method is:
 

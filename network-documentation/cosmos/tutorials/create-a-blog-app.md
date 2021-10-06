@@ -1,28 +1,22 @@
----
-description: Learn how to create a simple blog app using the Cosmos SDK
----
+[**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/starport-blog/tutorial/01-index.html). 
 
-# Create a blog app
+# Introduction
 
-\*\*\*\*[**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/starport-blog/tutorial/01-index.html).
+By following this tutorial, you will learn how to create a simple blog app that is powered by the Cosmos SDK.
 
-## Create posts
+# Getting Started
 
-By following this beginner tutorial, you will end up with a simple blog app that is powered by the Cosmos SDK.
-
-## Getting Started
-
-Let's get started! The first step is to [install the `starport`](https://github.com/tendermint/starport) CLI tool.
+Let's get started! The first step is to install the [`starport`](https://github.com/tendermint/starport) CLI tool.
 
 After `starport` is installed, use it to create the initial app structure inside a directory named `blog`:
 
-```javascript
+```
 starport app github.com/example/blog
 ```
 
 One of the main features of Starport is code generation. The command above has generated a directory structure with a working blockchain application. Starport can also add data types to your app with `starport type` command. To see it in action, follow the poll application tutorial. In this guide, however, we'll create those files manually to understand how it all works under the hood.
 
-## Overview
+# Overview
 
 Let's take a quick look at what Starport has generated for us. [`app/app.go`](https://docs.cosmos.network/master/basics/app-anatomy.html#core-application-file) file imports and configures SDK modules and creates a constructor for our application that extends a [basic SDK application](https://docs.cosmos.network/master/core/baseapp.html) among other things. This app will use only a couple standard modules bundled with Cosmos SDK \(including `auth` for dealing with accounts and `bank` for handling coin transfers\) and one module \(`x/blog`\) that will contain custom functionality.
 
@@ -32,20 +26,20 @@ This blog app will store data in a persistent [key-value store](https://docs.cos
 
 We’ll be creating a simple blog-like application, so let’s define the first type, the `Post`.
 
-#### `x/blog/types/TypesPost.go`
+**`x/blog/types/TypesPost.go`**
 
-```javascript
+```go
 package types
 
 import (
-    sdk "github.com/cosmos/cosmos-sdk/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type Post struct {
-    Creator sdk.AccAddress `json:"creator" yaml:"creator"`
-    ID      string         `json:"id" yaml:"id"`
-    Title   string         `json:"title" yaml:"title"`
-    Body    string         `json:"body" yaml:"body"`
+	Creator sdk.AccAddress `json:"creator" yaml:"creator"`
+	ID      string         `json:"id" yaml:"id"`
+	Title   string         `json:"title" yaml:"title"`
+	Body    string         `json:"body" yaml:"body"`
 }
 ```
 
@@ -53,7 +47,7 @@ The code above defines the three properties of a post: Creator, Title and ID. Th
 
 Posts in our key-value store will look like this:
 
-```javascript
+```
 "post-0bae9f7d-20f8-4b51-9d5c-af9103177d66": {
   "Creator": "cosmos18cd5t4msvp2lpuvh99rwglrmjrrw9qx5h3f3gz",
   "Title": "This is a post!",
@@ -69,11 +63,11 @@ Right now the store is empty. Let's figure out how to add posts.
 
 With the Cosmos SDK, users can interact with your app with either a CLI \(`blogcli`\) or by sending HTTP requests. Let's define the CLI command first. Users should be able to type `blogcli tx blog create-post 'This is a post!' 'Welcome to my blog app.' --from=user1` to add a post to your store. The `create-post` subcommand hasn’t been defined yet--let’s do it now.
 
-#### `x/blog/client/cli/tx.go`
+**`x/blog/client/cli/tx.go`**
 
 In the `import` block, make sure to import these five additional packages:
 
-```javascript
+```go
 import (
   // Existing imports...
   "bufio"
@@ -86,7 +80,7 @@ import (
 
 This file already contains `func GetTxCmd` which defines custom `blogcli` [commands](https://docs.cosmos.network/master/building-modules/module-interfaces.html#cli). We will add the custom `create-post` command to our `blogcli` by first adding `GetCmdCreatePost` to `blogTxCmd`.
 
-```javascript
+```go
 blogTxCmd.AddCommand(flags.PostCommands(
     GetCmdCreatePost(cdc),
   )...)
@@ -94,42 +88,42 @@ blogTxCmd.AddCommand(flags.PostCommands(
 
 At the end of the file, let's define `GetCmdCreatePost` itself.
 
-```javascript
+```go
 package cli
 
 import (
-    "bufio"
+	"bufio"
 
-    "github.com/spf13/cobra"
+	"github.com/spf13/cobra"
 
-    "github.com/cosmos/cosmos-sdk/client/context"
-    "github.com/cosmos/cosmos-sdk/codec"
-    sdk "github.com/cosmos/cosmos-sdk/types"
-    "github.com/cosmos/cosmos-sdk/x/auth"
-    "github.com/cosmos/cosmos-sdk/x/auth/client/utils"
-    "github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
+	"github.com/cosmos/cosmos-sdk/client/context"
+	"github.com/cosmos/cosmos-sdk/codec"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/x/auth"
+	"github.com/cosmos/cosmos-sdk/x/auth/client/utils"
+	"github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
 )
 
 func GetCmdCreatePost(cdc *codec.Codec) *cobra.Command {
-    return &cobra.Command{
-        Use:   "create-post [title] [body]",
-        Short: "Creates a new post",
-        Args:  cobra.MinimumNArgs(2),
-        RunE: func(cmd *cobra.Command, args []string) error {
-            argsTitle := string(args[0])
-            argsBody := string(args[1])
+	return &cobra.Command{
+		Use:   "create-post [title] [body]",
+		Short: "Creates a new post",
+		Args:  cobra.MinimumNArgs(2),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			argsTitle := string(args[0])
+			argsBody := string(args[1])
 
-            cliCtx := context.NewCLIContext().WithCodec(cdc)
-            inBuf := bufio.NewReader(cmd.InOrStdin())
-            txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
-            msg := types.NewMsgCreatePost(cliCtx.GetFromAddress(), argsTitle, argsBody)
-            err := msg.ValidateBasic()
-            if err != nil {
-                return err
-            }
-            return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
-        },
-    }
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+			inBuf := bufio.NewReader(cmd.InOrStdin())
+			txBldr := auth.NewTxBuilderFromCLI(inBuf).WithTxEncoder(utils.GetTxEncoder(cdc))
+			msg := types.NewMsgCreatePost(cliCtx.GetFromAddress(), argsTitle, argsBody)
+			err := msg.ValidateBasic()
+			if err != nil {
+				return err
+			}
+			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+		},
+	}
 }
 ```
 
@@ -137,167 +131,167 @@ The function above defines what happens when you run the `create-post` subcomman
 
 This is a common pattern in the SDK: users make changes to the store by broadcasting [messages](https://docs.cosmos.network/master/building-modules/messages-and-queries.html#messages). Both CLI commands and HTTP requests create messages that can be broadcasted in order for state transition to occur.
 
-#### `x/blog/types/MsgCreatePost.go`
+**`x/blog/types/MsgCreatePost.go`**
 
 Let’s define `NewMsgCreatePost` in a new file you should create as `x/blog/types/MsgCreatePost.go`.
 
-```javascript
+```go
 package types
 
 import (
-    sdk "github.com/cosmos/cosmos-sdk/types"
-    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-    "github.com/google/uuid"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/google/uuid"
 )
 
 var _ sdk.Msg = &MsgCreatePost{}
 
 type MsgCreatePost struct {
-    ID      string
-    Creator sdk.AccAddress `json:"creator" yaml:"creator"`
-    Title   string         `json:"title" yaml:"title"`
-    Body    string         `json:"body" yaml:"body"`
+	ID      string
+	Creator sdk.AccAddress `json:"creator" yaml:"creator"`
+	Title   string         `json:"title" yaml:"title"`
+	Body    string         `json:"body" yaml:"body"`
 }
 
 func NewMsgCreatePost(creator sdk.AccAddress, title string, body string) MsgCreatePost {
-    return MsgCreatePost{
-        ID:      uuid.New().String(),
-        Creator: creator,
-        Title:   title,
-        Body:    body,
-    }
+	return MsgCreatePost{
+		ID:      uuid.New().String(),
+		Creator: creator,
+		Title:   title,
+		Body:    body,
+	}
 }
 
 func (msg MsgCreatePost) Route() string {
-    return RouterKey
+	return RouterKey
 }
 
 func (msg MsgCreatePost) Type() string {
-    return "CreatePost"
+	return "CreatePost"
 }
 
 func (msg MsgCreatePost) GetSigners() []sdk.AccAddress {
-    return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
+	return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
 }
 
 func (msg MsgCreatePost) GetSignBytes() []byte {
-    bz := ModuleCdc.MustMarshalJSON(msg)
-    return sdk.MustSortJSON(bz)
+	bz := ModuleCdc.MustMarshalJSON(msg)
+	return sdk.MustSortJSON(bz)
 }
 
 func (msg MsgCreatePost) ValidateBasic() error {
-    if msg.Creator.Empty() {
-        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
-    }
-    return nil
+	if msg.Creator.Empty() {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
+	}
+	return nil
 }
 ```
 
 Similarly to the post struct, `MsgCreatePost` contains creator and title properties. We don’t include ID property, because `MsgCreatePost` defines only the data we accept from the user—we will be generating ID automatically on the next step.
 
-```javascript
+```go
 package types
 
 import (
-    sdk "github.com/cosmos/cosmos-sdk/types"
-    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-    "github.com/google/uuid"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/google/uuid"
 )
 
 var _ sdk.Msg = &MsgCreatePost{}
 
 type MsgCreatePost struct {
-    ID      string
-    Creator sdk.AccAddress `json:"creator" yaml:"creator"`
-    Title   string         `json:"title" yaml:"title"`
-    Body    string         `json:"body" yaml:"body"`
+	ID      string
+	Creator sdk.AccAddress `json:"creator" yaml:"creator"`
+	Title   string         `json:"title" yaml:"title"`
+	Body    string         `json:"body" yaml:"body"`
 }
 
 func NewMsgCreatePost(creator sdk.AccAddress, title string, body string) MsgCreatePost {
-    return MsgCreatePost{
-        ID:      uuid.New().String(),
-        Creator: creator,
-        Title:   title,
-        Body:    body,
-    }
+	return MsgCreatePost{
+		ID:      uuid.New().String(),
+		Creator: creator,
+		Title:   title,
+		Body:    body,
+	}
 }
 
 func (msg MsgCreatePost) Route() string {
-    return RouterKey
+	return RouterKey
 }
 
 func (msg MsgCreatePost) Type() string {
-    return "CreatePost"
+	return "CreatePost"
 }
 
 func (msg MsgCreatePost) GetSigners() []sdk.AccAddress {
-    return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
+	return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
 }
 
 func (msg MsgCreatePost) GetSignBytes() []byte {
-    bz := ModuleCdc.MustMarshalJSON(msg)
-    return sdk.MustSortJSON(bz)
+	bz := ModuleCdc.MustMarshalJSON(msg)
+	return sdk.MustSortJSON(bz)
 }
 
 func (msg MsgCreatePost) ValidateBasic() error {
-    if msg.Creator.Empty() {
-        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
-    }
-    return nil
+	if msg.Creator.Empty() {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
+	}
+	return nil
 }
 ```
 
 `NewMsgCreatePost` is a constructor function that creates the `MsgCreatePost` message. The following five functions have to be defined to implement the `Msg` interface. They allow you to perform validation that doesn’t require access to the store \(like checking for empty values\), etc.
 
-```javascript
+```go
 package types
 
 import (
-    sdk "github.com/cosmos/cosmos-sdk/types"
-    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-    "github.com/google/uuid"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/google/uuid"
 )
 
 var _ sdk.Msg = &MsgCreatePost{}
 
 type MsgCreatePost struct {
-    ID      string
-    Creator sdk.AccAddress `json:"creator" yaml:"creator"`
-    Title   string         `json:"title" yaml:"title"`
-    Body    string         `json:"body" yaml:"body"`
+	ID      string
+	Creator sdk.AccAddress `json:"creator" yaml:"creator"`
+	Title   string         `json:"title" yaml:"title"`
+	Body    string         `json:"body" yaml:"body"`
 }
 
 func NewMsgCreatePost(creator sdk.AccAddress, title string, body string) MsgCreatePost {
-    return MsgCreatePost{
-        ID:      uuid.New().String(),
-        Creator: creator,
-        Title:   title,
-        Body:    body,
-    }
+	return MsgCreatePost{
+		ID:      uuid.New().String(),
+		Creator: creator,
+		Title:   title,
+		Body:    body,
+	}
 }
 
 func (msg MsgCreatePost) Route() string {
-    return RouterKey
+	return RouterKey
 }
 
 func (msg MsgCreatePost) Type() string {
-    return "CreatePost"
+	return "CreatePost"
 }
 
 func (msg MsgCreatePost) GetSigners() []sdk.AccAddress {
-    return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
+	return []sdk.AccAddress{sdk.AccAddress(msg.Creator)}
 }
 
 func (msg MsgCreatePost) GetSignBytes() []byte {
-    bz := ModuleCdc.MustMarshalJSON(msg)
-    return sdk.MustSortJSON(bz)
+	bz := ModuleCdc.MustMarshalJSON(msg)
+	return sdk.MustSortJSON(bz)
 }
 
 func (msg MsgCreatePost) ValidateBasic() error {
-    if msg.Creator.Empty() {
-        return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
-    }
-    return nil
+	if msg.Creator.Empty() {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "creator can't be empty")
+	}
+	return nil
 }
 ```
 
@@ -305,11 +299,11 @@ Going back to `GetCmdCreatePost` in `x/blog/client/cli/tx.go`, you'll see `MsgCr
 
 After being broadcast, the messages are processed by an important part of the application, called [**handlers**](https://docs.cosmos.network/master/building-modules/handler.html).
 
-#### `x/blog/handler.go`
+**`x/blog/handler.go`**
 
 Begin by importing your new blog types that we created:
 
-```javascript
+```go
 import (
   // Existing imports...
   "github.com/example/blog/x/blog/types"
@@ -318,57 +312,57 @@ import (
 
 You should already have `func NewHandler` defined which lists all available handlers. Modify it to include a new function called `handleMsgCreatePost`.
 
-```javascript
+```go
 package blog
 
 import (
-    "fmt"
+	"fmt"
 
-    sdk "github.com/cosmos/cosmos-sdk/types"
-    "github.com/sdk-tutorials/starport-blog/blog/x/blog/keeper"
-    "github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
-    sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/sdk-tutorials/starport-blog/blog/x/blog/keeper"
+	"github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 // NewHandler ...
 func NewHandler(k keeper.Keeper) sdk.Handler {
-    return func(ctx sdk.Context, msg sdk.Msg) (*sdk.Result, error) {
-        ctx = ctx.WithEventManager(sdk.NewEventManager())
-        switch msg := msg.(type) {
+	return func(ctx sdk.Context, msg sdk.Msg) (*sdk.Result, error) {
+		ctx = ctx.WithEventManager(sdk.NewEventManager())
+		switch msg := msg.(type) {
     // this line is used by starport scaffolding
-        case types.MsgCreateComment:
-            return handleMsgCreateComment(ctx, k, msg)
-        case types.MsgCreatePost:
-            return handleMsgCreatePost(ctx, k, msg)
-        default:
-            errMsg := fmt.Sprintf("unrecognized %s message type: %T", types.ModuleName, msg)
-            return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, errMsg)
-        }
-    }
+		case types.MsgCreateComment:
+			return handleMsgCreateComment(ctx, k, msg)
+		case types.MsgCreatePost:
+			return handleMsgCreatePost(ctx, k, msg)
+		default:
+			errMsg := fmt.Sprintf("unrecognized %s message type: %T", types.ModuleName, msg)
+			return nil, sdkerrors.Wrap(sdkerrors.ErrUnknownRequest, errMsg)
+		}
+	}
 }
 ```
 
 Now let’s define `handleMsgCreatePost`:
 
-```javascript
+```go
 package blog
 
 import (
-    sdk "github.com/cosmos/cosmos-sdk/types"
-    "github.com/sdk-tutorials/starport-blog/blog/x/blog/keeper"
-    "github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/sdk-tutorials/starport-blog/blog/x/blog/keeper"
+	"github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
 )
 
 func handleMsgCreatePost(ctx sdk.Context, k keeper.Keeper, msg types.MsgCreatePost) (*sdk.Result, error) {
-    var post = types.Post{
-        Creator: msg.Creator,
-        ID:      msg.ID,
-        Title:   msg.Title,
-        Body:    msg.Body,
-    }
-    k.CreatePost(ctx, post)
+	var post = types.Post{
+		Creator: msg.Creator,
+		ID:      msg.ID,
+		Title:   msg.Title,
+		Body:    msg.Body,
+	}
+	k.CreatePost(ctx, post)
 
-    return &sdk.Result{Events: ctx.EventManager().Events()}, nil
+	return &sdk.Result{Events: ctx.EventManager().Events()}, nil
 }
 ```
 
@@ -376,108 +370,108 @@ In this handler you create a `Post` object \(post type was defined in the very f
 
 After creating a post object with creator, ID and title, the message handler calls `k.CreatePost(ctx, post)`. “k” stands for [Keeper](https://docs.cosmos.network/master/building-modules/keeper.html), an abstraction used by the SDK that writes data to the store. Let’s define the `CreatePost` keeper function.
 
-#### `x/blog/keeper/keeper.go`
+**`x/blog/keeper/keeper.go`**
 
 Add a `CreatePost` function that takes two arguments: a [context](https://docs.cosmos.network/master/core/context.html#context-definition) and a post.
 
-```javascript
+```go
 package keeper
 
 import (
-    "github.com/cosmos/cosmos-sdk/codec"
-    sdk "github.com/cosmos/cosmos-sdk/types"
-    "github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
+	"github.com/cosmos/cosmos-sdk/codec"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/sdk-tutorials/starport-blog/blog/x/blog/types"
 )
 
 func (k Keeper) CreatePost(ctx sdk.Context, post types.Post) {
-    store := ctx.KVStore(k.storeKey)
-    key := []byte(types.PostPrefix + post.ID)
-    value := k.cdc.MustMarshalBinaryLengthPrefixed(post)
-    store.Set(key, value)
+	store := ctx.KVStore(k.storeKey)
+	key := []byte(types.PostPrefix + post.ID)
+	value := k.cdc.MustMarshalBinaryLengthPrefixed(post)
+	store.Set(key, value)
 }
 
 func listPost(ctx sdk.Context, k Keeper) ([]byte, error) {
-    var postList []types.Post
-    store := ctx.KVStore(k.storeKey)
-    iterator := sdk.KVStorePrefixIterator(store, []byte(types.PostPrefix))
-    for ; iterator.Valid(); iterator.Next() {
-        var post types.Post
-        k.cdc.MustUnmarshalBinaryLengthPrefixed(store.Get(iterator.Key()), &post)
-        postList = append(postList, post)
-    }
-    res := codec.MustMarshalJSONIndent(k.cdc, postList)
-    return res, nil
+	var postList []types.Post
+	store := ctx.KVStore(k.storeKey)
+	iterator := sdk.KVStorePrefixIterator(store, []byte(types.PostPrefix))
+	for ; iterator.Valid(); iterator.Next() {
+		var post types.Post
+		k.cdc.MustUnmarshalBinaryLengthPrefixed(store.Get(iterator.Key()), &post)
+		postList = append(postList, post)
+	}
+	res := codec.MustMarshalJSONIndent(k.cdc, postList)
+	return res, nil
 }
 ```
 
 `CreatePost` creates a key by concatenating a post prefix with an ID. If you look back at how our store looks, you’ll notice keys have prefixes, which is why `post-0bae9f7d-20f8-4b51-9d5c-af9103177d66` contained the prefix `post-` . The reason for this is you have one store, but you might want to keep different types of objects in it, like posts and users. Prefixing keys with `post-` and `user-` allows you to share one storage space between different types of objects.
 
-#### `x/blog/types/key.go`
+**`x/blog/types/key.go`**
 
 To define the post prefix add the following code:
 
-```javascript
+```go
 package types
 
 const (
-    // ModuleName is the name of the module
-    ModuleName = "blog"
+	// ModuleName is the name of the module
+	ModuleName = "blog"
 
-    // StoreKey to be used when creating the KVStore
-    StoreKey = ModuleName
+	// StoreKey to be used when creating the KVStore
+	StoreKey = ModuleName
 
-    // RouterKey to be used for routing msgs
-    RouterKey = ModuleName
+	// RouterKey to be used for routing msgs
+	RouterKey = ModuleName
 
-    // QuerierRoute to be used for querier msgs
-    QuerierRoute = ModuleName
+	// QuerierRoute to be used for querier msgs
+	QuerierRoute = ModuleName
 )
 
 const (
-    PostPrefix = "post-"
+	PostPrefix = "post-"
 )
-
+		
 const (
-    CommentPrefix = "comment-"
+	CommentPrefix = "comment-"
 )
 ```
 
-#### `x/blog/types/codec.go`
+**`x/blog/types/codec.go`**
 
 Finally, `store.Set(key, value)` writes our post to the store. Two last things to do is tell our [encoder](https://docs.cosmos.network/master/core/encoding.html#amino) how our `MsgCreatePost` is converted to bytes.
 
-```javascript
+```go
 package types
 
 import (
-    "github.com/cosmos/cosmos-sdk/codec"
+	"github.com/cosmos/cosmos-sdk/codec"
 )
 
 // RegisterCodec registers concrete types on codec
 func RegisterCodec(cdc *codec.Codec) {
-    // this line is used by starport scaffolding
-    cdc.RegisterConcrete(MsgCreateComment{}, "blog/CreateComment", nil)
-    cdc.RegisterConcrete(MsgCreatePost{}, "blog/CreatePost", nil)
+	// this line is used by starport scaffolding
+	cdc.RegisterConcrete(MsgCreateComment{}, "blog/CreateComment", nil)
+	cdc.RegisterConcrete(MsgCreatePost{}, "blog/CreatePost", nil)
 }
 
 // ModuleCdc defines the module codec
 var ModuleCdc *codec.Codec
 
 func init() {
-    ModuleCdc = codec.New()
-    RegisterCodec(ModuleCdc)
-    codec.RegisterCrypto(ModuleCdc)
-    ModuleCdc.Seal()
+	ModuleCdc = codec.New()
+	RegisterCodec(ModuleCdc)
+	codec.RegisterCrypto(ModuleCdc)
+	ModuleCdc.Seal()
 }
 ```
 
-## Launch
+# Launch
 
 Now we are ready to build and start our app and create some posts.
 
 To launch your application run:
 
-```javascript
+```
 starport serve
 ```
 
@@ -492,7 +486,7 @@ Note: depending on your OS and firewall settings, you may have to accept a promp
 
 Run the following command to create a post:
 
-```javascript
+```
 blogcli tx blog create-post "My first post" "This is a post\!" --from=user1
 ```
 
@@ -502,24 +496,24 @@ After running the command and confirming it, you will see an object with “txha
 
 To verify that the transaction has been processed, open a browser and visit the following URL \(make sure to replace `CA14...` with the value of your txhash but make sure to keep the `0x` prefix\):
 
-```javascript
+```
 http://localhost:26657/tx?hash=0xCA1491B39384A4F29E568F62B156E0F2D0601507EF499CE1B8F3930BAFE7F03C
 ```
 
 Congratulations! You have just created and launched your custom blockchain and sent the first transaction 🎉
 
-## Errors
+# Potential errors and their solutions
 
-### Cannot find module providing package
+## Cannot find module providing package
 
-```javascript
+```
 x/blog/client/cli/tx.go:12:2: cannot find module providing package github.com/cosmos/cosmos-sdk/client/utils: import lookup disabled by -mod=readonly
 x/blog/client/cli/tx.go:75:59: undefined: sdk
 ```
 
-Make sure you import all required packages in x/blog/client/cli/tx.go:
+Make sure you import all required packages in `x/blog/client/cli/tx.go`:
 
-```javascript
+```go
 import (
   // ...
   sdk "github.com/cosmos/cosmos-sdk/types"
@@ -527,18 +521,18 @@ import (
 )
 ```
 
-### Unknown command "create-post" for "blog"
+## Unknown command "create-post" for "blog"
 
-```javascript
+```
 blogcli tx blog create-post 'Hello!' 'My first post' --from=user1
 ERROR: unknown command "create-post" for "blog"
 ```
 
 Make sure you’ve added `GetCmdCreatePost(cdc)`, to `func GetTxCmd` in `x/blog/client/cli/tx.go`.
 
-### Cannot encode unregistered concrete type
+## Cannot encode unregistered concrete type
 
-```javascript
+```
 blogcli tx blog create-post Hello! --from=user1
 panic: Cannot encode unregistered concrete type types.MsgCreatePost.
 ```
@@ -546,4 +540,3 @@ panic: Cannot encode unregistered concrete type types.MsgCreatePost.
 Make sure you’ve added `cdc.RegisterConcrete(MsgCreatePost{}, "blog/CreatePost", nil)` to `func RegisterCodec` in `x/blog/types/codec.go`.
 
 If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
-

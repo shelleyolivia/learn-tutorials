@@ -1,64 +1,79 @@
-# A first contact
+[Avalanche.js](https://github.com/ava-labs/avalanchejs) is a client JavaScript package that makes it easy to interact with Avalanche blockchain nodes, query data, submit transactions and offers plenty of other functionality. It's the official package developed by Avalanche, and is a preferred method of communicating with nodes on the private or public networks for development purposes.
 
-The ability to establish a connection is the first step for anyone wanting to discover and travel through web3 space. Fasten your seat belt, it's time to take off 🚀!
+In this tutorial, we will learn how to connect to an Avalanche node using DataHub. You will need to complete the code in each tutorial, to make the dApp functional.
 
-------------------------
+---
 
-## Lesson
+# Challenge
 
-Connecting to a node works pretty much the same as for a standard web server. There are two actors: Client & server, with a protocol managing how data are transferred from one to the other. 
-
-The main difference here is in the protocol. To connect to Avalanche, we'll be using `json-rpc`: 
-* `json`, stands for **J**ava**S**cript **O**bject **N**otation, which is a [text format for transferring data](https://www.w3schools.com/js/js_json_intro.asp).
-* `rpc`, stands for **R**emote **P**rocedure **C**all - a way to [call a server-side function](https://en.wikipedia.org/wiki/Remote_procedure_call) from the client-side.
-
-
-Need more info? => [AvalancheGo APIs](https://docs.avax.network/build/avalanchego-apis)
-
-------------------------
-
-## Challenge
-
-You are stuck in the web2.0 waiting room and need to *connect* to the web3 world. On the wall, an instruction is engraved:   
-> Decode **pages/api/avalanche/connect.ts** and the door will open!
+{% hint style="tip" %}
+In `pages/api/avalanche/connect.ts`, implement the function and try to establish your first connection to the Avalanche network. To verify your connection has been correctly established, try to return the current protocol version. You must replace any instances of `undefined` with working code to accomplish this.
+{% endhint %}
 
 ```typescript
-// Fill in the gaps to connect with Avalanche & be one of us =)
-// Do not forget we're in an "async" world,
-// so you may need to "await" some results.
+//...
   try {
-    const client = undefined
-    const info = undefined
-    const version = undefined
-    res.status(200).json(version)
+    const {network} = req.body;
+    const client = undefined;
+    const info = undefined;
+    const version = undefined;
+    if (version === undefined) {
+      throw new Error('Connection failed: Complete the code');
+    }
+    res.status(200).json(version);
   }
+//...
 ```
 
-A footnote engraved on the wall below the instructions reminds us to: 
-* Use the `getAvalancheClient` helper function.
-* Use the `Info` method on the client.
-* Use the `getNodeVersion` method on the client info.
+**Need some help?** Check out these tips
 
-------------------------
+- [**Check out the `AvalancheJS` library**](https://github.com/ava-labs/avalanchejs)
+- Use the `getAvalancheClient` helper function.
+- Use the `Info` method on the client.
+- Use the `getNodeVersion` method on the client info (remember to `await` this call).
 
-## Solution
+{% hint style="info" %}
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
+{% endhint %}
+
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
+
+---
+
+# Solution
 
 ```typescript
+// solution
+//...
   try {
-    const client = getAvalancheClient()
-    const info = client.Info()
-    const version = await info.getNodeVersion()
-    res.status(200).json(version)
+    const {network} = req.body;
+    const client = getAvalancheClient(network);
+    const info = client.Info();
+    const version = await info.getNodeVersion();
+    if (version === undefined) {
+      throw new Error('Connection failed: Complete the code');
+    }
+    res.status(200).json(version);
   }
+//...
 ```
 
-Quick overview:
-* We instantiate an `Avalanche` object with `getAvalancheClient`.
-* Calling the `Info` method returns a reference to the Info RPC.
-* `getNodeVersion` sends the request and retrieves the answer.
+**What happened in the code above?**
 
-------------------------
+- We instantiate an `Avalanche` object with `getAvalancheClient` passing to it the selected `network`.
+- Calling the `Info` method on the `AvalancheClient` module returns a reference to the Info RPC.
+- `getNodeVersion` sends the request and retrieves the current version of Avalanche running on the node.
 
-## Next
+---
 
-Well done! Your fluency in the Avalanche dialect of web3 is growing. As a newcomer, building an identity is important so you can distinguish yourself from other users on the Avalanche network. Ready to take the next step forward?
+# Make sure it works
+
+Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
+
+![](../../../.gitbook/assets/pathways/avalanche/avalanche-connect.gif)
+
+---
+
+# Conclusion
+
+Now that we have successfully connected to Avalanche node using DataHub, we are ready to move onto the next tutorial. We have also created the foundation for the next step, creating an account.

@@ -1,24 +1,18 @@
----
-description: Learn how to create a fixed-cap asset on Avalanche
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/create-a-fix-cap-asset). 
 
-# Creating A Fixed-Cap Asset
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/create-a-fix-cap-asset).
-
-## Introduction
+# Introduction
 
 This tutorial illustrates how Avalanche can be used to create and trade a fixed-cap, fungible asset. A quantity of the asset is created at the asset’s initialization, and then no more is ever created.
 
 Suppose there is an Income Sharing Agreement \(ISA\) with 10M shares, and no more shares are ever created. Let’s create an asset where one unit of the asset represents one share of the ISA.
 
-### Assumptions <a id="assumptions"></a>
+### Assumptions
 
 We assume that you’re already familiar with [**DataHub**](https://datahub.figment.io/sign_up?service=avalanche) and connecting to the Avalanche services.
 
 ## Create the Asset
 
-Our asset will exist on the [X-Chain](https://docs.avax.network/learn/platform-overview#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API.](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api)
+Our asset will exist on the [X-Chain](https://docs.avax.network/learn/platform-overview#exchange-chain-x-chain), so to create our asset we’ll call `avm.createFixedCapAsset`, a method of the [X-Chain’s API](https://docs.figment.io/network-documentation/avalanche/rpc-and-rest-api/).
 
 The signature for this method is:
 

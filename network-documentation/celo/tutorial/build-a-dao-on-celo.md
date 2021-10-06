@@ -1,12 +1,4 @@
----
-description: >-
-  Build a functioning DAO by writing the Solidity smart contract and building a
-  React Native dApp
----
-
-# Build a Decentralized Autonomous Organization \(DAO\) on Celo
-
-## Introduction
+# Introduction
 
 In this tutorial, we will build a functioning DAO \(Distributed Autonomous Organization\) by first writing the Solidity smart contract code which will be deployed on the Celo network and then building a React Native App to interact with the smart contract.
 
@@ -22,7 +14,7 @@ Read more [here](https://ethereum.org/en/dao/).
 
 In this tutorial, you will learn how to build a functioning Charity DAO. The smart contract code is deployed on the Alfajores testnet of the Celo network. The contract allows its members to contribute to the DAO. Members can initiate charity proposals which Stakeholders will have to vote on within a specified period of time. After that time has elapsed, the DAO contract will disburse the pooled funds.
 
-## Prerequisites
+# Prerequisites
 
 These tutorials assume that you have basic knowledge of Solidity, JavaScript/TypeScript, and also how to start a React Native App using [expo](https://expo.io/). It is also assumed that you have read the expo documentation and have basic knowledge of the Celo Wallet.
 
@@ -32,7 +24,7 @@ These tutorials assume that you have basic knowledge of Solidity, JavaScript/Typ
 * The Celo dAppKit [documentation](https://docs.celo.org/developer-guide/dappkit/setup) is also going to be useful.
 * Learn about [Redux](https://redux.js.org/introduction/getting-started) as well.
 
-## Requirements
+# Requirements
 
 For this tutorial, following software needs to be installed:
 
@@ -51,7 +43,7 @@ We will begin by outlining a visual representation of the dApp, its features, an
 
 ![](../../../.gitbook/assets/image%20%2827%29.png)
 
-## Features
+# Features
 
 The functionality of the dApp includes:
 
@@ -70,13 +62,13 @@ Building the React Native App, in which we show you how to quickly put together 
 
 Connecting the React Native App to the Smart Contract using Redux, which brings it all together and allows our mobile dApp to utilize Celo efficiently.
 
-## **1. Writing the DAO Smart Contract in Solidity**
+# Writing the DAO Smart Contract in Solidity
 
-In this tutorial, we are going to build the foundations of a functional DAO by writing the smart contract.
+In this tutorial, we are going to build the foundations of a functional DAO by writing the smart contract. 
 
 The smart contract is written using the [Solidity programming language](https://docs.soliditylang.org/en/v0.8.7/). Solidity is used on Ethereum as well as other Ethereum Virtual Machine \(EVM\) compatible blockchains like Celo.
 
-### Initial Setup
+## Initial Setup
 
 The first task is to initialize a basic Solidity project using Truffle. Most commonly, an empty directory somewhere under the users home directory is a good place to create the project files. Running the command `truffle init` in an empty directory will install the default files for the project.
 
@@ -97,18 +89,10 @@ Try our scaffold commands to get started:
 http://trufflesuite.com/docs
 ```
 
-### Overview
+## Overview
 
 Here is an look at the full code for the DAO contract, we’ll go over the different functions below to look at what they do and why they are needed.
 
-{% tabs %}
-{% tab title="Extra Information >>" %}
-```text
-Click the CeloDAO tab above if you would like to see the entire contract code!
-```
-{% endtab %}
-
-{% tab title="CeloDAO.sol" %}
 ```javascript
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -316,45 +300,43 @@ contract CharloDAO is ReentrancyGuard, AccessControl {
     }
 }
 ```
-{% endtab %}
-{% endtabs %}
 
 Let’s go ahead and dissect the different parts of the Solidity smart contract.
 
-```text
+```javascript
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 ```
 
 The opening line of a Solidity file should contain the [SPDX licence](https://spdx.org/licenses/) identifier of the relevant open source license - commonly this will be MIT or The Unlicense. The next line will specify the Solidity version needed to compile the contract, using the `pragma` [compiler directive](https://docs.soliditylang.org/en/v0.5.8/layout-of-source-files.html#version-pragma). Be aware of the [semantic versioning](https://semver.org/).
 
-```text
+```javascript
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 ```
 
 We’ll be relying on [OpenZepellin's](https://openzeppelin.com/) ReentrancyGuard and AccessControl here so we should go ahead and import those. These are important security features and should not be overlooked.
 
-```text
+```javascript
 bytes32 public constant CONTRIBUTOR_ROLE = keccak256("CONTRIBUTOR");
 bytes32 public constant STAKEHOLDER_ROLE = keccak256("STAKEHOLDER");
 ```
 
 Users of the DAO will be of two types - Contributors and Stakeholders. We need to declare two constants here, which are the [keccak256 hash](https://docs.soliditylang.org/en/v0.8.6/units-and-global-variables.html#mathematical-and-cryptographic-functions) of the words themselves. These constants will be used later to register and differentiate users.
 
-```text
+```javascript
 uint32 constant minimumVotingPeriod = 1 weeks;
 ```
 
 The `minimumVotingPeriod` variable holds the number of days a proposal can be voted on in UNIX time. The [time unit](https://docs.soliditylang.org/en/v0.8.6/units-and-global-variables.html#time-units) weeks is a suffix provided by Solidity, 1 weeks here translates to the total seconds of [UNIX time](https://en.wikipedia.org/wiki/Unix_time) a week from now. The value of UNIX time can be displayed with the command `date +%s.%N` in Linux. macOS users need to run `brew install coreutils` to enable microseconds display and use the command`gdate +%s.%N` instead.
 
-```text
+```javascript
 uint256 numOfProposals;
 ```
 
 `numOfProposals` is incremented every time a new charity proposal is added. This lets us iterate through the charity proposals in the mapping data type, as Solidity doesn’t provide a way to step through mappings.
 
-```text
+```javascript
 struct CharityProposal {
     uint256 id;
     uint256 amount;
@@ -372,7 +354,7 @@ struct CharityProposal {
 
 The `CharityProposal` struct definition holds the necessary data that makes up each proposal object.
 
-```text
+```javascript
 mapping(uint256 => CharityProposal) private charityProposals;
 mapping(address => uint256[]) private stakeholderVotes;
 mapping(address => uint256) private contributors;
@@ -386,7 +368,7 @@ There are four mappings used:
 * `contributors` maps the Contributor addresses and the amounts they have sent into the DAO treasury.
 * `stakeholders` maps the addresses and balances of Stakeholders.
 
-```text
+```javascript
 event ContributionReceived(address indexed fromAddress, uint256 amount);
 event NewCharityProposal(address indexed proposer, uint256 amount);
 event PaymentTransfered(
@@ -398,7 +380,7 @@ event PaymentTransfered(
 
 These events are emitted for every new proposal, new contribution and new payment transfer. This is for logging purposes and to make filtering these events simpler. The indexed attribute causes the respective arguments to be treated as log topics instead of data.
 
-```text
+```javascript
 modifier onlyStakeholder(string memory message) {
     require(hasRole(STAKEHOLDER_ROLE, msg.sender), message);
     _;
@@ -412,7 +394,7 @@ modifier onlyContributor(string memory message) {
 
 These two modifiers will be used to control access to specific functions.
 
-```text
+```javascript
 function createProposal(
     string calldata description,
     address charityAddress,
@@ -441,7 +423,7 @@ First a new identifier is set - the `proposalId`, which will be the existing num
 
 Finally, the `NewCharityProposal` event is emitted.
 
-```text
+```javascript
 function vote(uint256 proposalId, bool supportProposal)
     external
     onlyStakeholder("Only stakeholders are allowed to vote")
@@ -462,7 +444,7 @@ function vote(uint256 proposalId, bool supportProposal)
 
 The `vote()` function is an external function that allows voting on proposals when called with the proposal’s id and a second true/false argument depending on whether the vote is in support or against the proposal.
 
-```text
+```javascript
 function votable(CharityProposal storage charityProposal) private {
     if (
         charityProposal.votingPassed ||
@@ -483,7 +465,7 @@ function votable(CharityProposal storage charityProposal) private {
 
 `votable()` is called within the `vote()` function. It is used to verify if a proposal can be voted on.
 
-```text
+```javascript
 function payCharity(uint256 proposalId)
     external
     onlyStakeholder("Only stakeholders are allowed to make payments")
@@ -508,7 +490,7 @@ function payCharity(uint256 proposalId)
 
 `payCharity` handles payment to the specified address after the voting period of the proposal has ended. It takes the proposalId as an argument and retreives that proposal from the mapping. We check whether the charity has already been paid or if the number of supporting votes is less than those against. If either of these conditions are true then the transaction will be reverted with an error message. If not, the paid property of the proposal is set true, the address of the stakeholder making the payment is set, and finally emit the PaymentTransfered event for logging purposes and transfer the payment to the charity address.
 
-```text
+```javascript
 receive() external payable {
         emit ContributionReceived(msg.sender, msg.value);
 }
@@ -516,7 +498,7 @@ receive() external payable {
 
 This is needed so the contract can receive contributions without throwing an error. The function emits the ContributionReceived event previously declared in the upper scope.
 
-```text
+```javascript
 function makeStakeholder(uint256 amount) external {
     address account = msg.sender;
     uint256 amountContributed = amount;
@@ -541,7 +523,7 @@ function makeStakeholder(uint256 amount) external {
 
 This function adds a new Stakeholder to the DAO if the total contribution of the user is more than or equal to 5 Celo. If the total contribution is less than 5 then the user is made a Contributor instead.
 
-```text
+```javascript
 function getProposals() public view returns (CharityProposal[] memory props) {
     props = new CharityProposal[](numOfProposals);
 
@@ -553,7 +535,7 @@ function getProposals() public view returns (CharityProposal[] memory props) {
 
 We are returning a list of all the proposals in the DAO here. Solidity doesn’t have iterators for the mapping type so we declare a fixed-size array, used the `numOfProposals` variable as the upper limit of our loop. For each iteration, we assign the proposal at the current index to the index in our fixed-size array then return the array. Essentially, this fetches our proposals and returns them as an array.
 
-```text
+```javascript
 function getProposal(uint256 proposalId)
         public
         view
@@ -565,7 +547,7 @@ function getProposal(uint256 proposalId)
 
 The `getProposal()` function takes a proposal id as an argument to get the proposal from the mapping, then return the proposal.
 
-```text
+```javascript
 function getStakeholderVotes()
         public
         view
@@ -578,7 +560,7 @@ function getStakeholderVotes()
 
 The `getStakeholderVotes()` gets and returns a list containing the id of all the proposals that a particular stakeholder has voted on.
 
-```text
+```javascript
 function getStakeholderBalance()
         public
         view
@@ -591,7 +573,7 @@ function getStakeholderBalance()
 
 As the name suggests, the `getStakeholderBalance()` functions return the total amount of contribution a stakeholder has contributed to the DAO.
 
-```text
+```javascript
 function isStakeholder() public view returns (bool) {
     return stakeholders[msg.sender] > 0;
 }
@@ -599,7 +581,7 @@ function isStakeholder() public view returns (bool) {
 
 The `isStakeholder()` function returns true/false depending on whether the caller is a stakeholder or not
 
-```text
+```javascript
 function getContributorBalance()
         public
         view
@@ -612,7 +594,7 @@ function getContributorBalance()
 
 As the name suggests, this function returns the total balance of a contributor.
 
-```text
+```javascript
 function isContributor() public view returns (bool) {
     return contributors[msg.sender] > 0;
 }
@@ -620,16 +602,16 @@ function isContributor() public view returns (bool) {
 
 The `isContributor()` function returns true/false depending on whether the caller is a contributor or not.
 
-### Next Steps
+## Next Steps
 
 Now that we have written the smart contract code, the next step is to build the React Native App!
 
-## 2. Building the React Native App
+# Building the React Native App
 
-Note: If you have never built an app using React Native to connect to the Celo wallet before, you can follow the guide [here](https://learn.figment.io/network-documentation/celo/tutorial/how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp#project-setup%20).
+Note: If you have never built an app using React Native to connect to the Celo wallet before, you can follow the guide [here](https://learn.figment.io/tutorials/how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp#project-setup).
 
-In this tutorial, we will continue building a functional DAO by making a React Native app to communicate with the Solidity smart contract on Celo. We will make use of the [UI Kitten](https://akveo.github.io/react-native-ui-kitten/) library to style the dApp.
-
+In this tutorial, we will continue building a functional DAO by making a React Native app to communicate with the Solidity smart contract on Celo. We will make use of the [UI Kitten](https://akveo.github.io/react-native-ui-kitten/) library to style the dApp.  
+  
 This is an outline of the Pages and Components that make up the dApp. The next section on Redux will be a deep dive into how to connect the dApp to the smart contract.
 
 First, we will outline the UI and then write out the code for building each of the views:
@@ -655,13 +637,13 @@ First, we will outline the UI and then write out the code for building each of t
 
 At this stage of making the dApp, we will outline how the actions of the smart contract are carried out with a connection to the dApp. First, let’s put the code in place for all the screens. The screens at this point do not yet interact with the smart contract.
 
-### Initialize the dApp
+## Initialize the dApp
 
 This section assumes that you already know how to initialize and start a React Native App. This will serve as a high level overview on how to start your React Native app.
 
-### Setting up UI Kitten
+## Setting up UI Kitten
 
-UI Kitten is a customizable React Native UI Library based on Eva Design System specifications, it is a framework of UI components that can easily be added to a React Native app.  
+UI Kitten is a customizable React Native UI Library based on Eva Design System specifications, it is a framework of UI components that can easily be added to a React Native app.   
 Initializing the app with the `expo init` command and the blank managed workflow as the selected template sets up a basic @ui-kitten/components configuration for us. If this does not work for you, install UI Kitten using the following command instead:
 
 ```text
@@ -672,8 +654,9 @@ Once the installation process is complete, you can use any of the components ava
 
 Open the `App.js` file and wrap the project in UI Kitten’s `ApplicationProvider` module and also add the `IconRegistry` module so we can use @ui-kitten/eva-icons Icons.
 
-{% code title="App.js" %}
+
 ```javascript
+// App.js
 import './global';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
@@ -702,11 +685,10 @@ export default function App() {
   }
 }
 ```
-{% endcode %}
 
 We are making use of the eva dark theme and we have configured `IconRegistry` to use the `EvaIconsPack`. Now that we have UI Kitten set up, we can style our dApp as we build. Now let’s go ahead and build out the screens!
 
-### Screens
+## Screens
 
 ### Welcome Screen
 
@@ -716,7 +698,7 @@ The Welcome screen is the first thing users will see when loading the dApp. The 
 
 Below is the code needed to create the **Welcome** screen:
 
-```javascript
+```jsx
  export const WelcomePage = ({navigation}) => {
 
  return (
@@ -749,9 +731,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-{% hint style="warning" %}
-Notice anything missing? Don't worry, we will add the functionality to connect this screen to the Wallet and carry out user actions in the Redux tutorial.
-{% endhint %}
+> Notice anything missing? Don't worry, we will add the functionality to connect this screen to the Wallet and carry out user actions in the Redux tutorial.
 
 ### Side Menu Navigation
 
@@ -1205,16 +1185,16 @@ const closeIcon = (props) => {
 };
 ```
 
-### Next Steps
+## Next Steps
 
-All of our app pages are now complete!
-
+All of our app pages are now complete!   
+  
 To be able to interact with the smart contract on Celo, we will use Redux actions and reducers to connect with the functions in the smart contract. The next tutorial covers Redux and how to make these connections between actions performed by users and the smart contract functionality.
 
-## 3. Bringing it together with Redux
+# Bringing it together with Redux
 
-In this tutorial, we will complete our DAO and its dApp interface, writing the Redux code to connect our React Native app to the smart contract on Celo. We will look into how to connect the mobile app to the smart contract on the Celo network. This section contains Redux action creators for connecting to the contract, contributing to the DAO and so forth.
-
+In this tutorial, we will complete our DAO and its dApp interface, writing the Redux code to connect our React Native app to the smart contract on Celo. We will look into how to connect the mobile app to the smart contract on the Celo network. This section contains Redux action creators for connecting to the contract, contributing to the DAO and so forth.  
+  
 If you are unfamiliar with Redux, please read their [Getting Started](https://redux.js.org/introduction/getting-started) guide.
 
 Here’s the action creator to contribute some certain amount of Celo to the dApp:
@@ -1279,13 +1259,13 @@ For example the `contribute()` action creator performs the following steps:
 * Sends the transaction with an async call to `sendSignedTransaction(rawTx)` 
 * Dispatches a `CONTRIBUTION_SUCCESS` action with `dispatch(success(receipt));` if contribution was successful, or dispatches a `CONTRIBUTION_FAILED` action with `dispatch(failed());` if login failed.
 
-To keep the code tidy, sub action creators are nested within each async action creator function.  
-For example the `contribute()` function contains 3 nested action creator functions for `request()`, `success()` and `failure()` that return the actions `CONTRIBUTION_REQUEST`, `CONTRIBUTION_SUCCESS` and `CONTRIBUTION_FAILURE` respectively.  
+To keep the code tidy, sub action creators are nested within each async action creator function.   
+For example the `contribute()` function contains 3 nested action creator functions for `request()`, `success()` and `failure()` that return the actions `CONTRIBUTION_REQUEST`, `CONTRIBUTION_SUCCESS` and `CONTRIBUTION_FAILURE` respectively.   
 Putting the sub action creators into nested functions also allows us to give them standard names like request, success and failure without clashing with other function names because they only exist within the scope of the parent function.
 
-All other action creators for this project follow the same process as the one explained above.
+All other action creators for this project follow the same process as the one explained above. 
 
-### Connecting Action Creators with The UI
+## Connecting Action Creators with The UI
 
 {% hint style="info" %}
 Three dots `...` on a line by themselves indicate the presence of other code which we have trimmed for display purposes.
@@ -1331,17 +1311,17 @@ export const ProfilePage = ({ navigation }) => {
 }
 ```
 
-### Conclusion
+# Conclusion
 
-In this tutorial, you learned how to build a complete Charity DAO. We covered the complete smart contract code using the Solidity programming language. We scaffolded the App using React Native and then used Redux to tie the actions together!
-
+In this tutorial, you learned how to build a complete Charity DAO. We covered the complete smart contract code using the Solidity programming language. We scaffolded the App using React Native and then used Redux to tie the actions together!   
+  
 The Smart Contract code is deployed on the Alfajores testnet. The contract allows the members to contribute to the DAO.
 
 The App is available in an Open Source code repository on [Github](https://github.com/PhoenixTechAfrica/Tutorials/tree/dev/projects/charlo). You are encouraged to fork it and use it as a starting point for your own DAO.
 
 Congratulations for completing these tutorials. There are no limits to what you can build using the tools and techniques we have discussed.
 
-## About the Authors
+# About the Authors 
 
 This tutorial was created by [Segun Ogundipe](https://community.figment.io/u/segun-ogundipe) and [Emmanuel Oaikhenan](https://community.figment.io/u/odia.emma/).
 

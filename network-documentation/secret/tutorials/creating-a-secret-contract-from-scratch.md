@@ -1,10 +1,10 @@
 # Developing your first secret contract
 
-## Introduction
+# Introduction
 
 In this tutorial you will learn the basics of creating a new secret contract from scratch. You will learn the basics of handling messages and storing data for your contract on the chain. The contract that you make will allow individual users to store a private reminder on the secret network that can be read back at a later time. Using a secret contract for such a task is probably overkill, but it will teach you the basics of secret contract construction which provides a foundation for building more complex secret dapps using the same principles.
 
-### Pre-requisites
+# Prerequisites
 
 Make sure you have completed the [Secret Pathway Tutorials 1-5](https://learn.figment.io/network-documentation/secret/secret-pathway#secret-pathway-tutorials) prior to doing this tutorial. You should also have a working knowledge of the Rust programming language. If you have never used Rust before, you can learn more [here](https://doc.rust-lang.org/book/). You can use any IDE that supports Rust or just a text editor. Here are some options:
 
@@ -12,17 +12,17 @@ Make sure you have completed the [Secret Pathway Tutorials 1-5](https://learn.fi
 * [IntelliJ Rust plugin](https://www.jetbrains.com/rust/)
 * [Sublime Text 3 Rust Enhanced package](https://github.com/rust-lang/rust-enhanced)
 
-### Generating our project
+# Generating our project
 
-To generate a new project we follow the directions from the [Secret Pathway Tutorial 5](https://learn.figment.io/network-documentation/secret/tutorials/5.-writing-and-deploying-your-first-secret-contract#generate-the-smart-contract-project), however we choose a new name, in this case `reminder`.
+To generate a new project we follow the directions from the [Secret Pathway](https://learn.figment.io/tutorials/deploy-secret-contract), however we choose a new name, in this case `reminder`.
 
-```rust
+```text
 cargo generate --git https://github.com/enigmampc/secret-template --name reminder
 ```
 
 In addition to everything we need to compile a contract, this template includes sample code for the simple counter contract. We are going to remove that in order to start from scratch. **Go into the `src` directory and empty the contents of the following three files `contract.rs`, `msg.rs`, and `state.rs`.** Do NOT remove or edit `lib.rs`.
 
-## Secret contract functions
+# Secret contract functions
 
 There are three main functions that any secret contract can execute once it has been deployed to the network:
 
@@ -30,7 +30,7 @@ There are three main functions that any secret contract can execute once it has 
 2. `handle` takes a handle message as input from a client, executes transactions based on the content of the message, and outputs a response message to the client.
 3. `query` takes a query message as input from a client, reads data from storage to answer the query, and outputs a response message to the client.
 
-The key difference between `handle` and `query` is that `handle` can execute transactions that change the state of the storage, whereas `query` is read-only. `handle` transactions therefore require a gas payment from the requester in order to succeed, but a `query` does not[1](creating-a-secret-contract-from-scratch.md#f1). You can see this in the `customFees` object created in the Figment Learn [Tutorial 5](https://learn.figment.io/network-documentation/secret/tutorials/5.-writing-and-deploying-your-first-secret-contract#deploying-the-contract).
+The key difference between `handle` and `query` is that `handle` can execute transactions that change the state of the storage, whereas `query` is read-only. `handle` transactions therefore require a gas payment from the requester in order to succeed, but a `query` does not. You can see this in the `customFees` object created in the Figment Learn [Pathway](https://learn.figment.io/tutorials/deploy-secret-contract).
 
 We define these three functions \(and any additional helper functions\) in our `src/contract.rs` file as follows:
 
@@ -84,7 +84,7 @@ At the top of this file, we have a number of module imports, some of which will 
 
 A keen eye will note that `deps` is defined as `&mut Extern<S, A, Q>` in `init` and `handle`, but in `query` it is not mutable: `&Extern<S, A, Q>`. This is because a `query` is unable to change the `storage`, it is read-only. In addition, `query` does not have access to the external state of the contract, which importantly means that the address of the sender of the query is not available from within the `query` function. The reason for this is explained in more detail in the [Privacy Model of Secret Networks](https://build.scrt.network/dev/privacy-model-of-secret-contracts.html#verified-values-during-contract-execution).
 
-## Secret contract messages
+# Secret contract messages
 
 Now we need to specify the valid structure of input messages and output responses for each of our three main contract functions. We will define these message structures in `src/msg.rs`.
 
@@ -222,7 +222,7 @@ In addition, number values in Javascript are limited in range. The maximum safe 
 
 Likewise, a message type that has a `HumanAddr` or `CanonicalAddr` as a field value will also be sent from the client using string values.
 
-## Secret contract storage
+# Secret contract storage
 
 Now we are going to define how we want to model our contract's state in the contract storage. We will put that code in `src/state.rs`. Once we have completed that we will wire everything together in our `init`, `handle`, and `query` functions in `src/contract.rs` and we will have a fully working secret contract.
 
@@ -290,7 +290,7 @@ pub fn may_load<T: DeserializeOwned, S: ReadonlyStorage>(storage: &S, key: &[u8]
 }
 ```
 
-## Wiring it all together in our secret contract functions
+# Wiring it all together in our secret contract functions
 
 Now we are ready to fill in our three contract functions in `contract.rs`: `init`, `handle`, and `query`.
 
@@ -478,20 +478,20 @@ fn query_stats<S: Storage, A: Api, Q: Querier>(deps: &Extern<S, A, Q>) -> StdRes
 
 You now have a working reminder secret contract! The completed contract code can be found [here](https://github.com/darwinzer0/secret-contract-tutorials/tree/main/tutorial1/code).
 
-## Next steps
+# Next Steps
 
 Unlike a normal web service, there is no mechanism for a secret contract to repeatedly push information through an open socket connection in response to a handle or query message. Instead, if you want to support that behavior, then you must develop a pull mechanism where the client makes repeated executions of the contract. However, as our contract currently implements the functionality of reading a reminder as a handle execution that would very quickly cost the user a lot of `SCRT` due to gas fees! The solution is to create a private viewing key that allows a user to see their own reminder using a query instead of a handle message. In the next tutorial we will show how that can be done in the context of a simple React application.
 
-## Notes
+# Notes
 
 **1**: Although, queries do not impose a fee, they are metered by gas. This allows a node to reject a long-running query.[↩](creating-a-secret-contract-from-scratch.md#a1)
 
 **2**: These functions are based on the [Sealed Bid Auction contract code](https://github.com/baedrik/SCRT-sealed-bid-auction/blob/master/src/state.rs).[↩](creating-a-secret-contract-from-scratch.md#a2)
 
-## About the author
+# About the author
 
 This tutorial was written by Ben Adams, a senior lecturer in computer science and software engineering at the University of Canterbury in New Zealand.
 
-[![Creative Commons License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)  
+ [![Creative Commons License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/)  
 This work is licensed under a [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
 

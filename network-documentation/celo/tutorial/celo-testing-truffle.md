@@ -1,14 +1,4 @@
----
-description: We will learn how to use Truffle in order to test smart contracts on Celo.
----
-
-# Testing Celo Smart Contracts with Truffle
-
-## About the Author
-
-This tutorial was created by [Alex Reyes](https://www.linkedin.com/in/alexreyes-tech). Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He previously completed internships at Facebook and Microsoft.
-
-## Introduction
+# Introduction
 
 In this tutorial we will write tests for a Celo smart contract.
 
@@ -16,7 +6,7 @@ Writing tests is an important part of smart contract development because smart c
 
 This is a beginner friendly tutorial. Read on to learn about testing!
 
-## Prerequisites
+# Prerequisites
 
 For this tutorial you will need to install Truffle and Ganache. Truffle is a set of tools for smart contract development and Ganache is a tool for creating local blockchains.
 
@@ -30,7 +20,7 @@ then run:
 
 Great! That's all we'll need for our smart contract testing.
 
-## Project setup
+# Project setup
 
 Next, we're going to setup our project. Let's create a folder called `celoTesting` and `cd` into the folder:
 
@@ -42,7 +32,7 @@ Now let's initialize Truffle:
 
 There should now be a handful of files and folders in your `celoTesting` directory. Let's open `celoTesting` with your favorite text editor and continue.
 
-## Writing the smart contract
+# Writing the smart contract
 
 Since this tutorial focuses on smart contract testing, we'll use a very simple Solidity contract in order to get our bearings.
 
@@ -66,7 +56,7 @@ contract HelloWorld {
 
 Great! This is just a simple smart contract which will either get the `name` variable by calling `getName()` or update the `name` variable by calling `setName()`. When the contract first runs, `name` will be "Celo".
 
-## Deployment
+# Deployment
 
 Now that we have a smart contract, let's deploy it to make sure it works. We'll be deploying it on the Ganache CLI, which is a command line tool for creating local blockchains. Ganache will create a local Ethereum blockchain for us to test on. Since Celo is a fork of Ethereum, they use the same environment.
 
@@ -109,7 +99,7 @@ The results should look like this:
 
 ![result](https://i.imgur.com/yIEBGSk.png)
 
-## Testing
+# Testing
 
 Truffle lets us test our smart contracts using both Javascript or Solidity. For this tutorial, we will write tests in Javascript.
 
@@ -205,13 +195,13 @@ And finally, let's run this last test:
 
 Woohoo! All our tests pass.
 
-## Conclusion
+# Conclusion
 
 Now we know how to write tests for our smart contracts. This skill will come in handy whenever you're working on a smart contract and need to verify that all of the functionality works. Although our tests were relatively simple, they should be enough to get you started on your testing journey.
 
 Good luck! And as always, feel free to ask on the Figment Learn [Discord](https://discord.gg/f5YuEsQTAx) if you run into any problems.
 
-## Further reading
+# Further reading
 
 After following this tutorial, you should have a basis for writing tests for smart contracts. Unit testing is a entire subsection of development which has lots of discussion around it. If you'd like to read more, here are some additional resources:
 
@@ -220,3 +210,6 @@ After following this tutorial, you should have a basis for writing tests for sma
 * [New to unit testing, how to write great tests?](https://stackoverflow.com/questions/3258733/new-to-unit-testing-how-to-write-great-tests) - A stack overflow question with some great answers on writing great tests. 
 * [Testing deployed smart contracts](https://fulldecent.blogspot.com/2019/04/testing-deployed-ethereum-contracts.html) - This tutorial may come in handy if you're trying to test a contract which has been deployed to the Celo mainnet.
 
+# About the author
+
+This tutorial was created by Alex Reyes. Alex is a student \(BS, Computer Science\) and crypto enthusiast who's learning all about the world of web3 one day at a time and he's contributing to Web3 communities actively. He has previously completed internships at Facebook and Microsoft.

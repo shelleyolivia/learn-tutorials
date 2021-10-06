@@ -1,36 +1,47 @@
-# A first contact
-
-The ability to establish a connection is the first step for anyone wanting to discover and travel through web3 space. Fasten your seat belt, it's time to take off 🚀!
+In this tutorial we will learn how to connect to a Tezos node via DataHub, using functions from the Taquito JavaScript library.
 
 ------------------------
 
-## Lesson
+# Challenge
 
-Connecting to a node works pretty much the same as for a standard web server. There are two actors: Client & server, with a protocol managing how data are transferred from one to the other.
-
-The main difference here is in the protocol. To connect to Tezos, we'll be using `json-rpc`: 
-* `json`, stands for **J**ava**S**cript **O**bject **N**otation, which is a [text format for transferring data](https://www.w3schools.com/js/js_json_intro.asp).
-* `rpc`, stands for **R**emote **P**rocedure **C**all - a way to [call a server-side function](https://en.wikipedia.org/wiki/Remote_procedure_call) from the client-side.
-
-
-Need more info? => [Tezos Toolkit](https://tezostaquito.io/)
-
-------------------------
-
-## Challenge
-
-You are stuck in the web2.0 waiting room and need to *connect* to the web3 world. On the wall, an instruction is engraved:   
-> Decode **pages/api/tezos/connect.ts** and the door will open!
+{% hint style="tip" %}
+In `pages/api/tezos/connect.ts`, implement the function and try to establish your first connection to the Tezos network. To verify that the connection has been made, try to return the chainId. You must replace the instances of `undefined` with working code to accomplish this.
+{% endhint %}
 
 ```typescript
-// Fill in the gaps to connect with Tezos & be one of us :)
-// Do not forget we're in an "async" world,
-// so you may need to "await" some results.
+//...
+  try {
+    const url = getTezosUrl();
+    const toolkit = undefined;
+    const chainId = undefined;
+    if (validateChain(chainId) != 3) {
+      throw Error("invalid chain Id");
+    }
+    res.status(200).json(chainId);
+  } 
+//...
+```
+
+**Need some help?** Check out these links
+* [**Class `TezosToolkit`**](https://tezostaquito.io/typedoc/classes/_taquito_taquito.tezostoolkit.html)
+* [**Taquito**](https://tezostaquito.io/typedoc/modules.html)  
+
+{% hint style="info" %}
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
+{% endhint %}
+
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
+
+------------------------
+
+# Solution
+
+```typescript
+// solution
   try {
     const url = getTezosUrl();
     const toolkit = new TezosToolkit(url);
     const chainId = await toolkit.rpc.getChainId();
-    console.log(chainId, b58decode(chainId));
     if (validateChain(chainId) != 3) {
       throw Error("invalid chain Id");
     }
@@ -38,34 +49,22 @@ You are stuck in the web2.0 waiting room and need to *connect* to the web3 world
   } 
 ```
 
-A footnote below the instruction reminds us to: 
-* Use the `getTezosUrl` helper method to get a valid endpoint URL.
-* Instantiate a new `TezosToolkit` using that `url`.
-* Get the chainId via the toolkit RPC.
+**What happened in the code above?**
 
-------------------------
-
-## Solution
-
-```typescript
-  try {
-    const url = getTezosUrl();
-    const toolkit = new TezosToolkit(url);
-    const chainId = await toolkit.rpc.getChainId();
-    console.log(chainId, b58decode(chainId));
-    if (validateChain(chainId) != 3) {
-      throw Error("invalid chain Id");
-    }
-    res.status(200).json(chainId);
-  } 
-```
-
-Quick overview:
-* `getTezosUrl()` is a helper function to generate a valid endpoint URL.
+* `getTezosUrl` is a helper function used to generate a valid endpoint URL.
 * The `TezosToolkit` instance manages the connection.
-* Tezos does not expose a software version for nodes, so we will instead retrieve the Chain ID with `getChainId()`.
+* Unlike other blockchains, Tezos does not expose a software version for nodes. We will instead retrieve the Chain ID with `getChainId`.
+
 ------------------------
 
-## Next
+# Make sure it works
 
-Well done! Your fluency in the Tezos dialect of web3 is growing. As a newcomer, building an identity is important so you can distinguish yourself from other users on the Tezos network. Ready to take the next step forward?
+Once the code is complete and the file has been saved, refresh the page to see it update & display the Chain ID.
+
+![](../../../.gitbook/assets/pathways/tezos/tezos-connect.gif)
+
+-----------------------------
+
+# Conclusion
+
+Congratulations! You have connected to the Tezos blockchain and queried the chain ID with a few lines of JavaScript code. In the next tutorial, we will create an account for use on Florence, the Tezos testnet.

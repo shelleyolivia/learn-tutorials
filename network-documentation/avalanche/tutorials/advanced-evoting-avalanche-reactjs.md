@@ -1,24 +1,18 @@
----
-description: Learn how to create an Avalanche based dApp with a ReactJS frontend.
----
+# Introduction
 
-# Create a Voting dApp on Avalanche using ReactJS
-
-## Introduction
-
-In the tutorial [Making advanced e-voting dApp](https://learn.figment.io/network-documentation/avalanche/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle) we have learned to build smart contracts, deploy them on Avalanche and interact with them using jQuery.
+In the tutorial [Making advanced e-voting dApp](https://learn.figment.io/tutorials/making-advanced-e-voting-dapp-avalanche-fuji-using-trufle) we have learned to build smart contracts, deploy them on Avalanche and interact with them using jQuery.
 
 We will generate [ReactJS](https://reactjs.org) boilerplate code using `create-react-app`, which we will modify for our dApp frontend. React is a good choice for efficient, developer-friendly blockchain interactions. For the backend, [Solidity](https://docs.soliditylang.org/en/v0.8.4/) smart contracts will be deployed to the [Avalanche](advanced-evoting-avalanche-reactjs.md) blockchain using [Truffle Suite](https://www.trufflesuite.com).
 
 Truffle Suite is a toolkit for launching decentralized applications \(dApps\) on Ethereum Virtual Machine \(EVM\) compatible blockchains like Avalanche. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM.
 
-## Prerequisites
+# Prerequisites
 
 * You've created an account on [DataHub](https://datahub.figment.io/sign_up?service=avalanche).
 * Basic familiarity with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview) and smart contracts.
 * Basic familiarity with [ReactJS](https://reactjs.org).
 
-## Requirements
+# Requirements
 
 * [NodeJS](https://nodejs.org/en) &gt;= 10.16 and [npm](https://www.npmjs.com/) &gt;= 5.6 installed.
 * [Truffle](https://www.trufflesuite.com/truffle), which can be installed globally with `npm install -g truffle`
@@ -192,7 +186,7 @@ Now we need an Avalanche wallet, where we would keep our funds, required for all
 
 ### **Add .env file**
 
-Create a `.env` file in the project root folder. Please take a note that dot \(.\) is necessary for the `.env` file name. Now copy your Datahub's Avalanche API key and the Avalanche wallet's mnemonic in the .env file as shown below. In the .env file, **MNEMONIC** should be enclosed within double-quotes \(" "\). If you are facing any difficulty in setting up .env file then please refer to **Extra Guides** on [dotenv and .env](https://learn.figment.io/network-documentation/extra-guides/dotenv-and-.env).
+Create a `.env` file in the project root folder. Please take a note that dot \(.\) is necessary for the `.env` file name. Now copy your Datahub's Avalanche API key and the Avalanche wallet's mnemonic in the .env file as shown below. In the .env file, **MNEMONIC** should be enclosed within double-quotes \(" "\). If you are facing any difficulty in setting up .env file then please refer to **Extra Guides** on [dotenv and .env](https://docs.figment.io/network-documentation/extra-guides/dotenv-and-.env).
 
 ```bash
 MNEMONIC="<avalanche-wallet-mnemonic>"
@@ -1138,17 +1132,17 @@ Don't forget to set up Metamask with Fuji testnet and also fund the account with
 | Currency Symbol | AVAX-C |
 | Block Explorer URL | [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network) |
 
-## Conclusion
+# Conclusion
 
 You have successfully built a full-fledged e-voting dApp with advanced features like creating custom elections, voting in them and deployed the smart contract on the Fuji test network using Truffle Suite. Along with that, we have also built the client-side application using ReactJS for interacting with the network. From this tutorial, you have learned not only how to make make and deploy smart contracts but also how to integrate ReactJS with the blockchain using Truffle Suite.
 
 ![](https://imgur.com/bjdWr35.gif)
 
-## What's next?
+# Next Steps
 
 Now that we have built and deployed a voting dApp, we can make new elections with a title and description, and vote on them separately. Some recommended features to add would be the ability to add start and end dates for an election, declaring the winner after the election has ended, or UI enhancements like modal windows and styled buttons.
 
-## About the author
+# About the author
 
 This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/rranjan01234/) and [GitHub](https://github.com/rajranjan0608)
 

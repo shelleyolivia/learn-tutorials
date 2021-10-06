@@ -1,67 +1,65 @@
-# 2. Create a Keypair
+Like with most Web 3 protocols, transactions on Solana happen between **accounts**. To create an account, a client generates a **keypair** which has a **public key** (or **address**, used to identify and lookup an account) and a **secret key** used to sign transactions.
 
-## Accounts and Keypairs
+----------------------------------
 
-Like with most Web 3 protocols, transactions on Solana happen between *accounts*.  To create an account a client generates a *keypair*, which has a *publicKey* (or *address*, used to identify and lookup an account) and a *secretKey* used to sign transactions.
+# Challenge
 
-? > **`Account`is deprecated in the `@solana/web3.js` package** so you should use `Keypair` going forward. You might find some tutorials using older version of the package and the `Account` class but most of the times you can replace it with `Keypair`.
+{% hint style="tip" %}
+In `pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string. You must replace the instances of `undefined` with working code to accomplish this.
+{% endhint %}
 
-## The challenge
-
-!> In`components/protocols/solana/components/steps/Account.tsx`, implement `generateKeypair` and parse the keypair to extract the address as a string and render it in the webpage
-
-**Need some help?** Check out those two links
-* [Generate a`Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
-* [Convert a`PublicKey`to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
-
-Take a few minutes to figure this out.
+**Take a few minutes to figure this out.**
 
 ```tsx
 //...
-  const publicKeyStr = undefined // try to display the string formated address
-
-  const generateKeypair = () => {
-    // Generate a Keypair
-    // Save it to setKeypair Hook
-  }
+  const keypair = undefined;
+  const address = undefined;
+  const secret = JSON.stringify(Array.from(keypair.secretKey));
 //...
 ```
 
-> You can also [**join us on Discord**](https://discord.gg/fszyM7K) if you have questions.
+**Need some help?** Check out these links:
+* [Generate a `Keypair`](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#constructor)  
+* [Convert a `PublicKey` to a string](https://solana-labs.github.io/solana-web3.js/classes/PublicKey.html#tostring)
+
+{% hint style="info" %}
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
+{% endhint %}
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
-## The solution
+----------------------------------
 
+# Solution
 
 ```tsx
+// solution
 //...
-  const publicKeyStr = keypair?.publicKey.toString();
-
-  const generateKeypair = () => {
-    const keypair = Keypair.generate();
-    console.log(keypair);
-    setKeypair(keypair);
-  }
+  const keypair = Keypair.generate();
+  const address = keypair?.publicKey.toString();
+  const secret = JSON.stringify(Array.from(keypair.secretKey));
 //...
 ```
 
 **What happened in the code above?**
 
-* We used the JS API's `Keypair` to generate a keypair
-* Once we have it we call `setKeypair` to save it in the react hook
-* Once React re-renders, we parse the keypair object to extract the public key using `keypair.publicKey`
-* But this value is a `Buffer` so we need to convert it to a string using `PublicKey.toString()`
+* We used the `Keypair` from `@solana/web3.js` to `generate()` a keypair.
+* Parse the keypair object to extract the public key (as a string) using `keypair?.publicKey.toString()`.
+* The secret key is kept in array format, so to send it back to the client-side we need to remember to use `JSON.stringify`.
+* There's the nullish coalescing operator and optional chaining operator `?.` again! We don't want to return undefined values to the client-side.
 
-Once you have the code above saved, the webpage should automatically reload \(React's hot reloading!\) and you should see:
+----------------------------------
 
-![](https://github.com/figment-networks/datahub-learn/blob/new-pathways/.gitbook/assets/solana-keypair.png)
+# Make sure it works
 
-Try and click on "Generate a Keypair" again. And again. And again! Every time it will generate a new one with virtually no risk that someone else creates the same one as you. That's cause the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
+Once the code is complete and the file is saved, Next.js will rebuild the API route. Now click on **Generate a Keypair** and you should see:
 
-Copy and paste the address that was generated (using the icon to the right of it).
+![](../../../.gitbook/assets/pathways/solana/solana-keypair.gif)
 
-## Next
+**Click on "Generate a Keypair" again. And again. And again!** Each time it will generate a new one with virtually no risk that someone else creates the same one as you. That's because the domain of possible addresses is so vast that the probability of two identical addresses being generated is ridiculously small.
+
+----------------------------------
+
+# Conclusion
 
 Now that we have an account, we can fund it so we can start playing around with tokens!
-

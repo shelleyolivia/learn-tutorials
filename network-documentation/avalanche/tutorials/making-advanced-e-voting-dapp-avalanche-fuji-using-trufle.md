@@ -1,67 +1,63 @@
----
-description: Learn how to use Truffle with the Avalanche C-Chain
----
+# Introduction
 
-# Making an advanced e-Voting dApp on Avalanche Fuji network using Trufflesuite
+In the last tutorial on [Make an e-Voting dApp on Avalanche Fuji testnet](https://learn.figment.io/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), we learned how to deploy a smart contract on Avalanche's Fuji C-Chain using Trufflesuite. Along with that we have also coded the client-side application, to easily interact with smart contracts.
 
-## Introduction
+In this tutorial, we will be building a more advanced e-voting dApp, in which we will interact with pre-deployed smart contracts, deploy our own smart contracts, and  interact with them using their contract address. For developing this dApp we will continue to use the Trufflesuite framework.
 
-In the last tutorial on [Making a basic e-voting DApp on Avalanche's Fuji C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), we have learnt how to deploy a smart contract on Avalanche's Fuji C-Chain using Trufflesuite. Along with that we have also coded the client-side application, to easily interact with smart contracts.
+For your information, [Trufflesuite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications (dApps) on EVM compatible blockchains. With Truffle you can write and compile smart contracts, run migrations to deploy contracts and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM (Ethereum Virtual Machine).
 
-Today, in this tutorial, we will be building a more advanced e-voting `dApp`, in which we will not only interact with pre-deployed smart contracts, but will also deploy the contracts in runtime, and would interact with them using their contract address. For developing this dApp we will use the Trufflesuite framework.
+# Prerequisites
 
-For your information, [Truffle Suite](https://www.trufflesuite.com) is a toolkit for launching decentralized applications \(dApps\) on the EVM. With Truffle you can write and compile smart contracts, build artifacts, run migrations and interact with deployed contracts. This tutorial illustrates how Truffle can be used with Avalanche's C-Chain, which is an instance of the EVM \(Ethereum Virtual Machine\).
+This tutorial assumes you are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). Also that you have followed the tutorial [Make an e-Voting dApp on Avalanche Fuji testnet](https://learn.figment.io/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle).
 
-## Prerequisites
-
-You've created an [Avalanche DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and are familiar with [Avalanche's architecture](https://docs.avax.network/learn/platform-overview). Along with that, you've have followed the tutorial on [Making a basic e-voting DApp on Avalanche's Fuji C-Chain](https://learn.figment.io/network-documentation/avalanche/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle), though for the sake of completeness, we will be covering everything from start.
-
-## Requirements
+# Requirements
 
 * [NodeJS](https://nodejs.org/en) v8.9.4 or later.
 * Truffle, which you can install with `npm install -g truffle`
-* Metamask extension added to the browser, which you can add from [here](https://metamask.io/download.html)
-* `express`, `dotenv` and `@truffle/hdwallet-provider` \(instructions to install these will be added later\)
+* Metamask extension added to the browser, which you can install from [metamask.io](https://metamask.io/download.html).
+* You need to have a [DataHub](https://datahub.figment.io/sign_up?service=avalanche) account and an Avalanche API key.
+* `express`, `dotenv` and `@truffle/hdwallet-provider` (instructions to install these are below).
 
-## Create truffle directory and install dependencies
+# Project setup
 
-Open a new terminal so that we can create a `advanced-evoting` directory and install the package dependencies.
+Open a new terminal so that we can create an `advanced-evoting` directory and install the package dependencies.
 
 First, navigate to the directory within which you intend to create your `advanced-evoting` working directory:
 
-```bash
+```text
 cd /path/to/directory
 ```
 
 Create and enter a new directory named `advanced-evoting`:
 
-```bash
-mkdir advanced-evoting && cd advanced-evoting
+```text
+mkdir advanced-evoting
+cd advanced-evoting
 ```
 
-First initialize the folder with `npm` for, in order to have organise the project.
+Initialize the folder with `npm`:
 
-```bash
+```text
 npm init
 ```
 
-This command would prompt the user to enter the details about the project like `name`, `description`, `author` etc. You may either enter details as directed and press enter, or directly move ahead by hitting enter \(it will take default values\).
+This command would prompt the user to enter the details about the project like `name`, `description`, `author` etc. You may either enter details as directed and press enter, or accept defaults & move ahead by pressing enter.
 
 Now use `npm` to install other dependencies
 
-```bash
+```text
 npm install express dotenv @truffle/hdwallet-provider --save
 ```
 
 Lastly, create a boilerplate Truffle project with:
 
-```bash
+```text
 truffle init
 ```
 
 This will setup our initial project structure. Smart contracts will be stored in the `contracts` folder, deployment functions for migrating smart contracts to the network will be stored in the `migrations` folder. And `build/contracts` folder would contain information about the deployed contract, ABI etc.
 
-## Update truffle-config.js
+**Update truffle-config.js**
 
 One of the files created when you ran `truffle init` is `truffle-config.js`. Replace the existing contents of that file with the following code :
 
@@ -103,18 +99,18 @@ module.exports = {
 
 Note that we're setting the `gasPrice` and `gas` to the appropriate values for the Avalanche C-Chain.
 
-## Add .env file
+**Add .env file**
 
 * First of all, we need to create an account on Avalanche network. Please visit [Avalanche Wallet](https://wallet.avax.network/) to create your account and save your mnemonics in the .env file.
 * Now copy your Datahub's Avalanche Fuji testnet API key in the .env file as shown below.
 * Never share or commit your `.env` file. It contains your credentials like `mnemonics` and `API` key. Therefore, it is advised to add `.env` to your `.gitignore` file.
 
-```bash
+```text
 MNEMONIC="<avalanche-wallet-mnemonic>"
 APIKEY=<your-api-key>
 ```
 
-## Add Election.sol
+# Add Election.sol
 
 > **References** : Few parts of this tutorial has been made by taking reference from [Dapp University](https://github.com/dappuniversity/election).
 
@@ -173,11 +169,11 @@ contract Election {
 
 `Election` is a solidity smart contract which lets us view the name, description, about the candidates standing in an election and voting them. In this DApp, we will be accessing these runtime deployed election smart contracts using their `address` and `ABI`. This smart contract will be deployed to the blockchain, each time we create a new election.
 
-### Let's understand this smart contract
+# Understanding the smart contract
 
-The code for smart contract is everything within `contract Election { }`.
+Solidity smart contracts are defined by the `contract` keyword, which is very similar to a function signature. Therefore, the code for this smart contract is everything within `contract Election { }`.
 
-1. **Basic details about election** - This block of code would be storing basic details of each `Election` contract. Details include `name` and `description`.
+* **Basic details about election** - This block of code would be storing basic details of each `Election` contract. Details include `name` and `description`.
 
 ```javascript
   //Election details will be stored in these variables
@@ -185,7 +181,7 @@ The code for smart contract is everything within `contract Election { }`.
   string public description;
 ```
 
-1. **Storing candidate details** - Candidate details would be stored in a mapping between an unsigned integer to the `Candidate` structure. `Candidate` structure would consists of data like `id`, `name` \(candidate's name\) and `voteCount` \(number of times they are voted\).
+* **Storing candidate details** - Candidate details would be stored in a mapping between an unsigned integer to the `Candidate` structure. `Candidate` structure would consists of data like `id`, `name` \(candidate's name\) and `voteCount` \(number of times they are voted\).
 
 ```javascript
   //Structure of candidate standing in the election
@@ -199,7 +195,7 @@ The code for smart contract is everything within `contract Election { }`.
   mapping(uint => Candidate) public candidates;
 ```
 
-1. **Storing details of voters which have already voted and number of candidates** - `voters` is a mapping between the address of voter and a boolean. In Solidity, the default boolean value is `false`, so if the returned value of `voters(address)` is `false` we can understand that the voters is voting for the first time in this election, and vice-versa for `true`.
+* **Storing details of voters which have already voted and number of candidates** - `voters` is a mapping between the address of voter and a boolean. In Solidity, the default boolean value is `false`, so if the returned value of `voters(address)` is `false` we can understand that the voters is voting for the first time in this election, and vice-versa for `true`.
 
 ```javascript
   //Storing address of those voters who already voted
@@ -209,7 +205,7 @@ The code for smart contract is everything within `contract Election { }`.
   uint public candidatesCount = 0;
 ```
 
-1. **Constructor call and adding candidates to the election** - When a smart contract is deployed on a network, the first thing to be called is a `constructor()` function. Whatever we want to initialize in a smart contract, we do it inside the `constructor()` function. Like here, we will be adding a name, description, and candidates to the election. Here, `addCandidate()` is a private function, so that, it cannot be called publicly. This function takes `name` and `description` as a single array named `_nda` in the first argument and candidates' name as an array in the second argument.
+* **Constructor call and adding candidates to the election** - When a smart contract is deployed on a network, the first thing to be called is a `constructor()` function. Whatever we want to initialize in a smart contract, we do it inside the `constructor()` function. Like here, we will be adding a name, description, and candidates to the election. Here, `addCandidate()` is a private function, so that, it cannot be called publicly. This function takes `name` and `description` as a single array named `_nda` in the first argument and candidates' name as an array in the second argument.
 
 ```javascript
   //Setting of variables and data, during the creation of election contract
@@ -229,7 +225,7 @@ The code for smart contract is everything within `contract Election { }`.
   }
 ```
 
-1. **Voting candidates in an election** - We made a `vote()` function. It takes `candidateId` as an argument and increments vote of the respective candidate. It requires two things, viz. voter should not have voted in the particular election by checking boolean accross the `voters` mapping and `candidateId` should be a valid one, i.e. `0 <= candidateId < candiatesCount`.
+* **Voting candidates in an election** - We made a `vote()` function. It takes `candidateId` as an argument and increments vote of the respective candidate. It requires two things, viz. voter should not have voted in the particular election by checking boolean accross the `voters` mapping and `candidateId` should be a valid one, i.e. `0 <= candidateId < candiatesCount`.
 
 ```javascript
   //Public vote function for voting a candidate
@@ -241,7 +237,7 @@ The code for smart contract is everything within `contract Election { }`.
   }
 ```
 
-## Add MainContract.sol
+# Add MainContract.sol
 
 In the `contracts` directory add a new file called `MainContract.sol` and add the following block of code:
 
@@ -265,14 +261,14 @@ contract MainContract {
 
 `MainContract.sol` is the main entry point of our e-voting DApp. It will maintain the number of election contracts deployed, their address on the network and will also help in deploying them. We have also imported `Election.sol` contract, for using it in the `MainContract`.
 
-1. Here `electionId` is used for assigning ID's to each each election that a user creates and is incremented for using it while creating the next election. Also, `Elections` is a public mapping between `electionId` and address of the deployed election contract.
+* Here `electionId` is used for assigning ID's to each each election that a user creates and is incremented for using it while creating the next election. Also, `Elections` is a public mapping between `electionId` and address of the deployed election contract.
 
 ```javascript
     uint public electionId = 0;
     mapping (uint => address) public Elections;
 ```
 
-1. We have made a `createElection()` function which will be used to deploy our `Election` smart contract. This function takes `name` and `description` as a single array named `_nda` in the first argument and candidates' name as an array in the second argument.
+* We have made a `createElection()` function which will be used to deploy our `Election` smart contract. This function takes `name` and `description` as a single array named `_nda` in the first argument and candidates' name as an array in the second argument.
 
 ```javascript
     function createElection (string[] memory _nda, string[] memory _candidates) public {
@@ -284,7 +280,7 @@ contract MainContract {
 
 Here you can see that, new `Election` contract is deployed on the network using the `new` keyword. And address for the deployed smart contract is stored in the `Elections` mapping. Once the election contract is deployed successfully, `electionId` is incremented.
 
-## Add new migration
+# Add new migration
 
 Create a new file in the `migrations` directory named `2_deploy_contracts.js`, and add the following block of code. This handles deploying the `MainContract` and `Election` smart contract to the blockchain.
 
@@ -299,7 +295,7 @@ module.exports = function(deployer) {
 
 Here, you can see that, we are only deploying `MainContract` smart contract, because `Election` contract will be deployed by the `MainContract` itself during the runtime, using the function `createElection()`.
 
-## Compile Contracts with Truffle
+# Compile Contracts with Truffle
 
 Any time you make a change to `.sol` files, you need to run `truffle compile`.
 
@@ -309,7 +305,7 @@ truffle compile
 
 You should see:
 
-```javascript
+```text
 Compiling your contracts...
 ===========================
 > Compiling ./contracts/Election.sol
@@ -321,41 +317,37 @@ Compiling your contracts...
    - solc: 0.5.16+commit.9c3226ce.Emscripten.clang
 ```
 
-> **Note** : There might be an error `Error: Cannot find module 'pify'`, if the `pify` module is not installed automatically while installing `truffle`. So, this issue can be resolved by separately installing `pify`, using the command below
+> **Note** : There might be an error `Error: Cannot find module 'pify'`, if the `pify` module is somehow not installed automatically while installing `truffle`. So, this issue can be resolved by separately installing `pify`, using the command `npm install pify --save`
 
-```text
-npm install pify --save
-```
+Compiling the smart contracts would create `.json` file in the `build/contracts` directory. It stores the ABI and other necessary metadata. ABI refers to *Application Binary Interface*, which is a standard for interacting with the smart contracts from outside the blockchain as well as contract-to-contract interaction. Please refer to the [Solidity documentation about ABIs](https://docs.soliditylang.org/en/latest/abi-spec.html) to learn more.
 
-Compiling the smart contracts would create `.json` file in the `build/contracts` directory. It stores `ABI` and other necessary metadata. `ABI` refers to Application Binary Interface, which is basically a standard for interacting with the smart contracts from outside the blockchain as well as contract-to-contract interaction. Please refer to the Solidity's documentation about ABI's [here](https://docs.soliditylang.org/en/v0.5.3/abi-spec.html#:~:text=The%20Contract%20Application%20Binary%20Interface,contract%2Dto%2Dcontract%20interaction.&text=This%20specification%20does%20not%20address,known%20only%20at%20run%2Dtime) in order to learn more.
+# Fund the account and run migrations on the C-Chain
 
-## Fund the account and run migrations on the C-Chain
+When deploying smart contracts to the C-Chain, it will require some deployment cost. As you can see inside `truffle-config.js`, HDWallet Provider will help us in deploying on Fuji C-chain and the deployment cost will be managed by the account whose mnemonic has been stored in the `.env` file. Therefore we need to fund the account.
 
-When deploying smart contracts to the C-Chain, it will require some deployment cost. As you can see inside `truffle-config.js`, HDWallet Provider will help us in deploying on Fuji C-chain and deployment cost will be managed by account whose mnemonic has been stored in the `.env` file. Therefore we need to fund the account.
-
-### Fund your account
+**Fund your account**
 
 Fund your account using the the faucet link [https://faucet.avax-test.network/](https://faucet.avax-test.network/) and pasting your Fuji's C-Chain address in the input field. You'll need to send at least `135422040` nAVAX to the account to cover the cost of contract deployments. Here nAVAX refers to nano AVAX, which is one-billionth of an AVAX token. Minimum AVAX required for deployment, will vary from contract to contract, depending upon what variables and data structures our contract is using. Though funding through faucet would give you enough `AVAX` to run multiple deployments and transactions on the network.
 
-## Run Migrations
+# Run Migrations
 
 Now everything is in place to run migrations and deploy the `MainContract`:
 
-```javascript
+```text
 truffle migrate --network fuji
 ```
 
 This might take a while depending upon your internet connection or traffic on the network.
 
-Note - For development purpose, we may deploy our contracts on local network, by running Ganache \(Truffle's local blockchain simulation\) and using the command
+Note - For development purpose, we may deploy our contracts on local network, by running Ganache (Truffle's local blockchain tool) using the command:
 
-```bash
+```text
 truffle migrate --network development
 ```
 
-On successfull execution of this command, you should see:
+On successful execution of this command, you should see:
 
-```javascript
+```text
 Starting migrations...
 ======================
 > Network name:    'fuji'
@@ -419,13 +411,13 @@ Summary
 
 If you didn't create an account on the C-Chain you'll see this error:
 
-```javascript
+```text
 Error: Expected parameter 'from' not passed to function.
 ```
 
 If you didn't fund the account, you'll see this error:
 
-```javascript
+```text
 Error:  *** Deployment Failed ***
 
 "Migrations" could not deploy due to insufficient funds
@@ -436,11 +428,11 @@ Error:  *** Deployment Failed ***
       + Using an adequately funded account
 ```
 
-The information and ABI of the deployed contract is present in the `/build/contract` directory as `Election.json`. Inforamation like contract address, network info etc. could be found here.
+The information and ABI of the deployed contract is present in the `/build/contract` directory as `Election.json`. Information like the contract address, network info, etc. could be found here.
 
-## Building user interface for interacting with the blockchain
+# Building the UI for interacting with the blockchain
 
-* Make `src` directory where we will keep all our `web 2` files, for interacting with the blockchain.
+* Make a `src` directory where we will keep all our files for interacting with the blockchain.
 * Go to the `src` directory using `cd src`
 * Make a new file `server.js` . Put the following code inside the file.
 
@@ -475,7 +467,7 @@ app.listen(process.env.PORT || 3000, () => {
 });
 ```
 
-* Now make new file `index.html` and put the following code inside the file. Everything is well commented, for making you understand
+* Now make a new file `index.html` and put the following code inside the file. Everything is well commented, for your comprehension:
 
 ```markup
 <!DOCTYPE html>
@@ -543,7 +535,7 @@ app.listen(process.env.PORT || 3000, () => {
         <span class="spinner-border text-primary"></span>
       </center>
 
-      <!-- Button to syncrhronize the list of elections on the network -->
+      <!-- Button to synchronize the list of elections on the network -->
       <span>
         <img onclick="ElectionData.get()" src="https://img.icons8.com/color/50/000000/synchronize.png"/>
       </span>
@@ -584,7 +576,7 @@ app.listen(process.env.PORT || 3000, () => {
 </html>
 ```
 
-* In order to add some design to our basic `HTML` page, we will also be making `index.css` stylesheet file. Make a file named `index.css` and the paste the following code inside it.
+* In order to add some design to our basic HTML page, we will also need an `index.css` stylesheet file. Make a file named `index.css` with the following code:
 
 ```css
 #newElectionButton {
@@ -665,7 +657,7 @@ img {
 }
 ```
 
-* In order to make this DApp more strutured, we kept 2 small`javascript` function, in separate file named `index.js`. Those functions are `toggleNewElectionForm()` for showing and hiding new election form and `submitNewElection()`, for creating new elections. So, create a file named `index.js` and add the following code into it.
+* In order to make this dApp more structured, we will make two small javascript functions, in a separate file named `index.js`. These functions are `toggleNewElectionForm()` for showing and hiding the new election form and `submitNewElection()`, for creating new elections. So, create a file named `index.js` and add the following code into it:
 
 ```javascript
 var isFormVisible = false;
@@ -695,22 +687,22 @@ async function submitNewElection() {
 }
 ```
 
-* We will be interacting with smart contracts using their ABIs. The `ABI` for `MainContract` and `Election` would be available on `/mainContractJSON` and `/electionJSON` respectively.
-* For interaction purpose, there will be 3 modules, viz. `loadBlockchain.js`, `Election.js` and `loadElection.js`. Please refer to the below image to learn about the use of each file.
+* We will be interacting with smart contracts using their ABIs. The ABI for `MainContract` and `Election` would be available in `/mainContractJSON` and `/electionJSON` respectively.
+* For interaction purposes, there will be 3 modules: `loadBlockchain.js`, `Election.js` and `loadElection.js`. Please refer to the below image to learn about the use of each file.
 
 ![dapp-truffle](https://i.imgur.com/huyZOYB.png)
 
-* loadBlockchain.js \(Default\) - This would load `web3`, `account details` and `MainContract`'s javascript equivalent. Now create `loadBlockchain.js` file in the `src` directory and put the following code in that.
+* loadBlockchain.js (Default) - This would load `web3`, `account details` and `MainContract`'s javascript equivalent. Now create a `loadBlockchain.js` file in the `src` directory and add the following code:
 
   ```javascript
   import {ElectionData} from './loadElections.js';
 
-  //Default would contain all the necessary functions for interaction
+  // Default would contain all the necessary functions for interaction
   export var Default = {
     loading: false,
     contracts: {},
 
-    //Main function to be called first
+    // Main function to be called first
     load: async () => {
       await Default.loadWeb3();
       await Default.loadAccount(); 
@@ -719,7 +711,7 @@ async function submitNewElection() {
       await Default.render();
     },
 
-    //Loading web3 on the browser
+    // Loading web3 on the browser
     loadWeb3: async () => {
       if(typeof web3 !== 'undefined') {
         web3 = new Web3(web3.currentProvider);
@@ -743,23 +735,23 @@ async function submitNewElection() {
       }
     },
 
-    //This function would load account from Metamask to our dDefault
+    // This function would load account from Metamask to our dDefault
     loadAccount: async() => {
       await web3.eth.getAccounts().then((result)=>{
         Default.account = result[0];
       });
     },
 
-    //This function would help in loading contract to Default.MainContract
+    // This function would help in loading contract to Default.MainContract
     loadMainContract: async () => {
-      //Static pre-deployed contracts should be handled like this
+      // Static pre-deployed contracts should be handled like this
       const MainContract = await $.getJSON('/mainContractJSON');
       Default.contracts.MainContract = TruffleContract(MainContract);
       Default.contracts.MainContract.setProvider(Default.web3Provider);
       Default.MainContract = await Default.contracts.MainContract.deployed();
     },
 
-    //This function will be called after the browser is ready for blockchain interaction
+    // This function will be called after the browser is ready for blockchain interaction
     render: async() => {
       if(Default.loading) {
         return;
@@ -769,7 +761,7 @@ async function submitNewElection() {
       Default.setLoading(false);
     },
 
-    //This will facilitate loading feature according to the blockchain data
+    // This will facilitate loading feature according to the blockchain data
     setLoading: (boolean) => {
       Default.loading = boolean;
       const loader = $('#loader');
@@ -784,7 +776,7 @@ async function submitNewElection() {
     }
   };
 
-  //Driver function to initiate the blockchain interaction
+  // Function to initiate the blockchain interaction
   $(() => {
     window.addEventListener('load', ()=>{
         Default.load();
@@ -794,13 +786,13 @@ async function submitNewElection() {
   window.Default = Default;
   ```
 
-* Election.js \(Election\) - This would be a `Election` class, for maintaining separate states for each election \(corresponding to electionId\). We would interact with every election by creating an object of `Election` class. Its `constructor()` function would load `Election` contract's javascript equivalent. Now create `Election.js` file in the `src` directory and put the following code in that.
+* Election.js (Election) - This would be a `Election` class, for maintaining separate states for each election (corresponding to electionId). We would interact with every election by creating an object of `Election` class. Its `constructor()` function would load the `Election` contract's JavaScript equivalent. Now create an `Election.js` file in the `src` directory and add the following code:
 
   ```javascript
   import {Default} from './loadBlockchain.js';
   import {ElectionData} from './loadElections.js';
 
-  //Election class for maintaining separate states for each election contract
+  // Election class for maintaining separate states for each election contract
   export class Election {
   constructor(address) {
     this.address = address;
@@ -810,19 +802,19 @@ async function submitNewElection() {
     await this.loadElectionContract();
   }
 
-  //Loading election contract's javascript equivalent in the this.election variable
+  // Loading election contract's javascript equivalent in the this.election variable
   loadElectionContract = async () => {
-    //Dynamic contracts whose address is not known should be handled like this
+    // Dynamic contracts whose address is not known should be handled like this
     var electionABI = await $.getJSON('/electionJSON');
     this.election = await new web3.eth.Contract(electionABI, this.address);
     await this.election.setProvider(web3.currentProvider);
   }
 
-  //Get details of the election
+  // Get details of the election
   getDetails = async () => {
     var details = {};
 
-    //Fetching details from blockchain and storing it in details object
+    // Fetching details from blockchain and storing it in details object
     details.candidates      = [];
     details.address         = this.address;
     details.candidatesCount = await this.election.methods.candidatesCount().call()
@@ -830,7 +822,7 @@ async function submitNewElection() {
     details.description     = await this.election.methods.description().call();
     details.hasVoted        = await this.election.methods.voters(Default.account).call();
 
-    //Fetching candidate details along with their vote count
+    // Fetching candidate details along with their vote count
     for(var i = 0; i < details.candidatesCount; i++) {
         var candidate = await this.election.methods.candidates(i).call()
 
@@ -843,7 +835,7 @@ async function submitNewElection() {
     return details;
   }
 
-  //This function will call vote() on Fuji testnet
+  // This function will call vote() on Fuji testnet
   castVote = async (candidateId) => {
     await this.election.methods.vote(candidateId).send({ from: Default.account });
     await ElectionData.get();
@@ -851,39 +843,39 @@ async function submitNewElection() {
   }
   ```
 
-* loadElection.js \(ElectionData\) - This would create `Election` object for each available `deployed` elections and load election data on the UI. Now create `loadBlockchain.js` file in the `src` directory and put the following code in that.
+* `loadElection.js` (ElectionData) - This would create an `Election` object for each available deployed election and load the election data on the UI. Now create `loadBlockchain.js` file in the `src` directory and add the following code:
 
   ```javascript
   import {Default} from './loadBlockchain.js';
   import {Election} from './Election.js';
 
   export var ElectionData = {
-    //get() is a loader function, to run loadElections() function.
+    // get() is a loader function, to run loadElections() function.
     get: async () => {
         await ElectionData.loadElections();
         await ElectionData.loadElectionDetails();
     },
 
-    //Loading deployed election contracts in Default.election array
+    // Loading deployed election contracts in Default.election array
     loadElections: async () => {
         ElectionData.elections = [];
         ElectionData.electionCount = await Default.MainContract.electionId();
         for(var i = 0; i < ElectionData.electionCount; i++) {
-            var electionAdress = await Default.MainContract.Elections(i);
-            var election = await new Election(electionAdress);
+            var electionAddress = await Default.MainContract.Elections(i);
+            var election = await new Election(electionAddress);
             await election.init();
             ElectionData.elections.push(election);
         }
 
     },
 
-    //This function will update the page with election details
+    // This function will update the page with election details
     loadElectionDetails: async () => {
         $('#electionDetails').html("");
         for(var i = 0; i < ElectionData.electionCount; i++) {
             var details = await ElectionData.elections[i].getDetails();
             var votingForm;
-            //Showing voting forms to only non-voted elections
+            // Showing voting forms to only non-voted elections
             if(details.hasVoted) {
                 votingForm = `<td>
                                 <font size = 2 color = 'green'><b>Voted</b></font>
@@ -917,7 +909,7 @@ async function submitNewElection() {
         }
     },
 
-    //Function to create (deploy) election on the network
+    // Function to create (deploy) election on the network
     createElection: async (details, candidates) => {
         await Default.MainContract.createElection(details, candidates, {from: Default.account});
         ElectionData.get();
@@ -927,28 +919,29 @@ async function submitNewElection() {
   window.ElectionData = ElectionData;
   ```
 
-* Now run `node server.js` in the `src` directory. This should run till you want to interact with the contract. Your output would look like this
+Now run the command `node server.js` in the `src` directory to start the server!
 
-  ```text
-  Server started at 3000
-  ```
-
-* Visit [http://localhost:3000](http://localhost:3000) to interact with built dApp.
-* Don't forget to setup Metamask with `Fuji` testnet and also fund the account with Fuji c-chain test tokens in order to vote. Please refer to this tutorial on [Connecting Datahub to Metamask](https://learn.figment.io/network-documentation/avalanche/tutorials/connect-datahub-to-metamask). You may change address in the Metamask wallet and fund them in order to vote again.
+* Visit [http://localhost:3000](http://localhost:3000) to interact with the dApp.
+* Don't forget to setup Metamask with the `Fuji` testnet and also fund the account with Fuji C-Chain test tokens in order to vote. Please refer to this tutorial on [Connecting Datahub to Metamask](https://learn.figment.io/tutorials/connect-datahub-to-metamask). You may change to a different address in the Metamask wallet and fund it in order to vote again.
 
 ![](https://i.imgur.com/nfdnbwz.gif)
 
-## Conclusion 
+# Conclusion 
 
-Congratulations! You have successfully built a full fledged dApp and deployed the smart contract on Fuji test network using Trufflesuite. Along with that, we have also built the client side application for interacting with the network.
+Congratulations! You have successfully built a complete dApp and deployed the smart contract on Fuji testnet using Trufflesuite. Along with that, you have also built the client side application for interacting with the network.
 
-## What's next?
+# Next Steps
 
-The dApp which we built just now is an e-Voting application, as now we can make new elections, give them titles and descriptions & vote on them separately. For further learning, we recommend that you experiment and add a few more interesting features to it, like having start and end dates for elections, declaring winners after the election has ended or any other functionality you can think of!
+The dApp which we built in this tutorial is an e-Voting application, used to make new elections, give them titles and descriptions & vote on them separately. 
 
-## About the author
+For further learning, we recommend that you experiment and add a few more interesting features to it, like having start and end dates for elections, declaring winners after the election has ended or any other functionality you can think of!
+
+# About the author
 
 This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan). You can get in touch with the author on [Figment Forum](https://community.figment.io/u/rranjan01234/) and on [GitHub](https://github.com/rajranjan0608)
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
 
+# References
+
+* [Make an e-Voting dApp on Avalanche Fuji testnet](https://learn.figment.io/tutorials/making-evoting-dapp-on-avalanche-c-chain-using-truffle)

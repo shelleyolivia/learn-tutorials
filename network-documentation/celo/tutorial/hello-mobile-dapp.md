@@ -1,14 +1,6 @@
----
-description: >-
-  Learn how to create a simple mobile DApp using dAppKit and the React Native
-  Expo framework
----
+[**The original tutorial can be found in the Celo documentation here**](https://docs.celo.org/v/master/developer-guide/start/hello-mobile-dapp). 
 
-# Hello Mobile DApp
-
-\*\*\*\*[**The original tutorial can be found in the Celo documentation here**](https://docs.celo.org/v/master/developer-guide/start/hello-mobile-dapp).
-
-## Introduction
+# Introduction
 
 This tutorial includes a walk through of a truffle box to get you started with developing React Native DApps on Celo. We will touch on several key concepts in Celo DApp development including:
 
@@ -30,35 +22,33 @@ This Truffle box uses React Native and Expo for developing a mobile first Celo b
 $ npm install expo-cli --global
 ```
 
-## Smart contract development
+# Smart contract development
 
 The project comes with a Hello World example contract in the root contracts directory. The box is also configured to deploy Solidity smart contracts to the Alfajores test network, but you will need test network funds to pay for the deployment costs.
 
-Run
+Run the command:
 
-```javascript
-$ npm run account
+```
+npm run account
 ```
 
-to create a new account for development. The new account address will be printed in the console. This script will generate a private key for you and store it in `/.secret`. If you need to print the account info again, run `$ npm run account` again, it will not create a new account, it will read the saved private key and print the corresponding account address.
+This will create a new account for development. The new account address will be printed in the console. This script will generate a private key for you and store it in `/.secret`. If you need to print the account info again, run `$ npm run account` again, it will not create a new account, it will read the saved private key and print the corresponding account address.
 
 Truffle will read this private key for contract deployments.
 
 Copy your account address and paste it in to the [Alfajores faucet](https://celo.org/developers/faucet) to fund your account.
 
-You can migrate the `HelloWorld.sol` contract to the alfajores test network with
+You can migrate the `HelloWorld.sol` contract to the alfajores test network with the command:
 
-```javascript
-$ truffle migrate --network alfajores
+```
+truffle migrate --network alfajores
 ```
 
 To run a local development Celo blockchain, use the Celo fork of `ganache-cli`. You can find the package details and install instructions [here.](https://www.npmjs.com/package/@celo/ganache-cli)
 
 You should deploy the `HelloWorld.sol` contract to work through the exercise. You can deploy it using the remote node specified in `truffle-config.js`. You may get an error about connecting to a running RPC client. If you run into the error, trying running `truffle migrate --network alfajores` again. A successful deployment should print something like the following:
 
-```javascript
-Joshs-MacBook-Pro-2:untitled folder joshcrites$ truffle migrate --network alfajores
-
+```
 Compiling your contracts...
 ===========================
 > Everything is up to date, there is nothing to compile.
@@ -131,7 +121,7 @@ You can look up the contract deployment transaction on the Alfajores block explo
 
 Truffle will save the deployment information to the Truffle artifact located at `client/contracts/HelloWorld.json`. You will use this deployment information to connect your React Native application to the correct contract.
 
-## Developing the mobile application
+# Developing the mobile application
 
 Keep in mind that you will need a version of the Celo Wallet installed on the mobile device with which you are developing the application. The Celo Wallet is the private key management software used to sign transactions for the user.
 
@@ -139,7 +129,7 @@ You can build a the latest version of the Celo Wallet and find instructions on r
 
 For the purposes of introduction, we have added some code to you get you started located in App.js in the `client` directory.
 
-### Application development with Expo
+## Application development with Expo
 
 In this project, the React Native application lives in the `client` directory. `cd` into the client directory and run `$ yarn` to install the dependencies.
 
@@ -147,19 +137,19 @@ In this project, the React Native application lives in the `client` directory. `
 
 Install it with:
 
-```javascript
-$ npm install expo-cli --global
+```
+npm install expo-cli --global
 ```
 
 You can start the application with
 
-```javascript
-$ expo start
+```
+expo start
 ```
 
 You can use your physical mobile device or an emulator to develop apps with Expo. If you want to use your physical device, you will have to [install the Expo app on your device.](https://expo.io/learn)
 
-### Using an emulator
+## Using an emulator
 
 You can find more information about running and Android emulator [here.](https://developer.android.com/studio/run/emulator-commandline)
 
@@ -167,7 +157,7 @@ You can find more information about running and Android emulator [here.](https:/
 
 [Celo Savings Circle](https://github.com/celo-org/savings-circle-demo)
 
-## Wrapping up
+# Conclusion
 
 You should now have the necessary skills to get started with developing mobile applications on Celo. In this tutorial we covered:
 
@@ -177,5 +167,7 @@ You should now have the necessary skills to get started with developing mobile a
 * View transactions with a block explorer
 * Mobile development using React Native and Expo
 
-This is not a comprehensive tutorial for Celo's features and capabilities, keep exploring the docs to learn more. If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
+This is not a comprehensive tutorial for Celo's features and capabilities, keep exploring the docs to learn more. 
+
+If you had any difficulties following this tutorial or simply want to discuss Celo tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
 

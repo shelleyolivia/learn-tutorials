@@ -1,12 +1,6 @@
----
-description: Learn how to create an NFT on Avalanche
----
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-nft-part-1). 
 
-# Creating An NFT—Part 1
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/smart-digital-assets/creating-a-nft-part-1). 
-
-## Introduction
+# Introduction
 
 Avalanche is a global financial network for the issuance and trade of digital goods. On Avalanche, these digital goods are represented as tokens, which can be assets or utilities. Some tokens are **fungible**, which means that one token is interchangeable for any other one token. Real-world currency is fungible, for example; one $5 note is treated as being the same as any other $5 note.
 
@@ -14,13 +8,13 @@ Avalanche also supports non-fungible tokens \(NFTs\). By definition, each NFT is
 
 In this tutorial we’ll create and send NFTs using AvalancheGo’s API. In a future tutorial we’ll create a custom NFT family using [AvalancheJS](https://docs.avax.network/build/tools/avalanchejs) and explore NFTs in more detail.
 
-### Requirements <a id="requirements"></a>
+# Requirements
 
 We assume that you’re already familiar with [**DataHub**](https://datahub.figment.io/sign_up?service=avalanche) and connecting to the Avalanche services. In this tutorial, we use [Avalanche’s Postman collection](https://github.com/ava-labs/avalanche-postman-collection) to help us make API calls.
 
-## Create the NFT Family
+# Create the NFT Family
 
-Each NFT belongs to a **family**, which has a name and a symbol. Each family is composed of **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call `avm.createNFTAsset`, which is a method of the [X-Chain’s API.](https://learn.figment.io/network-documentation/avalanche/rpc-and-rest-api/avm-api)
+Each NFT belongs to a **family**, which has a name and a symbol. Each family is composed of **groups**. The number of groups in a family is specified when the family is created. Our NFT will exist on the X-Chain, so to create our NFT family we’ll call `avm.createNFTAsset`, which is a method of the [X-Chain’s API](https://docs.figment.io/network-documentation/avalanche/rpc-and-rest-api/).
 
 The signature for this method is:
 
@@ -180,7 +174,7 @@ Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 
 Note that the `TypeID` is `00 00 00 0a` which is the correct type ID for an NFT Mint Output. Also note that the `GroupID` is `00 00 00 00`. This `GroupID` was created based on the number of `MinterSets` which I passed in to `avm.createNFTAsset`.
 
-## Mint the Asset
+# Mint the Asset
 
 Now that we have an NFT family and a group for the single `MinterSet` we’re able to creat NFTs belonging to this group. To do that we call avm.mintNFT:
 
@@ -297,7 +291,7 @@ Addresses[0]: 3c b7 d3 84 2e 8c ee 6a 0e bd 09 f1 fe 88 4f 68 61 e1 b2 9c
 
 Note that the `TypeID` is `00 00 00 0b` which is the correct type id for an [NFT Transfer Output.](https://docs.avax.network/build/references/avm-transaction-serialization#nft-transfer-output) Also note that the Payload is included.
 
-## Send the NFT
+# Send the NFT
 
 Now you can send the NFT to anyone. To do that, use AvalancheGo’s `avm.sendNFT` API method.
 
@@ -348,7 +342,7 @@ The response confirms that our NFT Transfer Operation was successful:
 
 You can call `avm.getUTXOs` for the address which you sent the NFT to and decompose the returned UTXO, after converting from CB58 to hex, to confirm that there is a UTXO with type id `00 00 00 0b` in hex or `11` in decimal.
 
-## Wrapping up
+# Wrapping up
 
 Blockchain technology and tokenomics represent a radical new way of representing digital assets. Non-fungible tokens allow scarce assets to be tokenized. In this tutorial, we:
 

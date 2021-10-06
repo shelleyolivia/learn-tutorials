@@ -1,51 +1,45 @@
-# A first contact
+The ability to establish a connection is the first step for anyone wanting to discover and travel through Web 3 space. Fasten your seatbelt, it's time to take off 🚀!
 
-The ability to establish a connection is the first step for anyone wanting to discover and travel through web3 space. Fasten your seat belt, it's time to take off 🚀!
-
-------------------------
-
-## Lesson
-
-Connecting to a node works pretty much the same as for a standard web server. There are two actors: Client & server, with a protocol managing how data are transferred from one to the other.
-
-The main difference here is in the protocol. To connect to Secret, we'll be using `json-rpc`: 
-* `json`, stands for **J**ava**S**cript **O**bject **N**otation, which is a [text format for transferring data](https://www.w3schools.com/js/js_json_intro.asp).
-* `rpc`, stands for **R**emote **P**rocedure **C**all - a way to [call a server-side function](https://en.wikipedia.org/wiki/Remote_procedure_call) from the client-side.
-
-
-Need more info? => [SecretJS Examples](https://github.com/enigmampc/SecretJS-Templates)
+Connecting to a node works pretty much the same as for a standard web server. There are two actors: Client & server, with a protocol managing how data is transferred from one to the other.
 
 ------------------------
 
-## Challenge
+# Challenge
 
-You are stuck in the web2.0 waiting room and need to *connect* to the web3 world. On the wall, an instruction is engraved:   
-> Decode **pages/api/secret/connect.ts** and the door will open!
+{% hint style="tip" %}
+In `pages/api/secret/connect.ts`, implement the function and try to establish your first connection to the Secret network. To verify your connection has been correctly established, try to return the current protocol version. You must replace the instances of `undefined` with working code to accomplish this.
+{% endhint %}
+
+**Take a few minutes to figure this out**
 
 ```typescript
-// Fill in the gaps to connect with Secret & be one of us :)
-// Do not forget we're in an "async" world,
-// so you may need to "await" some results.
+//...
 try {
-    const url = undefined
-    const client = undefined
-    const nodeInfo = undefined
-    const version = undefined
+    const url = await getSafeUrl();
+    const client = undefined;
+    const nodeInfo = undefined;
+    const version = undefined;
     res.status(200).json(version);
   }
+//...
 ```
 
-A footnote below the instruction reminds us to: 
-* Await the `getSafeUrl()` helper function.
-* Instantiate a new `CosmWasmClient` using that `url`.
-* Await the `nodeInfo()` on the client.
-* Access the version property of `nodeInfo.application_version`
+**Need some help?** Check out these links
+* [**Connection example**](https://github.com/enigmampc/SecretJS-Templates/tree/master/1_connecting_to_node)  
+* [**Read the code for `SecretJS` & `cosmwasm`**](https://github.com/enigmampc/SecretNetwork/tree/master/cosmwasm-js/packages/sdk)  
+
+{% hint style="info" %}
+You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
+{% endhint %}
+
+Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
 ------------------------
 
-## Solution
+# Solution
 
 ```typescript
+// solution
 try {
     const url = await getSafeUrl();
     const client = new CosmWasmClient(url);
@@ -55,12 +49,23 @@ try {
   }
 ```
 
-Quick overview:
-* The `getSafeUrl()` helper function returns a valid endpoint URL.
-* Instantiate a new `CosmWasmClient` from SecretJS with the endpoint URL.
-* The `nodeInfo()` method gives us access to information about the node as well as the `application_version`.
+**What happened in the code above?**
+
+* First, we instantiate a new `CosmWamClient` passing the url of the `holodeck-2` network.
+* Next, using the `nodeInfo` method of the rest client returns a `NodeInfoResponse`. 
+* Inspecting the methods of our object will lead us naturally to reference the `application_version.version` property.
+* Finally, we send the `version` back to the client-side as JSON.
+
 ------------------------
 
-## Next
+# Make sure it works
 
-Well done! Your fluency in the Secret dialect of web3 is growing. As a newcomer, building an identity is important so you can distinguish yourself from other users on the Secret network. Ready to take the next step forward?
+Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
+
+![](../../../.gitbook/assets/pathways/secret/secret-connect.gif)
+
+-----------------------------
+
+# Conclusion
+
+Well done! Your fluency in the Secret dialect of Web 3 is growing. As a newcomer, creating an account is the next logical step in your exploration. Ready to take the next step forward?

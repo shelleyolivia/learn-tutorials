@@ -1,23 +1,17 @@
----
-description: Learn how to write to the Terra blockchain using DataHub
----
-
-# Submit your first transactions
-
-## **Introduction**
+# Introduction
 
 At some point, while building on the Terra blockchain, you will want to submit transactions in order to unlock the full power of Terra.
 
-In this tutorial, we will learn how to submit transactions using a **DataHub** Terra node. We will submit two transactions:
+In this tutorial, we will learn how to submit transactions using a [**DataHub**](https://figment.io/datahub-waitlist/) ****Terra node. We will submit two transactions:
 
 * Regular transfer of LUNA tokens to another account
 * Swap transactions which will exchange LUNA to UUSD
 
-## Prerequisites
+# Prerequisites
 
 Please make sure that you completed tutorials \#1 \("Connecting to a Terra node with DataHub"\), \#2 \("Creating your first Terra account with the Terra SDK"\), and \#3 \("Querying the Terra blockchain"\) before moving forward. We will be building on top of the Nodejs application created in these tutorials.
 
-## **Sending tokens**
+# Sending tokens
 
 In the previous tutorials, we created our account and we used the testnet faucet to request test tokens. Now that we have some tokens to spend, let’s send them to another account.
 
@@ -116,7 +110,7 @@ This is it! Congratulations, you’ve just submitted your first transaction to t
 
 Now it’s time to see if our transaction has succeeded. Head back to your Stake ID account view and refresh the page. Now you should see that your balance is not `1,000` LUNAs anymore.
 
-## **Swapping LUNAs**
+## Swapping LUNAs
 
 Now that we’ve seen how to send tokens to a different account, let’s examine how we can exchange our LUNAs for a different denomination. In tutorial \#3, we issued a query to get exchange rates for different denominations. We would like to get the exchange rate for `uusd` , so let’s swap `1,000` LUNAs to UUSD.
 
@@ -189,13 +183,13 @@ This is a swap message which will use our wallet account to exchange `1,000` LUN
 
 The complete code for this tutorial can be found [**here**](https://github.com/figment-networks/tutorials/tree/main/terra/4_transactions). 
 
-## **Conclusion**
+# Conclusion
 
 Great job! Now you not only know how to read from the Terra blockchain, but also how to interact with it by submitting transactions with [**DataHub**](https://figment.io/datahub-waitlist/). 
 
-## **Next steps**
+# Next Steps
 
-Terra.js has a lot more to offer. We just scratched the surface of what this package can do. In order to learn more about it, please visit: [**Terra.js**](https://terra-project.github.io/terra.js/)\*\*\*\*
+Terra.js has a lot more to offer. We just scratched the surface of what this package can do. In order to learn more about it, please visit: [**Terra.js**](https://terra-project.github.io/terra.js/)
 
-If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [join our community today](https://discord.gg/fszyM7K)!
 

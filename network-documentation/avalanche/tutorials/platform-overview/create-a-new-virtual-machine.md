@@ -1,16 +1,10 @@
----
-description: Learn how to create a new virtual machine on Avalanche
----
-
-# Create a New Virtual Machine
-
-\*\*\*\*[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-virtual-machine-vm). 
+[**The original tutorial can be found in the AVA Labs documentation here**](https://docs.avax.network/build/tutorials/platform/create-a-virtual-machine-vm). 
 
 ## Note
 
 The code below is slightly out of date. Some methods, interfaces and implementations are slightly different than in this tutorial. We’re going to leave this up because the current code is very similar and this tutorial is still useful in demonstrating how Avalanche’s VM model works.
 
-## Introduction
+# Introduction
 
 One of the core features of the Avalanche network is the creation of new, custom blockchains, which are defined by [Virtual Machines.](https://docs.avax.network/v1.0/en/core-concepts/overview/#what-are-virtual-machines)
 
