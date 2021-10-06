@@ -6,7 +6,7 @@ We can follow the progression of the sync looking at the logged output by the ru
 
 ## Using the graphql endpoint
 
-Having a fresh deployed subgraph make no sense if we don't query him. A graph node come up with a **graphql** endpoint, available at .
+Having a fresh deployed subgraph make no sense if we don't query him. A graph node come up with a **graphql** endpoint, available at `http://localhost:8000/subgraphs/name/punks`.
 
 ## Time to verify your work
 

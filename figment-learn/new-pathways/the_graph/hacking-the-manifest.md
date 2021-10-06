@@ -59,7 +59,7 @@ dataSources:
 
 Let's have a look at what this all means. Firstly, `.yaml` is the file extension for YAML ([**Y**AML **A**in't **M**arkup **L**anguage](https://www.cloudbees.com/blog/yaml-tutorial-everything-you-need-get-started)) which is an easy to read file format commonly used for configuration files.
 
-In order to save time when indexing the datasource, we must specify a starting block (or else the node would start indexing from the genesis block, which would take a very long time and not be useful to us). To specify a sensible starting block, insert the line `startBlock: 3914495` into the `subgraph.yaml` file for the datasource of the "punks" contract. Block 3914495 occurred on June 22, 2017 - and contained the deployment of the CryptoPunksMarket contract.
+In order to save time when indexing the datasource, we must specify a starting block (or else the node would start indexing from the genesis block, which would take a very long time and not be useful to us). To specify a sensible starting block, insert the line `startBlock: 12500000` into the `subgraph.yaml` file for the datasource of the "punks" contract.
 
 Next, we need to make sure the datasource mapping includes the entities "Punk" and "Account".
 
@@ -78,7 +78,7 @@ dataSources:
     source:
       address: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB"
       abi: punks
-      startBlock: 3914495
+      startBlock: 12500000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
