@@ -41,7 +41,7 @@ Scaffolding a subgraph will create a subgraph template. It will have the right s
 For learning purposes, we're going to use more options than strictly necessary to explain them all. To scaffold your subgraph from the existing smart contract, run this command in your terminal:
 
 ```text
-graph init
+graph init \
   --allow-simple-name \
   --from-contract 0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB \
   --index-events \
