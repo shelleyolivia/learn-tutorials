@@ -427,8 +427,8 @@ Balance: 1
 # Withdraw using SDK
 Now if we want to transfer our tokens from Mumbai to Goerli, similar before, we can call `burnERC721` and `exitERC721` functions in order.  
 Let's take a look at the workflow for withdrawing tokens with the SDK:
-1. We call the **burn** function of the **Child token** contract, which will burn the tokens.
-2. We call the **exit** function of the **RootChainManager** contract, that submit the proof of burn and transfer the tokens. 
+1. We will call the **burn** function of the **Child token** contract, which will burn the tokens.
+2. We will call the **exit** function of the **RootChainManager** contract, that submit the proof of burn and transfer the tokens. 
 
 ## Burn
 To **burn** the tokens we just need to call the `burnERC721` function. The code for this is straightforward: 
