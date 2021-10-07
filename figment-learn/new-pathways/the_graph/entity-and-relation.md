@@ -18,16 +18,21 @@ To define our entities:
 ```graphql
 type Account @entity {
   id: ID!
-  punksOwned: [Punk!] @derivedFrom(field: "owner")
-  numberOfPunksOwned: BigInt!
-  LastMvtAt: BigInt
+  punksBought: [Punk!] @derivedFrom(field: "currentOwner")
+  punksSell: [Punk!] @derivedFrom(field: "previousOwner")
+  numberOfPunkBought: BigInt!
+  numberOfPunkSell: BigInt!
+  LastBought: BigInt!
+  LastSell: BigInt!
 }
 
 type Punk @entity {
   id: ID!
   tokenId: BigInt!
-  owner: Account!
-  LastAssignAt: BigInt
+  currentOwner: Account!
+  previousOwner: Account
+  lastValue: BigInt!
+  tradeDate: BigInt!
 }
 ```
 

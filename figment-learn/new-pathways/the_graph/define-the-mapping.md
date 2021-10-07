@@ -64,31 +64,52 @@ At the end your `src/mapping.ts` should look like this.
 ```typescript
 import { BigInt } from "@graphprotocol/graph-ts";
 
-import { Assign as AssignEvent } from "../generated/punks/punks";
+import { PunkBought as PunkBoughtEvent } from "../generated/punks/punks";
 import { Account, Punk } from "../generated/schema";
 
-export function handleAssign(event: AssignEvent): void {
-  let account = Account.load(event.params.to.toHexString());
-  if (account == null) {
-    account = new Account(event.params.to.toHexString());
-    account.id = event.params.to.toHexString();
-    account.numberOfPunksOwned = BigInt.fromI32(1);
+export function handlePunkBought(event: PunkBoughtEvent): void {
+  let buyerAccount = Account.load(event.params.toAddress.toHexString());
+  if (buyerAccount == null) {
+    buyerAccount = new Account(event.params.toAddress.toHexString());
+    buyerAccount.id = event.params.toAddress.toHexString();
+    buyerAccount.numberOfPunkBought = BigInt.fromI32(1);
+    buyerAccount.numberOfPunkSell = BigInt.fromI32(0);
+    buyerAccount.LastSell = BigInt.fromI32(0);
   } else {
-    account.numberOfPunksOwned =
-      account.numberOfPunksOwned.plus(BigInt.fromI32(1));
+    buyerAccount.numberOfPunkBought = buyerAccount.numberOfPunkBought.plus(
+      BigInt.fromI32(1)
+    );
   }
-  account.LastMvtAt = event.block.timestamp;
-  account.save();
+  buyerAccount.LastBought = event.block.timestamp;
+  buyerAccount.save();
+
+  let sellerAccount = Account.load(event.params.fromAddress.toHexString());
+  if (sellerAccount == null) {
+    sellerAccount = new Account(event.params.fromAddress.toHexString());
+    sellerAccount.id = event.params.fromAddress.toHexString();
+    sellerAccount.numberOfPunkBought = BigInt.fromI32(0);
+    sellerAccount.numberOfPunkSell = BigInt.fromI32(1);
+    sellerAccount.LastSell = BigInt.fromI32(0);
+  } else {
+    sellerAccount.numberOfPunkSell = sellerAccount.numberOfPunkSell.plus(
+      BigInt.fromI32(1)
+    );
+  }
+  const timestamp = event.block.timestamp;
+  sellerAccount.LastSell = timestamp;
+  sellerAccount.save();
 
   let punk = Punk.load(event.params.punkIndex.toHexString());
   if (punk == null) {
     punk = new Punk(event.params.punkIndex.toHexString());
     punk.id = event.params.punkIndex.toHexString();
-    punk.owner = event.params.to.toHexString();
-  } else {
-    punk.owner = event.params.to.toHexString();
+    punk.tokenId = event.params.punkIndex;
   }
-  punk.LastAssignAt = event.block.timestamp;
+  punk.currentOwner = event.params.toAddress.toHexString();
+  punk.previousOwner = event.params.fromAddress.toHexString();
+  punk.lastValue = event.params.value;
+  punk.tradeDate = timestamp;
+
   punk.save();
 }
 ```

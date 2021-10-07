@@ -78,7 +78,7 @@ dataSources:
     source:
       address: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB"
       abi: punks
-      startBlock: 3914495
+      startBlock: 13100000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -90,8 +90,8 @@ dataSources:
         - name: punks
           file: ./abis/punks.json
       eventHandlers:
-        - event: Assign(indexed address,uint256)
-          handler: handleAssign
+        - event: PunkBought(indexed uint256,uint256,indexed address,indexed address)
+          handler: handlePunkBought
       file: ./src/mapping.ts
 ```
 
