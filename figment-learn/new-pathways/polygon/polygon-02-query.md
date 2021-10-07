@@ -6,7 +6,7 @@ In the file `components/protocols/polygon/components/steps/Query.tsx` we have al
 
 -------------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 **Imagine this scenario:** As the lead developer of a cool new dApp, you need to create a way to query information from the blockchain and then display it on the UI. You know that Next.js has some nice features for creating custom API routes, and that by using TypeScript it is easy to pass complex data types as JSON. Now you just need to wire it up to Polygon to take advantage of the impressive transaction throughput! In **`pages/api/polygon/query.ts`**, assign values to the following variables : `chainId` , `blockHeight` , `gasPriceAsGwei` , `blockInfo`.
@@ -25,6 +25,10 @@ In the file `components/protocols/polygon/components/steps/Query.tsx` we have al
     const gasPriceAsGwei = undefined;
     const blockInfo = undefined;
 
+    if (!chainId || !blockHeight || !gasPriceAsGwei || !blockInfo) {
+      throw new Error('Please complete the code');
+    }
+    
     res.status(200).json({
       networkName,
       chainId,
@@ -50,9 +54,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 -------------------------------------
 
-# The solution
+# Solution
 
 ```typescript
+// solution
 //...
   try {
     const networkName = await provider.getNetwork().then((res) => {
@@ -66,6 +71,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
     });
     const blockInfo = await provider.getBlockWithTransactions(blockHeight);
 
+    if (!chainId || !blockHeight || !gasPriceAsGwei || !blockInfo) {
+      throw new Error('Please complete the code');
+    }
+    
     res.status(200).json({
       networkName,
       chainId,

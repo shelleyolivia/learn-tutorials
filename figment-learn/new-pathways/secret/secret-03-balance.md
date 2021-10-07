@@ -49,6 +49,7 @@ You could experience some issues with the availability of the network. [**Click 
 # Solution
 
 ```typescript
+// solution
   try {
     const url = await getSafeUrl()
     const { address }= req.body

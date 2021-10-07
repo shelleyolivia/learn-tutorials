@@ -8,7 +8,7 @@ You could experience some issues with the availability of the network [**Click h
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/secret/transfer.ts`, implement the default function. There is a lot to fill here, so be careful!
@@ -54,9 +54,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```tsx
+// solution
 //...
   // 1. Initialize a secure Secret client
   const client = new SigningCosmWasmClient(

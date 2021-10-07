@@ -10,7 +10,7 @@ If you want to learn more about NEAR smart contracts, you can follow the tutoria
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In`pages/api/near/deploy.ts`, implement the default function. Deploy your first smart contract on the **NEAR** testnet. You must replace any instances of `undefined` with working code to accomplish this.
@@ -49,9 +49,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```tsx
+// solution
 //...
   try {
     const { network, accountId, secret } = req.body;

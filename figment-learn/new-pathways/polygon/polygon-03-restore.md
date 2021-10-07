@@ -2,7 +2,7 @@ At the beginning of this journey into Polygon, we generated a mnemonic. Now we'r
 
 -------------------------------------
 
-# The Challenge
+# Challenge
 
 {% hint style="tip" %}
 In the file `components/protocols/polygon/components/steps/Restore.tsx`, implement the `restore` function. Using `ethers`, look for `Wallet`, then when the wallet has been regenerated try to deduce which property we're going to call in order to display the address and the private key, finally verify than the generated key matches the existing one.   
@@ -12,6 +12,8 @@ In the file `components/protocols/polygon/components/steps/Restore.tsx`, impleme
 
 ```tsx
   const restore = () => {
+    setError(null);
+    setAddress(null);
     try {
       const wallet = undefined;
       const selectedAddress = window.ethereum.selectedAddress;
@@ -22,8 +24,6 @@ In the file `components/protocols/polygon/components/steps/Restore.tsx`, impleme
         setError('Unable to restore account');
       }
     } catch (error) {
-      setAddress(null);
-      setSecret(null);
       setError('Invalid mnemonic');
     }
   };
@@ -41,10 +41,13 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 -------------------------------------
 
-# The solution
+# Solution
 
 ```javascript
+// solution
   const restore = () => {
+    setAddress(null);
+    setSecret(null);
     try {
       const wallet = ethers.Wallet.fromMnemonic(value.trim());
       const selectedAddress = window.ethereum.selectedAddress;
@@ -55,8 +58,6 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
         setError('Unable to restore account');
       }
     } catch (error) {
-      setAddress(null);
-      setSecret(null);
       setError('Invalid mnemonic');
     }
   };

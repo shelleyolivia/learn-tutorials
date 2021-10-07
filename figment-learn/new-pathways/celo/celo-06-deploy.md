@@ -10,7 +10,7 @@ If you want to learn more about Celo smart contracts, follow the [**Deploy and I
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/celo/deploy.ts`, implement the default function. Upload your first smart contract on the **Celo** network. You must replace any instances of `undefined` with working code to accomplish this.
@@ -50,9 +50,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```tsx
+// solution
 //...
   try {
     const { secret, address } = req.body;
