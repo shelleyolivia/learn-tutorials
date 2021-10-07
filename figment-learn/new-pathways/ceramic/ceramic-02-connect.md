@@ -19,7 +19,7 @@ const checkConnection = async () => {
     const provider = await detectEthereumProvider();
 
     if (provider) {
-      // Connect to Polygon using Web3Provider and Metamask
+      // Connect to Ethereum using Web3Provider and Metamask
       // Define address and network
       const addresses = undefined;
       const address = undefined;
@@ -53,7 +53,7 @@ const checkConnection = async () => {
     if (provider) {
       // Connect to Polygon using Web3Provider and Metamask
       // Define address and network
-      const addresses = await window.ethereum.enable();
+      const addresses = await provider.request({method: 'eth_requestAccounts'});
       const address = addresses[0];
 
       setAddress(address);

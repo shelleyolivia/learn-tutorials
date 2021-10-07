@@ -90,8 +90,8 @@ const logIn = async (address: string): Promise<string | undefined> => {
 
 **Need some help?** Check out these links
 
-- [Setup HTTP Ceramic Client](https://developers.ceramic.network/build/javascript/http/)
 - [Learn how to use 3ID Connect DID wallet](https://developers.ceramic.network/authentication/3id-did/3id-connect/)
+- [Setup HTTP Ceramic Client](https://developers.ceramic.network/build/javascript/http/)
 
 {% hint style="info" %}
 You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
@@ -116,7 +116,6 @@ const logIn = async (address: string): Promise<string> => {
 
   // Create a DID instance
   const did = new DID({
-    provider,
     resolver: {
       ...ThreeIdResolver.getResolver(ceramicRef.current),
     },
