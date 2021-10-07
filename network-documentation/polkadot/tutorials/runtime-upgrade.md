@@ -2,15 +2,14 @@
 
 ![](./assets/runtime-upgrade.png)
 
-## Explaining the problem
+# Introduction
 
-Decentralization of blockchains has advantages and disadvantages, one of the major advantage is that there is no one central unit which has the whole power over a system. From the other side, disadvantage is that in the environment without one central unit upgrading is hard due to coordination so many nodes at one time. One of the well known solution of upgrading blockchains is so called `hard fork` but as I have written has many potential vectors of attack and is hard to coordinate.
+Decentralization of blockchains has advantages and disadvantages, one of the major advantages is that there is no single unit which has complete power over a system.
+From the other side, a disadvantage is that in the environment without centralized control, upgrading is hard due to the need for coordinating so many nodes at one time. One of the well known solutions of upgrading blockchains is the so-called "hard fork", however this has many potential vectors of attack and is hard to coordinate.
 
-## Solution to the problem
+The newest solution for upgrading decentralized systems based on the Substrate framework is called `runtime-upgrade`. The solution works smoothly and in this tutorial, I will show you how you can easily upgrade your Substrate based chain. We will examine how adaptability is implemented in the Substrate framework.
 
-The unique and newest solution how to make upgrade of decentralized system based on Substrate framework is called `runtime-upgrade`. The solution works smoothly and in the article I will show you how you can upgrade your Substrate based chain on your machine, locally and be honest - it is quite easy. This is how adaptability is implemented in Substrate framework.
-
-## Prerequisites
+# Prerequisites
 
 You have very basic knowledge about Rust language and Substrate framework.
 
@@ -202,9 +201,9 @@ error: build failed
 make: *** [Makefile:11: build-full] Error 101
 ```
 
-### Solution - configure and make default proper version of Rust language on your machine
+Solution - configure and make default proper version of Rust language on your machine
 
-You need to install and make default `rustup update nightly-2020-08-23` Rust language
+You need to install and set as default the specified nightly build of Rust: `rustup update nightly-2020-08-23` Rust language
 
 1. Installation
 
@@ -218,11 +217,24 @@ You need to install and make default `rustup update nightly-2020-08-23` Rust lan
 
 `rustup show` and in the output you should see following output:
 
-``
+```text
 active toolchain
 ----------------
 
 nightly-2020-08-23-x86_64-unknown-linux-gnu (default)
 rustc 1.47.0-nightly (663d2f5cd 2020-08-22)
-``
-### 2. Twitter's thread to the most possible issues: https://twitter.com/tomaszwaszczyk/status/1343512637909458944
+```
+
+# Conclusion
+
+Congratulations! You have already understood the importance of how adaptability is important in decentralized blockchains and how the feature is implemented in Substrate framework.
+
+During reading the tutorial you have learnt basics of Rust language, how to compile Substrate based chain and how to generate and then upload wasm file in order to deliver new feature for the chain.
+
+# About The Author
+
+The tutorial was created by Tomasz Waszczyk. In case any questions, you can reach out to Tomasz on [Figment Forum](https://community.figment.io/u/pantarhei) and on [Github](https://github.com/tomaszwaszczyk) for help or explaining doubts pertaining to Polkadot/Kusama ecosystem and this guide.
+
+# References
+
+When you have completed the tutorial, you are ready to learn more about [Forkless upgrading runtime](https://substrate.dev/docs/en/tutorials/forkless-upgrade/) by Jimmy Chu.
