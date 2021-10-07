@@ -3,8 +3,7 @@
 ## Description
 Now that we have our DID and we know how to authenticate using 3ID Connect, we can look into how to associate data to our DID. But first let’s talk about what is happening under the hood of IDX.
 
-
-[image:D00B35D9-C5F7-4C41-9C00-E6429BD8FF27-498-00008D85E242EF45/idx-simple.png]
+![](../../../.gitbook/assets/pathways/ceramic/idx.png)
 
 Every DID has an index which is a map of DefinitiionID and RecordID. Record defined by RecordID is the data that you want to store. But how IDX knows about the format of the data? That’s where Schema comes in. Schema is a JSON schema that describes the format of the data. So if you want to submit a Record for that schema you need to conform to that schema. Definition is a house of schema StreamID also with the name and description. So if you want to store something to IDX that is associated to your DID you need to know DefinitionID which tells IDX what data will come in and you need to provider Record with an actually data. If the data that you are trying to submit does not conform to schema, your request will fail.
 Since DefinitionID is just a StreamID which is not really human readable, IDX has a concept of aliases which are just human readable names for Definitions identified by DefinitionIDs. One of the default definition provided by IDX is called BasicProfile. It is definition used to hold basic profile information like name, description, avatar etc.

@@ -24,4 +24,3 @@ StreamTypes - These are functions which are applied to information coming in to 
 
 
 
-#figment/ceramic
