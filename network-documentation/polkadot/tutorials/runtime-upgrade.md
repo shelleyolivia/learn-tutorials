@@ -237,4 +237,4 @@ The tutorial was created by Tomasz Waszczyk. In case any questions, you can reac
 
 # References
 
-When you have completed the tutorial, you are ready to learn more about [Forkless upgrading runtime](https://substrate.dev/docs/en/tutorials/forkless-upgrade/) by Jimmy Chu.
+When you have completed the tutorial, you are ready to learn more about [Forkless upgrading runtime](https://substrate.dev/docs/en/tutorials/forkless-upgrade/) tutorial by Jimmy Chu.
