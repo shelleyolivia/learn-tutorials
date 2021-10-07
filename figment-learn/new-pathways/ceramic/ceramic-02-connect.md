@@ -13,6 +13,8 @@ Imagine this scenario: You're a fresh Web3 developer who just landed a sweet rol
 In `components/protocols/ceramic/components/steps/Connect.tsx`, implement the`checkConnection` function.
 
 ```typescript
+// components/protocols/ceramic/components/steps/Connect.tsx
+
 const checkConnection = async () => {
   try {
     const provider = await detectEthereumProvider();
@@ -41,6 +43,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 // solution
+
+// components/protocols/ceramic/components/steps/Connect.tsx
 const checkConnection = async () => {
   try {
     const provider = await detectEthereumProvider();
