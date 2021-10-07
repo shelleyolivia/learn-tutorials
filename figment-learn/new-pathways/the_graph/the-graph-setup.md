@@ -5,7 +5,7 @@ You might have already read about The Graph and just want to roll up your sleeve
 If you want to read about The Graph we've curated a bunch of resources to help you get started:
 
 - We wrote [this Twitter thread](https://twitter.com/sprngtheory/status/1425137466789486592) to explain The Graph without technical jargon. It's a great place to start
-- Project's own documentations are not always the best place to start but The Graph is an exception. They have very well written and approachable docs. [Give them a read](https://thegraph.com/docs/about/introduction)
+- Projects' own documentations are not always the best place to start but The Graph is an exception. They have very well written and approachable docs. [Give them a read](https://thegraph.com/docs/about/introduction)
 - More of a visual learner? The rock start of blockchain Youtube - Finematics - have the perfect video for you. [Bing it here](https://www.youtube.com/watch?v=7gC7xJ_98r8)
 - You're still here?? We have curated more links on [Figment Learn](https://learn.figment.io/protocols/thegraph). Knock yourself out!
 
