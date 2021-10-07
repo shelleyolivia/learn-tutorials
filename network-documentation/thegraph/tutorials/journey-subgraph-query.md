@@ -85,7 +85,7 @@ graph auth
 ![graph-auth](../../../.gitbook/assets/graph_graph-auth.png)
 
 
-Now we need to change to the project directory `grt-token`(which was generated using the `graph init` command) and deploy our subgraph to the explorer using the `yarn deploy` command.
+Now we need to change to the project directory `grt-token` (which was generated using the `graph init` command) and deploy our subgraph to the explorer using the `yarn deploy` command.
 
 ```text
 cd grt-token
@@ -222,7 +222,7 @@ type User @entity {
 }
 ```
 
-Let’s understand what this GraphQL type is for. We defined a new entity `User` which will have the attributes `id` of type `ID`, `totalTransfers` and `totalAmount` which are of type `BigInt`. `ID` is a special data type(a string) which should be always unique. We will have the user address as its ID so each user is identified uniquely by its Ethereum address. The exclamation mark(**!**) mark after the data type means that the value will never be `null`.
+Let’s understand what this GraphQL type is for. We defined a new entity `User` which will have the attributes `id` of type `ID`, `totalTransfers` and `totalAmount` which are of type `BigInt`. `ID` is a special data type (a string) which should be always unique. We will have the user address as its ID so each user is identified uniquely by its Ethereum address. The exclamation mark (**!**) after the data type means that the value will never be `null`.
 
 Save the file and open `subgraph.yaml`. We will remove most of the auto-generated code to keep things simple. We remove all other entities which were imported by default. We also remove all the events and their handlers except for the Transfer event and its eventHandler. The final contents of the file should look as below:
 
