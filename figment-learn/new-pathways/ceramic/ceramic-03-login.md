@@ -59,10 +59,12 @@ This allows us to keep the state of authenticated user in one place. You can see
 # 🧑🏼‍💻 Challenge
 
 {% hint style="tip" %}
-In **`components/protocols/ceramic/context/idx.tsx`**, implement the`login` function.
+In `components/protocols/ceramic/context/idx.tsx`, implement the`login` function.
 {% endhint %}
 
 ```typescript
+// components/protocols/ceramic/context/idx.tsx
+
 const logIn = async (address: string): Promise<string | undefined> => {
   // Request authentication using 3IDConnect
 
@@ -102,6 +104,8 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ```typescript
 // solution
+// components/protocols/ceramic/context/idx.tsx
+
 const logIn = async (address: string): Promise<string> => {
   // Request authentication using 3IDConnect
   const threeIdConnect = new ThreeIdConnect();
