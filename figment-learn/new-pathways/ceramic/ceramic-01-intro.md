@@ -1,5 +1,3 @@
-# Intro
-
 ## What is Ceramic?
 Ceramic is a platform for creating, hosting and sharing streams of data in decentralized way.
 
