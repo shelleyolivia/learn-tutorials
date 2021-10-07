@@ -1,14 +1,12 @@
 ## What's a subgraph?
 
-If a Graph node is a Christmas tree then subgraphs are like garlands. They represent structured datasets, tied up to a Graph node, and easily accessible using the GraphQL query language for APIs. The same way you can add garlands to your Christmas tree you can also add subgraphs to your local Graph node. Any subgraphs you add can be customized:
+A subgraph defines which data The Graph will index from Ethereum, and how it will store it.
 
-- By their shape: The way you structure your data.
-- By adding decorations: We call them Entities (more about this later).
-- The way you connect your decorations reflects how they are related, your entities upkeep.
+It's made up of 3 main pieces: a manifest, a schema of entities and mappings.
 
-As the garlands are made by _staking_ fil, subgraphs are built up by _staking_ events triggered from smart contracts residing on a blockchain. This means we need at least one smart contract to build up a subgraph for.
+<add image>
 
-Here, we'll use the [CryptoPunk](https://www.larvalabs.com/cryptopunks) smart contract, as CryptoPunks are a well known example of NFTs.
+
 
 ## Picking a smart contract
 

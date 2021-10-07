@@ -5,7 +5,7 @@ You're probably familiar with the idea of running a local web server in the earl
 We're going to follow the same pattern here. Think of our local Graph node as loosely equivalent to a web server: it will run on your machine, listen to Ethereum events and listen to clients' requests and respond with data.
 
 A Graph node comes with the following components:
-- An IPFS swarm for ......
+- An IPFS swarm for storing our subgraphs
 - A Postgres database for storing the data output of those processed events
 - A GraphQL API to allow clients to query this data
 
