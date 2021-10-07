@@ -110,10 +110,10 @@ const saveQuote = async (values: QuoteSchemaT) => {
 
   try {
     // Save quote information to custom schema (use IdxSchema.Figment enum)
-    
-    setCustomSchemaSaved(true);
+
+    setCustomDefinitionSaved(true);
   } catch (error) {
-    setError(error);
+    alert(error.message);
   } finally {
     setSaving(false);
   }
@@ -143,10 +143,10 @@ const saveQuote = async (values: QuoteSchemaT) => {
   try {
     // Save quote information to custom schema (use IdxSchema.Figment enum)
     await idx.set(IdxSchema.Figment, {text, author});
-    
-    setCustomSchemaSaved(true);
+
+    setCustomDefinitionSaved(true);
   } catch (error) {
-    setError(error);
+    alert(error.message);
   } finally {
     setSaving(false);
   }
@@ -173,6 +173,7 @@ const readQuote = async () => {
     setFetching(true);
 
     // Read quote (use IdxSchema.Figment enum)
+    const resp = undefined;
 
     setCustomDefinitionData(resp);
   } catch (error) {
