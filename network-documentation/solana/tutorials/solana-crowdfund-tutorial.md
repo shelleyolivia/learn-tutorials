@@ -22,17 +22,17 @@ In this tutorial we will discuss how to create a crowd funding platform on solan
     - What we want in our program?
     - Where can we store data?
     - How do we create a map with unlimited storage in solana eco system?
-    - Coding the program.
-    - Deploy solana program.
+    - Coding the program
+    - Deploy solana program
 - Frontend with solana web3.js
-    -  Writing functions to invoke instructions.
-    -  Fetching all campaigns.
+    -  Writing functions to invoke instructions
+    -  Fetching all campaigns
 
 > If you already have a good knowledge of Rust programming language feel free to skip the `Introduction to Rust`. I would still recommend to have a quick look on all the codeblocks.
 
 ---
 
-## Introduction to Rust
+# Introduction to Rust
 Rust is a multi-paradigm, high-level, general-purpose programming language designed for performance and safety, especially safe concurrency.
 
 Rust code uses snake case as the conventional style for function and variable names.
@@ -43,7 +43,7 @@ Rust code uses snake case as the conventional style for function and variable na
 
 For this tutorial, we will try to understand some basic of rust. I have added the link to the [rust book](https://doc.rust-lang.org/book/ch00-00-introduction.html) pages if you want to read more about any topic.
 
-#### Basics [Data types](https://doc.rust-lang.org/book/ch03-02-data-types.html) in rust:
+## Basics [Data types](https://doc.rust-lang.org/book/ch03-02-data-types.html) in rust:
 Rust has four primary scalar types: integers, floating-point numbers, Booleans, and characters.
 Integers can be represented with `u8`,`u32`,`i32`,`i64` , `usize` and the list goes on here basically `u` prefix suggest that we have a unsigned integer and the suffix number tell the number of bits. So `u8` is unsigned 8 bit number(0 to 255).
 |Length| Signed|	Unsigned|
@@ -59,7 +59,7 @@ We have `f32` and `f64` for floating point number. `bool` for boolens and `char`
 Rust has 2 types for strings, `str` and `String`. `String` is a growable, heap-allocated data structure whereas `str` is an immutable fixed-length string somewhere in memory.
 
 
-#### Creating a variable and [mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html):
+## Creating a variable and [mutability](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html):
 We can create a variable with `let` keyword
 ```rust
 // The compiler identifies the Rvalue as i32, so it sets the type of variable to i32
@@ -78,7 +78,7 @@ a=a+1;
 a=100;
 ```
 
-#### [Control flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html):
+## [Control flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html):
 We can use `if` `else` statement in rust just like we can do in other language, here is a small program for us to understand the syntax.
 ```rust
 fn main(){
@@ -101,7 +101,7 @@ fn main() {
 }
 ```
 
-#### [Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) and [Macros](https://doc.rust-lang.org/book/ch19-06-macros.html):
+## [Functions](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html) and [Macros](https://doc.rust-lang.org/book/ch19-06-macros.html):
 
 Function definitions in Rust start with fn and have a set of parentheses after the function name. The curly brackets tell the compiler where the function body begins and ends.
 ```rust
@@ -119,7 +119,7 @@ fn another_function_with_x_and_y(x: i32,y:i32) {
 ```
 For this tutotials we will assume macros are also function they just end with !, like `println!` macro, `format!` macro and `msg!` macro.
 
-#### [Enums](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html) and the [match syntax](https://doc.rust-lang.org/book/ch06-02-match.html):
+## [Enums](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html) and the [match syntax](https://doc.rust-lang.org/book/ch06-02-match.html):
 Rust has enums but they are quite more then simple enums other languages provide. In rust we can even store data in the enums.
 Here is the example of `Result enums`. Note this will be widely used the our solana program.
 
@@ -162,7 +162,7 @@ assert_eq!(a,30);
 // In this case a will be equal to 30 because coin is Custom with value 30.
 ```
 
-#### [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) and [Borsh](https://crates.io/crates/borsh)
+## [Cargo](https://doc.rust-lang.org/book/ch01-03-hello-cargo.html) and [Borsh](https://crates.io/crates/borsh)
 Cargo is the Rust package manager. We will be using it to  build our program. It also makes adding packages(crates) very easy.
 
 Borsh stands for Binary Object Representation Serializer for Hashing. It is meant to be used in security-critical projects as it prioritizes consistency, safety, speed, and comes with a strict specification. 
@@ -176,7 +176,7 @@ This is all the Rust we would need to get started with our solana smart program.
 
 # Solana Program
 
-##### Setup
+#### Setup
 First step is to install rust on your system. If you don't have it installed. [Here](https://doc.rust-lang.org/book/ch01-01-installation.html) is how to do that.
 
 1. We will create a react app first. Open your projects directory in terminal and run
@@ -228,7 +228,7 @@ crate-type = ["cdylib", "lib"]
 
 We have added all the dependencies we are going to need for our program. Run `cargo check` to get all the dependencies. We can now start working in `src/lib.rs` and start coding our smart program for solana blockchain.
 
-### What we want in our program?
+## What we want in our program?
 
 Before we start writing the code lets discuss what entrypoints our crowd funding app should have.
 - #### Create Crowd Funding Campaign.
@@ -244,7 +244,7 @@ These are all the entrypoints we are going to need for our project. Lets discuss
 
 ---
 
-### Where can we store data?
+## Where can we store data?
 
 Before we start we have to understand solana programs don't have storage(`contract storage` you might be familiar with). Then how and where should be store our data.
 
@@ -258,7 +258,7 @@ One way to deal with this is to create a Account with very large storage. But If
 
 We can create as many program owned account as we want, so the idea here is that we will have a will have a size limit for every element in our map. And whenever we want to add a new element we will create a new Program owned account. Program owned accounts are also called PDA(Program drived accounts).
 
-### Coding the program
+## Coding the program
 Now that we have discussed what we want to create let start coding.
 Go ahead and open up the `program` folder in vs-code or your favorite ide.
 File structure in the `program` directory should look  like this.
@@ -411,7 +411,7 @@ fn donate(
 }
 ```
 
-#### Our CampaignDetails struct, Borsh and code of create_campaign function.
+## Our CampaignDetails struct, Borsh and code of create_campaign function.
 We will create a struct in rust, we have not discussed structs above so I will explain them here. In rust we do not have class. If we want to store more than 1 variable (group variables) we create a struct.
 ```rust
 /// For an example, let use create human struct.
@@ -447,7 +447,7 @@ struct CampaignDetails {
 
 Here I have drived BorshSerialize and BorshDeserialize. BorshSerialize is used to convert the struct in a `array of u8` which is the datatype we can store in a solana account. And is the data we have in `instruction_data` so we can deserialize that to a struct with the help of `BorshDeserialize`.
 
-###### Code: 
+##### Code: 
 At the top of the file import `BorshSerialize` and `BorshDeserialize` from the `Borsh` Crate.
 ```rust
 use borsh::{BorshDeserialize, BorshSerialize};
@@ -542,7 +542,7 @@ If all goes well we will write the writing_account. Here on our `input_data`(typ
 Hurry! We are done with the first `create_campaign` function.
 Lets continue writing the contract and write the withdraw function next.
 
-#### Withdraw function implementation.
+## Withdraw function implementation.
 For withdraw function also, we will create a struct to get the input data. Here Input data is only the amount we want to withdraw.
 ```rust
 #[derive(BorshSerialize, BorshDeserialize, Debug)]
@@ -617,7 +617,7 @@ We do not want the campaign to get deleted after a withdrawal. We want it to alw
 
 > Note: We can only decrease the balance of a program owned account.
 
-##### Donate to a campaign.
+## Donate to a campaign
 We want to donate to a campaign but interestingly we can't decrease the balance of a account (not owned by our program) in our program. This means we can't just transfer balance like we did in the withdraw function. 
 As you can see the [policies here](https://docs.solana.com/developing/programming-model/runtime#policy).
 >An account not assigned to the program cannot have its balance decrease.
@@ -677,7 +677,7 @@ Then at the end of the program we will write the new updated campaign_data to wr
 
 Hurray, We have completed our solana program Now we can go ahead and deploy it.
 
-### Deploy solana program.
+## Deploy solana program.
 We are going to deploy on devnet.
 Solana Blockchain works on a [BPF system](https://docs.solana.com/developing/on-chain-programs/overview#berkeley-packet-filter-bpf) so we will compile our program for bpf machine.
 We can use the handly package manager `cargo` to do it.
@@ -813,7 +813,7 @@ export async function signAndSendTransaction(transaction) {
     }
 }
 ```
-### Writing a function to invoke `create_campaign` instruction.
+## Writing a function to invoke `create_campaign` instruction.
 Before we start let use create a javascript implementation for the rust struct `CampaignDetails`
 We have created a class and we will call it `CampaignDetails`. For deserialization and serialization we have to create a schema for our class 
 We will create map, And match the types of each field.
@@ -995,7 +995,7 @@ useEffect(() => {
 see final [`app.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/App.js) file.
 
 
-### Now we can write the donate function.
+## Now we can write the donate function.
 
 For donate we will again create an program account and we will fund it with the amount we want to donate. As we discussed while writing our program it is not possible to decrease the balance of an account which is not owned by program.
 
@@ -1066,7 +1066,7 @@ update the onDonate
 ```
 see the final [`card.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Card.js) file.
 
-### Withdraw function.
+## Withdraw function.
 Now we will write the withdraw function. For withdraw we don't have to create an program account and we will only pass one instruction.
 
 But since we are using a `WithdrawRequest` struct in our program. We will have to create a class and schema for borsh Serialization.
@@ -1152,4 +1152,4 @@ You can see the whole project on [github](https://github.com/SushantChandla/sola
 In this tutorial, you learned how to build a Crowd Funding app on solana. We covered the on-chain program's code using the Rust programming language. We built the User Interface with React.
 
 # About the Author
-This tutorial was created by Sushant Chandla. You can get in touch with the author on [GitHub](https://github.com/SushantChandla)
+This tutorial was created by [Sushant Chandla](https://github.com/SushantChandla).
