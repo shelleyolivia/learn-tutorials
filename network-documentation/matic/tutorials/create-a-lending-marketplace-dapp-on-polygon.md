@@ -1650,8 +1650,6 @@ Run the app and view it in the browser:
 npm start
 ```
 
-For complete source code and implementation visit - https://github.com/crypto-lend.
-
 # Conclusion
 
 Now you know about creating a Lending Marketplace with Truffle Suite and ReactJS on the Polygon network.
@@ -1663,6 +1661,4 @@ If you had any difficulties following this tutorial or simply want to discuss Po
 [Devendra Yadav](https://community.figment.io/u/dev.koold)
 
 # References
-- https://learn.figment.io/tutorials/create-a-local-test-network
-- https://learn.figment.io/tutorials/using-truffle-with-the-avalanche-c-chain
 - https://github.com/crypto-lend
