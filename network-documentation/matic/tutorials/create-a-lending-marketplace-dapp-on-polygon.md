@@ -30,9 +30,9 @@ Create a sample boilerplate:
 truffle init
 ```
 
-Add the smart contract code below:
+***Add the smart contract code below:***
 
-LoanContract.sol
+***LoanContract.sol***
 
 ```
 // Define the solidity compiler version
@@ -413,7 +413,7 @@ contract LoanContract {
 }
 ```
 
-LoanCreator.sol
+***LoanCreator.sol***
 
 ```
 // Define solidity compiler version
@@ -609,7 +609,7 @@ Install Web3 and setup methods inside services directory:
 npm i web3
 ```
 
-Web3Service.js
+***Web3Service.js***
 ```
 // Import the lodash 'isEmpty'
 import isEmpty from 'lodash/isEmpty';
@@ -692,7 +692,7 @@ export const fetchMinedTransactionReceipt = (transactionHash) => {
 }
 ```
 
-Now, setup `token.js`:
+***Now, setup `token.js`:***
 
 ```
 // Import the required services and ABIs
@@ -726,7 +726,7 @@ export const ExecuteTokenApproval = (params) => {
 }
 ```
 
-Create Loan Contract methods inside `loanContract.js`:
+***Create Loan Contract methods inside `loanContract.js`:***
 
 ```
 // Import the required services and ABIs
@@ -754,7 +754,7 @@ export const GetLoanDetails = (loanContractAddress) => {
     })
 }
 
-//Create `FinalizeCollateralTransfer()` method for final transfer of collateral to selected loan
+// Create `FinalizeCollateralTransfer()` method for final transfer of collateral to selected loan
 export const FinalizeCollateralTransfer = (loanContractAddress, collateralAddress) => {
 
     return new Promise((resolve, reject) => {
@@ -999,7 +999,7 @@ export const ClaimCollateralByLender = (loanContractAddress, repaymentNumber) =>
 }
 ```
 
-Setup Loan Book methods inside `loanbook.js`:
+***Setup Loan Book methods inside `loanbook.js`:***
 ```
 // Import the utils, services and ABIs
 import { padLeft } from 'web3-utils';
@@ -1110,7 +1110,7 @@ export const FetchCollateralPrice = (params) => {
 }
 ```
 
-Setup `App.js` in the following manner and divide it into components:
+***Setup `App.js` in the following manner and divide it into components:***
 
 ```
 import React from 'react';
@@ -1138,9 +1138,9 @@ const App = () => (
 export default App;
 ```
 
-Create `components/` directory and setup separate UI components:
+***Create `components/` directory and setup separate UI components:***
 
-## LoanRequest component
+***LoanRequest component***
 ```
 // Import the required libraries and components
 import React, { Component } from 'react';
