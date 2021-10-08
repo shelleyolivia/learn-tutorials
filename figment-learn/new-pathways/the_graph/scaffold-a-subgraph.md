@@ -45,7 +45,6 @@ We will be using the `init` command of the [Graph CLI docs](https://github.com/g
 - Set the Ethereum network to `mainnet`
 
 ```sh
-// solution
 graph init \
   --allow-simple-name \
   --index-events \
