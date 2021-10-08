@@ -64,6 +64,7 @@ In the above code snippet, there is two points worth to mention:
 Last but not least, run the following command to generate boilerplate code from our **entities**
 
 ```bash
+cd punks
 yarn codegen
 ```
 
