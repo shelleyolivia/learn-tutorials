@@ -4,7 +4,7 @@ A subgraph defines which data The Graph will index from Ethereum, and how it wil
 
 It's made up of 3 main pieces: a manifest, a schema of entities and mappings.
 
-![subgraph](https://user-images.githubusercontent.com/206753/136308677-cdd65453-5ef2-4ba3-a372-2aedf110199c.png)
+![Subgraph](https://user-images.githubusercontent.com/206753/136592063-56dcf0ef-2763-454a-ad46-9f8100ef112e.png)
 
 ## 🤝 Picking a smart contract
 
