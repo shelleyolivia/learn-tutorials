@@ -611,10 +611,14 @@ npm i web3
 
 Web3Service.js
 ```
+// Import the lodash 'isEmpty'
 import isEmpty from 'lodash/isEmpty';
 
+// Create fetchNetwork() method to get the current network
 export const fetchNetwork = () => {
   return new Promise((resolve, reject) => {
+  
+    // Initialize web3 from `window.web3`
     const { web3 } = window;
 
     web3 && web3.version && web3.version.getNetwork((err, netId) => {
@@ -627,11 +631,17 @@ export const fetchNetwork = () => {
   });
 };
 
+// Create fetchAccounts() to get the account addresses
 export const fetchAccounts = () => {
   return new Promise((resolve, reject) => {
+  
+    // Initialize web3 from `window.web3`
     const { web3 } = window;
+    
+    // Initialize constant ethAccounts
     const ethAccounts = getAccounts();
 
+    // Check if ethAccounts is empty
     if (isEmpty(ethAccounts)) {
       web3 && web3.eth && web3.eth.getAccounts((err, accounts) => {
         if (err) {
@@ -646,9 +656,13 @@ export const fetchAccounts = () => {
   });
 };
 
+// Create getAccounts() method to retreive the selected accouunt
 export function getAccounts() {
   try {
+  
+    // Initialize web3 from `window.web3`
     const { web3 } = window;
+    
     // throws if no account selected
     return web3.eth.accounts;
   } catch (e) {
@@ -656,12 +670,15 @@ export function getAccounts() {
   }
 }
 
+// Create fetchMinedTransactionReceipt method getting the transaction receipt after the is successfull
 export const fetchMinedTransactionReceipt = (transactionHash) => {
 
   return new Promise((resolve, reject) => {
 
+    // Initialize web3 from `window.web3`
     const { web3 } = window;
 
+    // Timer to check for transaction receipt every 2 seconds
     var timer = setInterval(()=> {
       web3.eth.getTransactionReceipt(transactionHash, (err, receipt)=> {
         if(!err && receipt){
@@ -678,18 +695,22 @@ export const fetchMinedTransactionReceipt = (transactionHash) => {
 Now, setup `token.js`:
 
 ```
+// Import the required services and ABIs
 import { fetchMinedTransactionReceipt } from './Web3Service';
 import { StandardTokenABI } from '../components/Web3/abi';
 
+// Create an ERC20 token approval method for collateral transfer and loan repayments
 export const ExecuteTokenApproval = (params) => {
-  console.log('=======>',params);
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
-
+        
+        // Initialize the ERC20 constant by passing token ABI and address.
         const ERC20 = web3.eth.contract(StandardTokenABI).at(params.ERC20Token);
 
+        // Call the `approve()` method of the selected ERC20 token
         ERC20.approve(params.loanContractAddress, params.tokenAmount,{
             from: web3.eth.accounts[0]
             }, async (err, transactionHash) => {
@@ -708,15 +729,19 @@ export const ExecuteTokenApproval = (params) => {
 Create Loan Contract methods inside `loanContract.js`:
 
 ```
+// Import the required services and ABIs
 import { fetchMinedTransactionReceipt } from './Web3Service';
 import { LoanContractABI } from '../components/Web3/abi';
 
+// Create a `GetLoanDetails()` method to fetch the selected loan details by passing the `loanContractAddress`
 export const GetLoanDetails = (loanContractAddress) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
-
+        
+        // Initialize the LoanContract constant by passing loan ABI and address.
         const LoanContract = web3.eth.contract(LoanContractABI).at(loanContractAddress);
 
         LoanContract.getLoanData((err, loan) => {
@@ -729,14 +754,18 @@ export const GetLoanDetails = (loanContractAddress) => {
     })
 }
 
+//Create `FinalizeCollateralTransfer()` method for final transfer of collateral to selected loan
 export const FinalizeCollateralTransfer = (loanContractAddress, collateralAddress) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
+        // Initialize the LoanContract constant by passing loan ABI and address.
         const LoanContract = web3.eth.contract(LoanContractABI).at(loanContractAddress);
 
+        // Call `transferCollateralToLoan()` method from LoanContract and return Transaction Receipt
         LoanContract.transferCollateralToLoan(collateralAddress, {
             from: web3.eth.accounts[0]
             }, async (err, transactionHash) => {
@@ -751,15 +780,18 @@ export const FinalizeCollateralTransfer = (loanContractAddress, collateralAddres
     })
 }
 
-
+// Create `AcceptLoanOffer()` for accepting the loan offer by borrower
 export const AcceptLoanOffer = (loanContractAddress) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
-
+        
+        // Initialize the LoanContract constant by passing loan ABI and address.
         const LoanContract = web3.eth.contract(LoanContractABI).at(loanContractAddress);
 
+        // Call `acceptLoanOffer()` from LoanContract and return Transaction Receipt
         LoanContract.acceptLoanOffer({
             from: web3.eth.accounts[0]
             }, async (err, transactionHash) => {
@@ -774,15 +806,18 @@ export const AcceptLoanOffer = (loanContractAddress) => {
     })
 }
 
-
+// Create `TransferFundsToLoanContract()` method so the lender can transfer funds to a loan
 export const TransferFundsToLoanContract = (loanContractAddress, loanAmount) => {
 
     return new Promise((resolve, reject) => {
-
+    
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
+        // Initialize the LoanContract constant by passing loan ABI and address.
         const LoanContract = web3.eth.contract(LoanContractABI).at(loanContractAddress);
 
+        // Call `transferFundsToLoanContract()` method from LoanContract and return the transaction receipt
         LoanContract.transferFundsToLoanContract({
             from: web3.eth.accounts[0],
             value: web3.toWei(loanAmount)
@@ -798,14 +833,18 @@ export const TransferFundsToLoanContract = (loanContractAddress, loanAmount) => 
     })
 }
 
+// Create `ApproveAndFundLoanRequest()` method so Lender can approve and fund the loan request
 export const ApproveAndFundLoanRequest = (loanContractAddress, loanAmount) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
+        // Initialize the LoanContract constant by passing loan ABI and address.
         const LoanContract = web3.eth.contract(LoanContractABI).at(loanContractAddress);
 
+        // Call `approveLoanRequest()` from LoanContract
         LoanContract.approveLoanRequest({
             from: web3.eth.accounts[0],
             value: web3.toWei(loanAmount)
@@ -821,16 +860,22 @@ export const ApproveAndFundLoanRequest = (loanContractAddress, loanAmount) => {
     })
 }
 
+  // Create `GetRepaymentData()` method to retreive the selected repayment with repaymentNumber and loanContractAddress
   export const GetRepaymentData = (loanContractAddress, repaymentNumber) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
+        // Initialize the LoanContract constant by passing loan ABI and address.
         const LoanContract = web3.eth.contract(LoanContractABI).at(loanContractAddress);
-
+        
+        // Call `getRepaymentAmount()` method from LoanContract to get the repayment amount
         LoanContract.getRepaymentAmount((err, repaymentData) => {
             if(!err){
+            
+                // Call `checkRepaymentStatus()` from LoanContract to check repayment status and return loan repayment details
                 LoanContract.checkRepaymentStatus(repaymentNumber, (err, repayee) => {
                     if(!err){
                         resolve({
@@ -852,13 +897,15 @@ export const ApproveAndFundLoanRequest = (loanContractAddress, loanAmount) => {
     })
 }
 
-
+// Create `RepayLoan()` method for selected repayment of a loan
 export const RepayLoan = (loanContractAddress, repaymentAmount) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
+        // Initialize the LoanContract constant by passing loan ABI and address.
         const LoanContract = web3.eth.contract(LoanContractABI).at(loanContractAddress);
 
         LoanContract.repayLoan({
@@ -876,12 +923,15 @@ export const RepayLoan = (loanContractAddress, repaymentAmount) => {
     })
 }
 
+// Create `LiquidateLoanCollateral()` method
 export const LiquidateLoanCollateral = (loanContractAddress) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
+        // Initialize the LoanContract constant by passing loan ABI and address.
         const LoanContract = web3.eth.contract(LoanContractABI).at(loanContractAddress);
 
         LoanContract.liquidateCollateral({
@@ -898,15 +948,17 @@ export const LiquidateLoanCollateral = (loanContractAddress) => {
     })
 }
 
-
+// Create `ClaimCollateralByBorrower()` method
 export const ClaimCollateralByBorrower = (loanContractAddress) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
         const LoanContract = web3.eth.contract(LoanContractABI).at(loanContractAddress);
 
+        // Initialize the LoanContract constant by passing loan ABI and address.
         LoanContract.returnCollateralToBorrower({
             from: web3.eth.accounts[0]
             }, async (err, transactionHash) => {
@@ -921,15 +973,17 @@ export const ClaimCollateralByBorrower = (loanContractAddress) => {
     })
 }
 
-
+// Create `ClaimCollateralByLender()` method
 export const ClaimCollateralByLender = (loanContractAddress, repaymentNumber) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
         const LoanContract = web3.eth.contract(LoanContractABI).at(loanContractAddress);
-
+        
+        // Initialize the LoanContract constant by passing loan ABI and address.
         LoanContract.claimCollateralOnDefault(repaymentNumber, {
             from: web3.eth.accounts[0]
             }, async (err, transactionHash) => {
@@ -947,13 +1001,16 @@ export const ClaimCollateralByLender = (loanContractAddress, repaymentNumber) =>
 
 Setup Loan Book methods inside `loanbook.js`:
 ```
+// Import the utils, services and ABIs
 import { padLeft } from 'web3-utils';
 import { fetchMinedTransactionReceipt } from './Web3Service';
 import { LoanBookABI, LoanBookAddress } from '../components/Web3/abi';
 
+// Create `GetLoans()` method
 export const GetLoans = () => {
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
         const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
@@ -969,10 +1026,12 @@ export const GetLoans = () => {
     })
 }
 
+// Create `CreateNewLoanRequest()` method
 export const CreateNewLoanRequest = (params) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
         const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
@@ -992,12 +1051,12 @@ export const CreateNewLoanRequest = (params) => {
     });
 }
 
-
-
+// Create `CreateNewLoanOffer()` method
 export const CreateNewLoanOffer = (params) => {
 
     return new Promise((resolve, reject) => {
 
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
         const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
@@ -1011,6 +1070,7 @@ export const CreateNewLoanOffer = (params) => {
                     padLeft(web3.toHex(params.collaterals[i].mpr),64)];
         }
 
+        // Call `createNewLoanOffer()` method from LoanBook
         LoanBook.createNewLoanOffer(web3.toWei(params.principal), params.duration, collateralsMetadata, {
             from: web3.eth.accounts[0]
           }, async(err, transactionHash) => {
@@ -1026,14 +1086,18 @@ export const CreateNewLoanOffer = (params) => {
     });
 }
 
+// Create `FetchCollateralPrice()` method to retreive the latest price
 export const FetchCollateralPrice = (params) => {
 
     return new Promise((resolve, reject) => {
-
+        
+        // Initialize web3 from `window.web3`
         const { web3 } = window;
 
+        // Initialize the LoanBook constant by passing loanbook ABI and address.
         const LoanBook = web3.eth.contract(LoanBookABI).at(LoanBookAddress);
-
+         
+        // Call `getCollateralPrice()` from LoanBook
         LoanBook.getCollateralPrice(params.collateralAddress, (err, price) => {
             if(!err){
                 resolve(web3.fromWei(price.toNumber()));
