@@ -75,9 +75,80 @@ cd quadratic-voting-app
 truffle init
 ```
 
-![folder structure](../../../.gitbook/assets/quadratic-voting-folder-structure.png)
+Your project should look like this:
+
+![file structure](../../../.gitbook/assets/quadratic-voting-folder-structure.png)
 
 # Creating the smart contract in Solidity
+
+Create a new file called `QuadraticVoting.sol` in the `contracts` folder.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.4.0 <0.9.0;
+
+contract QuadraticVoting {
+	struct Item {
+		address payable owner;
+		uint amount;
+		bytes32 title;
+		bytes32 image_hash;
+		string description;
+		mapping(address => uint) positiveVotes;
+		mapping(address => uint) negativeVotes;
+	}
+```
+
+```solidity
+	uint public voteCost = 10_000_000_000;
+
+	mapping(uint => Item) public items;
+	uint public itemCount = 0;
+```
+
+```solidity
+	event ItemCreated(uint itemId);
+	event Voted(uint itemId, uint votingPower, bool positive);
+
+	function createItem(bytes32 title, bytes32 image_hash, string memory description) public {
+		uint itemId = itemCount++;
+		Item storage item = items[itemId];
+		item.owner = msg.sender;
+		item.title = title;
+		item.image_hash = image_hash;
+		item.description = description;
+		emit ItemCreated(itemId);
+	}
+```
+
+```solidity
+	function positiveVote(uint itemId, uint votingPower) public payable {
+		Item storage item = items[itemId];
+		require(msg.sender != item.owner);
+		require(msg.value >= votingPower * votingPower * voteCost);
+		item.positiveVotes[msg.sender] = votingPower;
+		item.negativeVotes[msg.sender] = 0;
+		item.amount += msg.value;
+		emit Voted(itemId, votingPower, true);
+	}
+
+	function negativeVote(uint itemId, uint votingPower) public payable {
+		Item storage item = items[itemId];
+		require(msg.sender != item.owner);
+		require(msg.value >= votingPower * votingPower * voteCost);
+		item.negativeVotes[msg.sender] = votingPower;
+		item.positiveVotes[msg.sender] = 0;
+		item.amount += msg.value;
+		emit Voted(itemId, votingPower, false);
+	}
+
+	function claim(uint itemId) public {
+		Item storage item = items[itemId];
+		require(msg.sender == item.owner);
+		item.owner.transfer(item.amount);
+	}
+}
+```
 
 # Compiling and deploying with Truffle
 
