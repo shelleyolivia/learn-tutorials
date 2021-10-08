@@ -1,4 +1,4 @@
-## What's a subgraph?
+## 🌐 What's a subgraph?
 
 A subgraph defines which data The Graph will index from Ethereum, and how it will store it.
 
@@ -6,15 +6,15 @@ It's made up of 3 main pieces: a manifest, a schema of entities and mappings.
 
 ![subgraph](https://user-images.githubusercontent.com/206753/136308677-cdd65453-5ef2-4ba3-a372-2aedf110199c.png)
 
-## Picking a smart contract
+## 🤝 Picking a smart contract
 
 A subgraph is basically a piece of software that indexes events emitted by a smart contract. So the first thing we need to do is pick the smart contract our subgraph will be listening to.
 
-For the purpose of this tutorial we have decided to pick a fun and popular smart contract: the Crypto Punk ETH-20 contract. You can view it on Etherscan [here](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB) and if you click on the "Contract" tab you can also have a look at [its Solidity code](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB).
+For the purpose of this tutorial we have decided to pick a fun and popular smart contract: the Crypto Punk ETH-20 contract. You can view it on Etherscan [here](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB) and if you click on the "Contract" tab you can also have a look at [its Solidity code](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB). The contract's address is `0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB`.
 
 > Looking at the code, can you find its Events? What functions are they calling? What arguments are they passing? Browse around the codebase, we will come back to those events very soon.
 
-## Install the Graph CLI 
+## 🧑🏼‍💻 Install the Graph CLI 
 
 Fortunately, we won't have to build a subgraph from scratch, The Graph provides a CLI to do this. Install the CLI by running:
 
@@ -28,21 +28,40 @@ Verify the installation was successful by running:
 graph --version
 ```
 
-This should output the current version of the graph-cli, `0.22.1` at the time of writing this tutorial.
+This should output the current version of the graph-cli.
 
-## Generate a subgraph scaffold
-
-Scaffolding a subgraph will create a subgraph template. It will have the right shape but will be incomplete.
-
-Let's first cd into the folder that will hold out subgraphs
+Let's then cd into the `subgraphs` folder:
 
 ```sh
 cd subgraphs
 ```
 
-Then run this command in your terminal to generate a subgraph scaffold:
+## 🧑🏼‍💻 Your turn! Generate a subgraph scaffold
+
+Scaffolding a subgraph will create a subgraph template. It will have the right shape but will be incomplete.
+
+We will be using the `init` command of the [Graph CLI docs](https://github.com/graphprotocol/graph-cli). Your job is to fill in the missing fields:
+- Set the contract address to the CryptoPunk contract
+- Set the Ethereum network to `mainnet`
 
 ```sh
+// solution
+graph init \
+  --allow-simple-name \
+  --index-events \
+  --contract-name punks \
+  --node http://localhost:8020/ punks
+  // pass the CryptoPunk contract address
+  // set the Ethereum network to mainnet
+```
+
+When you're done, run this command in your terminal to generate a subgraph scaffold.
+If you need to start over, simply delete the folder `punks` inside `subgraphs` and run the `graph init ...` command again.
+
+# 👉 The solution
+
+```sh
+// solution
 graph init \
   --allow-simple-name \
   --from-contract 0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB \
@@ -52,7 +71,7 @@ graph init \
   --node http://localhost:8020/ punks
 ```
 
-That's a mouthful! What does this code do?
+That's a mouthful! Let's look at it line by line.
 
 - `graph init` is the CLI command that will initialize an empty subgraph.
 - `--allow-simple-name` simplifies the naming convention of our local graph.
@@ -84,17 +103,11 @@ Once you type Enter, you will be prompted to confirm the information: you can ju
 
 Subgraph punks created in punks
 
-Next steps:
-
-  1. Run `graph auth` to authenticate with your deploy key.
-
-  2. Type `cd punks` to enter the subgraph.
-
-  3. Run `yarn deploy` to deploy the subgraph.
-
-Make sure to visit the documentation on https://thegraph.com/docs/ for further information.
+...
 ```
+
+You don't need to run the next steps for now!
 
 ## Make sure it works
 
-Now, it's time for you to verify if you have followed the instructions carefully, click on the button **Test subgraph scaffold** to check for the presence of a scaffolded subgraph.
+Now, it's time for you to verify if you have followed the instructions carefully, click on the button on the right to check if your scaffold is right
