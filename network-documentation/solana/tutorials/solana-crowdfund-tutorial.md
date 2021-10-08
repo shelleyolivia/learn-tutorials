@@ -995,8 +995,7 @@ useEffect(() => {
 ```
 see final [`app.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/App.js) file.
 
-\
-![Result](https://j.gifs.com/qQ2oJG.gif)
+![Result](https://i.imgur.com/wjFVAaC.gif)
 
 ## we can write the donate function.
 
@@ -1070,7 +1069,7 @@ update the onDonate
 See the final [`card.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Card.js) file.
 
 \
-![Result](https://j.gifs.com/K86GWY.gif)
+![Result](https://i.imgur.com/0yahyH7.gif)
 
 ## Withdraw function.
 Now we will write the withdraw function. For withdraw, we don't have to create a program account, and we will only pass one instruction.
@@ -1149,8 +1148,6 @@ In `card.js`
 See the final [`card.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Card.js) file.
 
 And we're done! 
-\
-![Bye](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 
 You can see the whole project on [github](https://github.com/SushantChandla/solana-crowd-funding).
 
