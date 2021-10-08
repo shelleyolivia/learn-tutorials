@@ -22,7 +22,9 @@ In this tutorial we will discuss how to create a crowd funding platform on solan
     -  Writing functions to invoke instructions.
     -  Fetching all campaigns.
 
-We will cover all the topics, If you already have a good knowledge of Rust programming language feel free to skip the `Introduction to Rust`. I would still recommend to have a quick look on all the codeblocks.
+> If you already have a good knowledge of Rust programming language feel free to skip the `Introduction to Rust`. I would still recommend to have a quick look on all the codeblocks.
+
+---
 
 ## Introduction to Rust
 Rust is a multi-paradigm, high-level, general-purpose programming language designed for performance and safety, especially safe concurrency.
@@ -940,6 +942,7 @@ we can have a on submit, On calling this function we will see sollet dialog. Whi
         setRoute(0);// we are updated this to change the ui.
     }
 ```
+see final [`form.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Form.js) file.
 Now we can add campaigns.
 
 ### Fetch All Campaigns
@@ -983,6 +986,7 @@ useEffect(() => {
     });
   }, []);
 ```
+see final [`app.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/App.js) file.
 
 
 ### Now we can write the donate function.
@@ -1054,6 +1058,7 @@ update the onDonate
         setCards(newCards);
     }
 ```
+see the final [`card.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Card.js) file.
 
 ### Withdraw function.
 Now we will write the withdraw function. For withdraw we don't have to create an program account and we will only pass one instruction.
@@ -1113,7 +1118,7 @@ This part of the code is same as the `donate` and `createCampaign` functions.
 }
 ```
 Connect the functions with UI
-In `forms.js`
+In `card.js`
 ```js
  const onWithdraw = async (e) => {
         e.preventDefault();
@@ -1129,6 +1134,7 @@ In `forms.js`
 
     }
 ```
+see the final [`card.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Card.js) file.
 
 And we're done!
 
