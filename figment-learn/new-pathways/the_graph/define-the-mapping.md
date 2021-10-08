@@ -14,11 +14,10 @@ First we need a bunch of import and the prototype of the function
 ```typescript
 import { BigInt } from "@graphprotocol/graph-ts";
 
-import { Assign as AssignEvent } from "../generated/punks/punks";
+import { PunkBought as PunkBoughtEvent } from "../generated/punks/punks";
 import { Account, Punk } from "../generated/schema";
 
-// Handler for event Assign(address indexed to, uint256 punkIndex);
-export function handleAssign(event: AssignEvent): void {
+export function handlePunkBought(event: PunkBoughtEvent): void {
   // fill here
 }
 ```
@@ -26,35 +25,37 @@ export function handleAssign(event: AssignEvent): void {
 `Account` and `Punk` imported objects are the one we've just defined before, and `AssignEvent` is referencing the definition of event we gave on `subgraph.yaml`.
 
 ```typescript
-let account = Account.load(event.params.to.toHexString());
+let buyerAccount = Account.load(event.params.toAddress.toHexString());
 ```
 
 To create the Account entity, we first need to test if the entity is already existing.
 
 ```typescript
-if (account == null) {
-  account = new Account(event.params.to.toHexString());
-  account.id = event.params.to.toHexString();
-  account.numberOfPunksOwned = BigInt.fromI32(1);
+if (buyerAccount == null) {
+  buyerAccount = new Account(event.params.toAddress.toHexString());
+  buyerAccount.id = event.params.toAddress.toHexString();
+  buyerAccount.numberOfPunkBought = BigInt.fromI32(1);
+  buyerAccount.numberOfPunkSell = BigInt.fromI32(0);
+  buyerAccount.LastSell = BigInt.fromI32(0);
 }
 ```
 
 if not we create a new one filling all the field
 
-otherwise, we only need to increment the number of owned punk
+otherwise, we only need to increment the numberOfPunkBought
 
 ```typescript
-else {
-  account.numberOfPunksOwned =
-    account.numberOfPunksOwned.plus(BigInt.fromI32(1));
-}
+buyerAccount.numberOfPunkBought = buyerAccount.numberOfPunkBought.plus(
+  BigInt.fromI32(1)
+);
 ```
 
-At last and for both case we update the timestamp
+At last and for both case we update the last field and save
 
 ```typescript
-account.LastMvtAt = event.block.timestamp;
-account.save();
+const timestamp = event.block.timestamp;
+sellerAccount.LastSell = timestamp;
+sellerAccount.save();
 ```
 
 The creation of Punk entity follow the same logic.
