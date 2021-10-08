@@ -996,7 +996,7 @@ useEffect(() => {
 see final [`app.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/App.js) file.
 
 \
-![Result](../../../.gitbook/assets/solana-crowd-funding.gif)
+<img src="../../../.gitbook/assets/solana-crowd-funding.gif">
 
 ## we can write the donate function.
 
@@ -1070,8 +1070,7 @@ update the onDonate
 See the final [`card.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Card.js) file.
 
 \
-![Result](../../../.gitbook/assets/solana-crowd-funding2.gif)
-
+<img src="../../../.gitbook/assets/solana-crowd-funding2.gif">
 
 ## Withdraw function.
 Now we will write the withdraw function. For withdraw, we don't have to create a program account, and we will only pass one instruction.
