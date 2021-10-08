@@ -68,4 +68,6 @@ cd punks
 yarn codegen
 ```
 
+![](../../../.gitbook/assets/pathways/the_graph/yarn-codegen.gif)
+
 Now, it's time for you to verify if you have followed the instructions carefully, click on the button **Test Entites** to check that your entities are well formed.

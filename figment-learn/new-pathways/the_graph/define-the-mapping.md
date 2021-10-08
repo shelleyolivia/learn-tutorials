@@ -124,4 +124,7 @@ yarn create-local
 yarn deploy-local
 ```
 
+![](../../../.gitbook/assets/pathways/the_graph/create-deploy-local.gif)
+
+
 Now, it's time for you to verify if you have followed the instructions carefully, click on the button **Check subgraph deployment** to check that your deployment is well done.

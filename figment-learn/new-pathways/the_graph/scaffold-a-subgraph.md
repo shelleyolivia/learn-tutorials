@@ -85,25 +85,7 @@ That's a mouthful! Let's look at it line by line.
 
 Once you type Enter, you will be prompted to confirm the information: you can just accept the five suggested inputs The output should look like:
 
-```text
-✔ Subgraph name · punks
-✔ Directory to create the subgraph in · punks
-✔ Ethereum network · mainnet
-✔ Contract address · 0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB
-✔ Fetching ABI from Etherscan
-✔ Contract Name · punks
-———
-  Generate subgraph from ABI
-  Write subgraph to directory
-✔ Create subgraph scaffold
-✔ Initialize subgraph repository
-✔ Install dependencies with yarn
-✔ Generate ABI and schema types with yarn codegen
-
-Subgraph punks created in punks
-
-...
-```
+![](../../../.gitbook/assets/pathways/the_graph/graph-scaffold.gif)
 
 You don't need to run the next steps for now!
 
