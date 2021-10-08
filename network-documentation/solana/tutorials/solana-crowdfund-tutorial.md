@@ -1,9 +1,15 @@
 # Crowd Funding Platform
 In this tutorial we will discuss how to create a crowd funding platform on solana blockchain. This tutorial only assumes the reader to know some basic knowledge of [React](https://reactjs.org/) app development. I will be explaining some basics of rust, how to write solana program and how to invoke instructions from front-end.
 
+
 #### Requirements
 - [Git](https://git-scm.com/downloads)
 - [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool)
+
+#### Prerequisites
+- React
+- Javascript
+
 
 #### Overview:
 - Introduction to rust
@@ -1146,4 +1152,4 @@ You can see the whole project on [github](https://github.com/SushantChandla/sola
 In this tutorial, you learned how to build a Crowd Funding app on solana. We covered the on-chain program's code using the Rust programming language. We built the User Interface with React.
 
 # About the Author
-This tutorial was created by [Sushant Chandla](https://twitter.com/SushantChandla). You can get in touch with the author on on [GitHub](https://github.com/SushantChandla)
+This tutorial was created by Sushant Chandla. You can get in touch with the author on [GitHub](https://github.com/SushantChandla)

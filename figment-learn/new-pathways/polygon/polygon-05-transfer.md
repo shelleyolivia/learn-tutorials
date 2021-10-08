@@ -2,7 +2,7 @@ Transferring some token is one of the major feature of Web 3. In this challenge,
 
 -------------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 **Imagine this scenario:** You know you have a big balance and you want to eat some pizza. Then, you need to transfer **0.1** MATIC to buy one! In `components/protocols/polygon/components/steps/Transfer.tsx`, implement the `transfer` function.
@@ -13,6 +13,8 @@ Transferring some token is one of the major feature of Web 3. In this challenge,
 ```typescript
   const transfer = async () => {
     setFetching(true);
+    setError(null);
+    setHash(null);
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const send_account = provider.getSigner().getAddress();
@@ -47,11 +49,14 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 -------------------------------------
 
-# The solution
+# Solution
 
 ```typescript
+// solution
   const transfer = async () => {
     setFetching(true);
+    setError(null);
+    setHash(null);
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const send_account = provider.getSigner().getAddress();

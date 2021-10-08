@@ -2,7 +2,7 @@ At this point, we have deployed a smart contract on the Polygon testnet & set th
 
 -------------------------------------
 
-# The Challenge
+# Challenge
 
 {% hint style="tip" %}
 In the file `components/protocols/polygon/components/steps/Getter.tsx`, implement the `getValue` function.   
@@ -12,17 +12,18 @@ In the file `components/protocols/polygon/components/steps/Getter.tsx`, implemen
 
 ```typescript
   const getValue = async () => {
+    setFetching(true);
+    setContractNumber(null);
     try {
       setFetching(true);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-		  // try to figure out the expected parameters
+      // try to figure out the expected parameters
       const contract = new ethers.Contract(undefined);
-			// try to figure out the expected method 
+      // try to figure out the expected method 
       const storage = undefined;
       setContractNumber(storage.toString());
       setFetching(false);
     } catch (error) {
-      console.log(error);
       setFetching(false);
     }
   };
@@ -42,12 +43,14 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 -------------------------------------
 
-# The solution
+# Solution
 
 ```typescript
+// solution
   const getValue = async () => {
     try {
       setFetching(true);
+      setContractNumber(null);
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const contract = new ethers.Contract(
         SimpleStorageJson.networks['80001'].address,
@@ -58,7 +61,6 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
       setContractNumber(storage.toString());
       setFetching(false);
     } catch (error) {
-      console.log(error);
       setFetching(false);
     }
   };
