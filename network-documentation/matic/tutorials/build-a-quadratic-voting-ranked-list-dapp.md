@@ -81,7 +81,7 @@ Your project should look like this:
 
 # Creating the smart contract in Solidity
 
-Create a new file called `QuadraticVoting.sol` in the `contracts` folder.
+Create a new file called `QuadraticVoting.sol` in the `contracts` folder:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -92,12 +92,16 @@ contract QuadraticVoting {
 		address payable owner;
 		uint amount;
 		bytes32 title;
-		bytes32 image_hash;
+		bytes32 imageHash;
 		string description;
 		mapping(address => uint) positiveVotes;
 		mapping(address => uint) negativeVotes;
 	}
 ```
+
+The primary data structure in our app is going to be the Item. Users will vote up or down on items to control their ranking, paying a fee that depends on the weight of their vote. Votes are quadratically funded, which means that anyone can add as much weight to their vote as they like, however, the price of submitting this vote will be the weight squared.
+
+Any fee paid for a positive vote is rewarded to the creator of the item, creating an economy where the best suggestions, meaning the ones ranked the highest by others, receive the highest earnings. This incentivizes high quality, honest suggestions. Negative vote fees are redistributed to other items.
 
 ```solidity
 	uint public voteCost = 10_000_000_000;
@@ -106,42 +110,68 @@ contract QuadraticVoting {
 	uint public itemCount = 0;
 ```
 
+The variable `items` is a mapping of `itemId => item` and `itemCount` is the amount of items that have been created, as well as the next itemId to be used.
+
+The `voteCost` constant is the price of a vote of weight 1 in terms of wei. One ether consists of 1,000,000,000,000,000,000 wei and one gwei consists of 1,000,000,000 wei. Therefore, `voteCost` is set to 10 gwei, or 0.00000001 ether. You can change this value to whatever you wish.
+
+As an example of how quadratic voting works, let's say this contract was for a ranked list of the most favored Star Wars characters. One person may suggest Han Solo while another may suggest Chewbacca. If someone votes +2 for Han Solo, it will cost them `10 gwei * 2 * 2 =` 40 gwei. If someone votes +3 for Chewbacca, it will cost them `10 gwei * 3 * 3 =` 90 gwei. This leads to an ecosystem where a single person may vote more times than another if they care about the topic more, but it gets exponentially more expensive with each vote, ensuring a fair democracy.
+
 ```solidity
 	event ItemCreated(uint itemId);
-	event Voted(uint itemId, uint votingPower, bool positive);
+	event Voted(uint itemId, uint weight, bool positive);
 
-	function createItem(bytes32 title, bytes32 image_hash, string memory description) public {
+	function createItem(bytes32 title, bytes32 imageHash, string memory description) public {
 		uint itemId = itemCount++;
 		Item storage item = items[itemId];
 		item.owner = msg.sender;
 		item.title = title;
-		item.image_hash = image_hash;
+		item.imageHash = imageHash;
 		item.description = description;
 		emit ItemCreated(itemId);
 	}
 ```
 
+The function `createItem` is used to publish a new Item object to the ranked list. The item will require a title, IPFS image hash and text description to be set before the object can be created. The current sender is considered the owner of the item.
+
+This is an example of what a published item will look like when we build the UI:
+
+![item](../../../.gitbook/assets/quadratic-voting-item.png)
+
 ```solidity
-	function positiveVote(uint itemId, uint votingPower) public payable {
+	function positiveVote(uint itemId, uint weight) public payable {
 		Item storage item = items[itemId];
 		require(msg.sender != item.owner);
-		require(msg.value >= votingPower * votingPower * voteCost);
-		item.positiveVotes[msg.sender] = votingPower;
+		require(msg.value >= weight * weight * voteCost);
+		item.positiveVotes[msg.sender] = weight;
 		item.negativeVotes[msg.sender] = 0;
 		item.amount += msg.value;
-		emit Voted(itemId, votingPower, true);
+		emit Voted(itemId, weight, true);
 	}
+```
 
-	function negativeVote(uint itemId, uint votingPower) public payable {
+Users are not able to vote for their own items because this would allow them to claim what they spent and use it to vote again, essentially meaning they could infinitely vote on their own items. Therefore we need to make sure the sender is not the item owner. Also, the value of the transaction must be greater than or equal to `weight * weight * voteCost`.
+
+```solidity
+	function negativeVote(uint itemId, uint weight) public payable {
 		Item storage item = items[itemId];
 		require(msg.sender != item.owner);
-		require(msg.value >= votingPower * votingPower * voteCost);
-		item.negativeVotes[msg.sender] = votingPower;
+		require(msg.value >= weight * weight * voteCost);
+		item.negativeVotes[msg.sender] = weight;
 		item.positiveVotes[msg.sender] = 0;
-		item.amount += msg.value;
-		emit Voted(itemId, votingPower, false);
+
+		uint reward = msg.value / (itemCount - 1);
+		for (uint i = 0; i < itemCount; i++) {
+			if (i != itemId) items[i].amount += reward;
+		}
+
+		emit Voted(itemId, weight, false);
 	}
 
+```
+
+Negative votes are slightly different in their distribution. Rather than reward the owner for a poor addition to the list, the funds are distributed to everyone except the owner. This acts as a sort of basic income for all participants.
+
+```solidity
 	function claim(uint itemId) public {
 		Item storage item = items[itemId];
 		require(msg.sender == item.owner);
@@ -150,17 +180,88 @@ contract QuadraticVoting {
 }
 ```
 
+This allows the owner of an item to transfer any reward to their wallet.
+
+And there we go! Our smart contract is finished. Now let's learn how to deploy it.
+
 # Compiling and deploying with Truffle
 
+```bash
+truffle compile
+```
+
+![truffle compile](../../../.gitbook/assets/quadratic-voting-truffle-compile.png)
+
+Create a new file called `2_quadratic_voting.js` in the `migrations` folder:
+
+```js
+const QuadraticVoting = artifacts.require("QuadraticVoting");
+
+module.exports = function (deployer) {
+  deployer.deploy(QuadraticVoting);
+};
+```
+
+```bash
+yarn add -D @truffle/hdwallet-provider
+```
+
+Get testnet MATIC from faucet. Export your private key from MetaMask and put it in `.secret`.
+
+Create an account [here](https://rpc-mumbai.maticvigil.com/).
+
+```js
+const fs = require("fs");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+
+const mnemonic = fs.readFileSync(".secret").toString().trim();
+
+module.exports = {
+  networks: {
+    development: {
+      host: "localhost",
+      port: 7545,
+      network_id: "*",
+    },
+    matic: {
+      provider: () => new HDWalletProvider(mnemonic, "https://rpc-mumbai.maticvigil.com/v1/{APP_ID}"),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
+  },
+  compilers: {
+    solc: {
+      optimizer: {
+        enabled: true,
+        runs: 200,
+      },
+    },
+  },
+  db: {
+    enabled: false,
+  },
+};
+```
+
+Replace {APP_ID} with the App Id you created earlier.
+
+```bash
+truffle migrate --network matic
+```
+
+![truffle migrate](../../../.gitbook/assets/quadratic-voting-truffle-migrate.png)
+
 # Writing tests for the smart contract
-
-# Creating the front-end with Vue.js
-
-# Styling the components with TailwindCSS
 
 # Communicating with the smart contract with Web3
 
 # Uploading image files with IPFS
+
+# Creating the front-end with Vue.js
+
+# Styling the components with TailwindCSS
 
 # Conclusion
 
