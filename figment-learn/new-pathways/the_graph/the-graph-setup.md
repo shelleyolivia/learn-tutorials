@@ -1,55 +1,26 @@
-The following software is required to set up and complete the **The Graph** Pathway
+# 🤔 What's The Graph?
 
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed
-- [Node.js](https://nodejs.org/) v14.17.0 or higher installed
-- [yarn](https://yarnpkg.com/getting-started/install) installed
-- [docker](https://www.docker.com) installed
+You might have already read about The Graph and just want to roll up your sleeves and get started with coding, in which case feel free to skip to the "Setup the project" section below
 
-Start by cloning the repository and installing the dependencies with yarn :
+If you want to read about The Graph we've curated some great resources to help you get started:
 
-```text
-git clone https://github.com/figment-networks/learn-web3-dapp.git
-cd learn-web3-dapp
-yarn
-```
-
----
+- We wrote [this Twitter thread](https://twitter.com/sprngtheory/status/1425137466789486592) to explain The Graph without technical jargon. It's a great place to start!
+- Projects' own documentation are not always the best place to start, however The Graph is an exception. They have very well written and approachable docs. [Give them a read](https://thegraph.com/docs/about/introduction).
+- More of a visual learner? The rock star of blockchain Youtube - Finematics - have the perfect video for you: [Binge it here](https://www.youtube.com/watch?v=7gC7xJ_98r8).
+- You're still here?? We have curated more links on [Figment Learn](https://learn.figment.io/protocols/thegraph). Knock yourself out!
 
 # Get an alchemy API-KEY
 
-We could have used [public Ethereum RPC endpoints](https://docs.linkpool.io/docs/public_rpc), however we have chosen to rely on [Alchemy](https://www.alchemy.com/). 
+In this pathway you'll use Docker to easily run a local Graph node on your machine. [You can install Docker here](https://www.docker.com). Make sure it's installed and running before going forward.
 
 Alchemy provides one of the leading blockchain development platform, and thus it's provide endpoints to Ethereum mainnet. We need one as later our local graph node will be listen on event on the Ethereum mainnet.
 
 To get your alchemy API key you:
 
-- Go to Alchemy's website: <https://www.alchemy.com/>, and create an account if you do not already have one
+To get an Alchemy API key, [create an account](https://www.alchemy.com/), then create a new application. From that application dashboard, click on **View Details** and then on **View Key**. Copy the HTTP endpoint URL.
 
-- Create a new App on Alchemy.
-- From the Dashboard, click on **View Details** and then click on **View Key**. You can then click to copy your new Alchemy API, including the endpoint URL. Paste this API key in a safe place.
+![Alchemy](../../../.gitbook/assets/pathways/the_graph/alchemy-view-api-key.png)
 
-![](../assets/the-graph/graph-alchemy-setup.gif)
+## 👣 Next Steps
 
----
-
-# Start the server
-
-With the API key in place, start the Next.js development server with:
-
-```text
-yarn dev
-```
-
-Once the development server loads and compiles the application, open your default browser and navigate to `http://localhost:3000`:
-
-![](../../../.gitbook/assets/pathway-home.gif)
-
-{% hint style="warning" %}
-Did you know you can change the port? By default Next.js uses port 3000, but if you have another service already running on that port, use the `--port` flag, like `yarn dev --port 1122`.
-{% endhint %}
-
----
-
-# Next
-
-You can now move ahead to the next step by clicking on the "Next" button below on the right.
+Ok, enough of setup! Let's start getting our hands dirty with the first basic step: Running a local Graph node to listen to the Ethereum network.
