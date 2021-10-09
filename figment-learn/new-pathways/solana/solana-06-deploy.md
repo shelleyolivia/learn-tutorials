@@ -146,6 +146,8 @@ You will need **SOL** available in the account to deploy the program, so get an 
 solana airdrop 1 $(solana-keygen pubkey solana-wallet/keypair.json)
 ```
 
+> **NOTE**: In a Windows terminal, the `$( )` syntax does not work, so just paste the public key you want to fund after the airdrop amount (for example: `solana airdrop 1 C1qx2QUZq7EyLZao4U98fRb8HkT3X5fsGWUc25VyCRBn`).
+
 Verify that everything is ok:
 
 ```bash
