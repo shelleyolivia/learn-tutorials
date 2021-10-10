@@ -52,8 +52,9 @@ const checkConnection = async () => {
     const provider = await detectEthereumProvider();
 
     if (provider) {
-      // Connect to Polygon using Web3Provider and Metamask. Find more information at: https://docs.metamask.io/guide/rpc-api.html.
-      // Be careful not to use deprecated method
+      // Connect to Polygon using Web3Provider and Metamask. 
+      // Find more information at: https://docs.metamask.io/guide/rpc-api.html.
+      // NOTE: Be careful not to use deprecated method!
       // Define address and network
       const addresses = await provider.request({method: 'eth_requestAccounts'});
       const address = addresses[0];
