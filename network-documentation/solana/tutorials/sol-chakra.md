@@ -4,9 +4,19 @@ In the existing tutorials about Solana, we understood how we make smart contract
 
 The code for this tutorial is available in the repository [https://github.com/kanav99/solana-boilerplate](https://github.com/kanav99/solana-boilerplate). The tutorial is split into parts and each part has a commit specific to it on the repository. Do a `git checkout <commit hash>` to refer the code at that checkpoint.
 
-Prerequisite - Have a basic understanding of Solana backend and have gone through the helloworld example [here](https://github.com/solana-labs/example-helloworld).
+# Prerequisites
 
-This is a long and conceptual tutorial - we explain many small niches and concepts behing the code that we write. I would suggest getting a spare hour to understand the tutorial thoroughly.
+- Have a basic understanding of Solana backend and have gone through the helloworld example [here](https://github.com/solana-labs/example-helloworld).
+
+- This is a long and conceptual tutorial - we explain many small niches and concepts behing the code that we write. I would suggest getting a spare hour to understand the tutorial thoroughly.
+
+# Requirements
+
+For this tutorial, we need the following software installed
+
+- NPM and node.js
+- Rust and Solana CLI
+- A Solana Wallet (like Phantom, Solflare etc)
 
 # Create an empty Chakra App
 
@@ -875,10 +885,170 @@ Code till here is present in the commit `746ff70`.
 
 # Organizing things
 
-The logic is good enough now, but the page looks like everything is crammed in a single page. We might want that -
+The logic is good enough now, but the page looks like everything is crammed in a single page. Let's clean this up. We will use Chakra UI tabs on the homepage to split the page into two pages - Home and Transaction History. So, in the Home, we change the rendoring code to
 
-1. Transactions go in a separate tab.
-2. Option to disconnect wallet.
-3. A profile page - where we can see what how many greetings that person have recieved.
+```jsx
+return (
+  <Box textAlign="center" fontSize="xl">
+    <Grid minH="100vh" p={3}>
+      <Tabs variant="soft-rounded" colorScheme="green">
+        <TabList width="full">
+          <HStack justify="space-between" width="full">
+            <HStack>
+              <Tab>Home</Tab>
+              <Tab>Transaction History</Tab>
+            </HStack>
+            <ColorModeSwitcher justifySelf="flex-end" />
+          </HStack>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            {publicKey && (
+              <VStack spacing={8}>
+                <Text>Wallet Public Key: {publicKey.toBase58()}</Text>
+                <Text>
+                  Balance:{" "}
+                  {account
+                    ? account.lamports / web3.LAMPORTS_PER_SOL + " SOL"
+                    : "Loading.."}
+                </Text>
+                <Button onClick={getAirdrop} isLoading={airdropProcessing}>
+                  Get Airdrop of 1 SOL
+                </Button>
+                <Greet />
+              </VStack>
+            )}
+            {!publicKey && <WalletMultiButton />}
+          </TabPanel>
+          <TabPanel>
+            {publicKey && (
+              <VStack spacing={8}>
+                <Heading>Transactions</Heading>
+                {transactions && (
+                  <VStack>
+                    {transactions.map((v, i, arr) => (
+                      <HStack key={"transaction-" + i}>
+                        <Text>Signature: </Text>
+                        <Code>{v.signature}</Code>
+                      </HStack>
+                    ))}
+                  </VStack>
+                )}
+              </VStack>
+            )}
+            {!publicKey && <WalletMultiButton />}
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </Grid>
+  </Box>
+);
+```
 
-For this basic routing, we will use `react-router`.
+See how we have split the code into two panels - second one containing transaction history, first one containing the rest of the code. We shifted the Color mode switcher to the end of the tablist. We can add a wallet disconnect button there as well, if the wallet is connnected.
+
+```jsx
+<HStack justify="space-between" width="full">
+  <HStack>
+    <Tab>Home</Tab>
+    <Tab>Transaction History</Tab>
+  </HStack>
+  <HStack>
+    {publicKey && <WalletDisconnectButton bg="green" />}
+    <ColorModeSwitcher justifySelf="flex-end" />
+  </HStack>
+</HStack>
+```
+
+In case wallet is not connected, instead of just throwing the connect button, let's create a separate component that looks better.
+
+```jsx
+function WalletNotConnected() {
+  return (
+    <VStack height="70vh" justify="space-around">
+      <VStack>
+        <Text fontSize="2xl">
+          {" "}
+          Looks like your wallet is not connnected. Connect a wallet to get started!
+        </Text>
+        <WalletMultiButton />
+      </VStack>
+    </VStack>
+  );
+}
+```
+
+Let's use `SimpleGrid` to separate the wallet properties and greeting code and use readonly form input to show data beautifully.
+
+```jsx
+<SimpleGrid columns={2} spacing={10}>
+  <VStack spacing={8} borderRadius={10} borderWidth={2} p={10}>
+    <FormControl id="pubkey">
+      <FormLabel>Wallet Public Key</FormLabel>
+      <Input type="text" value={publicKey.toBase58()} readOnly />
+    </FormControl>
+    <FormControl id="balance">
+      <FormLabel>Balance</FormLabel>
+      <Input
+        type="text"
+        value={
+          account
+            ? account.lamports / web3.LAMPORTS_PER_SOL + " SOL"
+            : "Loading.."
+        }
+        readOnly
+      />
+    </FormControl>
+    <Button onClick={getAirdrop} isLoading={airdropProcessing}>
+      Get Airdrop of 1 SOL
+    </Button>
+  </VStack>
+  <VStack>
+    <Greet />
+  </VStack>
+</SimpleGrid>
+```
+
+After this change, do similar changes to the `Greet` component.
+
+```jsx
+return (
+  <>
+    <VStack width="full" spacing={8} borderRadius={10} borderWidth={2} p={10}>
+      <FormControl id="greetings">
+        <FormLabel>No. of greetings recieved</FormLabel>
+        <Input
+          type="text"
+          value={counter === null ? "Loading.." : counter}
+          readOnly
+        />
+      </FormControl>
+      <HStack>
+        <Button onClick={greetYourself}>Greet Yourself</Button>
+      </HStack>
+    </VStack>
+    <VStack width="full" spacing={8} borderRadius={10} borderWidth={2} p={10}>
+      <FormControl id="send">
+        <FormLabel>Send greeting to public key</FormLabel>
+        <Input
+          value={recipient}
+          onChange={(e) => setRecipient(e.target.value)}
+        ></Input>
+      </FormControl>
+      <Button
+        onClick={() => {
+          greet(recipient);
+        }}
+      >
+        Greet
+      </Button>
+    </VStack>
+  </>
+);
+```
+
+The code till here is available in the commit `e56e2d5`.
+
+# Conclusion
+
+Congratulations on completing the (long) tutorial! What we developed and understood was how we can use Chakra UI and Solana to make beautiful and fast dApps. Now, you should be able to use this knowledge to power your own big idea and easily use Solana to make blazing fast applications, while using the ease of Chakra to make frontend easily. There is a lot to still do in this simple application, but I will leave that imagination to the reader. If you liked this tutorial, do send me a greeting on the application you developed :)
