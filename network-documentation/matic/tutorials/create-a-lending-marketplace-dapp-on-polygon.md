@@ -30,6 +30,8 @@ Create a sample boilerplate:
 truffle init
 ```
 
+Follow [Deploying and Debugging Smart Contracts on Polygon](https://learn.figment.io/tutorials/deploying-and-debugging-smart-contracts-on-polygon) tutorial to setup network config inside Truffle and learn the deployment the Polygon network.
+
 ***Add the smart contract code below:***
 
 ***LoanContract.sol***
@@ -4116,3 +4118,4 @@ If you had any difficulties following this tutorial or simply want to discuss Po
 
 # References
 - https://github.com/crypto-lend
+- https://learn.figment.io/tutorials/deploying-and-debugging-smart-contracts-on-polygon
