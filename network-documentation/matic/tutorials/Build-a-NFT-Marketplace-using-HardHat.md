@@ -67,21 +67,19 @@ Now we have to install the dependencies we need for our project. Copy the follow
 
 Now run the following command:
 
-```bash
+```text
 npm install
 ```
 
-This command will install all the required dependencies for us project. All the installed modules can be found inside a folder called `node_modules` .
+This command will install all the required code libraries for the project. All the installed modules can be found inside a folder called `node_modules` .
 
-Congratulations 🎉🎉🎉, your are now ready to start writing smart contracts.
+Congratulations 🎉🎉🎉, you are now ready to start writing smart contracts.
 
 # Developing the Smart Contract
 
-Inside the `contracts` folder create a new file named `Marketplace.sol`. This is going to be our smart contract. You can also choose any other name you want.
+Inside the `contracts` folder create a new file named `Marketplace.sol`. The filename of our smart contract should indicate its functionality in some way although the filename is entirely your choice.
 
- 
-
-```jsx
+```solidity
 // SPDX-License-Identifier: Unlicensed
 
 pragma solidity 0.8.4;
@@ -90,13 +88,13 @@ contract Marketplace {
 }
 ```
 
-We start by defining the license for our smart contract. For the simplicity of this tutorial we are going to keep our contract as `Unlicensed` . Next we define the Solidity version we are willing to use using the `pragma` keyword. We will be using Solidity version `0.8.4` . We also define our smart contract using the `contract` keyword. Please make sure that the contract name defined matches with the name of the file we created.
+We start by defining the license for our smart contract. For the purposes of this tutorial we are going to keep our contract as `Unlicensed`. Next we define the Solidity version we are using with the `pragma` keyword. We will be using Solidity version `0.8.4` . We also define the name of the smart contract using the `contract` keyword. Please make sure that the contract name defined matches with the name of the file you created.
 
 ## Importing libraries
 
-Make the following changes
+Add the following import statements to the code:
 
-```jsx
+```solidity
 // SPDX-License-Identifier: Unlicensed
 
 pragma solidity 0.8.4;
@@ -107,13 +105,13 @@ contract Marketplace {
 }
 ```
 
-The `import` keyword is used to import the `IERC721` smart contract from the OpenZeppelin contracts which was installed as a dependency. IERC721 is read as ***Interface - ERC721.*** Interface of a smart contract provides a high level overview of all the public functions and events present in that smart contract. An interface contains only the function signature and event declarations of the function and it helps our smart contract to make calls to another another smart contract present in the blockchain. We are importing `IERC721` because it is an interface for ERC721 smart contract which forms the basis for any NFT in the blockchain.
+The `import` keyword is used to import the `IERC721` smart contract from the OpenZeppelin contracts which was installed as a dependency. IERC721 is read as ***Interface - ERC721***. An interface of a smart contract provides a high level overview of all the public functions and events present in that smart contract. An interface contains only the function signature and event declarations of the functions. It helps our smart contract to make calls to other smart contracts present on the blockchain. We are importing `IERC721` because it is an interface for ERC721 smart contracts which form the basis for many NFTs on the blockchain.
 
 ## Defining global variables
 
 Make the following changes to the smart contract:
 
-```jsx
+```solidity
 // SPDX-License-Identifier: Unlicensed
 
 pragma solidity 0.8.4;
@@ -148,9 +146,9 @@ contract Marketplace {
     );
 
     constructor() {
-				itemCounter = 0;
-				owner = payable(msg.sender);
-				listingPrice = 0.01 ether;
+  		itemCounter = 0;
+  		owner = payable(msg.sender);
+  		listingPrice = 0.01 ether;
 		}
 }
 ```
@@ -158,7 +156,7 @@ contract Marketplace {
 Here we have defined the following:
 
 - itemCounter: A public variable that is used to uniquely identify each NFT that is listed in the smart contract.
-- owner: This variable stores the address of the owner of the smart contract. We use the keyword `payable` that denotes that the address stored in this variable can receive Ether (Matic in our case) directly from the smart contract. This is needed because the owner of the smart contract is going to receive a small commission for all the NFTs listed in the smart contract.
+- owner: This variable stores the address of the owner of the smart contract. We use the keyword `payable` that denotes that the address stored in this variable can receive payment (MATIC in our case) directly from the smart contract. This is needed because the owner of the smart contract is going to receive a small commission for all the NFTs listed in the smart contract.
 - listingPrice: This variable is used to define the amount charged as commission by the owner of the smart contract for listing of the NFT.
 - MarketItem: We have used the `struct` keyword to define a composite datatype know as *structures.* A structure is a datatype which is made using more than one primary datatypes. In this case, MarketItem is a datatype that is used to denote an NFT that is listed in the contract. It consists of the following primary datatypes:
     - itemId: Each NFT listed in the smart contract is assigned an unique itemId.
@@ -185,7 +183,7 @@ Finally we initialise the following variables in the constructor:
 
 Add the following function:
 
-```jsx
+```solidity
 function listMarketItem(
     address nftContractAddress,
     uint256 tokenId,
