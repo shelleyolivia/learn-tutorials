@@ -2,40 +2,32 @@
 
 # Introduction
 
-In this tutorial we are going to learn how to build an NFT Marketplace smart contract. Our marketplace smart contract will enable its users to list their NFT on the contract by paying a small fee. The marketplace smart contract will form a medium where people can buy and sell their NFTs.
+In this tutorial we are going to learn how to build an NFT Marketplace smart contract. Our marketplace smart contract will enable its users to list their NFT on the contract by paying a small fee. This NFT marketplace is a medium where people can buy and sell their NFTs. We will learn about writing unit tests and how to deploy our contract to the Polygon Mumbai testnet using HardHat, as well as how to verify the contract source code on Polygonscan so it is publicly available.
 
-In this tutorial we are going to learn about how to build smart contracts using HardHat. We will be learning how to write tests and will also deploy our contract to the Mumbai Testnet and get it verified by Polygonscan.
+# Prerequisites
 
-# Prerequisite
+This tutorial assumes you have completed the [Create an NFT smart contract with HardHat](https://learn.figment.io/tutorials/create-nft-smart-contract-with-hardhat) tutorial. We are using that project build as the starting point of this tutorial. Although it is not necessary to have completed that tutorial, it will give you a better understanding on environment setup and how to build smart contracts using HardHat.
 
-This tutorial expects you to successfully have completed the [Create an NFT smart contract with HardHat](https://learn.figment.io/tutorials/create-nft-smart-contract-with-hardhat) tutorial. We are going the project build in this tutorial as our starting point. Although it is not necessary to have completed this tutorial, it will give you a better guide on environment setup and how to build smart contracts using HardHat.
-
-# Requirement
-
-The key requirement for this tutorial are:
+# Requirements
 
 - [Node.js](https://nodejs.org/en/) v14.17.6 LTS or higher, for installing packages.
-- [HardHat](https://hardhat.org/) will be the framework we will be using for developing our smart contracts.
+- [HardHat](https://hardhat.org/) is the framework we will be using for developing our smart contracts.
 - [MetaMask](https://metamask.io/) for interacting with the blockchain.
     - Once you have installed MetaMask, add a connection with [Polygon Mumbai Testnet](https://docs.matic.network/docs/develop/metamask/config-polygon-on-metamask).
     - Remember to get your account funded with testnet MATIC tokens using the [Polygon Faucet](https://faucet.polygon.technology/).
-- Have a Polygonscan API key which will be used for verifying our smart contract in Polygonscan using a HardHat plugin.
+- A [Polygonscan API key](https://polygonscan.com/login?cmd=last) which will be used for automatically verifying our smart contract source code on Polygonscan using a HardHat plugin.
 
 # Environment setup
 
-In this tutorial we will be starting by creating an empty HardHat project. Type the following in your terminal:
+We will start by creating an empty HardHat project. 
 
-```bash
-mkdir art_marketplace  # Creating a directory named art_marketplace
-cd art_marketplace     # Move inside the art_marketplace directory
-npx hardhat
-```
+Create a new directory called `art_marketplace` and change into it with the `cd` command, then run `npx hardhat` to initialize the HardHat project.
 
-On typing the last command, something similar to this should appear on your screen:
+The `npx hardhat` command will present you with a menu, where you can select how to initialize your project
 
 ![npx_hardhat.png](../../../.gitbook/assets/npx_hardhat_basic.png)
 
-For this tutorial we will be starting from scratch. Using arrow keys in your keyboard, select `Create an empty hardhat.config.js` option and hit Enter. 
+We will be starting from scratch. Using the arrow keys on your keyboard, select `Create an empty hardhat.config.js` option and press Enter. 
 
 This will create an empty `hardhat.config.js` file and a `package.json` file. We have discussed the use of this file in detail in our previous tutorial,  [Create an NFT smart contract with HardHat](https://learn.figment.io/tutorials/create-nft-smart-contract-with-hardhat). The `package.json` contains all the `npm` packages we install. Before proceeding further we will be creating some folders for organising our work. Type the following in the terminal:
 
