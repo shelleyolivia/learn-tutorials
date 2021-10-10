@@ -226,11 +226,11 @@ function listMarketItem(
 
 Now lets understand the code:
 
-- The function takes in 3 parameters, namely nftContractAddress, tokenId and price which represents the contract address of the NFT, the tokenId of the NFT and the price the seller wants to sell it for respectively. It is a `public` function which means anyone can call this function. The `payable` keyword is used because in order to use this function, the user must send ether to pay for the listing fees.
-- `msg.value` returns the amount of ether sent while calling the function. The amount sent must be equal to the listing price set by the owner of the smart contract. The `require(msg.value == listingPrice, "Must pay the listing price");` checks this and returns an error is the amount of token send (Matic in our case) is not equal to the needed listing price.
+- The function takes in 3 parameters: `nftContractAddress`, `tokenId` and `price` which represents the contract address of the NFT, the tokenId of the NFT and the price the seller wants to sell it for respectively. It is a public function which means anyone can call this function. The payable keyword is used because in order to use this function, the user must attach payment for the listing fees.
+- `msg.value` returns the amount of payment sent while calling the function. The amount sent must be equal to the listing price set by the owner of the smart contract. The `require(msg.value == listingPrice, "Must pay the listing price");` checks this and returns an error if the amount of token sent (MATIC in our case) is not equal to the specified listing price.
 - The next require statement makes sure that the selling price set for the contract is not 0.
 
-```jsx
+```solidity
 marketItems[itemCounter] = MarketItem(
     itemCounter,
     nftContractAddress,
@@ -243,9 +243,9 @@ marketItems[itemCounter] = MarketItem(
 );
 ```
 
-- Here we have created an new object of type MarketItem and mapping it to the value of itemCounter using marketItems mapping, that we have define earlier. Here the present value of the itemCounter becomes the ItemId for our NFT. The account calling this function (returned by `msg.sender`) is set as the seller of the NFT. We set a null address (represented by `address(0)`) as the owner of the NFT. This will be changed when someone buys the NFT.
+- Here we have created a new object of type `MarketItem` and mapped it to the value of `itemCounter` using the `marketItems` mapping, that we have defined earlier. The present value of the `itemCounter` becomes the `itemId` for our NFT. The account calling this function (returned by `msg.sender`) is set as the seller of the NFT. We set a null address (represented by `address(0)`) as the owner of the NFT. This will be changed when someone buys the NFT.
 
-```jsx
+```solidity
 IERC721(nftContractAddress).transferFrom(
     msg.sender,
     address(this),
@@ -253,19 +253,19 @@ IERC721(nftContractAddress).transferFrom(
 );
 ```
 
-- Here we first create an Object of type ERC721 using IERC721 interface that we imported. The interface needs the address of the ERC721 contract. `IERC721(nftContractAddress)` returns the reference to the ERC721 contract deployed at the address stored in `nftContractAddress` variable. The `transferFrom` function of the ERC721 contract is used to transfer the NFT from the user (address returned by `msg.sender`) to the smart contract (address returned by `address(this)`).
+- Here we first create an Object of type ERC721 using the IERC721 interface that we imported. The interface needs the address of the ERC721 contract. `IERC721(nftContractAddress)` returns the reference to the ERC721 contract deployed at the address stored in the `nftContractAddress` variable. The `transferFrom` function of the ERC721 contract is used to transfer the NFT from the user (the address returned by `msg.sender`) to the smart contract (the address returned by `address(this)`).
     
-    **Note: For our smart contract to be able to transfer the NFT from the user to itself, the user must first approve our smart contract to spend NFT on the user's behalf.**
+    >**Note**: For our smart contract to be able to transfer the NFT from the user to itself, the user must first approve our smart contract to spend NFT on the user's behalf.**
     
-- `payable(owner).transfer(listingPrice)` is used to transfer Ether (Matic when the contract is deployed to Polygon) to the owner of the smart contract. This line transfers the fee paid for listing to the owner.
-- After this, the `emit` keyword is used to create a new event of type MarketItemListed.
-- We increment the value of itemCounter by 1 so that the next NFT listed will have a new itemId.
+- `payable(owner).transfer(listingPrice)` is used to transfer MATIC to the owner of the smart contract. This line transfers the fee paid for listing to the owner.
+- After this, the `emit` keyword is used to create a new event of type **MarketItemListed**.
+- We increment the value of `itemCounter` by 1 so that the next NFT listed will have a new `itemId`.
 
 ## Creating the buyMarketItem function
 
 Add the following function:
 
-```jsx
+```solidity
 function buyMarketItem(uint256 itemId) public payable {
     require(marketItems[itemId].isPresent, "Item is not present");
     require(marketItems[itemId].isSold == false, "Item is already sold");
@@ -287,11 +287,11 @@ function buyMarketItem(uint256 itemId) public payable {
 
 Now lets understand the code:
 
-- The function takes in only 1 parameter, that is the itemId. It is of type `public` `payable` because anyone can call this function to buy an NFT and in order to buy the NFT the price has to be send during calling the function.
+- The function takes in only 1 parameter, that is the `itemId`. It is of type **public** and **payable** because anyone can call this function to buy an NFT and in order to buy the NFT the price has to be sent when calling the function.
 - The function checks for the following:
     - There is an item present with the itemId passed.
-    - The item is not already sold
-    - The amount send (returned with `msg.value`) is equal to the price to be paid for the NFT
+    - The item is not already sold.
+    - The amount send (returned with `msg.value`) is equal to the price to be paid for the NFT.
 - After this the item is marked as Sold and the owner of the NFT is changed from from blank to the address of the account calling the function.
 - We again use the IERC721 interface to create an interface for the ERC721 contract present and transfer the NFT from the contract itself (denoted by `address(this)`) to the account that called the function (denoted by `msg.sender`).
 
@@ -299,7 +299,7 @@ Now lets understand the code:
 
 Write the following function:
 
-```jsx
+```solidity
 function getMarketItem(uint256 itemId)
     public
     view
@@ -309,15 +309,15 @@ function getMarketItem(uint256 itemId)
 }
 ```
 
-This function is used to return the details of an item as listed in the smart contract. We use the keyword `view` because this function doesn't change the state of the blockchain and only returns a value. Because of this, while calling this function, it is not necessary to pay any Gas.
+This function is used to return the details of an item as listed in the smart contract. We use the keyword `view` because this function doesn't change the state of the blockchain and only returns a value. Because of this, while calling this function, it is not necessary to pay any gas fee.
 
-Here we see a new syntax for `returns` keyword where we can pass the variable name to be returned. in solidity `0.8.0` and higher, this syntax along with the traditional syntax are valid. One of the main advantages of using this syntax is its not necessary to return the value at the end of the function. The function returns the value stored in items variable. After the function execution, whatever value is stored in the `items` variable would be returned.
+Here we see a new syntax for the `returns` keyword where we can pass the variable name to be returned. In solidity 0.8.0 and higher, this syntax and the traditional syntax are both valid. One of the main advantages of using this syntax is that it's not necessary to return the value at the end of the function. The function returns the value stored in the `items` variable. After the function execution, whatever value is stored in the `items` variable would be returned.
 
 ## Creating the changeListingPrice function
 
 Add the following function:
 
-```jsx
+```solidity
 function changeListingPrice(uint256 newPrice) public {
     require(newPrice > 0, "Listing Price must be greater than 0");
     require(
@@ -329,13 +329,13 @@ function changeListingPrice(uint256 newPrice) public {
 }
 ```
 
-This function will take in only one parameter that is `newPrice` that denotes the new listing price that will be charged. The contract first makes sure that the new listing price is greater than 0. Since only the owner of the contract can modify the listing price, next we check that the account calling the function is the owner account. After the checks are passed, the `listingPrice` variable is updated to hold the new value passed with `newPrice` parameter.
+This function will take in only one parameter that is `newPrice` which denotes the new listing price that will be charged. The contract first makes sure that the new listing price is greater than 0. Since only the owner of the contract can modify the listing price, next we must check that the account calling the function is the owner account. After the checks are passed, the `listingPrice` variable is updated to hold the new value passed with `newPrice` parameter.
 
 ## Putting it all together
 
 The final smart contract should be:
 
-```jsx
+```solidity
 // SPDX-License-Identifier: Unlicensed
 
 pragma solidity 0.8.4;
@@ -452,11 +452,11 @@ contract Marketplace {
 }
 ```
 
-Congratulations 🎉🎉🎉 ! Your smart contract is ready.
+Congratulations 🎉🎉🎉 ! Your smart contract is ready to be tested.
 
 # Testing our smart contract
 
-Now that we have our smart contract ready, it is important to test our smart contract. We are going to test our smart contract for the following:
+Now that our smart contract is complete, it is important to test its functionality to avoid any obvious bugs making it into production. We will test our smart contract for the following:
 
 - Listing of NFT:
     - NFT is successfully listed
@@ -471,9 +471,9 @@ Now that we have our smart contract ready, it is important to test our smart con
 
 Although we already have installed the require node packages for writing our test cases, there is one last prerequisite for writing our test cases. That is, we will need an ERC721 contract that we can use to create NFTs while testing. For this we are going to copy the contract we have developed in the [Create an NFT smart contract with HardHat](https://learn.figment.io/tutorials/create-nft-smart-contract-with-hardhat#testing-the-smart-contract) tutorial.
 
-Create a new file named `Artwork.sol` inside the contracts directory and paste the following code:
+Create a new file named `Artwork.sol` inside the `contracts` directory and paste the following code:
 
-```jsx
+```solidity
 //SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.4;
 
@@ -521,7 +521,7 @@ contract Artwork is ERC721 {
 }
 ```
 
-Now in the `test` directory create a file named `market-test.js` . This file is going to store all our unit tests. Import the require libraries with the following code:
+Now in the `test` directory create a file named `market-test.js` . This file will contain all our unit testd. Import the required testing libraries with the following code:
 
 ```jsx
 const { expect } = require("chai");
@@ -532,7 +532,7 @@ const { ethers } = require("hardhat");
 
 Now we are ready to write our test cases. Lets start with the following:
 
-```jsx
+```js
 describe("Listing of NFT", function () {
   this.beforeEach(async function () {
     const Artwork = await ethers.getContractFactory("Artwork");
@@ -604,16 +604,16 @@ Here we are dealing with the test cases of the first type.
     - First deploying the ERC721 smart contract used to create NFTs and the Marketplace smart contract.
     - Then we mint two new NFTs using the ERC721 contract.
     - We approve the marketplace contract to spend the first NFT (represented with tokenId 0) on behalf of the account owning the NFT, and leave the second one unapproved.
-- `it` is used to define each unit test. We use the `listMarketItem` defined to list our NFT. The amount of Eth to be send is defined by using the `value` parameter. `ethers.utils.parseEther()` is used to convert the value passed to equivalent integer number can can be passed to the smart contract. That means if we pass `1` , it will represent 1 Eth or 1 * 10$^{18}$. The price for buying the listed NFT is set to be *0.1 ether.*
+- `it` is used to define each unit test. We use the `listMarketItem` defined to list our NFT. The amount of Eth to be send is defined by using the `value` parameter. `ethers.utils.parseEther()` is used to convert the value passed to equivalent integer number can can be passed to the smart contract. That means if we pass 1, it will represent 1 MATIC or 1 * 10^18. The price for buying the listed NFT is set to be *0.1 MATIC*.
     
     Then we use the `getMarketItem()` function. Since this is the first item to be listed in the contract, the itemId will be 0. We make sure that the contract address of the NFT matches that of ERC721 Contract we used to mint it. We also check that the price is set correctly.
     
-- In the next test case, we pass 0 eth while calling the function. This should return the error message "Must pay the listing price", that is checked using the `to.be.revertedWith()` function. This function checks for the error message that is returned.
+- In the next test case, we pass 0 MATIC while calling the function. This should return the error message "Must pay the listing price", that is checked using the `to.be.revertedWith()` function. This function checks for the error message that is returned.
 - In the 3rd test case, we try to list the 2nd minted NFT that was not approved. This will generate an error when our smart contract will try to transfer the NFT from the owner to itself. The error message will be `ERC721: transfer caller is not owner nor approved` . We again use the `to.be.revertedWith()` function to check for this error message.
 
 In order to run the test cases, type the following command in the console:
 
-```bash
+```text
 npx hardhat test
 ```
 
@@ -623,7 +623,7 @@ The output should be something like this
 
 Now let's write the second set of test cases:
 
-```jsx
+```js
 describe("Buying of NFT", function () {
   this.beforeEach(async function () {
     const Artwork = await ethers.getContractFactory("Artwork");
@@ -677,14 +677,14 @@ describe("Buying of NFT", function () {
 });
 ```
 
-- Before running the test cases we make sure that both the ERC721 and our Marketplace contracts are deployed and an NFT is listed in our contract. The NFT is listed at a selling price of `0.1 ETH` .
-- In order to check where the `buyMarketItem()` function is working properly, we first connect a new account (`account2` here) and call the function passing the itemId (itemId will be `0` for the first item listed in the contract) as parameter and sending the price of NFT using the `value` parameter. We find the balance of the account using `balanceOf` function of ERC721 smart contract before and after making the transaction. The balance before buying should be 0 and after the transaction it should be 1. This will prove that the NFT was successfully bought.
-- To check whether it is possible to buy an NFT for a lower price than the one listed, we try to pass a lower value in the `value` parameter. This should return the error message we defined, that is `Must pay the correct price` .
-- In order to check whether it is possible to buy the same NFT twice, we try to call the `buyMarketItem()` twice with the same itemId. The first time it will be work as expected and transfer the NFT to the account buying the NFT, however in the second time it will return an error message `Item is already sold` that denotes that it is not possible to buy an NFT once it is already sold.
+- Before running the test cases we make sure that both the ERC721 and our Marketplace contracts are deployed and an NFT is listed in our contract. The NFT is listed at a selling price of 0.1 MATIC.
+- In order to check if the `buyMarketItem()` function is working properly, we first connect a new account (`account2` here) and call the function passing the itemId (itemId will be `0` for the first item listed in the contract) as a parameter, then sending the price of the NFT using the `value` parameter. We find the balance of the account using the `balanceOf` function from the ERC721 smart contract before and after making the transaction. The balance before buying should be 0 and after the transaction it should be 1. This will prove that the NFT was successfully bought.
+- To check whether it is possible to buy an NFT for a lower price than the one listed, we try to pass a lower value in the `value` parameter. This should return the error message we defined, which is "Must pay the correct price" .
+- In order to check whether it is possible to buy the same NFT twice, we try to call the `buyMarketItem()` twice with the same `itemId`. The first time it will work as expected and transfer the NFT to the account buying the NFT, however the second time it will return an error message "Item is already sold" that denotes it is not possible to buy an NFT once it is already sold.
 
-Putting it all together, the final content of the file will be:
+Putting it all together, the final content of the test file will be:
 
-```jsx
+```js
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
@@ -805,8 +805,6 @@ describe("Buying of NFT", function () {
 });
 ```
 
- 
-
 We can run the test by typing the following in the console:
 
 ```bash
@@ -831,7 +829,7 @@ We will be using the `console.log()` function to print the details when an accou
 
 ```jsx
 function buyMarketItem(uint256 itemId) public payable {
-		...
+	  // Code has been removed for display purposes
     console.log("NFT with itemId ", itemId, "is sold to ", msg.sender);
 }
 ```
@@ -846,16 +844,17 @@ Please note that the `console.log()` statement has no use when the contract is d
 
 # Deploying the contract
 
-Before we deploy our smart contract to Mumbai Testnet, we will need to have our environment variables setup. We create a new file in the root directory of our project called `.env` and store the API Key for Polygonscan and the Private key for the account you want to use to deploy the smart contract.
+Before we deploy our smart contract to the Polygon Mumbai testnet, we will need to set up some environment variables.
+Create a new file in the root directory of our project called `.env` and store the API Key for Polygonscan and the private key for the account you want to use to deploy the smart contract.
 
-```
+```text
 POLYGONSCAN_KEY=Paste the API key here
 PRIVATE_KEY=Paste the private key here
 ```
 
-Now modify content of the `harhat.config.js` as follows:
+Now modify the contents of `harhat.config.js` as follows:
 
-```jsx
+```js
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-etherscan")
 require("dotenv").config();
@@ -902,13 +901,11 @@ You can refer [here](https://learn.figment.io/tutorials/create-nft-smart-contrac
 
 To deploy the smart contract type the following command:
 
- 
-
-```bash
+```text
 npx hardhat deploy --network mumbai
 ```
 
-You will be having a output similar to this:
+The output will be similar to this:
 
 ![Deploying and Verifying](../../../.gitbook/assets/deployingandverifying.png)
 
@@ -922,11 +919,11 @@ First we will have to approve the MarketPlace smart contract to spend our NFT. T
 
 1. Copy the contract address of the MarketPlace smart contract we just deployed.
 2. Go to Polygonscan and open the contract used to create the NFT.
-3. In the `Contract` section go to `Write Contract` tab and connect your MetaMask wallet. Double check that you are connected with Mumbai Testnet and is using the same account that was used to create the NFT.
+3. In the `Contract` section go to the `Write Contract` tab and connect your Metamask wallet. Double check that you are connected with Mumbai testnet and have selected the same account that was used to create the NFT in Metamask.
 4. Now in the `approve` function paste the MarketPlace contract address and tokenId of the NFT in `to` and `tokenId` field respectively and click on the write button.
 5. Sign the transaction and wait for the transaction to get verified.
 
-Now we open the MarketPlace contract in Polygonscan:
+Now we open the Marketplace contract in Polygonscan:
 
 1. In the `Contract` section go to `Write Contract` tab and connect your MetaMask wallet.
 2. In the `listMarketItem` function fill the details of the NFT to be listed. 
