@@ -177,7 +177,7 @@ Finally we initialise the following variables in the constructor:
 
 - itemCounter: The itemCounter variable is initialised to 0.
 - owner: By default the account deploying the smart contract (address of the deploying account is returned by `msg.sender` keyword) is set as the owner of the smart contract. We use the keyword `payable` while assigning the value to typecast the address returned by `msg.sender` to an address type that can receive payment from the smart contract.
-- listingPrice: The listing price is defaulted to 0.01 ether. The keyword `ether` refers to the the value 10$^{18}$. So 0.01 ether is means 0.01 * 10$^{18}$. This keyword is specific to Solidity language and hence applicable for any blockchain other than Ethereum like Polygon, Binance Smart Chain etc. that uses Solidity for smart contracts.
+- listingPrice: A price is charged for listing each NFT on the smart contract. We specify this price in the `listingPrice` variable. The default value is set to `0.01 ether` which means 0.01 Matic has to be paid for listing an NFT. `ether` is a special type of unit defined in Solidity. You can read more about the unit `ether` in the official documentation [here](https://docs.soliditylang.org/en/v0.8.9/units-and-global-variables.html?highlight=ether#ether-units).
 
 ## Creating the listMarketItem function
 
