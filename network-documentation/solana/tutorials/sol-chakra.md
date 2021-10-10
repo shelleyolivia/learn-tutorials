@@ -4,6 +4,10 @@ In the existing tutorials about Solana, we understood how we make smart contract
 
 The code for this tutorial is available in the repository [https://github.com/kanav99/solana-boilerplate](https://github.com/kanav99/solana-boilerplate). The tutorial is split into parts and each part has a commit specific to it on the repository. Do a `git checkout <commit hash>` to refer the code at that checkpoint.
 
+Prerequisite - Have a basic understanding of Solana backend and have gone through the helloworld example [here](https://github.com/solana-labs/example-helloworld).
+
+This is a long and conceptual tutorial - we explain many small niches and concepts behing the code that we write. I would suggest getting a spare hour to understand the tutorial thoroughly.
+
 # Create an empty Chakra App
 
 - Create an empty Chakra UI using the Create-React-App template.
@@ -312,3 +316,569 @@ npm i @solana/wallet-adapter-wallets \
       @solana/wallet-adapter-react \
       @solana/wallet-adapter-react-ui
 ```
+
+- Add the required imports
+
+```jsx
+import {
+  ConnectionProvider,
+  WalletProvider,
+  useConnection,
+  useWallet,
+} from "@solana/wallet-adapter-react";
+import {
+  getPhantomWallet,
+  getSolflareWallet,
+  getSolletWallet,
+  getSolletExtensionWallet,
+} from "@solana/wallet-adapter-wallets";
+import {
+  WalletModalProvider,
+  WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
+require("@solana/wallet-adapter-react-ui/styles.css");
+```
+
+- Inside the `App` component body, add
+
+```jsx
+const network = "devnet";
+const endpoint = web3.clusterApiUrl(network);
+const wallets = useMemo(
+  () => [
+    getPhantomWallet(),
+    getSolflareWallet(),
+    getSolletWallet({ network }),
+    getSolletExtensionWallet({ network }),
+  ],
+  [network]
+);
+```
+
+Here, we define three constants. First is `network`, just the string which tells which network we are on. The `endpoint` is a string which contains the RPC url of the selected network (i.e. Devnet). The third constant `wallets` is an array of wallet descriptors that we want our app to work with. The `useMemo` is a function that memoizes the value of the function output (passed as the first argument) and only changes when a list of state variables change their value (this dependency array is passed as the second argument). We currently will work with Phantom, Solflare and Sollet.
+
+Now to make all of the children components of `App` able to access the network and wallet, we have to wrap all of the sub-components in `ConnectionProvider` and `WalletProvider`. Then, the children elements can use `useWallet` and `useConnection` to access the wallet and network. After wrapping the components in these, the rendering of App should look something like this
+
+```jsx
+return (
+  <ChakraProvider theme={theme}>
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>{/* All the same elements */}</WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  </ChakraProvider>
+);
+```
+
+Let's now delete our old definition of `connection`, `wallet` and `pvkey` - let a wallet provide that. Also, we will have to refactor our initial code such that we have a new `Home` functional modal which contains all the design and logic, and `App` should only have these providers. So, the App becomes
+
+```jsx
+function App() {
+  const network = "devnet";
+  const endpoint = web3.clusterApiUrl(network);
+  const wallets = useMemo(
+    () => [
+      getPhantomWallet(),
+      getSolflareWallet(),
+      getSolletWallet({ network }),
+      getSolletExtensionWallet({ network }),
+    ],
+    [network]
+  );
+
+  return (
+    <ChakraProvider theme={theme}>
+      <ConnectionProvider endpoint={endpoint}>
+        <WalletProvider wallets={wallets} autoConnect>
+          <WalletModalProvider>
+            <Home></Home>
+          </WalletModalProvider>
+        </WalletProvider>
+      </ConnectionProvider>
+    </ChakraProvider>
+  );
+}
+```
+
+and the move all the contents to Home. Inside Home, we have to take care of some things. First, the `connection` object now comes from `useConnection`. Second, the `publicKey` should now come from `useWallet`. Third, the `publicKey` we now get might be empty, because the user might not have connected the wallet yet. In that case, we need to ask the user to connect their wallet with the application.
+
+So, after the changes in the logic, the Home component should look like.
+
+```jsx
+function Home() {
+  const { connection } = useConnection();
+  const { publicKey } = useWallet();
+  const { account, transactions } = useSolanaAccount();
+  const toast = useToast();
+  const [airdropProcessing, setAirdropProcessing] = useState(false);
+
+  const getAirdrop = useCallback(async () => {
+    setAirdropProcessing(true);
+    try {
+      var airdropSignature = await connection.requestAirdrop(
+        publicKey,
+        web3.LAMPORTS_PER_SOL
+      );
+      await connection.confirmTransaction(airdropSignature);
+    } catch (error) {
+      console.log(error);
+      toast({ title: "Airdrop failed", description: "unknown error" });
+    }
+    setAirdropProcessing(false);
+  }, [toast, publicKey, connection]);
+
+  return (
+    <Box textAlign="center" fontSize="xl">
+      <Grid minH="100vh" p={3}>
+        <ColorModeSwitcher justifySelf="flex-end" />
+        {publicKey && (
+          <VStack spacing={8}>
+            <Text>Wallet Public Key: {publicKey.toBase58()}</Text>
+            <Text>
+              Balance:{" "}
+              {account
+                ? account.lamports / web3.LAMPORTS_PER_SOL + " SOL"
+                : "Loading.."}
+            </Text>
+            <Button onClick={getAirdrop} isLoading={airdropProcessing}>
+              Get Airdrop of 1 SOL
+            </Button>
+            <Heading>Transactions</Heading>
+            {transactions && (
+              <VStack>
+                {transactions.map((v, i, arr) => (
+                  <HStack key={"transaction-" + i}>
+                    <Text>Signature: </Text>
+                    <Code>{v.signature}</Code>
+                  </HStack>
+                ))}
+              </VStack>
+            )}
+          </VStack>
+        )}
+        {!publicKey && <WalletMultiButton />}
+      </Grid>
+    </Box>
+  );
+}
+```
+
+Now the third part that needs change before we can conclude our wallet adaptation is the `useSolanaAccount` hook.
+
+```jsx
+function useSolanaAccount() {
+  const [account, setAccount] = useState(null);
+  const [transactions, setTransactions] = useState(null);
+  const { connection } = useConnection();
+  const { publicKey } = useWallet();
+
+  const init = useCallback(async () => {
+    if (publicKey) {
+      let acc = await connection.getAccountInfo(publicKey);
+      setAccount(acc);
+      let transactions = await connection.getConfirmedSignaturesForAddress2(
+        publicKey,
+        {
+          limit: 10,
+        }
+      );
+      setTransactions(transactions);
+    }
+  }, [publicKey, connection]);
+
+  useEffect(() => {
+    if (publicKey) {
+      setInterval(init, 1000);
+    }
+  }, [init, publicKey]);
+
+  return { account, transactions };
+}
+```
+
+Notice that we have converted the `init` function to `useCallback` - that is because we pass this function in the setInterval, at that time, the publicKey is empty. So now, when user changes the publicKey, `init` callback changes, consequently, `useEffect` is called, and a new interval is set then.
+
+There is still one issue in this, which I am leaving as an exercise - user may change their public key in between. In that case, we have to remove the interval created using `setInterval` using `clearInterval` and then create a new interval.
+
+The code till now is present in the commit 92c4c88.
+
+# Sending transactions - Greeting yourself
+
+Till now, we only read from the blockchain, we haven't written anything on it actively (airdrops happen due to some public program). In this part we will learn to "write" on the blockchain by interacting with the programs deployed on it. Now, we will make a button component which says hi to a program and then program maintains a counter of number of accounts greeted to.
+
+For this let us use the greeter code from the repository https://github.com/solana-labs/example-helloworld. If you haven't gone through this example already, I recommend you to. Generally in Solana Programs, we generate a "program account" that is "owned" by the program, but is "related" to your account. As anyone can create an account, not only the owner, hence, you can pay for the space it needs and create a program account. The public key for this program account is generated using your public key and a constant seed, using the function `PublicKey.createWithSeed`. This is basically a one-to-one mapping between your public key and the program account public key, given the seed is fixed. Now, anyone with your public key, can generate your program account's public key, and tell the program to greet this account (or just increase the counter for this account).
+
+- Clone the repository https://github.com/solana-labs/example-helloworld.
+- While being inside the repository, run `npm run build:program-rust` to build the program.
+- Deploy the program to devnet using `solana program deploy --url https://api.devnet.solana.com dist/program/helloworld.so`. This should print out a program ID. Take a note of it. For me, it was `FGbjtxeYmT5jUP7aNavo9k9mQ3rGQ815WdvwWndR7FF9`, so I will use this in the subsequent code.
+
+Now, let's not cram all the code into a single file. Create a new file `Greet.jsx` which this starter code.
+
+```jsx
+import React from "react";
+import { HStack, Button, Text } from "@chakra-ui/react";
+
+export function Greet() {
+  return (
+    <HStack>
+      <Text>Total greetings: {"0"}</Text>
+      <Button>Greet Yourself</Button>
+    </HStack>
+  );
+}
+```
+
+And inside the App.js file, add the import
+
+```jsx
+import { Greet } from "./Greet";
+```
+
+And just below our airdrop button, add this newly made component
+
+```jsx
+...
+  <Button onClick={getAirdrop} isLoading={airdropProcessing}>
+    Get Airdrop of 1 SOL
+  </Button>
+  <Greet />
+...
+```
+
+Now in this Greet component, we want two things to happen. 1) Get the current number of greetings sent to you. 2) Greet yourself. First, let's create an interface to our Rust/C backend. We will follow what is given in the helloworld example. The code will look very similar to the code present [here](https://github.com/solana-labs/example-helloworld/blob/master/src/client/hello_world.ts).
+
+- Store the program id and a fixed seed as a global constant.
+
+```jsx
+const programId = new PublicKey("FGbjtxeYmT5jUP7aNavo9k9mQ3rGQ815WdvwWndR7FF9");
+const GREETING_SEED = "hello";
+```
+
+- To have a similar interface as in the rust struct [GreetingAccount](https://github.com/solana-labs/example-helloworld/blob/master/src/program-rust/src/lib.rs#L13-L16), we create a similar global class in Javascript.
+
+```jsx
+class GreetingAccount {
+  counter = 0;
+  constructor(fields) {
+    if (fields) {
+      this.counter = fields.counter;
+    }
+  }
+}
+```
+
+- Now, accounts in Solana only store raw bytes. As we serialize/deserialize in the rust code using borsh, we will do the same here using the borsh package. Deserializing using borsh requires a schema which tells the deserializing logic about the size of different fields. We create that schema next, along with the complete size of serialized class object (we need the size when we create a new greeting account and pay only for the size each greeting account needs).
+
+```jsx
+const GreetingSchema = new Map([
+  [GreetingAccount, { kind: "struct", fields: [["counter", "u32"]] }],
+]);
+
+const GREETING_SIZE = borsh.serialize(
+  GreetingSchema,
+  new GreetingAccount()
+).length;
+```
+
+- Whenever we fetch the account info from the blockchain, we get it as a form of [`AccountInfo`](https://solana-labs.github.io/solana-web3.js/modules.html#AccountInfo). To directly fetch the counter from it, we define an easy function as well - which gets the data from AccountInfo, deserializes it, and returns the counter subobject.
+
+```jsx
+function counterFromAccountInfo(accountInfo) {
+  const data = borsh.deserialize(
+    GreetingSchema,
+    GreetingAccount,
+    accountInfo.data
+  );
+  return data.counter;
+}
+```
+
+- We now start writing out `Greet` component by adding the wallet and connection descriptors, along with a state variable containing the current counter of greetings and change the text that shows the counter.
+
+```jsx
+const wallet = useWallet();
+const { connection } = useConnection();
+const [counter, setCounter] = useState(null);
+...
+<Text>Total greetings: {counter === null ? 'Loading..' : counter}</Text>
+```
+
+- First, we will write the logic that fetches the current number of greetings sent to you. What we need to do is, first on page load, get the current number of greetings sent to you, and then add a listener on changes made to the account for any new greetings (this time, we will use `onAccountChange` instead of polling). To get the current number of greetings, we will use `connection.getAccountInfo` on the generated program account inside `useEffect`, to do it on load.
+
+```jsx
+const greetedPubkey = await PublicKey.createWithSeed(
+  wallet.publicKey,
+  GREETING_SEED,
+  programId
+);
+
+const currentAccountInfo = await connection.getAccountInfo(
+  greetedPubkey,
+  "confirmed"
+);
+```
+
+Now, if we don't have created the program account yet, we will set the counter to be zero. Otherwise, we will use the `counterFromAccountInfo` to get the counter.
+
+```jsx
+if (currentAccountInfo === null) {
+  setCounter(0);
+} else {
+  setCounter(counterFromAccountInfo(currentAccountInfo));
+}
+```
+
+One time job is done. But now, we want to change the counter every time you or someone else greets you. So we use `connection.onAccountChange` to add a listener.
+
+```jsx
+connection.onAccountChange(
+  greetedPubkey,
+  (accountInfo, _) => {
+    setCounter(counterFromAccountInfo(accountInfo));
+  },
+  "confirmed"
+);
+```
+
+So, final `useEffect` should look like this
+
+```jsx
+useEffect(() => {
+  async function addListener() {
+    if (wallet.publicKey) {
+      const greetedPubkey = await PublicKey.createWithSeed(
+        wallet.publicKey,
+        GREETING_SEED,
+        programId
+      );
+      const currentAccountInfo = await connection.getAccountInfo(
+        greetedPubkey,
+        "confirmed"
+      );
+      if (currentAccountInfo === null) {
+        setCounter(0);
+      } else {
+        setCounter(counterFromAccountInfo(currentAccountInfo));
+      }
+      connection.onAccountChange(
+        greetedPubkey,
+        (accountInfo, _) => {
+          setCounter(counterFromAccountInfo(accountInfo));
+        },
+        "confirmed"
+      );
+    }
+  }
+  addListener();
+}, [connection, wallet.publicKey]);
+```
+
+- Second thing that we want to implement is to greet ourselves when we click the button. For this we create a new callback and pass it as the onClick for the button.
+
+```jsx
+const greet = useCallback(async () => {
+  // code goes here ..
+});
+...
+<Button onClick={greet}>Greet Yourself</Button>
+```
+
+Logic for this should be fairly simple - 1) generate program account public key using `PublicKey.createWithSeed`, if the account doesn't exist, pay for creating the account with the required storage space 2) send the program the public key to greet (in this case, our own program key). For the first part, code is given below. See that we create a Transaction and add an `Instruction` to the `SystemProgram` which tells the SystemProgram to create a new account with the correct required space. (This should help you realize that creating a new account is a Solana Program in itself!)
+
+```jsx
+const greetedPubkey = await PublicKey.createWithSeed(
+  wallet.publicKey,
+  GREETING_SEED,
+  programId
+);
+
+const greetedAccount = await connection.getAccountInfo(greetedPubkey);
+if (greetedAccount === null) {
+  const lamports = await connection.getMinimumBalanceForRentExemption(
+    GREETING_SIZE
+  );
+
+  const transaction = new Transaction().add(
+    SystemProgram.createAccountWithSeed({
+      fromPubkey: wallet.publicKey,
+      basePubkey: wallet.publicKey,
+      seed: GREETING_SEED,
+      newAccountPubkey: greetedPubkey,
+      lamports,
+      space: GREETING_SIZE,
+      programId,
+    })
+  );
+
+  const signature = await wallet.sendTransaction(transaction, connection);
+  await connection.confirmTransaction(signature, "processed");
+}
+```
+
+For the second part, we send an instruction to our deployed program and send it the key of the generated program key. As our program only accepts a single type of instruction, that is "greet", and it doesn't need any arguments, we don't need to send any data.
+
+```jsx
+const instruction = new TransactionInstruction({
+  keys: [{ pubkey: greetedPubkey, isSigner: false, isWritable: true }],
+  programId,
+  data: Buffer.alloc(0),
+});
+
+const signature = await wallet.sendTransaction(
+  new Transaction().add(instruction),
+  connection
+);
+
+await connection.confirmTransaction(signature, "processed");
+```
+
+Finally, your callback should look like this
+
+```jsx
+const greet = useCallback(async () => {
+  const greetedPubkey = await PublicKey.createWithSeed(
+    wallet.publicKey,
+    GREETING_SEED,
+    programId
+  );
+
+  const greetedAccount = await connection.getAccountInfo(greetedPubkey);
+  if (greetedAccount === null) {
+    const lamports = await connection.getMinimumBalanceForRentExemption(
+      GREETING_SIZE
+    );
+
+    const transaction = new Transaction().add(
+      SystemProgram.createAccountWithSeed({
+        fromPubkey: wallet.publicKey,
+        basePubkey: wallet.publicKey,
+        seed: GREETING_SEED,
+        newAccountPubkey: greetedPubkey,
+        lamports,
+        space: GREETING_SIZE,
+        programId,
+      })
+    );
+
+    const signature = await wallet.sendTransaction(transaction, connection);
+    await connection.confirmTransaction(signature, "processed");
+  }
+
+  const instruction = new TransactionInstruction({
+    keys: [{ pubkey: greetedPubkey, isSigner: false, isWritable: true }],
+    programId,
+    data: Buffer.alloc(0),
+  });
+
+  const signature = await wallet.sendTransaction(
+    new Transaction().add(instruction),
+    connection
+  );
+
+  await connection.confirmTransaction(signature, "processed");
+}, [connection, wallet]);
+```
+
+Yay! You can now greet yourself! ... Doesn't seem exciting? Let's greet others in the next section and see their public profiles :). Code till now is available in the commit `4d5cad9`.
+
+Possible improvements - As `PublicKey.createWithSeed` might be an expensive operation, try memoizing using `useMemo`? Set the button in loading state while the transaction is being sent?
+
+# Greeting others
+
+Now, we might want to greet others, greeting ourselves is not that cool. For greeting others, we will need a person's public key, then only we can send them a hi. Our goal of the section is to send greetings to others by adding a textbox to our application where you can write the public key of your friend and then click a button to send greeting their way.
+
+First, as we are going to reuse the same logic from the previous code, we should move the greeting code into a function that accepts a public key (the one to greet) created by `useCallback` so that we can reuse it. What I did was - Added an argument, which is the base58 of the public key of the recipient, to the old `greet` callback and replaced `wallet.publicKey` to `PublicKey(<argument>)`. Now we can create a separate callback called `greetYourself` where we send our own `wallet.publicKey.toBase58()` and pass this callback to the "Greet Yourself" button.
+
+```jsx
+const greet = useCallback(
+  async (publicKey) => {
+    const recipient = new PublicKey(publicKey);
+    const greetedPubkey = await PublicKey.createWithSeed(
+      recipient,
+      GREETING_SEED,
+      programId
+    );
+
+    const greetedAccount = await connection.getAccountInfo(greetedPubkey);
+    if (greetedAccount === null) {
+      const lamports = await connection.getMinimumBalanceForRentExemption(
+        GREETING_SIZE
+      );
+
+      const transaction = new Transaction().add(
+        SystemProgram.createAccountWithSeed({
+          fromPubkey: recipient,
+          basePubkey: recipient,
+          seed: GREETING_SEED,
+          newAccountPubkey: greetedPubkey,
+          lamports,
+          space: GREETING_SIZE,
+          programId,
+        })
+      );
+
+      const signature = await wallet.sendTransaction(transaction, connection);
+      await connection.confirmTransaction(signature, "processed");
+    }
+
+    const instruction = new TransactionInstruction({
+      keys: [{ pubkey: greetedPubkey, isSigner: false, isWritable: true }],
+      programId,
+      data: Buffer.alloc(0),
+    });
+
+    const signature = await wallet.sendTransaction(
+      new Transaction().add(instruction),
+      connection
+    );
+
+    await connection.confirmTransaction(signature, "processed");
+  },
+  [connection, wallet]
+);
+
+const greetYourself = useCallback(async () => {
+  await greet(wallet.publicKey.toBase58());
+}, [greet, wallet.publicKey]);
+```
+
+Now what's left is entirely rendering part.
+
+```jsx
+const [recipient, setRecipient] = useState("");
+return (
+  <VStack width="full">
+    <HStack>
+      <Text>Total greetings: {counter === null ? "Loading.." : counter}</Text>
+      <Button onClick={greetYourself}>Greet Yourself</Button>
+    </HStack>
+    <HStack>
+      <Text width="full">Greet Someone: </Text>
+      <Input
+        value={recipient}
+        onChange={(e) => setRecipient(e.target.value)}
+      ></Input>
+      <Button
+        onClick={() => {
+          greet(recipient);
+        }}
+      >
+        Greet
+      </Button>
+    </HStack>
+  </VStack>
+);
+```
+
+Code till here is present in the commit `746ff70`.
+
+# Organizing things
+
+The logic is good enough now, but the page looks like everything is crammed in a single page. We might want that -
+
+1. Transactions go in a separate tab.
+2. Option to disconnect wallet.
+3. A profile page - where we can see what how many greetings that person have recieved.
+
+For this basic routing, we will use `react-router`.
