@@ -925,28 +925,29 @@ First we will have to approve the MarketPlace smart contract to spend our NFT. T
 
 Now we open the Marketplace contract in Polygonscan:
 
-1. In the `Contract` section go to `Write Contract` tab and connect your MetaMask wallet.
+1. In the `Contract` section go to the `Write Contract` tab and connect your Metamask wallet.
 2. In the `listMarketItem` function fill the details of the NFT to be listed. 
     - The first field is the amount that will be paid for listing. We have set it to `0.01 MATIC`
     - `nftContractAddress` and `tokenId` will depend on the NFT you are listing.
     - You can also put any price of your liking. This will be the price you someone will pay in order to buy the NFT from you.
-3. Click on the Write button. Sign the transaction in the MetaMask pop-up and wait for the transaction to complete.
+3. Click on the Write button. Sign the transaction in the Metamask pop-up and wait for the transaction to complete.
 
 Congratulations 🎉🎉🎉. You have successfully listed your NFT in the marketplace and it is ready to be traded.
 
 # Conclusion
 
-In this tutorial, we learned how to create a MarketPlace smart contract that can be used to buy and sell NFTs. We wrote the underlining smart contract for the marketplace, tested it with test cases, deployed it to the Mumbai Testnet and got it verified by Polygon Scan. We also learned how to print values to the console from our smart contract. We also covered how one smart contract can make calls to another smart contract on the same blockchain and what we can allow other accounts/smart contracts to spend token on our behalf.
+In this tutorial, we learned how to create a Marketplace smart contract that can be used to buy and sell NFTs. We wrote the underlying smart contract for the marketplace, unit tested it to make sure it works as intended, deployed it to the Mumbai testnet and verified the source code so it is visible on Polygonscan.
+We also learned how to print values to the console from our smart contract using HardHat's `console.log()` functionality. We covered how one smart contract can make calls to another smart contract on the same blockchain and that we can allow other accounts/smart contracts to spend token on our behalf.
 
-# Next Step
+# Next Steps
 
-The journey of learning never stops! Coming up next we will learn how we can using a 3D Game Engine like Unity3D to create an interactive art gallery where the player can freely move around and view various NFT artworks that are listed in our MarketPlace smart contract. 
+The journey of learning never stops! Coming up next we will learn how we can use a 3D Game Engine like Unity3D to create an interactive art gallery where the player can freely move around and view various NFT artworks that are listed in our Marketplace smart contract. 
 
 # About The Author
 
 Hi, my name is Bhaskar Dutta and I am a blockchain Developer, Researcher and Freelancer. I am always looking forward to learn new things and discuss about Sitcoms. To know me better, you can checkout my [Github](https://github.com/BhaskarDutta2209).
 
-# Reference
+# References
 
 The following resources turned out to be very helpful to me:
 
