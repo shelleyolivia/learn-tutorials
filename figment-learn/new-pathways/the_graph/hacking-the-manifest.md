@@ -4,13 +4,13 @@ Like an orchestra, your subgraph is made up of a bunch of pieces that need to pl
 
 If you open the repository in a code editor like Visual Studio Code, look for the folder called `subgraphs` and its child `punks`. It should look like this below. The manifest is the file called `subgraph.yaml`.
 
-![The Manifest](https://user-images.githubusercontent.com/206753/136856721-5d357f69-6c90-46bb-aaef-28faf017e8f0.png)
+![SG folder](https://user-images.githubusercontent.com/206753/136859280-1d2e1db6-649d-4583-be85-5a667bad9ede.png)
 
 ## 🔎 Inspecting the scaffolded file
 
 Open the `subgraph.yaml` file and notice that it's already been populated using the information we provided but also with A LOT of things we didn't specify.
 
-![Manifest file](https://user-images.githubusercontent.com/206753/136858022-7c9ac3f9-1900-44e1-9246-894ffe14548f.png)
+![Manifest file](https://user-images.githubusercontent.com/206753/136859526-181466c7-624e-4da6-9e4a-81e67239179e.png)
 
 Under the `mappings` key we find `entities` and `eventHandlers` - the next steps of this tutorial will be dedicated to understanding them a bit more in depth. For now just notice the information that's below them. Remember the [code](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB#code) from the CryptoPunk contract on Etherscan? They correspond to the Events emitted! The `eventHandlers` even have the right signatures already. That's promising.
 
