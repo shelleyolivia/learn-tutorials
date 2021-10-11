@@ -1,71 +1,25 @@
-## Manifest, so what?
+## 📜 What's a "manifest"?
 
-To capture and process information from a blockchain, we must:
+Like an orchestra, your subgraph is made up of a bunch of pieces that need to play nicely together for the music to sound good. Think of the the manifest as the conductor: it sits in the middle and coordinates everything.
 
-- Define which information we're looking for
-- Know what this information is made of
-- Define the shape of the processed information when we are finished with it
+If you open the repository in a code editor like Visual Studio Code, look for the folder called `subgraphs` and its child `punks`. It should look like this below. The manifest is the file called `subgraph.yaml`.
 
-The right place to do so is within the `punks/subgraph.yaml` file, the manifest of our subgraph.
+![The Manifest](https://user-images.githubusercontent.com/206753/136856721-5d357f69-6c90-46bb-aaef-28faf017e8f0.png)
 
-## The scaffolded subgraph.yaml
+## 🔎 Inspecting the scaffolded file
 
-By default the following file is generated. Our goal here is to customize this file in order to adapt it to our need.
+Open the `subgraph.yaml` file and notice that it's already been populated using the information we provided but also with A LOT of things we didn't specify.
 
-```yaml
-specVersion: 0.0.2
-schema:
-  file: ./schema.graphql
-dataSources:
-  - kind: ethereum/contract
-    name: punks
-    network: mainnet
-    source:
-      address: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB"
-      abi: punks
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.4
-      language: wasm/assemblyscript
-      entities:
-        - Assign
-        - Transfer
-        - PunkTransfer
-        - PunkOffered
-        - PunkBidEntered
-        - PunkBidWithdrawn
-        - PunkBought
-        - PunkNoLongerForSale
-      abis:
-        - name: punks
-          file: ./abis/punks.json
-      eventHandlers:
-        - event: Assign(indexed address,uint256)
-          handler: handleAssign
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
-        - event: PunkTransfer(indexed address,indexed address,uint256)
-          handler: handlePunkTransfer
-        - event: PunkOffered(indexed uint256,uint256,indexed address)
-          handler: handlePunkOffered
-        - event: PunkBidEntered(indexed uint256,uint256,indexed address)
-          handler: handlePunkBidEntered
-        - event: PunkBidWithdrawn(indexed uint256,uint256,indexed address)
-          handler: handlePunkBidWithdrawn
-        - event: PunkBought(indexed uint256,uint256,indexed address,indexed address)
-          handler: handlePunkBought
-        - event: PunkNoLongerForSale(indexed uint256)
-          handler: handlePunkNoLongerForSale
-      file: ./src/mapping.ts
-```
+![Manifest file](https://user-images.githubusercontent.com/206753/136858022-7c9ac3f9-1900-44e1-9246-894ffe14548f.png)
 
-Let's have a look at what this all means. Firstly, `.yaml` is the file extension for YAML ([**Y**AML **A**in't **M**arkup **L**anguage](https://www.cloudbees.com/blog/yaml-tutorial-everything-you-need-get-started)) which is an easy to read file format commonly used for configuration files.
+Under the `mappings` key we find `entities` and `eventHandlers` - the next steps of this tutorial will be dedicated to understanding them a bit more in depth. For now just notice the information that's below them. Remember the [code](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB#code) from the CryptoPunk contract on Etherscan? They correspond to the Events emitted! The `eventHandlers` even have the right signatures already. That's promising.
 
-In order to save time when indexing the datasource, we must specify a starting block (or else the node would start indexing from the genesis block, which would take a very long time and not be useful to us). To specify a sensible starting block, insert the line `startBlock: 13100000` into the `subgraph.yaml` file for the datasource of the "punks" contract.
+## 🧑🏼‍💻 Your turn! Edit the manifest
 
-Next, we need to make sure the datasource mapping includes the entities "Punk" and "Account".
-
-Finally, we will want to include an event handler for the **PunkBought(indexed uint256,uint256,indexed address,indexed address)** event.
+Edit the manifest file to accomplish the 3 following things:
+1) **Specify a starting block at `13100000`.** In order to save time when indexing the datasource, we must specify a starting block (or else the node would start indexing from the genesis block, which would take a veeeeery long time).
+2) **Define only two entities "Punk" and "Account"** under the dataSources mappings.
+3) **Only handle the `PunkBought` event** and name its handler `handlePunkBought`
 
 # 👉 The solution
 
