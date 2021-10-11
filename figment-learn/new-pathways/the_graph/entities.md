@@ -1,4 +1,4 @@
-## 👤 Entity and relation
+## 🪢 Entities and relations
 
 We just tweaked the manifest to declare what information we were looking for. We declared two entities called `Punk` (for the actual CryptoPunk NFT) and `Account` (for the owner of the NFT). Now we need to implement those entities: for each of them, define what attributes they have and what are those attribute types.
 
@@ -10,43 +10,28 @@ Entities will be defined in the `schema.graphql` file.
 
 ## 🧑🏼‍💻 Your turn! Define the Punk and Account entities
 
-To define our entities, we must create the
+Start from the following code below and fill in the two missing fields: `punksBought` on `Account` and `owner` on `Punk`. Have a look at Nader Dabit's tutorial on how to use `@derivedFrom` to specific a one-to-many relationship.
+
+> "For one-to-many relationships, the relationship should always be stored on the 'one' side, and the 'many' side should always be derived."
 
 ```graphql
 type Account @entity {
   id: ID!
-  punksBought: // Specify relation using the next section
+  // Reference the Punk entity to specify the relation between them
+  // aka "A owner has multiple Punks"
+  punksBought: _______________
   numberOfPunkBought: BigInt!
 }
 
 type Punk @entity {
-  // How can you index the Punk entity?
+  id: ID!
   index: BigInt!
-  owner: Account!
+  // Reference the Account entity to specify the relation between them
+  // aka "A punk belongs to an Owner"
+  owner: __________
   value: BigInt!
   date: BigInt!
 }
-```
-
-## Specify relation
-
-In the above code snippet, there are two points worth mentioning:
-
-- For the purpose of indexing, entities _must have_ an `ID` field to uniquely identify them.
-- As an `Account` can be the **owner** of multiple `Punk` we must explicitly define the `1:n` relation on the `Account`'s **punksBought** attribute using `[Punk!] @deriveFrom(field: "owner")` directive:
-
-```text
-                               |      ------
-                               | --- | Punk |
-                               |      ------
-                               ...
-     ---------                 |      ------
-    | Account |  1 : ----- n : | --- | Punk |
-     ---------                 |      ------
-                               ...
-                               |      ------
-                               | --- | Punk |
-                               |      ------
 ```
 
 # 👉 The solution
@@ -70,23 +55,39 @@ type Punk @entity {
 }
 ```
 
-We have now matched the changes to the manifest, by adding the entities `Account` and `Punk`.
+In the above code snippet, there are two points worth mentioning:
+- For the purpose of indexing, entities _must have_ an `ID` field to uniquely identify them.
+- As an `Account` can be the **owner** of multiple `Punk` we must explicitly define the `1:n` relation on the `Account`'s **punksBought** attribute using `[Punk!] @deriveFrom(field: "owner")` directive:
 
-## ✅ Make sure it works
+```text
+                               |      ------
+                               | --- | Punk |
+                               |      ------
+                               ...
+     ---------                 |      ------
+    | Account |  1 : ----- n : | --- | Punk |
+     ---------                 |      ------
+                               ...
+                               |      ------
+                               | --- | Punk |
+                               |      ------
+```
 
-Last but not least, run the following command to generate boilerplate code from our **entities**:
+## 🏗️ The `codegen` command
+
+We have now defined the entities that we declared in the manifest!
+
+Run the following command to generate boilerplate code from our **entities**:
 
 ```text
 cd punks
 yarn codegen
 ```
 
-About `yarn codegen`
-
-- This command create boilerplate code under `generated` folder
-- This boilerplate code define as much **typescript** class there is defined `entities`. You can have a taste of it looking at `generated/schema.ts`
-- We will re-use it in the next step to define the mapping between our `entities` and the smart-contract `event`
+What does `yarn codegen` do? This command create some boilerplate code under the `generated` folder. This boilerplate code define **typescript** classes for each `entities` (have a look at `generated/schema.ts`). We will use this code in the next step to define the mappings between our entities and the smart-contract events.
 
 ![](../../../.gitbook/assets/pathways/the_graph/yarn-codegen.gif)
 
-Now it's time for you to verify that you have followed the instructions carefully. Click on the **Check for expected entities** button on the right to see that your entities are properly defined.
+# ✅ Verify
+
+Before goign to the next step, click on the **Check for expected entities** button on the right to make sure your entities are properly defined.
