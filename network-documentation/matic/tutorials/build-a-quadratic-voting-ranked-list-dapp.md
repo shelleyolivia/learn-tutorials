@@ -45,7 +45,7 @@ MetaMask is a browser extension that allows you to access your Ethereum wallet a
 
 Install it [here](https://metamask.io/).
 
-Use the following configuraton to add the Polygon Mumbai testnet:
+Use the following configuraton to add the Polygon Mumbai testnet.
 
 ![MetaMask config](../../../.gitbook/assets/metamask-settings-mumbai.webp)
 
@@ -75,13 +75,13 @@ cd quadratic-voting-app
 truffle init
 ```
 
-Your project should look like this:
+Your project should look like this.
 
 ![file structure](../../../.gitbook/assets/quadratic-voting-folder-structure.png)
 
 # Creating the smart contract in Solidity
 
-Create a new file called `QuadraticVoting.sol` in the `contracts` folder:
+Create a new file called `QuadraticVoting.sol` in the `contracts` folder.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -186,29 +186,29 @@ And there we go! Our smart contract is finished. Now let's learn how to deploy i
 
 # Compiling and deploying with Truffle
 
+We'll need to compile our contracts before we can use them.
+
 ```bash
 truffle compile
 ```
 
+You should get similar output.
+
 ![truffle compile](../../../.gitbook/assets/quadratic-voting-truffle-compile.png)
 
-Create a new file called `2_quadratic_voting.js` in the `migrations` folder:
+You can find the output in the `build/contracts` directory.
+
+Create a new file called `2_quadratic_voting.js` in the `migrations` folder.
 
 ```js
-const QuadraticVoting = artifacts.require("QuadraticVoting");
+const QuadraticVoting = artifacts.require("QuadraticVoting")
 
 module.exports = function (deployer) {
-  deployer.deploy(QuadraticVoting);
-};
+  deployer.deploy(QuadraticVoting)
+}
 ```
 
-```bash
-yarn add -D @truffle/hdwallet-provider
-```
-
-Get testnet MATIC from faucet. Export your private key from MetaMask and put it in `.secret`.
-
-Create an account [here](https://rpc-mumbai.maticvigil.com/).
+Edit the `truffle-config.js` file to add the Matic Mumbai test network.
 
 ```js
 const fs = require("fs");
@@ -242,14 +242,28 @@ module.exports = {
   db: {
     enabled: false,
   },
-};
+}
 ```
 
-Replace {APP_ID} with the App Id you created earlier.
+We'll need to install the HD wallet provider.
+
+```bash
+yarn add -D @truffle/hdwallet-provider
+```
+
+In order to publish contracts to the blockchain we will need to pay the gas fees. Get testnet MATIC from the [Mumbai faucet](https://faucet.polygon.technology/) by inputting your wallet address.
+
+Export your private key from MetaMask and put it in the `.secret` file, which will be used as the `mnemonic` variable in the config.
+
+We'll need to create an account [here](https://rpc.maticvigil.com/) to have a quota for the RPC. Create an App and replace `{APP_ID}` in the config with the App Id.
+
+Now we'll deploy our contracts to Polygon.
 
 ```bash
 truffle migrate --network matic
 ```
+
+You should see similar output.
 
 ![truffle migrate](../../../.gitbook/assets/quadratic-voting-truffle-migrate.png)
 
