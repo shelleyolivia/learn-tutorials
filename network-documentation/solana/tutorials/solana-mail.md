@@ -2346,8 +2346,8 @@ The only thing left to complete the User Interface is to write the action creato
 
 In this tutorial, you learned how to build a mail dAPP on Solana. We covered the on-chain program's code using the Rust programming language. We built the User Interface with React and MaterialUI then tied everything together with Redux.
 
-There's still a lot of grounds to cover on this project. For instance, data store on Solana are not private, they can be accessed and read by the public. A consequence of this for this project is that mails sent between users are visible to the public. It'll be nice to add end-to-end encryption to the mails sent between to parties, this way users can be sure that their messages are can only be read by them. This will make for a nice challenge
+There's still a lot of grounds to cover on this project. For instance, data store on Solana is not private,it can be accessed and read by the public. A consequence of this for this project is that mails sent between users are visible to the public. It'll be nice to add end-to-end encryption to the mails sent between two parties, this way users can be sure that their messages can only be read by them. This will make for a nice challenge.
 
-# About the Authors
+# About the Author
 
 This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe). You can get in touch with the author on [Figment Forum](https://community.figment.io/u/segun-ogundipe) and on [GitHub](https://github.com/segun-ogundipe)
