@@ -77,7 +77,7 @@ In the above code snippet, there are two points worth mentioning:
                                |      ------
 ```
 
-## 🏗️ The `codegen` command
+## 🏗️ The "codegen" command
 
 We have now defined the entities that we declared in the manifest!
 
