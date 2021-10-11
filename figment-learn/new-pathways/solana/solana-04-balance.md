@@ -2,7 +2,7 @@ We must check our account balance to make sure we have sufficient **SOL** to per
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/balance.ts`, implement `publicKey` & `balance`.
@@ -18,6 +18,9 @@ In `pages/api/solana/balance.ts`, implement `publicKey` & `balance`.
     const connection = new Connection(url, 'confirmed');
     const publicKey = undefined;
     const balance = undefined;
+    if (balance === 0 || balance === undefined) {
+      throw new Error('Account not funded');
+    }
     res.status(200).json(balance);
   }
 //...
@@ -35,9 +38,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```typescript
+// solution
 //...
   try {
     const {network, address} = req.body;
@@ -45,6 +49,9 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
     const connection = new Connection(url, 'confirmed');
     const publicKey = new PublicKey(address);
     const balance = await connection.getBalance(publicKey);
+    if (balance === 0 || balance === undefined) {
+      throw new Error('Account not funded');
+    }
     res.status(200).json(balance);
   }
 //...

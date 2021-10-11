@@ -33,6 +33,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # Solution
 
 ```typescript
+// solution
   try {
     const keypair = KeyPair.fromRandom('ed25519');
     const secret = keypair.toString();
@@ -51,7 +52,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 Once the code is complete and the file is saved, Next.js will rebuild the API route. Now click on **Generate a Keypair** and you should see:
 
-![](../../../.gitbook/assets/pathways/near/near-keypair-v2.gif)
+![](../../../.gitbook/assets/pathways/near/near-keypair.gif)
 
 -----------------------------
 

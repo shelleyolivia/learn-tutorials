@@ -2,11 +2,11 @@
 
 In order to gather information from the blockchain, we will use ethers again. For basic interaction with Polygon, the [provider](https://docs.ethers.io/v5/api/providers/provider/) methods are often most useful. 
 
-In the file `components/protocols/polygon/steps/Query.tsx` we have already written the `getQuery` function which will send a network request to the node server. [By convention of Next.js routing](https://nextjs.org/docs/api-routes/introduction), a client-side request to `http://localhost:3000/api/polygon/query` will get routed to the file `query.js` in `/pages/api/polygon` and be executed by the default imported function.
+In the file `components/protocols/polygon/components/steps/Query.tsx` we have already written the `getQuery` function which will send a network request to the node server. [By convention of Next.js routing](https://nextjs.org/docs/api-routes/introduction), a client-side request to `http://localhost:3000/api/polygon/query` will get routed to the file `query.js` in `/pages/api/polygon` and be executed by the default imported function.
 
 -------------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 **Imagine this scenario:** As the lead developer of a cool new dApp, you need to create a way to query information from the blockchain and then display it on the UI. You know that Next.js has some nice features for creating custom API routes, and that by using TypeScript it is easy to pass complex data types as JSON. Now you just need to wire it up to Polygon to take advantage of the impressive transaction throughput! In **`pages/api/polygon/query.ts`**, assign values to the following variables : `chainId` , `blockHeight` , `gasPriceAsGwei` , `blockInfo`.
@@ -15,6 +15,7 @@ In the file `components/protocols/polygon/steps/Query.tsx` we have already writt
 **Take a few minutes to figure this out.**
 
 ```typescript
+//...
  try {
     const networkName = await provider.getNetwork().then(res => { return res.name })
 
@@ -24,7 +25,19 @@ In the file `components/protocols/polygon/steps/Query.tsx` we have already writt
     const gasPriceAsGwei = undefined;
     const blockInfo = undefined;
 
- }
+    if (!chainId || !blockHeight || !gasPriceAsGwei || !blockInfo) {
+      throw new Error('Please complete the code');
+    }
+    
+    res.status(200).json({
+      networkName,
+      chainId,
+      blockHeight,
+      gasPriceAsGwei,
+      blockInfo,
+    });
+  }
+//...
 ```
 
 **Need some help?** Check out these links  
@@ -41,15 +54,36 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 -------------------------------------
 
-# The solution
+# Solution
 
 ```typescript
-  const chainId = provider.network.chainId;
-  const blockHeight = await provider.getBlockNumber();
-  const gasPriceAsGwei = await provider.getGasPrice().then(res => {
-    return ethers.utils.formatUnits(res, "gwei");
-  });
-  const blockInfo = await provider.getBlockWithTransactions(blockHeight);
+// solution
+//...
+  try {
+    const networkName = await provider.getNetwork().then((res) => {
+      return res.name;
+    });
+
+    const chainId = provider.network.chainId;
+    const blockHeight = await provider.getBlockNumber();
+    const gasPriceAsGwei = await provider.getGasPrice().then((res) => {
+      return ethers.utils.formatUnits(res, 'gwei');
+    });
+    const blockInfo = await provider.getBlockWithTransactions(blockHeight);
+
+    if (!chainId || !blockHeight || !gasPriceAsGwei || !blockInfo) {
+      throw new Error('Please complete the code');
+    }
+    
+    res.status(200).json({
+      networkName,
+      chainId,
+      blockHeight,
+      gasPriceAsGwei,
+      blockInfo,
+    });
+  }
+//...
 ```
 
 **What happened in the code above?**

@@ -143,8 +143,10 @@ solana-keygen new --outfile solana-wallet/keypair.json
 You will need **SOL** available in the account to deploy the program, so get an airdrop with:
 
 ```bash
-solana airdrop 5 $(solana-keygen pubkey solana-wallet/keypair.json)
+solana airdrop 1 $(solana-keygen pubkey solana-wallet/keypair.json)
 ```
+
+> **NOTE**: In a Windows terminal, the `$( )` syntax does not work, so just paste the public key you want to fund after the airdrop amount (for example: `solana airdrop 1 C1qx2QUZq7EyLZao4U98fRb8HkT3X5fsGWUc25VyCRBn`).
 
 Verify that everything is ok:
 
@@ -213,7 +215,7 @@ Program Id: 7KwpCaaYXRsjfCTvf85eCVuZDW894zZNN38UMxMpQoaQ
 # Challenge
 
 {% hint style="tip" %}
-Before moving to the next step, we need to check that our program has been correctly deployed! For this, we'll need the `programId` of the program. Copy & paste it into the text input, then try to figure out how to complete the code for `pages/api/solana/checkProgram.ts`.
+Before moving to the next step, we need to check that our program has been correctly deployed! For this, we'll need the `programId` of the program. Copy & paste it into the text input, then try to figure out how to complete the code for `pages/api/solana/deploy.ts`.
 {% endhint %}
 
 **Take a few minutes to figure this out.**
@@ -257,9 +259,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```tsx
+// solution
 //...
   try {
     const {network, programId} = req.body;

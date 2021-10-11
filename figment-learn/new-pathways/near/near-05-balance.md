@@ -18,7 +18,7 @@ In `pages/api/near/balance.ts`, implement the default function. You must replace
       const account = undefined;
       const balance = undefined;
       console.log(balance)
-      return res.status(200).json(balance)
+      return res.status(200).json(balance.available)
   }
 ```
 
@@ -37,14 +37,14 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # Solution
 
 ```typescript
+// solution
   try {
       const { network, accountId } = req.body;
       const config = configFromNetwork(network);       
       const client = await connect(config);
       const account = await client.account(accountId);
       const balance = await account.getAccountBalance();
-      console.log(balance)
-      return res.status(200).json(balance)
+      return res.status(200).json(balance.available)
   }
 ```
 

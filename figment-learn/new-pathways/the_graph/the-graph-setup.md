@@ -9,13 +9,13 @@ If you want to read about The Graph we've curated some great resources to help y
 - More of a visual learner? The rock star of blockchain Youtube - Finematics - have the perfect video for you: [Binge it here](https://www.youtube.com/watch?v=7gC7xJ_98r8).
 - You're still here?? We have curated more links on [Figment Learn](https://learn.figment.io/protocols/thegraph). Knock yourself out!
 
-# Get an alchemy API-KEY
+## 🐳 Docker
 
 In this pathway you'll use Docker to easily run a local Graph node on your machine. [You can install Docker here](https://www.docker.com). Make sure it's installed and running before going forward.
 
-Alchemy provides one of the leading blockchain development platform, and thus it's provide endpoints to Ethereum mainnet. We need one as later our local graph node will be listen on event on the Ethereum mainnet.
+## 🔑 Get an Alchemy API key
 
-To get your alchemy API key you:
+We'll need to connect to the Ethereum mainnet to be able to listen to new events happening on the network. Alchemy is a blockchain development platform that provides access to Ethereum through their hosted nodes. 
 
 To get an Alchemy API key, [create an account](https://www.alchemy.com/), then create a new application. From that application dashboard, click on **View Details** and then on **View Key**. Copy the HTTP endpoint URL.
 

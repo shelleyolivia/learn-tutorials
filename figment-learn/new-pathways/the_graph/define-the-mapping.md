@@ -120,12 +120,11 @@ export function handlePunkBought(event: PunkBoughtEvent): void {
 
 Last but not least, run the following command to create the subgraph and deploy it to your local Graph node:
 
-```text
+```bash
 yarn create-local
 yarn deploy-local
 ```
 
 ![](../../../.gitbook/assets/pathways/the_graph/create-deploy-local.gif)
-
 
 Now it's time for you to verify that you have followed the instructions carefully. Click on the **Check subgraph deployment** button on the right to check that your deployment has succeeded.

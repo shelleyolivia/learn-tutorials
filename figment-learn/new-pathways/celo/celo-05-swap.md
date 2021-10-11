@@ -3,7 +3,7 @@ Celo has a number of core smart contracts that are deployed to the network. In t
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/celo/swap.ts`, implement the **swap** function. You must replace any instances of `undefined` with working code to accomplish this.
@@ -40,21 +40,28 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```tsx
+// solution
 //...
     // Get contract wrappers
+    // - StableTokenWrapper
+    // - ExchangeWrapper
     const stableToken = await kit.contracts.getStableToken();
     const exchange = await kit.contracts.getExchange();
 
-    // Approve a user to transfer StableToken on behalf of another user.
-    const approveTx = await stableToken.approve(exchange.address, OneCUSD).send({from: address})
-
+    await stableToken
+        .approve(exchange.address, OneCUSD)
+        .send({from: address, feeCurrency: stableToken.address})
+        .then(receipt => receipt.waitReceipt());
     // Exchange cUSD for CELO
     const goldAmount = await exchange.quoteStableSell(OneCUSD)
-    const sellTx = await exchange.sellStable(OneCUSD, goldAmount).send({from: address})
-    const sellReceipt = await sellTx.waitReceipt();
+    const sellReceipt = await exchange
+        .sellStable(OneCUSD, goldAmount)
+        .send({from: address, feeCurrency: stableToken.address})
+    await sellReceipt.waitReceipt();
+    const hash = await sellReceipt.getHash();
 //...
 ```
 

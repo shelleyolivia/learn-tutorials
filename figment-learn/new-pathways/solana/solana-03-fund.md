@@ -12,7 +12,7 @@ To fund an account, we will do what is called an **airdrop** - some tokens will 
 
 ----------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/fund.ts`, implement the `fund` function. Convert the text input to an address and use `requestAirdrop` to get 1 **SOL**. You must replace the instances of `undefined` with working code to accomplish this.
@@ -26,14 +26,12 @@ In `pages/api/solana/fund.ts`, implement the `fund` function. Convert the text i
     const {network, address} = req.body;
     const url = getNodeURL(network);
     const connection = new Connection(url, "confirmed");
-    const publicKey = new PublicKey(address);
     const publicKey = undefined;
     const hash = undefined;
     await undefined;
     res.status(200).json(hash);
   }
 //..
-}
 ```
 
 **Need some help?** Here are a few hints.
@@ -49,9 +47,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# The solution
+# Solution
 
 ```typescript
+// solution
 //..
   try {
     const {network, address} = req.body;

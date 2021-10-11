@@ -14,28 +14,34 @@ Once this transaction is confirmed, you will have 1 **MATIC** on the Mumbai test
 
 -------------------------------------
 
-# The challenge
+# Challenge
 
 {% hint style="tip" %}
-**Imagine this scenario:** You know you have a big balance. You need to show that balance so you can brag about it to all your awesome Web 3 developer friends! In `components/protocols/polygon/steps/Balance.tsx`, implement the`checkBalance` function :
+**Imagine this scenario:** You know you have a big balance. You need to show that balance so you can brag about it to all your awesome Web 3 developer friends! In `components/protocols/polygon/components/steps/Balance.tsx`, implement the`checkBalance` function :
 {% endhint %}
 
 **Take a few minutes to figure this out.**
 
 ```typescript
-const checkBalance = async () => {
-  setFetching(true)
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const selectedAddress = window.ethereum.selectedAddress;
-
-  // TODO
-  // Define those two variables
-  const selectedAddressBalance = undefined
-  const balanceToDisplay = undefined
-
-  setBalance(balanceToDisplay);
-  setFetching(false)
-}
+  const checkBalance = async () => {
+    setFetching(true);
+    setBalance(null);    
+    setError(undefined);
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const selectedAddress = window.ethereum.selectedAddress;
+      const selectedAddressBalance = undefined;
+      const balanceToDisplay = undefined;
+      if (!balanceToDisplay) {
+        throw new Error('Please complete the code');
+      }
+      setBalance(balanceToDisplay);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setFetching(false);
+    }
+  };
 ```
 
 **Need some help?** Check out these two links  
@@ -50,18 +56,31 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 -------------------------------------
 
-# The solution
+# Solution
 
 ```typescript
+// solution
   const checkBalance = async () => {
     setFetching(true);
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const selectedAddress = window.ethereum.selectedAddress;
-    const selectedAddressBalance = await provider.getBalance(selectedAddress);
-    const balanceToDisplay = ethers.utils.formatEther(selectedAddressBalance.toString());
-    setBalance(balanceToDisplay);
-    setFetching(false);
-  }
+    setBalance(null);
+    setError(undefined);
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const selectedAddress = window.ethereum.selectedAddress;
+      const selectedAddressBalance = await provider.getBalance(selectedAddress);
+      const balanceToDisplay = ethers.utils.formatEther(
+        selectedAddressBalance.toString(),
+      );
+      if (!balanceToDisplay) {
+        throw new Error('Please complete the code');
+      }
+      setBalance(balanceToDisplay);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setFetching(false);
+    }
+  };
 ```
 
 **What happened in the code above?**
@@ -76,11 +95,11 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 When you have completed the code, the **Check Balance** button will function. Click it to view the balance of the connected account:
 
-![](../../../.gitbook/assets/pathways/polygon/polygon-fund.gif)
+![](../../../.gitbook/assets/pathways/polygon/polygon-balance.gif)
 
 -------------------------------------
 
 # Conclusion
 
-Now that we have a funded Polygon account, we can use our MATIC tokens to deploy a smart contract.  
-In the next tutorial, we will cover writing, testing and deploying the Solidity code using Truffle - a popular smart contract development suite.
+Now that we have an account that has been funded with **MATIC** tokens, we are ready to make a transfer to another account!
+

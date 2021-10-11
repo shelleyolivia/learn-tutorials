@@ -44,6 +44,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 # Solution
 
 ```typescript
+// solution
 try {
   const config = configFromNetwork(network);
   const near = await connect(config);
@@ -67,7 +68,7 @@ try {
 
 Once the code is complete and the file has been saved, refresh the page to see it update & display the current version.
 
-![](../../../.gitbook/assets/pathways/near/near-connect-v2.gif)
+![](../../../.gitbook/assets/pathways/near/near-connect.gif)
 
 -----------------------------
 
