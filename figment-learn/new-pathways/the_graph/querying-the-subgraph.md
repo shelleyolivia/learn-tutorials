@@ -12,14 +12,14 @@ We're going to display the ten most expensive trades done on the CryptoPunk cont
 
 ```graphql
 query {
-  punks(first: 10, orderBy: lastValue, orderDirection: desc) {
+  punks(first: 10, orderBy: value, orderDirection: desc) {
     id
-    tokenId
-    currentOwner {
+    index
+    owner {
       id
     }
-    lastValue
-    tradeDate
+    value
+    date
   }
 }
 ```

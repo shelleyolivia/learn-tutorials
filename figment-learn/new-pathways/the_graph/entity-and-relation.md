@@ -15,23 +15,19 @@ To define our entities, we must create the
 ```graphql
 type Account @entity {
   id: ID!
-  punksBought: [Punk!] @derivedFrom(field: "currentOwner")
-  punksSell: [Punk!] @derivedFrom(field: "previousOwner")
+  punksBought: [Punk!] @derivedFrom(field: "owner")
   numberOfPunkBought: BigInt!
-  numberOfPunkSell: BigInt!
-  LastBought: BigInt!
-  LastSell: BigInt!
 }
 
 type Punk @entity {
   id: ID!
-  tokenId: BigInt!
-  currentOwner: Account!
-  previousOwner: Account
-  lastValue: BigInt!
-  tradeDate: BigInt!
+  index: BigInt!
+  owner: Account!
+  value: BigInt!
+  date: BigInt!
 }
 ```
+
 # 👉 The solution
 
 Replace the existing contents of `schema.graphql` with the following code snippet:
@@ -40,21 +36,16 @@ Replace the existing contents of `schema.graphql` with the following code snippe
 // solution
 type Account @entity {
   id: ID!
-  punksBought: [Punk!] @derivedFrom(field: "currentOwner")
-  punksSell: [Punk!] @derivedFrom(field: "previousOwner")
+  punksBought: [Punk!] @derivedFrom(field: "owner")
   numberOfPunkBought: BigInt!
-  numberOfPunkSell: BigInt!
-  LastBought: BigInt!
-  LastSell: BigInt!
 }
 
 type Punk @entity {
   id: ID!
-  tokenId: BigInt!
-  currentOwner: Account!
-  previousOwner: Account
-  lastValue: BigInt!
-  tradeDate: BigInt!
+  index: BigInt!
+  owner: Account!
+  value: BigInt!
+  date: BigInt!
 }
 ```
 
@@ -65,7 +56,7 @@ We have now matched the changes to the manifest, by adding the entities `Account
 In the above code snippet, there are two points worth mentioning:
 
 - For the purpose of indexing, entities _must have_ an `ID` field to uniquely identify them.
-- As an `Account` can be the **owner** of multiple `Punk` we must explicitly define the `1:n` relation on the `Account`'s **punksOwned** attribute using `[Punk!] @deriveFrom(field: "owner")` directive:
+- As an `Account` can be the **owner** of multiple `Punk` we must explicitly define the `1:n` relation on the `Account`'s **punksBought** attribute using `[Punk!] @deriveFrom(field: "owner")` directive:
 
 ```text
                                |      ------
@@ -92,4 +83,4 @@ yarn codegen
 
 ![](../../../.gitbook/assets/pathways/the_graph/yarn-codegen.gif)
 
-Now it's time for you to verify that you have followed the instructions carefully. Click on the **Check for expected entites** button on the right to see that your entities are properly defined.
+Now it's time for you to verify that you have followed the instructions carefully. Click on the **Check for expected entities** button on the right to see that your entities are properly defined.

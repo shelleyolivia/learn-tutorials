@@ -14,7 +14,7 @@ For the purpose of this tutorial we have decided to pick a fun and popular smart
 
 > Looking at the code, can you find its Events? What functions are they calling? What arguments are they passing? Browse around the codebase, we will come back to those events very soon.
 
-## 🧑🏼‍💻 Install the Graph CLI 
+## 🧑🏼‍💻 Install the Graph CLI
 
 Fortunately, we won't have to build a subgraph from scratch, The Graph provides a CLI to do this. Install the CLI by running:
 
@@ -32,7 +32,7 @@ This should output the current version of the graph-cli.
 
 Let's then cd into the `subgraphs` folder:
 
-```sh
+```text
 cd subgraphs
 ```
 
@@ -41,6 +41,7 @@ cd subgraphs
 Scaffolding a subgraph will create a subgraph template. It will have the right shape but will be incomplete.
 
 We will be using the `init` command of the Graph CLI (see the [docs](https://github.com/graphprotocol/graph-cli) if you need more info). Your job is to fill in the missing fields:
+
 - Set the contract address to the CryptoPunk contract
 - Set the Ethereum network to `mainnet`
 

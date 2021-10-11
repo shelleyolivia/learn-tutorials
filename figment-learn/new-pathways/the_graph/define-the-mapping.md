@@ -4,7 +4,7 @@ Remember in the **Tweak the manifest** step we defined a handler next to an even
 
 ## 👤 Define entities
 
-Now, we're going to create the `handleAssign` function.
+Now, we're going to create the `handlePunkBought` function.
 
 - Open `src/mapping.ts`
 - Erase the content
@@ -22,38 +22,36 @@ export function handlePunkBought(event: PunkBoughtEvent): void {
 }
 ```
 
-`Account` and `Punk` imported objects are the ones we've just defined, and `AssignEvent` is referencing the definition of an event we made in the `subgraph.yaml`.
+`Account` and `Punk` imported objects are the ones we've just defined, and `PunkBoughtEvent` is referencing the definition of an event we made in the `subgraph.yaml`.
 
 ```typescript
-let buyerAccount = Account.load(event.params.toAddress.toHexString());
+let account = Account.load(event.params.toAddress.toHexString());
 ```
 
 To create the `Account` entity, we first need to test if the entity already exists:
 
 ```typescript
-if (buyerAccount == null) {
-  buyerAccount = new Account(event.params.toAddress.toHexString());
-  buyerAccount.id = event.params.toAddress.toHexString();
-  buyerAccount.numberOfPunkBought = BigInt.fromI32(1);
-  buyerAccount.numberOfPunkSell = BigInt.fromI32(0);
-  buyerAccount.LastSell = BigInt.fromI32(0);
+if (account == null) {
+  account = new Account(event.params.toAddress.toHexString());
+  account.id = event.params.toAddress.toHexString();
+  account.numberOfPunkBought = BigInt.fromI32(1);
 }
 ```
 
 If it does not, we create a new one by filling all the fields. Otherwise, we only need to increment the `numberOfPunkBought`.
 
 ```typescript
-buyerAccount.numberOfPunkBought = buyerAccount.numberOfPunkBought.plus(
-  BigInt.fromI32(1)
-);
+else {
+    account.numberOfPunkBought = account.numberOfPunkBought.plus(
+      BigInt.fromI32(1),
+    );
+  }
 ```
 
-At last and for both cases, we update the last field and call `save()`.
+At last and for both cases, we call `save()`.
 
 ```typescript
-const timestamp = event.block.timestamp;
-sellerAccount.LastSell = timestamp;
-sellerAccount.save();
+account.save();
 ```
 
 The creation of a `Punk` entity follows the same logic.
@@ -70,47 +68,27 @@ import { PunkBought as PunkBoughtEvent } from "../generated/punks/punks";
 import { Account, Punk } from "../generated/schema";
 
 export function handlePunkBought(event: PunkBoughtEvent): void {
-  let buyerAccount = Account.load(event.params.toAddress.toHexString());
-  if (buyerAccount == null) {
-    buyerAccount = new Account(event.params.toAddress.toHexString());
-    buyerAccount.id = event.params.toAddress.toHexString();
-    buyerAccount.numberOfPunkBought = BigInt.fromI32(1);
-    buyerAccount.numberOfPunkSell = BigInt.fromI32(0);
-    buyerAccount.LastSell = BigInt.fromI32(0);
+  let account = Account.load(event.params.toAddress.toHexString());
+  if (account == null) {
+    account = new Account(event.params.toAddress.toHexString());
+    account.id = event.params.toAddress.toHexString();
+    account.numberOfPunkBought = BigInt.fromI32(1);
   } else {
-    buyerAccount.numberOfPunkBought = buyerAccount.numberOfPunkBought.plus(
+    account.numberOfPunkBought = account.numberOfPunkBought.plus(
       BigInt.fromI32(1)
     );
   }
-  buyerAccount.LastBought = event.block.timestamp;
-  buyerAccount.save();
-
-  let sellerAccount = Account.load(event.params.fromAddress.toHexString());
-  if (sellerAccount == null) {
-    sellerAccount = new Account(event.params.fromAddress.toHexString());
-    sellerAccount.id = event.params.fromAddress.toHexString();
-    sellerAccount.numberOfPunkBought = BigInt.fromI32(0);
-    sellerAccount.numberOfPunkSell = BigInt.fromI32(1);
-    sellerAccount.LastSell = BigInt.fromI32(0);
-  } else {
-    sellerAccount.numberOfPunkSell = sellerAccount.numberOfPunkSell.plus(
-      BigInt.fromI32(1)
-    );
-  }
-  const timestamp = event.block.timestamp;
-  sellerAccount.LastSell = timestamp;
-  sellerAccount.save();
+  account.save();
 
   let punk = Punk.load(event.params.punkIndex.toHexString());
   if (punk == null) {
     punk = new Punk(event.params.punkIndex.toHexString());
     punk.id = event.params.punkIndex.toHexString();
-    punk.tokenId = event.params.punkIndex;
+    punk.index = event.params.punkIndex;
   }
-  punk.currentOwner = event.params.toAddress.toHexString();
-  punk.previousOwner = event.params.fromAddress.toHexString();
-  punk.lastValue = event.params.value;
-  punk.tradeDate = timestamp;
+  punk.owner = event.params.toAddress.toHexString();
+  punk.value = event.params.value;
+  punk.date = event.block.timestamp;
 
   punk.save();
 }
