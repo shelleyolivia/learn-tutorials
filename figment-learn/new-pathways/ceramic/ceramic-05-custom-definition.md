@@ -91,6 +91,8 @@ export const aliases = {
 };
 ```
 
+Once you have your alias setup, you need to load it to IDX. You can do it by clicking `Set alias` button on the top right corner of `Challenge #1` card.
+
 Now we are all set to write and read data from our custom definition.
 
 # Challenge #1
@@ -111,7 +113,10 @@ const saveQuote = async (values: QuoteSchemaT) => {
   try {
     // Save quote information to custom schema (use IdxSchema.Figment enum)
 
-    setCustomDefinitionSaved(true);
+    setMyQuote({
+      text,
+      author,
+    });
   } catch (error) {
     alert(error.message);
   } finally {
@@ -144,7 +149,10 @@ const saveQuote = async (values: QuoteSchemaT) => {
     // Save quote information to custom schema (use IdxSchema.Figment enum)
     await idx.set(IdxSchema.Figment, {text, author});
 
-    setCustomDefinitionSaved(true);
+    setMyQuote({
+      text,
+      author,
+    });
   } catch (error) {
     alert(error.message);
   } finally {
