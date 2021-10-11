@@ -107,17 +107,24 @@ We can then show in the Program Log how many times the count has been incremente
 
 So far we've been using Solana's JS API to interact with the blockchain. In this chapter we're going to deploy a Solana program using another Solana developer tool: their Command Line Interface (CLI). We'll install it and use it through our Terminal.
 
-For simplicity, perform both of these installations inside the project root:
+For simplicity, perform both of these installations inside the project root (`/learn-web3-dapp/`):
 
 [**Install the latest Rust stable**](https://rustup.rs) : 
 
-```bash
+```text
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Developers using macOS may want to use the following commands instead:
+
+```text
+curl https://sh.rustup.rs -sSf | bash -s -- -y --no-modify-path
+source $HOME/.cargo/env
 ```
 
 [**Install Solana CLI**](https://docs.solana.com/cli/install-solana-cli-tools) v1.6.6 or later :
 
-```bash
+```text
 sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
 ```
 
