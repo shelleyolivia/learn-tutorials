@@ -88,15 +88,15 @@ Create a new file called `QuadraticVoting.sol` in the `contracts` folder.
 pragma solidity >=0.4.0 <0.9.0;
 
 contract QuadraticVoting {
-	struct Item {
-		address payable owner;
-		uint amount;
-		bytes32 title;
-		bytes32 imageHash;
-		string description;
-		mapping(address => uint) positiveVotes;
-		mapping(address => uint) negativeVotes;
-	}
+  struct Item {
+    address payable owner;
+    uint amount;
+    bytes32 title;
+    bytes32 imageHash;
+    string description;
+    mapping(address => uint) positiveVotes;
+    mapping(address => uint) negativeVotes;
+  }
 ```
 
 The primary data structure in our app is going to be the Item. Users will vote up or down on items to control their ranking, paying a fee that depends on the weight of their vote. Votes are quadratically funded, which means that anyone can add as much weight to their vote as they like, however, the price of submitting this vote will be the weight squared.
@@ -104,10 +104,10 @@ The primary data structure in our app is going to be the Item. Users will vote u
 Any fee paid for a positive vote is rewarded to the creator of the item, creating an economy where the best suggestions, meaning the ones ranked the highest by others, receive the highest earnings. This incentivizes high quality, honest suggestions. Negative vote fees are redistributed to other items.
 
 ```solidity
-	uint public voteCost = 10_000_000_000;
+  uint public voteCost = 10_000_000_000;
 
-	mapping(uint => Item) public items;
-	uint public itemCount = 0;
+  mapping(uint => Item) public items;
+  uint public itemCount = 0;
 ```
 
 The variable `items` is a mapping of `itemId => item` and `itemCount` is the amount of items that have been created, as well as the next itemId to be used.
@@ -117,18 +117,18 @@ The `voteCost` constant is the price of a vote of weight 1 in terms of wei. One 
 As an example of how quadratic voting works, let's say this contract was for a ranked list of the most favored Star Wars characters. One person may suggest Han Solo while another may suggest Chewbacca. If someone votes +2 for Han Solo, it will cost them `10 gwei * 2 * 2 =` 40 gwei. If someone votes +3 for Chewbacca, it will cost them `10 gwei * 3 * 3 =` 90 gwei. This leads to an ecosystem where a single person may vote more times than another if they care about the topic more, but it gets exponentially more expensive with each vote, ensuring a fair democracy.
 
 ```solidity
-	event ItemCreated(uint itemId);
-	event Voted(uint itemId, uint weight, bool positive);
+  event ItemCreated(uint itemId);
+  event Voted(uint itemId, uint weight, bool positive);
 
-	function createItem(bytes32 title, bytes32 imageHash, string memory description) public {
-		uint itemId = itemCount++;
-		Item storage item = items[itemId];
-		item.owner = msg.sender;
-		item.title = title;
-		item.imageHash = imageHash;
-		item.description = description;
-		emit ItemCreated(itemId);
-	}
+  function createItem(bytes32 title, bytes32 imageHash, string memory description) public {
+    uint itemId = itemCount++;
+    Item storage item = items[itemId];
+    item.owner = msg.sender;
+    item.title = title;
+    item.imageHash = imageHash;
+    item.description = description;
+    emit ItemCreated(itemId);
+  }
 ```
 
 The function `createItem` is used to publish a new Item object to the ranked list. The item will require a title, IPFS image hash and text description to be set before the object can be created. The current sender is considered the owner of the item.
@@ -138,45 +138,45 @@ This is an example of what a published item will look like when we build the UI:
 ![item](../../../.gitbook/assets/quadratic-voting-item.png)
 
 ```solidity
-	function positiveVote(uint itemId, uint weight) public payable {
-		Item storage item = items[itemId];
-		require(msg.sender != item.owner);
-		require(msg.value >= weight * weight * voteCost);
-		item.positiveVotes[msg.sender] = weight;
-		item.negativeVotes[msg.sender] = 0;
-		item.amount += msg.value;
-		emit Voted(itemId, weight, true);
-	}
+  function positiveVote(uint itemId, uint weight) public payable {
+    Item storage item = items[itemId];
+    require(msg.sender != item.owner);
+    require(msg.value >= weight * weight * voteCost);
+    item.positiveVotes[msg.sender] = weight;
+    item.negativeVotes[msg.sender] = 0;
+    item.amount += msg.value;
+    emit Voted(itemId, weight, true);
+  }
 ```
 
 Users are not able to vote for their own items because this would allow them to claim what they spent and use it to vote again, essentially meaning they could infinitely vote on their own items. Therefore we need to make sure the sender is not the item owner. Also, the value of the transaction must be greater than or equal to `weight * weight * voteCost`.
 
 ```solidity
-	function negativeVote(uint itemId, uint weight) public payable {
-		Item storage item = items[itemId];
-		require(msg.sender != item.owner);
-		require(msg.value >= weight * weight * voteCost);
-		item.negativeVotes[msg.sender] = weight;
-		item.positiveVotes[msg.sender] = 0;
+  function negativeVote(uint itemId, uint weight) public payable {
+    Item storage item = items[itemId];
+    require(msg.sender != item.owner);
+    require(msg.value >= weight * weight * voteCost);
+    item.negativeVotes[msg.sender] = weight;
+    item.positiveVotes[msg.sender] = 0;
 
-		uint reward = msg.value / (itemCount - 1);
-		for (uint i = 0; i < itemCount; i++) {
-			if (i != itemId) items[i].amount += reward;
-		}
+    uint reward = msg.value / (itemCount - 1);
+    for (uint i = 0; i < itemCount; i++) {
+      if (i != itemId) items[i].amount += reward;
+    }
 
-		emit Voted(itemId, weight, false);
-	}
+    emit Voted(itemId, weight, false);
+  }
 
 ```
 
 Negative votes are slightly different in their distribution. Rather than reward the owner for a poor addition to the list, the funds are distributed to everyone except the owner. This acts as a sort of basic income for all participants.
 
 ```solidity
-	function claim(uint itemId) public {
-		Item storage item = items[itemId];
-		require(msg.sender == item.owner);
-		item.owner.transfer(item.amount);
-	}
+  function claim(uint itemId) public {
+    Item storage item = items[itemId];
+    require(msg.sender == item.owner);
+    item.owner.transfer(item.amount);
+  }
 }
 ```
 
@@ -196,7 +196,7 @@ You should get similar output.
 
 ![truffle compile](../../../.gitbook/assets/quadratic-voting-truffle-compile.png)
 
-You can find the output in the `build/contracts` directory.
+You can find the compiled contracts in the `build/contracts` directory.
 
 Create a new file called `2_quadratic_voting.js` in the `migrations` folder.
 
@@ -268,6 +268,67 @@ You should see similar output.
 ![truffle migrate](../../../.gitbook/assets/quadratic-voting-truffle-migrate.png)
 
 # Writing tests for the smart contract
+
+Next we will be writing tests for our contract. Tests allow us to ensure our contract code is working as intended in a programmatic way.
+
+Create a file named `quadratic-voting-test.js` in the `test` directory.
+
+```js
+const QuadraticVoting = artifacts.require("QuadraticVoting");
+
+contract("QuadraticVoting", (accounts) => {
+  describe("deployment", () => {
+    it("should be a valid contract address", () =>
+      QuadraticVoting.deployed()
+        .then((instance) => instance.address)
+        .then((address) => {
+          assert.notEqual(address, null)
+          assert.notEqual(address, 0x0)
+          assert.notEqual(address, "")
+          assert.notEqual(address, undefined)
+        })
+    )
+  })
+
+  describe("items", () => {
+    it("should be the correct item data", () => {
+      let instance
+
+      QuadraticVoting.deployed()
+        .then((i) => (instance = i))
+        .then(() => instance.createItem(
+          web3.utils.utf8ToHex("Chewbacca"), // title
+          web3.utils.utf8ToHex("ipfs_hash"), // imageHash
+          "The ultimate furry.", // description
+        ))
+        .then(() => instance.itemCount())
+        .then((count) => assert.equal(count, 1))
+        .then(() => instance.items(0))
+        .then((item) => {
+          assert.equal(web3.utils.hexToUtf8(item.title), "Chewbacca")
+          assert.equal(web3.utils.hexToUtf8(item.imageHash), "ipfs_hash")
+          assert.equal(item.description, "The ultimate furry.")
+        })
+    })
+  })
+})
+```
+
+The Truffle testing suite uses [Chai](https://www.chaijs.com/) as its library for writing tests.
+
+Tests are broken up into two groups: `deployment` and `items`. The `deployment` tests are used to ensure successful deployment and valid contract address. The `items` tests are used to ensure the correct item data is being published to the blockchain.
+
+You may write additional tests for the remaining smart contract functions if you wish.
+
+You will need to install [Ganache](https://www.trufflesuite.com/ganache) to set up a local development blockchain to run our tests on. Once it is downloaded select Quickstart. This will allow us to use the development network configured earlier.
+
+```bash
+truffle test
+```
+
+You should see similar output.
+
+![truffle test](../../../.gitbook/assets/quadratic-voting-truffle-test.png)
 
 # Communicating with the smart contract with Web3
 
