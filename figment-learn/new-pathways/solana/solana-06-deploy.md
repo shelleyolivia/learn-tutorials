@@ -140,7 +140,9 @@ Set the CLI config URL to the devnet cluster:
 solana config set --url https://api.devnet.solana.com
 ```
 
-Next, we're going to generate a new keypair using the CLI. Run the following command in your Terminal:
+Next, we're going to generate a new keypair using the CLI. Run the following command in your Terminal :
+
+> **NOTE**: Make sure you're running these commands from the `/learn-web3-dapp/` directory, which is the **root directory** of the repository.
 
 ```bash
 mkdir solana-wallet
@@ -198,9 +200,11 @@ The `.so` extension does not stand for Solana! It stands for "shared object". Yo
 
 ## Deploying the program
 
-Now we're going to deploy the program to the devnet cluster. The CLI provides a very simple interface for this :
+Now we're going to deploy the program to the devnet cluster. The CLI provides a simple interface for this, `solana deploy`:
 
-```bash
+> **NOTE**: Make sure you're running this command from the `/learn-web3-dapp/` directory, which is the **root directory** of the repository (otherwise, you would need to change the paths to the `keypair.json` and the `helloworld.so` file).
+
+```text
 solana deploy -v --keypair solana-wallet/keypair.json dist/solana/program/helloworld.so 
 ```
 
