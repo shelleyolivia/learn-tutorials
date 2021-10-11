@@ -10,7 +10,8 @@ If you open the repository in a code editor like Visual Studio Code, look for th
 
 Open the `subgraph.yaml` file and notice that it's already been populated using the information we provided but also with A LOT of things we didn't specify.
 
-![Manifest file](https://user-images.githubusercontent.com/206753/136859637-b7747369-bc3f-42bc-b3aa-9b55b1f8cb1b.png)
+![Manifest file](https://user-images.githubusercontent.com/206753/136859766-1527c57a-95a5-4828-9e2a-01b196c991f3.png)
+
 
 Under the `mappings` key we find `entities` and `eventHandlers` - the next steps of this tutorial will be dedicated to understanding them a bit more in depth. For now just notice the information that's below them. Remember the [code](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB#code) from the CryptoPunk contract on Etherscan? They correspond to the Events emitted! The `eventHandlers` even have the right signatures already. That's promising.
 
