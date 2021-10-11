@@ -1,14 +1,14 @@
 ## 👤 Entity and relation
 
-To capture and process information from a blockchain, we must:
+We just tweaked the manifest to declare what information we were looking for. We declared two entities called `Punk` (for the actual CryptoPunk NFT) and `Account` (for the owner of the NFT). Now we need to implement those entities: for each of them, define what attributes they have and what are those attribute types.
 
-- Define which information we're looking for
-- Know what this information is made of
-- Define the shape of the processed information when we are finished with it
+This is analogous to the process of defining the Models in an MVC framework.
 
-The right place to do so is within the `schema.graphql`.
+Entities will be defined in the `schema.graphql` file.
 
-## 👥 Define entities
+![Entities](https://user-images.githubusercontent.com/206753/136861292-2c178573-5dc8-48c5-92c3-4482a8963887.png)
+
+## 🧑🏼‍💻 Your turn! Define the Punk and Account entities
 
 To define our entities, we must create the
 
