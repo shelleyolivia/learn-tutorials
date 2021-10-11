@@ -34,7 +34,7 @@ type Punk @entity {
 }
 ```
 
-# 👉 The solution
+## 👉 The solution
 
 Replace the existing contents of `schema.graphql` with the following code snippet:
 
@@ -88,6 +88,6 @@ What does `yarn codegen` do? This command create some boilerplate code under the
 
 ![](../../../.gitbook/assets/pathways/the_graph/yarn-codegen.gif)
 
-# ✅ Verify
+## ✅ Verify
 
 Before goign to the next step, click on the **Check for expected entities** button on the right to make sure your entities are properly defined.
