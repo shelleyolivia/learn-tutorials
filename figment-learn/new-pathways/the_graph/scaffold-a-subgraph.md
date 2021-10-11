@@ -40,11 +40,11 @@ cd subgraphs
 
 Scaffolding a subgraph will create a subgraph template. It will have the right shape but will be incomplete.
 
-We will be using the `init` command of the [Graph CLI docs](https://github.com/graphprotocol/graph-cli). Your job is to fill in the missing fields:
+We will be using the `init` command of the Graph CLI (see the [docs](https://github.com/graphprotocol/graph-cli) if you need more info). Your job is to fill in the missing fields:
 - Set the contract address to the CryptoPunk contract
 - Set the Ethereum network to `mainnet`
 
-```sh
+```text
 graph init \
   --allow-simple-name \
   --index-events \
@@ -59,7 +59,7 @@ If you need to start over, simply delete the folder `punks` inside `subgraphs` a
 
 # 👉 The solution
 
-```sh
+```text
 // solution
 graph init \
   --allow-simple-name \
@@ -81,7 +81,7 @@ That's a mouthful! Let's look at it line by line.
 - `--node http://localhost:8020/` will prepare our script to deploy to our local graph node
 - `punks` is the name of the folder under which the files are created
 
-> _NOTE_: Linux and macOS use the backslash character \ for multi-line input. Windows uses the ^ character. If you paste this command into a Windows terminal (PowerShell, cmd.exe or Windows Terminal), replace the \ with ^
+> **NOTE**: Linux and macOS use the backslash character \ for multi-line input. Windows uses the ^ character. If you paste this command into a Windows terminal (PowerShell, cmd.exe or Windows Terminal), replace the \ with ^
 
 Once you type Enter, you will be prompted to confirm the information: you can just accept the five suggested inputs The output should look like:
 
@@ -89,6 +89,6 @@ Once you type Enter, you will be prompted to confirm the information: you can ju
 
 You don't need to run the next steps for now!
 
-## Make sure it works
+## ✅ Make sure it works
 
-Now, it's time for you to verify if you have followed the instructions carefully, click on the button on the right to check if your scaffold is right
+Now it's time for you to verify that you have followed the instructions carefully. Click on the **Check for a subgraph scaffold** button on the right to see if your scaffold exists, and is in the right place.

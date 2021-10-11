@@ -1,4 +1,4 @@
-## What's a Graph node?
+## 🤔 What's a Graph node?
 
 You're probably familiar with the idea of running a local web server in the early stages of a project, or while developing on it. It allows you to rapidly design, write and test your code. Then when you're ready you can deploy it and in production users will interact with that deployed version of your server.
 
@@ -9,7 +9,7 @@ A Graph node comes with the following components:
 - A Postgres database for storing the data output of those processed events
 - A GraphQL API to allow clients to query this data
 
-## Setting up a local Graph node
+## 👨‍💻 Setting up a local Graph node
 
 We don't need to worry about installing and running them: we'll use Docker for this. We defined a Docker configuration in `docker/docker-compose.yaml` and it will tell Docker what to do for each of those three components. Our Graph node will run inside a Docker container and connect it to Ethereum mainnet using Alchemy as a provider (you'll need that Alchemy API key soon).
 
@@ -33,14 +33,12 @@ Attaching to docker_postgres_1, docker_ipfs_1, docker_graph-node_1
 
 >  If you encounter the error "Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?", well... make sure Docker is running ;)
 
-> Linux and macOS users can run a script to ensure the necessary software is installed: `sudo ./script.sh`
-
-## Make sure it works
+## ✅ Make sure it works
 
 The same way that a local web server usually listens for connections on `localhost://3000`, our local Graph node is listening for connections on `localhost://8020`.
 
 Click on the button **Test local Graph node** to make sure it's running!
 
-## Conclusion
+## 🏁 Conclusion
 
-Nice! A Graph node is now running on your computer but... it's not doing much. Let's give it some code to run for us...
+Nice! A Graph node is now running on your computer but it's not doing much at the moment. Let's give it some code to run...

@@ -1,15 +1,15 @@
-## Mapping event to feed entity
+## 🗺 Mapping event to feed entity
 
-Remember in the `Hacking the manifest` step we have defined a handler next to an event. This handler will the maestro of our subgraph. This piece of code will orchestrate event with entity with the aim to give what we are asking for? A well sounded concerto or data!
+Remember in the **Tweak the manifest** step we defined a handler next to an event? This handler will the maestro of our subgraph. This piece of code will orchestrate events with entities, to give us what we are asking for: A lovely concerto of data!
 
-## Define entities
+## 👤 Define entities
 
 Now, we're going to create the `handleAssign` function.
 
 - Open `src/mapping.ts`
 - Erase the content
 
-First we need a bunch of import and the prototype of the function
+First we need to import some code and prototype the function:
 
 ```typescript
 import { BigInt } from "@graphprotocol/graph-ts";
@@ -18,17 +18,17 @@ import { PunkBought as PunkBoughtEvent } from "../generated/punks/punks";
 import { Account, Punk } from "../generated/schema";
 
 export function handlePunkBought(event: PunkBoughtEvent): void {
-  // fill here
+  // Implement the function here
 }
 ```
 
-`Account` and `Punk` imported objects are the one we've just defined before, and `AssignEvent` is referencing the definition of event we gave on `subgraph.yaml`.
+`Account` and `Punk` imported objects are the ones we've just defined, and `AssignEvent` is referencing the definition of an event we made in the `subgraph.yaml`.
 
 ```typescript
 let buyerAccount = Account.load(event.params.toAddress.toHexString());
 ```
 
-To create the Account entity, we first need to test if the entity is already existing.
+To create the `Account` entity, we first need to test if the entity already exists:
 
 ```typescript
 if (buyerAccount == null) {
@@ -40,9 +40,7 @@ if (buyerAccount == null) {
 }
 ```
 
-if not we create a new one filling all the field
-
-otherwise, we only need to increment the numberOfPunkBought
+If it does not, we create a new one by filling all the fields. Otherwise, we only need to increment the `numberOfPunkBought`.
 
 ```typescript
 buyerAccount.numberOfPunkBought = buyerAccount.numberOfPunkBought.plus(
@@ -50,7 +48,7 @@ buyerAccount.numberOfPunkBought = buyerAccount.numberOfPunkBought.plus(
 );
 ```
 
-At last and for both case we update the last field and save
+At last and for both cases, we update the last field and call `save()`.
 
 ```typescript
 const timestamp = event.block.timestamp;
@@ -58,11 +56,14 @@ sellerAccount.LastSell = timestamp;
 sellerAccount.save();
 ```
 
-The creation of Punk entity follow the same logic.
+The creation of a `Punk` entity follows the same logic.
 
-At the end your `src/mapping.ts` should look like this.
+# 👉 The solution
+
+At the end, your `src/mapping.ts` should look like this:
 
 ```typescript
+// solution
 import { BigInt } from "@graphprotocol/graph-ts";
 
 import { PunkBought as PunkBoughtEvent } from "../generated/punks/punks";
@@ -115,9 +116,9 @@ export function handlePunkBought(event: PunkBoughtEvent): void {
 }
 ```
 
-## Make sure it works
+## ✅ Make sure it works
 
-Last but not least, run the following command to create the subgraph and deploy it to our local graph node.
+Last but not least, run the following command to create the subgraph and deploy it to your local Graph node:
 
 ```bash
 yarn create-local
@@ -126,5 +127,4 @@ yarn deploy-local
 
 ![](../../../.gitbook/assets/pathways/the_graph/create-deploy-local.gif)
 
-
-Now, it's time for you to verify if you have followed the instructions carefully, click on the button **Check subgraph deployment** to check that your deployment is well done.
+Now it's time for you to verify that you have followed the instructions carefully. Click on the **Check subgraph deployment** button on the right to check that your deployment has succeeded.
