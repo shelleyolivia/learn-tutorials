@@ -90,4 +90,4 @@ What does `yarn codegen` do? This command create some boilerplate code under the
 
 ## ✅ Verify
 
-Before goign to the next step, click on the **Check for expected entities** button on the right to make sure your entities are properly defined.
+Before going to the next step, click on the **Check for expected entities** button on the right to make sure your entities are properly defined.
