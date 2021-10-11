@@ -54,7 +54,7 @@ At last and for both cases, we call `save()`.
 account.save();
 ```
 
-The creation of a `Punk` entity follows the same logic.
+The creation of a `Punk` entity follows the same logic, as an helper be inform that we can access timestamp of the event using `event.block.timestamp`.
 
 # 👉 The solution
 
@@ -102,6 +102,11 @@ Last but not least, run the following command to create the subgraph and deploy 
 yarn create-local
 yarn deploy-local
 ```
+
+Some notes about the above commands:
+
+- `yarn create-local` will create an endpoints for our subgraph: here `http://localhost:8000/subgraphs/name/punks
+- `yarn deploy-local` will deploy the subgraph to the above mention endpoints.
 
 ![](../../../.gitbook/assets/pathways/the_graph/create-deploy-local.gif)
 

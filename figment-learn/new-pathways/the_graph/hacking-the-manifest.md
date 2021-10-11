@@ -10,6 +10,8 @@ The right place to do so is within the `punks/subgraph.yaml` file, the manifest 
 
 ## The scaffolded subgraph.yaml
 
+By default the following file is generated. Our goal here is to customize this file in order to adapt it to our need.
+
 ```yaml
 specVersion: 0.0.2
 schema:
@@ -59,15 +61,18 @@ dataSources:
 
 Let's have a look at what this all means. Firstly, `.yaml` is the file extension for YAML ([**Y**AML **A**in't **M**arkup **L**anguage](https://www.cloudbees.com/blog/yaml-tutorial-everything-you-need-get-started)) which is an easy to read file format commonly used for configuration files.
 
-In order to save time when indexing the datasource, we must specify a starting block (or else the node would start indexing from the genesis block, which would take a very long time and not be useful to us). To specify a sensible starting block, insert the line `startBlock: 13100000` into the `subgraph.yaml` file for the datasource of the "punks" contract. Block 3914495 occurred on June 22, 2017 - and contained the deployment of the CryptoPunksMarket contract.
+In order to save time when indexing the datasource, we must specify a starting block (or else the node would start indexing from the genesis block, which would take a very long time and not be useful to us). To specify a sensible starting block, insert the line `startBlock: 13100000` into the `subgraph.yaml` file for the datasource of the "punks" contract.
 
 Next, we need to make sure the datasource mapping includes the entities "Punk" and "Account".
 
 Finally, we will want to include an event handler for the **PunkBought(indexed uint256,uint256,indexed address,indexed address)** event.
 
-## The changed subgraph.yaml
+# 👉 The solution
+
+Replace the existing contents of `subgraph.yaml` with the following code snippet:
 
 ```yaml
+// solution
 specVersion: 0.0.2
 schema:
   file: ./schema.graphql
