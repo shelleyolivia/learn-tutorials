@@ -69,7 +69,7 @@ In `components/protocols/ceramic/context/idx.tsx`, implement the`login` function
 ```typescript
 // components/protocols/ceramic/context/idx.tsx
 
-const logIn = async (address: string): Promise<string | undefined> => {
+const logIn = useCallback(async (address: string): Promise<string | undefined> => {
   // Request authentication using 3IDConnect. 
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#4-request-authentication
 
@@ -90,8 +90,8 @@ const logIn = async (address: string): Promise<string | undefined> => {
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#7-authenticate-the-3id
   const userDID = undefined;
 
-  if (setCurrentUserDID) {
-    setCurrentUserDID(userDID);
+  if (setIsAuthenticated) {
+    setIsAuthenticated(true);
   }
 
   // Create IDX instance
@@ -101,7 +101,7 @@ const logIn = async (address: string): Promise<string | undefined> => {
   });
 
   return userDID;
-};
+}, [setIsAuthenticated]);
 ```
 
 **Need some help?** Check out these links
@@ -119,7 +119,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 // solution
 // components/protocols/ceramic/context/idx.tsx
 
-const logIn = async (address: string): Promise<string> => {
+const logIn = useCallback(async (address: string): Promise<string | undefined> => {
   // Request authentication using 3IDConnect. 
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#4-request-authentication
   const threeIdConnect = new ThreeIdConnect();
@@ -151,8 +151,8 @@ const logIn = async (address: string): Promise<string> => {
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#7-authenticate-the-3id
   const userDID = await ceramicRef.current.did.authenticate();
 
-  if (setCurrentUserDID) {
-    setCurrentUserDID(userDID);
+  if (setIsAuthenticated) {
+    setIsAuthenticated(true);
   }
 
   // Create IDX instance
@@ -162,7 +162,7 @@ const logIn = async (address: string): Promise<string> => {
   });
 
   return userDID;
-};
+}, [setIsAuthenticated]);
 ```
 
 # 🤔 What happened here?

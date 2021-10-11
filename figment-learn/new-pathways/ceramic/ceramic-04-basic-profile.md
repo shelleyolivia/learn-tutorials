@@ -143,12 +143,14 @@ In **`components/protocols/ceramic/components/steps/BasicProfile.tsx`**, impleme
 ```typescript
 const saveBasicProfile = async (values: BasicProfile) => {
   setSaving(true);
+  setBasicProfile(null);
+  
   const {name} = values;
 
   try {
     // Set BasicProfile (use IndexSchema.BasicProfile)
 
-    setBasicProfileSaved(true);
+    setName(name);
   } catch (error) {
     alert(error.message);
   } finally {
@@ -176,13 +178,15 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 // solution
 const saveBasicProfile = async (values: BasicProfile) => {
   setSaving(true);
+  setBasicProfile(null);
+  
   const {name} = values;
 
   try {
     // Set BasicProfile (use IndexSchema.BasicProfile)
     await idx.set(IdxSchema.BasicProfile, {name});
 
-    setBasicProfileSaved(true);
+    setName(name);
   } catch (error) {
     alert(error.message);
   } finally {
