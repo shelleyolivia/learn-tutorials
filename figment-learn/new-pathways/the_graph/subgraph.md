@@ -18,7 +18,7 @@ You can view it on Etherscan [here](https://etherscan.io/address/0xb47e3cd837dDF
 
 > Looking at the code, can you find its Events? What functions are they calling? What arguments are they passing? Browse around the codebase, we will come back to those events very soon.
 
-## 🧑🏼‍💻 Install the Graph CLI
+## 💻 Install the Graph CLI
 
 In a code editor, a subgraph will be a folder with a few different folders and files. We could create it manually but The Graph provides a CLI tool so we don't have to do it from scratch. Install the CLI by running:
 
