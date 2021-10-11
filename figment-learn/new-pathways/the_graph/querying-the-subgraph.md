@@ -12,7 +12,7 @@ Before, running the query you'll need to check you have a [metamask](https://met
 
 Having a fresh deployed subgraph make no sense if we don't query him. A graph node come up with a **GraphQL** endpoint, available at `http://localhost:8000/subgraphs/name/punks`.
 
-We're going to display the ten most expensive trades done on the CryptoPunk contract. As a helper please consider this example query. The file to modify to complete the query is `components/protocols\the_graph\graphql\index.ts`
+We're going to display the ten most expensive trades done on the CryptoPunk contract. As a helper please consider this example query. The file to modify to complete the query is `components/protocols/the_graph/graphql/index.ts`
 
 ```graphql
 query {
