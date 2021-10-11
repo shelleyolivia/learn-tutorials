@@ -17,8 +17,8 @@ Start from the following code below and fill in the two missing fields: `punksBo
 ```graphql
 type Account @entity {
   id: ID!
-  // Reference the Punk entity to specify the relation between them
-  // aka "A owner has multiple Punks"
+  # Reference the Punk entity to specify the relation between them
+  # aka "A owner has multiple Punks"
   punksBought: _______________
   numberOfPunkBought: BigInt!
 }
@@ -26,8 +26,8 @@ type Account @entity {
 type Punk @entity {
   id: ID!
   index: BigInt!
-  // Reference the Account entity to specify the relation between them
-  // aka "A punk belongs to an Owner"
+  # Reference the Account entity to specify the relation between them
+  # aka "A punk belongs to an Owner"
   owner: __________
   value: BigInt!
   date: BigInt!
@@ -42,6 +42,8 @@ Replace the existing contents of `schema.graphql` with the following code snippe
 // solution
 type Account @entity {
   id: ID!
+  # Defining the one to many relationship here from the "one" perspective
+  # "an Account has many Punks"
   punksBought: [Punk!] @derivedFrom(field: "owner")
   numberOfPunkBought: BigInt!
 }
@@ -49,6 +51,8 @@ type Account @entity {
 type Punk @entity {
   id: ID!
   index: BigInt!
+  # Defining the one to many relationship here from the "many" perspective
+  # "a Punk has one Account"
   owner: Account!
   value: BigInt!
   date: BigInt!
