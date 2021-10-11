@@ -107,17 +107,24 @@ We can then show in the Program Log how many times the count has been incremente
 
 So far we've been using Solana's JS API to interact with the blockchain. In this chapter we're going to deploy a Solana program using another Solana developer tool: their Command Line Interface (CLI). We'll install it and use it through our Terminal.
 
-For simplicity, perform both of these installations inside the project root:
+For simplicity, perform both of these installations inside the project root (`/learn-web3-dapp/`):
 
 [**Install the latest Rust stable**](https://rustup.rs) : 
 
-```bash
+```text
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Developers using macOS may want to use the following commands instead:
+
+```text
+curl https://sh.rustup.rs -sSf | bash -s -- -y --no-modify-path
+source $HOME/.cargo/env
 ```
 
 [**Install Solana CLI**](https://docs.solana.com/cli/install-solana-cli-tools) v1.6.6 or later :
 
-```bash
+```text
 sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
 ```
 
@@ -133,7 +140,9 @@ Set the CLI config URL to the devnet cluster:
 solana config set --url https://api.devnet.solana.com
 ```
 
-Next, we're going to generate a new keypair using the CLI. Run the following command in your Terminal:
+Next, we're going to generate a new keypair using the CLI. Run the following command in your Terminal :
+
+> **NOTE**: Make sure you're running these commands from the `/learn-web3-dapp/` directory, which is the **root directory** of the repository.
 
 ```bash
 mkdir solana-wallet
@@ -145,6 +154,8 @@ You will need **SOL** available in the account to deploy the program, so get an 
 ```bash
 solana airdrop 1 $(solana-keygen pubkey solana-wallet/keypair.json)
 ```
+
+> **NOTE**: In a Windows terminal, the `$( )` syntax does not work, so just paste the public key you want to fund after the airdrop amount (for example: `solana airdrop 1 C1qx2QUZq7EyLZao4U98fRb8HkT3X5fsGWUc25VyCRBn`).
 
 Verify that everything is ok:
 
@@ -189,9 +200,11 @@ The `.so` extension does not stand for Solana! It stands for "shared object". Yo
 
 ## Deploying the program
 
-Now we're going to deploy the program to the devnet cluster. The CLI provides a very simple interface for this :
+Now we're going to deploy the program to the devnet cluster. The CLI provides a simple interface for this, `solana deploy`:
 
-```bash
+> **NOTE**: Make sure you're running this command from the `/learn-web3-dapp/` directory, which is the **root directory** of the repository (otherwise, you would need to change the paths to the `keypair.json` and the `helloworld.so` file).
+
+```text
 solana deploy -v --keypair solana-wallet/keypair.json dist/solana/program/helloworld.so 
 ```
 
