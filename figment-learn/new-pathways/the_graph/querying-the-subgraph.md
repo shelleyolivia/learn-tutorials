@@ -29,7 +29,7 @@ query {
 Some hints to help you:
 
 - Seem like `value` and `date` are missing.
-- We need the `first` 10, `orderBy` value in the `orderDirection` desc.
+- We need the `first` 10, `orderBy` value and the `orderDirection` desc.
 - To exercise, use the **GraphQL** playground available [here](http://localhost:8000/subgraphs/name/punks)
 
 # 👉 The solution
