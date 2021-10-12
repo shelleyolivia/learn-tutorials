@@ -26,12 +26,11 @@ In a code editor, a subgraph will be a folder with a few different folders and f
 yarn global add @graphprotocol/graph-cli
 ```
 
-Verify the installation was successful by running `graph` in your Terminal: You should see
+Verify the installation was successful by running `graph` in your Terminal. You should see:
 
 ```text
-
-  Welcome to graph CLI version 0.22.2!
-  Type graph --help to view common commands.
+Welcome to graph CLI version 0.22.2!
+Type graph --help to view common commands.
 ```
 
 Let's then cd into the `subgraphs` folder:
@@ -46,7 +45,7 @@ We will be using the `init` command of the Graph CLI (see the [docs](https://git
 
 Using the `graph init` command, generate a subgraph scaffold with the following properties:
 - Use a subgraph name without a prefix
-- Set the contract address to the CryptoPunk contract
+- Set the contract address to the CryptoPunk contract and fetch its ABI
 - Set the Ethereum network to `mainnet`
 - Tell the subgraph to index contract events as entities
 - Set the Graph node to the local one (hint: it's running on `http://localhost:8020/`)
@@ -71,9 +70,9 @@ That's a mouthful! Let's look at it line by line.
 
 - `graph init` is the CLI command that will initialize an empty subgraph. Everything else are flags and options.
 - `--allow-simple-name` simplifies the naming convention of our local graph (no need for a prefix)
-- `--from-contract` uses an already deployed contract at the specified address
+- `--from-contract` gets the ABI from an already deployed contract at the specified address (we'll get back to this later!)
 - `--network mainnet` tells the Graph CLI to look on Mainnet Ethereum to find the contract ABI
-- `--index-event` creates entities from events (not a good idea)
+- `--index-events` creates entities from events
 - `--node http://localhost:8020/` will prepare our script to deploy to our local graph node
 - `punks` is the name of the folder under which the files are created
 
