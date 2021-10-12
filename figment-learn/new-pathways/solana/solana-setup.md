@@ -55,10 +55,6 @@ During the Pathway, you will need to generate a keypair for use in the tutorials
 
 ---------------------------
 
-# Next
-
-You can now move ahead to the instructions of the first tutorial step by clicking on the "Next" button below on the right.
-
 {% hint style="info" %}
 [**Join us on Discord**](https://figment.io/devchat), if you encounter any issues with the tutorial or have any questions!
 {% endhint %}
