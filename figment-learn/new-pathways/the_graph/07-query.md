@@ -34,7 +34,7 @@ Some hints to help you:
 
 # 👉 The solution
 
-In `components/protocols\the_graph\graphql\index.ts` replace the **GraphQL** query with:
+In `components/protocols/the_graph/graphql/index.ts` replace the **GraphQL** query with:
 
 ```graphql
 // solution
