@@ -90,7 +90,7 @@ yarn codegen
 
 What does `yarn codegen` do? This command create some boilerplate code under the `generated` folder. This boilerplate code define **typescript** classes for each `entities` (have a look at `generated/schema.ts`). We will use this code in the next step to define the mappings between our entities and the smart-contract events.
 
-![](../../../.gitbook/assets/pathways/the_graph/yarn-codegen.gif)
+![ezgif-4-ef490e86179d](https://user-images.githubusercontent.com/2707197/136944082-07cd27e2-8038-4b03-a5ef-4abe4c31c1de.gif)
 
 ## ✅ Verify
 
