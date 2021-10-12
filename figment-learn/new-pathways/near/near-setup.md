@@ -11,7 +11,7 @@ Your personal API key can be found on the [**DataHub Services Dashboard**](https
 
 ![](../../../.gitbook/assets/pathways/near/near-setup.gif)
 
-You can then paste your personal API key into `.env.local`, as the value for the environment variable `DATAHUB_NEAR_API_KEY`. This will authenticate you and enable you to make JSON-RPC requests to Polkadot via DataHub:
+You can then paste your personal API key into `.env.local`, as the value for the environment variable `DATAHUB_NEAR_API_KEY`. This will authenticate you and enable you to make JSON-RPC requests to NEAR via DataHub:
 
 ![API keys](https://user-images.githubusercontent.com/2707197/136941013-1aad4f17-8f7f-4816-9c7c-acfbe56f93de.png)
 
