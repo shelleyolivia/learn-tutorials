@@ -22,7 +22,7 @@ Edit the manifest file to accomplish the 3 following things:
 2) **Define only two entities "Punk" and "Account"** under the dataSources mappings.
 3) **Only handle the `PunkBought` event** and name its handler `handlePunkBought`
 
-# 👉 The solution
+## 👉 The solution
 
 Replace the existing contents of `subgraph.yaml` with the following code snippet:
 
@@ -55,6 +55,6 @@ dataSources:
       file: ./src/mapping.ts
 ```
 
-## Make sure it works
+## ✅ Make sure it works
 
 Now, it's time for you to verify if you have followed the instructions carefully, click on the button **Test Manifest** to check that your manifest is well formed.
