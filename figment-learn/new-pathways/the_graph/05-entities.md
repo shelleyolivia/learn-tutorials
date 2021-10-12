@@ -10,7 +10,7 @@ Entities will be defined in the `schema.graphql` file.
 
 ## 🧑🏼‍💻 Your turn! Define the Punk and Account entities
 
-Start from the following code below and fill in the two missing fields: `punksBought` on `Account` and `owner` on `Punk`. Have a look at Nader Dabit's tutorial on how to use `@derivedFrom` to specific a one-to-many relationship.
+Start from the following code below and fill in the two missing fields: `punksBought` on `Account` and `owner` on `Punk`. Have a look at Nader Dabit's tutorial on how to use `@derivedFrom` to specify a one-to-many relationship.
 
 > "For one-to-many relationships, the relationship should always be stored on the 'one' side, and the 'many' side should always be derived."
 
