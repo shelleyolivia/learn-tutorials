@@ -83,7 +83,7 @@ That's a mouthful! Let's look at it line by line.
 
 Once you type Enter, you will be prompted to confirm the information: you can just accept the five suggested inputs. The output should look like:
 
-![](../../../.gitbook/assets/pathways/the_graph/graph-scaffold.gif)
+![ezgif-4-3fb33a9f6ff7](https://user-images.githubusercontent.com/2707197/136943459-b39ec729-7d41-4e93-ab9d-9f41d1c7a30d.gif)
 
 You don't need to run the next steps for now!
 
