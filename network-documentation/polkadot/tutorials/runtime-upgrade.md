@@ -13,7 +13,7 @@ The newest solution for upgrading decentralized systems based on the Substrate f
 
 To successfully follow this tutorial, you should have a basic knowledge about the Rust programming language and Polkadot's Substrate framework.
 
-## Let's start coding
+# Getting started
 
 During the tutorial we are going to make following steps:
 1. build the simplest Substrate based blockchain
