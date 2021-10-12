@@ -55,6 +55,14 @@ dataSources:
       file: ./src/mapping.ts
 ```
 
+## 💡 A word about ABIs
+
+When another smart contract or external application wants to call a smart contract function, it needs to know how to interact with the contract's interface. And since in practice an Ethereum smart contract is deployed on the blockchain as byte code, we need a better way to tell consumers how to invoke the contract and what to expect back.
+
+This is what ABIs (Application Binary Interface) are for! They define the methods and structures that can be used to interact with that binary contract and what shape of data you'll get back.
+
+You can read more about ABIs in the [Solidity docs](https://docs.soliditylang.org/en/latest/abi-spec.html), or check out this [Quicknode article](https://www.quicknode.com/guides/solidity/what-is-an-abi) on the topic.
+
 ## ✅ Make sure it works
 
 Now, it's time for you to verify if you have followed the instructions carefully, click on the button **Test Manifest** to check that your manifest is well formed.
