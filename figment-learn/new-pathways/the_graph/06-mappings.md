@@ -1,15 +1,24 @@
-## 🗺 Mapping event to feed entity
+## 🗺 Mapping events to entities
 
-Remember in the **Tweak the manifest** step we defined a handler next to an event? This handler will the maestro of our subgraph. This piece of code will orchestrate events with entities, to give us what we are asking for: A lovely concerto of data!
+Remember in the "Tweak the manifest" step we defined a handler for each event? It looked like this:
 
-## 👤 Define entities
+```yaml
+eventHandlers:
+  - event: PunkBought(indexed uint256,uint256,indexed address,indexed address)
+    handler: handlePunkBought
+```
 
-Now, we're going to create the `handlePunkBought` function.
+For each event handler that is defined in `subgraph.yaml` under `mapping.eventHandlers` we will create an exported function of the same name. Each handler must accept a single parameter called event with a type corresponding to the name of the event which is being handled.
 
-- Open `src/mapping.ts`
-- Erase the content
+This collection of event handlers is what we call "mappings" and they go in `src/mapping.ts`. They will transform the Ethereum event data into entities defined in your schema. 
 
-First we need to import some code and prototype the function:
+## ✏️ Implement the event handlers
+
+Now we have to implement the `handlePunkBought` eventHandler to be able to process the event data and turn it into an piece of data that can be persisted in our Postgres database.
+
+First, open `src/mapping.ts` and erase its content.
+
+Then we need to import some code and prototype the function:
 
 ```typescript
 import { BigInt } from "@graphprotocol/graph-ts";
@@ -42,10 +51,10 @@ If it does not, we create a new one by filling all the fields. Otherwise, we onl
 
 ```typescript
 else {
-    account.numberOfPunkBought = account.numberOfPunkBought.plus(
-      BigInt.fromI32(1),
-    );
-  }
+  account.numberOfPunkBought = account.numberOfPunkBought.plus(
+    BigInt.fromI32(1),
+  );
+}
 ```
 
 At last and for both cases, we call `save()`.
@@ -56,9 +65,9 @@ account.save();
 
 The creation of a `Punk` entity follows the same logic, as an helper be inform that we can access timestamp of the event using `event.block.timestamp`.
 
-## 👉 The solution
+## 🧑🏼‍💻 Your turn! Finish implement the "handlePunkBought" handler
 
-At the end, your `src/mapping.ts` should look like this:
+We implemented half of the event handler. Can you finish it?
 
 ```typescript
 // solution
@@ -69,6 +78,7 @@ import { Account, Punk } from "../generated/schema";
 
 export function handlePunkBought(event: PunkBoughtEvent): void {
   let account = Account.load(event.params.toAddress.toHexString());
+  
   if (account == null) {
     account = new Account(event.params.toAddress.toHexString());
     account.id = event.params.toAddress.toHexString();
@@ -78,14 +88,52 @@ export function handlePunkBought(event: PunkBoughtEvent): void {
       BigInt.fromI32(1)
     );
   }
+  
+  account.save();
+
+  // Your turn! Write underneath those comments
+  // ---------------------------------------------------------------------
+  // - find (aka load) the Punk using his HexString found in the event
+  // - if there is none, create it and set its "id" and "index" attributes
+  // - set the "owner", "value" and "date" attributes
+  // - save the punk
+}
+```
+
+## 👉 The solution
+
+Your `src/mapping.ts` should look like this:
+
+```typescript
+// solution
+import { BigInt } from "@graphprotocol/graph-ts";
+
+import { PunkBought as PunkBoughtEvent } from "../generated/punks/punks";
+import { Account, Punk } from "../generated/schema";
+
+export function handlePunkBought(event: PunkBoughtEvent): void {
+  let account = Account.load(event.params.toAddress.toHexString());
+  
+  if (account == null) {
+    account = new Account(event.params.toAddress.toHexString());
+    account.id = event.params.toAddress.toHexString();
+    account.numberOfPunkBought = BigInt.fromI32(1);
+  } else {
+    account.numberOfPunkBought = account.numberOfPunkBought.plus(
+      BigInt.fromI32(1)
+    );
+  }
+  
   account.save();
 
   let punk = Punk.load(event.params.punkIndex.toHexString());
+  
   if (punk == null) {
     punk = new Punk(event.params.punkIndex.toHexString());
     punk.id = event.params.punkIndex.toHexString();
     punk.index = event.params.punkIndex;
   }
+  
   punk.owner = event.params.toAddress.toHexString();
   punk.value = event.params.value;
   punk.date = event.block.timestamp;
@@ -96,7 +144,7 @@ export function handlePunkBought(event: PunkBoughtEvent): void {
 
 ## 🚀 Deploy your subgraph
 
-Last but not least, run the following command to create the subgraph and deploy it to your local Graph node:
+Last but not least, run the following command to deploy your subgraph to your local Graph node:
 
 ```bash
 yarn create-local
@@ -106,10 +154,12 @@ yarn deploy-local
 What does those two commands do?
 
 - `yarn create-local` will create an endpoints for our subgraph: here `http://localhost:8000/subgraphs/name/punks
-- `yarn deploy-local` will deploy the subgraph to the above mention endpoints.
+- `yarn deploy-local` will deploy the subgraph to those endpoints
+
+As soon as you run `yarn deploy-local` you will see Docker starting to scan the Ethereum mainnet for punks!
 
 ![](../../../.gitbook/assets/pathways/the_graph/create-deploy-local.gif)
 
 ## ✅ Make sure it works
 
-Now it's time for you to verify that you have followed the instructions carefully. Click on the **Check subgraph deployment** button on the right to check that your deployment has succeeded.
+Now it's time for you to verify that you have followed the instructions carefully. Click on the **Check mappings** button on the right to check that your mappings are correctly implemented.
