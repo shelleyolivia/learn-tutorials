@@ -92,6 +92,6 @@ What does `yarn codegen` do? This command create some boilerplate code under the
 
 ![ezgif-4-ef490e86179d](https://user-images.githubusercontent.com/2707197/136944082-07cd27e2-8038-4b03-a5ef-4abe4c31c1de.gif)
 
-## ✅ Verify
+## ✅ Make sure it works
 
 Before going to the next step, click on the **Check for expected entities** button on the right to make sure your entities are properly defined.
