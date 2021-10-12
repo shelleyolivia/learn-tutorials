@@ -63,7 +63,6 @@ graph init \
   --from-contract 0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB \
   --network mainnet \
   --index-events \
-  --contract-name punks \
   --node http://localhost:8020/ \
   punks
 ```
@@ -75,7 +74,6 @@ That's a mouthful! Let's look at it line by line.
 - `--from-contract` uses an already deployed contract at the specified address
 - `--network mainnet` tells the Graph CLI to look on Mainnet Ethereum to find the contract ABI
 - `--index-event` creates entities from events (not a good idea)
-- `--contract-name punks` sets the contract name to the supplied string, for example: punks
 - `--node http://localhost:8020/` will prepare our script to deploy to our local graph node
 - `punks` is the name of the folder under which the files are created
 
