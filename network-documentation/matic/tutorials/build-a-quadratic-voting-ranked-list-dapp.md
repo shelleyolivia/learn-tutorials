@@ -332,6 +332,89 @@ You should see similar output.
 
 # Communicating with the smart contract with Web3
 
+Now we'll be using Web3 to communicate with our smart contracts from JavaScript.
+
+Create the directory `src/lib` and add a file named `quadratic-voting.js`.
+
+Install the web3 package.
+
+```bash
+yarn add web3
+```
+
+```js
+import Web3 from "web3"
+import QuadraticVoting from "../../build/contracts/QuadraticVoting.json"
+
+let web3
+let contract
+let accounts
+
+(async () => {
+  if (window.ethereum) {
+    web3 = new Web3(window.ethereum)
+    await window.ethereum.request({ method: "eth_requestAccounts" })
+  } else if (window.web3) {
+    web3 = new Web3(window.web3.currentProvider)
+  } else {
+    window.alert("No compatible wallet detected. Please install the Metamask browser extension to continue.")
+  }
+
+  const networkId = await web3.eth.net.getId()
+  const networkData = QuadraticVoting.networks[networkId]
+  contract = new web3.eth.Contract(QuadraticVoting.abi, networkData.address)
+
+  accounts = await web3.eth.getAccounts()
+})()
+
+export async function items(itemId) {
+  const item = await contract.methods.items(itemId).call()
+  return {
+    title: web3.utils.hexToUtf8(item.title),
+    imageHash: web3.utils.hexToUtf8(item.imageHash),
+    description: item.description,
+  }
+}
+
+export async function itemCount() {
+  return await contract.methods.itemCount().call()
+}
+
+export async function createItem(title, imageHash, description) {
+  return await contract.methods.createItem(
+    web3.utils.utf8ToHex(title),
+    web3.utils.utf8ToHex(imageHash),
+    description,
+  )
+    .send({ from: accounts[0] })
+}
+
+export async function positiveVote(itemId, weight) {
+  return await contract.methods.positiveVote(itemId, weight)
+    .send({ from: accounts[0] })
+}
+
+export async function negativeVote(itemId, weight) {
+  return await contract.methods.negativeVote(itemId, weight)
+    .send({ from: accounts[0] })
+}
+
+export async function claim(itemId) {
+  return await contract.methods.claim(itemId)
+    .send({ from: accounts[0] })
+}
+```
+
+The anonymous function allows us to asynchronously define the following variables when the web app is loaded:
+
+- `web3`: An instance of the imported `Web3` class which allows us to interact with the Ethereum blockchain.
+- `contract`: An instance of our QuadraticVoting contract which allows us to use its methods and events.
+- `accounts`: List of our client's Ethereum account addresses.
+
+We need to use `utf8ToHex` because `title` and `imageHash` are defined as the `bytes32` type in our contract.
+
+The exported functions are a more convenient way to serialize/deserialize contract data and create a simpler API. We'll be using these from our Vue components later.
+
 # Uploading image files with IPFS
 
 # Creating the front-end with Vue.js
