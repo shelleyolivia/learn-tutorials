@@ -56,7 +56,7 @@ account.save();
 
 The creation of a `Punk` entity follows the same logic, as an helper be inform that we can access timestamp of the event using `event.block.timestamp`.
 
-# 👉 The solution
+## 👉 The solution
 
 At the end, your `src/mapping.ts` should look like this:
 
@@ -94,7 +94,7 @@ export function handlePunkBought(event: PunkBoughtEvent): void {
 }
 ```
 
-## ✅ Make sure it works
+## 🚀 Deploy your subgraph
 
 Last but not least, run the following command to create the subgraph and deploy it to your local Graph node:
 
@@ -103,11 +103,13 @@ yarn create-local
 yarn deploy-local
 ```
 
-Some notes about the above commands:
+What does those two commands do?
 
 - `yarn create-local` will create an endpoints for our subgraph: here `http://localhost:8000/subgraphs/name/punks
 - `yarn deploy-local` will deploy the subgraph to the above mention endpoints.
 
 ![](../../../.gitbook/assets/pathways/the_graph/create-deploy-local.gif)
+
+## ✅ Make sure it works
 
 Now it's time for you to verify that you have followed the instructions carefully. Click on the **Check subgraph deployment** button on the right to check that your deployment has succeeded.
