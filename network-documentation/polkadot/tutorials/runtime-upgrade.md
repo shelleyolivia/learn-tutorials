@@ -11,7 +11,7 @@ The newest solution for upgrading decentralized systems based on the Substrate f
 
 # Prerequisites
 
-You have very basic knowledge about Rust language and Substrate framework.
+To successfully follow this tutorial, you should have a basic knowledge about the Rust programming language and Polkadot's Substrate framework.
 
 ## Let's start coding
 
