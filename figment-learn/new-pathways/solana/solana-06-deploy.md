@@ -4,7 +4,7 @@ A **program** is to Solana what a **smart contract** is to other protocols. Once
 [You can learn more about Solana's programs here](https://docs.solana.com/developing/on-chain-programs/overview).
 {% endhint %}
 
-# Smart contract review
+# 🧐 Smart contract review
 
 There is a `program` folder at the app's root. It contains the Rust program `contracts/solana/program/src/lib.rs` and some configuration files to help us compile and deploy it.
 
@@ -101,7 +101,7 @@ We can then show in the Program Log how many times the count has been incremente
 
 -----------------------------------------
 
-# Set up the Solana CLI
+# 💻 Set up the Solana CLI
 
 ## Install Rust and Solana CLI
 
@@ -165,7 +165,7 @@ solana account $(solana-keygen pubkey solana-wallet/keypair.json)
 ```
 
 -----------------------------------------
-# Deploy a Solana program
+# 🧩 Deploy a Solana program
 
 {% hint style="info" %}
 The program we're going to deploy is an easy but pretty complete program. This program keeps track of the number of times an account has sent a greeting instruction to it.
@@ -223,7 +223,7 @@ Program Id: 7KwpCaaYXRsjfCTvf85eCVuZDW894zZNN38UMxMpQoaQ
 
 -----------------------------------------
 
-# Challenge
+# 👨‍💻 Challenge
 
 {% hint style="tip" %}
 Before moving to the next step, we need to check that our program has been correctly deployed! For this, we'll need the `programId` of the program. Copy & paste it into the text input, then try to figure out how to complete the code for `pages/api/solana/deploy.ts`.
@@ -270,7 +270,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Solution
+# 👉 Solution
 
 ```tsx
 // solution
@@ -309,7 +309,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Make sure it works
+# ✅ Make sure it works
 
 Once you have the code above saved:
 * Copy and paste the generated address in the text input.   
@@ -321,6 +321,6 @@ For the rest of the challenge we'll keep this programId in the localStorage of o
 
 ----------------------------------
 
-# Conclusion
+# 🏁 Conclusion
 
 So at this point, we've deployed our program to Solana's devnet cluster and checked that it went smoothly. Now it's time to create an account that is owned by our program, to store some data on the Solana cluster! 
