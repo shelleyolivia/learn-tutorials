@@ -417,7 +417,50 @@ The exported functions are a more convenient way to serialize/deserialize contra
 
 # Uploading image files with IPFS
 
+We'll need to add a few things to our `quadratic-voting.js` file to add support for image uploads.
+
+To begin, add the IPFS package.
+
+```bash
+yarn add ipfs-core
+```
+
+Now we will edit the top of our file to import the package.
+
+```js
+import Web3 from "web3"
+import * as IPFS from "ipfs-core"
+import QuadraticVoting from "../../build/contracts/QuadraticVoting.json"
+
+let web3
+let contract
+let accounts
+let ipfs
+```
+
+We will need to create our IPFS node in the loading function.
+
+```js
+  accounts = await web3.eth.getAccounts()
+
+  ipfs = await IPFS.create()
+})()
+```
+
+And then we will define a new `uploadFile` function.
+
+```js
+export async function uploadFile(file) {
+  const { cid } = await ipfs.add(file)
+  return cid
+}
+```
+
+That's all for now! When we upload the image file from an input element, the returned `cid` is what we will use as the `imageHash` variable.
+
 # Creating the front-end with Vue.js
+
+It's finally time to create on our Vue components and build our app UI.
 
 # Styling the components with TailwindCSS
 
