@@ -1,17 +1,22 @@
-# Set your Datahub API key
+# 🧩 DataHub API keys
 
-Create an `.env.local` file at the root of the directory. Copy and paste the contents of the existing `.env.example` into the new file and save it to disk (you could also rename `.env.example` to `.env.local`).
+To make use of the Pathway content, you will require a DataHub account and a valid API key to access Avalanche via DataHub's infrastructure.
+You will need to [sign up for a DataHub account](https://auth.figment.io/sign_up) and verify your email address.
 
-The value for `DATAHUB_AVALANCHE_API_KEY` can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/services/secret). Click on the **Avalanche** icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local`. This will authenticate you and enable you to make JSON-RPC requests to Secret via DataHub.
+To use your API key you must create a new file named `.env.local` in the project root directory `/learn-web3-dapp/`, copying the contents of the existing `.env.example` file. Your API key needs to be pasted into `.env.local` so that you can authenticate your connections with DataHub.
+
+![env-example](https://user-images.githubusercontent.com/2707197/136933393-c0a0ddd9-fce7-4868-9690-9675919e8c58.gif)
+
+Your personal API key can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/). Click on the **Avalanche** icon in the list of available protocols and then copy your key as shown below:
 
 ![](../../../.gitbook/assets/pathways/avalanche/avalanche-setup.gif)
 
-{% hint style="info" %}
-[**Join us on Discord**](https://discord.gg/fszyM7K), if you encounter any issues with the tutorial or have any questions!**
-{% endhint %}
+You can then paste your personal API key into `.env.local`, as the value for the environment variable `DATAHUB_AVALANCHE_API_KEY`. This will authenticate you and enable you to make JSON-RPC requests to Avalanche via DataHub:
+
+![API keys](https://user-images.githubusercontent.com/2707197/136942268-96486e9c-ce22-480f-a094-0b043e29d927.png)
 
 ---------------------------
 
-# Next
-
-You can now move ahead to the next step by clicking on the "Next" button below on the right. There are also links to the instructions for each step on the UI.
+{% hint style="info" %}
+[**Join us on Discord**](https://figment.io/devchat), if you encounter any issues with the tutorial or have any questions!
+{% endhint %}
