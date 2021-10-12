@@ -1,4 +1,4 @@
-# 🤔 What's The Graph?
+## 🤔 What's The Graph?
 
 You might have already read about The Graph and just want to roll up your sleeves and get started with coding, in which case feel free to skip to the "Setup the project" section below
 
@@ -9,11 +9,11 @@ If you want to read about The Graph we've curated some great resources to help y
 - More of a visual learner? The rock star of blockchain Youtube - Finematics - have the perfect video for you: [Binge it here](https://www.youtube.com/watch?v=7gC7xJ_98r8).
 - You're still here?? We have curated more links on [Figment Learn](https://learn.figment.io/protocols/thegraph). Knock yourself out!
 
-# 🐳 Docker
+## 🐳 Docker
 
 In this pathway you'll use Docker to easily run a local Graph node on your machine. [You can install Docker here](https://www.docker.com). Make sure it's installed and running before going forward.
 
-# 🔑 Get an Alchemy API key
+## 🔑 Get an Alchemy API key
 
 We'll need to connect to the Ethereum mainnet to be able to listen to new events happening on the network. Alchemy is a blockchain development platform that provides access to Ethereum through their hosted nodes. 
 
@@ -21,6 +21,6 @@ To get an Alchemy API key, [create an account](https://www.alchemy.com/), then c
 
 ![Alchemy](../../../.gitbook/assets/pathways/the_graph/alchemy-view-api-key.png)
 
-# 👣 Next Steps
+## 👣 Next Steps
 
 Ok, enough of setup! Let's start getting our hands dirty with the first basic step: Running a local Graph node to listen to the Ethereum network.
