@@ -15,25 +15,24 @@ To successfully follow this tutorial, you should have a basic knowledge about th
 
 # Getting started
 
-During the tutorial we are going to make following steps:
-1. build the simplest Substrate based blockchain
-2. run locally the blockchain
-3. add a new feature to runtime
-4. build WASM file
-5. verify of the upgrade - check version
+During the tutorial we will progress through these steps:
+1. Build the simplest Substrate based blockchain
+2. Run the Substrate chain locally (on your own hardware)
+3. Add a new feature to the runtime
+4. Build a WebAssembly (WASM) file
+5. Verify the upgrade by checking the version
 
-Upgrading runtime state transition function consists of following steps: 
+Upgrading the runtime state transition function consists of the following steps:
 
-- bump spec_version
-- build wasm file
-  - `WASM_TARGET_DIRECTORY="$(pwd)" cargo build`
-- Use sudo to perform runtime
+- Bump (increase) the spec_version
+- Build the WASM file: `WASM_TARGET_DIRECTORY="$(pwd)" cargo build`
+-Use the `sudo` command to start the runtime
 
-### Ad. 1: Building the simplest Substrate based blockchain
+# Building a simple Substrate blockchain
 
-Checkout https://github.com/TomaszWaszczyk/substrate-runtime-upgrade-tutorial (master branch) then execute `make init` and after around 10 minutes (depends on performance of your machine) you should see something like:
+Checkout the master branch of https://github.com/TomaszWaszczyk/substrate-runtime-upgrade-tutorial, then execute the command make init and after around 10 minutes (depends on performance of your machine) you should see something like:
 
-```
+```text
 Compiling sc-finality-grandpa v0.8.0
 Compiling rocksdb v0.15.0
 Compiling kvdb-rocksdb v0.9.1
@@ -44,13 +43,13 @@ Compiling frame-benchmarking-cli v2.0.0
 Finished dev [unoptimized + debuginfo] target(s) in 13m 01s
 ```
 
-> Hint: If you want build optimized version of the project execute `cargo build --release`
+> Note: If you want to build an optimized version of the project execute `cargo build --release`
 
-### Ad. 2: Run locally blockchain
+# Run the Substrate node locally
 
-Execute `make run` command:
+Use the `make run` command:
 
-```
+```text
 Running `target/debug/node-template --dev -lruntime=debug`
 Sep 29 18:18:09.106  WARN Running in --dev mode, RPC CORS has been disabled.    
 Sep 29 18:18:09.106  INFO Substrate Node    
@@ -76,15 +75,15 @@ Sep 29 18:18:12.517  INFO ✨ Imported #1 (0xc61a…b216)
 Sep 29 18:18:14.123  INFO 🙌 Starting consensus session on top of parent 0xc61a8f6ea035c0fd2e8acef986a60ec92abbaaa1f30c4781603d4ec83591b216
 ```
 
-Access frontend of running locally node via: `https://polkadot.js.org/apps/#/extrinsics?rpc=ws://127.0.0.1:9944`
+Access the front-end of the local node via: <https://polkadot.js.org/apps/#/extrinsics?rpc=ws://127.0.0.1:9944>
 
 ![](./assets/before-upgrade.png)
 
-We can see that `kitties` pallet has only `create()` function, it is our current state transition function - runtime. What we are going now is to show how adaptable Substrate based blockchains are, we add new feature (breed function).
+We can see that the kitties pallet has only a create() function, it is our current state transition function in the runtime. To demonstrate how adaptable Substrate based blockchains are, we can add a new feature - the breed() function.
 
-## Ad 3: Add a new feature to runtime
+# Adding a feature to the runtime
 
-Before upgrade `spec_version` was equal to `1`, now while making upgrade we have incremented the field into `2` like below:
+Before making an upgrade, spec_version would be 1. Now that we are making an upgrade, we have incremented the field, so it will now be 2 as shown below:
 
 ```rust
 pub const VERSION: RuntimeVersion = RuntimeVersion {
@@ -98,7 +97,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 };
 ```
 
-Our upgrade will add a new function to `kitties` pallet called `breed`, here is the implementation:
+Our upgrade will add a new function to the kitties pallet called `breed`, here is the implementation:
 
 ```rust
 /// Breed kitties
@@ -130,25 +129,25 @@ pub fn breed(origin, kitty_id_1: u32, kitty_id_2: u32) {
 }
 ```
 
-After addition of `breed` function in `kitties` pallet we need to build WASM file.
+After adding this breed function to the kitties pallet, we need to build the WASM file.
 
 Here is a link to the whole new implementation: https://github.com/TomaszWaszczyk/substrate-runtime-upgrade-tutorial/blob/after-runtime-upgrade/pallets/kitties/src/lib.rs
 
-After making upgrade we expect that `kitties` pallet will have `breed` function without stopping running chain. Real adaptability of the blockchain.
+After performing the upgrade, we expect that the kitties pallet will contain the new `breed` function without needing to restart the running Substrate node. Real adaptability of the blockchain!
 
-### Ad. 4: Build WASM file - runtime
+# Building the runtime WASM file
 
-Execute following command in order to build runtime wasm file: `WASM_TARGET_DIRECTORY="$(pwd)" cargo build`.
+Run the terminal command `WASM_TARGET_DIRECTORY="$(pwd)" cargo build` in order to build the runtime WASM file.
 
-After successfully build we expect to have a new file should appear in current directory:
+After a successful build, we expect to have a new file in the current directory:
 
 ![](./assets/wasm.png)
 
-## Ad 5: Upgrade runtime and verify version
+# Upgrading the runtime
 
-We have running node with version `1` and upgrade runtime into version `2`, we expect that version should change to version `2`. If it will happen it proves that we have upgraded working chain. Proof of successfully making upgrade runtime will be our freshly added `breed` function. Let's check it.
+We have a running Substrate node with version 1 and want to upgrade the runtime into version 2. Proof of a successful upgrade will be our freshly added breed function. Let's check, using the front-end.
 
-In order to make upgrade go to `Developer` tab, select `Sudo`. Then make sure that you have selected `system` pallet and `setCode(code)`, check in `file upload` and select freshly created WASM file made in previous step `node_template_runtime.wasm` then check in `with weight override` and in the field `unchecked weight for this call` type example value like `100`. To confirm making upgrade click on `Submit Sudo Unchecked`.
+To perform the upgrade, go to the **Developer** tab, then select **Sudo**. Make sure that you have selected the `system` pallet and `setCode(code)`, check in `file upload` and select the freshly created WASM file made in the previous step: `node_template_runtime.wasm`. Next, check the **with weight override** and in the field **unchecked weight for this call** type a value like 100, for example. To confirm the upgrade, click on **Submit Sudo Unchecked**.
 
 ![](./assets/upgrade.png)
 
@@ -156,15 +155,15 @@ After successfully upgrade you should see updated `spec_version` and have access
 
 ![](./assets/after-upgrade.png)
 
-On the screenshot we can see successfully upgrade, take into consideration that the version of `spec_version` has been changed to incremented value `2`.
+In the screenshot above, we can see the result of a successful upgrade. Notice that `spec_version` has been incremented to 2 (where it says "node-template/2").
 
-## Troubleshooting
+# Troubleshooting
 
-### 1. Problem: First build could be not easy
+## Problem: Rust errors when building
 
-The possible issue you can face with while building is error shown below, it means that you do not have installed proper version of Rust language.
+You may encounter an error while building, such as the one shown below. This means that you do not have the proper version of Rust installed.
 
-```
+```text
    Compiling prost-derive v0.6.1
 error[E0034]: multiple applicable items in scope
    --> /home/tomek/.cargo/registry/src/github.com-1ecc6299db9ec823/prost-derive-0.6.1/src/lib.rs:111:14
