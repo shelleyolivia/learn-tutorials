@@ -10,7 +10,7 @@ Make sure you've installed the [Solana CLI](https://docs.solana.com/cli/install-
 
 # 🧩 DataHub API keys
 
-To make use of the Pathway content, you will require a DataHub account and a valid API key to access Tezos via DataHub's infrastructure.
+To make use of the Pathway content, you will require a DataHub account and a valid API key to access Solana via DataHub's infrastructure.
 You will need to [sign up for a DataHub account](https://auth.figment.io/sign_up) and verify your email address.
 
 To use your API key you must create a new file named `.env.local` in the project root directory `/learn-web3-dapp/`, copying the contents of the existing `.env.example` file. Your API key needs to be pasted into `.env.local` so that you can authenticate your connections with DataHub.
