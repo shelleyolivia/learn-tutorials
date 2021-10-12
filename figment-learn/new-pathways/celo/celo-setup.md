@@ -5,8 +5,6 @@ You will need to [sign up for a DataHub account](https://auth.figment.io/sign_up
 
 To use your API key you must create a new file named `.env.local` in the project root directory `/learn-web3-dapp/`, copying the contents of the existing `.env.example` file. Your API key needs to be pasted into `.env.local` so that you can authenticate your connections with DataHub.
 
-![env-example](https://user-images.githubusercontent.com/2707197/136933393-c0a0ddd9-fce7-4868-9690-9675919e8c58.gif)
-
 Your personal API key can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/). Click on the **Celo** icon in the list of available protocols and then copy your key as shown below:
 
 ![](../../../.gitbook/assets/pathways/celo/celo-setup.gif)
