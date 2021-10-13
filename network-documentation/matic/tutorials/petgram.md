@@ -36,10 +36,13 @@ To avoid potential version related errors & instead of installing the supporting
 
 - Fork the repository located at https://github.com/electrone901/tutorial-petgram, this will make a copy of this project in your own GitHub account.
 
-- Clone the GitHub repository with the command `git clone https://github.com/<YourGitHubUsername>/tutorial-petgram.git`.
-  This will copy the project files from GitHub to your computer.
+- Clone the GitHub repository with the following command (this will copy the project files from GitHub to your computer):
 
-Now you can open the project with your favorite code editor or IDE, such as [VS Code](https://code.visualstudio.com). If you browse the project directory, you’ll notice a basic React app project structure from ([Create React App](https://github.com/facebook/create-react-app)). This ​​contains our front-end React code and we’ll need to make changes to it once our smart contracts have been deployed.
+```text
+git clone https://github.com/<YourGitHubUsername>/tutorial-petgram.git
+```
+
+Now you can open the project with your favorite code editor or IDE, such as [Visual Studio Code](https://code.visualstudio.com). If you browse the project directory, you’ll notice a basic React app project structure from [Create React App](https://github.com/facebook/create-react-app). This contains our front-end React code and we’ll need to make changes to it once our smart contracts have been deployed.
 
 Before running the React front-end, let's install the dependencies with the command `npm install`.
 
@@ -47,7 +50,7 @@ Now that our project has all the dependencies we can run it using the command `n
 
 ![](../../../.gitbook/assets/petgram-img1.png)
 
-Note: As you move forward with this tutorial, make sure your project is reflecting similar results at a given point. There are screenshots as checkpoints for almost every step.
+> **Note**: As you move forward with this tutorial, make sure your project is reflecting similar results at a given point. There are screenshots as checkpoints for almost every step.
 
 # Smart Contracts in Solidity
 
@@ -75,7 +78,7 @@ dotenv is a module that loads environment variables from a `.env` file into Java
 
 The HDWalletProvider class from Truffle enables the Web3 provider and is used to sign transactions for addresses derived from a 12 or 24 word Secret Recovery Phrase (mnemonic).
 
-Let’s import them to our truffle-config.js:
+Let’s import them to our `truffle-config.js`:
 
 ```javascript
 require('dotenv').config()
@@ -87,7 +90,7 @@ We'll also need a `.env` file to store the mnemonic - the twelve word phrase. To
 Your file should look similar to this:
 ![](../../../.gitbook/assets/petgram-img5.png)
 
-Let’s initialize the mnemonic variable by using dotenv: `dotenv` dependency module.
+We can initialize the mnemonic as a variable by using `dotenv`, which allows us to access the environment variables from the `.env` file through `process.env` :
 
 ```javascript
 const mnemonic = process.env.MNEMONIC.toString().trim()
@@ -95,9 +98,9 @@ const mnemonic = process.env.MNEMONIC.toString().trim()
 
 Now we need to define the networks we want to use. Networks specify how we connect Truffle to our Ethereum client and let us set the defaults for web3 which is used to send transactions. For this project, we will use the development and the matic network.
 
-The development network is a special network that Truffle uses by default, generally for testing. The basic setup requires a host, a port number, and a network id. More information about the configuration can be found in the [truffle-docs](https://www.trufflesuite.com/docs/truffle/reference/configuration).
+The development network is a special network that Truffle uses by default, generally for testing. The basic setup requires a host, a port number, and a network id. More information about the configuration can be found in the [Truffle documentation](https://www.trufflesuite.com/docs/truffle/reference/configuration).
 
-Add the following code to your truffle-config.js.
+Add the following code to your `truffle-config.js`:
 
 ```javascript
 require('dotenv').config()
@@ -131,11 +134,28 @@ We also need to specify the contracts build directory, the Solidity version and 
 The contracts build directory is the default output directory path for compiled contracts. In our case, we want the output to be on the frontend of our project.
 We can use the Solidity compiler version 0.6.0 and default setup. The number of runs will affect the tradeoff between contract creation gas cost and subsequent function call gas cost. If you don't mind a large upfront cost, you should have more runs of the compiler. Check out the Solidity docs for more info https://docs.soliditylang.org/en/develop/using-the-compiler.html#using-the-compiler.
 
-Add these solc defaults to your truffle-config.js file:
+Add these solc defaults to your `truffle-config.js` file, below the networks:
 
 ```javascript
 module.exports = {
- networks: {...},
+  networks: {
+    development: {
+      host: '127.0.0.1',
+      port: 7545,
+      network_id: '*', // Match any network id
+    },
+    matic: {
+      provider: () =>
+        new HDWalletProvider(
+          mnemonic,
+          `https://matic-mumbai.chainstacklabs.com`,
+        ),
+      network_id: 80001,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
+  },
  contracts_build_directory: './src/abis/',
  compilers: {
    solc: {
@@ -155,7 +175,7 @@ Now let’s start coding the smart contract. Create a new file in the contracts 
 
 ![](../../../.gitbook/assets/petgram-img6.png)
 
-This is the file where we’ll write all the Pet's token source code with the Solidity programming language. We are going to design our smart contract to store photos off-chain using IPFS for storing the data. NFT metadata often uses decentralized storage like IPFS or Filecoin. Using NFT metadata allows us to upload data and to receive an IPFS hash of the content (a CID) that can be referenced on-chain as a pointer to the content.
+This is the file where we’ll write all the Pet's token source code with the Solidity programming language. We are going to design our smart contract to store photos off-chain using IPFS for storing the data. NFT metadata often uses decentralized storage like IPFS or Filecoin. Using NFT metadata allows us to upload data and to receive an IPFS hash of the content (a CID, or Content Identifier) that can be referenced on-chain as a pointer to the content.
 
 Let’s create the basic structure for the smart contract like this:
 
@@ -170,7 +190,7 @@ contract Pet is ERC721 {
 
 First, we start off by declaring the version of the Solidity programming language that we’ll use to code the smart contract, in this case, version 0.6.0.
 
-Then, we import the OpenZeppelin Solidity library. We need to install it in our project before continuing:
+Then, we import the OpenZeppelin Solidity library. We need to install it in our project before continuing. Use the terminal command:
 
 - `npm i @openzeppelin/contracts@3.4.1`
 
@@ -280,7 +300,8 @@ Let's deploy the smart contract using the command:
 truffle migrate --network matic
 ```
 
-If you're deploying it for the second time or more, use the `--reset` flag to avoid JSON errors: `truffle migrate --network matic --reset`.
+If you're deploying it for the second time or more, use the `--reset` flag to avoid JSON errors:
+`truffle migrate --network matic --reset`.
 
 As long as the deployment was successful, the output should be similar:
 ![](../../../.gitbook/assets/petgram-img8.png)
@@ -1129,12 +1150,12 @@ Albert Carbajal is a web developer, blockchain enthusiast with a passion for Sof
 
 # References
 
-- Truffle docs: https://www.trufflesuite.com/docs/truffle/overview_
-- Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started_
-- MetaMask docs: https://docs.metamask.io/guide/#why-metamask_
-- Web3 docs: https://web3js.readthedocs.io/en/v1.4.0/_
-- React docs: https://reactjs.org/docs/getting-started.html_
-- IPFS docs: https://docs.ipfs.io/concepts/what-is-ipfs/#decentralization_
-- Async/Await: https://www.geeksforgeeks.org/async-await-function-in-javascript/_
-- Material-ui components: https://material-ui.com_
-- React Hooks: https://reactjs.org/docs/hooks-effect.html_
+- Truffle docs: https://www.trufflesuite.com/docs/truffle/overview
+- Polygon (Matic) docs: https://docs.matic.network/docs/develop/getting-started
+- MetaMask docs: https://docs.metamask.io/guide/#why-metamask
+- Web3 docs: https://web3js.readthedocs.io/en/v1.4.0/
+- React docs: https://reactjs.org/docs/getting-started.html
+- IPFS docs: https://docs.ipfs.io/concepts/what-is-ipfs/#decentralization
+- Async/Await: https://www.geeksforgeeks.org/async-await-function-in-javascript
+- Material-ui components: https://material-ui.com
+- React Hooks: https://reactjs.org/docs/hooks-effect.html
