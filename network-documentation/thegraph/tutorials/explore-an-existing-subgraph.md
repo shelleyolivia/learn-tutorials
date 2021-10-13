@@ -8,8 +8,6 @@ In order to complete this tutorial, you will need to have some basic knowledge a
 
 In this tutorial, you will interact with the `Hopr on Mainnet` subgraph. You can use this [playground](https://thegraph.com/explorer/subgraph?id=0x77d63a93c90a9860ab07ee6bc7bc5becad1cbfde-0&view=Playground) to explore it. 
 
-
-
 # Requirements
 
 You will need to have `Node.js >= 14.0.0` and `npm >= 5.6` on your machine.
@@ -24,16 +22,19 @@ cd my-app
 ```
 
 Also, you need to install necessary packages including request client, GraphQL support and ECharts for visualization.
+
 ```text
 npm i @apollo/client graphql echarts-for-react echarts
 ```
 
 Run the app at localhost.
+
 ```text
 npm start
 ```
 
 You should see similar message in your terminal.
+
 ```text
 Compiled successfully!
 
@@ -45,11 +46,12 @@ You can now view my-app in the browser.
 Note that the development build is not optimized.
 To create a production build, use yarn build.
 ```
+
 Then, you are able to see your project at http://localhost:3000 by default.
 
 # Create Query Client
 
-Create `QueryClients.js` under `src` folder. Add following script to configure a query client to interact with [HOPR Subgraph Mainnet](https://thegraph.com/legacy-explorer/subgraph/minatofund/hopr-subgraph-mainnet). You need this client to send GraphQL query to the subgraph endpoint.
+Create a new file called `QueryClients.js` under the `src` folder. Add the following script to configure a query client to interact with [HOPR Subgraph Mainnet](https://thegraph.com/legacy-explorer/subgraph/minatofund/hopr-subgraph-mainnet). You need this client to send GraphQL queries to the subgraph endpoint.
 
 ```javascript
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
@@ -63,7 +65,7 @@ export const hoprClient = new ApolloClient({
 
 # Configure Query and Visualization
 
-Crete `HolderBalance.js` under `src` folder. Add the script below.
+Create the file `HolderBalance.js` under the `src` folder. Add the following code:
 
 ```javascript
 import React from 'react'
@@ -122,10 +124,10 @@ class HolderBalance extends React.Component {
   }
 
   processHolderBalanceData(data) {
-    //Sizes are sorted in descending order
+    // Sizes are sorted in descending order
     const sizes = data.map(item => (parseFloat(item.totalBalance)))
     const spliters = [10, 100, 1000, 10000, 100000]
-    //Find indexes spliting the sizes by given spliters
+    // Find indexes spliting the sizes by given spliters
     let spliterIndex = spliters.length - 1
     let splitingIndexes = [0]
     for (let [idx, size] of sizes.entries()) {
@@ -136,7 +138,7 @@ class HolderBalance extends React.Component {
       if (spliterIndex < 0 )
         break
     }
-    //Split sizes, get chunk size and calculate sum of each chunk
+    // Split sizes, get chunk size and calculate sum of each chunk
     const chunkNames = ['>100k 🐳', '10k-100k', '1k-10k', '100-1k', '10-100', '0-10']
     let splited = []
     for (let i = 0; i < splitingIndexes.length - 1; i++) {
@@ -150,7 +152,7 @@ class HolderBalance extends React.Component {
       name: chunkNames[splitingIndexes.length - 1],
       chunk: sizes.slice(splitingIndexes[splitingIndexes.length - 1])
     })
-    //Update holder balance data
+    // Update holder balance data
     const reducer = (accumulator, currentValue) => accumulator + currentValue
     let holderBalance = splited.map((item) => {
       const length = item.chunk.length
@@ -175,10 +177,6 @@ class HolderBalance extends React.Component {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)'
       },
-      // legend: {
-      //   top: '5%',
-      //   left: 'center'
-      // },
       series: [
         {
           name: 'Holder Balance',
@@ -218,6 +216,7 @@ export default HolderBalance
 Let me explain the functionality of each part of the code.
 
 Import necessary components. 
+
 ```javascript
 import React from 'react'
 import ReactECharts from 'echarts-for-react'
@@ -227,6 +226,7 @@ import {hoprClient} from './QueryClients'
 ```
 
 Define the class and initial state.
+
 ```javascript
 class HolderBalance extends React.Component {
   state = {
@@ -235,7 +235,8 @@ class HolderBalance extends React.Component {
   }
 ```
 
-Configure the query you are going to send. Leave `skip` as a variable because you need to adjust it at runtime. This query means we would like to get accounts' HOPR balance and exclude 0x0 address.
+Configure the query you are going to send. Leave `skip` as a variable because you need to adjust it at runtime. This query means we want to get accounts' HOPR balance and exclude the Zero address (0x0).
+
 ```javascript
  async fetchData() {
     const holderBalanceQuery = `
@@ -252,7 +253,7 @@ Before you move on, you might want to check the raw data in response. Use the pl
 
 ![HOPR Subgraph Playground](../../../.gitbook/assets/hopr-subgraph-playground.png)
 
-Use a while loop to send query until the result has less than 1000 records. This is because a single query can only return 1000 results as maximum. In order to get all data, you need to adjust the `skip` variable until the result data length is less than 1000.
+Use a while loop to send queries until the result has less than 1000 records. This is because a single query can only return 1000 results maximum. In order to get all data, you need to adjust the `skip` variable.
 
 ```javascript
     try {
@@ -290,14 +291,14 @@ Use a while loop to send query until the result has less than 1000 records. This
   }
 ```
 
-Now you have the raw data, and the next part is to visualize it in a pie chart. In this section, we split the accounts into different categories by HOPR token balance. 
+Now you have the raw data, and the next part is to visualize it. In this section, we will split the accounts into different categories by their HOPR token balance.
 
 ```javascript
   processHolderBalanceData(data) {
-    //Sizes are sorted in descending order
+    // Sizes are sorted in descending order
     const sizes = data.map(item => (parseFloat(item.totalBalance)))
     const spliters = [10, 100, 1000, 10000, 100000]
-    //Find indexes spliting the sizes by given spliters
+    // Find indexes spliting the sizes by given spliters
     let spliterIndex = spliters.length - 1
     let splitingIndexes = [0]
     for (let [idx, size] of sizes.entries()) {
@@ -310,9 +311,19 @@ Now you have the raw data, and the next part is to visualize it in a pie chart. 
     }
 ```
 
-The categories are '>100k 🐳', '10k-100k', '1k-10k', '100-1k', '10-100', '0-10', so you need to assign the name to each categorized chunk.
+The categories are:
+
+* '>100k 🐳'
+* '10k-100k'
+* '1k-10k'
+* '100-1k'
+* '10-100'
+* '0-10'
+
+You need to assign the name to each categorized chunk.
+
 ```javascript
-    //Split sizes, get chunk size and calculate sum of each chunk
+    // Split sizes, get chunk size and calculate sum of each chunk
     const chunkNames = ['>100k 🐳', '10k-100k', '1k-10k', '100-1k', '10-100', '0-10']
     let splited = []
     for (let i = 0; i < splitingIndexes.length - 1; i++) {
@@ -326,7 +337,7 @@ The categories are '>100k 🐳', '10k-100k', '1k-10k', '100-1k', '10-100', '0-10
       name: chunkNames[splitingIndexes.length - 1],
       chunk: sizes.slice(splitingIndexes[splitingIndexes.length - 1])
     })
-    //Update holder balance data
+    // Update holder balance data
     const reducer = (accumulator, currentValue) => accumulator + currentValue
     let holderBalance = splited.map((item) => {
       const length = item.chunk.length
@@ -343,7 +354,8 @@ The categories are '>100k 🐳', '10k-100k', '1k-10k', '100-1k', '10-100', '0-10
   }
 ```
 
-Finally, you generate the chart and export it. When the app is still fetching data, it shows `Loading...`. After `state.loading` becoming `false`, show the fresh pie chart.
+Finally, you can generate the chart and export it. When the app is still fetching data, it shows `Loading...`. After `state.loading` becoming `false`, show the fresh pie chart.
+
 ```javascript
   chart() {
     if (this.state.loading) {
@@ -354,10 +366,6 @@ Finally, you generate the chart and export it. When the app is still fetching da
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)'
       },
-      // legend: {
-      //   top: '5%',
-      //   left: 'center'
-      // },
       series: [
         {
           name: 'Holder Balance',
@@ -395,6 +403,7 @@ export default HolderBalance
 ```
 
 Now you can display the new chart in your application. Just replace the code in App.js with the following:
+
 ```javascript
 import './App.css';
 import HolderBalance from './HolderBalance'
@@ -408,13 +417,11 @@ function App() {
 }
 
 export default App;
-
 ```
 
 Please remember to save all of the changes to the code, then refresh the localhost page. You should see the nice pie chart we just created:
 
 ![Graph React App Pie Chart](../../../.gitbook/assets/graph-react-app-pie-chart.png)
-
 
 # Conclusion
 
