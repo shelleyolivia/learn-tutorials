@@ -1,7 +1,3 @@
-# How do on-chain upgrades work and how to compile a runtime?
-
-![](./assets/runtime-upgrade.png)
-
 # Introduction
 
 Decentralization of blockchains has advantages and disadvantages, one of the major advantages is that there is no single unit which has complete power over a system.
@@ -15,6 +11,8 @@ To successfully follow this tutorial, you should have a basic knowledge about th
 
 # Getting started
 
+![](./assets/runtime-upgrade.png)
+
 During the tutorial we will progress through these steps:
 1. Build the simplest Substrate based blockchain
 2. Run the Substrate chain locally (on your own hardware)
@@ -26,7 +24,7 @@ Upgrading the runtime state transition function consists of the following steps:
 
 - Bump (increase) the spec_version
 - Build the WASM file: `WASM_TARGET_DIRECTORY="$(pwd)" cargo build`
--Use the `sudo` command to start the runtime
+- Use the `sudo` command to start the runtime
 
 # Building a simple Substrate blockchain
 
