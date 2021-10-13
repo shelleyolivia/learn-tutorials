@@ -1,6 +1,13 @@
 # Introduction
 
-In this tutorial you will learn how to create a simple React app by leveraging the existing subgraphs. It includes configuring GraphQL queries and simple data visualization. 
+In this tutorial you will learn how to create a simple React app by leveraging some existing Graph Protocol subgraphs. It includes configuring GraphQL queries and explains how to perform simple data visualization using a pie chart.
+
+# Prerequisites
+
+In order to complete this tutorial, you will need to have some basic knowledge about NodeJS, ECharts library and GraphQL query. Also, get familiar with existing subgraph schema and the Graph Explorer can be super helpful.  
+
+In this tutorial, you will interact with the `Hopr on Mainnet` subgraph. You can use this [playground](https://thegraph.com/explorer/subgraph?id=0x77d63a93c90a9860ab07ee6bc7bc5becad1cbfde-0&view=Playground) to explore it. 
+
 
 
 # Requirements
@@ -11,19 +18,23 @@ You will need to have `Node.js >= 14.0.0` and `npm >= 5.6` on your machine.
 
 Run the following command to create a new project.
 
-```bash
+```text
 npx create-react-app my-app
 cd my-app
 ```
 
-Also, you need to install some packages and run the app at localhost.
-```bash
+Also, you need to install necessary packages including request client, GraphQL support and ECharts for visualization.
+```text
 npm i @apollo/client graphql echarts-for-react echarts
+```
+
+Run the app at localhost.
+```text
 npm start
 ```
 
 You should see similar message in your terminal.
-```
+```text
 Compiled successfully!
 
 You can now view my-app in the browser.
@@ -40,7 +51,7 @@ Then, you are able to see your project at http://localhost:3000 by default.
 
 Create `QueryClients.js` under `src` folder. Add following script to configure a query client to interact with [HOPR Subgraph Mainnet](https://thegraph.com/legacy-explorer/subgraph/minatofund/hopr-subgraph-mainnet). You need this client to send GraphQL query to the subgraph endpoint.
 
-```JavaScript
+```javascript
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 
 export const hoprClient = new ApolloClient({
@@ -54,7 +65,7 @@ export const hoprClient = new ApolloClient({
 
 Crete `HolderBalance.js` under `src` folder. Add the script below.
 
-```JavaScript
+```javascript
 import React from 'react'
 import ReactECharts from 'echarts-for-react'
 import { gql } from '@apollo/client'
@@ -207,7 +218,7 @@ export default HolderBalance
 Let me explain the functionality of each part of the code.
 
 Import necessary components. 
-```JavaScript
+```javascript
 import React from 'react'
 import ReactECharts from 'echarts-for-react'
 import { gql } from '@apollo/client'
@@ -215,8 +226,8 @@ import {hoprClient} from './QueryClients'
 
 ```
 
-Define the class and state.
-```JavaScript
+Define the class and initial state.
+```javascript
 class HolderBalance extends React.Component {
   state = {
     loading: true,
@@ -225,7 +236,7 @@ class HolderBalance extends React.Component {
 ```
 
 Configure the query you are going to send. Leave `skip` as a variable because you need to adjust it at runtime. This query means we would like to get accounts' HOPR balance and exclude 0x0 address.
-```JavaScript
+```javascript
  async fetchData() {
     const holderBalanceQuery = `
     query accounts($skip: Int!) {
@@ -237,8 +248,13 @@ Configure the query you are going to send. Leave `skip` as a variable because yo
     `
 ```
 
-Use a while loop to send query until the result has less than 1000 records. This is because a single query can only return 1000 results as maximum. In order to get all data, you need to adjust the `skip` variable.
-```JavaScript
+Before you move on, you might want to check the raw data in response. Use the playground is a good choice. You can find the format and check values easily.
+
+![HOPR Subgraph Playground](../../../.gitbook/assets/hopr-subgraph-playground.png)
+
+Use a while loop to send query until the result has less than 1000 records. This is because a single query can only return 1000 results as maximum. In order to get all data, you need to adjust the `skip` variable until the result data length is less than 1000.
+
+```javascript
     try {
       let skip = 0
       let allResults = []
@@ -274,9 +290,9 @@ Use a while loop to send query until the result has less than 1000 records. This
   }
 ```
 
-Now you have the raw data, and the next part is to visualize it. In this section, we split the accounts into different categories by HOPR token balance. 
+Now you have the raw data, and the next part is to visualize it in a pie chart. In this section, we split the accounts into different categories by HOPR token balance. 
 
-```JavaScript
+```javascript
   processHolderBalanceData(data) {
     //Sizes are sorted in descending order
     const sizes = data.map(item => (parseFloat(item.totalBalance)))
@@ -294,8 +310,8 @@ Now you have the raw data, and the next part is to visualize it. In this section
     }
 ```
 
-The categories are '>100k 🐳', '10k-100k', '1k-10k', '100-1k', '10-100', '0-10'.
-```JavaScript
+The categories are '>100k 🐳', '10k-100k', '1k-10k', '100-1k', '10-100', '0-10', so you need to assign the name to each categorized chunk.
+```javascript
     //Split sizes, get chunk size and calculate sum of each chunk
     const chunkNames = ['>100k 🐳', '10k-100k', '1k-10k', '100-1k', '10-100', '0-10']
     let splited = []
@@ -327,8 +343,8 @@ The categories are '>100k 🐳', '10k-100k', '1k-10k', '100-1k', '10-100', '0-10
   }
 ```
 
-Finally, you generate the chart and export it.
-```JavaScript
+Finally, you generate the chart and export it. When the app is still fetching data, it shows `Loading...`. After `state.loading` becoming `false`, show the fresh pie chart.
+```javascript
   chart() {
     if (this.state.loading) {
       return <p>Loading...</p>
@@ -378,15 +394,15 @@ Finally, you generate the chart and export it.
 export default HolderBalance
 ```
 
-Finally, you can use display the new chart in your app. Please replace the code in `App.js` by the following one. 
-```JavaScript
+Now you can display the new chart in your application. Just replace the code in App.js with the following:
+```javascript
 import './App.css';
 import HolderBalance from './HolderBalance'
 
 function App() {
   return (
     <div className="App">
-      <div> <HolderBalance /> </div>
+      <HolderBalance />
     </div>
   );
 }
@@ -395,15 +411,17 @@ export default App;
 
 ```
 
-Please save all your changes and refresh the localhost page. You should see the nice pie chart we just created. 
+Please remember to save all of the changes to the code, then refresh the localhost page. You should see the nice pie chart we just created:
 
 ![Graph React App Pie Chart](../../../.gitbook/assets/graph-react-app-pie-chart.png)
 
 
 # Conclusion
 
-Congratulations! You complete this tutorial. You have learned how to configure GraphQL query to retrieve data from existing subgraph. You also understand how to visualize the data properly on your React app. 
+Congratulations, you have completed the tutorial! You have learned how to configure a GraphQL query to retrieve data from an existing subgraph. You also understand how to visualize the data properly in a React app.
 
 # About the Author
 
-This tutorial was created by [Minato Fund](https://github.com/minatofund), an active group helping merge blockchain projects operating as a validator.
+This tutorial was created by [Minato Fund](https://github.com/minatofund), an active group helping merge blockchain projects operating as a validator. We are positively working on building and utilizing subgraphs. If you have any questions, please do not hesitate to contact us by:
+* Discord: minatofund#1944
+* Twitter: [@FundMinato](https://twitter.com/FundMinato)
