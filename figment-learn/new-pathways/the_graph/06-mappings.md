@@ -70,7 +70,6 @@ The creation of a `Punk` entity follows the same logic, as an helper be inform t
 We implemented half of the event handler. Can you finish it?
 
 ```typescript
-// solution
 import { BigInt } from "@graphprotocol/graph-ts";
 
 import { PunkBought as PunkBoughtEvent } from "../generated/Contract/Contract";
