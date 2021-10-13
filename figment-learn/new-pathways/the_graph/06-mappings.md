@@ -23,7 +23,7 @@ Then we need to import some code and prototype the function:
 ```typescript
 import { BigInt } from "@graphprotocol/graph-ts";
 
-import { PunkBought as PunkBoughtEvent } from "../generated/punks/punks";
+import { PunkBought as PunkBoughtEvent } from "../generated/Contract/Contract";
 import { Account, Punk } from "../generated/schema";
 
 export function handlePunkBought(event: PunkBoughtEvent): void {
@@ -73,7 +73,7 @@ We implemented half of the event handler. Can you finish it?
 // solution
 import { BigInt } from "@graphprotocol/graph-ts";
 
-import { PunkBought as PunkBoughtEvent } from "../generated/punks/punks";
+import { PunkBought as PunkBoughtEvent } from "../generated/Contract/Contract";
 import { Account, Punk } from "../generated/schema";
 
 export function handlePunkBought(event: PunkBoughtEvent): void {
@@ -108,7 +108,7 @@ Your `src/mapping.ts` should look like this:
 // solution
 import { BigInt } from "@graphprotocol/graph-ts";
 
-import { PunkBought as PunkBoughtEvent } from "../generated/punks/punks";
+import { PunkBought as PunkBoughtEvent } from "../generated/Contract/Contract";
 import { Account, Punk } from "../generated/schema";
 
 export function handlePunkBought(event: PunkBoughtEvent): void {
