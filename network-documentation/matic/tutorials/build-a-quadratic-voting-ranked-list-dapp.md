@@ -92,10 +92,12 @@ contract QuadraticVoting {
     address payable owner;
     uint amount;
     bytes32 title;
-    bytes32 imageHash;
+    string imageHash;
     string description;
     mapping(address => uint) positiveVotes;
     mapping(address => uint) negativeVotes;
+    uint positiveWeight;
+    uint negativeWeight;
   }
 ```
 
@@ -104,7 +106,7 @@ The primary data structure in our app is going to be the Item. Users will vote u
 Any fee paid for a positive vote is rewarded to the creator of the item, creating an economy where the best suggestions, meaning the ones ranked the highest by others, receive the highest earnings. This incentivizes high quality, honest suggestions. Negative vote fees are redistributed to other items.
 
 ```solidity
-  uint public voteCost = 10_000_000_000;
+  uint constant public voteCost = 10_000_000_000;
 
   mapping(uint => Item) public items;
   uint public itemCount = 0;
@@ -120,7 +122,25 @@ As an example of how quadratic voting works, let's say this contract was for a r
   event ItemCreated(uint itemId);
   event Voted(uint itemId, uint weight, bool positive);
 
-  function createItem(bytes32 title, bytes32 imageHash, string memory description) public {
+  function currentWeight(uint itemId, address addr, bool isPositive) public view returns(uint) {
+    if (isPositive) {
+      return items[itemId].positiveVotes[addr];
+    } else {
+      return items[itemId].negativeVotes[addr];
+    }
+  }
+
+  function calcCost(uint currWeight, uint weight) public pure returns(uint) {
+    if (currWeight > weight) {
+      return weight * weight * voteCost;
+    } else if (currWeight < weight) {
+      return (weight * weight - currWeight * currWeight) * voteCost;
+    } else {
+      return 0;
+    }
+  }
+
+  function createItem(bytes32 title, string memory imageHash, string memory description) public {
     uint itemId = itemCount++;
     Item storage item = items[itemId];
     item.owner = msg.sender;
@@ -130,6 +150,8 @@ As an example of how quadratic voting works, let's say this contract was for a r
     emit ItemCreated(itemId);
   }
 ```
+
+`currentWeight` and `calcCost` are helper functions we will be using later.
 
 The function `createItem` is used to publish a new Item object to the ranked list. The item will require a title, IPFS image hash and text description to be set before the object can be created. The current sender is considered the owner of the item.
 
@@ -141,23 +163,38 @@ This is an example of what a published item will look like when we build the UI:
   function positiveVote(uint itemId, uint weight) public payable {
     Item storage item = items[itemId];
     require(msg.sender != item.owner);
-    require(msg.value >= weight * weight * voteCost);
+
+    uint currWeight = item.positiveVotes[msg.sender];
+    require(currWeight != weight);
+
+    uint cost = calcCost(currWeight, weight);
+    require(msg.value >= cost);
+
     item.positiveVotes[msg.sender] = weight;
     item.negativeVotes[msg.sender] = 0;
+    item.positiveWeight += weight;
     item.amount += msg.value;
+
     emit Voted(itemId, weight, true);
   }
 ```
 
-Users are not able to vote for their own items because this would allow them to claim what they spent and use it to vote again, essentially meaning they could infinitely vote on their own items. Therefore we need to make sure the sender is not the item owner. Also, the value of the transaction must be greater than or equal to `weight * weight * voteCost`.
+Users are not able to vote for their own items because this would allow them to claim what they spent and use it to vote again, essentially meaning they could infinitely vote on their own items. Therefore we need to make sure the sender is not the item owner. The value of the transaction must also be enough to cover the cost of voting.
 
 ```solidity
   function negativeVote(uint itemId, uint weight) public payable {
     Item storage item = items[itemId];
     require(msg.sender != item.owner);
-    require(msg.value >= weight * weight * voteCost);
+
+    uint currWeight = item.negativeVotes[msg.sender];
+    require(currWeight != weight);
+
+    uint cost = calcCost(currWeight, weight);
+    require(msg.value >= cost);
+
     item.negativeVotes[msg.sender] = weight;
     item.positiveVotes[msg.sender] = 0;
+    item.negativeWeight += weight;
 
     uint reward = msg.value / (itemCount - 1);
     for (uint i = 0; i < itemCount; i++) {
@@ -166,7 +203,6 @@ Users are not able to vote for their own items because this would allow them to 
 
     emit Voted(itemId, weight, false);
   }
-
 ```
 
 Negative votes are slightly different in their distribution. Rather than reward the owner for a poor addition to the list, the funds are distributed to everyone except the owner. This acts as a sort of basic income for all participants.
@@ -176,11 +212,12 @@ Negative votes are slightly different in their distribution. Rather than reward 
     Item storage item = items[itemId];
     require(msg.sender == item.owner);
     item.owner.transfer(item.amount);
+    item.amount = 0;
   }
 }
 ```
 
-This allows the owner of an item to transfer any reward to their wallet.
+This allows the owner of an item transfer any reward to their wallet.
 
 And there we go! Our smart contract is finished. Now let's learn how to deploy it.
 
@@ -349,8 +386,9 @@ import QuadraticVoting from "../../build/contracts/QuadraticVoting.json"
 let web3
 let contract
 let accounts
+let loaded = false
 
-(async () => {
+;(async () => {
   if (window.ethereum) {
     web3 = new Web3(window.ethereum)
     await window.ethereum.request({ method: "eth_requestAccounts" })
@@ -360,49 +398,13 @@ let accounts
     window.alert("No compatible wallet detected. Please install the Metamask browser extension to continue.")
   }
 
-  const networkId = await web3.eth.net.getId()
-  const networkData = QuadraticVoting.networks[networkId]
+  const networkData = QuadraticVoting.networks["80001"]
   contract = new web3.eth.Contract(QuadraticVoting.abi, networkData.address)
 
   accounts = await web3.eth.getAccounts()
+
+  loaded = true
 })()
-
-export async function items(itemId) {
-  const item = await contract.methods.items(itemId).call()
-  return {
-    title: web3.utils.hexToUtf8(item.title),
-    imageHash: web3.utils.hexToUtf8(item.imageHash),
-    description: item.description,
-  }
-}
-
-export async function itemCount() {
-  return await contract.methods.itemCount().call()
-}
-
-export async function createItem(title, imageHash, description) {
-  return await contract.methods.createItem(
-    web3.utils.utf8ToHex(title),
-    web3.utils.utf8ToHex(imageHash),
-    description,
-  )
-    .send({ from: accounts[0] })
-}
-
-export async function positiveVote(itemId, weight) {
-  return await contract.methods.positiveVote(itemId, weight)
-    .send({ from: accounts[0] })
-}
-
-export async function negativeVote(itemId, weight) {
-  return await contract.methods.negativeVote(itemId, weight)
-    .send({ from: accounts[0] })
-}
-
-export async function claim(itemId) {
-  return await contract.methods.claim(itemId)
-    .send({ from: accounts[0] })
-}
 ```
 
 The anonymous function allows us to asynchronously define the following variables when the web app is loaded:
@@ -410,10 +412,97 @@ The anonymous function allows us to asynchronously define the following variable
 - `web3`: An instance of the imported `Web3` class which allows us to interact with the Ethereum blockchain.
 - `contract`: An instance of our QuadraticVoting contract which allows us to use its methods and events.
 - `accounts`: List of our client's Ethereum account addresses.
+- `loaded`: Tells our front-end it's safe to call contract functions.
 
-We need to use `utf8ToHex` because `title` and `imageHash` are defined as the `bytes32` type in our contract.
+```js
+export function isReady() {
+  return loaded
+}
 
-The exported functions are a more convenient way to serialize/deserialize contract data and create a simpler API. We'll be using these from our Vue components later.
+export function address() {
+  return accounts[0]
+}
+
+export async function voteCost() {
+  return await contract.methods.voteCost().call()
+}
+
+export async function items(itemId) {
+  const item = await contract.methods.items(itemId).call()
+
+  if (item) {
+    return {
+      id: itemId,
+      owner: item.owner,
+      amount: item.amount,
+      title: web3.utils.hexToUtf8(item.title),
+      imageHash: item.imageHash,
+      description: item.description,
+      votes: item.positiveWeight - item.negativeWeight,
+    }
+  } else {
+    return null
+  }
+}
+
+export async function itemCount() {
+  return await contract.methods.itemCount().call()
+}
+
+export async function currentWeight(itemId, isPositive) {
+  return await contract.methods.currentWeight(itemId, address(), isPositive).call()
+}
+
+export async function calcCost(currWeight, weight) {
+  return await contract.methods.calcCost(currWeight, weight).call()
+}
+
+export async function createItem(title, imageHash, description) {
+  return await contract.methods.createItem(
+    web3.utils.utf8ToHex(title),
+    imageHash,
+    description,
+  )
+    .send({ from: address() })
+}
+
+export async function positiveVote(itemId, weight, cost) {
+  return await contract.methods.positiveVote(itemId, weight)
+    .send({ from: address(), value: cost })
+}
+
+export async function negativeVote(itemId, weight, cost) {
+  return await contract.methods.negativeVote(itemId, weight)
+    .send({ from: address(), value: cost })
+}
+
+export async function claim(itemId) {
+  return await contract.methods.claim(itemId)
+    .send({ from: address() })
+}
+
+export async function rankedItems() {
+  const count = await itemCount()
+  let itemsArr = []
+
+  for (let i = 0; i < count; i++) {
+    const item = await items(i)
+    if (item) itemsArr.push(item)
+  }
+
+  return itemsArr.sort((a, b) => a.votes - b.votes)
+}
+```
+
+These exported functions allow us to serialize/deserialize data to and from our smart contracts.
+
+Note the changed fields `id` and `votes` in the `items` function.
+
+We need to use `utf8ToHex` because `title` is defined as the `bytes32` type in our contract.
+
+`rankedItems` creates a list of all published items and sorts it based off of votes.
+
+We'll be using these from our Vue components later.
 
 # Uploading image files with IPFS
 
@@ -436,6 +525,7 @@ let web3
 let contract
 let accounts
 let ipfs
+let loaded = false
 ```
 
 We will need to create our IPFS node in the loading function.
@@ -444,6 +534,8 @@ We will need to create our IPFS node in the loading function.
   accounts = await web3.eth.getAccounts()
 
   ipfs = await IPFS.create()
+
+  loaded = true
 })()
 ```
 
@@ -461,6 +553,235 @@ That's all for now! When we upload the image file from an input element, the ret
 # Creating the front-end with Vue.js
 
 It's finally time to create on our Vue components and build our app UI.
+
+### App
+
+Edit the `src/App.vue` file.
+
+```vue
+<template>
+  <main>
+    <CreateItem />
+    <RankedList />
+  </main>
+</template>
+
+<script>
+import CreateItem from "@/components/CreateItem.vue"
+import RankedList from "@/components/RankedList.vue"
+
+export default {
+  name: "App",
+  components: {
+    CreateItem,
+    RankedList,
+  }
+}
+</script>
+```
+
+This is a simple component containing the 
+
+### CreateItem
+
+Create a file named `src/components/CreateItem.vue`.
+
+```vue
+<template>
+  <form @submit.prevent="submit">
+    <input type="text" v-model="title" placeholder="Title" />
+    <br />
+    <input type="file" placeholder="Upload image" @input="uploadImage" />
+    <br />
+    <p v-if="imageHash">{{ imageHash }}</p>
+    <textarea v-model="description" placeholder="Description" />
+    <br />
+    <input type="submit" value="Create Item" />
+  </form>
+</template>
+
+<script>
+import { uploadFile, createItem } from "@/lib/quadratic-voting"
+
+export default {
+  name: "CreateItem",
+  methods: {
+    async uploadImage(e) {
+      const file = e.target.files[0]
+      this.imageHash = await uploadFile(file)
+    },
+    async submit() {
+      await createItem(this.title, this.imageHash, this.description)
+    }
+  },
+  data() {
+    return {
+      title: "",
+      imageHash: null,
+      description: "",
+    }
+  }
+}
+</script>
+```
+
+This is a form that allows us to fill in data for item creation. In the `uploadImage` function you will see we respond to a file input element's `oninput` event and upload the file using IPFS. In our form element we use `@submit.prevent` to automatically call `e.preventDefault()` before the `submit` function to prevent the page from redirecting.
+
+The component will look like this. We will style it later.
+
+![create item](../../../.gitbook/assets/quadratic-voting-create-item.png)
+
+When you click on the "Create Item" button you should see MetaMask prompt you to confirm the transaction.
+
+![create item MetaMask](../../../.gitbook/assets/quadratic-voting-create-item-metamask.png)
+
+### RankedList
+
+Create a file named `src/components/RankedList.vue`.
+
+```vue
+<template>
+  <section>
+    <h1>Ranked List</h1>
+    <Item v-for="item in items" :key="item.id" :item="item" />
+  </section>
+</template>
+
+<script>
+import Item from "@/components/Item.vue"
+import { isReady, rankedItems } from "@/lib/quadratic-voting"
+
+export default {
+  name: "RankedList",
+  components: {
+    Item,
+  },
+  data() {
+    return {
+      items: [],
+    }
+  },
+  created() {
+    const wait = async () => {
+      if (isReady()) {
+        this.items = await rankedItems()
+      } else {
+        setTimeout(wait, 100)
+      }
+    }
+
+    wait()
+  },
+}
+</script>
+```
+
+This component waits until the contract and IPFS node are defined, checking every 100ms, before filling the page with a sorted list of all items published to the contract.
+
+We will create the `Item` component next so that this will display correctly.
+
+### Item
+
+Create a file named `src/components/Item.vue`.
+
+```vue
+<template>
+  <div>
+    <h2>{{ item.title }}</h2>
+    <img :src="`https://ipfs.io/ipfs/${item.imageHash}`" alt="item image" width="640" height="480" />
+    <p>{{ item.description }}</p>
+    <p>{{ item.owner }}</p>
+    <p>{{ item.amount / 1_000_000_000 }} gwei</p>
+    <template v-if="address() === item.owner">
+      <button @click="claimGwei">Claim</button>
+    </template>
+    <template v-else>
+      <button @click="upvote">Up</button>
+      <p>{{ item.votes + weight - startWeight }}</p>
+      <button @click="downvote">Down</button>
+      <div v-if="weight !== startWeight">
+        <p>Weight: {{ weight }}</p>
+        <p>Cost: {{ cost / 1_000_000_000 }} gwei</p>
+        <button @click="submitVote">Submit Vote</button>
+      </div>
+    </template>
+  </div>
+</template>
+
+<script>
+import { address, currentWeight, calcCost, positiveVote, negativeVote, claim } from "@/lib/quadratic-voting"
+
+export default {
+  name: "Item",
+  props: ["item"],
+  methods: {
+    address,
+    upvote() {
+      this.weight += 1
+      this.setCost()
+    },
+    downvote() {
+      this.weight -= 1
+      this.setCost()
+    },
+    async setCost() {
+      if (this.weight === 0) {
+        this.cost = 0
+      } else {
+        const currWeight = await currentWeight(this.item.id, this.weight > 0)
+        this.cost = await calcCost(currWeight, Math.abs(this.weight))
+      }
+    },
+    async submitVote() {
+      if (this.weight >= 0) {
+        await positiveVote(this.item.id, Math.abs(this.weight), this.cost)
+      } else if (this.weight < 0) {
+        await negativeVote(this.item.id, Math.abs(this.weight), this.cost)
+      }
+    },
+    async claimGwei() {
+      await claim(this.item.id)
+    },
+  },
+  data() {
+    return {
+      weight: 0,
+      startWeight: 0,
+      cost: 0,
+    }
+  },
+  created() {
+    const getWeight = async () => {
+      const posWeight = await currentWeight(this.item.id, true)
+      const negWeight = await currentWeight(this.item.id, false)
+      this.weight = posWeight - negWeight
+      this.startWeight = this.weight
+    }
+    getWeight()
+  }
+}
+</script>
+```
+
+This will by far be our largest and most complex component.
+
+Our `RankedList` component should now look something like this depending on the data you posted. We will style this later.
+
+![ranked items with claim button](../../../.gitbook/assets/quadratic-voting-ranked-items-claim.png)
+
+If you switch your MetaMask wallet to a different account and reload the page, you should see voting controls instead of the "Claim" button.
+
+![ranked items with voting controls](../../../.gitbook/assets/quadratic-voting-ranked-items-voting.png)
+
+Interacting with the "Up"/"Down" buttons will reveal a submit section that allows you to quadratically vote on the item.
+
+![submit vote](../../../.gitbook/assets/quadratic-voting-submit-vote.png)
+
+Notice the `640 gwei` fee, which is calculated from `8 * 8 * 10 gwei` where `10 gwei` is the `voteCost` we defined in our contract.
+
+Clicking the "Submit Vote" button should allow you to confirm a transaction.
+
+![submit vote MetaMask](../../../.gitbook/assets/quadratic-voting-submit-vote-metamask.png)
 
 # Styling the components with TailwindCSS
 
