@@ -33,11 +33,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: punks
+    name: Contract
     network: mainnet
     source:
       address: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB"
-      abi: punks
+      abi: Contract
       startBlock: 13100000
     mapping:
       kind: ethereum/events
@@ -47,7 +47,7 @@ dataSources:
         - Account
         - Punk
       abis:
-        - name: punks
+        - name: Contract
           file: ./abis/Contract.json
       eventHandlers:
         - event: PunkBought(indexed uint256,uint256,indexed address,indexed address)
