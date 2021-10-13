@@ -48,7 +48,7 @@ dataSources:
         - Punk
       abis:
         - name: punks
-          file: ./abis/punks.json
+          file: ./abis/Contract.json
       eventHandlers:
         - event: PunkBought(indexed uint256,uint256,indexed address,indexed address)
           handler: handlePunkBought
