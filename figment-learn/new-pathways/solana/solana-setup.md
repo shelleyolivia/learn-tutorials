@@ -8,12 +8,32 @@ Make sure you've installed the [Solana CLI](https://docs.solana.com/cli/install-
 
 ---------------------------
 
+# 🧑‍💻 Get started
+
+Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/) (you'll need `v14.17.0` or greater) and [yarn](https://yarnpkg.com/getting-started/install) installed. Then clone the repo and run the `yarn` command to install the dependencies:
+
+```
+git clone https://github.com/figment-networks/learn-web3-dapp.git
+cd learn-web3-dapp
+yarn
+```
+
+Start the Next.js development server on the default port 3000 with:
+
+```
+yarn dev
+```
+
+---------------------------
+
 # 🧩 DataHub API keys
 
 To make use of the Pathway content, you will require a DataHub account and a valid API key to access Solana via DataHub's infrastructure.
 You will need to [sign up for a DataHub account](https://auth.figment.io/sign_up) and verify your email address.
 
 To use your API key you must create a new file named `.env.local` in the project root directory `/learn-web3-dapp/`, copying the contents of the existing `.env.example` file. Your API key needs to be pasted into `.env.local` so that you can authenticate your connections with DataHub.
+
+> 💡 **Tip**: You can find the `.env.example` file in the root directory of the project which you just cloned: `/learn-web3-dapp/.env.example`
 
 Your personal API key can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/). Click on the **Solana** icon in the list of available protocols and then copy your key as shown below:
 
@@ -22,6 +42,8 @@ Your personal API key can be found on the [**DataHub Services Dashboard**](https
 You can then paste your personal API key into `.env.local`, as the value for the environment variable `DATAHUB_SOLANA_API_KEY`. This will authenticate you and enable you to make RPC requests to Solana via DataHub:
 
 ![API keys](https://user-images.githubusercontent.com/2707197/136934560-086acda2-6bfe-4dc1-a75b-d9dbff036a12.png)
+
+---------------------------
 
 # Using a Test Validator
 
