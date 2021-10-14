@@ -347,6 +347,7 @@ def divest_liquidity(self, lp_amount: sp.TNat):
     self.data.tez_pool = self.data.tez_pool - sp.utils.nat_to_mutez(token_out)
     self.data.token_pool = sp.as_nat(self.data.token_pool - token_out)
     self.data.invariant = self.data.token_pool * sp.utils.mutez_to_nat(self.data.tez_pool)
+    self.burn_lp(lp_amount)
 
     sp.if tez_out > sp.nat(0):
         self.transfer_tez(to_=sp.sender, amount=sp.utils.nat_to_mutez(tez_out))
@@ -380,6 +381,8 @@ Now we are updating the contract's storage and using our utility functions to se
 self.data.tez_pool = self.data.tez_pool - sp.utils.nat_to_mutez(token_out)
 self.data.token_pool = sp.as_nat(self.data.token_pool - token_out)
 self.data.invariant = self.data.token_pool * sp.utils.mutez_to_nat(self.data.tez_pool)
+self.burn_lp(lp_amount)
+
 
 sp.if tez_out > sp.nat(0):
     self.transfer_tez(to_=sp.sender, amount=sp.utils.nat_to_mutez(tez_out))
