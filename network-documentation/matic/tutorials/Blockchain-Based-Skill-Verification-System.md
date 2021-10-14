@@ -1,32 +1,12 @@
-# Blockchain-Based Skill Verification System
-
-## Introduction
+# Introduction
 
 In this tutorial, you will learn how to build a skill verification system using blockchain from scratch and deploy it on the Polygon Mumbai test network. Before diving into the building part, let's first see why we need a skill verification system using blockchain.
 
-## Problem Statement
-
-One of the most basic yet most important tasks for every firm is the verification of the candidate's qualifications and experience before hiring. With an increasing number of applying candidates especially in larger firms, verifying candidate qualifications and experience is becoming very time-consuming, and as a result is overlooked many times. This problem of candidates falsifying their information is an increasing concern for the HR department and while conventional skill verification systems are useful, they are still far from perfect to handle this.
-
-## How we plan to tackle the problem
-
-Blockchain-based skill verification will be an ideal solution to this problem as it provides a transparent, trustworthy, and independent platform that also reduces the time spent on conducting competency checks. With blockchain, any user can enter their details regarding skills, certifications, and work experience and get those details verified by their respective company coworkers, managers, and team leaders with complete transparency.  
-
-In our solution, every user whether they are an employee or an employer will have a unique id via which they can be uniquely identified across the network. It will be very simple to verify the qualifications of any candidate as each and every one of their skills will have their own list of linked certifications and endorsements. And their skill will also get a verified badge once it is endorsed by the managers/employers of their current company.
-
-New users and companies shall be cross verified by platforms such as LinkedIn via OAuth for adding an additional layer of verification. The creation of companies will also require at least two verified manager-level employees along with the other standard details. The users can add a company to their work experience only after getting their joining request approved by the company.
-
-## Prerequisites
+# Prerequisites
 
 This tutorial assumes that you have some beginner-level programming knowledge with solidity,web3, React.js, and an understanding of basic blockchain principles.
 
-## Implementation
-
-For this implementation, we shall be using React.js and Web3.js for the frontend of the web app and Solidity to create Ethereum compatible smart contracts which will be deployed on the Polygon network. By using the Polygon network we are relying on the solid security of the Ethereum network while getting its low gas fees and high throughput of layer 2 scaling at the same time. This will allow for a much more scalable solution by increasing the number of peak allowable simultaneous users while maintaining a viable response time. 
-
-Here we are using React.js for the frontend but you can use any frontend framework of your choice.
-
-## Requirements
+# Requirements
 
 We will need the following things on your PC to start with this tutorial rest of the things we will tell you when they are required.
 
@@ -39,13 +19,31 @@ We will need the following things on your PC to start with this tutorial rest of
 
 **Note:** Refer to the reference section at the end if you have any doubts about these requirements.
 
-## Roadmap
+# Problem Statement
+
+One of the most basic yet most important tasks for every firm is the verification of the candidate's qualifications and experience before hiring. With an increasing number of applying candidates especially in larger firms, verifying candidate qualifications and experience is becoming very time-consuming, and as a result is overlooked many times. This problem of candidates falsifying their information is an increasing concern for the HR department and while conventional skill verification systems are useful, they are still far from perfect to handle this.
+
+# How we plan to tackle the problem
+
+Blockchain-based skill verification will be an ideal solution to this problem as it provides a transparent, trustworthy, and independent platform that also reduces the time spent on conducting competency checks. With blockchain, any user can enter their details regarding skills, certifications, and work experience and get those details verified by their respective company coworkers, managers, and team leaders with complete transparency.  
+
+In our solution, every user whether they are an employee or an employer will have a unique id via which they can be uniquely identified across the network. It will be very simple to verify the qualifications of any candidate as each and every one of their skills will have their own list of linked certifications and endorsements. And their skill will also get a verified badge once it is endorsed by the managers/employers of their current company.
+
+New users and companies shall be cross verified by platforms such as LinkedIn via OAuth for adding an additional layer of verification. The creation of companies will also require at least two verified manager-level employees along with the other standard details. The users can add a company to their work experience only after getting their joining request approved by the company.
+
+# Implementation
+
+For this implementation, we shall be using React.js and Web3.js for the frontend of the web app and Solidity to create Ethereum compatible smart contracts which will be deployed on the Polygon network. By using the Polygon network we are relying on the solid security of the Ethereum network while getting its low gas fees and high throughput of layer 2 scaling at the same time. This will allow for a much more scalable solution by increasing the number of peak allowable simultaneous users while maintaining a viable response time. 
+
+Here we are using React.js for the frontend but you can use any frontend framework of your choice.
+
+# Roadmap
 
 We will first start with building the contracts using solidity and deploying them locally then we will move to the development of front end with react and connect to our contracts using web3 and at last deploying the contracts on the Polygon Mumbai network and for the deployment of frontend, we will show it using netlify.
 
-## Project Environment Setup
+# Project Environment Setup
 
-### Setup project using Create React App
+## Setup project using Create React App
 
 ```bash
 # Create and setup a folder named Decentraskill
@@ -54,7 +52,7 @@ npx create-react-app Decentraskill
 cd Decentraskill
 ```
 
-### Install and setup required dependencies
+## Install and setup required dependencies
 
 ```bash
 # This will install truffle globally (only need to do this once)
@@ -63,7 +61,11 @@ npm install -g truffle
 npm install web3
 # This will setup the truffle project in the current directory
 truffle init .
-# After following these steps, you should have a folder structure like:
+```
+
+After following these steps, you should have a folder structure like:
+
+```bash
 ├── contracts
 ├── migrations
 ├── node_modules
@@ -74,14 +76,13 @@ truffle init .
 └── package-lock.json
 ```
 
-### Configure truffle-config.js
+## Configure truffle-config.js
 
 Replace the contents of your truffle-config.js file with the following code snippet:
 
 ```jsx
 module.exports = {
-	// React only allows importing the built smart contract code (abis) from the
-	// src directory
+  // React only allows importing the built smart contract code (abis) from the src directory
   contracts_build_directory: path.join(__dirname, 'src/abis'),
   networks: {
     development: {
@@ -98,7 +99,7 @@ module.exports = {
 };
 ```
 
-### Configure initial migrations
+## Configure initial migrations
 
 Update the 1_initial_migration.js file with the desired smart contract file name:
 
@@ -110,28 +111,28 @@ module.exports = function (deployer) {
 };
 ```
 
-## Smart Contracts in Solidity
+# Smart Contracts in Solidity
 
 Let us start by creating the Decentraskill.sol smart contract in the contracts folder. Here we first define the global/storage variables of the smart contracts. The first two lines of the contract define the smart contract license type and the compatible solidity version respectively. 
 
-```jsx
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.1;
 /*
 userid and company id is a unique natural number representing a account globally.
 */
 contract Decentraskill {
-		company[] public companies; // List of companies
-    user[] public employees; // List of employee/user 's ids
-    certificate[] public certifications; // List of certificates
-    endorsment[] public endorsments; // List of endorsements
-    skill[] public skills; // List of skills 
-    experience[] public experiences; // List of experiances
+    company[] public companies; 
+    user[] public employees;
+    certificate[] public certifications; 
+    endorsment[] public endorsments; 
+    skill[] public skills; 
+    experience[] public experiences; 
 ```
 
 For the sign-in/signup process, we plan to use the LinkedIn OAuth as the first layer of security after which we shall map the email id of the user to their current wallet address in the smart contract. So every time the user tries to sign in, the user needs to sign in via the LinkedIn OAuth and also verify their wallet address. 
 
-```jsx
+```solidity
 // mapping of account's mail id with account's wallet address
 mapping(string => address) public email_to_address;
 // mapping of wallet address with account id 
@@ -140,7 +141,7 @@ mapping(address => uint256) public address_to_id;
 mapping(address => bool) public is_company;
 ```
 
-### Account Structure
+## Account Structure
 
 Whenever someone signs up, there can be two kinds of accounts: the company account and the user account.
 
@@ -148,14 +149,14 @@ Whenever someone signs up, there can be two kinds of accounts: the company accou
 
 The company account shall be maintaining a list of current and previously working employees. This account shall have the permissions to add and remove any of the employees of the company and also promote an employee to the manager level.
 
-```jsx
+```solidity
 struct company {
-		uint256 id; //company id which is the index of id in the global company array
-    string name; // Company name
-    address wallet_address; // Wallet address connected with the company account
-    uint256[] current_employees; // user id's of the company's current employees
-    uint256[] previous_employees; // user id's of the company's previous employees
-    uint256[] requested_employees; // user id's of the requests made to company for employment status
+    uint256 id; //company id which is the index of id in the global company array
+    string name; 
+    address wallet_address;
+    uint256[] current_employees; 
+    uint256[] previous_employees; 
+    uint256[] requested_employees;
 }
 ```
 
@@ -163,30 +164,30 @@ struct company {
 
 A user account contains all the skills, certifications, and work experience of the user. This account can be of a standard employee level or a manager level account. A manager-level account shall have similar privileges as the company account but only over the standard employee accounts. They do not have any authority over those of similar or higher-level accounts.
 
-```jsx
+```solidity
 struct user {
-    uint256 id; // user's id
-    uint256 company_id; // user's current company id
-    string name; // user's name
-    address wallet_address; // user's wallet address connected to account
-    bool is_employed; // bool representing weather user is currently employed or not
-    bool is_manager; // bool representing weather manager 
-    uint256 num_skill; // count of number of skills user has
-    uint256[] user_skills; // list of user's skills  
-    uint256[] user_work_experience; // list of user's work experiance
+    uint256 id; 
+    uint256 company_id; 
+    string name; 
+    address wallet_address;
+    bool is_employed; 
+    bool is_manager; 
+    uint256 num_skill; 
+    uint256[] user_skills; 
+    uint256[] user_work_experience; 
 }
 
 struct experience {
-    string starting_date; // starting date of employment
-    string ending_date; // ending date of employment
-		string role;
-    bool currently_working; // bool representing weather user is presently working here or not
-    uint256 company_id; // company id
-    bool is_approved; // bool representing that experiance is approved by company
+    string starting_date; 
+    string ending_date; 
+    string role;
+    bool currently_working; 
+    uint256 company_id; 
+    bool is_approved; 
 }
 ```
 
-### Sign Up Process
+## Sign Up Process
 
 For the signup function, the contract takes in the user email, name, and account type(user/company). Depending on the account type, we add a new entry to the company global array or the employee's global array and then update the parameters of the newly created object. After the account is created, its id (index of the object in its respective global array) is linked with the email address and account type in the global mappings we have defined above.
 
@@ -194,13 +195,13 @@ For the signup function, the contract takes in the user email, name, and account
 
 **Note:** We use calldata as storage location for the input string as it results in lesser gas fees compared to storage in memory.  
 
-```jsx
+```solidity
 function sign_up(
-		string calldata email,
+    string calldata email,
     string calldata name,
     string calldata acc_type // account type (Company/User)
 ) public {
-		// first we check that account does not already exists
+    // first we check that account does not already exists
     require(
         email_to_address[email] == address(0),
         "error: user already exists!"
@@ -213,14 +214,14 @@ function sign_up(
         new_user.id = employees.length - 1; // give account a unique user id
         new_user.wallet_address = msg.sender;
         address_to_id[msg.sender] = new_user.id;
-        new_user.user_skills = new uint256[](0); // this initilizes a empty array of user's skill id
+        new_user.user_skills = new uint256[](0);
         new_user.user_work_experience = new uint256[](0);
     } else { // for company account type
         company storage new_company = companies.push(); // creates a new company and returns a reference to it
         new_company.name = name; 
         new_company.id = companies.length - 1; // give account a unique company id
         new_company.wallet_address = msg.sender; 
-        new_company.current_employees = new uint256[](0); // this initializes a empty array of company's employees
+        new_company.current_employees = new uint256[](0);
         new_company.previous_employees = new uint256[](0);
         address_to_id[msg.sender] = new_company.id; 
         is_company[msg.sender] = true;
@@ -230,7 +231,7 @@ function sign_up(
 
 As Solidity does not have any inbuilt string comparison function of its own, we need to create it on our own. To do this we first convert the string to bytes and then compare the hash of these resulting bytes created by the keccak256 function. These functions are "pure" as they do not view or modify any state variables.
 
-```jsx
+```solidity
 function memcmp(bytes memory a, bytes memory b)
     internal
     pure
@@ -248,16 +249,16 @@ function strcmp(string memory a, string memory b) // string comparison function
 }
 ```
 
-### Login Process
+## Login Process
 
 For the login function, the contract simply checks if the wallet address of the account is the same as the wallet address of the person trying to sign in. If the address matches, then it returns the account type (company/user). 
 
 **Note:** We use the view function modifier as the function does not modify the state (any global variables) and only "views" them.
 
-```jsx
+```solidity
 function login(string calldata email) public view returns (string memory) {
-		// checking the function caller's wallet address from global map containing email address mapped to wallet address
-		require(
+	// checking the function caller's wallet address from global map containing email address mapped to wallet address
+	require(
         msg.sender == email_to_address[email],
         "error: incorrect wallet address used for signing in"
     );
@@ -265,11 +266,11 @@ function login(string calldata email) public view returns (string memory) {
 }
 ```
 
-### Updation of Wallet Address
+## Updation of Wallet Address
 
 We need to consider that a user might want to change the wallet address linked to their email/user id. To do this, all the user needs to do is just provide the new wallet address while connected to their current/previous wallet address.
 
-```jsx
+```solidity
 function update_wallet_address(string calldata email, address new_address)
     public
 {
@@ -284,28 +285,28 @@ function update_wallet_address(string calldata email, address new_address)
 }
 ```
 
-### Skill Verification
+## Skill Verification
 
 Every single skill of the user shall be linked to the list of endorsements and certifications for that particular skill. These skills will only be marked as verified when a manager-level account of their current or previous companies endorse it. So whenever a potential employer visits their profile they will get a complete list of skills from which the verified ones can be easily located. These skills can be endorsed by any user and a distinctive tag shall be shown for the endorsements made by the user's coworkers and managers. These endorsements shall include a personalized review of the user's skill thus reducing the number of spam endorsements.
 
-```jsx
+```solidity
 struct certificate {
     string url; 
     string issue_date;  
     string valid_till; 
     string name;
-    uint256 id; // 
+    uint256 id;
     string issuer;
 }
 
 struct endorsment {
     uint256 endorser_id;
-		string date;
+    string date;
     string comment;
 }
 
 struct skill {
-		uint256 id;
+    uint256 id;
     string name;
     bool verified;
     uint256[] skill_certifications;
@@ -315,7 +316,7 @@ struct skill {
 
 For the functions used for the creation or updating of user data, only the linked user should be able to call them.  To do this we create function modifiers that will allow us to reuse the necessarily *require statements* in multiple functions thus avoiding the rewriting of the same code again and again.
 
-```jsx
+```solidity
 modifier verifiedUser(uint256 user_id) {
     require(user_id == address_to_id[msg.sender]);
     _;
@@ -324,7 +325,7 @@ modifier verifiedUser(uint256 user_id) {
 
 For adding an experience to a particular user, the *add_experiance* function will take the user's id, employment starting date, and ending date, and employer id i.e company id. This function creates a new object in the experiences global array and adds its id in the user's *user_work_experience* array and the company's *requested_employees* array.
 
-```jsx
+```solidity
 function add_experience(
     uint256 user_id,
     string calldata starting_date,
@@ -336,7 +337,7 @@ function add_experience(
     new_experience.currently_working = false;
     new_experience.is_approved = false;
     new_experience.starting_date = starting_date;
-		new_experience.role = role;
+    new_experience.role = role;
     new_experience.ending_date = ending_date;
     employees[user_id].user_work_experience.push(experiences.length - 1);
     companies[company_id].requested_employees.push(experiences.length - 1);
@@ -345,7 +346,7 @@ function add_experience(
 
 For approving experience, the *approve_experience* function will take experience id which is an id from the global *experiences* array, and a company id. First, the function will check that the person calling the function has the manager role in the given company. and then it will make the *is_approved* bool in the experiences list true.
 
-```jsx
+```solidity
 function approve_experience(uint256 exp_id, uint256 company_id) public {
 	  require(
 	      (is_company[msg.sender] &&
@@ -377,7 +378,7 @@ function approve_experience(uint256 exp_id, uint256 company_id) public {
 
 Now, Let say any employee does not work in a particular company so, to remove the employee from the company employee list we have two options either we shift the list after removing the employee from the particular position this method will be too costly as it will take too much gas fees another effective alternative to this if we change the employee id value to store a dummy user id in place which can later be reused to store new employee in that list. For this, we made a dummy user profile in the constructor so that it will be called when smart contracts are deployed on the network and we can use this profile whenever we need. 
 
-```jsx
+```solidity
 constructor() {
     user storage dummy_user = employees.push();
     dummy_user.name = "dummy";
@@ -390,7 +391,7 @@ constructor() {
 
 To approve a manager, the function *approve_manager* will take the employee id as input and verify that the account calling the function has a "company" account type. It will then make sure that this employee id is present in the company's "current employees" list and if all this checks out it will give that employee a manager tag by making its *is_manager* bool true.
 
-```jsx
+```solidity
 function approve_manager(uint256 employee_id) public {
 		require(is_company[msg.sender], "error: sender not a company account");
     require(
@@ -407,10 +408,10 @@ function approve_manager(uint256 employee_id) public {
 
 To add to skills a user will call a function that will push the input skill in the *skills* list. **
 
-```jsx
+```solidity
 function add_skill(uint256 userid, string calldata skill_name)
-		public
-		verifiedUser(userid) { // the modifier that we created above 
+    public
+    verifiedUser(userid) { // the modifier that we created above 
     skill storage new_skill = skills.push();
     employees[userid].user_skills.push(skills.length - 1);
     new_skill.name = skill_name;
@@ -422,15 +423,15 @@ function add_skill(uint256 userid, string calldata skill_name)
 
 Similarly, we will make the add certifications function. 
 
-```jsx
+```solidity
 function add_certification(
-		uint256 user_id,
+    uint256 user_id,
     string calldata url,
     string calldata issue_date,
     string calldata valid_till,
     string calldata name,
     string calldata issuer,
-		uint256 linked_skill_id
+    uint256 linked_skill_id
 ) public verifiedUser(user_id) {
     certificate storage new_certificate = certifications.push();
     new_certificate.url = url;
@@ -439,17 +440,17 @@ function add_certification(
     new_certificate.name = name;
     new_certificate.id = certifications.length - 1;
     new_certificate.issuer = issuer;
-		skills[linked_skill_id].skill_certifications.push(new_certificate.id);
+    skills[linked_skill_id].skill_certifications.push(new_certificate.id);
 }
 ```
 
 *endorse_skill* function can be called by a manager, coworker or any user. To endorse someone endorsee must give a personalized comment about the person, this will help us in spam reductions of endorsements. if the endorsee is manager in the user's current company this will also make the user's skill verified.  **
 
-```jsx
+```solidity
 function endorse_skill(
     uint256 user_id,
     uint256 skill_id,
-		string calldata endorsing_date,
+    string calldata endorsing_date,
     string calldata comment
 ) public {
     endorsment storage new_endorsemnt = endorsments.push();
@@ -468,7 +469,7 @@ function endorse_skill(
 }
 ```
 
-## Connecting frontend with smart contracts using web3
+# Connecting frontend with smart contracts using web3
 
 To connect the smart contract with the React.js frontend, we are going to be using Web3.js. We shall be storing all the important details which shall be reused in various components in a react state variable using the useState hook to persist object across rerenders.
 
@@ -667,9 +668,9 @@ const endorseSkill = async (empId, skillId, comment) => {
 };
 ```
 
-## Deploying smart contacts
+# Deploying smart contacts
 
-1. **To** **Local Network**
+## **To** **Local Network**
 
 To deploy the smart contracts locally firstly we check our *truflle.config.js* to make sure that we have the same port from ganache(default: 8545) in development and the root of our truffle project is set properly.
 
@@ -699,9 +700,9 @@ Compiler Error: Stack too deep when compiling inline assembly: Variable headStar
 
 To resolve this error, you need to change the storage type of some input/output function parameters from calldata to memory. Read [this](https://medium.com/coinmonks/stack-too-deep-error-in-solidity-608d1bd6a1ea) article to know more.
 
-1. **To** **Polygon (Mumbai) Testnet**
+## **To** **Polygon (Mumbai) Testnet**
 
-To deploy smart contracts in the Polygon Mumbai network we will use the services of [Alchemy](https://www.alchemy.com/) platform. In Alchemy login using your Google account, click on create a new app on dashboard, while creating choose environment as development, chain as polygon, and network as Polygon Mumbai. Now we are going to configure our *truffle.config.js*
+To deploy smart contracts in the Polygon Mumbai network we will use the services of the [Alchemy](https://www.alchemy.com/) platform. In Alchemy login using your Google account, click on create a new app on dashboard, while creating choose environment as development, chain as polygon, and network as Polygon Mumbai. Now we are going to configure our *truffle.config.js*
 
 While deploying to an actual network instead of the development network, we need to connect to our metamask account (using HDWalletProvider) to pay for the gas fees for deploying the contract.
 
@@ -761,23 +762,23 @@ Now, you are all set to run the following commands in the cmd to deploy our cont
 truffle migrate --network=matic 
 ```
 
-## Frontend using Reactjs
+# Frontend using Reactjs
 
 Link to the wireframe: [https://whimsical.com/decentraskill-UukeCuFudL9kNGsC6rqaGJ](https://whimsical.com/decentraskill-UukeCuFudL9kNGsC6rqaGJ)
 
-Well till now we have successfully set up smart contracts deployed them on the polygon network and connected with our frontend web3. The only thing now we have left to do is making some great User Interface screens. you can use any of favorite framework for this part. We are going to using ours i.e, react. We are not going to be explaining this part as this is a bit out of scope for this article and there are various great resources out there about it. still, If you come across some problems We are providing you with the GitHub repository link (It is still in progress) and the wireframes for it, and If the problem still persists find us in the author's section. 
+Well till now we have successfully set up smart contracts deployed them on the polygon network and connected with our frontend web3. The only thing now we have left to do is making some great user interface screens. You can use any of favorite framework for this part. We are going to using ours i.e, react. We are not going to be explaining this part as this is a bit out of scope for this article and there are various great resources out there about it. Still, If you come across some problems We are providing you with the GitHub repository link (It is still in progress) and the wireframes for it, and If the problem still persists find us in the author's section. 
 
-## Deploying frontend on Netlify
+# Deploying frontend
 
 For Deploying the frontend you can use any service of your choice. For React you can refer to the *Netlify for React docs* in the reference section.
 
-## Conclusion
+# Conclusion
 
 Link to GitHub repo: [https://github.com/iamsdas/Decentraskill](https://github.com/iamsdas/Decentraskill)
 
 Congratulations! After completing this tutorial, you should have a good understanding of how to create a dApp for a blockchain-based skill verification system and how to deploy it on Polygon.
 
-## What's Next
+# Next Steps
 
 Awesome guys, you have finally created a blockchain-based skill verification system on your own but you must not stop now. There is always room for improvements and innovation. following are some features that you can add to this platform of yours to make it better.
 
@@ -796,7 +797,7 @@ Awesome guys, you have finally created a blockchain-based skill verification sys
     - Automation of addition and removal of employees via company database.
     - Anonymous company review system for employees to give the company an understanding of the flaws in their departments.
 
-## About the Authors
+# About the Authors
 
 **Hardik Agarwal:**
 
@@ -806,11 +807,10 @@ I am a tech-savvy pre-final year CSE student from India I am passionate about we
 
 I am a full-stack web developer and a blockchain enthusiast. I love exploring the latest technologies. Feel free to check out my profile at [iamsdas.me](https://iamsdas.me) and connect with me on [Twitter](https://twitter.com/_iamsdas) and  [LinkedIn](https://linkedin.com/in/iamsdas).
 
-## References
+# References
 
 - *node and npm docs:* [https://docs.npmjs.com/downloading-and-installing-node-js-and-npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - *solidity docs:* [https://docs.soliditylang.org/en/v0.8.1/](https://docs.soliditylang.org/en/v0.8.1/)
-- *vscode IDE:* [https://code.visualstudio.com/download](https://code.visualstudio.com/download)
 - *Truffle docs: [https://www.trufflesuite.com/docs/truffle/overview](https://www.trufflesuite.com/docs/truffle/overview)*
 - *Polygon (Matic) docs: [https://docs.matic.network/docs/develop/getting-started](https://docs.matic.network/docs/develop/getting-started)*
 - *MetaMask docs: [https://docs.metamask.io/guide/#why-metamask](https://docs.metamask.io/guide/#why-metamask)*
