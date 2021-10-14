@@ -19,6 +19,7 @@ Any modern Browser!
 Before we go to the depths of testing the contract , we need to first have a sample contract which is complex enough so that we can understand it's testing.
 
 Below I have taken a simple time based Escrow Contract : 
+
 ```python
 import smartpy as sp
 
@@ -135,6 +136,7 @@ secret = sp.blake2b(s) #Hashing bytes to secret key
 ob = Escrow(bob.address, sp.tez(25), udit.address, sp.tez(5), sp.timestamp(1634753427), secret)
 scenario += ob
 ```
+
 Now in our **test scenario** we have added a Smart Contract between two users (bob and udit) with each of them staking 50 XTZ and 5 XTZ respectively with a deadline of 20th October 2021 and a hashed secret key
 
 > You can read up on Human Date to Epoch Timestamp conversion [HERE](https://www.epochconverter.com/).
@@ -164,6 +166,7 @@ We write all our verifying conditions in the contract and create transactions wh
 My advice here is to proceed by isolating an EntryPoint and then testing all it's variables and then moving on to the next EntryPoint:
 
 ## ```addBalanceOwner()```
+
 ```python
 #addBalanceOwner Tests
 ob.addBalanceOwner().run(sender=udit , amount = sp.tez(25) , valid = False)
@@ -173,13 +176,16 @@ ob.addBalanceOwner().run(sender = bob, amount = sp.tez(25))
 
 ob.addBalanceOwner().run(sender = bob , amount = sp.tez(25) , valid = False)
 ```
-### Faults
+
+- Faults
+
 1. In the first transaction we are sending **udit** as the **sender** who we have set as **CounterParty**. Hence, we expect our transaction to fail and have **valid** set as **False**.
 2. In the second transaction we are sending ```sp.tez(1)``` as the owner's stake which we have set as 25 XTZ. Hence, we expect our transaction to fail and have **valid** set as **False**.
 3. The third transaction has both the owner and stake amount correct and we expect it to be a valid transaction.
 4. In the fourth transaction evn though all the parameters are correct , the owner has already staked once in the contract and can not stake again. Hence, we expect our transaction to fail and have **valid** set as **False**.
 
 ## ```addBalanceCounterparty()```
+
 ```python
 #addBalanceCounterparty Tests
 ob.addBalanceCounterparty().run(sender=bob , amount = sp.tez(5) , valid = False)
@@ -189,13 +195,16 @@ ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5))
 
 ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5) , valid = False)
 ```
-### Faults
+
+- Faults
+
 1. In the first transaction we are sending **bob** as the **sender** who we have set as **Owner**. Hence, we expect our transaction to fail and have **valid** set as **False**.
 2. In the second transaction we are sending ```sp.tez(25)``` as the counter party's stake which we have set as 5 XTZ. Hence, we expect our transaction to fail and have **valid** set as **False**.
 3. The third transaction has both the counter party and stake amount correct and we expect it to be a valid transaction.
 4. In the fourth transaction evn though all the parameters are correct , the counter arty has already staked once in the contract and can not stake again. Hence, we expect our transaction to fail and have **valid** set as **False**.
 
 ## ```claimCounterparty()```
+
 ```python
 #claimCounterparty Tests
 ob.claimCounterparty(secret = s).run(sender = bob , valid = False)
@@ -205,13 +214,15 @@ ob.claimCounterparty(secret = s).run(sender = udit , now = sp.timestamp(16351921
  
 ob.claimCounterparty(secret = s).run(sender = udit)
 ```
-### Faults
+
+- Faults
 1. In the first transaction we are sending bob as the **sender** who is not the counter party. Hence, we expect our transaction to fail and have **valid** set as **False**.
 2. In the second transaction we are sending the wrong secret key. Hence, we expect our transaction to fail and have **valid** set as **False**.
 3. The third transaction has both the counter party and secret key correct but the timestamp is for 25th October 2021 which is past our deadline set during origination.
 4. The fourth transaction has everything in order and hence is a valid transaction.
 
 ## ```claimOwner()```
+
 ```python
 #claimOwner Tests
 ob.claimOwner().run(sender = udit , valid = False)
@@ -220,7 +231,8 @@ ob.claimOwner().run(sender = bob, valid=False)
  
 ob.claimOwner().run(sender = bob ,now = sp.timestamp(1635192186) )
 ```
-### Faults
+
+- Faults
 1. In the first transaction we are sending udit as the **sender** who is not the owner. Hence, we expect our transaction to fail and have **valid** set as **False**.
 2. The second transaction has the correct **sender** but the time limit has not yet expired. Hence, we expect our transaction to fail and have **valid** set as **False**.
 3. The third transaction has everything in order and hence is a valid transaction with the timestamp simulated as of 25th October 2021.
@@ -242,27 +254,31 @@ address | Fetches contract's deployed address within the scenario
 # Scenario Methods
 The scenario we made in the above tutorial also provides us with various tools to verify , compute and show in HTML Output.
 
-### Verify
+## Verify
 We can verify all the parameters of our storage or any condition using **verify** method.
+
 ```python
 scenario.verify(ob.data.owner == bob.address)
 ```
 
-### Compute
+## Compute
 Using **compute** we perform calculations and store them in local variable inside the scenario.
+
 ```python
 x = scenario.compute(ob.data.fromOwner + sp.tez(15))
 ```
 
-### Show
+## Show
 **show** method is used to add expressions which are not transactions into the HTML Output. This will compute the expression and add it to our output panel
+
 ```python
 scenario.show(ob.data)
 scenario.show(ob.data.fromOwner + sp.tez(15))
 ```
 
-### HTML Tags
+## HTML Tags
 We are also provided with 6 levels of headings in our scenario so that we can beautify and segregate our output panel.
+
 ```python
 scenario.h1("title")
 scenario.h2("subtitle")
@@ -274,6 +290,7 @@ scenario.p("<p> HTML tag.")
 Now that we have completed the in depths of testing our smart contract we are ready to deploy it in the real world and have real users interact with it.
 
 # Final Code
+
 ```python
 import smartpy as sp
 
