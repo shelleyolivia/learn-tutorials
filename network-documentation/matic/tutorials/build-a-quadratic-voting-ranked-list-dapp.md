@@ -353,7 +353,7 @@ Tests are broken up into two groups: `deployment` and `items`. The `deployment` 
 
 You may write additional tests for the remaining smart contract functions if you wish.
 
-You will need to install [Ganache](https://www.trufflesuite.com/ganache) to set up a local development blockchain to run our tests on. Once it is downloaded select Quickstart. This will allow us to use the development network configured earlier.
+You will need to install [Ganache](https://www.trufflesuite.com/ganache) to set up a local development blockchain to run our tests on. Once it is downloaded select Quickstart. This will allow us to use the development network configured earlier. Alternatively, you can use `--network matic` to test on the Mumbai testnet.
 
 ```bash
 truffle test
@@ -495,7 +495,7 @@ These exported functions allow us to serialize/deserialize data to and from our 
 
 We need to use `utf8ToHex` because `title` is defined as the `bytes32` type in our contract.
 
-`rankedItems` creates a list of all published items and sorts it based off of votes.
+`rankedItems` creates a list of all published items and sorts it based off of votes, from most positive to most negative.
 
 We'll be using these from our Vue components later.
 
@@ -547,7 +547,7 @@ That's all for now! When we upload the image file from an input element, the ret
 
 # Creating the front-end with Vue.js
 
-It's finally time to create on our Vue components and build our app UI.
+It's finally time to create our Vue components and build our app UI.
 
 ### App
 
@@ -575,21 +575,21 @@ export default {
 </script>
 ```
 
-This is a simple component containing the 
+This is a simple component containing the item creation form and ranked list of items we will be creating later.
 
 ### CreateItem
 
-Create a file named `src/components/CreateItem.vue`.
+Create a file at `src/components/CreateItem.vue`.
 
 ```vue
 <template>
   <form @submit.prevent="submit">
-    <input type="text" v-model="title" placeholder="Title" />
+    <input type="text" v-model="title" placeholder="Title" required />
     <br />
-    <input type="file" placeholder="Upload image" @input="uploadImage" />
+    <input type="file" placeholder="Upload image" @input="uploadImage" required />
     <br />
     <p v-if="imageHash">{{ imageHash }}</p>
-    <textarea v-model="description" placeholder="Description" />
+    <textarea v-model="description" placeholder="Description" required />
     <br />
     <input type="submit" value="Create Item" />
   </form>
@@ -620,7 +620,7 @@ export default {
 </script>
 ```
 
-This is a form that allows us to fill in data for item creation. In the `uploadImage` function you will see we respond to a file input element's `oninput` event and upload the file using IPFS. In our form element we use `@submit.prevent` to automatically call `e.preventDefault()` before the `submit` function to prevent the page from redirecting.
+This is a form that allows us to fill in data for item creation. In the `uploadImage` function you will see we respond to a file input element's `oninput` event, take the first file and upload the file using IPFS. In our form element we use `@submit.prevent` to automatically call `e.preventDefault()` before the `submit` function to prevent the page from redirecting.
 
 The component will look like this. We will style it later.
 
@@ -632,7 +632,7 @@ When you click on the "Create Item" button you should see MetaMask prompt you to
 
 ### RankedList
 
-Create a file named `src/components/RankedList.vue`.
+Create a file at `src/components/RankedList.vue`.
 
 ```vue
 <template>
@@ -677,7 +677,7 @@ We will create the `Item` component next so that this will display correctly.
 
 ### Item
 
-Create a file named `src/components/Item.vue`.
+Create a file at `src/components/Item.vue`.
 
 ```vue
 <template>
@@ -759,17 +759,19 @@ export default {
 </script>
 ```
 
-This will by far be our largest and most complex component.
+This will by far be our largest and most complex component. We'll need to break it down.
 
-The first thing to notice is the `src` attribute of the image. `ipfs.io` is the gateway we will be using to access our IPFS files.
-
-
+- The first thing to notice is the `src` attribute of the image. `ipfs.io` is the gateway we will be using to access our IPFS files.
+- Next is the `v-if` template which ensures the "Claim" button is only displayed to the one who can claim the amount stored in the item (the item owner). `v-else` is then used to instead show voting controls only to non-owners. `weight !== startWeight` means that the "Submit Vote" section will only be displayed if the user changes their voting weight.
+- You may also see `item.amount` and `cost` are divided by `1_000_000_000`. This is because those values are stored in terms of wei but need to be displayed as gwei.
+- `calcCost` calls the smart contract function we defined a while back to notify our user of how much their voting submission will cost. `submitVote` will submit either a negative or positive vote depending on the weight the user inputted.
+- Finally, when the component is created, we will fetch the positive and negative weight currently associated with the user and use that to determine the weight they start with before interacting with the item.
 
 Our `RankedList` component should now look something like this depending on the data you posted. We will style this later.
 
 ![ranked items with claim button](../../../.gitbook/assets/quadratic-voting-ranked-items-claim.png)
 
-If you switch your MetaMask wallet to a different account and reload the page, you should see voting controls instead of the "Claim" button.
+If you switch your MetaMask wallet to a different account and reload the page, you should see voting controls instead of the "Claim" button. Both positive and negative votes are displayed.
 
 ![ranked items with voting controls](../../../.gitbook/assets/quadratic-voting-ranked-items-voting.png)
 
@@ -785,7 +787,7 @@ Clicking the "Submit Vote" button should allow you to confirm a transaction.
 
 # Styling the components with Tailwind CSS
 
-Next we'll be styling our Vue components to make the app look prettier.
+Our last step will be styling our Vue components to make the app look prettier.
 
 ### Configuration
 
@@ -845,17 +847,17 @@ Edit `App.vue` to add a dark background to our app.
 </template>
 ```
 
-Edit `CreateItem.vue` to make our form pop out more.
+Edit `CreateItem.vue` to make our form pop out more. Take note of the changes made to the `imageHash` paragraph.
 
 ```vue
 <template>
   <form @submit.prevent="submit" class="bg-gray-300 p-10 w-1/2 mx-auto rounded">
-    <input type="text" v-model="title" placeholder="Title" class="px-3 py-1 w-full mb-10" />
+    <input type="text" v-model="title" placeholder="Title" required class="px-3 py-1 w-full mb-10" />
     <br />
-    <input type="file" placeholder="Upload image" @input="uploadImage" class="text-gray-300" />
+    <input type="file" placeholder="Upload image" @input="uploadImage" required class="text-gray-300" />
     <br />
     <p class="mb-10 text-gray-300" :class="imageHash ? 'mt-3' : ''">{{ imageHash || "" }}</p>
-    <textarea v-model="description" placeholder="Description" class="px-3 py-1 w-full mb-10" />
+    <textarea v-model="description" placeholder="Description" required class="px-3 py-1 w-full mb-10" />
     <br />
     <input type="submit" value="Create Item" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white cursor-pointer" />
   </form>
@@ -877,30 +879,28 @@ And finally, edit `Item.vue`. The layout of this component will change a lot.
 
 ```vue
 <template>
-  <div class="bg-gray-300 p-10 rounded border-b border-gray-400">
-    <div class="flex items-center">
-      <img :src="`https://ipfs.io/ipfs/${item.imageHash}`" alt="item image" class="w-1/12 mr-10 rounded shadow" />
-      <div class="mr-5">
-        <button @click="upvote" class="text-xl px-4 py-3 border border-b-2 border-black rounded hover:bg-black hover:text-white">&uarr;</button>
-        <p class="text-lg text-center mt-2">{{ item.positiveWeight }}</p>
-      </div>
-      <div class="mr-10">
-        <button @click="downvote" class="text-xl px-4 py-3 border border-b-2 border-black rounded hover:bg-black hover:text-white">&darr;</button>
-        <p class="text-lg text-center mt-2">{{ item.negativeWeight }}</p>
-      </div>
-      <div class="ml-5">
-        <h2 class="text-xl font-bold mb-5">{{ item.title }}</h2>
-        <p class="text-gray-600 mb-5">{{ item.description }}</p>
-      </div>
-      <div v-if="address() === item.owner" class="ml-auto">
-        <p class="mb-5 text-center">Amount: {{ item.amount / 1_000_000_000 }} gwei</p>
-        <button @click="claimGwei" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white">Claim</button>
-      </div>
-      <div v-else-if="weight !== startWeight" class="ml-auto">
-        <p class="mb-5 text-center">Weight: {{ weight }}</p>
-        <p class="mb-5 text-center">Cost: {{ cost / 1_000_000_000 }} gwei</p>
-        <button @click="submitVote" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white">Submit Vote</button>
-      </div>
+  <div class="bg-gray-300 p-10 rounded flex items-center">
+    <img :src="`https://ipfs.io/ipfs/${item.imageHash}`" alt="item image" class="w-1/12 mr-10 rounded shadow" />
+    <div class="mr-5">
+      <button @click="upvote" class="text-xl px-4 py-3 border border-b-2 border-black rounded hover:bg-black hover:text-white">&uarr;</button>
+      <p class="text-lg text-center mt-2">{{ item.positiveWeight }}</p>
+    </div>
+    <div class="mr-10">
+      <button @click="downvote" class="text-xl px-4 py-3 border border-b-2 border-black rounded hover:bg-black hover:text-white">&darr;</button>
+      <p class="text-lg text-center mt-2">{{ item.negativeWeight }}</p>
+    </div>
+    <div>
+      <h2 class="text-xl font-bold mb-5">{{ item.title }}</h2>
+      <p class="text-gray-600 mb-5">{{ item.description }}</p>
+    </div>
+    <div v-if="address() === item.owner" class="ml-auto">
+      <p class="mb-5 text-center">Amount: {{ item.amount / 1_000_000_000 }} gwei</p>
+      <button @click="claimGwei" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white">Claim</button>
+    </div>
+    <div v-else-if="weight !== startWeight" class="ml-auto">
+      <p class="mb-5 text-center">Weight: {{ weight }}</p>
+      <p class="mb-5 text-center">Cost: {{ cost / 1_000_000_000 }} gwei</p>
+      <button @click="submitVote" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white">Submit Vote</button>
     </div>
   </div>
 </template>
@@ -912,4 +912,8 @@ We're done! Your app should now have a much better appearance.
 
 # Conclusion
 
+Congratulations! After completing this tutorial, you should now know how to create a smart contract in Solidity, interact with smart contracts using Web3, deploy contracts to the Polygon testnet and build a front-end with Vue/Tailwind. You are now a full stack dApp developer.
+
 # About the author
+
+I'm giraffekey, a free software developer interested in decentralized technologies. Feel free to connect with me on [GitHub](https://github.com/giraffekey).
