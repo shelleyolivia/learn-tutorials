@@ -342,7 +342,7 @@ eth.getBalance("0xD8f24D419153E5D03d614C5155f900f4B5C8A65C")
 
 **Mumbai**:
 
-* Sign up for a [DataHub](https://datahub.figment.io/) 
+* Sign up for a [DataHub account](https://datahub.figment.io/) 
 * Choose the Polygon service from the [DataHub Services Dashboard](https://datahub.figment.io/services/Polygon/)
 * Scroll down to see the Polygon endpoint URLs
 * Form the URL like so, replacing the text YOUR_API_KEY with the API key you got from DataHub:
@@ -356,10 +356,10 @@ We will need to install both of these packages on the commandline with the Node 
 npm install @maticnetwork/maticjs --save
 npm install @truffle/hdwallet-provider --save
 ```
-## Trasnfering ERC-1155
-In order to trasnfer ERC-1155 tokens we call `approveERC1155ForDeposit` and `depositSingleERC1155ForUser` function respectively.
+## Transferring ERC-1155
+In order to transfer ERC-1155 tokens, we call the `approveERC1155ForDeposit` and `depositSingleERC1155ForUser` functions respectively.
 
-### Approve
+## Approve
 To **approve** the **Ethereum Predicate Contract** we just need to call the `approveERC1155ForDeposit` function. The code for this is straightforward: 
 
 ```javascript
@@ -369,7 +369,7 @@ let result = await maticPOSClient.approveERC1155ForDeposit(rootToken, {
 });
 ```
 
-### Deposit
+## Deposit
 Next, we would call the `depositSingleERC1155ForUser` function of the **Ethereum Predicate Contract**:
 
 ```javascript
@@ -447,7 +447,7 @@ The expected output for **approveERC1155ForDeposit** is something like this:
   effectiveGasPrice: '0x2540be400',
   from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
   gasUsed: 26780,
-  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000002000000000000000000000400000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000002000000100000000001000000000000000000200800000000000000000000000000000000000000000000000008000000',
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008000000',
   status: true,
   to: '0x11c47a4f19cc52923b9c495080adb441ade38883',
   transactionHash: '0x2627a28ff17a57565445bb4222b5ccf99389e325c3b388ba21c8293288bea1e7',
@@ -465,8 +465,7 @@ The expected output for **approveERC1155ForDeposit** is something like this:
       id: 'log_c2ae5ce3',
       returnValues: [Result],
       event: 'ApprovalForAll',
-      signature: '0x17307eab39ab6107e8899845ad3d59bd9653f200f220920489ca2b5937696c31',
-      raw: [Object]
+      signature: '0x17307eab39ab6107e8899845ad3d59bd9653f200f220920489ca2b5937696c31'
     }
   }
 }
@@ -483,7 +482,7 @@ And for **depositSingleERC1155ForUser**:
   effectiveGasPrice: '0x2540be400',
   from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
   gasUsed: 125838,
-  logsBloom: '0x0000000000000210000000000000000000000000000000000020000000080000000000000000000000040008000000000000008000000000000000000000000104000040100000001000000200000000000000000000000000000000000000000000000000000001000000040000001000000000080000004000000000000000000000008000000000000000000000000000000000000000000002000008000000000000020000100000000000000000000200000000080000000000000000000000000000000000000000000000000200040010000000000100000000000000000000000000000000000000000000000000000000000000000000000a010000',
+  logsBloom: '0x0000000000000210000000000000000000000000000000000020000000080000000000000000000000040008000000000000008000000000000000000',
   status: true,
   to: '0xbbd7cbfa79faee899eaf900f13c9065bf03b1a74',
   transactionHash: '0xfd107f2ce76b183153eaff4bccaff6873386ef89e6e5937bf30aa153612757ee',
@@ -501,8 +500,7 @@ And for **depositSingleERC1155ForUser**:
       id: 'log_6fa41672',
       returnValues: Result {},
       event: undefined,
-      signature: null,
-      raw: [Object]
+      signature: null
     },
     '1': {
       address: '0x11C47A4F19cc52923b9C495080ADB441ADe38883',
@@ -530,8 +528,8 @@ Just a few things to mention:
 * `rootToken`: The ERC-1155 contract address on the Goerli testnet.
 * `amount`: The amount of **token** we want to transfer.
 
-## Trasnfering ERC-721
-In order to trasnfer ERC-1155 tokens we call `approveERC721ForDeposit` and `depositERC721ForUser` function respectively.
+## Transferring ERC-721
+In order to transfer ERC-1155 tokens, we call the `approveERC721ForDeposit` and `depositERC721ForUser` functions respectively.
 
 ### Approve
 To **approve** the **Ethereum Predicate Contract** we just need to call the `approveERC721ForDeposit` function. The code for this is straightforward: 
@@ -615,7 +613,7 @@ The expected output for **approveERC721ForDeposit** is something like this:
   effectiveGasPrice: '0x87ffb64b',
   from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
   gasUsed: 29345,
-  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000240000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000800000000000000000000000000000000000004000000020000000000020000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000400040000010000000000000000800000000000000000000000000000000000000000000',
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000',
   status: true,
   to: '0xcce32d5a6b433972fa3ff21233470d60ab7afd6b',
   transactionHash: '0xe397fe030e14402ecfd4920a2e4dc32f3adb7b2cd8baa6df2cb7fa22decd4b8c',
@@ -633,8 +631,7 @@ The expected output for **approveERC721ForDeposit** is something like this:
       id: 'log_3c37d4f8',
       returnValues: [Result],
       event: 'Approval',
-      signature: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925',
-      raw: [Object]
+      signature: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925'
     }
   }
 }
@@ -652,7 +649,7 @@ And for **depositERC721ForUser**:
   effectiveGasPrice: '0x87ffb64b',
   from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
   gasUsed: 111868,
-  logsBloom: '0x0000000000000000000000000002000000000008000840000000000000000000000400000000000000040108010000000000080000000000000000000024000000004000400000001000000a000000000000000000040000000000100000000000000000020000000000000400000810000000000000000000000010000000000000000800000000000000000000000000000000000004000000020000080000020000000200000000000000000000000400000000000800000000000000000000000002000000000000000000000102000000100000000000000000400060000010000000000000000800000000000000000000000000000000000000000000',
+  logsBloom: '0x000000000000000000000000000000000',
   status: true,
   to: '0xbbd7cbfa79faee899eaf900f13c9065bf03b1a74',
   transactionHash: '0x5167f0d875aeeb0b9a695be6acbcfe568039f7e43084d58f6211dbf14ec8336f',
@@ -670,8 +667,7 @@ And for **depositERC721ForUser**:
       id: 'log_bed4a03e',
       returnValues: Result {},
       event: undefined,
-      signature: null,
-      raw: [Object]
+      signature: null
     },
     '1': {
       address: '0xcCE32d5A6B433972fA3Ff21233470D60ab7AFD6b',
@@ -681,13 +677,12 @@ And for **depositERC721ForUser**:
       blockHash: '0xb353ae7b47953a6bec8c2a0d01852dbb917d4b018cf3d8243d1fd69cdde3ee56',
       .
       .
-      .
 ```
 
-## Trasnfering ERC-20
-In order to trasnfer ERC-20 tokens we call `approveERC20ForDeposit` and `depositERC20ForUser` function respectively.
+## Transferring ERC-20
+In order to transfer ERC-20 tokens, we call the `approveERC20ForDeposit` and `depositERC20ForUser` functions respectively.
 
-### Approve
+## Approve
 To **approve** the **Ethereum Predicate Contract** we just need to call the `approveERC20ForDeposit` function. The code for this is straightforward: 
 
 ```javascript
@@ -697,7 +692,7 @@ await maticPOSClient.approveERC20ForDeposit(rootToken, amount.toString(), {
 });
 ```
 
-### Deposit
+## Deposit
 Next, we would call the `depositERC20ForUser` function of the **Ethereum Predicate Contract**:
 
 ```javascript
@@ -767,7 +762,7 @@ Expected output for **approveERC20ForDeposit** is something like this:
   effectiveGasPrice: '0x2540be400',
   from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
   gasUsed: 46263,
-  logsBloom: '0x0000000000000000000000000000000000000000000000800000000000000000000080000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000010000000000000000000000',
+  logsBloom: '0x000000000000000000000000000000000010000000000000000000000000000000000000010000000000000000000000',
   status: true,
   to: '0xd2d40892b3eebda85e4a2742a97ca787559bf92f',
   transactionHash: '0x3aba80ae8938ed1abbb18560cb061f4915d202a731e5e2ec443aded67169e28a',
@@ -781,12 +776,10 @@ Expected output for **approveERC20ForDeposit** is something like this:
       transactionIndex: 0,
       blockHash: '0x9616fab5f19fb93580fe5dc71da9062168f1f1f5a4a5297094cad0b2b3e2dceb',
       logIndex: 0,
-      removed: false,
       id: 'log_0e714fbf',
       returnValues: [Result],
       event: 'Approval',
-      signature: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925',
-      raw: [Object]
+      signature: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925'
     }
   }
 }
@@ -803,7 +796,7 @@ And for **depositERC20ForUser**:
   effectiveGasPrice: '0x2540be400',
   from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
   gasUsed: 89761,
-  logsBloom: '0x0200000000000000000000000000000800000040000000800000000000000000000080000000000000040008000000000000200000000000008000100020000000000000000000001000000a000000000000000000000100000000000000000000000000000008000000000400000014000000000000000000000010200000000000000000000000000000000200000000000000000000000000020000080000020000000200008000000000000000040000000000000800000000000000000000000002000000000000000000000002000000140000000000200000000000000010000000000000000000000000000000000000010000000000000000000000',
+  logsBloom: '0x020000000000000000000000000000080000004000000080000000000000000000008000000000000004000800000000000020000000000000',
   status: true,
   to: '0xbbd7cbfa79faee899eaf900f13c9065bf03b1a74',
   transactionHash: '0x58a7f01edc2b9772f87fca57789f0912152615813e6231ab137e4759c8f6415f',
@@ -822,10 +815,8 @@ And for **depositERC20ForUser**:
       returnValues: Result {},
       event: undefined,
       signature: null,
-      raw: [Object]
     },
     '1': {
-      .
       .
       .
 ```
@@ -844,7 +835,7 @@ The contract has not been mapped yet.
 
 **Geth not running**
 
-If you have not run Geth, you will get an error like this
+If your local Geth node is not running, you will get an error like this:
 
 ```text
 Error: PollingBlockTracker - encountered an error while attempting to update latest block:
@@ -855,7 +846,7 @@ Error: connect ECONNREFUSED 127.0.0.1:8545
 
 If you get an error like this
 
-```javascript
+```text
 {
   code: -32000,
   message: 'getDeleteStateObject (0000000000000000000000000000000000000000) error: no suitable peers available'
@@ -889,7 +880,7 @@ And Metamask is something like:
 # Transfer using Web UI
 Transferring assets through a **Web UI** is pretty simple. Just like the SDK, there are the **Approve** and **Deposit** steps:
 
-## Trasnfering ERC-721 and ERC-1155
+## Transferring ERC-721 and ERC-1155
 1. Open [MintNFT Bridge](https://bridge.mintnft.today/)
 2. Make sure Goerli Testnet is selected in Metamask
 
@@ -911,8 +902,10 @@ Transferring assets through a **Web UI** is pretty simple. Just like the SDK, th
 
   ![Transfer Done](../../../.gitbook/assets/erc721-pos-ui-done.png)
 
-## Trasnfering ERC-20
-**Note** that we can't use **Goerli** to **Mumbai** here. Because **Web UI** only supports Ethereum and Polygon **mainnets**.  
+## Transferring ERC-20
+
+> **Note** that we can't use **Goerli** to **Mumbai** here. Because **Web UI** only supports Ethereum and Polygon **mainnets**.  
+
 So I am going to transfer some **real tokens** from my **Ethereum** account to **Polygon** and pay the fees. You may just follow the images below to see how the process works.
 
 1. Open [wallet.polygon.technology](https://wallet.polygon.technology/login)
@@ -961,7 +954,7 @@ The expected output is something like this:
   effectiveGasPrice: '0xb2d05e00',
   from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
   gasUsed: 35319,
-  logsBloom: '0x00000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000018020000000000000000000240000000000000000000000000008000000800001000000040000000100000000000000000000020000000000000400000800000000000000000080000010000000000000000000000000000000000000000000000000000000000000020000000000220000000000000000000000000000000000000000000000000000000000024800000002000000000001000000000000000000100000000000100000000060000010000000000000000000000000000000000000000000000000000000100000',
+  logsBloom: '0x00000000000000001000',
   status: true,
   to: '0xf6320326327c07759602423f01d8fad4af9e3f24',
   transactionHash: '0x09400584a1eabdf85fc491bbbfbc9d5283905478e76fd6a5d7d22bb63e0510fa',
@@ -974,13 +967,11 @@ The expected output is something like this:
       transactionHash: '0x09400584a1eabdf85fc491bbbfbc9d5283905478e76fd6a5d7d22bb63e0510fa',
       transactionIndex: 4,
       blockHash: '0x5e259cb402d7537b3d030e511865ab5e0aeb13416c72a52846fcceb2785788d8',
-      logIndex: 9,
       removed: false,
       id: 'log_8aa0a436',
       returnValues: Result {},
       event: undefined,
-      signature: null,
-      raw: [Object]
+      signature: null
     },
     Approval: {
       address: '0xf6320326327c07759602423f01D8fad4AF9E3f24',
@@ -988,13 +979,10 @@ The expected output is something like this:
       transactionHash: '0x09400584a1eabdf85fc491bbbfbc9d5283905478e76fd6a5d7d22bb63e0510fa',
       transactionIndex: 4,
       blockHash: '0x5e259cb402d7537b3d030e511865ab5e0aeb13416c72a52846fcceb2785788d8',
-      logIndex: 7,
-      removed: false,
       id: 'log_a24d5618',
       returnValues: [Result],
       event: 'Approval',
-      signature: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925',
-      raw: [Object]
+      signature: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925'
     },
     Transfer: {
       address: '0xf6320326327c07759602423f01D8fad4AF9E3f24',
@@ -1002,13 +990,10 @@ The expected output is something like this:
       transactionHash: '0x09400584a1eabdf85fc491bbbfbc9d5283905478e76fd6a5d7d22bb63e0510fa',
       transactionIndex: 4,
       blockHash: '0x5e259cb402d7537b3d030e511865ab5e0aeb13416c72a52846fcceb2785788d8',
-      logIndex: 8,
-      removed: false,
       id: 'log_eb4348bf',
       returnValues: [Result],
       event: 'Transfer',
-      signature: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef',
-      raw: [Object]
+      signature: '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef'
     }
   }
 }
@@ -1037,8 +1022,7 @@ The expected output is something like this:
   chainId: 5,
   value: 0,
   to: '0xBbD7cBFA79faee899Eaf900F13C9065bF03B1A74',
-  data: '0x3805550f00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000a25f90a228421989dd0b901a037f4568e3b7554bb03b542d686e68448de982f4a254613497c08d7cb1f8e445d73e51ba1b6d9045
-  .
+  data: '0x3805550f0d0b901a037f448de982f4a254613497c08d7cb1f8e445d73e51ba1b6d9045
   .
   .
 }
