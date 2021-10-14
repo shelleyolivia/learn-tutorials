@@ -1,12 +1,14 @@
 # Code a Simple Dex with SmartPy
 
 ## Introduction
-In this tutorial, we'll create a simple DEX(Decentralized Exchange) with which we'll understand how to code a DEX and how dexs work in general. This tutorial presumes you have a basic understanding of smartpy, taquito and react.
+In this tutorial, we'll create a simple DEX(Decentralized Exchange) with which we'll understand how to code a DEX and how dexs work in general. 
 
 This DEX will be using the Constant Product Market-Making algorithm, and it will be based on the v1 of uniswap, if more information about the Constant Product Market-Making algorithm and v1 of uniswap you can read this [white paper](https://hackmd.io/@HaydenAdams/HJ9jLsfTz). You can also refer to this [video](https://www.youtube.com/watch?v=-6HefvM5vBg) to get an understanding of the CPMM algorithm. Before we start to write extensive code, You can find the full source code from this repository.
 
 https://github.com/vivekascoder/tez-dex
 
+## Prerequisites
+Basic knowledge of smartpy, react, taquito and smart contracts.
 
 ## Requirements
 - NodeJs 
@@ -404,7 +406,7 @@ We'll start by importing the necessary things in the `App.jsx` file.
 
 Let's import all the necessary things that we might need in our project. Here we're using `axios` to make use of `tzkt` API to fetch balances of the users.
 
-```js
+```jsx
 import React, { useState, useEffect } from "react";
 import "./index.css";
 
@@ -417,7 +419,7 @@ import axios from "axios";
 
 We've a file here called `config.js` which contains the addresses and other information about our contracts.
 
-```js
+```jsx
 const config = {
   rpcUrl: "https://granadanet.smartpy.io",
   tokenAddress: "KT1HrjGaoTmdZ8Znbup6bgV2gEpFF8tt9jo5",
@@ -435,7 +437,7 @@ export default config;
 
 We'll create two separate file Components in the same `App.jsx` file namely  `Notification` which is responsible for showing any message and `Balance` which shows the current amount of `Cat Token` and `LP Token` a user has.
 
-```js
+```jsx
 function Notification({ error, setError }) {
   return (
     <div
@@ -478,7 +480,7 @@ Now, let's start our main `App` component and create some state variables using 
 8. `lpBalance`: Keeps track of current user's LP Token balance.
 9. `catBalance`: Keeps track of the amount of Cat Tokens that the user has.
 
-```js
+```jsx
 function App() {
   const [tezos, setTezos] = useState(null);
   const [wallet, setWallet] = useState(null);
@@ -500,7 +502,7 @@ function App() {
 
 We'll create a utility function that can fetch the token balance of a user with the help of `tzkt` API.
 
-```js
+```jsx
 async function getBalance(userAddress, bigmapId) {
   const {data} = await axios.get(
     `https://api.granadanet.tzkt.io/v1/bigmaps/${bigmapId}/keys`
@@ -518,7 +520,7 @@ async function getBalance(userAddress, bigmapId) {
 
 We'll have one function to update the balance, so that whenever we want to update the balance, we can directly do it just by calling this method.
 
-```js
+```jsx
 async function updateBalances() {
 if (tezos) {
     const cat = await getBalance(
@@ -539,7 +541,7 @@ if (tezos) {
 
 Let's make use of the `useEffect` hook to update the balance whenever `wallet` changes.
 
-```js
+```jsx
 useEffect( () => {
   async function runUseEffect () {
     await updateBalances()
@@ -551,7 +553,7 @@ useEffect( () => {
 
 Let's make a function to connect to the `Temple Wallet`.
 
-```js
+```jsx
 async function connectToWallet() {
   if (!tezos) {
     const t = new TezosToolkit(CONFIG.rpcUrl);
@@ -574,7 +576,7 @@ async function connectToWallet() {
 
 When the user will click on `Swap` button we'll fire this method which will call the `tez_to_token` entry point.
 
-```js
+```jsx
 async function exchange() {
   try {
     const dexContract = await tezos.wallet.at(CONFIG.dexAddress);
@@ -623,7 +625,7 @@ In the same way, when the user will click on the `Add` button of addLiquidity fo
 
 Another cool thing to note here is that we're also calculating the amount of Cat tokens that needs to be approve while based on the amount of xtz sent and the current exchange ratio.
 
-```js
+```jsx
 async function addLiquidity() {
   // Add the liquidity into the dex.
   const dexContract = await tezos.wallet.at(CONFIG.dexAddress);
@@ -656,7 +658,7 @@ async function addLiquidity() {
 
 Now, we'll create a method that will be fired when the user will click on `Remove` button and call the `divest_liquidity` entry point with the amount of LP Tokens that needs to be burn.
 
-```js
+```jsx
 async function removeLiquidity() {
   const lp = parseInt(lpToBurn * 10 ** 6);
   const dexContract = await tezos.wallet.at(CONFIG.dexAddress);
@@ -674,7 +676,7 @@ async function removeLiquidity() {
 Let's start coding the actual UI, with the help of some HTML and tailwindcss utility classes. Here you can see we're conditionally rendering the `Notification` component which will display a little popup if the `error` has some value.
 
 After that, we're also rendering the `Balance` component.
-```js
+```jsx
 <div className="max-w-2xl mx-auto relative min-h-screen">
   {error ? <Notification error={error} setError={setError} /> : ""}
   <nav className="bg-gray-100 shadow-sm flex items-center justify-between p-4 mb-20">
@@ -698,7 +700,7 @@ After that, we're also rendering the `Balance` component.
 
 After that, let's start coding some forms for the different actions that we want to call, all the forms are similar to each other.
 
-```js
+```jsx
 return (
     <div className="max-w-2xl mx-auto relative min-h-screen">
       {error ? <Notification error={error} setError={setError} /> : ""}
