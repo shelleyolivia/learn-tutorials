@@ -18,12 +18,6 @@ cd learn-web3-dapp
 yarn
 ```
 
-Start the Next.js development server on the default port 3000 with:
-
-```text
-yarn dev
-```
-
 ---------------------------
 
 # 🧩 DataHub API keys
@@ -42,6 +36,13 @@ Your personal API key can be found on the [**DataHub Services Dashboard**](https
 You can then paste your personal API key into `.env.local`, as the value for the environment variable `DATAHUB_SOLANA_API_KEY`. This will authenticate you and enable you to make RPC requests to Solana via DataHub:
 
 ![API keys](https://user-images.githubusercontent.com/2707197/136934560-086acda2-6bfe-4dc1-a75b-d9dbff036a12.png)
+
+
+Now that your API key is in place, start the Next.js development server on the default port 3000 with:
+
+```text
+yarn dev
+```
 
 ---------------------------
 
