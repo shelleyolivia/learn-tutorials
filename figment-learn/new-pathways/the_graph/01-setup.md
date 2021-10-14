@@ -8,6 +8,9 @@ If you want to read about The Graph we've curated some great resources to help y
 - Projects' own documentation are not always the best place to start, however The Graph is an exception. They have very well written and approachable docs. [Give them a read](https://thegraph.com/docs/about/introduction).
 - More of a visual learner? The rock star of blockchain Youtube - Finematics - have the perfect video for you: [Binge it here](https://www.youtube.com/watch?v=7gC7xJ_98r8).
 - You're still here?? We have curated more links on [Figment Learn](https://learn.figment.io/protocols/thegraph). Knock yourself out!
+- If you would like to watch a video walkthrough of the Pathway, it is embedded below for your viewing pleasure:
+
+{% embed url="https://www.youtube.com/watch?v=P0sGpnVVVx8" caption="The Graph Pathway launch event with Guillaume & Nader" %}
 
 ## 🐳 Docker
 
