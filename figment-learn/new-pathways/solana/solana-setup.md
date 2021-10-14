@@ -12,7 +12,7 @@ Make sure you've installed the [Solana CLI](https://docs.solana.com/cli/install-
 
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/) (you'll need `v14.17.0` or greater) and [yarn](https://yarnpkg.com/getting-started/install) installed. Then clone the repo and run the `yarn` command to install the dependencies:
 
-```
+```text
 git clone https://github.com/figment-networks/learn-web3-dapp.git
 cd learn-web3-dapp
 yarn
@@ -20,7 +20,7 @@ yarn
 
 Start the Next.js development server on the default port 3000 with:
 
-```
+```text
 yarn dev
 ```
 
