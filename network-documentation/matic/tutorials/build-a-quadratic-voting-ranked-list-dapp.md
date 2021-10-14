@@ -549,7 +549,7 @@ That's all for now! When we upload the image file from an input element, the ret
 
 It's finally time to create our Vue components and build our app UI.
 
-### App
+## App
 
 Edit the `src/App.vue` file.
 
@@ -577,7 +577,7 @@ export default {
 
 This is a simple component containing the item creation form and ranked list of items we will be creating later.
 
-### CreateItem
+## CreateItem
 
 Create a file at `src/components/CreateItem.vue`.
 
@@ -630,7 +630,7 @@ When you click on the "Create Item" button you should see MetaMask prompt you to
 
 ![create item MetaMask](../../../.gitbook/assets/quadratic-voting-create-item-metamask.png)
 
-### RankedList
+## RankedList
 
 Create a file at `src/components/RankedList.vue`.
 
@@ -675,7 +675,7 @@ This component waits until the contract and IPFS node are defined, checking ever
 
 We will create the `Item` component next so that this will display correctly.
 
-### Item
+## Item
 
 Create a file at `src/components/Item.vue`.
 
@@ -789,7 +789,7 @@ Clicking the "Submit Vote" button should allow you to confirm a transaction.
 
 Our last step will be styling our Vue components to make the app look prettier.
 
-### Configuration
+## Configuration
 
 We'll need the following packages to style our components with Tailwind CSS.
 
@@ -832,7 +832,7 @@ Then add the following to `src/App.vue`. Note that this is a global stylesheet.
 </style>
 ```
 
-### Components
+## Components
 
 Now it's finally time to make our components look like part of a real app.
 
