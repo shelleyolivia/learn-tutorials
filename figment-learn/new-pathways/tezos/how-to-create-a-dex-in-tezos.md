@@ -1,16 +1,9 @@
 # Code a Simple Dex with SmartPy
 
 ## Introduction
-In this tutorial, we'll create a simple DEX(Decentralized Exchange) with which
-we'll understand how to code a DEX and how dexs work in general. This tutorial
-presumes you have a basic understanding of smartpy, taquito and react.
+In this tutorial, we'll create a simple DEX(Decentralized Exchange) with which we'll understand how to code a DEX and how dexs work in general. This tutorial presumes you have a basic understanding of smartpy, taquito and react.
 
-This DEX will be using the Constant Product Market-Making algorithm, and it will be
-based on the v1 of uniswap, if more information about the Constant Product
-Market-Making algorithm and v1 of uniswap you can read this [white paper](https://hackmd.io/@HaydenAdams/HJ9jLsfTz).
-You can also refer to this [video](https://www.youtube.com/watch?v=-6HefvM5vBg)
-to get an understanding of the CPMM algorithm.
-Before we start to write extensive code, You can find the full source code from this repository.
+This DEX will be using the Constant Product Market-Making algorithm, and it will be based on the v1 of uniswap, if more information about the Constant Product Market-Making algorithm and v1 of uniswap you can read this [white paper](https://hackmd.io/@HaydenAdams/HJ9jLsfTz). You can also refer to this [video](https://www.youtube.com/watch?v=-6HefvM5vBg) to get an understanding of the CPMM algorithm. Before we start to write extensive code, You can find the full source code from this repository.
 
 https://github.com/vivekascoder/tez-dex
 
@@ -22,12 +15,9 @@ https://github.com/vivekascoder/tez-dex
 
 
 ## Project Setup
-Create an empty react project using `create-react-app`, after creating it install
-the following packages.
+Create an empty react project using `create-react-app`, after creating it install the following packages.
 
-> NOTE: For this tutorial, i'll 
-> be using `tailwindcss` for styling the components, but this step is completely 
-> optional. You can use any UI Library that you want.
+> NOTE: For this tutorial, i'll be using `tailwindcss` for styling the components, but this step is completely optional. You can use any UI Library that you want.
 
 1. Taquito and BeconWallet
 ```bash
@@ -38,14 +28,11 @@ yarn add @taquito/taquito @taquito/beacon-wallet
 ```bash
 yarn add --dev tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 ```
-For more information on setting up tailwindcss with `create-react-app` you can read 
-[here](https://tailwindcss.com/docs/guides/create-react-app).
+For more information on setting up tailwindcss with `create-react-app` you can read [here](https://tailwindcss.com/docs/guides/create-react-app).
 
-After installing the dependencies make a folder called `contracts` in the 
-root directory where we'll keep all our smartpy code.
+After installing the dependencies make a folder called `contracts` in the root directory where we'll keep all our smartpy code.
 
-Deploy two FA1.2 tokens namely `🐱 Cat Token` and `LP Token` which we'll be
-using later in this tutorial.
+Deploy two FA1.2 tokens namely `🐱 Cat Token` and `LP Token` which we'll be using later in this tutorial.
 
 
 ## Working on the Smart Contract
@@ -64,8 +51,7 @@ class Token(fa12.FA12):
     pass
 ```
 
-Create another Contract in the same file and call it `Dex`, it is going to be our
-main DEX contract class.
+Create another Contract in the same file and call it `Dex`, it is going to be our main DEX contract class.
 ```py
 class Dex(sp.Contract):
     def __init__(self, _token_address, _lp_address):
@@ -78,15 +64,10 @@ class Dex(sp.Contract):
         )
 ```
 
-Here the storage in the `Dex` contract consist of 5 things where invariant denotes 
-the invariant of the pool, it is equal to the product of the `tez_pool` and `token_pool`. The `tez_pool` and `token_pool` keeps track of the quantity of xtz and
-Cat token in our pool which will used to determine the ratio while exchanging tokens.
-Here `lp_address` and `token_address` keeps track of the address of our LP token and Cat Token which while be used while doing inter contract calls.
+Here the storage in the `Dex` contract consist of 5 things where invariant denotes the invariant of the pool, it is equal to the product of the `tez_pool` and `token_pool`. The `tez_pool` and `token_pool` keeps track of the quantity of xtz and Cat token in our pool which will used to determine the ratio while exchanging tokens. Here `lp_address` and `token_address` keeps track of the address of our LP token and Cat Token which while be used while doing inter contract calls.
 
 
-We'll now create some utility function that will be used to do the transfer, namely `transfer_tokens` which will be used to transfer a certain amount of tokens from one 
-address to another with the help of inter contract calls and `transfer_tez` which is
-just used to transfer a certain amount of xtz from the pool to a specific address,
+We'll now create some utility function that will be used to do the transfer, namely `transfer_tokens` which will be used to transfer a certain amount of tokens from one address to another with the help of inter contract calls and `transfer_tez` which is just used to transfer a certain amount of xtz from the pool to a specific address,
 
 ```py
 def transfer_tokens(self, from_, to, amount):
@@ -111,10 +92,7 @@ def transfer_tez(self, to_, amount: sp.TMutez):
 
 ```
 
-While allowing other people to provide liquidity to our pool, we'll have to give 
-them a certain amount of `LP Tokens` based on their liquidity, for that we'll have to mint LP tokens and burn them when the user wants their liquidity back. For this, we'll 
-have two more utility functions namely `mint_lp`, and `burn_lp` which are basically 
-used to mint and burn LP tokens.
+While allowing other people to provide liquidity to our pool, we'll have to give them a certain amount of `LP Tokens` based on their liquidity, for that we'll have to mint LP tokens and burn them when the user wants their liquidity back. For this, we'll have two more utility functions namely `mint_lp`, and `burn_lp` which are basically used to mint and burn LP tokens.
 
 ```py
 def mint_lp(self, amount):
@@ -152,18 +130,14 @@ def burn_lp(self, amount):
     sp.transfer(transfer_value, sp.mutez(0), contract)
 ```
 
-The `mint_lp` method takes the amount of tokens to mint and then it does an inter 
-contract call to out LP Token Contract to the `entry_point` called `mint` to mint LP
-tokens. In the same way, the `burn_lp` method takes the amount of LP Tokens to burn.
+The `mint_lp` method takes the amount of tokens to mint and then it does an inter contract call to out LP Token Contract to the `entry_point` called `mint` to mint LP tokens. In the same way, the `burn_lp` method takes the amount of LP Tokens to burn.
 
-> NOTE: Please note that here our DEX contract is the admin of LP Token contract and
-> that's why it can mint and burn the tokens.
+> NOTE: Please note that here our DEX contract is the admin of LP Token contract and that's why it can mint and burn the tokens.
 
 
 ### Initialize Exchange
-Now we'll work on an entry point called `initialize_exchange` that will be responsible
-for providing the initial liquidity in the pool and govern the initial ratio between the
-token and xtz which will we used to govern the prices.
+Now we'll work on an entry point called `initialize_exchange` that will be responsible for providing the initial liquidity in the pool and govern the initial ratio between the token and xtz which will we used to govern the prices.
+
 ```py
 @sp.entry_point
 def initialize_enchange(self, token_amount):
@@ -187,23 +161,16 @@ def initialize_enchange(self, token_amount):
         sp.failwith('ALREADY_INITIALIZED')
 ```
 
-This entry point first check whether the total quantity of tez and token is zero or not
-which will limit users to call it after the initial liquidity is provided.
+This entry point first check whether the total quantity of tez and token is zero or not which will limit users to call it after the initial liquidity is provided.
 
-Then we check whether the token amount and xtz amount is more than 0, and then we
-update the `tez_pool` and `token_pool` along with the invariant. Then we transfer the 
-tokens from the user to our contract using our utility function `transfer_tokens`.
+Then we check whether the token amount and xtz amount is more than 0, and then we update the `tez_pool` and `token_pool` along with the invariant. Then we transfer the tokens from the user to our contract using our utility function `transfer_tokens`.
 
 
 ### Tez to Token Swap
 
-Now we'll code the most interesting part of our dex which is the exchange tez 
-into tokens and vice versa. We'll start with tez to token swap, we'll create an entry 
-point called `tez_to_token` which will exchange the amount of xtz sent i.e `sp.sender`,
-and exchange it to toke tokens based on the current exchange ratio.
+Now we'll code the most interesting part of our dex which is the exchange tez into tokens and vice versa. We'll start with tez to token swap, we'll create an entry point called `tez_to_token` which will exchange the amount of xtz sent i.e `sp.sender` and exchange it to Cat tokens based on the current exchange ratio.
 
-In the CPMM algorithm, the invariant needs to be constant, which means `x.y=k` where x and y represent the amount of xtz and tokens respectively. Now if you want to swap xtz 
-into the token, then the amount of new xtz will increase let's call it `x'`. 
+In the CPMM algorithm, the invariant needs to be constant, which means `x.y=k` where x and y represent the amount of xtz and tokens respectively. Now if you want to swap xtz into the token, then the amount of new xtz will increase let's call it `x'`. 
 
 And let's call the new token amount as `y'`, so according to the equation `x'y'=k`.
 
@@ -211,14 +178,9 @@ This means the new amount of tokens in the pool will be `y' = k / x'`. This is h
 
 Now, the amount of tokens that the user will receive for exchanging his `x` tez (x is in mutez) would be `token_out = y - y'`. This is how we are calculating `token_out`.
 
-> NOTE: Please note that after exchanging certain xtz into tokens, the amount of
-> xtz in the pool will increase and the amount of tokens will decrease and that's why
-> while calculating the amount of tokens that the user will receive we're doing 
-> `y - y'` and not `y' - y`.
+> NOTE: Please note that after exchanging certain xtz into tokens, the amount of xtz in the pool will increase and the amount of tokens will decrease and that's why while calculating the amount of tokens that the user will receive we're doing `y - y'` and not `y' - y`.
 
-After calculating the `tokens_out`, we're updating the new `tez_pool` and `token_pool` 
-along with the new invariant. After that, we're sending `token_out` amount of tokens
-to the user using our utility function called `transfer_tokens`.
+After calculating the `tokens_out`, we're updating the new `tez_pool` and `token_pool` along with the new invariant. After that, we're sending `token_out` amount of tokens to the user using our utility function called `transfer_tokens`.
 
 ```py
 @sp.entry_point
@@ -244,8 +206,7 @@ def tez_to_token(self):
 
 
 ### Token to Tez Swap
-The process of exchanging tokens into tez is also quite similar to what we've done 
-in out tez to token swap.
+The process of exchanging tokens into tez is also quite similar to what we've done in out tez to token swap.
 
 ```py
 @sp.entry_point
@@ -270,9 +231,7 @@ def token_to_tez(self, params):
     self.transfer_tez(to_=sp.sender, amount=tez_out)
 ```
 
-We can calculate the `new_token_pool` by adding the amount of token which is sent to 
-the contract by the user to the previous amount of token in the pool. We're calculating
-the new amount of xtz by dividing the invariant with the `new_token_amount`.
+We can calculate the `new_token_pool` by adding the amount of token which is sent to the contract by the user to the previous amount of token in the pool. We're calculating the new amount of xtz by dividing the invariant with the `new_token_amount`.
 
 And then we're updating the values in the pool.
 
@@ -284,8 +243,7 @@ self.data.token_pool = new_token_pool
 self.data.invariant = new_token_pool * new_tez_pool
 ```
 
-After this, we're transferring the amount of tokens i.e `params.token_amount`
-from the sender to our contract address. After that, we're calculating the `tez_out` which represents the amount of xtz (in mutez) which the user will receive. 
+After this, we're transferring the amount of tokens i.e `params.token_amount` from the sender to our contract address. After that, we're calculating the `tez_out` which represents the amount of xtz (in mutez) which the user will receive. 
 
 Finally, we're actually transfering `tez_out` xtz from our contract to the sender.
 
@@ -304,14 +262,9 @@ self.transfer_tez(to_=sp.sender, amount=tez_out)
 
 
 ### Invest Liquidity
-We're done with exchanging the tez into tokens and vice versa, but we need to add
-a way in our contract with which we can allow other people to add new liquidity to
-the pool, and for this, we're going to add two entry points namely `invest_liquidty` and
-`divest_liquidity` which will allow users to add new liquidity to the pool and remove 
-their liquidity from the pool respectively.
+We're done with exchanging the tez into tokens and vice versa, but we need to add a way in our contract with which we can allow other people to add new liquidity to the pool, and for this, we're going to add two entry points namely `invest_liquidty` and `divest_liquidity` which will allow users to add new liquidity to the pool and remove their liquidity from the pool respectively.
 
-Before diving into the code of `invest_liquidity`, let's see what are the things 
-that it needs to do.
+Before diving into the code of `invest_liquidity`, let's see what are the things that it needs to do.
 1. Check if the xtz sent in the transaction while calling the entry point is more than 0.
 2. Calculate the total liquidity of the pool.
 3. Calculate the token amount that we'll take which is determined based on the current exchange ratio and amount of xtz sent.
@@ -355,8 +308,7 @@ Then we're calculating the amount of liquidity that we'll have to mint for the l
 
 After that, we'll be minting LP tokens with our utility function `mint_lp` and then we're updating the contract's storage. 
 
-Finally we're transferring the amount of tokens needed from the sender's address to our
-contract's address.
+Finally we're transferring the amount of tokens needed from the sender's address to our contract's address.
 
 ```py
 liquidity_minted = sp.utils.mutez_to_nat(sp.amount) * total_liquidity / sp.utils.mutez_to_nat(self.data.tez_pool)
@@ -376,12 +328,9 @@ self.transfer_tokens(
 ```
 
 ### Divest Liquidity
-Now, users can invest liquidity into our pool, so let's work on `divest_liquidty` which
-will allow liquidity providers to get back their liquidity.
+Now, users can invest liquidity into our pool, so let's work on `divest_liquidty` which will allow liquidity providers to get back their liquidity.
 
-Our `divest_liquidiity` entry point takes only one parameter which is the amount of LP
-tokens that the liquidity provider wants to burn, based on this amount we'll give them 
-their liquidity back.
+Our `divest_liquidiity` entry point takes only one parameter which is the amount of LP tokens that the liquidity provider wants to burn, based on this amount we'll give them their liquidity back.
 
 ```py
 @sp.entry_point
@@ -423,8 +372,7 @@ token_out = self.data.token_pool * lp_amount / total_liquidity
 ```
 
 
-Now we are updating the contract's storage and using our utility functions to send 
-back the liquidity.
+Now we are updating the contract's storage and using our utility functions to send back the liquidity.
 
 ```py
 self.data.tez_pool = self.data.tez_pool - sp.utils.nat_to_mutez(token_out)
@@ -444,8 +392,7 @@ sp.else:
     sp.failwith('NOT_ENOUG_TOKENS')
 ```
 
-So far we've coded all the required entry points. Now let's move to the frontend. For 
-getting full source code, check the repository mentioned above.
+So far we've coded all the required entry points. Now let's move to the frontend. For getting full source code, check the repository mentioned above.
 
 
 ## Working on the Frontend
@@ -455,8 +402,7 @@ We'll start by importing the necessary things in the `App.jsx` file.
 > NOTE: Just to keep things simple I'm writing everything in `App.jsx` but you can
 > structure your code however you like.
 
-Let's import all the necessary things that we might need in our project. Here we're
-using `axios` to make use of `tzkt` API to fetch balances of the users.
+Let's import all the necessary things that we might need in our project. Here we're using `axios` to make use of `tzkt` API to fetch balances of the users.
 
 ```js
 import React, { useState, useEffect } from "react";
@@ -487,8 +433,7 @@ const config = {
 export default config;
 ```
 
-We'll create two separate file Components in the same `App.jsx` file namely  `Notification` which is responsible for showing any message and `Balance` which shows
-the current amount of `Cat Token` and `LP Token` a user has.
+We'll create two separate file Components in the same `App.jsx` file namely  `Notification` which is responsible for showing any message and `Balance` which shows the current amount of `Cat Token` and `LP Token` a user has.
 
 ```js
 function Notification({ error, setError }) {
@@ -521,8 +466,7 @@ function Balances({catToken, lpToken}) {
 }
 ```
 
-Now, let's start our main `App` component and create some state variables using 
-useState to make certain state within our application. 
+Now, let's start our main `App` component and create some state variables using useState to make certain state within our application. 
 
 1. `tezos`: Keeps track of `TezosToolkit` object.
 2. `wallet`: Keeps track of the address of the user.
@@ -596,136 +540,135 @@ if (tezos) {
 Let's make use of the `useEffect` hook to update the balance whenever `wallet` changes.
 
 ```js
-  useEffect( () => {
-    async function runUseEffect () {
-      await updateBalances()
-      console.log('updates')
-    }
-    runUseEffect();
-  }, [wallet])
+useEffect( () => {
+  async function runUseEffect () {
+    await updateBalances()
+    console.log('updates')
+  }
+  runUseEffect();
+}, [wallet])
 ```
 
 Let's make a function to connect to the `Temple Wallet`.
 
 ```js
-  async function connectToWallet() {
-    if (!tezos) {
-      const t = new TezosToolkit(CONFIG.rpcUrl);
-      const wallet = new BeaconWallet({
-        name: "Tez Dex",
-        preferredNetwork: CONFIG.preferredNetwork,
-      });
-      await wallet.requestPermissions({
-        network: { type: CONFIG.preferredNetwork },
-      });
-      t.setWalletProvider(wallet);
-      const pkh = await t.wallet.pkh();
-      setTezos(t);
-      setWallet(pkh);
-    } else {
-      setError("The wallet is already connected.");
-    }
+async function connectToWallet() {
+  if (!tezos) {
+    const t = new TezosToolkit(CONFIG.rpcUrl);
+    const wallet = new BeaconWallet({
+      name: "Tez Dex",
+      preferredNetwork: CONFIG.preferredNetwork,
+    });
+    await wallet.requestPermissions({
+      network: { type: CONFIG.preferredNetwork },
+    });
+    t.setWalletProvider(wallet);
+    const pkh = await t.wallet.pkh();
+    setTezos(t);
+    setWallet(pkh);
+  } else {
+    setError("The wallet is already connected.");
   }
+}
 ```
 
 When the user will click on `Swap` button we'll fire this method which will call the `tez_to_token` entry point.
 
 ```js
-  async function exchange() {
-    try {
-      const dexContract = await tezos.wallet.at(CONFIG.dexAddress);
-      if (swapXtzAmount > 0) {
-        // Swap Xtz -> Token
-        console.log('Tez -> Token')
-        const xtz = parseInt(swapXtzAmount * 10 ** 6);
-        
-        // Interacting with the entry_point
-        const op = await dexContract.methods.tez_to_token().send({amount: xtz, mutez: true});
-        setError(`Operation Hash: ${op.opHash}`)
-        const result = await op.confirmation();
-        console.log(result);
-      } 
-      else if(swapTokenAmount > 0) {
-        console.log('Token-> Tez')
-        // Swap Token -> Xtz
-        const catAmount = parseInt(swapTokenAmount * CONFIG.tokenDecimals);
-        const tokenContract = await tezos.wallet.at(CONFIG.tokenAddress);
-        const batch = await tezos.wallet.batch()
-        .withContractCall(
-          tokenContract.methods.approve(
-            CONFIG.dexAddress,
-            catAmount,
-          )
+async function exchange() {
+  try {
+    const dexContract = await tezos.wallet.at(CONFIG.dexAddress);
+    if (swapXtzAmount > 0) {
+      // Swap Xtz -> Token
+      console.log('Tez -> Token')
+      const xtz = parseInt(swapXtzAmount * 10 ** 6);
+      
+      // Interacting with the entry_point
+      const op = await dexContract.methods.tez_to_token().send({amount: xtz, mutez: true});
+      setError(`Operation Hash: ${op.opHash}`)
+      const result = await op.confirmation();
+      console.log(result);
+    } 
+    else if(swapTokenAmount > 0) {
+      console.log('Token-> Tez')
+      // Swap Token -> Xtz
+      const catAmount = parseInt(swapTokenAmount * CONFIG.tokenDecimals);
+      const tokenContract = await tezos.wallet.at(CONFIG.tokenAddress);
+      const batch = await tezos.wallet.batch()
+      .withContractCall(
+        tokenContract.methods.approve(
+          CONFIG.dexAddress,
+          catAmount,
         )
-        .withContractCall(
-          dexContract.methods.token_to_tez(catAmount)
-        )
-        const batchOp = await batch.send();
-        console.log("Operation hash:", batchOp.hash);
-        setError(`Operation Hash: ${batchOp.hash}`)
+      )
+      .withContractCall(
+        dexContract.methods.token_to_tez(catAmount)
+      )
+      const batchOp = await batch.send();
+      console.log("Operation hash:", batchOp.hash);
+      setError(`Operation Hash: ${batchOp.hash}`)
 
-        await updateBalances();
-      } 
-      else {
-        setError(`Not a valid Value.`)
-      }
-    } catch(err) {
-      setError(err.message)
+      await updateBalances();
+    } 
+    else {
+      setError(`Not a valid Value.`)
     }
+  } catch(err) {
+    setError(err.message)
   }
+}
 ```
 
 In the same way, when the user will click on the `Add` button of addLiquidity form we'll fire this method which will call the `invest_liquidity` entry point.
 
-Another cool thing to note here is that we're also calculating the amount of Cat tokens that needs to be approve while based on the amount of xtz sent and the current 
-exchange ratio.
+Another cool thing to note here is that we're also calculating the amount of Cat tokens that needs to be approve while based on the amount of xtz sent and the current exchange ratio.
 
 ```js
-  async function addLiquidity() {
-    // Add the liquidity into the dex.
-    const dexContract = await tezos.wallet.at(CONFIG.dexAddress);
-    const tokenContract = await tezos.wallet.at(CONFIG.tokenAddress);
-    
-    const xtz = parseInt(liquidityXtz * 10 ** 6);
-    const storage = await dexContract.storage();
-    const tezpool = storage['tez_pool'].toNumber();
-    const tokenPool = storage['token_pool'].toNumber();
-    const tokenNeeded = parseInt(xtz * tokenPool / tezpool);
-    
-    const op = await tokenContract.methods.approve(
-      CONFIG.dexAddress,
-      tokenNeeded
-    ).send();
-    setError(`Operation Hash: ${op.opHash}`)
-    const result = await op.confirmation();
-    console.log(result);
+async function addLiquidity() {
+  // Add the liquidity into the dex.
+  const dexContract = await tezos.wallet.at(CONFIG.dexAddress);
+  const tokenContract = await tezos.wallet.at(CONFIG.tokenAddress);
+  
+  const xtz = parseInt(liquidityXtz * 10 ** 6);
+  const storage = await dexContract.storage();
+  const tezpool = storage['tez_pool'].toNumber();
+  const tokenPool = storage['token_pool'].toNumber();
+  const tokenNeeded = parseInt(xtz * tokenPool / tezpool);
+  
+  const op = await tokenContract.methods.approve(
+    CONFIG.dexAddress,
+    tokenNeeded
+  ).send();
+  setError(`Operation Hash: ${op.opHash}`)
+  const result = await op.confirmation();
+  console.log(result);
 
-    // Interacting with the entry_point
-    const anotherOp = await dexContract.methods.invest_liquidity().send({amount: xtz, mutez: true});
-    setError(`Operation Hash: ${anotherOp.opHash}`)
-    const anotherResult = await anotherOp.confirmation();
-    console.log(anotherResult);
+  // Interacting with the entry_point
+  const anotherOp = await dexContract.methods.invest_liquidity().send({amount: xtz, mutez: true});
+  setError(`Operation Hash: ${anotherOp.opHash}`)
+  const anotherResult = await anotherOp.confirmation();
+  console.log(anotherResult);
 
-    await updateBalances();
-  }
+  await updateBalances();
+}
 ```
 
 
 Now, we'll create a method that will be fired when the user will click on `Remove` button and call the `divest_liquidity` entry point with the amount of LP Tokens that needs to be burn.
 
 ```js
-  async function removeLiquidity() {
-    const lp = parseInt(lpToBurn * 10 ** 6);
-    const dexContract = await tezos.wallet.at(CONFIG.dexAddress);
+async function removeLiquidity() {
+  const lp = parseInt(lpToBurn * 10 ** 6);
+  const dexContract = await tezos.wallet.at(CONFIG.dexAddress);
 
-    // Remove the liquidity from the dex based on the amount of the LP Token burn.
-    const op = await dexContract.methods.divest_liquidity(lp).send();
-    setError(`Operation Hash: ${op.opHash}`)
-    const result = await op.confirmation();
-    console.log(result);
-    
-    await updateBalances();
-  }
+  // Remove the liquidity from the dex based on the amount of the LP Token burn.
+  const op = await dexContract.methods.divest_liquidity(lp).send();
+  setError(`Operation Hash: ${op.opHash}`)
+  const result = await op.confirmation();
+  console.log(result);
+  
+  await updateBalances();
+}
 ```
 
 Let's start coding the actual UI, with the help of some HTML and tailwindcss utility classes. Here you can see we're conditionally rendering the `Notification` component which will display a little popup if the `error` has some value.
