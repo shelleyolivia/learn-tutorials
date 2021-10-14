@@ -28,6 +28,11 @@ The beginning of the video is a discussion of Web 3 between Guillaume Galuz, Fig
 
 {% embed url="https://www.youtube.com/watch?v=P0sGpnVVVx8" caption="Learn The Graph with Figment's 101 Pathway" %}
 
+- Create a subgraph scaffold @ [13:15](https://youtu.be/P0sGpnVVVx8?t=791)
+- Tweaking the manifest @ [22:00](https://youtu.be/P0sGpnVVVx8?t=1320)
+- Define the schema @ [27:47](https://youtu.be/P0sGpnVVVx8?t=1667)
+- Implement the mappings @ [38:22](https://youtu.be/P0sGpnVVVx8?t=2297)
+
 ## 👣 Next Steps
 
 Ok, enough of setup! Let's start getting our hands dirty with the first basic step: Running a local Graph node to listen to the Ethereum network.
