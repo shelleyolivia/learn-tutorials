@@ -1,4 +1,4 @@
-# Code a Simple Dex with SmartPy
+# How to create a DEX on Tezos 
 
 ## Introduction
 In this tutorial, we'll create a simple DEX(Decentralized Exchange) with which we'll understand how to code a DEX and how dexs work in general. 
