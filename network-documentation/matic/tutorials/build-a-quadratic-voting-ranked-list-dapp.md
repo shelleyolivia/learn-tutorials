@@ -917,3 +917,11 @@ Congratulations! After completing this tutorial, you should now know how to crea
 # About the author
 
 I'm giraffekey, a free software developer interested in decentralized technologies. Feel free to connect with me on [GitHub](https://github.com/giraffekey).
+
+# References
+
+- Truffle docs: https://www.trufflesuite.com/docs/truffle/overview
+- Polygon (Matic) docs: https://docs.polygon.technology/docs/develop/getting-started
+- MetaMask docs: https://docs.metamask.io/guide/
+- Web3 docs: https://web3js.readthedocs.io/en/v1.5.2/
+- IPFS docs: https://docs.ipfs.io/concepts/what-is-ipfs/
