@@ -8,7 +8,7 @@ Hey Reader! Welcome to this Tutorial on Testing a smart contract on Tezos in Sma
 
 # Prerequisites
 
-To complete this tutorial, you will need a basic understanding of the Python programming language and a know-how of how to write and deploy Tezos Contracts.
+To complete this tutorial, you will need a basic understanding of the Python programming language and know-how of how to write and deploy Tezos Contracts.
 I will suggest you take a look at this [Tutorial](https://learn.figment.io/tutorials/using-the-smartpy-ide-to-deploy-tezos-smart-contracts) first.
 
 # Requirements
@@ -16,68 +16,68 @@ Any modern Browser!
 
 
 # Smart Contract
-Before we go to the depths of testing the contract , we need to first have a sample contract which is complex enough so that we can understand it's testing.
+Before we go to the depths of testing the contract, we need to first have a sample contract that is complex enough so that we can understand its testing.
 
-Below I have taken a simple time based Escrow Contract : 
+Below I have taken a simple time-based Escrow Contract : 
 
 ```python
 import smartpy as sp
 
 class Escrow(sp.Contract):
-    def __init__(self, owner, fromOwner, counterparty, fromCounterparty, epoch, hashedSecret):
-        self.init(fromOwner           = fromOwner,
-                  fromCounterparty    = fromCounterparty,
-                  balanceOwner        = sp.tez(0),
-                  balanceCounterparty = sp.tez(0),
-                  hashedSecret        = hashedSecret,
-                  epoch               = epoch,
-                  owner               = owner,
-                  counterparty        = counterparty)
+    def __init__(self, owner, fromOwner, counterparty, fromCounterparty, epoch, hashedSecret):
+        self.init(fromOwner           = fromOwner,
+                  fromCounterparty    = fromCounterparty,
+                  balanceOwner        = sp.tez(0),
+                  balanceCounterparty = sp.tez(0),
+                  hashedSecret        = hashedSecret,
+                  epoch               = epoch,
+                  owner               = owner,
+                  counterparty        = counterparty)
 
-    @sp.entry_point
-    def addBalanceOwner(self):
-        sp.verify(self.data.owner == sp.sender , "Wrong Owner")
-        sp.verify(self.data.balanceOwner == sp.tez(0) , "There is already some stake")
-        sp.verify(sp.amount == self.data.fromOwner , "Only the stake amount is allowed")
-        self.data.balanceOwner = self.data.fromOwner
+    @sp.entry_point
+    def addBalanceOwner(self):
+        sp.verify(self.data.owner == sp.sender , "Wrong Owner")
+        sp.verify(self.data.balanceOwner == sp.tez(0) , "There is already some stake")
+        sp.verify(sp.amount == self.data.fromOwner , "Only the stake amount is allowed")
+        self.data.balanceOwner = self.data.fromOwner
 
-    @sp.entry_point
-    def addBalanceCounterparty(self):
-        sp.verify(self.data.counterparty == sp.sender , "Wrong CounterParty")
-        sp.verify(self.data.balanceCounterparty == sp.tez(0) , "There is already some stake")
-        sp.verify(sp.amount == self.data.fromCounterparty , "Only the stake amount is allowed")
-        self.data.balanceCounterparty = self.data.fromCounterparty
+    @sp.entry_point
+    def addBalanceCounterparty(self):
+        sp.verify(self.data.counterparty == sp.sender , "Wrong CounterParty")
+        sp.verify(self.data.balanceCounterparty == sp.tez(0) , "There is already some stake")
+        sp.verify(sp.amount == self.data.fromCounterparty , "Only the stake amount is allowed")
+        self.data.balanceCounterparty = self.data.fromCounterparty
 
-    def claim(self, identity):
-        sp.verify(sp.sender == identity , "Wrong Identity. Internal call only")
-        sp.send(identity, self.data.balanceOwner + self.data.balanceCounterparty)
-        self.data.balanceOwner = sp.tez(0)
-        self.data.balanceCounterparty = sp.tez(0)
+    def claim(self, identity):
+        sp.verify(sp.sender == identity , "Wrong Identity. Internal call only")
+        sp.send(identity, self.data.balanceOwner + self.data.balanceCounterparty)
+        self.data.balanceOwner = sp.tez(0)
+        self.data.balanceCounterparty = sp.tez(0)
 
-    @sp.entry_point
-    def claimCounterparty(self, params):
-        sp.verify(sp.now < self.data.epoch , "Time limit expired")
-        sp.verify(self.data.hashedSecret == sp.blake2b(params.secret) , "Wrong Secret Key")
-        self.claim(self.data.counterparty)
+    @sp.entry_point
+    def claimCounterparty(self, params):
+        sp.verify(sp.now < self.data.epoch , "Time limit expired")
+        sp.verify(self.data.hashedSecret == sp.blake2b(params.secret) , "Wrong Secret Key")
+        self.claim(self.data.counterparty)
 
-    @sp.entry_point
-    def claimOwner(self):
-        sp.verify(self.data.epoch < sp.now , "Time Limit not yet reached")
-        self.claim(self.data.owner)
+    @sp.entry_point
+    def claimOwner(self):
+        sp.verify(self.data.epoch < sp.now , "Time Limit not yet reached")
+        self.claim(self.data.owner)
 ```
 
-An Escrow contract acts as a security between two untrusting parties whenever there is an amount involved.
-A task and a deadline is agreed upon and both parties stake some amount **fromOwner** and **fromCounterparty**.
-In this case we have **owner** and **counterParty** as the two parties and the latter can claim the amount till the deadline **time** does not expire.
+An Escrow contract acts as security between two untrusting parties whenever there is an amount involved.
+A task and a deadline are agreed upon and both parties stake some amount **fromOwner** and **fromCounterparty**.
+In this case, we have **owner** and **counterParty** as the two parties and the latter can claim the amount till the deadline **time** does not expire.
 Once the deadline has expired and if the **counterParty** hasn't claimed the amount yet then **owner** can claim all the amount. 
-A secret code is hashed and stored in the contract which acts as the password for the **counterParty** and is revealed to the **counterParty** only after the agreed upon task is completed making sure that both parties are serious about the task!
+A secret code is hashed and stored in the contract which acts as the password for the **counterParty** and is revealed to the **counterParty** only after the agreed-upon task is completed making sure that both parties are serious about the task!
 
 Now a contract of such high importance must be iron-clad and no bug should allow either of the parties to claim the amount before the specified task is completed. Hence the need for testing it extensively arises.
 
 # Test Scenarios
 In SmartPy we can simulate all kinds of transaction possibilities and test out our contract without having to spend a single XTZ.
 
-To implement testinf we must examine the concept of **test scenarios** :
+To implement testing we must examine the concept of **test scenarios** :
 
 Test scenarios are an important tool to make sure our smart contracts are working correctly.
 - A new test is a method marked with `@sp.add_test`
@@ -89,28 +89,28 @@ Let's start by defining a method named `test()`:
 
 ```python
 @sp.add_test(name = "Escrow")
-    def test():
-        pass
+    def test():
+        pass
 ```
 Now we need to create a test scenario:
 
 ```python
 @sp.add_test(name = "Escrow")
 def test():
-    scenario = sp.test_scenario()
-    scenario.h1("Escrow")
+    scenario = sp.test_scenario()
+    scenario.h1("Escrow")
 ```
 
 # Test Accounts
 
-Test Accounts are unique dummy accounts provided to us via SmartPy library so that we can simulate real-world user accounts which will interact with our contract.
+Test Accounts are unique dummy accounts provided to us via the SmartPy library so that we can simulate real-world user accounts which will interact with our contract.
 It is instatiated the following way:
 
 ```python
 bob = sp.test_account("Bob")
 udit = sp.test_account("Udit")
 ```
-The string parameter acts like a seed phrase so that no two test accounts are same.
+The string parameter acts like a seed phrase so that no two test accounts are the same.
 
 Test Accounts have the following properties for us to use:
 - *admin*.address
@@ -118,7 +118,7 @@ Test Accounts have the following properties for us to use:
 - *admin*.public_key
 - *admin*.secret_key
 
-These represent the values that the user will have in their account. For us the most important is their **Address**.
+These represent the values that the user will have in their account. For us, the most important is their **Address**.
 
 # Originating a Contract
 Now we have the two parties of the Escrow contract namely **bob** and **udit** and we are ready to Originate our contract in our **test scenario**.
@@ -144,7 +144,7 @@ Now in our **test scenario** we have added a Smart Contract between two users (b
 > I have used blake2b as my cryptographic hash function. Read more about it [HERE](https://www.blake2.net/)
 
 # Run Method
-As we know that we can directly call our contract's EntryPoints using the ```.``` operator like ```ob.addBalanceOwner()``` but to simulate the intricate parameters of a real world transaction we user the ```.run()``` method which has the following parameters :
+As we know that we can directly call our contract's EntryPoints using the ```.``` operator like ```ob.addBalanceOwner()``` but to simulate the intricate parameters of a real-world transaction we user the ```.run()``` method which has the following parameters :
 
 Parameter | Function
 --------- | --------
@@ -154,16 +154,16 @@ amount | It simulates the amount sent by the user in the transaction. Sets the v
 now | It simulates the timestamp of the transaction. Sets the value of ```sp.now```
 level | It simulates the block level of the transaction. Sets the value of ```sp.level```
 chain_id | It simulates the chain_id of the transaction. Sets the value of ```sp.chain_id```
-voting_powers | It simulates the voting power of different users in the contract's implementaion. It is a dictionary. Sets the value of ```sp.voting_power```
+voting_powers | It simulates the voting power of different users in the contract's implementation. It is a dictionary. Sets the value of ```sp.voting_power```
 valid | If we expect a transaction to fail i.e. testing out edge cases we put this parameter as **FALSE** so that the compiler won't throw an error
 show | If we do not want to show a transaction in the HTML Output we set this parameter as **FALSE** 
 exception | If we expect a transaction to fail then we can also specify the expected exception that it will raise. **Valid** must be **False**
 
-For our tutorial we will be focusing on the ```sender``` , ```amount```, ```now```, ```valid``` , ```show``` parameters.
+For our tutorial, we will be focusing on the ```sender``` , ```amount```, ```now```, ```valid``` , ```show``` parameters.
 
 # Unit Tests
-We write all our verifying conditions in the contract and create transactions which would test all the functionalities of our contract. 
-My advice here is to proceed by isolating an EntryPoint and then testing all it's variables and then moving on to the next EntryPoint:
+We write all our verifying conditions in the contract and create transactions that would test all the functionalities of our contract. 
+My advice here is to proceed by isolating an EntryPoint and then testing all its variables and then moving on to the next EntryPoint:
 
 ## ```addBalanceOwner()```
 
@@ -182,7 +182,7 @@ ob.addBalanceOwner().run(sender = bob , amount = sp.tez(25) , valid = False)
 1. In the first transaction we are sending **udit** as the **sender** who we have set as **CounterParty**. Hence, we expect our transaction to fail and have **valid** set as **False**.
 2. In the second transaction we are sending ```sp.tez(1)``` as the owner's stake which we have set as 25 XTZ. Hence, we expect our transaction to fail and have **valid** set as **False**.
 3. The third transaction has both the owner and stake amount correct and we expect it to be a valid transaction.
-4. In the fourth transaction evn though all the parameters are correct , the owner has already staked once in the contract and can not stake again. Hence, we expect our transaction to fail and have **valid** set as **False**.
+4. In the fourth transaction even though all the parameters are correct, the owner has already staked once in the contract and can not stake again. Hence, we expect our transaction to fail and have **valid** set as **False**.
 
 ## ```addBalanceCounterparty()```
 
@@ -200,8 +200,8 @@ ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5) , valid = Fals
 
 1. In the first transaction we are sending **bob** as the **sender** who we have set as **Owner**. Hence, we expect our transaction to fail and have **valid** set as **False**.
 2. In the second transaction we are sending ```sp.tez(25)``` as the counter party's stake which we have set as 5 XTZ. Hence, we expect our transaction to fail and have **valid** set as **False**.
-3. The third transaction has both the counter party and stake amount correct and we expect it to be a valid transaction.
-4. In the fourth transaction evn though all the parameters are correct , the counter arty has already staked once in the contract and can not stake again. Hence, we expect our transaction to fail and have **valid** set as **False**.
+3. The third transaction has both the counterparty and stake amount correct and we expect it to be a valid transaction.
+4. In the fourth transaction even though all the parameters are correct, the counter arty has already staked once in the contract and can not stake again. Hence, we expect our transaction to fail and have **valid** set as **False**.
 
 ## ```claimCounterparty()```
 
@@ -211,14 +211,14 @@ ob.claimCounterparty(secret = s).run(sender = bob , valid = False)
 ob.claimCounterparty(secret = sp.bytes("0x01223343")).run(sender = udit, valid = False)
 ob.claimCounterparty(secret = s).run(sender = udit , now = sp.timestamp(1635192186) , valid=False)
 
- 
+ 
 ob.claimCounterparty(secret = s).run(sender = udit)
 ```
 
 - Faults
-1. In the first transaction we are sending bob as the **sender** who is not the counter party. Hence, we expect our transaction to fail and have **valid** set as **False**.
+1. In the first transaction we are sending bob as the **sender** who is not the counterparty. Hence, we expect our transaction to fail and have **valid** set as **False**.
 2. In the second transaction we are sending the wrong secret key. Hence, we expect our transaction to fail and have **valid** set as **False**.
-3. The third transaction has both the counter party and secret key correct but the timestamp is for 25th October 2021 which is past our deadline set during origination.
+3. The third transaction has both the counterparty and secret key correct but the timestamp is for 25th October 2021 which is past our deadline set during origination.
 4. The fourth transaction has everything in order and hence is a valid transaction.
 
 ## ```claimOwner()```
@@ -228,7 +228,7 @@ ob.claimCounterparty(secret = s).run(sender = udit)
 ob.claimOwner().run(sender = udit , valid = False)
 ob.claimOwner().run(sender = bob, valid=False)
 
- 
+ 
 ob.claimOwner().run(sender = bob ,now = sp.timestamp(1635192186) )
 ```
 
@@ -252,7 +252,7 @@ baker | Fetches contract's optional delegated baker
 address | Fetches contract's deployed address within the scenario
 
 # Scenario Methods
-The scenario we made in the above tutorial also provides us with various tools to verify , compute and show in HTML Output.
+The scenario we made in the above tutorial also provides us with various tools to verify, compute and show in HTML Output.
 
 ## Verify
 We can verify all the parameters of our storage or any condition using **verify** method.
@@ -262,14 +262,14 @@ scenario.verify(ob.data.owner == bob.address)
 ```
 
 ## Compute
-Using **compute** we perform calculations and store them in local variable inside the scenario.
+Using **compute** we perform calculations and store them in local variables inside the scenario.
 
 ```python
 x = scenario.compute(ob.data.fromOwner + sp.tez(15))
 ```
 
 ## Show
-**show** method is used to add expressions which are not transactions into the HTML Output. This will compute the expression and add it to our output panel
+**show** method is used to add expressions that are not transactions into the HTML Output. This will compute the expression and add it to our output panel
 
 ```python
 scenario.show(ob.data)
@@ -287,7 +287,7 @@ scenario.h4(" <h4> HTML tag.")
 scenario.p("<p> HTML tag.")
 ```
 
-Now that we have completed the in depths of testing our smart contract we are ready to deploy it in the real world and have real users interact with it.
+Now that we have completed the depths of testing our smart contract we are ready to deploy it in the real world and have real users interact with it.
 
 # Final Code
 
@@ -295,113 +295,113 @@ Now that we have completed the in depths of testing our smart contract we are re
 import smartpy as sp
 
 class Escrow(sp.Contract):
-    def __init__(self, owner, fromOwner, counterparty, fromCounterparty, epoch, hashedSecret):
-        self.init(fromOwner           = fromOwner,
-                  fromCounterparty    = fromCounterparty,
-                  balanceOwner        = sp.tez(0),
-                  balanceCounterparty = sp.tez(0),
-                  hashedSecret        = hashedSecret,
-                  epoch               = epoch,
-                  owner               = owner,
-                  counterparty        = counterparty)
+    def __init__(self, owner, fromOwner, counterparty, fromCounterparty, epoch, hashedSecret):
+        self.init(fromOwner           = fromOwner,
+                  fromCounterparty    = fromCounterparty,
+                  balanceOwner        = sp.tez(0),
+                  balanceCounterparty = sp.tez(0),
+                  hashedSecret        = hashedSecret,
+                  epoch               = epoch,
+                  owner               = owner,
+                  counterparty        = counterparty)
 
-    @sp.entry_point
-    def addBalanceOwner(self):
-        sp.verify(self.data.owner == sp.sender , "Wrong Owner")
-        sp.verify(self.data.balanceOwner == sp.tez(0) , "There is already some stake")
-        sp.verify(sp.amount == self.data.fromOwner , "Only the stake amount is allowed")
-        self.data.balanceOwner = self.data.fromOwner
+    @sp.entry_point
+    def addBalanceOwner(self):
+        sp.verify(self.data.owner == sp.sender , "Wrong Owner")
+        sp.verify(self.data.balanceOwner == sp.tez(0) , "There is already some stake")
+        sp.verify(sp.amount == self.data.fromOwner , "Only the stake amount is allowed")
+        self.data.balanceOwner = self.data.fromOwner
 
-    @sp.entry_point
-    def addBalanceCounterparty(self):
-        sp.verify(self.data.counterparty == sp.sender , "Wrong CounterParty")
-        sp.verify(self.data.balanceCounterparty == sp.tez(0) , "There is already some stake")
-        sp.verify(sp.amount == self.data.fromCounterparty , "Only the stake amount is allowed")
-        self.data.balanceCounterparty = self.data.fromCounterparty
+    @sp.entry_point
+    def addBalanceCounterparty(self):
+        sp.verify(self.data.counterparty == sp.sender , "Wrong CounterParty")
+        sp.verify(self.data.balanceCounterparty == sp.tez(0) , "There is already some stake")
+        sp.verify(sp.amount == self.data.fromCounterparty , "Only the stake amount is allowed")
+        self.data.balanceCounterparty = self.data.fromCounterparty
 
-    def claim(self, identity):
-        sp.verify(sp.sender == identity , "Wrong Identity. Internal call only")
-        sp.send(identity, self.data.balanceOwner + self.data.balanceCounterparty)
-        self.data.balanceOwner = sp.tez(0)
-        self.data.balanceCounterparty = sp.tez(0)
+    def claim(self, identity):
+        sp.verify(sp.sender == identity , "Wrong Identity. Internal call only")
+        sp.send(identity, self.data.balanceOwner + self.data.balanceCounterparty)
+        self.data.balanceOwner = sp.tez(0)
+        self.data.balanceCounterparty = sp.tez(0)
 
-    @sp.entry_point
-    def claimCounterparty(self, params):
-        sp.verify(sp.now < self.data.epoch , "Time limit expired")
-        sp.verify(self.data.hashedSecret == sp.blake2b(params.secret) , "Wrong Secret Key")
-        self.claim(self.data.counterparty)
+    @sp.entry_point
+    def claimCounterparty(self, params):
+        sp.verify(sp.now < self.data.epoch , "Time limit expired")
+        sp.verify(self.data.hashedSecret == sp.blake2b(params.secret) , "Wrong Secret Key")
+        self.claim(self.data.counterparty)
 
-    @sp.entry_point
-    def claimOwner(self):
-        sp.verify(self.data.epoch < sp.now , "Time Limit not yet reached")
-        self.claim(self.data.owner)
+    @sp.entry_point
+    def claimOwner(self):
+        sp.verify(self.data.epoch < sp.now , "Time Limit not yet reached")
+        self.claim(self.data.owner)
 
 @sp.add_test(name = "Escrow")
 def test():
-    #Test Scenario
-    scenario = sp.test_scenario()
-    scenario.h1("Escrow")
+    #Test Scenario
+    scenario = sp.test_scenario()
+    scenario.h1("Escrow")
 
-    #Test Accounts
-    bob = sp.test_account("Bob")
-    udit = sp.test_account("Udit")
+    #Test Accounts
+    bob = sp.test_account("Bob")
+    udit = sp.test_account("Udit")
 
-    #Origination
-    s = sp.pack("SECRETKEY") #String to Bytes
-    secret = sp.blake2b(s) #Hashing bytes to secret key
-    ob = Escrow(bob.address, sp.tez(25), udit.address, sp.tez(5), sp.timestamp(1634753427), secret)
-    scenario += ob
+    #Origination
+    s = sp.pack("SECRETKEY") #String to Bytes
+    secret = sp.blake2b(s) #Hashing bytes to secret key
+    ob = Escrow(bob.address, sp.tez(25), udit.address, sp.tez(5), sp.timestamp(1634753427), secret)
+    scenario += ob
 
-    scenario.h1("Workflows")
-    scenario.h2("Add Balance Owner")
-    #addBalanceOwner Tests
-    ob.addBalanceOwner().run(sender=udit , amount = sp.tez(25) , valid = False)
-    ob.addBalanceOwner().run(sender=bob , amount = sp.tez(1) , valid = False)
+    scenario.h1("Workflows")
+    scenario.h2("Add Balance Owner")
+    #addBalanceOwner Tests
+    ob.addBalanceOwner().run(sender=udit , amount = sp.tez(25) , valid = False)
+    ob.addBalanceOwner().run(sender=bob , amount = sp.tez(1) , valid = False)
 
-    ob.addBalanceOwner().run(sender = bob, amount = sp.tez(25))
+    ob.addBalanceOwner().run(sender = bob, amount = sp.tez(25))
 
-    ob.addBalanceOwner().run(sender = bob , amount = sp.tez(25) , valid = False)
+    ob.addBalanceOwner().run(sender = bob , amount = sp.tez(25) , valid = False)
 
 
-    scenario.h2("Add Balance CounterParty")
-    #addBalanceCounterparty Tests
-    ob.addBalanceCounterparty().run(sender=bob , amount = sp.tez(5) , valid = False)
-    ob.addBalanceCounterparty().run(sender=udit , amount = sp.tez(25) , valid = False)
+    scenario.h2("Add Balance CounterParty")
+    #addBalanceCounterparty Tests
+    ob.addBalanceCounterparty().run(sender=bob , amount = sp.tez(5) , valid = False)
+    ob.addBalanceCounterparty().run(sender=udit , amount = sp.tez(25) , valid = False)
 
-    ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5))
+    ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5))
 
-    ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5) , valid = False)
+    ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5) , valid = False)
 
-    scenario.h2("Claim CounterParty")
-    #claimCounterparty Tests
-    ob.claimCounterparty(secret = s).run(sender = bob , valid = False)
-    ob.claimCounterparty(secret = sp.bytes("0x01223343")).run(sender = udit, valid = False)
-    ob.claimCounterparty(secret = s).run(sender = udit , now = sp.timestamp(1635192186) , valid=False)
+    scenario.h2("Claim CounterParty")
+    #claimCounterparty Tests
+    ob.claimCounterparty(secret = s).run(sender = bob , valid = False)
+    ob.claimCounterparty(secret = sp.bytes("0x01223343")).run(sender = udit, valid = False)
+    ob.claimCounterparty(secret = s).run(sender = udit , now = sp.timestamp(1635192186) , valid=False)
 
- 
-    # ob.claimCounterparty(secret = s).run(sender = udit)
+ 
+    # ob.claimCounterparty(secret = s).run(sender = udit)
 
-    scenario.h2("Claim Owner")
-    #claimOwner Tests
-    ob.claimOwner().run(sender = udit , valid = False)
-    ob.claimOwner().run(sender = bob, valid=False)
+    scenario.h2("Claim Owner")
+    #claimOwner Tests
+    ob.claimOwner().run(sender = udit , valid = False)
+    ob.claimOwner().run(sender = bob, valid=False)
 
- 
-    ob.claimOwner().run(sender = bob ,now = sp.timestamp(1635192186) )
+ 
+    ob.claimOwner().run(sender = bob ,now = sp.timestamp(1635192186) )
 
-    scenario.verify(ob.data.owner == bob.address)
-    x = scenario.compute(ob.data.fromOwner + sp.tez(15))
-    scenario.show(ob.data)
-    scenario.show(ob.data.fromOwner + sp.tez(15))
+    scenario.verify(ob.data.owner == bob.address)
+    x = scenario.compute(ob.data.fromOwner + sp.tez(15))
+    scenario.show(ob.data)
+    scenario.show(ob.data.fromOwner + sp.tez(15))
 ```
 
 # Conclusion
 
-In this Tutorial we learned about how to test , verify and debug smart contracts before deploying them to the real world.
+In this tutorial, we learned about how to test, verify and debug smart contracts before deploying them to the real world.
 
 # Next Steps
 
-I would like for you to make your own contracts and test all their EntryPoints , Storage and make sure they are perfect before deploying them to the chain.
+I would like for you to make your contracts and test all their EntryPoints, Storage and make sure they are perfect before deploying them to the chain.
 
 # About The Author
 
