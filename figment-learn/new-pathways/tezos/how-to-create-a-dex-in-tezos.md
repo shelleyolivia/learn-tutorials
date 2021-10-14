@@ -34,7 +34,7 @@ For more information on setting up tailwindcss with `create-react-app` you can r
 
 After installing the dependencies make a folder called `contracts` in the root directory where we'll keep all our smartpy code.
 
-Deploy two FA1.2 tokens namely `🐱 Cat Token` and `LP Token` which we'll be using later in this tutorial.
+Deploy two FA1.2 tokens namely **🐱 Cat Token** and **LP Token** which we'll be using later in this tutorial.
 
 
 ## Working on the Smart Contract
@@ -94,7 +94,7 @@ def transfer_tez(self, to_, amount: sp.TMutez):
 
 ```
 
-While allowing other people to provide liquidity to our pool, we'll have to give them a certain amount of `LP Tokens` based on their liquidity, for that we'll have to mint LP tokens and burn them when the user wants their liquidity back. For this, we'll have two more utility functions namely `mint_lp`, and `burn_lp` which are basically used to mint and burn LP tokens.
+While allowing other people to provide liquidity to our pool, we'll have to give them a certain amount of **LP Tokens** based on their liquidity, for that we'll have to mint LP tokens and burn them when the user wants their liquidity back. For this, we'll have two more utility functions namely `mint_lp`, and `burn_lp` which are basically used to mint and burn LP tokens.
 
 ```py
 def mint_lp(self, amount):
@@ -404,7 +404,7 @@ We'll start by importing the necessary things in the `App.jsx` file.
 > NOTE: Just to keep things simple I'm writing everything in `App.jsx` but you can
 > structure your code however you like.
 
-Let's import all the necessary things that we might need in our project. Here we're using `axios` to make use of `tzkt` API to fetch balances of the users.
+Let's import all the necessary things that we might need in our project. Here we're using `axios` to make use of **tzkt API** to fetch balances of the users.
 
 ```jsx
 import React, { useState, useEffect } from "react";
@@ -435,7 +435,7 @@ const config = {
 export default config;
 ```
 
-We'll create two separate file Components in the same `App.jsx` file namely  `Notification` which is responsible for showing any message and `Balance` which shows the current amount of `Cat Token` and `LP Token` a user has.
+We'll create two separate JSX Components in the same `App.jsx` file namely `Notification` which will be responsible for showing any message and `Balance` which shows the current amount of **Cat Token** and **LP Token** a user has.
 
 ```jsx
 function Notification({ error, setError }) {
@@ -551,7 +551,7 @@ useEffect( () => {
 }, [wallet])
 ```
 
-Let's make a function to connect to the `Temple Wallet`.
+Let's make a function to connect to the **Temple Wallet**.
 
 ```jsx
 async function connectToWallet() {
@@ -574,7 +574,7 @@ async function connectToWallet() {
 }
 ```
 
-When the user will click on `Swap` button we'll fire this method which will call the `tez_to_token` entry point.
+When the user will click on **Swap** button we'll fire this method which will call the `tez_to_token` entry point.
 
 ```jsx
 async function exchange() {
@@ -621,7 +621,7 @@ async function exchange() {
 }
 ```
 
-In the same way, when the user will click on the `Add` button of addLiquidity form we'll fire this method which will call the `invest_liquidity` entry point.
+In the same way, when the user will click on the **Add** button of addLiquidity form we'll fire this method which will call the `invest_liquidity` entry point.
 
 Another cool thing to note here is that we're also calculating the amount of Cat tokens that needs to be approve while based on the amount of xtz sent and the current exchange ratio.
 
@@ -656,7 +656,7 @@ async function addLiquidity() {
 ```
 
 
-Now, we'll create a method that will be fired when the user will click on `Remove` button and call the `divest_liquidity` entry point with the amount of LP Tokens that needs to be burn.
+Now, we'll create a method that will be fired when the user will click on **Remove** button and call the `divest_liquidity` entry point with the amount of LP Tokens that needs to be burn.
 
 ```jsx
 async function removeLiquidity() {
