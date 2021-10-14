@@ -4,7 +4,7 @@ In this tutorial, we will be learning how to create a quadratic voting app with 
 
 Here's a preview of what we will be building:
 
-![app demo](../../../.gitbook/assets/quadratic-voting-demo.gif)
+![app demo](../../../.gitbook/assets/quadratic-voting-complete.png)
 
 # Prerequisites
 
@@ -16,7 +16,7 @@ By the end of this tutorial you will be able to:
 - Create smart contracts with Solidity
 - Write tests for smart contracts
 - Compile and migrate smart contracts with Truffle
-- Build a front-end with Vue.js and TailwindCSS
+- Build a front-end with Vue.js and Tailwind CSS
 - Call smart contract functions with Web3
 - Serve images with IPFS
 - Deploy smart contracts to the Polygon Mumbai testnet
@@ -58,7 +58,7 @@ These are the additional technologies we will be using:
 - Web3.js
 - IPFS
 - Vue.js
-- TailwindCSS
+- Tailwind CSS
 
 # Project setup
 
@@ -155,10 +155,6 @@ As an example of how quadratic voting works, let's say this contract was for a r
 
 The function `createItem` is used to publish a new Item object to the ranked list. The item will require a title, IPFS image hash and text description to be set before the object can be created. The current sender is considered the owner of the item.
 
-This is an example of what a published item will look like when we build the UI:
-
-![item](../../../.gitbook/assets/quadratic-voting-item.png)
-
 ```solidity
   function positiveVote(uint itemId, uint weight) public payable {
     Item storage item = items[itemId];
@@ -205,7 +201,7 @@ Users are not able to vote for their own items because this would allow them to 
   }
 ```
 
-Negative votes are slightly different in their distribution. Rather than reward the owner for a poor addition to the list, the funds are distributed to everyone except the owner. This acts as a sort of basic income for all participants.
+Negative votes are slightly different in their distribution. Rather than reward the owner for a poor addition to the list, the funds are distributed to every item except for the one being voted on. This acts as a sort of basic income for all participants.
 
 ```solidity
   function claim(uint itemId) public {
@@ -217,7 +213,7 @@ Negative votes are slightly different in their distribution. Rather than reward 
 }
 ```
 
-This allows the owner of an item transfer any reward to their wallet.
+This allows the owner of an item to transfer any reward to their wallet.
 
 And there we go! Our smart contract is finished. Now let's learn how to deploy it.
 
@@ -438,7 +434,8 @@ export async function items(itemId) {
       title: web3.utils.hexToUtf8(item.title),
       imageHash: item.imageHash,
       description: item.description,
-      votes: item.positiveWeight - item.negativeWeight,
+      positiveWeight: item.positiveWeight,
+      negativeWeight: item.negativeWeight,
     }
   } else {
     return null
@@ -489,14 +486,12 @@ export async function rankedItems() {
     const item = await items(i)
     if (item) itemsArr.push(item)
   }
-
-  return itemsArr.sort((a, b) => a.votes - b.votes)
+  
+  return itemsArr.sort((a, b) => (b.positiveWeight - b.negativeWeight) - (a.positiveWeight - a.negativeWeight))
 }
 ```
 
 These exported functions allow us to serialize/deserialize data to and from our smart contracts.
-
-Note the changed fields `id` and `votes` in the `items` function.
 
 We need to use `utf8ToHex` because `title` is defined as the `bytes32` type in our contract.
 
@@ -691,14 +686,15 @@ Create a file named `src/components/Item.vue`.
     <img :src="`https://ipfs.io/ipfs/${item.imageHash}`" alt="item image" width="640" height="480" />
     <p>{{ item.description }}</p>
     <p>{{ item.owner }}</p>
-    <p>{{ item.amount / 1_000_000_000 }} gwei</p>
     <template v-if="address() === item.owner">
+      <p>Amount: {{ item.amount / 1_000_000_000 }} gwei</p>
       <button @click="claimGwei">Claim</button>
     </template>
     <template v-else>
       <button @click="upvote">Up</button>
-      <p>{{ item.votes + weight - startWeight }}</p>
+      <p>Votes: {{ item.positiveWeight }}</p>
       <button @click="downvote">Down</button>
+      <p>Votes: {{ item.negativeWeight }}</p>
       <div v-if="weight !== startWeight">
         <p>Weight: {{ weight }}</p>
         <p>Cost: {{ cost / 1_000_000_000 }} gwei</p>
@@ -765,6 +761,10 @@ export default {
 
 This will by far be our largest and most complex component.
 
+The first thing to notice is the `src` attribute of the image. `ipfs.io` is the gateway we will be using to access our IPFS files.
+
+
+
 Our `RankedList` component should now look something like this depending on the data you posted. We will style this later.
 
 ![ranked items with claim button](../../../.gitbook/assets/quadratic-voting-ranked-items-claim.png)
@@ -783,7 +783,132 @@ Clicking the "Submit Vote" button should allow you to confirm a transaction.
 
 ![submit vote MetaMask](../../../.gitbook/assets/quadratic-voting-submit-vote-metamask.png)
 
-# Styling the components with TailwindCSS
+# Styling the components with Tailwind CSS
+
+Next we'll be styling our Vue components to make the app look prettier.
+
+### Configuration
+
+We'll need the following packages to style our components with Tailwind CSS.
+
+```bash
+yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9 postcss-loader
+```
+
+Create a file named `postcss.config.js`. This allows us to use `tailwindcss` as a PostCSS plugin.
+
+```js
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  }
+}
+```
+
+Create a file named `tailwind.config.js`. The purge option removes any unused styles from our compiled CSS output when building in production.
+
+```js
+module.exports = {
+  purge: ["./src/**/*.vue"],
+  darkMode: false,
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+}
+```
+
+Then add the following to `src/App.vue`. Note that this is a global stylesheet.
+
+```vue
+<style lang="postcss" global>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+</style>
+```
+
+### Components
+
+Now it's finally time to make our components look like part of a real app.
+
+Edit `App.vue` to add a dark background to our app.
+
+```vue
+<template>
+  <main class="p-10 min-h-screen bg-gray-900">
+    <CreateItem />
+    <RankedList />
+  </main>
+</template>
+```
+
+Edit `CreateItem.vue` to make our form pop out more.
+
+```vue
+<template>
+  <form @submit.prevent="submit" class="bg-gray-300 p-10 w-1/2 mx-auto rounded">
+    <input type="text" v-model="title" placeholder="Title" class="px-3 py-1 w-full mb-10" />
+    <br />
+    <input type="file" placeholder="Upload image" @input="uploadImage" class="text-gray-300" />
+    <br />
+    <p class="mb-10 text-gray-300" :class="imageHash ? 'mt-3' : ''">{{ imageHash || "" }}</p>
+    <textarea v-model="description" placeholder="Description" class="px-3 py-1 w-full mb-10" />
+    <br />
+    <input type="submit" value="Create Item" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white cursor-pointer" />
+  </form>
+</template>
+```
+
+Edit `RankedList.vue` to add spacing between items and style our heading.
+
+```vue
+<template>
+  <section class="flex flex-col items-center gap-10">
+    <h1 class="text-2xl text-center text-white font-bold mt-10">Ranked List</h1>
+    <Item v-for="item in items" :key="item.id" :item="item" />
+  </section>
+</template>
+```
+
+And finally, edit `Item.vue`. The layout of this component will change a lot.
+
+```vue
+<template>
+  <div class="bg-gray-300 p-10 rounded border-b border-gray-400">
+    <div class="flex items-center">
+      <img :src="`https://ipfs.io/ipfs/${item.imageHash}`" alt="item image" class="w-1/12 mr-10 rounded shadow" />
+      <div class="mr-5">
+        <button @click="upvote" class="text-xl px-4 py-3 border border-b-2 border-black rounded hover:bg-black hover:text-white">&uarr;</button>
+        <p class="text-lg text-center mt-2">{{ item.positiveWeight }}</p>
+      </div>
+      <div class="mr-10">
+        <button @click="downvote" class="text-xl px-4 py-3 border border-b-2 border-black rounded hover:bg-black hover:text-white">&darr;</button>
+        <p class="text-lg text-center mt-2">{{ item.negativeWeight }}</p>
+      </div>
+      <div class="ml-5">
+        <h2 class="text-xl font-bold mb-5">{{ item.title }}</h2>
+        <p class="text-gray-600 mb-5">{{ item.description }}</p>
+      </div>
+      <div v-if="address() === item.owner" class="ml-auto">
+        <p class="mb-5 text-center">Amount: {{ item.amount / 1_000_000_000 }} gwei</p>
+        <button @click="claimGwei" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white">Claim</button>
+      </div>
+      <div v-else-if="weight !== startWeight" class="ml-auto">
+        <p class="mb-5 text-center">Weight: {{ weight }}</p>
+        <p class="mb-5 text-center">Cost: {{ cost / 1_000_000_000 }} gwei</p>
+        <button @click="submitVote" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white">Submit Vote</button>
+      </div>
+    </div>
+  </div>
+</template>
+```
+
+We're done! Your app should now have a much better appearance.
+
+![completed app](../../../.gitbook/assets/quadratic-voting-complete.png)
 
 # Conclusion
 
