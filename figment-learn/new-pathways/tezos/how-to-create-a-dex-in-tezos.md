@@ -19,7 +19,7 @@ Basic knowledge of smartpy, react, taquito and smart contracts.
 ## Project Setup
 Create an empty react project using `create-react-app`, after creating it install the following packages.
 
-> NOTE: For this tutorial, i'll be using `tailwindcss` for styling the components, but this step is completely optional. You can use any UI Library that you want.
+> NOTE: For this tutorial, i'll be using `tailwindcss` for styling the components, but this step is completely optional. You can use any UI Library/Css Framework that you want.
 
 1. Taquito and BeconWallet
 ```bash
@@ -32,7 +32,7 @@ yarn add --dev tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefi
 ```
 For more information on setting up tailwindcss with `create-react-app` you can read [here](https://tailwindcss.com/docs/guides/create-react-app).
 
-After installing the dependencies make a folder called `contracts` in the root directory where we'll keep all our smartpy code.
+After installing the dependencies make a folder called `./contracts` in the root directory where we'll keep all our smartpy code.
 
 Deploy two FA1.2 tokens namely **🐱 Cat Token** and **LP Token** which we'll be using later in this tutorial.
 
