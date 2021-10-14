@@ -811,8 +811,8 @@ You can see after exchanging 1 tez we're getting around 97 cat token based on cu
 ![Transaction](https://i.imgur.com/4lHckUS.png)
 
 
-<!-- ## About The Author
-I am vivek, I am a full stack web2 and web3 developer, You can find me on github  -->
+## About The Author
+I am Vivek, You can find more about me [here](https://github.com/vivekascoder)
 
 ## References
 1. [Uniswap v1 white paper](https://hackmd.io/@HaydenAdams/HJ9jLsfTz)
