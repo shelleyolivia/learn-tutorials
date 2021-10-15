@@ -25,7 +25,7 @@ Install Truffle:
 npm i -g truffle
 ```
 
-Clone this [Git Repository](https://github.com/devilla/cryptolend.eth) and read the [Deploying and Debugging Smart Contracts on Polygon](https://learn.figment.io/tutorials/deploying-and-debugging-smart-contracts-on-polygon) tutorial to setup network config inside Truffle and learn the deployment the Polygon network.
+Clone this [Git Repository](https://github.com/devilla/cryptolend.eth) and read the [Deploying and Debugging Smart Contracts on Polygon](https://learn.figment.io/tutorials/deploying-and-debugging-smart-contracts-on-polygon) tutorial to setup network config inside Truffle and learn the deployment on the Polygon network.
 
 ```
 git clone https://github.com/Devilla/cryptolend.eth.git
@@ -47,7 +47,7 @@ Open `truffle console` to run a local blockchain in your terminal at `http://127
 truffle develop
 ```
 
-This will and display `Account addresses` along with their `Private Keys` and `Mnemonic`.
+This will and display `Account addresses` along with their `Private Keys` and `Mnemonic` required for deploying the smart contracts.
 
 In the `truffle console` compile the smart contracts:
 
