@@ -1,5 +1,5 @@
 # Introduction
-Hi, In this tutorial, we will learn how to mint NFTs on Tezos. We will write a smart contract in SmartPy and deploy it, upload the NFT metadata on IPFS and mint the token using better-call.dev. We will also cover how to mint it using React and taquito.
+Hi, in this tutorial, we will learn how to mint NFTs on Tezos. We will write a smart contract in SmartPy and deploy it, upload the NFT metadata on IPFS and mint the token using better-call.dev. We will also cover how to mint it using React and taquito.
 
 
 # Prerequisites
@@ -12,14 +12,14 @@ Hi, In this tutorial, we will learn how to mint NFTs on Tezos. We will write a s
 
 - Temple Wallet Installed in your browser. Get it from https://templewallet.com/
 - Few XTZs on Granada Testnet is also needed in the wallet account. To get it, you can refer to Faucet and Temple Wallet section in this [tutorial](https://learn.figment.io/tutorials/using-the-smartpy-ide-to-deploy-tezos-smart-contracts#faucet-and-temple-wallet).
-- NodeJS, npm and git are also needed for the frontend.
+- NodeJS, npm and git needs to be installed for the frontend.
 
 # SmartPy
 
 SmartPy is an intuitive and powerful smart contract development platform for Tezos.  
 The SmartPy language is available through a Python library for building and analyzing Tezos smart contracts.  
 And with its IDE, we can quickly write our code in the browser itself. We can also deploy our code from the browser. No local setup is required.  
-Open https://smartpy.io/ide 
+So, Let's start. Open https://smartpy.io/ide 
 
 ![SmartPy](../../../.gitbook/assets/mint_smartpy_1.png)
 
@@ -29,7 +29,7 @@ To move to the editor, click CLOSE.
 # Token Contract and FA2 Standard
 
 The left panel is where we are going to code.  
-We are going to follow the FA2 token standard(TZIP-12) for our NFTs.  
+We are going to follow the FA2 token standard([TZIP-12](https://tezostaquito.io/docs/tzip12/)) for our NFTs.  
 Let’s start coding our contract.
 
 First, we will import the smartpy library
@@ -38,13 +38,13 @@ First, we will import the smartpy library
 import smartpy as sp
 ```
 
-Now we will import the FA2 template. Most of the features(mint) we needed have already been implemented in this template. 
+Now we will import the FA2 template. Most of the features(mint) we need have already been implemented in this template. 
 
 ```python
 FA2 = sp.io.import_template("FA2.py")
 ```
 
-Let’s use this template and inherit it in our NFT class, and the entry points we needed for this tutorial are already in the template, so we don’t need to change our class and simply pass. And this will be our contract.
+Let’s use this template and inherit it in our NFT class, and the entry points we need for this tutorial are already in the template, so we don’t need to change our class and simply pass. And this will be our contract.
 
 ```python
 class NFT(FA2.FA2):
@@ -87,7 +87,7 @@ Add the nft to scenario
 ```
 
 Test the mint function.   
-We are going to send three parameters to the mint entry point.
+We will send three parameters to the mint entry point.
 
 - token_id  
 the token id of the NFT usually stars with 0 and then needs to be increment by 1 for each subsequent NFT.
@@ -96,10 +96,11 @@ the token id of the NFT usually stars with 0 and then needs to be increment by 1
 the address on which we want to mint the token.
 
 - metadata  
-for token metadata, we are using IPFS (will come to it later in this tutorial). 
-The metadata is stored in a map(string, bytes) so, we need to convert the strings to IPFS for which sp.utils.bytes_of_string is used. 
+for token metadata, we are using IPFS (will come to it later in this tutorial).  
+The metadata is stored in a map(string, bytes) so, we need to convert the strings to IPFS for which sp.utils.bytes_of_string is used.  
+For now, use the same IPFS URL (ipfs://bafkreih36m3d4yfbpyteluvntuph5xybwtgxdvyksbgyg66es44drk4hqy)
 
-And only the admin can run the mint query.
+And remember only the admin can run the mint query.
 
 ```python
    nft.mint(token_id=0, address=jerry.address, amount=1, metadata = sp.map({"": sp.utils.bytes_of_string("ipfs://bafkreih36m3d4yfbpyteluvntuph5xybwtgxdvyksbgyg66es44drk4hqy")})).run(sender=admin)
@@ -139,11 +140,11 @@ We can check it according to the tests defined. We defined the heading in h1 in 
 
 # Deploy Contract
 
-It’s time to deploy this contract. For this tutorial, we are going to deploy the contract Granada testnet.  
-We can deploy the contract using smartpy ide itself. 
+It’s time to deploy this contract. For this tutorial, we are going to deploy the contract on Granada testnet.  
+We can deploy the contract using smartpy IDE itself. 
 After running, we get the option to Deploy Michelson Contract in the output panel. Move to it.
 
-Click on the Deploy Michelson Contract.
+Click on the Deploy Michelson Contract button.
 
 ![SmartPy](../../../.gitbook/assets/mint_smartpy_deploy_1.png)
 
@@ -190,11 +191,11 @@ The file will get uploaded, and this is your hash.
 
 ![IPFS](../../../.gitbook/assets/mint_ipfs_3.png)
 
-You can view your files visiting ipfs://<hash> (If your browser doesn’t support IPFS, you can use https://ipfs.io/ipfs/<hash> )
+You can view your files visiting ipfs://{hash} (If your browser doesn’t support IPFS, you can use https://ipfs.io/ipfs/{hash} )
 
 For token metadata, decimals is the required field according to the FA2 standard.  
-name and symbols fields are highly recommended.
-And according to TZIP-21 for NFTs, these are some other recommended fields 
+name and symbol fields are highly recommended.
+And according to TZIP-21 for NFTs, these are some other recommended fields.
 - artifactUri
 - displayUri
 - thumbnailUri
@@ -202,8 +203,6 @@ And according to TZIP-21 for NFTs, these are some other recommended fields
 - minter
 - creators
 - isBooleanAmount
-
-We will be storing the metadata in JSON file. Create metadata.json and open it in any editor of your choice.
 
 We will be storing the metadata in JSON file. Create metadata.json and open it in any editor of your choice.
 
@@ -225,21 +224,21 @@ We will be storing the metadata in JSON file. Create metadata.json and open it i
 }
 ```
 
-Here, we will be using the same IPFS link for artifactUri, displayUri and thumbnailUri.  
-For NFTs, decimals must be 0, as you are the minter you can put your address there and creators is an array of string and isBooleanAmount is boolean, and it describes whether an account can have an amount of exactly 0 or 1.  
+Here, we will be using the same IPFS URL for artifactUri, displayUri and thumbnailUri.  
+For NFTs, decimals must be 0, creators is an array of string and isBooleanAmount is boolean, and it describes whether an account can have an amount of exactly 0 or 1.  
 There are other fields also which can be used. You can read the details of all this in the TZIP-21.
 
 Now we will upload this JSON file to IPFS using nft.storage.
 
 **Small Exercise:-**  
-Repeat the same procedure we did to upload the image and upload this file and store the hash that will be needed later and view the file in a browser using the link. 
+Repeat the same procedure we did to upload the image and upload this JSON file and store the hash that will be needed later. Also, view the file in browser. 
 
 # Mint using better-call.dev
 
-It’s time to mint our first NFT. Open up better-call.dev.
+It’s time to mint our first NFT. Open up [better-call.dev](https://better-call.dev/).
 
-Move to interact tab, open mint from the right sidebar. 
-Put the address you want to mint the NFT to. The amount should be 1 and token_id to 0. And for metadata, we will take the hash of the metadata.json file we uploaded above and use ipfs://<hash> to set the token metadata. But for the token metadata, the ipfs URL needs to be in bytes. You can convert the strings to bytes from [here](https://tutorial-mint-nfts.vercel.app/char2bytes). 
+Move to interact tab, open mint from the right sidebar.  
+Put the address you want to mint the NFT to. The amount should be 1 and token_id to 0. And for metadata, we will take the hash of the metadata.json file we uploaded above and use ipfs://{hash} to set the token metadata. But for the token metadata, the ipfs URL needs to be in bytes. You can convert the strings to bytes from [here](https://tutorial-mint-nfts.vercel.app/char2bytes). 
 
 ![better-call.dev](../../../.gitbook/assets/mint_better_1.png)
 
@@ -251,7 +250,7 @@ You can check the fees and also explore the operations which wallet is going to 
 
 ![better-call.dev](../../../.gitbook/assets/mint_better_3.png)
 
-This message will come if it’s successfully sent.
+The message will come if it’s successfully sent.
 
 ![better-call.dev](../../../.gitbook/assets/mint_better_4.png)
 
@@ -295,7 +294,7 @@ And visit localhost:3000 to view the app. There won't be much as of now. So let'
 
 The boilerplate has the folder structure and pre-code for redux storage, where we will store the NFTs to show.  
 And there are three pages.
-- Char2bytes (we used before, code is already there)
+- Char2bytes (we used before, code is already in boilerplate)
 - Home (All the NFTs will be visible here)
 - Mint (Form to mint the NFTs)
 
@@ -385,7 +384,7 @@ const mintNFT = async (address, url, token_id) => {
 };
 ```
 
-And we will be using the tzkt api to get all the token_metadata.
+We will be using the tzkt api to get all the token_metadata.
 
 ```js
 const getNFTs = async () => {
@@ -415,10 +414,10 @@ And exporting all these functions from the file at the end.
 export {connectWallet, disconnectWallet, getPKH, getContract, mintNFT, getNFTs};
 ```
 
-This was our src/utils/wallet.js.
+This was our `src/utils/wallet.js`.
 
 We will also be needing one more util, uploadFileToIPFS.   
-For that, you need to get the API Keys from nft.storage. Login and get one.
+For that, you need to get the API Keys from nft.storage. Login and get one. 
 
 ```js
 import {NFTStorage, File} from 'nft.storage';
@@ -489,8 +488,8 @@ const Card = (props) => {
 };
 ```
 
-Next, we have our Home component. In this, we are using useEffect, and as the storage gets loaded, we are taking the image, name and description from it and storing it in our nfts State.  
-We need to change the URL format as we cant fetch ipfs:// using axios as it’s not supported. So we are using the HTTPS URL for it.
+Next, we have our Home component. In this, we are using useEffect, and as the storage gets loaded, we are taking the image, name and description from it and storing it in our nfts state.  
+We need to change the URL format as we can't fetch ipfs:// using axios as it’s not supported for now. So we are using the HTTPS URL for it.
 
 
 ```jsx
@@ -687,13 +686,15 @@ And in the end, we close the Mint function and default export it.
 export default Mint;
 ```
 
-Now run 
+Now run in terminal
 
 ```text
 npm start
 ```
 
-And mint a token on `/mint` and view them on `/`.
+Open locahost:3000 in browser and mint a token using `/mint` and view them on `/`.
+
+We completed the frontend. You can checkout the complete code on [Github](https://github.com/PriyanshuDangi/Tutorial_Mint_NFTs) and view the demo [here](tutorial-mint-nfts.vercel.app)
 
 # Conclusion
 
@@ -704,7 +705,7 @@ And we learned how to mint NFTs on tezos.
 
 # Next Steps (Optional)
 
-Try out all the other entry points of FA2, and you can modify the smart code and make a marketplace for NFTs. 
+Try out all the other entry points of FA2. You can modify the smart code and using transfer entrypoiny can make a marketplace for NFTs. 
 
 # About The Author
 
