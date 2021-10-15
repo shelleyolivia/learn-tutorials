@@ -2,7 +2,7 @@
 
 In the existing tutorials about Solana, we understood how we make smart contracts (or _programs_, as we say in the Solana ecosystem) and mint tokens and NFTs. However, a Dapp is incomplete without a frontend, and we cannot reach a wider audience unless we host it on the web. So, in this tutorial, we will understand how to develop the frontend for Solana programs and make beautiful web apps effortlessly with the help of Chakra UI.
 
-The code for this tutorial is available in the repository [https://github.com/kanav99/solana-boilerplate](https://github.com/kanav99/solana-boilerplate). The tutorial is split into parts, and each part has a commit specific to it on the repository. Do a `git checkout <commit hash>` to refer to the code at that checkpoint.
+The code for this tutorial is available in the repository [https://github.com/kanav99/solana-boilerplate](https://github.com/kanav99/solana-boilerplate). The tutorial is split into parts, and each part has a commit specific to it on the repository, mentioned at the end of the part. Do a `git checkout <commit hash>` or just click on the hash to refer to the code at that checkpoint.
 
 # Prerequisites
 
@@ -133,7 +133,7 @@ We have fetched the account details. This object contains the balance in lamport
 
 You can also use `connection.getBalance` to get only balance as well.
 
-All the code till now is present in the `d7ecab7` commit of the final repository.
+All the code till now is present in the [`d7ecab7`](https://github.com/kanav99/solana-boilerplate/tree/d7ecab78045b74447df797d989a70247f633c4c4) commit of the final repository.
 
 # Getting Airdrops
 
@@ -170,7 +170,7 @@ And add a button in the rendering part -
 </Button>
 ```
 
-Get code on commit `83fa3e5`.
+Get code on commit [`83fa3e5`](https://github.com/kanav99/solana-boilerplate/tree/83fa3e5877bf1a5b21a0d1c47054d2ca5158978b).
 
 # Get Transaction history
 
@@ -212,7 +212,7 @@ and add this loop inside the rendering part.
 
 But we also want to call this `init` function after we airdrop, so that the transaction that added the SOLs also gets logged. So we can move this init function out of `useEffect`, but inside the `App` functional component. Hence, just before the function `getAirdrop` ends, we can call `init` and update the account balance and transactions.
 
-You might be seeing a problem over here - the transaction, balance, or account status, in general, is not real-time. This is what we will fix in the next section. For the code till now, refer to the commit `f50143c`.
+You might be seeing a problem over here - the transaction, balance, or account status, in general, is not real-time. This is what we will fix in the next section. For the code till now, refer to the commit [`f50143c`](https://github.com/kanav99/solana-boilerplate/tree/f50143cb9d9c1956a57f1bff55b09cebcfdbf1fc).
 
 # Realtime account updates using polling and custom React Hooks
 
@@ -293,7 +293,7 @@ const [airdropProcessing, setAirdropProcessing] = useState(false);
 ...
 ```
 
-Voila! No more `setAccount` and `setTransactions` inside the App component. No more manually updating the state after every change. Try sending some SOLs from the CLI to this account and see it update in real-time! As an exercise to the reader, try using [`connection.onAccountChange`](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#onAccountChange) instead of setInterval for getting updates :). Code until now is present in the commit `c598b22`.
+Voila! No more `setAccount` and `setTransactions` inside the App component. No more manually updating the state after every change. Try sending some SOLs from the CLI to this account and see it update in real-time! As an exercise to the reader, try using [`connection.onAccountChange`](https://solana-labs.github.io/solana-web3.js/classes/Connection.html#onAccountChange) instead of setInterval for getting updates :). Code until now is present in the commit [`c598b22`](https://github.com/kanav99/solana-boilerplate/tree/c598b220eac2070cfa4b6fc146d8cdf071ee1f40).
 
 # Using an actual wallet
 
@@ -511,7 +511,7 @@ Notice that we have converted the `init` function to `useCallback` - that is bec
 
 There is still one issue in this, which I am leaving as an exercise - the user may change their public key in between. In that case, we have to remove the interval created using `setInterval` using `clearInterval` and then create a new interval.
 
-The code till now is present in the commit `92c4c88`.
+The code till now is present in the commit [`92c4c88`](https://github.com/kanav99/solana-boilerplate/tree/92c4c885a4a190e3edafcfdbe33309adfab38f8b).
 
 # Sending transactions - Greeting yourself
 
@@ -790,7 +790,7 @@ const greet = useCallback(async () => {
 }, [connection, wallet]);
 ```
 
-Yay! You can now greet yourself! ... Doesn't seem exciting? Let us greet others in the next section :). Code till now is available in the commit `4d5cad9`.
+Yay! You can now greet yourself! ... Doesn't seem exciting? Let us greet others in the next section :). Code till now is available in the commit [`4d5cad9`](https://github.com/kanav99/solana-boilerplate/tree/4d5cad9f3bfe4a49754de5aa6077b89f5223603e).
 
 Possible improvements - As `PublicKey.createWithSeed` might be an expensive operation, try memoizing using `useMemo`? Set the button in loading state while the transaction is being sent?
 
@@ -881,7 +881,7 @@ return (
 );
 ```
 
-Code till here is present in the commit `746ff70`.
+Code till here is present in the commit [`746ff70`](https://github.com/kanav99/solana-boilerplate/tree/746ff7095bb45af822fa3be5bd999a3d1ce29dca).
 
 # Organizing things
 
@@ -1047,7 +1047,7 @@ return (
 );
 ```
 
-The code till here is available in the commit `e56e2d5`, or just the current master branch.
+The code till here is available in the commit [`e56e2d5`](https://github.com/kanav99/solana-boilerplate/tree/e56e2d5ee69df21e9a3cfd4f2e6dcc2dd42436e5), or just the current master branch.
 
 # Conclusion
 
