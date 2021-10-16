@@ -1,14 +1,13 @@
-# Crowd Funding Platform
+# Introduction
 In this tutorial, we will discuss how to create a crowd-funding platform on the Solana blockchain. This tutorial only assumes the reader to know some basic knowledge of [React](https://reactjs.org/) app development. I will be explaining some basics of Rust lang, how to write the Solana program and how to invoke instructions from the front-end.
 
-
-#### Requirements
-- [Git](https://git-scm.com/downloads)
-- [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool)
-
-#### Prerequisites
+# Prerequisites
 - React
 - Javascript
+
+# Requirements
+- [Git](https://git-scm.com/downloads)
+- [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool)
 
 
 #### Overview:
@@ -61,17 +60,17 @@ Rust has 2 types for strings, `str` and `String`. `String` is a growable, heap-a
 
 ## Creating a variable and [mutability](https://doc.Rust-lang.org/book/ch03-01-variables-and-mutability.html):
 We can create a variable with the `let` keyword
-```Rust
+```rust
 // The compiler identifies the Rvalue as i32, so it sets the type of variable to i32
 let a=0;
 ```
 we can also set the data type for a variable, eg.
-```Rust
+```rust
 let a :u8 = 0;
 ```
 In Rust, all the variables are immutable by default. Which means their value can not be changed once set.
 And here comes the `mut` keyword. We can initialize the variable with `let mut` to have a mutable variable. eg.
-```Rust
+```rust
 // This program will compile
 let mut a = 0;
 a=a+1;
@@ -80,7 +79,7 @@ a=100;
 
 ## [Control flow](https://doc.Rust-lang.org/book/ch03-05-control-flow.html):
 We can use `if` `else` statement in Rust just like we can do in other language, here is a small program for us to understand the syntax.
-```Rust
+```rust
 fn main(){
     let a=99;
     if a%2==0{
@@ -93,7 +92,7 @@ fn main(){
 ```
 We also have loops in Rust. We can create a loop with 3 keywords `loop`, `for`, and `while`. Since `for` is most common. Here is an example of it. You can checkout example for `loop` and `while` [here](https://doc.Rust-lang.org/book/ch03-05-control-flow.html#repeating-code-with-loop).
 
-```Rust
+```rust
 fn main() {
     for i in 0..7 { // 0..7 is range expression including 0 excluding 7.
         println!("variable `i` is : {}", i);
@@ -104,7 +103,7 @@ fn main() {
 ## [Functions](https://doc.Rust-lang.org/book/ch03-03-how-functions-work.html) and [Macros](https://doc.Rust-lang.org/book/ch19-06-macros.html):
 
 Function definitions in Rust start with fn and have a set of parentheses after the function name. The curly brackets tell the compiler where the function body begins and ends.
-```Rust
+```rust
 fn main() {
     another_function(5);
     another_function_with_x_and_y(1,2);
@@ -124,7 +123,7 @@ Rust has enums. They are more than simple enums other languages provide. In Rust
 Here is the example of `Result enum`. 
 > We are going to make use of the `Result` enum in our program.
 
-```Rust
+```rust
 // Here the pub keyword means it is public.
 // We have used generics T and E for data and error type
 pub enum Result<T, E> { 
@@ -135,7 +134,7 @@ pub enum Result<T, E> {
 
 Here is an enum and match example with an explanation of each line.
 
-```Rust
+```rust
 enum Coin {
     Penny,
     Nickel,
@@ -274,7 +273,7 @@ You can see the completed code on [github](https://github.com/SushantChandla/sol
 We can get the value of a reference with `*` Operator.
 
 
-```Rust 
+```rust 
 // First we include what we are going to need in our program. 
 // This  is the Rust style of importing things.
 // Remember we added the dependencies in cargo.toml
@@ -333,7 +332,7 @@ Notice we can have 256 entry points like this in a single program (`u8` has a va
 
 Okay, let's do more coding...
 
-```Rust
+```rust
 fn process_instruction(
     program_id: &Pubkey,
     accounts: &[AccountInfo],
@@ -414,7 +413,7 @@ fn donate(
 ## Our CampaignDetails struct, Borsh, and code of create_campaign function.
 We will create a struct in Rust. We have not discussed structs above so, I will explain them here. In Rust, we do not have class. If we want to store more than 1 variable (group variables) we create a struct.
 
-```Rust
+```rust
 /// For an example, let us create human struct.
 #[derive(Debug)]
 struct Human {
@@ -433,7 +432,7 @@ Now you must be wondering what is the meaning of `#[derive(Debug)]`. It is inter
 Now let's code our `CampaignDetails` struct.
 I have added the fields name, admin, description, image_link,amount_donated for our Campaign.
 
-```Rust
+```rust
 #[derive(BorshSerialize, BorshDeserialize, Debug)]
 struct CampaignDetails {
     pub admin: Pubkey,
@@ -450,12 +449,12 @@ Here I have driven BorshSerialize and BorshDeserialize. BorshSerialize is used t
 
 ##### Code: 
 At the top of the file import `BorshSerialize` and `BorshDeserialize` from the `Borsh` Crate.
-```Rust
+```rust
 use borsh::{BorshDeserialize, BorshSerialize};
 ```
 Now let's add the code of our `create_campaign` function and the `CampaignDetails` Struct.
 I have added an explanation to each line in the code.
-```Rust 
+```rust 
 entrypoint!(process_instruction);
 
 /// We are creating the struct;.
@@ -484,7 +483,7 @@ fn create_campaign(
 
  Solana programs can only write data on a program-owned account.
  > Note: `writing_account` is a program-owned account.
-```Rust   
+```rust   
     /// Writing account or we can call it program account.
     /// This is an account we will create in our front-end.
     /// This account should br owned by the solana program.
@@ -507,7 +506,7 @@ fn create_campaign(
 By deriving the trait `BorshDeserialize` in our `CampaignDetails` struct we have added a method `try_from_slice` which takes in the parameter `array of u8` and creates an object of CampaignDetails with it.
 It gives us an enum of type results. We will use the `expect` method on result enums to and pass in the string which we can see in case of error.
 
-```Rust
+```rust
     let mut input_data = CampaignDetails::try_from_slice(&instruction_data)
         .expect("Instruction data serialization didn't worked");
 
@@ -522,7 +521,7 @@ It gives us an enum of type results. We will use the `expect` method on result e
 ```
 Solana accounts can have data, but size has to be specified when it is created.  We need to have a minimum balance to make it rent exempt. For this project, we create an account that already has a balance equal to the minimum balance.
 You can read more about solana account and rent exemption [here](https://docs.solana.com/developing/programming-model/accounts#rent-exemption).
-```Rust
+```rust
     /// get the minimum balance we need in our program account.
     let rent_exemption = Rent::get()?.minimum_balance(writing_account.data_len());
     /// And we make sure our program account (`writing_account`) has that much lamports(balance).
@@ -534,7 +533,7 @@ You can read more about solana account and rent exemption [here](https://docs.so
     input_data.amount_donated=0;
 ```
 If all goes well, we will write the writing_account. Here on our `input_data`(type `CampaignDetails`) variable, we have a method `serialize` this is because of the `BorshSerialize` derivation. We will use this and write the data in a writing account. At the end of the program, we can return `Ok(())`.
-```Rust
+```rust
     input_data.serialize(&mut &mut writing_account.data.borrow_mut()[..])?;
 
     Ok(())
@@ -546,14 +545,14 @@ Let's continue writing the contract and write the withdraw function next.
 
 ## Withdraw function implementation.
 For withdraw function also, we create a struct to get the input data. Here Input data is only the amount we want to withdraw.
-```Rust
+```rust
 #[derive(BorshSerialize, BorshDeserialize, Debug)]
 struct WithdrawRequest {
     pub amount: u64,
 }
 ```
 Now let us write the function.
-```Rust
+```rust
 fn withdraw(
     program_id: &Pubkey,
     accounts: &[AccountInfo],
@@ -561,7 +560,7 @@ fn withdraw(
 ) -> ProgramResult {
 ```
 For the withdraw also we will create iterator and get `writing_account` (which is the program owned account) and `admin_account`.
-```Rust
+```rust
     let accounts_iter = &mut accounts.iter();
     let writing_account = next_account_info(accounts_iter)?;
     let admin_account = next_account_info(accounts_iter)?;
@@ -579,7 +578,7 @@ For the withdraw also we will create iterator and get `writing_account` (which i
 ```
 Now we will get the data of campaign from the `writing_account`. Note that we stored this when we created the campaign with `create_campaign` function.
 > Note: We are currently thinking of a scenario where a campaign is created and we want to withdraw some money from it.
-```Rust
+```rust
     // Just like we used the try_from_slice for 
     // instruction_data we will use it for the 
     // writing_account's data.
@@ -600,7 +599,7 @@ Now we will get the data of campaign from the `writing_account`. Note that we st
         .expect("Instruction data serialization didn't worked");
 ```
 We do not want the campaign to get deleted after a withdrawal. We want it to always have a minimum balance, So we calculate the `rent_exemption` and consider it.
-```Rust
+```rust
     let rent_exemption = Rent::get()?.minimum_balance(writing_account.data_len());
 
     /// We check if we have enough funds
@@ -626,7 +625,7 @@ We want to donate to a campaign, but interestingly we can't decrease the balance
 
 So for this, we will create a program-owned account in our front-end and then make the sol-token transaction.
 
-```Rust
+```rust
 fn donate(
     program_id: &Pubkey,
     accounts: &[AccountInfo],
@@ -643,7 +642,7 @@ Then we have the account of the `donator`.
 > Note: When we will create it in our front-end, although we do not want to store anything in it we will assign it some size. So that it automatically gets deleted after the sol token the transferred.
 
 Then we want donator account to sign this transaction.
-```Rust
+```rust
   if writing_account.owner != program_id {
         msg!("writing_account isn't owned by program");
         return Err(ProgramError::IncorrectProgramId);
@@ -658,26 +657,26 @@ Then we want donator account to sign this transaction.
     }
 ```
 Here we get the campaign_data and we will increment the  `amount_donated`. As the total amount of data donated to this campaign will increased.
-```Rust
+```rust
  let mut campaign_data = CampaignDetails::try_from_slice(*writing_account.data.borrow())
         .expect("Error deserialaizing data");
 
     campaign_data.amount_donated += **donator_program_account.lamports.borrow();
 ```
 Then we do the actual transaction. Note that the donator_program_account is owned by program so it can decrease it's lamports. no sweat.
-```Rust
+```rust
  **writing_account.try_borrow_mut_lamports()? += **donator_program_account.lamports.borrow();
  **donator_program_account.try_borrow_mut_lamports()? = 0;
 ```
 Then at the end of the program we will write the new updated campaign_data to writing_account's data field. And return `Ok(())`.
-```Rust
+```rust
     campaign_data.serialize(&mut &mut writing_account.data.borrow_mut()[..])?;
 
     Ok(())
 }
 ``` 
 
-Hurray, We have completed our Solana program, Now we can go ahead and deploy it.
+Hooray, We have completed our Solana program, Now we can go ahead and deploy it.
 
 ## Deploy solana program.
 We are going to deploy on devnet.
@@ -723,7 +722,7 @@ solana deploy --keypair keypair.json dist/program/program.so --url https://api.d
 command to deploy. Note that the path of `keypair.json` and `dist/program/program.so` might be different in your case.
 Please check and then run the command.
 
-Hurray! we have deployed our program.
+Hooray! we have deployed our program.
 We will get the program id as output.
 ```text
 Program Id: 286rapsUbvDe1ZgBeNhp37YHvEPwWPTr4Bkce4oMpUKT
@@ -731,7 +730,7 @@ Program Id: 286rapsUbvDe1ZgBeNhp37YHvEPwWPTr4Bkce4oMpUKT
 We can verify this by checking on [solana explorer for devnet](https://explorer.solana.com/?cluster=devnet). 
 We can search our program id here.
 
-Hurray! We Have completed everything with Rust and successfully deployed our program. Now, let us move forward and build the react app.
+Hooray! We Have completed everything with Rust and successfully deployed our program. Now, let us move forward and build the react app.
 
 # Front-end with Solana web3.js
 We have created a react app, so we can open the `crowd-funding` directory in our vs-code.
