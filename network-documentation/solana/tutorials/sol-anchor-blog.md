@@ -171,7 +171,7 @@ $  SoMeKeyThatIsUniqueTOmyPROGRAM
 
 If you're following along in this tutorial repo, I've placed a shortcut to this script in the `package.json` file, so you can simply run `npm run show-key` in the terminal (as long as it's WSL2/Linux -- the rust toolchain doen't work in Windows).
 
-Copy-and=paste your key and replace that default `declare_id` placeholder:
+Copy-and-paste your key and replace that default `declare_id` placeholder:
 
 ```rust
 declare_id!("SoMeKeyThatIsUniqueTOmyPROGRAM");
@@ -363,12 +363,14 @@ To deploy the anchor program on devnet, a small helper script to setup some keys
 
 For this tutorial, I borrow heavily from the auto-generated [`Decentology`](https://dappstarter.decentology.com/) DappStarter to generate the deploy code is saved at `./deploy.js`. You can run the script using `node` or use the shortcut script in `package.json` which is convenienlty run by:
 
-    // CLI
-    $ 	npm run deploy
+```
+// CLI
+$ 	npm run deploy
 
-    (or)
+(or)
 
-    $	node ./deploy.js
+$	node ./deploy.js
+```
 
 The deploy script creates a new keypair to pay for the deployment for you, funds it with some SOL, and deploys it to the Devnet.
 
