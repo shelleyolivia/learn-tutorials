@@ -1,4 +1,4 @@
-# SolBlog
+# SolBlog - Solana Blog Program Built with Anchor
 
 <center>
 <img src="tutorial-graphics\solblog.svg" width="90%" height="auto">
@@ -16,7 +16,7 @@ YouTube video on building the Rust portion:
 <img src="../../../.gitbook/assets/tutorial-graphics/youtub.png" width="35%" height="auto">
 </a>
 
-## About
+# Introduction
 
 This tutorial will take you from zero to functional blog.
 
@@ -29,6 +29,12 @@ There are always two parts to a Solana app -- the _on-chain_ program and account
 <div style="background-color: white;"></div>
 
 <img src="../../../.gitbook/assets/tutorial-graphics/IDL.svg" width="90%" height="auto">
+
+# Prerequisites
+
+-   You will need access to a Linux command line interface
+-   Anchor and Rust installed in accordance with the Setup section below
+-   Phantom.app Solana Wallet, with an address you are comfortable using on DevNet (can make a new address in Phantom if you like)
 
 ## Anchor Versions
 
