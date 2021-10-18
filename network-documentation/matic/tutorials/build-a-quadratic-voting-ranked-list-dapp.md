@@ -1,6 +1,6 @@
 # Introduction
 
-In this tutorial, we will be learning how to create a quadratic voting app with collaboratively managed ranked lists.
+In this tutorial, we will be learning how to create a quadratic voting app with collaboratively managed ranked lists. This is a fairly complex application and a good exercise in serious dApp development. We're going to write a smart contract in Solidity and a front-end in Vue.js, then deploy our dApp on the Polygon testnet.
 
 Here's a preview of what we will be building:
 
@@ -55,9 +55,9 @@ Use the following configuraton to add the Polygon Mumbai testnet.
 
 ![MetaMask config](../../../.gitbook/assets/metamask-settings-mumbai.webp)
 
-## Additional
+## Preview
 
-These are the additional technologies we will be using:
+These are the additional technologies we will be using later.
 
 - [Solidity](https://soliditylang.org/)
 - [Polygon (Matic)](https://polygon.technology/)
@@ -168,7 +168,7 @@ The function `createItem` is used to publish a new Item object to the ranked lis
     require(msg.sender != item.owner); // owners cannot vote on their own items
 
     uint currWeight = item.positiveVotes[msg.sender];
-    if currWeight == weight {
+    if (currWeight == weight) {
       return; // no need to process further if vote has not changed
     }
 
@@ -196,7 +196,7 @@ Users are not able to vote for their own items because this would allow them to 
     require(msg.sender != item.owner);
 
     uint currWeight = item.negativeVotes[msg.sender];
-    if currWeight == weight {
+    if (currWeight == weight) {
       return; // no need to process further if vote has not changed
     }
 
@@ -267,10 +267,10 @@ The Truffle cli will use this file later to deploy our `QuadraticVoting` contrac
 Edit the `truffle-config.js` file to add the network.
 
 ```js
-const fs = require("fs");
-const HDWalletProvider = require("@truffle/hdwallet-provider");
+const fs = require("fs")
+const HDWalletProvider = require("@truffle/hdwallet-provider")
 
-const mnemonic = fs.readFileSync(".secret").toString().trim();
+const mnemonic = fs.readFileSync(".secret").toString().trim()
 
 module.exports = {
   networks: {
@@ -281,11 +281,15 @@ module.exports = {
     },
     // Matic Mumbai testnet RPC (requires API key)
     matic: {
-      provider: () => new HDWalletProvider(mnemonic, "https://rpc-mumbai.maticvigil.com/v1/{APP_ID}"),
+      provider: () =>
+        new HDWalletProvider(
+          mnemonic,
+          "https://rpc-mumbai.maticvigil.com/v1/{APP_ID}",
+        ),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,
-      skipDryRun: true
+      skipDryRun: true,
     },
   },
   compilers: {
@@ -331,7 +335,7 @@ Next we will be writing tests for our contract. Tests allow us to ensure our con
 Create a file named `quadratic-voting-test.js` in the `test` directory.
 
 ```js
-const QuadraticVoting = artifacts.require("QuadraticVoting");
+const QuadraticVoting = artifacts.require("QuadraticVoting")
 
 contract("QuadraticVoting", (accounts) => {
   describe("deployment", () => {
@@ -343,8 +347,7 @@ contract("QuadraticVoting", (accounts) => {
           assert.notEqual(address, 0x0)
           assert.notEqual(address, "")
           assert.notEqual(address, undefined)
-        })
-    )
+        }))
   })
 
   describe("items", () => {
@@ -353,11 +356,13 @@ contract("QuadraticVoting", (accounts) => {
 
       QuadraticVoting.deployed()
         .then((i) => (instance = i))
-        .then(() => instance.createItem(
-          web3.utils.utf8ToHex("Chewbacca"), // title
-          "ipfs_hash", // imageHash
-          "The ultimate furry.", // description
-        ))
+        .then(() =>
+          instance.createItem(
+            web3.utils.utf8ToHex("Chewbacca"), // title
+            "ipfs_hash", // imageHash
+            "The ultimate furry.", // description
+          ),
+        )
         .then(() => instance.itemCount())
         .then((count) => assert.equal(count, 1)) // should be 1 item in the registry
         .then(() => instance.items(0))
@@ -417,7 +422,9 @@ let loaded = false
   } else if (window.web3) {
     web3 = new Web3(window.web3.currentProvider)
   } else {
-    window.alert("No compatible wallet detected. Please install the Metamask browser extension to continue.")
+    window.alert(
+      "No compatible wallet detected. Please install the Metamask browser extension to continue.",
+    )
   }
 
   const networkData = QuadraticVoting.networks["80001"] // Matic network data
@@ -473,7 +480,9 @@ export async function itemCount() {
 }
 
 export async function currentWeight(itemId, isPositive) {
-  return await contract.methods.currentWeight(itemId, address(), isPositive).call()
+  return await contract.methods
+    .currentWeight(itemId, address(), isPositive)
+    .call()
 }
 
 export async function calcCost(currWeight, weight) {
@@ -481,27 +490,29 @@ export async function calcCost(currWeight, weight) {
 }
 
 export async function createItem(title, imageHash, description) {
-  return await contract.methods.createItem(
-    web3.utils.utf8ToHex(title), // string => bytes32
-    imageHash,
-    description,
-  )
+  return await contract.methods
+    .createItem(
+      web3.utils.utf8ToHex(title), // string => bytes32
+      imageHash,
+      description,
+    )
     .send({ from: address() })
 }
 
 export async function positiveVote(itemId, weight, cost) {
-  return await contract.methods.positiveVote(itemId, weight)
+  return await contract.methods
+    .positiveVote(itemId, weight)
     .send({ from: address(), value: cost })
 }
 
 export async function negativeVote(itemId, weight, cost) {
-  return await contract.methods.negativeVote(itemId, weight)
+  return await contract.methods
+    .negativeVote(itemId, weight)
     .send({ from: address(), value: cost })
 }
 
 export async function claim(itemId) {
-  return await contract.methods.claim(itemId)
-    .send({ from: address() })
+  return await contract.methods.claim(itemId).send({ from: address() })
 }
 
 export async function rankedItems() {
@@ -512,7 +523,7 @@ export async function rankedItems() {
     const item = await items(i)
     if (item) itemsArr.push(item)
   }
-  
+
   return itemsArr.sort((a, b) => {
     const netWeightB = b.positiveWeight - b.negativeWeight
     const netWeightA = a.positiveWeight - a.negativeWeight
@@ -600,7 +611,7 @@ export default {
   components: {
     CreateItem,
     RankedList,
-  }
+  },
 }
 </script>
 ```
@@ -615,10 +626,16 @@ Create a file at `src/components/CreateItem.vue`.
 
 ```vue
 <template>
-  <form @submit.prevent="submit"> <!-- .prevent will prevent the page from redirecting -->
+  <!-- .prevent will prevent the page from redirecting -->
+  <form @submit.prevent="submit">
     <input type="text" v-model="title" placeholder="Title" required />
     <br />
-    <input type="file" placeholder="Upload image" @input="uploadImage" required />
+    <input
+      type="file"
+      placeholder="Upload image"
+      @input="uploadImage"
+      required
+    />
     <br />
     <p v-if="imageHash">{{ imageHash }}</p>
     <textarea v-model="description" placeholder="Description" required />
@@ -639,7 +656,7 @@ export default {
     },
     async submit() {
       await createItem(this.title, this.imageHash, this.description)
-    }
+    },
   },
   data() {
     return {
@@ -647,7 +664,7 @@ export default {
       imageHash: null,
       description: "",
     }
-  }
+  },
 }
 </script>
 ```
@@ -717,7 +734,12 @@ Create a file at `src/components/Item.vue`.
   <div>
     <h2>{{ item.title }}</h2>
     <!-- ipfs.io is the gateway we will be using to serve our image files -->
-    <img :src="`https://ipfs.io/ipfs/${item.imageHash}`" alt="item image" width="640" height="480" />
+    <img
+      :src="`https://ipfs.io/ipfs/${item.imageHash}`"
+      alt="item image"
+      width="640"
+      height="480"
+    />
     <p>{{ item.description }}</p>
     <p>{{ item.owner }}</p>
     <!-- the "Claim" button is only displayed to the item owner -->
@@ -743,7 +765,14 @@ Create a file at `src/components/Item.vue`.
 </template>
 
 <script>
-import { address, currentWeight, calcCost, positiveVote, negativeVote, claim } from "@/lib/quadratic-voting"
+import {
+  address,
+  currentWeight,
+  calcCost,
+  positiveVote,
+  negativeVote,
+  claim,
+} from "@/lib/quadratic-voting"
 
 export default {
   name: "Item",
@@ -797,7 +826,7 @@ export default {
       this.startWeight = this.weight
     }
     getWeight()
-  }
+  },
 }
 </script>
 ```
@@ -841,7 +870,7 @@ module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
-  }
+  },
 }
 ```
 
@@ -889,15 +918,47 @@ Edit `CreateItem.vue` to make our form pop out more. Take note of the changes ma
 ```vue
 <template>
   <form @submit.prevent="submit" class="bg-gray-300 p-10 w-1/2 mx-auto rounded">
-    <input type="text" v-model="title" placeholder="Title" required class="px-3 py-1 w-full mb-10" />
+    <input
+      type="text"
+      v-model="title"
+      placeholder="Title"
+      required
+      class="px-3 py-1 w-full mb-10"
+    />
     <br />
-    <input type="file" placeholder="Upload image" @input="uploadImage" required class="text-gray-300" />
+    <input
+      type="file"
+      placeholder="Upload image"
+      @input="uploadImage"
+      required
+      class="text-gray-300"
+    />
     <br />
     <!-- top margin will separate displayed hash from file input when imageHash is defined -->
-    <p class="mb-10 text-gray-300" :class="imageHash ? 'mt-3' : ''">{{ imageHash || "" }}</p>
-    <textarea v-model="description" placeholder="Description" required class="px-3 py-1 w-full mb-10" />
+    <p class="mb-10 text-gray-300" :class="imageHash ? 'mt-3' : ''">
+      {{ imageHash || "" }}
+    </p>
+    <textarea
+      v-model="description"
+      placeholder="Description"
+      required
+      class="px-3 py-1 w-full mb-10"
+    />
     <br />
-    <input type="submit" value="Create Item" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white cursor-pointer" />
+    <input
+      type="submit"
+      value="Create Item"
+      class="
+        block
+        mx-auto
+        px-5
+        py-3
+        bg-blue-600
+        hover:bg-blue-500
+        text-white
+        cursor-pointer
+      "
+    />
   </form>
 </template>
 ```
@@ -918,13 +979,41 @@ And finally, edit `Item.vue`. The layout of this component will change quite a b
 ```vue
 <template>
   <div class="bg-gray-300 p-10 rounded flex items-center">
-    <img :src="`https://ipfs.io/ipfs/${item.imageHash}`" alt="item image" class="w-1/12 mr-10 rounded shadow" />
+    <img
+      :src="`https://ipfs.io/ipfs/${item.imageHash}`"
+      alt="item image"
+      class="w-1/12 mr-10 rounded shadow"
+    />
     <div class="mr-5">
-      <button @click="upvote" class="text-xl px-4 py-3 border border-b-2 border-black rounded hover:bg-black hover:text-white">&uarr;</button>
+      <button
+        @click="upvote"
+        class="
+          text-xl
+          px-4
+          py-3
+          border border-b-2 border-black
+          rounded
+          hover:bg-black hover:text-white
+        "
+      >
+        &uarr;
+      </button>
       <p class="text-lg text-center mt-2">{{ item.positiveWeight }}</p>
     </div>
     <div class="mr-10">
-      <button @click="downvote" class="text-xl px-4 py-3 border border-b-2 border-black rounded hover:bg-black hover:text-white">&darr;</button>
+      <button
+        @click="downvote"
+        class="
+          text-xl
+          px-4
+          py-3
+          border border-b-2 border-black
+          rounded
+          hover:bg-black hover:text-white
+        "
+      >
+        &darr;
+      </button>
       <p class="text-lg text-center mt-2">{{ item.negativeWeight }}</p>
     </div>
     <div>
@@ -932,13 +1021,25 @@ And finally, edit `Item.vue`. The layout of this component will change quite a b
       <p class="text-gray-600 mb-5">{{ item.description }}</p>
     </div>
     <div v-if="address() === item.owner" class="ml-auto">
-      <p class="mb-5 text-center">Amount: {{ item.amount / 1_000_000_000 }} gwei</p>
-      <button @click="claimGwei" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white">Claim</button>
+      <p class="mb-5 text-center">
+        Amount: {{ item.amount / 1_000_000_000 }} gwei
+      </p>
+      <button
+        @click="claimGwei"
+        class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white"
+      >
+        Claim
+      </button>
     </div>
     <div v-else-if="weight !== startWeight" class="ml-auto">
       <p class="mb-5 text-center">Weight: {{ weight }}</p>
       <p class="mb-5 text-center">Cost: {{ cost / 1_000_000_000 }} gwei</p>
-      <button @click="submitVote" class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white">Submit Vote</button>
+      <button
+        @click="submitVote"
+        class="block mx-auto px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white"
+      >
+        Submit Vote
+      </button>
     </div>
   </div>
 </template>
