@@ -13,7 +13,7 @@ A simple blog platform, powered by Solana with a SvelteKit front end.
 YouTube video on building the Rust portion:
 
 <a href='https://youtu.be/w-n87Aq3f8k' target='_blank'>
-<img src="tutorial-graphics\youtub.png" width="35%" height="auto">
+<img src="../../../.gitbook/assets/tutorial-graphics/youtub.png" width="35%" height="auto">
 </a>
 
 ## About
@@ -28,7 +28,7 @@ There are always two parts to a Solana app -- the _on-chain_ program and account
 
 <div style="background-color: white;"></div>
 
-<img src="tutorial-graphics\IDL.svg" width="90%" height="auto">
+<img src="../../../.gitbook/assets/tutorial-graphics/IDL.svg" width="90%" height="auto">
 
 ## Anchor Versions
 
@@ -100,7 +100,7 @@ pub struct Initialize {}
 
 Let's break down what we see.
 
-<img src="tutorial-graphics\2RUST.svg" width="90%" height="auto">
+<img src="../../../.gitbook/assets/tutorial-graphics/2RUST.svg" width="90%" height="auto">
 After including the anchor library, the program public key has this placeholder:
 
 ```rust
@@ -182,17 +182,17 @@ const program = new anchor.Program(idl, programId, provider)
 
 We will get to that part once we build the client side. My only poitn at this time is to emphasize that the client side in javascript must match the Program side in Rust. For now, let's finish taking a look at the Rust code.
 
-<img src="tutorial-graphics\program-block.svg" width="40%" height="auto">
+<img src="../../../.gitbook/assets/tutorial-graphics/program-block.svg" width="40%" height="auto">
 
 The next code block under `#[program]` is our program's functions, how we make the program do anything. The function names here are lowercase snake_case.
 
-<img src="tutorial-graphics\Accounts.svg" width="40%" height="auto">
+<img src="../../../.gitbook/assets/tutorial-graphics/Accounts.svg" width="40%" height="auto">
 
 Notice the `#[derive(Accounts)]` struct is the same name as in the `program`, but in `camelCase` (whereas `snake_case` is used in program above).
 
 The next code block under `#[derive(Accounts)]` is a going to be struct that describes the account itself and enables us to access fields from the account struct (which is non-existant at this point). Let's create it:
 
-<img src="tutorial-graphics\AccountsRUST.svg" width="40%" height="auto">
+<img src="../../../.gitbook/assets/tutorial-graphics/AccountsRUST.svg" width="40%" height="auto">
 
 ```rs
 #[account]
@@ -209,7 +209,7 @@ We created the third style code block, which is an Account struct which is a Sol
 
 Now we have the three Anchor blocks we need to make out blog:
 
-<img src="tutorial-graphics\3RUST.svg" width="100%" height="auto">
+<img src="../../../.gitbook/assets/tutorial-graphics/3RUST.svg" width="100%" height="auto">
 
 But right now out program doesn't do anything, because our program methods are empty.
 
