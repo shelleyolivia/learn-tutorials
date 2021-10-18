@@ -35,9 +35,15 @@ NPM and Yarn are package managers. Which you use is a matter of preference. We w
 
 ## Truffle
 
-Truffle is a development environment for Ethereum that we will use to compile and deploy our smart contract.
+[Truffle](https://www.trufflesuite.com/truffle) is a development environment for Ethereum that we will use to compile and deploy our smart contract.
 
 `npm i -g truffle`
+
+## Ganache
+
+[Ganache](https://www.trufflesuite.com/ganache) is a personal Ethereum blockchain you can deploy on your computer for development purposes.
+
+This is mostly optional, but it is recommended to install it so we can use it later to run our tests.
 
 ## MetaMask
 
@@ -49,16 +55,16 @@ Use the following configuraton to add the Polygon Mumbai testnet.
 
 ![MetaMask config](../../../.gitbook/assets/metamask-settings-mumbai.webp)
 
-## Other
+## Additional
 
 These are the additional technologies we will be using:
 
-- Solidity
-- Polygon (Matic)
-- Web3.js
-- IPFS
-- Vue.js
-- Tailwind CSS
+- [Solidity](https://soliditylang.org/)
+- [Polygon (Matic)](https://polygon.technology/)
+- [Web3.js](https://web3js.readthedocs.io/)
+- [IPFS](https://ipfs.io/)
+- [Vue.js](https://vuejs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 # Project setup
 
@@ -92,27 +98,25 @@ contract QuadraticVoting {
     address payable owner;
     uint amount;
     bytes32 title;
-    string imageHash;
+    string imageHash; // IPFS cid
     string description;
-    mapping(address => uint) positiveVotes;
-    mapping(address => uint) negativeVotes;
-    uint positiveWeight;
-    uint negativeWeight;
+    mapping(address => uint) positiveVotes; // user => weight
+    mapping(address => uint) negativeVotes; // user => weight
+    uint totalPositiveWeight;
+    uint totalNegativeWeight;
   }
 ```
 
-The primary data structure in our app is going to be the Item. Users will vote up or down on items to control their ranking, paying a fee that depends on the weight of their vote. Votes are quadratically funded, which means that anyone can add as much weight to their vote as they like, however, the price of submitting this vote will be the weight squared.
+The primary data structure in our app is going to be the Item. Users will vote positively or negatively on items to control their ranking, paying a fee that depends on the weight of their vote. Votes are quadratically funded, which means that anyone can add as much weight to their vote as they like, however, the price of submitting this vote will be the weight squared.
 
 Any fee paid for a positive vote is rewarded to the creator of the item, creating an economy where the best suggestions, meaning the ones ranked the highest by others, receive the highest earnings. This incentivizes high quality, honest suggestions. Negative vote fees are redistributed to other items.
 
 ```solidity
-  uint constant public voteCost = 10_000_000_000;
+  uint constant public voteCost = 10_000_000_000; // wei
 
-  mapping(uint => Item) public items;
-  uint public itemCount = 0;
+  mapping(uint => Item) public items; // itemId => id
+  uint public itemCount = 0; // also next itemId
 ```
-
-The variable `items` is a mapping of `itemId => item` and `itemCount` is the amount of items that have been created, as well as the next itemId to be used.
 
 The `voteCost` constant is the price of a vote of weight 1 in terms of wei. One ether consists of 1,000,000,000,000,000,000 wei and one gwei consists of 1,000,000,000 wei. Therefore, `voteCost` is set to 10 gwei, or 0.00000001 ether. You can change this value to whatever you wish.
 
@@ -132,8 +136,11 @@ As an example of how quadratic voting works, let's say this contract was for a r
 
   function calcCost(uint currWeight, uint weight) public pure returns(uint) {
     if (currWeight > weight) {
-      return weight * weight * voteCost;
+      return weight * weight * voteCost; // cost is always quadratic
     } else if (currWeight < weight) {
+      // this allows users to save on costs if they are increasing their vote
+      // example: current weight is 3, they want to change it to 5
+      // this would cost 16x (5 * 5 - 3 * 3) instead of 25x the vote cost
       return (weight * weight - currWeight * currWeight) * voteCost;
     } else {
       return 0;
@@ -158,18 +165,24 @@ The function `createItem` is used to publish a new Item object to the ranked lis
 ```solidity
   function positiveVote(uint itemId, uint weight) public payable {
     Item storage item = items[itemId];
-    require(msg.sender != item.owner);
+    require(msg.sender != item.owner); // owners cannot vote on their own items
 
     uint currWeight = item.positiveVotes[msg.sender];
-    require(currWeight != weight);
+    if currWeight == weight {
+      return; // no need to process further if vote has not changed
+    }
 
     uint cost = calcCost(currWeight, weight);
-    require(msg.value >= cost);
+    require(msg.value >= cost); // msg.value must be enough to cover the cost
 
     item.positiveVotes[msg.sender] = weight;
+    item.totalPositiveWeight += weight - currWeight;
+
+    // weight cannot be both positive and negative simultaneously
+    item.totalNegativeWeight -= item.negativeVotes[msg.sender];
     item.negativeVotes[msg.sender] = 0;
-    item.positiveWeight += weight;
-    item.amount += msg.value;
+
+    item.amount += msg.value; // reward creator of item for their contribution
 
     emit Voted(itemId, weight, true);
   }
@@ -183,15 +196,21 @@ Users are not able to vote for their own items because this would allow them to 
     require(msg.sender != item.owner);
 
     uint currWeight = item.negativeVotes[msg.sender];
-    require(currWeight != weight);
+    if currWeight == weight {
+      return; // no need to process further if vote has not changed
+    }
 
     uint cost = calcCost(currWeight, weight);
-    require(msg.value >= cost);
+    require(msg.value >= cost); // msg.value must be enough to cover the cost
 
     item.negativeVotes[msg.sender] = weight;
-    item.positiveVotes[msg.sender] = 0;
-    item.negativeWeight += weight;
+    item.totalNegativeWeight += weight - currWeight;
 
+    // weight cannot be both positive and negative simultaneously
+    item.totalPositiveWeight -= item.positiveVotes[msg.sender];
+    item.positiveVotes[msg.sender] = 0;
+
+    // distribute voting cost to every item except for this one
     uint reward = msg.value / (itemCount - 1);
     for (uint i = 0; i < itemCount; i++) {
       if (i != itemId) items[i].amount += reward;
@@ -202,6 +221,8 @@ Users are not able to vote for their own items because this would allow them to 
 ```
 
 Negative votes are slightly different in their distribution. Rather than reward the owner for a poor addition to the list, the funds are distributed to every item except for the one being voted on. This acts as a sort of basic income for all participants.
+
+Note that this will reward items whose total voting weight is more negative than positive, which essentially means that even the worst suggestions will still make a partial income from this mechanism. You may want to innovate with this code to fix this issue by only allowing net positive suggestions to have a basic income. To keep things simple, we will not be concerned with this in this tutorial.
 
 ```solidity
   function claim(uint itemId) public {
@@ -219,7 +240,7 @@ And there we go! Our smart contract is finished. Now let's learn how to deploy i
 
 # Compiling and deploying with Truffle
 
-We'll need to compile our contracts before we can use them.
+We'll need to compile our contracts before we can use them. We can do this with the Truffle cli tool we installed earlier.
 
 ```bash
 truffle compile
@@ -231,7 +252,7 @@ You should get similar output.
 
 You can find the compiled contracts in the `build/contracts` directory.
 
-Create a new file called `2_quadratic_voting.js` in the `migrations` folder.
+Now we need to migrate (deploy) our contracts to the Matic Mumbai test network. Create a new file called `2_quadratic_voting.js` in the `migrations` folder.
 
 ```js
 const QuadraticVoting = artifacts.require("QuadraticVoting")
@@ -241,7 +262,9 @@ module.exports = function (deployer) {
 }
 ```
 
-Edit the `truffle-config.js` file to add the Matic Mumbai test network.
+The Truffle cli will use this file later to deploy our `QuadraticVoting` contract.
+
+Edit the `truffle-config.js` file to add the network.
 
 ```js
 const fs = require("fs");
@@ -256,6 +279,7 @@ module.exports = {
       port: 7545,
       network_id: "*",
     },
+    // Matic Mumbai testnet RPC (requires API key)
     matic: {
       provider: () => new HDWalletProvider(mnemonic, "https://rpc-mumbai.maticvigil.com/v1/{APP_ID}"),
       network_id: 80001,
@@ -278,7 +302,9 @@ module.exports = {
 }
 ```
 
-We'll need to install the HD wallet provider.
+We'll need to create an account [here](https://rpc.maticvigil.com/) to have a quota for the RPC. Create an App and replace `{APP_ID}` in the config with the App Id.
+
+Make sure to install the HD wallet provider.
 
 ```bash
 yarn add -D @truffle/hdwallet-provider
@@ -286,11 +312,9 @@ yarn add -D @truffle/hdwallet-provider
 
 In order to publish contracts to the blockchain we will need to pay the gas fees. Get testnet MATIC from the [Mumbai faucet](https://faucet.polygon.technology/) by inputting your wallet address.
 
-Export your private key from MetaMask and put it in the `.secret` file, which will be used as the `mnemonic` variable in the config.
+Export your private key from MetaMask and paste it in a `.secret` file. This will be used as the `mnemonic` variable in the config.
 
-We'll need to create an account [here](https://rpc.maticvigil.com/) to have a quota for the RPC. Create an App and replace `{APP_ID}` in the config with the App Id.
-
-Now we'll deploy our contracts to Polygon.
+Now we can deploy our contract to Polygon.
 
 ```bash
 truffle migrate --network matic
@@ -331,15 +355,15 @@ contract("QuadraticVoting", (accounts) => {
         .then((i) => (instance = i))
         .then(() => instance.createItem(
           web3.utils.utf8ToHex("Chewbacca"), // title
-          web3.utils.utf8ToHex("ipfs_hash"), // imageHash
+          "ipfs_hash", // imageHash
           "The ultimate furry.", // description
         ))
         .then(() => instance.itemCount())
-        .then((count) => assert.equal(count, 1))
+        .then((count) => assert.equal(count, 1)) // should be 1 item in the registry
         .then(() => instance.items(0))
         .then((item) => {
           assert.equal(web3.utils.hexToUtf8(item.title), "Chewbacca")
-          assert.equal(web3.utils.hexToUtf8(item.imageHash), "ipfs_hash")
+          assert.equal(item.imageHash, "ipfs_hash")
           assert.equal(item.description, "The ultimate furry.")
         })
     })
@@ -347,13 +371,15 @@ contract("QuadraticVoting", (accounts) => {
 })
 ```
 
-The Truffle testing suite uses [Chai](https://www.chaijs.com/) as its library for writing tests.
+The Truffle testing suite uses [Chai](https://www.chaijs.com/) as its library for writing tests. It is already installed for us.
 
-Tests are broken up into two groups: `deployment` and `items`. The `deployment` tests are used to ensure successful deployment and valid contract address. The `items` tests are used to ensure the correct item data is being published to the blockchain.
+Tests are broken up into two groups: `deployment` and `items`. The `deployment` tests are used to ensure successful deployment and a valid contract address. The `items` tests are used to ensure the correct item data is being published to the blockchain.
+
+We need to use `utf8ToHex` and `hexToUtf8` because `title` is defined as the `bytes32` type in our contract.
 
 You may write additional tests for the remaining smart contract functions if you wish.
 
-You will need to install [Ganache](https://www.trufflesuite.com/ganache) to set up a local development blockchain to run our tests on. Once it is downloaded select Quickstart. This will allow us to use the development network configured earlier. Alternatively, you can use `--network matic` to test on the Mumbai testnet.
+Spin up Ganache to run our tests on a local development blockchain.
 
 ```bash
 truffle test
@@ -367,13 +393,13 @@ You should see similar output.
 
 Now we'll be using Web3 to communicate with our smart contracts from JavaScript.
 
-Create the directory `src/lib` and add a file named `quadratic-voting.js`.
-
 Install the web3 package.
 
 ```bash
 yarn add web3
 ```
+
+Create a file at `src/lib/quadratic-voting.js`.
 
 ```js
 import Web3 from "web3"
@@ -394,8 +420,8 @@ let loaded = false
     window.alert("No compatible wallet detected. Please install the Metamask browser extension to continue.")
   }
 
-  const networkData = QuadraticVoting.networks["80001"]
-  contract = new web3.eth.Contract(QuadraticVoting.abi, networkData.address)
+  const networkData = QuadraticVoting.networks["80001"] // Matic network data
+  contract = new web3.eth.Contract(QuadraticVoting.abi, networkData.address) // address of contract we deployed earlier
 
   accounts = await web3.eth.getAccounts()
 
@@ -431,11 +457,11 @@ export async function items(itemId) {
       id: itemId,
       owner: item.owner,
       amount: item.amount,
-      title: web3.utils.hexToUtf8(item.title),
+      title: web3.utils.hexToUtf8(item.title), // bytes32 => string
       imageHash: item.imageHash,
       description: item.description,
-      positiveWeight: item.positiveWeight,
-      negativeWeight: item.negativeWeight,
+      positiveWeight: item.totalPositiveWeight,
+      negativeWeight: item.totalNegativeWeight,
     }
   } else {
     return null
@@ -456,7 +482,7 @@ export async function calcCost(currWeight, weight) {
 
 export async function createItem(title, imageHash, description) {
   return await contract.methods.createItem(
-    web3.utils.utf8ToHex(title),
+    web3.utils.utf8ToHex(title), // string => bytes32
     imageHash,
     description,
   )
@@ -487,13 +513,17 @@ export async function rankedItems() {
     if (item) itemsArr.push(item)
   }
   
-  return itemsArr.sort((a, b) => (b.positiveWeight - b.negativeWeight) - (a.positiveWeight - a.negativeWeight))
+  return itemsArr.sort((a, b) => {
+    const netWeightB = b.positiveWeight - b.negativeWeight
+    const netWeightA = a.positiveWeight - a.negativeWeight
+    return netWeightB - netWeightA // sort from greatest to least
+  })
 }
 ```
 
-These exported functions allow us to serialize/deserialize data to and from our smart contracts.
+These exported functions allow us to serialize/deserialize data to and from our smart contract. They will help simplify our UI code by abstracting over Web3.
 
-We need to use `utf8ToHex` because `title` is defined as the `bytes32` type in our contract.
+`contract.methods` is how we access the functions we defined in our smart contract earlier. `.call()` allows us to call certain functions offchain while `.send()` will create a transaction that needs to be signed with our wallet.
 
 `rankedItems` creates a list of all published items and sorts it based off of votes, from most positive to most negative.
 
@@ -534,16 +564,16 @@ We will need to create our IPFS node in the loading function.
 })()
 ```
 
-And then we will define a new `uploadFile` function.
+And then we will define a new exported `uploadFile` function.
 
 ```js
 export async function uploadFile(file) {
   const { cid } = await ipfs.add(file)
-  return cid
+  return cid // will be used as the imageHash
 }
 ```
 
-That's all for now! When we upload the image file from an input element, the returned `cid` is what we will use as the `imageHash` variable.
+That's all for now!
 
 # Creating the front-end with Vue.js
 
@@ -575,15 +605,17 @@ export default {
 </script>
 ```
 
-This is a simple component containing the item creation form and ranked list of items we will be creating later.
+This is a simple component containing the item creation form and ranked list of items we will be creating later. It's the root component of our application.
 
 ## CreateItem
+
+The `CreateItem` component is a form that allows us to fill in data for item creation.
 
 Create a file at `src/components/CreateItem.vue`.
 
 ```vue
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="submit"> <!-- .prevent will prevent the page from redirecting -->
     <input type="text" v-model="title" placeholder="Title" required />
     <br />
     <input type="file" placeholder="Upload image" @input="uploadImage" required />
@@ -602,8 +634,8 @@ export default {
   name: "CreateItem",
   methods: {
     async uploadImage(e) {
-      const file = e.target.files[0]
-      this.imageHash = await uploadFile(file)
+      const file = e.target.files[0] // get file from oninput event
+      this.imageHash = await uploadFile(file) // upload to IPFS network
     },
     async submit() {
       await createItem(this.title, this.imageHash, this.description)
@@ -620,8 +652,6 @@ export default {
 </script>
 ```
 
-This is a form that allows us to fill in data for item creation. In the `uploadImage` function you will see we respond to a file input element's `oninput` event, take the first file and upload the file using IPFS. In our form element we use `@submit.prevent` to automatically call `e.preventDefault()` before the `submit` function to prevent the page from redirecting.
-
 The component will look like this. We will style it later.
 
 ![create item](../../../.gitbook/assets/quadratic-voting-create-item.png)
@@ -631,6 +661,8 @@ When you click on the "Create Item" button you should see MetaMask prompt you to
 ![create item MetaMask](../../../.gitbook/assets/quadratic-voting-create-item-metamask.png)
 
 ## RankedList
+
+The `RankedList` component displays a sorted list of all items previously published to the contract.
 
 Create a file at `src/components/RankedList.vue`.
 
@@ -657,6 +689,7 @@ export default {
     }
   },
   created() {
+    // make sure app is started before attempting to retrieve items
     const wait = async () => {
       if (isReady()) {
         this.items = await rankedItems()
@@ -671,11 +704,11 @@ export default {
 </script>
 ```
 
-This component waits until the contract and IPFS node are defined, checking every 100ms, before filling the page with a sorted list of all items published to the contract.
-
-We will create the `Item` component next so that this will display correctly.
+In the `created` function we wait until the contract and IPFS node are defined, checking every 100ms, before filling the page with list items.
 
 ## Item
+
+We will need to create the `Item` component next so that our `RankedList` code will compile.
 
 Create a file at `src/components/Item.vue`.
 
@@ -683,18 +716,23 @@ Create a file at `src/components/Item.vue`.
 <template>
   <div>
     <h2>{{ item.title }}</h2>
+    <!-- ipfs.io is the gateway we will be using to serve our image files -->
     <img :src="`https://ipfs.io/ipfs/${item.imageHash}`" alt="item image" width="640" height="480" />
     <p>{{ item.description }}</p>
     <p>{{ item.owner }}</p>
+    <!-- the "Claim" button is only displayed to the item owner -->
     <template v-if="address() === item.owner">
+      <!-- item.amount is in wei but must be translated to gwei -->
       <p>Amount: {{ item.amount / 1_000_000_000 }} gwei</p>
       <button @click="claimGwei">Claim</button>
     </template>
+    <!-- non-owners are shown voting controls -->
     <template v-else>
       <button @click="upvote">Up</button>
       <p>Votes: {{ item.positiveWeight }}</p>
       <button @click="downvote">Down</button>
       <p>Votes: {{ item.negativeWeight }}</p>
+      <!-- submit section is only displayed if a user changes their weight -->
       <div v-if="weight !== startWeight">
         <p>Weight: {{ weight }}</p>
         <p>Cost: {{ cost / 1_000_000_000 }} gwei</p>
@@ -724,19 +762,22 @@ export default {
       if (this.weight === 0) {
         this.cost = 0
       } else {
-        const currWeight = await currentWeight(this.item.id, this.weight > 0)
+        const isPositive = this.weight > 0
+        const currWeight = await currentWeight(this.item.id, isPositive)
         this.cost = await calcCost(currWeight, Math.abs(this.weight))
       }
     },
     async submitVote() {
       if (this.weight >= 0) {
-        await positiveVote(this.item.id, Math.abs(this.weight), this.cost)
+        // submit positive vote if weight is positive
+        await positiveVote(this.item.id, this.weight, this.cost)
       } else if (this.weight < 0) {
-        await negativeVote(this.item.id, Math.abs(this.weight), this.cost)
+        // submit negative vote if weight is negative
+        await negativeVote(this.item.id, -this.weight, this.cost)
       }
     },
     async claimGwei() {
-      await claim(this.item.id)
+      await claim(this.item.id) // transfers rewards to owner wallet
     },
   },
   data() {
@@ -748,9 +789,11 @@ export default {
   },
   created() {
     const getWeight = async () => {
+      // calculate the net weight to be used with voting controls
       const posWeight = await currentWeight(this.item.id, true)
       const negWeight = await currentWeight(this.item.id, false)
       this.weight = posWeight - negWeight
+      // keep track of the weight we started with
       this.startWeight = this.weight
     }
     getWeight()
@@ -759,15 +802,9 @@ export default {
 </script>
 ```
 
-This will by far be our largest and most complex component. We'll need to break it down.
+This will by far be our largest and most complex component. Read through the code carefully when implementing it.
 
-- The first thing to notice is the `src` attribute of the image. `ipfs.io` is the gateway we will be using to access our IPFS files.
-- Next is the `v-if` template which ensures the "Claim" button is only displayed to the one who can claim the amount stored in the item (the item owner). `v-else` is then used to instead show voting controls only to non-owners. `weight !== startWeight` means that the "Submit Vote" section will only be displayed if the user changes their voting weight.
-- You may also see `item.amount` and `cost` are divided by `1_000_000_000`. This is because those values are stored in terms of wei but need to be displayed as gwei.
-- `calcCost` calls the smart contract function we defined a while back to notify our user of how much their voting submission will cost. `submitVote` will submit either a negative or positive vote depending on the weight the user inputted.
-- Finally, when the component is created, we will fetch the positive and negative weight currently associated with the user and use that to determine the weight they start with before interacting with the item.
-
-Our `RankedList` component should now look something like this depending on the data you posted. We will style this later.
+Our `RankedList` component should now look something like this depending on the data you posted.
 
 ![ranked items with claim button](../../../.gitbook/assets/quadratic-voting-ranked-items-claim.png)
 
@@ -856,6 +893,7 @@ Edit `CreateItem.vue` to make our form pop out more. Take note of the changes ma
     <br />
     <input type="file" placeholder="Upload image" @input="uploadImage" required class="text-gray-300" />
     <br />
+    <!-- top margin will separate displayed hash from file input when imageHash is defined -->
     <p class="mb-10 text-gray-300" :class="imageHash ? 'mt-3' : ''">{{ imageHash || "" }}</p>
     <textarea v-model="description" placeholder="Description" required class="px-3 py-1 w-full mb-10" />
     <br />
@@ -875,7 +913,7 @@ Edit `RankedList.vue` to add spacing between items and style our heading.
 </template>
 ```
 
-And finally, edit `Item.vue`. The layout of this component will change a lot.
+And finally, edit `Item.vue`. The layout of this component will change quite a bit, but the functionality is the same.
 
 ```vue
 <template>
@@ -906,7 +944,7 @@ And finally, edit `Item.vue`. The layout of this component will change a lot.
 </template>
 ```
 
-We're done! Your app should now have a much better appearance.
+We're done! Our app should now have a much better appearance.
 
 ![completed app](../../../.gitbook/assets/quadratic-voting-complete.png)
 
