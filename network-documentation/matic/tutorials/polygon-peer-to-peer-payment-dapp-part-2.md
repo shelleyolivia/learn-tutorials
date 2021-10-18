@@ -14,8 +14,8 @@ To successfully follow along with this tutorial, you will need an understanding 
 
 # Requirements
 
-Metamask - You will need a Metamask wallet with a Polygon mainnet configured to deploy our smart contract and use our dApp.
-Figment Datahub API - We will be using DataHub's Polygon Mainnet RPC URL to deploy the smart contract.
+- Metamask - You will need a Metamask wallet with a Polygon mainnet configured to deploy our smart contract and use our dApp.
+- Figment Datahub API - We will be using DataHub's Polygon Mainnet RPC URL to deploy the smart contract.
 
 # Deploying smart contract to Polygon Mainnet
 
