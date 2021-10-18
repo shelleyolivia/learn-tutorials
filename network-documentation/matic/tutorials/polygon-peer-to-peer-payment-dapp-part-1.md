@@ -2,7 +2,7 @@
 
 This tutorial will learn how to create a Peer-to-Peer payment dApp and deploy our smart contract on Polygon Network. We will first create an ERC20 token smart contract and use this token in our payment dApp to send to other addresses.
 
-This is a two-part tutorial. In the first part, we will learn how to send payment in one token, and in the second part, we will learn how to add other tokens to our payment dApp.
+This is part one of a two-part tutorial. In this part, we will learn how to send payments using a single token. The second part will cover how to add other tokens to our payment dApp.
 
 This is what the dApp we will be creating looks like:
 
@@ -12,7 +12,7 @@ This is what the dApp we will be creating looks like:
 
 To successfully follow this tutorial, you will need fundamental knowledge and understanding of Blockchain technology, Solidity programming language, and ERC20 tokens.
 
-We will be using [web3.js](https://web3js.readthedocs.io/en/v1.5.2/) in [NextJs](https://nextjs.org/) framework for the frontend. It's recommended to learn the basics of NextJs.
+We will be using [web3.js](https://web3js.readthedocs.io/en/v1.5.2/) to connect to Polygon and the [Next.js](https://nextjs.org/) framework for the frontend. It's recommended to learn the basics of Next.js before continuing.
 
 # Requirements
 
@@ -20,11 +20,6 @@ We will be using [web3.js](https://web3js.readthedocs.io/en/v1.5.2/) in [NextJs]
 [Metamask](https://metamask.io) - You will need Metamask wallet installed in your browser.
 [NodeJs](https://nodejs.org/en/) - You must have a recent version of Node.js installed. We recommend using v14.17.6 LTS.
 [Figment DataHub](https://figment.io/datahub/) account - We will be using DataHub's Polygon RPC URL to deploy the smart contract.
-
-**Other technologies used in this tutorial:**
-[NextJS](https://nextjs.org/) - To Create frontend for our Dapp
-[Web3.js](https://web3js.readthedocs.io/en/v1.4.0/) - Javascript library to connect our frontend to smart contract
-[Polygon Network](https://polygon.technology/) - For deploying our smart contract
 
 Topics covered in this tutorial:
 
@@ -39,22 +34,18 @@ Topics covered in this tutorial:
 Run the following commands in the terminal to install required packages and create project directories.
 
 ```text
-npm install -f truffle # Install truffle framework globally
-
-npx create-next-app --typescript polygon-peer-to-peer-payment-dapp # Create a NextJs app the typescript support
-
-cd polygon-peer-to-peer-payment-dapp
-
-truffle init # Intialize the truffle project 
-
+npm install -g truffle
+npx create-next-app --typescript payment-dapp
+cd payment-dapp
+truffle init
 yarn add @openzeppelin/contracts @truffle/hdwallet-provider web3 dotenv tailwindcss
 ```
 
-The `npx create-next-app` will create a basic NextJs project with typescript, and `truffle init` will initiate a truffle project.
+The command `npx create-next-app` will create a basic Next.js project with typescript support, and `truffle init` will scaffold a Truffle project.
 
-`@openzeppelin/contracts`, `@truffle/hdwallet-provider`, and `web3` packages will be used to create, deploy and integrate our smart contract.
+The code libraries `@openzeppelin/contracts`, `@truffle/hdwallet-provider`, and `web3` will be used to create, deploy and integrate our smart contract. `dotenv` is for dealing with environment variables, and `tailwindcss` is used for UI styling.
 
-# Creating Solidity smart contract
+# Creating a smart contract
 
 Create a new file called `PaymentToken.sol` in the `contracts` directory and add the following code:
 
@@ -78,17 +69,17 @@ contract PaymentToken is ERC20 {
 }
 ```
 
-We create a new ERC20 token using the `openzeppelin` ERC20 contract called **Payment Token**. We will use this token in our frontend to make payment in our peer-to-peer payment dApp.
+We create a new ERC20 token using the OpenZeppelin ERC20 contract called **Payment Token**. This is the token we will use to make payments in our peer-to-peer payment dApp.
 
-In the constructor, we are minting and sending **1000000** PAY token to the account deploying the contract.
+In the constructor of our contract, we are minting and sending **100,000** PAY tokens to the contract's **owner**, the account deploying the contract.
 
-Since `PaymentToken` is an ERC20 token and we are using `openzeppelin`'s ERC20 contract, we have few ready-made functions like `transfer`, `approve`, `allowance`, etc. We will be looking into the `transfer` function in our dApp, and come back to this when we start our frontend.
+Since `PaymentToken` is an ERC20 token and we are using OpenZeppelin's ERC20 contract, we have a few ready-made functions like `transfer`, `approve`, `allowance`, etc. We will be looking into the `transfer` function in our dApp, and come back to this when we start our frontend.
 
 # Compiling and deploying with Truffle
 
 Now that we have our ERC20 token ready, we have to make few changes to compile and deploy our token.
 
-Go to the migrations directory, create a new file `2_payment_token_migration.js` and add the following code.
+Go to the `migrations` directory, create a new file `2_payment_token_migration.js` and add the following code:
 
 ```javascript
 const PaymentToken = artifacts.require("PaymentToken");
@@ -98,23 +89,23 @@ module.exports = function (deployer) {
 };
 ```
 
-Before running the deployment command, we need to get Polygon RPC URL from datahub. Create an account on [Figment Datahub](https://datahub.figment.io/), head over to the Polygon section, and get the API key.
+Before running the deployment command, we need to get a Polygon RPC URL and API key from DataHub. Create an account on [DataHub](https://datahub.figment.io/), head over to the Polygon section, and copy your API key.
 
 ![Datahub Polygon API](../../../.gitbook/assets/polygon-datahub-api.png)
 
-Create a `.env` file in the root directory of your project and paste the key as shown below.
+Create a `.env` file in the root directory of your project (`/payment-dapp/`) and paste the key after the name of the environment variable as shown below:
 
 ```text
-DATAHUB_POLYGON_API=40fc1292c70a416e5a.......
+DATAHUB_POLYGON_API=paste your API key here
 ```
 
-Now we have to get the mnemonic of the account we will be using to deploy our contract. Goto Metamask extension and get your account's mnemonic (Secret phrase); if you don't know how to get your mnemonics, [follow this tutorial.](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase).
+Now we need to get the Secret Recovery Phrase (mnemonic) of the account we will be using to deploy the smart contract. Go to your Metamask extension and get your account's mnemonic; if you don't know how to get your mnemonic, [follow this tutorial](https://metamask.zendesk.com/hc/en-us/articles/360015290032-How-to-reveal-your-Secret-Recovery-Phrase).
 
-Once you have your mnemonics, create a file called `.secret` in your root directory and paste your mnemonics. Make sure you add `.secret` in your `.gitignore` so that your mnemonics are not added into your `git` history.
+Once you have your mnemonic, create a file called `.secret` in the project root directory (`/payment-dapp/.secret`) and paste your mnemonic there. Make sure you add `.secret` to your `.gitignore` file so that your mnemonic is not added into your `git` history or uploaded to GitHub by accident.
 
-To deploy our contract to Polygon testnet, we need to have some Matic tokens in our account to pay for gas fees. To get some testnet Matic tokens, go to [Polygon Faucet](https://faucet.polygon.technology/), paste in your account address to get 0.1 MATIC in your account, which is more than enough to deploy the contract as gas fees are very cheap on the Polygon network.
+To deploy our contract to Polygon testnet, we need to have some MATIC tokens in our account to pay for gas fees. To get some testnet MATIC tokens, go to the [Polygon Faucet](https://faucet.polygon.technology/) to get 0.1 MATIC in your account, which is more than enough to deploy the contract as gas fees are very cheap on the Polygon network.
 
-Now, open `truffle-config.js`, delete the entire content and add the following code.
+Next, open `truffle-config.js`, delete the existing content and then add the following code:
 
 ```js
 const HDWalletProvider = require("@truffle/hdwallet-provider");
@@ -160,18 +151,19 @@ module.exports = {
 };
 ```
 
-We use `@truffle/hdwallet-provider` and `mnemonics` to use our account and pay for gas fees. Truffle's wallet provider allows us to use the same account that we have in our Metamask using either a private key or `mnemonics.`
+We use `@truffle/hdwallet-provider` and `mnemonic` to use our funded testnet account and pay for gas fees. Truffle's wallet provider allows us to use the same account that we have in our Metamask using either a private key or mnemonic.
+
 Next, we are creating a provider with RPC URL, chain ID, and Truffle provider. Chain ID and other information relevant to the Polygon network can be found [here](https://docs.polygon.technology/docs/develop/metamask/config-polygon-on-metamask).
 
 To compile and deploy the smart contract run the following command,
 
 ```text
-truffle compile # Compile the smart contract 
+truffle compile
 
-truffle deploy --network matic # To deploy the contract to Polygon testnet
+truffle deploy --network matic
 ```
 
-# Creating frontend and integrating smart contract
+# Create the frontend and integrate the smart contract
 
 Now that we are done with the smart contract and have created our token, it's time to develop the frontend and integrate our contract using web3js.
 
@@ -278,10 +270,10 @@ export const useProviderData = () => {
 ```
 
 In `useProviderData` we are creating two functions - `loadWallet` and `sendPayment`.
-In `loadWallet`, we are fetching all the accounts present in our web3 provider (metamask in our case).
+In `loadWallet`, we are fetching all the accounts present in our web3 provider (Metamask in our case).
 Create an instance of the `PaymentToken` contract instance using the ABI from the `abis` directory.
 Then we will fetch the balance of the logged-in account using the `balanceOf` function available in ERC20 tokens.
-> You can also see the token balance in metamask. Click on the `Add Token` button and enter the `PaymentToken` contract address. You can get the address of the deployed contract either from contract ABI or from the terminal when you deployed the contract.
+> You can also see the token balance in Metamask. Click on the `Add Token` button and enter the `PaymentToken` contract address. You can get the address of the deployed contract either from contract ABI or from the terminal when you deployed the contract.
 
 In `sendPayment`, we accept the amount to tokens and the receiver address as a parameter and convert the amount into Wei.
 Get the user's current balance and check if the balance is greater than the amount requested to transfer.
@@ -290,7 +282,7 @@ Since this is a transaction, we need to call the `send` function on the `transfe
 
 # Creating UI with TailwindCSS
 
-First, we will create the Navbar, which will contain a button to connect to the metamask wallet and show the current address from metamask. Create a file called `Navbar.tsx` in `components` directory.
+First, we will create the Navbar, which will contain a button to connect to the Metamask wallet and show the current address from Metamask. Create a file called `Navbar.tsx` in `components` directory.
 
 ```javascript
 import React from "react";
@@ -332,7 +324,7 @@ function Navbar() {
 export default Navbar;
 ```
 
-Here first, we check if we have an account address, then show the address; else, we offer the connect button to connect metamask.
+Here, we check to see if we have an account address, then show the address; otherwise, we offer the connect button to connect Metamask.
 
 To create the main UI, open `pages/index.tsx` and add the following code.
 
@@ -468,9 +460,9 @@ export default function Home() {
 
 Here we are creating two text fields and a button. One text field accepts the number of tokens to transfer, and the other text field accepts the receiver's address. We also show the current balance of the account above the text field and a button to select the max amount of tokens available in the wallet.
 
-When the user clicks on the `Send` button, we call the `sendPayment` function from our context, which will send the token to the receiver's address and update the new balance of the current account in the UI.
+When the user clicks on the **Send** button, we call the `sendPayment` function from our context, which will send the token to the receiver's address and update the new balance of the current account in the UI.
 
-We are done with the UI part, and this is how the payment gateway looks like -
+We are finished with the UI now, and this is how the payment gateway should look:
 
 ![Payment gateway UI](../../../.gitbook/assets/peer-to-peer-payment-ui.png)
 
