@@ -58,6 +58,7 @@ import React, { useEffect } from "react";
 import { Typography, Tag, Card } from "antd";
 const { Title, Text } = Typography;
 
+// Create Interfaces for Coingecko API
 export interface CoinInfo {
   price: number;
   volume_24: number;
@@ -97,10 +98,13 @@ export interface CoinInfoResult {
 
 export default function PriceCard() {
   const [coinInfo, setCoinInfo] = useState<CoinGeckoResult>();
+
   const coinId = "solana";
   useEffect(() => {
     getPrice();
   }, []);
+
+  // Use Coingecko API
   function getPrice() {
     fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`)
       .then((res) => res.json())
@@ -125,6 +129,7 @@ export default function PriceCard() {
       });
   }
 
+  // Display Solana price
   return (
     <Card
       hoverable
@@ -184,6 +189,7 @@ And add inside return the `PriceCard` to show the price components.
 ```tsx
 return (
   <Row gutter={[16, 16]} align="middle" justify="center">
+    {/* Add Solana price card to homepage */}
     <Col span={24}>
       <PriceCard />
     </Col>
@@ -217,6 +223,7 @@ Create a new folder called `SupplyCard` with an index file inside: `src/componen
 Paste this code:
 
 ```tsx
+// Import Types and Connection from web3
 import {
   Supply,
   Connection,
@@ -224,12 +231,15 @@ import {
   VoteAccountStatus,
 } from "@solana/web3.js";
 import { useEffect, useState } from "react";
+
+// Import formatters for better visualization
 import { abbreviatedNumber, lamportsToSol } from "../../utils/utils";
 import React from "react";
 
 import { Typography, Row, Card } from "antd";
 const { Title, Paragraph } = Typography;
 
+// Convert lamports ( A fractional native token ) in more human readable format
 function displayLamports(value: number) {
   return abbreviatedNumber(lamportsToSol(value));
 }
@@ -240,6 +250,8 @@ export default function SupplyCard() {
   useEffect(() => {
     getSupply();
   }, []);
+
+  // Use connection to get the supply and the number of vote accounts
   async function getSupply() {
     const url = clusterApiUrl("devnet").replace("api", "explorer-api");
     const connection = new Connection(url, "finalized");
@@ -249,6 +261,7 @@ export default function SupplyCard() {
     setSupply(supply);
   }
 
+  // Get delinquent or inactive validators
   const delinquentStake = React.useMemo(() => {
     if (voteAccounts) {
       return voteAccounts.delinquent.reduce(
@@ -258,6 +271,7 @@ export default function SupplyCard() {
     }
   }, [voteAccounts]);
 
+  // Get active validators
   const activeStake = React.useMemo(() => {
     if (voteAccounts && delinquentStake) {
       return (
@@ -269,6 +283,7 @@ export default function SupplyCard() {
     }
   }, [voteAccounts, delinquentStake]);
 
+  // Get the percentage of stake that are in delinquent
   let delinquentStakePercentage;
   if (delinquentStake && activeStake) {
     delinquentStakePercentage = ((delinquentStake / activeStake) * 100).toFixed(
@@ -278,6 +293,7 @@ export default function SupplyCard() {
 
   return (
     <Row gutter={[16, 16]} align="top" justify="center">
+      {/* Show Active Stake */}
       <Card
         hoverable
         style={{
@@ -301,6 +317,8 @@ export default function SupplyCard() {
           </>
         )}
       </Card>
+
+      {/* Show Circulating Supply */}
       <Card
         hoverable
         style={{
@@ -351,6 +369,7 @@ return (
       <PriceCard />
     </Col>
 
+    {/* Add Supply data to homepage */}
     <Col span={24}>
       <SupplyCard />
     </Col>
@@ -394,6 +413,7 @@ const { Title } = Typography;
 
 export const SAMPLE_HISTORY_HOURS = 6;
 
+// Create type for clusterStats state
 export type ClusterStats = {
   absoluteSlot: number;
   blockHeight: number | undefined;
@@ -407,17 +427,20 @@ export default function StatsCard() {
   useEffect(() => {
     getClusterStats();
   }, []);
+
+  // Complete the code where is marked as TODO
   async function getClusterStats() {
-    const url = undefined; // TODO: Retrieve the RPC API URL for the devnet
+    const url = undefined; // TODO 1: Retrieve the RPC API URL for the devnet
     const connection = new Connection(url);
 
-    const epochInfo = await undefined; // TODO: get the epoch
+    const epochInfo = await undefined; // TODO 2: get the epoch
     const blockTime = await connection.getBlockTime(epochInfo.absoluteSlot);
     const { blockHeight, absoluteSlot } = epochInfo;
     const currentEpoch = epochInfo.epoch.toString();
     const { slotIndex, slotsInEpoch } = epochInfo;
     const epochProgress = ((100 * slotIndex) / slotsInEpoch).toFixed(1) + "%";
 
+    // Set the state with cluster stats
     if (blockTime !== null) {
       const clusterStatsData = {
         absoluteSlot,
@@ -429,6 +452,8 @@ export default function StatsCard() {
       setClusterStats(clusterStatsData);
     }
   }
+
+  // Show the card with cluster stats
   return (
     <Card
       hoverable
@@ -478,6 +503,7 @@ In the utils file add:
 
 ```tsx
 // utils.ts
+// Convert timestamp to human readable
 export function displayTimestampUtc(
   unixTimestamp: number,
   shortTimeZoneName = false
@@ -505,7 +531,7 @@ Import to the home page.
 ```tsx
 import StatsCard from "../../components/StatsCard";
 
-// ... add inside return
+// ... add the stats card inside return
 <Col span={24}>
   <StatsCard />
 </Col>;
@@ -541,12 +567,14 @@ export type Query = { searchValue?: string; searchType?: string };
 export default function SearchCard() {
   const [query, setQuery] = useState<Query>();
 
+  // Set searched value to state
   function handleChange(event: any) {
     const { value } = event.target;
     console.log(value);
     setQuery({ searchValue: value });
   }
 
+  // Set search type to address or signature
   function handleSubmit(event: any) {
     event.preventDefault();
     console.log(event.target);
@@ -565,6 +593,7 @@ export default function SearchCard() {
     }
   }
 
+  // Show search input and the result
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -636,6 +665,7 @@ const { Title } = Typography;
 
 export type Query = { searchValue?: string; searchType?: string };
 
+// Type for account details data
 export type DataDetails = {
   program: string;
   parsed: {
@@ -678,9 +708,12 @@ export function AccountHeader({ data }: { data?: Data }) {
     setDetailsData(data?.details?.data);
     console.log("detatailsData", detailsData);
   }, [data]);
+
+  // Check if is token account
   const isToken =
     detailsData?.program === "spl-token" && detailsData?.parsed.type === "mint";
 
+  // Show Token Account
   if (isToken) {
     return (
       <Card
@@ -714,6 +747,7 @@ export function AccountHeader({ data }: { data?: Data }) {
     );
   }
 
+  // Show account
   return (
     <Card
       hoverable
@@ -755,20 +789,25 @@ export default function AccountDetailsCard({ query }: { query: Query }) {
   }, [query.searchValue]);
 
   async function getData() {
+    // Get explorer url and connect
     const url = clusterApiUrl("devnet").replace("api", "explorer-api");
     const connection = new Connection(url, "finalized");
 
     try {
       if (query.searchValue !== undefined) {
+        // Create public key from search string
         pubkey = new PublicKey(query.searchValue);
+        // Get account data
         const result = (await undefined).value; // TODO: Get the account info
 
         let lamports, details;
         if (result === null) {
           lamports = 0;
         } else {
+          // Get account lamports
           lamports = result.lamports;
 
+          // Space used by account data
           let space: number;
           if (!("parsed" in result.data)) {
             space = result.data.length;
@@ -776,6 +815,7 @@ export default function AccountDetailsCard({ query }: { query: Query }) {
             space = result.data.space;
           }
 
+          // Set result data to the variable details
           let data: DataDetails | undefined;
           if ("parsed" in result.data) {
             data = {
@@ -796,12 +836,15 @@ export default function AccountDetailsCard({ query }: { query: Query }) {
             };
           }
         }
+
+        // Set all the data to the state
         setData({ pubkey, lamports, details });
         console.log("address", query.searchValue);
       }
     } catch (err) {}
   }
 
+  // Return the account header and the component that shows the history.
   return (
     <>
       {!data?.pubkey ? (
@@ -844,9 +887,11 @@ export default function HistoryCard({ pubkey }: { pubkey: PublicKey }) {
   }, [pubkey]);
 
   async function getHistory() {
-    console.log("Hello");
+    // Get API URL and create the connection
     const url = clusterApiUrl("devnet").replace("api", "explorer-api");
     const connection = new Connection(url);
+
+    // Limit the maximum amounts of returned signatures
     const options = {
       limit: 25,
     };
@@ -856,6 +901,7 @@ export default function HistoryCard({ pubkey }: { pubkey: PublicKey }) {
     console.log(fetched);
   }
 
+  // Show the history
   return (
     <Card
       hoverable
@@ -905,6 +951,7 @@ import React, { useEffect, useState } from "react";
 import { Typography, Card } from "antd";
 const { Title } = Typography;
 
+// Create types for the transaction details
 export type Query = { searchValue?: string; searchType?: string };
 
 export type Confirmations = number | "max";
@@ -931,11 +978,13 @@ export default function TxDetailsCard({ query }: { query: Query }) {
   }, []);
 
   async function getData() {
+    // Get API URL and create the connection
     const url = clusterApiUrl("devnet").replace("api", "explorer-api");
     const connection = new Connection(url, "finalized");
 
     let data;
     try {
+      // Get the signature status
       if (query.searchValue !== undefined) {
         const { value } = await connection.getSignatureStatus(
           query.searchValue,
@@ -944,6 +993,7 @@ export default function TxDetailsCard({ query }: { query: Query }) {
           }
         );
 
+        // If status is not null. Get transaction details
         let info = null;
         if (value !== null) {
           let confirmations: Confirmations;
@@ -979,6 +1029,7 @@ export default function TxDetailsCard({ query }: { query: Query }) {
     }
   }
 
+  // Show transaction details
   return (
     <Card
       hoverable
@@ -1032,6 +1083,7 @@ On home page import the component.
 ```tsx
 import SearchCard from "../../components/SearchCard";
 // ...
+// Add search card
 <Col span={24}>
   <SearchCard />
 </Col>;
