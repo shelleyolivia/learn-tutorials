@@ -6,11 +6,6 @@ We are going to build a very simplified clone of [Solana Explorer](https://githu
 
 ![](../../../.gitbook/assets/solana-explorer-01.png)
 
-At the end of the tutorial you will learn how to fetch Price data from Coingecko, Fetch general statistics with @solana/web3.js
-Search historical transactions from an account and get details for a transaction.
-
-If you have any difficulty following this tutorial or simply want to discuss Solana tech with us you can [join our community today](https://discord.gg/fszyM7K)!
-
 # Prerequisites
 
 - We are going to build with [dApp Scaffold](https://github.com/solana-labs/dapp-scaffold).
@@ -1028,7 +1023,9 @@ Congratulations! We made it. 👍
 
 # Conclusion
 
-In this tutorial, we built a simple blockchain explorer using Solana dapp-scaffold and the key features of Solana explorer. We have seen how to get the price and data such as transaction history, supply or account info with solana-web3.
+In this tutorial, we built a simple blockchain explorer using Solana dapp-scaffold and the key features of Solana explorer. We have learnt how to fetch Price data from Coingecko, fetch general statistics with @solana/web3.js, search historical transactions from an account and get details for a transaction.
+
+If you have any difficulty following this tutorial or simply want to discuss Solana tech with us you can [join our community today](https://discord.gg/fszyM7K)!
 
 # Next Steps
 
