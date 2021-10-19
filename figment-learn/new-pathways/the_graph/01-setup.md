@@ -15,15 +15,15 @@ In this pathway you'll use Docker to easily run a local Graph node on your machi
 
 ## 🔑 Get an Alchemy API key
 
-We'll need to connect to the Ethereum mainnet to be able to listen to new events happening on the network. Alchemy is a blockchain development platform that provides access to Ethereum through their hosted nodes. 
+We'll need to connect to the Ethereum mainnet to be able to listen to new events happening on the network. Alchemy is a blockchain development platform that provides access to Ethereum through their hosted nodes.
 
 To get an Alchemy API key, [create an account](https://www.alchemy.com/), then create a new application. From that application dashboard, click on **View Details** and then on **View Key**. Copy the HTTP endpoint URL.
 
-![Alchemy](../../../.gitbook/assets/pathways/the_graph/alchemy-view-api-key.png)
+![Alchemy](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/alchemy-view-api-key.png)
 
 ## 🎥 Video Walkthrough
 
-This is a video walkthrough of the Pathway which goes into detail to help you understand what is going on at every step. 
+This is a video walkthrough of the Pathway which goes into detail to help you understand what is going on at every step.
 The beginning of the video is a discussion of Web 3 between Guillaume Galuz, Figment's Head of Education and Nader Dabit, Developer Relations Engineer at Edge & Node. The walkthrough of the Pathway content begins at [10:18](https://www.youtube.com/watch?v=P0sGpnVVVx8?t=621) if you would like to skip ahead and get right into it 😃.
 
 {% embed url="https://www.youtube.com/watch?v=P0sGpnVVVx8" caption="Learn The Graph with Figment's 101 Pathway" %}

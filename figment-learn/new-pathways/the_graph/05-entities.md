@@ -6,7 +6,7 @@ This is analogous to the process of defining the Models in an MVC framework.
 
 Entities will be defined in the `schema.graphql` file.
 
-![Entities](https://user-images.githubusercontent.com/206753/136861292-2c178573-5dc8-48c5-92c3-4482a8963887.png)
+![Entities](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/entity-01.png)
 
 ## 🧑🏼‍💻 Your turn! Define the Punk and Account entities
 
@@ -60,6 +60,7 @@ type Punk @entity {
 ```
 
 In the above code snippet, there are two points worth mentioning:
+
 - For the purpose of indexing, entities _must have_ an `ID` field to uniquely identify them.
 - As an `Account` can be the **owner** of multiple `Punk` we must explicitly define the `1:n` relation on the `Account`'s **punksBought** attribute using `[Punk!] @deriveFrom(field: "owner")` directive:
 
@@ -90,7 +91,7 @@ yarn codegen
 
 What does `yarn codegen` do? This command create some boilerplate code under the `generated` folder. This boilerplate code define **typescript** classes for each `entities` (have a look at `generated/schema.ts`). We will use this code in the next step to define the mappings between our entities and the smart-contract events.
 
-![ezgif-4-ef490e86179d](https://user-images.githubusercontent.com/2707197/136944082-07cd27e2-8038-4b03-a5ef-4abe4c31c1de.gif)
+![terminal](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/entity-02.gif)
 
 ## ✅ Make sure it works
 

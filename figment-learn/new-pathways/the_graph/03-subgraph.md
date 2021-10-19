@@ -2,7 +2,7 @@
 
 A subgraph defines which data The Graph will index from Ethereum, and how it will store it. It's made up of 3 main pieces: a manifest, a schema of entities and mappings.
 
-![Anatomy](https://user-images.githubusercontent.com/206753/136852548-30eea776-8332-4023-b4e9-628bed1421cc.png)
+![Anatomy](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/subgraph-01.png)
 
 In this Pathway we will go over each of them one by one, understand what they do and how they work.
 
@@ -12,7 +12,7 @@ In practice, a subgraph indexes events emitted by a smart contract. So the first
 
 For the purpose of this tutorial we have decided to pick a fun and popular smart contract: the Crypto Punk ETH-20 contract.
 
-![punk-variety-2x](https://user-images.githubusercontent.com/206753/136851460-045f9d1b-aee2-4c67-a07b-139a4ed318ba.png)
+![punk-variety-2x](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/subgraph-02.png)
 
 You can view it on Etherscan [here](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB) and if you click on the "Contract" tab you can also have a look at [its Solidity code](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB). The contract's address is `0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB`.
 
@@ -44,6 +44,7 @@ We will be using the `init` command of the Graph CLI (see the [docs](https://git
 ## 🧑🏼‍💻 Your turn! Generate a subgraph scaffold
 
 Using the `graph init` command, generate a subgraph scaffold with the following properties:
+
 - Use a subgraph name without a prefix
 - Set the contract address to the CryptoPunk contract and fetch its ABI
 - Set the Ethereum network to `mainnet`
@@ -80,7 +81,7 @@ That's a mouthful! Let's look at it line by line.
 
 Once you type Enter, you will be prompted to confirm the information: you can just accept the five suggested inputs. The output should look like:
 
-![ezgif-4-3fb33a9f6ff7](https://user-images.githubusercontent.com/2707197/136943459-b39ec729-7d41-4e93-ab9d-9f41d1c7a30d.gif)
+![terminal](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/subgraph-03.gif)
 
 You don't need to run the next steps for now!
 
