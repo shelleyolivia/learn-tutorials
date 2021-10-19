@@ -43,7 +43,7 @@ query {
 
 Now, it's time to enjoy the result of your work! Click on the button on the right, and say hello to the Punks!
 
-<img width="1611" alt="136962097-0be3a2cd-dc2e-44c5-ab5f-69baceff003e" src="https://user-images.githubusercontent.com/206753/136981772-d27afd15-fefd-4563-ad0c-7ba5d4b64cc6.png">
+![punks](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/query-01.png)
 
 ## 🏁 Conclusion
 

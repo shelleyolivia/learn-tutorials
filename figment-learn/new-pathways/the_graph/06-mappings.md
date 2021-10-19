@@ -10,7 +10,7 @@ eventHandlers:
 
 For each event handler that is defined in `subgraph.yaml` under `mapping.eventHandlers` we will create an exported function of the same name. Each handler must accept a single parameter called event with a type corresponding to the name of the event which is being handled.
 
-This collection of event handlers is what we call "mappings" and they go in `src/mapping.ts`. They will transform the Ethereum event data into entities defined in your schema. 
+This collection of event handlers is what we call "mappings" and they go in `src/mapping.ts`. They will transform the Ethereum event data into entities defined in your schema.
 
 ## ✏️ Implement the event handlers
 
@@ -77,7 +77,7 @@ import { Account, Punk } from "../generated/schema";
 
 export function handlePunkBought(event: PunkBoughtEvent): void {
   let account = Account.load(event.params.toAddress.toHexString());
-  
+
   if (account == null) {
     account = new Account(event.params.toAddress.toHexString());
     account.id = event.params.toAddress.toHexString();
@@ -87,7 +87,7 @@ export function handlePunkBought(event: PunkBoughtEvent): void {
       BigInt.fromI32(1)
     );
   }
-  
+
   account.save();
 
   // Your turn! Write underneath those comments
@@ -112,7 +112,7 @@ import { Account, Punk } from "../generated/schema";
 
 export function handlePunkBought(event: PunkBoughtEvent): void {
   let account = Account.load(event.params.toAddress.toHexString());
-  
+
   if (account == null) {
     account = new Account(event.params.toAddress.toHexString());
     account.id = event.params.toAddress.toHexString();
@@ -122,17 +122,17 @@ export function handlePunkBought(event: PunkBoughtEvent): void {
       BigInt.fromI32(1)
     );
   }
-  
+
   account.save();
 
   let punk = Punk.load(event.params.punkIndex.toHexString());
-  
+
   if (punk == null) {
     punk = new Punk(event.params.punkIndex.toHexString());
     punk.id = event.params.punkIndex.toHexString();
     punk.index = event.params.punkIndex;
   }
-  
+
   punk.owner = event.params.toAddress.toHexString();
   punk.value = event.params.value;
   punk.date = event.block.timestamp;
@@ -157,7 +157,7 @@ What does those two commands do?
 
 As soon as you run `yarn deploy-local` you will see Docker starting to scan the Ethereum mainnet for punks!
 
-![](../../../.gitbook/assets/pathways/the_graph/create-deploy-local.gif)
+![terminal](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/mapping-01.gif)
 
 ## ✅ Make sure it works
 
