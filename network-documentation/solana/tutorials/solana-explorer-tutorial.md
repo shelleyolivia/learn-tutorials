@@ -19,9 +19,19 @@ We are going to build a very simplified clone of [Solana Explorer](https://githu
 
 # Get started
 
-Download [dapp scaffold](https://github.com/solana-labs/dapp-scaffold.git).
+1. First clone the dApp Scaffold repo [dapp scaffold](https://github.com/solana-labs/dapp-scaffold.git).
 
-Open the terminal in the dapp-scaffold folder and run `npm install` or `yarn` to install dependencies and `npm run start` or `yarn start` to run the dapp on localhost.
+```bash
+git clone https://github.com/solana-labs/dapp-scaffold.git
+```
+
+```bash
+cd dapp-scaffold
+```
+
+2. To install dependencies run `npm install` or `yarn`.
+
+3. `npm run start` or `yarn start` to run the dapp on localhost.
 
 ![](../../../.gitbook/assets/solana-explorer-terminal-start.png)
 
@@ -32,6 +42,8 @@ We should have dapp-scaffold running in localhost:3000.
 We are going to build the basic stats that we can see in the [solana explorer](https://explorer.solana.com/), we break it up into more basic steps. We are going to fetch the price, the stats and search for the address.
 
 # Get Solana Price
+
+{% embed url="https://youtu.be/0ly3cU5kPns" caption="Get Price" %}
 
 As a first step, we will get the price from Coingecko. Under components create a new folder called PriceCard and inside create a file called `index.tsx`.
 
@@ -196,6 +208,8 @@ Save all the files. Save all and reload. Now you should be able to see the price
 ![](../../../.gitbook/assets/solana-explorer-03.png)
 
 # Get Supply Stats
+
+{% embed url="https://youtu.be/wNgtUQqIwEk" caption="Get Supply Stats" %}
 
 Let's dive in with Solana web3js. `Web3js` offers a complete set of calls that allow us to get on-chain data. You can go deeper with the [documentation](https://solana-labs.github.io/solana-web3.js/)
 Create a new folder called `SupplyCard` with an index file inside: `src/components/SupplyCard.tsx/index.tsx`.
@@ -365,6 +379,8 @@ At this point you should see Active Stake and Circulating Supply in the frontend
 
 # Get Cluster Stats
 
+{% embed url="https://youtu.be/LlXaPZTBHc4" caption="Get Cluster Stats" %}
+
 To challenge yourself to see if you know how to get data from web3js now we are going to create another file where you have to substitute `undefined` with the correct call to get the data.
 Create a new folder `StatsCard.tsx` with an index file inside.
 
@@ -501,6 +517,8 @@ Once completed the missing info you will have this:
 ![](../../../.gitbook/assets/solana-explorer-05.png)
 
 # Search for accounts and transactions
+
+{% embed url="https://youtu.be/RYZRRcIBBJM" caption="Search for accounts" %}
 
 You have done a great job, now you know how to fetch data with Solana `web3js`. We will continue with how to search for an account and list the historical transactions and also we are going to fetch details from a transaction. To show the time we will need to install react `moment`:
 
@@ -1049,10 +1067,3 @@ This tutorial was created by Giovanni Fu. He can be found on [Github](https://gi
 Finished project source
 
 - [End Project](https://github.com/aeither/dapp-scaffold-explorer-tutorial)
-
-Video Tutorial
-
-- [Part 1](https://youtu.be/0ly3cU5kPns)
-- [Part 2](https://youtu.be/wNgtUQqIwEk)
-- [Part 3](https://youtu.be/LlXaPZTBHc4)
-- [Part 4](https://youtu.be/RYZRRcIBBJM)
