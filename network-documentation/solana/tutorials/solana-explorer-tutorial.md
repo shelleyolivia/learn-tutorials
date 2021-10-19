@@ -8,8 +8,8 @@ We are going to build a very simplified clone of [Solana Explorer](https://githu
 
 # Prerequisites
 
-- We are going to build with [dApp Scaffold](https://github.com/solana-labs/dapp-scaffold).
 - Basic familiarity with javascript and reactjs.
+- Complete the [Solana 101 Pathway](https://learn.figment.io/protocols/solana)
 
 # Requirements
 
@@ -23,9 +23,13 @@ Download [dapp scaffold](https://github.com/solana-labs/dapp-scaffold.git).
 
 Open the terminal in the dapp-scaffold folder and run `npm install` or `yarn` to install dependencies and `npm run start` or `yarn start` to run the dapp on localhost.
 
-We should have something like this running in localhost:3000. As we have seen in the screenshot in the introduction, we break it up into more basic steps. We are going to fetch the price, the stats and search for the address.
+![](../../../.gitbook/assets/solana-explorer-terminal-start.png)
+
+We should have dapp-scaffold running in localhost:3000.
 
 ![](../../../.gitbook/assets/solana-explorer-02.png)
+
+We are going to build the basic stats that we can see in the [solana explorer](https://explorer.solana.com/), we break it up into more basic steps. We are going to fetch the price, the stats and search for the address.
 
 # Get Solana Price
 
