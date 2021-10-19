@@ -1,33 +1,34 @@
 # Introduction
 
-In the existing tutorials about Solana, we understood how we make smart contracts (or _programs_, as we say in the Solana ecosystem) and mint tokens and NFTs. However, a Dapp is incomplete without a frontend, and we cannot reach a wider audience unless we host it on the web. So, in this tutorial, we will understand how to develop the frontend for Solana programs and make beautiful web apps effortlessly with the help of Chakra UI.
+Many existing tutorials about Solana focus on writing _programs_ (commonly known as smart contracts on other blockchains), minting tokens or NFTs - however a decentralized app is incomplete without an interface and needs to be hosted on the web to reach a wider audience. In this tutorial, we will explain how to develop a frontend interface for Solana programs and how to make beautiful web apps with the help of Chakra UI.
 
-The code for this tutorial is available in the repository [https://github.com/kanav99/solana-boilerplate](https://github.com/kanav99/solana-boilerplate). The tutorial is split into parts, and each part has a commit specific to it on the repository, mentioned at the end of the part. Do a `git checkout <commit hash>` or just click on the hash to refer to the code at that checkpoint.
+The code for this tutorial is available in the repository [https://github.com/kanav99/solana-boilerplate](https://github.com/kanav99/solana-boilerplate). Each part of the tutorial refers to the repository, which is mentioned at the end of the part. If you are comfortable with using git on the commandline, you can `git checkout <commit hash>` or just click on the link to the code to refer to the code at that checkpoint.
 
 # Prerequisites
 
 - Have a basic understanding of Solana backend and have gone through the helloworld example [here](https://github.com/solana-labs/example-helloworld).
 
-- This is a long and conceptual tutorial - we explain many small niches and concepts behind the code we write. It is recommended for the reader to get a spare hour to understand the tutorial thoroughly.
+- A basic understanding of React.js is required.
 
 # Requirements
 
 For this tutorial, we need the following software installed -
 
-- NPM and node.js
-- Rust and Solana CLI
-- A Solana Wallet (like Phantom, Solflare etc.)
+- Node.js version 14.18.1 or higher
+- The Rust toolchain, which can be found at [https://rustup.rs](https://rustup.rs)
+- The Solana CLI, which can be found at [https://docs.solana.com/cli/install-solana-cli-tools](https://docs.solana.com/cli/install-solana-cli-tools)
+- A Solana Wallet (like Phantom, Solflare, etc.), check out the Wallet guide [here](https://docs.solana.com/wallet-guide).
 
 # Create an empty Chakra App
 
-- Create an empty Chakra UI using the Create-React-App template.
+To get started, we will create an empty Chakra UI app using `create-react-app`, which is a program used to set up a React development environment and generate a starting point from templates. Run the following commands in your terminal:
 
 ```
 npx create-react-app solana-boilerplate --template @chakra-ui
 cd solana-boilerplate
 ```
 
-- This creates a scaffolding for a simple web app, with `src/App.js` file containing a rotating Logo. We don't need that, so we reduce the file to -
+- This creates a scaffolding for a simple web app with the main file of the application, `src/App.js`, containing a welcome message and a rotating Logo. We don't need that, so let's remove the existing contents of App.js and replace it with the following:
 
 ```jsx
 import React from "react";
@@ -59,7 +60,7 @@ function App() {
 export default App;
 ```
 
-You can try running the app by running `npm start`, and you'll see an empty page with a convenient colour mode switching button with a "Hello world!" floating in the middle.
+To start the development server, use the command `npm start` in your terminal. Once it has loaded you will be able to visit the running app in your browser at `http://localhost:3000` - you'll see an empty page with a convenient colour mode switching button with a "Hello world!" floating in the middle.
 
 If this is your first time seeing a Chakra UI app, here is a refresher. All chakra components must be wrapped between `ChakraProvider`, which controls the theming of all children components. `Box` is equivalent to `div` tag of HTML. `VStack` is a vertical stack of elements spaced evenly.
 
@@ -218,8 +219,7 @@ You might be seeing a problem over here - the transaction, balance, or account s
 
 Ever wondered how functions like `useToast` (in chakra), `useWallet` (in most web3 frameworks) work? These are all custom hooks. Right now, in our code, we have all of the code for frontend, wallet info, getting airdrop is all in a single function `App`. The account info is not real-time. The code in the `App` functional component should not have access to `setAccounnt` or `setTransactions`; it should just receive account info and a list of transactions and show it as a list. We will fix all of it using React custom hooks. Using hooks, we can localize a part of the application's state inside a separate function that internally manages and updates the value of those states, returning only the value of the real-time state. If you do not understand any part of what is coming, bear with me until the code for the hook is complete.
 
-All custom hooks should start with "use", so let us call our hook `useSolanaAccount`. We know for sure that the hook should have the state
-of account and transactions and should return both.
+All custom hooks should start with "use", so let us call our hook `useSolanaAccount`. We know for sure that the hook should have the state of account and transactions and should return both.
 
 ```jsx
 function useSolanaAccount() {
@@ -327,7 +327,7 @@ npm i @solana/wallet-adapter-wallets \
       @solana/wallet-adapter-react-ui
 ```
 
-- Add the required imports
+- Add the required imports just after the previous imports end. Note that the last import is done using `require` and would need to be after all the `import`s at all the times.
 
 ```jsx
 import {
@@ -413,7 +413,7 @@ function App() {
 
 ... and move all the contents to Home. Inside Home, we have to take care of some things. First, the `connection` object now comes from `useConnection`. Second, the `publicKey` should now come from `useWallet`. Third, the `publicKey` we now get might be empty because the user might not have connected the wallet yet. In that case, we need to ask the user to connect their wallet with the application.
 
-So, after the changes in the logic, the Home component should look like.
+So, after the changes in the logic, the Home component should look like:
 
 ```jsx
 function Home() {
@@ -474,7 +474,7 @@ function Home() {
 }
 ```
 
-The third part that needs change before we can conclude our wallet adaptation is the `useSolanaAccount` hook.
+The third part that needs to be changed before we can conclude our wallet adaptation is the `useSolanaAccount` hook:
 
 ```jsx
 function useSolanaAccount() {
@@ -515,13 +515,13 @@ The code till now is present in the commit [`92c4c88`](https://github.com/kanav9
 
 # Sending transactions - Greeting yourself
 
-Till now, we only read from the blockchain; we have not written anything on it actively (airdrops happen due to a public program). In this part, we will learn to "write" on the blockchain by interacting with the programs deployed on it. Now, we will make a button component that says hi to a person's account, and the account maintains a counter of the number of accounts that greeted it.
+Until this point, we only read from the blockchain; we have not written anything on it actively (airdrops happen due to a public program). In this part, we will learn to "write" on the blockchain by interacting with the programs deployed on it. Now, we will make a button component that says hi to a person's account, and the account maintains a counter of the number of accounts that greeted it.
 
-For this, let us use the greeter code from the [helloworld](https://github.com/solana-labs/example-helloworld) repository. If you have not gone through this example already, I recommend you to. Generally, in Solana Programs, we generate a "program account" that is "owned" by the program but is "related" to your account. Anyone can create an account, not only the owner; you can pay for the space it needs and create a program account. The public key for this program account is generated using your public key and a constant seed, using the function `PublicKey.createWithSeed`. This is basically a one-to-one mapping between your public key and the program account public key, given the seed is fixed. Now, anyone with your public key can generate your program account's public key and tell the program to greet this account (or just increase the counter for this account).
+For this, let us use the greeter code from the [example-helloworld](https://github.com/solana-labs/example-helloworld) repository. If you have not gone through this example already, I recommend you to. Generally, in Solana Programs, we generate a "program account" that is "owned" by the program but is "related" to your account. Anyone can create an account, not only the owner; you can pay for the space it needs and create a program account. The public key for this program account is generated using your public key and a constant seed, using the function `PublicKey.createWithSeed`. This is basically a one-to-one mapping between your public key and the program account public key, given the seed is fixed. Now, anyone with your public key can generate your program account's public key and tell the program to greet this account (or just increase the counter for this account).
 
 - Clone the repository https://github.com/solana-labs/example-helloworld.
 - While being inside the repository, run `npm run build:program-rust` to build the program.
-- Deploy the program to devnet using `solana program deploy --url https://api.devnet.solana.com dist/program/helloworld.so`. This should print out a program ID. Please take a note of it. For me, it was FGbjtxeYmT5jUP7aNavo9k9mQ3rGQ815WdvwWndR7FF9, so I will use this in the coming code.
+- Deploy the program to devnet using `solana program deploy --url https://api.devnet.solana.com dist/program/helloworld.so`. This should print out a program ID. Please take a note of it. For me, it was FGbjtxeYmT5jUP7aNavo9k9mQ3rGQ815WdvwWndR7FF9, so I will use this in the following example.
 
 Now, let us not cram all the code into a single file. Create a new file, `Greet.jsx`, with this starter code.
 
@@ -556,7 +556,12 @@ And just below our airdrop button, add this newly made component -
 ...
 ```
 
-Now in this Greet component, we want two things to happen. 1) Get the current number of greetings sent to you. 2) Greet yourself. First, let us create an interface to our Rust/C backend. We will follow what is given in the helloworld example. The code will look very similar to the code present [here](https://github.com/solana-labs/example-helloworld/blob/master/src/client/hello_world.ts).
+Now in this Greet component, we want two things to happen:
+
+1. Get the current number of greetings sent to you.
+2. Greet yourself.
+
+We will create an interface to our Rust backend. We will follow what is given in the helloworld example. The code will look very similar to the code present [here](https://github.com/solana-labs/example-helloworld/blob/master/src/client/hello_world.ts).
 
 - Store the program id and a fixed seed as a global constant.
 
@@ -565,7 +570,7 @@ const programId = new PublicKey("FGbjtxeYmT5jUP7aNavo9k9mQ3rGQ815WdvwWndR7FF9");
 const GREETING_SEED = "hello";
 ```
 
-- To have a similar interface as in the rust struct [`GreetingAccount`](https://github.com/solana-labs/example-helloworld/blob/master/src/program-rust/src/lib.rs#L13-L16), we create a similar global class in Javascript.
+- To have a similar interface as in the Rust struct [`GreetingAccount`](https://github.com/solana-labs/example-helloworld/blob/master/src/program-rust/src/lib.rs#L13-L16), we create a similar global class in Javascript.
 
 ```jsx
 class GreetingAccount {
@@ -578,7 +583,7 @@ class GreetingAccount {
 }
 ```
 
-- Now, accounts in Solana only store raw bytes. As we serialize/deserialize in the rust code using borsh, we will do the same here using the borsh package. Deserializing using borsh requires a schema that tells the deserializing logic about the size of different fields. We create that schema next, along with the total size of the serialized class object (we need the size when we create a new greeting account and pay only for the size each greeting account needs).
+- Now, accounts in Solana only store raw bytes. As we serialize/deserialize in the Rust code using borsh, we will do the same here using the borsh package. Deserializing using borsh requires a schema that tells the deserializing logic about the size of different fields. We create that schema next, along with the total size of the serialized class object (we need the size when we create a new greeting account and pay only for the size each greeting account needs).
 
 ```jsx
 const GreetingSchema = new Map([
@@ -694,7 +699,12 @@ const greet = useCallback(async () => {
 <Button onClick={greet}>Greet Yourself</Button>
 ```
 
-The logic for this should be pretty straightforward - 1) generate program account public key using `PublicKey.createWithSeed`, if the account does not exist, pay for creating the account with the required storage space 2) send the program the public key to greet (in this case, our own program key). For the first part, the code is given below. See that we create a Transaction and add an `Instruction` to the `SystemProgram`, which tells the SystemProgram to create a new account with the correct required space. (This should help you realize that creating a new account is a Solana Program in itself!)
+The logic for this should be pretty straightforward:
+
+1. Generate program account public key using `PublicKey.createWithSeed`, if the account does not exist, pay for creating the account with the required storage space.
+2. Send the program the public key to greet (in this case, our own program key).
+
+For the first part, the code is given below. See that we create a Transaction and add an `Instruction` to the `SystemProgram`, which tells the `SystemProgram` to create a new account with the correct required space. This should help you realize that creating a new account is a Solana Program in itself!
 
 ```jsx
 const greetedPubkey = await PublicKey.createWithSeed(
@@ -796,7 +806,7 @@ Possible improvements - As `PublicKey.createWithSeed` might be an expensive oper
 
 # Greeting others
 
-Now, we might want to greet others as greeting ourselves is not that cool. For greeting others, we will need a person's public key; then only we can send them a hi. Our goal of the section is to send greetings to others by adding a textbox to our application where you can write the public key of your friend and then click a button to send greeting their way.
+Now, we might want to greet others as greeting ourselves is not that cool. For greeting others, we will need a public key for that account; then we can send them a greeting. Our goal of the section is to send greetings to others by adding a textbox to our application where you can write the public key of your friend and then click a button to send a greeting their way.
 
 First, as we will reuse the same logic from the previous code, we should move the greeting code into a function that accepts a public key (the one to greet) created by `useCallback` so that we can reuse it. What I did was - Added an argument, which is the base58 of the public key of the recipient, to the old `greet` callback and replaced `wallet.publicKey` to `PublicKey(<argument>)`. Now we can create a separate callback called `greetYourself` where we send our own `wallet.publicKey.toBase58()` and pass this callback to the "Greet Yourself" button.
 
@@ -853,7 +863,7 @@ const greetYourself = useCallback(async () => {
 }, [greet, wallet.publicKey]);
 ```
 
-Now what is left is entirely rendering part.
+Now what remains is the ReactJS code used to render the label and input:
 
 ```jsx
 const [recipient, setRecipient] = useState("");
@@ -945,7 +955,7 @@ return (
 );
 ```
 
-See how we have split the code into two panels - the second one contains transaction history, and the first one contains the rest of the code. We shifted the colour mode switcher to the end of the tablist. We can add a wallet disconnect button there, as well, if the wallet is connected.
+See how we have split the code into two panels - the second one contains transaction history, and the first one contains the rest of the code. We shifted the colour mode switcher to the end of the tablist. We can add a wallet disconnect button there as well, if the wallet is connected.
 
 ```jsx
 <HStack justify="space-between" width="full">
@@ -1051,4 +1061,13 @@ The code till here is available in the commit [`e56e2d5`](https://github.com/kan
 
 # Conclusion
 
-Congratulations on completing the (long) tutorial! What we developed and understood was how we can use Chakra UI and Solana to make beautiful and fast dApps. Now, you should be able to use this knowledge to power your big idea and easily use Solana to make blazing fast applications while using the ease of Chakra to develop the frontend easily. There is a lot to still do in this simple application, but I will leave that imagination to the reader. If you liked this tutorial, do send me a greeting on the application you developed :)
+Congratulations on completing this tutorial! What we developed and understood was how we can use Chakra UI and Solana to make beautiful and fast dApps. Now, you should be able to use this knowledge to power your big idea and easily use Solana to make blazing fast applications while using the ease of Chakra to develop the frontend with confidence. There is still much that can be improved in this simple application, but I will leave that to the imagination of the reader.
+
+# About the author
+
+This tutorial was created by Kanav Gupta. He can be found on [Github](https://github.com/kanav99) and on their [website](https://kanavgupta.xyz).
+
+# References
+
+- [Solana example-helloworld repository](https://github.com/solana-labs/example-helloworld)
+- [Chakra UI Documentation](https://chakra-ui.com/docs/getting-started)
