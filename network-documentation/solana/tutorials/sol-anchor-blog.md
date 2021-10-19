@@ -1,24 +1,26 @@
-# SolBlog - Solana Blog Program Built with Anchor
-
-<center>
-<img src="tutorial-graphics\solblog.svg" width="90%" height="auto">
-</center>
+![Logo](../../../.gitbook/assets/tutorial-graphics/solblog.svg)
 
 A simple blog platform, powered by Solana with a SvelteKit front end.
 
--   [x] Solana (Rust)
--   [x] Anchor (Rust macros + IDL generation)
--   [x] Svelte & SvelteKit (JavaScript front end)
+-   Solana (Rust)
+-   Anchor (Rust macros + IDL generation)
+-   Svelte & SvelteKit (JavaScript front end)
 
 YouTube video on building the Rust portion:
 
-<a href='https://youtu.be/w-n87Aq3f8k' target='_blank'>
-<img src="../../../.gitbook/assets/tutorial-graphics/youtub.png" width="35%" height="auto">
-</a>
+[![](../../../.gitbook/assets/tutorial-graphics/youtub.png)]('https://youtu.be/w-n87Aq3f8k')
+
+{% embed url="https://youtu.be/w-n87Aq3f8k" caption="SolBlog - Solana blog platform built with Anchor" %}
 
 # Introduction
 
-This tutorial will take you from zero to functional blog.
+In this tutotial, we will create a simple short form yet fully functional blog with the data saved on Solana. We are going to do this using the Anchor framework to illustrate how to use Anchor.
+
+Why we are building a blog is it is a simple web format that most people are familiar with, and it has a simple structure: A blogger and their blog posts. A simple example of saving data to the Solana network is the best and easiest way to learn.
+
+We will cover in this tutorial Anchor setup and Anchor program building, and touch on the JavaScript front end and how it interacts with the Anchor program.
+
+# What Anchor does for you
 
 Building Solana programs in Rust language can be tough. Anytime you want to save or retrieve data from an account, you need to think about packing/unpacking the data, serializing/unserializing the data and formats, which are all a real pain.
 
@@ -32,7 +34,18 @@ There are always two parts to a Solana app -- the _on-chain_ program and account
 
 # Prerequisites
 
--   You will need access to a Linux command line interface
+Prior knowledge:
+
+-   Complete Solana 101 Pathway
+-   Basic understanding of Rust & Solana will be a plus.
+-   Basic JavaScript knowledge
+-   Basic Command Line Interface usage
+
+# Technical Requirements
+
+We will use these installed tools throughout the tutorial:
+
+-   A Linux command line interface
 -   Anchor and Rust installed in accordance with the Setup section below
 -   Phantom.app Solana Wallet, with an address you are comfortable using on DevNet (can make a new address in Phantom if you like)
 
@@ -42,16 +55,12 @@ It's important to understand that Anchor is new, and the API may change as devel
 
 I used v 0.16.1 for this tutorial.
 
-```
+```bash
 $ anchor --version
 anchor-cli 0.16.1
 ```
 
-## A Simple Blog
-
-In this tutotial, we will create a simple short form blog saved to the Solana program and accounts, to show you how to use Anchor.
-
-## Setup
+# Setup
 
 Getting started with Anchor is fairly straightforward, and you can follow the [setup instructions on the Anchor website](https://project-serum.github.io/anchor/getting-started/installation.html).
 
@@ -119,7 +128,7 @@ Since that's not our key, let's fix that now and generate our key.
 
 Run:
 
-```
+```bash
 $ cd solblog
 $ anchor build
 ```
@@ -155,15 +164,14 @@ Our newly generated code public key is in that new .`/target/deploy` folder, go 
 
 To show our program public key which we will use as out id, simply run:
 
-```cli
+```bash
 // CLI
 solana address -k ./target/deploy/solblog-keypair.json
 ```
 
 Which shows us out unique key:
 
-```
-// CLI
+```bash
 // yours will look different, that's ok
 
 $  SoMeKeyThatIsUniqueTOmyPROGRAM
@@ -186,7 +194,7 @@ We will also need to include this same Program ID in the client side, in our `ap
 const program = new anchor.Program(idl, programId, provider)
 ```
 
-We will get to that part once we build the client side. My only poitn at this time is to emphasize that the client side in javascript must match the Program side in Rust. For now, let's finish taking a look at the Rust code.
+We will get to that part once we build the client side. My only point at this time is to emphasize that the client side in javascript must match the Program side in Rust. For now, let's finish taking a look at the Rust code.
 
 <img src="../../../.gitbook/assets/tutorial-graphics/program-block.svg" width="40%" height="auto">
 
@@ -347,8 +355,8 @@ Lastly, we grab the `accounts` from the context (`ctx`) and pick `blog_account` 
 
 Our Rust Solana Program is complete, written in Rust! Now that we're done, we need to build again so that the Solana build uses our most recent code:
 
-```
-// in project root directory
+```bash
+# in project root directory
 
 anchor build
 ```
@@ -357,18 +365,139 @@ Make sure you run anchor build in your project's root folder, anchor will take c
 
 ## Deploy to Devnet
 
-Now that out Rust Program has been written with the help of Anchor, it's time to deploy to the Devnet.
+Now that our Rust Program has been written with the help of Anchor, it's time to deploy to the Devnet.
 
 To deploy the anchor program on devnet, a small helper script to setup some keys, fund via airdrop, then use anchor deploy to deploy to the devnet would sure be great. That's included with this tutorial!
 
-For this tutorial, I borrow heavily from the auto-generated [`Decentology`](https://dappstarter.decentology.com/) DappStarter to generate the deploy code is saved at `./deploy.js`. You can run the script using `node` or use the shortcut script in `package.json` which is convenienlty run by:
+The deploy code is saved at `./deploy.js`. Let's walk through the necessary parts to deploy to Solana using anchor.
 
+We need 2 keypairs in order to deploy:
+
+1. Our Program Authority keypair, and
+2. Our Program Keypair
+
+We can generate a Program Authority keypair by using the [solana-web3.js](https://solana-labs.github.io/solana-web3.js/classes/Keypair.html#generate) library:
+
+```js
+// imported by deploy.js
+
+import { Keypair } from "@solana/web3.js"
+
+let programAuthorityKeypair = new Keypair()
 ```
-// CLI
+
+To deploy our code, we need cryptocurrency SOL in our newly created account. On Devnet, we can call an airdrop to fund our account.
+
+```js
+// imported by deploy.js
+
+import { Connection, LAMPORTS_PER_SOL } from "@solana/web3.js"
+
+this.connection = new Connection("https://api.devnet.solana.com", "confirmed")
+
+const signature = await this.connection.requestAirdrop(
+    programAuthorityKeypair.publicKey,
+    LAMPORTS_PER_SOL * 5
+)
+await this.connection.confirmTransaction(signature)
+```
+
+I like to use the library's constant `LAMPORTS_PER_SOL` because that way you can ensure you get a full SOL or 2, just multiply by however much you need. For this deployment, we should need between 2 - 3 SOL, so let's drop 5 SOL in there just to make sure we aren't hassled with airdropping more.
+
+Now that we have our Program Authority Account keypair created and funded, let's save it as a keyfile (json file) so that Anchor can access it from the command line:
+
+```js
+// deploy.js
+
+// ... [snip]
+
+const programAuthorityKeyfileName = `deploy/programauthority-keypair.json`
+const programAuthorityKeypairFile = path.resolve(
+    `${__dirname}${SLASH}${programAuthorityKeyfileName}`
+)
+
+// ... [snip]
+
+fs.writeFileSync(
+    programAuthorityKeypairFile,
+    `[${Buffer.from(programAuthorityKeypair.secretKey.toString())}]`
+)
+
+// ... [snip]
+```
+
+The second keypair that we need is our program keypair. This was generated for you when you ran `anchor build` and is saved in `target/deploy/solblog-keypair.json`. We need to get the programId from that keypair. We _could_ just copy and paste, or we can retreive the keys programmatically liek this:
+
+```js
+// deploy.js
+
+// ...[snip]
+const SLASH = path.sep
+
+const programKeyfileName = `target/deploy/solblog-keypair.json`
+const programKeypairFile = path.resolve(
+    `${__dirname}${SLASH}${programKeyfileName}`
+)
+
+let programKeypair = readKeyfile(programKeypairFile)
+
+let programId = programKeypair.publicKey.toString()
+```
+
+Now we have both keys that we need to deploy!
+
+The command in Anchor to deploy is `anchor deploy` and we want to call this from our deploy script. Let's use Nodejs to spawn a sub process to call it programatically:
+
+```js
+// deploy.js
+
+let method = ["deploy"] // we are deploying for the first time, using 'deploy'
+
+spawn.sync(
+    "anchor",
+    [
+        ...method, // we use a variable so we when we want to upgrade, we can use 'upgrade' instead
+        "--provider.cluster", // we want to specify the node cluster
+        "Devnet", // the node cluster as the Devnet
+        "--provider.wallet", // we need to pass in a keyfile to pay for the deployment
+        `${programAuthorityKeypairFile}`, // this is the keypair file we created just a moment ago
+    ],
+    { stdio: "inherit" }
+)
+```
+
+If we want to update our program after the initial deployment, we can use `anchor upgrade` instead. We would need to specify what program we are upgrading, and specify the built code we want to replace it with. So we get:
+
+```js
+// deploy.js
+
+let method = [
+    "upgrade", // we use upgrade to modify the program
+    "target/deploy/solblog.so", // specify where the built code is from 'anchor build'
+    "--program-id", // specify the programId
+    programId,
+]
+
+spawn.sync(
+        "anchor",
+        [
+            ...method, // use spread operator to expand out our array into individual elements
+
+// ... [snip]
+// ... rest is the same
+```
+
+A full functioning version of the complete code is included with this tutorial.
+
+Now that we've built our `deploy.js` script, we can run the script using `node` or use the shortcut script in `package.json` which is convenienlty run by:
+
+```bash
 $ 	npm run deploy
+```
 
 (or)
 
+```bash
 $	node ./deploy.js
 ```
 
@@ -390,13 +519,17 @@ spawn.sync(
     [
         ...method,
         "--provider.cluster",
-        "Devnet",
+        "Devnet", // or on Figment DataHub, https://solana--devnet.datahub.figment.io/apikey/yourApiKeyHere/
         "--provider.wallet",
         `${programAuthorityKeypairFile}`,
     ],
     { stdio: "inherit" }
 )
 ```
+
+When choosing to deploy, you can use Solana's Devnet or choose Figment's DataHub as well for deploying the program.
+
+To use Figment's Datahub, Go to https://datahub.figment.io -> Make an account (It's free) -> Select Solana from Protocols -> Get the API Key and endpoint on your dashboard. Now you can use the same here in this tutorial by setting the cluster to Figment's datahub!
 
 This first run through, the deploy script uses `anchor deploy` whereas in subsequent deploys with the same program, it will use `anchor upgrade` with all the required flags included for convenience:
 
@@ -670,30 +803,38 @@ The rest of the app integrates both `initialize` and `makePost` as well as `sola
 
 ## SvelteKit
 
-After setup and focusing on the Anchor RPC and Solana-Web3.js portions of the client side code, we can see a bit of the Svelte Setup, which is pretty standard and easy from their website:
+You can use Anchor and these tutorial libraries with any framework, such as React, Vue, or Svelte. I chose to demonstrated this in Svelte, below are some front-end tips for working with the libraries, through a Svelte lens. But they can be applied to any other framework too.
+
+After setup and focusing on the Anchor RPC and Solana-Web3.js portions of the client side code, we can see a bit of the Svelte Setup, which is pretty standard and easy from the Svelte website:
 
 The Svelte [setup](https://kit.svelte.dev/docs#introduction-getting-started) is simply:
 
-1. `$ npm init svelte@next ./app`
-2. `$ cd app`
-3. `$ npm install` (choose the full app defaults)
+```bash
+$ npm init svelte@next ./app
+$ cd app
+$ npm install
+# (choose the full app defaults)
+```
 
 Now we can add our Anchor javascript code to feed our Svelte front end with Solana data for our blog!
 
-To use anchor from javascript, we import the anchor library:
+To use anchor from javascript, we install the anchor library:
 
-```
+```bash
+
 npm install @project-serum/anchor --save
+
 ```
 
 There are a few gotchyas that you might run into while trying to use the solana or anchor libraries in client side browser code.
 
 ### Gotchya #1 - Buffer not defined
 
-Since Anchor uses borsh, there is a small hack we need to add in order to get the Global varibale to work. In Svelte, if we paste something in our page layouts, it'll apply to all layouts, so we'll add our hack here to make things work with the imported Anchor library:
+Since Anchor uses borsh, there may be a small hack you need to add in order to get the Global varibale to work. In Svelte, if we paste something in our page layouts, it'll apply to all layouts, so we'll add our hack here to make things work with the imported Anchor library:
 
 ```js
-// app\src\routes\__layout.svelte
+// location: app\src\routes\__layout.svelte
+// Svelte layouts are code that apply to ALL pages, so we only add it once here:
 
 import { onMount } from "svelte"
 
@@ -710,10 +851,13 @@ onMount(async () => {
 
 ### Gotchya #2 - import in onMount()
 
-The other issue is the solana / anchor code is NOT isomorphic, which means it doesn't play equally nicely in Nodejs and the browser. The way to force front ends like Svelte to use the Browser version only (and skip the whole Server Side Rendering, or SSR) is to `import` in the browser side code, in Svelte's case, in onMount()
+The other issue is the solana / anchor code is NOT isomorphic, which means it doesn't play equally nicely in Nodejs and the browser. The way to force frontend frameworks like Svelte to use the Browser version only (and skip the whole Server Side Rendering, or SSR) is to `import` in the browser side code, in Svelte's case, in onMount():
 
 ```js
-// any file where you want solana libraries to work in the browser
+// paste this in any file where you want solana libraries to work in the browser
+// such as
+// app\src\routes\blog\[slug].svelte
+
 import { loadAnchorClient } from "$lib/helpers/utils"
 
 onMount(async () => {
@@ -724,6 +868,8 @@ onMount(async () => {
 where
 
 ```js
+// location: app\src\lib\helpers\utils.ts
+
 export const loadAnchorClient = async () => {
     let AnchorBlogLibrary = await import("$lib/anchorClient")
     anchorClient.update((_) => new AnchorBlogLibrary.default()) // establish our Solana connection & load our little library helpers
@@ -752,11 +898,33 @@ The BlogAccount key is created on the fly during intilization, but if there was 
 
 In the end, navigating to `./app` and running `npm run dev` will start up the Svelte App and get you to the home screen.
 
-```
-  // CLI
+```bash
 
-  $ npm run dev
+$   npm run dev
 
 ```
 
 Open up your browser to `http://localhost:3000` and play around!
+
+# Conclusion
+
+Congratulations! You have learned how to write an Anchor program and deploy it to the Solana Devnet, and interact with it in JavaScript to make posts and retreive posts.
+
+Please remember that this code is not intended for production: there are still a few other things to consider if you wanted to deploy this to mainnet, such as more robust wallet integration and mainnet testing. But this tutorial has given you the basics to build on top of!
+
+# Next Steps
+
+The blog program is a very basic smart contract. In what ways could you make it do more? You can now keep experimenting by adding other features like a bio or about section. Or you could try next to integrate Solana's "Cross Program Invocations" (CPI) to get the Blog program to call other programs, perhaps triggering an event in someone else's program based on a post (perhaps a token event, such as minting or burning a token?). The only limit is your imagination. What would you choose as next steps?
+
+# About the Author
+
+Doug Anderson is @DougAnderson444 on the internet. A computer engineer and retired Naval Engineering Officer in the Royal Canadian Navy, he has always held a passion for building cutting edge technologies on the internet. He has an innate ability to dissect, diagram, and diagnose systems and teach them to others in an easy to understand fashion. Follow him on Twitter and elsewhere under @DougAnderson444
+
+# References
+
+Web3.js Library https://solana-labs.github.io/solana-web3.js/
+Anchor Website https://project-serum.github.io/anchor/
+Anchor Rust Docs https://docs.rs/anchor-lang/0.16.1/anchor_lang/
+Credit to Decentology DappStarter for ideas on how to programmatically deploy a Solana program https://dappstarter.decentology.com/
+https://docs.figment.io/network-documentation/solana/rpc-and-rest-api
+https://datahub.figment.io/
