@@ -68,18 +68,18 @@ These are the additional technologies we will be using later.
 
 # Project setup
 
-To generate initial project files, we will use the Truffle and Vue cli tools.
+To generate initial project files, we will use the Truffle and Vue CLI tools.
 
-```bash
+```text
 npm i -g truffle @vue/cli
 
 vue create quadratic-voting-app
-> Default (Vue 3)
-> Use Yarn
 
 cd quadratic-voting-app
 truffle init
 ```
+
+When creating the Vue app, choose "Default (Vue 3)" and "Use Yarn".
 
 Your project should look like this.
 
@@ -118,7 +118,7 @@ Any fee paid for a positive vote is rewarded to the creator of the item, creatin
   uint public itemCount = 0; // also next itemId
 ```
 
-The `voteCost` constant is the price of a vote of weight 1 in terms of wei. One ether consists of 1,000,000,000,000,000,000 wei and one gwei consists of 1,000,000,000 wei. Therefore, `voteCost` is set to 10 gwei, or 0.00000001 ether. You can change this value to whatever you wish.
+The `voteCost` constant is the price of a vote of weight 1 in terms of wei. One MATIC (Polygon equivalent of ETH) consists of 1,000,000,000,000,000,000 wei and one gwei consists of 1,000,000,000 wei. Therefore, `voteCost` is set to 10 gwei, or 0.00000001 MATIC. You can change this value to whatever you wish.
 
 As an example of how quadratic voting works, let's say this contract was for a ranked list of the most favored Star Wars characters. One person may suggest Han Solo while another may suggest Chewbacca. If someone votes +2 for Han Solo, it will cost them `10 gwei * 2 * 2 =` 40 gwei. If someone votes +3 for Chewbacca, it will cost them `10 gwei * 3 * 3 =` 90 gwei. This leads to an ecosystem where a single person may vote more times than another if they care about the topic more, but it gets exponentially more expensive with each vote, ensuring a fair democracy.
 
@@ -188,7 +188,7 @@ The function `createItem` is used to publish a new Item object to the ranked lis
   }
 ```
 
-Users are not able to vote for their own items because this would allow them to claim what they spent and use it to vote again, essentially meaning they could infinitely vote on their own items. Therefore we need to make sure the sender is not the item owner. The value of the transaction must also be enough to cover the cost of voting.
+Users are not able to vote for their own items because this would allow them to claim what they spent and use it to vote again, essentially meaning they could infinitely vote on their own items. Therefore, we need to make sure the sender is not the item owner. Restricting the owner wallet from voting helps with this, though technically they could just create a different address, so this isn't a complete solution to this problem. The value of the transaction must also be enough to cover the cost of voting.
 
 ```solidity
   function negativeVote(uint itemId, uint weight) public payable {
@@ -222,7 +222,7 @@ Users are not able to vote for their own items because this would allow them to 
 
 Negative votes are slightly different in their distribution. Rather than reward the owner for a poor addition to the list, the funds are distributed to every item except for the one being voted on. This acts as a sort of basic income for all participants.
 
-Note that this will reward items whose total voting weight is more negative than positive, which essentially means that even the worst suggestions will still make a partial income from this mechanism. You may want to innovate with this code to fix this issue by only allowing net positive suggestions to have a basic income. To keep things simple, we will not be concerned with this in this tutorial.
+Note that this will reward items whose total voting weight is more negative than positive, which essentially means that even the worst suggestions will still make a partial income from this mechanism. You may want to innovate with this code to fix this issue by only allowing net positive suggestions to have a basic income. To keep things simple, we will not dive into that topic in this tutorial.
 
 ```solidity
   function claim(uint itemId) public {
@@ -240,9 +240,9 @@ And there we go! Our smart contract is finished. Now let's learn how to deploy i
 
 # Compiling and deploying with Truffle
 
-We'll need to compile our contracts before we can use them. We can do this with the Truffle cli tool we installed earlier.
+We'll need to compile our contracts before we can use them. We can do this with the Truffle CLI tool we installed earlier.
 
-```bash
+```text
 truffle compile
 ```
 
@@ -262,7 +262,7 @@ module.exports = function (deployer) {
 }
 ```
 
-The Truffle cli will use this file later to deploy our `QuadraticVoting` contract.
+The Truffle CLI will use this file later to deploy our `QuadraticVoting` contract.
 
 Edit the `truffle-config.js` file to add the network.
 
@@ -306,21 +306,21 @@ module.exports = {
 }
 ```
 
-We'll need to create an account [here](https://rpc.maticvigil.com/) to have a quota for the RPC. Create an App and replace `{APP_ID}` in the config with the App Id.
+We'll need to create an account [here](https://rpc.maticvigil.com/) to have a quota for the RPC. Create an App and replace `{APP_ID}` in the config with the App Id. You can alternatively use [DataHub](https://datahub.figment.io).
 
-Make sure to install the HD wallet provider.
+Make sure to install the HD wallet provider class from Truffle, so we can supply a mnemonic to sign the deployment transaction.
 
-```bash
+```text
 yarn add -D @truffle/hdwallet-provider
 ```
 
-In order to publish contracts to the blockchain we will need to pay the gas fees. Get testnet MATIC from the [Mumbai faucet](https://faucet.polygon.technology/) by inputting your wallet address.
+In order to publish contracts to the blockchain we will need to pay the gas fees. Get testnet MATIC from the [Mumbai faucet](https://faucet.polygon.technology/) by inputting your wallet address. Small warning - due to an issue with the faucet, you may encounter an error the first few times you attempt to confirm the transaction.
 
 Export your private key from MetaMask and paste it in a `.secret` file. This will be used as the `mnemonic` variable in the config.
 
 Now we can deploy our contract to Polygon.
 
-```bash
+```text
 truffle migrate --network matic
 ```
 
@@ -386,7 +386,7 @@ You may write additional tests for the remaining smart contract functions if you
 
 Spin up Ganache to run our tests on a local development blockchain.
 
-```bash
+```text
 truffle test
 ```
 
@@ -396,11 +396,11 @@ You should see similar output.
 
 # Communicating with the smart contract with Web3
 
-Now we'll be using Web3 to communicate with our smart contracts from JavaScript.
+Now we'll be using web3.js to communicate with our smart contracts from JavaScript.
 
 Install the web3 package.
 
-```bash
+```text
 yarn add web3
 ```
 
@@ -415,6 +415,7 @@ let contract
 let accounts
 let loaded = false
 
+// This semicolon is needed or the above statement will cause this to be read as "loaded = false(..)()"
 ;(async () => {
   if (window.ethereum) {
     web3 = new Web3(window.ethereum)
@@ -439,9 +440,11 @@ let loaded = false
 The anonymous function allows us to asynchronously define the following variables when the web app is loaded:
 
 - `web3`: An instance of the imported `Web3` class which allows us to interact with the Ethereum blockchain.
-- `contract`: An instance of our QuadraticVoting contract which allows us to use its methods and events.
+- `contract`: An instance of our `QuadraticVoting` contract which allows us to use its methods and events.
 - `accounts`: List of our client's Ethereum account addresses.
 - `loaded`: Tells our front-end it's safe to call contract functions.
+
+Next we will add some helper functions to `quadratic-voting.js`.
 
 ```js
 export function isReady() {
@@ -546,7 +549,7 @@ We'll need to add a few things to our `quadratic-voting.js` file to add support 
 
 To begin, add the IPFS package.
 
-```bash
+```text
 yarn add ipfs-core
 ```
 
@@ -859,7 +862,7 @@ Our last step will be styling our Vue components to make the app look prettier.
 
 We'll need the following packages to style our components with Tailwind CSS.
 
-```bash
+```text
 yarn add -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9 postcss-loader
 ```
 
@@ -1051,7 +1054,7 @@ We're done! Our app should now have a much better appearance.
 
 # Conclusion
 
-Congratulations! After completing this tutorial, you should now know how to create a smart contract in Solidity, interact with smart contracts using Web3, deploy contracts to the Polygon testnet and build a front-end with Vue/Tailwind. You are now a full stack dApp developer.
+Congratulations! After completing this tutorial, you should now know how to create a smart contract in Solidity, interact with smart contracts using Web3, deploy contracts to the Polygon testnet and build a front-end with Vue/Tailwind. You are now on your way to becoming a full stack dApp developer.
 
 # About the author
 
