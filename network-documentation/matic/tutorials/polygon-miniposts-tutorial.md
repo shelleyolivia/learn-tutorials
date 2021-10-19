@@ -13,8 +13,6 @@ The smart contract is designed for educational purposes, don’t use it in produ
 
 # Requirements
 
-You will need the following software on your computer to build this dApp:
-
 - [Tutorial’s Github repo](https://github.com/aeither/miniblog)
 - [Remix Ethereum](https://remix.ethereum.org/) Browser solidity editor
 - [Metamask](https://metamask.io/) Browser extension
