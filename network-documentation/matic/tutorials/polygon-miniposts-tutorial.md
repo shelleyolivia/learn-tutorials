@@ -1,10 +1,10 @@
 # Introduction
 
-In this tutorial, we will build a simple blogging website on Polygon(Matic). Fundamental knowledge of programming is recommended to follow the tutorial properly.
+In this tutorial, you will learn how to build a simple blogging website on Polygon (Matic). The dapp allows users to visualize their name, biography and the feed of all the posts. The user can also publish posts.
 
-We will see elemental usage of solidity. The most popular smart contract programming language. For the frontend, we will use Reactjs.
+We will learn some basic elements of solidity such as mapping or struct and how to deploy it on the Polygon Mumbai test network. For the frontend, we will use Reactjs.
 
-The smart contract is designed for educational purposes, don’t use it in production.
+\*The smart contract is designed for educational purposes, don’t use it in production.
 
 # Prerequisites
 
