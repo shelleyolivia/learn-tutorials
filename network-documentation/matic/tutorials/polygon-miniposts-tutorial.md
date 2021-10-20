@@ -2,17 +2,17 @@
 
 In this tutorial, you will learn how to build a simple blogging website on Polygon (Matic). The dapp allows users to visualize their name, biography and the feed of all the posts. The user can also publish posts.
 
-We will learn some basic elements of solidity such as mapping or struct and how to deploy it on the Polygon Mumbai test network. For the frontend, we will use Reactjs.
+We will learn some basic elements of Solidity such as mapping or struct and how to deploy it on the Polygon Mumbai test network. For the frontend, we will use Reactjs.
 
 # Prerequisites
 
 - [Polygon pathway](https://learn.figment.io/protocols/polygon)
-- Familiarity with Metamask, Solidity and Javascript is recommended.
+- Familiarity with Metamask, Solidity and Javascript are recommended.
 
 # Requirements
 
 - [Tutorial’s Github repo](https://github.com/aeither/miniblog)
-- [Remix Ethereum](https://remix.ethereum.org/) Browser solidity editor
+- [Remix Ethereum](https://remix.ethereum.org/) Browser Solidity editor
 - [Metamask](https://metamask.io/) Browser extension
 - [Code Editor](https://code.visualstudio.com/download) For example VS Code
 - [GitHub account](https://github.com/)
@@ -30,8 +30,8 @@ When this is complete, check your Metamask & you'll see some MATIC tokens there.
 The first thing that we are going to accomplish is to create a working smart contract that allows everyone to post a twitter-like post. Whoever could interact with the smart contract to get their message published where each message has its id.
 
 Open your browser and go to [Remix](https://remix.ethereum.org/)
-This is one of the best online editors for development with solidity. You will see several folders that you can delete as we won't use them.
-Press the **Create New File Icon** and create a new solidity file miniblog.sol at the root.
+This is one of the best online editors for development with Solidity. You will see several folders that you can delete as we won't use them.
+Press the **Create New File Icon** and create a new Solidity file miniblog.sol at the root.
 
 ![](../../../.gitbook/assets/miniposts01.png)
 
@@ -429,7 +429,7 @@ Awesome. We made it. Now you have a mini post web app from where you can bootstr
 
 # Conclusion
 
-In this tutorial we made a mini posts web3 application. We learn the basics of solidity: how to create a smart contract, how to deploy, how to interact, mapping, struct and event. Then we built the frontend where we see how to interact with the contract with a web app. We have played a little with web3js from Moralis.
+In this tutorial we made a mini posts web3 application. We learn the basics of Solidity: how to create a smart contract, how to deploy, how to interact, mapping, struct and event. Then we built the frontend where we see how to interact with the contract with a web app. We have played a little with web3js from Moralis.
 
 # About the Author
 
