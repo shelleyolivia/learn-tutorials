@@ -4,12 +4,10 @@ In this tutorial, you will learn how to build a simple blogging website on Polyg
 
 We will learn some basic elements of solidity such as mapping or struct and how to deploy it on the Polygon Mumbai test network. For the frontend, we will use Reactjs.
 
-\*The smart contract is designed for educational purposes, don’t use it in production.
-
 # Prerequisites
 
-- Basic knowledge of web programming
-- Desire to learn and jump into the wonderful world of web3
+- [Polygon pathway](https://learn.figment.io/protocols/polygon)
+- Familiarity with Metamask, Solidity and Javascript is recommended.
 
 # Requirements
 
