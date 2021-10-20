@@ -531,15 +531,17 @@ When choosing to deploy, you can use Solana's Devnet or choose Figment's DataHub
 
 To use Figment's Datahub, Go to https://datahub.figment.io -> Make an account (It's free) -> Select Solana from Protocols -> Get the API Key and endpoint on your dashboard. Now you can use the same here in this tutorial by setting the cluster to Figment's datahub!
 
-This first run through, the deploy script uses `anchor deploy` whereas in subsequent deploys with the same program, it will use `anchor upgrade` with all the required flags included for convenience:
+You may want to consider Figment's endpoint, as Public endpoints, for example native Devnet, have some limitations like rate limits, latency, per day req. limit/quota etc. However, DataHub resolves all these problems and breaks barriers that devs come across while scaling their projects. I myself ran into a couple of these issues working with Devnet, so it's a valid considering for you too.
+
+The first run through, the deploy script uses `anchor deploy`, whereas in _subsequent_ deploys with the same program, it will use `anchor upgrade` with all the required flags included for convenience:
 
 ```js
 // ./deploy.js
 
 	method = [
 		"upgrade",
-		"target/deploy/solblog.so",
-		"--program-id",
+		"target/deploy/solblog.so", // specify the .so file
+		"--program-id", // specify the program to upgrade -- you must have the authority though!
 		programId,
 	]
 
@@ -550,7 +552,7 @@ This first run through, the deploy script uses `anchor deploy` whereas in subseq
         [
             ...method,
 
-	// ... etc
+	// ... etc, same as deploy
 
 ```
 
@@ -899,12 +901,15 @@ The BlogAccount key is created on the fly during intilization, but if there was 
 In the end, navigating to `./app` and running `npm run dev` will start up the Svelte App and get you to the home screen.
 
 ```bash
-
-$   npm run dev
-
+$   cd ./app
+$   npm run dev # or npm run dev3654 if using the exact tutorial code
 ```
 
+Alternatively, in MS VS Code IDE you can also just click in the "npm" tab to "run dev".
+
 Open up your browser to `http://localhost:3000` and play around!
+
+[![](../../../.gitbook/assets/tutorial-graphics/solblog.gif)]('https://youtu.be/k_cVwvXHO4U')
 
 # Conclusion
 
