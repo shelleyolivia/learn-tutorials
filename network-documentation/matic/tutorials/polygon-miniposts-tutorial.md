@@ -31,20 +31,20 @@ The first thing that we are going to accomplish is to create a working smart con
 
 Open your browser and go to [Remix](https://remix.ethereum.org/)
 This is one of the best online editors for development with Solidity. You will see several folders that you can delete as we won't use them.
-Press the **Create New File Icon** and create a new Solidity file miniblog.sol at the root.
+Press the **Create New File** icon to create a new Solidity file named `miniblog.sol` at the root.
 
 ![](../../../.gitbook/assets/miniposts01.png)
 
-At the time of writing this tutorial is advisable to use a version above `0.8.0`. Too new could contain unknown issues and not too old with deprecated code.
+At the time of writing this tutorial it is advisable to use a Solidity version above 0.8.0. A cutting edge version could contain unknown issues and older versions would force us to deal with old and deprecated code.
 
-```javascript
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 ```
 
-We need 2 `struct` to define the structure of the data we want to store. The first one will contain the user information and the second one the post information.
+We need two structs to define the structure of the data we want to store. The first one will contain the user information and the second one the post information.
 
-```javascript
+```solidity
 contract MiniBlog {
 
    struct User {
@@ -65,22 +65,32 @@ contract MiniBlog {
 
 Mapping in Solidity acts like a hashtable or dictionary in any other language. These are used to store the data as key-value pairs. We create 2 `mapping`, an `address` to User data and a postId to post Info.
 
-```javascript
+```solidity
   mapping (address => User) public users;
   mapping (uint256 => Post) public posts;
 ```
 
-With the mapping, we can access post data such as title or content with the id as key. For example posts[2].title.
+With the mapping, we can access post data such as title or content with the id as key. For example `posts[2].title`.
 
-Declare the post id at the beginning of the contract, above structs the latest post id that starts from 0 and increments with each new post.
+Add the post id that we can increment and assign to each new post.
 
-```javascript
-   uint256 public latestPostId = 0;
+```solidity
+contract MiniBlog {
+  // Add latestPostId Here
+  uint256 public latestPostId = 0;
+
+  struct User {
+    string username;
+    string bio;
+    uint256[] postIds;
+    }
+  // ...
+}
 ```
 
 Below mapping we create a function that takes title and content as parameter
 
-```javascript
+```solidity
    function createPost(string memory title, string memory content) public {
        latestPostId++;
 
@@ -89,11 +99,11 @@ Below mapping we create a function that takes title and content as parameter
    }
 ```
 
-When the function is called It creates a new post and pushes into a unique incremental Id. Then we push the id of the post to the caller so later we can track all the posts created by one writer.
+When the function is called, it creates a new post and pushes a unique incremental Id into the array used in the mapping for posts. Then we push the id of the post to the users mapping for the caller of the function (msg.sender) so later we can track all the posts created by that writer.
 
 With require, we can restrict to only the writer of the post who can edit his posts.
 
-```javascript
+```solidity
  function modifyPostTitle(uint256 postId, string memory title) public {
    require(msg.sender == posts[postId].author, "Only the author can modify");
 
@@ -109,7 +119,7 @@ With require, we can restrict to only the writer of the post who can edit his po
 
 The caller can customize his profile by changing the username and the biography.
 
-```javascript
+```solidity
  function updateUsername(string memory username) public {
    users[msg.sender].username = username;
  }
@@ -121,7 +131,7 @@ The caller can customize his profile by changing the username and the biography.
 
 To get the posts data we have created 2 functions. One gets an array of all the post Ids created by the same address. Another to get the post Id content. For the `getPostById`, we can access directly through the mapping posts variable as we declared it as `public`.
 
-```javascript
+```solidity
 function getPostIdsByAuthor(address author)
    public
    view
@@ -142,7 +152,7 @@ function getPostIdsByAuthor(address author)
 
 In Solidity, events are dispatched signals the smart contracts can fire. With the function `createPost`, we can add the `emit` keyword to trigger an event.
 
-```javascript
+```solidity
  function createPost(string memory title, string memory content) public {
    latestPostId++;
 
@@ -153,15 +163,15 @@ In Solidity, events are dispatched signals the smart contracts can fire. With th
  }
 ```
 
-And we declare the event to be triggered. You can see the events of the smart contracts in etherscan, events section. Example: https://etherscan.io/address/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984#events
+We declare the event to be triggered. you can see the events of the smart contracts on Etherscan, in the events section. Example: https://etherscan.io/address/0x1f9840a85d5af5bf1d1762f925bdaddc4201f984#events
 
-```javascript
+```solidity
 event NewPost(address indexed author, uint256 postId, string title);
 ```
 
-Now we should have the following contract.
+Now putting it all together, we should have the following contract:
 
-```javascript
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -234,20 +244,20 @@ contract MiniBlog {
 }
 ```
 
-In Remix go to Solidity Compiler and hit the blue button with compiler 0.8.0
+On the Remix site, go to Solidity Compiler and click the blue button with compiler 0.8.0:
 
 ![](../../../.gitbook/assets/miniposts02.png)
 
-We should successfully compile the smart contract. There would be a green icon in the left tab. Go to Deploy & Run Transactions. Make sure the Environment is set to JavaScript VM. Deploy the contract.
-We should see the contract under deployed contracts.
+This should successfully compile the smart contract. There would be a green icon in the left tab. Go to **Deploy & Run Transactions**. Make sure the Environment is set to **JavaScript VM**. Deploy the contract.
+You should now see the contract under deployed contracts.
 
 ![](../../../.gitbook/assets/miniposts03.png)
 
-We can play with the contract. Update your username, create several posts, change them and check the result by getting the posts.
+You can play with the contract. Update your username, create several posts, change them and check the result by getting the posts.
 
 Outstanding! We have created a mini-blogging smart contract. Now let’s build the frontend for this.
 
-# Create the Front end
+# Create the frontend
 
 We are going to use a created repository to make it easier to follow.
 In this repository there are 3 branches, you can checkout from 1 to 3 to see the progress and changes while following this tutorial.
@@ -256,13 +266,14 @@ In this repository there are 3 branches, you can checkout from 1 to 3 to see the
 
 Clone the repository by running git clone in your terminal.
 
-```sh
+```text
 git clone https://github.com/aeither/miniblog
+cd miniblog
 ```
 
-Checkout to the first branch with.
+Checkout to the first branch with the command:
 
-```sh
+```text
 git checkout 1-web3-signin
 ```
 
@@ -318,7 +329,7 @@ In the compiler, you can go to the end and copy the ABI. an application binary i
 
 Back to your editor, inside the src folder, we create an abi.json file and paste the ABI.
 
-Get the contract address from deployed contracts in remix or https://mumbai.polygonscan.com/
+Get the contract address from deployed contracts in Remix or https://mumbai.polygonscan.com/
 
 ![](../../../.gitbook/assets/miniposts08.png)
 
@@ -377,7 +388,7 @@ Inside `initContract` we enabled the web3 provider and created a new contract. `
 
 Check out the third branch to learn more about how to interact with the contract.
 
-We installed **react-hook-form** so we can use it inside `NewPostForm`. Run `Yarn` to install it or `Yarn add react-hook-form`.
+We added **react-hook-form** as a dependency already so we can use it inside `NewPostForm`. Run `yarn` to install it or `yarn add react-hook-form` if it is not already installed in your project.
 
 ```tsx
 <form onSubmit={handleSubmit(onSubmit)}>
@@ -413,7 +424,7 @@ This time as you can observe, we use send instead of call. This transaction shou
 
 Now let’s see the result. \*Make sure you are in Mumbai. Make sure you have the dependencies install with `yarn` or `npm install` and run with `yarn dev`.
 
-We should see the homepage in localhost:3000. Authenticate with your Metamask extension.
+We should be able to see the homepage by visiting http://localhost:3000. Authenticate with your Metamask extension.
 
 ![](../../../.gitbook/assets/miniposts09.png)
 
@@ -429,7 +440,7 @@ Awesome. We made it. Now you have a mini post web app from where you can bootstr
 
 # Conclusion
 
-In this tutorial we made a mini posts web3 application. We learn the basics of Solidity: how to create a smart contract, how to deploy, how to interact, mapping, struct and event. Then we built the frontend where we see how to interact with the contract with a web app. We have played a little with web3js from Moralis.
+In this tutorial we made a mini posts Web 3 application. We learned some of the basics of Solidity: How to create a smart contract, how to deploy it, how to interact with it, mapping, struct and events. Then we built the frontend where we see how to interact with the contract with a web app. We have played a little with web3js from Moralis.
 
 # About the Author
 
