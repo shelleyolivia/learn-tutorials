@@ -2,7 +2,7 @@
 
 # Explaining Blockchain with The Simpsons
 
-## Introduction
+# Introduction
 
 If you’re over 30’s I bet you’re familiar with The Simpsons sitcom, right?
 
@@ -66,9 +66,9 @@ This high-level analogy explains **_transaction validation_** and **_Consensus M
 
 SUMMARY: **This episode taught you important blockchain concepts, like what is a blockchain, what is a transaction and how consensus methods work.**
 
-## SOLANA'S INNOVATIONS
+# SOLANA'S INNOVATIONS
 
-# Briefing
+## Briefing
 
 **SOLANA** ecosystem has taken the blockchain world by storm, bringing some amazing innovations which empower SOLANA to achieve performance and security like never before.
 
@@ -277,7 +277,7 @@ This allows validators not to have the obligation to have the full ledger stored
 
 That’s a high level of how archivers nodes work in SOLANA’s ecosystem.
 
-# **About The Author**
+# About the Author
 
 Hey, my name is Jonathan Ferreira, and I'm a software developer in constant evolution, seeking knowledge acquiring and sharing. Learning and implementing blockchain technology, and specially intereseted about Solana ecosystem.
 
@@ -285,7 +285,7 @@ My GitHub: [https://github.com/Jonathansoufer](https://https://github.com/Jonath
 
 In case you found any misinformation in the article or had any suggestions to improve the article please comment it or you can find me on Twitter: [@JSoufer](https://twitter.com/JSoufer).
 
-# **References**
+# References
 
 Solana's Medium: [7 Innovations that maskes Solana the First Web Scale Blockchain - Medium!](https://medium.com/solana-labs/7-innovations-that-make-solana-the-first-web-scale-blockchain-ddc50b1defda)
 
