@@ -921,7 +921,7 @@ The blog program is a very basic smart contract. In what ways could you make it 
 
 # About the Author
 
-Doug Anderson is @DougAnderson444 on the internet. A computer engineer and retired Naval Engineering Officer in the Royal Canadian Navy, he has always held a passion for building cutting edge technologies on the internet. He has an innate ability to dissect, diagram, and diagnose systems and teach them to others in an easy to understand fashion. Follow him on Twitter and elsewhere under @DougAnderson444
+This tutorial was written by Doug Anderson. Doug is a computer engineer and retired Naval Engineering Officer in the Royal Canadian Navy. Get in touch with Doug on twitter and elsewhere under @DougAnderson444
 
 # References
 
