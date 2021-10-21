@@ -925,9 +925,9 @@ This tutorial was written by Doug Anderson. Doug is a computer engineer and reti
 
 # References
 
-Web3.js Library https://solana-labs.github.io/solana-web3.js/
-Anchor Website https://project-serum.github.io/anchor/
-Anchor Rust Docs https://docs.rs/anchor-lang/0.16.1/anchor_lang/
-Credit to Decentology DappStarter for ideas on how to programmatically deploy a Solana program https://dappstarter.decentology.com/
-https://docs.figment.io/network-documentation/solana/rpc-and-rest-api
-https://datahub.figment.io/
+-   Web3.js Library https://solana-labs.github.io/solana-web3.js/
+-   Anchor Website https://project-serum.github.io/anchor/
+-   Anchor Rust Docs https://docs.rs/anchor-lang/0.16.1/anchor_lang/
+-   Credit to Decentology DappStarter for ideas on how to programmatically deploy a Solana program https://dappstarter.decentology.com/
+-   Figment Solana RPC API https://docs.figment.io/network-documentation/solana/rpc-and-rest-api
+-   Figment DataHub https://datahub.figment.io/
