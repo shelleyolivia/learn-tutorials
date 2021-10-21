@@ -8,8 +8,6 @@ A simple blog platform, powered by Solana with a SvelteKit front end.
 
 YouTube video on building the Rust portion:
 
-[![](../../../.gitbook/assets/tutorial-graphics/youtub.png)]('https://youtu.be/w-n87Aq3f8k')
-
 {% embed url="https://youtu.be/w-n87Aq3f8k" caption="SolBlog - Solana blog platform built with Anchor" %}
 
 # Introduction
