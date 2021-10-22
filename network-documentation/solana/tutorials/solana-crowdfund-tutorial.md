@@ -1,14 +1,17 @@
 # Introduction
-In this tutorial, we will discuss how to create a crowd-funding platform on the Solana blockchain. This tutorial only assumes the reader to know some basic knowledge of [React](https://reactjs.org/) app development. I will be explaining some basics of Rust lang, how to write the Solana program and how to invoke instructions from the front-end.
+We are going to make a CrowdFunding platform like GoFundMe, Kickstarter, and Indiegogo. Our DApp will let people create campaings, Donate SOL to existing campaings and payout to the compaign creator. 
+We are going to make a solana program and connect it with our front-end application.
+
 
 # Prerequisites
 - React
 - Javascript
 
 # Requirements
-- [Git](https://git-scm.com/downloads)
-- [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool)
-
+- We'll need Git in this tutorial, install it from [HERE](https://git-scm.com/downloads).
+- We'll need Solana CLI in this tutorial, install it from [HERE](https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool).
+- We'll need Rust Toolchain in this tutorial, install it from [HERE](https://www.rust-lang.org/tools/install).
+- We'll need Node.js in this tutorial, install it from [HERE](https://nodejs.org/en/download/).
 
 > If you already have good knowledge of Rust programming language. You can skip the `Introduction to Rust.` I would still recommend having a quick look at all the code blocks.
 
