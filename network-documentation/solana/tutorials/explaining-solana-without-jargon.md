@@ -1,4 +1,4 @@
-# Explaining Solana and its Innovations without technical jargon
+# Introduction
 
 Think of a world where people can pay each other without the help of a bank or a third-party service. Users' data is not getting sold for commercial purposes. Decentralized markets exist where users and producers interact and make P2P payments without unfair market owner commissions.
 
@@ -35,7 +35,7 @@ There are several key innovations Solana has introduced to the blockchain world.
 7. Pipelining
 8. Cloudbreak
 
-## 1 - Proof of History
+# Proof of History
 
 Proof of History (PoH) is the core innovation of Solana. For a blockchain to work, participant nodes need to reach an agreement on time. Traditional blockchains like Bitcoin function by proof of work. Solana has revolutionized their consensus model, called PoH.
 
@@ -74,7 +74,7 @@ An adorable story to be sure, but let's map its elements to PoH:
 - The 100$ bill is equivalent to a referenced hash from the ledger
 - Analyzing the bill in a lab is equivalent to a Validator node validating the block
 
-## 2. Tower BFT
+# Tower BFT
 
 The Byzantine Generals is an old problem discussing the issue of deciding upon a solution for a question where there is more than one solution or proposal with a different number of votes for each solution.
 
@@ -136,7 +136,7 @@ This mechanism sounds similar to what happens with Proof of Stake on other block
 
 Another advantage of this approach is that every participant in the network can compute the timeouts for every other participant without any P2P communications. This makes Tower BFT asynchronous.
 
-## 3. Turbine
+# Turbine
 
 ![turbine.jpg](../../../.gitbook/assets/turbine.jpg)
 Is it just me or the man in the meme looks like the CEO of Solana Anatoly Yakovenko 😂
@@ -203,7 +203,7 @@ If the Leader sends 30% of packets as erasure codes, then the network can drop a
 
 ![turbine - erasure codes.jpg](../../../.gitbook/assets/turbine_-_erasure_codes.jpg)
 
-## 4. Gulf Stream
+# Gulf Stream
 
 Gulf stream is Solana’s mempool management solution. A mempool (i.e. memory pool) is a set of transactions which haven’t yet been processed in the blockchain and are waiting to be picked up by the network.
 
@@ -234,7 +234,7 @@ So that all being said what distinguishes Solana in terms of speed under heavy l
 
 These two privileges together help the network to degrade and keep working even under a huge DoS attack.
 
-## 5. Archivers
+# Archivers
 
 When running at full capacity, Solana will produce 1 Gigabit per second. In just 1024 seconds (~17 minutes), the data produced would be 1 Terrabit and in a year it would catch up to 4 Petabytes (32 Petabits). A tremendous amount of data to be stored!
 
@@ -253,7 +253,7 @@ Archivers signal to the network that they have X bytes of space available for st
 
 Occasionally, the network will ask/challenge the archivers to prove they’re doing their job of storing data and at this point, archivers should complete PoRep. To reward archivers they would get 3% of inflation for their efforts.
 
-## 6. Sea Level
+# Sealevel
 
 Sealevel is Solana’s runtime for smart contracts. Running smart contracts in parallel and using all available computational resources of validators efficiently makes the Sealevel as one of the core innovations of Solana.
 
@@ -285,7 +285,7 @@ Now considering the previous step in which Sealevel classified instructions by p
 
 Sealevel does an impressive amount of optimization and again takes Solana one step further towards claiming the top spot in comparison to other blockchains with single-threaded runtimes like Ethereum.
 
-## 7. Pipelining
+# Pipelining
 
 For processing a transaction an optimization system has been designed which enables the validator or the leader node to keep working on incoming transactions without waiting for previous ones to be processed completely.
 
@@ -321,7 +321,7 @@ In the kitchen example, cooking may be the slowest step and in transaction proce
 
 A node in the Solana network runs two pipelined processes, a transaction processing unit (TPU) when it acts as a leader and a transaction validation unit (TVU) when it acts as a validator. The hardware being used for processes and network input and output is the same but the process happening in each pipeline is different.
 
-## 8. Cloud Break
+# Cloud Break
 
 Some blockchains like Ethereum use the technique of sharding to scale the network, which means the blockchain's database gets split. This way the load of transactions gets spread over these smaller chains (shards).
 
@@ -345,9 +345,9 @@ in case you found any misinformation in the article or had any suggestions to im
 
 # References
 
-bitcoin mempool : [https://www.blockchain.com/charts/mempool-size](https://www.blockchain.com/charts/mempool-size)
+Bitcoin mempool : [https://www.blockchain.com/charts/mempool-size](https://www.blockchain.com/charts/mempool-size)
 
-solanabeach website : [https://solanabeach.io](https://solanabeach.io)
+Solanabeach website : [https://solanabeach.io](https://solanabeach.io)
 
 An overview to solana ecosystem on official website: [https://solana.com/ecosystem](https://solana.com/ecosystem)
 
