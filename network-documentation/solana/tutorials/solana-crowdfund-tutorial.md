@@ -454,7 +454,7 @@ struct CampaignDetails {
 We need to derive both BorshSerialize and BorshDeserialize. BorshSerialize is used to convert the struct into an **array of u8**, which is the data we can store in Solana accounts. It is also the data we have in `instruction_data` so we can deserialize that to a struct with the help of `BorshDeserialize`.
 
 
-##### Code: 
+**Code**: 
 At the top of the file import `BorshSerialize` and `BorshDeserialize` from the `Borsh` Crate.
 
 ```rust
