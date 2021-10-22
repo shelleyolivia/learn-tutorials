@@ -2,6 +2,10 @@
 
 In this tutorial, we will learn how to create a simple blog post dapp on solana blockchain. while build this dapp we will learn how to write Solana rust program, Test the program and finally integrate the program with React frontend.
 
+**Final Dapp**
+
+<img src="../../../.gitbook/assets/sblog_final_dapp.gif" alt="sblog dapp" width="800" >
+
 # Prerequisites
 
 This tutorial assumes that you have,
