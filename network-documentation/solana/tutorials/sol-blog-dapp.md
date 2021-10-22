@@ -840,7 +840,7 @@ fs.writeFileSync("./app/src/idl.json", JSON.stringify(blog_idl, null, 2));
 Next, install dependencies.
 
 ```
-npm i @Solana/wallet-adapter-react @Solana/wallet-adapter-wallets @Solana/web3.js
+npm i @solana/wallet-adapter-react @solana/wallet-adapter-wallets @solana/web3.js
 ```
 
 Next, open app/src/App.js and update it with the following:
@@ -849,8 +849,8 @@ Next, open app/src/App.js and update it with the following:
 import {
   ConnectionProvider,
   WalletProvider,
-} from "@Solana/wallet-adapter-react";
-import { getPhantomWallet } from "@Solana/wallet-adapter-wallets";
+} from "@solana/wallet-adapter-react";
+import { getPhantomWallet } from "@solana/wallet-adapter-wallets";
 import { Home } from "./home";
 
 const wallets = [getPhantomWallet()];
@@ -882,8 +882,8 @@ create button inside Home.js component with `onConnect` onClick handler like thi
 Then create `onConnect` function that handles the click event of connect button.
 
 ```js
-import { WalletName } from "@Solana/wallet-adapter-wallets";
-import { useWallet } from "@Solana/wallet-adapter-react";
+import { WalletName } from "@solana/wallet-adapter-wallets";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 // inside react component
 const { select } = useWallet();
@@ -927,7 +927,7 @@ Now we will initialize the blog. Initializing blog is one-time process. Let's cr
 
 ```js
 import { Program } from "@project-serum/anchor";
-import { Keypair, PublicKey, SystemProgram } from "@Solana/web3.js";
+import { Keypair, PublicKey, SystemProgram } from "@solana/web3.js";
 import idl from "./idl.json";
 
 const PROGRAM_KEY = new PublicKey(idl.metadata.address);
@@ -959,7 +959,7 @@ Now the ui part of this, we will create a temporary button to call the initBlog 
   import {
     useAnchorWallet,
     useConnection
-  } from "@Solana/wallet-adapter-react";
+  } from "@solana/wallet-adapter-react";
   import idl from './idl.json'
 
   const PROGRAM_KEY = new PublicKey(idl.metadata.address);
@@ -1041,7 +1041,7 @@ if you remember the initBlog function there we have randomly generated Keypair b
 so we will create seed by combining `PROGRAM_KEY` and users `wallet_key` so it will create unique Keypair.
 
 ```js
-import { Keypair, PublicKey, SystemProgram } from "@Solana/web3.js";
+import { Keypair, PublicKey, SystemProgram } from "@solana/web3.js";
 import { Program, Provider } from "@project-serum/anchor";
 
 const genUserKey = (PROGRAM_KEY, walletKey) => {
