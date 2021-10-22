@@ -1,6 +1,6 @@
 # Introduction
 
-In this tutorial, we will learn how to create a simple blog post dapp on solana blockchain. while build this dapp we will learn how to write Solana rust program, Test the program and finally integrate the program with React frontend.
+In this tutorial, we will learn how to create a simple blog post dapp on Solana blockchain. while building this dapp we will learn how to write the Solana rust program, Test the program and finally integrate the program with React frontend.
 
 **Final Dapp**
 
@@ -12,83 +12,83 @@ This tutorial assumes that you have,
 
 - Basic understanding of React.js
 - Basic understanding of Rust
-- completed [Solana 101 Pathway](https://learn.figment.io/protocols/solana)
+- completed [Solana 101 Pathway](https://learn.figment.io/protocols/Solana)
 
 ## Requirements
 
-This tutorial covers how to build a dapp on Solana, but does not go through installation of individual dependencies(as it assumes you already completed the Solana 101 Pathway on Figment learn).
+This tutorial covers how to build a dapp on the Solana, but does not go through the installation of individual dependencies(as it assumes you already completed the Solana 101 Pathway on Figment learn).
 
 - **Anchor Framework -**
-  Anchor is framework use for solana dapp development, it provides DSL to interact with the solana program. If you are familiar with developing in Solidity, Truffle or Hardhat then consider the DSL is equivalent to ABI.
+  Anchor is a framework used for Solana dapp development, It provides DSL to interact with the Solana program. If you are familiar with developing in Solidity, Truffle or Hardhat then consider the DSL is equivalent to ABI.
   Follow the guide to install [Anchor](https://project-serum.github.io/anchor/getting-started/installation.html#install-rust) along with Rust and Solana cli.
 
 - **React.js -**
-  To interact with our solana program we will create client side app with React.js.
+  To interact with our Solana program we will create client-side app with React.js.
 
 - **Phantom Wallet -**
-  Phantom is a digital wallet which lets you connect your crypto account to any dapp that build on Solana blockchain. We will you Phantom wallet to connect to our Blog Dapp.
+  Phantom is a digital wallet that lets you connect your crypto account to any dapp that build on the Solana blockchain. We will use Phantom wallet to connect to our Blog Dapp.
 
 - **Vs code -**
-  I will recommend using vscode with rust analyzer extension as it has great support for Rust language.
+  I will recommend using vscode with rust analyzer extension as it has a great support for Rust language.
 
 # Solana Programming model
 
-**Program -** Solana is fast and low cost blockchain, to achieve the speed and low cost solana has slight different programming model. Solana uses Rust programing language to create programs, as you notice we are keep saying solana program instead of solana smart contract from choosing programing language to naming concepts solana is different, in solana world smart contracts are known as Solana Programs.
+**Program -** Solana is a fast and low-cost blockchain, to achieve speed and low-cost Solana has slight different programming model. Solana uses Rust programing language to create programs as, you notice we keep saying Solana program instead of Solana smart contract from choosing programing language to naming concepts Solana is different, in Solana world smart contracts are known as Solana Programs.
 
-**Account -** Solana program are stateless so if you want to store state you need to use an account for it and the accounts are fixed in size. once the account is initialized with the size, you cannot change the size latter So we have to design our application by keeping this is mind.
+**Account -** Solana programs are stateless so, if you want to store state, you need to use an account for it and accounts are fixed in size. Once the account is initialized with the size, you cannot change the size later So we have to design our application by keeping this in mind.
 
-**Rent -** on Solana you need to pay rent regularly to store data on blockchain according to the space the data requires,
-the account can be made rent exempt (means you wont have to pay rent) if its balance is higher than the some threshold that depends on the space its consuming.
+**Rent -** on Solana, you need to pay rent regularly to store data on the blockchain according to the space the data requires,
+The account can be made rent exempt (means you won't have to pay rent) if its balance is higher than some threshold that depends on the space it is consuming.
 
 ## Application design decision
 
-As we learn we need an account to create our blog dapp that has fixed size, so if we create a single account with X size and start pushing posts inside that account eventually the account exceeds its size limit and we wont be able to create new posts.
-if you know solidity, in solidity we create a dynamic array and push as many items to it as we want. but in solana our accounts will be fixed in sized so we have to find a solution this problem.
+As we have learned, we need an account to create our blog dapp that has a fixed size so, if we create a single account with X size and start pushing posts inside that account, eventually the account will exceeds its size limit and we won't be able to create new posts.
+If you know solidity, In solidity we create a dynamic array and push as many items to it as we want. but in Solana our accounts will be fixed in size so we have to find a solution to this problem.
 
-- **Solution one -** What if we create extremely large size account like in gigabytes? on solana we need to pay rent of account according to its size so if our account grows in size account rent will grow along with it.
+- **Solution one -** What if we create an extremely large size account like in gigabytes? on Solana we need to pay rent of an account according to its size so, if our account grows in size the account rent will grow along with it.
 
-- **Solution two -** What if we create multiple accounts and connect them somehow? Yes thats the plan, we will create new account for every single post and create chain of posts linked one after another.
+- **Solution two -** What if we create multiple accounts and connect them somehow? Yes, Thats the plan. we will create a new account for every single post and create a chain of posts linked one after another.
 
-Linked 🤔, yeah you guessed it right we will use LinkedList to connect all the posts.
+Linked 🤔 yeah, you guessed it right. We will use LinkedList to connect all the posts.
 
 ## Setting up Local development
 
-before we start with actual development we learn some Solana CLI commands [docs](https://docs.solana.com/cli/conventions):
+Before we start with actual development. We learn some Solana CLI commands [docs](https://docs.Solana.com/cli/conventions):
 
-to see your current solana configuration use(I assume you have followed Solana 101 Pathway and you have all the cli installation done):
+to see your current Solana configuration use(I assume you have followed Solana 101 Pathway and you have all the CLI installation done):
 
 ```
-solana config get
+Solana config get
 
 # output
-Config File: /Users/user/.config/solana/cli/config.yml
-RPC URL: https://api.devnet.solana.com
-WebSocket URL: wss://api.devnet.solana.com/ (computed)
-Keypair Path: /home/user/.config/solana/id.json
+Config File: /Users/user/.config/Solana/cli/config.yml
+RPC URL: https://api.devnet.Solana.com
+WebSocket URL: wss://api.devnet.Solana.com/ (computed)
+Keypair Path: /home/user/.config/Solana/id.json
 Commitment: confirmed
 ```
 
-your output might have different file paths.
+Your output might have different file paths.
 
 You can check the current wallet address by:
 
 ```
-solana address
+Solana address
 ```
 
-You can the check the balance of your wallet.
+You can check the balance of your wallet.
 
 ```
-solana balance
+Solana balance
 ```
 
-or You can airdrop tokens to your account.
+or, You can airdrop tokens to your account.
 
 ```
-solana airdrop 10
+Solana airdrop 10
 ```
 
-Check balance again and now you should have a balance 10 SOL in your wallet.
+Check balance again. Now you should have a balance of 10 SOL in your wallet.
 
 **Now its time to scaffold our blog app with the help of Anchor CLI:**
 
@@ -112,12 +112,12 @@ The anchor init command creates the following directories:
 Before writing program code update Anchor.toml
 
 ```
-wallet = "your Keypair Path from output of solana config get"
+wallet = "your Keypair Path from the output of Solana config get"
 ```
 
 ## Creating blog program
 
-Now we are ready to start with solana rust program, open up the lib.rs file located inside /program/blog/src/ folder.
+Now we are ready to start with the Solana rust program. Open up the lib.rs file located inside /program/blog/src/ folder.
 
 ```rust
 use anchor_lang::prelude::*;
@@ -136,10 +136,10 @@ pub mod blog {
 pub struct Initialize {}
 ```
 
-This is the basic example of an anchor solana program, there is only one function `initialize` which will be invoke by the client.
+This is the basic example of an anchor Solana program. There is only one function `initialize`, which will be invoked by the client.
 The initialize function has one argument of type context of `Initialize` struct.
 
-Another noticeable thing is `declare_id!`. declare_id! is a macro it defines the program address and used in internal validation, we dont have to think about it too much this will be handle by the Anchor cli.
+Another noticeable thing is `declare_id!`. declare_id! is a macro it defines the program address and is used in internal validation. We don't have to think about it too much. This will be handled by the Anchor CLI.
 
 **Now its time to start declaring states of our blog app.**
 
@@ -166,9 +166,9 @@ post {
 }
 ```
 
-as you have seen the first basic example, we need to create function tha will define out task that we want to perform on program like, init_blog, signup_user, create_post etc.
+As you have seen in the first basic example, we need to create function that will define out a task that we want to perform on a program like, init_blog, signup_user, create_post, etc.
 
-we will start with create our very first function `init_blog`
+we will start with creating our very first function `init_blog`.
 
 ```rust
  pub fn init_blog(ctx: Context<InitBlog>) -> ProgramResult {
@@ -194,20 +194,20 @@ we will start with create our very first function `init_blog`
   }
 ```
 
-as you know every function needs a typed context as first argument, here we have defined `InitBlog` as type of our `init_blog` ctx.
-in ctx type we have define the account we needed to execute the function and account will be provided by the client(caller of the function).
+As you know every function needs a typed context as the first argument, here we have defined `InitBlog` as a type of our `init_blog` ctx.
+In the ctx type we have to define the account and the account will be provided by the client(caller of the function).
 
 in `InitBlog` there are 4 accounts:
 
 - **blog_account**
-  - init attribute to create/initialize new account
-  - space = 8 + 32 + 32, here we are creating new account thats why we have to specify account size, we will see later how to calculate the account size.
-  - payer = authority, authority is an one of account provided by client basically authority is rent payer of blog_account
+  - init attribute to create/initialize a new account
+  - space = 8 + 32 + 32. Here, We are creating a new account, that's why we have to specify account size. We will see later how to calculate the account size.
+  - payer = authority. authority is one of the accounts provided by the client. Authority is rent payer of blog_account.
 - **genesis_post_account**
-  - we are also creating this account thats why the init, payer and space attributes are there
-  - to create LinkedList we initialize the blog account with the very first post, so we can link it to the next post.
+  - We are also creating this account, that's why the init, payer, and space attributes are there
+  - To create LinkedList we initialize the blog account with the very first post so, we can link it to the next post.
 - authority
-  - program signer, creator of blog.
+  - program signer is a creator of the blog.
 - system_program
   - required by the runtime for creating the account.
 
@@ -228,9 +228,9 @@ with `init_blog` our plan is to initialize the blog account with current_post_ke
   }
 ```
 
-this how easy to create an account which holds some state data with the anchor framework.
+This how easy to create an account that holds some state data with the Anchor framework.
 
-Now we will move to the next function, what we can do next?? user, user signup. Lets define signup function with which user can create his/her profile by providing name and avatar as inputs.
+Now, We will move to the next function, what we can do next?? user, user signup. Let's define signup function with which users can create his or her profile by providing name and avatar as inputs.
 
 ```rust
  pub fn signup_user(ctx: Context<SignupUser>) -> ProgramResult {
@@ -238,7 +238,7 @@ Now we will move to the next function, what we can do next?? user, user signup. 
  }
 ```
 
-Thats the basic skeleton to create new function but here how we get name and avatar from user?? Lets see.
+That's the basic skeleton to create a new function but here is how we get the name and avatar from user?? Let's see.
 
 ```rust
  pub fn signup_user(ctx: Context<SignupUser>, name: String, avatar: String) -> ProgramResult {
@@ -246,7 +246,7 @@ Thats the basic skeleton to create new function but here how we get name and ava
  }
 ```
 
-we can accept any number of arguments after ctx like here name and avatar as String (Rust is a statically typed Language, we have to define type while defining variables). Next is `SignupUser` ctx type and `UserState` state.
+We can accept any number of arguments after ctx like here name and avatar as String (Rust is a statically typed language, we have to define type while defining variables). Next is `SignupUser` ctx type and `UserState` state.
 
 ```rust
 #[derive(Accounts)]
@@ -265,8 +265,8 @@ pub struct UserState {
 }
 ```
 
-Here we need three accounts and you already understand in previous function all the attributes(like init, payer, space) so i wont re-explain that here. But i will explain to you how to calculate the account space this time.
-to measure account space we need to take look at what state the account is holding, in user_account case **UserState** has 3 values to store name, avatar and authority.
+Here, We need three accounts and you already understand in the previous function all the attributes(like init, payer, space) so, I won't re-explain that here. But I will explain to you how to calculate the account space this time.
+To measure account space we need to take a look at what state the account is holding. In user_account case **UserState** has 3 values to store name, avatar and authority.
 
 | State Values | Data Types | Size (in bytes) |
 | ------------ | ---------- | --------------- |
@@ -274,9 +274,9 @@ to measure account space we need to take look at what state the account is holdi
 | name         | String     | 40              |
 | avatar       | String     | 120             |
 
-**Pubkey:** Pubkey is always 32 bytes and String is variable in size so it is depend on your use case.
+**Pubkey:** Pubkey is always 32 bytes and String is variable in size so it depends on your use case.
 
-**String:** String is an array of chars and each char take 4 bytes in rust.
+**String:** String is an array of chars and each char takes 4 bytes in rust.
 
 **Account Discriminator:** All accounts created with Anchor needs 8 bytes
 
@@ -295,8 +295,8 @@ Moving forward, Let's complete the remaining signup function
     }
 ```
 
-Till now we have created 2 function init_blog and signup user with name and avatar. specifically signup takes two arguments, what if user mistakenly sent wrong name and he/she want to update it??
-you guessed it right, we will create next function that allow user to update name and avatar of their account.
+Till now, We have created 2 function init_blog and signup user with name and avatar. Specifically signup takes two arguments. What if user mistakenly sent the wrong name and the user wants to update it??
+You guessed it right. We will create next function that allows the user to update name and avatar of their account.
 
 ```rust
   pub fn update_user(ctx: Context<UpdateUser>, name: String, avatar: String) -> ProgramResult {
@@ -324,9 +324,9 @@ New attributes mut and has_only
 - **mut:** if we want to change/update account state/data we must specify the mut attribute
 - **has_one:** has_one checks user_account.authority is equal to authority accounts key ie. owner of user_account is signer(caller) of update_user function
 
-Our blog is initialized user is created now whats remaining?? CRUD of post, in next section we will look into the CRUD of post entity. if you feel overwhelming take break or go through what we have learned/builded so far.
+Our blog is initialized user is created now whats remaining?? CRUD of the post. In the next section, We will look into the CRUD of the post entity. If you feel overwhelmed, take a break or go through what we have learned so far.
 
-Now lets go little crazy!! CRUD of post!!
+Now, Let's move to the CRUD of the post!!
 
 ```rust
    pub fn create_post(ctx: Context<CreatePost>, title: String, content: String) -> ProgramResult {
@@ -355,7 +355,7 @@ Now lets go little crazy!! CRUD of post!!
     }
 ```
 
-What do you think, why we need **blog_account** as mut here? Do you remember **current_post_key** field in **BlogState**. Lets look at the function body.
+What do you think? Why do we need **blog_account** as mut here? Do you remember **current_post_key** field in **BlogState**. Let's look at the function body.
 
 ```rust
     pub fn create_post(ctx: Context<CreatePost>, title: String, content: String) -> ProgramResult {
@@ -378,7 +378,7 @@ What do you think, why we need **blog_account** as mut here? Do you remember **c
 ```
 
 The post is created, Now how we can let the client know that the post is created and the client fetch the post and render it into ui.
-Anchor provides a handy feature of emitting an event, Event?? Yup you heard it right. we can emit an event post created post. Before emitting event we need to define it.
+Anchor provides a handy feature of emitting an event, Event?? Yup, you read it right. We can emit an event like post-created. Before emitting an event, We need to define it.
 
 ```rust
 
@@ -390,7 +390,7 @@ pub struct PostEvent {
 }
 ```
 
-Lets emit post create event from post_create function
+Let's emit post created event from post_create function
 
 ```rust
     pub fn create_post(ctx: Context<CreatePost>, title: String, content: String) -> ProgramResult {
@@ -406,7 +406,7 @@ Lets emit post create event from post_create function
     }
 ```
 
-No questions game, straight to the point "Update Post"!
+Next, Update Post.
 
 ```rust
     pub fn update_post(ctx: Context<UpdatePost>, title: String, content: String) -> ProgramResult {
@@ -438,16 +438,16 @@ No questions game, straight to the point "Update Post"!
 
 Updating post is really simple, take title and content from user and update the **mut post_account**
 
-Delete post is little challenging, to store posts we have used LinkedList. if you know LinkedList after delete node from LinkedList we need to link the adjacent node of deleting node. lets understand this through diagram.
+Delete post is little challenging. To store posts, We have used LinkedList. If you know LinkedList, After deleting a node from LinkedList, we need to link the adjacent node of deleting a node. Let's understand this through a diagram.
 
  <img src="../../../.gitbook/assets/sblog_delete_post.png" alt="post delete" width="400" >
 
-if we want to delete post 2 we have to link 1 -> 3.
+If we want to delete post 2 we have to link 1 -> 3.
 
-Lets jump to the code,I know you will understand it easily.
+Let's jump to the code,I know you will understand it easily.
 
 ```rust
-    // Here we need two post account, current_post and next_post account. we get pre_post of current_post from current_post and link it to next_post
+    // Here, We need two post account, current_post and next_post account. we get pre_post of current_post from current_post and link it to next_post
 
     pub fn delete_post(ctx: Context<DeletePost>) -> ProgramResult {
         let post_account = &mut ctx.accounts.post_account;
@@ -481,8 +481,8 @@ Lets jump to the code,I know you will understand it easily.
 
 **constraint** attribute performs simple if check.
 
-So to delete post use needs to send post_account and next_post_account but what is there is no next_post?? what if user want to delete the latest post that has no next post??
-to handle this case we need to create another function **delete_latest_post**
+So to delete a post, user needs to send post_account and next_post_account. But what if there is no next_post?? what if user wants to delete the latest post that has no next post??
+To handle this case, We need to create another function **delete_latest_post**
 
 ```rust
     pub fn delete_latest_post(ctx: Context<DeleteLatestPost>) -> ProgramResult {
@@ -514,13 +514,13 @@ to handle this case we need to create another function **delete_latest_post**
     }
 ```
 
-That was last function of our Rust Program.
+That was the last function of our Rust Program.
 
-Next is Testing program. Dont worry, we'll fast forward the next section.
+Next is the Testing program. Don't worry, we'll fast forward to the next section.
 
 ## Writing tests for blog program
 
-before we dive into writing test cases, every test needs a initialized blog, a brand new user and a post so to avoid repetition we will create 3 simple reusable utility functions.
+Before we dive into writing test cases, every test needs an initialized blog, a brand new user, and a post, so to avoid repetition we will create 3 simple reusable utility functions.
 
 - createBlog - initialize new Blog account
 - createUser - create a new User
@@ -657,7 +657,7 @@ Next, run the test:
 anchor test
 ```
 
-after running `anchor test` you will see the 1/1 test passing.
+After running `anchor test` you will see the 1/1 test passing.
 
 Now we complete remaining tests:
 
@@ -809,7 +809,7 @@ anchor test
 
 # Building frontend
 
-Now we're ready to build out the front end. we will create react app inside the existing app directory.
+Now, We're ready to build out the front end. We will create react app inside the existing app directory.
 
 ```
 cd app
@@ -825,8 +825,8 @@ folder structure of React spp
 ├── package.json
 ```
 
-Before we start writing frontend part of tutorial we will create a simple script that will copy program idl file to the React app.
-whenever we deploy our rust program with `anchor deploy` the anchor cli generates the idl file that has all the metadata related to our rust program(this metadata helps building client side interface with the rust program).
+Before we start writing the frontend part of the tutorial we will create a simple script that will copy the program idl file to the React app.
+whenever we deploy our rust program with `anchor deploy` the Anchor CLI generates the idl file that has all the metadata related to our rust program(this metadata helps to build client-side interface with the rust program).
 
 Create copy_idl.js file root of your project and copy the code given below. The code is just copying the idl file from /target/idl to /app/src directory.
 
@@ -837,10 +837,10 @@ const blog_idl = require("./target/idl/blog_sol.json");
 fs.writeFileSync("./app/src/idl.json", JSON.stringify(blog_idl, null, 2));
 ```
 
-Next, install dependencie.
+Next, install dependencies.
 
 ```
-npm i @solana/wallet-adapter-react @solana/wallet-adapter-wallets @solana/web3.js
+npm i @Solana/wallet-adapter-react @Solana/wallet-adapter-wallets @Solana/web3.js
 ```
 
 Next, open app/src/App.js and update it with the following:
@@ -849,8 +849,8 @@ Next, open app/src/App.js and update it with the following:
 import {
   ConnectionProvider,
   WalletProvider,
-} from "@solana/wallet-adapter-react";
-import { getPhantomWallet } from "@solana/wallet-adapter-wallets";
+} from "@Solana/wallet-adapter-react";
+import { getPhantomWallet } from "@Solana/wallet-adapter-wallets";
 import { Home } from "./home";
 
 const wallets = [getPhantomWallet()];
@@ -869,9 +869,9 @@ const App = () => {
 export default App;
 ```
 
-in the further tutorial I'm just gonna explain the logical part of our dapp and I'll leave the styling part up to you.
+In the further tutorial, I'm just gonna explain the logical part of our dapp and I'll leave the styling part up to you.
 
-Now let's start with login functionality of our dapp, we will need a button that handle the user login with Phantom browser wallet.
+Now, Let's start with the login functionality of our dapp. We will need a button that handles the user login with Phantom browser wallet.
 
 create button inside Home.js component with `onConnect` onClick handler like this,
 
@@ -879,11 +879,11 @@ create button inside Home.js component with `onConnect` onClick handler like thi
 <button onClick={onConnect}>Connect with Phantom</button>
 ```
 
-then create `onConnect` function that handles the click event of connect button.
+Then create `onConnect` function that handles the click event of connect button.
 
 ```js
-import { WalletName } from "@solana/wallet-adapter-wallets";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { WalletName } from "@Solana/wallet-adapter-wallets";
+import { useWallet } from "@Solana/wallet-adapter-react";
 
 // inside react component
 const { select } = useWallet();
@@ -892,14 +892,14 @@ const onConnect = () => {
 };
 ```
 
-Lets deploy our Rust program first then copy the idl file with the help of the copy_idl.js script that we wrote before,
+Let's deploy our Rust program first then copy the idl file with the help of the copy_idl.js script that we wrote before,
 
-before deploy make sure you have `localnet` cluster set in Anchor.toml file. Now
-open up new Terminal session and run `solana-test-validator` command this will start local network of solana blockchain.
+Before deploy make sure you have `localnet` cluster set in Anchor.toml file. Now
+open up a new Terminal session and run `Solana-test-validator` command this will start a local network of the Solana blockchain.
 
 ```
 // in new terminal run,
-solana-test-validator
+Solana-test-validator
 ```
 
 then deploy the program with,
@@ -910,10 +910,10 @@ anchor deploy
 
 if you run into an error,
 
-- make sure `solana-test-validator` is running
-- make sure your solana config is in valid state (I mean the RPC url, KeyPair path etc.)
+- make sure `Solana-test-validator` is running
+- make sure your Solana config is in a valid state (I mean the RPC url, KeyPair path etc.)
 
-once you successfully deploy the Rust program with anchor cli then run the copy_idl.js file like,
+once you successfully deploy the Rust program with anchor CLI then run the copy_idl.js file like,
 
 ```
 node copy_idl.js
@@ -923,11 +923,11 @@ it will copy the idl file to /app/src directory, Now you will see the idl.json f
 
 ## Initialize Blog
 
-Now we will initialize the blog. Initializing blog is one time process. Lets create `init_blog.js` file inside /app/src folder and copy the code given below.
+Now we will initialize the blog. Initializing blog is one-time process. Let's create `init_blog.js` file inside /app/src folder and copy the code given below.
 
 ```js
 import { Program } from "@project-serum/anchor";
-import { Keypair, PublicKey, SystemProgram } from "@solana/web3.js";
+import { Keypair, PublicKey, SystemProgram } from "@Solana/web3.js";
 import idl from "./idl.json";
 
 const PROGRAM_KEY = new PublicKey(idl.metadata.address);
@@ -951,7 +951,7 @@ export async function initBlog(walletKey, provider) {
 }
 ```
 
-in this `initBlog` function we have imported the program idl then we have generated two Keypair for blog account and initial dummy post account and after that we just call the initBlog function of the program with all the necessary accounts. we are creating two new accounts here `blogAccount` and `genesisPostAccount` thats why we have to pass it as signers.
+In this `initBlog` function we have imported the program idl then we have generated two Keypair for blog account and initial dummy post account and after that we just call the initBlog function of the program with all the necessary accounts. we are creating two new accounts here `blogAccount` and `genesisPostAccount` that's why we have to pass it as signers.
 
 Now the ui part of this, we will create a temporary button to call the initBlog function. Once the blog is initialize we will remove the button(as it wont be needed anymore).
 
@@ -959,7 +959,7 @@ Now the ui part of this, we will create a temporary button to call the initBlog 
   import {
     useAnchorWallet,
     useConnection
-  } from "@solana/wallet-adapter-react";
+  } from "@Solana/wallet-adapter-react";
   import idl from './idl.json'
 
   const PROGRAM_KEY = new PublicKey(idl.metadata.address);
@@ -977,9 +977,9 @@ Now the ui part of this, we will create a temporary button to call the initBlog 
   <button onClick={_initBlog}>Init blog</button>
 ```
 
-initBlog function will create a brand new Blog and console log its publicKey. make sure you still have `solana-test-validator` running in another shell and your Phantom wallet is connected to the local network (http://localhost:8899)
+initBlog function will create a brand new Blog and console log its publicKey. make sure you still have `Solana-test-validator` running in another shell and your Phantom wallet is connected to the local network (http://localhost:8899)
 
-if you dont know how to connect Phantom wallet to Localnet here are the steps,
+if you don't know how to connect Phantom wallet to Localnet here are the steps,
 
 - go to settings tab in Phantom wallet
 - scroll down and select `change network`
@@ -988,18 +988,18 @@ if you dont know how to connect Phantom wallet to Localnet here are the steps,
 Next, you need balance in your account on Localnet to get balance you need to run the following command.
 
 ```
-solana airdrop 10 <your-account-address>
+Solana airdrop 10 <your-account-address>
 ```
 
 then check balance with
 
 ```
-solana balance <your-account-address>
+Solana balance <your-account-address>
 ```
 
 you will see `10 SOL` printed on your terminal.
 
-Once you are connected to the Localhost you are ready to initialize the blog account. Run the app with `npm run start` it will open up your Dapp in your browser there you will see two button one is `connect` and another one is `init blog`. First step is to connect to the Phantom wallet by clicking `connect` button. Once you are connected then click on the `init blog` button it will trigger the Phantom wallet confirmation popup click `Approve`. After 1 to 2 sec the `initBlog` function will console log the publicKey of your blog account, just copy the blog publicKey and store in `BLOG_KEY` variable and thats it we have successfully initialized our blog account.
+Once you are connected to the Localhost you are ready to initialize the blog account. Run the app with `npm run start` it will open up your Dapp in your browser there you will see two button one is `connect` and another one is `init blog`. First step is to connect to the Phantom wallet by clicking `connect` button. Once you are connected then click on the `init blog` button. it will trigger the Phantom wallet confirmation popup click `Approve`. After 1 to 2 sec the `initBlog` function will console log the publicKey of your blog account, just copy the blog publicKey and store in `BLOG_KEY` variable and that's it. We have successfully initialized our blog account.
 
 ```js
 const BLOG_KEY = new PublicKey(your - blog - key);
@@ -1034,14 +1034,14 @@ Next attach React state to the input fields and create `signup` button
 ```
 
 Now we will write the functionality of \_signup function,
-if you remember the initBlog function there we have randomly generated Keypair but in this case we wont generate the Keypair randomly as we need to identify the user for all the subsequent logins.
+if you remember the initBlog function there we have randomly generated Keypair but in this case we won't generate the Keypair randomly as we need to identify the user for all the subsequent logins.
 
 `Keypair` has `fromSeed` function that takes a `seed` argument and generate unique Keypair from the given seed.
 
 so we will create seed by combining `PROGRAM_KEY` and users `wallet_key` so it will create unique Keypair.
 
 ```js
-import { Keypair, PublicKey, SystemProgram } from "@solana/web3.js";
+import { Keypair, PublicKey, SystemProgram } from "@Solana/web3.js";
 import { Program, Provider } from "@project-serum/anchor";
 
 const genUserKey = (PROGRAM_KEY, walletKey) => {
@@ -1238,7 +1238,7 @@ const fetchAllPosts = async () => {
 };
 ```
 
-Now trigger the fetchAllPosts function when user login with Phantom wallet.
+Now trigger the fetchAllPosts function when the user login with Phantom wallet.
 
 ```js
 const [posts, setPosts] = useState([]);
@@ -1278,16 +1278,16 @@ Till now we have integrated initialization of blog, user signup, fetch user, cre
 - update post
 - delete post
 
-if your follow the same steps as we have learned you can definitely be able to complete the remaining todo tasks.
+If your follow the same steps as we have learned you can definitely be able to complete the remaining to-do tasks.
 
 # Deploying to Devnet
 
 Deploying to a live network is straightforward:
 
-1. Set solana config to devnet
+1. Set Solana config to devnet
 
 ```
-solana config set --url devnet
+Solana config set --url devnet
 ```
 
 2. Open Anchor.toml and Update the cluster to devnet
@@ -1310,7 +1310,7 @@ anchor deploy
 
 ## Conclusion
 
-Congratulations on finishing the tutorial. Thank you for taking the time to complete it. There still a room for improvements like,
+Congratulations on finishing the tutorial. Thank you for taking the time to complete it. There is still room for improvements like,
 
 - UI improvements
 - creating frontend app with Typescript
@@ -1324,4 +1324,4 @@ This tutorial was created by [Kiran Bhalerao](https://github.com/kiran-bhalerao)
 
 ## References
 
-[https://github.com/kiran-bhalerao/blog-dapp-solana](https://github.com/kiran-bhalerao/blog-dapp-solana)
+[https://github.com/kiran-bhalerao/blog-dapp-Solana](https://github.com/kiran-bhalerao/blog-dapp-Solana)
