@@ -14,7 +14,7 @@ YouTube video on building the Rust portion:
 
 In this tutotial, we will create a simple short form yet fully functional blog with the data saved on Solana. We are going to do this using the Anchor framework to illustrate how to use Anchor.
 
-We're building a blog publishing platform because it is a simple web format that most people are familiar with, and it has a simple structure: A blogger and their blog posts. A simple example of saving data to the Solana network is the best and easiest way to learn.
+We're building a blog publishing platform because it is a simple web format that most people are familiar with. Blogs have a simple data structure: A blogger and their blog posts. This example of storing data on the Solana network is an easy way to learn.
 
 We will cover in this tutorial Anchor setup and Anchor program building, and touch on the JavaScript front end and how it interacts with the Anchor program.
 
