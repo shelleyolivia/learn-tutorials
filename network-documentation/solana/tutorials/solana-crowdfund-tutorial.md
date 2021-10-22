@@ -44,16 +44,21 @@ Read more on [Rust book](https://doc.Rust-lang.org/book/ch03-02-data-types.html)
 
 ## Creating a variable and mutability:
 We can create a variable with the `let` keyword
+
 ```rust
 // The compiler identifies the Rvalue as i32, so it sets the type of variable to i32
 let a=0;
 ```
+
 we can also set the data type for a variable, eg.
+
 ```rust
 let a :u8 = 0;
 ```
+
 In Rust, all the variables are immutable by default. Which means their value can not be changed once set.
 And here comes the `mut` keyword. We can initialize the variable with `let mut` to have a mutable variable. eg.
+
 ```rust
 // This program will compile
 let mut a = 0;
@@ -65,6 +70,7 @@ Read more on [Rust book](https://doc.Rust-lang.org/book/ch03-01-variables-and-mu
 
 ## Control flow:
 We can use `if` `else` statement in Rust just like we can do in other language, here is a small program for us to understand the syntax.
+
 ```rust
 fn main(){
     let a=99;
@@ -76,6 +82,7 @@ fn main(){
     }
 }
 ```
+
 We also have loops in Rust. We can create a loop with 3 keywords `loop`, `for`, and `while`. Since `for` is most common. Here is an example of it. You can checkout example for `loop` and `while` [here](https://doc.Rust-lang.org/book/ch03-05-control-flow.html#repeating-code-with-loop).
 
 ```rust
@@ -313,6 +320,7 @@ fn process_instruction(
 // Then we call the entry point macro to add `process_instruction` as our entry point to our program.
 entrypoint!(process_instruction);
 ```
+
 > Note: In Rust, if the last line doesn't end with `;` means our function is return-ing that.
 Here the line `Ok(())` is equivalent to `return Ok(());` 
 
@@ -445,11 +453,14 @@ We need to derive both BorshSerialize and BorshDeserialize. BorshSerialize is us
 
 ##### Code: 
 At the top of the file import `BorshSerialize` and `BorshDeserialize` from the `Borsh` Crate.
+
 ```rust
 use borsh::{BorshDeserialize, BorshSerialize};
 ```
+
 Now let's add the code of our `create_campaign` function and the `CampaignDetails` Struct.
 I have added an explanation to each line in the code.
+
 ```rust 
 entrypoint!(process_instruction);
 
@@ -474,6 +485,7 @@ fn create_campaign(
     /// accounts parameter is the array of accounts related to this entrypoint
     let accounts_iter = &mut accounts.iter();
 ```
+
  We can use the `next_account_info` function to get an account from the array. This function returns a result enum. We can use `?` Operator on the result enum to get the value. If in case of an error the `?` Operator will chain the error, and our program will return the same error which was returned by next_account_info.
 
 
@@ -499,6 +511,7 @@ fn create_campaign(
         return Err(ProgramError::IncorrectProgramId);
     }
 ```
+
 By deriving the trait `BorshDeserialize` in our `CampaignDetails` struct we have added a method `try_from_slice` which takes in the parameter `array of u8` and creates an object of CampaignDetails with it.
 It gives us an enum of type results. We will use the `expect` method on result enums to and pass in the string which we can see in case of error.
 
@@ -515,8 +528,10 @@ It gives us an enum of type results. We will use the `expect` method on result e
         return Err(ProgramError::InvalidInstructionData);
     }
 ```
+
 Solana accounts can have data, but size has to be specified when it is created.  We need to have a minimum balance to make it rent exempt. For this project, we create an account that already has a balance equal to the minimum balance.
 You can read more about solana account and rent exemption [here](https://docs.solana.com/developing/programming-model/accounts#rent-exemption).
+
 ```rust
     /// get the minimum balance we need in our program account.
     let rent_exemption = Rent::get()?.minimum_balance(writing_account.data_len());
@@ -528,6 +543,7 @@ You can read more about solana account and rent exemption [here](https://docs.so
     // Then we can set the initial amount donate to be zero.
     input_data.amount_donated=0;
 ```
+
 If all goes well, we will write the `writing_account`. Here on our `input_data` variable (of type `CampaignDetails`), we have a method serialize. this is because of the `BorshSerialize` derivation. We will use this to write the data in a `writing_account`. At the end of the program, we can return `Ok(())`.
 
 
@@ -642,6 +658,7 @@ fn donate(
     let donator_program_account = next_account_info(accounts_iter)?;
     let donator = next_account_info(accounts_iter)?;
 ```
+
 We get 3 accounts here, first is the program-owned account containing the data of campaign we want to donate to.
 Then we have a `donator_program_account` which is also the program-owned account that only has the Lamport we would like to donate.
 Then we have the account of the `donator`.
@@ -697,9 +714,11 @@ We are going to deploy the program on Devnet.
 Solana Programs work on a [BPF system](https://docs.solana.com/developing/on-chain-programs/overview#berkeley-packet-filter-bpf), so we will compile our program into a compatible format.
 
 We can use the handy package manager cargo to do this:
+
 ```text
 cargo build-bpf --manifest-path=Cargo.toml --bpf-out-dir=dist/program
 ```
+
 We can use this command to create a build. In this command, the manifest-path should be the path of your `Cargo.toml` file.
 This will output the compiled program in Shared Object format (.so) in the `dist/program` directory.
 
@@ -760,15 +779,18 @@ solana airdrop 1 7WQDnydTTtyb2DsTuuFpeu2bDxQdpZMRc4R6qja1UzP --url https://api.d
 If you get **insufficient balance** while deploying, you can re-run the command to airdrop funds on Devnet.
 
 Now we will use the following command to deploy. Note that the path of `keypair.json` and `dist/program/program.so` might be different in your case. Please check and then run the command.
+
 ```text
 solana deploy --keypair keypair.json dist/program/program.so --url https://api.devnet.solana.com 
 ```
 
 Hooray! we have deployed our program.
 We will get the program id as output.
+
 ```text
 Program Id: 286rapsUbvDe1ZgBeNhp37YHvEPwWPTr4Bkce4oMpUKT
 ```
+
 We can verify this by checking on [Solana Explorer for Devnet.](https://explorer.solana.com/?cluster=devnet). 
 We can search our program id here.
 
@@ -905,9 +927,11 @@ export async function createCampaign(
 ) {
      await checkWallet();
 ```
+
 checkWallet function:
 
 We will check if the wallet is connected or not, and connect if it isn't.
+
 ```js
 async function checkWallet() {
     if (!wallet.connected()) {
@@ -917,6 +941,7 @@ async function checkWallet() {
 ```
 
 We will create a pubkey for our program account which will contain the data of a campaign, this is `writing_account` we have used in our program. 
+
 ```js
     const SEED = "abcdef" + Math.random().toString();
     let newAccount = await PublicKey.createWithSeed(
@@ -925,9 +950,11 @@ We will create a pubkey for our program account which will contain the data of a
         programId
     );
 ```
+
 Now we have created a publicKey. Note that we have not given an instruction to create an account yet.
 
 Let us setup the campaignDetails we want to send to our program.
+
 ```js
     let campaign =new CampaignDetails({
         name: name,
@@ -937,24 +964,30 @@ Let us setup the campaignDetails we want to send to our program.
         amount_donated: 0
     })
 ```
+
 Convert the data to `Uint8Array`. Note that all the programs have the `instruction_data` datatype, an array of u8.
 And before we send this data remember we want the first element in our instruction_data to be (0,1,2) for calling different entry points.
 We will set it to 0. As we want to call `create_campaign` instruction. 
+
 ```js
     let data = serialize(CampaignDetails.schema, campaign);
     let data_to_send = new Uint8Array([0, ...data]);
 ```
+
 Now we have the data we want to send to our program.
 
 We will fund it with the minimum number of lamports required to make it rent Exempt.
 So we calculate the lamports required like this.
+
 ```js
     const lamports =
         (await connection.getMinimumBalanceForRentExemption(data.length));
 ```
+
 Here we create the instruction to create our account we will pass in the pub key, the size of data it needs to store, initial lamports, and other parameters.
 This is the first instruction we will create.
 > Note: Only system program can create accounts. We are writing instruction for system program here and not our deployed program.
+
 ```js
     const createProgramAccount = SystemProgram.createAccountWithSeed({
         fromPubkey: wallet.publicKey,
@@ -966,6 +999,7 @@ This is the first instruction we will create.
         programId: programId,
     });
 ```
+
 Now we can create the 2nd instruction. We invoke our program that would write the data to the program account we just created in the above instruction.
 
 In the keys parameter we will pass all accounts we want to send and in data (instruction_data for our program) we want to send, we will pass the programId we want to invoke. Note we have created programId global variable in this file already.
@@ -990,7 +1024,9 @@ Now we have created the instructions we want. We will pass them to our helper fu
     );
     const signature = await signAndSendTransaction(trans);
 ```
+
 Now that is done we can confirm our transaction by passing the `signature` in `confirmTransaction` function.
+
 ```js
     const result = await connection.confirmTransaction(signature);
     console.log("end sendMessage", result);
@@ -1008,7 +1044,8 @@ So in our `form.js`, we can have an on submit. On calling this function we will 
         setRoute(0);// we are updated this to change the ui.
     }
 ```
-See the final [`form.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Form.js) file.
+
+See the final [`form.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Form.js) file for reference.
 Now we can add campaigns.
 
 ## Fetch All Campaigns
@@ -1181,7 +1218,9 @@ Then we will create the instruction and pass the data. Note that we are insertin
         data: data_to_send
     });
 ```
+
 This part of the code is same as the `donate` and `createCampaign` functions.
+
 ```js
     const trans = await setPayerAndBlockhashTransaction(
         [instructionTOOurProgram]
@@ -1209,6 +1248,7 @@ Connect the functions with the UI in `card.js`:
 
     }
 ```
+
 See the final [`card.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Card.js) file.
 
 And we're done! 
