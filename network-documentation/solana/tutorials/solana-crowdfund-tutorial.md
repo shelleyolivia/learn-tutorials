@@ -13,9 +13,8 @@ We are going to make a solana program and connect it with our front-end applicat
 - We'll need Rust Toolchain in this tutorial, install it from [HERE](https://www.rust-lang.org/tools/install).
 - We'll need Node.js in this tutorial, install it from [HERE](https://nodejs.org/en/download/).
 
-> If you already have good knowledge of Rust programming language. You can skip the `Introduction to Rust.` I would still recommend having a quick look at all the code blocks.
+> If you already have good knowledge of the Rust programming language, you can skip the `Introduction to Rust` section. I would still recommend having a quick look at all the code blocks.
 
----
 
 # Introduction to Rust
 Rust is a multi-paradigm, high-level, general-purpose programming language designed for performance and safety, especially safe concurrency.
@@ -256,7 +255,7 @@ These are all the entry points we are going to need for our project. Let us disc
 
 Before we start we have to understand Solana programs don't have storage(`contract storage` you might be familiar with). Then how and where should we store our data.
 
-**program accounts**
+**Program accounts**
 In Solana, data can only be stored in accounts. So we can create program-owned accounts to save the data.
 > Note: The total number of bytes of data an account can have is fixed when we create an account.
 
@@ -266,10 +265,11 @@ We can create as many program-owned accounts as we want, so the idea here is tha
 
 ## Coding the program
 Now that we have discussed what we want to create. Let start coding.
-Go ahead and open up the program folder in VSCode or your favorite IDE.File structure in the `program` directory should look  like this.
+Go ahead and open up the `program` folder in VSCode or your favorite IDE.
+File structure in the `program` directory should look like this.
 ![file structure](../../../.gitbook/assets/solana-crowdfunding-program-files.png)
 
-Go ahead and open up the lib.rs file in your code editor, and let us add some boilerplate code first.
+Go ahead and open up the `lib.rs` file in your code editor, and let us add some boilerplate code first.
 
 You can see the completed code on [github](https://github.com/SushantChandla/solana-crowd-funding/blob/main/program/src/lib.rs).
 
@@ -327,9 +327,7 @@ entrypoint!(process_instruction);
 > Note: In Rust, if the last line doesn't end with `;` means our function is return-ing that.
 Here the line `Ok(())` is equivalent to `return Ok(());` 
 
-Go through the comments and code.
- 
-_In the code, I have mentioned there is only one entry point in the Solana program._
+In the code, I have mentioned there is only one entry point in the Solana program.
 But we want three as we discussed in the "What do we want in our program?" section. Let's fix this issue.
 Have you noticed there is no limit to the instruction_data array? We are going to take advantage of that fact. We use the first element of the array to know what entry point we want to call.
 Notice we can have 256 entry points like this in a single program (`u8` has a value of 0..255). Realistically we never do that if in case we want that many entry points for a project. It is better to deploy more programs.
@@ -515,7 +513,7 @@ fn create_campaign(
     }
 ```
 
-By deriving the trait `BorshDeserialize` in our `CampaignDetails` struct we have added a method `try_from_slice` which takes in the parameter `array of u8` and creates an object of CampaignDetails with it.
+By deriving the trait `BorshDeserialize` in our `CampaignDetails` struct we have added a method `try_from_slice` which takes in the parameter array of u8 and creates an object of CampaignDetails with it.
 It gives us an enum of type results. We will use the `expect` method on result enums to and pass in the string which we can see in case of error.
 
 ```rust
@@ -556,6 +554,7 @@ If all goes well, we will write the `writing_account`. Here on our `input_data` 
     Ok(())
 }
 ```
+
 
 Hurry! We are done with the first `create_campaign` function.
 Let's continue writing the contract and write the withdraw function next.
@@ -700,7 +699,7 @@ Then we do the actual transaction. Note that the `donator_program_account` is ow
  **donator_program_account.try_borrow_mut_lamports()? = 0;
 ```
 
-Then at the end of the program we will write the new updated campaign_data to the writing_account's data field and return the result `Ok(())`.
+Then at the end of the program we will write the new updated `campaign_data` to the `writing_account`'s data field and return the result `Ok(())`.
 
 ```rust
     campaign_data.serialize(&mut &mut writing_account.data.borrow_mut()[..])?;
@@ -725,7 +724,8 @@ cargo build-bpf --manifest-path=Cargo.toml --bpf-out-dir=dist/program
 We can use this command to create a build. In this command, the manifest-path should be the path of your `Cargo.toml` file.
 This will output the compiled program in Shared Object format (.so) in the `dist/program` directory.
 
-> If you will run this command in `program` directory you will see `dist/program` directory added.
+> If you run this command in the `program` directory, you will see the `dist/program` directory is created automatically if it does not already exist.
+
 ![program_complied-bpf](../../../.gitbook/assets/solana-crowdfunding-program-complied-bpf.png)
 
 Now that we have compiled our program we can deploy it. 
@@ -763,7 +763,7 @@ lemon avoid all erase chair acid fire govern glue outside wheel clock
 =====================================================================
 ```
 
-Once complete you will have the keypair.json file, containing the private and public key of a new Solana account. It is important to keep your keypair safe. Do not commit this file to a remote code repository. It is best to add this file to a .gitignore to prevent this from happening.
+Once complete you will have the `keypair.json` file, containing the private and public key of a new Solana account. It is important to keep your keypair safe. Do not commit this file to a remote code repository. It is best to add this file to a `.gitignore` to prevent this from happening.
 
 Now we are going to request an airdrop of SOL tokens on the Solana Devnet. This command will add 1 SOL token to the account:
 
@@ -794,7 +794,7 @@ We will get the program id as output.
 Program Id: 286rapsUbvDe1ZgBeNhp37YHvEPwWPTr4Bkce4oMpUKT
 ```
 
-We can verify this by checking on [Solana Explorer for Devnet.](https://explorer.solana.com/?cluster=devnet). 
+We can verify this by checking on the [Solana Explorer for Devnet.](https://explorer.solana.com/?cluster=devnet). 
 We can search our program id here.
 
 Hooray! We have completed everything to do with Rust for this tutorial and successfully deployed our program. Now, let us move forward and build the React app.
@@ -818,7 +818,7 @@ Let us add the `@solana/web3.js` package.
 yarn add @solana/web3.js
 ```
 
-We will also use `@project-serum/sol-wallet-adapter` package. To connect our app with sollet wallet.
+We will also use the `@project-serum/sol-wallet-adapter` package to connect our app with sollet wallet.
 
 ```text
 yarn add @project-serum/sol-wallet-adapter
@@ -833,7 +833,7 @@ yarn add borsh
 Let us create a new directory named `solana` in our `crowd-funding/src` directory. We will write all the Solana related code in this folder for easy reference.
 
 
-Create a new file in the solana directory, `index.js`, and add the following code:
+Create a new file in the `solana` directory, `index.js`, and add the following code:
 
 ```js
 import Wallet from "@project-serum/sol-wallet-adapter";
@@ -847,8 +847,8 @@ import {
 import { deserialize, serialize } from "borsh";
 ```
 
-Solana calls its networks clusters, if you have by any chance deployed the program on testnet/mainnet, you will need to change the cluster variable to the URL for that cluster.
-Also update the programId it should be the one you got after deploying your program on blockchain.
+Solana calls its networks **clusters**, if you have by any chance deployed the program on testnet/mainnet, you will need to change the cluster variable to the URL for that cluster.
+Also update the programId, this should be the public key you got after deploying your program.
 
 ```js
 const cluster = "https://api.devnet.solana.com";
@@ -859,9 +859,9 @@ const programId= new PublicKey(
 );
 ```
 
-After this I also like to create 2 helper functions`setPayerAndBlockhashTrasaction` and `signAndSendTrasaction`.
-The `setPayerAndBlockhashTransaction` take in `instructions` as parameters. `instructions` will contains all the set of instruction we want to perform on the blockchain.
-> Note: If any of the instruction fails with a program error all the instructions in the transaction fails.
+Next, create two helper functions: `setPayerAndBlockhashTrasaction` and `signAndSendTrasaction`.
+The `setPayerAndBlockhashTransaction` takes in `instructions` as parameters. `instructions` will contain all the instructions we want to perform in this transaction.
+> Note: If any of the instructions fails with a program error, all the instructions in the transaction fail.
 
 ```js
 export async function setPayerAndBlockhashTransaction(instructions) {
@@ -897,7 +897,7 @@ export async function signAndSendTransaction(transaction) {
 ```
 
 ## Writing a function to invoke create_campaign instruction.
-We need to write a JavaScript implementation for the Rust struct CampaignDetails. We have created a class and we will call it CampaignDetails. For deserialization and serialization we have to create a schema for our class. We will create map, and match the types of each field. Note that PubKey type is nothing but a u8 array with length 32.
+We need to write a JavaScript implementation for the Rust struct `CampaignDetails`. We have created a class and we will call it `CampaignDetails`. For deserialization and serialization we have to create a schema for our class. We will create map, and match the types of each field. Note that `PubKey` type is nothing but a u8 array with length 32.
 
 ```js
 class CampaignDetails {
@@ -920,7 +920,7 @@ class CampaignDetails {
 ```
 
 Now we can write our `createCampaign` function.
-This function take in  `name`,`description` and `image_link` as input parameters.
+This function takes in  `name`,`description` and `image_link` as input parameters.
 
 The first thing we will do it to add a call to `checkWallet` function.
 
@@ -1005,7 +1005,7 @@ This is the first instruction we will create.
 
 Now we can create the 2nd instruction. We invoke our program that would write the data to the program account we just created in the above instruction.
 
-In the keys parameter we will pass all accounts we want to send and in data (instruction_data for our program) we want to send, we will pass the programId we want to invoke. Note we have created programId global variable in this file already.
+In the keys parameter we will pass all accounts we want to send and in data (`instruction_data` for our program) we want to send, we will pass the programId we want to invoke. Note we have created programId global variable in this file already.
 
 ```js
     const instructionTOOurProgram = new TransactionInstruction({
@@ -1051,7 +1051,7 @@ So in our `form.js`, we can have an on submit. On calling this function we will 
 See the final [`form.js`](https://github.com/SushantChandla/solana-crowd-funding/blob/main/src/components/Form.js) file for reference.
 Now we can add campaigns.
 
-## Fetch All Campaigns
+## Fetch all Campaigns
 
 We have implemented a function to add campaigns, but we do not have any function to fetch all the campaigns. Let's make that.
 
@@ -1081,7 +1081,7 @@ export async function getAllCampaigns() {
 }
 ```
 
-Then we can use this in app.js, we can render cards with this data. Add this code to app.js:
+Then we can use this in `app.js`, we can render cards with this data. Add this code to `app.js`:
 
 ```js
 useEffect(() => {
@@ -1157,7 +1157,6 @@ We are sending data as an array, [2], because we want call the donate function i
 
 We have created instructions to our program and then called the `setPayerAndBlockhashTransaction`, `signAndSendTransaction` and `confirmTransaction` to send and confirm the transaction just like we did in the `createCampaign` function.
 
-Let connect this function with the ui 
 We can connect this function with the UI. In `card.js`, update the `onDonate` function:
 
 ```js
