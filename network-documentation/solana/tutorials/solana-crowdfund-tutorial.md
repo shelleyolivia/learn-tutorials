@@ -920,7 +920,7 @@ class CampaignDetails {
 ```
 
 Now we can write our `createCampaign` function.
-This function takes in  `name`,`description` and `image_link` as input parameters.
+This function takes `name`,`description` and `image_link` as input parameters.
 
 The first thing we will do it to add a call to `checkWallet` function.
 
