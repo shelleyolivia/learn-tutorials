@@ -4,7 +4,7 @@ Think of a world where people can pay each other without the help of a bank or a
 
 That's just a glance at the financial utopia. The concept of decentralized finance and a "Web 3" where users own their data is alluring - But what makes a blockchain the right one to build next-generation apps on?
 
-well, it needs to be:
+Well, it needs to be:
 
 - Fast
 - Secure
@@ -35,7 +35,7 @@ There are several key innovations Solana has introduced to the blockchain world.
 7. Pipelining
 8. Cloudbreak
 
-## 1. Proof of History
+## 1 - Proof of History
 
 Proof of History (PoH) is the core innovation of Solana. For a blockchain to work, participant nodes need to reach an agreement on time. Traditional blockchains like Bitcoin function by proof of work. Solana has revolutionized their consensus model, called PoH.
 
