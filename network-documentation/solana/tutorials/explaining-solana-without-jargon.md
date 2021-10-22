@@ -294,7 +294,7 @@ This technique is called pipelining and is common in systems with a stream of en
 - Washing and cleaning raw material
 - cooking the food
 - plating of the food
-- serving food to the costumers
+- serving food to the customers
 
 For maximum efficiency kitchen staff works like below:
 
