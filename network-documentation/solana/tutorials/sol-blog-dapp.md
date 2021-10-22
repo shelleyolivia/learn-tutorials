@@ -1,28 +1,33 @@
-## Introduction
+# Introduction
 
-In this tutorial, we will learn how to create a simple blog post dapp on solana blockchain with anchor framework.
+In this tutorial, we will learn how to create a simple blog post dapp on solana blockchain. while build this dapp we will learn how to write Solana rust program, Test the program and finally integrate the program with React frontend.
+
+# Prerequisites
+
+This tutorial assumes that you have,
+
+- Basic understanding of React.js
+- Basic understanding of Rust
+- completed [Solana 101 Pathway](https://learn.figment.io/protocols/solana)
 
 ## Requirements
 
-The tools we will use includes:
+This tutorial covers how to build a dapp on Solana, but does not go through installation of individual dependencies(as it assumes you already completed the Solana 101 Pathway on Figment learn).
 
-**Anchor Framework -**
-Anchor is framework use for solana dapp development, it provides DSL to interact with the solana program. If you are familiar with developing in Solidity, Truffle or Hardhat then consider the DSL is equivalent to ABI.
-Follow the guide to install [Anchor](https://project-serum.github.io/anchor/getting-started/installation.html#install-rust) along with Rust and Solana cli.
+- **Anchor Framework -**
+  Anchor is framework use for solana dapp development, it provides DSL to interact with the solana program. If you are familiar with developing in Solidity, Truffle or Hardhat then consider the DSL is equivalent to ABI.
+  Follow the guide to install [Anchor](https://project-serum.github.io/anchor/getting-started/installation.html#install-rust) along with Rust and Solana cli.
 
-**Vscode -**
-I will recommend using vscode with rust analyzer extension as it has great support for Rust language.
+- **React.js -**
+  To interact with our solana program we will create client side app with React.js.
 
-## Table of Contents
+- **Phantom Wallet -**
+  Phantom is a digital wallet which lets you connect your crypto account to any dapp that build on Solana blockchain. We will you Phantom wallet to connect to our Blog Dapp.
 
-- [Solana Programming model](#solana-programming-model)
-- [Application design decision](#application-design-decision)
-- [Setting up Local development](#setting-up-local-development)
-- [Creating blog program](#creating-blog-program)
-- [Writing tests for blog program](#writing-tests-for-blog-program)
-- [Deploying to Devnet](#deploying-to-devnet)
+- **Vs code -**
+  I will recommend using vscode with rust analyzer extension as it has great support for Rust language.
 
-## Solana Programming model
+# Solana Programming model
 
 **Program -** Solana is fast and low cost blockchain, to achieve the speed and low cost solana has slight different programming model. Solana uses Rust programing language to create programs, as you notice we are keep saying solana program instead of solana smart contract from choosing programing language to naming concepts solana is different, in solana world smart contracts are known as Solana Programs.
 
@@ -36,9 +41,9 @@ the account can be made rent exempt (means you wont have to pay rent) if its bal
 As we learn we need an account to create our blog dapp that has fixed size, so if we create a single account with X size and start pushing posts inside that account eventually the account exceeds its size limit and we wont be able to create new posts.
 if you know solidity, in solidity we create a dynamic array and push as many items to it as we want. but in solana our accounts will be fixed in sized so we have to find a solution this problem.
 
-**Solution one -** What if we create extremely large size account like in gigabytes? on solana we need to pay rent of account according to its size so if our account grows in size account rent will grow along with it.
+- **Solution one -** What if we create extremely large size account like in gigabytes? on solana we need to pay rent of account according to its size so if our account grows in size account rent will grow along with it.
 
-**Solution two -** What if we create multiple accounts and connect them somehow? Yes thats the plan, we will create new account for every single post and create chain of posts linked one after another.
+- **Solution two -** What if we create multiple accounts and connect them somehow? Yes thats the plan, we will create new account for every single post and create chain of posts linked one after another.
 
 Linked 🤔, yeah you guessed it right we will use LinkedList to connect all the posts.
 
@@ -46,7 +51,7 @@ Linked 🤔, yeah you guessed it right we will use LinkedList to connect all the
 
 before we start with actual development we learn some Solana CLI commands [docs](https://docs.solana.com/cli/conventions):
 
-to see your current solana confguration use:
+to see your current solana configuration use(I assume you have followed Solana 101 Pathway and you have all the cli installation done):
 
 ```
 solana config get
@@ -84,17 +89,21 @@ Check balance again and now you should have a balance 10 SOL in your wallet.
 **Now its time to scaffold our blog app with the help of Anchor CLI:**
 
 ```
-anchor init blog-app
+anchor init blog
 
 cd blog
 ```
 
 The anchor init command creates the following directories:
 
-- app - for frontend client
-- program - Rust code for the Solana program
-- test - Tests code to test Program
-- so on...
+```
+├── app
+├── programs
+|   └── blog
+|        └── src
+|             └── lib.rs
+├── test
+```
 
 Before writing program code update Anchor.toml
 
@@ -104,7 +113,7 @@ wallet = "your Keypair Path from output of solana config get"
 
 ## Creating blog program
 
-Now we are ready to start with solana rust program, open up the lib.rs file located inside /program/<blog>/src/ folder.
+Now we are ready to start with solana rust program, open up the lib.rs file located inside /program/blog/src/ folder.
 
 ```rust
 use anchor_lang::prelude::*;
@@ -507,7 +516,11 @@ Next is Testing program. Dont worry, we'll fast forward the next section.
 
 ## Writing tests for blog program
 
-before we dive into writing test cases, we will create 3 simple reusable utility functions.
+before we dive into writing test cases, every test needs a initialized blog, a brand new user and a post so to avoid repetition we will create 3 simple reusable utility functions.
+
+- createBlog - initialize new Blog account
+- createUser - create a new User
+- createPost - create new Post
 
 **createBlog.js**
 
@@ -516,7 +529,7 @@ const anchor = require("@project-serum/anchor");
 
 const { SystemProgram } = anchor.web3;
 
-// we will discus the arguments when we use it
+// we will discus the parameters when we use it
 async function createBlog(program, provider) {
   const blogAccount = anchor.web3.Keypair.generate(); // creates random keypair
   const genesisPostAccount = anchor.web3.Keypair.generate(); // creates random keypair
@@ -583,7 +596,7 @@ async function createPost(program, provider, blogAccount, userAccount) {
   const content = "post content";
 
   await program.rpc.createPost(title, content, {
-    // pass arguments to program
+    // pass arguments to the program
     accounts: {
       blogAccount: blogAccount.publicKey,
       authority: provider.wallet.publicKey,
@@ -615,8 +628,8 @@ describe("blog tests", () => {
   const program = anchor.workspace.BlogSol;
 
   it("initialize blog account", async () => {
+    // call the utility function
     const { blog, blogAccount, genesisPostAccount } = await createBlog(
-      // call the utility function
       program,
       provider
     );
@@ -631,8 +644,6 @@ describe("blog tests", () => {
       provider.wallet.publicKey.toString()
     );
   });
-
-  // other test cases
 });
 ```
 
@@ -641,6 +652,8 @@ Next, run the test:
 ```
 anchor test
 ```
+
+after running `anchor test` you will see the 1/1 test passing.
 
 Now we complete remaining tests:
 
@@ -790,7 +803,480 @@ Run again:
 anchor test
 ```
 
-## Deploying to Devnet
+# Building frontend
+
+Now we're ready to build out the front end. we will create react app inside the existing app directory.
+
+```
+cd app
+npx create-react-app .
+```
+
+folder structure of React spp
+
+```
+├── public
+├── src
+|   └── app.js
+├── package.json
+```
+
+Before we start writing frontend part of tutorial we will create a simple script that will copy program idl file to the React app.
+whenever we deploy our rust program with `anchor deploy` the anchor cli generates the idl file that has all the metadata related to our rust program(this metadata helps building client side interface with the rust program).
+
+Create copy_idl.js file root of your project and copy the code given below. The code is just copying the idl file from /target/idl to /app/src directory.
+
+```js
+const fs = require("fs");
+const blog_idl = require("./target/idl/blog_sol.json");
+
+fs.writeFileSync("./app/src/idl.json", JSON.stringify(blog_idl, null, 2));
+```
+
+Next, install dependencie.
+
+```
+npm i @solana/wallet-adapter-react @solana/wallet-adapter-wallets @solana/web3.js
+```
+
+Next, open app/src/App.js and update it with the following:
+
+```js
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
+import { getPhantomWallet } from "@solana/wallet-adapter-wallets";
+import { Home } from "./home";
+
+const wallets = [getPhantomWallet()];
+const endPoint = "http://127.0.0.1:8899";
+
+const App = () => {
+  return (
+    <ConnectionProvider endpoint={endPoint}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <Home />
+      </WalletProvider>
+    </ConnectionProvider>
+  );
+};
+
+export default App;
+```
+
+in the further tutorial I'm just gonna explain the logical part of our dapp and I'll leave the styling part up to you.
+
+Now let's start with login functionality of our dapp, we will need a button that handle the user login with Phantom browser wallet.
+
+create button inside Home.js component with `onConnect` onClick handler like this,
+
+```JSX
+<button onClick={onConnect}>Connect with Phantom</button>
+```
+
+then create `onConnect` function that handles the click event of connect button.
+
+```js
+import { WalletName } from "@solana/wallet-adapter-wallets";
+import { useWallet } from "@solana/wallet-adapter-react";
+
+// inside react component
+const { select } = useWallet();
+const onConnect = () => {
+  select(WalletName.Phantom);
+};
+```
+
+Lets deploy our Rust program first then copy the idl file with the help of the copy_idl.js script that we wrote before,
+
+before deploy make sure you have `localnet` cluster set in Anchor.toml file. Now
+open up new Terminal session and run `solana-test-validator` command this will start local network of solana blockchain.
+
+```
+// in new terminal run,
+solana-test-validator
+```
+
+then deploy the program with,
+
+```
+anchor deploy
+```
+
+if you run into an error,
+
+- make sure `solana-test-validator` is running
+- make sure your solana config is in valid state (I mean the RPC url, KeyPair path etc.)
+
+once you successfully deploy the Rust program with anchor cli then run the copy_idl.js file like,
+
+```
+node copy_idl.js
+```
+
+it will copy the idl file to /app/src directory, Now you will see the idl.json file inside /app/src directory.
+
+## Initialize Blog
+
+Now we will initialize the blog. Initializing blog is one time process. Lets create `init_blog.js` file inside /app/src folder and copy the code given below.
+
+```js
+import { Program } from "@project-serum/anchor";
+import { Keypair, PublicKey, SystemProgram } from "@solana/web3.js";
+import idl from "./idl.json";
+
+const PROGRAM_KEY = new PublicKey(idl.metadata.address);
+
+export async function initBlog(walletKey, provider) {
+  const program = new Program(idl, PROGRAM_KEY, provider);
+  const blogAccount = Keypair.generate();
+  const genesisPostAccount = Keypair.generate();
+
+  await program.rpc.initBlog({
+    accounts: {
+      authority: walletKey,
+      systemProgram: SystemProgram.programId,
+      blogAccount: blogAccount.publicKey,
+      genesisPostAccount: genesisPostAccount.publicKey,
+    },
+    signers: [blogAccount, genesisPostAccount],
+  });
+
+  console.log("Blog pubkey: ", blogAccount.publicKey.toString());
+}
+```
+
+in this `initBlog` function we have imported the program idl then we have generated two Keypair for blog account and initial dummy post account and after that we just call the initBlog function of the program with all the necessary accounts. we are creating two new accounts here `blogAccount` and `genesisPostAccount` thats why we have to pass it as signers.
+
+Now the ui part of this, we will create a temporary button to call the initBlog function. Once the blog is initialize we will remove the button(as it wont be needed anymore).
+
+```JSX
+  import {
+    useAnchorWallet,
+    useConnection
+  } from "@solana/wallet-adapter-react";
+  import idl from './idl.json'
+
+  const PROGRAM_KEY = new PublicKey(idl.metadata.address);
+  const BLOG_KEY = /* new PublicKey(blog key) */;
+
+  // inside react component
+  const { connection } = useConnection();
+  const wallet = useAnchorWallet();
+
+  const _initBlog = () => {
+    const provider = new Provider(connection, wallet, {});
+    initBlog(provider.wallet.publicKey, provider);
+  };
+
+  <button onClick={_initBlog}>Init blog</button>
+```
+
+initBlog function will create a brand new Blog and console log its publicKey. make sure you still have `solana-test-validator` running in another shell and your Phantom wallet is connected to the local network (http://localhost:8899)
+
+if you dont know how to connect Phantom wallet to Localnet here are the steps,
+
+- go to settings tab in Phantom wallet
+- scroll down and select `change network`
+- finally choose `Localhost`
+
+Next, you need balance in your account on Localnet to get balance you need to run the following command.
+
+```
+solana airdrop 10 <your-account-address>
+```
+
+then check balance with
+
+```
+solana balance <your-account-address>
+```
+
+you will see `10 SOL` printed on your terminal.
+
+Once you are connected to the Localhost you are ready to initialize the blog account. Run the app with `npm run start` it will open up your Dapp in your browser there you will see two button one is `connect` and another one is `init blog`. First step is to connect to the Phantom wallet by clicking `connect` button. Once you are connected then click on the `init blog` button it will trigger the Phantom wallet confirmation popup click `Approve`. After 1 to 2 sec the `initBlog` function will console log the publicKey of your blog account, just copy the blog publicKey and store in `BLOG_KEY` variable and thats it we have successfully initialized our blog account.
+
+```js
+const BLOG_KEY = new PublicKey(your - blog - key);
+```
+
+Your blog is initialized now you can comment out the `init blog` button as well the `_initBlog` function.
+
+## Signup user
+
+Now we will move to the part where user enter his/her name and avatar url and we will initialize his/her account.
+
+let's create two input fields one for user name and another for user avatar.
+
+```JSX
+ <input placeholder="user name" />
+ <input placeholder="user avatar" />
+```
+
+Next attach React state to the input fields and create `signup` button
+
+```JSX
+ const [name, setName] = useState("")
+ const [avatar, setAvatar] = useState("")
+
+ const _signup = ()=> {
+
+ }
+
+ <input placeholder="user name" value={name} onChange={e => setName(e.target.value)} />
+ <input placeholder="user avatar" value={avatar} onChange={e => setAvatar(e.target.value)} />
+ <button onClick={_signup}>Signup</button>
+```
+
+Now we will write the functionality of \_signup function,
+if you remember the initBlog function there we have randomly generated Keypair but in this case we wont generate the Keypair randomly as we need to identify the user for all the subsequent logins.
+
+`Keypair` has `fromSeed` function that takes a `seed` argument and generate unique Keypair from the given seed.
+
+so we will create seed by combining `PROGRAM_KEY` and users `wallet_key` so it will create unique Keypair.
+
+```js
+import { Keypair, PublicKey, SystemProgram } from "@solana/web3.js";
+import { Program, Provider } from "@project-serum/anchor";
+
+const genUserKey = (PROGRAM_KEY, walletKey) => {
+  const userAccount = Keypair.fromSeed(
+    new TextEncoder().encode(
+      `${PROGRAM_KEY.toString().slice(0, 15)}__${walletKey
+        .toString()
+        .slice(0, 15)}`
+    )
+  );
+
+  return userAccount;
+};
+```
+
+Let's complete the \_signup function,
+
+```js
+const _signup = async () => {
+  const provider = new Provider(connection, wallet, {});
+  const program = new Program(idl, PROGRAM_KEY, provider);
+  const userAccount = genUserKey(PROGRAM_KEY, provider.wallet.publicKey);
+
+  await program.rpc.signupUser(name, avatar, {
+    accounts: {
+      authority: provider.wallet.publicKey,
+      userAccount: userAccount.publicKey,
+      systemProgram: SystemProgram.programId,
+    },
+    signers: [userAccount],
+  });
+};
+```
+
+Now we have created user account next we will fetch the user account to see whether user has already signed up.
+
+```jsx
+import { useEffect, useState } from "react";
+
+// inside react component
+const fetchUser = async () => {
+  const provider = new Provider(connection, wallet, {});
+  const program = new Program(idl, PROGRAM_KEY, provider);
+  const userAccount = genUserKey(PROGRAM_KEY, provider.wallet.publicKey);
+
+  const _user = await program.account.userState.fetch(userAccount.publicKey);
+
+  return _user;
+};
+
+const [user, setUser] = useState();
+// fetch user when wallet is connected
+useEffect(() => {
+  if (wallet?.publicKey) {
+    fetchUser()
+      .then((user) => {
+        setUser(user);
+      })
+      .catch((e) => console.log(e));
+  }
+}, [wallet]);
+
+// if user is not undefined then show user name and user avatar in ui
+// otherwise show signup form to the user
+
+{
+  user ? (
+    <>
+      <h1>user name: {user.name}</h1>
+      <h1>user avatar: {user.avatar} </h1>
+    </>
+  ) : (
+    <>
+      <input
+        placeholder="user name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        placeholder="user avatar"
+        value={avatar}
+        onChange={(e) => setAvatar(e.target.value)}
+      />
+      <button onClick={_signup}>Signup</button>{" "}
+    </>
+  );
+}
+```
+
+## create post
+
+first we will create a form to take post title and post content from user.
+
+```jsx
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
+
+
+     const _createPost = async ()=> {
+
+     }
+
+    <input
+      placeholder="post title"
+      value={title}
+      onChange={(e) => setTitle(e.target.value)}
+    />
+    <input
+      placeholder="post content"
+      value={content}
+      onChange={(e) => setContent(e.target.value)}
+    />
+    <button onClick={_createPost}>Create post</button>
+```
+
+next complete the \_createPost function
+
+```js
+const _createPost = async () => {
+  const provider = new Provider(connection, wallet, {});
+  const program = new Program(idl, PROGRAM_KEY, provider);
+  const postAccount = Keypair.generate();
+  const userAccount = genUserKey(PROGRAM_KEY, provider.wallet.publicKey);
+
+  await program.rpc.createPost(title, content, {
+    accounts: {
+      blogAccount: BLOG_KEY,
+      authority: provider.wallet.publicKey,
+      userAccount: userAccount.publicKey,
+      postAccount: postAccount.publicKey,
+      systemProgram: SystemProgram.programId,
+    },
+    signers: [postAccount],
+  });
+};
+```
+
+here we have passed the `BLOG_KEY` the same key that we have obtained by initializing the blog.
+
+Now we will fetch the all the posts created on our Blog. if you remember the Rust program we have attach the previous post id the the current post, here we will use the previous post id to iterate over the list of posts. to do so first we will create a function that finds the post of given post id.
+
+```js
+const getPostById = async (postId) => {
+  const provider = new Provider(connection, wallet, {});
+  const program = new Program(idl, PROGRAM_KEY, provider);
+
+  try {
+    const post = await program.account.postState.fetch(new PublicKey(postId));
+
+    const userId = post.user.toString();
+    if (userId === SystemProgram.programId.toString()) {
+      return;
+    }
+
+    return {
+      id: postId,
+      title: post.title,
+      content: post.content,
+      userId,
+      prePostId: post.prePostKey.toString(),
+    };
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+```
+
+To loop over all the posts we need latest post id and we can find the latest post id from the blog state.
+create `fetchAllPosts` function as,
+
+```js
+const fetchAllPosts = async () => {
+  const provider = new Provider(connection, wallet, {});
+  const program = new Program(idl, PROGRAM_KEY, provider);
+
+  // read the blog state
+  const blog = await program.account.blogState.fetch(BLOG_KEY);
+
+  const latestPostId = blog.currentPostKey.toString();
+  const posts = [];
+
+  let nextPostId = latestPostId;
+  while (!!nextPostId) {
+    const post = await getPostById(nextPostId, program);
+    if (!post) {
+      break;
+    }
+
+    posts.push(post);
+    nextPostId = post.prePostId;
+  }
+
+  return posts;
+};
+```
+
+Now trigger the fetchAllPosts function when user login with Phantom wallet.
+
+```js
+const [posts, setPosts] = useState([]);
+
+// fetch all the posts when wallet is connected
+useEffect(() => {
+  if (wallet?.publicKey) {
+    fetchAllPosts()
+      .then((posts) => {
+        setPosts(posts);
+      })
+      .catch((e) => console.log(e));
+  }
+}, [wallet]);
+```
+
+Show posts in the UI
+
+```jsx
+{
+  posts.map(({ title, content }, i) => {
+    return (
+      <div key={i}>
+        <h2>{title}</h2>
+        <p>{content}</p>
+      </div>
+    );
+  });
+}
+```
+
+## Todo
+
+Till now we have integrated initialization of blog, user signup, fetch user, create post, fetch all the posts there still some part is remaining like,
+
+- update user
+- update post
+- delete post
+
+if your follow the same steps as we have learned you can definitely be able to complete the remaining todo tasks.
+
+# Deploying to Devnet
 
 Deploying to a live network is straightforward:
 
@@ -820,11 +1306,17 @@ anchor deploy
 
 ## Conclusion
 
-Congratulations on finishing the tutorial. Thank you for taking the time to complete it.
+Congratulations on finishing the tutorial. Thank you for taking the time to complete it. There still a room for improvements like,
+
+- UI improvements
+- creating frontend app with Typescript
+- adding pagination while fetching all the posts
+- creating user timeline(posts created user)
+- adding rxjs to fetch posts(streaming posts)
 
 ## About Author
 
-This tutorial was created by [Kiran Bhalerao](https://github.com/kiran-bhalerao). If you have any suggestions/questions feel free to contact with author.
+This tutorial was created by [Kiran Bhalerao](https://github.com/kiran-bhalerao). For any suggestions/questions you can connect with author on [Figment Forum](https://community.figment.io/u/kiranbhalerao/).
 
 ## References
 
