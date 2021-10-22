@@ -399,7 +399,7 @@ Then, you'll see a project directory like this.
 
 #### Paste your smart contract into the contracts folder
 
-Create Company.sol file to paste in the smart contract.
+Create Company.sol file under ``/contracts``
 
 ```bash
 $ touch Company.sol
@@ -706,7 +706,9 @@ After reading this tutorial you'll able to :
 - Use truffle library to unit test smart contract
 
 ### About the Author
-David Kim : BlockChain developer with much interest in NFT, DEFI.[GitHub](https://github.com/PowerStream3604)
+David Kim : BlockChain developer with much interest in NFT, DEFI.
+
+Github : [GitHub](https://github.com/PowerStream3604)
 
 ### References
 - [Truffle](https://www.trufflesuite.com/)
