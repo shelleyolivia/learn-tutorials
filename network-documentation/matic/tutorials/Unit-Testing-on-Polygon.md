@@ -703,8 +703,7 @@ After reading this tutorial you'll able to :
 - Use truffle library to unit test smart contract
 
 ### About the Author
-
-[Please add my intro]
+David Kim : BlockChain developer with much interest in NFT, DEFI.[GitHub](https://github.com/PowerStream3604)
 
 ### References
 - [Truffle](https://www.trufflesuite.com/)
