@@ -53,7 +53,7 @@ It's important to understand that Anchor is new, and the API may change as devel
 
 I used v 0.16.1 for this tutorial.
 
-```bash
+```text
 $ anchor --version
 anchor-cli 0.16.1
 ```
@@ -126,7 +126,7 @@ Since that's not our key, let's fix that now and generate our key.
 
 Run:
 
-```bash
+```text
 $ cd solblog
 $ anchor build
 ```
@@ -162,14 +162,14 @@ Our newly generated code public key is in that new .`/target/deploy` folder, go 
 
 To show our program public key which we will use as out id, simply run:
 
-```bash
+```text
 // CLI
 solana address -k ./target/deploy/solblog-keypair.json
 ```
 
 Which shows us out unique key:
 
-```bash
+```text
 // yours will look different, that's ok
 
 $  SoMeKeyThatIsUniqueTOmyPROGRAM
@@ -206,7 +206,7 @@ The next code block under `#[derive(Accounts)]` is a going to be struct that des
 
 <img src="../../../.gitbook/assets/tutorial-graphics/AccountsRUST.svg" width="40%" height="auto">
 
-```rs
+```rust
 #[account]
 pub struct BlogAccount {
     pub authority: Pubkey,    // save the posting authority to this authority field
@@ -239,7 +239,7 @@ BUT, in order for us to have access to `authority` in `initialize()` we need:
 
 Anchor makes this easy for us using their macros:
 
-```rs
+```rust
 #[derive(Accounts)]
 pub struct Initialize<'info> {
     #[account(
@@ -258,7 +258,7 @@ pub struct Initialize<'info> {
 
 The `#[account]` macros in `#[derive(Accounts)]` wire up all the connections we need in order to use `blog_account` and `authority` in our `initilize` function. So now we can use `blog_account` and `authority` in our function:
 
-```rs
+```rust
 #[program]
 pub mod solblog {
     use super::*;
@@ -277,7 +277,7 @@ Once Anchor has helped us `initilize` our account and set the blog `authority` n
 
 First we create our Anchor glue by writing an additional `#[derive(Accounts)]` struct. Again, we want access to `blog_account` so we need to include that. We are changing `latest_post` so `blog_account` needs to be mutable, hence the `#[account(mut)]` but we also need for the transaction to be signed by the blogger, so it also needs to include `authority` as a `Signer`. The result looks like this:
 
-```rs
+```rust
 #[derive(Accounts)]
 pub struct MakePost<'info> {
     #[account(
@@ -296,7 +296,7 @@ pub struct MakePost<'info> {
 
 Now that this Anchor struct has given us access to these fields, we can use them in the first code block under `#program`:
 
-```rs
+```rust
     pub fn make_post(
         ctx: Context<MakePost>,
         new_post: Vec<u8> // <--- our blog post data
@@ -320,7 +320,7 @@ Our `make_post` function gets broken down in a few steps here:
 
 First we take our `new_post` as an argument to the function:
 
-```rs
+```rust
 new_post: Vec<u8> // <--- our blog post data
 ```
 
@@ -328,7 +328,7 @@ Our blog posts are going to be Strings, but we don't know how long these strings
 
 Next we take the `Vec<u8>` and convert it to a String slice (`&str`) with a bit of error handling included, in case we don't get valid UTF8:
 
-```rs
+```rust
 let post = from_utf8(&new_post) // convert the array of bytes into a string slice
 	.map_err(|err| {
 	msg!("Invalid UTF-8, from byte {}", err.valid_up_to());
@@ -338,7 +338,7 @@ let post = from_utf8(&new_post) // convert the array of bytes into a string slic
 
 Lastly, we print the blog post to the Program Log:
 
-```rs
+```rust
 	msg!(post); // msg!() is a Solana macro that prints string slices to the program log, which we can grab from the transaction block data
 ```
 
@@ -346,14 +346,14 @@ The reason we print to the program log is: our BlogAccount only saves the latest
 
 Lastly, we grab the `accounts` from the context (`ctx`) and pick `blog_account` as the one we're going to use (we only have one, but you could have had more) so we can also save the most recent post to the Account (`BlogAccount`):
 
-```rs
+```rust
 	let b_acc = &mut ctx.accounts.blog_account;
 	b_acc.latest_post = new_post; // save the latest post in the account.
 ```
 
 Our Rust Solana Program is complete, written in Rust! Now that we're done, we need to build again so that the Solana build uses our most recent code:
 
-```bash
+```text
 # in project root directory
 
 anchor build
@@ -489,13 +489,13 @@ A full functioning version of the complete code is included with this tutorial.
 
 Now that we've built our `deploy.js` script, we can run the script using `node` or use the shortcut script in `package.json` which is convenienlty run by:
 
-```bash
+```text
 $ 	npm run deploy
 ```
 
 (or)
 
-```bash
+```text
 $	node ./deploy.js
 ```
 
@@ -809,7 +809,7 @@ After setup and focusing on the Anchor RPC and Solana-Web3.js portions of the cl
 
 The Svelte [setup](https://kit.svelte.dev/docs#introduction-getting-started) is simply:
 
-```bash
+```text
 $ npm init svelte@next ./app
 $ cd app
 $ npm install
@@ -820,7 +820,7 @@ Now we can add our Anchor javascript code to feed our Svelte front end with Sola
 
 To use anchor from javascript, we install the anchor library:
 
-```bash
+```text
 
 npm install @project-serum/anchor --save
 
@@ -898,7 +898,7 @@ The BlogAccount key is created on the fly during intilization, but if there was 
 
 In the end, navigating to `./app` and running `npm run dev` will start up the Svelte App and get you to the home screen.
 
-```bash
+```text
 $   cd ./app
 $   npm run dev # or npm run dev3654 if using the exact tutorial code
 ```
