@@ -1,6 +1,6 @@
 # Introduction
 We are going to make a CrowdFunding platform like GoFundMe, Kickstarter, and Indiegogo. Our DApp will let people create campaings, Donate SOL to existing campaings and payout to the compaign creator. 
-We are going to make a solana program and connect it with our front-end application.
+We are going to make a Solana program and connect it with our front-end application.
 
 
 # Prerequisites
@@ -8,10 +8,13 @@ We are going to make a solana program and connect it with our front-end applicat
 - Javascript
 
 # Requirements
-- We'll need Git in this tutorial, install it from [HERE](https://git-scm.com/downloads).
-- We'll need Solana CLI in this tutorial, install it from [HERE](https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool).
-- We'll need Rust Toolchain in this tutorial, install it from [HERE](https://www.rust-lang.org/tools/install).
-- We'll need Node.js in this tutorial, install it from [HERE](https://nodejs.org/en/download/).
+The following software is required to complete this tutorial:
+- Git, install it from [HERE](https://git-scm.com/downloads).
+- Solana CLI, install it from [HERE](https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool).
+- The Rust toolchain, install it from [HERE](https://www.rust-lang.org/tools/install).
+- Node.js (v14.18.1+), install it from [HERE](https://nodejs.org/en/download/).
+
+
 
 > If you already have good knowledge of the Rust programming language, you can skip the `Introduction to Rust` section. I would still recommend having a quick look at all the code blocks.
 
@@ -27,7 +30,7 @@ You can follow this this [link](https://doc.rust-lang.org/book/ch01-01-installat
 
 Before we start the tutorial, we need to understand some basics of Rust. I have added the link to the [Rust book](https://doc.Rust-lang.org/book/ch00-00-introduction.html) pages if you want to read more about any topic.
 
-## Basics Data types in Rust:
+## Basics Data types in Rust
 Rust has four primary scalar types: integers, floating-point numbers, Booleans, and characters.
 Integers are `u8`,`u32`, `i32`, `i64`, `usize`, and the list goes on here basically `u` prefix suggests that we have an unsigned integer and the suffix number tell the number of bits. So `u8` is an unsigned 8-bit number(0 to 255).
 |Length| Signed|	Unsigned|
@@ -44,7 +47,7 @@ Rust has 2 types for strings, `str` and `String`. `String` is a growable, heap-a
 
 Read more on [Rust book](https://doc.Rust-lang.org/book/ch03-02-data-types.html).
 
-## Creating a variable and mutability:
+## Creating a variable and mutability
 We can create a variable with the `let` keyword
 
 ```rust
@@ -70,7 +73,7 @@ a=100;
 
 Read more on [Rust book](https://doc.Rust-lang.org/book/ch03-01-variables-and-mutability.html).
 
-## Control flow:
+## Control flow
 We can use `if` `else` statement in Rust just like we can do in other language, here is a small program for us to understand the syntax.
 
 ```rust
@@ -98,7 +101,7 @@ fn main() {
 Read more on [Rust book](https://doc.Rust-lang.org/book/ch03-05-control-flow.html).
 
 
-## Functions and Macros:
+## Functions and Macros
 
 Function definitions in Rust start with fn and have a set of parentheses after the function name. The curly brackets tell the compiler where the function body begins and ends.
 
@@ -120,7 +123,7 @@ For this tutorial, we can assume macros are also functions. They end with `!`, l
 
 Read more about functions on [Rust book](https://doc.Rust-lang.org/book/ch03-03-how-functions-work.html).
 
-## [Enums]() and the [match syntax](https://doc.Rust-lang.org/book/ch06-02-match.html):
+## Enums and the match syntax
 Rust has enums. They are more than simple enums other languages provide. In Rust, we can even store data in the enums.
 Here is the example of `Result enum`. 
 We are going to make use of the `Result` enum in our program.
@@ -181,7 +184,7 @@ This is all the Rust we would need to get started with our Solana program.
 
 ## Setup
 
-1. We create a react app. Open your projects directory in the terminal and run
+1. We create a React app. Open your projects directory in the terminal and run
 
 ```text
 npx create-react-app crowd-funding
@@ -633,7 +636,7 @@ We do not want the campaign to get deleted after a withdrawal. We want it to alw
         return Err(ProgramError::InsufficientFunds);
     }
 
-    /// Tranfer balance
+    /// Transfer balance
     /// We will decrease the balance of the program account, and increase the admin_account balance.
     **writing_account.try_borrow_mut_lamports()? -= input_data.amount;
     **admin_account.try_borrow_mut_lamports()? += input_data.amount;
@@ -665,8 +668,7 @@ We get 3 accounts here, first is the program-owned account containing the data o
 Then we have a `donator_program_account` which is also the program-owned account that only has the Lamport we would like to donate.
 Then we have the account of the `donator`.
 
-> Note: When we will create it in our front-end, although we do not want to store anything in it we will assign it some size. That is so it gets automatically deleted after the SOL token has been transferred.
-Then we want the donator account to sign this transaction.
+> Note: When we will create it in our front-end, although we do not want to store anything in it we will assign it some size. That is so it gets automatically deleted after the SOL token has been transferred. Then we want the donator account to sign this transaction.
 
 ```rust
   if writing_account.owner != program_id {
@@ -710,7 +712,7 @@ Then at the end of the program we will write the new updated `campaign_data` to 
 
 Hooray, We have completed our Solana program, Now we can go ahead and deploy it.
 
-## Deploy solana program.
+## Deploy Solana program.
 We are going to deploy the program on Devnet.
 
 Solana Programs work on a [BPF system](https://docs.solana.com/developing/on-chain-programs/overview#berkeley-packet-filter-bpf), so we will compile our program into a compatible format.
