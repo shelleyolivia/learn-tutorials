@@ -905,7 +905,9 @@ npm run dev
 
 You can use `npm run dev3654` if using the exact tutorial code repository.
 
-Alternatively, in MS VS Code IDE you can also just click in the "npm" tab to "run dev".
+If you are using Visual Studio Code as your IDE and you want a shortcut, you can also just click in the "npm" tab to "run dev".
+
+![run](../../../.gitbook/assets/tutorial-graphics/ms-vs-code-npm-run.png)
 
 Open up your browser to `http://localhost:3000` and play around!
 
