@@ -62,7 +62,7 @@ anchor-cli 0.16.1
 
 Getting started with Anchor is fairly straightforward, and you can follow the [setup instructions on the Anchor website](https://project-serum.github.io/anchor/getting-started/installation.html).
 
-For test environments, you have the choice of [installing a local validator](https://docs.solana.com/developing/test-validator) or using the [Devnet online](https://explorer.solana.com/?cluster=devnet). We will be deploying to the Solana Devnet to practice deploying in real life. As the syaing goes, _"deploy early, deploy often"_! The last thing you want is for your code to work in a development environment, and not in production.
+For test environments, you have the choice of [installing a local validator](https://docs.solana.com/developing/test-validator) or using the [Devnet online](https://explorer.solana.com/?cluster=devnet). We will be deploying to the Solana Devnet to practice deploying in real life. As the saying goes, _"deploy early, deploy often"_! The last thing you want is for your code to work in a development environment, and not in production.
 
 Once you have installed all the Anchor dependencies, it's time to initiate a project!
 
@@ -424,7 +424,7 @@ fs.writeFileSync(
 // ... [snip]
 ```
 
-The second keypair that we need is our program keypair. This was generated for you when you ran `anchor build` and is saved in `target/deploy/solblog-keypair.json`. We need to get the programId from that keypair. We _could_ just copy and paste, or we can retreive the keys programmatically liek this:
+The second keypair that we need is our program keypair. This was generated for you when you ran `anchor build` and is saved in `target/deploy/solblog-keypair.json`. We need to get the programId from that keypair. We _could_ just copy and paste, or we can retrieve the keys programmatically liek this:
 
 ```js
 // deploy.js
