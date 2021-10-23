@@ -6,7 +6,7 @@ AMM is a type of decentralized exchange which is based on a mathematical formula
 
 For example, Uniswap uses p * q = k, where p is the amount of one token in the liquidity pool, and q is the amount of the other. Here “k” is a fixed constant which means the pool’s total liquidity always has to remain the same. For further explanation let us take an example if an AMM has coin A and Coin B, two volatile assets, every time A is bought, the price of A goes up as there is less A in the pool than before the purchase. Conversely, the price of B goes down as there is more B in the pool. The pool stays in constant balance, where the total value of A in the pool will always equal the total value of B in the pool. The size will expand only when new liquidity providers join the pool.
 
-Different AMMs use different formulas according to the specific use cases they target and the similarity between all of them is that they determine the prices algorithmically. In this tutorial, we will learn how to build a very basic AMM having features namely Provide, Withdraw & Swap with no incentive mechanism like trading fees. Also, we will not deal with ERC20 tokens; instead we will maintain our own mapping storing the balance of the accounts to keep things simple!
+Different AMMs use different formulas according to the specific use cases they target and the similarity between all of them is that they determine the prices algorithmically. In this tutorial, we will learn how to build a very basic AMM having features namely Provide, Withdraw & Swap with no incentive mechanism like trading fees. Also, we will not deal with ERC20 tokens instead, we will maintain our own mapping storing the balance of the accounts to keep things simple!
 
 # Prerequisites
 
@@ -33,7 +33,7 @@ contract AMM {
 }
 ```
 
-Next, we define the state variables needed to operate the AMM. We will be using the same mathematical formula as used by Uniswap to determine the price of the assets (`K = totalToken1 * totalToken2`). For simplicity purposes, We are maintaining our own internal balance mapping (token1Balance & token2Balance) instead of dealing with the ERC-20 tokens. As solidity doesn't support float numbers, We will reserve the first six digits of an integer value to represent the decimal value after the dot. This is achieved by scaling the numbers by a factor of 10^6 (PRECISION).
+Next, we define the state variables needed to operate the AMM. We will be using the same mathematical formula as used by Uniswap to determine the price of the assets (**K = totalToken1 * totalToken2**). For simplicity purposes, We are maintaining our own internal balance mapping (token1Balance & token2Balance) instead of dealing with the ERC-20 tokens. As solidity doesn't support float numbers, We will reserve the first six digits of an integer value to represent the decimal value after the dot. This is achieved by scaling the numbers by a factor of 10^6 (PRECISION).
 
 ```solidity
 uint256 totalShares;  // Stores the total amount of share issued for the pool
@@ -96,7 +96,7 @@ Now we will start implementing the three core functionalities - Provide, Withdra
 
 ## Provide
 
-`provide` function takes two parameters - amount of token1 & amount of token2 that the user wants to lock in the pool. If the pool is initially empty then the equivalence rate is set as `_amountToken1 : _amountToken2` and the user is issued 100 shares for it. Otherwise, it is checked whether the two amounts provided by the user have equivalent value or not. This is done by checking if the two amounts are in equal proportion to the total number of their respective token locked in the pool i.e. `_amountToken1 : totalToken1 :: _amountToken2 : totalToken2` should hold.
+`provide` function takes two parameters - amount of token1 & amount of token2 that the user wants to lock in the pool. If the pool is initially empty then the equivalence rate is set as **_amountToken1 : _amountToken2** and the user is issued 100 shares for it. Otherwise, it is checked whether the two amounts provided by the user have equivalent value or not. This is done by checking if the two amounts are in equal proportion to the total number of their respective token locked in the pool i.e. **_amountToken1 : totalToken1 :: _amountToken2 : totalToken2** should hold.
 
 ```solidity
 // Adding new liquidity in the pool
@@ -128,7 +128,7 @@ function provide(uint256 _amountToken1, uint256 _amountToken2) external validAmo
 Carefully notice the order of balance update we are performing in the above function. We are first deducting the tokens from the users' account and in the very last step, we are updating her share balance. This is done to prevent a reentrancy attack.  
 {% endhint %}
 
-The given functions help the user get an estimate of the amount of other token that they need to lock for the given token amount. Here again, we use the proportion `_amountToken1 : totalToken1 :: _amountToken2 : totalToken2` to determine the amount of token1 required if we wish to lock given amount of token2 and vice-versa.
+The given functions help the user get an estimate of the amount of the second token that they need to lock for the given token amount. Here again, we use the proportion **_amountToken1 : totalToken1 :: _amountToken2 : totalToken2** to determine the amount of token1 required if we wish to lock given amount of token2 and vice-versa.
 
 ```solidity
 // Returns amount of Token1 required when providing liquidity with _amountToken2 quantity of Token2
@@ -144,7 +144,7 @@ function getEquivalentToken2Estimate(uint256 _amountToken1) public view activePo
 
 ## Withdraw
 
-Withdraw is used when a user wishes to burn a given amount of share to get back their tokens. Token1 and Token2 are released from the pool in proportion to the share burned with respect to total shares issued i.e. `share : totalShare :: amountTokenX : totalTokenX`.
+Withdraw is used when a user wishes to burn a given amount of share to get back their tokens. Token1 and Token2 are released from the pool in proportion to the share burned with respect to total shares issued i.e. **share : totalShare :: amountTokenX : totalTokenX**.
 
 ```solidity
 // Returns the estimate of Token1 & Token2 that will be released on burning given _share
@@ -174,7 +174,7 @@ function withdraw(uint256 _share) external activePool validAmountCheck(shares, _
 
 To swap from Token1 to Token2 we will implement three functions - `getSwapToken1Estimate`, `getSwapToken1EstimateGivenToken2` & `swapToken1`. The first two functions only determine the values of swap for estimation purposes while the last one does the conversion.
 
-`getSwapToken1Estimate` returns the amount of token2 that the user will get when depositing a given amount of token1. The amount of token2 is obtained from the equation `K = totalToken1 * totalToken2` where the `K` should remain the same before/after the operation. This gives us `K = (totalToken1 + amountToken1) * (totalToken2 - amountToken2)` and we get the value `amountToken2` from solving this equation. In the last line, we are ensuring that the pool is never drained completely from either side, which would make the equation undefined.
+`getSwapToken1Estimate` returns the amount of token2 that the user will get when depositing a given amount of token1. The amount of token2 is obtained from the equation **K = totalToken1 * totalToken2** where the **K** should remain the same before/after the operation. This gives us **K = (totalToken1 + amountToken1) * (totalToken2 - amountToken2)** and we get the value `amountToken2` from solving this equation. In the last line, we are ensuring that the pool is never drained completely from either side, which would make the equation undefined.
 
 ```solidity
 // Returns the amount of Token2 that the user will get when swapping a given amount of Token1 for Token2
@@ -188,7 +188,7 @@ function getSwapToken1Estimate(uint256 _amountToken1) public view activePool ret
 }
 ```
 
-`getSwapToken1EstimateGivenToken2` returns the amount of token1 that the user should deposit to get a given amount of token2. Amount of token1 is similarly obtained by solving the following equation `K = (totalToken1 + amountToken1) * (totalToken2 - amountToken2)`.
+`getSwapToken1EstimateGivenToken2` returns the amount of token1 that the user should deposit to get a given amount of token2. Amount of token1 is similarly obtained by solving the following equation **K = (totalToken1 + amountToken1) * (totalToken2 - amountToken2)**.
 
 ```solidity
 // Returns the amount of Token1 that the user should swap to get _amountToken2 in return
@@ -246,7 +246,7 @@ function swapToken2(uint256 _amountToken2) external activePool validAmountCheck(
 }
 ```
 
-This completes the smart contract implementation part. Now we will deploy it on the Fuji C-Chain tesnet.
+This completes the smart contract implementation part. Now we will deploy it on the Fuji C-Chain testnet.
 
 # Deploying the smart contract
 
@@ -254,7 +254,7 @@ This completes the smart contract implementation part. Now we will deploy it on 
 
 Log in to MetaMask -> Click the Network drop-down -> Select Custom RPC
 
-![Metamask](https://gblobscdn.gitbook.com/assets%2F-MIVL6JKxnpiaciltfue%2F-MM1OJt2er1kalefd4bd%2F-MM1PMHVK808DUpeSuF4%2Fimage.png?alt=media&token=9b5898f1-57e0-4334-b40c-b18005e3be0e)
+![Metamask](../../../.gitbook/assets/create-an-amm-on-avalanche_metamask.png)
 
 **FUJI Testnet Settings:**
 
@@ -270,9 +270,9 @@ Fund your address from the given [faucet](https://faucet.avax-test.network/).
 
 Open [Remix](https://remix.ethereum.org/) -> Select Solidity
 
-![remix-preview](https://gblobscdn.gitbook.com/assets%2F-MKmFQYgp3Usx3i-VLJU%2F-MLOuR33iyanZrmnCDTl%2F-MLOw5RJ5tNGvy2C90xN%2Fimage.png?alt=media&token=391f3978-7d53-4112-b45a-e89c3d6d783d)
+![remix-preview](../../../.gitbook/assets/create-an-amm-on-avalanche_remix.png)
 
-Create an `AMM.sol` file in the Remix file explorer, and paste the following code :
+Create an `AMM.sol` file in the Remix file explorer, and paste the following code:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -453,31 +453,36 @@ An Application Binary Interface (ABI) is a JSON object which stores the metadata
 {% endhint %}
 
 # Creating a frontend in React
-Now, we are going to create a react app and set up the frontend of the application. In the frontend, we represent token1 and token2 as KAR and KOTHI.
+Now, we are going to create a react app and set up the front-end of the application. In the frontend, we represent token1 and token2 as KAR and KOTHI respectively.
 
 Open a terminal and navigate to the directory where we will create the application.
-```bash
+
+```text
 cd /path/to/directory
 ```
 
 Create a new react app.
-```bash
+
+```text
 npx create-react-app avalanche-amm
 ```
 
 Move to the newly created directory and install the given dependencies.
-```bash
+
+```text
 cd avalanche-amm
 npm install --save ethers@5.4.7 react-icons@4.3.1
 ```
 
-Create a new directory `components` inside the `src` directory, where we will be keeping all our React components, using the following command :
-```bash
+Create a new directory `components` inside the `src` directory, where we will be keeping all our React components, using the following command:
+
+```text
 mkdir ./src/components
 cd ./src/components
 ```
 
-Now lets create the most reused component which takes user-input for our dApp. Create a new file called `BoxTemplate.jsx` and paste the following code : 
+Now let's create the most reused component which takes user input for our dApp. Create a new file called `BoxTemplate.jsx` and paste the following code:
+
 ```javascript
 import "../styles.css";
 import { RE } from "../constants";
@@ -507,7 +512,8 @@ export default function BoxTemplate(props) {
 }
 ```
 
-Lets create the component which will contain and control the other component. Create a new file called `ContainerComponent.jsx` and paste the following code:
+Let's create the component which will contain and control the other component. Create a new file called `ContainerComponent.jsx` and paste the following code:
+
 ```javascript
 import { useEffect, useState } from "react";
 import "../styles.css";
@@ -649,7 +655,8 @@ export default function ContainerComponent(props) {
 }
 ```
 
-Next we create the faucet component which helps to fund an account with the desired amount of KAR and KOTHI. Create a new file called `FaucetComponent.jsx` and paste the following code: 
+Next, we create the faucet component which helps to fund an account with the desired amount of KAR and KOTHI. Create a new file called `FaucetComponent.jsx` and paste the following code: 
+
 ```javascript
 import { useState } from "react";
 import "../styles.css";
@@ -718,7 +725,8 @@ export default function FaucetComponent(props) {
 }
 ```
 
-Now lets create the provide component which helps to provide liquidity to our AMM. Create a new file called `ProvideComponent.jsx` and paste the following code: 
+Now let's create the provide component which helps to provide liquidity to our AMM. Create a new file called `ProvideComponent.jsx` and paste the following code: 
+
 ```javascript
 import { MdAdd } from "react-icons/md";
 import { useState } from "react";
@@ -748,7 +756,7 @@ export default function ProvideComponent(props) {
                     setAmountOfKar(estimate / PRECISION);
                 }
             } catch (err) {
-                if (err.data.message === "execution reverted: Zero Liquidity") {
+                if (err.data.message.includes("Zero Liquidity")) {
                     setError("Message: Empty pool. Set the initial conversion rate.");
                 } else {
                     alert(err?.data?.message);
@@ -945,7 +953,8 @@ export default function SwapComponent(props) {
 }
 ```
 
-Lets now create the implementing the withdraw feature. Create a new file called `WithdrawComponent.jsx` and paste the following code: 
+Let's now create the implementing the withdraw feature. Create a new file called `WithdrawComponent.jsx` and paste the following code: 
+
 ```javascript
 import { useState } from "react";
 import "../styles.css";
@@ -1039,11 +1048,13 @@ export default function WithdrawComponent(props) {
 ```
 
 Now move out of the `components` directory using the following command:
-```bash
+
+```text
 cd ..
 ```
 
 Under the `src` directory now create a new file called `styles.css` and paste the following code: 
+
 ```css
 body {
     margin: 0;
@@ -1387,6 +1398,7 @@ svg {
 ```
 
 Open the file `App.js` and paste the following code block:
+
 ```javascript
 import { ethers } from "ethers";
 import { useState } from "react";
@@ -1444,7 +1456,6 @@ export default function App() {
         </div>
     );
 }
-
 ```
 
 Open the file `index.js` and paste the following code block:
@@ -1470,7 +1481,6 @@ export const abi = /*PASTE THE CONTRACT ABI*/;
 Note that you have to store the contract address and the ABI you copied from remix in this file in the variables named `CONTRACT_ADDRESS` and `abi` respectively. The `constants.js` file should look like this!
 
 ```javascript
-
 export const PRECISION = 1000000;
 export const RE = /^[0-9]*[.]?[0-9]{0,6}$/;
 export const CONTRACT_ADDRESS = "0x806D6B235C33c6B5b82EcD3B11509eFeC61BF643";
@@ -1771,7 +1781,7 @@ An Application Binary Interface (ABI) is a JSON object which stores the metadata
 {% endhint %}
 
 Now it's time to run our React app. Use the following command to start the React app.
-```bash
+```text
 npm start
 ```
 
@@ -1798,24 +1808,24 @@ npm start
 # Conclusion
 Congratulations! We have successfully developed a working AMM model where users can swap tokens, provide & withdraw liquidity. As a next step, you can play around with the price formula, integrate the ERC20 standard, introduce fees as an incentive mechanism for providers or add slippage protection, and much more...
 
-## Troubleshooting
+# Troubleshooting
 
 **Transaction Failure**
 
 * Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You can fund your address from the given [faucet](https://faucet.avax-test.network/)
 
-![Zero balance preview](https://raw.githubusercontent.com/realnimish/blockchain-chat-app/main/public/zero_balance.jpeg)
+![Zero balance preview](../../../.gitbook/assets/create-an-amm-on-avalanche_zero_balance.jpeg)
 
-* Make sure that you have selected the correct account on metamask if you have more than one account connected to the site.
+* Make sure that you have selected the correct account on Metamask if you have more than one account connected to the site.
 
-![Multiple account preview](https://raw.githubusercontent.com/realnimish/blockchain-chat-app/main/public/multiple_accounts.jpeg)
+![Multiple account preview](../../../.gitbook/assets/create-an-amm-on-avalanche_multiple_accounts.jpeg)
 
 # About the Author(s)  
 
-The tutorial was created by [Sayan Kar](https://github.com/SayanKar), [Yash Kothari](https://github.com/Yashkothari9) and [Nimish Agrawal](https://github.com/realnimish). You can reach out to them on [Figment Forum](https://community.figment.io/u/nimishagrawal100.in/) for any query regarding the tutorial.
+The tutorial was created by [Sayan Kar](https://github.com/SayanKar), [Yash Kothari](https://github.com/Yashkothari9), and [Nimish Agrawal](https://github.com/realnimish). You can reach out to them on [Figment Forum](https://community.figment.io/u/nimishagrawal100.in/) for any query regarding the tutorial.
 
 # References
 
-- [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask)
-
 - [How Uniswap works](https://docs.uniswap.org/protocol/V2/concepts/protocol-overview/how-uniswap-works)
+
+- [Deploy a Smart Contract on Avalanche using Remix and MetaMask](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask)
