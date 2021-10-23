@@ -124,8 +124,8 @@ function provide(uint256 _amountToken1, uint256 _amountToken2) external validAmo
 }
 ```
 
-{% hint style="danger" %}
-Carefully notice the order of balance update we are performing in the above function. We are first deducting the tokens from the users' account and in the very last step, we are updating her share balance. This is done to prevent a reentrancy attack.
+{% hint style="danger" %}  
+Carefully notice the order of balance update we are performing in the above function. We are first deducting the tokens from the users' account and in the very last step, we are updating her share balance. This is done to prevent a reentrancy attack.  
 {% endhint %}
 
 The given functions help the user get an estimate of the amount of other token that they need to lock for the given token amount. Here again, we use the proportion `_amountToken1 : totalToken1 :: _amountToken2 : totalToken2` to determine the amount of token1 required if we wish to lock given amount of token2 and vice-versa.
@@ -245,6 +245,8 @@ function swapToken2(uint256 _amountToken2) external activePool validAmountCheck(
     token1Balance[msg.sender] += amountToken1;
 }
 ```
+
+This completes the smart contract implementation part. Now we will deploy it on the Fuji C-Chain tesnet.
 
 # Deploying the smart contract
 
@@ -1779,19 +1781,19 @@ npm start
 
 * Getting funds from the faucet to interact with the AMM
 
-![preview]()
+![preview](../../../.gitbook/assets/create-an-amm-on-avalanche_faucet.gif)
 
 * Adding liquidity in the pool 
 
-![preview]()
+![preview](../../../.gitbook/assets/create-an-amm-on-avalanche_provide.gif)
 
 * Swapping tokens
 
-![preview]()
+![preview](../../../.gitbook/assets/create-an-amm-on-avalanche_swap.gif)
 
 * Withdrawing liquidity from the pool 
 
-![preview]()
+![preview](../../../.gitbook/assets/create-an-amm-on-avalanche_withdraw.gif)
 
 # Conclusion
 Congratulations! We have successfully developed a working AMM model where users can swap tokens, provide & withdraw liquidity. As a next step, you can play around with the price formula, integrate the ERC20 standard, introduce fees as an incentive mechanism for providers or add slippage protection, and much more...
@@ -1810,7 +1812,7 @@ Congratulations! We have successfully developed a working AMM model where users 
 
 # About the Author(s)  
 
-The tutorial was created by [Sayan Kar](https://github.com/SayanKar), [Yash Kothari](https://github.com/YASH) and [Nimish Agrawal](https://github.com/realnimish). You can reach out to them on [Figment Forum](https://community.figment.io/u/nimishagrawal100.in/) or on LinkedIn [@Nimish Agrawal](https://www.linkedin.com/in/realnimish), [@Yash Kothari](https://www.linkedin.com/in/YASH) and [@Sayan Kar](https://www.linkedin.com/in/sayan-kar-).
+The tutorial was created by [Sayan Kar](https://github.com/SayanKar), [Yash Kothari](https://github.com/Yashkothari9) and [Nimish Agrawal](https://github.com/realnimish). You can reach out to them on [Figment Forum](https://community.figment.io/u/nimishagrawal100.in/) for any query regarding the tutorial.
 
 # References
 
