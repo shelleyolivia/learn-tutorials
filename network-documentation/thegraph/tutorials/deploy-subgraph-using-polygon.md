@@ -4,7 +4,7 @@ In this tutorial you will learn how to deploy a Solidity smart contract to the P
 
 ![Subgraph Studio](../../../.gitbook/assets/graph.png)
 
-The subgraph studio is where you can create a subgraph using the Studio UI, deploy a subgraph using the Graph Protocol CLI, test it in the Playground (where you can run graphql queries without incurring any quering fees), add metadata about the subgraph, deploy multiple versions of your subgraphs, as well as publish them to the decentralized Graph Explorer.
+The subgraph studio is where you can create a subgraph using the Studio UI, deploy a subgraph using the Graph Protocol CLI, test it in the Playground (where you can run GraphQL queries without incurring any querying fees), add metadata about the subgraph, deploy multiple versions of your subgraphs, as well as publish them to the decentralized Graph Explorer.
 
 When you deploy a subgraph, you alone shall have access to it. But when you publish your subgraph, anyone can access and test your subgraph in the Playground. So basically, you have full control of your subgraphs.
 
@@ -17,7 +17,7 @@ To successfully complete this tutorial, you will need to have a basic understand
 # Requirements
 
 - You will need Metamask installed in your browser. You can install it from <https://metamask.io/>
-- You need to have a recent version of Node.js installed. We recommend using v14.17.6 LTS for compatibility.
+- You need to have a recent version of Node.js installed. We recommend using v14.18.1 LTS for compatibility.
 
 # Project setup
 
@@ -115,7 +115,7 @@ Create a new directory called `contracts`, then create a file inside it called `
 
 Paste this Solidity code into that file:
 
-```javascript
+```solidity
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
