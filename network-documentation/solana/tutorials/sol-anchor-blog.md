@@ -899,9 +899,11 @@ The BlogAccount key is created on the fly during intilization, but if there was 
 In the end, navigating to `./app` and running `npm run dev` will start up the Svelte App and get you to the home screen.
 
 ```text
-$   cd ./app
-$   npm run dev # or npm run dev3654 if using the exact tutorial code
+cd ./app
+npm run dev
 ```
+
+You can use `npm run dev3654` if using the exact tutorial code repository.
 
 Alternatively, in MS VS Code IDE you can also just click in the "npm" tab to "run dev".
 
