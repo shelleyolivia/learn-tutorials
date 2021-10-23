@@ -865,7 +865,7 @@ onMount(async () => {
 })
 ```
 
-where
+Where `loadAnchorClient()` is defined in `utils.ts` as:
 
 ```js
 // location: app\src\lib\helpers\utils.ts
