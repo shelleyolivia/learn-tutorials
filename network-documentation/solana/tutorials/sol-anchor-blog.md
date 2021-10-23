@@ -72,7 +72,7 @@ Initiating a project is pretty straightforward. In the command line -- use Windo
 
 Don't make a new folder! Anchor will create a new one for you :)
 
-```
+```text
 anchor init solblog
 ```
 
@@ -82,7 +82,7 @@ This creates a folder and puts the anchor starter in that directory. From here, 
 
 The folders we are interested in the most to start are:
 
-```
+```text
 |
 ├── programs
 |   └── solblog
@@ -133,7 +133,7 @@ $ anchor build
 
 As that builds (it'll take a minute), watch your target folder as it is pretty empty right now.
 
-```
+```text
 |
 ├── programs
 |   └── solblog
@@ -145,7 +145,7 @@ As that builds (it'll take a minute), watch your target folder as it is pretty e
 
 Watch how the target folder changes once build completes it is a bit beefier:
 
-```
+```text
 |
 ├── programs
 |   └── solblog
@@ -560,7 +560,7 @@ At the end, the `deploy.js` script will also save your keys to the dapp-starter 
 
 When you run this `deploy.js` code, you can see the result is that Anchor has filled in our basic starting point with all the necessary glue to make a Solana program work, and now it's compiled ready for the blockchain as a 149kb in size file, and real life deployment would costs about 2 SOL to deploy.
 
-```
+```text
 |
 ├── target
 |   └── deploy
@@ -692,7 +692,7 @@ In order to start up `anchor.program`, we need three things:
 
 Our `IDL` (`json` file) is saved alongside our rust program at:
 
-```
+```text
 |
 ├── target
 |   └── idl
@@ -712,7 +712,7 @@ If you're using a different framework for front end, you may need to change this
 
 Second, our `programId` is the `publicKey` of our program keypair that we generated when we ran `anchor build`, remember that?
 
-```
+```text
 |
 ├── target
 |   └── deploy
