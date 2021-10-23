@@ -68,7 +68,7 @@ Once you have installed all the Anchor dependencies, it's time to initiate a pro
 
 ## Init an Anchor Project
 
-Initiating a project is pretty straightforward. In the command line -- use Windows Subsystem for Linux 2 (WSL2) if you are on Windows, as the Rust toolchain doesn't work in regular Windows:
+Initiating a project is pretty straightforward. In the command line -- use Windows Subsystem for Linux 2 (WSL2) if you are on Windows, as the Berkeley Packet Filter (BPF) compiler portion of the Solana toolchain doesn't work in regular Windows.
 
 Don't make a new folder! Anchor will create a new one for you :)
 
