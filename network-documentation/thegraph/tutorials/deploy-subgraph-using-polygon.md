@@ -346,10 +346,16 @@ You will need the contract address when creating the subgraph, so remember to co
 Run the following command to create the subgraph by downloading the contract ABI from the Mumbai testnet. A new directory called `funnft` will be created, and all node dependencies will be installed automatically.
 
 ```text
-graph init --contract-name FunNFT --index-events --studio --from-contract <YOUR MUMBAI SMART CONTRACT ADDRESS> --abi abi/contracts/nft.sol/FunNFT.json --network mumbai funnft
+graph init --contract-name FunNFT --index-events --studio \
+  --from-contract <YOUR MUMBAI SMART CONTRACT ADDRESS> \
+  --abi abi/contracts/nft.sol/FunNFT.json \
+  --network mumbai \
+  funnft
 ```
 
 Replace `<YOUR MUMBAI SMART CONTRACT ADDRESS>` with your deployed FunNFT smart contract address from above.
+
+If you are a Windows user, replace `\` characters in the above command with `^` character.
 
 This will output:
 
