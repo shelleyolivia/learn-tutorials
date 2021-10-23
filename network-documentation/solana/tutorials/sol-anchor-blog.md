@@ -917,7 +917,7 @@ Open up your browser to `http://localhost:3000` and play around!
 
 Congratulations! You have learned how to write an Anchor program and deploy it to the Solana Devnet, and interact with it in JavaScript to make posts and retreive posts.
 
-Please remember that this code is not intended for production: there are still a few other things to consider if you wanted to deploy this to mainnet, such as more robust wallet integration and mainnet testing. But this tutorial has given you the basics to build on top of!
+Please remember that this code is not intended for production! There are still a few other things to consider if you wanted to deploy this to mainnet, such as more robust wallet integration and unit testing. However this tutorial has given you the basics to build on top of!
 
 # Next Steps
 
