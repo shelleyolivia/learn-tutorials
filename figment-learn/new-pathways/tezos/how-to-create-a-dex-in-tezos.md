@@ -37,7 +37,7 @@ Deploy two FA1.2 tokens namely **🐱 Cat Token** and **LP Token** which we'll b
 # Working on the Smart Contract
 
 ## Add dex.py
-We'll start working on our smart contract by creating a file called `dex.py` in the `contracts` directory where we'll keep all our dex code.
+We'll start working on our smart contract by creating a file called `dex.py` in the `contracts` directory where we'll keep all the code related to our DEX functionality.
 
 Create a demo FA1.2 contract called `Token` which we'll use only for testing.
 ```py
@@ -160,7 +160,7 @@ def initialize_enchange(self, token_amount):
         sp.failwith('ALREADY_INITIALIZED')
 ```
 
-This entry point first check whether the total quantity of tez and token is zero or not which will limit users to call it after the initial liquidity is provided.
+This entry point first checks whether the total quantity of tez and token is zero or not, which will limit users to only be able to call it after the initial liquidity is provided.
 
 Then we check whether the token amount and xtz amount is more than 0, and then we update the `tez_pool` and `token_pool` along with the invariant. Then we transfer the tokens from the user to our contract using our utility function `transfer_tokens`.
 
@@ -169,15 +169,15 @@ Then we check whether the token amount and xtz amount is more than 0, and then w
 
 Now we'll code the most interesting part of our dex which is the exchange tez into tokens and vice versa. We'll start with tez to token swap, we'll create an entry point called `tez_to_token` which will exchange the amount of xtz sent i.e `sp.sender` and exchange it to Cat tokens based on the current exchange ratio.
 
-In the CPMM algorithm, the invariant needs to be constant, which means `x.y=k` where x and y represent the amount of xtz and tokens respectively. Now if you want to swap xtz into the token, then the amount of new xtz will increase let's call it `x'`. 
+In the CPMM algorithm, the invariant needs to be constant, which means `x.y=k` where x and y represent the amount of xtz and tokens respectively. Now if you want to swap xtz into the token, then the amount of new xtz will increase let's call it `x1`. 
 
-And let's call the new token amount as `y'`, so according to the equation `x'y'=k`.
+And let's call the new token amount as `y1`, so according to the equation `x1.y1=k`.
 
-This means the new amount of tokens in the pool will be `y' = k / x'`. This is how we are calculating the `new_token_pool`.
+This means the new amount of tokens in the pool will be `y1 = k / x1`. This is how we are calculating the `new_token_pool`.
 
-Now, the amount of tokens that the user will receive for exchanging his `x` tez (x is in mutez) would be `token_out = y - y'`. This is how we are calculating `token_out`.
+Now, the amount of tokens that the user will receive for exchanging his `x` tez (x is in mutez) would be `token_out = y - y1`. This is how we are calculating `token_out`.
 
-> NOTE: Please note that after exchanging certain xtz into tokens, the amount of xtz in the pool will increase and the amount of tokens will decrease and that's why while calculating the amount of tokens that the user will receive we're doing `y - y'` and not `y' - y`.
+> NOTE: Please note that after exchanging certain xtz into tokens, the amount of xtz in the pool will increase and the amount of tokens will decrease and that's why while calculating the amount of tokens that the user will receive we're doing `y - y1` and not `y1 - y`.
 
 After calculating the `tokens_out`, we're updating the new `tez_pool` and `token_pool` along with the new invariant. After that, we're sending `token_out` amount of tokens to the user using our utility function called `transfer_tokens`.
 
