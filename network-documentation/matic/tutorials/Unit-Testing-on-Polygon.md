@@ -430,7 +430,7 @@ the above configuration sets the provider url to connect truffle with the node o
 
 We need **3 distinct private keys** for this test. You can refer to this manual to export private key from [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
 
-For creating Infura projects, please refer to this [manual](https://blog.infura.io/getting-started-with-infura-28e41844cc89/).
+For creating Infura projects, please refer this [Infura manual](https://blog.infura.io/getting-started-with-infura-28e41844cc89/).
 
 *NOTES : The accounts should be funded with **MATIC** on Mumbai. Use the [Polygon faucet](https://faucet.polygon.technology/)*
 
