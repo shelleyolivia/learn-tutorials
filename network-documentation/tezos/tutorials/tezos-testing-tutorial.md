@@ -397,7 +397,7 @@ def test():
 
 # Conclusion
 
-In this tutorial, we learned about how to test, verify and debug smart contracts before deploying them to the real world. 
+In this tutorial, we learned how to create test scenarios, simulate complex transactions in SmartPy, and how to use the various functionalities provided by SmartPy to test and make our code bug-free. You can create your test scenarios like above and save yourself a lot of time and XTZ by ironing out the bugs before deployment.
 
 # Next Steps
 
