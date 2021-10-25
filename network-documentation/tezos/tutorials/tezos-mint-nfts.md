@@ -296,9 +296,9 @@ And there are three pages.
 - Home (All the NFTs will be visible here)
 - Mint (Form to mint the NFTs)
 
-Open `src/config/config.js` Here, we store our configurations.
+  Open `src/config/config.js`. This is where we store our configurations.
 
-```js
+  ```js
 export const NAME = 'Tutorial'; // the name of the app
 export const CONTRACT_ADDRESS = 'KT1J4Qk8pfTeMEmN9WW9x12smt3ce5yXE4yZ';
 export const RPC_URL = 'https://granadanet.smartpy.io'; // network rpc url
