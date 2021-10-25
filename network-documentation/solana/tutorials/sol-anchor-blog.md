@@ -158,7 +158,7 @@ Watch how the target folder changes once build completes it is a bit beefier:
 |           solblog-keypair.json
 ```
 
-Our newly generated code public key is in that new .`/target/deploy` folder, go ahead and check it out!
+Our newly generated code public key is in that new `./target/deploy` folder, go ahead and check it out!
 
 To show our program public key which we will use as out id, simply run:
 
