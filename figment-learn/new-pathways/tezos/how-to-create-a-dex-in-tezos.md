@@ -205,7 +205,7 @@ def tez_to_token(self):
 
 
 ## Token to Tez Swap
-The process of exchanging tokens into tez is also quite similar to what we've done in out tez to token swap.
+The process of exchanging tokens into tez is also quite similar to what we've done in our tez to token swap.
 
 ```py
 @sp.entry_point
@@ -327,9 +327,9 @@ self.transfer_tokens(
 ```
 
 ## Divest Liquidity
-Now, users can invest liquidity into our pool, so let's work on `divest_liquidty` which will allow liquidity providers to get back their liquidity.
+Now, users can invest liquidity into our pool, so let's work on `divest_liquidity` which will allow liquidity providers to get back their liquidity.
 
-Our `divest_liquidiity` entry point takes only one parameter which is the amount of LP tokens that the liquidity provider wants to burn, based on this amount we'll give them their liquidity back.
+Our `divest_liquidity` entry point takes only one parameter which is the amount of LP tokens that the liquidity provider wants to burn, based on this amount we'll give them their liquidity back.
 
 ```py
 @sp.entry_point
@@ -356,10 +356,10 @@ def divest_liquidity(self, lp_amount: sp.TNat):
             amount=token_out
         )
     sp.else:
-        sp.failwith('NOT_ENOUG_TOKENS')
+        sp.failwith('NOT_ENOUGH_TOKENS')
 ```
 
-We'll start by verifying the amount of lp tokens (needs to be more than 0). Then we're calculating the total_liquidity of the pool.
+We'll start by verifying the amount of LP tokens (needs to be more than 0). Then we're calculating the total_liquidity of the pool.
 
 Now based on the amount of LP tokens you are burning we're calculating the `tez_out` and `token_out` which represents the amount of xtz and tokens the liquidity provider will get back.
 
@@ -391,10 +391,10 @@ sp.if token_out > sp.nat(0):
         amount=token_out
     )
 sp.else:
-    sp.failwith('NOT_ENOUG_TOKENS')
+    sp.failwith('NOT_ENOUGH_TOKENS')
 ```
 
-So far we've coded all the required entry points. Now let's move to the frontend. For getting full source code, check the repository mentioned above.
+So far we've coded all the required entry points. Now let's move to the frontend. For getting full source code, check this repository: https://github.com/vivekascoder/tez-dex
 
 
 # Working on the Frontend
@@ -623,7 +623,7 @@ async function exchange() {
 
 In the same way, when the user will click on the **Add** button of addLiquidity form we'll fire this method which will call the `invest_liquidity` entry point.
 
-Another cool thing to note here is that we're also calculating the amount of Cat tokens that needs to be approve while based on the amount of xtz sent and the current exchange ratio.
+Another cool thing to note here is that we're also calculating the amount of Cat tokens that needs to be approved based on the amount of XTZ sent and the current exchange ratio.
 
 ```jsx
 async function addLiquidity() {
@@ -796,7 +796,7 @@ return (
   );
 ```
 
-You can start the react project by doing `yarn start`. Then open your web page. you'll see somehing like the following image.
+You can start the React project with the command `yarn start`. Then open your web browser to `http://localhost:3000`, you'll see something like the following image:
 
 ![Tez Dex](https://i.imgur.com/QIElN7Z_d.webp?maxwidth=760&fidelity=grand)
 
