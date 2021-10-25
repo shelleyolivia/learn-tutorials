@@ -76,7 +76,7 @@ Don't make a new folder! Anchor will create a new one for you :)
 anchor init solblog
 ```
 
-This creates a folder and puts the anchor starter in that directory. From here, we can build out our app.
+This creates a folder and puts the anchor starter in that directory. From here, we can build our app.
 
 ## Project folders
 
@@ -166,13 +166,13 @@ To show our program public key which we will use as our id, simply run:
 solana address -k ./target/deploy/solblog-keypair.json
 ```
 
-Which shows us out unique key:
+Which shows us our unique key:
 
 ```text
-// yours will look different, that's ok
-
- SoMeKeyThatIsUniqueTOmyPROGRAM
+BLoG9PtBTkhUbGRAYVe8jzd5ji1G2VPkzwbsRV3bnteD
 ```
+
+Your key will look different, that's ok. Anchor will generate a unique keypair for everyone, which is how we can uniquely identify our programs from one another.
 
 If you're following along in this tutorial repo, I've placed a shortcut to this script in the `package.json` file, so you can simply run `npm run show-key` in the terminal (as long as it's WSL2/Linux -- the rust toolchain doen't work in Windows).
 
@@ -213,16 +213,16 @@ pub struct BlogAccount {
 }
 ```
 
-We created the third style code block, which is an Account struct which is a Solana account that holds out data. We will save 2 pieces of data to this account:
+We created the third style code block, which is an Account struct which is a Solana account that holds our data. We will save 2 pieces of data to this account:
 
 1. blog `authority`: you need to have this keypair in order to make posts,
 2. `latest_post`: the, well, the lastest blog post.
 
-Now we have the three Anchor blocks we need to make out blog:
+Now we have the three Anchor blocks we need to make our blog:
 
 <img src="../../../.gitbook/assets/tutorial-graphics/3RUST.svg" width="100%" height="auto">
 
-But right now out program doesn't do anything, because our program methods are empty.
+But right now our program doesn't do anything, because our program methods are empty.
 
 ### The `initialize()` function
 
@@ -478,7 +478,7 @@ let method = [
 spawn.sync(
         "anchor",
         [
-            ...method, // use spread operator to expand out our array into individual elements
+            ...method, // use spread operator to expand our array into individual elements
 
 // ... [snip]
 // ... rest is the same
@@ -584,7 +584,7 @@ We have our IDL.json which describes how we use our app, but we need to build so
 
 ### `initialize()`
 
-In order to call out initialize function in our program, we first need an equivalent fuction in javascript. It looks like this:
+In order to call our initialize function in our program, we first need an equivalent fuction in javascript. It looks like this:
 
 ```js
 // anchorClient.js
@@ -796,7 +796,7 @@ const wallet = new WalletAdaptorPhantom()
 
 ...with some fallback in case Phantom isn't the wallet of choice. The user has the option of passing in a keypair, or the code will generate a random keypair for use as a backup. In production, users will want to use a wallet such as Phantom, but in Dev mode we can use made up keys, because we can call `airDrop(publicKey)` to fund our accounts.
 
-So now that we have a connection, and a wallet we get a provider, and with the provier we get a `program` rpc client, and we can make out calls. Phew!
+So now that we have a connection, and a wallet we get a provider, and with the provier we get a `program` rpc client, and we can make our calls. Phew!
 
 The rest of the app integrates both `initialize` and `makePost` as well as `solana-web3.js` calls to interact with the program.
 
