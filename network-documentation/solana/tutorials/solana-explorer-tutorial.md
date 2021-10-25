@@ -21,11 +21,11 @@ We are going to build a very simplified clone of [Solana Explorer](https://githu
 
 1. First clone the dApp Scaffold repo [dapp scaffold](https://github.com/solana-labs/dapp-scaffold.git).
 
-```bash
+```text
 git clone https://github.com/solana-labs/dapp-scaffold.git
 ```
 
-```bash
+```text
 cd dapp-scaffold
 ```
 
@@ -39,7 +39,7 @@ We should have dapp-scaffold running in localhost:3000.
 
 ![](../../../.gitbook/assets/solana-explorer-02.png)
 
-We are going to build the basic stats that we can see in the [solana explorer](https://explorer.solana.com/), we break it up into more basic steps. We are going to fetch the price, the stats and search for the address.
+We are going to build the basic stats that we can see in the [Solana explorer](https://explorer.solana.com/), we break it up into more basic steps. We are going to fetch the price, the stats and search for the address.
 
 # Get Solana Price
 
@@ -349,7 +349,7 @@ At the end of `utils.ts` add:
 
 ```ts
 // utils.ts
-export const LAMPORTS_PER_SOL = 1000000000;
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 export function lamportsToSol(lamports: number): number {
   return Math.abs(lamports) / LAMPORTS_PER_SOL;
@@ -548,7 +548,7 @@ Once completed the missing info you will have this:
 
 You have done a great job, now you know how to fetch data with Solana `web3js`. We will continue with how to search for an account and list the historical transactions and also we are going to fetch details from a transaction. To show the time we will need to install react `moment`:
 
-```sh
+```text
 npm i -D react-moment
 ```
 
@@ -1077,7 +1077,7 @@ export default function TxDetailsCard({ query }: { query: Query }) {
 }
 ```
 
-We have used the connection to check the signature status first. If It is not null, we get the block time and pass it all to tx data.
+We have used the connection to check the signature status first. If it is not null, we get the block time and pass it all to `txData`.
 On home page import the component.
 
 ```tsx
@@ -1099,7 +1099,7 @@ Congratulations! We made it. 👍
 
 In this tutorial, we built a simple blockchain explorer using Solana dapp-scaffold and the key features of Solana explorer. We have learnt how to fetch Price data from Coingecko, fetch general statistics with @solana/web3.js, search historical transactions from an account and get details for a transaction.
 
-If you have any difficulty following this tutorial or simply want to discuss Solana tech with us you can [join our community today](https://discord.gg/fszyM7K)!
+If you have any difficulty following this tutorial or simply want to discuss Solana tech with us you can [join our community today](https://figment.io/devchat)!
 
 # Next Steps
 
