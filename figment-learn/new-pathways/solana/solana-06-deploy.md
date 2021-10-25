@@ -4,7 +4,7 @@ A **program** is to Solana what a **smart contract** is to other protocols. Once
 [You can learn more about Solana's programs here](https://docs.solana.com/developing/on-chain-programs/overview).
 {% endhint %}
 
-# Smart contract review
+# 🧐 Smart contract review
 
 There is a `program` folder at the app's root. It contains the Rust program `contracts/solana/program/src/lib.rs` and some configuration files to help us compile and deploy it.
 
@@ -101,23 +101,30 @@ We can then show in the Program Log how many times the count has been incremente
 
 -----------------------------------------
 
-# Set up the Solana CLI
+# 💻 Set up the Solana CLI
 
 ## Install Rust and Solana CLI
 
 So far we've been using Solana's JS API to interact with the blockchain. In this chapter we're going to deploy a Solana program using another Solana developer tool: their Command Line Interface (CLI). We'll install it and use it through our Terminal.
 
-For simplicity, perform both of these installations inside the project root:
+For simplicity, perform both of these installations inside the project root (`/learn-web3-dapp/`):
 
 [**Install the latest Rust stable**](https://rustup.rs) : 
 
-```bash
+```text
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Developers using macOS may want to use the following commands instead:
+
+```text
+curl https://sh.rustup.rs -sSf | bash -s -- -y --no-modify-path
+source $HOME/.cargo/env
 ```
 
 [**Install Solana CLI**](https://docs.solana.com/cli/install-solana-cli-tools) v1.6.6 or later :
 
-```bash
+```text
 sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
 ```
 
@@ -133,7 +140,9 @@ Set the CLI config URL to the devnet cluster:
 solana config set --url https://api.devnet.solana.com
 ```
 
-Next, we're going to generate a new keypair using the CLI. Run the following command in your Terminal:
+Next, we're going to generate a new keypair using the CLI. Run the following command in your Terminal :
+
+> **NOTE**: Make sure you're running these commands from the `/learn-web3-dapp/` directory, which is the **root directory** of the repository.
 
 ```bash
 mkdir solana-wallet
@@ -156,7 +165,7 @@ solana account $(solana-keygen pubkey solana-wallet/keypair.json)
 ```
 
 -----------------------------------------
-# Deploy a Solana program
+# 🧩 Deploy a Solana program
 
 {% hint style="info" %}
 The program we're going to deploy is an easy but pretty complete program. This program keeps track of the number of times an account has sent a greeting instruction to it.
@@ -191,9 +200,11 @@ The `.so` extension does not stand for Solana! It stands for "shared object". Yo
 
 ## Deploying the program
 
-Now we're going to deploy the program to the devnet cluster. The CLI provides a very simple interface for this :
+Now we're going to deploy the program to the devnet cluster. The CLI provides a simple interface for this, `solana deploy`:
 
-```bash
+> **NOTE**: Make sure you're running this command from the `/learn-web3-dapp/` directory, which is the **root directory** of the repository (otherwise, you would need to change the paths to the `keypair.json` and the `helloworld.so` file).
+
+```text
 solana deploy -v --keypair solana-wallet/keypair.json dist/solana/program/helloworld.so 
 ```
 
@@ -212,7 +223,7 @@ Program Id: 7KwpCaaYXRsjfCTvf85eCVuZDW894zZNN38UMxMpQoaQ
 
 -----------------------------------------
 
-# Challenge
+# 👨‍💻 Challenge
 
 {% hint style="tip" %}
 Before moving to the next step, we need to check that our program has been correctly deployed! For this, we'll need the `programId` of the program. Copy & paste it into the text input, then try to figure out how to complete the code for `pages/api/solana/deploy.ts`.
@@ -259,7 +270,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Solution
+# 👉 Solution
 
 ```tsx
 // solution
@@ -298,7 +309,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Make sure it works
+# ✅ Make sure it works
 
 Once you have the code above saved:
 * Copy and paste the generated address in the text input.   
@@ -310,6 +321,6 @@ For the rest of the challenge we'll keep this programId in the localStorage of o
 
 ----------------------------------
 
-# Conclusion
+# 🏁 Conclusion
 
 So at this point, we've deployed our program to Solana's devnet cluster and checked that it went smoothly. Now it's time to create an account that is owned by our program, to store some data on the Solana cluster! 

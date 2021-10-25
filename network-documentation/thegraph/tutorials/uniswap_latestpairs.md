@@ -4,7 +4,7 @@
 # Introduction
 This tutorial is built to help non-technical people get a sense of how to interact with TheGraph and connect on-chain data into Google Sheets. I've been working on gathering crypto data in Google Sheets for a couple of years now and I found that sheets is a useful interface when filtering for new listed pairs on decentralized exchanges. In this tutorial you'll **learn how to find a UniswapV3 subgraph on The Graph, make a GraphQL request, translate the query in Javascript (Google Sheet's programming language) using Postman, and finally retrieve the pairs in the Sheet with a user-defined formula.**
 
-## Prerequisites
+# Prerequisites
 For beginners with basic coding skills. This training assumes that you have a Gmail/Google account as we will be building upon Google Sheets. Also it would help if you have access to Postman to get an easier view on how to test a GraphQL request from TheGraph and transform it into Javascript code which is  the Official programming language of Google Sheet . 
 
 * **GraphQL & Javascript knowledge are a plus.** Code can be written directly with the help of Postman and The Graph's website.
@@ -24,7 +24,7 @@ This is how Uniswap’s Decentralized Exchange looks like:
 # Getting familiar with TheGraph and GraphQL
 [The Graph](https://graphql.org/) is a **decentralized protocol for indexing and querying data** from blockchains. It is able to query networks like Ethereum and since Uniswap is built on Ethereum, it will allow us to get its on-chain data. 
  
-## Finding Uniswap V3 subgraph on Thegraph
+## Finding the Uniswap V3 subgraph on The Graph
 In this tutorial, we will be focusing on getting blockchain data on Version 3 of Uniswap. All you need to do is to search in TheGraph's explorer bar for Uniswap V3. The following picture shows you what TheGraph looks like and which subgraph we will be using:
 
 * https://thegraph.com/legacy-explorer/subgraph/uniswap/uniswap-v3
@@ -34,7 +34,7 @@ In this tutorial, we will be focusing on getting blockchain data on Version 3 of
 ## Building the GraphQL query
 [GraphQL](https://en.wikipedia.org/wiki/GraphQL) is an **open-source data query and manipulation language for APIs,** and a runtime for fulfilling queries with existing data. GraphQL was developed internally by Facebook in 2012 before being publicly released in 2015. 
 
-On TheGraph interface in playgroud mode, there is an example of a GraphQL query. This query gets the first 5 factories with id, poolCount, txCount and totalVolumeUSD, as well as the first 5 bundles with their id and ethPriceUSD.
+On The Graph interface in playgroud mode, there is an example of a GraphQL query. This query gets the first 5 factories with id, poolCount, txCount and totalVolumeUSD, as well as the first 5 bundles with their id and ethPriceUSD.
 
 ![PLAYGROUND](../../../.gitbook/assets/playground.gif)
 
@@ -63,15 +63,13 @@ Subsequently in order to create the rest of the query, you need to display the s
 This is how the final graphQL query looks:
 ```graphql
 query{
-  
   pools( where: {
       volumeUSD_gte:20000
       totalValueLockedUSD_gte: 30000
       txCount_gte:100
       createdAtTimestamp_gte: 1625575864
     } 
-		) {
-  
+  ) {
     token0 {
       symbol
     }
@@ -214,7 +212,7 @@ Once all of these steps are done, you should be able to request the newest trada
 
 ![UNISWAP](../../../.gitbook/assets/UNISWAP.gif)
 
-## [HERE IS THE ACCESS TO THE LIVE TEMPLATE SHEET](https://docs.google.com/spreadsheets/d/1tME9nMh79KzZP4Wmld7lezom6je4BOw_0T9ABf5GKXE/edit?usp=sharing)
+- [Here is the access to the live template sheet](https://docs.google.com/spreadsheets/d/1tME9nMh79KzZP4Wmld7lezom6je4BOw_0T9ABf5GKXE/edit?usp=sharing)
 
 For example, if I want to get the new Uniswap pairs where the pool was launched in the last 2 days, the daily Volume is greater than $1'000, the Liquidity is above $10'000 and there has been more than 10 Transactions since the launch. 
 The formula is:
@@ -225,6 +223,7 @@ which returns a table (see GIF above) with all new tradable pairs on Uniswap and
 
 
 # Conclusion
+
 A user-friendly interface that interacts with The Graph protocols using Google Sheet. In this tutorial you have learned how to :
 
 1. Find a UniswapV3 subgraph on The Graph
@@ -233,17 +232,15 @@ A user-friendly interface that interacts with The Graph protocols using Google S
 4. Retrieve the latest pairs in the Sheet with a user-defined formula under your specific constraints
 
 
-## About the author
+# About the author
+
 Eloise gathers cryptocurrency data to help users import and value their crypto portfolio in Google Sheets. She publishes her work in [Medium](https://eloise88.medium.com/) and hopes you can benefit from it. 
 
-And for developers who wish to directly check her work on [Github](https://github.com/Eloise1988), she built the [COINGECKO](https://github.com/Eloise1988/COINGECKO) repository for pricing as well as the [CRYPTOBALANCE](https://github.com/Eloise1988/CRYPTOBALANCE) repository for balances, staking, dex prices etc...
+And for developers who wish to directly check her work on [Github](https://github.com/Eloise1988), she built the [COINGECKO](https://github.com/Eloise1988/COINGECKO) repository for pricing as well as the [CRYPTOBALANCE](https://github.com/Eloise1988/CRYPTOBALANCE) repository for balances, staking, DEX prices, etc.
 
 Feedback is very welcomed. A [TELEGRAM chat](https://t.me/TheCryptoCurious) is also available for support. If this project adds any value to you and/or are looking for personalized coding on your Google Sheets, don’t hesitate to leave a message. Thank you so much for investing your time in reading this article. Take care of yourself & your family in these challenging times!
 
-## References
+# References
+
 * https://github.com/Eloise1988/THEGRAPH
 * https://github.com/bradjasper/ImportJSON
-
-
-
-

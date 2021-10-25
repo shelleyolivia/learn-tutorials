@@ -2,7 +2,7 @@ We must check our account balance to make sure we have sufficient **SOL** to per
 
 ----------------------------------
 
-# Challenge
+# 👨‍💻 Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/balance.ts`, implement `publicKey` & `balance`.
@@ -38,7 +38,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Solution
+# 👉 Solution
 
 ```typescript
 // solution
@@ -65,7 +65,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Make sure it works
+# ✅ Make sure it works
 
 * Save the code (Next.js will automatically rebuild the page)
 * Enter the address you just funded
@@ -75,6 +75,6 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Conclusion
+# 🏁 Conclusion
 
 Now that we have an account that has been funded with **SOL** tokens, we are ready to make a transfer to another account!

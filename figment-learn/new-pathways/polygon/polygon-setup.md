@@ -1,6 +1,6 @@
 # Install Metamask
 
-Make sure the [Metamask](https://metamask.io/) browser extension is installed!
+Make sure you have the [Metamask](https://metamask.io/) browser extension installed!
 
 # Safety disclaimers
 
@@ -9,8 +9,8 @@ If you **ALREADY** have Metamask installed and are using it for a hot wallet, we
 {% endhint %}
 
 {% hint style="danger" %}
-If you **DO NOT** already have Metamask installed, welcome to the wonderful world of web3!   
-The first piece of advice we will give you is to make _absolutely sure that you write down the_ [**Secret Recovery Phrase**](https://community.metamask.io/t/what-is-a-secret-recovery-phrase-and-how-to-keep-your-crypto-wallet-secure/3440) that is generated during Metamask's initial setup. Do not store it in a digital format. Do not share it with anybody. Please do keep it accessible to yourself, because we will be using it during the pathway. 
+If you **DO NOT** already have Metamask installed, welcome to the wonderful world of Web 3!   
+The first piece of advice we will give you is to make _absolutely sure that you write down the_ [**Secret Recovery Phrase**](https://community.metamask.io/t/what-is-a-secret-recovery-phrase-and-how-to-keep-your-crypto-wallet-secure/3440) that is generated during Metamask's initial setup. Do not store it in a digital format. Do not share it with anybody. Please do keep it accessible to yourself, because you will be using it during the pathway. 
 {% endhint %}
 
 -------------------------------------
@@ -35,18 +35,23 @@ We use the testnet for development before moving into production on the main net
 
 -------------------------------------
 
-# Set your Datahub API key
+# 🧩 DataHub API keys
 
-The value for `DATAHUB_POLYGON_API_KEY` can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/services/Polygon). Click on the **Polygon** icon in the list of available protocols and then copy your key as shown below. You can now paste your personal API key into `.env.local`. This will authenticate you and enable you to make JSON-RPC requests to Polygon via DataHub.
+To make use of the Pathway content, you will require a DataHub account and a valid API key to access Polygon via DataHub's infrastructure.
+You will need to [sign up for a DataHub account](https://auth.figment.io/sign_up) and verify your email address.
+
+To use your API key you must create a new file named `.env.local` in the project root directory `/learn-web3-dapp/`, copying the contents of the existing `.env.example` file. Your API key needs to be pasted into `.env.local` so that you can authenticate your connections with DataHub.
+
+Your personal API key can be found on the [**DataHub Services Dashboard**](https://datahub.figment.io/). Click on the **Polygon** icon in the list of available protocols and then copy your key as shown below:
 
 ![](../../../.gitbook/assets/pathways/polygon/polygon-setup.gif)
 
-{% hint style="info" %}
-[**Join us on Discord**](https://discord.gg/fszyM7K), if you encounter any issues with the tutorial or have any questions!**
-{% endhint %}
+You can then paste your personal API key into `.env.local`, as the value for the environment variable `DATAHUB_POLYGON_API_KEY`. This will authenticate you and enable you to make RPC requests to Polygon via DataHub:
+
+![API keys](https://user-images.githubusercontent.com/2707197/136939418-dd23159f-5410-4005-b36c-e2e74105f6d7.png)
 
 -------------------------------------
 
-# Next
-
-You can now move ahead to the next step by clicking on the "Next" button below on the right. There are also links to the instructions for each step on the UI.
+{% hint style="info" %}
+[**Join us on Discord**](https://figment.io/devchat), if you encounter any issues with the tutorial or have any questions!
+{% endhint %}

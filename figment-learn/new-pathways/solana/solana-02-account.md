@@ -2,7 +2,7 @@ Like with most Web 3 protocols, transactions on Solana happen between **accounts
 
 ----------------------------------
 
-# Challenge
+# 👨‍💻 Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/keypair.ts`, implement `keypair` and parse the keypair to extract the address as a string. You must replace the instances of `undefined` with working code to accomplish this.
@@ -30,7 +30,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Solution
+# 👉 Solution
 
 ```tsx
 // solution
@@ -50,7 +50,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Make sure it works
+# ✅ Make sure it works
 
 Once the code is complete and the file is saved, Next.js will rebuild the API route. Now click on **Generate a Keypair** and you should see:
 
@@ -60,6 +60,6 @@ Once the code is complete and the file is saved, Next.js will rebuild the API ro
 
 ----------------------------------
 
-# Conclusion
+# 🏁 Conclusion
 
 Now that we have an account, we can fund it so we can start playing around with tokens!
