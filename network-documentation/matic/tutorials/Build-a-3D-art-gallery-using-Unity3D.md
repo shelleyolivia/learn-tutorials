@@ -1,5 +1,3 @@
-# Making a 3D-Art Gallery
-
 # Introduction
 
 In this tutorial we are going to create an art gallery where users can move around freely and see various art works. This artworks will be stores as NFT on the blockchain. Our application is going to comprise of two parts, an NFT Marketplace Smart contract that will be present on the blockchain (we are using Mumbai Testnet in this tutorial) and a 3D game built using Unity3D game engine that will be used to fetch the NFTs listed in the Marketplace smart contract and display them inside an interactive 3D art gallery.
