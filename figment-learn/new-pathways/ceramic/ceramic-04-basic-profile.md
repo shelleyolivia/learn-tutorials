@@ -150,6 +150,8 @@ const saveBasicProfile = async (values: BasicProfile) => {
   try {
     // Set BasicProfile (use IndexSchema.BasicProfile)
 
+    setCurrentUserData(IdxSchema.BasicProfile, {name});
+    
     setName(name);
   } catch (error) {
     alert(error.message);
@@ -186,6 +188,8 @@ const saveBasicProfile = async (values: BasicProfile) => {
     // Set BasicProfile (use IndexSchema.BasicProfile)
     await idx.set(IdxSchema.BasicProfile, {name});
 
+    setCurrentUserData(IdxSchema.BasicProfile, {name});
+    
     setName(name);
   } catch (error) {
     alert(error.message);
@@ -218,6 +222,8 @@ const readBasicProfile = async () => {
       // Read basic profile (use IdxSchema.BasicProfile enum)
       const resp = undefined;
 
+      setCurrentUserData(IdxSchema.BasicProfile, resp as BasicProfile);
+      
       setBasicProfile(resp);
     } catch (error) {
       alert(error.message);
@@ -250,6 +256,8 @@ const readBasicProfile = async () => {
     
     // Read basic profile (use IdxSchema.BasicProfile enum)
     const resp = await idx.get<BasicProfile>(IdxSchema.BasicProfile);
+
+    setCurrentUserData(IdxSchema.BasicProfile, resp as BasicProfile);
     
     setBasicProfile(resp);
   } catch (error) {

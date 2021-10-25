@@ -110,6 +110,8 @@ const saveQuote = async (values: QuoteSchemaT) => {
   setSaving(true);
   const {text, author} = values;
 
+  setAlias();
+  
   try {
     // Save quote information to custom schema (use IdxSchema.Figment enum)
 
@@ -145,6 +147,8 @@ const saveQuote = async (values: QuoteSchemaT) => {
   setSaving(true);
   const {text, author} = values;
 
+  setAlias();
+  
   try {
     // Save quote information to custom schema (use IdxSchema.Figment enum)
     await idx.set(IdxSchema.Figment, {text, author});

@@ -50,7 +50,7 @@ In order to be able to use IDX and 3ID Connect wallet you need to have the follo
 
 Don't worry. We have you covered. These packages are already installed for you.
 
-# THIS SECTION NEEDS A HEADING!
+# From simple connect to decentralized log in
 
 As you probably know authentication allows you to perform extra actions that are not allowed for regular users. In Ceramic when you are authenticated, you can perform such actions as updating data associated to your identity as well as creating genesis commits, signed commits, or decrypting data.
 
@@ -59,6 +59,8 @@ Connecting your Metamask wallet to dApp allows for easy interaction with smart c
 For keeping information about authenticated user we use React Context API and wrap our application with exposed provider.
 
 This allows us to keep the state of authenticated user in one place. You can see how it is implemented in `components/protocols/ceramic/context/idx.tsx`.
+
+You already touched this file in the last step to implement connect functionality. 
 
 # 🧑🏼‍💻 Challenge
 
@@ -69,17 +71,19 @@ In `components/protocols/ceramic/context/idx.tsx`, implement the`login` function
 ```typescript
 // components/protocols/ceramic/context/idx.tsx
 
-const logIn = useCallback(async (address: string): Promise<string | undefined> => {
-  // Request authentication using 3IDConnect. 
+const logIn = useCallback(async (): Promise<string> => {
+  const address = await connect();
+
+  // Request authentication using 3IDConnect.
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#4-request-authentication
 
   // Create provider instance.
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#5-create-provider-instance
 
-  // Create a DID instance. 
+  // Create a DID instance.
   // Find more information here: https://developers.ceramic.network/build/javascript/http/
   // NOTE: We want to use only ThreeIdResolver here
-  
+
   // Set DID instance on HTTP client
   // Find more information here: https://developers.ceramic.network/build/javascript/http/#7-set-did-instance-on-http-client
 
@@ -89,16 +93,27 @@ const logIn = useCallback(async (address: string): Promise<string | undefined> =
   // Authenticate the 3ID
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#7-authenticate-the-3id
   const userDID = undefined;
+  
+  // Create IDX instance
+
+  // Get current user's basic profile
+  const basicProfile = await getBasicProfile(userDID);
 
   if (setIsAuthenticated) {
     setIsAuthenticated(true);
   }
 
-  // Create IDX instance
-  idxRef.current = new IDX({
-    ceramic: ceramicRef.current,
-    aliases,
-  });
+  if (setCurrentUserDID) {
+    setCurrentUserDID(userDID);
+  }
+
+  if (identityStore) {
+    await identityStore.setDID(userDID);
+  }
+
+  if (basicProfile && setUserData) {
+    await setUserData(IdxSchema.BasicProfile, basicProfile);
+  }
 
   return userDID;
 }, [setIsAuthenticated]);
@@ -119,8 +134,10 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 // solution
 // components/protocols/ceramic/context/idx.tsx
 
-const logIn = useCallback(async (address: string): Promise<string | undefined> => {
-  // Request authentication using 3IDConnect. 
+const logIn = useCallback(async (): Promise<string> => {
+  const address = await connect();
+
+  // Request authentication using 3IDConnect.
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#4-request-authentication
   const threeIdConnect = new ThreeIdConnect();
   const authProvider = new EthereumAuthProvider(window.ethereum, address);
@@ -130,10 +147,10 @@ const logIn = useCallback(async (address: string): Promise<string | undefined> =
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#5-create-provider-instance
   const provider = await threeIdConnect.getDidProvider();
 
-  // Create a DID instance. 
+  // Create a DID instance.
   // Find more information here: https://developers.ceramic.network/build/javascript/http/
   // NOTE: We want to use only ThreeIdResolver here
-  const did = new DID({
+  const didInstance = new DID({
     resolver: {
       ...ThreeIdResolver.getResolver(ceramicRef.current),
     },
@@ -141,7 +158,7 @@ const logIn = useCallback(async (address: string): Promise<string | undefined> =
 
   // Set DID instance on HTTP client
   // Find more information here: https://developers.ceramic.network/build/javascript/http/#7-set-did-instance-on-http-client
-  ceramicRef.current.did = did;
+  ceramicRef.current.did = didInstance;
 
   // Set the provider to Ceramic
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#6-set-the-provider-to-ceramic
@@ -151,15 +168,30 @@ const logIn = useCallback(async (address: string): Promise<string | undefined> =
   // Find more information here: https://developers.ceramic.network/authentication/3id-did/3id-connect/#7-authenticate-the-3id
   const userDID = await ceramicRef.current.did.authenticate();
 
-  if (setIsAuthenticated) {
-    setIsAuthenticated(true);
-  }
-
   // Create IDX instance
   idxRef.current = new IDX({
     ceramic: ceramicRef.current,
     aliases,
   });
+
+  // Get current user's basic profile
+  const basicProfile = await getBasicProfile(userDID);
+
+  if (setIsAuthenticated) {
+    setIsAuthenticated(true);
+  }
+
+  if (setCurrentUserDID) {
+    setCurrentUserDID(userDID);
+  }
+
+  if (identityStore) {
+    await identityStore.setDID(userDID);
+  }
+
+  if (basicProfile && setUserData) {
+    await setUserData(IdxSchema.BasicProfile, basicProfile);
+  }
 
   return userDID;
 }, [setIsAuthenticated]);
