@@ -144,28 +144,28 @@ Now in our **test scenario** we have added a Smart Contract between two users (b
 > I have used blake2b as my cryptographic hash function. Read more about it [HERE](https://www.blake2.net/)
 
 # Run Method
-As we know that we can directly call our contract's EntryPoints using the ```.``` operator like ```ob.addBalanceOwner()``` but to simulate the intricate parameters of a real-world transaction we user the ```.run()``` method which has the following parameters :
+As we know that we can directly call our contract's EntryPoints using the `.` operator like `ob.addBalanceOwner()` but to simulate the intricate parameters of a real-world transaction we user the `.run()` method which has the following parameters :
 
 Parameter | Function
 --------- | --------
-sender | It simulates the user who is sending the transaction to the contract. Sets the value of ```sp.sender```
-source | It simulates the source of the transaction. Sets the value of ```sp.source```
-amount | It simulates the amount sent by the user in the transaction. Sets the value of ```sp.amount```
-now | It simulates the timestamp of the transaction. Sets the value of ```sp.now```
-level | It simulates the block level of the transaction. Sets the value of ```sp.level```
-chain_id | It simulates the chain_id of the transaction. Sets the value of ```sp.chain_id```
-voting_powers | It simulates the voting power of different users in the contract's implementation. It is a dictionary. Sets the value of ```sp.voting_power```
+sender | It simulates the user who is sending the transaction to the contract. Sets the value of `sp.sender`
+source | It simulates the source of the transaction. Sets the value of `sp.source`
+amount | It simulates the amount sent by the user in the transaction. Sets the value of `sp.amount`
+now | It simulates the timestamp of the transaction. Sets the value of `sp.now`
+level | It simulates the block level of the transaction. Sets the value of `sp.level`
+chain_id | It simulates the chain_id of the transaction. Sets the value of `sp.chain_id`
+voting_powers | It simulates the voting power of different users in the contract's implementation. It is a dictionary. Sets the value of `sp.voting_power`
 valid | If we expect a transaction to fail i.e. testing out edge cases we put this parameter as **FALSE** so that the compiler won't throw an error
 show | If we do not want to show a transaction in the HTML Output we set this parameter as **FALSE** 
 exception | If we expect a transaction to fail then we can also specify the expected exception that it will raise. **Valid** must be **False**
 
-For our tutorial, we will be focusing on the ```sender``` , ```amount```, ```now```, ```valid``` , ```show``` parameters.
+For our tutorial, we will be focusing on the `sender` , `amount`, `now`, `valid` , `show` parameters.
 
 # Unit Tests
 We write all our verifying conditions in the contract and create transactions that would test all the functionalities of our contract. 
 My advice here is to proceed by isolating an EntryPoint and then testing all its variables and then moving on to the next EntryPoint:
 
-## ```addBalanceOwner()```
+## addBalanceOwner()
 
 ```python
 #addBalanceOwner Tests
@@ -184,7 +184,7 @@ ob.addBalanceOwner().run(sender = bob , amount = sp.tez(25) , valid = False)
 3. The third transaction has both the owner and stake amount correct and we expect it to be a valid transaction.
 4. In the fourth transaction even though all the parameters are correct, the owner has already staked once in the contract and can not stake again. Hence, we expect our transaction to fail and have **valid** set as **False**.
 
-## ```addBalanceCounterparty()```
+## addBalanceCounterparty()
 
 ```python
 #addBalanceCounterparty Tests
@@ -203,7 +203,7 @@ ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5) , valid = Fals
 3. The third transaction has both the counterparty and stake amount correct and we expect it to be a valid transaction.
 4. In the fourth transaction even though all the parameters are correct, the counter arty has already staked once in the contract and can not stake again. Hence, we expect our transaction to fail and have **valid** set as **False**.
 
-## ```claimCounterparty()```
+## claimCounterparty()
 
 ```python
 #claimCounterparty Tests
@@ -221,7 +221,7 @@ ob.claimCounterparty(secret = s).run(sender = udit)
 3. The third transaction has both the counterparty and secret key correct but the timestamp is for 25th October 2021 which is past our deadline set during origination.
 4. The fourth transaction has everything in order and hence is a valid transaction.
 
-## ```claimOwner()```
+## claimOwner()
 
 ```python
 #claimOwner Tests
@@ -282,8 +282,8 @@ We are also provided with 6 levels of headings in our scenario so that we can be
 ```python
 scenario.h1("title")
 scenario.h2("subtitle")
-scenario.h3('<h3> HTML tag.')
-scenario.h4(" <h4> HTML tag.")
+scenario.h3("<h3> HTML tag.")
+scenario.h4("<h4> HTML tag.")
 scenario.p("<p> HTML tag.")
 ```
 
@@ -397,7 +397,7 @@ def test():
 
 # Conclusion
 
-In this tutorial, we learned about how to test, verify and debug smart contracts before deploying them to the real world.
+In this tutorial, we learned about how to test, verify and debug smart contracts before deploying them to the real world. 
 
 # Next Steps
 
