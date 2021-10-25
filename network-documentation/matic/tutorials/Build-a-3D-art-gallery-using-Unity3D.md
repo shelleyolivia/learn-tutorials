@@ -1,6 +1,6 @@
 # Introduction
 
-In this tutorial we are going to create an art gallery where users can move around freely and see various art works. This artworks will be stores as NFT on the blockchain. Our application is going to comprise of two parts, an NFT Marketplace Smart contract that will be present on the blockchain (we are using Mumbai Testnet in this tutorial) and a 3D game built using Unity3D game engine that will be used to fetch the NFTs listed in the Marketplace smart contract and display them inside an interactive 3D art gallery.
+In this tutorial we are going to create an art gallery where users can move around freely and see various artworks. These artworks will be stored as NFTs on the blockchain. Our application is comprised of two parts, an NFT Marketplace Smart contract that will be present on the blockchain (we are using Mumbai Testnet in this tutorial) and a 3D game built using Unity3D game engine that will be used to fetch the NFTs listed in the Marketplace smart contract and display them inside an interactive 3D art gallery.
 
 # Prerequisites
 
@@ -83,7 +83,7 @@ The `FirstPerson-AIO` already have a camera attached to it which will act as our
 
 Click on the Play button. You will be able to move around freely inside the game.
 
-# Displaying Art Work
+# Displaying Artwork
 
 Before we start displaying NFTs from the blockchain, let's create a demo artwork to be displayed.
 
@@ -127,13 +127,13 @@ We duplicate this text area and create some additional fields for various inform
 
 All this details will be either fetched from the Metadata of the NFT (**Title** and **Desc**) while other details (Owner, On Sale and Price) will be fetched from the Marketplace smart contract.
 
-Now you can switch back to the 3D view. Quickly click on the `Game Window` to have a preview of how this text fields will appear on screen.
+Now you can switch back to the 3D view. Quickly click on the `Game Window` to have a preview of how these text fields will appear on the screen.
 
 ![In game view](../../../.gitbook/assets/unity14.png)
 
 ## Writing scripts for displaying information
 
-If now we try to play our Game, you will notice that the texts constantly appear on the screen. We want the text to appear only when we move close to some artwork. In order to do this we will have to take help of scripts (Uinty3D uses C# for writing scripts). Before we start writing our scripts we do two small tweaks:
+If now we try to play our game, you will notice that the texts constantly appear on the screen. We want the text to appear only when we move close to some artwork. In order to do this, we will have to take the help of scripts (Uinty3D uses C# for writing scripts). Before we start writing our scripts we do two small tweaks:
 
 - Add `Player` Tag: Tags are used so that any script used in a game can identify a GameObject that belongs to a particular type. You can read about it in details [here](https://docs.unity3d.com/2019.4/Documentation/Manual/Tags.html).  Select the `FirstPerson - AIO` from the `Hierarchy Window` and check in the top of `Inspector Window` whether it is tagged as `Player`. If not, click on the drop down menu and select the `Player` tag.
 
@@ -1006,7 +1006,7 @@ This will start the built process and once done, it will run the game. You can p
 
 # Conclusion
 
-This was a long tutorial, and this we have learned how to interact with a Smart Contract from a Unity3D game. We have learned how to read data from the blockchain and display information to the user. We also learned the basics of Nethereum, that is a C# library used for interacting with Ethereum based blockchain.
+Congratulations on making it all the way through this tutorial! We have learned how to interact with a smart contract from a Unity3D game. We have learned how to read data from the blockchain and display information to the user. We also learned the basics of Nethereum, which is a C# library used for interacting with Ethereum based blockchains.
 
 # Next Steps
 
