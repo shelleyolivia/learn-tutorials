@@ -58,7 +58,7 @@ networks: {
 ...
 ```
 
-*Notes* - Since we are deploying to mainnet, we need at least `0.01 Matic` token present in our account to pay for deployment gas fees. These matic tokens are not the same tokens we use in testnet, and we cannot get these tokens from the matic faucet. Matic faucet is only for testnet. To get Matic token in the mainnet, you need to buy the token from any exchange and transfer that tokens to your metamask wallet.
+*Note*: Since we are deploying to mainnet, we need at least 0.01 MATIC token present in our account to pay for deployment gas fees. These MATIC tokens are not the same tokens we use on the testnet, and we cannot get these tokens from the Polygon faucet. The faucet is only for testnet tokens. To get MATIC tokens on the Polygon mainnet, you need to buy the token from an exchange and transfer those tokens to your Metamask wallet.
 
 To deploy the contract to the mainnet, run the following command.
 
@@ -72,7 +72,7 @@ Truffle will deploy the contract on Polygon mainnet, and since we have sent the 
 
 Adding a custom token to Metamask is pretty simple; all you need is the token contract address. The contract address of the Payment token can be fetched from the output of the `truffle deploy` command or from the network section of the `abis/PaymentToken.json` file.
 
-Head over to Metamask, and make sure you are connected to Polygon mainnet network. In the assets section, click on the Import tokens button, and paste the contract address of the token you are trying to add, in our case address of the PAY token. Metamask will automatically fetch the Token symbol and Token Decimal from the contract if the token address is correct.
+Open Metamask, and make sure you are connected to the Polygon mainnet network. In the assets section, click on the Import tokens button, and paste the contract address of the token you are trying to add, in our case the address of the PAY token. Metamask will automatically fetch the token symbol and token decimals from the contract if the token address is correct.
 
 ![Metamask Import Token](../../../.gitbook/assets/metamask-import-token.jpg)
 
@@ -86,7 +86,7 @@ Before we start working on `DataContext` that we created in the past one of this
 yarn add @maticnetwork/meta @headlessui/react
 ```
 
-`@maticnetwork/meta` is the official package created by maticnetwork to get the static content related to the Polygon network. This includes the default RPC URLs and the contract address of all the tokens deployed by maticnetwork(Polygon, ERC20, TESTERC20, etc..) on both mainnet and testnet along with ABIs for default ERC20 token. Since we are adding multiple ERC20 tokens in our dApp and usually, all the ERC20 tokens have the same ABI, we can use the ABI from the `@maticnetwork/meta` package when making standard calls like `balanceOf` and `transfer`.
+`@maticnetwork/meta` is the official package created by the maticnetwork team to get the static content related to the Polygon network. This includes the default RPC URLs and the contract address of all the tokens deployed by maticnetwork (Polygon, ERC20, TESTERC20, etc..) on both mainnet and testnet along with ABIs for the default ERC20 token. Since we are adding multiple ERC20 tokens in our dApp and usually, all the ERC20 tokens have the same ABI, we can use the ABI from the `@maticnetwork/meta` package when making standard calls like `balanceOf` and `transfer`.
 
 `@headlessui/react` is an unstyled, fully accessible UI component designed to integrate with Tailwind CSS.
 
@@ -115,9 +115,9 @@ interface DataContextProps {
 }
 ```
 
-If you notice, we have removed import for `PaymentToken` ABI because we will be using ABI for ERC20 token from `@maticnetwork/meta/network`. In the interface, we have added two new variables, selectedToken and updateSelectedToken.
+You'll notice that we have removed the import for the `PaymentToken` ABI because we will be using the ABI for ERC20 tokens from `@maticnetwork/meta/network`. In the interface, we have added two new variables, `selectedToken` and `updateSelectedToken`.
 
-In `useProviderData`, replace the state variables with the below code:
+In `useProviderData`, replace the state variables with the following code:
 
 ```javascript
   const [loading, setLoading] = useState(true);
@@ -398,15 +398,15 @@ export default TokensModal;
 
 ```
 
-We are iterating over the `tokenList` and creating a list of tokens for the user to select from. When the user clicks on any token, we will call the `updateSelectedToken` from the `useData` context and pass in the token that the user clicked on, and close the modal. You can refer to [this site]((https://headlessui.dev/react/dialog)) to learn more about headlessUI modals.
+We are iterating over the `tokenList` and creating a list of tokens for the user to select from. When the user clicks on any token, we will call the `updateSelectedToken` from the `useData` context and pass in the token that the user clicked on, and close the modal. You can refer to [this site](https://headlessui.dev/react/dialog) to learn more about headlessUI modals.
 
 This is how the modal looks like:
 
 ![Tokens Modal](../../../.gitbook/assets/tokens-modal.png)
 
-Now that we are done with the modal, let's update our `index.tsx` to replace `Pay Token` with the modal button.
+Now that we are done with the modal, let's update our `index.tsx` to replace **Pay Token** with the modal button.
 
-In `index.tsx` replace
+In `index.tsx` replace this:
 
 ```javascript
 <div className="px-3 py-2 bg-gray-800 rounded-2xl flex flex-row items-center">
@@ -416,7 +416,7 @@ In `index.tsx` replace
 </div>
 ```
 
-with this,
+With this:
 
 ```javascript
 <TokensModal
@@ -459,9 +459,9 @@ openModal={openModal}
 
 Here instead of showing a button, we are creating a button to open the modal. On the button, we are displaying the selected token symbol and token logo. If the token logo is not available, we show the first token letter to make the placeholder.
 
-Now we need to update the way we show the balance. Before, we were only showing `PAY` token balance, which has 18 decimal, we can easily use `Web3.utils.fromWei` to show the balance, but now that we have some tokens with the different decimal values, we need to update the code.
+Now we need to update the way we show the balance. Before, we were only showing PAY token balance, which has 18 decimals, we can easily use `Web3.utils.fromWei` to show the balance, but now that we have some tokens with the different decimal values, we need to update the code.
 
-Replace this code,
+Replace this code:
 
 ```javascript
 {balance &&
@@ -471,7 +471,7 @@ Replace this code,
   )} PAY`}
 ```
 
-with,
+With this:
 
 ```javascript
 {balance &&
