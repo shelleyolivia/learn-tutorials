@@ -163,7 +163,6 @@ Our newly generated code public key is in that new `./target/deploy` folder, go 
 To show our program public key which we will use as our id, simply run:
 
 ```text
-// CLI
 solana address -k ./target/deploy/solblog-keypair.json
 ```
 
