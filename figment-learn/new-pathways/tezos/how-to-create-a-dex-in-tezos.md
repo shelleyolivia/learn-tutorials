@@ -1,22 +1,19 @@
-# How to create a DEX on Tezos 
+# Introduction
+In this tutorial, we'll create a simple DEX (Decentralized Exchange) with which we'll understand how to code a DEX and how a DEX works in general. 
 
-## Introduction
-In this tutorial, we'll create a simple DEX(Decentralized Exchange) with which we'll understand how to code a DEX and how dexs work in general. 
+This DEX will be using the Constant Product Market-Making algorithm, and it will be based on the v1 of Uniswap. If you want more information about the Constant Product Market-Making algorithm and v1 of Uniswap you can read this [white paper](https://hackmd.io/@HaydenAdams/HJ9jLsfTz). You can also refer to this [video](https://www.youtube.com/watch?v=-6HefvM5vBg) to get an understanding of the CPMM algorithm. Before we start to write extensive code, you can find the full source code from this repository: https://github.com/vivekascoder/tez-dex
 
-This DEX will be using the Constant Product Market-Making algorithm, and it will be based on the v1 of uniswap, if more information about the Constant Product Market-Making algorithm and v1 of uniswap you can read this [white paper](https://hackmd.io/@HaydenAdams/HJ9jLsfTz). You can also refer to this [video](https://www.youtube.com/watch?v=-6HefvM5vBg) to get an understanding of the CPMM algorithm. Before we start to write extensive code, You can find the full source code from this repository.
 
-https://github.com/vivekascoder/tez-dex
+# Prerequisites
+Basic knowledge of SmartPy, React, Taquito and smart contracts.
 
-## Prerequisites
-Basic knowledge of smartpy, react, taquito and smart contracts.
-
-## Requirements
+# Requirements
 - NodeJs 
 - Yarn
 - Temple Wallet
 
 
-## Project Setup
+# Project Setup
 Create an empty react project using `create-react-app`, after creating it install the following packages.
 
 > NOTE: For this tutorial, i'll be using `tailwindcss` for styling the components, but this step is completely optional. You can use any UI Library/Css Framework that you want.
@@ -37,9 +34,9 @@ After installing the dependencies make a folder called `./contracts` in the root
 Deploy two FA1.2 tokens namely **🐱 Cat Token** and **LP Token** which we'll be using later in this tutorial.
 
 
-## Working on the Smart Contract
+# Working on the Smart Contract
 
-### Add dex.py
+## Add dex.py
 We'll start working on our smart contract by creating a file called `dex.py` in the `contracts` directory where we'll keep all our dex code.
 
 Create a demo FA1.2 contract called `Token` which we'll use only for testing.
@@ -137,7 +134,7 @@ The `mint_lp` method takes the amount of tokens to mint and then it does an inte
 > NOTE: Please note that here our DEX contract is the admin of LP Token contract and that's why it can mint and burn the tokens.
 
 
-### Initialize Exchange
+## Initialize Exchange
 Now we'll work on an entry point called `initialize_exchange` that will be responsible for providing the initial liquidity in the pool and govern the initial ratio between the token and xtz which will we used to govern the prices.
 
 ```py
@@ -168,7 +165,7 @@ This entry point first check whether the total quantity of tez and token is zero
 Then we check whether the token amount and xtz amount is more than 0, and then we update the `tez_pool` and `token_pool` along with the invariant. Then we transfer the tokens from the user to our contract using our utility function `transfer_tokens`.
 
 
-### Tez to Token Swap
+## Tez to Token Swap
 
 Now we'll code the most interesting part of our dex which is the exchange tez into tokens and vice versa. We'll start with tez to token swap, we'll create an entry point called `tez_to_token` which will exchange the amount of xtz sent i.e `sp.sender` and exchange it to Cat tokens based on the current exchange ratio.
 
@@ -207,7 +204,7 @@ def tez_to_token(self):
 
 
 
-### Token to Tez Swap
+## Token to Tez Swap
 The process of exchanging tokens into tez is also quite similar to what we've done in out tez to token swap.
 
 ```py
@@ -263,7 +260,7 @@ self.transfer_tez(to_=sp.sender, amount=tez_out)
 ```
 
 
-### Invest Liquidity
+## Invest Liquidity
 We're done with exchanging the tez into tokens and vice versa, but we need to add a way in our contract with which we can allow other people to add new liquidity to the pool, and for this, we're going to add two entry points namely `invest_liquidty` and `divest_liquidity` which will allow users to add new liquidity to the pool and remove their liquidity from the pool respectively.
 
 Before diving into the code of `invest_liquidity`, let's see what are the things that it needs to do.
@@ -329,7 +326,7 @@ self.transfer_tokens(
 )
 ```
 
-### Divest Liquidity
+## Divest Liquidity
 Now, users can invest liquidity into our pool, so let's work on `divest_liquidty` which will allow liquidity providers to get back their liquidity.
 
 Our `divest_liquidiity` entry point takes only one parameter which is the amount of LP tokens that the liquidity provider wants to burn, based on this amount we'll give them their liquidity back.
@@ -400,7 +397,7 @@ sp.else:
 So far we've coded all the required entry points. Now let's move to the frontend. For getting full source code, check the repository mentioned above.
 
 
-## Working on the Frontend
+# Working on the Frontend
 
 We'll start by importing the necessary things in the `App.jsx` file.
 
@@ -804,7 +801,7 @@ You can start the react project by doing `yarn start`. Then open your web page. 
 ![Tez Dex](https://i.imgur.com/QIElN7Z_d.webp?maxwidth=760&fidelity=grand)
 
 
-### Swapping Tez into token.
+## Swapping Tez into token.
 
 Click on the Swap button after entering some amount in xtz let's say 1.
 
@@ -814,9 +811,9 @@ You can see after exchanging 1 tez we're getting around 97 cat token based on cu
 ![Transaction](https://i.imgur.com/4lHckUS.png)
 
 
-## About The Author
+# About The Author
 I am Vivek, You can find more about me [here](https://github.com/vivekascoder)
 
-## References
+# References
 1. [Uniswap v1 white paper](https://hackmd.io/@HaydenAdams/HJ9jLsfTz)
 2. [Video Explaining DEX](https://hackmd.io/@HaydenAdams/HJ9jLsfTz)
