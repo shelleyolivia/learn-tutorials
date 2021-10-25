@@ -8,9 +8,9 @@ This DEX will be using the Constant Product Market-Making algorithm, and it will
 Basic knowledge of SmartPy, React, Taquito and smart contracts.
 
 # Requirements
-- NodeJs 
-- Yarn
-- Temple Wallet
+- [NodeJs](https://nodejs.org/en/)
+- [Yarn](https://yarnpkg.com/)
+- [Temple Wallet](https://templewallet.com/)
 
 
 # Project Setup
