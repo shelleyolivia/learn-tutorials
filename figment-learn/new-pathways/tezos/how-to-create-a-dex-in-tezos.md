@@ -14,17 +14,17 @@ Basic knowledge of SmartPy, React, Taquito and smart contracts.
 
 
 # Project Setup
-Create an empty react project using `create-react-app`, after creating it install the following packages.
+Create an empty React project using `create-react-app`, after creating it install the following packages.
 
-> NOTE: For this tutorial, i'll be using `tailwindcss` for styling the components, but this step is completely optional. You can use any UI Library/Css Framework that you want.
+> NOTE: For this tutorial, I'll be using `tailwindcss` for styling the components, but this step is completely optional. You can use any UI Library/Css Framework that you want.
 
 1. Taquito and BeconWallet
-```bash
+```text
 yarn add @taquito/taquito @taquito/beacon-wallet 
 ```
 
 2. Tailwindcss (Optional)
-```bash
+```text
 yarn add --dev tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 ```
 For more information on setting up tailwindcss with `create-react-app` you can read [here](https://tailwindcss.com/docs/guides/create-react-app).
