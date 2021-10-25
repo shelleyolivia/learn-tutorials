@@ -298,7 +298,7 @@ And there are three pages.
 - Home (All the NFTs will be visible here)
 - Mint (Form to mint the NFTs)
 
-Open src/config/config.js Here, we store our configurations.
+Open `src/config/config.js` Here, we store our configurations.
 
 ```js
 export const NAME = 'Tutorial'; // the name of the app
@@ -309,11 +309,11 @@ export const NETWORK = 'granadanet';
 
 Change the name and contract address accordingly, and as we deployed to Granada Testnet, we are using that network. If deployed on any other network, it can be changed accordingly.
 
-Now let's code some of the utilities we will be using. Open src/utils/wallet.js 
+Now let's code some of the utilities we will be using. Open `src/utils/wallet.js` 
 In this file, there will be all our wallets and interacting with smart contract code.
 
-Let’s import tezostoolkit and beacon SDK, which we will use to connect to the wallet.
-And also import config, axios and bytes2Char and char2Bytes.
+Let’s import the TezosToolkit and beacon SDK, which we will use to connect to the wallet.
+We also need to import our config object, axios and bytes2Char and char2Bytes from the Taquito utils
 
 ```js
 import {TezosToolkit, MichelsonMap} from '@taquito/taquito';
@@ -339,7 +339,7 @@ const wallet = new BeaconWallet(options);
 Tezos.setWalletProvider(wallet);
 ```
 
-Next, we will write functions to connect the wallet(requesting the user permission) and disconnect the wallet.
+Next, we will write functions to connect the wallet (requesting the user permission) and disconnect the wallet.
 
 ```js
 const connectWallet = async () => {
@@ -356,7 +356,7 @@ const disconnectWallet = async () => {
 };
 ```
 
-To get the Public Key Hash(pkh) of the user and get the contract will use the following functions.
+To get the Public Key Hash (pkh) of the user and get the contract will use the following functions.
 
 ```js
 const getPKH = async () => {
@@ -424,8 +424,7 @@ import {NFTStorage, File} from 'nft.storage';
 
 const symbol = 'TUT';
 
-const apiKey =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY4QTMwQzA1ZjY3RTc3NTc3MjI2RjBlOEFmNjQzODA4ZDc2MzA1ZTQiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYzNDEzMDUwNTkzMCwibmFtZSI6Im1pbnRfdHV0b3JpYWwifQ.jCpzhkEJdFPuM0NtKtJoywX__m6xrJuPRmbagccwarU';
+const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY4QTMwQzA1ZjY3RTc3NTc3MjI2RjBlOEFmNjQzODA4ZDc2MzA1ZTQiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYzNDEzMDUwNTkzMCwibmFtZSI6Im1pbnRfdHV0b3JpYWwifQ.jCpzhkEJdFPuM0NtKtJoywX__m6xrJuPRmbagccwarU';
 const client = new NFTStorage({token: apiKey});
 
 const uploadToIpfs = async (name, description, imgFile) => {
@@ -449,8 +448,7 @@ export {uploadToIpfs};
 ```
 Change the API Key, and to the function, we will be sending the name, description and our imgFile, and it will return us the IPFS URL after uploading it to IPFS.
 
-Now in src/App.js   
-Add
+Now in `src/App.js`, add:   
 ```jsx
 import {getNFTs} from './utils/wallet';
 ```
@@ -463,7 +461,7 @@ dispatch(setStorage(nfts));
 
 This will get all the NFTs metadata URLs and store them in the redux storage.
 
-Now lets code our src/components/Home.jsx (remove the already present code).  
+Now lets code our `src/components/Home.jsx` (remove the already present code).  
 Here we will show all our NFTS.  
 We have a card for each NFT that will show the image, name and description.
 
@@ -535,7 +533,7 @@ const Home = () => {
 export default Home;
 ```
 
-TIme for src/components/Mint.jsx (remove the already present code).
+TIme for `src/components/Mint.jsx` (remove the already present code).
 Let’s import everything first.
 
 
@@ -558,7 +556,7 @@ const Mint = () => {
     const [message, setMessage] = useState('');
 ```
 
-In our submit function, we take all the details and uploadToIPFS using the util we coded above. And then use this URL to mint using the mintNFT util from utils/wallet.js
+In our submit function, we take all the details and uploadToIPFS using the util we coded above. And then use this URL to mint using the mintNFT util from `utils/wallet.js`
 And once minted, we add the NFT to redux storage.
 
 
@@ -595,7 +593,7 @@ And once minted, we add the NFT to redux storage.
     };
 ```
 
-To close the toast. We set the message to empty.
+To close the toast, we set the message to empty.
 
 ```jsx
     const closeMessage = () => {
@@ -700,10 +698,10 @@ We completed the frontend. You can checkout the complete code on [Github](https:
 
 In this tutorial, we learned about coding in SmartPy, deploying a contract on the blockchain, and interacting with the contract using better-call.dev. We also built the frontend using React and learned how to interact using taquito. 
 
-And we learned how to mint NFTs on tezos.
+And most importantly, we learned how to mint NFTs on Tezos.
 
 
-# Next Steps (Optional)
+# Next Steps
 
 Try out all the other entry points of FA2. You can modify the smart code and using transfer entrypoiny can make a marketplace for NFTs. 
 
