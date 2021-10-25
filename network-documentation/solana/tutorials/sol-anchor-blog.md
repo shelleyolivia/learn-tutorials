@@ -54,7 +54,7 @@ It's important to understand that Anchor is new, and the API may change as devel
 I used v 0.16.1 for this tutorial.
 
 ```text
-$ anchor --version
+anchor --version
 anchor-cli 0.16.1
 ```
 
@@ -127,8 +127,8 @@ Since that's not our key, let's fix that now and generate our key.
 Run:
 
 ```text
-$ cd solblog
-$ anchor build
+cd solblog
+anchor build
 ```
 
 As that builds (it'll take a minute), watch your target folder as it is pretty empty right now.
@@ -172,7 +172,7 @@ Which shows us out unique key:
 ```text
 // yours will look different, that's ok
 
-$  SoMeKeyThatIsUniqueTOmyPROGRAM
+ SoMeKeyThatIsUniqueTOmyPROGRAM
 ```
 
 If you're following along in this tutorial repo, I've placed a shortcut to this script in the `package.json` file, so you can simply run `npm run show-key` in the terminal (as long as it's WSL2/Linux -- the rust toolchain doen't work in Windows).
@@ -353,9 +353,9 @@ Lastly, we grab the `accounts` from the context (`ctx`) and pick `blog_account` 
 
 Our Rust Solana Program is complete, written in Rust! Now that we're done, we need to build again so that the Solana build uses our most recent code:
 
-```text
-# in project root directory
+In project root directory, run:
 
+```text
 anchor build
 ```
 
@@ -490,13 +490,13 @@ A full functioning version of the complete code is included with this tutorial.
 Now that we've built our `deploy.js` script, we can run the script using `node` or use the shortcut script in `package.json` which is convenienlty run by:
 
 ```text
-$ 	npm run deploy
+npm run deploy
 ```
 
 (or)
 
 ```text
-$	node ./deploy.js
+node ./deploy.js
 ```
 
 The deploy script creates a new keypair to pay for the deployment for you, funds it with some SOL, and deploys it to the Devnet.
@@ -810,20 +810,19 @@ After setup and focusing on the Anchor RPC and Solana-Web3.js portions of the cl
 The Svelte [setup](https://kit.svelte.dev/docs#introduction-getting-started) is simply:
 
 ```text
-$ npm init svelte@next ./app
-$ cd app
-$ npm install
-# (choose the full app defaults)
+npm init svelte@next ./app
+cd app
+npm install
 ```
+
+Choose the full app defaults for the install step.
 
 Now we can add our Anchor javascript code to feed our Svelte front end with Solana data for our blog!
 
 To use anchor from javascript, we install the anchor library:
 
 ```text
-
 npm install @project-serum/anchor --save
-
 ```
 
 There are a few gotchyas that you might run into while trying to use the solana or anchor libraries in client side browser code.
