@@ -1,5 +1,5 @@
 # Introduction
-In this tutorial, we will go through the process of transferring ERC-1155, ERC-721 and ERC-20 tokens to the Polygon (Matic) chain, and from Polygon to Ethereum using the Polygon PoS SDK.  
+In this tutorial, we will go through the process of transferring ERC-1155 and ERC-721 tokens to the Polygon (Matic) chain, and from Polygon to Ethereum using the Polygon PoS SDK.  
 We will use the **Ethereum Goerli** testnet and **Polygon Mumbai** testnet, and ERC tokens that have been deployed and their source code have been verified on Etherscan.
 The Polygon Proof of Stake (PoS) Bridge is a mechanism and a set of contracts on both Ethereum and Polygon that will help us in moving assets between the **root** chain and **child** chain.
 In contrast to the [Plasma Bridge](https://docs.matic.network/docs/develop/ethereum-matic/plasma/getting-started/), the Polygon PoS bridge is much faster, making it a better choice for dApps that are looking for faster withdrawals.
@@ -249,28 +249,11 @@ async function getBalance() {
 }
 ```
 
-# MLB ERC20 Contract
-> You can find a step by step guide to creating an ERC-20 token [here](https://github.com/mlibre/blockchain/tree/master/Ethereum/ERC20).
-
-**MLB** is the symbol of the token (deployed on the Goerli testnet) that we'll map and transfer, which is a standard OpenZeppelin ERC-20 token.  
-
-Token info:
-
-```text
-Name: Mlibre
-Symbol: MLB
-Owner: 0xD8f24D419153E5D03d614C5155f900f4B5C8A65C
-Contract Address: 0xd2d40892B3EebdA85e4A2742A97CA787559BF92f
-Goerli etherscan: https://goerli.etherscan.io/address/0xd2d40892B3EebdA85e4A2742A97CA787559BF92f
-```
-
-Gather this information for the token you intend to map.
-
 # Getting started
 1. In order to transfer assets between **root** (Ethereum) and **child** (Polygon) contracts, they should be mapped first. This is a process by which an existing token contract is mirrored between the root and child chain.  
 If the token you intend to transfer already exists on **Polygon**, this means you don't need to perform the **mapping**.  
 Check the [official docs](https://docs.polygon.technology/docs/develop/ethereum-matic/submit-mapping-request/) to learn about the mapping process.
-2. After we mapped the contract, it's time to transfer the assets. We use [Polygon SDK](https://polygon.technology/polygon-sdk/) to transfer tokens. In addition, we will transfer ERC-721 and ERC-1155 tokens with the [Mintnft](https://bridge.mintnft.today/) and the ERC-20 token with [Polygon Wallet UI](https://wallet.polygon.technology/login/). 
+2. After we mapped the contract, it's time to transfer the assets. We use [Polygon SDK](https://polygon.technology/polygon-sdk/) to transfer tokens. In addition, we will transfer ERC-721 and ERC-1155 tokens with the [Mintnft](https://bridge.mintnft.today/). 
 
 # Mapping
 Now that everything is ready. Let's map our contracts.
@@ -284,10 +267,6 @@ Now that everything is ready. Let's map our contracts.
   * ERC-721
 
     ![map image](../../../.gitbook/assets/erc721-pos-map.png)
-
-  * ERC-20
-
-    ![map image](../../../.gitbook/assets/erc20-pos-map.png)
 
 * At this time the mapping process is not immediate. It can take up to 3 days to be confirmed.  
 
@@ -303,7 +282,6 @@ As you may notice, the contract addresses on Goerli and Mumbai are different. Le
 4. Paste the contract address there
    * ERC-1155: `0x7242B6E18F85DB7b2A19d027e0b81Dcf6637C68b`
    * ERC-721: `0xf6320326327c07759602423f01D8fad4AF9E3f24`
-   * ERC-20: `0x0F6886ca4476D3aAb965F2D1b9185F2dd857E653`
 
 Now it should be something like:
 
@@ -679,148 +657,6 @@ And for **depositERC721ForUser**:
       .
 ```
 
-## Transferring ERC-20
-In order to transfer ERC-20 tokens, we call the `approveERC20ForDeposit` and `depositERC20ForUser` functions respectively.
-
-## Approve
-To **approve** the **Ethereum Predicate Contract** we just need to call the `approveERC20ForDeposit` function. The code for this is straightforward: 
-
-```javascript
-await maticPOSClient.approveERC20ForDeposit(rootToken, amount.toString(), {
-	from,
-	gasPrice: "10000000000"
-});
-```
-
-## Deposit
-Next, we would call the `depositERC20ForUser` function of the **Ethereum Predicate Contract**:
-
-```javascript
-await maticPOSClient.depositERC20ForUser(rootToken, from, amount.toString(), {
-	from,
-	gasPrice: "10000000000",
-});
-```
-
-This is a complete example of how to use maticjs and the HDWalletProvider class to communicate with a deployed smart contract on Polygon. Use the following code as a guide for building your own solution!
-
-```javascript
-// main.js
-import { HDWalletProvider } from '@truffle/hdwallet-provider';
-import { MaticPOSClient } from '@maticnetwork/maticjs');
-import { secrets } from './secrets.json'
-
-const from = "0xD8f24D419153E5D03d614C5155f900f4B5C8A65C";
-const rootToken = "0xd2d40892B3EebdA85e4A2742A97CA787559BF92f";
-const amount = 999 * (10 ** 18);
-
-const parentProvider = new HDWalletProvider(secrets.seed, 'http://127.0.0.1:8545'); // Local Geth client address
-const maticProvider = new HDWalletProvider(secrets.seed, secrets.mumbai)  // DataHub Mumbai Testnet JSONRPC URL
-
-const maticPOSClient = new MaticPOSClient({
-  network: "testnet",
-  version: "mumbai",
-  parentProvider,
-  maticProvider,
-});
-
-(async () => {
-  try {
-    let result = await maticPOSClient.approveERC20ForDeposit(
-      rootToken,
-      amount.toString(),
-      {
-        from,
-        gasPrice: "10000000000",
-      }
-    );
-    let result_2 = await maticPOSClient.depositERC20ForUser(
-      rootToken,
-      from,
-      amount.toString(),
-      {
-        from,
-        gasPrice: "10000000000",
-      }
-    );
-    console.log(result);
-    console.log(result_2);
-  } catch (error) {
-    console.log(error);
-  }
-})();
-```
-
-Expected output for **approveERC20ForDeposit** is something like this:
-
-```javascript
-{
-  blockHash: '0x9616fab5f19fb93580fe5dc71da9062168f1f1f5a4a5297094cad0b2b3e2dceb',
-  blockNumber: 5513011,
-  contractAddress: null,
-  cumulativeGasUsed: 46263,
-  effectiveGasPrice: '0x2540be400',
-  from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
-  gasUsed: 46263,
-  logsBloom: '0x000000000000000000000000000000000010000000000000000000000000000000000000010000000000000000000000',
-  status: true,
-  to: '0xd2d40892b3eebda85e4a2742a97ca787559bf92f',
-  transactionHash: '0x3aba80ae8938ed1abbb18560cb061f4915d202a731e5e2ec443aded67169e28a',
-  transactionIndex: 0,
-  type: '0x0',
-  events: {
-    Approval: {
-      address: '0xd2d40892B3EebdA85e4A2742A97CA787559BF92f',
-      blockNumber: 5513011,
-      transactionHash: '0x3aba80ae8938ed1abbb18560cb061f4915d202a731e5e2ec443aded67169e28a',
-      transactionIndex: 0,
-      blockHash: '0x9616fab5f19fb93580fe5dc71da9062168f1f1f5a4a5297094cad0b2b3e2dceb',
-      logIndex: 0,
-      id: 'log_0e714fbf',
-      returnValues: [Result],
-      event: 'Approval',
-      signature: '0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925'
-    }
-  }
-}
-```
-
-And for **depositERC20ForUser**:
-
-```javascript
-{
-  blockHash: '0x622989e0d1097ea59c557663bf4fa19b3064cfb858706021a6eecb11bb1c19b2',
-  blockNumber: 5513012,
-  contractAddress: null,
-  cumulativeGasUsed: 89761,
-  effectiveGasPrice: '0x2540be400',
-  from: '0xd8f24d419153e5d03d614c5155f900f4b5c8a65c',
-  gasUsed: 89761,
-  logsBloom: '0x020000000000000000000000000000080000004000000080000000000000000000008000000000000004000800000000000020000000000000',
-  status: true,
-  to: '0xbbd7cbfa79faee899eaf900f13c9065bf03b1a74',
-  transactionHash: '0x58a7f01edc2b9772f87fca57789f0912152615813e6231ab137e4759c8f6415f',
-  transactionIndex: 0,
-  type: '0x0',
-  events: {
-    '0': {
-      address: '0xdD6596F2029e6233DEFfaCa316e6A95217d4Dc34',
-      blockNumber: 5513012,
-      transactionHash: '0x58a7f01edc2b9772f87fca57789f0912152615813e6231ab137e4759c8f6415f',
-      transactionIndex: 0,
-      blockHash: '0x622989e0d1097ea59c557663bf4fa19b3064cfb858706021a6eecb11bb1c19b2',
-      logIndex: 0,
-      removed: false,
-      id: 'log_20b9b372',
-      returnValues: Result {},
-      event: undefined,
-      signature: null,
-    },
-    '1': {
-      .
-      .
-```
-
 # Potential errors and solutions
 
 **Not able to run main.js**
@@ -880,7 +716,6 @@ And Metamask is something like:
 # Transfer using Web UI
 Transferring assets through a **Web UI** is pretty simple. Just like the SDK, there are the **Approve** and **Deposit** steps:
 
-## Transferring ERC-721 and ERC-1155
 1. Open [MintNFT Bridge](https://bridge.mintnft.today/)
 2. Make sure Goerli Testnet is selected in Metamask
 
@@ -901,33 +736,6 @@ Transferring assets through a **Web UI** is pretty simple. Just like the SDK, th
 8. Once the transaction is mined, the process is complete! It takes about 7 minutes to complete the transfer. As mentioned before Polygon needs about 5 minutes to sync.
 
   ![Transfer Done](../../../.gitbook/assets/erc721-pos-ui-done.png)
-
-## Transferring ERC-20
-
-> **Note** that we can't use **Goerli** to **Mumbai** here. Because **Web UI** only supports Ethereum and Polygon **mainnets**.  
-
-So I am going to transfer some **real tokens** from my **Ethereum** account to **Polygon** and pay the fees. You may just follow the images below to see how the process works.
-
-1. Open [wallet.polygon.technology](https://wallet.polygon.technology/login)
-2. Make sure Ethereum Mainnet is selected in Metamask
-
-	![Metamask Ethereum](../../../.gitbook/assets/erc20-pos-metamask-eth-mainnet.png)
-
-3. Click on **Metamask**. first login option
-4. You will be asked to sign a **Signature Request** to make sure you have access to the wallet. It costs no fees
-
-	![pos web ui login](../../../.gitbook/assets/erc20-pos-web-ui-login.png)
-	
-5. I chose `DAI` token from Ethereum
-
-	![DAI](../../../.gitbook/assets/erc20-pos-web-ui-dai.png)
-
-6. Click on **Transfer**
-7. Then review the transaction details, like gas fees and the smart contract you are sending tokens to - before clicking on **Confirm**
-
-	![transfer](../../../.gitbook/assets/erc20-pos-web-ui-transfer.png)
-
-8. Once the transaction is mined, the process is complete! It takes about 7 minutes to complete the transfer, as mentioned before Polygon needs about 5 minutes to sync.
 
 
 # Withdrawing ERC-721 using SDK
