@@ -8,7 +8,7 @@ Solana programs are stateless. To store values we must use a separate account.
 
 ----------------------------------
 
-# Challenge
+# 👨‍💻 Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/greeter.ts`, implement `greeter`. First, derive the **greeter** address from some values. Then create a transaction which instructs the blockchain to create the **greeter** account. You must replace the instances of `undefined` with working code to accomplish this.
@@ -49,7 +49,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Solution
+# 👉 Solution
 
 ```typescript
 // solution
@@ -101,7 +101,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Make sure it works
+# ✅ Make sure it works
 
 Once you have the code above saved, click on **Create Greeter**:
 
@@ -109,6 +109,6 @@ Once you have the code above saved, click on **Create Greeter**:
 
 ----------------------------------
 
-# Conclusion
+# 🏁 Conclusion
 
 Now we have an account owned by the program and dedicated to storing the program data. We are ready to go ahead and act on the data: the first natural action is to read the data. Ready?

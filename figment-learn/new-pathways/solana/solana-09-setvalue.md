@@ -2,7 +2,7 @@ Last but certainly not least, we'll need to modify the data stored into **greete
 
 ----------------------------------
 
-# Challenge
+# 👨‍💻 Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/setter.ts`, complete `setter`. First you'll have to create an instruction, then you'll have to send and confirm a transaction to store the data from. You must replace the instances of `undefined` with working code to accomplish this.
@@ -36,7 +36,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Solution
+# 👉 Solution
 
 ```typescript
 // solution
@@ -68,7 +68,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Make sure it works
+# ✅ Make sure it works
 
 Once you have the code above saved, click on **Send A Greeting** and watch the magic happen:
 
@@ -76,7 +76,7 @@ Once you have the code above saved, click on **Send A Greeting** and watch the m
 
 ----------------------------------
 
-# Conclusion
+# 🏁 Conclusion
 
 Congratulations on completing the Solana Pathway! We hope you had a fun time and learned a lot. Here are a few things you can check out when you are ready to go further:
 

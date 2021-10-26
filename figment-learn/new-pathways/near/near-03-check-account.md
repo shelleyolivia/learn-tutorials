@@ -1,6 +1,6 @@
 Unlike many other Web 3 protocols, NEAR uses a human readable account ID instead of a public key hash. You can link as many `keypairs` to a NEAR account as you want. Here, we're going to Learn how to check the availability of a NEAR account name. As you might expect, **figment.testnet** is already taken.
 
-------------------------
+---
 
 # Challenge
 
@@ -12,10 +12,10 @@ In `pages/api/near/check-account.ts`, implement the default function. You must r
 
 ```typescript
   try {
-    const { freeAccountId, network } = req.body
-    const config = configFromNetwork(network);
+    const { freeAccountId, NETWORK } = req.body
+    const config = configFromNetwork(NETWORK);
     const near = await connect(config);
-    // Query the account info of freeAccountId 
+    // Query the account info of freeAccountId
     const accountInfo = undefined
     try {
         undefined;
@@ -27,9 +27,10 @@ In `pages/api/near/check-account.ts`, implement the default function. You must r
 ```
 
 **Need some help?** Check out these links
-* [The `Account` class](https://near.github.io/near-api-js/classes/account.account-1.html)  
-* [An explanation of `NEAR Accounts`](https://docs.near.org/docs/concepts/account)
-* [RPC `view_account`](https://docs.near.org/docs/develop/front-end/rpc#view-account)
+
+- [The `Account` class](https://near.github.io/near-api-js/classes/account.account-1.html)
+- [An explanation of `NEAR Accounts`](https://docs.near.org/docs/concepts/account)
+- [RPC `view_account`](https://docs.near.org/docs/develop/front-end/rpc#view-account)
 
 {% hint style="info" %}
 You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questions or want help completing the tutorial.
@@ -37,15 +38,15 @@ You can [**join us on Discord**](https://discord.gg/fszyM7K), if you have questi
 
 Still not sure how to do this? No problem! The solution is below so you don't get stuck.
 
-------------------------
+---
 
 # Solution
 
 ```typescript
 // solution
   try {
-    const { freeAccountId, network } = req.body
-    const config = configFromNetwork(network);
+    const { freeAccountId, NETWORK } = req.body
+    const config = configFromNetwork(NETWORK);
     const near = await connect(config);
     const accountInfo = await near.account(freeAccountId);
     try {
@@ -59,24 +60,24 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 **What happened in the code above?**
 
-* First, we create an `Account` object from the `freeAccountId` being passed in the request body.
-* Next, we query the state of this object with the `state` method:
-  * If it returns `true`, the account exists and we will return a `false` value to the client-side - indicating that the name is unavailable. 
-  * If `state` returns `false`, the account doesn't exist - so we pass a `true` value back to the client-side, indicating that the name is available. Phew! Little bit of programming logic there.
+- First, we create an `Account` object from the `freeAccountId` being passed in the request body.
+- Next, we query the state of this object with the `state` method:
+  - If it returns `true`, the account exists and we will return a `false` value to the client-side - indicating that the name is unavailable.
+  - If `state` returns `false`, the account doesn't exist - so we pass a `true` value back to the client-side, indicating that the name is available. Phew! Little bit of programming logic there.
 
-------------------------
+---
 
 # Make sure it works
 
-Once the code is complete and the file is saved, Next.js will rebuild the API route: 
-* Choose an account Id.
-* Click on **Check it!** 
-You should see:
+Once the code is complete and the file is saved, Next.js will rebuild the API route:
 
+- Choose an account Id.
+- Click on **Check it!**
+  You should see:
 
 ![](../../../.gitbook/assets/pathways/near/near-account.gif)
 
------------------------------
+---
 
 # Conclusion
 

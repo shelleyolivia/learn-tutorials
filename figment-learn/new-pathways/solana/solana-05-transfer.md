@@ -4,7 +4,7 @@ When a transaction is submitted to the **cluster**, the Solana runtime will exec
 
 ----------------------------------
 
-# Challenge
+# 👨‍💻 Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/transfer.ts` finish implementing the `transfer()` function.
@@ -42,7 +42,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Solution
+# 👉 Solution
 
 ```typescript
 // solution
@@ -84,7 +84,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Make sure it works
+# ✅ Make sure it works
 
 Once you've filled in the form with a value, click **Submit Transfer**: 
 
@@ -94,6 +94,20 @@ Once you've filled in the form with a value, click **Submit Transfer**:
 
 ----------------------------------
 
-# Conclusion
+# 🧐 Anatomy of an Explorer page
+
+When viewing Account details on the Solana Explorer:
+
+1. The Account Overview panel displays information about the account including its address, balance, and information about whether or not there is a Program deployed at that address.
+
+![](https://user-images.githubusercontent.com/2707197/136972044-0a07ea2f-3061-4a4a-af05-aaee562c8f7f.png)
+
+2. The History tab displays the Transaction history for the selected account, which is a list of previous transactions that account has been involved in.
+
+3. The Tokens tab displays information regarding any tokens held by the account.
+
+----------------------------------
+
+# 🏁 Conclusion
 
 Now that you are comfortable with accounts and tokens, we will look at how to deploy a program written in the Rust language to the Solana cluster. Don't worry, this process is not as scary as it sounds 😇

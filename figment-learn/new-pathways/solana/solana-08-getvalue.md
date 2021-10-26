@@ -23,7 +23,7 @@ const GreetingSchema = new Map([
 
 ----------------------------------
 
-# Challenge
+# 👨‍💻 Challenge
 
 {% hint style="tip" %}
 In `pages/api/solana/getter.ts`, complete the code for `getter`. First deserialize the greeter data to a TypeScript class, then access the counter value and pass it to the response object using the `.json()` method as in all previous tutorials.
@@ -59,7 +59,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Solution
+# 👉 Solution
 
 ```typescript
 // solution
@@ -85,7 +85,7 @@ Still not sure how to do this? No problem! The solution is below so you don't ge
 
 ----------------------------------
 
-# Make sure it works
+# ✅ Make sure it works
 
 Once you have the code above saved, click on **Get Greeting** and watch the magic happen: 
 
@@ -93,6 +93,6 @@ Once you have the code above saved, click on **Get Greeting** and watch the magi
 
 ----------------------------------
 
-# Conclusion
+# 🏁 Conclusion
 
 Simply getting the number of greetings is not enough, we'd like to also *send* a greeting to our contract. We're going to learn how to do it in the next step. Ready?
