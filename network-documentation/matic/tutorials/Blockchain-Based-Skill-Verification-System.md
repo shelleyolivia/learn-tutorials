@@ -63,16 +63,7 @@ truffle init .
 
 After following these steps, you should have a folder structure like:
 
-```bash
-├── contracts
-├── migrations
-├── node_modules
-├── package.json
-├── public
-├── src
-├── truffle-config.js
-└── package-lock.json
-```
+![str](https://user-images.githubusercontent.com/54525688/139138833-b912fc28-484e-4a01-b642-7e273af539fd.JPG)
 
 ## Configure truffle-config.js
 
@@ -696,6 +687,8 @@ To resolve this error, you need to change the storage type of some input/output 
 ## To the Mumbai testnet
 
 To deploy smart contracts in the Polygon Mumbai network we will use the services of the [DataHub](https://datahub.figment.io) platform. In DataHub login using your email account, select Polygon from the available protocols and get your private RPC url.
+
+![dataHub](https://user-images.githubusercontent.com/54525688/139138966-380ec28e-b1ec-4881-b718-e202b791d1b4.JPG)
 
 While deploying to an actual network instead of the development network, we need to connect to our metamask account (using HDWalletProvider) to pay for the gas fees for deploying the contract.
 
