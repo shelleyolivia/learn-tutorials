@@ -1,5 +1,9 @@
 # Introduction
-In this tutorial, we will discuss how to create an NFT marketplace on the Tezos blockchain. This tutorial assumes you have basic knowledge about [React](https://reactjs.org/), Redux, and Smart contract development on Tezos with Smart Py. We will be going through writing the smart contracts,  creating the UI, and invoking the entry points in the front end.
+In this tutorial, we will discuss how to create an NFT marketplace on the Tezos blockchain. We will build a simple open NFT marketplace where anyone can mint and collect NFTs. We will be going through writing the smart contracts,  creating the UI, and invoking the entry points in the front end.
+
+# Prerequisites
+- Basic familiarity with [ReactJS](https://reactjs.org/) and Redux.
+- Should also have some experience writing smart contracts on Tezos with SmartPy.
 
 # Requirements
 - [Git](https://git-scm.com/downloads)
@@ -14,23 +18,19 @@ A non-fungible token is a unique and non-interchangeable unit of data stored on 
 ## What is IPFS?
 The InterPlanetary File System is a protocol and peer-to-peer network for storing and sharing data in a distributed file system. IPFS uses content-addressing to uniquely identify each file in a global namespace connecting all computing devices. In this tutorial, we will be using [nft.storage](nft.storage) to store the metadata for NFTs.
 
-
-
-
 # Smart Contract
-We will be building two contracts for the marketplace. First will be the token contract. On Tezos [FA2](https://tezos.b9lab.com/fa2) is the standard for Non-fungible Token contracts. We will be using the template provided by Smart py to build out the Token Contract.
+We will be building two contracts for the marketplace. First will be the token contract. On Tezos [FA2](https://tezos.b9lab.com/fa2) is the standard for Non-fungible Token contracts. We will be using the template provided by SmartPy to build out the Token Contract.
 The template contains the basic entry points for building a Fungible or Non-fungible token including
-- minting tokens
-- transfer
-- adding operators
-and more.
+- Minting tokens
+- Transfer
+- Adding operators
 
-You can check out the template yourself [here](https://smartpy.io/dev/templates/FA2.py)
+You can check out the template for yourself [on the SmartPy site](https://smartpy.io/dev/templates/FA2.py).
 
 
 
 ## Token contract
-We will use Smart Py online ide to build out the contract. You can use Smart Py CLI if you prefer.
+We will use SmartPy online IDE to build out the contract. You can also use the SmartPy CLI if you prefer.
 
 1. Go to [smartpy.io/ide](smartpy.io/ide)
 2. We will first import the Smartpy library
@@ -39,12 +39,12 @@ We will use Smart Py online ide to build out the contract. You can use Smart Py 
 import smartpy as sp
 ```
 
-3. Now, we can directly import the FA2 template from smartpy with `import_script_from_url` function
+3. Now, we can directly import the FA2 template from smartpy with the `import_script_from_url` function
 
 ```python
 FA2 = sp.io.import_script_from_url("https://smartpy.io/dev/templates/FA2.py")
 ```
-4. FA2 template is a smart contract ready to be deployed for Fungible and non-fungible tokens.
+4. FA2 template is a smart contract ready to be deployed for Fungible and Non-fungible tokens.
 5. To use the imported contract, we can create a class and inherit it from the FA2 template.
 
 ```python
@@ -52,7 +52,7 @@ class Token(FA2.FA2):
     pass
 ```
 
-6. That is all for the NFT contract. Now, we will write some tests to see if this works. Create tests by using `@sp.add_test` decorator from the smartpy library.
+6. That is all for the NFT contract. Now, we will write some tests to see if this works. Create tests by using `@sp.add_test` decorator from the SmartPy library.
 
 ```python
 @sp.add_test(name = "Non Fungible Token")
@@ -71,24 +71,23 @@ def test():
     elon = sp.test_account("user2")
 ```
 
-8. Now, we create the instance of the Token contract and pass the required parameters which are,
+8. Now, we create the instance of the Token contract and pass the required parameters which are:
 
-```text
-FA2 config
-admin address
-metadata
-```
+- FA2 config
+- Admin address
+- Metadata
 
 You can customize all the parameters however you like and change the metadata IPFS hash. Here we are sticking with a simple configuration.
 
 ```python
 @sp.add_test(name = "Non Fungible Token")
 def test():
-    ...
+    # ...
     token_contract = Token(FA2.FA2_config(non_fungible = True), admin = admin.address, metadata = sp.utils.metadata_of_url("ipfs://QmW8jPMdBmFvsSEoLWPPhaozN6jGQFxxkwuMLtVFqEy6Fb"))
     
     scenario += token_contract
 ```
+> Note: Where ever there is missing code in the tutorial ellipsis is used to indicate it.
 
 9. We are all set for the Token contract. We can test this out by clicking on the run button.
 
@@ -100,18 +99,17 @@ There are some important features for a marketplace.
 - Transfering XTZ from contract to account. i.e. Collecting management rewards
 - Updating admin
 
-Before writing the functions, let us create the contract boilerplate. We will name our class `MarketPlace`. Let's initialize data fields in the init function. \
-We are going to initialize \
-`token`: The address to the token contract.\
-`metadata`: Meta-data of this contract to make it recognizable in explorers.\
-`admin`: the admin for this contract,\
-`token_id`: we will use this to know the total number of NFTs we have minted.\
-`data`: This is a big map to save a particular token's data.\
-#### `data` big_map
-- `holder`: The current owner of this NFT.
-- `collectable`: Whether the NFT is on sale or not. 
-- `author`: The creator of the NFT.
-- `amount`:The amount at which this NFT will be sold, if `collectable` is true
+Before writing the functions, let us create the contract boilerplate. We will name our class `MarketPlace`. Let's initialize data fields in the init function. 
+We are going to initialize 
+- `token`: The address to the token contract.
+- `metadata`: Meta-data of this contract to make it recognizable in explorers.
+- `admin`: the admin for this contract,
+- `token_id`: we will use this to know the total number of NFTs we have minted.
+- `data`: This is a big map to save a particular token's data.
+	- `holder`: The current owner of this NFT.
+	- `collectable`: Whether the NFT is on sale or not. 
+	- `author`: The creator of the NFT.
+	- `amount`: The amount at which this NFT will be sold, if the item is collectible
 
 ```python
 class Marketplace(sp.Contract):
@@ -127,9 +125,9 @@ class Marketplace(sp.Contract):
 
 Now, Let us code the entry points one by one.
 
-#### Minting NFT
+## Minting NFT
 The mint function is used for minting new NFTs. We first verify the amount at which the minter wants to sell this NFT is positive.
-Then we call our token contract, by inter-contract calling. Once the inter contract call is made we update our data big map. Here, We are sending metadata to the `Token` contract.
+Then we call our token contract, by inter-contract calling. Once the inter contract call is made, we update our `data` big map. Here, We are also sending metadata to the `Token` contract.
 
 We add a new token in our big map and set the holder as the contract, author as the sender, amount at which this will be sold as the input parameter `amount` and `collectable` True.
 
@@ -161,7 +159,7 @@ We add a new token in our big map and set the holder as the contract, author as 
         self.data.token_id += 1
 ```
 
-### Collect NFT entry point
+## Collect NFT entry point
 Before we start coding this, let us first create a utility function that we can use to call the transfer entry point in the token contract.
 
 ```python
@@ -197,7 +195,7 @@ If all the checks pass we can set our new holder. And we will use our utility fu
 
 We are also sending 97% of the amount to the author of the NFT.
 
-### Update admin Entry point
+## Update admin Entry point
 We check if the sender is admin and, if it is true we will update the admin.
 
 > It is always good to have an entry point to update admin, in case you have lost your private key.
@@ -209,7 +207,7 @@ We check if the sender is admin and, if it is true we will update the admin.
         self.data.admin = params
 ```
 
-### Collect management rewards
+## Collect management rewards
 Our smart contract has collected XTZ and we want to withdraw them. We are creating an entry point just for that.
 We verify the sender to be admin and transfer the amount of XTZ, specified in parameters.
 
@@ -221,9 +219,9 @@ We verify the sender to be admin and transfer the amount of XTZ, specified in pa
         sp.send(params.address, params.amount)
 ```
 
-Hurray! we have coded all the entry point now. Let us write tests for all of them.
+Hurray! We have coded all the entrypoints now. Next, we can write tests for all of them.
 
-## Testing both contracts.
+## Testing the contracts.
 First, we initialize the `MarketPlace` Contract.
 We will pass the token address as the first parameter. We get the token address by calling `.address` on the Token contract instance.
 
@@ -246,9 +244,9 @@ def test():
     scenario += marketplace
 ```
 
-Now we will try to mint the NFT, We use a temporary IPFS hash here. First, we will call the entry point without giving Marketplace contract admin privileges. This is to check if everything is working how it is supposed to. We should see a fail message if we try to run.
+Now we will try to mint the NFT, we use a temporary IPFS hash here. First, we will call the entry point without giving the `MarketPlace` contract admin privileges. This is to check if everything is working how it is supposed to. We should see a fail message if we try to run.
 After that, we can call the `set_administrator` entry point on the Token contract and set the Marketplace contract as the admin.
-If we try to mint again, It will work.
+If we try to mint again, it will work.
 
 Now we can test out the collect function.
 > Make sure to use a different user while calling the entry point. As we have added a check to make sure the minter is not the same as the collector.
@@ -267,21 +265,21 @@ Now, we can also try out the `collect_management_rewards` entry point and enter 
     scenario += marketplace.collect_management_rewards(sp.record(amount = sp.mutez(1000), address = admin.address)).run(sender = admin)
 ```
 
-Check out the complete code on smartpy. [here](https://smartpy.io/ide?cid=QmVGqtBwNNnxwdFPrnmZYnQGq5PEQGSGMQwrB53rMtuJfg&k=6c6a8bdfdaf5a2893854)
+Check out the complete code on SmartPy [here](https://smartpy.io/ide?cid=QmVGqtBwNNnxwdFPrnmZYnQGq5PEQGSGMQwrB53rMtuJfg&k=6c6a8bdfdaf5a2893854).
 
 
-## Deploying the contract
+## Deploy the contract
 
-Now, We are going to deploy both contracts.
+Now, we are going to deploy both contracts.
 
-In the smartpy output, click the `Deploy Michelson Project`
+In the SmartPy output, click on `Deploy Michelson Project`
 
 ![image](../../../.gitbook/assets/tezos-nft-market-10.png)
 
 Then will open a new page. Select the network where you want to deploy the smart contract.
 Then select the account which will be used to deploy the smart contract.
 
-Now Click on the `Estimated Cost From Rpc` to estimate the fee in tezos to deploy the contract. Make sure the account you are using has that much.
+Now Click on the `Estimated Cost From Rpc` to estimate the fee in Tezos to deploy the contract. Make sure the account you are using has that much XTZ available.
 
 ![image](../../../.gitbook/assets/tezos-nft-market-9.png)
 
@@ -291,24 +289,24 @@ Before deploying we will change the admin for this contract. Update the address 
 ![image](../../../.gitbook/assets/tezos-nft-market-3.png)
 
 
-Now click the `Deploy contract` button. This will generate the address for the deployed contract save that.
+Now click the `Deploy contract` button. This will generate the address for the deployed contract; save that.
 
 ![image](../../../.gitbook/assets/tezos-nft-market-7.png)
 
 And we have deployed the `Token` contract successfully. Now let us deploy the `MarketPlace` Contract. 
 
 
-Now again, In the Smartpy output, Click the deploy contract button for the `MarketPlace` Contract.
+Now again, In the Smartpy output, click the deploy contract button for the `MarketPlace` Contract.
 
 ![image](../../../.gitbook/assets/tezos-nft-market-5.png)
 
-We will repeat the same steps for this one also. First, We will select the account, then we will Estimate the cost.
+We will repeat the same steps for this one also. First, we will select the account, then we will estimate the cost.
 
 Once these 2 steps are done, we will update the initial storage. Change the contract address here to the contract address we got after deploying the `Token` contract.
 
 ![image](../../../.gitbook/assets/tezos-nft-market-2.png)
 
-And now we can deploy this contract as well by clicking the `Deploy contract` button. And save the address of this contract.
+And now we can deploy this contract as well by clicking the `Deploy contract` button, then save the address of this contract.
 
 Now we have deployed both the contracts. Now we can update the `admin` by calling the `setAdminstator` entry point.
 
@@ -324,20 +322,20 @@ To get the boilerplate setup, we will clone a Template that includes a wallet co
 
 ## Setup
 1. Go to https://github.com/NishantChandla/taquito-react-redux-template
-2. Click the `Use this template button. This will create a new repository for you.
-3. Now, we can clone the created repository using.
+2. Click the `Use this template` button. This will create a new repository for you.
+3. Now, we can clone the created repository (replace URL with the actual URL of the repository you just created):
 
-```bash
+```text
 git clone URL
 ```
 
-4. Open up the cloned folder in vs-code, and we can get a quick look at the boilerplate and start coding.
+4. Open up the cloned folder in VSCode, and we can get a quick look at the boilerplate and start coding.
 5. First run the `npm install` command in your terminal. Then run `npm start`. This will start a development server for the project.
 
-> We will write the contract calls in src/actions/index.js.
+> We will write the contract calls in `src/actions/index.js`.
 
 ## Editing the template
-1. We will edit the contract addresses in the config/index.js file. We will use the addresses we got after deploying.
+1. We will edit the contract addresses in the `config/index.js` file. We will use the addresses we got after deploying.
 
 ```js
 const config = {
@@ -349,8 +347,8 @@ export default config;
 ```
 
 Here, I have used the contract address I got after deploying. You have to replace them with your addresses.
-`contractAddress`: Marketplace address/
-`tokenAddress`: FA2 contract address/
+`contractAddress`: Marketplace address
+`tokenAddress`: FA2 contract address
 
 2. We will have to change the test network as we have deployed our contract on GRANADANET and the template has FLORENCENET.
 There are a couple of instances where we will change the network RPC URL.
@@ -360,41 +358,40 @@ There are a couple of instances where we will change the network RPC URL.
     const [Tezos, setTezos] = useState(
         new TezosToolkit("https://granadanet.smartpy.io/")
     );
-    ...
+    // ...
     const wallet_instance = new BeaconWallet({
     name: "NFT marketplace",
     preferredNetwork: NetworkType.GRANADANET,
-    ...
+    // ...
 ```
 
 - actions.js
 
 ```js
-    ...
+    // ...
     await wallet.requestPermissions({
         network: {
             type: NetworkType.GRANADANET,
             rpcUrl: "https://granadanet.smartpy.io/",
         },
     });
-    ...
+    // ...
     setTezos(new TezosToolkit("https://granadanet.smartpy.io/"));
 
 ```
 
 We have to change all the URLs from FLORENCENET to GRANADANET.
-> We are using a smartpy node here. You can use whatever node you prefer.
+> We are using a SmartPy node here. You can use whatever node you prefer.
 
-3. You can change the name of the project in package.json and public/index.html
+3. You can change the name of the project in `package.json` and `public/index.html`
 
 ## Writing Contract calls
-We will first create actions creators for contract calls in actions/index.js
+We will first create actions creators for contract calls in `actions/index.js`
 - mintNFT
 - collectNFT
 
-### mintNFT
-We use the Tezos toolkit instance to create an instance of our marketplace contract. Then we can use the instance to call the entry points on our contract. Mint entry point requires two parameters amount and metadata URL. We can create these are parameters for the action creator and pass them up from a form.
-> Here we cannot send a string as the second parameter as the metadata should of bytes type. So we convert it to hex code (bytes).
+## mintNFT
+We use the Tezos toolkit instance to create an instance of our marketplace contract. Then we can use the instance to call the entry points on our contract. Mint entry point requires two parameters amount and metadata URL. We can create these are parameters for the action creator and pass them up from a form. Here we cannot send a string as the second parameter as the metadata should of bytes type, so we convert it to hex code (bytes).
 
 ```js
 export const mintNFT = ({ Tezos, amount, metadata }) => {
@@ -418,8 +415,8 @@ export const mintNFT = ({ Tezos, amount, metadata }) => {
 > We have added a dispatch to fetch data. We will create that action creator later.
 Our mintNFT action creator is complete.
 
-### collectNFT
-As we did before, We use the Tezos toolkit instance to create an instance of our marketplace contract. Then we can use the instance to call the collect entry point on our contract. Collect entry point requires one parameter which is the token id. Additionally, we want to send the amount required to collect the NFT. We can do so by passing an object when calling the entry point.
+## collectNFT
+As before, we use the Tezos toolkit instance to create an instance of our marketplace contract. Then we can use the instance to call the collect entry point on our contract. Collect entry point requires one parameter which is the token id. Additionally, we want to send the amount required to collect the NFT. We can do so by passing an object when calling the entry point.
 > Here we have used mutez units.
 
 ```js
@@ -440,17 +437,16 @@ export const collectNFT = ({ Tezos, amount, id }) => {
 };
 ```
 
-> We have added a dispatch to fetch data. We will create that action creator later.
-When we dispatch this action creator it will call our contract and buy the NFT specified.
-> Note that the user address is already sent when we call .send() on the entry point
+We have added a dispatch to fetch data. We will create that action creator later. When we dispatch this action creator it will call our contract and buy the NFT specified.
+Note that the user address is already sent when we call `.send()` on the entry point
 
 ## Getting the contract data
 Here we have two options either we can read the contract storage directly using taquito or we can use an indexer API to get the data.
 We will be using tzkt API to get the storage. There are a couple of reasons to do so. Getting the storage from the contract using taquito is slow and we will be getting the data multiple times in our app.
 
-> Check out the API specification at https://api.granadanet.tzkt.io/
+Check out the API specification at https://api.granadanet.tzkt.io/
 
-First, We will install Axios to make the API calls.
+We will need to install Axios to make the API calls.
 Go to the terminal and run `npm install axios`
 
 Also, we will need two utility functions to convert bytes into strings back. As you might remember we converted string to bytes when minting.
@@ -467,7 +463,7 @@ export function bytes2Char(hex) {
 }
 ```
 
-We will create an action creator fetch data, and then we will call the API with our contract addresses. As we want data from both the token contract and the marketplace contract. We will call both of them and then combine them with data. The token contract returns an array with values `token_id and token_info` token info containing bytes for IPFS hash. We convert bytes to string using the bytes2Char function. Then create get request with Axios using `https://ipfs.io/ipfs/` public node. 
+We will create an action creator fetch data, and then we will call the API with our contract addresses, as we want data from both the token contract and the marketplace contract. We will call both of them and then combine them with data. The token contract returns an array with values `token_id` and `token_info`, containing bytes for IPFS hash. We convert bytes to a string using the `bytes2Char` function, then create a `get` request with Axios using the `https://ipfs.io/ipfs/` public node.
 We then combine both of the results in an object and append it to an array `tokenData`.
 
 ```js
@@ -510,7 +506,7 @@ export const fetchData = () => {
 
 Here we dispatch the data with type `SET_TOKEN_DATA`. Now we will create reducers to store the data.
 
-### Creating reducers
+## Creating reducers
 As we can see we already have a reducer created for storing the wallet configuration i.e. user address and user balance.
 Now we will create a tokenDataReducer and store the data for our NFTs.
 
@@ -525,7 +521,7 @@ const tokenDataReducer=(state=[], action)=>{
 }
 ```
 
-This is straight forward reducer that stores whatever data is dispatched with the SET_TOKEN_DATA type.
+This is straight forward reducer that stores whatever data is dispatched with the `SET_TOKEN_DATA` type.
 
 We will need to add this reducer to the combine reducers function call.
 
@@ -538,21 +534,21 @@ Now we can move on to minting our first NFT.
 
 At this point, you can go ahead and build your design that shows the NFTs. You can use the collect and mint action creators to interact with the contract. 
 
-### UI
+## Creating the UI
 In this tutorial, we will be going over a basic frontend using `Semantic UI`
 
-First, we will set up React router. Go to your terminal and install react-router-dom.
+First, we will set up React router. Go to your terminal and install `react-router-dom`.
 
-```bash
+```text
 npm install react-router-dom
 ```
 
 Now we can use the `BrowserRouter` component from `react-router-dom`. React router requires us to keep this as a parent to the App component. First, we import the component, then we will use it.
 
 ```js
-...
+
 import { BrowserRouter } from "react-router-dom";
-...
+
 ReactDOM.render(
 	<Provider store={store}>
 		<PersistGate loading={null} persistor={persistStore(store)}>
@@ -563,7 +559,6 @@ ReactDOM.render(
 	</Provider>,
 	document.querySelector("#root")
 );
-...
 
 ```
 
@@ -603,7 +598,7 @@ Now we can use the Switch and Route components to do the routing. Route componen
     );
 ```
 
-We also dispatch fetchData action creator using the dispatch object created already.
+We also dispatch the `fetchData` action creator using the dispatch object created already.
 
 ```js
    useEffect(()=>{
@@ -611,13 +606,13 @@ We also dispatch fetchData action creator using the dispatch object created alre
     },[dispatch]);
 ```
 
-Now we will change the routes in our Header.js. We will use the `Link` component from react-router-dom.
-We can also make the files a little more organized and move Header.js to component/sections
+Now we will change the routes in our `Header.js`. We will use the `Link` component from `react-router-dom`.
+We can also make the files a little more organized and move `Header.js` to `component/sections`.
 
 ```js
-...
 import { Link } from 'react-router-dom';
-...
+
+// ...
    return (
             <div className="ui menu black" style={{'marginTop':'5px'}}>
                 <a href="/#" className="ui header item">NFTs</a>
@@ -640,7 +635,7 @@ If you run `npm start` now you will get an error as the components don't exist y
 
 ## Fixing the errors
 
-We will create three files `Create.js`, `Show.js`, `Home.js` in components/layouts. We will create a basic react component in each of the files to get rid of the error.
+We need to create three files `Create.js`, `Show.js`, `Home.js` in `components/layouts`. We will create a basic React component in each of the files to get rid of the error.
 
 ```js
 const Create = () => {
@@ -648,19 +643,19 @@ const Create = () => {
 }
 export default Create;
 ```
-> Note replace the component name with the file name.
+> Note: Remember to use the component name in each file, such as: const Show = () => {} and const Home = () => {}
 
 ## Creating a form to mint NFTs
 Our mintNFT action creator requires two parameters amount and metadata IPFS hash. In this tutorial, we will use the `nft.storage` library to upload our NFT data to IPFS storage.
 
-FA2 standard requires us to have some necessary files in the metadata which are `name`, `decimals`, `symbol`. Here we will also be adding description and image hash. To get the image we will use the `use-file-picker` package.
+The FA2 standard requires us to have some necessary fields in the metadata which are `name`, `decimals`, and `symbol`. Here we will also be adding a description and the image hash. To get the image we will use the `use-file-picker` package.
 Let us install both of them.
 
-```bash
+```text
 npm install use-file-picker nft.storage
 ```
 
-We will need to get an API key by signing up on [nft.storage](nft.storage). You can go ahead a get the API key.
+We will need to get an API key by signing up for an account on [nft.storage](nft.storage). You can go ahead and get the API key once you've created an account and logged in.
 
 ```js
 import { useFilePicker } from "use-file-picker";
@@ -669,17 +664,16 @@ import { NFTStorage, File } from "nft.storage";
 import { mintNFT } from "../../actions";
 import { useDispatch } from "react-redux";
 
-const apiKey =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY0NmFmRGIyMjhhMGY1RjFhMURDNDQyMjFCQ0E4YTIwNTNlNWUzQzIiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYyNDY0NjcyNjUwMiwibmFtZSI6IlRleiBCeXRlcyJ9.JfjY624-uOXE9naYfN7Z8QfY1bbO_bZcVihhHL5ke3I";
+const apiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY0NmFmRGIyMjhhMGY1RjFhMURDNDQyMjFCQ0E4YTIwNTNlNWUzQzIiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYyNDY0NjcyNjUwMiwibmFtZSI6IlRleiBCeXRlcyJ9.JfjY624-uOXE9naYfN7Z8QfY1bbO_bZcVihhHL5ke3I";
 const client = new NFTStorage({ token: apiKey });
-...
+// ...
 ```
 
 First, we import all the required packages and set up the nft.storage client.
 
 ```js
 const Create = ({ Tezos }) => {
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const [openFileSelector, { filesContent }] = useFilePicker({
 		accept: [".png", ".jpg", ".jpeg"],
 		multiple: false,
@@ -694,12 +688,12 @@ const Create = ({ Tezos }) => {
 ```
 
 Here we will declare all the states we need for our form. We also declare `openFileSelector` and `filesContent` from the `useFilePicker` hook.
->You can also store additional details on the NFT.
+You can also store additional details on the NFT.
 
-Now we will create a submit button that simply calls the NFT.storage client and generate the IPFS hash. Then we dispatch the mintNFT action creator.
+Now we will create a submit button that simply calls the nft.storage client and generates the IPFS hash. Then we dispatch the mintNFT action creator.
 
-The form here also has some basic validation. It is a basic form that has labels and fields. 
-> Note CSS comes from semantic UI. The link tag is already present in the public/index.html
+The form here has labels and fields, it also has some basic validation.
+Note CSS comes from semantic UI. The link tag is already present in the `public/index.html` file.
 
 ```js
 	const onSubmit = (e) => {
@@ -865,16 +859,17 @@ export default Create;
 
 ![image](../../../.gitbook/assets/Tezos-nft-marketplace-mint-nft.png)
 
-## Displaying the NFTs in home
-As we have already stored the data in our Redux store. We can display it in our Home. We can first create a section component to render the NFTs.
+## Displaying NFTs in the Home component
+As we have already stored the data in our Redux store, we can display it in our Home component. We can first create a section component to render the NFTs.
 
-Let us create a `Token_card.js` file in sections. This component will be really simple without any logic. We will show details of our NFT here. Let us write this out.
+Create a `Token_card.js` file in the `sections` directory. This component will be really simple without any logic. We will show details of our NFT here. Let us write this out.
 
-We show 
-- image
-- amount
-- name
-- description
+We'll show:
+
+- The image
+- The amount
+- The NFT's name
+- The NFT's description
 - A button to buy/collect the NFT
 
 Here we can create prop `item` for the details, `onClick` to navigate to the detailed view and _onCollect_ which simply dispatches collectNFT action creator.
@@ -882,12 +877,12 @@ Here we can create prop `item` for the details, `onClick` to navigate to the det
 We will set up _onClick_ on the image and _onCollect_ to the buy button.
 
 ```js
-const Token = ({item, onClick, onCollect}) => {
+const Token = ({ item, onClick, onCollect }) => {
 	return (
 		<div className="ui fluid card">
 			<div className="image">
 				<img
-                    onClick={onClick}
+					onClick={onClick}
 					style={{ maxHeight: "200px", objectFit: "cover" }}
 					src={`https://ipfs.io/ipfs/${
 						item.image.split("ipfs://")[1]
@@ -898,14 +893,10 @@ const Token = ({item, onClick, onCollect}) => {
 			<div className="content">
 				<div className="right floated">
 					Price:
-					<div style={{ color: "black" }}>
-						{item.amount}
-					</div>
+					<div style={{ color: "black" }}>{item.amount}</div>
 				</div>
 				<div className="header">{item.name}</div>
-				<div className="meta">
-					{item.symbol}
-				</div>
+				<div className="meta">{item.symbol}</div>
 				<div className="description">
 					{item.description.length > 15
 						? item.description.slice(0, 15) + "..."
@@ -931,28 +922,28 @@ const Token = ({item, onClick, onCollect}) => {
 export default Token;
 ```
 
-Now, we are all set to show the Tokens in our Home.js component.
-First, we will import useDispatch and useSelector. We will use `useDispatch` to execute collectNFT action creator and `useSelector` to show all the data from the store i.e. state.tokenData.
+Now, we are all set to show the Tokens in our `Home.js` component.
+First, we will import the `useDispatch` and `useSelector` hooks. We will use `useDispatch` to execute the collectNFT action creator and `useSelector` to show all the data from the store i.e. `state.tokenData`.
 
 ```js
 import { useDispatch, useSelector } from "react-redux";
-...
+// ...
 const Home = ({Tezos}) => {
 	const selector = useSelector(state => state.tokenData);
     const dispatch = useDispatch();
 ```
 
-Now, we can also import `useHistory` from react-router to push to show route on click.
+We can also import `useHistory` from `react-router` to show the route on click.
 
 ```js
 import { useHistory } from "react-router";
-...
+// ...
 const Home = ({Tezos}) => {
-    ...
+    // ...
     const history = useHistory();
 ```
 
-Now, we can run .map on the selector and return `Token_card.js` component we just created. We pass in all the props that are required.
+Now, we can run .map on the selector and return the `Token_card.js` component we just created. We pass in all the props that are required.
 
 We can see the completed code here.
 
@@ -964,19 +955,25 @@ import { useHistory } from "react-router";
 import { collectNFT } from "../../actions";
 import Token from "../sections/Token_card";
 
-const Home = ({Tezos}) => {
-	const selector = useSelector(state => state.tokenData);
-    const dispatch = useDispatch();
-    const history = useHistory();
+const Home = ({ Tezos }) => {
+	const selector = useSelector((state) => state.tokenData);
+	const dispatch = useDispatch();
+	const history = useHistory();
 
-    const tokens = selector.map((obj, idx) => 
-        <Token 
-            key={idx} 
-            item={obj} 
-            onCollect={()=>dispatch(collectNFT({Tezos, amount: obj.amount, id: obj.token_id}))}
-            onClick={()=>obj.collectable && history.push(`/show/${obj.token_id}`)}
-        />
-    );
+	const tokens = selector.map((obj, idx) => (
+		<Token
+			key={idx}
+			item={obj}
+			onCollect={() =>
+				dispatch(
+					collectNFT({ Tezos, amount: obj.amount, id: obj.token_id })
+				)
+			}
+			onClick={() =>
+				obj.collectable && history.push(`/show/${obj.token_id}`)
+			}
+		/>
+	));
 
 	return <div className="ui link three column grid cards">{tokens}</div>;
 };
@@ -1049,13 +1046,11 @@ return (
                                 navigator.clipboard.writeText(
                                     data.holder + ""
                                 );
-                            }}
-                        >
+                            }}>
                             <h3
                                 className="ui right floated header green"
                                 style={{ cursor: "pointer" }}
-                                data-content="Copy to clipboard"
-                            >
+                                data-content="Copy to clipboard">
                                 {data.holder?.slice(0, 6) + "..."}
                             </h3>
                             <h3 className="ui left aligned header">
@@ -1068,13 +1063,11 @@ return (
                                 navigator.clipboard.writeText(
                                     data.author + ""
                                 );
-                            }}
-                        >
+                            }}>
                             <h3
                                 className="ui right floated header green"
                                 style={{ cursor: "pointer" }}
-                                data-content="Copy to clipboard"
-                            >
+                                data-content="Copy to clipboard">
                                 {data.author?.slice(0, 6) + "..."}
                             </h3>
                             <h3 className="ui left aligned header">
@@ -1097,8 +1090,7 @@ return (
                                 Token ID
                             </h3>
                         </div>
-                        ...
-                        ...
+                        {/*...*/}
                     </div>
                 </div>
             </>
