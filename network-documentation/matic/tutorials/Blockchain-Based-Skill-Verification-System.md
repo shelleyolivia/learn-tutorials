@@ -53,7 +53,7 @@ cd Decentraskill
 
 ## Install and setup required dependencies
 
-Install the required node modules and setup the truffle project in the decentrskill directory.
+Install the required node modules and setup the truffle project in the Decentraskill directory.
 
 ```text
 npm install -g truffle
@@ -246,12 +246,12 @@ For the login function, the contract simply checks if the wallet address of the 
 
 ```solidity
 function login(string calldata email) public view returns (string memory) {
-	// checking the function caller's wallet address from global map containing email address mapped to wallet address
-	require(
-        msg.sender == email_to_address[email],
-        "error: incorrect wallet address used for signing in"
+    // checking the function caller's wallet address from global map containing email address mapped to wallet address
+    require(
+    msg.sender == email_to_address[email],
+    "error: incorrect wallet address used for signing in"
     );
-		return (is_company[msg.sender]) ? "company" : "user"; // returns account type
+    return (is_company[msg.sender]) ? "company" : "user"; // returns account type
 }
 ```
 
@@ -312,7 +312,7 @@ modifier verifiedUser(uint256 user_id) {
 }
 ```
 
-For adding an experience to a particular user, the _add_experiance_ function will take the user's id, employment starting date, and ending date, and employer id i.e company id. This function creates a new object in the experiences global array and adds its id in the user's _user_work_experience_ array and the company's _requested_employees_ array.
+For adding an experience to a particular user, the `add_experiance` function will take the user's id, employment starting date, and ending date, and employer id i.e company id. This function creates a new object in the experiences global array and adds its id in the user's `user_work_experience` array and the company's `requested_employees` array.
 
 ```solidity
 function add_experience(
