@@ -1,5 +1,3 @@
-# Create an AMM on Avalanche
-
 # Introduction
 
 In this tutorial, we will learn how to build a very basic AMM having features namely Provide, Withdraw & Swap with no incentive mechanism like trading fees. Also, we will not deal with ERC20 tokens instead, we will maintain our own mapping storing the balance of the accounts to keep things simple! We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.
@@ -13,6 +11,8 @@ In this tutorial, we will learn how to build a very basic AMM having features na
 
 * [Node.js](https://nodejs.org/en/download/releases/) v10.18.0+
 * [Metamask extension](https://metamask.io/download.html) on your browser
+
+# What's an AMM?
 
 Automated Market Maker(AMM) is a type of decentralized exchange which is based on a mathematical formula of price assets. It allows digital assets to be traded without any permissions and automatically by using liquidity pools instead of any traditional buyers and sellers which uses an order book that was used in traditional exchange, here assets are priced according to a pricing algorithm. 
 
