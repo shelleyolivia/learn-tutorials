@@ -224,7 +224,7 @@ Now we have the three Anchor blocks we need to make our blog:
 
 But right now our program doesn't do anything, because our program methods are empty.
 
-### The `initialize()` function
+# The `initialize()` function
 
 In `initialize` we want to set our blog account `authority`. We will set `authority` to the same public key as the keys that signed the transaction.
 
@@ -360,7 +360,7 @@ anchor build
 
 Make sure you run anchor build in your project's root folder, anchor will take care of the rest.
 
-## Deploy to Devnet
+# Deploy to Devnet
 
 Now that our Rust Program has been written with the help of Anchor, it's time to deploy to the Devnet.
 
@@ -570,7 +570,7 @@ Now that the program is deployed to Solana Devnet, we can access it from the cli
 
 Let's build the client front end to interface with our program!
 
-## Client Setup
+# Client Setup
 
 Anchor is every bit about the client side as it is about the program side. Our program is complete and our IDL is built, so all that is left is for us to build a front end to use it all.
 
@@ -578,11 +578,11 @@ Although I have chosen to use Svelte for this, any front end can be used. We wil
 
 So I'll get straight to the `anchorClient.js` setup and then cover the SvelteKit integration for those who wish to stick around for that part.
 
-## Building our anchorClient
+# Building our anchorClient
 
 We have our IDL.json which describes how we use our app, but we need to build some handlers to call the remote procedure calls (RPCs).
 
-### `initialize()`
+Let's take a look at the `initialize()` function, now from the client side.
 
 In order to call our initialize function in our program, we first need an equivalent fuction in javascript. It looks like this:
 
@@ -654,7 +654,7 @@ async makePost(post, blogAccountStr) {
 
 In order for these calls to work, we need this `this.program` that you see used everywhere, so let's take care of that.
 
-### Creating `program.*`
+# Creating `program.*`
 
 We create `program` using a call to the class constructor:
 
@@ -800,7 +800,7 @@ So now that we have a connection, and a wallet we get a provider, and with the p
 
 The rest of the app integrates both `initialize` and `makePost` as well as `solana-web3.js` calls to interact with the program.
 
-## SvelteKit
+# SvelteKit
 
 You can use Anchor and these tutorial libraries with any framework, such as React, Vue, or Svelte. I chose to demonstrated this in Svelte, below are some front-end tips for working with the libraries, through a Svelte lens. But they can be applied to any other framework too.
 
@@ -826,7 +826,7 @@ npm install @project-serum/anchor --save
 
 There are a few gotchyas that you might run into while trying to use the solana or anchor libraries in client side browser code.
 
-### Gotchya #1 - Buffer not defined
+## Gotchya #1 - Buffer not defined
 
 Since Anchor uses borsh, there may be a small hack you need to add in order to get the Global varibale to work. In Svelte, if we paste something in our page layouts, it'll apply to all layouts, so we'll add our hack here to make things work with the imported Anchor library:
 
@@ -847,7 +847,7 @@ onMount(async () => {
 })
 ```
 
-### Gotchya #2 - import in onMount()
+## Gotchya #2 - import in onMount()
 
 The other issue is the solana / anchor code is NOT isomorphic, which means it doesn't play equally nicely in Nodejs and the browser. The way to force frontend frameworks like Svelte to use the Browser version only (and skip the whole Server Side Rendering, or SSR) is to `import` in the browser side code, in Svelte's case, in onMount():
 
@@ -876,7 +876,7 @@ export const loadAnchorClient = async () => {
 
 Embedding loading of our anchor Client into the Browser side ensires that the browser version of any non-isomorphic libraries gets loaded, and we don't get any nasty errors.
 
-## Summary of Account Address Keypairs
+# Summary of Account Address Keypairs
 
 There are a number of keypairs that are used throughout this whole process, and it can get a bit confusing:
 
@@ -892,7 +892,7 @@ Program upgrade authority keys are creates and funded during the first deploy ca
 
 The BlogAccount key is created on the fly during intilization, but if there was a reason you wanted to pick your key, it _could_ be passed in, but that's pretty extra.
 
-## Running the App
+# Running the App
 
 In the end, navigating to `./app` and running `npm run dev` will start up the Svelte App and get you to the home screen.
 
