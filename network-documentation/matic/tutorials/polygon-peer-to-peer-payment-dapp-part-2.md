@@ -10,7 +10,7 @@ Before starting, let's see what our dApp will look like after adding support for
 
 # Prerequisites
 
-To successfully follow along with this tutorial, you will need an understanding of ERC20 tokens, basic knowledge of the frontend framework (NextJS in our case), and you will need to complete the first part of this tutorial.
+To successfully follow along with this tutorial, you will need an understanding of ERC20 tokens, basic knowledge of the frontend framework (NextJS in our case), and you will need to complete the first part of this tutorial, at <https://learn.figment.io/tutorials/peer-to-peer-payment-on-polygon-part-1>.
 
 # Requirements
 
