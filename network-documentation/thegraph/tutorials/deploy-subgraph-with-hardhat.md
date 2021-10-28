@@ -167,9 +167,6 @@ To deploy to the Ethereum Rinkeby testnet with HardHat, you need to add a networ
 ```javascript
 require("@nomiclabs/hardhat-waffle");
 
-// Replace this with your Alchemy api key
-const ALCHEMY_API_KEY = "YOUR ALCHEMY_API_KEY";
-
 // Replace this private key with your Rinkeby account private key
 const RINKEBY_PRIVATE_KEY = "YOUR RINKEBY_PRIVATE_KEY";
 
@@ -177,22 +174,12 @@ module.exports = {
   solidity: "0.7.3",
   networks: {
     rinkeby: {
-      url: `https://eth-rinkeby.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+      url: `https://rinkeby-light.eth.linkpool.io/`,
       accounts: [`0x${RINKEBY_PRIVATE_KEY}`],
     },
   },
 };
 ```
-
-To get your `ALCHEMY_API_KEY`, go to <https://www.alchemyapi.io>, and signup for an account.
-
-![Create your Alchemy app](../../../.gitbook/assets/alchemy_create_app.png)
-
-Fill in the details like shown above.
-
-Then choose the free plan.
-
-![Choose Alchemy Free plan](../../../.gitbook/assets/alchemy_plan_free.png)
 
 To get your `RINKEBY_PRIVATE_KEY`, open your browser and open Metamask. Make sure **Rinkeby Test Network** is selected. Go to Account details, and click on `Export Private Key`.
 
