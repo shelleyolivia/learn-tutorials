@@ -148,7 +148,6 @@ Now we'll work on an entry point called `initialize_exchange` that will be respo
 ```py
 @sp.entry_point
 def initialize_enchange(self, token_amount):
-    # We just take the sp.amount and then transfer the tokens based on that.
     sp.if ((self.data.token_pool == sp.nat(0)) & (self.data.tez_pool == sp.mutez(0))):
         tez_amount = sp.amount
         sp.verify(token_amount > sp.nat(10), message="NOT_ENOUGH_TOKEN")
@@ -226,7 +225,6 @@ def token_to_tez(self, params):
     self.data.token_pool = new_token_pool
     self.data.invariant = new_token_pool * new_tez_pool
 
-    # Transfer `token_amount` to this contract's address
     self.transfer_tokens(
         from_=sp.sender, 
         to=sp.self_address, 
@@ -234,9 +232,10 @@ def token_to_tez(self, params):
     )
 
     tez_out = self.data.tez_pool - sp.utils.nat_to_mutez(new_tez_pool)
-    # Transfer the swapped tezos.
     self.transfer_tez(to_=sp.sender, amount=tez_out)
 ```
+
+The `self.transfer_tokens` function will transfer `token_amount` to this contract's address. `self.transfer_tez`  will transfer the swapped tezos.
 
 We can calculate the `new_token_pool` by adding the amount of token which is sent to the contract by the user to the previous amount of token in the pool. We're calculating the new amount of xtz by dividing the invariant with the `new_token_amount`.
 
@@ -255,7 +254,6 @@ After this, we're transferring the amount of tokens i.e `params.token_amount` fr
 Finally, we're actually transfering `tez_out` xtz from our contract to the sender.
 
 ```py
-# Transfer `token_amount` to this contract's address
 self.transfer_tokens(
     from_=sp.sender, 
     to=sp.self_address, 
@@ -263,7 +261,6 @@ self.transfer_tokens(
 )
 
 tez_out = self.data.tez_pool - sp.utils.nat_to_mutez(new_tez_pool)
-# Transfer the swapped tezos.
 self.transfer_tez(to_=sp.sender, amount=tez_out)
 ```
 
@@ -288,7 +285,6 @@ def invest_liquidity(self):
     token_amount = sp.utils.mutez_to_nat(sp.amount) * self.data.token_pool / sp.utils.mutez_to_nat(self.data.tez_pool)
     liquidity_minted = sp.utils.mutez_to_nat(sp.amount) * total_liquidity / sp.utils.mutez_to_nat(self.data.tez_pool)
 
-    # Mint `liquidity_minted` LP tokens to the `sp.sender`
     self.mint_lp(liquidity_minted)
     
     self.data.tez_pool += sp.amount
@@ -320,7 +316,6 @@ Finally we're transferring the amount of tokens needed from the sender's address
 ```py
 liquidity_minted = sp.utils.mutez_to_nat(sp.amount) * total_liquidity / sp.utils.mutez_to_nat(self.data.tez_pool)
 
-# Mint `liquidity_minted` LP tokens to the `sp.sender`
 self.mint_lp(liquidity_minted)
 
 self.data.tez_pool += sp.amount
@@ -387,7 +382,6 @@ self.data.tez_pool = self.data.tez_pool - sp.utils.nat_to_mutez(token_out)
 self.data.token_pool = sp.as_nat(self.data.token_pool - token_out)
 self.data.invariant = self.data.token_pool * sp.utils.mutez_to_nat(self.data.tez_pool)
 self.burn_lp(lp_amount)
-
 
 sp.if tez_out > sp.nat(0):
     self.transfer_tez(to_=sp.sender, amount=sp.utils.nat_to_mutez(tez_out))
