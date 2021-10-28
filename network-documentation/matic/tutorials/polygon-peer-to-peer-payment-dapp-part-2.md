@@ -479,9 +479,11 @@ With this:
     selectedToken.decimals === 18
       ? Web3.utils.fromWei(balance.toString(), "ether")
       : balance / Math.pow(10, selectedToken.decimals)
-  } ${selectedToken.symbol}`}```
+  } ${selectedToken.symbol}`}
+```
 
 Now the last thing remaining is the way to open and close the modal. Create the following state variables and functions in the `Home` component.
+
 ```javascript
   let [isOpen, setIsOpen] = useState(false);
 
