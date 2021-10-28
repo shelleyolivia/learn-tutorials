@@ -1,10 +1,12 @@
 # Introduction
+
 In this tutorial, we'll create a simple DEX (Decentralized Exchange) with which we'll understand how to code a DEX and how a DEX works in general. 
 
 This DEX will be using the Constant Product Market-Making algorithm, and it will be based on the v1 of Uniswap. If you want more information about the Constant Product Market-Making algorithm and v1 of Uniswap you can read this [white paper](https://hackmd.io/@HaydenAdams/HJ9jLsfTz). You can also refer to this [video](https://www.youtube.com/watch?v=-6HefvM5vBg) to get an understanding of the CPMM algorithm. Before we start to write extensive code, you can find the full source code from this repository: https://github.com/vivekascoder/tez-dex
 
 
 # Prerequisites
+
 Basic knowledge of SmartPy, React, Taquito and smart contracts.
 
 # Requirements
@@ -14,19 +16,23 @@ Basic knowledge of SmartPy, React, Taquito and smart contracts.
 
 
 # Project Setup
+
 Create an empty React project using `create-react-app`, after creating it install the following packages.
 
 > NOTE: For this tutorial, I'll be using `tailwindcss` for styling the components, but this step is completely optional. You can use any UI Library/Css Framework that you want.
 
 1. Taquito and BeconWallet
+
 ```text
 yarn add @taquito/taquito @taquito/beacon-wallet 
 ```
 
 2. Tailwindcss (Optional)
+
 ```text
 yarn add --dev tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
 ```
+
 For more information on setting up tailwindcss with `create-react-app` you can read [here](https://tailwindcss.com/docs/guides/create-react-app).
 
 After installing the dependencies make a folder called `./contracts` in the root directory where we'll keep all our smartpy code.
@@ -39,7 +45,8 @@ Deploy two FA1.2 tokens namely **🐱 Cat Token** and **LP Token** which we'll b
 ## Add dex.py
 We'll start working on our smart contract by creating a file called `dex.py` in the `contracts` directory where we'll keep all the code related to our DEX functionality.
 
-Create a demo FA1.2 contract called `Token` which we'll use only for testing.
+Create a demo FA1.2 contract called `Token` which we'll use only for testing:
+
 ```py
 import smartpy as sp
 fa12 = sp.io.import_script_from_url("https://smartpy.io/templates/FA1.2.py")
@@ -51,6 +58,7 @@ class Token(fa12.FA12):
 ```
 
 Create another Contract in the same file and call it `Dex`, it is going to be our main DEX contract class.
+
 ```py
 class Dex(sp.Contract):
     def __init__(self, _token_address, _lp_address):
@@ -812,7 +820,7 @@ You can see after exchanging 1 tez we're getting around 97 cat token based on cu
 
 
 # About The Author
-I am Vivek, You can find more about me [here](https://github.com/vivekascoder)
+I am Vivek Kumar, you can find more about me [on my GitHub profile](https://github.com/vivekascoder)!
 
 # References
 1. [Uniswap v1 white paper](https://hackmd.io/@HaydenAdams/HJ9jLsfTz)
