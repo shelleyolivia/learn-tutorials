@@ -224,7 +224,7 @@ Now we have the three Anchor blocks we need to make our blog:
 
 But right now our program doesn't do anything, because our program methods are empty.
 
-# The `initialize()` function
+# Writing the Rust functions
 
 In `initialize` we want to set our blog account `authority`. We will set `authority` to the same public key as the keys that signed the transaction.
 
