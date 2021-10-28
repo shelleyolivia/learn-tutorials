@@ -138,7 +138,7 @@ Summary
 - Saving migration to chain.
 ```
 
-# Building UI with ReactJS
+# Using UI in the browser
 
 Clone this [Git Repository](https://github.com/Devilla/cryptolend.ui)
 ```
@@ -158,6 +158,17 @@ Run the app in the browser:
 ```
 npm start
 ```
+In the chrome/firefox browser create a [Custom RPC](https://medium.com/stakingbits/setting-up-metamask-for-polygon-matic-network-838058f6d844) in the Networks as follows:
+
+```
+Network Name: Polygon
+New RPC URL: https://rpc-mainnet.matic.network or
+ChainID: 137
+Symbol: MATIC
+Block Explorer URL: https://polygonscan.com/
+```
+
+Open the lending dapp in browser and go to the `/myloans` path and connect to Polygon Network in the Metamask extention. Now feel free to go throgh the various features of thhe lending marketplace like creating a loan request on `/request` path and loan offer on `/offer`, which can also be browsed from the Navigation bar.
 
 # Conclusion
 
