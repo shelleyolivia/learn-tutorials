@@ -1,4 +1,3 @@
-# Solana's Innovations —  A Jargon-Free Explanation
 # Introduction
 What is Solana? As a non-developer, this may be difficult to understand when explained by a code-speaking engineer. By definition, Solana is a decentralized blockchain built to enable scalable, user-friendly apps for the world.¹ Famous for being based on 8 core innovations, Solana offers high throughput and low transaction costs, delivering a web-scale product for DeFi, NFTs, Web3, and more.
 
