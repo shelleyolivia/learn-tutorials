@@ -28,7 +28,9 @@ This tutorial is meant for intermediate Web 3 developers. It assumes you have so
 
 Before we continue, make sure you have truffle installed. If you don't, run the following line of code in your terminal:
 
-`npm install -g truffle`
+`npm install -g truffle@5.3.12`
+
+**Note:** This tutorial uses Node v14.16.1
 
 ## Project setup
 
@@ -54,7 +56,7 @@ After it has been initialized, we’ll need to install some additional packages 
 Install all of the above using `npm`:
 
 ```text
-npm install -—save @celo/contractkit dotenv web3 @openzeppelin/contracts
+npm install -—save @celo/contractkit dotenv web3@1.3.6 @openzeppelin/contracts
 ```
 
 After all the `npm` packages have installed, run `truffle init` in the terminal to initialize Truffle.
@@ -759,14 +761,14 @@ Next, comment out the `console.log` of the `celoCrowdfundContract` variable sinc
 The next step is to create a new `Project`. Create a new function outside of `interact()` called `createProject()`:
 
 ```javascript
-async function createProject(celoCrowdfundContract, stableToken)  {
+async function createProject(celoCrowdfundContract, stableToken, gasPrice)  {
   var projectGoal = BigNumber(1E18);
-  await celoCrowdfundContract.methods.startProject(stableToken.address, 'Test project', 'We are testing the create project function', 'https://i.imgur.com/Flfo4hJ.png',  5, projectGoal).send({from: account.address, feeCurrency: stableToken.address});
+  await celoCrowdfundContract.methods.startProject(stableToken.address, 'Test project', 'We are testing the create project function', 'https://i.imgur.com/Flfo4hJ.png',  5, projectGoal).send({from: account.address, feeCurrency: stableToken.address, gasPrice: gasPrice});
   console.log("Created new project");
 }
 ```
 
-This function takes in the `celoCrowdfunding` contract, and a `stableToken` variable. It then creates a `projectGoal` using `BigNumber`.
+This function takes in the `celoCrowdfunding`, `stableToken`, and `gasPrice` as parameters. It then creates a `projectGoal` using `BigNumber`.
 
 We create a number that's of size 1,000,000,000,000,000,000 or 1^18 because cUSD has a size of 18 decimals. Solidity doesn't have support for floating point numbers, so the workaround is to make really large numbers. 1^18 cUSD is equal to $1 cUSD.
 
@@ -785,7 +787,11 @@ function startProject(
 
 These are the parameters we supply when we call the function.
 
-Now that we have that, we'll create a stableToken variable which uses the `ContractKit` stabletoken wrapper in order to get a reference to the cUSD coin, and we will call the `createProject()` helper function inside `interact()`. We'll also return all the projects in our contract using the `returnProjects()` function in our `CeloCrowdfund` contract, to verify that it worked:
+Now that we have that, we will create a stableToken variable which uses the `ContractKit` stabletoken wrapper in order to get a reference to the cUSD coin. 
+
+We will also get the gas price to pass in to our functions. We'll set the gas higher than the recommended minimums in order to get our transactions confirmed faster. For a primer on gas fees in Celo, feel free to check out [this post](https://consensys.net/blog/metamask/what-is-a-gas-fee-on-ethereum/). 
+
+After getting those two variables, we will call the `createProject()` helper function inside `interact()`. We'll also return all the projects in our contract using the `returnProjects()` function in our `CeloCrowdfund` contract, to verify that it worked:
 
 ```javascript
   // Print wallet address so we can check it on the block explorer
@@ -794,7 +800,12 @@ Now that we have that, we'll create a stableToken variable which uses the `Contr
   // Get the cUSD ContractKit wrapper
   var stableToken = await kit.contracts.getStableToken();
 
-  await createProject(celoCrowdfundContract, stableToken);
+  // Get the gas price minimum and set the new gas price to be double
+  const gasPriceMinimumContract = await kit.contracts.getGasPriceMinimum()
+  const gasPriceMinimum = await gasPriceMinimumContract.getGasPriceMinimum(stableToken.address)
+  const gasPrice = Math.ceil(gasPriceMinimum * 2) // This should be much higher than the current average, so the transaction will confirm faster
+
+  await createProject(celoCrowdfundContract, stableToken, gasPrice);
 
   // Return projects inside the celo crowdfund contract
   var result = await celoCrowdfundContract.methods.returnProjects().call();
@@ -815,50 +826,32 @@ To do this we can write the following:
 ```javascript
 var projectInstanceContract = new web3.eth.Contract(
   Project.abi,
-  deployedNetwork && result[0]
+  deployedNetwork && result[result.length - 1] // Get the most recently deployed Project
 );
 ```
 
-This will create a variable to access the first Project \(`result[0]`\) created in the list of projects returned by the `returnProjects()` function earlier.
+This will create a variable to access the most recently created Project contract instance from the array returned by the `returnProjects()` function.
 
 Now that we can access our project, we'll need to do two things in order to send cUSD to the contract. Since cUSD follows the [ERC-20](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) standard, we'll need to approve sending cUSD to the contract prior to sending money. After it's approved, we can send cUSD to our contract.
 
-To approve 5 cUSD to be sent, write the following:
+We'll approve a large amount of cUSD for the contract as an example. To approve 500 cUSD to be sent, write the following:
 
 ```javascript
-  var projectGoal = BigNumber(5E18);
-  var result = await stableToken.approve(projectInstanceContract._address, projectGoal).sendAndWaitForReceipt({from: account.address});
+  // Approve the project to spend up to 500 cUSD from wallet
+  var approveAmount = BigNumber(500E18);
+  await stableToken.approve(projectInstanceContract._address, approveAmount).sendAndWaitForReceipt({from: account.address});
 ```
 
-After the above `approve()`function runs, we will need to wait a couple of seconds to see the change on the blockchain before we send some cUSD.
-
-Create a helper function outside of the `interact()` function to cause a delay:
-
-```javascript
-const delay = ms => new Promise(res => setTimeout(res, ms));
-```
-
-Next, use `delay()` to wait 5 seconds in our `interact()` function:
-
-```javascript
-  var projectGoal = BigNumber(5E18);
-  var result = await stableToken.approve(projectInstanceContract._address, projectGoal).sendAndWaitForReceipt({from: account.address});
-
-  console.log("Waiting 5s...")
-  await delay(5000);
-  console.log("Done waiting\n");
-```
-
-Great! Now we have approved our contract to receive 5 cUSD. The next step is to actually send some money.
+Great! Now we have approved our contract to receive 500 cUSD. The next step is to actually send some money.
 
 Outside of the `interact()` function, create a new function called `contribute()`:
 
 ```javascript
-async function contribute(stableToken, projectInstanceContract)  {
+async function contribute(stableToken, projectInstanceContract, gasPrice)  {
   var sendAmount = BigNumber(2E18);
 
   // Call contribute() function with 2 cUSD
-  await projectInstanceContract.methods.contribute(sendAmount).send({from: account.address, feeCurrency: stableToken.address});
+  await projectInstanceContract.methods.contribute(sendAmount).send({from: account.address, feeCurrency: stableToken.address, gasPrice: gasPrice});
 
   console.log("Contributed to the project\n");
 }
@@ -869,11 +862,7 @@ In the `contribute()` function, we create a variable called `sendAmount` which i
 Back in our `interact()` function, let's call the `contribute()` helper function we created:
 
 ```javascript
-  console.log("Waiting 5s...")
-  await delay(5000);
-  console.log("Done waiting\n");
-
-  await contribute(stableToken, projectInstanceContract);
+  await contribute(stableToken, projectInstanceContract, gasPrice);
 ```
 
 ## Displaying our balances
@@ -902,7 +891,6 @@ The `printBalances()` function uses the `stableToken` variable's `balanceOf()` f
 Next, inside the `interact()` function just call the `printBalances()` function after `contribute()`:
 
 ```javascript
-await contribute(stableToken, projectInstanceContract);
 await printBalances(stableToken, projectInstanceContract);
 ```
 
@@ -913,8 +901,8 @@ So far we're able to create a Project, and fund it. The final step is paying out
 Outside the `interact()` function, create a helper function called `payOut()`:
 
 ```javascript
-async function payOut(stableToken, projectInstanceContract)  {
-  var payOut = await projectInstanceContract.methods.payOut().send({from: account.address, feeCurrency: stableToken.address});
+async function payOut(stableToken, projectInstanceContract, gasPrice)  {
+  var payOut = await projectInstanceContract.methods.payOut().send({from: account.address, feeCurrency: stableToken.address, gasPrice: gasPrice});
   console.log("Paying out from project");
 }
 ```
@@ -924,14 +912,10 @@ The `payOut()` function calls the `payOut()` function inside our `Project` smart
 Finally, let's call the `payOut()` helper function inside our `interact()` function:
 
 ```javascript
-  await contribute(stableToken, projectInstanceContract);
+  await contribute(stableToken, projectInstanceContract, gasPrice);
   await printBalances(stableToken, projectInstanceContract);
 
-  console.log("Waiting 5s...")
-  await delay(5000);
-  console.log("Done waiting\n");
-
-  await payOut(stableToken, projectInstanceContract);
+  await payOut(stableToken, projectInstanceContract, gasPrice);
 
   console.log("After pay out: ");
   await printBalances(stableToken, projectInstanceContract);
