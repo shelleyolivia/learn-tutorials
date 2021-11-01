@@ -168,12 +168,9 @@ My advice here is to proceed by isolating an EntryPoint and then testing all its
 ## addBalanceOwner()
 
 ```python
-#addBalanceOwner Tests
 ob.addBalanceOwner().run(sender=udit , amount = sp.tez(25) , valid = False)
 ob.addBalanceOwner().run(sender=bob , amount = sp.tez(1) , valid = False)
-
 ob.addBalanceOwner().run(sender = bob, amount = sp.tez(25))
-
 ob.addBalanceOwner().run(sender = bob , amount = sp.tez(25) , valid = False)
 ```
 
@@ -187,12 +184,9 @@ ob.addBalanceOwner().run(sender = bob , amount = sp.tez(25) , valid = False)
 ## addBalanceCounterparty()
 
 ```python
-#addBalanceCounterparty Tests
 ob.addBalanceCounterparty().run(sender=bob , amount = sp.tez(5) , valid = False)
 ob.addBalanceCounterparty().run(sender=udit , amount = sp.tez(25) , valid = False)
-
 ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5))
-
 ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5) , valid = False)
 ```
 
@@ -206,12 +200,9 @@ ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5) , valid = Fals
 ## claimCounterparty()
 
 ```python
-#claimCounterparty Tests
 ob.claimCounterparty(secret = s).run(sender = bob , valid = False)
 ob.claimCounterparty(secret = sp.bytes("0x01223343")).run(sender = udit, valid = False)
 ob.claimCounterparty(secret = s).run(sender = udit , now = sp.timestamp(1635192186) , valid=False)
-
- 
 ob.claimCounterparty(secret = s).run(sender = udit)
 ```
 
@@ -224,11 +215,8 @@ ob.claimCounterparty(secret = s).run(sender = udit)
 ## claimOwner()
 
 ```python
-#claimOwner Tests
 ob.claimOwner().run(sender = udit , valid = False)
 ob.claimOwner().run(sender = bob, valid=False)
-
- 
 ob.claimOwner().run(sender = bob ,now = sp.timestamp(1635192186) )
 ```
 
@@ -338,23 +326,20 @@ class Escrow(sp.Contract):
 
 @sp.add_test(name = "Escrow")
 def test():
-    #Test Scenario
     scenario = sp.test_scenario()
     scenario.h1("Escrow")
 
-    #Test Accounts
     bob = sp.test_account("Bob")
     udit = sp.test_account("Udit")
 
-    #Origination
     s = sp.pack("SECRETKEY") #String to Bytes
     secret = sp.blake2b(s) #Hashing bytes to secret key
     ob = Escrow(bob.address, sp.tez(25), udit.address, sp.tez(5), sp.timestamp(1634753427), secret)
     scenario += ob
 
     scenario.h1("Workflows")
+    
     scenario.h2("Add Balance Owner")
-    #addBalanceOwner Tests
     ob.addBalanceOwner().run(sender=udit , amount = sp.tez(25) , valid = False)
     ob.addBalanceOwner().run(sender=bob , amount = sp.tez(1) , valid = False)
 
@@ -364,7 +349,6 @@ def test():
 
 
     scenario.h2("Add Balance CounterParty")
-    #addBalanceCounterparty Tests
     ob.addBalanceCounterparty().run(sender=bob , amount = sp.tez(5) , valid = False)
     ob.addBalanceCounterparty().run(sender=udit , amount = sp.tez(25) , valid = False)
 
@@ -373,16 +357,12 @@ def test():
     ob.addBalanceCounterparty().run(sender = udit, amount = sp.tez(5) , valid = False)
 
     scenario.h2("Claim CounterParty")
-    #claimCounterparty Tests
     ob.claimCounterparty(secret = s).run(sender = bob , valid = False)
     ob.claimCounterparty(secret = sp.bytes("0x01223343")).run(sender = udit, valid = False)
     ob.claimCounterparty(secret = s).run(sender = udit , now = sp.timestamp(1635192186) , valid=False)
 
- 
-    # ob.claimCounterparty(secret = s).run(sender = udit)
 
     scenario.h2("Claim Owner")
-    #claimOwner Tests
     ob.claimOwner().run(sender = udit , valid = False)
     ob.claimOwner().run(sender = bob, valid=False)
 
