@@ -58,9 +58,8 @@ Before we start with actual development. We learn some Solana CLI commands [docs
 to see your current Solana configuration use(I assume you have followed Solana 101 Pathway and you have all the CLI installation done):
 
 ```text
-Solana config get
+solana config get
 
-# output
 Config File: /Users/user/.config/Solana/cli/config.yml
 RPC URL: https://api.devnet.Solana.com
 WebSocket URL: wss://api.devnet.Solana.com/ (computed)
@@ -295,8 +294,8 @@ Moving forward, Let's complete the remaining signup function
     }
 ```
 
-Till now, We have created 2 function init_blog and signup user with name and avatar. Specifically signup takes two arguments. What if user mistakenly sent the wrong name and the user wants to update it??
-You guessed it right. We will create next function that allows the user to update name and avatar of their account.
+Until now, We have created 2 function `init_blog` and `signup_user` with name and avatar. Specifically, `signup_user` takes two arguments. What if a user mistakenly sent the wrong name and the user wants to update it??
+You guessed it right. We will create a function that allows the user to update name and avatar of their account.
 
 ```rust
   pub fn update_user(ctx: Context<UpdateUser>, name: String, avatar: String) -> ProgramResult {
@@ -319,14 +318,14 @@ You guessed it right. We will create next function that allows the user to updat
   }
 ```
 
-New attributes mut and has_only
+New attributes:
 
 - **mut:** if we want to change/update account state/data we must specify the mut attribute
 - **has_one:** has_one checks user_account.authority is equal to authority accounts key ie. owner of user_account is signer(caller) of update_user function
 
-Our blog is initialized user is created now whats remaining?? CRUD of the post. In the next section, We will look into the CRUD of the post entity. If you feel overwhelmed, take a break or go through what we have learned so far.
+Our blog is initialized, a user is created, now what's remaining?? CRUD of the post. In the next section, We will look into the CRUD of the post entity. If you feel overwhelmed, take a break or go through what we have learned so far.
 
-Now, Let's move to the CRUD of the post!!
+Now, Let's move to the CRUD of the post!! CRUD stands for Create Read Update Delete.
 
 ```rust
    pub fn create_post(ctx: Context<CreatePost>, title: String, content: String) -> ProgramResult {
@@ -377,8 +376,7 @@ What do you think? Why do we need **blog_account** as mut here? Do you remember 
     }
 ```
 
-The post is created, Now we can let the client know that the post is created. The client can fetch the post and render it into the UI.
-Anchor provides a handy feature of emitting an event, Event?? Yup, you read it right. We can emit an event like post-created. Before emitting an event, We need to define it.
+The post is created, Now we can let the client know that the post is created. The client can fetch the post and render it into the UI. Anchor provides a handy feature of emitting an event, Event?? Yup, you read it right. We can emit an event like post-created. Before emitting an event, We need to define it.
 
 ```rust
 
@@ -390,7 +388,7 @@ pub struct PostEvent {
 }
 ```
 
-Let's emit post created event from post_create function
+Let's emit a post created event from `post_create` function
 
 ```rust
     pub fn create_post(ctx: Context<CreatePost>, title: String, content: String) -> ProgramResult {
@@ -659,7 +657,7 @@ anchor test
 
 After running `anchor test` you will see the 1/1 test passing.
 
-Now we complete remaining tests:
+Now we complete the remaining tests, we will write all the test cases below the previous test case inside `blog.js` file.
 
 ```js
 const anchor = require("@project-serum/anchor");
@@ -809,14 +807,14 @@ anchor test
 
 # Building frontend
 
-Now, We're ready to build out the front end. We will create react app inside the existing app directory.
+Now, We're ready to build out the front end. We will create a new react app inside the existing app directory.
 
 ```text
 cd app
 npx create-react-app .
 ```
 
-folder structure of React spp
+The directory structure of a basic React app made with `create-react-app`:
 
 ```text
 ├── public
