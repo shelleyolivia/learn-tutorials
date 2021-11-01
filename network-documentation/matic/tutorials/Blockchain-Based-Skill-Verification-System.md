@@ -75,7 +75,7 @@ module.exports = {
   contracts_build_directory: path.join(__dirname, 'src/abis'),
   networks: {
     development: {
-      host: '127.0.0.1', // locahost
+      host: '127.0.0.1', // localhost
       port: 7545, // default port for ganache dev server
       network_id: '*', // matches any network id
     },
@@ -94,7 +94,7 @@ Update the `1_initial_migration.js` file with the desired smart contract file na
 
 ```jsx
 const Decentraskill = artifacts.require('Decentraskill');
-// Deploys the smart contract "Decenraskill"
+// Deploys the smart contract "Decentraskill"
 module.exports = function (deployer) {
   deployer.deploy(Decentraskill);
 };
@@ -107,9 +107,8 @@ Let us start by creating the `Decentraskill.sol` smart contract in the `contract
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.1;
-/*
-userid and company id is a unique natural number representing a account globally.
-*/
+
+// userid and company id is a unique natural number representing a account globally.
 contract Decentraskill {
     company[] public companies;
     user[] public employees;
@@ -365,7 +364,10 @@ function approve_experience(uint256 exp_id, uint256 company_id) public {
 }
 ```
 
-Now, Let say any employee does not work in a particular company so, to remove the employee from the company employee list we have two options either we shift the list after removing the employee from the particular position this method will be too costly as it will take too much gas fees another effective alternative to this if we change the employee id value to store a dummy user id in place which can later be reused to store new employee in that list. For this, we made a dummy user profile in the constructor so that it will be called when smart contracts are deployed on the network and we can use this profile whenever we need.
+Now let's say an employee no longer works at a particular company - to remove the employee from the company's employee list we have two options:
+
+- Shift the list after removing the employee from the particular position. This method will be costly as it will require paying more gas fees.
+- An alternative is to change the employee id value to store a dummy user id in place, which can later be reused to store a new employee in that list. For this, we made a dummy user profile in the constructor which can be reused after it has been initialized (remember the constructor is called once when a Solidity smart contract is deployed).
 
 ```solidity
 constructor() {
@@ -378,7 +380,7 @@ constructor() {
 }
 ```
 
-To approve a manager, the function _approve_manager_ will take the employee id as input and verify that the account calling the function has a "company" account type. It will then make sure that this employee id is present in the company's "current employees" list and if all this checks out it will give that employee a manager tag by making its _is_manager_ bool true.
+To approve a manager, the function `approve_manager` will take the employee id as input and verify that the account calling the function has a "company" account type. It will then make sure that this employee id is present in the company's "current employees" list. If these checks pass, it will give that employee a manager tag by setting its `is_manager` boolean to true.
 
 ```solidity
 function approve_manager(uint256 employee_id) public {
@@ -395,7 +397,7 @@ function approve_manager(uint256 employee_id) public {
 }
 ```
 
-To add to skills a user will call a function that will push the input skill into the `skills` list.
+To add to their list of skills, a user will call the `add_skill` function to push the input skill into the `skills` list.
 
 ```solidity
 function add_skill(uint256 userid, string calldata skill_name)
@@ -644,7 +646,7 @@ const endorseSkill = async (empId, skillId, comment) => {
   try {
     await state.contract.methods.endorse_skill(
       empId,
-      skillName,
+      skillId,
       `${date.getMonth()} ${date.getFullYear()}`,
       comment
     );
@@ -688,6 +690,8 @@ To resolve this error, you need to change the storage type of some input/output 
 
 To deploy smart contracts in the Polygon Mumbai network we will use the services of the [DataHub](https://datahub.figment.io) platform. In DataHub login using your email account, select Polygon from the available protocols and get your private RPC url.
 
+**Note**: The user requires a unique API key to access their private DataHub URL.
+
 ![dataHub](https://user-images.githubusercontent.com/54525688/139138966-380ec28e-b1ec-4881-b718-e202b791d1b4.JPG)
 
 While deploying to an actual network instead of the development network, we need to connect to our metamask account (using HDWalletProvider) to pay for the gas fees for deploying the contract.
@@ -698,7 +702,7 @@ This HDWalletProvider takes in 2 arguments:
 
 **mnemonic:** This is the secret recovery phrase of your metamask wallet that you can find under Advanced Settings in the security and privacy section.
 
-Put both **URL** and **mnemonic** into a dotfile (.env) and add the filename to the .gitignore file so that you won't expose your secrets accidentally.
+Put both **URL** and **mnemonic** into a dotfile (`.env`) as the values of `REACT_APP_POLYGON_MUMBAI_RPC_URL` and `REACT_APP_MNEMONIC` respectively. Also remember to add the `.env` filename to your `.gitignore` file so that you won't expose your secrets accidentally.
 
 ```jsx
 const path = require('path');
