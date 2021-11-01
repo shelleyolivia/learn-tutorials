@@ -654,7 +654,7 @@ async makePost(post, blogAccountStr) {
 
 In order for these calls to work, we need this `this.program` that you see used everywhere, so let's take care of that.
 
-# Creating `program.*`
+# Creating program.*
 
 We create `program` using a call to the class constructor:
 
