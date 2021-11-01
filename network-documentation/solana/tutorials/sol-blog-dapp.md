@@ -31,7 +31,7 @@ This tutorial covers how to build a dapp on the Solana, but does not go through 
 - **Vs code -**
   I will recommend using vscode with rust analyzer extension as it has a great support for Rust language.
 
-## Solana Programming model
+# Solana Programming model
 
 **Program -** Solana is a fast and low-cost blockchain, to achieve speed and low-cost Solana has slight different programming model. Solana uses Rust programing language to create programs as, you notice we keep saying Solana program instead of Solana smart contract from choosing programing language to naming concepts Solana is different, in Solana world smart contracts are known as Solana Programs.
 
@@ -40,10 +40,10 @@ This tutorial covers how to build a dapp on the Solana, but does not go through 
 **Rent -** on Solana, you need to pay rent regularly to store data on the blockchain according to the space the data requires,
 The account can be made rent exempt (means you won't have to pay rent) if its balance is higher than some threshold that depends on the space it is consuming.
 
-## Application design decision
+# Application design decision
 
 As we have learned, we need an account to create our blog dapp that has a fixed size so, if we create a single account with X size and start pushing posts inside that account, eventually the account will exceeds its size limit and we won't be able to create new posts.
-If you know solidity, In solidity we create a dynamic array and push as many items to it as we want. but in Solana our accounts will be fixed in size so we have to find a solution to this problem.
+If you know Solidity, in Solidity we create a dynamic array and push as many items to it as we want, but in Solana our accounts will be fixed in size so we have to find a solution to this problem.
 
 - **Solution one -** What if we create an extremely large size account like in gigabytes? on Solana we need to pay rent of an account according to its size so, if our account grows in size the account rent will grow along with it.
 
@@ -51,7 +51,7 @@ If you know solidity, In solidity we create a dynamic array and push as many ite
 
 Linked 🤔 yeah, you guessed it right. We will use LinkedList to connect all the posts.
 
-## Setting up Local development
+# Setting up Local development
 
 Before we start with actual development. We learn some Solana CLI commands [docs](https://docs.Solana.com/cli/conventions):
 
@@ -93,7 +93,6 @@ Check balance again. Now you should have a balance of 1 SOL in your wallet.
 
 ```text
 anchor init blog
-
 cd blog
 ```
 
@@ -111,10 +110,10 @@ The anchor init command creates the following directories:
 Before writing program code update Anchor.toml
 
 ```text
-wallet = "your Keypair Path from the output of Solana config get"
+wallet = "your Keypair Path from the output of solana config get"
 ```
 
-## Creating blog program
+# Creating blog program
 
 Now we are ready to start with the Solana rust program. Open up the `lib.rs` file located inside `/program/blog/src/` folder.
 
@@ -193,10 +192,10 @@ we will start with creating our very first function `init_blog`.
   }
 ```
 
-As you know every function needs a typed context as the first argument, here we have defined `InitBlog` as a type of our `init_blog` ctx.
+As you know, every function needs a typed context as the first argument. Here we have defined `InitBlog` as a type of our `init_blog` ctx.
 In the ctx type we have to define the account and the account will be provided by the client(caller of the function).
 
-in `InitBlog` there are 4 accounts:
+In `InitBlog` there are 4 accounts:
 
 - **blog_account**
   - init attribute to create/initialize a new account
@@ -210,7 +209,7 @@ in `InitBlog` there are 4 accounts:
 - system_program
   - required by the runtime for creating the account.
 
-with `init_blog` our plan is to initialize the blog account with current_post_key and authority as blog state so lets write code for that,
+With `init_blog` our plan is to initialize the blog account with current_post_key and authority as blog state so lets write code for that,
 
 ```rust
   pub fn init_blog(ctx: Context<InitBlog>) -> ProgramResult {
@@ -438,9 +437,9 @@ Updating post is really simple, take title and content from user and update the 
 
 Delete post is little challenging. To store posts, We have used LinkedList. If you know LinkedList, After deleting a node from LinkedList, we need to link the adjacent node of deleting a node. Let's understand this through a diagram.
 
- <img src="../../../.gitbook/assets/sblog_delete_post.png" alt="post delete" width="400" >
+![](../../../.gitbook/assets/sblog_delete_post.png)
 
-If we want to delete 2nd post, We have to link 1 -> 3.
+If we want to delete 2nd post, we have to link 1 -> 3.
 
 Let's jump to the code, I know you will understand it easily.
 
@@ -479,8 +478,7 @@ Let's jump to the code, I know you will understand it easily.
 
 **constraint** attribute performs simple if check.
 
-So to delete a post, user needs to send post_account and next_post_account. But what if there is no next_post?? what if user wants to delete the latest post that has no next post??
-To handle this case, We need to create another function **delete_latest_post**
+So to delete a post, user needs to send post_account and next_post_account. But what if there is no next_post?? What if the user wants to delete the latest post that has no next post?? To handle this case, we need to create another function **delete_latest_post**
 
 ```rust
     pub fn delete_latest_post(ctx: Context<DeleteLatestPost>) -> ProgramResult {
@@ -516,13 +514,13 @@ That was the last function of our Rust Program.
 
 Next is the Testing program. Don't worry, we'll fast forward to the next section.
 
-## Writing tests for blog program
+# Writing tests for blog program
 
 Before we dive into writing test cases, every test needs an initialized blog, a brand new user, and a post. To avoid repetition, we will create 3 simple reusable utility functions.
 
-- createBlog - initialize new Blog account
-- createUser - create a new User
-- createPost - create new Post
+- `createBlog` - Initialize new Blog account
+- `createUser` - Create a new User
+- `createPost` - Create new Post
 
 **createBlog.js**
 
