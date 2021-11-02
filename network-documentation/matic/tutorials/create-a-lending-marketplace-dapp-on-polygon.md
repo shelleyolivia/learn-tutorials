@@ -1,16 +1,16 @@
 # Create a Lending Marketplace dapp on Polygon with Truffle Suite.
 
-## Introduction
+# Introduction
 
 A Lending Marketplace provides a secure, flexible, open-source foundation for a decentralized loan marketplace on the Polygon blockchain. It provides the pieces necessary to create a decentralized lending exchange, including the requisite lending assets, repayments, and collateral infrastructure, enabling third parties to build applications for lending.
 
-## Prerequisites
+# Prerequisites
 
 [MetaMask](https://metamask.io/) is a browser-based blockchain wallet that can be used to store any kind of digital assets and cryptocurrency.
 
 [Polygon](https://docs.polygon.technology/) is a blockchain that is EVM compatible.
 
-## Requirement
+# Requirement
 
 [Node.js](https://nodejs.org/en/) enables the development of fast web servers in JavaScript by bringing event-driven programming to web servers.
 
@@ -18,7 +18,7 @@ A Lending Marketplace provides a secure, flexible, open-source foundation for a 
 
 [React.js](https://reactjs.org/) is an open-source JavaScript library that is used to create single-page applications' user interfaces.
 
-## Create a truffle project
+# Create a truffle project
 
 Install Truffle:
 ```
@@ -40,16 +40,16 @@ Install the required depencencies:
 npm i
 ```
 
-## Introduction to smart-contracts
+# Introduction to smart contracts
 
-Here we're mainly using 2 smart contracts creating the loan & the main cpntract details of the loan
+There are two main smart contracts which are regarding creating the loan offer and request, and second the contract details of the loan with repayment methods
 
-### Loan creator –
-A smart contract for both the lender & the requester to place their offer’s on loan.A person might be willing to offer a loan or requesting for a loan.
+## Loan creator
+A smart contract for both the lender & the borrower to create their loan offer and request repectively. A person might be willing to offer a loan or requesting for a loan.
 
-### Importing the dependencies
+## Importing the dependencies
 
-OpenZeppelin Contracts helps you minimize risk by using battle-tested libraries of smart contracts for Ethereum and other blockchains
+OpenZeppelin Contracts helps you minimize risk by using battle-tested libraries of smart contracts over several blockchains.
 
 ```
 pragma solidity ^0.5.0;
@@ -63,7 +63,7 @@ Here two events have been build as part of the Loan creator :
 •	createNewLoanOffer
 •	createNewLoanRequest
 
-#### createNewLoanOffer :
+### createNewLoanOffer:
 
 Taking input from the person who’s willing to give a loan in form of a cryptocurrency, this will include the Loan Amount,duration,data about the Collateral accepted incase loan isn’t paid, referencing the same to the loancontract address.
      
@@ -84,9 +84,9 @@ function createNewLoanOffer(uint256 _loanAmount, uint128 _duration, string memor
   Variables from the lenders end are accepted & appended into the array named loans. The loan offer created then sent as a message to that loan contract address
 
 
-#### createNewLoanRequest : 
-This is a request from the requestor, the person who needs a loan.
-Includes the Loan Amount,duration , interest the person’ willing to pay, data about the Collateral (collateral address, collateral amount- the cryptocurrency being requested as loan, price of the collateral in the specific cryptocurrency)& finally the loancontract address.
+### createNewLoanRequest: 
+This is a request from the borrower, the person who needs a loan.
+Includes the Loan Amount,duration, interest the person willing to pay, data about the Collateral (collateral address, collateral amount- the cryptocurrency being requested as loan, price of the collateral in the specific cryptocurrency)& finally the loancontract address.
 
 Variables from the requester’s end are accepted & appended into the array named loans.
 The loan offer created then sent as a message to that loan contract address
@@ -107,11 +107,9 @@ function createNewLoanRequest(uint256 _loanAmount, uint128 _duration, uint256 _i
  function getAllLoans() public view returns(address[] memory){
      return loans;
 
-
 ```
-  
- 
-The second contract that we're prominently using is the LoanContract
+
+The second contract that we're prominently using is the `LoanContract.sol`
 
 Importing the dependancies for our contract.
 
@@ -244,13 +242,12 @@ constructor(uint256 _loanAmount, uint128 _duration, string memory _acceptedColla
         loan.collateral = CollateralData(_collateralAddress, _collateralAmount, _collateralPriceInETH, _ltv, CollateralStatus.WAITING);
         
 ```
-// later this will be filled when borrower accepts the loan
+Later this will be filled when borrower accepts the loan.
 
-Creating our functions used
-
-transferFundsToLoan – to transfer funds to loan address after loan is sanctioned
-toString – converts the address into a string to which loan is being sent
-transferCollateralToLoan – transfers the collateral after the loan request is created
+functions used:
+- transferFundsToLoan – to transfer funds to loan address after loan is sanctioned
+- toString – converts the address into a string to which loan is being sent
+- transferCollateralToLoan – transfers the collateral after the loan request is created
 change CollateralAddress to String
 
 ```
@@ -284,8 +281,8 @@ change CollateralAddress to String
 
 ```
 
-Also, we do instantiate the collateral status to arrived once our conditions for loan sanction as per the contract are met contract will also be transferring funds to borrower(only in case of loan offer)
-Also, we do instantiate the collateral status to arrived once our conditions for loan sanction as per the contract are met contract will also be transferring funds to borrower (only in case of loan offer)
+We instantiate the collateral status arrived once conditions for the loan sanctioned as per the contract are met contract then transfer funds to borrower(only in case of loan offer)
+And instantiate the collateral status to arrived once our conditions for loan sanctioned as per the contract are met contract will also be transferring funds to borrower (only in case of loan offer)
 
 ```
 emit CollateralTransferToLoanSuccessful(msg.sender, loan.collateral.collateralAmount, loan.collateral.collateralPrice)
@@ -295,7 +292,7 @@ emit CollateralTransferToLoanSuccessful(msg.sender, loan.collateral.collateralAm
 
 Some more functions created being used in our loan contract:
 
-**acceptLoanOffer** : calls an event that keeps track on the accceptance of the loan offer by the requester
+**acceptLoanOffer**: calls an event that keeps track on the accceptance of the loan offer by the requester
 
 ```
 function acceptLoanOffer(uint256 _interestRate, address _collateralAddress, uint256 _collateralAmount, uint256 _collateralPriceInETH, uint256 _ltv) public {
@@ -310,7 +307,7 @@ function acceptLoanOffer(uint256 _interestRate, address _collateralAddress, uint
     }
 ```
 
-**approveLoanRequest**     :  this calls an event to show that the loan has been approved.the date-time for loan started will be stored used for keeping a track on repayments
+**approveLoanRequest**:  this calls an event to show that the loan has been approved.the date-time for loan started will be stored used for keeping a track on repayments
 
 ```
    function approveLoanRequest() public payable {
@@ -346,7 +343,7 @@ function acceptLoanOffer(uint256 _interestRate, address _collateralAddress, uint
  ```
  
 
-**getCurrentRepaymentNumber** :The number of the current installment is returned as well as kept a track on throughout the repayment process
+**getCurrentRepaymentNumber**: The number of the current installment is returned as well as kept a track on throughout the repayment process
  
 ```
 function getCurrentRepaymentNumber() view public returns(uint256) {
@@ -356,7 +353,7 @@ function getCurrentRepaymentNumber() view public returns(uint256) {
 
 
 
-**getRepaymentAmount** : The amount for each installment for repayment is calculated based on the installment number & the interest being levied on.
+**getRepaymentAmount**: The amount for each installment for repayment is calculated based on the installment number & the interest being levied on.
 ```
 function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256 amount, uint256 monthlyInterest, uint256 fees){
 
@@ -376,7 +373,7 @@ function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256
 
 ```
 
-**makeFailedRepayments** : based on nth duration it is triggered we pass repayment number from UI
+**makeFailedRepayments**: based on nth duration it is triggered we pass repayment number from UI
  ```
  function makeFailedRepayments(uint256 _repaymentNumberMissed) public OnlyAdmin {
  uint256 repaymentNumber = _repaymentNumberMissed;
@@ -391,7 +388,7 @@ function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256
  ```
  
 
-**repayLoan** : Keeps track on if the loan has been completely paid & emits the event to be stored on blockchain.The installment number of the repayment id also logged in at same
+**repayLoan**: Keeps track on if the loan has been completely paid & emits the event to be stored on blockchain.The installment number of the repayment id also logged in at same
  
  ```
      function repayLoan() public payable {
@@ -423,7 +420,7 @@ function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256
     }
  ```
 
-**transferToWallet1** – fees for eth contract use will be taken by the contract service provider.will be private only viewable to the owner of the contract
+**transferToWallet1**: fees for eth contract use will be taken by the contract service provider.will be private only viewable to the owner of the contract
  
  ```
  function transferToWallet1(uint256 fees) private {
@@ -433,7 +430,7 @@ function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256
  ```
  
  
-**transferCollateralToWallet1** – The collateral will be transferred in the wallet provided by the contract owner, for a fair use policy of the contract
+**transferCollateralToWallet1**: The collateral will be transferred in the wallet provided by the contract owner, for a fair use policy of the contract
 ```
     function transferCollateralToWallet1 (uint256 fees) private {
         uint256 feesInCollateralAmount = LoanMath.calculateCollateralAmountToDeduct(fees, loan.collateral.collateralPrice);
