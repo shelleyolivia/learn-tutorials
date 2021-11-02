@@ -4,7 +4,7 @@ In this tutorial, we will learn how to create a simple blog post dapp on Solana 
 
 **Final Dapp**
 
-<img src="../../../.gitbook/assets/sblog_final_dapp.gif" alt="sblog dapp" width="800" >
+![](../../../.gitbook/assets/sblog_final_dapp.gif)
 
 # Prerequisites
 
@@ -55,7 +55,7 @@ Linked 🤔 yeah, you guessed it right. We will use LinkedList to connect all th
 
 Before we start with actual development. We learn some Solana CLI commands [docs](https://docs.Solana.com/cli/conventions):
 
-to see your current Solana configuration use(I assume you have followed Solana 101 Pathway and you have all the CLI installation done):
+To see your current Solana configuration use (I assume you have followed Solana 101 Pathway and you have all the CLI installation done):
 
 ```text
 solana config get
@@ -67,21 +67,19 @@ Keypair Path: /home/user/.config/Solana/id.json
 Commitment: confirmed
 ```
 
-Your output might have different file paths.
-
-You can check the current wallet address by:
+Your output might have different file paths. You can check the current wallet address by:
 
 ```text
 solana address
 ```
 
-You can check the balance of your wallet.
+You can check the balance of your wallet:
 
 ```text
 solana balance
 ```
 
-or, You can airdrop tokens to your account.
+Or, you can airdrop tokens to your account:
 
 ```text
 solana airdrop 1 <your-account-address>
@@ -113,7 +111,7 @@ Before writing program code update Anchor.toml
 wallet = "your Keypair Path from the output of solana config get"
 ```
 
-# Creating blog program
+# Creating the blog program
 
 Now we are ready to start with the Solana rust program. Open up the `lib.rs` file located inside `/program/blog/src/` folder.
 
@@ -137,7 +135,7 @@ pub struct Initialize {}
 This is the basic example of an anchor Solana program. There is only one function `initialize`, which will be invoked by the client.
 The initialize function has one argument of type context of `Initialize` struct.
 
-Another noticeable thing is `declare_id!`. declare_id! is a macro it defines the program address and is used in internal validation. We don't have to think about it too much. This will be handled by the Anchor CLI.
+Another noticeable thing is `declare_id!`, which is a macro that defines the program address and is used in internal validation. We don't have to think about it too much. This will be handled by the Anchor CLI.
 
 **Now its time to start declaring states of our blog app.**
 
@@ -164,7 +162,7 @@ post {
 }
 ```
 
-As you have seen in the first basic example, we need to create function that will define out a task that we want to perform on a program like, init_blog, signup_user, create_post, etc.
+As you have seen in the first basic example, we need to create functions that will define tasks that we want to perform on a program like, init_blog, signup_user, create_post, etc.
 
 we will start with creating our very first function `init_blog`.
 
