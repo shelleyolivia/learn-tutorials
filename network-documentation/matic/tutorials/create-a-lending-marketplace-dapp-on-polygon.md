@@ -431,7 +431,7 @@ function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256
 
 ## Compile and migrate
 
-Loan contract & loancreator is being used 
+LoanContract and LoanCreator are being compiled and migrated here along with a Standard ERC20 token. 
 
 Open `truffle console` to run a local blockchain in your terminal at `http://127.0.0.1:9545/`:
 ```
@@ -499,6 +499,20 @@ Starting migrations...
    > gas price:           2 gwei
    > value sent:          0 ETH
    > total cost:          0.004920946 ETH
+   
+   Deploying 'LoanContract'
+   -----------------------
+   > transaction hash:    0x657we40e9575c62f74585c52e15492a8a8663b8a65eb9f97f6e57ccdcb0eec435
+   > Blocks: 0            Seconds: 0
+   > contract address:    0xb8b239cC1e53093D645A50c70B4a995BBC9acb
+   > block number:        4
+   > block timestamp:     1629372448
+   > account:             0x2F3CeD6f849630301feC1dD613869E8cc3857665
+   > balance:             99.990053476
+   > gas used:            2460473 (0x258b39)
+   > gas price:           2 gwei
+   > value sent:          0 ETH
+   > total cost:          0.004920946 ETH
 
 
    Deploying 'StandardToken'
@@ -518,9 +532,6 @@ Starting migrations...
 
    > Saving migration to chain.
    > Saving artifacts
-   -------------------------------------
-   > Total cost:         0.010922144 ETH
-
 
 Summary
 =======
@@ -567,9 +578,9 @@ Now you know about creating a Lending Marketplace with Truffle Suite and ReactJS
 
 If you had any difficulties following this tutorial or simply want to discuss Polygon tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
 
-# About the author
+# About the authors
 
-[Devendra Yadav](https://community.figment.io/u/dev.koold) [Prince Rana](https://community.figment.io/u/ranaprince7.pr)
+[Devendra Yadav](https://community.figment.io/u/dev.koold) and [Prince Rana](https://community.figment.io/u/ranaprince7.pr)
 
 # References
 - https://github.com/crypto-lend
