@@ -60,8 +60,8 @@ import "./LoanContract.sol";
 
 ```
 Here two events have been build as part of the Loan creator :
-•	createNewLoanOffer
-•	createNewLoanRequest
+- createNewLoanOffer
+- createNewLoanRequest
 
 ### createNewLoanOffer:
 
@@ -126,7 +126,7 @@ import "./libs/LoanMath.sol";
 import "./libs/String.sol";
 ```
 
-**Contracts** in **Solidity** are similar to classes in _object-oriented languages_. Calling a function on a different contract (instance) will perform an _EVM function call_ and thus switch the context such that state variables in the calling contract are inaccessible // [Solidity](https://docs.soliditylang.org/en/v0.8.9/contracts.html)
+**Contracts** in **Solidity** are similar to classes in _object-oriented languages_. Calling a function on a different contract (instance) will perform an _EVM function call_ and thus switch the context such that state variables in the calling contract are inaccessible.
 
 
 Then we start creating our contract & also declare the data types used in our contract. The wallet address & admin address corresponding to our contract are also pre-mentioned.
@@ -306,9 +306,6 @@ function acceptLoanOffer(uint256 _interestRate, address _collateralAddress, uint
         loan.borrower = msg.sender;
         /* This will call setters and enrich loan data */
         enrichLoan(_interestRate,_collateralAddress,_collateralAmount, _collateralPriceInETH,_ltv);
-
-        // borrower should transfer collateral after this. use same above method? YES (validation done)
-        // to be done in UI
     }
 ```
 
@@ -328,7 +325,6 @@ function acceptLoanOffer(uint256 _interestRate, address _collateralAddress, uint
         loan.startedOn = now;
         
         address(uint160(loan.borrower)).transfer(loan.loanAmount);
-        //loan.loanStatus = LoanStatus.ACTIVE;
         emit FundTransferToBorrowerSuccessful(loan.borrower, loan.loanAmount);
     }
 ```
@@ -408,17 +404,8 @@ function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256
             transferToWallet1(fees);
         }
         uint256 toTransfer = amount.sub(fees);
-
-      //  loan.outstandingAmount = loan.outstandingAmount.sub(msg.value);
-
-      //  if(loan.outstandingAmount <= 0)
-      //      loan.loanStatus = LoanStatus.REPAID;
-
         loan.repayments[repaymentNumber] = true;
-
         address(uint160(loan.lender)).transfer(toTransfer);
-
-       // should log particular repaymentNumber paid instead
         emit LoanRepaid(msg.sender, amount);
     }
  ```
@@ -582,9 +569,9 @@ If you had any difficulties following this tutorial or simply want to discuss Po
 
 # About the author
 
-[Devendra Yadav](https://community.figment.io/u/dev.koold) [Prince Rana]
+[Devendra Yadav](https://community.figment.io/u/dev.koold) [Prince Rana](https://community.figment.io/u/ranaprince7.pr)
 
 # References
 - https://github.com/crypto-lend
 - https://learn.figment.io/tutorials/deploying-and-debugging-smart-contracts-on-polygon
-- https://docs.soliditylang.org/en/v0.8.7/
+- https://docs.soliditylang.org
