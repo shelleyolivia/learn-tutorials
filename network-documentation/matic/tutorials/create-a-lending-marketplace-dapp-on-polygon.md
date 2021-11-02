@@ -45,7 +45,7 @@ npm i
 There are two main smart contracts which are regarding creating the loan offer and request, and second the contract details of the loan with repayment methods
 
 ## Loan creator
-A smart contract for both the lender & the borrower to create their loan offer and request repectively. A person might be willing to offer a loan or requesting for a loan.
+A smart contract for both the lender & the borrower to create their loan offer and request respectively. A person might be willing to offer a loan or requesting for a loan.
 
 ## Importing the dependencies
 
@@ -60,12 +60,12 @@ import "./LoanContract.sol";
 
 ```
 Here two events have been build as part of the Loan creator :
-•	createNewLoanOffer
-•	createNewLoanRequest
+- createNewLoanOffer
+- createNewLoanRequest
 
 ### createNewLoanOffer:
 
-Taking input from the person who’s willing to give a loan in form of a cryptocurrency, this will include the Loan Amount,duration,data about the Collateral accepted incase loan isn’t paid, referencing the same to the loancontract address.
+Taking input from the person who’s willing to give a loan in form of a cryptocurrency, this will include the Loan Amount, duration, data about the Collateral accepted in case the loan isn’t paid, referencing the same to the loan contract address.
      
 ```
 
@@ -86,7 +86,7 @@ function createNewLoanOffer(uint256 _loanAmount, uint128 _duration, string memor
 
 ### createNewLoanRequest: 
 This is a request from the borrower, the person who needs a loan.
-Includes the Loan Amount,duration, interest the person willing to pay, data about the Collateral (collateral address, collateral amount- the cryptocurrency being requested as loan, price of the collateral in the specific cryptocurrency)& finally the loancontract address.
+Includes the Loan Amount, duration, interest the person willing to pay, data about the Collateral (collateral address, collateral amount- the cryptocurrency being requested as loan, price of the collateral in the specific cryptocurrency)& finally the loan contract address.
 
 Variables from the requester’s end are accepted & appended into the array named loans.
 The loan offer created then sent as a message to that loan contract address
@@ -108,13 +108,12 @@ function createNewLoanRequest(uint256 _loanAmount, uint128 _duration, uint256 _i
      return loans;
 
 ```
-
 The second contract that we're prominently using is the `LoanContract.sol`
 
-Importing the dependancies for our contract.
+Importing the dependencies for our contract.
 
-**LoanMath** is a library created for our mathematical functions(can be found in libs folder), it consists of all the financial related functions being used in our smart contract
-**String** is a library for our string functions , it basically converts any type bytes32 in to a string
+**LoanMath** is a library created for our mathematical functions(can be found in the libs folder), it consists of all the financial-related functions being used in our smart contract
+**String** is a library for our string functions, it converts any type bytes32 into a string
 
 
 ```
@@ -127,9 +126,10 @@ import "./libs/LoanMath.sol";
 import "./libs/String.sol";
 ```
 
-Contracts in Solidity are similar to classes in object-oriented languages. Calling a function on a different contract (instance) will perform an EVM function call and thus switch the context such that state variables in the calling contract are inaccessible // [Solidity](https://docs.soliditylang.org/en/v0.8.9/contracts.html)
+**Contracts** in **Solidity** are similar to classes in _object-oriented languages_. Calling a function on a different contract (instance) will perform an _EVM function call_ and thus switch the context such that state variables in the calling contract are inaccessible.
 
-Then we start creating our contract & also declare the data types used in our contract.The wallet address & admin address corresponding to our contract are also pre-mentioned.
+
+Then we start creating our contract & also declare the data types used in our contract. The wallet address & admin address corresponding to our contract are also pre-mentioned.
 
 ```
 contract LoanContract {
@@ -141,7 +141,9 @@ contract LoanContract {
     uint256 constant SOME_THINGS = 105;
     address admin = 0x95FfeBC06Bb4b7DeDfF961769055C335542E1dBF;
 ```
-Enumerated lists LoanStatus & CollateralStatus are created thereafter wich limit user options to select from the given options for both the lender & the loan requester.
+
+_Enumerated lists_**LoanStatus** & **CollateralStatus** are created thereafter which limit user options to select from the given options for both the lender & the loan requester.
+
 
 ```
  enum CollateralStatus {
@@ -161,8 +163,9 @@ Enumerated lists LoanStatus & CollateralStatus are created thereafter wich limit
     }
 
 ```
-Creating records for the CollateralData & LoanData with struct types
-Struct types are used to represent a record, a data type with with more than one member of different data types. The struct types we’re creating here have data in reference to the Collateral being provided by the loan requester & the details of the loan being sanctioned .
+Generating records for the **CollateralData** & **LoanData** with struct types
+_Struct_ types are used to represent a record, a data type with more than one member of different data types. The _struct_ types we’re creating here have data about the Collateral being provided by the loan requester & the details of the loan being sanctioned.
+
 
 ```
  struct CollateralData {
@@ -192,7 +195,7 @@ Struct types are used to represent a record, a data type with with more than one
     }
 ```
 
-A function **enrich loan** is created to  provide the details inside , once our loan is sanctioned 
+A function **enrich loan** is created to  provide the details inside, once our loan is sanctioned.
 
 ```
 
@@ -208,8 +211,10 @@ function enrichLoan(uint256 _interestRate, address _collateralAddress, uint256 _
     
 ```
     
-Below we are declaring our events to store the arguments passed in transaction logs, these logs further are stored on the blockchain & can be accessed using address of the contract till the contract is present on the blockchain. Various events in ref the collateral transfer, funds transfer , collateral return on complete loan repayment, collateral seizure incase of loan non-payment of loan & incase any update is done further in the loan contract.
+Below we are declaring our events to store the arguments passed in transaction logs, these logs further are stored on the blockchain & can be accessed using the address of the contract till the contract is present on the blockchain. Various events in ref the collateral transfer, funds transfer, collateral return on complete loan repayment, collateral seizure incase of loan non-payment of loan & in case any update is done further in the loan contract.
+
 At all these events a log will be created in the blockchain which remains there till eternity & can be accessed for legal or non-legal claims & allegations by either party.
+
 
 
 ```
@@ -226,7 +231,8 @@ event CollateralTransferToLoanFailed(address, uint256);
 ```
 
 
-Here we’re declaring the constructor function to be executed for our contract.Post execution the final code of the contract is stored on the blockchain.
+Here we’re declaring the _constructor_ function to be executed for our contract. Post execution, the final code of the contract is stored on the blockchain.
+
 ```
 constructor(uint256 _loanAmount, uint128 _duration, string memory _acceptedCollateralsMetadata,
         uint256 _interestRate, address _collateralAddress,
@@ -245,10 +251,9 @@ constructor(uint256 _loanAmount, uint128 _duration, string memory _acceptedColla
 Later this will be filled when borrower accepts the loan.
 
 functions used:
-- transferFundsToLoan – to transfer funds to loan address after loan is sanctioned
-- toString – converts the address into a string to which loan is being sent
-- transferCollateralToLoan – transfers the collateral after the loan request is created
-change CollateralAddress to String
+- **transferFundsToLoan** – to transfer funds to loan address after loan is sanctioned
+- **toString** – converts the address into a string to which loan is being sent
+- **transferCollateralToLoan** – transfers the collateral after the loan request is created
 
 ```
     // after loan offer created
@@ -282,7 +287,7 @@ change CollateralAddress to String
 ```
 
 We instantiate the collateral status arrived once conditions for the loan sanctioned as per the contract are met contract then transfer funds to borrower(only in case of loan offer)
-And instantiate the collateral status to arrived once our conditions for loan sanctioned as per the contract are met contract will also be transferring funds to borrower (only in case of loan offer)
+And instantiate the collateral status to arrive once our conditions for loan sanctioned as per the contract are met contract will also be transferring funds to borrower (only in case of loan offer)
 
 ```
 emit CollateralTransferToLoanSuccessful(msg.sender, loan.collateral.collateralAmount, loan.collateral.collateralPrice)
@@ -292,7 +297,7 @@ emit CollateralTransferToLoanSuccessful(msg.sender, loan.collateral.collateralAm
 
 Some more functions created being used in our loan contract:
 
-**acceptLoanOffer**: calls an event that keeps track on the accceptance of the loan offer by the requester
+**acceptLoanOffer**: calls an event that keeps track of the acceptance of the loan offered by the requester
 
 ```
 function acceptLoanOffer(uint256 _interestRate, address _collateralAddress, uint256 _collateralAmount, uint256 _collateralPriceInETH, uint256 _ltv) public {
@@ -301,14 +306,10 @@ function acceptLoanOffer(uint256 _interestRate, address _collateralAddress, uint
         loan.borrower = msg.sender;
         /* This will call setters and enrich loan data */
         enrichLoan(_interestRate,_collateralAddress,_collateralAmount, _collateralPriceInETH,_ltv);
-
-        // borrower should transfer collateral after this. use same above method? YES (validation done)
-        // to be done in UI
     }
 ```
 
-**approveLoanRequest**:  this calls an event to show that the loan has been approved.the date-time for loan started will be stored used for keeping a track on repayments
-
+**approveLoanRequest**:  this calls an event to show that the loan has been approved.the date-time for a loan started will be stored used for keeping a track of repayments
 ```
    function approveLoanRequest() public payable {
 
@@ -324,12 +325,11 @@ function acceptLoanOffer(uint256 _interestRate, address _collateralAddress, uint
         loan.startedOn = now;
         
         address(uint160(loan.borrower)).transfer(loan.loanAmount);
-        //loan.loanStatus = LoanStatus.ACTIVE;
         emit FundTransferToBorrowerSuccessful(loan.borrower, loan.loanAmount);
     }
 ```
 
-**getLoanData** : will publicly view the loan details- amount left, collateral status,loan status, addresses of the borrower & lender .at each repayment of the loan installment, this function feeds  the vals in blockchain publicly viewable
+**getLoanData** : will publicly view the loan details- amount left, collateral status,loan status, addresses of the borrower & lender .at each repayment of the loan installment, this function feeds  the values in blockchain publicly viewable
  
  ```
   function getLoanData() view public returns (
@@ -342,8 +342,7 @@ function acceptLoanOffer(uint256 _interestRate, address _collateralAddress, uint
     }
  ```
  
-
-**getCurrentRepaymentNumber**: The number of the current installment is returned as well as kept a track on throughout the repayment process
+**getCurrentRepaymentNumber**: The number of the current instalment is returned as well as kept track on throughout the repayment process.
  
 ```
 function getCurrentRepaymentNumber() view public returns(uint256) {
@@ -353,7 +352,7 @@ function getCurrentRepaymentNumber() view public returns(uint256) {
 
 
 
-**getRepaymentAmount**: The amount for each installment for repayment is calculated based on the installment number & the interest being levied on.
+**getRepaymentAmount**: The amount for each instalment for repayment is calculated based on the instalment number & the interest being levied on.
 ```
 function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256 amount, uint256 monthlyInterest, uint256 fees){
 
@@ -373,7 +372,7 @@ function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256
 
 ```
 
-**makeFailedRepayments**: based on nth duration it is triggered we pass repayment number from UI
+**makeFailedRepayments**: based on the nth duration it is triggered we pass repayment number from UI.
  ```
  function makeFailedRepayments(uint256 _repaymentNumberMissed) public OnlyAdmin {
  uint256 repaymentNumber = _repaymentNumberMissed;
@@ -388,7 +387,7 @@ function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256
  ```
  
 
-**repayLoan**: Keeps track on if the loan has been completely paid & emits the event to be stored on blockchain.The installment number of the repayment id also logged in at same
+**repayLoan**: Keeps track of if the loan has been completely paid & emits the event to be stored on the blockchain. The instalment number of the repayment id also logged in at the same.
  
  ```
      function repayLoan() public payable {
@@ -405,22 +404,13 @@ function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256
             transferToWallet1(fees);
         }
         uint256 toTransfer = amount.sub(fees);
-
-      //  loan.outstandingAmount = loan.outstandingAmount.sub(msg.value);
-
-      //  if(loan.outstandingAmount <= 0)
-      //      loan.loanStatus = LoanStatus.REPAID;
-
         loan.repayments[repaymentNumber] = true;
-
         address(uint160(loan.lender)).transfer(toTransfer);
-
-       // should log particular repaymentNumber paid instead
         emit LoanRepaid(msg.sender, amount);
     }
  ```
 
-**transferToWallet1**: fees for eth contract use will be taken by the contract service provider.will be private only viewable to the owner of the contract
+**transferToWallet1**: fees for contract use will be taken by the contract service provider. will be private only viewable to the owner of the contract
  
  ```
  function transferToWallet1(uint256 fees) private {
@@ -430,7 +420,7 @@ function getRepaymentAmount(uint256 repaymentNumber) view public returns(uint256
  ```
  
  
-**transferCollateralToWallet1**: The collateral will be transferred in the wallet provided by the contract owner, for a fair use policy of the contract
+**transferCollateralToWallet1**: The collateral will be transferred in the wallet provided by the contract owner, for a fair use policy of the contract.
 ```
     function transferCollateralToWallet1 (uint256 fees) private {
         uint256 feesInCollateralAmount = LoanMath.calculateCollateralAmountToDeduct(fees, loan.collateral.collateralPrice);
@@ -579,8 +569,9 @@ If you had any difficulties following this tutorial or simply want to discuss Po
 
 # About the author
 
-[Devendra Yadav](https://community.figment.io/u/dev.koold)
+[Devendra Yadav](https://community.figment.io/u/dev.koold) [Prince Rana](https://community.figment.io/u/ranaprince7.pr)
 
 # References
 - https://github.com/crypto-lend
 - https://learn.figment.io/tutorials/deploying-and-debugging-smart-contracts-on-polygon
+- https://docs.soliditylang.org
