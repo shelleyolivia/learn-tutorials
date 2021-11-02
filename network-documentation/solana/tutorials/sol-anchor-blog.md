@@ -26,9 +26,7 @@ Anchor abstracts away from the low level construction of accounts, the packing a
 
 There are always two parts to a Solana app -- the _on-chain_ program and accounts, and the _off-chain_ app that interacts with it. The other benefit Anchor brings is the alignments of the interaction between these two app segments. This alignment is called an Interface Description Language [(IDL)](https://en.wikipedia.org/wiki/Interface_description_language). Since the interface of the off-chain app (say, in JavaScript) must always match the on-chain Solana program, this is a really nice convenience feature to have.
 
-<div style="background-color: white;"></div>
-
-<img src="../../../.gitbook/assets/tutorial-graphics/IDL.svg" width="90%" height="auto">
+![](../../../.gitbook/assets/tutorial-graphics/IDL.svg)
 
 # Prerequisites
 
@@ -93,7 +91,7 @@ The folders we are interested in the most to start are:
 By default, Anchor has put some basic starting code in there for us.
 
 ```rust
-// programs\solblog\src\lib.rs
+// programs/solblog/src/lib.rs
 
 use anchor_lang::prelude::*;
 
@@ -113,7 +111,8 @@ pub struct Initialize {}
 
 Let's break down what we see.
 
-<img src="../../../.gitbook/assets/tutorial-graphics/2RUST.svg" width="90%" height="auto">
+![](../../../.gitbook/assets/tutorial-graphics/2RUST.svg)
+
 After including the anchor library, the program public key has this placeholder:
 
 ```rust
@@ -185,7 +184,7 @@ declare_id!("SoMeKeyThatIsUniqueTOmyPROGRAM");
 We will also need to include this same Program ID in the client side, in our `app\src\lib\anchorClient.js`
 
 ```js
-// app\src\lib\anchorClient.js
+// app/src/lib/anchorClient.js
 
 // programId is the program public key, SoMeKeyThatIsUniqueTOmyPROGRAM
 const program = new anchor.Program(idl, programId, provider)
@@ -193,17 +192,17 @@ const program = new anchor.Program(idl, programId, provider)
 
 We will get to that part once we build the client side. My only point at this time is to emphasize that the client side in javascript must match the Program side in Rust. For now, let's finish taking a look at the Rust code.
 
-<img src="../../../.gitbook/assets/tutorial-graphics/program-block.svg" width="40%" height="auto">
+![](../../../.gitbook/assets/tutorial-graphics/program-block.svg)
 
 The next code block under `#[program]` is our program's functions, how we make the program do anything. The function names here are lowercase snake_case.
 
-<img src="../../../.gitbook/assets/tutorial-graphics/Accounts.svg" width="40%" height="auto">
+![](../../../.gitbook/assets/tutorial-graphics/Accounts.svg)
 
 Notice the `#[derive(Accounts)]` struct is the same name as in the `program`, but in `camelCase` (whereas `snake_case` is used in program above).
 
 The next code block under `#[derive(Accounts)]` is a going to be struct that describes the account itself and enables us to access fields from the account struct (which is non-existant at this point). Let's create it:
 
-<img src="../../../.gitbook/assets/tutorial-graphics/AccountsRUST.svg" width="40%" height="auto">
+![](../../../.gitbook/assets/tutorial-graphics/AccountsRUST.svg)
 
 ```rust
 #[account]
@@ -220,7 +219,7 @@ We created the third style code block, which is an Account struct which is a Sol
 
 Now we have the three Anchor blocks we need to make our blog:
 
-<img src="../../../.gitbook/assets/tutorial-graphics/3RUST.svg" width="100%" height="auto">
+![](../../../.gitbook/assets/tutorial-graphics/3RUST.svg)
 
 But right now our program doesn't do anything, because our program methods are empty.
 
@@ -824,7 +823,7 @@ To use anchor from javascript, we install the anchor library:
 npm install @project-serum/anchor --save
 ```
 
-There are a few gotchyas that you might run into while trying to use the solana or anchor libraries in client side browser code.
+There are a few gotchyas that you might run into while trying to use the Solana or Anchor libraries in client side browser code.
 
 ## Gotchya #1 - Buffer not defined
 
@@ -909,7 +908,7 @@ If you are using Visual Studio Code as your IDE and you want a shortcut, you can
 
 Open up your browser to `http://localhost:3000` and play around!
 
-[![](../../../.gitbook/assets/tutorial-graphics/solblog.gif)]('https://youtu.be/k_cVwvXHO4U')
+![](../../../.gitbook/assets/tutorial-graphics/solblog.gif)
 
 # Conclusion
 
