@@ -281,7 +281,7 @@ That’s a high level of how archivers nodes work in SOLANA’s ecosystem.
 
 Hey, my name is Jonathan Ferreira, and I'm a software developer in constant evolution, seeking knowledge acquiring and sharing. Learning and implementing blockchain technology, and specially intereseted about Solana ecosystem.
 
-My GitHub: [https://github.com/Jonathansoufer](https://https://github.com/Jonathansoufer)
+My GitHub: [https://github.com/Jonathansoufer](https://github.com/Jonathansoufer)
 
 In case you found any misinformation in the article or had any suggestions to improve the article please comment it or you can find me on Twitter: [@JSoufer](https://twitter.com/JSoufer).
 
