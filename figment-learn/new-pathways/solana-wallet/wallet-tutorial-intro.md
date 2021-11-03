@@ -12,7 +12,7 @@ We think of ourselves as your guide - for a brief amount of time - on your journ
 
 We've tried to show you the door (or maybe part of it). Your job is to discover your path and walk it courageously.
 
-![Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/cat.jpeg)
+![Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/cat.jpeg)
 ##### _Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes_
 
 # Step 1: Up and Running
@@ -57,21 +57,21 @@ The implementation is followed by a challenge that aims to give you just enough 
 
 By the time you're done with this tutorial, you'll have a functional wallet capable of changing the state of the Solana blockchain by receiving and transferring onchain funds. In [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2), we'll generate a 12-word phrase that will grant us access to a wallet.
 
-![](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/create.png)
+![](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/create.png)
 
 Then we'll build a function to fetch the balance of our newly created wallet in [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3) before leveraging functionality to issue "test tokens" through something called an "airdrop" that we'll explore in [Step 4](https://learn.figment.io/tutorials/solana-wallet-step-4).
 
-![](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/airdrop.png)
+![](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/airdrop.png)
 
 Having added funds to our wallet, we'll build the ability to transfer funds to another wallet in [Step 5](https://learn.figment.io/tutorials/solana-wallet-step-5) using bank checks as a scaffolding analogy.
 
-![](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/transfer.png)
+![](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/transfer.png)
 
 Finally, we'll use the phrase we generated in [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2) to sign into an account and recover access to it in [Step 6](https://learn.figment.io/tutorials/solana-wallet-step-6).
 
-![](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/import.png)
+![](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/import.png)
 
 Although building a production-ready, non-custodial wallet like [Phantom](https://phantom.app/) or [MetaMask](https://metamask.io/) is beyond the scope of this tutorial, by the end of it you'll have developed a foundation of judgment that will let you better allocate your learning time as you explore new projects. To assist with that, we'll end the tutorial with a list of [additional resources](#additional-resources) that you'll be well prepared to explore.
 
-![Figure 2: A journey of a thousand miles begins with a single step](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/journey.jpeg)
+![Figure 2: A journey of a thousand miles begins with a single step](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/journey.jpeg)
 ##### _Figure 2: A journey of a thousand miles begins with a single step_

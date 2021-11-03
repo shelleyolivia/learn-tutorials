@@ -16,7 +16,7 @@ The opportunities are endless and we wish you well on your journey!
 
 _If you want to connect with an amazing community of developers, join us on [Discord](https://discord.gg/fszyM7K)._
 
-![Figure 10: This is just the beginning, godspeed!](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/begin.jpeg)
+![Figure 10: This is just the beginning, godspeed!](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/begin.jpeg)
 ##### _Figure 10: This is just the beginning, godspeed!_
 
 ## Additional Resources
@@ -29,5 +29,5 @@ _If you want to connect with an amazing community of developers, join us on [Dis
 - [Why the Blockchain Matters](https://seths.blog/2021/05/why-the-blockchain-matters/) by Seth Godin
 - [The Quest for Digital Cash](https://bitcoinmagazine.com/.amp/culture/bitcoin-adam-back-and-digital-cash) by Bitcoin Magazine
 - [The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography](https://www.worldcat.org/title/code-book-the-science-of-secrecy-from-ancient-egypt-to-quantum-cryptography/oclc/738479322) by Simon Singh
-- [Ethereum Documentation]()
+- [Ethereum Documentation](https://ethereum.org/en/developers/docs/intro-to-ethereum/)
 - [Mastering Ethereum: Building Smart Contracts and DApps](https://github.com/ethereumbook/ethereumbook) by Andreas M. Antonopoulos, Gavin Wood
