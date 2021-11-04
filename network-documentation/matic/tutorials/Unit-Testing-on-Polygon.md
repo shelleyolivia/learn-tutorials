@@ -1,33 +1,33 @@
-# Polygon Smart Contract unit testing with truffle
-
 # Introduction
+
 In this tutorial, you will learn how to deploy & unit test smart contracts in solidity using Truffle. Before diving into unit testing we will implement a smart contract for testing. Grab a cup of tea, review the Smart-Contract and unit test them!
 
 # Prerequisites
+
 This tutorial assumes that you have a basic understanding of Solidity, Truffle, and blockchains.
 
 # Requirements
+
 - [Truffle](https://www.trufflesuite.com/)
 - The [Solidity](https://docs.soliditylang.org/en/v0.8.9/) compiler (this is installed automatically by Truffle)
 - [Metamask](https://metamask.io/)
+- A DataHub account - Go to <https://datahub.figment.io/sign_up> and create an account
 
-# Deep Dive into unit testing on polygon
-
-## Github Repository
 The complete code used in this tutorial is available [on Github](https://github.com/PowerStream3604/Polygon-unit-testing)
+
+# Unit testing smart contracts with Truffle
 
 **What is unit testing?**
 Unit testing is a way of **testing a unit** - the smallest piece of code that can be logically isolated in a system. These units are mostly functions, subroutine, methods or properties.
 
-## Introduction about the Smart Contract we'll implement.
 Before we can test a smart contract, we will need to implement one.
 
-The smart contract we'll implement is a Smart Contract that represents a **Corportion**. Similar to how corporations operate, our smart contract assign **roles:**
+The smart contract we'll implement is a Smart Contract that represents a **Corportion**. Similar to how corporations operate, our smart contract assigns **roles:**
 **Owners :** Shareholders of the company who have limited access.
 **Master :** The president/CEO of the company with full access.
 **Admins :** Both **Owners** and **Master** together as a group.
 
-## Features :
+**Features**:
 1. **Master** has the right to **add** owner with **addOwner()** and **remove** owner with **removeOwner()**.
 2. **Admins** (owner & master) have the right to transfer their share to anyone using the **giveShare()** function.
 3. **Admins** (owner & master) have the right to transfer their share to one of the owners(not master) using the **addShare()** function.
@@ -37,7 +37,7 @@ The smart contract we'll implement is a Smart Contract that represents a **Corpo
 7. **Users** who are not in the boundary of **Admins** cannot transfer their share but can still **receive**.
 
 
-## Events :
+**Events**:
 1. **MasterSetup** is emitted when **Master** is set
 
 ```solidity
@@ -61,8 +61,6 @@ event OwnerRemoval(address indexed owner);
 ```solidity
 event Transfer(address indexed receiver, uint256 amount);
 ```
-
-# Unit testing smart contracts with Truffle
 
 ## Defining the smart contract
 
@@ -233,7 +231,7 @@ function addShare(address receiver, uint256 _share)
 }
 ```
 
-Here is the full **implementation**.
+Here is the full **implementation**:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -380,44 +378,39 @@ contract Company {
 
 Let's then go to unit test the above contract with Truffle.
 
-## Unit Testing With Truffle
-
 As I mentioned above, unit testing is testing the **smallest** unit which can be functions, subroutines, methods, etc.
 Truffle provides a convinient library to test smart contracts, by using **truffle-assert** library, we'll check if all scenarios stand by our expectation.
 
-## Initialize truffle project
+## Initialize Truffle project
+
+To initialize a new Truffle project, run the command `truffle init` inside the directory you want to use, for example `polygon-unit-testing`. You can name the directory whatever you want, but we recommend using this example to follow the tutorial:
 
 ```text
+mkdir polygon-unit-testing
+cd polygon-unit-testing
 truffle init
 ```
 
-Then, you'll see a project directory like this.
+Then, you'll see a project directory like this:
 
 ![project overview](https://i.ibb.co/19Xnw0X/Screen-Shot-2021-10-22-at-9-52-29-AM.png)
 
 ## Paste your smart contract into the contracts folder
 
-Create Company.sol file under `/contracts`
+Create a new file named `Company.sol` file under `/contracts`
 
-```text
-touch Company.sol
-```
-
-**Then**, paste the smart contract.
+**Then**, paste the smart contract **implementation** from the previous section into `Company.sol`.
 
 ## Configure the network settings
 
-**Edit** the configuration file:
-```text
-truffle-config.js
-```
+**Edit** the Truffle configuration file, `truffle-config.js`.
 
-Inside the **networks** object paste the below network configuration.
+Inside the **networks** object paste the network configuration shown below:
 
 ```javascript
 mumbai: {
       provider: () => new HDWalletProvider(["<Private Key 1>", "<Private Key 2>", "<Private Key 3>"],
-      "https://polygon-mumbai.infura.io/v3/[PROJECT-ID]"),
+      `https://matic-mumbai--rpc.datahub.figment.io/apikey/${process.env.DATAHUB_POLYGON_API_KEY}`),
       network_id: 80001,
       confirmations: 2,
       timeoutBlocks: 200,
@@ -426,17 +419,31 @@ mumbai: {
 }
 ```
 
-the above configuration sets the provider url to connect truffle with the node of **Mumbai testnet**, and provides private keys to **sign** and pay for **gas fee** on **Mumbai**.
+This configuration sets the provider URL to connect Truffle with a DataHub node of the **Mumbai testnet**, and provides private keys to **sign** and pay for **gas fees** on **Mumbai**. Remember to replace <Private Key 1>, etc.. with the actual private keys you will be using.
 
-We need **3 distinct private keys** for this test. You can refer to this manual to export private key from [Metamask](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
+**dotenv and .env**:
 
-For creating Infura projects, please refer this [Infura manual](https://blog.infura.io/getting-started-with-infura-28e41844cc89/).
+If you are unfamiliar with how to use `.env` files, refer to [this guide](https://docs.figment.io/network-documentation/extra-guides/dotenv-and-.env).
 
-*NOTES : The accounts should be funded with **MATIC** on Mumbai. Use the [Polygon faucet](https://faucet.polygon.technology/)*
+You must add your DataHub API key to a file named `.env` in the same directory as `truffle-config.js`, as the value of the environment variable `DATAHUB_POLYGON_API_KEY`:
+
+```text
+DATAHUB_POLYGON_API_KEY=<paste your API key here>
+```
+
+You will also need to add the code to use dotenv at the top of `truffle-config.js`:
+
+```javascript
+require('dotenv').config(); // Load .env file
+```
+
+You will need **3 distinct private keys** for this test. You can refer to this manual to export private keys from Metamask: <https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key>.
+
+**NOTE**: The accounts should be funded with test **MATIC** on Mumbai. Use the [Polygon faucet](https://faucet.polygon.technology/).
 
 ## Create company.js file in test folder
 
-In order to create test in truffle, create a test file under the `test` folder.
+In order to create tests in a Truffle project, create a test file under the `test` folder.
 
 ```text
 cd test
@@ -462,18 +469,21 @@ module.exports = function (deployer, networks, accounts) {
 ```
 
 ## Before unit testing smart contract
-We'll use the javascript library of truffle to test the functions.
 
-Before going in, we'll import the contract we'll test and the truffle library for testing.
+We'll use the JavaScript library of Truffle to test the functions. Before going in, we'll import the contract we want to test and the Truffle library for testing. Add this code to the test file:
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 const Company = artifacts.require("Company");
 const truffleAssert = require('truffle-assertions');
 ```
 
-Also, we'll define user variable to better distinguish accounts for testing we designated in the **truffle-config.js** file.
+Also, we'll define user variables to better distinguish accounts for testing we designated in the **truffle-config.js** file:
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 const user1 = accounts[0];
 const user2 = accounts[1];
 const user3 = accounts[2];
@@ -484,6 +494,8 @@ const user3 = accounts[2];
 1. Test if the Master address is set appropariately by the constructor.
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 it("1. should be able to set the right master", async () => {
     // Get deployed contract
     const company = await Company.deployed();
@@ -495,6 +507,8 @@ it("1. should be able to set the right master", async () => {
 2. Check if only master is able to add owner
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 it("2. only master should be able to add owner", async () => {
     // Get deployed contract
     const company = await Company.deployed();
@@ -508,6 +522,8 @@ it("2. only master should be able to add owner", async () => {
 3. Check if Master is able to add owner.
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 it("3. master should be able to add owner", async() => {
     // Get deployed contract
     const company = await Company.deployed();
@@ -525,6 +541,8 @@ it("3. master should be able to add owner", async() => {
 4. Check if an address is an owner
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 it("4. should be able to check owner", async () => {
     const company = await Company.deployed();
     await company.addOwner(user1);
@@ -537,6 +555,8 @@ it("4. should be able to check owner", async () => {
 5. Check if master is the only account to remove owner
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 it("5. only master should be able to remove owners", async () => {
     const company = await Company.deployed();
 
@@ -549,6 +569,8 @@ it("5. only master should be able to remove owners", async () => {
 6. Check if Master is able to add owner
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 it("6. master should be able to remove owners", async () => {
     const company = await Company.deployed();
 
@@ -565,6 +587,8 @@ it("6. master should be able to remove owners", async () => {
 7. Check if Master is able to send his share to owners
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 it("7. master should be able to send his share to owners", async() => {
     const company = await Company.deployed();
     // add user2 as owner
@@ -591,6 +615,8 @@ it("7. master should be able to send his share to owners", async() => {
 8. Check if it's not possible to user `addShare()` to transfer share to ordinary users
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 it("8. should not be able to use addShare() to transfer share to non-admins(normal-users)", async() => {
     const company = await Company.deployed();
 
@@ -603,6 +629,8 @@ it("8. should not be able to use addShare() to transfer share to non-admins(norm
 9. Check if it's possible to use `giveShare()` to transfer share to ordinary users
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 it("9. should be able to use giveShare() to transfer share to anyone", async () => {
     const company = await Company.deployed();
 
@@ -615,9 +643,11 @@ it("9. should be able to use giveShare() to transfer share to anyone", async () 
 });
 ```
 
-## The whole test code
+The complete test file should look like this:
 
 ```javascript
+// polygon-unit-testing/test/company.js
+
 const Company = artifacts.require("Company");
 const truffleAssert = require("truffle-assertions");
 contract("Company", (accounts) => {
@@ -705,27 +735,27 @@ contract("Company", (accounts) => {
 });
 ```
 
-## Run test
+## Run the test
 
 ```text
 truffle test --network mumbai
 ```
 
-## Test Result
+The result of the test should look similar: 
+
 ![Test Result](https://i.ibb.co/Fqs3vjb/Screen-Shot-2021-10-22-at-9-24-47-AM.png)
 
 
 # Conclusion
-After reading this tutorial you'll able to :
-- Write a basic smart contract with solidity
-- Use the Truffle library to unit test smart contracts
+
+Congratulations, you have finished this tutorial about unit testing Solidity smart contracts with Truffle. After completing this tutorial you'll able to write a basic smart contract with Solidity and use the Truffle library to unit test it.
 
 # About the Author
-David Kim : BlockChain developer with much interest in NFT, DEFI.
 
-Github : [GitHub](https://github.com/PowerStream3604)
+David Kim is a Blockchain developer interested in NFTs and DeFi. Contact him on [GitHub](https://github.com/PowerStream3604).
 
 # References
+
 - [Truffle](https://www.trufflesuite.com/)
 - [Solidity](https://docs.soliditylang.org/en/v0.8.9/)
 - [Polygon docs](https://docs.matic.network/docs/develop/getting-started)
