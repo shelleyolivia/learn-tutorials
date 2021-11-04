@@ -1,8 +1,8 @@
-# 🚀 Introduction 
+# Introduction 🚀
 
 You're about to learn how to develop a wallet for the [Solana](https://solana.com/) protocol. As you build, we'll dive into some of the fundamentals of Web 3 so you can start cultivating an understanding for blockchain technology and decentralized applications (dApps).
 
-## 📋 Prerequisites
+## Prerequisites 📋
 
 There are no formal blockchain or Web 3 prerequisites for this tutorial, but you should have some experience with [TypeScript](https://www.typescriptlang.org/) and [React](https://reactjs.org/). Ideally you have heard about [Solana](https://solana.com/), and know that it's a public blockchain protocol capable of running smart contracts with significant scalability advantages.
 
@@ -15,11 +15,11 @@ We've tried to show you the door (or maybe part of it). Your job is to discover 
 ![Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/cat.jpeg)
 ##### _Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes_
 
-# 💻 System Dependencies
+# System Dependencies 💻
 
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/getting-started/install) installed.
 
-## 🧱 Setting Up
+## Setting Up 🧱 
 
 You'll be building Solana interactions on top of a [Next.js](https://nextjs.org/) app that we have pre-built for you. This way you can skip the development phase you're familiar with (e.g. writing React components and Next pages) and dive right into the blockchain-specific phase.
 
@@ -43,7 +43,7 @@ info  - Using webpack 5. Reason: Enabled by default https://nextjs.org/docs/mess
 event - compiled successfully
 ```
 
-## 🏗 Tutorial Structure
+## Tutorial Structure 🏗 
 
 The tutorial is structured as a set of steps that break down the process of developing the wallet functionality for the pre-built Next.js app. Each step discusses key concepts and mental models that create the necessary context for you to better understand what we're building and why. Think of this as the warm up.
 
@@ -51,7 +51,7 @@ After the warm up, we provide a step-by-step implementation of the functionality
 
 The implementation is followed by a challenge that aims to give you just enough instructions and references to allow you to implement the functionality on your own if you want to take a shot at it. This allows you to exercise [active recall](https://en.wikipedia.org/wiki/Active_recall) and increases your mind's ability to make connections.
 
-## 🔍 Wallet Preview
+## Wallet Preview 🔍
 
 By the time you're done with this tutorial, you'll have a functional wallet capable of changing the state of the Solana blockchain by receiving and transferring onchain funds. In [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2), we'll generate a 12-word phrase that will grant us access to a wallet.
 
