@@ -17,7 +17,7 @@ The concept of cryptographic signing is fascinating, but well beyond the scope o
 
 With those building blocks in mind, we're ready to search the docs for a way to send and confirm a transaction.
 
-## Implementation
+# Implementation
 
 If you click on the **Send** button on the wallet dashboard, a drawer component opens up that shows a form structured as a paper check thus building on our analogy above. It includes all the components of a transaction but the **Sign and Send** button doesn't work yet.
 
@@ -168,7 +168,7 @@ const transfer = async () => {
 };
 ```
 
-## Challenge
+# Challenge
 
 Navigate to `components/TransactionLayout/index.tsx` in your editor and follow the steps included as comments to finish writing the `transfer` function. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 5.1](#listing-51-instructions-for-writing-transfer-function) below.
 
