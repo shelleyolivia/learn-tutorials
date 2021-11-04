@@ -1,3 +1,5 @@
+# Conclusion
+
 Congratulations! You've built a crypto wallet that is capable of managing onchain digital assets on the Solana protocol.
 
 By writing a function to generate a mnemonic phrase and using it to create a keypair in [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2), you gave the wallet access to a unique account. You then implemented functionality to connect to one of Solana's networks and fetch balance data from it in [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3).

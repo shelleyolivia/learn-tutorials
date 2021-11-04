@@ -1,3 +1,5 @@
+# Introduction
+
 You're about to learn how to develop a wallet for the [Solana](https://solana.com/) protocol. As you build, we'll dive into some of the fundamentals of Web 3 so you can start cultivating an understanding for blockchain technology and decentralized applications (dApps).
 
 # Prerequisites
