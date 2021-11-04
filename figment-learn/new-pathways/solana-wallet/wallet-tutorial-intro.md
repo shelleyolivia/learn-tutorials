@@ -15,7 +15,7 @@ We've tried to show you the door (or maybe part of it). Your job is to discover 
 ![Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/cat.jpeg)
 ##### _Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes_
 
-# System Dependencies 💻
+## System Dependencies 💻
 
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/getting-started/install) installed.
 
