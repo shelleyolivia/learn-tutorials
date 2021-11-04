@@ -1,5 +1,3 @@
-# Step 4: Airdropping Funds
-
 We've now generated a wallet and connected it to the Solana blockchain. In the previous step, we confirmed that our account's balance is zero but wouldn't it be nice to fund our account so we can see the balance change?
 
 You might be wondering whether we'll now need to transfer real money so we can test the account, but as we discussed in [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3), a blockchain's devnet typically provides a way to test transactions without risking real economic value.

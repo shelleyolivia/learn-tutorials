@@ -1,5 +1,3 @@
-# Step 3: Fetching a Balance
-
 Crypto wallets serve one key function. By storing your private keys, they allow you to manage - transfer, receive, organize - your digital assets. Part of that function requires the wallet to retrieve certain data that is stored onchain to display on your user dashboard.
 
 A balance represents a certain amount of cryptocurrency or tokens held by an account. If you think of the blockchain as a database that keeps ownership records, and of the public keys as the owner IDs, then you can think of the balances as an integer column in the database that tracks how much of a certain token each owner holds.
