@@ -1,5 +1,3 @@
-# Step 6: Recovering an Account
-
 Getting access to accounts is obviously a critical feature for any wallet application, and given our choice of architecture, we don't have to worry about encrypting and decrypting passwords to log in and out.
 
 The beauty of public-key cryptography is that the private key is effectively your password. And while securing crypto applications is more sophisticated than simply using your private key as a password, especially for industrial-strength wallets, we can achieve the basic functionality of accessing a wallet by leveraging what we learned in [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2) for creating wallets.
