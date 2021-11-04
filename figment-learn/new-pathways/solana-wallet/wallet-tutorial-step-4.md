@@ -1,3 +1,5 @@
+# 🪂 Step 4
+
 We've now generated a wallet and connected it to the Solana blockchain. In the previous step, we confirmed that our account's balance is zero but wouldn't it be nice to fund our account so we can see the balance change?
 
 You might be wondering whether we'll now need to transfer real money so we can test the account, but as we discussed in [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3), a blockchain's devnet typically provides a way to test transactions without risking real economic value.
@@ -16,7 +18,7 @@ On the right side of the wallet dashboard, you'll find a button with the label *
 
 Once we've completed this step, our balance will automatically increase when we click **Airdrop**. This will position us well for [Step 5](https://learn.figment.io/tutorials/solana-wallet-step-5) where we'll build functionality to send funds to other Solana accounts.
 
-# Implementation
+## 🧩 Implementation
 
 In [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3) we learned how to instantiate a connection to one of Solana's networks, and how to assign our account's public key property to a variable. We can apply that same code here to start writing the `handleAirdrop` function in `utils/index.ts`:
 
@@ -111,7 +113,7 @@ const refreshBalance = async (network: Cluster, account: Keypair | null) => {
 };
 ```
 
-# Challenge
+## 🏋️ Challenge
 
 If you open the browser's console from the `/wallet` page, and click on the **Airdrop** button, you'll notice a message that reads, "Airdrop functionality not implemented yet!". Navigate to `utils/index.ts` in your editor and follow the steps included as comments to finish writing the `handleAirdrop` function. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 4.1](#listing-41-instructions-for-writing-airdrop-function) below.
 

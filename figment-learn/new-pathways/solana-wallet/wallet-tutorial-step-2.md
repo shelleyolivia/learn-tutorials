@@ -1,3 +1,5 @@
+# 💼 Step 2
+
 Crypto wallets are the most critical piece of user-facing infrastructure in the blockchain space. In the same way that the browser brought the web to a mass audience by providing an easy-to-use gateway into the underlying servers and databases, wallets provide users with an easy-to-use gateway into blockchain protocols.
 
 A wallet is less like the wallet you use for your credit cards, and a lot more like a keychain. If you think of a blockchain as a giant bank safe with digital safety deposit boxes, wallets are the keychains where you keep the key to your box. Once you have access to a box, you can manage the contents of it by receiving, sending, holding and spending digital assets.
@@ -18,7 +20,7 @@ Run and open the app in your browser at [http://localhost:3000](http://localhost
 
 Clicking on **Create New Wallet** routes the user to a `/generate` page signaling to our user that by clicking **Generate**, the app will generate a key phrase and thus create a new wallet. But when we click **Generate**, we're routed to a `/phrase` page with an empty phrase container.
 
-# Implementation
+## 🧩 Implementation
 
 For the app to work, we need to implement a function that generates a phrase and uses it to create a wallet when the `/phrase` page renders. In your editor, navigate to `pages/phrase.tsx`.
 
@@ -100,7 +102,7 @@ setAccount(newAccount);
 
 ![](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/dashboard.png)
 
-# Challenge
+## 🏋️ Challenge
 
 In your editor, navigate to `pages/phrase.tsx` and follow the steps included as comments to finish writing the function. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 2.1](#listing-21-instructions-for-generating-a-phrase-and-creating-a-wallet) below.
 
