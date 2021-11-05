@@ -1,4 +1,8 @@
+# Not the end
+
 Congratulations! You've built a crypto wallet that is capable of managing on-chain digital assets on the Solana protocol.
+
+## Reflection
 
 By writing a function to generate a mnemonic phrase and using it to create a keypair in [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2), you gave the wallet access to a unique account. You then implemented functionality to connect to one of Solana's networks and fetch balance data from it in [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3).
 
@@ -7,6 +11,8 @@ Next, you wrote functionality to request test tokens via an airdrop in [Step 4](
 In the process of building the wallet, you learned some of the fundamentals of developing for Web 3. You learned how the frontend of the stack is practically identical to what you're already used to. You also learned that interacting with blockchain protocols means leveraging API libraries that help you create, read and update data in a familiar way.
 
 Importantly, you learned just enough about public-key cryptography, crypto wallets, and blockchain concepts like airdrops, keypairs, and mnemonics to unlock a whole world of learning paths to explore next.
+
+## This is the way
 
 Web 3 holds a world of promise for the future of the internet. Moreover, there are vasts areas of greenspace for developers to build amazing things and a ton of low hanging fruit problems to solve.
 
@@ -19,7 +25,7 @@ _If you want to connect with an amazing community of developers, join us on [Dis
 {% label %}
 Figure 10: This is just the beginning, godspeed!
 
-## Additional Resources 💻 
+# Additional Resources 💻 
 
 - [Figment Learn Pathways](https://learn.figment.io/)
 - [Solana Protocol Documentation](https://docs.solana.com/developing/programming-model/overview)

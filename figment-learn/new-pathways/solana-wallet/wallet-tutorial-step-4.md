@@ -1,4 +1,4 @@
-# Airdrops explained
+# Airdrop basics
 
 We've now generated a wallet and connected it to the Solana blockchain. In the previous step, we confirmed that our account's balance is zero but wouldn't it be nice to fund our account so we can see the balance change?
 
@@ -20,7 +20,7 @@ On the right side of the wallet dashboard, you'll find a button with the label *
 
 Once we've completed this step, our balance will automatically increase when we click **Airdrop**. This will position us well for [Step 5](https://learn.figment.io/tutorials/solana-wallet-step-5) where we'll build functionality to send funds to other Solana accounts.
 
-## Implementation 🧩
+# Implementation 🧩
 
 In [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3) we learned how to instantiate a connection to one of Solana's networks, and how to assign our account's public key property to a variable. We can apply that same code here to start writing the `handleAirdrop` function in `utils/index.ts`:
 
@@ -28,6 +28,8 @@ In [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3) we learned 
 const connection = new Connection(clusterApiUrl(network), "confirmed");
 const publicKey = account.publicKey;
 ```
+
+## Airdrop function
 
 Following our previous heuristic of searching the docs for keywords, we can now search for "airdrop" to see if there's a function we can leverage. Lo and behold the `Connection` class has a `requestAirdrop` function that looks promising. It takes in two properties - `to: PublicKey` and `lamports: number` - and returns a `promise` that resolves to a string.
 
@@ -55,6 +57,8 @@ const confirmation = await connection.requestAirdrop(
   LAMPORTS_PER_SOL
 );
 ```
+
+## Confirming airdrop
 
 Finally, before we can refresh our account's balance automatically, we need a way to make sure the blockchain ledger has been updated with our airdropped funds before we call `refreshBalance`. As with any database-type operations, blockchain state changes are asynchronous. In fact, given the decentralized nature of most blockchain protocols, some updates [can take a while](https://twitter.com/CryptoKitties/status/937444644740198400?s=20).
 
@@ -119,7 +123,7 @@ const refreshBalance = async (network: Cluster, account: Keypair | null) => {
 };
 ```
 
-## Challenge 🏋️
+# Challenge 🏋️
 
 If you open the browser's console from the `/wallet` page, and click on the **Airdrop** button, you'll notice a message that reads, "Airdrop functionality not implemented yet!". Navigate to `utils/index.ts` in your editor and follow the steps included as comments to finish writing the `handleAirdrop` function. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 4.1](#listing-41-instructions-for-writing-airdrop-function) below.
 

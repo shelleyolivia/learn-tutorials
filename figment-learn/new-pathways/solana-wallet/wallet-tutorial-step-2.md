@@ -1,4 +1,4 @@
-# Crypto wallets explained
+# Crypto gateway
 
 Crypto wallets are the most critical piece of user-facing infrastructure in the blockchain space. In the same way that the browser brought the web to a mass audience by providing an easy-to-use gateway into the underlying servers and databases, wallets provide users with an easy-to-use gateway into blockchain protocols.
 
@@ -13,6 +13,8 @@ We can think of the box itself as a chunk of memory on the blockchain. The digit
 
 The key that can unlock the safety deposit box is referred to as the private key. Anyone with access to a box's private key has access to the box, which is why it's paramount to keep the key private - hence the name, private key.
 
+# HD wallets
+
 In this tutorial, we'll be building a type of wallet called a Hierarchical Deterministic (HD) wallet. We don't need to dive into the full definition of HD wallets here, but it's important to know that they enable the ability to store the private key as a 12-, 18-, or 24-word phrase referred to as a secret recovery phrase or mnemonic phrase. You'll be using a JavaScript library called [Bip39](https://github.com/bitcoinjs/bip39) to facilitate the generation of this phrase, which in turn can be converted into a private key to create a wallet.
 
 {% sidenote title="Box 2.1: Why is the secret recovery phrase also called a mnemonic?" %}
@@ -22,7 +24,7 @@ Run and open the app in your browser at [http://localhost:3000](http://localhost
 
 Clicking on **Create New Wallet** routes the user to a `/generate` page signaling to our user that by clicking **Generate**, the app will generate a key phrase and thus create a new wallet. But when we click **Generate**, we're routed to a `/phrase` page with an empty phrase container.
 
-## Implementation 🧩
+# Implementation 🧩
 
 For the app to work, we need to implement a function that generates a phrase and uses it to create a wallet when the `/phrase` page renders. In your editor, navigate to `pages/phrase.tsx`.
 
@@ -36,6 +38,8 @@ We already installed the library when we ran `yarn` during set up because we inc
 import * as Bip39 from "bip39";
 ```
 
+## Recovery phrase
+
 Recall that secret recovery phrases are also called mnemonics and Bip39 includes the method `generateMnemonic()` for generating mnemonic phrases. We can call it and replace the variable currently assigned to an empty string:
 
 ```javascript
@@ -46,6 +50,8 @@ This allows us to set the phrase in state and display it for our user to write d
 
 {% sidenote title="Box 2.2: The conservation of blockchain accounts" %}
 Even though most of the community refers to accounts as being created, technically blockchain accounts can't be created or destroyed. These accounts are mathematical addresses in a system where their existence is established mathematically at inception by the system's architecture. It's more accurate to think of the mnemonic as obtaining the key to access a pre-existing, empty account.
+
+## Keypairs and seeds
 
 Before we can connect to the account on the blockchain, however, we need to convert the phrase into a form that the blockchain can understand. After all, mnemonic phrases are abstractions that translate a long, archaic number into a more human-friendly form.
 
@@ -104,7 +110,7 @@ setAccount(newAccount);
 
 ![](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/dashboard.png)
 
-## Challenge 🏋️ 
+# Challenge 🏋️ 
 
 In your editor, navigate to `pages/phrase.tsx` and follow the steps included as comments to finish writing the function. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 2.1](#listing-21-instructions-for-generating-a-phrase-and-creating-a-wallet) below.
 
