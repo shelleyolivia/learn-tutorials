@@ -1,4 +1,4 @@
-# Step 3 ⚖️ 
+# Asset balances explained
 
 Crypto wallets serve one key function. By storing your private keys, they allow you to manage - transfer, receive, organize - your digital assets. Part of that function requires the wallet to retrieve certain data that is stored onchain to display on your user dashboard.
 

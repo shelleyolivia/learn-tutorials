@@ -1,4 +1,4 @@
-# Step 2 💼
+# Crypto wallets explained
 
 Crypto wallets are the most critical piece of user-facing infrastructure in the blockchain space. In the same way that the browser brought the web to a mass audience by providing an easy-to-use gateway into the underlying servers and databases, wallets provide users with an easy-to-use gateway into blockchain protocols.
 

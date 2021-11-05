@@ -1,4 +1,4 @@
-# Step 5 💵 
+# Asset transfers explained
 
 Now that we've funded our account with test tokens on devnet, we can start to think about how we might use those funds. In a real-world application, we might want to swap SOL for another token, pay for goods or services in SOL, or even gift someone some SOL. To do that we need a way to let the network ledger know that our account should transfer funds to another account.
 

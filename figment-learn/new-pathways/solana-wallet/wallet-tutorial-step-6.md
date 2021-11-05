@@ -1,4 +1,4 @@
-# Step 6 🔐
+# Restoring accounts explained
 
 Getting access to accounts is obviously a critical feature for any wallet application, and given our choice of architecture, we don't have to worry about encrypting and decrypting passwords to log in and out.
 

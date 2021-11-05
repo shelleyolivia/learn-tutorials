@@ -1,4 +1,4 @@
-# Step 4 🪂
+# Airdrops explained
 
 We've now generated a wallet and connected it to the Solana blockchain. In the previous step, we confirmed that our account's balance is zero but wouldn't it be nice to fund our account so we can see the balance change?
 
