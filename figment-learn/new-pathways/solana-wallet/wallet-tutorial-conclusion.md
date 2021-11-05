@@ -15,7 +15,9 @@ The opportunities are endless and we wish you well on your journey!
 _If you want to connect with an amazing community of developers, join us on [Discord](https://discord.gg/fszyM7K)._
 
 ![Figure 10: This is just the beginning, godspeed!](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/begin.jpeg)
-##### _Figure 10: This is just the beginning, godspeed!_
+
+{% label %}
+Figure 10: This is just the beginning, godspeed!
 
 ## Additional Resources
 
