@@ -393,7 +393,7 @@ truffle init
 
 Then, you'll see a project directory like this:
 
-![project overview](https://i.ibb.co/19Xnw0X/Screen-Shot-2021-10-22-at-9-52-29-AM.png)
+![project overview](../../../.gitbook/assets/truffle-initial-directory.png)
 
 ## Paste your smart contract into the contracts folder
 
@@ -743,7 +743,7 @@ truffle test --network mumbai
 
 The result of the test should look similar: 
 
-![Test Result](https://i.ibb.co/Fqs3vjb/Screen-Shot-2021-10-22-at-9-24-47-AM.png)
+![Test Result](../../../.gitbook/assets/Polygon-unit-testing-result.png)
 
 
 # Conclusion
