@@ -560,7 +560,7 @@ Run the app in the browser:
 ```
 npm start
 ```
-In the chrome/firefox browser create a [Custom RPC](https://medium.com/stakingbits/setting-up-metamask-for-polygon-matic-network-838058f6d844) in the Networks as follows:
+In the metamask supported browser create a [Custom RPC](https://medium.com/stakingbits/setting-up-metamask-for-polygon-matic-network-838058f6d844) in the Networks as follows:
 
 ```
 Network Name: Polygon
