@@ -168,7 +168,7 @@ Run the code using the RUN button above the left(editor) panel or can use ctrl+e
 ![SmartPy](../../../.gitbook/assets/fungible_smartpy_run.png)
 
 If there are no errors, we will get the output in the right terminal.  
-We can check it according to the tests defined. We defined the heading in h1 in tests as “tutorial tests”, so we can see that on the top. Then, we minted one token on jerry address and ten tokens on tom address; we can see that. After that, there's transfer in which it's transferring two tokens from tom to jerry. So this looks perfect, and our contact is working correctly.
+We can check it according to the tests defined. We defined the heading in h1 in tests as “tutorial tests”, so we can see that on the top. Then, we minted one token on jerry address and ten tokens on tom address; we can see that. After that, there's transfer in which it's transferring two tokens from tom to jerry. So this looks perfect, and our contract is working correctly.
 
 ![SmartPy](../../../.gitbook/assets/fungible_smartpy_output.png)
 
