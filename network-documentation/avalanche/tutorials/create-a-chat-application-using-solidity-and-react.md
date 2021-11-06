@@ -68,7 +68,7 @@ We would maintain 2 collections in our database:
 
 Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
-![Metamask](https://gblobscdn.gitbook.com/assets%2F-MIVL6JKxnpiaciltfue%2F-MM1OJt2er1kalefd4bd%2F-MM1PMHVK808DUpeSuF4%2Fimage.png?alt=media&token=9b5898f1-57e0-4334-b40c-b18005e3be0e)
+![Metamask](../../../.gitbook/assets/create-an-amm-on-avalanche_metamask.png)
 
 **FUJI Testnet Settings:**
 
@@ -84,7 +84,7 @@ Fund your address from the given [faucet](https://faucet.avax-test.network/).
 
 Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity
 
-![remix-preview](https://gblobscdn.gitbook.com/assets%2F-MKmFQYgp3Usx3i-VLJU%2F-MLOuR33iyanZrmnCDTl%2F-MLOw5RJ5tNGvy2C90xN%2Fimage.png?alt=media&token=391f3978-7d53-4112-b45a-e89c3d6d783d)
+![remix-preview](../../../.gitbook/assets/create-an-amm-on-avalanche_remix.png)
 
 Create a `Database.sol` file in the Remix file explorer, and paste the following code :
 
@@ -960,15 +960,15 @@ Congratulations! We have successfully deployed a decentralized chat application 
 
 * Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You can fund your address from the given [faucet](https://faucet.avax-test.network/)
 
-![Zero balance preview](https://raw.githubusercontent.com/realnimish/blockchain-chat-app/main/public/zero_balance.jpeg)
+![Zero balance preview](../../../.gitbook/assets/create-an-amm-on-avalanche_zero_balance.jpeg)
 
 * Make sure that you have selected the correct account on metamask if you have more than one account connected to the site.
 
-![Multiple account preview](https://raw.githubusercontent.com/realnimish/blockchain-chat-app/main/public/multiple_accounts.jpeg)
+![Multiple account preview](../../../.gitbook/assets/create-an-amm-on-avalanche_multiple_accounts.jpeg)
 
 #### Application crash
 
-![Error!](https://user-images.githubusercontent.com/44340561/119778345-05dba100-bee5-11eb-85b9-c9bd18ea4082.png)
+![Error!](../../../.gitbook/assets/chat-dapp-crash.png)
 
 To resolve this error, doublecheck that you have updated the `CONTRACT_ADDRESS` variable in `src/index.js.`
 
