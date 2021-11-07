@@ -893,4 +893,3 @@ impl Serialize for StreamData {
 
 We have added the same model we had in our `program` with one more derivations. We have derived `Serialize` from `serde` to serialize data to json format so we can use that in our React application. We have choose to go for manual implemnation because we wanted to add one additional key-value pair `lamports_withdrawn` and use `to_string` function on the `PubKey` type. 
 
-**Desiel Orm**
