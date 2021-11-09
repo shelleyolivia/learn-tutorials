@@ -16,10 +16,7 @@ This tutorial explains how to mint fungible tokens on the Tezos blockchain. In t
 
 # SmartPy
 
-SmartPy is an intuitive and powerful smart contract development platform for Tezos.  
-The SmartPy language is available through a Python library for building and analyzing Tezos smart contracts.  
-And with its IDE, we can quickly write our code in the browser itself. We can also deploy our code from the browser. No local setup is required.  
-So, Let's start. Open <https://smartpy.io/ide>
+SmartPy is an intuitive and powerful smart contract development platform for Tezos. It provides a Python library for building and analyzing Tezos smart contracts. With the SmartPy IDE, we can quickly write our code in the browser itself. We can also deploy our code from the browser. No local setup is required. So, Let's get started! Open <https://smartpy.io/ide>
 
 ![SmartPy](../../../.gitbook/assets/mint_smartpy_1.png)
 
@@ -524,7 +521,7 @@ const Transfer = () => {
   const [message, setMessage] = useState('');
 ```
 
-In our submit function, we take the address, amount, to from the input fields and then we call the transer util. Here we are only trasfering to one account, but more transfers can be added by adding it in the transactions array.
+In our `submit` function, we take the address, amount, to from the input fields and then we call the transfer util. Here we are only transferring to one account, but more transfers can be added to the transactions array.
 
 ```jsx
 const submit = async (event) => {
