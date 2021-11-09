@@ -1,24 +1,25 @@
 # Introduction
 
-Hi! Welcome to this tutorial on how to mint Fungible Token on Tezos. In this tutorial, we will write a smart contract in SmartPy and deploy it on granadanet, upload the token metadata on IPFS and mint the token using better-call.dev. We will also cover how to mint tokens using React and taquito.
+This tutorial explains how to mint fungible tokens on the Tezos blockchain. In this tutorial, we will write a smart contract in SmartPy and deploy it on Granadanet, upload the token metadata to IPFS and then mint the token using better-call.dev. We will also cover how to mint tokens using React and taquito.
 
 # Prerequisites
 
 - Basic Knowledge of SmartPy
-- React
+- Basic Knowledge of functional components and React Hooks (mainly useState)
 
 # Requirements
 
-- Temple Wallet Installed in your browser. Get it from https://templewallet.com/
-- Few XTZs on Granada Testnet is also needed in the wallet account. To get it, you can refer to Faucet and Temple Wallet section in this [tutorial](https://learn.figment.io/tutorials/using-the-smartpy-ide-to-deploy-tezos-smart-contracts#faucet-and-temple-wallet).
-- NodeJS, npm and git needs to be installed for the frontend.
+- Temple Wallet installed in your browser. Get it from <https://templewallet.com/>
+- You will need some XTZs on Granada Testnet in your wallet account. To get them, you can refer to the Faucet and Temple Wallet section in [this tutorial.](https://learn.figment.io/tutorials/using-the-smartpy-ide-to-deploy-tezos-smart-contracts#faucet-and-temple-wallet).
+- [NodeJS](https://nodejs.org/en/download/) v14 LTS or higher and npm installed 
+- [git]((https://git-scm.com/downloads)) installed
 
 # SmartPy
 
 SmartPy is an intuitive and powerful smart contract development platform for Tezos.  
 The SmartPy language is available through a Python library for building and analyzing Tezos smart contracts.  
 And with its IDE, we can quickly write our code in the browser itself. We can also deploy our code from the browser. No local setup is required.  
-So, Let's start. Open https://smartpy.io/ide
+So, Let's start. Open <https://smartpy.io/ide>
 
 ![SmartPy](../../../.gitbook/assets/mint_smartpy_1.png)
 
@@ -29,9 +30,8 @@ To move to the editor, click CLOSE.
 
 The left panel is where we are going to code.  
 We are going to follow the FA2 token standard([TZIP-12](https://tzip.tezosagora.org/proposal/tzip-12/)) for our token.  
-Let’s start coding our contract.
 
-First, we will import the smartpy library.
+First, we will import the SmartPy library.
 
 ```python
 import smartpy as sp
@@ -43,7 +43,7 @@ Now we will import the FA2 template. Most of the features (mint, transfer) we ne
 FA2 = sp.io.import_template("FA2.py")
 ```
 
-Let’s use this template and inherit it in our Token class, and the entry points we need for this tutorial are already in the template, so we don’t need to change our class and simply pass. And this will be our contract.
+We can use this template and inherit it in our Token class. Since the entrypoints we need for this tutorial are already in the template, we don’t need to change the class, just pass it. This will be our contract.
 
 ```python
 class Token(FA2.FA2):
@@ -52,7 +52,7 @@ class Token(FA2.FA2):
 
 Let’s write some tests for our contract.
 
-We need some test accounts for tests; let's add two test accounts, Tom and Jerry. And as we also need to set admin for our contract, we require that also. For admin also, you can use a test account and set your address as admin later from storage JSON while deploying, but I prefer putting it in tests itself.
+We need some accounts for testing; let's add two test accounts, Tom and Jerry. We also need to set an admin for our contract as well. For admin, you can use a test account and set your address as admin later from storage JSON while deploying, but I prefer putting it in the test itself.
 
 ```python
 @sp.add_test(name="tests")
@@ -62,21 +62,22 @@ def test():
     admin = sp.address("tz1aV2DuPYXEK2mEVc4VBhP9o4gguFGxBky4")
 ```
 
-Change the address inside the sp.address to your address (your wallet account public key).
+Change the address being passed to `sp.address` to your address (your wallet account public key).
 
-For tests, we need to create test_scenario and assign a heading to it using h1.
+We need to create `test_scenario` and assign a heading to it using `scenario.h1`.
 
 ```python
     scenario = sp.test_scenario()
     scenario.h1("tutorial tests")
 ```
 
-Now we will originate our Tokens contract. As we inherit the FA2 template, we need to understand what parameters we need to send and can change that according to our needs.  
-To our contract we need to send config, admin and metadata.   
-The FA2 template provides us with FA2_config which we will be using for the config to control the token behaviour. There are multiple options ,but the ones we need are single_asset and non_fungible. As we want our token to be fungible, we will set non_fungible to False. And for this tutorial, we want the token to be of only one type and for that we will set single_asset to True.  
-The default value of non_fungible is False in the config, so we don't need to change it, but the default value of single_asset is False ,so we will set that to True in the config.  
+Now we will originate our Tokens contract. As we inherit the `FA2` template, we need to understand what parameters are required so we can change them according to our needs. We need to send config, admin and metadata to our contract.
+
+The `FA2` template provides us with `FA2_config` which we will be using to configure the token's behaviour. There are multiple options, but the ones we need are `single_asset` and `non_fungible`. As we want our token to be fungible, we will set `non_fungible` to false. We only want the token to be of one type and for that we will set `single_asset` to true.
+
 For the admin, we pass the admin address we created.  
-For metadata, we will use big_map, in which first we set where to look for the metadata. Here from tezos-storage:content we can understand we need to look for content in the storage. And in storage, we will define the metadata. We will define the name and description.  
+For metadata, we will use `big_map`, in which we set where to look for the metadata - from `tezos-storage:content`. We can understand we need to look for content in the storage, where we will define the metadata as the name and description.
+
 You can refer to [TZIP-16](https://tzip.tezosagora.org/proposal/tzip-16/) for more details on contract metadata.
 
 ```python
@@ -92,26 +93,20 @@ Add the token to scenario.
 Test the mint entry point.  
 We send three parameters to the mint entry point.
 
-- token_id  
-  the token id must always be 0 as single_asset.
+- `token_id`: the token id must always be 0 as single_asset.
+- `address`: the address to which we want to mint the token.
+- `metadata`: for token metadata, we are using IPFS (will come to it later in this tutorial). The metadata is stored in a `map(string, bytes)` so, we need to convert the strings to IPFS for which `sp.utils.bytes_of_string` is used.  
+For now, use the same IPFS URL (ipfs://bafkreifrve4w57gccc546mnhdzxoyjfcse2pajplxsqe5u3fjnclaakloi)
 
-- address  
-  the address on which we want to mint the token.
-
-- metadata  
-  for token metadata, we are using IPFS (will come to it later in this tutorial).  
-  The metadata is stored in a map(string, bytes) so, we need to convert the strings to IPFS for which sp.utils.bytes_of_string is used.  
-  For now, use the same IPFS URL (ipfs://bafkreifrve4w57gccc546mnhdzxoyjfcse2pajplxsqe5u3fjnclaakloi)
-
-Here, we are minting one token on jerry and ten tokens on tom address. And remember, only the admin can run the mint query.
+Here, we are minting one token to Jerry and ten tokens to Tom's address. Remember, only the admin can run the mint query.
 
 ```python
     token.mint(token_id=0, address=jerry.address, amount=1, metadata = sp.map({"": sp.utils.bytes_of_string("ipfs://bafkreifrve4w57gccc546mnhdzxoyjfcse2pajplxsqe5u3fjnclaakloi")})).run(sender=admin)
     token.mint(token_id=0, address=tom.address, amount=10, metadata = sp.map({"": sp.utils.bytes_of_string("ipfs://bafkreifrve4w57gccc546mnhdzxoyjfcse2pajplxsqe5u3fjnclaakloi")})).run(sender=admin)
 ```
 
-Let's test the transfer entry point also.   
-For transfer, we will be using the batchtransfer helper defined in the FA2 standard. It will take the from_ and txs arguments. txs is the array of transactions which contains the to\_ , amount and token_id.  
+Let's test the transfer entry point also. For transfer, we will be using the `batchtransfer` helper defined in the FA2 standard. It will take the `from_` and `txs` arguments. `txs` is the array of transactions which contains the `to_` , `amount` and `token_id`.
+
 Here, we are sending 2 token from tom to jerry.
 
 ```python
@@ -124,14 +119,13 @@ Here, we are sending 2 token from tom to jerry.
     ]).run(sender = admin)
 ```
 
-For checking, output the data stored in token storage also.
+To check that the transfer went OK, output the data stored in token storage also:
 
 ```python
     scenario.show(token.data)
 ```
 
-This is our contract.  
-Here's the full code you can refer to:
+That's it for our contract. Here's the full code you can refer to:
 
 ```python
 import smartpy as sp
@@ -163,24 +157,22 @@ def test():
     scenario.show(token.data)
 ```
 
-Run the code using the RUN button above the left(editor) panel or can use ctrl+enter also, cmd+enter for mac.
+Run the code in SmartPy using the RUN button above the left (Editor) panel. You can also use CTRL+Enter on Windows, or CMD+Enter on macOS.
 
 ![SmartPy](../../../.gitbook/assets/fungible_smartpy_run.png)
 
 If there are no errors, we will get the output in the right terminal.  
-We can check it according to the tests defined. We defined the heading in h1 in tests as “tutorial tests”, so we can see that on the top. Then, we minted one token on jerry address and ten tokens on tom address; we can see that. After that, there's transfer in which it's transferring two tokens from tom to jerry. So this looks perfect, and our contract is working correctly.
+We can check it according to the tests defined. We defined the heading `h1` in tests as “tutorial tests”, so we can see that on the top. Then, we minted one token to Jerry's address and ten tokens to Tom's address; we can see that as well. Then the transfer in which we're transferring two tokens from Tom to Jerry. So this looks perfect, and our contract is working correctly.
 
 ![SmartPy](../../../.gitbook/assets/fungible_smartpy_output.png)
 
-In the end, there is contract storage also and we can check in that there are eigth tokens in tom's address and three tokens in jerry's address and it's correct according to our tests.
+In the end, the contract storage shows that there are eight tokens in Tom's address and three tokens in Jerry's address, which is correct according to our tests.
 
 ![SmartPy](../../../.gitbook/assets/fungible_smartpy_storage.png)
 
 # Deploy Contract
 
-It’s time to deploy this contract. For this tutorial, we are going to deploy the contract on Granada testnet.  
-We can deploy the contract using smartpy IDE itself.
-After running, we get the option to Deploy Michelson Contract in the output panel. Move to it.
+It’s time to deploy this contract. For this tutorial, we are going to deploy the contract on the Granada testnet. We can deploy the contract using the Smartpy IDE itself. After running the tests, we get the option to Deploy Michelson Contract in the output panel. 
 
 Click on the Deploy Michelson Contract button.
 
@@ -214,8 +206,7 @@ IPFS is a distributed system for storing and accessing files, websites, applicat
 And, we will use IPFS to store the metadata of our tokens. And to upload our files to IPFS, we will use nft.storage.    
 In this tutorial, we will upload the token metadata in JSON format to IPFS.
 
-For token metadata, decimals is the required field according to the FA2 standard. name and symbol fields are highly recommended.
-There are other fields also which can be used. You can read the details of all this in the [TZIP-21](https://tzip.tezosagora.org/proposal/tzip-21/).  
+For token metadata, decimals is the required field according to the FA2 standard. name and symbol fields are highly recommended. There are other fields also which can be used. You can read the details of all this in the Tezos Improvement Proposal [TZIP-21](https://tzip.tezosagora.org/proposal/tzip-21/).  
 We will be storing the metadata in a JSON file. Create `token.json` and open it in any editor of your choice.
 
 ```json
@@ -242,14 +233,14 @@ The file will get uploaded, and this is your hash.
 
 ![IPFS](../../../.gitbook/assets/fungible_ipfs_hash.png)
 
-You can view your files visiting ipfs://{hash} (If your browser doesn’t support IPFS, you can use https://ipfs.io/ipfs/{hash} )
+You can view your files visiting ipfs://{hash} - If your browser doesn’t support IPFS, you can use <https://ipfs.io/ipfs/{hash}>
 
 # Mint using better-call.dev
 
 It's time to mint our token. Open up [better-call.dev](https://better-call.dev/).
 
-Move to interact tab, open mint from the right sidebar.  
-Put the amount and address you want to mint the token to. The token_id should be 0 as our contract is single_asset. And for metadata, we will take the hash of the `token.json` file we uploaded above and use ipfs://{hash} to set the token metadata. But for the token metadata, the ipfs URL needs to be in bytes. You can convert the strings to bytes from [here](https://tutorial-mint-nfts.vercel.app/char2bytes).
+Move to the interact tab, open mint from the right sidebar.
+Put the amount and address you want to mint the token to. The `token_id` should be 0 as our contract is a `single_asset`. And for metadata, we will take the hash of the `token.json` file we uploaded above and use ipfs://{hash} to set the token metadata. But for the token metadata, the ipfs URL needs to be in bytes. You can convert the strings to bytes from [here](https://tutorial-mint-nfts.vercel.app/char2bytes).
 
 ![better-call.dev](../../../.gitbook/assets/fungible_bcd_bytes.png)
 
@@ -265,11 +256,11 @@ The message will come if it’s successfully sent.
 
 ![better-call.dev](../../../.gitbook/assets/fungible_bcd_successful.png)
 
-After few seconds, refresh and move to the operations tab, you can see the mint operation.
+After a few seconds, refresh and move to the operations tab. You can see the mint operation.
 
 ![better-call.dev](../../../.gitbook/assets/fungible_bcd_operations.png)
 
-You can look at the metdata of the token in the tokens section.
+You can look at the metadata of the token in the tokens section.
 
 ![better-call.dev](../../../.gitbook/assets/fungible_bcd_tokens.png)
 
@@ -283,7 +274,7 @@ Import this boilerplate code using the following command.
 git clone -b boilerplate --single-branch https://github.com/PriyanshuDangi/Tutorial_Fungible_Tokens.git
 ```
 
-cd into the folder
+Change into the directory created by the `git clone` command:
 
 ```text
 cd Tutorial_Fungible_Tokens
@@ -301,11 +292,11 @@ Try running the app using
 npm start
 ```
 
-And visit localhost:3000 to view the app. There won't be much as of now. So let's build it.
+And visit localhost:3000 to view the app. There is not much as of now, so let's build it.
 
 The boilerplate has a folder structure and two pages.
 
-- Mint (Form to mint the Tokens)
+- Mint (Form to mint the tokens)
 - Transfer (Form to transfer tokens)
 
 Open `src/config/config.js`. This is where we store our configurations.
@@ -376,7 +367,7 @@ const getContract = async () => {
 };
 ```
 
-Now to mint tokens, we need the user to connect his wallet and then sign the mint method. Use the IPFS url of the `token.json` we uploaded above.
+Now to mint tokens, we need the user to connect their wallet and then sign the mint method. Use the IPFS url of the `token.json` we uploaded above.
 
 ```js
 const mint = async (address, amount) => {
@@ -391,7 +382,7 @@ const mint = async (address, amount) => {
 };
 ```
 
-For transfer also, we need the user to connect his wallet and sign the transfer method.
+For the transfer function, we need the user to connect their wallet and sign the transfer method.
 
 ```js
 const transfer = async (address, transactions) => {
@@ -418,7 +409,7 @@ const transfer = async (address, transactions) => {
 };
 ```
 
-And we are exporting mint and transfer functions from the file at the end.
+Remember to export the `mint` and `transfer` functions from the file at the end.
 
 ```js
 export {mint, transfer};
@@ -437,7 +428,7 @@ import React, {useState} from 'react';
 import {mint} from '../../utils/wallet';
 ```
 
-Now we will set the state.
+Now we will set the initial app state with the React hook `useState`:
 
 ```jsx
 const Mint = () => {
@@ -480,48 +471,44 @@ const closeMessage = () => {
 This is our page code.
 
 ```jsx
-return (
-  <div className="container">
-    {message && (
-      <div className="position-fixed top-0 end-0 p-3" style={{zIndex: 11}}>
-        <div id="liveToast" className="toast fade show d-flex" role="alert" aria-live="assertive" aria-atomic="true">
-          <div className="toast-body">{message}</div>
-          <button type="button" className="btn-close me-2 m-auto" onClick={closeMessage}></button>
+  return (
+    <div className="container">
+      {message && (
+        <div className="position-fixed top-0 end-0 p-3" style={{zIndex: 11}}>
+          <div id="liveToast" className="toast fade show d-flex" role="alert" aria-live="assertive" aria-atomic="true">
+            <div className="toast-body">{message}</div>
+            <button type="button" className="btn-close me-2 m-auto" onClick={closeMessage}></button>
+          </div>
         </div>
-      </div>
-    )}
-    <form onSubmit={submit}>
-      <div className="mb-3">
-        <label htmlFor="address" className="form-label">
-          Address
-        </label>
-        <input type="text" className="form-control" id="address" aria-describedby="address" required />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="amount" className="form-label">
-          Amount
-        </label>
-        <input type="number" className="form-control" id="amount" aria-describedby="amount" required min="1" step="1" />
-      </div>
-      <button type="submit" className="btn btn-primary" disabled={loading}>
-        {loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
-        Mint
-      </button>
-    </form>
-  </div>
-);
-```
-
-And in the end, we close the Mint function and default export it.
-
-```jsx
+      )}
+      <form onSubmit={submit}>
+        <div className="mb-3">
+          <label htmlFor="address" className="form-label">
+            Address
+          </label>
+          <input type="text" className="form-control" id="address" aria-describedby="address" required />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="amount" className="form-label">
+            Amount
+          </label>
+          <input type="number" className="form-control" id="amount" aria-describedby="amount" required min="1" step="1" />
+        </div>
+        <button type="submit" className="btn btn-primary" disabled={loading}>
+          {loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
+          Mint
+        </button>
+      </form>
+    </div>
+  );
 };
 
 export default Mint;
 ```
 
-Time for `src/components/transfer/Transfer.jsx` (remove the already present code). It will be mostly the same as Mint page with just slight changes.  
-Let's import React, useState and our transfer util first.
+Remember to export the `Mint` component as the default export.
+
+Now to make the Transfer component, in `src/components/transfer/Transfer.jsx` (remove the already present code). It will be mostly the same as the Mint component, with just slight changes. Let's import React, useState and our transfer util first:
 
 ```jsx
 import React, {useState} from 'react';
@@ -529,7 +516,7 @@ import React, {useState} from 'react';
 import {transfer} from '../../utils/wallet';
 ```
 
-Now we will set the state.
+Now we will set the initial app state with the React hook `useState`:
 
 ```jsx
 const Transfer = () => {
@@ -580,69 +567,66 @@ const closeMessage = () => {
 This is our page code.
 
 ```jsx
-return (
-  <div className="container">
-    {message && (
-      <div className="position-fixed top-0 end-0 p-3" style={{zIndex: 11}}>
-        <div id="liveToast" className="toast fade show d-flex" role="alert" aria-live="assertive" aria-atomic="true">
-          <div className="toast-body">{message}</div>
-          <button type="button" className="btn-close me-2 m-auto" onClick={closeMessage}></button>
-        </div>
-      </div>
-    )}
-    <form onSubmit={submit}>
-      <div className="mb-3">
-        <label htmlFor="address" className="form-label">
-          From
-        </label>
-        <input type="text" className="form-control" id="address" aria-describedby="address" required />
-      </div>
-      <div>
-        <div className="mb-3">
-          <div className="mb-3">
-            <label htmlFor="to" className="form-label">
-              To
-            </label>
-            <input type="text" className="form-control" id="to" aria-describedby="to" required />
+  return (
+    <div className="container">
+      {message && (
+        <div className="position-fixed top-0 end-0 p-3" style={{zIndex: 11}}>
+          <div id="liveToast" className="toast fade show d-flex" role="alert" aria-live="assertive" aria-atomic="true">
+            <div className="toast-body">{message}</div>
+            <button type="button" className="btn-close me-2 m-auto" onClick={closeMessage}></button>
           </div>
-          <label htmlFor="amount" className="form-label">
-            Amount
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            id="amount"
-            aria-describedby="amount"
-            required
-            min="1"
-            step="1"
-          />
         </div>
-      </div>
-      <button type="submit" className="btn btn-primary" disabled={loading}>
-        {loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
-        Transfer
-      </button>
-    </form>
-  </div>
-);
-```
-
-And in the end, we close the Transfer function and default export it.
-
-```jsx
+      )}
+      <form onSubmit={submit}>
+        <div className="mb-3">
+          <label htmlFor="address" className="form-label">
+            From
+          </label>
+          <input type="text" className="form-control" id="address" aria-describedby="address" required />
+        </div>
+        <div>
+          <div className="mb-3">
+            <div className="mb-3">
+              <label htmlFor="to" className="form-label">
+                To
+              </label>
+              <input type="text" className="form-control" id="to" aria-describedby="to" required />
+            </div>
+            <label htmlFor="amount" className="form-label">
+              Amount
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="amount"
+              aria-describedby="amount"
+              required
+              min="1"
+              step="1"
+            />
+          </div>
+        </div>
+        <button type="submit" className="btn btn-primary" disabled={loading}>
+          {loading && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}
+          Transfer
+        </button>
+      </form>
+    </div>
+  );
 };
 
 export default Transfer;
 ```
 
-Now run in terminal
+It has a form in which there are `From`, `To` and `Amount` input fields, `Transfer` button to submit the form. And in the end, we close the Transfer function and default export it.
+
+To start the server so you can view the app in your web browser, run the terminal command:
 
 ```text
 npm start
 ```
 
-Open locahost:3000 in browser and mint a token on `/` and transfer them on `/transfer`.
+Open your browser, and navigate to locahost:3000. You can now mint a token from the default page route `/` and transfer tokens on the `/transfer` route.
 
 We completed the frontend. You can checkout the complete code on [Github](https://github.com/PriyanshuDangi/Tutorial_Fungible_Tokens).
 
