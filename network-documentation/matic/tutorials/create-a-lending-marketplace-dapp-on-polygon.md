@@ -465,6 +465,20 @@ Starting migrations...
    > gas price:           2 gwei
    > value sent:          0 ETH
    > total cost:          0.004920946 ETH
+   
+   Deploying 'LoanContract'
+   -----------------------
+   > transaction hash:    0x657we40e9575c62f74585c52e15492a8a8663b8a65eb9f97f6e57ccdcb0eec435
+   > Blocks: 0            Seconds: 0
+   > contract address:    0xb8b239cC1e53093D645A50c70B4a995BBC9acb
+   > block number:        4
+   > block timestamp:     1629372448
+   > account:             0x2F3CeD6f849630301feC1dD613869E8cc3857665
+   > balance:             99.990053476
+   > gas used:            2460473 (0x258b39)
+   > gas price:           2 gwei
+   > value sent:          0 ETH
+   > total cost:          0.004920946 ETH
 
 
    Deploying 'StandardToken'
@@ -484,9 +498,6 @@ Starting migrations...
 
    > Saving migration to chain.
    > Saving artifacts
-   -------------------------------------
-   > Total cost:         0.010922144 ETH
-
 
 Summary
 =======
@@ -521,7 +532,7 @@ Run the server to be able to access the application UI in your browser:
 npm start
 ```
 
-In the Metamask settings on a supported browser, create a [Custom RPC](https://medium.com/stakingbits/setting-up-metamask-for-polygon-matic-network-838058f6d844) in the Networks as follows:
+In the metamask supported browser create a [Custom RPC](https://medium.com/stakingbits/setting-up-metamask-for-polygon-matic-network-838058f6d844) in the Networks as follows:
 
 Network Name: Polygon
 New RPC URL: https://rpc-mainnet.matic.network or
@@ -538,9 +549,9 @@ Now you know about creating a Lending Marketplace with Truffle Suite and ReactJS
 
 If you had any difficulties following this tutorial or simply want to discuss Polygon tech with us you can join the Figment Learn [**community forums**](https://community.figment.io/) or [**Join our discord community**](https://discord.gg/fszyM7K)!
 
-# About the author
+# About the authors
 
-[Devendra Yadav](https://community.figment.io/u/dev.koold) BlockChain Developer
+[Devendra Yadav](https://community.figment.io/u/dev.koold) Blockchain Developer
 [Prince Rana](https://community.figment.io/u/ranaprince7.pr) Data Specialist(Data Science & Automation)
 
 # References
