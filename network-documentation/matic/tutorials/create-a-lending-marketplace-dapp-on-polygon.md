@@ -4,7 +4,7 @@ A Lending Marketplace provides a secure, flexible, open-source foundation for a 
 
 # Prerequisites
 
-- [Polygon](https://docs.polygon.technology/) is a blockchain that is EVM compatible.Refer [here] to have a fair idea on this. 
+- [Polygon](https://docs.polygon.technology/) is a blockchain that is EVM compatible.
 
 # Requirements
 
@@ -12,7 +12,11 @@ A Lending Marketplace provides a secure, flexible, open-source foundation for a 
 
 - [Node.js](https://nodejs.org/en/) enables the development of fast web servers in JavaScript by bringing event-driven programming to web servers.Make sure to have NodeJS 12.0.1+ version installed.
 
-- Truffle, which you can install with `npm install -g truffle`
+- Truffle, which can be installed with command: 
+
+```text
+npm install -g truffle
+```
 
 [React.js](https://reactjs.org/) is an open-source JavaScript library that is used to create single-page applications' user interfaces.
 
@@ -38,10 +42,10 @@ npm i
 There are two main smart contracts: One to create the loan offer and request, and one to define the contract details of the loan with repayment methods.
 
 ## Loan creator
-A smart contract for both the lender & the borrower to create their loan offer and request respectively. A person might be willing to offer a loan or requesting for a loan.This is in file : contracts/Loancreator.sol
+In the contracts/Loancreator.sol file there are smart contract methods for both the lender & the borrower to create their loan offer and request respectively. A person might be willing to offer a loan or requesting for a loan.
 
 
-**Importing the dependencies**
+**Importing OpenZeppelin contract functionality:**
 
 OpenZeppelin contracts help to minimize risks for end-users and give developers confidence by using well-tested libraries of smart contracts.
 
@@ -53,7 +57,7 @@ import "openzeppelin-solidity/contracts/lifecycle/Pausable.sol";
 import "./LoanContract.sol";
 ```
 
-There are two functions required to support the creation of a new Loan: :
+There are two functions required to support the creation of a new Loan:
 - createNewLoanOffer
 - createNewLoanRequest
 
@@ -77,6 +81,7 @@ The data is appended into the array named loans. The loan offer is created then 
 
 
 **createNewLoanRequest:**
+
 This function is a request from the borrower, the user who is asking for a loan. It includes the loan amount and duration; interest the user is willing to pay; data about the collateral such as the collateral address
 & collateral amount; the cryptocurrency being requested as a loan; price of the collateral in the specific cryptocurrency & finally the loan contract address.Includes the Loan Amount, duration, interest the person willing to pay, data about the Collateral (collateral address, collateral amount- the cryptocurrency being requested as loan, price of the collateral in the specific cryptocurrency)& finally the loan contract address.
 
@@ -106,8 +111,9 @@ The second contract that we're creating is the LoanContract.sol.
 
 Importing OpenZeppelin contract functionality. OpenZeppelin contracts help to minimize risks for end-users and give developers confidence by using well-tested libraries of smart contracts.
 
-**LoanMath** is a library created for our mathematical functions(can be found in the libs directory), it consists of all the financial-related functions being used in our smart contract
-**String** is a library for our string functions, it converts any type bytes32 into a string
+**LoanMath** is a library created for our mathematical functions (it can be found in the `libs` directory), it consists of all the financial-related functions being used in our smart contract.
+
+**String** is a library for our string functions, it converts any type bytes32 into a string.
 
 
 ```solidity
@@ -534,11 +540,11 @@ npm start
 
 In the metamask supported browser create a [Custom RPC](https://medium.com/stakingbits/setting-up-metamask-for-polygon-matic-network-838058f6d844) in the Networks as follows:
 
-Network Name: Polygon
-New RPC URL: https://rpc-mainnet.matic.network or
-ChainID: 137
-Symbol: MATIC
-Block Explorer URL: https://polygonscan.com/
+- Network Name: Polygon
+- New RPC URL: https://rpc-mainnet.matic.network or
+- ChainID: 137
+- Symbol: MATIC
+- Block Explorer URL: https://polygonscan.com/
 
 
 Open the lending dapp in browser and go to the `/myloans` path and connect to Polygon Network in the Metamask extention. Now feel free to go throgh the various features of thhe lending marketplace like creating a loan request on `/request` path and loan offer on `/offer`, which can also be browsed from the Navigation bar.
@@ -547,12 +553,12 @@ Open the lending dapp in browser and go to the `/myloans` path and connect to Po
 
 Now you know about creating a Lending Marketplace with Truffle Suite and ReactJS on the Polygon network.
 
-If you had any difficulties following this tutorial or simply want to discuss Polygon tech with us you can join the Figment Learn [**community forums**](https://community.figment.io/) or [**Join our discord community**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Polygon tech with us you can join the Figment Learn [**community forums**](https://community.figment.io/) or [**Join our discord community**](https://figment.io/devchat)!
 
 # About the authors
 
-[Devendra Yadav](https://community.figment.io/u/dev.koold) Blockchain Developer
-[Prince Rana](https://community.figment.io/u/ranaprince7.pr) Data Specialist(Data Science & Automation)
+This tutorial is created by [Devendra Yadav](https://community.figment.io/u/dev.koold) (Blockchain Developer)
+[Prince Rana](https://community.figment.io/u/ranaprince7.pr) (Data Specialist).
 
 # References
 - https://github.com/crypto-lend
