@@ -83,8 +83,7 @@ The data is appended into the array named loans. The loan offer is created then 
 
 **createNewLoanRequest:**
 
-This function is a request from the borrower, the user who is asking for a loan. It includes the loan amount and duration; interest the user is willing to pay; data about the collateral such as the collateral address
-& collateral amount; the cryptocurrency being requested as a loan; price of the collateral in the specific cryptocurrency & finally the loan contract address.Includes the Loan Amount, duration, interest the person willing to pay, data about the Collateral (collateral address, collateral amount- the cryptocurrency being requested as loan, price of the collateral in the specific cryptocurrency)& finally the loan contract address.
+This function is a request from the borrower, the user who is asking for a loan. It includes the loan amount and duration; interest the user is willing to pay; data about the collateral such as the collateral address & collateral amount; the cryptocurrency being requested as a loan; price of the collateral in the specific cryptocurrency & finally the loan contract address.
 
 The input is appended into the array named loans. The loan request is created then sent as a message to that loan contract address.
 
@@ -101,12 +100,12 @@ function createNewLoanRequest(uint256 _loanAmount, uint128 _duration, uint256 _i
          return _loanContractAddress;
  }
 
- function getAllLoans() public view returns(address[] memory){
+function getAllLoans() public view returns(address[] memory) {
      return loans;
 }
 ```
 
-The second contract that we're creating is the LoanContract.sol.
+The second contract that we're creating is the `LoanContract.sol`.
 
 **Importing the dependencies for our contract:**
 
