@@ -5,6 +5,7 @@ A Lending Marketplace provides a secure, flexible, open-source foundation for a 
 # Prerequisites
 
 - [Polygon](https://docs.polygon.technology/) is a blockchain that is EVM compatible.
+- Familiarity with [Solidity](https://docs.soliditylang.org/) and [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) are recommended.
 
 # Requirements
 
@@ -557,7 +558,7 @@ If you had any difficulties following this tutorial or simply want to discuss Po
 
 # About the authors
 
-This tutorial is created by [Devendra Yadav](https://community.figment.io/u/dev.koold) (Blockchain Developer)
+This tutorial is created by [Devendra Yadav](https://community.figment.io/u/dev.koold) (Blockchain Developer) and
 [Prince Rana](https://community.figment.io/u/ranaprince7.pr) (Data Specialist).
 
 # References
