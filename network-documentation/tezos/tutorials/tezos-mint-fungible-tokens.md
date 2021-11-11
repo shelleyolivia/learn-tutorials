@@ -12,7 +12,7 @@ This tutorial explains how to mint fungible tokens on the Tezos blockchain. In t
 - Temple Wallet installed in your browser. Get it from <https://templewallet.com/>
 - You will need some XTZs on Granada Testnet in your wallet account. To get them, you can refer to the Faucet and Temple Wallet section in [this tutorial.](https://learn.figment.io/tutorials/using-the-smartpy-ide-to-deploy-tezos-smart-contracts#faucet-and-temple-wallet).
 - [NodeJS](https://nodejs.org/en/download/) v14 LTS or higher and npm installed 
-- [git]((https://git-scm.com/downloads)) installed
+- [git](https://git-scm.com/downloads) installed
 
 # SmartPy
 
