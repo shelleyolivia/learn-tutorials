@@ -4,8 +4,20 @@ Crypto wallets are the most critical piece of user-facing infrastructure in the 
 
 A wallet is less like the wallet you use for your credit cards, and a lot more like a keychain. If you think of a blockchain as a giant bank safe with digital safety deposit boxes, wallets are the keychains where you keep the key to your box. Once you have access to a box, you can manage the contents of it by receiving, sending, holding and spending digital assets.
 
+<<<<<<< Updated upstream:solana/solana-wallet/wallet-tutorial-step-2.md
 ![Figure 3: Wallets hold private keys to your public address on a blockchain](./assets/safe.jpeg)
 ##### _Figure 3: Wallets hold private keys to your public address on a blockchain_
+=======
+<<<<<<< HEAD:figment-learn/new-pathways/solana-wallet/wallet-tutorial-step-2.md
+![Figure 3: Wallets hold private keys to your public address on a blockchain](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/safe.jpeg)
+
+{% label %}
+Figure 3: Wallets hold private keys to your public address on a blockchain
+=======
+![Figure 3: Wallets hold private keys to your public address on a blockchain](./assets/safe.jpeg)
+##### _Figure 3: Wallets hold private keys to your public address on a blockchain_
+>>>>>>> rx/reorganize:solana/solana-wallet/wallet-tutorial-step-2.md
+>>>>>>> Stashed changes:figment-learn/new-pathways/solana-wallet/wallet-tutorial-step-2.md
 
 We can think of the box itself as a chunk of memory on the blockchain. The digital box location is referred to as a public key, or more intuitively as a public address, and can be shared with anyone in the same way you might share your address to receive mail at home. As the name implies, this is widely available to others on the network and it is the identifier others use to send digital assets to a box.
 

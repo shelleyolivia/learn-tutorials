@@ -14,8 +14,20 @@ The opportunities are endless and we wish you well on your journey!
 
 _If you want to connect with an amazing community of developers, join us on [Discord](https://discord.gg/fszyM7K)._
 
+<<<<<<< Updated upstream:solana/solana-wallet/wallet-tutorial-conclusion.md
 ![Figure 10: This is just the beginning, godspeed!](./assets/begin.jpeg)
 ##### _Figure 10: This is just the beginning, godspeed!_
+=======
+<<<<<<< HEAD:figment-learn/new-pathways/solana-wallet/wallet-tutorial-conclusion.md
+![Figure 10: This is just the beginning, godspeed!](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/begin.jpeg)
+=======
+![Figure 10: This is just the beginning, godspeed!](./assets/begin.jpeg)
+##### _Figure 10: This is just the beginning, godspeed!_
+>>>>>>> rx/reorganize:solana/solana-wallet/wallet-tutorial-conclusion.md
+
+{% label %}
+Figure 10: This is just the beginning, godspeed!
+>>>>>>> Stashed changes:figment-learn/new-pathways/solana-wallet/wallet-tutorial-conclusion.md
 
 ## Additional Resources 💻 
 

@@ -10,8 +10,17 @@ We think of ourselves as your guide - for a brief amount of time - on your journ
 
 We've tried to show you the door (or maybe part of it). Your job is to discover your path and walk it courageously.
 
+<<<<<<< Updated upstream:solana/solana-wallet/wallet-tutorial-intro.md
 ![Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes](./assets/cat.jpeg)
 ##### _Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes_
+=======
+<<<<<<< HEAD:figment-learn/new-pathways/solana-wallet/wallet-tutorial-intro.md
+![Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/cat.jpeg)
+=======
+![Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes](./assets/cat.jpeg)
+##### _Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes_
+>>>>>>> rx/reorganize:solana/solana-wallet/wallet-tutorial-intro.md
+>>>>>>> Stashed changes:figment-learn/new-pathways/solana-wallet/wallet-tutorial-intro.md
 
 # System Dependencies 💻
 
@@ -62,6 +71,7 @@ Then we'll build a function to fetch the balance of our newly created wallet in 
 Having added funds to our wallet, we'll build the ability to transfer funds to another wallet in [Step 5](https://learn.figment.io/tutorials/solana-wallet-step-5) using bank checks as a scaffolding analogy.
 
 ![](./assets/transfer.png)
+<<<<<<< Updated upstream:solana/solana-wallet/wallet-tutorial-intro.md
 
 Finally, we'll use the phrase we generated in [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2) to sign into an account and recover access to it in [Step 6](https://learn.figment.io/tutorials/solana-wallet-step-6).
 
@@ -71,3 +81,21 @@ Although building a production-ready, non-custodial wallet like [Phantom](https:
 
 ![Figure 2: A journey of a thousand miles begins with a single step](./assets/journey.jpeg)
 ##### _Figure 2: A journey of a thousand miles begins with a single step_
+=======
+
+Finally, we'll use the phrase we generated in [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2) to recover access to it in [Step 6](https://learn.figment.io/tutorials/solana-wallet-step-6).
+
+![](./assets/import.png)
+
+Although building a production-ready, non-custodial wallet like [Phantom](https://phantom.app/) or [MetaMask](https://metamask.io/) is beyond the scope of this tutorial, by the end of it you'll have developed a foundation of judgment that will let you better allocate your learning time as you explore new projects. To assist with that, we'll end the tutorial with a list of [additional resources](https://learn.figment.io/tutorials/solana-wallet-conclusion#additional-resources) that you'll be well prepared to explore.
+
+<<<<<<< HEAD:figment-learn/new-pathways/solana-wallet/wallet-tutorial-intro.md
+![Figure 2: A journey of a thousand miles begins with a single step](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/journey.jpeg)
+
+{% label %}
+Figure 2: A journey of a thousand miles begins with a single step
+=======
+![Figure 2: A journey of a thousand miles begins with a single step](./assets/journey.jpeg)
+##### _Figure 2: A journey of a thousand miles begins with a single step_
+>>>>>>> rx/reorganize:solana/solana-wallet/wallet-tutorial-intro.md
+>>>>>>> Stashed changes:figment-learn/new-pathways/solana-wallet/wallet-tutorial-intro.md
