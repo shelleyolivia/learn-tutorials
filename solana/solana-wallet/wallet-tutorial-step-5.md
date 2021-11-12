@@ -1,4 +1,4 @@
-# Asset transfers explained
+# Sign and send
 
 Now that we've funded our account with test tokens on devnet, we can start to think about how we might use those funds. In a real-world application, we might want to swap SOL for another token, pay for goods or services in SOL, or even gift someone some SOL. To do that we need a way to let the network ledger know that our account should transfer funds to another account.
 
@@ -6,24 +6,17 @@ Thinking about it from first principles, we know we'll need a function that take
 
 But there's one more important component: we need to prove to the network that we are in fact the owner of those funds and that we approve the transfer.
 
+## Paper checks
+
 Consider a traditional paper check that you might use to pay your landlord. The check has your name and address printed on the top left. It includes a field for you to write the recipient's name along with a field for you to write the amount you're paying. Finally, it includes a field for you to sign the check to validate to the bank that you're approving the transfer.
 
-<<<<<<< Updated upstream:solana/solana-wallet/wallet-tutorial-step-5.md
 ![Figure 8: Crypto transactions are like digital checks (with real signatures)](./assets/check.jpeg)
-##### _Figure 8: Crypto transactions are like digital checks (with real signatures)_
-=======
-<<<<<<< HEAD:figment-learn/new-pathways/solana-wallet/wallet-tutorial-step-5.md
-![Figure 8: Crypto transactions are like digital checks (with real signatures)](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/check.jpeg)
-
 {% label %}
 Figure 8: Crypto transactions are like digital checks (with real signatures)
-=======
-![Figure 8: Crypto transactions are like digital checks (with real signatures)](./assets/check.jpeg)
-##### _Figure 8: Crypto transactions are like digital checks (with real signatures)_
->>>>>>> rx/reorganize:solana/solana-wallet/wallet-tutorial-step-5.md
->>>>>>> Stashed changes:figment-learn/new-pathways/solana-wallet/wallet-tutorial-step-5.md
 
 Let's pretend that banks actually use those signatures to validate that you actually signed the check and it's not someone else forging your signature (spoiler alert: they don't for the most part).
+
+## Blockchain transfers
 
 The blockchain model of transferring funds is pretty similar. You need a way to sign the transaction so the network can confirm it as valid and change the corresponding balances.
 
@@ -31,7 +24,7 @@ The concept of cryptographic signing is fascinating, but well beyond the scope o
 
 With those building blocks in mind, we're ready to search the docs for a way to send and confirm a transaction.
 
-## Implementation 🧩
+# Implementation 🧩
 
 If you click on the **Send** button on the wallet dashboard, a drawer component opens up that shows a form structured as a paper check thus building on our analogy above. It includes all the components of a transaction but the **Sign and Send** button doesn't work yet.
 
@@ -42,6 +35,8 @@ Based on [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3) and [
 ```javascript
 const connection = new Connection(clusterApiUrl(network), "confirmed");
 ```
+
+## Transactions
 
 We can guess that we'll need to build some sort of transaction object and send it through the connection, but it's not immediately obvious how we might do that. By searching the docs, it looks like there are two ways to send transactions - the `sendTransaction` method in `Connection` and the general function `sendAndConfirmTransaction`.
 
@@ -71,6 +66,8 @@ Looking at the transaction we created, it clearly lacks any of the components we
 
 Unfortunately, the docs aren't very intuitive in how to progress but we can leverage our technical sophistication. There's a very useful class called `SystemProgram` with a `transfer` method, which "generates a transaction instruction that transfers lamports from one account to another." This seems like exactly what we need.
 
+## Transfer
+
 The `transfer` method takes in a `TransferParams` object that requires a `sender`, `recipient` and `amount` in lamports. That matches the data we're hoping to use for our transaction and we can get that from the account in context state and the form inputs. The resulting instructions look like this:
 
 ```javascript
@@ -95,6 +92,8 @@ const transaction = new Transaction().add(instructions);
 
 We have two out of the three parameters ready for the `sendAndConfirmTransaction` function - `connection` and `transaction`.
 
+## Signing
+
 Now we need the `signers array`. From the function's specification, we know `signers` will be an array with at least one `Signer` object. Reviewing the `Signer` type in the docs, it looks like it's an object with two properties - `publicKey` and `privateKey`. We can get both from the `account`, so we can build the `signers array`.
 
 ```javascript
@@ -105,6 +104,8 @@ const signers = [
   },
 ];
 ```
+
+## Send and confirm
 
 Now that all three parameters are complete, we can finally call `sendAndConfirmTransaction` and await its confirmation.
 
@@ -123,26 +124,19 @@ const updatedBalance = await refreshBalance(network, account);
 setBalance(updatedBalance);
 ```
 
+## Test driving
+
 If you haven't already, airdrop some devnet SOL into your account and test transferring funds to another account - preferably another account that you also control so you can check the funds flow.
 
 Once you fill in the public address of your recipient and the amount, say one million lamports, the **Sign and Send** button will be enabled. Once you click **Sign and Send** you will see a successful message displayed at the top of the page along with a link to the [Solana Block Explorer](https://explorer.solana.com/?cluster=devnet) at the top left of the check.
 
+## Block explorer
+
 The [Solana Block Explorer](https://explorer.solana.com/?cluster=devnet) is a simple dashboard that allows you to search for specific blocks, accounts, transactions, contracts and tokens by network. It displays all the information related to the item you searched for.
 
-<<<<<<< Updated upstream:solana/solana-wallet/wallet-tutorial-step-5.md
 ![Figure 9: Oh the places you'll go!](./assets/explore.jpeg)
-##### _Figure 9: Oh the places you'll go!_
-=======
-<<<<<<< HEAD:figment-learn/new-pathways/solana-wallet/wallet-tutorial-step-5.md
-![Figure 9: Oh the places you'll go!](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/explore.jpeg)
-
 {% label %}
 Figure 9: Oh the places you'll go!
-=======
-![Figure 9: Oh the places you'll go!](./assets/explore.jpeg)
-##### _Figure 9: Oh the places you'll go!_
->>>>>>> rx/reorganize:solana/solana-wallet/wallet-tutorial-step-5.md
->>>>>>> Stashed changes:figment-learn/new-pathways/solana-wallet/wallet-tutorial-step-5.md
 
 In this case, if you click the link on the check, you'll be able to see a basic overview of the transfer you just issued. In the middle of the page, you'll see our transfer's information - mainly, the sender (your public address) and how much SOL you sent; and the recipient (the other public address) and how much SOL they received.
 
@@ -194,7 +188,7 @@ const transfer = async () => {
 };
 ```
 
-## Challenge 🏋️
+# Challenge 🏋️
 
 Navigate to `components/TransactionLayout/index.tsx` in your editor and follow the steps included as comments to finish writing the `transfer` function. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 5.1](#listing-51-instructions-for-writing-transfer-function) below.
 

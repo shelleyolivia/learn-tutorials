@@ -10,23 +10,15 @@ We think of ourselves as your guide - for a brief amount of time - on your journ
 
 We've tried to show you the door (or maybe part of it). Your job is to discover your path and walk it courageously.
 
-<<<<<<< Updated upstream:solana/solana-wallet/wallet-tutorial-intro.md
 ![Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes](./assets/cat.jpeg)
-##### _Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes_
-=======
-<<<<<<< HEAD:figment-learn/new-pathways/solana-wallet/wallet-tutorial-intro.md
-![Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/cat.jpeg)
-=======
-![Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes](./assets/cat.jpeg)
-##### _Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes_
->>>>>>> rx/reorganize:solana/solana-wallet/wallet-tutorial-intro.md
->>>>>>> Stashed changes:figment-learn/new-pathways/solana-wallet/wallet-tutorial-intro.md
+{% label %}
+Figure 1: You take the red pill — you stay in Wonderland and I show you how deep the rabbit hole goes
 
-# System Dependencies 💻
+# System dependencies 💻
 
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/getting-started/install) installed.
 
-# Setting Up 🧱 
+# Setting up 🧱 
 
 You'll be building Solana interactions on top of a [Next.js](https://nextjs.org/) app that we have pre-built for you. This way you can skip the development phase you're familiar with (e.g. writing React components and Next pages) and dive right into the blockchain-specific phase.
 
@@ -50,7 +42,7 @@ info  - Using webpack 5. Reason: Enabled by default https://nextjs.org/docs/mess
 event - compiled successfully
 ```
 
-# Tutorial Structure 🏗 
+# Tutorial structure 🏗 
 
 The tutorial is structured as a set of steps that break down the process of developing the wallet functionality for the pre-built Next.js app. Each step discusses key concepts and mental models that create the necessary context for you to better understand what we're building and why. Think of this as the warm up.
 
@@ -58,7 +50,7 @@ After the warm up, we provide a step-by-step implementation of the functionality
 
 The implementation is followed by a challenge that aims to give you just enough instructions and references to allow you to implement the functionality on your own if you want to take a shot at it. This allows you to exercise [active recall](https://en.wikipedia.org/wiki/Active_recall) and increases your mind's ability to make connections.
 
-# Wallet Preview 🔍
+# Wallet preview 🔍
 
 By the time you're done with this tutorial, you'll have a functional wallet capable of changing the state of the Solana blockchain by receiving and transferring onchain funds. In [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2), we'll generate a 12-word phrase that will grant us access to a wallet.
 
@@ -71,17 +63,6 @@ Then we'll build a function to fetch the balance of our newly created wallet in 
 Having added funds to our wallet, we'll build the ability to transfer funds to another wallet in [Step 5](https://learn.figment.io/tutorials/solana-wallet-step-5) using bank checks as a scaffolding analogy.
 
 ![](./assets/transfer.png)
-<<<<<<< Updated upstream:solana/solana-wallet/wallet-tutorial-intro.md
-
-Finally, we'll use the phrase we generated in [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2) to sign into an account and recover access to it in [Step 6](https://learn.figment.io/tutorials/solana-wallet-step-6).
-
-![](./assets/import.png)
-
-Although building a production-ready, non-custodial wallet like [Phantom](https://phantom.app/) or [MetaMask](https://metamask.io/) is beyond the scope of this tutorial, by the end of it you'll have developed a foundation of judgment that will let you better allocate your learning time as you explore new projects. To assist with that, we'll end the tutorial with a list of [additional resources](https://learn.figment.io/tutorials/solana-wallet-conclusion#additional-resources) that you'll be well prepared to explore.
-
-![Figure 2: A journey of a thousand miles begins with a single step](./assets/journey.jpeg)
-##### _Figure 2: A journey of a thousand miles begins with a single step_
-=======
 
 Finally, we'll use the phrase we generated in [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2) to recover access to it in [Step 6](https://learn.figment.io/tutorials/solana-wallet-step-6).
 
@@ -89,13 +70,6 @@ Finally, we'll use the phrase we generated in [Step 2](https://learn.figment.io/
 
 Although building a production-ready, non-custodial wallet like [Phantom](https://phantom.app/) or [MetaMask](https://metamask.io/) is beyond the scope of this tutorial, by the end of it you'll have developed a foundation of judgment that will let you better allocate your learning time as you explore new projects. To assist with that, we'll end the tutorial with a list of [additional resources](https://learn.figment.io/tutorials/solana-wallet-conclusion#additional-resources) that you'll be well prepared to explore.
 
-<<<<<<< HEAD:figment-learn/new-pathways/solana-wallet/wallet-tutorial-intro.md
-![Figure 2: A journey of a thousand miles begins with a single step](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/journey.jpeg)
-
+![Figure 2: A journey of a thousand miles begins with a single step](./assets/journey.jpeg)
 {% label %}
 Figure 2: A journey of a thousand miles begins with a single step
-=======
-![Figure 2: A journey of a thousand miles begins with a single step](./assets/journey.jpeg)
-##### _Figure 2: A journey of a thousand miles begins with a single step_
->>>>>>> rx/reorganize:solana/solana-wallet/wallet-tutorial-intro.md
->>>>>>> Stashed changes:figment-learn/new-pathways/solana-wallet/wallet-tutorial-intro.md

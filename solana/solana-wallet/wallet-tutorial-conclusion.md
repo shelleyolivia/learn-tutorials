@@ -1,4 +1,8 @@
+# Not the end
+
 Congratulations! You've built a crypto wallet that is capable of managing on-chain digital assets on the Solana protocol.
+
+## Reflection
 
 By writing a function to generate a mnemonic phrase and using it to create a keypair in [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2), you gave the wallet access to a unique account. You then implemented functionality to connect to one of Solana's networks and fetch balance data from it in [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3).
 
@@ -8,28 +12,20 @@ In the process of building the wallet, you learned some of the fundamentals of d
 
 Importantly, you learned just enough about public-key cryptography, crypto wallets, and blockchain concepts like airdrops, keypairs, and mnemonics to unlock a whole world of learning paths to explore next.
 
+## This is the way
+
 Web 3 holds a world of promise for the future of the internet. Moreover, there are vasts areas of greenspace for developers to build amazing things and a ton of low hanging fruit problems to solve.
 
 The opportunities are endless and we wish you well on your journey!
 
 _If you want to connect with an amazing community of developers, join us on [Discord](https://discord.gg/fszyM7K)._
 
-<<<<<<< Updated upstream:solana/solana-wallet/wallet-tutorial-conclusion.md
-![Figure 10: This is just the beginning, godspeed!](./assets/begin.jpeg)
-##### _Figure 10: This is just the beginning, godspeed!_
-=======
-<<<<<<< HEAD:figment-learn/new-pathways/solana-wallet/wallet-tutorial-conclusion.md
-![Figure 10: This is just the beginning, godspeed!](https://raw.githubusercontent.com/figment-networks/datahub-learn/solana-wallet/figment-learn/new-pathways/solana-wallet/public/begin.jpeg)
-=======
-![Figure 10: This is just the beginning, godspeed!](./assets/begin.jpeg)
-##### _Figure 10: This is just the beginning, godspeed!_
->>>>>>> rx/reorganize:solana/solana-wallet/wallet-tutorial-conclusion.md
 
+![Figure 10: This is just the beginning, godspeed!](./assets/begin.jpeg)
 {% label %}
 Figure 10: This is just the beginning, godspeed!
->>>>>>> Stashed changes:figment-learn/new-pathways/solana-wallet/wallet-tutorial-conclusion.md
 
-## Additional Resources 💻 
+# Additional Resources 💻 
 
 - [Figment Learn Pathways](https://learn.figment.io/)
 - [Solana Protocol Documentation](https://docs.solana.com/developing/programming-model/overview)
