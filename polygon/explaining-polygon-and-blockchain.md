@@ -110,10 +110,10 @@ The smart contract on the main chain is responsible for maintaining checkpoints 
 ## Rebranding Matic into Polygon
 
 In February 2021, Matic revamped to **Polygon**, representing the integration of multiple layer 2 scaling solutions. Instead of only plasma chains as a solution, it will now offer -
-* State channels
-* Plasma chains
-* ZK (zero-knowledge) Rollups
-* Optimistic rollups
+* [State channels](https://education.district0x.io/general-topics/understanding-ethereum/basics-state-channels/)
+* [Plasma chains](https://education.district0x.io/general-topics/understanding-ethereum/understanding-plasma/)
+* [ZK (zero-knowledge) Rollups]()
+* [Optimistic rollups]()
 
 Polygon is often called **Ethereum's Internet of Blockchains**. This is because Polygon aims to connect and scale all the Ethereum compatible blockchain networks, just like the internet connects people. It strives to make an ecosystem of Ethereum-compatible and scalable blockchains, so that every network can enjoy scalability, security, and decentralization at the same time.
 
@@ -125,11 +125,41 @@ Polygon is often called **Ethereum's Internet of Blockchains**. This is because 
 
 One of the plans is obviously to connect every Ethereum compatible blockchain to a scalable ecosystem. And other plans are to integrate other scalability solutions like ZK-Rollups, Optimistic Rollups on the platform.
 
+Polygon is integrating one of the most interesting scaling solutions, through **Rollups**.
+
+Consider our pizza store for example. Our order got delayed might be due to slow processing of transactions. We could upgrade their algorithm to more efficient one, but the store manager is not willing to do so. We could now only opt to layer 2 solution.
+
+To increase the speed of pizza orders, we could make another store that will only handle orders or transactions. The new store will use efficient algorithms to handle transaction. At regular intervals we batch these transactions and publish them as a single order to the main pizza store. This forms the basis of **rollups**.
+
+**The whole process essentially executes transactions, takes the data, compresses it and rolls it up to the main chain in a single batch, hence the name – a rollup.** ~Finematics
+
+Since, these rolled up transactions are not executed on the main chain, there should be some fraud proofs to prevent any kind of invalid submissions. There could be multiple algorithms to prove this. Two of the most famous ones are - **Optimistic** and **Zero Knowledge (ZK) Rollups**.
+
+In **Optimistic** rollups, transactions is considered to be valid (that's why this algorithm is called optimistic), but there is a challenge period for each batch. During this period, any network participant can submit a fraud proof against any fraudulent transaction. These suspicious transactions are executed again on the main chain. Both the parties which batched and submitted the transactions as well as those which raised a dispute, needs to lock a bond (cryptocurrency tokens) on the main chain. Their partial or even complete bonds could be slashed, if it had done a fraud transaction or raised a incorrect fraud proofs.
+
+In **Zero Knowledege (ZK)** rollups, each transaction is associated with a sufficent proof to prove its validity. These are called zero-knowledge proofs, because we do not have any knowledge about the validity of transactions, but can easily verify through these proofs. A smart contract on the main chain uses this zero-knowledge proofs to identify valid and invalid batch of transactions.
+
+Optimistic approach is easier to implement, but funds are locked for a long time during dispute resolution. ZK rollups are fast, but are quite complex to implement EVM compatible ZK rollup for general purpose smart contracts.
+
+There is a lot on Rollups, you can always learn more. I would suggest you to go through the [Finematics](https://finematics.com/rollups-explained/) explanation on Rollups.
+
 # Conclusion
 
 This article explained some of Polygon's technology and the difference between Proof of Work and Proof of Stake. Since Polygon seeks to solve the problems faced by contemporary blockchains, it is important to understand those problems first. This would also be useful to investors who want to invest in blockchain technologies but do not understand the highly technical whitepapers, which can often require extensive research.
 
-I am assuming your pizza isn't delivered yet, and you learned a lot of things about Polygon and blockchain ;)
+There is some good news :) Our blockchain-based pizza store has read this amazing explanation on Polygon and decided to scale their system. Their delivery boy must be waiting outside with your favorite pizza.
 
 # About the author
 This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/rranjan01234/) and [GitHub](https://github.com/rajranjan0608)
+
+# References
+
+[Ethereum Layer 2 Scaling Explained](https://finematics.com/ethereum-layer-2-scaling-explained/) by Finematics
+
+[Polygon's POS and Plasma](https://docs.polygon.technology/docs/develop/ethereum-matic/getting-started) by Polygon
+
+[Rollups – The Ultimate Ethereum Scaling Solution](https://finematics.com/rollups-explained/) by Finematics
+
+[Understanding State channels](https://education.district0x.io/general-topics/understanding-ethereum/basics-state-channels/) by District0x
+
+[Understanding Plasma chains](https://education.district0x.io/general-topics/understanding-ethereum/understanding-plasma/) by District0x
