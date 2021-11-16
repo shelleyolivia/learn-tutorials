@@ -29,7 +29,7 @@ We are going to fork the Metaplex repository to our own Github account so that w
 
 * Fork the [Metaplex repository](https://github.com/metaplex-foundation/metaplex)
 
-![metaplexRepo](../assets/metaplexRepo.png)
+![metaplexRepo](https://github.com/figment-networks/datahub-learn/raw/master/assets/metaplexRepo.png)
 
 Now, we need to copy all of the Metaplex files over to our computer.
 
@@ -57,13 +57,13 @@ When we deploy the website, we want it to save in the Metaplex repository we for
 
 * Change the deployment address to your Github username
 
-![deployAddressSol](../assets/deployAddressSol.png)
+![deployAddressSol](https://github.com/figment-networks/datahub-learn/raw/master/assets/deployAddressSol.png)
 
 Notice where my name is. This should be where our Github username goes. Make sure to follow the path taken, on the left of the picture, to get to the `package.json` file.
 
 * Change the store's wallet address
 
-![storeWalletAddress](../assets/storeWalletAddress.png)
+![storeWalletAddress](https://github.com/figment-networks/datahub-learn/raw/master/assets/storeWalletAddress.png)
 
 This is where we add the public address of our browser wallet, so the store knows who to give administrative access. Make sure to follow the path taken, on the left of the picture, to get to the `.env` file.
 
@@ -111,7 +111,7 @@ It may take several minutes for everything to compile. Once the terminal says `c
 yarn build
 ```
 
-![yarnBuildSol](../assets/yarnBuildSol.png)
+![yarnBuildSol](https://github.com/figment-networks/datahub-learn/raw/master/assets/yarnBuildSol.png)
 
 When it is complete, we should see it output `Done`, indicating the build has finished. We will now be able to see the `build` folder that was created inside the `js` folder.
 
@@ -141,11 +141,11 @@ Metaplex allows us to create our own NFT marketplace, but does not have one gene
 
 * Head over to the "My Items" tab
 
-![myItemsPage](../assets/myItemsPage.png)
+![myItemsPage](https://github.com/figment-networks/datahub-learn/raw/master/assets/myItemsPage.png)
 
 * Click "Create" at the top
 
-![createNFTButton](../assets/createNFTButton.png)
+![createNFTButton](https://github.com/figment-networks/datahub-learn/raw/master/assets/createNFTButton.png)
 
 Now we should be on the "Category" section. 
 
@@ -157,7 +157,7 @@ I created an AR file that people could interact with on [Vecteezy](https://www.v
 
 * Press "Continue to Mint".
 
-![uploadNFTImages](../assets/uploadNFTImages.png)
+![uploadNFTImages](https://github.com/figment-networks/datahub-learn/raw/master/assets/uploadNFTImages.png)
 
 * Go ahead and give the NFT a cool title and a description about what it is. 
 
@@ -169,7 +169,7 @@ The attributes, for example, would be "background: blue", "eyes: closed", "mouth
 
 * Press "Continue to Royalties".
 
-![nftInfoPage](../assets/nftInfoPage.png)
+![nftInfoPage](https://github.com/figment-networks/datahub-learn/raw/master/assets/nftInfoPage.png)
 
 Metaplex allows us to modify the royalties and amount to split of the initial sale. 
 
@@ -177,7 +177,7 @@ Metaplex allows us to modify the royalties and amount to split of the initial sa
 
 Make sure to add creators if anyone else had taken part in creating the NFT.
 
-![nftRoyaltiesPage](../assets/nftRoyaltiesPage.png)
+![nftRoyaltiesPage](https://github.com/figment-networks/datahub-learn/raw/master/assets/nftRoyaltiesPage.png)
 
 It's time to launch our NFT!
 
@@ -185,21 +185,21 @@ It's time to launch our NFT!
 
 It will take up to a few minutes for the NFT to upload, as the metadata (title, description, attributes etc.) is being saved on [Arweave](https://www.arweave.org/). This is a blockchain tool for storing data eternally. Storing data on the Solana chain itself would be too expensive, so our non-fungible token on Solana contains a link to where the NFT information is stored on Arweave. 
 
-![nftLaunchPage](../assets/nftLaunchPage.png)
+![nftLaunchPage](https://github.com/figment-networks/datahub-learn/raw/master/assets/nftLaunchPage.png)
 
 Wooo! Your new NFT should be finished minting. Congratulations, you now have an accessible NFT on the Solana network. What can we do with it now?
 
-![nftMintFinished](../assets/nftMintFinished.png)
+![nftMintFinished](https://github.com/figment-networks/datahub-learn/raw/master/assets/nftMintFinished.png)
 
 * Check the "My Items" tab for your NFT
 
-![myItemsPage](../assets/myItemsPage.png)
+![myItemsPage](https://github.com/figment-networks/datahub-learn/raw/master/assets/myItemsPage.png)
 
 You should be able to see your NFT on the [My Items](https://jacobmakarsky.github.io/metaplex#/artworks) page. 
 
 If you've been using a Phantom browser wallet, go ahead and check your "Collectibles" tab. Your brand new NFT should appear in your wallet! It may take some time for the images and metadata to be synced around. 
 
-![phantomCollectibles](../assets/phantomCollectibles.png)
+![phantomCollectibles](https://github.com/figment-networks/datahub-learn/raw/master/assets/phantomCollectibles.png)
 
 # BONUS: List the NFT for sale
 
@@ -211,27 +211,27 @@ I wouldn't recommend listing the NFT on the marketplace I made for us (even thou
 
 * Connect your wallet
 
-![connectWalletToMarket](../assets/connectWalletToMarket.png)
+![connectWalletToMarket](https://github.com/figment-networks/datahub-learn/raw/master/assets/connectWalletToMarket.png)
 
 * Go to the "Sell" tab 
 
-![yourNFTs](../assets/yourNFTs.png)
+![yourNFTs](https://github.com/figment-networks/datahub-learn/raw/master/assets/yourNFTs.png)
 
 * Click on the NFT you want to sell
 
 * Choose the amount you want to sell it for and list the NFT
 
-![listNFTButton](../assets/listNFTButton.png)
+![listNFTButton](https://github.com/figment-networks/datahub-learn/raw/master/assets/listNFTButton.png)
 
 * Approve the transaction to list the NFT
 
 The transaction cost me 0.1 SOL, so make sure you have enough SOL in your wallet to list the NFT. 
 
-![approveNFTTransaction](../assets/approveNFTTransaction.png)
+![approveNFTTransaction](https://github.com/figment-networks/datahub-learn/raw/master/assets/approveNFTTransaction.png)
 
 Now we should be able to see our NFT listed on the marketplace! Search for the "Unverifeyed" collection in the search bar, and scroll to your NFT. The marketplaces are still in development, so hopefully it'll be much easier to search for the NFT's soon. 
 
-![listedNFTs](../assets/listedNFTs.png)
+![listedNFTs](https://github.com/figment-networks/datahub-learn/raw/master/assets/listedNFTs.png)
 
 Go ahead and click on the NFT that's listed. You'll see the option to unlist it and some labels saying "Unverifeyed". This is just because DigitalEyes has not verified our NFT, so they aren't sure if it's a fake copy of an exisiting collection. For any questions about DigitalEyes, such as getting your NFT verified, [go here](https://digitaleyes.market/faq). 
 
