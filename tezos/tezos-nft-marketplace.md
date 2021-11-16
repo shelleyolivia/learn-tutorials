@@ -274,43 +274,43 @@ Now, we are going to deploy both contracts.
 
 In the SmartPy output, click on `Deploy Michelson Project`
 
-![image](../assets/tezos-nft-market-10.png)
+![image](https://github.com/figment-networks/datahub-learn/raw/master/assets/tezos-nft-market-10.png)
 
 Then will open a new page. Select the network where you want to deploy the smart contract.
 Then select the account which will be used to deploy the smart contract.
 
 Now Click on the `Estimated Cost From Rpc` to estimate the fee in Tezos to deploy the contract. Make sure the account you are using has that much XTZ available.
 
-![image](../assets/tezos-nft-market-9.png)
+![image](https://github.com/figment-networks/datahub-learn/raw/master/assets/tezos-nft-market-9.png)
 
 
 Before deploying we will change the admin for this contract. Update the address string to your public address.
 
-![image](../assets/tezos-nft-market-3.png)
+![image](https://github.com/figment-networks/datahub-learn/raw/master/assets/tezos-nft-market-3.png)
 
 
 Now click the `Deploy contract` button. This will generate the address for the deployed contract; save that.
 
-![image](../assets/tezos-nft-market-7.png)
+![image](https://github.com/figment-networks/datahub-learn/raw/master/assets/tezos-nft-market-7.png)
 
 And we have deployed the `Token` contract successfully. Now let us deploy the `MarketPlace` Contract. 
 
 
 Now again, In the Smartpy output, click the deploy contract button for the `MarketPlace` Contract.
 
-![image](../assets/tezos-nft-market-5.png)
+![image](https://github.com/figment-networks/datahub-learn/raw/master/assets/tezos-nft-market-5.png)
 
 We will repeat the same steps for this one also. First, we will select the account, then we will estimate the cost.
 
 Once these 2 steps are done, we will update the initial storage. Change the contract address here to the contract address we got after deploying the `Token` contract.
 
-![image](../assets/tezos-nft-market-2.png)
+![image](https://github.com/figment-networks/datahub-learn/raw/master/assets/tezos-nft-market-2.png)
 
 And now we can deploy this contract as well by clicking the `Deploy contract` button, then save the address of this contract.
 
 Now we have deployed both the contracts. Now we can update the `admin` by calling the `setAdminstator` entry point.
 
-![image](../assets/tezos-nft-market-1.png)
+![image](https://github.com/figment-networks/datahub-learn/raw/master/assets/tezos-nft-market-1.png)
 
 > Note: you can update the IPFS hash, which can be done in the tests.
 
@@ -857,7 +857,7 @@ export default Create;
 
 ```
 
-![image](../assets/Tezos-nft-marketplace-mint-nft.png)
+![image](https://github.com/figment-networks/datahub-learn/raw/master/assets/Tezos-nft-marketplace-mint-nft.png)
 
 ## Displaying NFTs in the Home component
 As we have already stored the data in our Redux store, we can display it in our Home component. We can first create a section component to render the NFTs.
@@ -981,7 +981,7 @@ const Home = ({ Tezos }) => {
 export default Home;
 ```
 
-![image](../assets/Tezos-nft-marketplace-show-nft.png)
+![image](https://github.com/figment-networks/datahub-learn/raw/master/assets/Tezos-nft-marketplace-show-nft.png)
 
 ## Displaying the detailed view
 To show the detailed view, we will use `useParams` hook from `react-router`. As we have already specified the id in the URL. We can retrieve it directly using this hook.
@@ -1125,7 +1125,7 @@ We have also imported collectNFT, We can give an option in the detailed view as 
     </div>
 ```
 
-![image](../assets/Tezos-nft-marketplace-show-detail-nft.png)
+![image](https://github.com/figment-networks/datahub-learn/raw/master/assets/Tezos-nft-marketplace-show-detail-nft.png)
 
 Hurray! We are all done. We have completed the UI of our NFT marketplace.
 Check out the complete code on [Github](https://github.com/NishantChandla/nft-marketplace-tutorial)

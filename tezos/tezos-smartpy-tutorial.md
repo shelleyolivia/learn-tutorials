@@ -22,7 +22,7 @@ SmartPy is a high-level smart contracts library and comes with related tools in 
 So head over to [SmartPy.io](https://smartpy.io/) and let us begin writing our first smart contract in Python!
 
 
-![SmartPy](../assets/smartpy1.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/smartpy1.png)
 
 For our purposes, the important links on this page are:
 - [Online Editor](https://smartpy.io/ide)
@@ -32,7 +32,7 @@ The Online Editor will help us write , execute and test our code before it is de
 
 Click the Online Editor button to go to the IDE page:
 
-![SmartPy](../assets/smartpy2_1.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/smartpy2_1.png)
 
 Here SmartPy has provided us with various templates and sample contracts including games, token contracts and some basic utility contracts.
 We will be coding our own version of a Calculator contract that is present as one of the examples.
@@ -204,17 +204,17 @@ Now that the code has been tested and works properly, we will need to get some T
 Before we can deploy anything, let's first get some Testnet ꜩ from the [Tezos Faucet](https://faucet.tzalpha.net/).
 
 On the Faucet page, complete the CAPTCHA Verification and you will be given a faucet key, which looks like this:
-![Faucet](../assets/faucet1.png)
+![Faucet](https://github.com/figment-networks/datahub-learn/raw/master/assets/faucet1.png)
 
 Download and keep this JSON file in a secure location as it contains the secret key and mnemonic which will be used for deployment of the smart contract we have created.
 
 Now Open your Temple Wallet and click **Settings** > **Import account**:
 
-![Temple](../assets/temple1.png)
+![Temple](https://github.com/figment-networks/datahub-learn/raw/master/assets/temple1.png)
 
 Now select Faucet File as the source and upload the JSON file you got from the faucet:
 
-![Temple](../assets/temple2.png)
+![Temple](https://github.com/figment-networks/datahub-learn/raw/master/assets/temple2.png)
 
 Now that we have a funded wallet on the Tezos testnet, we can move on to deploying the code.
 
@@ -269,15 +269,15 @@ class Calculator(sp.Contract):
 ```
 Go ahead and run this code in the SmartPy IDE (click on the "Play" button at the top left) and in the Output panel on the right side, you will see the option to **Deploy Michelson Contract**:
 
-![Deploy](../assets/deploy1.png)
+![Deploy](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy1.png)
 
 You will be be redirected to the Origination page of the contract. On this page we have to select on which Node we wish to deploy our contract. Check your Temple Wallet and the JSON you got from the faucet in the previous section and select the appropriate Node. Then Click on the Temple Wallet option and connect your wallet to SmartPy.io:
 
-![Deploy](../assets/deploy2_1.png)
+![Deploy](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy2_1.png)
 
 Scroll Down and click **Estimate Cost From RPC** and then click on **Deploy Contract**:
 
-![Deploy](../assets/deploy3.png)
+![Deploy](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy3.png)
 
 Then in the pop-up that appears click on **ACCEPT** and then Temple Wallet will open up and you will need to click on the **SIGN** button.
 
@@ -285,7 +285,7 @@ Once the transaction is confirmed, your contract will be deployed on the Granada
 
 Copy the contract address as seen on the screen and wait for at least 3 block confirmations.
 
-![Deploy](../assets/deploy4.png)
+![Deploy](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy4.png)
 
 # Interacting with the contract
 
@@ -293,16 +293,16 @@ Now we are at the final step of this tutorial. We are going to learn how to expl
 
 Copy your contract address and head over to [Better Call Dev](https://better-call.dev/). Paste the contract address in the search box and press Enter.
 
-![Interact](../assets/interact1.png)
+![Interact](https://github.com/figment-networks/datahub-learn/raw/master/assets/interact1.png)
 
 You will now be able to see your contract details. If they do not appear, wait for a couple of minutes and then refresh the page as it takes some time for the block confirmations to arrive after you have deployed the contract.
 
-![Interact](../assets/interact2.png)
+![Interact](https://github.com/figment-networks/datahub-learn/raw/master/assets/interact2.png)
 
 
 On the **Interact** tab, you will be able to see all your available entrypoints there with the input parameters that we specified.
 
-![Interact](../assets/interact3.png)
+![Interact](https://github.com/figment-networks/datahub-learn/raw/master/assets/interact3.png)
 
 Now we will call our `add` EntryPoint!
 
@@ -310,11 +310,11 @@ Now we will call our `add` EntryPoint!
 2. Put integer values in **x** and **y** fields.
 3. Add your wallet address as the **source** and leave the **amount** field blank.
 
-![Interact](../assets/interact4.png)
+![Interact](https://github.com/figment-networks/datahub-learn/raw/master/assets/interact4.png)
 
 One of the best features of Better Call Dev is that we can simulate any transaction without having to spend any XTZ. So click on **EXECUTE** and choose **Simulate**. BetterCallDev will simulate the transaction and tell us if it is valid or will it fail and also what changes it will make to the contract's storage.
 
-![Interact](../assets/interact5.png)
+![Interact](https://github.com/figment-networks/datahub-learn/raw/master/assets/interact5.png)
 
 
 Now it is time to complete our first on-chain interaction!
@@ -323,11 +323,11 @@ This time, click on **EXECUTE** and Select **Temple - Tezos Wallet** instead of 
 
 It will pop up your Temple Wallet and ask you to sign the transaction. It will also tell you the gas fee you are paying to complete the transaction:
 
-![Interact](../assets/interact6.png)
+![Interact](https://github.com/figment-networks/datahub-learn/raw/master/assets/interact6.png)
 
 Finally, go to the **Operations** tab on BetterCallDev and you will be able to see your transaction and all of its details:
 
-![Interact](../assets/interact7.png)
+![Interact](https://github.com/figment-networks/datahub-learn/raw/master/assets/interact7.png)
 
 As we can see our transaction changed the **value** in storage to the sum of the parameters we supplied to the `add` entrypoint (i.e. 5 + 11 = 16).
 

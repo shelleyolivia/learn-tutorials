@@ -19,7 +19,7 @@ We will learn some basic elements of Solidity such as mapping or struct and how 
 
 It is strongly recommended to create a new MetaMask account for testing. You will want to keep the Secret Recovery Phrase for this fresh account handy because it is needed for deployment of the smart contract.
 
-![](../assets/miniposts05.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts05.png)
 
 Now you'll notice zero balance (0 MATIC) in your wallet, to get test Matic for deployment and testing go to the Matic Faucet [link](https://faucet.matic.network) -> Select Mumbai -> Paste your wallet address -> Click "Submit".
 
@@ -33,7 +33,7 @@ Open your browser and go to [Remix](https://remix.ethereum.org/)
 This is one of the best online editors for development with Solidity. You will see several folders that you can delete as we won't use them.
 Press the **Create New File** icon to create a new Solidity file named `miniblog.sol` at the root.
 
-![](../assets/miniposts01.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts01.png)
 
 At the time of writing this tutorial it is advisable to use a Solidity version above 0.8.0. A cutting edge version could contain unknown issues and older versions would force us to deal with old and deprecated code.
 
@@ -246,12 +246,12 @@ contract MiniBlog {
 
 On the Remix site, go to Solidity Compiler and click the blue button with compiler 0.8.0:
 
-![](../assets/miniposts02.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts02.png)
 
 This should successfully compile the smart contract. There would be a green icon in the left tab. Go to **Deploy & Run Transactions**. Make sure the Environment is set to **JavaScript VM**. Deploy the contract.
 You should now see the contract under deployed contracts.
 
-![](../assets/miniposts03.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts03.png)
 
 You can play with the contract. Update your username, create several posts, change them and check the result by getting the posts.
 
@@ -262,7 +262,7 @@ Outstanding! We have created a mini-blogging smart contract. Now let’s build t
 We are going to use a created repository to make it easier to follow.
 In this repository there are 3 branches, you can checkout from 1 to 3 to see the progress and changes while following this tutorial.
 
-![](../assets/miniposts04.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts04.png)
 
 Clone the repository by running git clone in your terminal.
 
@@ -318,20 +318,20 @@ const LoginBar = () =>
 
 With Mumbai network selected in Metamask. In Remix deploy this time with environment set to Injected Web3
 
-![](../assets/miniposts06.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts06.png)
 
 When you hit deploy, Metamask should show a confirmation for the transaction.
 
 Now we need the ABI and the smart contract address.
 In the compiler, you can go to the end and copy the ABI. an application binary interface (ABI) is an interface between two binary program modules. It allows us to interact with the contract.
 
-![](../assets/miniposts07.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts07.png)
 
 Back to your editor, inside the src folder, we create an abi.json file and paste the ABI.
 
 Get the contract address from deployed contracts in Remix or https://mumbai.polygonscan.com/
 
-![](../assets/miniposts08.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts08.png)
 
 Import the ABI and add the smart contract address.
 
@@ -426,15 +426,15 @@ Now let’s see the result. \*Make sure you are in Mumbai. Make sure you have th
 
 We should be able to see the homepage by visiting http://localhost:3000. Authenticate with your Metamask extension.
 
-![](../assets/miniposts09.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts09.png)
 
 We can create the first posts by going to the plus icon and submit a new post.
 
-![](../assets/miniposts10.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts10.png)
 
 If we update the username or modify the post from remix you can see the changes by refreshing the frontend.
 
-![](../assets/miniposts11.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/miniposts11.png)
 
 Awesome. We made it. Now you have a mini post web app from where you can bootstrap your journey in the Matic network.
 

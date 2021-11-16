@@ -43,7 +43,7 @@ We will cover the project in three parts:
 
 We will begin by outlining a visual representation of the dApp, its features, and the various screens used in interacting with the smart contract.
 
-![](../../assets/image%20%2827%29.png)
+![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2827%29.png)
 
 ## Features
 

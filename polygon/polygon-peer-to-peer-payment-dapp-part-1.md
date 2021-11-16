@@ -6,7 +6,7 @@ This is part one of a two-part tutorial. In this part, we will learn how to send
 
 This is what the dApp we will be creating looks like:
 
-![Payment dApp demo](../assets/payment-dApp-demo.gif)
+![Payment dApp demo](https://github.com/figment-networks/datahub-learn/raw/master/assets/payment-dApp-demo.gif)
 
 # Prerequisites
 
@@ -91,7 +91,7 @@ module.exports = function (deployer) {
 
 Before running the deployment command, we need to get a Polygon RPC URL and API key from DataHub. Create an account on [DataHub](https://datahub.figment.io/), head over to the Polygon section, and copy your API key.
 
-![Datahub Polygon API](../assets/polygon-datahub-api.png)
+![Datahub Polygon API](https://github.com/figment-networks/datahub-learn/raw/master/assets/polygon-datahub-api.png)
 
 Create a `.env` file in the root directory of your project (`/payment-dapp/`) and paste the key after the name of the environment variable as shown below:
 
@@ -464,7 +464,7 @@ When the user clicks on the **Send** button, we call the `sendPayment` function 
 
 We are finished with the UI now, and this is how the payment gateway should look:
 
-![Payment gateway UI](../assets/peer-to-peer-payment-ui.png)
+![Payment gateway UI](https://github.com/figment-networks/datahub-learn/raw/master/assets/peer-to-peer-payment-ui.png)
 
 # Conclusion
 

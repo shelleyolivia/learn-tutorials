@@ -4,7 +4,7 @@ In this tutorial, we will learn how to perform CRUD (Create, Read, Update and De
 
 This is what the dApp we will be creating looks like:
 
-![App Demo](../assets/flutter-todo-dapp-demo.gif)
+![App Demo](https://github.com/figment-networks/datahub-learn/raw/master/assets/flutter-todo-dapp-demo.gif)
 
 # Prerequisites
 
@@ -41,7 +41,7 @@ The command `npm install -g truffle` will install Truffle globally so that you c
 
 This is how the folder structure will be after initial setup:
 
-![Folder Structure](../assets/flutter-dapp-folder-structure.png)
+![Folder Structure](https://github.com/figment-networks/datahub-learn/raw/master/assets/flutter-dapp-folder-structure.png)
 
 The `truffle init` command creates the following directories:
 
@@ -140,7 +140,7 @@ truffle compile
 
 Truffle will compile the smart contract, and you should see the output similar to:
 
-![Truffle Compile](../assets/flutter-dapp-truffle-compile.png)
+![Truffle Compile](https://github.com/figment-networks/datahub-learn/raw/master/assets/flutter-dapp-truffle-compile.png)
 
 For the migration of our contact to the blockchain, go to the `migrations` directory, create a new file called `2_todo_contract_migration.js` and add the following code:
 
@@ -189,7 +189,7 @@ truffle migrate
 
 This will deploy the contract to the Ganache development blockchain and will give you output that looks similar to this:
 
-![Contract Migration](../assets/flutter-dapp-truffle-migrate.png)
+![Contract Migration](https://github.com/figment-networks/datahub-learn/raw/master/assets/flutter-dapp-truffle-migrate.png)
 
 # Connecting to a Flutter application with web3dart
 
@@ -261,7 +261,7 @@ class TodoListModel extends ChangeNotifier {
 - Setting Ganache's `_rpcUrl` and `_wsUrl` for the local environment.
 - Setting the private key of any account from Ganache (you can get this by clicking on the Key icon in the Ganache UI).
 
-![Ganache Private Key](../assets/flutter-dapp-ganache-privatekey-demo.jpeg)
+![Ganache Private Key](https://github.com/figment-networks/datahub-learn/raw/master/assets/flutter-dapp-ganache-privatekey-demo.jpeg)
 
 `Web3Client _client` is used to connect to the Polygon blockchain with WebSockets. `String _abiCode` is used to store the ABI of our smart contract. `Credentials _credentials` contains the `Credential` object of the logged-in user. `EthereumAddress _ownAddress` is used to store the public key of the logged-in user. `DeployedContract _contract` is an instance of our smart contract, which will be eventually used to communicate with the smart contract. `_taskCount`, `_todos`, `_createTask`, `_updateTask`, `_deleteTask` and `_toggleComplete` are the functions of our deployed smart contract.
 
@@ -493,7 +493,7 @@ Here we are creating a stateless widget, `TodoList`. In the build function, we a
 
 - This is how our list of to-dos should look:
 
-![Todo List](../assets/flutter-todolist-home.png)
+![Todo List](https://github.com/figment-networks/datahub-learn/raw/master/assets/flutter-todolist-home.png)
 
 `TodoBottomSheet.dart`
 
@@ -599,7 +599,7 @@ When `Create`, `Update`, and `Delete` buttons are pressed, we call the respectiv
 
 This is how the bottom sheet should look:
 
-![Bottom sheet GIF](../assets/flutter-todolist-bottomsheet.png)
+![Bottom sheet GIF](https://github.com/figment-networks/datahub-learn/raw/master/assets/flutter-todolist-bottomsheet.png)
 
 The last remaining part is calling the `TodoList` widget from `main.dart` to render our app.
 

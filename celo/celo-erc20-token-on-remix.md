@@ -164,11 +164,11 @@ We will deploy our contract on `Alfajores testnet`. We need to make sure that we
 a. Select the account on Celo Wallet with which we want to deploy the smart contract. Make sure to select the account on `Alfajores Test Network`!
 
 b. Click on **Deploy** button.  
- ![accessibility text](../assets/celo-extension-deploy-button%20%281%29%20%281%29.JPG)
+ ![accessibility text](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-extension-deploy-button%20%281%29%20%281%29.JPG)
 
 c. Pay the `transaction fee` and sign the transaction using celo wallet.
 
-![accessibility text](../assets/signing-transaction-celo.JPG)
+![accessibility text](https://github.com/figment-networks/datahub-learn/raw/master/assets/signing-transaction-celo.JPG)
 
 **Congratulations!** we have deployed our very own Fungible token on the Celo blockchain. It usually takes around 5 seconds to achieve finality for our transactions. Once our transaction is confirmed, let's head over to [BlockScout](https://alfajores-blockscout.celo-testnet.org/) to see all the details.
 
@@ -184,11 +184,11 @@ a. Select the account which has 1000 CFT, in the example case `0x0eAd666A5B65ED6
 
 b. In the transfer tab and we need to enter the **Alfajores Testnet Address** of the account to which we want to transfer the tokens with the amount of tokens to be transferred. For this tutorial, we will use `0x39E526B01fDe70d64FABDCe5Ca92b47789AA231D` and send 10 CFT tokens \(be mindful of decimals that we defined in the contract\).
 
-![accessibility text](../assets/transfer-tab-celo-extension.JPG)
+![accessibility text](https://github.com/figment-networks/datahub-learn/raw/master/assets/transfer-tab-celo-extension.JPG)
 
 c. Click on `Transact`
 
-![accessibility text](../assets/sending-token-celo-remix.JPG)
+![accessibility text](https://github.com/figment-networks/datahub-learn/raw/master/assets/sending-token-celo-remix.JPG)
 
 d. Pay the `transaction fee`
 
@@ -196,17 +196,17 @@ With that, we have learned how to transfer your fungible tokens to other address
 
 a. Select the **Add Token** button on our Celo wallet as shown in the image.
 
-![accessibility text](../assets/celo-extension-wallet.JPG)
+![accessibility text](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-extension-wallet.JPG)
 
 b. Enter the contract address in **Token Contract Address** and click `Next`.
 
-![accessibility text](../assets/token-address-celo-wallet.JPG)
+![accessibility text](https://github.com/figment-networks/datahub-learn/raw/master/assets/token-address-celo-wallet.JPG)
 
 c. Click on `Add token`
 
 Now we are able to see our token balance!
 
-![accessibility text](../assets/celo-wallet-after-token-addition.JPG)
+![accessibility text](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-wallet-after-token-addition.JPG)
 
 **2. Celo Wallet**
 
