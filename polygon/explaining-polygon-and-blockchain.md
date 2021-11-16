@@ -2,7 +2,7 @@
 
 Before we jump into a discussion of explaining blockchain and Polygon stuff, let's get ourselves a pizza first. Before the pizza is delivered to your doorstep, I bet, you will learn all about the topic.
 
-![](../../../.gitbook/assets/explaining-polygon-1-pizza.png)
+![](../assets/explaining-polygon-1-pizza.png)
 
 
 ## Introduction
@@ -57,7 +57,7 @@ Is it because of the traffic on the road or did the pizza oven just break? No no
 
 These are called **scalability issues** of the **Ethereum** network.
 
-![](../../../.gitbook/assets/explaining-polygon-2-chart.png)
+![](../assets/explaining-polygon-2-chart.png)
 
 ## Who can process my pizza order quickly? - MATIC
 
@@ -65,7 +65,7 @@ These are called **scalability issues** of the **Ethereum** network.
 
 Broadly speaking, there are two ways to scale a blockchain: **Layer 1 scaling** and **Layer 2 scaling**. In layer 1 scaling, changes or improvements are made by upgrading the main blockchain protocol. With Layer 2 scaling, we try to bypass scalability obstacles without altering the main protocol. Polygon is an example of a Layer 2 scaling solution because it incorporates several different technologies to achieve a higher number of transactions per second, all of which are implemented separately from the main Ethereum or Matic networks.
 
-![](../../../.gitbook/assets/explaining-polygon-3-scaling.png)
+![](../assets/explaining-polygon-3-scaling.png)
 
 Consider the main blockchain as a congested road, where only 20 vehicles at a time can be moving. Obviously, this would lead to long traffic jams, whenever more vehicles approach and try to use the road at the same time.
 
@@ -105,7 +105,7 @@ This layer is responsible for submitting regular transaction reports on the main
 **Staking and Smart contract layer**
 The smart contract on the main chain is responsible for maintaining checkpoints published by the PoS layer. It also involves staking from the various node to participate as a PoS layer validator. Users can stake their ETH to the smart contract and can participate in PoS layer validation.
 
-![](../../../.gitbook/assets/explaining-polygon-4-matic-plasma-pos.png)
+![](../assets/explaining-polygon-4-matic-plasma-pos.png)
 
 ## Rebranding Matic into Polygon
 
@@ -119,7 +119,7 @@ Polygon is often called **Ethereum's Internet of Blockchains**. This is because 
 
 > A blockchain is considered Ethereum compatible if it can run smart contracts written for Ethereum, commonly known as EVM compatibility.
 
-![](../../../.gitbook/assets/explaining-polygon-5-polygon-internet.png)
+![](../assets/explaining-polygon-5-polygon-internet.png)
 
 ## Plans of Polygon
 
