@@ -4,7 +4,7 @@ Most dapps span across multiple smart contracts with many of them being created 
 
 It uses the Uniswap AMM market contracts as an example as the reader might be familiar with it. We will start with the factory contract which deploys Uniswap pairs and then use events to be able to add the newly created pairs to our subgraph.
 
-![Subgraph Studio](../assets/graph.png)
+![Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph.png)
 
 
 # Prerequisites
@@ -25,7 +25,7 @@ graph init uni-subgraph
 
 For newer Macbooks you might need `yarn exec graph init uni-subgraph` depending upon your system permissions.
 
-![Init](../assets/graphinit.png)
+![Init](https://github.com/figment-networks/datahub-learn/raw/master/assets/graphinit.png)
 
 For the network, select mainnet. The contract address for Uniswap Factory Contract is "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f" and it remains the same across all test networks as well.
 
@@ -36,7 +36,7 @@ Graph will fetch the ABI of this contract for you and also initialize some of th
 In this tutorial, we are going to keep track of the reserves of tokens in Uniswap pairs.
 As you know, pairs in Uniswap are created dynamically by the factory contract. The factory contract deploys the pair contract and then users can add liquidity to these contracts. Since the pair contract address is not known in advance, we will be dynamically taking the address of the pairs from the events emitted by the Factory contract. Whenever a new pair is created PairCreated event is emitted. We will be listening to this event and add the new pair contracts as data sources when they are created.
 
-![Uniswap Diagram](../assets/graphuniswap.png)
+![Uniswap Diagram](https://github.com/figment-networks/datahub-learn/raw/master/assets/graphuniswap.png)
 
 # Downloading the ABIs
 
@@ -330,7 +330,7 @@ Subscriptions (WS): https://api.studio.thegraph.com/query/4570/uni-subgraph/v0.1
 
 You can now go to https://thegraph.com/studio/subgraph/uni-subgraph/ to play with your subgraph. You should see a `syncing` status and you can start making queries once the progress reaches 100. 
 
-![Playground](../assets/graphplayground.png)
+![Playground](https://github.com/figment-networks/datahub-learn/raw/master/assets/graphplayground.png)
 
 
 # Conclusion

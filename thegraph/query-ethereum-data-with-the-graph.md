@@ -2,7 +2,7 @@
 
 In this tutorial, you will learn how to create a subgraph from an already deployed smart contract on the Ethereum Rinkeby testnet, deploy it to the Subgraph Studio, and then use the Subgraph Studio Playground to query the subgraph.
 
-![Subgraph Studio](../assets/graph.png)
+![Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph.png)
 
 # Prerequisites
 
@@ -38,15 +38,15 @@ npm i -g @graphprotocol/graph-cli
 
 First, you will want to head over to the Subgraph Studio at <https://thegraph.com/studio/>.
 
-![Login to Subgraph Studio](../assets/graph_connect.png)
+![Login to Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_connect.png)
 
 Click on the **Connect Wallet** button. Choose a Metamask wallet to login with. Once you are authenticated, you shall see the below screen, where you can create your first subgraph.
 
-![Create your first subgraph](../assets/graph_create_subgraph.png)
+![Create your first subgraph](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_create_subgraph.png)
 
 Next, you need to give your subgraph a name. Give the name as **vending**. Once that's done, you will see this screen:
 
-![Subgraph dashboard](../assets/graph_subgraph_created.png)
+![Subgraph dashboard](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_subgraph_created.png)
 
 On this screen, you can see details about the subgraph like your deploy key, the subgraph slug and status.
 
@@ -197,7 +197,7 @@ Once the sync is complete, you can access the subgraph on the Playground to run 
 
 Head over to <https://thegraph.com/studio/subgraph/vending/> to start querying data with the Playground.
 
-![Subgraph Studio Playground](../assets/graph_playground.png)
+![Subgraph Studio Playground](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_playground.png)
 
 This is a basic GraphQL query for the subgraph we have created:
 
@@ -283,19 +283,19 @@ Or filter the results by certain conditions using the `where` clause:
 
 Go to <https://rinkeby.etherscan.io/address/0x4006c82ffb71933160948626db3ff8d8aaad6510#writeContract> to see the Rinkeby smart contract.
 
-![Rinkeby Smart Contract](../assets/graph_rinkeby_contract.png)
+![Rinkeby Smart Contract](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_rinkeby_contract.png)
 
 Click on the **Connect to Web3** button. Choose **Metamask** from the wallet options. After authenticatng with Metamask, you shall see **Connected - Web3[address]** instead of the earlier button. Make sure you are connected to the **Rinkeby** test network.
 
 Click on the **purchase** row. You need to fill in **purchase** and **amount** fields.
 
-![Rinkeby Smart Contract Purchase](../assets/graph_rinkeby_contract_purchase.png)
+![Rinkeby Smart Contract Purchase](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_rinkeby_contract_purchase.png)
 
 Fill in **purchase** as **0.2** and **amount** as **20**. Click on the **Write** button.
 
 It will open up the Metamask prompt. Make sure you are on the **Rinkeby** test network.
 
-![Metamask](../assets/graph_metamask.png)
+![Metamask](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_metamask.png)
 
 Once you click on the **Confirm** button, wait for your transaction to be mined.
 

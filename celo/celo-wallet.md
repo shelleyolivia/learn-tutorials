@@ -23,25 +23,25 @@ The Celo Wallet is a free, open-source wallet for the [Celo network](https://cel
 
 Setup CELO Web Wallet - Firstly, you have to go to [https://celowallet.app/setup](https://celowallet.app/setup) and you’ll see a web page with two options - **Create New Account** and **Use Existing Account**.
 
-![](../assets/image%20%286%29.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%286%29.png)
 
 Click on **Create New Account** and you’ll see a new screen on your browser which has your unique & newly generated public key, private key & unique icon.
 
-![](../assets/image%20%2818%29.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2818%29.png)
 
 Before hitting the continue button, make sure to copy and save your private key in a safe place. It’ll allow you to log back into your account.
 
 After saving your private key, now it’s time to set up your Pincode or Password for your account. Make sure not to lose your Pincode/Password, it unlocks your account!
 
-![](../assets/image%20%2817%29.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2817%29.png)
 
 Once your Pincode/Password are set up, you’re ready to send and receive Celo.
 
-![Celo Web Wallet Dashboard](../assets/image%20%2819%29.png)
+![Celo Web Wallet Dashboard](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2819%29.png)
 
 Now on your dashboard, you can check all the options to buy and receive Celo. Also, you can find all your account details, public & private keys.
 
-![](../assets/image%20%282%29.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%282%29.png)
 
 When you click on “Buy Celo”, you can see all the options for buying Celo. When you click on “Receive Celo” you can get your account information to get paid/receive Celo in your account. That’s It!! It was quite easy. Now start CELOing 💰
 
@@ -78,7 +78,7 @@ The process involves writing down 24 random words in a specific order, and you w
 
 Check out this Illustration to visualize all the steps mentioned above -
 
-![Celo Wallet Verification](../assets/5.gif)
+![Celo Wallet Verification](https://github.com/figment-networks/datahub-learn/raw/master/assets/5.gif)
 
 Learn more about Valora [HERE](https://valoraapp.com/)
 

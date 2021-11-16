@@ -21,7 +21,7 @@ In this tutorial, we will explore different queries that we can run again our [*
 1. Please make sure that you completed tutorials \#1 \("Connecting to a Terra node with DataHub"\) and \#2 \("Creating your first Terra account with the Terra SDK"\) before moving forward. We will be building on top of the Nodejs application created in these tutorials. 
 2. Make sure that you connect to an archive Tequila node available on DataHub.
 
-![](../assets/download.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/download.png)
 
 {% hint style="info" %}
 Archive nodes allow you to query historical data, no matter how old it is.

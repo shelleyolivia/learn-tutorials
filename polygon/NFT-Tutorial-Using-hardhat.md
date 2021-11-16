@@ -49,11 +49,11 @@ npx hardhat
 
 On typing the last command, something similar to this should appear on your screen:
 
-![Hardhat Initializing](../assets/HardHatInitializing.png)
+![Hardhat Initializing](https://github.com/figment-networks/datahub-learn/raw/master/assets/HardHatInitializing.png)
 
 We can start with a basic sample project so that it is easier to understand the project layout, so let's just press Enter. After this we will be asked to set our project root - Press Enter to keep the default value. Next it will ask if we want a .gitignore file. Press Enter again to keep the default value of "yes" or type n for "no". It will then ask if we want to install the dependencies for our sample project. Press Enter to accept the default of yes. Now HardHat will create a sample project for us and install the dependencies. Once complete, it will look something like this:
 
-![Hardhat Initialized](../assets/HardhatInstalled.png)
+![Hardhat Initialized](https://github.com/figment-networks/datahub-learn/raw/master/assets/HardhatInstalled.png)
 
 **Congrats** 🎊🎊🎊 you have created your first HardHat project!
 
@@ -61,7 +61,7 @@ We can start with a basic sample project so that it is easier to understand the 
 
 Now let's open our project and take a look at what it contains. I will be using VSCode as my editor of choice but feel free to use any other code editor you are comfortable with.
 
-![Initial File Structure](../assets/InitialFileStructure.png)
+![Initial File Structure](https://github.com/figment-networks/datahub-learn/raw/master/assets/InitialFileStructure.png)
 
 What we get is a very simple project scaffold. The directory names are quite self explanatory. All our smart contracts, script files and test scripts are going to be kept in their respective directories (folders).
 
@@ -464,7 +464,7 @@ npx hardhat test
 
 This should output:
 
-![Running Tests](../assets/ranTest.png)
+![Running Tests](https://github.com/figment-networks/datahub-learn/raw/master/assets/ranTest.png)
 
 # Deploy the smart contract
 
@@ -477,7 +477,7 @@ Before we move ahead and deploy our smart contract, we will need two additional 
 
 ## Setting up environment variable
 
-![Creating ENV File](../assets/WithENV.png)
+![Creating ENV File](https://github.com/figment-networks/datahub-learn/raw/master/assets/WithENV.png)
 
 Create a new file named `.env` in the project root directory
 
@@ -557,7 +557,7 @@ Now we have to wait for a few minutes as the contract is deployed and verified. 
 
 If everything is correct you should get an output similar to this:
 
-![Deploying Contract](../assets/DeployingContract.png)
+![Deploying Contract](https://github.com/figment-networks/datahub-learn/raw/master/assets/DeployingContract.png)
 
 You can now view your contract at the link provided in the output. You can check out my example of the deployed contract [here](https://mumbai.polygonscan.com/address/0x12Fc3C44b4092aD55cf0212fa3A84a1210fCED5f).
 
@@ -598,15 +598,15 @@ In this case please make sure you are entering the correct API key.
 
 If we view our smart contract on Polygonscan, you can see that our contract is verified. This is indicated by a green checkmark in the Contracts tab. In the Contracts tab, click on `Write Contract`. Now click on "Connect to Web3" and connect your Metamask account.
 
-![Contract Deployed and Verified](../assets/ContractVerified.png)
+![Contract Deployed and Verified](https://github.com/figment-networks/datahub-learn/raw/master/assets/ContractVerified.png)
 
 Now select the `mint` action and put in your tokenURI. I am using [https://gambakitties-metadata.herokuapp.com/metadata/1](https://gambakitties-metadata.herokuapp.com/metadata/1) as my tokenURI. If you want, you can create your own tokenURI by hosting it using IPFS. Once you enter your tokenURI, click on the "Write" button. This will show a Metamask popup. Confirm the transaction and wait for it to be confirmed.
 
-![MetaMask Sign Popup](../assets/MetaMaskSign.png)
+![MetaMask Sign Popup](https://github.com/figment-networks/datahub-learn/raw/master/assets/MetaMaskSign.png)
 
 Congratulations🥳🥳🥳, Your NFT is successfully minted. You can visit the [Opensea Testnet](https://testnets.opensea.io/) page and in the "My Profile" section you can now view your NFT. Checkout the example [here](https://testnets.opensea.io/assets/mumbai/0x12fc3c44b4092ad55cf0212fa3a84a1210fced5f/0).
 
-![NFT in Opensea Testnet](../assets/NFTMinted.png)
+![NFT in Opensea Testnet](https://github.com/figment-networks/datahub-learn/raw/master/assets/NFTMinted.png)
 
 # Conclusion
 

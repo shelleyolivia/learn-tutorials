@@ -2,7 +2,7 @@
 
 In this tutorial you will learn how to deploy a Solidity smart contract to the Avalanche Fuji testnet using HardHat, then create and deploy its subgraph to the Subgraph Studio.
 
-![Subgraph Studio](../assets/graph.png)
+![Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph.png)
 
 The Subgraph Studio is where you can build and create subgraphs. You can add metadata to your graphs (even after deploying your subgraphs), deploy multiple versions of your subgraphs, as well as publish them to the decentralized Graph Explorer. Do note that publishing a subgraph is different from deploying a subgraph. When you deploy a subgraph, you alone can access it. But when you publish it, it's created on-chain, and everyone can access it.
 
@@ -214,15 +214,15 @@ module.exports = {
 
 To get your `DATAHUB_API_KEY`, head over to <https://datahub.figment.io/sign_up> and create a free account.
 
-![Datahub Signup](../assets/datahub_signup.png)
+![Datahub Signup](https://github.com/figment-networks/datahub-learn/raw/master/assets/datahub_signup.png)
 
 Click on the verification link you shall receive in your email. After email verification, you will be redirected to <https://datahub.figment.io/>.
 
-![Datahub Avalanche](../assets/datahub_avalanche.png)
+![Datahub Avalanche](https://github.com/figment-networks/datahub-learn/raw/master/assets/datahub_avalanche.png)
 
 Click on the `Avalanche` button to view the Avalanche Services Dashboard at <https://datahub.figment.io/services/avalanche>. You can copy your API key to the clipboard by clicking on the **copy** button.
 
-![Datahub Avalanche API Key](../assets/datahub_avalanche_api.png)
+![Datahub Avalanche API Key](https://github.com/figment-networks/datahub-learn/raw/master/assets/datahub_avalanche_api.png)
 
 ## Getting your Metamask private key
 
@@ -238,7 +238,7 @@ You need to add a connection to the Avalanche Fuji testnet to your Metamask by f
   - **Symbol**: `AVAX`
   - **Explorer**: `https://cchain.explorer.avax-test.network`
 
-![Metamask FUJI Avalanche](../assets/avalanche_metamask.png)
+![Metamask FUJI Avalanche](https://github.com/figment-networks/datahub-learn/raw/master/assets/avalanche_metamask.png)
 
 You will also need some Fuji AVAX tokens in your Metamask wallet. Follow the instructions below:
 
@@ -348,15 +348,15 @@ It shall create three files:
 
 First, you will want to head over to the Subgraph Studio at <https://thegraph.com/studio/>.
 
-![Login to Subgraph Studio](../assets/graph_connect.png)
+![Login to Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_connect.png)
 
 Click on the **Connect Wallet** button. Choose a Metamask wallet to login with. Once you are authenticated, you shall see the below screen, where you can create your first subgraph.
 
-![Create your first subgraph](../assets/graph_create_subgraph.png)
+![Create your first subgraph](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_create_subgraph.png)
 
 Next, you need to give your subgraph a name. Give the name as **vending**. Once that's done, you will see this screen:
 
-![Subgraph dashboard](../assets/graph_subgraph_created.png)
+![Subgraph dashboard](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_subgraph_created.png)
 
 On this screen, you can see details about the subgraph like your deploy key, the subgraph slug and status.
 

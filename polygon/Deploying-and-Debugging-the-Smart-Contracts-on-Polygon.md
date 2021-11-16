@@ -17,13 +17,13 @@ This tutorial assumes that you have some beginner-level experience in programmin
 
 To be able to interact with the Mumbai testnet via MetaMask, you first have to add an RPC endpoint to your MetaMask wallet. This will allow you to view your MATIC balance, also to send and receive MATIC tokens. Open the extension in your browser by clicking on the Fox icon, then click on the Identicon at the top right of the extension window, then click through `Settings -> Networks -> Add network`. When you have entered the information as shown in the image below, click on **Save** to complete the process.
 
-![<img src="../assets/deploy-&-debug-on-polygon-1.png" width="80" />](../assets/deploy-&-debug-on-polygon-1.png)
+![<img src="https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy-&-debug-on-polygon-1.png" width="80" />](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy-&-debug-on-polygon-1.png)
 
 To get Mumbai MATIC tokens so that you can pay the gas fees for smart contract deployment and testing, go to the Matic Faucet at [https://faucet.matic.network](https://faucet.matic.network). Select the Mumbai network, paste your account address into the textinput and click on **Submit**.
 
 When you are done, open MetaMask and check your wallet - you'll see the MATIC tokens there. Keep in mind that MATIC tokens on the Mumbai testnet have no value, and cannot be exchanged with Mainnet MATIC.
 
-![](../assets/deploy-&-debug-on-polygon-2.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy-&-debug-on-polygon-2.png)
 
 # truffle-config
 

@@ -20,7 +20,7 @@ The SmartPy language is available through a Python library for building and anal
 And with its IDE, we can quickly write our code in the browser itself. We can also deploy our code from the browser. No local setup is required.  
 So, Let's start. Open https://smartpy.io/ide
 
-![SmartPy](../assets/mint_smartpy_1.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_smartpy_1.png)
 
 You can explore and look at the template codes given.  
 To move to the editor, click CLOSE.
@@ -130,12 +130,12 @@ def test():
 
 Run the code using the RUN button above the left(editor) panel or can use ctrl+enter also, cmd+enter for mac.
 
-![SmartPy](../assets/mint_smartpy_run.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_smartpy_run.png)
 
 If there are no errors, we will get the output in the right terminal.  
 We can check it according to the tests defined. We defined the heading in h1 in tests as “tutorial tests”, so we can see that on the top. Other than that, we can look at the NFT contract and on scrolling, we can see the mint transaction as defined in the tests. So this looks perfect, and our contact is working correctly.
 
-![SmartPy](../assets/mint_smartpy_output.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_smartpy_output.png)
 
 # Deploy Contract
 
@@ -145,29 +145,29 @@ After running, we get the option to Deploy Michelson Contract in the output pane
 
 Click on the Deploy Michelson Contract button.
 
-![SmartPy](../assets/mint_smartpy_deploy_1.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_smartpy_deploy_1.png)
 
 A new tab will open up.
 
-![SmartPy](../assets/mint_smartpy_deploy_2.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_smartpy_deploy_2.png)
 
 Choose Granadanet in the Node. Now Click on Temple Wallet. Choose one account (if you have multiple). And then press connect.
 
 Account loaded with success will come.
-![SmartPy](../assets/mint_smartpy_deploy_3.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_smartpy_deploy_3.png)
 
 Scroll down below and click on Estimate Cost From RPC. It will refresh the cost. And after that, click on the DEPLOY CONTRACT button.
-![SmartPy](../assets/mint_smartpy_deploy_4.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_smartpy_deploy_4.png)
 
 Accept the pre-signature information.
 
-![SmartPy](../assets/mint_smartpy_deploy_5.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_smartpy_deploy_5.png)
 
 Then your wallet popup will come. Press sign.
 
 Contract Originated Successfully will be shown. Copy the contract address(KT1Rv5Nvc4A2e4hTHi34QhChYFdJ2aBjAp7P) and store it.
 
-![SmartPy](../assets/mint_smartpy_deploy_6.png)
+![SmartPy](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_smartpy_deploy_6.png)
 
 Hurray, we deployed our contract successfully.
 
@@ -178,16 +178,16 @@ And, we will use IPFS to store the metadata of our tokens. And to upload our fil
 In this tutorial, we will create a NFT of an image. Firstly, we will upload the image and then use the image hash in the token metadata.
 So to upload files, visit [nft.storage](https://nft.storage/).
 
-![IPFS](../assets/mint_ipfs_1.png)
+![IPFS](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_ipfs_1.png)
 
 Log in and click on upload and choose the image file you want to upload and upload.
 
-![IPFS](../assets/mint_ipfs_2.png)
+![IPFS](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_ipfs_2.png)
 
 Upload it now.  
 The file will get uploaded, and this is your hash.
 
-![IPFS](../assets/mint_ipfs_3.png)
+![IPFS](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_ipfs_3.png)
 
 You can view your files visiting ipfs://{hash} (If your browser doesn’t support IPFS, you can use https://ipfs.io/ipfs/{hash} )
 
@@ -237,27 +237,27 @@ It’s time to mint our first NFT. Open up [better-call.dev](https://better-call
 Move to interact tab, open mint from the right sidebar.  
 Put the address you want to mint the NFT to. The amount should be 1 and token_id to 0. And for metadata, we will take the hash of the `metadata.json` file we uploaded above and use ipfs://{hash} to set the token metadata. But for the token metadata, the ipfs URL needs to be in bytes. You can convert the strings to bytes from [here](https://tutorial-mint-nfts.vercel.app/char2bytes).
 
-![better-call.dev](../assets/mint_better_1.png)
+![better-call.dev](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_better_1.png)
 
 Press Execute and choose the wallet option. From the list of wallets, choose the temple wallet. And then use the account which was set to admin for the contract. This is important; we won’t be able to mint using any other address. Only admin can mint according to our smart contract.
 
-![better-call.dev](../assets/mint_better_2.png)
+![better-call.dev](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_better_2.png)
 
 You can check the fees and also explore the operations which wallet is going to send. Then click confirm.
 
-![better-call.dev](../assets/mint_better_3.png)
+![better-call.dev](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_better_3.png)
 
 The message will come if it’s successfully sent.
 
-![better-call.dev](../assets/mint_better_4.png)
+![better-call.dev](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_better_4.png)
 
 After few seconds, refresh and move to the operations tab, you can see the mint operation.
 
-![better-call.dev](../assets/mint_better_5.png)
+![better-call.dev](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_better_5.png)
 
 You can look at the NFT token metadata in tokens section.
 
-![better-call.dev](../assets/mint_better_6.png)
+![better-call.dev](https://github.com/figment-networks/datahub-learn/raw/master/assets/mint_better_6.png)
 
 Hurray, we minted our token.
 

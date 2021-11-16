@@ -4,7 +4,7 @@ Solana is a public blockchain platform. It is open-source and decentralized, wit
 
 We are going to build a very simplified clone of [Solana Explorer](https://github.com/solana-labs/explorer).
 
-![](../assets/solana-explorer-01.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana-explorer-01.png)
 
 # Prerequisites
 
@@ -33,11 +33,11 @@ cd dapp-scaffold
 
 3. `npm run start` or `yarn start` to run the dapp on localhost.
 
-![](../assets/solana-explorer-terminal-start.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana-explorer-terminal-start.png)
 
 We should have dapp-scaffold running in localhost:3000.
 
-![](../assets/solana-explorer-02.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana-explorer-02.png)
 
 We are going to build the basic stats that we can see in the [Solana explorer](https://explorer.solana.com/), we break it up into more basic steps. We are going to fetch the price, the stats and search for the address.
 
@@ -211,7 +211,7 @@ return (
 
 Save all the files. Save all and reload. Now you should be able to see the price.
 
-![](../assets/solana-explorer-03.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana-explorer-03.png)
 
 # Get Supply Stats
 
@@ -394,7 +394,7 @@ Let’s go back to `SupplyCard.tsx` and see what we have done. Import `Supply` a
 Save all and let’s look into it.
 At this point you should see Active Stake and Circulating Supply in the frontend.
 
-![](../assets/solana-explorer-04.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana-explorer-04.png)
 
 # Get Cluster Stats
 
@@ -540,7 +540,7 @@ import StatsCard from "../../components/StatsCard";
 This time inside `StatsCard` the URL and `epochInfo` are **omitted** for you to complete them. At the end of this tutorial, you will find the final repo where you can check for the answer or you can also follow the video tutorial.
 Once completed the missing info you will have this:
 
-![](../assets/solana-explorer-05.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana-explorer-05.png)
 
 # Search for accounts and transactions
 
@@ -1091,7 +1091,7 @@ import SearchCard from "../../components/SearchCard";
 
 Try it by searching an address, you should something similar to this:
 
-![](../assets/solana-explorer-06.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana-explorer-06.png)
 
 Congratulations! We made it. 👍
 

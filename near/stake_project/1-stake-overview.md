@@ -34,7 +34,7 @@ The STAKE token business model leverages the following from NEAR:
 
 # STAKE Token Contract High-Level Overview
 
-![](../../assets/oysterpack-near-stake-token-overview-1-.png)
+![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-near-stake-token-overview-1-.png)
 
 * Users must register with the contract in order to use it. When registering, users are required to pay an upfront account storage fee to cover storage staking costs. On NEAR long term storage is not free. The account storage fee is escrowed and will be refunded back to the user when the account unregisters.
 * Contract is linked to a single staking pool contract, i.e., STAKE token contract is deployed per staking pool contract.

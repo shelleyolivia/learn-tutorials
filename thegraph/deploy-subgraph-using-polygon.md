@@ -2,7 +2,7 @@
 
 In this tutorial you will learn how to deploy a Solidity smart contract to the Polygon Mumbai testnet using HardHat, then create and deploy its subgraph to the Subgraph Studio.
 
-![Subgraph Studio](../assets/graph.png)
+![Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph.png)
 
 The subgraph studio is where you can create a subgraph using the Studio UI, deploy a subgraph using the Graph Protocol CLI, test it in the Playground (where you can run GraphQL queries without incurring any querying fees), add metadata about the subgraph, deploy multiple versions of your subgraphs, as well as publish them to the decentralized Graph Explorer.
 
@@ -266,13 +266,13 @@ module.exports = {
 
 To get your `DATAHUB_API_KEY`, head over to <https://datahub.figment.io/sign_up> and create a free account.
 
-![Datahub Signup](../assets/datahub_signup.png)
+![Datahub Signup](https://github.com/figment-networks/datahub-learn/raw/master/assets/datahub_signup.png)
 
 Click on the verification link you shall receive in your email. After email verification, you will be redirected to <https://datahub.figment.io/>.
 
 Click on the `Polygon` button to view the Polygon Services Dashboard at <https://datahub.figment.io/services/polygon>. You can copy your API key to the clipboard by clicking on the **copy** button.
 
-![Datahub Polygon API Key](../assets/datahub_polygon_api.png)
+![Datahub Polygon API Key](https://github.com/figment-networks/datahub-learn/raw/master/assets/datahub_polygon_api.png)
 
 ## Getting your Metamask private key
 
@@ -391,15 +391,15 @@ Make sure to visit the documentation on https://thegraph.com/docs/ for further i
 
 First, you will want to head over to the Subgraph Studio at <https://thegraph.com/studio/>.
 
-![Login to Subgraph Studio](../assets/graph_connect.png)
+![Login to Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_connect.png)
 
 Click on the **Connect Wallet** button. Choose a Metamask wallet to login with. Once you are authenticated, you shall see the below screen, where you can create your first subgraph.
 
-![Create your first subgraph](../assets/graph_create_subgraph.png)
+![Create your first subgraph](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_create_subgraph.png)
 
 Next, you need to give your subgraph a name. Give the name as **FunNFT**. Once that's done, you will see this screen:
 
-![Subgraph dashboard](../assets/graph_fun_nft.png)
+![Subgraph dashboard](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_fun_nft.png)
 
 On this screen, you can see details about the subgraph like your deploy key, the subgraph slug and status.
 
