@@ -18,7 +18,7 @@ Before we jump right into SOLANA's eight innovations, let’s slow down and lear
 
 The name of this “episode” is: _“Sending letters to grandpa!”_
 
-![maxresdefault.jpeg](./assets/maxresdefault.jpeg)
+![maxresdefault.jpeg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/maxresdefault.jpeg)
 
 Bart, Lisa, and Maggie are writing letters to Grampa Simpson. Each one of them needs to write onto the envelope the usual information: the sender, the receiver, and inside of the envelope, the content, right? Pretty straightforward.
 
