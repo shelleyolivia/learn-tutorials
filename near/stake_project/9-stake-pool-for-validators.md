@@ -6,9 +6,9 @@ In my last tutorial I introduced you to the **next generation** OysterPack SMART
 
 # The Big Picture
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-deployment.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-deployment.png)
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-operator-usecases.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-operator-usecases.png)
 
 Below is the list of components used by the contract along with brief descriptions for each of the APIs they provide:
 
@@ -61,7 +61,7 @@ Thus, in order to prevent malicious behavior, contracts should be designed to pa
 
    the staked NEAR to current STAKERS.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-storage-management-api.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-storage-management-api.png)
 
 ```text
 export DATAHUB_APIKEY=<DATAHUB_APIKEY>
@@ -99,7 +99,7 @@ near-figment call $CONTRACT storage_unregister --args '{"force":true}' --account
 
 As stated above, managing account storage usage properly is crucial. The storage management NEP-145 standard looks at it from the perspective of cost, i.e., storage balance. However, storage costs change overtime. Storage usage should be managed as storage usage - not storage balance. The storage management API provides a storage balance bounds, i.e., which is used by accounts to lookup how much it costs to register with the contract. The account management component is designed to dynamically compute account storage usage bounds when the contract is deployed. Then, storage balance bounds are derived from the storage usage bounds.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-storage-usage.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-storage-usage.png)
 
 ```text
 near-figment view $CONTRACT ops_storage_usage_bounds 
@@ -122,7 +122,7 @@ The STAKE Pool contract defines one additional custom contract permission: **tre
 
 Any other permission bits granted to an account will be ignored. The **treasurer** permission is required to access the **Staking Pool Treasury API**.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-permissions.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-permissions.png)
 
 ```text
 # used to check permissions
@@ -178,7 +178,7 @@ The API supports the following use cases:
 
 1. Contract ownership can be transferred to another prospective account using the following workflow:
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-contract-owner-transfer.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-contract-owner-transfer.png)
 
 1. The contract owner can withdraw funds that the contract owner is entitled too.
 
@@ -189,7 +189,7 @@ The contract owner available balance will always be zero for the STAKE pool cont
 * When the transfer is finalized, any owner balance is transferred to the new owner. 
 * The owner can withdraw from its available balance before the transfer is finalized.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-contract-ownership.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-contract-ownership.png)
 
 ```text
 # returns the contract owner account ID
@@ -214,7 +214,7 @@ near -node_url $NEAR_NODE_URL call $CONTRACT ops_owner_withdraw_balance --accoun
 
 The operator API enables storage balance to be locked based on expected contract storage usage. When the STAKE pool contract is deployed, it will automatically lock funds to reserve 10 KB of contract storage, which is a conservative amount. The STAKE pool contract should not require more than 10 KB storage. Locking the funds ensures that there is always enough balance available on the contract to pay for storage for the contract to be operational.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-contract-operator.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-contract-operator.png)
 
 ```text
 # storage usage is specified in bytes
@@ -235,7 +235,7 @@ The following metrics are tracked:
 3. Account NEAR balances - from account storage balances
 4. Contract NEAR balances - these are funds managed at the contract level \(see below\)
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-contract-metrics.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-contract-metrics.png)
 
 ```text
 # returns the total number of registered accounts
@@ -263,7 +263,7 @@ This is fundamental to understand because it's how all the "money" is managed. T
 
 > PAY ATTENTION HERE - This is the most critical diagram to understand how money is flowing within the contract.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-pool-balances.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-pool-balances.png)
 
 1. **Account Locked Balance**
    * is the portion of the total contract account balance that is currently locked by the NEAR protocol
@@ -329,7 +329,7 @@ Provides the API's that provide the STAKE token. These APIs are well documented,
 
 In addition to the standard Fungible Token API interfaces, the contract also provides a Fungible Token Operator API interface, which is used to manage the fungible token metadata and transfer callback gas settings:
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-ft-operator.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-ft-operator.png)
 
 ```text
 # commands require operator permission
@@ -359,7 +359,7 @@ Most of these APIs were covered in my last tutorial. I am also including them he
 
 ### Staking Pool API
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-staking-pool-api.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-staking-pool-api.png)
 
 ```text
 # used to check if the STAKE pool is online or offline
@@ -414,7 +414,7 @@ near-figment call $CONTRACT ops_stake_transfer_call --accountId $NEAR_ACCOUNT--a
 
 This API mirrors the first generation staking pool API to make it easier for folks to migrate over. The only difference I want to call out is that when staking, accounts will be automatically registered. This means the account storage balance fees will be deducted from the attached deposit.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-near-staking-pool-api.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-near-staking-pool-api.png)
 
 ### Staking Pool Treasury API
 
@@ -435,7 +435,7 @@ The API provides convenience APIs to manage the treasurer permissions, which was
    * Remember that the treasury funds are effectively owned by the contract owner, i.e., the validator
    * This enables the owner to withdraw funds from the treasury, which has the effect of decreasing the dividend payout
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-treasury.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-treasury.png)
 
 ```text
 near-figment call $CONTRACT ops_stake_treasury_deposit --accountId oysterpack.testnet --amount 10
@@ -449,7 +449,7 @@ near-figment call $CONTRACT ops_stake_treasury_transfer_to_owner --accountId oys
 
 The staking pool operator APIs were well covered in the \[previous tutorial\]\[11\].
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-staking-pool-operator.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-staking-pool-operator.png)
 
 # Conclusion
 
@@ -469,7 +469,7 @@ That being said ... I invite you to join the Figment and NEAR communities and em
 
 Stay tuned for more tutorials on the OysterPack SMART component based framework to help contract developers build _**SMARTER**_, _**FASTER**_, and _**BETTER**_ on the [NEAR](https://near.org/) platform.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-liberty.jpeg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-liberty.jpeg)
 
-\[11\]: [https://learn.figment.io/tutorials/8-stake-pool-contract#how-to-operate-the-s-t-a-k-e-pool-contract](https://learn.figment.io/tutorials/8-stake-pool-contract#how-to-operate-the-s-t-a-k-e-pool-contract)
+\[11\]: [https://learn.figment.io/tutorials/stake-pool-contract#how-to-operate-the-s-t-a-k-e-pool-contract](https://learn.figment.io/tutorials/stake-pool-contract#how-to-operate-the-s-t-a-k-e-pool-contract)
 
