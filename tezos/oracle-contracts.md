@@ -369,7 +369,7 @@ While we have everything we need to originate and administer an oracle contract,
 
 Below are two simple examples of how you can periodically fetch some data and automatically push it to the oracle contract.
 
-## Minimal `bash` server
+## Minimal server implementation
 
 A minimal server written in bash shellscript could consist of:
 
