@@ -72,10 +72,11 @@ Consider the main blockchain as a congested road, where only 20 vehicles at a ti
 There are two obvious solutions to overcome this issue. Either we can broaden the road so that more vehicles can pass at a time (layer 1 solution), or we can make another broad highway bypassing the road so that this would divert some traffic to the highway (layer 2 solution).
 
 **Polygon Matic** focuses on layer 2 scaling. Some of the layer 2 scaling mechanisms -
-* State channels
-* Plasma chains
-* ZK (zero-knowledge) Rollups
-* Optimistic rollups
+
+* [State channels](https://education.district0x.io/general-topics/understanding-ethereum/basics-state-channels/) 
+* [Plasma chains](https://education.district0x.io/general-topics/understanding-ethereum/understanding-plasma/)
+* [ZK (zero-knowledge) Rollups](https://finematics.com/rollups-explained/)
+* [Optimistic rollups](https://finematics.com/rollups-explained/) 
 
 ## What is MATIC?
 
@@ -112,8 +113,8 @@ The smart contract on the main chain is responsible for maintaining checkpoints 
 In February 2021, Matic revamped to **Polygon**, representing the integration of multiple layer 2 scaling solutions. Instead of only plasma chains as a solution, it will now offer -
 * [State channels](https://education.district0x.io/general-topics/understanding-ethereum/basics-state-channels/)
 * [Plasma chains](https://education.district0x.io/general-topics/understanding-ethereum/understanding-plasma/)
-* [ZK (zero-knowledge) Rollups]()
-* [Optimistic rollups]()
+* [ZK (zero-knowledge) Rollups](https://finematics.com/rollups-explained/)
+* [Optimistic rollups](https://finematics.com/rollups-explained/)
 
 Polygon is often called **Ethereum's Internet of Blockchains**. This is because Polygon aims to connect and scale all the Ethereum compatible blockchain networks, just like the internet connects people. It strives to make an ecosystem of Ethereum-compatible and scalable blockchains, so that every network can enjoy scalability, security, and decentralization at the same time.
 
