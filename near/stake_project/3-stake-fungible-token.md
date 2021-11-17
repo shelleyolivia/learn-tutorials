@@ -4,7 +4,7 @@ In this tutorial, we'll learn about how staking works on NEAR. We'll see how the
 
 ## NEAR Staking 101
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-basic-staking.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-basic-staking.png)
 
 The NEAR protocol is a Proof-of-Stake \(PoS\) blockchain. Those who participate in staking to help secure the blockchain network earn staking rewards paid in NEAR tokens. There are two ways to participate:
 
@@ -34,7 +34,7 @@ For more information on how staking works on NEAR see:
 
 ## You Can Have Your STAKE and Trade It Too
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-STAKE-FT.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-STAKE-FT.png)
 
 When you deposit NEAR into the STAKE token contract, it will delegate the NEAR to the staking pool for you. In return, you are issued STAKE tokens that grow in value via staking rewards issued through the staking pool contract. STAKE tokens unlock the value of the staked NEAR that is locked up by the staking pool contract by enabling the user to transfer the staked NEAR value to other accounts. The STAKE token contract adds even more value beyond letting you use staked NEAR as fungible tokens. However, we'll save that for future tutorials. For now, we'll stay focused on how the STAKE token implements [NEP-141](2-fungible-token.md).
 
@@ -70,7 +70,7 @@ That's pretty cool because if you are eager to start using new features then you
 
 To keep the code clean we will first design the interfaces separate from the implementation. The contract API will be defined explicitly via an interface. In Rust, interfaces are called [traits](https://doc.rust-lang.org/book/ch10-02-traits.html). The design approach will be to leverage Rust strongly typed system to model the domain. The [NEP-141](2-fungible-token.md) standard defined the API using the lowest common denominator to keep the API programming language-neutral as much as possible. In doing so, we lost type safety. For example, numeric amounts were specified as `string` types. With Rust, we get type safety back. We will be working with a typed domain model that makes the code clear and precise.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-FT-NEP-141.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-FT-NEP-141.png)
 
 * see [Rust code](https://github.com/oysterpack/oysterpack-near-stake-token/blob/main/contract/src/interface/fungible_token.rs) on Github
 
@@ -193,7 +193,7 @@ fn ft_transfer_call(
 
 Transfer call is a little more interesting because it involves cross contract calls. It showcases how NEAR differs and stands out from other blockchains thanks to its sharded architecture.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-transfer-call.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-transfer-call.png)
 
 * Transfer call workflow will first transfer the tokens - it simply delegates to `ft_transfer()` as we saw above
 * Then it composes the async transfer call workflow using the [Promise](https://docs.rs/near-sdk/2.0.1/near_sdk/struct.Promise.html) abstraction provided by the NEAR Rust SDK
@@ -372,13 +372,13 @@ near view $CONTRACT ft_balance_of --node_url $NEAR_NODE_URL --args "{\"account_i
 
 * **NOTE**: in case you wondering what **dev-1611907846758-1343432** is, it's a mock contract that implements the **TransferReceiver** contract interface. The `near dev-deploy` CLI command was used to deploy the contract, which automatically creates the account and auto-generated the contract account ID. For those that are even more curious about the mock contract, the code is located within the same STAKE project: [ft-transfer-receiver-mock](https://github.com/oysterpack/oysterpack-near-stake-token/tree/main/contract/ft-transfer-receiver-mock).
 
-## Conclusion
+# Conclusion
 
 That was longer than expected, but time flies by when you are having fun. We learned about staking on NEAR and how you can earn staking rewards as a delegator. I went over, at a high level, how the STAKE contract unlocks value in your staked NEAR by providing you with fungible tokens for your staked NEAR. We then implemented the Fungible Token Core Standard \(NEP-141\) for the STAKE contract. We did some design and coding. Along the way, we also got a little taste of how cross contract calls and promises work on NEAR using the NEAR Rust SDK. Finally, you got a chance to earn some NEAR while learning with us. I invite you to join the Figment and NEAR communities and embark on our common mission to take back the Internet together.
 
 # Next Steps
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-testing-code-meme.jpg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-testing-code-meme.jpg)
 
 Just kidding folks ... I didn't forget about testing. Testing was intentionally left out of this tutorial because it is a huge topic in itself that deserves full attention. I also didn't want to turn this tutorial into a novel 😄. In the next tutorial, we'll be following up on how to test our smart contracts using the STAKE fungible token as an example.
 
