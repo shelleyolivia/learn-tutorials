@@ -24,7 +24,7 @@ Performing these setup steps for the purposes of following the tutorial should n
 
 When we copy and paste all four of these commands into a terminal, the first three will execute in sequence. `npm init -y` will output the contents of the default `package.json` to the terminal. `npm install` will be on the commandline, however we must still **press enter** to start the installation process.
 
-```
+```text
 mkdir polkadot_sr
 cd polkadot_sr
 npm init -y
@@ -35,7 +35,7 @@ Once the installation process is complete, Create an `.env` file in the working 
 \(`/polkadot_sr`\). For convenience, copy and paste the template below. Read more about `dotenv`in our handy [quick-reference guide](../../extra-guides/dotenv-and-.env.md). Also, remember to replace `API_KEY` with a valid DataHub API key from the [Polkadot Services Dashboard](https://datahub.figment.io/services/polkadot).
 
 
-```
+```text
 DATAHUB_URL=http://polkadot-westend--rpc.datahub.figment.io/apikey/API_KEY
 
 # Alice
@@ -155,7 +155,7 @@ main().catch((err) => { console.error(err) }).finally(() => process.exit());
 
 Run the code with `node create_proxy.js`. The expected output will look similar to this example :
 
-```
+```text
 Required values  : .transfer(destination, amount)
 Submitted values : .transfer(5FsyYpFCETZpmexY3FZuD5oxK3viQwcDenHa5hiHsVyaqvYA, 2.0000 WND)
 transfer() tx: https://westend.subscan.io/extrinsic/...
@@ -240,7 +240,7 @@ main().catch((err) => { console.error(err) }).finally(() => process.exit());
 This is an example of how simple it is to batch transactions with PolkadotJS. All we have done here is define an array of transfers, which will then be automatically processed, signed and sent to the network with just a couple of method calls. Go ahead and run the code in the terminal with `node fund_friends.js` . The output will be similar to this example \(some removed for display\) :
 
 
-```bash
+```text
 Required values  : .batch([transactions])
 Submitted values : .batch([
   "0xac040400004c5f5c983eaa1a5ce7cf4462b4f527f69c3b9cb284e2ae941d1b8b3a85a...",
@@ -444,8 +444,7 @@ Without this part of the process, social recovery is impossible. This is why it 
 
 Run `node vouch_recovery.js` :
 
-
-```bash
+```text
 Bob vouch tx: https://westend.subscan.io/extrinsic/...
 Charlie vouch tx: https://westend.subscan.io/extrinsic/...
 ```
@@ -545,7 +544,7 @@ There is also a `cancelRecovered()` function which revokes the ability of a regi
 
 Run `node use_recovery.js` :
 
-```
+```text
 Required values  : asRecovered(address, function)
 Submitted values : asRecovered(
     5CwJrhV9DaLncybk2vHbvt62SfwDfqMmPHVbo83u3iPkSDkc,
@@ -621,7 +620,7 @@ Regarding `signAndSend(Alice, { nonce: -1 })` , when sending multiple API calls 
 Run `node remove_recovery.js` :
 
 
-```
+```text
 Required values  : .batch([transactions])
 Submitted values : .batch([
   "0x8c041206a806dbe17a11f61c09bff38ef9a78cdd1fde311ff8ee09ef241a95052903be66",
