@@ -2,7 +2,7 @@
 
 In this tutorial you will learn how to create a subgraph from an ERC-721 smart contract on Ethereum mainnet, deploy it to the Subgraph Studio, and then use the Subgraph Studio Playground to query the subgraph for information about the indexed transactions.
 
-![Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph.png)
+![Subgraph Studio](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph.png)
 
 OpenZeppelin Subgraphs is a powerful library for easily indexing activity of OpenZeppelin Contracts. It simplies building subgraphs by supporting some of the most popular modules in OpenZeppelin Contracts, like `erc20`, `erc721`, `ownable` and so on. We shall be using `erc721` and `ownable` modules in this tutorial.
 
@@ -28,17 +28,17 @@ Because the latest version of the Graph Protocol CLI breaks compatibility with O
 
 Head over to [OpenSea](https://opensea.io/assets), the largest NFT marketplace.
 
-![OpenSea assets](https://github.com/figment-networks/datahub-learn/raw/master/assets/opensea_assets.png)
+![OpenSea assets](https://github.com/figment-networks/learn-tutorials/raw/master/assets/opensea_assets.png)
 
 As you can see from the screenshot above, there are over 20 million NFTs on sale!
 
 Click on the **Collections** tab on the left. There we can see many of the popular NFT collections like CryptoPunks, Art Blocks Curated, Galaxy-Eggs, and so on. Let's choose the **Galaxy-Eggs** NFT collection for this tutorial. Click on the **Galaxy-Eggs** link, which will take you to <https://opensea.io/collection/galaxyeggs9999>.
 
-![OpenSea Galaxy-Eggs](https://github.com/figment-networks/datahub-learn/raw/master/assets/opensea_galaxyeggs.png)
+![OpenSea Galaxy-Eggs](https://github.com/figment-networks/learn-tutorials/raw/master/assets/opensea_galaxyeggs.png)
 
 Click on any of the NFTs to view its display page:
 
-![OpenSea Galaxy-Eggs #7836](https://github.com/figment-networks/datahub-learn/raw/master/assets/opensea_galaxyeggs_7836.png)
+![OpenSea Galaxy-Eggs #7836](https://github.com/figment-networks/learn-tutorials/raw/master/assets/opensea_galaxyeggs_7836.png)
 
 From here you can click on the **Details** tab, to view the contract address for the NFT: <https://etherscan.io/address/0xa08126f5e1ed91a635987071e6ff5eb2aeb67c48>.
 
@@ -46,15 +46,15 @@ From here you can click on the **Details** tab, to view the contract address for
 
 Now that you have the address of a smart contract that you want to index using the Graph Protocol, you can head over to the Subgraph Studio at <https://thegraph.com/studio/>.
 
-![Login to Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_connect.png)
+![Login to Subgraph Studio](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph_connect.png)
 
 Click on the **Connect button** at the top right side of the page. Choose a Metamask wallet to login with. Once authenticated, you will be at the main Studio page where you can create your first subgraph:
 
-![Create your first subgraph](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_create_subgraph.png)
+![Create your first subgraph](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph_create_subgraph.png)
 
 Click the "Create a Subgraph" button to begin. You need to give your subgraph a name. For now, give the name as *GalaxyEggNFT* (this name is for display only and can be changed at any time). Once that's done, you can see details about the subgraph like your deploy key, the subgraph slug and status.
 
-![GalaxyEggs NFT subgraph](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_galaxyeggs_nft.png)
+![GalaxyEggs NFT subgraph](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph_galaxyeggs_nft.png)
 
 # Creating the subgraph
 
@@ -185,11 +185,11 @@ It will trigger a syncing process, where The Graph nodes will inspect historical
 
 You shall also have access to the Playground, where you can run your queries, like shown below.
 
-![GalaxyEggs NFT Subgraph](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_galaxyeggs_nft_subgraph.png)
+![GalaxyEggs NFT Subgraph](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph_galaxyeggs_nft_subgraph.png)
 
 **For now, you alone will have access to this subgraph in the Subgraph Studio. For others to be able to access your subgraph, you need to publish it to the Graph Network.**
 
-![GalaxyEggs NFT Subgraph Publish](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_publish.png)
+![GalaxyEggs NFT Subgraph Publish](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph_publish.png)
 
 Publishing meaning pushing your subgraph on-chain to either Ethereum mainnet or Ethereum Rinkeny testnet. This will allow you to see how your subgraph works in the [Graph Explorer](https://thegraph.com/explorer/).
 

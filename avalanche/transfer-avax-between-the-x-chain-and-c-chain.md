@@ -18,7 +18,7 @@ The Avalanche Wallet source code can be found [here](https://github.com/ava-labs
 
 ### Step 1 - Open the Avalanche Wallet
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/wallet-x2p-01-login-1-%20%281%29%20%281%29.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/wallet-x2p-01-login-1-%20%281%29%20%281%29.png)
 
 Select **Access Wallet** to enter your wallet. To connect the wallet to a network other than the main Avalanche network, select **Mainnet** and choose the network to connect to.
 
@@ -26,13 +26,13 @@ Select **Access Wallet** to enter your wallet. To connect the wallet to a networ
 
 You can access your wallet using the private key, mnemonic key phrase, keystore file or Ledger Nano S. C-Chain transfers via Ledger are not supported yet.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/wallet-x2p-02-access.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/wallet-x2p-02-access.png)
 
 After a successful login you will see your balance, assets portfolio and various other information.
 
 ### Step 3 - Go to the Cross Chain Tab
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/wallet-x2p-03-earn-1-%20%281%29.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/wallet-x2p-03-earn-1-%20%281%29.png)
 
 Functionality for transferring tokens between chains is on the **Cross Chain** tab.
 
@@ -40,13 +40,13 @@ Functionality for transferring tokens between chains is on the **Cross Chain** t
 
 You will be presented with a choice for **Source Chain** and **Destination Chain**. Select X-Chain and C-Chain, respectively. You will see your X and C balances, and an input field for entering the amount to transfer from source to destination chain.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/wallet-x2c-01-x-c.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/wallet-x2c-01-x-c.png)
 
 Enter the amount you wish to transfer from the X-Chain to the C-Chain.
 
 ### Step 5 - Confirm the Transaction
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/wallet-x2c-02-trasnfer.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/wallet-x2c-02-trasnfer.png)
 
 Press **Confirm**, and then **Transfer** to initiate the transfer.
 
@@ -54,7 +54,7 @@ Press **Confirm**, and then **Transfer** to initiate the transfer.
 
 A cross-chain transfer is a two step process: first a transaction to export the funds from the X-Chain, and another to import it to the C-Chain. The wallet will do both and show its the progress while doing so.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/wallet-x2c-03-done.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/wallet-x2c-03-done.png)
 
 That's it! You've transferred AVAX from the X-Chain to C-Chain! Now you can use them to deploy smart contracts on C-Chain.
 

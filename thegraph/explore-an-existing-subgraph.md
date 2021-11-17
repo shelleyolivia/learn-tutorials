@@ -251,7 +251,7 @@ Configure the query you are going to send. Leave `skip` as a variable because yo
 
 Before you move on, you might want to check the raw data in response. Use the playground is a good choice. You can find the format and check values easily.
 
-![HOPR Subgraph Playground](https://github.com/figment-networks/datahub-learn/raw/master/assets/hopr-subgraph-playground.png)
+![HOPR Subgraph Playground](https://github.com/figment-networks/learn-tutorials/raw/master/assets/hopr-subgraph-playground.png)
 
 Use a while loop to send queries until the result has less than 1000 records. This is because a single query can only return 1000 results maximum. In order to get all data, you need to adjust the `skip` variable.
 
@@ -421,7 +421,7 @@ export default App;
 
 Please remember to save all of the changes to the code, then refresh the localhost page. You should see the nice pie chart we just created:
 
-![Graph React App Pie Chart](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph-react-app-pie-chart.png)
+![Graph React App Pie Chart](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph-react-app-pie-chart.png)
 
 # Conclusion
 

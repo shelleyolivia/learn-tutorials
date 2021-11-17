@@ -1,4 +1,4 @@
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/dtube.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/dtube.png)
 
 # Introduction
 In this tutorial, you will learn how to build a Social Media DApp (Decentralized Application) like YouTube & how to Deploy it on the Polygon (Matic) Mumbai test network. So, grab a cup of coffee ☕️ and let's get started!
@@ -43,13 +43,13 @@ Now, `Create a MetaMask account -> save the mnemonics (12 secret words) because 
 
 To interact with Polygon via Metamask we first have to add a new RPC endpoint. Open the Metamask extension by clicking on the Fox icon in your browser toolbar then select `Settings -> Networks -> Add network -> Save`. Fill out the information as given in the image below.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy-and-debug-on-polygon-1.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/deploy-and-debug-on-polygon-1.png)
 
 Now you'll notice zero balance (0 MATIC) in your wallet, To get test Matic for deployment and testing,
 `go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network).
 Done! check your wallet, you'll see some Matic there. *(We only need small amount of Matic (5-10 Matic) to deploy and test our DApp.)*
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy-and-debug-on-polygon-2.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/deploy-and-debug-on-polygon-2.png)
 
 ### Tech Stack
 
@@ -92,7 +92,7 @@ This will copy the project files from GitHub to your computer.
 
 Now, open the folder with your favorite code editor or IDE, [VS Code](https://code.visualstudio.com) for example.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/dtube-5.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/dtube-5.png)
 
 Install all the dependencies by the following command:
 * `npm install`
@@ -178,7 +178,7 @@ Whenever we create a DApp using truffle by the commands `truffle init` or `truff
 
 Hence, to deploy our Smart Contracts to the Blockchain it is important to create a new file in the migrations folder called `2_initial_migration.js` which will talk to our `DTube.sol` contracts.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/dtube-6.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/dtube-6.png)
 
 The code is similar to `1_initial_migration.js`, just replace migrations with DTube.
 
@@ -196,7 +196,7 @@ Path: `/src/components/`
 
 React applications are comprised of various components, for example a navigation bar, main page, webpage footer, etc. React loads a single HTML page (`/public/index.html`) which is then populated with all the components that are defined in the project.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/dtube-7.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/dtube-7.png)
 
 ### app.js
 Now let's work on our main `app.js` file which will contain all the components (navbar, main, footer).
@@ -384,7 +384,7 @@ export default App;
 ```
 ### Navbar.js
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/dtube-8.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/dtube-8.png)
 
 In the Navbar component, we're going to display the brand logo, brand name, user account address, and user profile (including a unique identicon, using a JavaScript library). First, let's import the code and brand logo. We're going to use [Bootstrap](https://getbootstrap.com/) to make our navigation bar.
 ```javascript
@@ -457,7 +457,7 @@ We're displaying the user address in this component with the `this.props.account
 
 ### Main.js
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/dtube-9.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/dtube-9.png)
 
 To display the current uploaded video & title of the video we're going to use `this.props.currentHash` & `this.props.currentTitle` properties. Now, why are we using `https://ipfs.infura.io/ipfs/` here? Because [Infura](https://infura.io/) will [pin our IPFS file](https://docs.ipfs.io/concepts/persistence/) to keep the file available to the network. Otherwise, if the IPFS node we're connected to is down, the video file might not be available. There are several IPFS pinning services available and Infura is one of the most commonly used due to its resilience.
 ```javascript
@@ -490,7 +490,7 @@ class Main extends Component {
           </div>
 ```
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/dtube-10.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/dtube-10.png)
 
 Next, we're going to create a form in the video feed to choose the video file, input the title of the video, and upload the video. We're going to choose the video file, which will process to upload on IPFS with `this.props.captureFile` method. Then we're going to input the title of the `video ref={(input) => { this.videoTitle = input }}`. In the `onSubmit` event handler we'll upload the video file with the title of the video by `this.props.uploadVideo(title)`.
 
@@ -538,7 +538,7 @@ Next, we're going to create a form in the video feed to choose the video file, i
             </form>
 ```
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/dtube-11.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/dtube-11.png)
 
 Finally, to list out all the previously uploaded videos with their title in the video feed we'll use `video.hash` and `video.title` properties. Whenever we click on any listed/previous videos the `changeVideo` function will convert the `video.hash` and `video.title` to `currentHash` & `currentTitle`, so that the selected video will appear on the screen.
 
@@ -683,7 +683,7 @@ Summary
 
 Now let's run the React app on http://localhost:3000/ with the command `npm start`. You should see MetaMask pop up, asking if you would like to connect your MetaMask wallet with the site. Once connected, you can upload and share videos on your DApp which is deployed on Polygon (Matic) network!
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/dtube-12.gif)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/dtube-12.gif)
 
 # Host the DApp on IPFS using Fleek
 You cannot call this project a "Decentralized Application" if you are hosting it on any centralized server. To make it decentralized, again we're going to use IPFS. But the problem here is you cannot update/modify the project with same IPFS hash. IPFS uses content based addressing, hence each asset has its own unique address. This is where we're going to use "Fleek" IPFS hosting and Filecoin storage platform where you can **deploy the project, get a link, get SSL certificate, assign the domain, and update the project by simply connecting your GitHub repository**. When you push any changes on that repo, fleek will automatically update the changes with new IPFS hash on the same Fleek url. How cool is that? Let's see how it's done.

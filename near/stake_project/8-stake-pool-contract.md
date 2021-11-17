@@ -41,11 +41,11 @@ The goal is to provide more financial levers to validators in order to promote c
 
 STAKE is modeled as a **dividend stock**. STAKE links the dividend yield directly to EPS \(earnings per share or earnings per STAKE\). When EPS increases, so does the dividend, and gets automatically paid out, which is governed by the contract \(and not a board of directors\). The STAKE pool contract enables validators to compete on EPS on more than just staking rewards provided by NEAR PoS.
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-smart-stake-earnings.png)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-earnings.png)
 
 # STAKE High Level Component Based Architecture
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-smart-stake-deployment.png)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-deployment.png)
 
 ## STAKE Pool Factory Contract
 
@@ -141,7 +141,7 @@ https://explorer.testnet.near.org/transactions/Yhrda9sutT4jhGMpwTuUZCZYm5vfH8RLC
 
 The logs tell the story about what's happening during the deployment, which is illustrated in the below diagram:
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-smart-stake-factory-deploy.png)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-factory-deploy.png)
 
 ## Notes
 
@@ -156,7 +156,7 @@ The logs tell the story about what's happening during the deployment, which is i
 
 # How to operate the STAKE pool contract
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-smart-stake-operator-usecases.png)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-operator-usecases.png)
 
 The above diagram shows the role and responsibilities for the operator. In this tutorial, I will review the key APIs to be familiar with to get started. The rest is out of scope and will be covered in future tutorials and workshops.
 
@@ -224,7 +224,7 @@ near call  $STAKE.stake-v1.oysterpack.testnet ops_stake_operator_command --args 
 
 # How to Get Started as a Staker
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-smart-staker-usecases.png)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-staker-usecases.png)
 
 The STAKE Pool contract implements the NEAR standard [storage management](https://nomicon.io/Standards/StorageManagement.html) specification. This means that accounts must first register with the contract and deposit funds to pay for account storage before being able to use the contract. I defer to the [storage management](https://nomicon.io/Standards/StorageManagement.html) documentation for details.
 
@@ -448,5 +448,5 @@ I invite you to join the Figment and NEAR communities and embark on our common m
 
 The focus will be providing the validators with more in-depth tutorials and workshops to help them get onboard.
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-smart-field-of-dreams.jpeg)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-field-of-dreams.jpeg)
 

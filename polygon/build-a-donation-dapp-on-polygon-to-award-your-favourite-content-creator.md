@@ -4,7 +4,7 @@ In this tutorial, you will learn how to create a Donation dApp on Polygon to awa
 
 This is what the dApp we will be creating looks like:
 
-![Dapp Demo](https://github.com/figment-networks/datahub-learn/raw/master/assets/dapp-demo.gif)
+![Dapp Demo](https://github.com/figment-networks/learn-tutorials/raw/master/assets/dapp-demo.gif)
 
 # Prerequisites
 
@@ -49,7 +49,7 @@ truffle init # Create truffle-config.js test/ and contracts/ directory
 ```
 When asked during the `create-next-app` setup, use "polygon-dapp" as the project name so that it will be easy for you to follow along with this tutorial. This is how the folder structure will be after initial setup:
 
-![Folder Structure](https://github.com/figment-networks/datahub-learn/raw/master/assets/folder-structure.png)
+![Folder Structure](https://github.com/figment-networks/learn-tutorials/raw/master/assets/folder-structure.png)
 
 The `truffle init` command creates the following directories:
 
@@ -166,7 +166,7 @@ truffle compile
 
 - Truffle will compile the Solidity file and you should see output similar to:
 
-![Truffle Compile](https://github.com/figment-networks/datahub-learn/raw/master/assets/truffle-compile.png)
+![Truffle Compile](https://github.com/figment-networks/learn-tutorials/raw/master/assets/truffle-compile.png)
 
 - For the migration of our contact to the blockchain, go to the `migrations` directory, create a new file called `2_donation_contract_migration.js` and add the following code:
 
@@ -216,7 +216,7 @@ truffle migrate
 
 This command will deploy your contract to Ganache, and will give you output that looks similar to this:
 
-![Output Image](https://github.com/figment-networks/datahub-learn/raw/master/assets/truffle-migrate.png)
+![Output Image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/truffle-migrate.png)
 
 # Writing tests for the smart contract
 
@@ -312,7 +312,7 @@ truffle test
 
 The output of the command should be similar to this: -
 
-![Output image](https://github.com/figment-networks/datahub-learn/raw/master/assets/truffle-test.png)
+![Output image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/truffle-test.png)
 
 # Connecting to a frontend with web3js
 
@@ -954,7 +954,7 @@ Summary
 
 This is how our Dapp will look like at the end:
 
-![Demo GIF](https://github.com/figment-networks/datahub-learn/raw/master/assets/donation-demo-dapp.gif)
+![Demo GIF](https://github.com/figment-networks/learn-tutorials/raw/master/assets/donation-demo-dapp.gif)
 
 # Conclusion
 

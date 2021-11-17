@@ -62,7 +62,7 @@ There's no such thing as a free lunch (TNSTAAFL) ... Everyone must pay for their
 
 # Fungible Token Core Standard - The Big Picture
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-near-stake-token-nep-41.png)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-nep-41.png)
 
 ... a picture says a thousand words ... NEP-141 core elevator pitch is:
 

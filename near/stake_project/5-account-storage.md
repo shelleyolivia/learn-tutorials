@@ -26,7 +26,7 @@ On NEAR, the contract is responsible to pay for its long term persistent storage
 
 # Quick API Overview
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-smart-account-storage-api.png)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-account-storage-api.png)
 
 **NOTES**
 
@@ -155,4 +155,4 @@ Enough theoretical discussion for now ... in the next tutorial we will get back 
 
 The Internet is the greatest revolution in humanity's history. It provides the people of the world with an opportunity to connect and unite to build a global community that knows no borders. I invite you to join the Figment and NEAR communities and embark on our common mission to defend and take back the Internet together.
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-smart-coder.jpeg)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-coder.jpeg)

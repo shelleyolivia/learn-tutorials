@@ -2,7 +2,7 @@
 
 In this tutorial you will learn how to deploy a Solidity smart contract to the Ethereum Rinkeby testnet using HardHat, then create and deploy its subgraph to the Subgraph Studio.
 
-![Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph.png)
+![Subgraph Studio](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph.png)
 
 Topics covered in this tutorial:
 
@@ -232,15 +232,15 @@ We will need the smart contract address later.
 
 First, you will want to head over to the Subgraph Studio at <https://thegraph.com/studio/>.
 
-![Login to Subgraph Studio](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_connect.png)
+![Login to Subgraph Studio](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph_connect.png)
 
 Click on the **Connect Wallet** button. Choose a Metamask wallet to login with. Once you are authenticated, you shall see the below screen, where you can create your first subgraph.
 
-![Create your first subgraph](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_create_subgraph.png)
+![Create your first subgraph](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph_create_subgraph.png)
 
 Next, you need to give your subgraph a name. Give the name as **vending**. Once that's done, you will see this screen:
 
-![Subgraph dashboard](https://github.com/figment-networks/datahub-learn/raw/master/assets/graph_subgraph_created.png)
+![Subgraph dashboard](https://github.com/figment-networks/learn-tutorials/raw/master/assets/graph_subgraph_created.png)
 
 On this screen, you can see details about the subgraph like your deploy key, the subgraph slug and status.
 

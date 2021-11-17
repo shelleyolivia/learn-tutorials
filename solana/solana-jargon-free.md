@@ -1,7 +1,7 @@
 # Introduction
 What is Solana? As a non-developer, this may be difficult to understand when explained by a code-speaking engineer. By definition, Solana is a decentralized blockchain built to enable scalable, user-friendly apps for the world.¹ Famous for being based on 8 core innovations, Solana offers high throughput and low transaction costs, delivering a web-scale product for DeFi, NFTs, Web3, and more.
 
-![Solana](https://github.com/figment-networks/datahub-learn/raw/master/assets/solanalogo.jpeg) 
+![Solana](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solanalogo.jpeg) 
 
 In this tutorial, we will review and discuss each of these innovations in terms suitable for anyone to grasp. If you're not a developer or fluent in the world of code, you’re in the right place to learn what Solana is, and more importantly — what it brings to the table.
 
@@ -43,7 +43,7 @@ If you further expand our amusement park analogy, you get a more accurate depict
 * Each published confirmation by the other gates serves as a vote for the consensus algorithm (Tower BFT)
 * A new leader is chosen and the process repeats for the next batch of guests waiting to get in
 
-![Transaction Flow](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana_txn_flow.png)
+![Transaction Flow](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solana_txn_flow.png)
 
 Source: [Solana Whitepaper](https://solana.com/solana-whitepaper.pdf)
 
@@ -69,7 +69,7 @@ The process is such:
     
     * Hardware used: *Kernel Space* — the core of a computer operating system, possessing complete system control and facilitates interactions between hardware and software. Think of this like the quarterback of the machine, receiving incoming play calls and distributing the ball accordingly.
 
-![Kernel](https://github.com/figment-networks/datahub-learn/raw/master/assets/kernel.png)
+![Kernel](https://github.com/figment-networks/learn-tutorials/raw/master/assets/kernel.png)
 
 Source: Wikipedia³
 
@@ -102,7 +102,7 @@ Memory is usually used to keep track of accounts in a distributed system. This c
 
 Solana chooses to distribute its database horizontally across multiple storage devices — in this case, SSDs. Blocks of data are segmented and distributed in sequential order amongst the SSD cards. Think of a block of data coming into the database for storage as a deck of unshuffled playing cards, and the players at the card table as the SSD cards. The incoming deck of cards (packet of data) is comprised of four suits (accounts) to be stored. The cards are distributed one by one to a table of 13 players, each receiving one card from each suit by the time all of the cards have been handed out. Each card in a suit can then be thought of as a segment of data. At the end of this, the storage structure of the deck (data packet) looks like this:
 
-![Data Storage](https://github.com/figment-networks/datahub-learn/raw/master/assets/data_deck.png)
+![Data Storage](https://github.com/figment-networks/learn-tutorials/raw/master/assets/data_deck.png)
 
 The account “Clubs” being stored, is horizontally distributed in a logical and sequential order amongst the players. Since each player, or storage device, can be accessed simultaneously, the systems’ total throughput is increased. This is commonly referred to as data striping. Each additional player added to the table adds not only storage space, but also the number of concurrent access sources available. Sequential organization of data is also optimal for CPU usage, adding another performance boost to boot.
 

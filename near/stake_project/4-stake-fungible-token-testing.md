@@ -1,4 +1,4 @@
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-testing-code-meme.jpg)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-testing-code-meme.jpg)
 
 Don't try this at home folks because it is very dangerous! Sadly this happens much too often than folks like to admit. In the corporate world, some might even say that is the price to pay for "agile" ... All kidding aside, you better have thoroughly tested your smart contract before you stripped it of all access keys because you will not get a second chance. After all access keys are deleted from the contract, the deployed contract is locked down and becomes **immutable**. Immutable means the contract code can never change and becomes married to the blockchain forever ... until death do us part.
 
@@ -467,7 +467,7 @@ With all of the work we did above, i.e., referring back to the Rust conditional 
 
 The payoff for all of the groundwork that was laid down is that we can now fully test all of the business logic code for the fungible token transfer call workflow. Here's a refresher:
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-near-stake-token-transfer-call.png)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-transfer-call.png)
 
 This tests the happy case scenario for the transfer call with and with out a memo:
 
@@ -698,5 +698,5 @@ Circling back to the [Fungible Token Core Standard NEP-141](https://learn.figmen
 
 We still have only scratched the surface. My brain is full of ideas on how to monetize NEAR smart contracts using the STAKE token as a pillar for the DeFi ecosystem on NEAR. I would love to hear your ideas and thoughts from all the brains in the NEAR community. Until next time ...
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-matrix.gif)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-matrix.gif)
 

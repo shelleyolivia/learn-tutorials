@@ -4,7 +4,7 @@ description: Learn what makes Tezos unique and build your first Tezos smart cont
 
 # 🗺 Tezos Pathway
 
-## ![](https://github.com/figment-networks/datahub-learn/raw/master/assets/2011%20%282%29%20%283%29%20%282%29.png) Welcome to the Tezos Pathway
+## ![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/2011%20%282%29%20%283%29%20%282%29.png) Welcome to the Tezos Pathway
 
 Tezos is an open-source platform for assets and applications that can evolve by upgrading itself. Stakeholders govern upgrades to the core protocol, including upgrades to the amendment process itself. ****It benefits from three main characteristics: self-amendment, on-chain governance, and decentralized innovation. ****
 
@@ -16,9 +16,9 @@ Once you are ready, get started by [**setting up an account on DataHub**](https:
 
 \*\*\*\*[**Make sure to read our Terms of Use before starting**](https://learn.datahub.figment.io/terms-of-use)**.** 
 
-##  ![](https://github.com/figment-networks/datahub-learn/raw/master/assets/2011%20%282%29%20%283%29%20%282%29.png) **Tezos** Pathway Tutorials <a id="avalanche-pathway-tutorials"></a>
+##  ![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/2011%20%282%29%20%283%29%20%282%29.png) **Tezos** Pathway Tutorials <a id="avalanche-pathway-tutorials"></a>
 
-### ​ ![](https://github.com/figment-networks/datahub-learn/raw/master/assets/vhhp1wl4_400x400-1-.jpg) [Get started by signing up to DataHub](https://datahub.figment.io/sign_up?service=tezos)! <a id="get-started-by-signing-up-to-datahub"></a>
+### ​ ![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/vhhp1wl4_400x400-1-.jpg) [Get started by signing up to DataHub](https://datahub.figment.io/sign_up?service=tezos)! <a id="get-started-by-signing-up-to-datahub"></a>
 
 ### 💡 1. Connect to a Tezos node using DataHub
 

@@ -41,7 +41,7 @@ We will cover the project in three parts:
 
 We will begin by outlining a visual representation of the dApp, its features, and the various screens used in interacting with the smart contract.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2827%29.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image%20%2827%29.png)
 
 # Features
 
@@ -694,7 +694,7 @@ We are making use of the eva dark theme and we have configured `IconRegistry` to
 
 The Welcome screen is the first thing users will see when loading the dApp. The UI is only one button which the user must click to connect to the DAO. Since our app is making use of the Celo protocol, we will have to connect to the Alfajores/Valora wallet.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2829%29.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image%20%2829%29.png)
 
 Below is the code needed to create the **Welcome** screen:
 
@@ -737,13 +737,13 @@ const styles = StyleSheet.create({
 
 This is based on React Navigation’s Drawer Navigation. To use the React Drawer navigation, you have to install and set up React Navigation following the instructions in the [docs](https://reactnavigation.org/docs/getting-started). The instructions for designing a Drawer based navigation can be found [here](https://reactnavigation.org/docs/drawer-based-navigation).
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2828%29.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image%20%2828%29.png)
 
 ### All Proposals Screen
 
 The All Proposals screen contains all the DAO proposals that have been created. The UI is a button at the top which will open a modal window containing a form to be filled out by the user creating the proposal.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2830%29.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image%20%2830%29.png)
 
 This is the code to create the All Proposals screen:
 
@@ -791,7 +791,7 @@ export const ProposalsPage = ({ navigation }) => {
 
 The Create Proposal modal component is imported into the Proposals page and is displayed when the Create proposal Button is clicked.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2826%29.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image%20%2826%29.png)
 
 Below is the code snippet to create the modal:
 
@@ -972,7 +972,7 @@ In the return statement inside of `Layout` add the CreateProposalModal Component
 
 The Profile screen contains an input field through which users can contribute some Celo tokens \(at least 5 Celo\) to become a Contributor. Below are the static elements of the Profile screen. We will be adding the user actions in the Redux tutorial ahead.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2825%29.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image%20%2825%29.png)
 
 The Profile screen is completely styled and makes use of cards for the different sections. Examine the code below:
 
@@ -1107,7 +1107,7 @@ export const ProfilePage = ({ navigation }) => {
 
 The View Proposal modal component is imported into the Profile page and is displayed when a Proposal Card is clicked.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%2831%29.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image%20%2831%29.png)
 
 Below is the code snippet to create the modal:
 
