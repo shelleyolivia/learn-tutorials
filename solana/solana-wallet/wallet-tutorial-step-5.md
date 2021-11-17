@@ -10,7 +10,8 @@ But there's one more important component: we need to prove to the network that w
 
 Consider a traditional paper check that you might use to pay your landlord. The check has your name and address printed on the top left. It includes a field for you to write the recipient's name along with a field for you to write the amount you're paying. Finally, it includes a field for you to sign the check to validate to the bank that you're approving the transfer.
 
-![Figure 8: Crypto transactions are like digital checks (with real signatures)](https://github.com/figment-networks/learn-tutorials/blob/master/solana/solana-wallet/assets/check.jpeg)
+![Figure 8: Crypto transactions are like digital checks (with real signatures)](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/solana/solana-wallet/assets/check.jpeg)
+
 {% label %}
 Figure 8: Crypto transactions are like digital checks (with real signatures)
 
@@ -134,7 +135,8 @@ Once you fill in the public address of your recipient and the amount, say one mi
 
 The [Solana Block Explorer](https://explorer.solana.com/?cluster=devnet) is a simple dashboard that allows you to search for specific blocks, accounts, transactions, contracts and tokens by network. It displays all the information related to the item you searched for.
 
-![Figure 9: Oh the places you'll go!](https://github.com/figment-networks/learn-tutorials/blob/master/solana/solana-wallet/assets/explore.jpeg)
+![Figure 9: Oh the places you'll go!](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/solana/solana-wallet/assets/explore.jpeg)
+
 {% label %}
 Figure 9: Oh the places you'll go!
 

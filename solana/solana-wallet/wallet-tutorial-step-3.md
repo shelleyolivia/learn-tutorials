@@ -10,7 +10,8 @@ We'll be connecting to one of Solana's networks, and fetching the balance for th
 
 The concept of various networks for a single protocol is similar to that of different environments for an app (e.g. development, test, production, etc). Typically blockchain protocols have a main network or mainnet, which refers to the production blockchain with real economic value and official transactions, and at least one experimentation network, which refers to an identical blockchain used to test features before they go live on mainnet.
 
-![Figure 4: It's always important to test on devnet before deploying on mainnet](https://github.com/figment-networks/learn-tutorials/blob/master/solana/solana-wallet/assets/consultant.jpeg)
+![Figure 4: It's always important to test on devnet before deploying on mainnet](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/solana/solana-wallet/assets/consultant.jpeg)
+
 {% label %}
 Figure 4: It's always important to test on devnet before deploying on mainnet
 
