@@ -690,8 +690,8 @@ Let's think of a scenario where we do not have a backend for our protocol. We ha
 
 Now let us suppose we have made our app live and it has about 1000 users and all users have created 2 streams. So this means we will have 2000 Program driven accounts and then fetching all the accounts just to display the 2 streams will make our protocol slow and with the increase in users unuseable. 
 
-We will we using our backend to index our PDA's and fix the scalability issue. Let us create a rust project again but this time with default template i.e binary (application) template.
-Open console in your projects folder and run the following command:
+We will use our backend to index our PDA's and fix the scalability issue. Let us create a rust project again but this time with the default template i.e binary (application) template.
+Open the console in your projects folder and run the following command:
 
 ```text
 cargo new sol-stream-backend
@@ -728,14 +728,14 @@ diesel = { version = "1.4.4", features = ["postgres"] }
 dotenv = "0.15.0"
 ```
 
-- borsh: To serialize and derserialize data
-- rocket_cors: To enable cross origin resource sharing
+- borsh: To serialize and deserialize data
+- rocket_cors: To enable cross-origin resource sharing
 - solana-client: To  fetch all program accounts on the solana blockchain
-- serde: For Json Serialization and Deserialization.
+- serde: For JSON Serialization and Deserialization.
 - diesel: For SQL query building
 - dotenv: To manage our database_url
 
-We are going to need all of these crate, to get them we can save this file and in the terminal run:
+We are going to need all of these crates, to get them we can save this file and in the terminal run:
 
 ```text
 cargo check
@@ -782,12 +782,11 @@ It will compile and run the program then we can open `http://127.0.0.1:8000/` on
 
 ![browser image](/assets/solana-streaming-protocol-2.png)
 
-Now let's see what code made this happen. In the first line, we have imported `routes` macro and `get` from rocket. We will use
-`#[rocket::main]` on our function which will transfrom our function into a regular main function that internally initializes a Rocket-specific tokio runtime and runs the attributed async fn inside of it.
+Now let's see what code made this happen. In the first line, we have imported `routes` macro and `get` from the rocket. We will use `#[rocket::main]` on our function which will transform our function into a regular main function that internally initializes a Rocket-specific tokio runtime and runs the attributed async fn inside of it.
 
-Then inside the function we will get default cors in a variable `cors`. The main line of code which attachs our `cors` and will start a server with a base `"/"` and it will have routes which will be passed in the `routes!` macro. As you can see we have two routes and the function for them are called `index` and `route_with_pubkey`. I have passed them in the macro. Then we await this call and return `Ok(())` so it compiles.
+Then inside the function, we will get default cors in a variable `cors`. This line of code attaches our `cors` and will start a server with a base `"/"` and it will have routes that will be passed in the `routes!` macro. As you can see we have two routes and the function for them are called `index` and `route_with_pubkey`. I have passed them in the macro. Then we await this call and return `Ok(())` so it compiles.
 
-Now let's see `index` and `route_with_pubkey` functions. We have made use of `get` macro here. For the `index` function, we will return a String `Hello world`. In case of `route_with_pubkey` we will get the pubkey from the url and return `Hello <pubkey>`.
+Now let's see `index` and `route_with_pubkey` functions. We have made use of `get` macro here. For the `index` function, we will return a String `Hello world`. In the case of `route_with_pubkey` we will get the pubkey from the URL and return `Hello <pubkey>`.
 
 
 > NOTE: You can stop the running server by using `cmd+c` on mac and `control+c` on windows.
@@ -798,21 +797,21 @@ Now let us install `diesel` CLI. We can do this by running:
 cargo install diesel_cli --feature postgres
 ```
 
-> This will fail if you do not have postgres installed.
+> This will fail if you do not have Postgres installed.
 
-Now in our project folder we can run :
+Now in our project folder, we can run:
 
 ```text
 diesel setup
 ```
 
-Now run the following command to create migration:
+Now run the following command to create a migration:
 
 ```text
 diesel migration generate Stream
 ```
 
-This will create migrations folder with name `<Timestamp>_Stream` with `down.sql` and `up.sql` file.
+This will create a migrations folder with the name `<Timestamp>_Stream` with `down.sql` and `up.sql` files.
 
 Update the `up.sql` file to:
 
@@ -844,7 +843,7 @@ Now we can run the following command which would create `src/schema.rs` file whi
 diesel migration run 
 ```
 
-Now we can run the following command to create `.env` file in our project which would contain the database url.
+Now we can run the following command to create a `.env` file in our project which would contain the database URL.
 
 ```
 DATABASE_URL=postgres://username:password@localhost/sol_stream_indexer > .env
@@ -861,11 +860,11 @@ In the `src`:
 - `models.rs`: will contain `Stream` and `StreamData` model
 - `routes.rs`: will contain all the routes in our app.
 - `schema.rs`: is generated by diesel cli.
-- `solana.rs`: will contain function to subscribe to solana program and get all program accounts.
+- `solana.rs`: will contain a function to subscribe to the solana program and get all program accounts.
 
-Create the empty files and let us write the code in all of these one by one.
+Create the empty files and let us write the code for our backend.
 
-Fistly in `main.rs` at the top add:
+Firstly in `main.rs` at the top add:
 
 ```rs
 #[macro_use]
@@ -927,11 +926,11 @@ pub struct Stream {
 }
 ```
 
-Here we have 2 struct one of them is same we had in our program `StreamData` and `Stream` 
-- `StreamData`: This is the same we had in our program we will be using it when we want to get the data from pda account.
-- `Stream`: This is the struct we would like to store in our database. We will have `pda_account` PubKey as ID. We have changed Pubkey types to `String` for `sender` and `receiver` as we can use `.tostring` function on pubkey and it would be easy to store that in our database compared to array of i32. We have also drived `Queryable` and `Insertable` from diesel so we can generate find, insert, update and other SQl queries with the help of diesel. We have also drived `Serialize` from `serde` crate to convert this to json format.
+Here we have 2 structs one of them is the same we had in our program `StreamData` and `Stream` 
+- `StreamData`: This is the same we had in our program we will be using it when we want to get the data from the PDA account.
+- `Stream`: This is the struct we would like to store in our database. We will have `pda_account` PubKey as ID. We have changed Pubkey types to `String` for `sender` and `receiver` as we can use the `.tostring` function on pubkey and it would be easy to store that in our database compared to an array of i32. We have also drived `Queryable` and `Insertable` from diesel so we can generate find, insert, update, and other SQL queries with the help of diesel. We have also drived `Serialize` from the `serde` crate to convert this to JSON format.
 
-Now we will need some more function in on `Stream` so at the end of the file add:
+Now we will need some more functions in on `Stream` so at the end of the file add:
 
 ```rs
 impl Stream {
@@ -1011,13 +1010,13 @@ impl Stream {
 }
 ```
 
-We have added following functions:
+We have added the following functions:
 
-- `new`: function to create a new `Stream` with the help of `pda` pub key and `pda` data. We first create the `StreamData` with the help of `borsh` crate and then we can create return `Stream`.
+- `new`: function to create a new `Stream` with the help of `pda` pub key and `pda` data. We first create the `StreamData` with the help of the `borsh` crate and then we can create a return `Stream`.
 
-- `get_all_with_sender`: function to get all the stream with the sender equal to the given public key.
+- `get_all_with_sender`: function to get all the streams with the sender equal to the given public key.
 
-- `get_all_with_receiver`: function to get all the stream with the receiver equal to the given public key.
+- `get_all_with_receiver`: function to get all the streams with the receiver equal to the given public key.
 
 - `id_is_present`: function to check if the database contains the particular id.
 
@@ -1026,9 +1025,9 @@ We have added following functions:
 If you want to learn more about diesel you can read [HERE](https://diesel.rs/guides/getting-started).
 
 
-Now we can move to `src/solana.rs` file:
+Now we can move to the `src/solana.rs` file:
 
-We have added two function in this file.
+We have added three functions to this file.
 
 ```rs
 use std::{str::FromStr, thread};
@@ -1101,15 +1100,15 @@ pub fn get_accounts_and_update() {
 }
 ```
 
-- `get_all_program_accounts`: function will return our all the program accounts owned by a program.
-- `subscribe_to_program`: function to subscribe to program which would give us notification when ever there is an update in any program owned account.
+- `get_all_program_accounts`: function will return all the program accounts owned by a program.
+- `subscribe_to_program`: function to subscribe to the program which would give us notification whenever there is an update in any program-owned account.
 - `get_accounts_and_update`: function to get all the program accounts and fill insert or update them in our database.
 
-> Note : The `pubsub_client` has a [issue](https://github.com/solana-labs/solana/issues/16102) which is still WIP due which we are missing some notification.
+> Note: The `pubsub_client` has an [issue](https://github.com/solana-labs/solana/issues/16102) that is still WIP due to which we are missing some notifications.
 
-You can read about solana RPC [HERE](https://docs.solana.com/developing/clients/jsonrpc-api).
+You can read about Solana RPC [HERE](https://docs.solana.com/developing/clients/jsonrpc-api).
 
-In the `subscribe_to_program` we have spawn a thread to listen to updates we will receive and in case of we receive an error we have called the function again. For each notification in the for loop, we have created the stream with the help of `RPC Notification` you can see the json schema for that [HERE](https://docs.solana.com/developing/clients/jsonrpc-api#notification-format-2). Then we have called `insert_or_update` function which we created in our model.
+In the `subscribe_to_program` we have spawned a thread to listen to updates we will receive and in case we receive an error we have called the function again. For each notification in the for loop, we have created the stream with the help of `RPC Notification` you can see the JSON schema for that [HERE](https://docs.solana.com/developing/clients/jsonrpc-api#notification-format-2). Then we have called the `insert_or_update` function which we created in our model.
 
 Now let's go to `src/routes.rs`:
 
@@ -1156,10 +1155,10 @@ pub fn get_all_stream(pubkey: &str) -> Json<Value> {
 }
 ```
 
-We have added create two function the `index` function is same as we had in our rocket example.
+We have added create two functions the `index` function is the same as we had in our rocket example.
 - `get_all_stream`: This function will return Json response we are using `get_all_with_sender` and `get_all_with_receiver` function to get them from our indexed table.
 
-Now lets move to `src/main.rs` and add the main function
+Now let us move to `src/main.rs` and add the main function
 at the end of the file add:
 
 ```rs
@@ -1200,14 +1199,14 @@ use crate::routes::get_all_stream;
 use crate::routes::index;
 ```
 
-In the main function we are getting all the program accounts and populating our database then, we can call the `subscribe_to_program` function. We are starting the rocket server after this.
+In the main function, we are getting all the program accounts and populating our database then, we can call the `subscribe_to_program` function. We are starting the rocket server after this.
 
 You can see the complete Backend [HERE](https://github.com/SushantChandla/sol-stream-backend).
 
 # Frontend
-Now let's write the frontend part of the the app. I have created a react app for frontend. We are using Redux for statemangement. I have already created the UI part of it. You can get the UI part of the app [HERE](https://github.com/SushantChandla/sol-stream-frontend/tree/ui).
+Now let's write the frontend part of the app. I have created a react app for the front end. We are using Redux for state management. I have already created the UI part of it. You can get the UI part of the app [HERE](https://github.com/SushantChandla/sol-stream-frontend/tree/ui).
 
-You can clone and checkout the `ui` branch and run it with the help of following commands:
+You can clone and checkout the `ui` branch and run it with the help of the following commands:
 
 ```text
 yarn
@@ -1244,11 +1243,11 @@ const cluster = "https://api.devnet.solana.com";
 const connection = new Connection(cluster, "confirmed");
 ```
 
-We have create `programAccount` and `adminAddress` variables to store the program id and admin address for the program.
-We have also created a `connection` variable with the help of `cluster` variable which contains the link to devnet RPC.
+We have created `programAccount` and `adminAddress` variables to store the program id and admin address for the program.
+We have also created a `connection` variable with the help of the `cluster` variable which contains the link to devnet RPC.
 
 
-Now let's write the `getAllStreams` function first which you can find at the very last in the `action/index.js` file. It just contains a request to our backend client it takes in the string value of  `pubkey` as parameter in it. I have used axios for it we can change the base url in `src/config/index.js`:
+Now let's write the `getAllStreams` function first which you can find at the very last in the `action/index.js` file. It just contains a request to our backend client it takes in the string value of  `pubkey` as a parameter in it. I have used the axios package for it we can change the base URL in `src/config/index.js`:
 
 ```js
 import axios from "axios";
@@ -1285,10 +1284,10 @@ export const getAllStreams = (pubkey) => {
 };
 ```
 
-In this we are making request on "/\<pubkey>" and then we dispatch the result. We have added the code in try and catch block to handle network errors. 
+In this we requesting "/\<pubkey>" and then we dispatch the result. We have added the code in the try and catch block to handle network errors.
 
 ## Create Stream
-Now let's write the functions that will contain the instructions to our program. We will also create Schema for data Serialization.
+Now let's write the functions that will contain the instructions to our program. We will also create a Schema for data Serialization.
 
 ```js
 class CreateStreamInput {
@@ -1310,7 +1309,7 @@ class CreateStreamInput {
 }
 ```
 
-For create stream instruction we have created a Schema which describes the data type for variables. We will be using this in `createStream` function:
+For creating stream instruction we have created a Schema that describes the data type for variables. We will be using this in the `createStream` function:
 
 ```js
 export const createStream = ({
@@ -1339,7 +1338,7 @@ export const createStream = ({
             let data = serialize(CreateStreamInput.schema, create_stream_input);
 ```
 
-In the code above we have create a pubkey which we will use to create a Program Drived account(PDA). We have used the function `serialize` from the borsh package to get Uint8Array of the input data.
+In the code above we have created a pubkey which we will use to create a Program Drived account(PDA). We have used the function `serialize` from the borsh package to get the Uint8Array of the input data.
 
 
 ```js
@@ -1348,9 +1347,9 @@ In the code above we have create a pubkey which we will use to create a Program 
             let rent = await connection.getMinimumBalanceForRentExemption(96);
 ```
 
-We have to append `1` in our Uint8Array as we are using the first character as tag. Please refer the unpack function in `instructions.rs`.
+We have to append `1` in our Uint8Array as we are using the first character as the tag. Please refer to the unpack function in `instructions.rs`.
 
-And then we can get the minimum lamports required to make the account lamports by using the provided function on connection variable.
+And then we can get the minimum lamports required to make the account lamports by using the provided function on the connection variable.
 > Note: I checked the size of the data ( the value 96) by a test [HERE](https://github.com/SushantChandla/sol-stream-program/blob/d0d537889b155d16fa3c0879e61e4f68c3d47f07/src/state.rs#L42).
 
 ```js
@@ -1376,14 +1375,14 @@ And then we can get the minimum lamports required to make the account lamports b
 			});
 ```
 
-Here we have create 2 instruction
+Here we have created 2 instruction
 
 1. To the system program to create a Program drived account with the space of `96` and lamports which are equal to `0.03(admin cut)+solana rent+total amount user want to send`.
-2. We have created a instruction to our Program we have passed the account that will be used which corresponds to `accounts: &[AccountInfo],` in our program in `keys`, `programId` is the address we got when we deployed our program and `data` is equal to `data_to_send` variable.
+2. We have created an instruction to our Program we have passed the account that will be used which corresponds to `accounts: &[AccountInfo],` in our program in `keys`, `programId` is the address we got when we deployed our program and `data` is equal to `data_to_send` variable.
 
-Then we create a transaction object we have used `setPayerAndBlockhashTransaction` function which we will add later.
-Once we have the transation object we have send the transaction with the help of wallet. We have then dispached the result.
-In case of an error we can just alert.
+Then we create a transaction object we have used the `setPayerAndBlockhashTransaction` function which we will add later.
+Once we have the transaction object we have to send the transaction with the help of the wallet. We have then dispatched the result.
+In case of an error, we can just alert the user.
 
 ```js
 			const trans = await setPayerAndBlockhashTransaction(
@@ -1426,9 +1425,9 @@ async function setPayerAndBlockhashTransaction(instructions, wallet) {
 ```
 
 ## Withdraw
-Now let's write the `withdraw` function for this one also we have create the `WithdrawInput` class with schema:
+Now let's write the `withdraw` function for this one also we have created the `WithdrawInput` class with schema:
 
-We only have `amount` in the struct for withdraw input.
+We only have the `amount` variable in the struct for withdrawal input.
 
 ```js
 class WithdrawInput {
@@ -1447,10 +1446,10 @@ class WithdrawInput {
 }
 ```
 
-This also the same code in same fashion. This time we aren't creating a PDA so we only have one instruction in this transaction which is to our program.
-Note that the `streamId` is the address to `PDA` account.
+This time we aren't creating a PDA so we only have one instruction in this transaction which is to our program.
+Note that the `streamId` is the address to the `PDA` account.
 
-Here in `data_to_send` we have append 2 as you can see in our program's `src/instrction.rs` file we have `tag` 2 for withdraw.
+Here in `data_to_send`, we have to append 2 as you can see in our program's `src/instrction.rs` file we have `tag` 2 for withdraw.
 
 ```js
 export const withdraw = (streamId, amountToWithdraw, wallet) => {
@@ -1493,7 +1492,7 @@ We have dispatched the withdraw response in the end.
 ## Close Stream
 Now let's write the last function in the file to close a stream.
 
-Fot this function we do not have any instruction data we are only passing the tag. Then we have packed the instruction by calling `setPayerAndBlockhashTransaction` and then dispatched the result.
+For this function, we do not have any instruction data we are only passing the tag. Then we have packed the instruction by calling `setPayerAndBlockhashTransaction` and then dispatched the result.
 
 ```js
 export const closeStream = (streamId, receiverAddress, wallet) => {
@@ -1527,12 +1526,12 @@ export const closeStream = (streamId, receiverAddress, wallet) => {
 
 You can check the frontend code [HERE](https://github.com/SushantChandla/sol-stream-frontend).
 
-Now for testing it we will need a backend server running. Here is a video walkthrough.
+Now for testing it we will need the backend server running. Here is a video walkthrough.
 
 {% embed url="https://youtu.be/MUyt5Rz9T64" caption="Sol Streaming Protocol"  %}
 
 # Conclusion
-In this tutorial, you learned how to build a Sol token streaming protocol on Solana. We covered the on-chain program's code using the Rust programming language. We built the User Interface with React. And we have created a backend in with Rocket framework to index PDA's data.
+In this tutorial, you learned how to build a Sol token streaming protocol on Solana. We covered the on-chain program's code using the Rust programming language. We built the User Interface with React. And we have created a backend with Rocket framework to index PDA's data.
 
 # About the Author
 This tutorial was created by [Sushant Chandla](https://github.com/SushantChandla).
