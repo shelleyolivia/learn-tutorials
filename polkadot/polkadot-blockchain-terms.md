@@ -177,7 +177,7 @@ Why not try building your first Substrate-based chain!
 
 This guide was created by Danny Salman. You can reach out to Danny on [Figment Forum](https://community.figment.io/u/salman.danny03/) & on GitHub for help or if you have questions pertaining to Polkadot and this guide.
 
-## References
+# References
 
 \[1\] [A brief summary of everything Substrate and Polkadot](https://www.parity.io/a-brief-summary-of-everything-substrate-polkadot/)  
 \[2\] [Parathreads: Pay-as-you-go Parachains](https://polkadot.network/parathreads-parathreads-pay-as-you-go-parachains/)  
