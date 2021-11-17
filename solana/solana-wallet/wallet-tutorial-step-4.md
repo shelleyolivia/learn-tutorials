@@ -7,7 +7,8 @@ You might be wondering whether we'll now need to transfer real money so we can t
 In this step, we'll be building functionality to allow users to "airdrop" SOL tokens into their devnet account. In the crypto world, an airdrop is a way for the protocol to distribute tokens to account holders for free. 
 
 
-![Figure 5: We're about reinforce our supply lines with some devnet SOL](https://github.com/figment-networks/learn-tutorials/blob/master/solana/solana-wallet/assets/airdrop.jpeg)
+![Figure 5: We're about reinforce our supply lines with some devnet SOL](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/solana/solana-wallet/assets/airdrop.jpeg)
+
 {% label %}
 Figure 5: We're about reinforce our supply lines with some devnet SOL
 
@@ -35,7 +36,8 @@ Following our previous heuristic of searching the docs for keywords, we can now 
 
 You might be wondering what a "lamport" is. Solana's native token, SOL, is divisible into 1 billion lamports. You can think of lamports as the cents to SOL's dollar.
 
-![Figure 6: This is also a lamport. Leslie Lamport is the lamport's namesake. He's a computer scientist who has made key contributions to distributed systems](https://github.com/figment-networks/learn-tutorials/blob/master/solana/solana-wallet/assets/leslie.jpeg)
+![Figure 6: This is also a lamport. Leslie Lamport is the lamport's namesake. He's a computer scientist who has made key contributions to distributed systems](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/solana/solana-wallet/assets/leslie.jpeg)
+
 {% label %}
 Figure 6: This is also a lamport. Leslie Lamport is the lamport's namesake. He's a computer scientist who has made key contributions to distributed systems
 
@@ -80,7 +82,8 @@ Avid readers might have noticed that the balance in our account looks wrong. It 
 return balance / LAMPORTS_PER_SOL;
 ```
 
-![Figure 7: Getting close to the summit](https://github.com/figment-networks/learn-tutorials/blob/master/solana/solana-wallet/assets/climbing.jpeg)
+![Figure 7: Getting close to the summit](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/solana/solana-wallet/assets/climbing.jpeg)
+
 {% label %}
 Figure 7: Getting close to the summit
 
