@@ -1,4 +1,4 @@
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-stake-in-the-ground.jpg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-stake-in-the-ground.jpg)
 
 My vision for STAKE can be summed up in 3 words:
 
@@ -14,7 +14,7 @@ I couldn't agree more. Based on the **"Show Me The Money"** meme that I weave th
 
 All you need is to provide the right financial incentives to attract enough people to come together at the same place and time and they will start to form complex patterns of connection with one another. This is how new markets are formed. In this regard, I will share with you my vision for the STAKE token and how it will be a game changer for NEAR.
 
-## What is the core problem that STAKE is solving?
+# What is the core problem that STAKE is solving?
 
 The financial incentive to stake NEAR is to earn staking rewards. The problem is that staked NEAR is locked within the staking pool contract. Technically speaking, the staking pool contract owns the NEAR while it is being staked. In order to get back possession of your staked NEAR, you must submit a request to the staking pool contract to unstake your NEAR. You will then need to wait 4 epoch periods, which translates to about 2 days, before the NEAR is available for withdrawal from the staking pool contract back to your account. However, the unstaking process is not exactly that simple because if you submit another unstaking request while an unstaking request has not yet cleared, then it resets the 4 epoch wait period for the total amount that is unstaked. This makes it more complicated to manage access to your staked NEAR.
 
@@ -32,7 +32,7 @@ However, [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) offe
 
 This effectively distributes the **income** earned by the STAKE contract and external contracts to all STAKE holders.
 
-### If you stake then there is no reason not to use STAKE
+## If you stake then there is no reason not to use STAKE
 
 STAKE provides the following benefits over the current staking pool:
 
@@ -40,11 +40,11 @@ STAKE provides the following benefits over the current staking pool:
 2. STAKE provides more yield than the staking pool contract leveraging the contract rewards super powers. The more the STAKE contract is used, the higher the yield. The more NEAR that is deposited by external contracts, the higher the yield. This transforms STAKE into an **INCOME** stream.
 3. STAKE contract also provides liquidity to unstaking through staking. Basically, the way this works is simple. If you submitted a request to unstake, then normally you would need to wait 2 days. However, if users are depositing NEAR into the STAKE contract to stake, then those funds are used to add liquidity that the unstakers can withdraw against. For example, Bob unstakes STAKE that is worth 1 NEAR. A few seconds later, Alice deposits 1 NEAR to stake. The 1 NEAR that Alice deposited is added to the liquidity pool. Bob's 1 NEAR that was unstaked is simply restaked back into the staking pool. Bob can now immediately withdraw the 1 NEAR from the liquidity pool with out having to wait 2 days. 
 
-## Show me the MONEY!
+# Show me the MONEY!
 
 Let me show you how this is a game changer for NEAR and how it has the potential to help NEAR take off ...
 
-### Competition is the mother of innovation - Prepare for STAKE Wars!
+## Competition is the mother of innovation - Prepare for STAKE Wars!
 
 STAKE makes the staking game more interesting. Today, there is a single staking pool contract used by all validators that enable users to delegate their NEAR to stake with the validator. Validators simply "compete" for delegators using the validator's brand and fees sharged. That's pretty boring. STAKE transforms vanilla staking into a more competitive landscape for validators by throwing in contract rewards into the equation. Today, the delegators look at staking pools from the perspective of fees charged. STAKE will change that perspective. Delegators will look at STAKE as an income investment and ask questions such as:
 
@@ -56,7 +56,7 @@ STAKE makes the staking game more interesting. Today, there is a single staking 
 
 This expands the economy around staking and brings in more players. This provides more financial incentives to build on NEAR. This also creates more incentive for delegators to diversify their staking investments. Keep in mind also that anyone can deploy a STAKE contract, which expands the playing field. Today, in order to use the staking pool contract, you must run and manage a validator node. Prepare for STAKE wars!
 
-### STAKE brings NeFi to life
+## STAKE brings NeFi to life
 
 By unlocking staked NEAR, STAKE suddenly brings to market the entire value of the NEAR network to the DeFi market. Let that sink in. This would bring **NeFi** \("NEAR" + "DeFi"\) to life. I believe this will attract massive capital investment into NeFi.
 
@@ -80,7 +80,7 @@ In the coming years, exponential DeFi growth will create generational wealth opp
 
 STAKE can serve as the cornerstone to build and grow the NeFi ecosystem. Here's my overall vision:
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-stake-vision.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-stake-vision.png)
 
 * **NEAR** solves the "Scalability Trilemma" problem with a super scalable, fast, cheap network
 * **STAKE** solves the problems caused by locked staked NEAR. It transforms staked NEAR into **Internet Money with Super Powers** and brings **NeFi** to life.
@@ -89,7 +89,7 @@ STAKE can serve as the cornerstone to build and grow the NeFi ecosystem. Here's 
 
 That builds the base for mass adoption explosion.
 
-## It's a wrap folks
+# It's a wrap folks
 
 I shared with you my vision. The case for STAKE can be summed up in 3 words: **Money + Income + NeFi**. I am so excited about this that I am putting my money where my mouth is and forming a new startup named **OysterPack SMART**. OysterPack SMART mission will be focused on NEAR mass adoption. There are around 8 billion people in the world, and that is scratching the surface because we haven't even talked about [IoT](https://en.wikipedia.org/wiki/Internet_of_things) possibilities yet ... If Facebook can onboard ~2.8 billion people, then that gives me a minimum target.
 
@@ -99,5 +99,5 @@ This is where I make my call for action to the community. I invite you to join t
 
 The game plan remains the same. As new NEAR standards are released, I plan to document them and provide reference implementations as tutorials. The rest of the time will be focused on the core mission, which is to build the [STAKE Token](https://github.com/oysterpack/oysterpack-near-stake-token) with the community and bring it to market.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-team-holding-hands.jpeg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-team-holding-hands.jpeg)
 
