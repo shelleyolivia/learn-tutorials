@@ -45,7 +45,7 @@ $ cd nft-tutorial
 
 1. Install `@tqtezos/nft-tutorial` npm package:
 
-```
+```text
 npm install -g https://github.com/tqtezos/nft-tutorial.git
 
 /usr/local/bin/tznft -> /usr/local/lib/node_modules/@tqtezos/nft-tutorial/lib/tznft.js
@@ -58,7 +58,7 @@ The command installs `tznft` CLI tool.
 
 1. Initialize tutorial config:
 
-```
+```text
 tznft init-config
 
 tznft.json config file created
@@ -66,7 +66,7 @@ tznft.json config file created
 
 1. Check that the default active network is `sandbox`:
 
-```
+```text
 tznft show-network
 
 active network: sandbox
@@ -74,7 +74,7 @@ active network: sandbox
 
 1. Bootstrap Tezos network:
 
-```
+```text
 tznft bootstrap
 
 ebb03733415c6a8f6813a7b67905a448556e290335c5824ca567badc32757cf4
@@ -104,7 +104,7 @@ tznft mint <owner_alias> --tokens <token_meta_list>`
 
 Example:
 
-```
+```text
 tznft mint bob --tokens '0, T1, My Token One' '1, T2, My Token Two'
 
 originating new NFT contract...
@@ -123,13 +123,13 @@ Using `KT1..` address of the NFT contract created by the `mint` command, we can 
 * `--signer` alias on behalf of which contract is inspected
 * `--tokens` a list of token IDs to inspect
 
-```
+```text
 tznft show-meta --nft <nft_address> --signer <alias> --tokens <token_id_list>
 ```
 
 Example:
 
-```
+```text
 tznft show-meta --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --signer bob --tokens 0 1
 
 token_id: 0	symbol: T1	name: My Token One	extras: { }
@@ -145,13 +145,13 @@ token_id: 1	symbol: T2	name: My Token Two	extras: { }
 * `--owner` alias of the token owner to check balances
 * `--tokens` a list of token IDs to inspect
 
-```
+```text
 tznft show-balance --nft <nft_address> --signer <alias> --owner <alias> --tokens <token_id_list>
 ```
 
 Example 1, check `bob`'s balances:
 
-```
+```text
 tznft show-balance --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --signer bob --owner bob --tokens 0 1
 
 querying NFT contract KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh using balance inspector KT1Pezr7JjgmrPcPhpkbkH1ytG7saMZ34sfd
@@ -162,7 +162,7 @@ owner: tz1YPSCGWXwBdTncK2aCctSZAXWvGsGwVJqU	token: 1	balance: 1
 
 Example 2, check `alice` balances:
 
-```
+```text
 tznft show-balance --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --signer bob --owner alice --tokens 0 1
 
 querying NFT contract KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh using balance inspector KT1Pezr7JjgmrPcPhpkbkH1ytG7saMZ34sfd
@@ -181,7 +181,7 @@ Let's create a single NFT token which references an image on IPFS.
 2. Copy the IPFS file hash code \(`CID`\). For this example we will use `QmRyTc9KbD7ZSkmEf4e7fk6A44RPciW5pM4iyqRGrhbyvj`
 3. Execute `tznft mint` command adding IPFS hash as a fourth parameter in the token description:
 
-```
+```text
 tznft mint bob -t '0, TZT, Tezos Token, QmRyTc9KbD7ZSkmEf4e7fk6A44RPciW5pM4iyqRGrhbyvj'
 
 originating new NFT contract...
@@ -190,7 +190,7 @@ originated NFT collection KT1SgzbcfTtdHRV8qHNG3hd3w1x23oiC31B8
 
 1. Now we can inspect new token metadata and see that the IPFS hash \(`ipfs_cid`\) is there.
 
-```
+```text
 tznft show-meta -s bob --nft KT1SgzbcfTtdHRV8qHNG3hd3w1x23oiC31B8 --tokens 0
 
 token_id: 0	symbol: TZT	name: Tezos Token	extras: { ipfs_cid=QmRyTc9KbD7ZSkmEf4e7fk6A44RPciW5pM4iyqRGrhbyvj }
@@ -206,13 +206,13 @@ token_id: 0	symbol: TZT	name: Tezos Token	extras: { ipfs_cid=QmRyTc9KbD7ZSkmEf4e
 * `--signer` alias or address that initiates the transfer operation
 * `--batch` a list of individual transfers. Each individual transfer is represented as a comma delimited string: `<from_address_or_alias>, <to_address_or_alias>, <token_id>`. We do not need to specify amount of the transfer for NFTs since we can only transfer a single token for any NFT type.
 
-```
+```text
 tznft transfer --nft <nft_address> --signer <signer> --batch <batch_list>`
 ```
 
 Example, `bob` transfers his own tokens `0` and `1` to `alice`:
 
-```
+```text
 tznft transfer --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --signer bob --batch 'bob, alice, 0' 'bob, alice, 1'
 
 transferring tokens...
@@ -221,7 +221,7 @@ tokens transferred
 
 Now, we can check token balances after the transfer:
 
-```
+```text
 tznft show-balance --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --signer bob --owner bob --tokens 0 1
 
 querying NFT contract KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh using balance inspector KT1Pezr7JjgmrPcPhpkbkH1ytG7saMZ34sfd
@@ -230,7 +230,7 @@ owner: tz1YPSCGWXwBdTncK2aCctSZAXWvGsGwVJqU	token: 0	balance: 0
 owner: tz1YPSCGWXwBdTncK2aCctSZAXWvGsGwVJqU	token: 1	balance: 0
 ```
 
-```
+```text
 tznft show-balance --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --signer bob --owner alice --tokens 0 1
 
 querying NFT contract KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh using balance inspector KT1Pezr7JjgmrPcPhpkbkH1ytG7saMZ34sfd
@@ -245,7 +245,7 @@ It is also possible to transfer tokens on behalf of the owner.
 
 `bob` is trying to transfer one of `alice`'s tokens back:
 
-```
+```text
 tznft transfer --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --signer bob --batch 'alice, bob, 1'
 
 transferring tokens...
@@ -263,13 +263,13 @@ However, `alice` can add `bob` as an operator to allow him transfer any tokens o
 * `--add` list of pairs aliases or addresses and token id to add to the operator set
 * `--remove` list of aliases or addresses and token id to remove from the operator set
 
-```
+```text
 tznft update-ops <owner> --nft <nft_address> --add [add_operators_list] --remove [add_operators_list]
 ```
 
 Example, `alice` adds `bob` as an operator:
 
-```
+```text
 tznft update-ops alice --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --add 'bob, 1'
 
 updating operators...
@@ -278,7 +278,7 @@ updated operators
 
 Now `bob` can transfer a token on behalf of `alice` again:
 
-```
+```text
 tznft transfer --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --signer bob --batch 'alice, bob, 1'
 
 transferring tokens...
@@ -287,7 +287,7 @@ tokens transferred
 
 Inspecting balances after the transfer:
 
-```
+```text
 tznft show-balance --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --signer bob --owner bob --tokens 0 1
 
 querying NFT contract KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh using balance inspector KT1Pezr7JjgmrPcPhpkbkH1ytG7saMZ34sfd
@@ -296,7 +296,7 @@ owner: tz1YPSCGWXwBdTncK2aCctSZAXWvGsGwVJqU	token: 0	balance: 0
 owner: tz1YPSCGWXwBdTncK2aCctSZAXWvGsGwVJqU	token: 1	balance: 1
 ```
 
-```
+```text
 tznft show-balance --nft KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh --signer bob --owner alice --tokens 0 1
 
 querying NFT contract KT1XP3RE6S9t44fKR9Uo5rAfqHvHXu9Cy7fh using balance inspector KT1Pezr7JjgmrPcPhpkbkH1ytG7saMZ34sfd
@@ -317,7 +317,7 @@ Token `1` now belongs to `bob`.
 
   Example:
 
-```
+```text
 tznft set-network sandbox
 
 network sandbox is selected
@@ -327,7 +327,7 @@ network sandbox is selected
 
   Example:
 
-```
+```text
 tznft show-network --all
 
 * sandbox
@@ -338,7 +338,7 @@ tznft show-network --all
 
   Example:
 
-```
+```text
 tznft bootstrap
 
 366b9f3ead158a086e8c397d542b2a2f81111a119f3bd6ddbf36574b325f1f03
@@ -353,7 +353,7 @@ originated balance inspector KT1WDqPuRFMm2HwDRBotGmnWdkWm1WyG4TYE
 
   Example:
 
-```
+```text
 tznft kill-sandbox
 
 flextesa-sandbox
@@ -375,7 +375,7 @@ If you are using `testnet`, your originated contracts will remain on the blockch
 
   Example:
 
-```
+```text
 tznft show-alias bob
 
 bob	tz1YPSCGWXwBdTncK2aCctSZAXWvGsGwVJqU	edsk3RFgDiCt7tWB2oe96w1eRw72iYiiqZPLu9nnEY23MYRp2d8Kkx
@@ -388,9 +388,9 @@ alice	tz1VSUr8wwNhLAzempoch5d6hLRiTh8Cjcjb	edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZ
 
 * `add-alias <alias> <private_key>` add alias using its private key. Aliases that configured with the private key can be used to sign operations that originate or call smart contracts on chain. `tznft` commands that require Tezos operation signing have `--signer` option.
 
-  Example:
+Example:
 
-```
+```text
 tznft add-alias jane edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZPbwWNnwdZpSpJiEbq
 
 alias jane has been added
@@ -404,7 +404,7 @@ jane	tz1VSUr8wwNhLAzempoch5d6hLRiTh8Cjcjb	edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZP
 
   Example:
 
-```
+```text
 tznft add-alias michael tz1VSUr8wwNhLAzempoch5d6hLRiTh8Cjcjb
 
 alias michael has been added
@@ -418,7 +418,7 @@ michael	tz1VSUr8wwNhLAzempoch5d6hLRiTh8Cjcjb
 
   Example:
 
-```
+```text
 tznft add-alias-faucet john ~/Downloads/tz1NfTBQM9QpZpEY6GSvdw3XBpyEjLLGhcEU.json
 
 activating faucet account...
@@ -439,10 +439,3 @@ tznft remove-alias john
 
 alias john has been deleted
 ```
-
-# Advanced Topics \(TBD\)
-
-* Modifying NFT contract code
-* Extending token metadata
-
-If you had any difficulties following this tutorial or simply want to discuss Tezos tech with us you can [join our community today](https://discord.gg/fszyM7K)!
