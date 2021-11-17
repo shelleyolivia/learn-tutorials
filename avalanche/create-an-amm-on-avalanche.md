@@ -254,7 +254,7 @@ This completes the smart contract implementation part. Now we will deploy it on 
 
 Log in to MetaMask -> Click the Network drop-down -> Select Custom RPC
 
-![Metamask](../../../.gitbook/assets/create-an-amm-on-avalanche_metamask.png)
+![Metamask](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_metamask.png)
 
 **FUJI Testnet Settings:**
 
@@ -270,7 +270,7 @@ Fund your address from the given [faucet](https://faucet.avax-test.network/).
 
 Open [Remix](https://remix.ethereum.org/) -> Select Solidity
 
-![remix-preview](../../../.gitbook/assets/create-an-amm-on-avalanche_remix.png)
+![remix-preview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_remix.png)
 
 Create an `AMM.sol` file in the Remix file explorer, and paste the following code:
 
@@ -500,19 +500,19 @@ npm start
 
 * Getting funds from the faucet to interact with the AMM
 
-![preview](../../../.gitbook/assets/create-an-amm-on-avalanche_faucet.gif)
+![preview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_faucet.gif)
 
 * Adding liquidity in the pool 
 
-![preview](../../../.gitbook/assets/create-an-amm-on-avalanche_provide.gif)
+![preview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_provide.gif)
 
 * Swapping tokens
 
-![preview](../../../.gitbook/assets/create-an-amm-on-avalanche_swap.gif)
+![preview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_swap.gif)
 
 * Withdrawing liquidity from the pool 
 
-![preview](../../../.gitbook/assets/create-an-amm-on-avalanche_withdraw.gif)
+![preview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_withdraw.gif)
 
 # Conclusion
 Congratulations! We have successfully developed a working AMM model where users can swap tokens, provide & withdraw liquidity. As a next step, you can play around with the price formula, integrate the ERC20 standard, introduce fees as an incentive mechanism for providers or add slippage protection, and much more...
@@ -523,11 +523,11 @@ Congratulations! We have successfully developed a working AMM model where users 
 
 * Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You can fund your address from the given [faucet](https://faucet.avax-test.network/)
 
-![Zero balance preview](../../../.gitbook/assets/create-an-amm-on-avalanche_zero_balance.jpeg)
+![Zero balance preview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_zero_balance.jpeg)
 
 * Make sure that you have selected the correct account on Metamask if you have more than one account connected to the site.
 
-![Multiple account preview](../../../.gitbook/assets/create-an-amm-on-avalanche_multiple_accounts.jpeg)
+![Multiple account preview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_multiple_accounts.jpeg)
 
 # About the Author(s)  
 

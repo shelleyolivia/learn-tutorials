@@ -393,7 +393,7 @@ truffle init
 
 Then, you'll see a project directory like this:
 
-![project overview](../../../.gitbook/assets/truffle-initial-directory.png)
+![project overview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/truffle-initial-directory.png)
 
 ## Paste your smart contract into the contracts folder
 
@@ -743,7 +743,7 @@ truffle test --network mumbai
 
 The result of the test should look similar: 
 
-![Test Result](../../../.gitbook/assets/Polygon-unit-testing-result.png)
+![Test Result](https://github.com/figment-networks/learn-tutorials/raw/master/assets/Polygon-unit-testing-result.png)
 
 
 # Conclusion

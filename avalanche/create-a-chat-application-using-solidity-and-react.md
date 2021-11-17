@@ -59,7 +59,7 @@ We would maintain 2 collections in our database:
 
 Log in to MetaMask -&gt; Click the Network drop-down -&gt; Select Custom RPC
 
-![Metamask](../../../.gitbook/assets/create-an-amm-on-avalanche_metamask.png)
+![Metamask](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_metamask.png)
 
 **FUJI Testnet Settings:**
 
@@ -75,7 +75,7 @@ Fund your address from the given [faucet](https://faucet.avax-test.network/).
 
 Open [Remix](https://remix.ethereum.org/) -&gt; Select Solidity
 
-![remix-preview](../../../.gitbook/assets/create-an-amm-on-avalanche_remix.png)
+![remix-preview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_remix.png)
 
 Create a `Database.sol` file in the Remix file explorer, and paste the following code :
 
@@ -951,15 +951,15 @@ Congratulations! We have successfully deployed a decentralized chat application 
 
 * Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You can fund your address from the given [faucet](https://faucet.avax-test.network/)
 
-![Zero balance preview](../../../.gitbook/assets/create-an-amm-on-avalanche_zero_balance.jpeg)
+![Zero balance preview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_zero_balance.jpeg)
 
 * Make sure that you have selected the correct account on metamask if you have more than one account connected to the site.
 
-![Multiple account preview](../../../.gitbook/assets/create-an-amm-on-avalanche_multiple_accounts.jpeg)
+![Multiple account preview](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-an-amm-on-avalanche_multiple_accounts.jpeg)
 
 ## Application crash
 
-![Error!](../../../.gitbook/assets/chat-dapp-crash.png)
+![Error!](https://github.com/figment-networks/learn-tutorials/raw/master/assets/chat-dapp-crash.png)
 
 To resolve this error, doublecheck that you have updated the `CONTRACT_ADDRESS` variable in `src/index.js.`
 
