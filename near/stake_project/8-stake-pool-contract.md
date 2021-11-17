@@ -4,21 +4,21 @@ In my last tutorial, "It's Time to Put a STAKE in the Ground!"), I shared with y
 2. Show you how to deploy and use the STAKE pool contract as a **Validator**
 3. Show you how to use the STAKE pool contract as a **Staker**
 
-> "Stakers" are the delegators ... to me "Stakers" sounds better "delegators"
+> "Stakers" are the delegators ... to me "Stakers" sounds better than "delegators"
 
 # OysterPack SMART STAKE Benefits
 
 Today there only lives a single staking pool contract in the NEAR wild. All validators on mainnet are using the [staking pool](https://github.com/near/core-contracts/tree/master/staking-pool) built by the NEAR core DEV team to bootstrap staking on NEAR's PoS blockchain. Staking on NEAR is permissionless, which enables staking to evolve. This illustrates the power and beauty of decentralization on the blockchain. There is nothing stopping any person with new ideas to build and create on the blockchain. The current staking pool on NEAR works, but there's always room for improvement - I call it the _"first generation"_ staking pool. Here's the list of improvements for the **"next generation"** **OysterPack SMART STAKE Pool** and how it compares to the first generation staking pool:
 
-## Locked staked NEAR is made mobile through **STAKE fungible tokens** provided by the STAKE pool
+Locked staked NEAR is made mobile through **STAKE fungible tokens** provided by the STAKE pool
 
 This enables staked NEAR value to be transferred while still being staked. This opens the door to many new DeFi use cases for staked NEAR.
 
-## Staking Done Right - Maximizing Yield
+# Staking Done Right - Maximizing Yield
 
 The first generation staking pool will only stake deposited funds and restake earnings once every epoch. Earnings are composed of staking rewards plus any contract rewards earned from transaction gas fees. Because earnings are only restaked once per epoch, you lose some potential yield from less compounding. The compounding yield opportunity is lost for earnings outside staking rewards because the NEAR protocol only issues staking rewards once per epoch. Thus, today some yield is left on the table for contract earnings received from transaction gas fees, which impacts long term stakers the most because of less compounding. The next generation STAKE pool maximizes yield by checking for earnings in each pool transaction and restakes earnings as soon as they are received to maximize the power of the compounding yield effect.
 
-## Unstaking Done Right
+# Unstaking Done Right
 
 The following 2 improvements enable accounts to withdraw unstaked NEAR sooner:
 
@@ -41,11 +41,11 @@ The goal is to provide more financial levers to validators in order to promote c
 
 STAKE is modeled as a **dividend stock**. STAKE links the dividend yield directly to EPS \(earnings per share or earnings per STAKE\). When EPS increases, so does the dividend, and gets automatically paid out, which is governed by the contract \(and not a board of directors\). The STAKE pool contract enables validators to compete on EPS on more than just staking rewards provided by NEAR PoS.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-earnings.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-earnings.png)
 
 # STAKE High Level Component Based Architecture
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-deployment.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-deployment.png)
 
 ## STAKE Pool Factory Contract
 
@@ -57,12 +57,12 @@ It currently costs a little just under 6 NEAR to deploy the STAKE pool contract 
 
 The STAKE Pool Contract is composed of 4 components, which are depicted on the right-hand side of the diagram. Each component provides multiple interfaces which are paired up in the diagram by the coloring scheme. The diagram also depicts the main actors and the key interfaces they depend on. In this tutorial, we will just be scratching the surface and focus on the core staking functionality to get started.
 
-> The STAKE pool contract is built using a component based architecture. If you happen to wander into the source code, you will probably notice that it follows a completely different design approach to build contracts on NEAR compared to what you are probably used to seeing. 
-> There's nothing special besides applying software engineering best practices. A component based approach enables component reuse across contracts - and I have plans for building many. 
-> My plan is to eventually publish them all to [https://crates.io](https://crates.io) to make it easy for developers to use them. Until then, if you are interested in using them, you'll need to pull them in from the GitHub project. 
-> I'll end the discussion on the benefits of a component based architecture here by putting it into context for web developers. If you prefer building web apps using React components, then you should also prefer building contracts using OysterPack SMART components for the same reasons.
->
-> You might also notice that I have built components that implement the NEAR standard APIs that I have covered in prior tutorials for account storage management and fungible tokens, but there's much more ...
+The STAKE pool contract is built using a component based architecture. If you happen to wander into the source code, you will probably notice that it follows a completely different design approach to build contracts on NEAR compared to what you are probably used to seeing. 
+There's nothing special besides applying software engineering best practices. A component based approach enables component reuse across contracts - and I have plans for building many. 
+My plan is to eventually publish them all to [https://crates.io](https://crates.io) to make it easy for developers to use them. Until then, if you are interested in using them, you'll need to pull them in from the GitHub project. 
+I'll end the discussion on the benefits of a component based architecture here by putting it into context for web developers. If you prefer building web apps using React components, then you should also prefer building contracts using OysterPack SMART components for the same reasons.
+
+You might also notice that I have built components that implement the NEAR standard APIs that I have covered in prior tutorials for account storage management and fungible tokens, but there's much more ...
 
 # How to Get Started as a Validator
 
@@ -141,9 +141,9 @@ https://explorer.testnet.near.org/transactions/Yhrda9sutT4jhGMpwTuUZCZYm5vfH8RLC
 
 The logs tell the story about what's happening during the deployment, which is illustrated in the below diagram:
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-factory-deploy.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-factory-deploy.png)
 
-## Notes
+# Notes
 
 * **AccountManagementComponent** is designed to track and log \(**ACCOUNT\_STORAGE\_CHANGED**\) all account storage changes
 * The STAKE pool contract implements the NEAR standard [account storage management](https://nomicon.io/Standards/StorageManagement.html) interface. It measures dynamically how much account storage is required by the contract and configures the minimum storage usage bound accordingly.
@@ -156,7 +156,7 @@ The logs tell the story about what's happening during the deployment, which is i
 
 # How to operate the STAKE pool contract
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-operator-usecases.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-stake-operator-usecases.png)
 
 The above diagram shows the role and responsibilities for the operator. In this tutorial, I will review the key APIs to be familiar with to get started. The rest is out of scope and will be covered in future tutorials and workshops.
 
@@ -224,7 +224,7 @@ near call  $STAKE.stake-v1.oysterpack.testnet ops_stake_operator_command --args 
 
 # How to Get Started as a Staker
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-staker-usecases.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-staker-usecases.png)
 
 The STAKE Pool contract implements the NEAR standard [storage management](https://nomicon.io/Standards/StorageManagement.html) specification. This means that accounts must first register with the contract and deposit funds to pay for account storage before being able to use the contract. I defer to the [storage management](https://nomicon.io/Standards/StorageManagement.html) documentation for details.
 
@@ -448,5 +448,5 @@ I invite you to join the Figment and NEAR communities and embark on our common m
 
 The focus will be providing the validators with more in-depth tutorials and workshops to help them get onboard.
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-field-of-dreams.jpeg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-smart-field-of-dreams.jpeg)
 
