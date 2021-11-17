@@ -18,7 +18,7 @@ This tutorial explains how to mint fungible tokens on the Tezos blockchain. In t
 
 SmartPy is an intuitive and powerful smart contract development platform for Tezos. It provides a Python library for building and analyzing Tezos smart contracts. With the SmartPy IDE, we can quickly write our code in the browser itself. We can also deploy our code from the browser. No local setup is required. So, Let's get started! Open <https://smartpy.io/ide>
 
-![SmartPy](../../../.gitbook/assets/mint_smartpy_1.png)
+![SmartPy](../assets/mint_smartpy_1.png)
 
 You can explore and look at the template codes given.  
 To move to the editor, click CLOSE.
@@ -156,16 +156,16 @@ def test():
 
 Run the code in SmartPy using the RUN button above the left (Editor) panel. You can also use CTRL+Enter on Windows, or CMD+Enter on macOS.
 
-![SmartPy](../../../.gitbook/assets/fungible_smartpy_run.png)
+![SmartPy](../assets/fungible_smartpy_run.png)
 
 If there are no errors, we will get the output in the right terminal.  
 We can check it according to the tests defined. We defined the heading `h1` in tests as “tutorial tests”, so we can see that on the top. Then, we minted one token to Jerry's address and ten tokens to Tom's address; we can see that as well. Then the transfer in which we're transferring two tokens from Tom to Jerry. So this looks perfect, and our contract is working correctly.
 
-![SmartPy](../../../.gitbook/assets/fungible_smartpy_output.png)
+![SmartPy](../assets/fungible_smartpy_output.png)
 
 In the end, the contract storage shows that there are eight tokens in Tom's address and three tokens in Jerry's address, which is correct according to our tests.
 
-![SmartPy](../../../.gitbook/assets/fungible_smartpy_storage.png)
+![SmartPy](../assets/fungible_smartpy_storage.png)
 
 # Deploy Contract
 
@@ -173,19 +173,19 @@ It’s time to deploy this contract. For this tutorial, we are going to deploy t
 
 Click on the Deploy Michelson Contract button.
 
-![SmartPy](../../../.gitbook/assets/fungible_smartpy_deployButton.png)
+![SmartPy](../assets/fungible_smartpy_deployButton.png)
 
 A new tab will open up.
 
-![SmartPy](../../../.gitbook/assets/fungible_smartpy_originate.png)
+![SmartPy](../assets/fungible_smartpy_originate.png)
 
 Choose Granadanet in the Node. Now Click on Temple Wallet. Choose one account (if you have multiple). And then press connect.
 
 Account loaded with success will come.
-![SmartPy](../../../.gitbook/assets/fungible_smartpy_loaded.png)
+![SmartPy](../assets/fungible_smartpy_loaded.png)
 
 Scroll down below and click on Estimate Cost From RPC. It will refresh the cost. And after that, click on the DEPLOY CONTRACT button.
-![SmartPy](../../../.gitbook/assets/fungible_smartpy_estimate.png)
+![SmartPy](../assets/fungible_smartpy_estimate.png)
 
 Accept the pre-signature information.
 
@@ -193,7 +193,7 @@ Then your wallet popup will come. Press sign.
 
 Contract Originated Successfully will be shown. Copy the contract address(KT1VUvsQdZdBeRbnFdhfWJTi8tXSCAs5Yexi) and store it.
 
-![SmartPy](../../../.gitbook/assets/fungible_smartpy_deployed.png)
+![SmartPy](../assets/fungible_smartpy_deployed.png)
 
 Hurray, we deployed our contract successfully.
 
@@ -219,16 +219,16 @@ Edit the name, symbol, decimals and shouldPreferSymbol according to the need. If
 
 So to upload files, visit [nft.storage](https://nft.storage/).
 
-![IPFS](../../../.gitbook/assets/mint_ipfs_1.png)
+![IPFS](../assets/mint_ipfs_1.png)
 
 Log in and click on upload and choose the `token.json` and upload.
 
-![IPFS](../../../.gitbook/assets/fungible_ipfs_upload.png)
+![IPFS](../assets/fungible_ipfs_upload.png)
 
 Upload it now.  
 The file will get uploaded, and this is your hash.
 
-![IPFS](../../../.gitbook/assets/fungible_ipfs_hash.png)
+![IPFS](../assets/fungible_ipfs_hash.png)
 
 You can view your files visiting ipfs://{hash} - If your browser doesn’t support IPFS, you can use <https://ipfs.io/ipfs/{hash}>
 
@@ -239,27 +239,27 @@ It's time to mint our token. Open up [better-call.dev](https://better-call.dev/)
 Move to the interact tab, open mint from the right sidebar.
 Put the amount and address you want to mint the token to. The `token_id` should be 0 as our contract is a `single_asset`. And for metadata, we will take the hash of the `token.json` file we uploaded above and use ipfs://{hash} to set the token metadata. But for the token metadata, the ipfs URL needs to be in bytes. You can convert the strings to bytes from [here](https://tutorial-mint-nfts.vercel.app/char2bytes).
 
-![better-call.dev](../../../.gitbook/assets/fungible_bcd_bytes.png)
+![better-call.dev](../assets/fungible_bcd_bytes.png)
 
 Press Execute and choose the wallet option. From the list of wallets, choose the temple wallet. And then use the account which was set to admin for the contract. This is important; we won’t be able to mint using any other address. Only admin can mint according to our smart contract.
 
-![better-call.dev](../../../.gitbook/assets/fungible_bcd_mint.png)
+![better-call.dev](../assets/fungible_bcd_mint.png)
 
 You can check the fees and also explore the operations which wallet is going to send. Then click confirm.
 
-![better-call.dev](../../../.gitbook/assets/fungible_bcd_temple.png)
+![better-call.dev](../assets/fungible_bcd_temple.png)
 
 The message will come if it’s successfully sent.
 
-![better-call.dev](../../../.gitbook/assets/fungible_bcd_successful.png)
+![better-call.dev](../assets/fungible_bcd_successful.png)
 
 After a few seconds, refresh and move to the operations tab. You can see the mint operation.
 
-![better-call.dev](../../../.gitbook/assets/fungible_bcd_operations.png)
+![better-call.dev](../assets/fungible_bcd_operations.png)
 
 You can look at the metadata of the token in the tokens section.
 
-![better-call.dev](../../../.gitbook/assets/fungible_bcd_tokens.png)
+![better-call.dev](../assets/fungible_bcd_tokens.png)
 
 Hurray, we minted our token.
 
