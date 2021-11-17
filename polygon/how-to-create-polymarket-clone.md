@@ -881,6 +881,8 @@ const Admin = () => {
 export default Admin;
 ```
 
+![Admin index demo](../assets/admin-index.gif)
+
 On this page, we are creating a form through which the admin can create a new market. While creating a new market,  the admin must add a title, description, title image, resolve URL, and the end date for the market. Here resolve URL is the URL that will be referred by the admin to decide the outcome of the market. We have two functions, one to upload the image to IPFS and the other to call the `createMarket` method of the `Polymarket` contract.
 
 Once this page is completed, we can create a new market and head to the home page to see the newly listed market.
@@ -1101,6 +1103,8 @@ const Details = () => {
 
 export default Details;
 ```
+
+![Market details](../assets/market-market-details.gif)
 
 The market details page has four sections:
 
@@ -1594,6 +1598,8 @@ const Markets: React.FC = () => {
 
 export default Markets;
 ```
+
+![Admin market resolve](../assets/admin-market-resolve.gif)
 
 On this page, we are just fetching all the markets from `Polymarket` and displaying them on a card. For the card, we have to create a new component called `AdminMarketCard`.
 
