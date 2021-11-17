@@ -38,19 +38,15 @@ Once the installation process is complete, Create an `.env` file in the working 
 ```text
 DATAHUB_URL=http://polkadot-westend--rpc.datahub.figment.io/apikey/API_KEY
 
-# Alice
 ALICE_ADDRESS=
 ALICE_MNEMONIC= 
 
-# AliceProxy
 PROXY_ADDRESS=
 PROXY_MNEMONIC=
 
-# Bob
 BOB_ADDRESS=
 BOB_MNEMONIC=
 
-# Charlie
 CHARLIE_ADDRESS= 
 CHARLIE_MNEMONIC=
 ```
