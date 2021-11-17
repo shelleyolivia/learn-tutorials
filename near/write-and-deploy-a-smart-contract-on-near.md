@@ -71,16 +71,16 @@ near-sdk = "3.1.0"
 
 [profile.release]
 codegen-units = 1
-# Tell `rustc` to optimize for small code size.
 opt-level = "z"
 lto = true
 debug = false
 panic = "abort"
 overflow-checks = true
 ```
-> See more cargo manifest keys and their definitions at <https://doc.rust-lang.org/cargo/reference/manifest.html>
-> Use `overflow-checks = true` to opt into extra safety checks on arithmetic operations: <https://stackoverflow.com/a/64136471/249801>
 
+See more cargo manifest keys and their definitions at <https://doc.rust-lang.org/cargo/reference/manifest.html> \
+Use `overflow-checks = true` to opt into extra safety checks on arithmetic operations: <https://stackoverflow.com/a/64136471/249801> \
+Use `opt-level = "z"` to tell the Rust compiler to optimize for small code size.
 
 We are all set now! This can be used as a template and a starting point for any future project.
 
