@@ -6,7 +6,7 @@ We will create a full-stack dApp with an admin panel where events/markets are cr
 
 This is what the dApp we will be creating looks like:
 
-[Demo video](https://vimeo.com/645127735)
+[Demo GIF](../assets/polymarket-app-demo.gif)
 
 # Prerequisites
 
@@ -1680,6 +1680,11 @@ export const AdminMarketCard: React.FC<Props> = ({
 In `AdminMarketCard`, we have two buttons, Yes and No, which will call the `distributeWinningAmount` method of `Polymarket` contract and pass in `true` if the Yes button is pressed and pass `false` if No button is pressed. `distributeWinningAmount` method calculates the winning amount and send the tokens directly to winners wallet address.
 
 We have covered all the Frontend code required to make a Polymarket clone. The source code for this tutorial is available [here](https://github.com/viral-sangani/Polymarket-clone).
+
+
+This is what the Polymarket clone at the end looks like:
+
+[Demo Video](https://vimeo.com/645127735)
 
 # Conclusion
 
