@@ -48,14 +48,15 @@ Once we have decided which contract(s) we need to watch and index data from, the
 
 Let’s start by creating a Subgraph for the above contract using the Graph CLI tool and we will add our logic for achieving our goal. Install the Graph CLI using the command below:
 
-Using npm
+Using npm:
 
-```
+```text
 npm install -g @graphprotocol/graph-cli
 ``` 
 
-Using yarn
-```
+Using yarn:
+
+```text
 yarn global add @graphprotocol/graph-cli	
 ```
 
@@ -227,6 +228,7 @@ Let’s understand what this GraphQL type is for. We defined a new entity `User`
 Save the file and open `subgraph.yaml`. We will remove most of the auto-generated code to keep things simple. We remove all other entities which were imported by default. We also remove all the events and their handlers except for the Transfer event and its eventHandler. The final contents of the file should look as below:
 
 `subgraph.yaml`
+
 ```yaml
 specVersion: 0.0.2
 schema:
@@ -256,6 +258,7 @@ dataSources:
 Once you've made the changes to `subgraph.yaml`, save the file. Next, open the `mapping.ts` file where we will store our logic for aggregating the user data. First, let's clean up by removing the auto-generated code. Just leave the transfer handler as it is and import `User` entity instead of `ExampleEntity`. The final code should be as below:
 
 `mapping.ts`
+
 ```typescript
 import { BigInt } from "@graphprotocol/graph-ts"
 import { Transfer } from "../generated/GraphToken/GraphToken"
@@ -266,7 +269,7 @@ export function handleTransfer(event: Transfer): void { }
 
 Now we can build and deploy to check if everything works as expected. The subgraph obviously won’t do anything as of now, but it is a good practice to build and test code frequently after main logical changes. Open your terminal and run the command
 
-```
+```text
 yarn codegen && yarn deploy
 ```
 
@@ -351,7 +354,7 @@ export function handleTransfer(event: Transfer): void {
 
 Wasn’t it simple? Now let’s build and deploy our subgraph using the commands
 
-```
+```text
 yarn codegen && yarn deploy
 ```
 
