@@ -17,15 +17,9 @@ This tutorial assumes that you have completed the [Secret Learn Pathway](https:/
   * [dotenv](https://www.npmjs.com/package/dotenv) - for working with environment variables
 * [Rust](https://rustup.rs) + [docker](https://docs.docker.com/get-docker/) toolchain to compile secret contracts
 
-For the latest you may want to refer to
-
-{% page-ref page="intro-pathway-secret-basics/5.-writing-and-deploying-your-first-secret-contract.md" %}
-
-which will help you setting up everything needed for developing on Secret.
-
 ## Generate the contract
 
-```bash
+```text
 cargo generate --git https://github.com/baedrik/snip721-reference-impl --name my-snip721
 ```
 
@@ -33,13 +27,13 @@ This git project is a reference implementation for tokens based on the [snip721 
 
 You can have a look at the generated files by stepping into the folder using:
 
-```bash
+```text
 cd my-snip721 && ls
 ```
 
 Most of the files in here should look very familiar from what you saw in part 5 of the Secret pathway, with the main difference that the `src` folder contains more files, due to the complexity of the contract
 
-```bash
+```text
 Cargo.lock  Developing.md  LICENSE  Publishing.md  examples      schema  tests
 Cargo.toml  Importing.md   NOTICE   README.md      rustfmt.toml  src
 ```
@@ -69,7 +63,7 @@ This will output an optimized build file, `contract.wasm.gz`, ready to be stored
 
 While `secretcli` supports uploading the compressed file, we'll be using SecretJS which expects the uncompressed WASM file, so lets unpack the optimized `contract.wasm` with this terminal command:
 
-```bash
+```text
 gunzip contract.wasm.gz
 ```
 
@@ -196,7 +190,7 @@ Ensure that if you have changed the name of the contract folder, you also change
   const wasm = fs.readFileSync('my-snip721/contract.wasm');
 ```
 
-## Instantiating the contract
+# Instantiating the contract
 
 Similar to what you have seen before, we first got the `codeId` from the upload receipt and then defined the `initMsg` to instantiate the contract. In this case the initMsg is more complex that for a simple counter and allows us to configure the secret NFT to our liking.
 
@@ -204,7 +198,7 @@ Open up the `msg.rs` file within the `src` folder of the contract code. You will
 
 Lets have a look at the different fields and what part of the contract they control:
 
-#### **InitMsg**
+## InitMsg
 
 | Name | Type | Description | Optional | Value If Omitted |
 | :--- | :--- | :--- | :--- | :--- |
@@ -215,7 +209,7 @@ Lets have a look at the different fields and what part of the contract they cont
 | config | [Config \(see below\)](deploy-your-own-secret-nft.md#config) | Privacy configuration for the contract | yes | defined below |
 | post\_init\_callback | [PostInitCallback \(see below\)](deploy-your-own-secret-nft.md#postinitcallback) | Information used to perform a callback message after initialization | yes | nothing |
 
-#### **InitConfig**
+## InitConfig
 
 | Name | Type | Description | Optional | Value If Omitted |
 | :--- | :--- | :--- | :--- | :--- |
@@ -244,13 +238,13 @@ For this tutorial we will keep most of the default values and just change the na
 
 Let's run the code:
 
-```bash
+```text
 node deploy-nft.js
 ```
 
 If it went well, you should see similar output:
 
-```bash
+```text
 Uploading contract
 contract:  {
   contractAddress: 'secret1g0t7sggeh89k27xa2vux5rnpc3ly4a9c0u8724',
@@ -260,9 +254,9 @@ contract:  {
 } address: secret1g0t7sggeh89k27xa2vux5rnpc3ly4a9c0u8724
 ```
 
-> **Unable to deploy your contract or initializing it using deploy-ft.js**
->
-> Let's check for some common causes:
+**Unable to deploy your contract or initializing it using deploy-ft.js**
+
+Let's check for some common causes:
 
 * First, make sure you have `.env` file saved and it's in the correct format as given in the tutorial.
 * If you're getting an error message like `UnauthorizedError: { "message":"Invalid authentication credentials"` then make sure to replace the &lt;API\_KEY&gt; with your correct API key which you copied from your DataHub Dashboard.
@@ -271,9 +265,7 @@ contract:  {
 * If still, you're experiencing the same issue, for help reach out to us on [Discord](https://discord.gg/fszyM7K) or [Forum](https://community.figemnt.io)
 
 
-After this executed successfully you can take the program you created in the first installment, change the contract address to the one of your contract and interact with it in the same way!
-
-{% page-ref page="create-your-first-secret-nft.md" %}
+After this executed successfully you can take the program you created in the [first tutorial](https://learn.figment.io/tutorials/create-your-first-secret-nft), change the contract address to the one of your contract and interact with it in the same way!
 
 # Conclusion
 
