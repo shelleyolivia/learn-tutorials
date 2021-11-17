@@ -18,7 +18,7 @@ We will now modify the `substrate-node-template` to include the Contracts pallet
 
 Open the `substrate-node-template` in your favorite code editor. We will be editing two files: `runtime/src/lib.rs`, and `runtime/Cargo.toml`.
 
-```
+```text
 substrate-node-template
 |
 +-- runtime
@@ -38,7 +38,6 @@ substrate-node-template
 +-- node             <-- changes in this directory
 |
 +-- ...
-Copy
 ```
 
 ## Importing a Pallet Crate
@@ -455,14 +454,15 @@ fn testnet_genesis(
 
 Now you are ready to compile and run your contract-capable node. Compile the node in release mode with:
 
-```
+```text
 cargo build --release
 ```
 
+## Run a temporary node in development mode
+
 Now launch the executable you just built by running this command:
 
-```bash
-# Run a temporary node in development mode
+```text
 ./target/release/node-template --dev --tmp
 ```
 
