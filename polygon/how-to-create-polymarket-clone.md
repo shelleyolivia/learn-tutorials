@@ -6,7 +6,7 @@ We will create a full-stack dApp with an admin panel where events/markets are cr
 
 This is what the dApp we will be creating looks like:
 
-[Demo GIF](../assets/polymarket-app-demo.gif)
+![Demo GIF](../assets/polymarket-app-demo.gif)
 
 # Prerequisites
 
