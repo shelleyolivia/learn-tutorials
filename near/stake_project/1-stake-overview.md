@@ -34,7 +34,7 @@ The STAKE token business model leverages the following from NEAR:
 
 # STAKE Token Contract High-Level Overview
 
-![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-overview-1-.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-overview-1-.png)
 
 * Users must register with the contract in order to use it. When registering, users are required to pay an upfront account storage fee to cover storage staking costs. On NEAR long term storage is not free. The account storage fee is escrowed and will be refunded back to the user when the account unregisters.
 * Contract is linked to a single staking pool contract, i.e., STAKE token contract is deployed per staking pool contract.
@@ -74,5 +74,5 @@ NEAR is a super-fast smart contract platform with super low transaction fees tha
 
 # Next Steps
 
-If you are wondering what is NEP-41, then you are in luck. In the next tutorial, we'll do a deep dive into the new and improved Fungible Token Core Standard NEP-141.
+If you are wondering what is NEP-41, then you are in luck. In the [next tutorial](https://learn.figment.io/tutorials/stake-fungible-token), we'll do a deep dive into the new and improved Fungible Token Core Standard NEP-141.
 
