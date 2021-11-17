@@ -4,7 +4,7 @@ In this tutorial, we will be learning how to create a quadratic voting app with 
 
 Here's a preview of what we will be building:
 
-![app demo](../../../.gitbook/assets/quadratic-voting-complete.png)
+![app demo](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-complete.png)
 
 # Prerequisites
 
@@ -53,7 +53,7 @@ Install it [here](https://metamask.io/).
 
 Use the following configuraton to add the Polygon Mumbai testnet.
 
-![MetaMask config](../../../.gitbook/assets/metamask-settings-mumbai.webp)
+![MetaMask config](https://github.com/figment-networks/learn-tutorials/raw/master/assets/metamask-settings-mumbai.webp)
 
 ## Preview
 
@@ -83,7 +83,7 @@ When creating the Vue app, choose "Default (Vue 3)" and "Use Yarn".
 
 Your project should look like this.
 
-![file structure](../../../.gitbook/assets/quadratic-voting-folder-structure.png)
+![file structure](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-folder-structure.png)
 
 # Creating the smart contract in Solidity
 
@@ -248,7 +248,7 @@ truffle compile
 
 You should get similar output.
 
-![truffle compile](../../../.gitbook/assets/quadratic-voting-truffle-compile.png)
+![truffle compile](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-truffle-compile.png)
 
 You can find the compiled contracts in the `build/contracts` directory.
 
@@ -326,7 +326,7 @@ truffle migrate --network matic
 
 You should see similar output.
 
-![truffle migrate](../../../.gitbook/assets/quadratic-voting-truffle-migrate.png)
+![truffle migrate](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-truffle-migrate.png)
 
 # Writing tests for the smart contract
 
@@ -392,7 +392,7 @@ truffle test
 
 You should see similar output.
 
-![truffle test](../../../.gitbook/assets/quadratic-voting-truffle-test.png)
+![truffle test](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-truffle-test.png)
 
 # Communicating with the smart contract with Web3
 
@@ -674,11 +674,11 @@ export default {
 
 The component will look like this. We will style it later.
 
-![create item](../../../.gitbook/assets/quadratic-voting-create-item.png)
+![create item](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-create-item.png)
 
 When you click on the "Create Item" button you should see MetaMask prompt you to confirm the transaction.
 
-![create item MetaMask](../../../.gitbook/assets/quadratic-voting-create-item-metamask.png)
+![create item MetaMask](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-create-item-metamask.png)
 
 ## RankedList
 
@@ -838,21 +838,21 @@ This will by far be our largest and most complex component. Read through the cod
 
 Our `RankedList` component should now look something like this depending on the data you posted.
 
-![ranked items with claim button](../../../.gitbook/assets/quadratic-voting-ranked-items-claim.png)
+![ranked items with claim button](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-ranked-items-claim.png)
 
 If you switch your MetaMask wallet to a different account and reload the page, you should see voting controls instead of the "Claim" button. Both positive and negative votes are displayed.
 
-![ranked items with voting controls](../../../.gitbook/assets/quadratic-voting-ranked-items-voting.png)
+![ranked items with voting controls](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-ranked-items-voting.png)
 
 Interacting with the "Up"/"Down" buttons will reveal a submit section that allows you to quadratically vote on the item.
 
-![submit vote](../../../.gitbook/assets/quadratic-voting-submit-vote.png)
+![submit vote](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-submit-vote.png)
 
 Notice the `640 gwei` fee, which is calculated from `8 * 8 * 10 gwei` where `10 gwei` is the `voteCost` we defined in our contract.
 
 Clicking the "Submit Vote" button should allow you to confirm a transaction.
 
-![submit vote MetaMask](../../../.gitbook/assets/quadratic-voting-submit-vote-metamask.png)
+![submit vote MetaMask](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-submit-vote-metamask.png)
 
 # Styling the components with Tailwind CSS
 
@@ -1050,7 +1050,7 @@ And finally, edit `Item.vue`. The layout of this component will change quite a b
 
 We're done! Our app should now have a much better appearance.
 
-![completed app](../../../.gitbook/assets/quadratic-voting-complete.png)
+![completed app](https://github.com/figment-networks/learn-tutorials/raw/master/assets/quadratic-voting-complete.png)
 
 # Conclusion
 
