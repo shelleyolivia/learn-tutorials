@@ -230,7 +230,7 @@ impl pallet_contracts::Config for Runtime {
 
 At this point, it is recommended to explore the [Contracts pallet source code](https://github.com/paritytech/substrate/blob/v3.0.0/frame/contracts/src/lib.rs) if things don't make sense or you want to gain a deeper understanding.
 
-## Adding Contracts to the `construct_runtime!` Macro
+## Adding Contracts to the construct_runtime! Macro
 
 Next, we need to add the pallet to the `construct_runtime!` macro. For this, we need to determine the types that the pallet exposes so that we can tell our runtime that they exist. The complete list of possible types can be found in the [`construct_runtime!` macro documentation](https://substrate.dev/rustdocs/v3.0.0/frame_support/macro.construct_runtime.html).
 
