@@ -27,7 +27,7 @@ _also:_
 > * Existential deposit is equal to 0.01 WND \(Westies; Westend's native coin\) instead of 1 DOT.
 > * The multi signature transaction deposit is equal to ~1 WND instead of ~20.2 DOT.
 
-## Setup
+# Setup
 
 It is not a requirement, however completing the Polkadot [Pathway](../polkadot-pathway.md) and the [social recovery](implement-social-recovery-on-polkadot.md) tutorial form a strong basis of understanding which will enhance this tutorial. 
 
@@ -43,7 +43,7 @@ This tutorial has the following two dependencies which must be installed via the
 
 ## Initialize the project directory
 
-```
+```text
 mkdir polkadot_ms
 cd polkadot_ms
 npm init -y
@@ -54,22 +54,19 @@ When we copy and paste all four of these commands into a terminal, the first thr
 
 Once the installation process is complete, create an `.env` file in the project directory. For convenience, copy and paste the template below. Read more about `dotenv`in our handy [quick-reference guide](../../extra-guides/dotenv-and-.env.md). Also, remember to replace `API_KEY` with a valid DataHub API key from the [Polkadot Services Dashboard](https://datahub.figment.io/services/polkadot).
 
+Paste the following into your `.env` file:
 
-```bash
-# paste the following into your .env file
+```text
 DATAHUB_URL=https://polkadot-westend--rpc.datahub.figment.io/apikey/API_KEY
 
 MULTISIG_ADDRESS=
 
-# Alice
 ALICE_ADDRESS=
 ALICE_MNEMONIC= 
 
-# Bob
 BOB_ADDRESS=
 BOB_MNEMONIC=
 
-# Charlie
 CHARLIE_ADDRESS= 
 CHARLIE_MNEMONIC=
 ```
@@ -78,9 +75,8 @@ CHARLIE_MNEMONIC=
 
 Create a file called `create_account.js` and paste the following code :
 
-
 ```javascript
-// create_accoount.js
+// create_account.js
 const { ApiPromise, Keyring } = require('@polkadot/api');
 const { HttpProvider } = require('@polkadot/rpc-provider');
 const { mnemonicGenerate } = require('@polkadot/util-crypto');
@@ -100,8 +96,7 @@ const main = async () => {
 main().catch((err) => {console.error(err)}).finally(() => process.exit());
 ```
 
-
-In a terminal window, run `node create_account.js` 3 \(_three_\) times in order to generate the data we require. Copy/paste the mnemonics & addresses for each new account into the supplied`.env` template. 
+In a terminal window, run `node create_account.js` 3 \(_three_\) times in order to generate the data we require. Copy/paste the mnemonics & addresses for each new account into the supplied `.env` template. 
 
 * `Alice`: The account which we will use in the multisig wallet.
 * `Bob` & `Charlie`: These accounts represent other participants in the multisig.
@@ -112,7 +107,7 @@ There are three types of actions to be taken with a multi-sig account. Executing
 
 # Create a Multisig account
 
-![Click to enlarge.](https://github.com/figment-networks/learn-tutorials/raw/master/assets/encode_flow-fix.png)
+![Click to enlarge](https://github.com/figment-networks/learn-tutorials/raw/master/assets/encode_flow-fix.png)
 
 Create a file called `create_multisig.js` and paste the following code :
 
@@ -147,13 +142,11 @@ const main = async () => {
   const multisig = encodeMultiAddress(addresses, THRESHOLD);
   console.log(`Multisig Address: ${multisig}\n`);
 
-
   // 4. Filter out the sender
   const otherSignatories = addresses.filter((who) => who !== addresses[INDEX]);
   const otherSignatoriesSorted = sortAddresses(otherSignatories);
   console.log(`Other Signatories: ${JSON.stringify(otherSignatoriesSorted, null, 2)}\n`);  
 
-    
   // 4. Define an array of transactions
   const transactions = [
      api.tx.balances.transfer(Bob.address, AMOUNT_TO_SEND),
@@ -173,19 +166,19 @@ const main = async () => {
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
 
-`SS58PREFIX` is used to encode our address for use on different chains. The `0` value will encode our multisig address for the Polkadot relay chain, therefore the encoded address will begin with the number `1` . The Parity team maintains a [registry of the SS58 types](https://github.com/paritytech/substrate/blob/master/ss58-registry.json), which might come in handy when working with various para-chains.
+- `SS58PREFIX` is used to encode our address for use on different chains. The `0` value will encode our multisig address for the Polkadot relay chain, therefore the encoded address will begin with the number `1` . The Parity team maintains a [registry of the SS58 types](https://github.com/paritytech/substrate/blob/master/ss58-registry.json), which might come in handy when working with various para-chains.
 
-`INDEX`  will be used to refer to the index of our address within an array of addresses. More information on[ zero-indexed arrays](https://medium.com/swlh/zero-indexed-arrays-f752a47abf65), for the curious.
+- `INDEX`  will be used to refer to the index of our address within an array of addresses. More information on[ zero-indexed arrays](https://medium.com/swlh/zero-indexed-arrays-f752a47abf65), for the curious.
 
-`THRESHOLD` specifies the number of accounts required to approve a transaction from the Multisig. It is possible to set the threshold to the same number of total addresses, which would mean that no transactions could be sent from that multisig without full approval, however in this example we will set it to require 2 of 3 signatures.
+- `THRESHOLD` specifies the number of accounts required to approve a transaction from the Multisig. It is possible to set the threshold to the same number of total addresses, which would mean that no transactions could be sent from that multisig without full approval, however in this example we will set it to require 2 of 3 signatures.
 
-`otherSignatories` illustrates the use of `filter()` to remove the address at the specified index. Before we display the filtered list of addresses, the `sortAddresses()` function will sort it by public key. Logging this via `JSON.stringify()` will display it in a more readable format in the terminal.  
+- `otherSignatories` illustrates the use of `filter()` to remove the address at the specified index. Before we display the filtered list of addresses, the `sortAddresses()` function will sort it by public key. Logging this via `JSON.stringify()` will display it in a more readable format in the terminal.  
 
-`encodeMultiAddress()` is part of the takes the array of addresses, `THRESHOLD` & optionally the`SS58PREFIX` and returns the deterministic address of the multisig. If the SS58 prefix is included, the address will be encoded for the specified chain.  
+- `encodeMultiAddress()` is part of the takes the array of addresses, `THRESHOLD` & optionally the`SS58PREFIX` and returns the deterministic address of the multisig. If the SS58 prefix is included, the address will be encoded for the specified chain.  
 
 Run the code with `node create_multisig.js` :
 
-```
+```text
 Multisig Address: 5CPnQhU8TCvtbaJQEYEPuYhgbwpeGqhx6uErZJ7QDcaD7aX9
 
 Other Signatories: [
@@ -198,12 +191,11 @@ to 5GL63QD2HhXvBMcP9skdjq8H5Znhe7Fke83aWENHPGRMvJSA, 5GpDZiUMpdX2GcGJzAZVX36kSGo
 transfer tx: https://westend.subscan.io/extrinsic/...
 ```
 
-
 > Remember to copy and paste the resulting value for Multisig Address into `.env` as `MULTISIG_ADDRESS` in preparation for the next step! 
 
 # Fund a Multisig account
 
-![Click to enlarge.](https://github.com/figment-networks/learn-tutorials/raw/master/assets/transfer_flow-fix.png)
+![Click to enlarge](https://github.com/figment-networks/learn-tutorials/raw/master/assets/transfer_flow-fix.png)
 
 Funding the multisig wallet is an important step in this tutorial process, so that it will have enough available balance to cover the existential deposit, and an available balance for sending further transactions. 
 
@@ -255,7 +247,7 @@ To complete the action of funding the specified multisig account, paying from th
 
 Run the code with `node fund_multisig.js` : 
 
-```bash
+```text
 Sending 2.0000 WND 
 from 5Ekc5BsbkAgSbSYwi4W1CnpYLFzwUDJ4WGvohSzNcau2ZDLp 
 to 5CPnQhU8TCvtbaJQEYEPuYhgbwpeGqhx6uErZJ7QDcaD7aX9
@@ -340,11 +332,13 @@ const main = async () => {
 main().catch((err) => { console.error(err) }).finally(() => process.exit());
 ```
 
-`THRESHOLD` and `otherSignatories` should be familiar, `TIME_POINT` must be `null` if this is the first approval for the multisig. `call.method.hash` does what it says, returning a hashed representation of the method data of the transfer. `MAX_WEIGHT` refers to the maximum weight of the call, although this is not clearly stated in the API documentation, it has to do with fee calculation. Weight is a fixed number designed to manage block validation times. It can be supplemented with an optional tip. Read more about Polkadot transaction fees [here](https://wiki.polkadot.network/docs/en/learn-transaction-fees).
+- `THRESHOLD` and `otherSignatories` should be familiar, `TIME_POINT` must be `null` if this is the first approval for the multisig. `call.method.hash` does what it says, returning a hashed representation of the method data of the transfer.
+
+- `MAX_WEIGHT` refers to the maximum weight of the call, although this is not clearly stated in the API documentation, it has to do with fee calculation. Weight is a fixed number designed to manage block validation times. It can be supplemented with an optional tip. Read more about Polkadot transaction fees [here](https://wiki.polkadot.network/docs/en/learn-transaction-fees).
 
 Run the code with `node transfer_multisig.js` :
 
-```bash
+```text
 depositBase   : 1.0044 WND
 depositFactor : 1.6000 mWND
 Sending 1.0000 WND
@@ -365,7 +359,7 @@ approveAsMulti tx: https://westend.subscan.io/extrinsic/...
 
 ![Click to enlarge.](https://github.com/figment-networks/learn-tutorials/raw/master/assets/asmulti-flow.png)
 
-Create a new file called`approve_multisig.js` and paste the following code : 
+Create a new file called `approve_multisig.js` and paste the following code : 
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -432,7 +426,7 @@ If we encounter `Error: Option: unwrapping a None value` it means that the `unwr
 
 Run the code with `node approve_multisig.js` :
 
-```bash
+```text
 Time point is: {"height":5556711,"index":2}
 Sending 1.0000 WND 
 from 5CPnQhU8TCvtbaJQEYEPuYhgbwpeGqhx6uErZJ7QDcaD7aX9 
@@ -443,7 +437,6 @@ asMulti tx: https://westend.subscan.io/extrinsic/...
 # Cancel a multisig transfer
 
 Create a new file called `cancel_multisig.js` and paste the following code :
-
 
 ```javascript
 const { ApiPromise, Keyring } = require('@polkadot/api');
@@ -503,7 +496,7 @@ main().catch((err) => { console.error(err) }).finally(() => process.exit());
 
 It is not necessary to run this code in the normal course of the tutorial, it is largely included here for the sake of completeness. This would useful in case a multisig approval transaction gets stuck or needs to be cancelled for any reason. Should it be necessary, or for testing purposes, run the code with `node cancel_multisig.js` :
 
-```
+```text
 Time point is: {"height":5557129,"index":2}
 Sending 1.0000 WND 
 from 5CPnQhU8TCvtbaJQEYEPuYhgbwpeGqhx6uErZJ7QDcaD7aX9
@@ -519,7 +512,4 @@ cancelAsMulti tx: https://westend.subscan.io/extrinsic/0x774822d10f1159f12491bf9
 
 # Conclusion
 
-Congratulations! This brief tutorial has covered the creation and usage of a multisig account using the Polkadot JS API. We are now able to initiate, approve and cancel transactions using an account that requires multiple authorizations. This functionality enables many other amazing things to be built on Polkadot, and we all look forward to seeing what you build using multisig accounts.
-
-Join us on the [community forums](https://community.figment.io) or on our [Discord server](https://discord.gg/WGfw5SWpae) to talk about web3 and building on Polkadot!
-
+Congratulations! This tutorial has covered the creation and usage of a multisig account using the Polkadot JS API. We are now able to initiate, approve and cancel transactions using an account that requires multiple authorizations. This functionality enables many other amazing things to be built on Polkadot, and we all look forward to seeing what you build using multisig accounts.
