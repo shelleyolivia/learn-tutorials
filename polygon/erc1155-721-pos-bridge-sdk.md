@@ -25,7 +25,7 @@ The Goerli testnet is pre-configured in Metamask's list of available networks. Y
 
 You can fund your account with testnet Ether from the [Goerli Authenticated faucet](https://faucet.goerli.mudit.blog/) as long as you are willing to make a post on a valid Twitter or Facebook account. If this is not something you wish to do, there is an alternative faucet at [goerli-faucet.slock.it](https://goerli-faucet.slock.it/)
 
-  ![tokens balance](https://github.com/figment-networks/datahub-learn/raw/master/assets/pos-bridge-sdk-balance-metamask.png)
+  ![tokens balance](https://github.com/figment-networks/learn-tutorials/raw/master/assets/pos-bridge-sdk-balance-metamask.png)
 
 ## Mumbai
 You can either open [mumbai.polygonscan.com](https://mumbai.polygonscan.com/) and click on "Add Mumbai Network" in the footer at the bottom of the page *or* add it manually using the following information:
@@ -36,7 +36,7 @@ You can either open [mumbai.polygonscan.com](https://mumbai.polygonscan.com/) an
 * **Currency Symbol:** MATIC
 * **Block Explorer URL:** https://mumbai.polygonscan.com/
 
-![mumbai](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc1155-pos-mumbai.png)
+![mumbai](https://github.com/figment-networks/learn-tutorials/raw/master/assets/erc1155-pos-mumbai.png)
 
 You can fund your **Mumbai** account with MATIC [here](https://faucet.polygon.technology)
 
@@ -262,17 +262,17 @@ Now that everything is ready. Let's map our contracts.
 * Choose **Goerli Testnet -> Mumbai testnet**
   * ERC-1155
 
-    ![map image](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc1155-pos-map.png)
+    ![map image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/erc1155-pos-map.png)
 
   * ERC-721
 
-    ![map image](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc721-pos-map.png)
+    ![map image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/erc721-pos-map.png)
 
 * At this time the mapping process is not immediate. It can take up to 3 days to be confirmed.  
 
 Then open [mapper.matic.today](https://mapper.matic.today/), and enter the contract address to see if it has been added.
 
-![mapped image](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc1155-pos-mapped.png)
+![mapped image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/erc1155-pos-mapped.png)
 
 As you may notice, the contract addresses on Goerli and Mumbai are different. Let's remember to add it to Metamask so it shows up when we are connected to Mumbai as well.
 
@@ -285,7 +285,7 @@ As you may notice, the contract addresses on Goerli and Mumbai are different. Le
 
 Now it should be something like:
 
-![metamask after map](https://github.com/figment-networks/datahub-learn/raw/master/assets/pos-bridge-sdk-metamask-mumbai.png)
+![metamask after map](https://github.com/figment-networks/learn-tutorials/raw/master/assets/pos-bridge-sdk-metamask-mumbai.png)
 
 We don't yet have any tokens in Mumbai. We can transfer some across the bridge and check our balance again afterward.
 
@@ -710,7 +710,7 @@ TokenID 1: 0
 
 And Metamask is something like:
 
-  ![balances Metamask](https://github.com/figment-networks/datahub-learn/raw/master/assets/pos-bridge-sdk-metamask-mumbai-after.png)
+  ![balances Metamask](https://github.com/figment-networks/learn-tutorials/raw/master/assets/pos-bridge-sdk-metamask-mumbai-after.png)
 
 
 # Transfer using Web UI
@@ -719,23 +719,23 @@ Transferring assets through a **Web UI** is pretty simple. Just like the SDK, th
 1. Open [MintNFT Bridge](https://bridge.mintnft.today/)
 2. Make sure Goerli Testnet is selected in Metamask
 
-  ![Metamask Goerli](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc721-pos-metamask-eth-goerli.png)
+  ![Metamask Goerli](https://github.com/figment-networks/learn-tutorials/raw/master/assets/erc721-pos-metamask-eth-goerli.png)
   
 3. Enter the contract address in Goerli and Mumbai, and ID of the token you want to transfer.
 
 4. Click on **Approve**
 
-  ![Approve](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc721-pos-ui.png)
+  ![Approve](https://github.com/figment-networks/learn-tutorials/raw/master/assets/erc721-pos-ui.png)
 
 5. Then review the transaction details, like gas fees and the smart contract you are sending tokens to - before clicking on **Confirm**
 6. Now, wait until you receive confirmations. Metamask and the website both will send a notification.
 7. Now Click on **Deposit**
 
-  ![Deposit](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc721-pos-ui-deposit.png)
+  ![Deposit](https://github.com/figment-networks/learn-tutorials/raw/master/assets/erc721-pos-ui-deposit.png)
 
 8. Once the transaction is mined, the process is complete! It takes about 7 minutes to complete the transfer. As mentioned before Polygon needs about 5 minutes to sync.
 
-  ![Transfer Done](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc721-pos-ui-done.png)
+  ![Transfer Done](https://github.com/figment-networks/learn-tutorials/raw/master/assets/erc721-pos-ui-done.png)
 
 
 # Withdrawing ERC-721 using SDK

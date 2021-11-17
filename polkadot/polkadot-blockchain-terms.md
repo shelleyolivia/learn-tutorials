@@ -4,7 +4,7 @@
 
 Polkadot allows blockchains and applications to come together and work with each other in parallel. To have a decentralized web, an internet of interoperable blockchains is key. **A sharded blockchain protocol.** Polkadot considers itself to be a next-generation blockchain, or better yet, a foundational network layer that will truly drive the "web 3.0 vision" to create a unified network of specialized, self-governed, optimal blockchains that work together via interoperability. Polkadot offers scalability through its shared model, where blockchains that used to operate in isolation can take advantage of the Polkadot architecture to eliminate bottlenecks and network traffic.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/polkadot-graphic.jpg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/polkadot-graphic.jpg)
 
 Bitcoin gave us the first real concept of a money protocol; a blockchain that is now generally accepted at being a store of value. Ethereum extended this idea to, well, almost anything - creating the next wave of new finance and allowing us to develop real-world applications on-chain through smart contracts. Polkadot aims to bring these blockchains together, along with many others, while supporting web 3.0 protocols and other key blockchain features on-chain - acting as an infrastructure for infrastructures.
 
@@ -44,7 +44,7 @@ As the name suggests, the `Ethereum Virtual Machine` is a virtual machine for Et
 
 **Fun Fact \[4\]:** The co-founder and former CTO of Ethereum, Dr. Gavin James Wood, who is also the founder of the [Web 3 Foundation](https://web3.foundation/) and [Parity Technologies](https://www.parity.io/), is an inventor of the Solidity language and was the initial proposer in 2014 \[4\].
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/polkadot-substrate-ethereum.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/polkadot-substrate-ethereum.png)
 
 #### Advantages of Smart Contracts
 
@@ -78,11 +78,11 @@ The Polkadot network has a central chain called the [relay chain](https://wiki.p
 
 External chains can connect to the Relay chain as `Parachains`. A parachain is an individual blockchain that runs in parallel on the Polkadot network. As such, parachains can also be considered "parallelizable chains" \[5\].
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/one_parachain.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/one_parachain.png)
 
 Polkadot is considered to be a _layer-0 multi-chain network_, and Parachains run in parallel as individual _layer-1 blockchains_. For reference, _Bitcoin_ and _Ethereum_ are considered to be layer-1 blockchains. The parachain model allows for individual blockchains to achieve scalability at layer-1 \[3\].
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/polkadot-relay-chain.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/polkadot-relay-chain.png)
 
 > A prominent issue in the Ethereum ecosystem is the ability to scale where a dependency is created on possible _layer-2_ scaling solutions.
 
@@ -123,7 +123,7 @@ Parachain's participation on polkadot is auction-based and requires the parachai
 
 `Parathreads` are parachains that do not stay connected to the relay chain. Parathreads are essentially pay-as-you-go parachains and temporarily participate on the network on a per-block basis \[2\].
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/parathread-pool.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/parathread-pool.png)
 
 The main difference between parachains and parathreads is **economic**. A parachain auction happens every six months for securing a slot on the network. A fee auction happens every block for a parathread.
 
@@ -155,7 +155,7 @@ _**Runtime development is different than dApp development**_
 
 _**Building a dApp on Polkadot can be seen as building a dApp on a Substrate-based chain**_
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/parachains-substrate-polkadot-venn-diagram-1.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/parachains-substrate-polkadot-venn-diagram-1.png)
 
 > NOTE: Remember, Polkadot supports parachains that are not built on Substrate. Chains can also be built on Substrate and are not required to be deployed onto Polkadot \[1\].
 

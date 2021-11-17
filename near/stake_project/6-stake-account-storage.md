@@ -1,4 +1,4 @@
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-show-me-code.jpeg)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-show-me-code.jpeg)
 
 In the last tutorial, we learned about the new NEAR [Account Storage API \(NEP-145\)](5-account-storage.md). As promised, in this tutorial we'll see how to code that up on the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) contract. As a bonus, you will get a chance to earn some NEAR at the end for taking the [Account Storage API \(NEP-145\)](5-account-storage.md) for a test drive on the [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) contract.
 
@@ -203,4 +203,4 @@ This is where I make my call for action to the community. I invite you to join t
 
 Here's my plan going forward. As new NEAR standards are released, I plan to document them and provide reference implementations as tutorials. The rest of the time will be spend focused on the core mission, which is to build the [STAKE Token](https://github.com/oysterpack/oysterpack-near-stake-token) with the community and bring it to market. In the next tutorial, I will share with you my vision for the [STAKE Token](https://github.com/oysterpack/oysterpack-near-stake-token) and how it can serve as a cornerstone to help bootstrap the NEAR DeFi ecosystem.
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-stake-cornerstone.png)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-stake-cornerstone.png)

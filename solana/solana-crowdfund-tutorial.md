@@ -270,7 +270,7 @@ We can create as many program-owned accounts as we want, so the idea here is tha
 Now that we have discussed what we want to create. Let start coding.
 Go ahead and open up the `program` folder in VSCode or your favorite IDE.
 File structure in the `program` directory should look like this.
-![file structure](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana-crowdfunding-program-files.png)
+![file structure](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solana-crowdfunding-program-files.png)
 
 Go ahead and open up the `lib.rs` file in your code editor, and let us add some boilerplate code first.
 
@@ -728,7 +728,7 @@ This will output the compiled program in Shared Object format (.so) in the `dist
 
 > If you run this command in the `program` directory, you will see the `dist/program` directory is created automatically if it does not already exist.
 
-![program_complied-bpf](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana-crowdfunding-program-complied-bpf.png)
+![program_complied-bpf](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solana-crowdfunding-program-complied-bpf.png)
 
 Now that we have compiled our program we can deploy it. 
 
@@ -807,7 +807,7 @@ This is not a React tutorial, so we will not go into the details of React. But I
 
 Let's first clean our project. We will remove `setupTests.js`, `reportWebVitals.js`, `logo.svg` and `app.test.js`. And remove the usage of `reportWebVitals.js` in index.js.
 Now the project should look like:
-![front-end-project](https://github.com/figment-networks/datahub-learn/raw/master/assets/solana-crowdfunding-front-end-files.png)
+![front-end-project](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solana-crowdfunding-front-end-files.png)
 
 We will create a basic UI for the app. I have used sementic-ui to do that.
 

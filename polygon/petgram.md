@@ -22,13 +22,13 @@ It is strongly recommended to create a new MetaMask account for testing. You wil
 
 To interact with Polygon via Metamask, you first have to add a new RPC endpoint. Open the Metamask extension by clicking on the Fox icon in your browser toolbar then select Settings -> Networks -> Add network -> Save. Fill out the information as given in the image below:
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy-and-debug-on-polygon-1.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/deploy-and-debug-on-polygon-1.png)
 
 Now you'll notice zero balance (0 MATIC) in your wallet, to get test Matic for deployment and testing go to the Matic Faucet [link](https://faucet.matic.network) -> Select Mumbai -> Paste your wallet address -> Click "Submit".
 
 When this is complete, check your Metamask & you'll see some MATIC tokens there. We only need a small amount of MATIC (about 5-10) to deploy and test our dApp.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy-and-debug-on-polygon-2.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/deploy-and-debug-on-polygon-2.png)
 
 # Project Setup
 
@@ -48,7 +48,7 @@ Before running the React front-end, let's install the dependencies with the comm
 
 Now that our project has all the dependencies we can run it using the command `npm start`. Your browser should open automatically and display the home page (see the image below). If your browser doesn't open make sure your project is running, go to your browser, and type `http://localhost:3000/`.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img1.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img1.png)
 
 > **Note**: As you move forward with this tutorial, make sure your project is reflecting similar results at a given point. There are screenshots as checkpoints for almost every step.
 
@@ -88,7 +88,7 @@ const HDWalletProvider = require('@truffle/hdwallet-provider')
 We'll also need a `.env` file to store the mnemonic - the twelve word phrase. To create it follow [this guide](https://docs.figment.io/network-documentation/extra-guides/dotenv-and-.env).
 
 Your file should look similar to this:
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img5.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img5.png)
 
 We can initialize the mnemonic as a variable by using `dotenv`, which allows us to access the environment variables from the `.env` file through `process.env` :
 
@@ -173,7 +173,7 @@ module.exports = {
 
 Now let’s start coding the smart contract. Create a new file in the contracts folder, you can open your project in a new terminal and use the command `touch ./contracts/Pet.sol` on Linux/macOS or `type nul > contracts\Pet.sol` on Windows.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img6.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img6.png)
 
 This is the file where we’ll write all the Pet's token source code with the Solidity programming language. We are going to design our smart contract to store photos off-chain using IPFS for storing the data. NFT metadata often uses decentralized storage like IPFS or Filecoin. Using NFT metadata allows us to upload data and to receive an IPFS hash of the content (a CID, or Content Identifier) that can be referenced on-chain as a pointer to the content.
 
@@ -267,7 +267,7 @@ contract Pet is ERC721 {
 
 Before we continue, let's ensure that everything is working properly. In your terminal, make sure you are in the project root directory and run the command `truffle compile`.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img7.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img7.png)
 
 Now, let's deploy our smart contract to the development local blockchain. First, make sure that Ganache is running (in its own terminal window/tab). Then, create a new migration file in the `migrations` directory called `2_deploy_contracts.js`.
 
@@ -288,7 +288,7 @@ truffle migrate
 
 You should see similar results.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img8.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img8.png)
 
 # Deploying the smart contract to Polygon Mumbai Testnet
 
@@ -304,7 +304,7 @@ If you're deploying it for the second time or more, use the `--reset` flag to av
 `truffle migrate --network matic --reset`.
 
 As long as the deployment was successful, the output should be similar:
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img8.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img8.png)
 
 # Building the React front-end
 
@@ -526,7 +526,7 @@ Now that we have the wallet account, we can add the following code under the com
 
 In this snippet of code, we are checking if the account exists then we display the wallet address. Otherwise, we display the button with the label `Connect Wallet`. At this point, whenever you click the `Connect Wallet` button it should prompt you to connect your Metamask, and the UI should change to reflect the connected wallet.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img15.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img15.png)
 
 # CreatePet.js
 
@@ -554,11 +554,11 @@ As you can see we are importing a few things here:
 
 To get your API key, go to [nft.storage](https://nft.storage), sign up for an account, create a new API key and then add it to your APIKEYS.js file.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img9.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img9.png)
 
 Don’t forget to create your APIKEYS.js inside src, it should look something like this:
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img10.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img10.png)
 
 To create a new pet, we need a few variables and functions. Let's add all the functions to collect the user input like the pet name, the owner name, the image type, etc.
 
@@ -698,10 +698,10 @@ For a good user experience, we are adding a preview of the image being uploaded.
 Then we added a simple form with an image field, two text fields for the owner name and pet name. As well as a drop down menu for the pet type. All of them are bound to a variable and to the onChange function. Lastly, we have the submit button bound to the handleSubmit function to send the data to the nft.storage API.
 
 Now, go to http://localhost:3000/create-pet and try to create a new post. It should look like this:
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img11.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img11.png)
 
 Also, it should send the information to the nft.storage. To check, go to https://nft.storage/files/ it should have one file:
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img16.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img16.png)
 
 Yay!! Now that we are able to create new posts, let's move to the pet gallery. At this point, feel free to add a few posts so that we can display them in the `PetGallery.js` component.
 
@@ -842,7 +842,7 @@ If the `petsData` array is empty it will display "No Pets Yet...".
 
 In our case, we should have at least one pet in our petsData array. Feel free to add more so you can see a similar gallery to this one.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-cover.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-cover.png)
 
 # PetDetails.js
 
@@ -1022,7 +1022,7 @@ In this code, we just simply inserting the pet details we got from IPFS. Notice 
 
 At this point, our component should display something similar to this:
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img30.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img30.png)
 
 We are still missing the transaction confirmation for minting tokens, the React form to add comments. Let's start by adding the transaction confirmation. Whenever we mint NFTS we need a confirmation that notifies us if our transaction was successful or not. Let's add the following code under the section "Add Transaction Confirmation":
 
@@ -1063,9 +1063,9 @@ This transaction might take a few minutes and the process will be:
 3.  The transaction is pending
 4.  The transaction is complete
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img21.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img21.png)
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img31.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img31.png)
 
 Now, whenever we mint an NFT we will get this confirmation and we will be able to view the transaction details on the Polygonscan.
 
@@ -1136,7 +1136,7 @@ Now, we need to display the comments on our page. To do this, add the following 
 
 We are adding the user's account and the comment to the UI. Try to post a comment, the result should look similar to this:
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/petgram-img36.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/petgram-img36.png)
 
 Remember that we are not saving the comments, so as soon as you refresh the page the comments will disappear.
 

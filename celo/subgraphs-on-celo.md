@@ -39,11 +39,11 @@ We will create a subgraph for a gravatar contract deployed on the Celo mainnet. 
 - Visit the Graph Protocol website and sign in with Github.
 - Go to your dashboard and click on **Add Subgraph**. Fill in the required details and click on **Create subgraph**.
 
-   ![Create subgraph](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-subgraph-01-dashboard-create-new.png)
+   ![Create subgraph](https://github.com/figment-networks/learn-tutorials/raw/master/assets/celo-subgraph-01-dashboard-create-new.png)
 
 - Follow the steps shown on the dashboard with a small variation.
 
-![Create subgraph](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-subgraph-02-dashboard-instructions.png)
+![Create subgraph](https://github.com/figment-networks/learn-tutorials/raw/master/assets/celo-subgraph-02-dashboard-instructions.png)
 
 1. Install Graph CLI using NPM or Yarn.
 
@@ -115,7 +115,7 @@ Subscriptions (WS): wss://api.thegraph.com/subgraphs/name/secretshardul/celo-sub
 
 4. Refresh the page to see your deployed subgraph. It can take some hours for data to be synced, after which our queries will return the desired results.
 
-![Query explorer](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-subgraph-03-query-explorer.png)
+![Query explorer](https://github.com/figment-networks/learn-tutorials/raw/master/assets/celo-subgraph-03-query-explorer.png)
 
 5. Time to run a GraphQL query! A default query is given which gets data of the first five gravatars. Press the run button. Here's the query again for reference:
 
@@ -156,11 +156,11 @@ Press the code button on the right side. Select the language of your choice to g
 
 **Postman generate code button**
 
-![Postman generate code button](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-subgraph-04-postman-code-button.png)
+![Postman generate code button](https://github.com/figment-networks/learn-tutorials/raw/master/assets/celo-subgraph-04-postman-code-button.png)
 
 **Postman generated code results**
 
-![Postman generated code results](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-subgraph-05-postman-generated-code.png)
+![Postman generated code results](https://github.com/figment-networks/learn-tutorials/raw/master/assets/celo-subgraph-05-postman-generated-code.png)
 
 ```bash
 curl --location --request POST 'https://api.thegraph.com/subgraphs/name/secretshardul/the-graph-celo' \

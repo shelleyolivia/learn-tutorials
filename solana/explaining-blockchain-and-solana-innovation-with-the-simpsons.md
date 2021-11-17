@@ -1,4 +1,4 @@
-![The-Simpsons-Season-33.jpeg](https://github.com/figment-networks/datahub-learn/raw/master/assets/The-Simpsons-Season-33.jpeg)
+![The-Simpsons-Season-33.jpeg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/The-Simpsons-Season-33.jpeg)
 
 # Explaining Blockchain with The Simpsons
 
@@ -36,7 +36,7 @@ After writing, Bart, Lisa, and Maggie need to send their letters to their parent
 
 Homer and Marge are the **validators** of the letters (transactions), and their job is to validate and agree upon some requirements these letters should have.
 
-![we-break-thumbs.jpeg](https://github.com/figment-networks/datahub-learn/raw/master/assets/we-break-thumbs.jpeg)
+![we-break-thumbs.jpeg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/we-break-thumbs.jpeg)
 
 If the letter fails their validation consensus, the letter isn’t sent to be inserted into a box at all.
 
@@ -87,7 +87,7 @@ Solana’s innovative approach is organized into eight pillars, which we’re go
 
 **Now let’s watch a different episode. Let’s jump right into the SOLANA’s eight innovations.**
 
-![the-simpsons.jpeg](https://github.com/figment-networks/datahub-learn/raw/master/assets/the-simpsons.jpeg)
+![the-simpsons.jpeg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/the-simpsons.jpeg)
 
 ## First Innovation: PROOF OF HISTORY
 
@@ -102,7 +102,7 @@ Let’s visit Springfield and learn about it.
 
 Imagine that Marge needs to take Bart to a medical appointment. Before going to a specific medical facility, Marge needs to use a universal take-a-number system common to all medical facilities, to prove she scheduled her appointment at a specific point in time.
 
-![tickets.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/tickets.png)
+![tickets.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/tickets.png)
 
 As Marge now has a ticket with her number, she called a call center and was told to drive to the medical facility “A”. She then drives for ten minutes until she gets there.
 
@@ -126,13 +126,13 @@ Before speaking about Tower BFT (aka. Tower Byzantine Fault Tolerance), let’s 
 
 The Byzantine Generals Problem.
 
-![arm.jpeg](https://github.com/figment-networks/datahub-learn/raw/master/assets/arm.jpeg)
+![arm.jpeg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/arm.jpeg)
 
 The Byzantine Generals Problem comes into play when more than two generals have to come to a common agreement on whether to attack or retreat, but can communicate only by sending messengers who might never arrive.
 
 Some generals may also be traitors and can try to spread different information to other generals, leading to a catastrophic failure.
 
-![generals.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/generals.png)
+![generals.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/generals.png)
 
 To avoid a failure or inability to communicate properly impacts the function of the entire blockchain, a fault tolerance system needs to be implemented.
 
@@ -152,7 +152,7 @@ Each vote sent by the generals carries a small sequence of verifiable informatio
 
 Using The Simpsons analogy, imagine how communication would be delayed if instead of having just 5 packers on the Springfield Post Office (to add a box (block) onto the chain), we have 100 packers.
 
-![banksy_simpsons.jpeg](https://github.com/figment-networks/datahub-learn/raw/master/assets/banksy_simpsons.jpeg)
+![banksy_simpsons.jpeg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/banksy_simpsons.jpeg)
 
 They need to communicate among themselves to send a copy of the box (block) to each packer. But some may have a more limited channel of communication between them. If they live far from each other, the time they will take to communicate and send this copy among them, can increase dramatically.
 
@@ -182,7 +182,7 @@ This high-level analogy explains **block propagation using Turbine technique** a
 
 Before explaining **Gulf Stream**, let’s speak about **mempool**.
 
-![queue_simpson.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/queue_simpson.png)
+![queue_simpson.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/queue_simpson.png)
 
 You can think about mempool as a waiting queue for the blockchain. Using Springfield’s analogy it's the waiting queue of Springfield Post Office. A mempool is a set of valid transactions that have been submitted, but have not yet been processed by the network.
 
@@ -206,7 +206,7 @@ We’re going to use it in our analogy for this innovation. But, before explaini
 
 **EVM (Ethereum Virtual Machine)** is where these codes run. It’s like a magic box where the Smart-contracts are executed.
 
-![power-plant.jpeg](https://github.com/figment-networks/datahub-learn/raw/master/assets/power-plant.jpeg)
+![power-plant.jpeg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/power-plant.jpeg)
 
 Back to the Nuclear Power Plant, imagine that to prevent Homer from making any stupid mistake and blow the place up, a bunch of procedures has been written using punched card
 and made available to be used by him to execute certain tasks.
@@ -233,7 +233,7 @@ Let’s use a metaphor to explain Pipelining.
 
 There is a washer, a dryer and a folding machine. Guess what?! Wash/dry/fold several loads of laundry in sequence. Washing must occur before drying and drying before folding, but each of the three operations is performed by a separate unit.
 
-![laundry-how-i-spend-my-free-time.gif](https://github.com/figment-networks/datahub-learn/raw/master/assets/laundry-how-i-spend-my-free-time.gif)
+![laundry-how-i-spend-my-free-time.gif](https://github.com/figment-networks/learn-tutorials/raw/master/assets/laundry-how-i-spend-my-free-time.gif)
 
 To maximize efficiency, one creates a pipeline of stages. We’ll call the washer one stage, the dryer another, and the folding process a third. To run the pipeline, one adds a second load of laundry to the washer just after the first load is added to the dryer. Likewise, the third load is added to the washer after the second is in the dryer and the first is being folded. In this way, one can make progress on three loads of laundry simultaneously. Given infinite loads, the pipeline will consistently complete a load at the rate of the slowest stage in the pipeline.
 
@@ -243,7 +243,7 @@ So Pipelining is an appropriate process when there’s a stream of input data th
 
 Cloudbreak in a nutshell is how SOLANA organizes its data in a particular structure to achieve concurrent read and write operations in an optimal way.
 
-![lego-simpsons.jpeg](https://github.com/figment-networks/datahub-learn/raw/master/assets/lego-simpsons.jpeg)
+![lego-simpsons.jpeg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/lego-simpsons.jpeg)
 
 Imagine Lisa was asking for a long time the whole family to assemble a Washington Lego city replica with her. After postponing for a while, they finally decided to do it. Before they accepted the task, Homer asked Bart, Lisa, and Margie to organize all the pieces by color and shape.
 
@@ -263,7 +263,7 @@ That’s an analogy of how SOLANA organizes the database of accounts (more impor
 
 ## Eighth Innovation: ARCHIVERS
 
-![store-u-stuff.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/store-u-stuff.png)
+![store-u-stuff.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/store-u-stuff.png)
 
 As you can imagine, as a blockchain grows in usage, more and more data is created, thus the size of the ledger gets heavier to be stored by its nodes.
 

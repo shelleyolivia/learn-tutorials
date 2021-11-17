@@ -191,7 +191,7 @@ Then if you wanted to later call functions on the pair address, you need to acce
 
 # Deployment
 
-[This is what your deployment should look like if succesful](https://github.com/figment-networks/datahub-learn/raw/master/assets/deploy-pangolin-to-local-testnet-with-token-pair-3_deploy.png)
+[This is what your deployment should look like if succesful](https://github.com/figment-networks/learn-tutorials/raw/master/assets/deploy-pangolin-to-local-testnet-with-token-pair-3_deploy.png)
 
 
 ## Wrapping Up

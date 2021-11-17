@@ -1,4 +1,4 @@
-![Logo](https://github.com/figment-networks/datahub-learn/raw/master/assets/solblog.svg)
+![Logo](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solblog.svg)
 
 A simple blog platform, powered by Solana with a SvelteKit front end.
 
@@ -26,7 +26,7 @@ Anchor abstracts away from the low level construction of accounts, the packing a
 
 There are always two parts to a Solana app -- the _on-chain_ program and accounts, and the _off-chain_ app that interacts with it. The other benefit Anchor brings is the alignments of the interaction between these two app segments. This alignment is called an Interface Description Language [(IDL)](https://en.wikipedia.org/wiki/Interface_description_language). Since the interface of the off-chain app (say, in JavaScript) must always match the on-chain Solana program, this is a really nice convenience feature to have.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/IDL.svg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/IDL.svg)
 
 # Prerequisites
 
@@ -111,7 +111,7 @@ pub struct Initialize {}
 
 Let's break down what we see.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/2RUST.svg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/2RUST.svg)
 
 After including the anchor library, the program public key has this placeholder:
 
@@ -192,17 +192,17 @@ const program = new anchor.Program(idl, programId, provider)
 
 We will get to that part once we build the client side. My only point at this time is to emphasize that the client side in javascript must match the Program side in Rust. For now, let's finish taking a look at the Rust code.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/program-block.svg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/program-block.svg)
 
 The next code block under `#[program]` is our program's functions, how we make the program do anything. The function names here are lowercase snake_case.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/Accounts.svg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/Accounts.svg)
 
 Notice the `#[derive(Accounts)]` struct is the same name as in the `program`, but in `camelCase` (whereas `snake_case` is used in program above).
 
 The next code block under `#[derive(Accounts)]` is a going to be struct that describes the account itself and enables us to access fields from the account struct (which is non-existant at this point). Let's create it:
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/AccountsRUST.svg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/AccountsRUST.svg)
 
 ```rust
 #[account]
@@ -219,7 +219,7 @@ We created the third style code block, which is an Account struct which is a Sol
 
 Now we have the three Anchor blocks we need to make our blog:
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/3RUST.svg)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/3RUST.svg)
 
 But right now our program doesn't do anything, because our program methods are empty.
 
@@ -904,11 +904,11 @@ You can use `npm run dev3654` if using the exact tutorial code repository.
 
 If you are using Visual Studio Code as your IDE and you want a shortcut, you can also just click in the "npm" tab to "run dev".
 
-![run](https://github.com/figment-networks/datahub-learn/raw/master/assets/ms-vs-code-npm-run.png)
+![run](https://github.com/figment-networks/learn-tutorials/raw/master/assets/ms-vs-code-npm-run.png)
 
 Open up your browser to `http://localhost:3000` and play around!
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/solblog.gif)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solblog.gif)
 
 # Conclusion
 

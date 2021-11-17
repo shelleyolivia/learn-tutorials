@@ -84,7 +84,7 @@ We will need to get SOL into this wallet from a wallet such as the [Sollet](http
 
 * Send 0.1 SOL to our command-line wallet
 
-![sendToCLIWallet](https://github.com/figment-networks/datahub-learn/raw/master/assets/sendToCLIWallet.png)
+![sendToCLIWallet](https://github.com/figment-networks/learn-tutorials/raw/master/assets/sendToCLIWallet.png)
 
 * Check the balance of the wallet with the public key in this input being **your** wallet's public key
 
@@ -274,7 +274,7 @@ Go ahead and name the logo file `logo.png` for raster logos or `logo.svg`if you 
 
 * Open the token list file at `token-list/src/tokens/solana.tokenlist.json` to add your token to the list like so:
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/SOLTokenList.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/SOLTokenList.png)
 
 This example token will be a social token, so be sure to not copy that unless your token is also a social token. The required information is:
 
@@ -331,15 +331,15 @@ You should now see the changes in your forked repository on GitHub.
 * Go to the token list [pull requests page](https://github.com/solana-labs/token-list/pulls)
 * Select the **New pull request** button
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/screen-shot-2021-08-12-at-12.19.19-pm.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/screen-shot-2021-08-12-at-12.19.19-pm.png)
 
 * Select the highlighted **compare across forks** option in the subtitle below the **Compare changes** header
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/solCompareForks.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solCompareForks.png)
 
 * Select your forked repository from the **head repository** dropdown list
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/solHeadRepo.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solHeadRepo.png)
 
 You should see 2 changed files; your token changes and the logo image.
 

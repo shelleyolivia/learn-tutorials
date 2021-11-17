@@ -87,7 +87,7 @@ In a terminal window, run `node create_account.js` 4 \(_four_\) times in order t
 
 Get Alice some funding to afford the deposit fees by going to [https://faucet.figment.io](https://faucet.figment.io) and entering the first address we generated. As we will need to pay for transactions during the tutorial, it will also be necessary to transfer some tokens to the other accounts. This will be covered as we proceed.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/flow1_big.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/flow1_big.png)
 
 # Add a proxy account for Alice
 
@@ -253,7 +253,7 @@ batch() tx: https://westend.subscan.io/extrinsic/...
 
 The submitted values are the hashed data for the transfer functions we set in the `transactions` array, which will be processed by the `batch()` function. Check the link to SubScan, to view the successful transaction. 
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/utility-batchcompleted-socialrec.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/utility-batchcompleted-socialrec.png)
 
 At this point, we are set up and should have a funded main account with a reserved balance of just over 1 WND, a functioning proxy account, and two separate accounts with 0.5 WND each. The next step is to create a recovery configuration. 
 
@@ -262,7 +262,7 @@ At this point, we are set up and should have a funded main account with a reserv
 > **NOTE:** This step must be completed _**before**_ a seed phrase is lost!
 
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/flow2_big%20%281%29.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/flow2_big%20%281%29.png)
 
 Creating a recovery configuration in storage requires a deposit to be paid. The base amount is fixed, with an additional deposit fee based on the number of friends we set up to be our social recovery contacts. 
 
@@ -344,7 +344,7 @@ So the required deposit amount for new social recovery configurations on Polkado
 At this point, we have the option to either remove the recovery store to regain the deposit amount with `removeRecovery()`, or start the recovery process by calling `initiateRecovery()` .
 # Initiate recovery from the proxy account
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/flow3_big.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/flow3_big.png)
 
 Create a file called `initiate_recovery.js` and paste the following code :
 
@@ -396,13 +396,13 @@ initiateRecovery() tx: https://westend.subscan.io/extrinsic/...
 
 The way to be sure it has completed successfully is to follow the link to the SubScan block explorer and see that the Events for the transaction we just sent include a successful [recovery\(RecoveryInitiated\)](https://westend.subscan.io/event?module=recovery&event=recoveryinitiated) action, which would look like this example :
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/rec_success.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/rec_success.png)
 
 
 
 # Vouch for recovery
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/vouchfix.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/vouchfix.png)
 
 Create a file called `vouch_recovery.js` and paste the following code :
 
@@ -454,7 +454,7 @@ In a live scenario involving accounts with actual value \(DOT instead of WND\), 
 
 # Claim a recovery configuration
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/flow5_big.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/flow5_big.png)
 
 Create a file called `claim_recovery.js` and paste the following code :
 
@@ -493,11 +493,11 @@ claimRecovery tx: https://westend.subscan.io/extrinsic/...
 
 Follow the link in the terminal output to check that the AliceProxy has successfully claimed the recovery attempt. We are looking for the  [recovery\(AccountRecovered\)](https://westend.subscan.io/event?module=recovery&event=accountrecovered) action similar to this example :
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/rec_acct.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/rec_acct.png)
 
 # Send transactions as the recovered account
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/flow6_big.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/flow6_big.png)
 
 Create a file called `use_recovery.js` and paste the following code :
 
@@ -633,7 +633,7 @@ transfer() tx: https://westend.subscan.io/extrinsic/...
 
 The events for successful removal of the recovery configuration and refund of the deposits to the Alice account will look similar to this on SubScan :
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/remove_events.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/remove_events.png)
 
 # Conclusion
 

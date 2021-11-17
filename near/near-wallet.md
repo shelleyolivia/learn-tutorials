@@ -16,7 +16,7 @@ The wallet is now available to everyone! To get started, go to [**https://wallet
 
 First, choose your account name. Each account created in the NEAR Wallet is appended by `.near`, which is part of the account name. For example, choosing `satoshi` will create the `satoshi.near` account name.
 
-![Create Account](https://github.com/figment-networks/datahub-learn/raw/master/assets/image%20%286%29%20%281%29.png)
+![Create Account](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image%20%286%29%20%281%29.png)
 
 ## Choosing an Access Method
 

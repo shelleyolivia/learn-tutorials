@@ -248,7 +248,7 @@ console.log(Storage)
 
 > What you see below is a Javascript representation of the compiled smart contract - you don't need to understand everything you see in the logged output. We print it out to demonstrate that the instruction was executed successfully.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/storage-console-log.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/storage-console-log.png)
 
 Now we go on to deploy the Storage contract we just retrieved, using:
 

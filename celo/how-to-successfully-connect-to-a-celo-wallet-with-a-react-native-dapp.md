@@ -20,7 +20,7 @@ Open the Celo documentation and follow the setup instructions:
 `expo init $YOUR_APP_NAME`  
 We will use the `TypeScript Template >> Tabs` 
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/terminalimage.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/terminalimage.png)
 
 To use the Celo DappKit, install using: `yarn add @celo/dappkit`  
 DAppKit's dependencies require a bit of adjustment to use vanilla Expo. The first are a lot of the Node.js modules that are expected. You can get those mostly by using the following modules:`yarn add node-libs-react-native vm-browserify`
@@ -125,7 +125,7 @@ export default function LoginScreen() {
 }
 ```
 
-![Login Screen](https://github.com/figment-networks/datahub-learn/raw/master/assets/loginscreen.png)
+![Login Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/loginscreen.png)
 
 ```javascript
 export default function HomeScreen() {
@@ -142,7 +142,7 @@ export default function HomeScreen() {
 
 We will use Redux to manage the app state, we have to set up redux actions to make a call to the Celo Wallet and return the result which is then saved in the app global state. To keep your directory devoid of clutter, open a directory to hold the files for the Redux logic:
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/reduxdirectory.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/reduxdirectory.png)
 
 You can add a file called `constants.js` to the Redux Store Directory. The constants will be used to track the wallet connection process by having the constants as the type of action that was dispatched and then update the state accordingly using a reducer.
 
@@ -323,9 +323,9 @@ export default function HomeScreen() {
 
 Run your app and Login to see the Wallet and Phone number returned to the Home Screen.
 
-![Wallet Screen](https://github.com/figment-networks/datahub-learn/raw/master/assets/walletscreen.png)
+![Wallet Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/walletscreen.png)
 
-![Home Screen](https://github.com/figment-networks/datahub-learn/raw/master/assets/homescreen.png)
+![Home Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/homescreen.png)
 
 # Conclusion
 

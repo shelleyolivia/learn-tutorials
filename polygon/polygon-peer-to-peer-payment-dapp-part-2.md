@@ -6,7 +6,7 @@ In the last part, we deployed our smart contract on the Polygon testnet. To add 
 
 Before starting, let's see what our dApp will look like after adding support for multiple tokens.
 
-![App demo](https://github.com/figment-networks/datahub-learn/raw/master/assets/payment-gateway-part-2.gif)
+![App demo](https://github.com/figment-networks/learn-tutorials/raw/master/assets/payment-gateway-part-2.gif)
 
 # Prerequisites
 
@@ -74,9 +74,9 @@ Adding a custom token to Metamask is pretty simple; all you need is the token co
 
 Open Metamask, and make sure you are connected to the Polygon mainnet network. In the assets section, click on the Import tokens button, and paste the contract address of the token you are trying to add, in our case the address of the PAY token. Metamask will automatically fetch the token symbol and token decimals from the contract if the token address is correct.
 
-![Metamask Import Token](https://github.com/figment-networks/datahub-learn/raw/master/assets/metamask-import-token.jpg)
+![Metamask Import Token](https://github.com/figment-networks/learn-tutorials/raw/master/assets/metamask-import-token.jpg)
 
-![Metamask Import Token form](https://github.com/figment-networks/datahub-learn/raw/master/assets/metamask-import-token-form.png)
+![Metamask Import Token form](https://github.com/figment-networks/learn-tutorials/raw/master/assets/metamask-import-token-form.png)
 
 # Adding logic for multiple token
 
@@ -402,7 +402,7 @@ We are iterating over the `tokenList` and creating a list of tokens for the user
 
 This is how the modal looks like:
 
-![Tokens Modal](https://github.com/figment-networks/datahub-learn/raw/master/assets/tokens-modal.png)
+![Tokens Modal](https://github.com/figment-networks/learn-tutorials/raw/master/assets/tokens-modal.png)
 
 Now that we are done with the modal, let's update our `index.tsx` to replace **Pay Token** with the modal button.
 

@@ -70,21 +70,21 @@ Congratulations! You’ve just created your Tequila account.
 
 You can go to this URL [https://tequila.stake.id/?\#/](https://tequila.stake.id/?#/) to check your address with the search bar. Once you enter your address, you should see something similar to:
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/terra-1.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/terra-1.png)
 
 Now that you have an account, how about getting some tokens? Let’s get you set up! 
 
 Copy your address to the clipboard and head to [Terra Faucet](https://faucet.terra.money/). Check “I’m not a robot”, paste in your address, select "Luna", and click `Send me tokens`.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/terra-2.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/terra-2.png)
 
 After a few seconds you should see a message pop up on the top right corner of the screen:
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/terra-3.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/terra-3.png)
 
 That's it! Now head back to the Stake ID app, refresh the page and enjoy the view of 1000 LUNAs in your account.
 
-![](https://github.com/figment-networks/datahub-learn/raw/master/assets/terra-4.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/terra-4.png)
 
 Great work. You’ve earned it!
 

@@ -1,4 +1,4 @@
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-stake-in-the-ground.jpg)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-stake-in-the-ground.jpg)
 
 My vision for STAKE can be summed up in 3 words:
 
@@ -24,7 +24,7 @@ The [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) Token pro
 
 However, [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) offers much more than simply providing tradeable fungible tokens for your staked NEAR. It captures more value by combining staking rewards and contract rewards, transforming [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) into **Internet Money with Super Powers**. Contract rewards are a percentage of the transaction fees that are provided back to the contracts that were run during that transaction. The percentage of fees which are allocated to this reward is set to a minimum value of initially 30%. The super powers are provided by the contract rewards coupled with the power of compounding that boost the overall yield for [STAKE](https://github.com/oysterpack/oysterpack-near-stake-token) tokens:
 
-![STAKE Token is Internet Money with Super Powers](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-near-stake-token-overview-1-.png)
+![STAKE Token is Internet Money with Super Powers](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-near-stake-token-overview-1-.png)
 
 * STAKE token contract contributes contract rewards to the staking pool
 * External contracts contribute earnings to the staking pool
@@ -80,7 +80,7 @@ In the coming years, exponential DeFi growth will create generational wealth opp
 
 STAKE can serve as the cornerstone to build and grow the NeFi ecosystem. Here's my overall vision:
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-stake-vision.png)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-stake-vision.png)
 
 * **NEAR** solves the "Scalability Trilemma" problem with a super scalable, fast, cheap network
 * **STAKE** solves the problems caused by locked staked NEAR. It transforms staked NEAR into **Internet Money with Super Powers** and brings **NeFi** to life.
@@ -99,5 +99,5 @@ This is where I make my call for action to the community. I invite you to join t
 
 The game plan remains the same. As new NEAR standards are released, I plan to document them and provide reference implementations as tutorials. The rest of the time will be focused on the core mission, which is to build the [STAKE Token](https://github.com/oysterpack/oysterpack-near-stake-token) with the community and bring it to market.
 
-![](../https://github.com/figment-networks/datahub-learn/raw/master/assets/oysterpack-team-holding-hands.jpeg)
+![](../https://github.com/figment-networks/learn-tutorials/raw/master/assets/oysterpack-team-holding-hands.jpeg)
 
