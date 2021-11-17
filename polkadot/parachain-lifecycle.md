@@ -41,11 +41,11 @@ Taking the case for one parachain:
 * If all is well, the validator will share the candidate block with the relay chain.
 * Parachain block candidates are collected together and a relay chain block candidate is produced. \[3\]
 
-\*\*\*\*![](../assets/polkadot-consensus-example-1.png)\*\*\*\*
+\*\*\*\*![](https://github.com/figment-networks/datahub-learn/raw/master/assets/polkadot-consensus-example-1.png)\*\*\*\*
 
 * Then the validators on the network will try to reach a consensus on the relay chain block candidate. Upon reaching consensus, the now validated relay chain block candidate is shared with the validators and collators, and the process repeats for new transactions. \[3\]
 
-\*\*\*\*![](../assets/polkadot-consensus-example-2.png)\*\*\*\*
+\*\*\*\*![](https://github.com/figment-networks/datahub-learn/raw/master/assets/polkadot-consensus-example-2.png)\*\*\*\*
 
 ### Parachain Slot Auction
 
@@ -106,11 +106,11 @@ The parachain team does not have any control over the contributed funds: all tok
      relatively the same as its cousin, Polkadot.
   ```
 
-  \*\*\*\*![](../assets/kusama.png)\*\*\*\*
+  \*\*\*\*![](https://github.com/figment-networks/datahub-learn/raw/master/assets/kusama.png)\*\*\*\*
 
 * The candidate parachain can consider transforming their parachain into a parathread and use the pay-as-you-go model. The parathread model has a fixed registration fee. This registration fee _only registers_ the parathread's source code onto the relay chain. The parathread is required to pay a fee to participate in a per-block auction for inclusion in the verification of the next Relay Chain block \[2\].
 
-  \*\*\*\*![](../assets/parathread-parachain-diff.png)\*\*\*\*
+  \*\*\*\*![](https://github.com/figment-networks/datahub-learn/raw/master/assets/parathread-parachain-diff.png)\*\*\*\*
 
   _**Parachain registration does not grant the right to the parathread as the parathreads are competing on a per-block basis.**_
 
@@ -122,7 +122,7 @@ The parachain team does not have any control over the contributed funds: all tok
   * If the candidate parachain focusses on a specific use-case such as identity management. 
   * The network you would like to deploy has limited traffic and does not need full throughput.
 
-    \*\*\*\*![](../assets/parathreads-pay-as-you-go.png)\*\*\*\*
+    \*\*\*\*![](https://github.com/figment-networks/datahub-learn/raw/master/assets/parathreads-pay-as-you-go.png)\*\*\*\*
 
 * Parachain candidates can also attempt to deploy their application on an existing parachain via smart contracts.
 * Parachain candidates can connect to Polkadot via [bridging](https://wiki.polkadot.network/docs/en/learn-bridges) as a solo-chain.

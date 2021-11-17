@@ -25,7 +25,7 @@ Create a new directory called `art_marketplace` and change into it with the `cd`
 
 The `npx hardhat` command will present you with a menu, where you can select how to initialize your project
 
-![npx_hardhat.png](../assets/npx_hardhat_basic.png)
+![npx_hardhat.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/npx_hardhat_basic.png)
 
 We will be starting from scratch. Using the arrow keys on your keyboard, select `Create an empty hardhat.config.js` option and press Enter. 
 
@@ -40,7 +40,7 @@ touch .gitignore   # This file will list all the files that are to ignore by the
 touch README.md    # The README file for our project which contains descriptive information about it
 ```
 
-![Folder Structure](../assets/FolderStructure_hh.png)
+![Folder Structure](https://github.com/figment-networks/datahub-learn/raw/master/assets/FolderStructure_hh.png)
 
 Now, if you open the working directory in your favourite code editor (I am using VSCode), the file structure should look similar to this
 
@@ -619,7 +619,7 @@ npx hardhat test
 
 The output should be something like this
 
-![First Teest](../assets/testingCont1.png)
+![First Teest](https://github.com/figment-networks/datahub-learn/raw/master/assets/testingCont1.png)
 
 Now let's write the second set of test cases:
 
@@ -813,7 +813,7 @@ npx hardhat test
 
 And the expected output will be:
 
-![Second Test](../assets/testingCont2.png)
+![Second Test](https://github.com/figment-networks/datahub-learn/raw/master/assets/testingCont2.png)
 
 # Console.log() in solidity
 
@@ -836,7 +836,7 @@ function buyMarketItem(uint256 itemId) public payable {
 
 Now lets again run the test with `npx hardhat test` command. The output will be:
 
-![Third Test](../assets/testingCont3.png)
+![Third Test](https://github.com/figment-networks/datahub-learn/raw/master/assets/testingCont3.png)
 
 The `console.log()` statement prints the value while we run our tests.
 
@@ -907,7 +907,7 @@ npx hardhat deploy --network mumbai
 
 The output will be similar to this:
 
-![Deploying and Verifying](../assets/deployingandverifying.png)
+![Deploying and Verifying](https://github.com/figment-networks/datahub-learn/raw/master/assets/deployingandverifying.png)
 
 The contract address will be different in your case. You can checkout the one deployed by me [here](https://mumbai.polygonscan.com/address/0x8Eae63C3D13C615420F14D0C57425A4cf5C442b3#code).
 

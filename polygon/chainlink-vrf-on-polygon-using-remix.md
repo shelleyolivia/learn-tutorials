@@ -28,14 +28,14 @@ To see LINK tokens in your Metamask:
 2) Enter `0x326C977E6efc84E512bB9C30f76E30c160eD06FB` in the Token Contract Address text field. Token Symbol and Token Decimal text fields will be pre-filled when you enter the Token Contract Address.
 3) Click the Next button
 4) Click the Confirm button to add LINK tokens to your list of assets in Metamask
-![](../assets/matic-chainlinkvrf-tutorial-img1.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img1.png)
 
 ## Using the Remix IDE
 We will use the Remix IDE - an online development environment for smart contracts, provided by the Ethereum Foundation.
 
 Head over to [https://remix.ethereum.org](https://remix.ethereum.org/). Click on the File Icon to create a new file and name it `RandomNumber.sol`.
 
-![](../assets/matic-chainlinkvrf-tutorial-img2.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img2.png)
 
 ## Creating the smart contract
 In `RandomNumber.sol`, copy the entire smart contract code below and paste it into the Remix editor panel.
@@ -123,13 +123,13 @@ function fulfillRandomness(bytes32 requestId, uint256 randomness) internal overr
 ## Deploy the contract with Remix
 In Remix, click on the Solidity Compiler icon on the sidebar:
 
-![](../assets/matic-chainlinkvrf-tutorial-img3.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img3.png)
 
 Select `0.6.6+commit.6c089d02` as the compiler and click the "Compile RandomNumber.sol" button to compile the contract. Once compiled, it is ready to be deployed onto the Mumbai testnet.
 
 Click the Solidity Compiler icon on the sidebar again:
 
-![](../assets/matic-chainlinkvrf-tutorial-img4.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img4.png)
 
 Select "Injected Web3" as the environment in the dropdown. It will connect to your Metamask and find the network ID and account address. 80001 is the network ID for the Mumbai testnet.
 
@@ -137,14 +137,14 @@ Now, select `RandomNumberConsumer - RandomNumber.sol` as the contract in the dro
 
 Metamask should popup, allowing you to click the Confirm button to complete the transaction. This should deploy the contract to the Mumbai testnet.
 
-![](../assets/matic-chainlinkvrf-tutorial-img5.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img5.png)
 
-![](../assets/matic-chainlinkvrf-tutorial-img6.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img6.png)
 
 ## Fund the contract with LINK
 You will need to fund your contract with LINK tokens to pay the Chainlink oracle for VRF to work. Click on the Copy Icon to copy your contract address.
 
-![](../assets/matic-chainlinkvrf-tutorial-img7.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img7.png)
 
 Go to your Metamask:
 1. Click on the LINK token
@@ -156,12 +156,12 @@ Go to your Metamask:
 
 You can go to the Mumbai block explorer [https://mumbai.polygonscan.com/](https://mumbai.polygonscan.com/) to check your contract balances by entering your contract address in the search bar.
 
-![](../assets/matic-chainlinkvrf-tutorial-img8.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img8.png)
 
 ## Using the contract
 Click on the Arrow Icon to see your contract methods
 
-![](../assets/matic-chainlinkvrf-tutorial-img9.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img9.png)
 
 Click on the "getRandomNumber" button. You should see a Metamask popup. Click on Confirm to confirm the transaction.
 
@@ -169,12 +169,12 @@ When the transaction is successful, click on the "randomResult" button and you s
 
 **Note:** It may take around 1 min for random number to change.
 
-![](../assets/matic-chainlinkvrf-tutorial-img10.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img10.png)
 
 # Possible errors & solutions
 If you get this error, it means that your contract does not have enough LINK token to pay the oracle fee. To solve this, you should send some LINK token to your contract address.
 
-![](../assets/matic-chainlinkvrf-tutorial-img11.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/matic-chainlinkvrf-tutorial-img11.png)
 
 # Conclusion
 Congratulations! This tutorial introduced you to Chainlink Verifiable Random Function (VRF). Now you can generate random numbers in your smart contracts using the Chainlink oracle.

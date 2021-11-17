@@ -284,13 +284,13 @@ You must follow the instructions given by the netlify CLI and specify `./dist` a
 
 
 # Screenshots
-![](../assets/near_registry_1.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/near_registry_1.png)
 
-![](../assets/near_registry_2.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/near_registry_2.png)
 
-![](../assets/near_registry_3.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/near_registry_3.png)
 
-![](../assets/near_registry_4.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/near_registry_4.png)
 
 # App Link (NEAR Testnet)
 https://near-registry.netlify.app/

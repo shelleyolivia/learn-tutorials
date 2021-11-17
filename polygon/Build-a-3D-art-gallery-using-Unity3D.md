@@ -17,11 +17,11 @@ The requirements for this tutorial are:
 
 Open Unity Hub and create a new Unity3D project with the `3D` template. Make sure you are using version `2019.4` (the subversion may differ). It is recommended to use a relatable name. We will name our project **Figment 3D Art Gallery**, however any other name will work as well.
 
-![Starting Unity](../assets/unity1.png)
+![Starting Unity](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity1.png)
 
 This will create an Empty Unity3D project to begin with
 
-![Project Initiation](../assets/unity2.png)
+![Project Initiation](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity2.png)
 
 The interface of Unity3D is divided into various **Window,** each with it's own unique purpose. These windows can be arranged freely by the developers and hence they are referred to by their name rather than location. You can get a detailed tour of Unity's User Interface [here](https://docs.unity3d.com/2019.4/Documentation/Manual/UsingTheEditor.html).
 
@@ -43,15 +43,15 @@ It is important to visualise how our end project should look and what features w
 
 For the simplicity of this tutorial we are not going to design the 3D Art Gallery ourselves. Rather we are going to use the one already available [here](https://www.notion.so/67497c50b017469d9d404c48d1d2739c). Unzip the downloaded `.zip` file and import them into our Unity Project. To do so, drag and drop the extracted folder into `The Project Window` .
 
-![3DGalleryImported.png](../assets/unity3.png)
+![3DGalleryImported.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity3.png)
 
 After successful import you will see the folder appear. The name however may vary depending on what is the name of the extracted folder. Inside this folder there will be another folder called `Models` , open this folder. Here you will notice we have a Prefab named `museum` .
 
-![MuseumPrefab.png](../assets/unity4.png)
+![MuseumPrefab.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity4.png)
 
 Drag this to `The Hierarchy Window` . From The Inspector Window make sure that coordinates of the asset is `X:0, Y:0, Z:0`  and is scaled to `X:10, Y: 10, Z:10` . So finally it should look like:
 
-![ShowingMuseumAssetImported.png](../assets/unity5.png)
+![ShowingMuseumAssetImported.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity5.png)
 
 ## Adding Mesh Collider
 
@@ -59,7 +59,7 @@ Collider is a special type of component used by Unity to detect collision. You c
 
 Expand the `museum` gameobject and select all the child component. Then from the `Inspector Window` click on the **Add Component** button and select `Mesh Collider`.
 
-![SettingMeshCollider.png](../assets/unity6.png)
+![SettingMeshCollider.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity6.png)
 
 ## Creating the basic player
 
@@ -69,7 +69,7 @@ Using the keyboard and mouse, we should be able to make our character run, walk,
 
 Open the Asset Store window. If it is not visible select `Asset Store` from the `Window` option in the top menu. Search for "[First Person All In One](https://assetstore.unity.com/packages/tools/input-management/first-person-all-in-one-135316)". Click on **Add to My Assets** and then click on **Accept** to accept the terms and conditions. Now click on the **Import** button. This shall open the `Import Unity Package` window. By default everything will be selected, if not click on **All** button, and then click on **Import**.
 
-![ImportFPS_AIO.png](../assets/unity7.png)
+![ImportFPS_AIO.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity7.png)
 
 This will import the entire package into our project and you can see it in `The Project Window`. Ignore if you seen any yellow warning messages.
 
@@ -77,7 +77,7 @@ Select the `FirstPerson-AIO` Prefab by clicking on `FirstPersionAIO → FirstPer
 
  
 
-![AIOinGame.png](../assets/unity8.png)
+![AIOinGame.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity8.png)
 
 The `FirstPerson-AIO` already have a camera attached to it which will act as our main camera. Delete or Deactivate the `MainCamera` component which was present in our Hierarchy since we created a blank unity project.
 
@@ -91,7 +91,7 @@ We will be using the [Classic Picture Frame](https://assetstore.unity.com/packag
 
 Select the `picture` prefab in the `Classic Picture Frame`directory and drag it into the `Hierarchy Window` and over the `museum` object to make it a child of `museum` game object. You can place the frame at any place of your choice. In this tutorial it is placed in the front wall while entering the `Rectangle Room`  and is scaled to `X: 0.2, Y: 0.2, Z: 0.1` .
 
-![BasicImage.png](../assets/unity9.png)
+![BasicImage.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity9.png)
 
 We will convert this game object into a Prefab and later use it to spawn new Artworks when NFTs are fetched from the Smart contract. You can read about what is Prefab in Unity's official documentation [here](https://docs.unity3d.com/2019.4/Documentation/Manual/Prefabs.html). 
 
@@ -103,13 +103,13 @@ Now that we have our artwork in place, we want to display various informations a
 
 Right click in the `Hierarchy Window` and select `UI` and select `Canvas`. This will create a new `Canvas` component. To view the `Canvas` properly, switch your editor to 2D.
 
-![Canvas2D.png](../assets/unity10.png)
+![Canvas2D.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity10.png)
 
 Now we are ready to design how the various details will be displayed. For the simplicity of the tutorial we will display the details as simple text on the screen.
 
 Right click on the `Canvas` and select `Text - TextMeshPro` from `UI` section. 
 
-![TMP.png](../assets/unity11.png)
+![TMP.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity11.png)
 
 This will pop up a menu asking to Import TMP Essentials. Click on the **Import TMP Essentials** button. Then click on **Import TMP Examples & Extras**. Now you can close the pop-up dialog box.
 
@@ -117,19 +117,19 @@ A new Text Area will appear on the screen. Change the name of the game object to
 
  
 
-![TitleArea.png](../assets/unity12.png)
+![TitleArea.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity12.png)
 
 The Title of the NFT will be displayed in this area. The text area denotes the amount of space the text to be displayed can take up. The text area is place on the Canvas based on how we want the title to look. You can also make various changes to the text like changing font size, font style, etc. from the `Inspector Window`.
 
 We duplicate this text area and create some additional fields for various informations to be displayed. The final outcome should look something like this:
 
-![All Text area](../assets/unity13.png)
+![All Text area](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity13.png)
 
 All this details will be either fetched from the Metadata of the NFT (**Title** and **Desc**) while other details (Owner, On Sale and Price) will be fetched from the Marketplace smart contract.
 
 Now you can switch back to the 3D view. Quickly click on the `Game Window` to have a preview of how these text fields will appear on the screen.
 
-![In game view](../assets/unity14.png)
+![In game view](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity14.png)
 
 ## Writing scripts for displaying information
 
@@ -137,15 +137,15 @@ If now we try to play our game, you will notice that the texts constantly appear
 
 - Add `Player` Tag: Tags are used so that any script used in a game can identify a GameObject that belongs to a particular type. You can read about it in details [here](https://docs.unity3d.com/2019.4/Documentation/Manual/Tags.html).  Select the `FirstPerson - AIO` from the `Hierarchy Window` and check in the top of `Inspector Window` whether it is tagged as `Player`. If not, click on the drop down menu and select the `Player` tag.
 
-![Player Tag](../assets/unity15.png)
+![Player Tag](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity15.png)
 
 - Add Tags to the UI elements: We also have to add Tags to the Text areas we added so that our script can easily detect it. To do so, select the text area (Title for example) from the `Hierarchy Window` , in the `Inspector Window,` click on the drop down beside `Tag` field and click on `Add Tag...` .  Click on the plus(**+**) icon and create a new Tag named **`Title`** and click on **Save**. Repeat this process and create tags named `Desc`, `Owner`, `OnSale` and `Price`.  Now select the Text Field from the `Hierarchy Window` and assign them their respective tags.
 
-![All tags](../assets/unity16.png)
+![All tags](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity16.png)
 
 Now we are ready to start writing our scripts. Create a new folder inside the root directory in `Project Window` called `Scripts`. Inside it create a new directory called `GameScripts`. Since even a small game can have multiple scripts, it is very important to ensure that these scripts are organised properly. Inside the `GameScripts` directory create a new **C# Script** called `ProximityScript`.
 
-![Screenshot 2021-10-14 at 01.00.35.png](../assets/unity17.png)
+![Screenshot 2021-10-14 at 01.00.35.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity17.png)
 
 Open this script in any code editor of your choice. I will be using Visual Studio for writing and editing C# scripts. Open the `ProximityScript` and paste the following code:
 
@@ -263,11 +263,11 @@ Now that our script is ready, we attach it to our `picture` game object. This is
 
 Once the script is attached, in the `Inspector Window` enter some test values for `New Title`, `New Desc`, `New Owner`, `New Is For Sale` and `New Price`. Later this values will be set from a separate script, but now we set random values for testing.
 
-![Test Data](../assets/unity18.png)
+![Test Data](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity18.png)
 
 Now click on the Play Button. If everything is done properly, you shall see the details appear on screen when you move closer to the artwork and disappear as you move further away.
 
-![Screenshot 2021-10-15 at 16.28.39.png](../assets/unity19.png)
+![Screenshot 2021-10-15 at 16.28.39.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity19.png)
 
 If not so, some of the possible errors can be:
 
@@ -282,7 +282,7 @@ Most `.Net` projects use `nuget` as a package manager, but it is difficult to im
 
 For the simplicity of this tutorial, the content of both the folders are uploaded [here](https://drive.google.com/drive/folders/12bhKyGKBxQQgnIXZD5w_AT2sjVOWyK-Y?usp=sharing). Download both the `NEther` and `Plugins` folder and import them directly into your Unity project by dragging and dropping them in the `Project Window`. Make sure that both the folders are imported into the root `Assets` folder.
 
-![ImportedPlugins.png](../assets/unity20.png)
+![ImportedPlugins.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity20.png)
 
 The `NEther` contains all the required files and scripts needed to use the `Nethereum` library while the `Plugins` folder contain `AsyncAwaitUtil` plugin that will be used for making Asynchronous calls. Although there are many other available Libraries for Asynchronous calls, this particular one seems to work smoothly with `Nethereum` while others ran into various errors.
 
@@ -574,11 +574,11 @@ public class QueryMarketplace
 
 Still there is one error left. If you are using Visual Studio as the Editor will be the Red Squiggly line under the keyword `BigInteger`. If you hover over it, you will see an error message similar to:
 
-![Screenshot 2021-10-15 at 21.25.53.png](../assets/unity21.png)
+![Screenshot 2021-10-15 at 21.25.53.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity21.png)
 
 To solve this, open `Player Settings` from the `Build Settings` window, and select **API Compatibility Level** as `.NET 4.x` 
 
-![NET4x.png](../assets/unity22.png)
+![NET4x.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity22.png)
 
 ## Query the NFT
 
@@ -675,7 +675,7 @@ public class OpenSeaMetadata
 
 With this we are ready with all our helper scripts. Before moving to the next section make sure you have the following scripts in the `HelperScripts` directory
 
-![Helper Scripts](../assets/unity23.png)
+![Helper Scripts](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity23.png)
 
 ## Getting the artwork
 
@@ -734,7 +734,7 @@ We use the `GetTexture` function in `UnityWebRequestTexture` class to make a cal
 
 Once we receive the image, we use `downloadHandler` method to get the texture and store it in a variable. Next we use the `SetTexture` function to set the desired image as a texture. If observed closely, the `picture` present in our game has two materials associated with it, the first is for the frame and the second is the image that is displayed.
 
-![Texture2.png](../assets/unity24.png)
+![Texture2.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity24.png)
 
 We use `materials[1]` to chose the 2nd Texture and set the "Main Texture" to our desired texture. Refer to the official documentation [here](https://docs.unity3d.com/2019.4/Documentation/ScriptReference/Material.SetTexture.html) to understand `SetTexture` function in more details.
 
@@ -796,7 +796,7 @@ public IEnumerator GetArtworkDetails(string URI, ArtworkDetails details)
 
 The diagram below summarise the flow of Coroutine once the `GetArtworkDetails` Coroutine is called.
 
-![CoroutineFlow.png](../assets/unity25.png)
+![CoroutineFlow.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity25.png)
 
 Putting it all together, the entire code for `GetArtwork` is:
 
@@ -891,11 +891,11 @@ Since the artworks must be spawned in an organised manner, first we have to deci
 
 For simplicity, I have defined 5 spawn points:
 
-![SpawnPoints.png](../assets/unity26.png)
+![SpawnPoints.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity26.png)
 
 In order to keep our project organised, in the `Hierarchy Window` create a new **Empty Game Object**, and name it `ArtworkSpawner` and drag the spawn points over it, to make them a child object of `ArtworkSpawner`. 
 
-![ChildSpawn.png](../assets/unity27.png)
+![ChildSpawn.png](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity27.png)
 
 Finally, you can safely delete the `picture` game object.
 
@@ -979,7 +979,7 @@ public class ArtworkSpawner : MonoBehaviour
 
 Now that we have our script ready, we attach this script to the `ArtworkSpawner` game object we created. Now with `ArtworkSpawner` selected in the `Hierarchy Window` we set the public variables of the script from `Inspector Window`. We drag the `picture` prefab, present in `Prefabs` folder, into the `Artwork` field. In the Spawn Points field, we enter the number of spawn points created (in this example `5`), and then drag each Spawn Point one-by-one in respective fields. It should look something like this:
 
-![Demo](../assets/unity28.png)
+![Demo](https://github.com/figment-networks/datahub-learn/raw/master/assets/unity28.png)
 
  
 

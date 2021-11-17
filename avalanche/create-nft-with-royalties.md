@@ -46,11 +46,11 @@ contract GameItem is ERC721URIStorage {
 
 This screenshot shows the main Remix IDE interface, with the Solidity code from above pasted into a new file called `ERC721.sol`
 
-![](../assets/create-ERC721-contract.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/create-ERC721-contract.png)
 
 Go to the second tab in the sidebar to compile the Solidity code, which will also fetch and install the OpenZeppelin boilerplate for ERC721 smart contracts which was specified by the `import` statements.
 
-![](../assets/compile-and-install-deps.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/compile-and-install-deps.png)
 
 Open the file ERC721.sol in the `.deps/npm/openzeppelin/contracts/token/ERC721/` directory to declare a royalties variable of the `uint8` type in the contract. This gives us the ability to specify the royalties as a number. The underscore before the variable name is to prevent [variable shadowing](https://en.wikipedia.org/wiki/Variable_shadowing).
 
@@ -73,7 +73,7 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
     ...
 ```
 
-![](../assets/add-royalties-ERC721.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/add-royalties-ERC721.png)
 
 After declaring the royalties variable in the ERC721 contract, we must also initialize it in the constructor.
 
@@ -87,7 +87,7 @@ After declaring the royalties variable in the ERC721 contract, we must also init
 ```
 
 
-![](../assets/initialize-royalties-ERC721.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/initialize-royalties-ERC721.png)
 
 To get the current value of the royalties variable from the smart contract, create a public function `royalties()`, which can be set as a `view` type. We also want to make it `virtual` so that it can be overridden by any contract which inherits the function. It will return a `uint8` value, which matches the value that `_royalties` stores on the blockchain.
 
@@ -101,7 +101,7 @@ To get the current value of the royalties variable from the smart contract, crea
 
 We can now compile the amended ERC721 smart contract and check for warnings, making sure the declared solidity version and compiler version are similar. The Solidity compiler uses [semantic versioning](http://semver.org/), so be aware that for example the version strings `0.8.0` and `^0.8.0` are not equal.
 
-![](../assets/compile-ERC721.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/compile-ERC721.png)
 
 Next, download and install the Metamask wallet for your browser. Create a new wallet in Metamask, then [follow our quick guide](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask) to connect to the Avalanche Fuji C-Chain. You will need to have a valid DataHub API key for Avalanche. 
 
@@ -109,15 +109,15 @@ Request AVAX from the test faucet for the deployment, from [https://faucet.avax-
 
 Pass the required parameters to the constructor in Remix: the Token Name, Symbol and Royalties. Then click the Deploy button!
 
-![](../assets/ERC721-Deploy.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/ERC721-Deploy.png)
 
 Still on the Deploy & Run Transactions tab in Remix, call the respective functions; _name_, _royalties_ and _symbol_ from the deployed ERC721 smart contract.
 
-![](../assets/Deploy-And-Run-Transections.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/Deploy-And-Run-Transections.png)
 
 Copy the address of the deployed contract to import in the Avalanche wallet. It should now appear on the collectibles tab in the portfolio section inside your [Avalanche wallet](https://wallet.avax.network/).
 
-![](../assets/Add-Collectibles.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/Add-Collectibles.png)
 
 Congratulations! You have successfully added the NFT as collectible in the Avalanche wallet.
 

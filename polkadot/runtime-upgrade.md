@@ -11,7 +11,7 @@ To successfully follow this tutorial, you should have a basic knowledge about th
 
 # Getting started
 
-![](../assets/runtime-upgrade.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/runtime-upgrade.png)
 
 During the tutorial we will progress through these steps:
 1. Build the simplest Substrate based blockchain
@@ -75,7 +75,7 @@ Sep 29 18:18:14.123  INFO 🙌 Starting consensus session on top of parent 0xc61
 
 Access the front-end of the local node via: <https://polkadot.js.org/apps/#/extrinsics?rpc=ws://127.0.0.1:9944>
 
-![](../assets/before-upgrade.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/before-upgrade.png)
 
 We can see that the kitties pallet has only a create() function, it is our current state transition function in the runtime. To demonstrate how adaptable Substrate based blockchains are, we can add a new feature - the breed() function.
 
@@ -139,7 +139,7 @@ Run the terminal command `WASM_TARGET_DIRECTORY="$(pwd)" cargo build` in order t
 
 After a successful build, we expect to have a new file in the current directory:
 
-![](../assets/wasm.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/wasm.png)
 
 # Upgrading the runtime
 
@@ -147,11 +147,11 @@ We have a running Substrate node with version 1 and want to upgrade the runtime 
 
 To perform the upgrade, go to the **Developer** tab, then select **Sudo**. Make sure that you have selected the `system` pallet and `setCode(code)`, check in `file upload` and select the freshly created WASM file made in the previous step: `node_template_runtime.wasm`. Next, check the **with weight override** and in the field **unchecked weight for this call** type a value like 100, for example. To confirm the upgrade, click on **Submit Sudo Unchecked**.
 
-![](../assets/upgrade.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/upgrade.png)
 
 After successfully upgrade you should see updated `spec_version` and have access to our new function:
 
-![](../assets/after-upgrade.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/after-upgrade.png)
 
 In the screenshot above, we can see the result of a successful upgrade. Notice that `spec_version` has been incremented to 2 (where it says "node-template/2").
 

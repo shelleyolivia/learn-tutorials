@@ -4,7 +4,7 @@ In this tutorial, we will learn how to create a simple blog post dapp on Solana 
 
 **Final Dapp**
 
-![](../assets/sblog_final_dapp.gif)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/sblog_final_dapp.gif)
 
 # Prerequisites
 
@@ -435,7 +435,7 @@ Updating post is really simple, take title and content from user and update the 
 
 Delete post is little challenging. To store posts, We have used LinkedList. If you know LinkedList, After deleting a node from LinkedList, we need to link the adjacent node of deleting a node. Let's understand this through a diagram.
 
-![](../assets/sblog_delete_post.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/sblog_delete_post.png)
 
 If we want to delete 2nd post, we have to link 1 -> 3.
 

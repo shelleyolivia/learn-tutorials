@@ -13,13 +13,13 @@ Remix is an in-browser Solidity IDE that’s used to write, compile and debug So
 
 Head over to [Remix](https://remix.ethereum.org/) and click on `Plugin Manger`. Here search for **Celo** Plugin and click on **Activate**.
 
-![](../assets/celo-extension-first.JPG)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-extension-first.JPG)
 
 Now we should be able to see **Celo** icon in Icon Tray.
 
 Our development area should look like this.
 
-![](../assets/celo-extension-added.JPG)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-extension-added.JPG)
 
 # Connecting Celo Extension Wallet to Remix
 
@@ -72,7 +72,7 @@ After compiling the successfully, we are ready to deploy our contract.
 
 Click on the **Deploy** button and sign the transaction using your wallet.
 
-![](../assets/celo-extension-deploy-button%20%281%29%20%281%29%20%281%29.JPG)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/celo-extension-deploy-button%20%281%29%20%281%29%20%281%29.JPG)
 
 Yay! we have successfully deployed our contract to the Alfajores Testnet. We can check the status of the transaction on [Alfajores Blockscout](https://alfajores-blockscout.celo-testnet.org/) by pasting the transaction hash.
 

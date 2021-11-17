@@ -40,7 +40,7 @@ You can either open [mumbai.polygonscan.com](https://mumbai.polygonscan.com/) an
 * **Currency Symbol:** MATIC
 * **Block Explorer URL:** https://mumbai.polygonscan.com/
 
-![mumbai](../assets/erc20-pos-mumbai.png)
+![mumbai](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc20-pos-mumbai.png)
 
 You can fund your **Mumbai** account with MATIC [here](https://faucet.polygon.technology)
 
@@ -67,13 +67,13 @@ Now that everything is ready. Let's map our `MLB` token.
 * Make sure the token you want to map has had its [contract verfied](https://etherscan.io/verifyContract) on Etherscan
 * Choose **Gorli Testnet -> Mumbai testnet**
 
-	![map image](../assets/erc20-pos-map.png)
+	![map image](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc20-pos-map.png)
 
 * At this time the mapping process is not immediate, it can take up to 3 days to be confirmed.  
 
 Then open [mapper.matic.today](https://mapper.matic.today/), and enter the contract address to see if it has been added.
 
-![mapped image](../assets/erc20-pos-mapped.png)
+![mapped image](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc20-pos-mapped.png)
 
 As you may notice, the contract address in Goerli and Mumbai are not the same. Let's remember to add it to Metamask so it shows up when we are connected to Mumbai as well.
 
@@ -84,7 +84,7 @@ As you may notice, the contract address in Goerli and Mumbai are not the same. L
 
 Now it should be something like:
 
-![metamask after map](../assets/erc20-pos-metamask-after-map.png)
+![metamask after map](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc20-pos-metamask-after-map.png)
 
 We don't yet have any MLB tokens on Mumbai. We can transfer some across the bridge and check our Metamask balance again afterward.
 
@@ -336,7 +336,7 @@ Wait a few minutes and try again.
 
 It takes up to 5 minutes for Mumbai to read data from the Goerli chain and sync itself. Once it has synced, then we can check the token balance in Metamask.
 
-![MLB Metamask](../assets/erc20-MLB-token.png)
+![MLB Metamask](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc20-MLB-token.png)
 
 # Transfer using Web UI
 Transferring assets through **Web UI** is pretty simple.  
@@ -346,21 +346,21 @@ So I am going to transfer some **real tokens** from my **Ethereum** account to *
 1. Open [wallet.polygon.technology](https://wallet.polygon.technology/login)
 2. Make sure Ethereum Mainnet is selected in Metamask
 
-	![Metamask Ethereum](../assets/erc20-pos-metamask-eth-mainnet.png)
+	![Metamask Ethereum](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc20-pos-metamask-eth-mainnet.png)
 
 3. Click on **Metamask**. first login option
 4. You will be asked to sign a **Signature Request** to make sure you have access to the wallet. It costs no fees
 
-	![pos web ui login](../assets/erc20-pos-web-ui-login.png)
+	![pos web ui login](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc20-pos-web-ui-login.png)
 	
 5. I chose `DAI` token from Ethereum
 
-	![DAI](../assets/erc20-pos-web-ui-dai.png)
+	![DAI](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc20-pos-web-ui-dai.png)
 
 6. Click on **Transfer**
 7. Then review the transaction details, like gas fees and the smart contract you are sending tokens to - before clicking on **Confirm**
 
-	![transfer](../assets/erc20-pos-web-ui-transfer.png)
+	![transfer](https://github.com/figment-networks/datahub-learn/raw/master/assets/erc20-pos-web-ui-transfer.png)
 
 8. Once the transaction is mined, the process is complete! It takes about 7 minutes to complete the transfer, as mentioned before Polygon needs about 5 minutes to sync.
 

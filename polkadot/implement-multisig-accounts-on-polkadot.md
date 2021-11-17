@@ -8,7 +8,7 @@ There are many potential applications of this concept, however for this tutorial
 
 Check out the [Polkadot API documentation](https://polkadot.js.org/docs/substrate) for a summary of all the relevant API metadata.
 
-![](../assets/total_flow-fix.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/total_flow-fix.png)
 
 > From the Polkadot JS API documentation:
 
@@ -112,7 +112,7 @@ There are three types of actions to be taken with a multi-sig account. Executing
 
 # Create a Multisig account
 
-![Click to enlarge.](../assets/encode_flow-fix.png)
+![Click to enlarge.](https://github.com/figment-networks/datahub-learn/raw/master/assets/encode_flow-fix.png)
 
 Create a file called `create_multisig.js` and paste the following code :
 
@@ -203,7 +203,7 @@ transfer tx: https://westend.subscan.io/extrinsic/...
 
 # Fund a Multisig account
 
-![Click to enlarge.](../assets/transfer_flow-fix.png)
+![Click to enlarge.](https://github.com/figment-networks/datahub-learn/raw/master/assets/transfer_flow-fix.png)
 
 Funding the multisig wallet is an important step in this tutorial process, so that it will have enough available balance to cover the existential deposit, and an available balance for sending further transactions. 
 
@@ -264,17 +264,17 @@ transfer tx: https://westend.subscan.io/extrinsic/...
 
 The [SubScan](https://westend.subscan.io/) page will include these 4 events. Refer to the following examples of successful events. 
 
-![](../assets/balances-deposit.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/balances-deposit.png)
 
-![](../assets/balances-transfer.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/balances-transfer.png)
 
-![](../assets/balances-endowed.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/balances-endowed.png)
 
-![](../assets/system-newaccount.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/system-newaccount.png)
 
 # Execute a Multisig transfer
 
-![Click to enlarge.](../assets/approveasmulti_flow-fix.png)
+![Click to enlarge.](https://github.com/figment-networks/datahub-learn/raw/master/assets/approveasmulti_flow-fix.png)
 
 Create a file called `transfer_multisig.js` and paste the following code :
 
@@ -359,11 +359,11 @@ Submitted values : approveAsMulti(2, otherSignatories: [
 approveAsMulti tx: https://westend.subscan.io/extrinsic/...
 ```
 
-![](../assets/multisig_action.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/multisig_action.png)
 
 # Approve a Multisig transfer
 
-![Click to enlarge.](../assets/asmulti-flow.png)
+![Click to enlarge.](https://github.com/figment-networks/datahub-learn/raw/master/assets/asmulti-flow.png)
 
 Create a new file called`approve_multisig.js` and paste the following code : 
 

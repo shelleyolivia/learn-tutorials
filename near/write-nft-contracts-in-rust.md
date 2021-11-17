@@ -512,7 +512,7 @@ Done deploying to dev-1607722059840-7354752
 
 The provided link will give you complete details about the deployment in the NEAR Explorer.
 
-![](../assets/screen-shot-2021-02-01-at-6.30.27-pm.png)
+![](https://github.com/figment-networks/datahub-learn/raw/master/assets/screen-shot-2021-02-01-at-6.30.27-pm.png)
 
 In this step, the CLI created a new user account on the testnet and deployed the contract in that account. Make a note of that new Account ID, which looks something like `dev-nnnnnnnnn-nnnnn`, where the `n`s are replaced by digits.
 

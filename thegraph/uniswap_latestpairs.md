@@ -1,4 +1,4 @@
-![UNISWAP](../assets/UNISWAP.gif)
+![UNISWAP](https://github.com/figment-networks/datahub-learn/raw/master/assets/UNISWAP.gif)
 
 
 # Introduction
@@ -18,7 +18,7 @@ For beginners with basic coding skills. This training assumes that you have a Gm
 [Uniswap](https://academy.binance.com/en/articles/what-is-uniswap-and-how-does-it-work) is a **decentralized exchange protocol built on Ethereum.** To be more precise, it is an automated liquidity protocol. There is no order book or any centralized party required to make trades. Uniswap allows users to trade without intermediaries, with a high degree of decentralization and censorship-resistance.
 
 This is how Uniswap’s Decentralized Exchange looks like:
-![UNISWAPEXCHANGE](../assets/Uniswap_exchange.gif)
+![UNISWAPEXCHANGE](https://github.com/figment-networks/datahub-learn/raw/master/assets/Uniswap_exchange.gif)
     
 
 # Getting familiar with TheGraph and GraphQL
@@ -29,14 +29,14 @@ In this tutorial, we will be focusing on getting blockchain data on Version 3 of
 
 * https://thegraph.com/legacy-explorer/subgraph/uniswap/uniswap-v3
 
-![UNISWAPv3SUBGRAPH](../assets/uniswapv3-subgraph.gif)
+![UNISWAPv3SUBGRAPH](https://github.com/figment-networks/datahub-learn/raw/master/assets/uniswapv3-subgraph.gif)
 
 ## Building the GraphQL query
 [GraphQL](https://en.wikipedia.org/wiki/GraphQL) is an **open-source data query and manipulation language for APIs,** and a runtime for fulfilling queries with existing data. GraphQL was developed internally by Facebook in 2012 before being publicly released in 2015. 
 
 On The Graph interface in playgroud mode, there is an example of a GraphQL query. This query gets the first 5 factories with id, poolCount, txCount and totalVolumeUSD, as well as the first 5 bundles with their id and ethPriceUSD.
 
-![PLAYGROUND](../assets/playground.gif)
+![PLAYGROUND](https://github.com/figment-networks/datahub-learn/raw/master/assets/playground.gif)
 
 For our purpose, we will just need to adjust a little the query to request pool pairs. We will be interested in filtering by constraints on the Number of Days the coin is active, the Volume ($), the Liquidity ($), and the number of Transactions. When you look at the pool parameters, you will find the following correspondence needed to build our constraints:
 * Number of Days -> createdAtTimestamp
@@ -87,7 +87,7 @@ query{
 ```
 You can replace the example query with this new query and press play in the playground. You should see the results.
 
-![PLAYGROUNDCONSTRAINTS](../assets/PLAYGROUNDCONSTRAINTS.png)
+![PLAYGROUNDCONSTRAINTS](https://github.com/figment-networks/datahub-learn/raw/master/assets/PLAYGROUNDCONSTRAINTS.png)
 
 ## Testing model and translating the query into javascript using Postman
 
@@ -95,7 +95,7 @@ You can replace the example query with this new query and press play in the play
 
 Once you download Postman, you can open a new window like shown below:
 
-![POSTMANCLEAN](../assets/postmanempty.png)
+![POSTMANCLEAN](https://github.com/figment-networks/datahub-learn/raw/master/assets/postmanempty.png)
 
 To get the data in Postman, you will need to:
 1. Insert in the URL box the HTTP Query url from the Uniswap V3 subgraph (https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3)
@@ -105,13 +105,13 @@ To get the data in Postman, you will need to:
 
 You should get the same JSON table as on TheGraph.
 
-![POSTMANQUERY](../assets/postmanconstraints.png)
+![POSTMANQUERY](https://github.com/figment-networks/datahub-learn/raw/master/assets/postmanconstraints.png)
 
 
 # Connecting the model through Google Sheet
 Once you confirmed that the query is functioning in Postman, you can transform the code into a Javascript Fetch request (for Google Sheet) using the Code button underneath the Save button.
 
-![POSTMANJAVASCRIPT](../assets/postmanjavascript.png)
+![POSTMANJAVASCRIPT](https://github.com/figment-networks/datahub-learn/raw/master/assets/postmanjavascript.png)
 
 
 The important part to save for the App Script in Google is:
@@ -194,15 +194,15 @@ async function UNISWAP(days,volume,liquidity,tx_count){
 ## Copy/Pasting the code in Google Sheet
 Open a Google sheet where you wish to use the Uniswap function -> Go to **Tools › Script editor**
 
-![GOOGLESHEETEDITOR](../assets/googlesheetmacro.gif)
+![GOOGLESHEETEDITOR](https://github.com/figment-networks/datahub-learn/raw/master/assets/googlesheetmacro.gif)
 
 Replace the empty function with the code we just created.
 
-![Uniswapgs](../assets/uniswapgs.png)
+![Uniswapgs](https://github.com/figment-networks/datahub-learn/raw/master/assets/uniswapgs.png)
 
 Add the [ImportJSON script by Brad Jasper and Trevor Lohrbeer version 1.5](https://raw.githubusercontent.com/Eloise1988/ImportJSON/master/ImportJSON.gs)
 
-![ImportJSONgs](../assets/importjsongs.png)
+![ImportJSONgs](https://github.com/figment-networks/datahub-learn/raw/master/assets/importjsongs.png)
 
 Once you save the code, you need to activate the [Manual authorization scopes for Sheets](https://developers.google.com/apps-script/guides/services/authorization).
 
@@ -210,7 +210,7 @@ Once you save the code, you need to activate the [Manual authorization scopes fo
 
 Once all of these steps are done, you should be able to request the newest tradable pairs on Uniswap, giving constraints on the Number of Days the pair has been active, the Volume ($), the Liquidity ($), and the number of Transactions.
 
-![UNISWAP](../assets/UNISWAP.gif)
+![UNISWAP](https://github.com/figment-networks/datahub-learn/raw/master/assets/UNISWAP.gif)
 
 - [Here is the access to the live template sheet](https://docs.google.com/spreadsheets/d/1tME9nMh79KzZP4Wmld7lezom6je4BOw_0T9ABf5GKXE/edit?usp=sharing)
 
