@@ -384,6 +384,7 @@ In our dApp, we will be creating five pages:
 We will start by creating `context.tsx` which will handle the smart contract instances. Create a file `DataContext.tsx` in `context` directory and paste the following code:
 
 ```tsx
+// contexts/DataContext.tsx
 declare let window: any;
 import { createContext, useContext, useState } from "react";
 import Web3 from "web3";
@@ -477,6 +478,7 @@ In `useProviderData` function, we have `loadWeb3` and `loadBlockchainData`. `loa
 We will start with `index.tsx`. Open `pages/index.tsx` and paste the following code:
 
 ```tsx
+// pages/index.tsx
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
 import { MarketCard } from "../components/MarketCard";
@@ -584,7 +586,7 @@ On this page, we have two main components, `Navbar` and `MarketCard`.
 
 
 ```tsx
-// `components/Navbar.tsx`
+// components/Navbar.tsx
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
@@ -675,7 +677,7 @@ To connect to Metamask from our dApp, we will use the `loadWeb3` function from o
 
 
 ```tsx
-// `components/MarketCard.tsx`
+// components/MarketCard.tsx
 import Img from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -750,7 +752,7 @@ Next, we will start with the `admin/index.tsx` page, which will allow us to crea
 
 
 ```tsx
-// `admin/index.tsx`
+// admin/index.tsx
 import { create } from "ipfs-http-client";
 import Head from "next/head";
 import Link from "next/link";
@@ -1158,6 +1160,7 @@ After the `approve` call, we make a contract call to `addYesBet` / `addNoBet` de
 For the graph section, create a new file in the `components/Chart` directory called `ChartContainer.tsx` and paste the following code:
 
 ```tsx
+// components/Chart/ChartContainer.tsx
 import "chartjs-adapter-moment";
 import Plotly from "plotly.js-dist-min";
 import React, { useEffect } from "react";
@@ -1245,7 +1248,7 @@ Now let's create a Portfolio section, where the users can see all the market val
 
 
 ```tsx
-// `pages/portfolio.tsx`
+// pages/portfolio.tsx
 import Head from "next/head";
 import React, { useCallback, useEffect, useState } from "react";
 import Web3 from "web3";
@@ -1341,6 +1344,8 @@ export default Portfolio;
 In the Portfolio, we have Navbar, a list of markets, and the total portfolio value. To get the list of markets, paste the following code in the `Portfolio` component before the return statement.
 
 ```javascript
+// pages/portfolio.tsx
+
 const getMarkets = useCallback(async () => {
     var totalMarkets = await polymarket.methods
       .totalMarkets()
