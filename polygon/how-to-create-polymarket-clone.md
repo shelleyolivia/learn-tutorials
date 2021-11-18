@@ -6,7 +6,7 @@ We will create a full-stack dApp with an admin panel where events/markets are cr
 
 This is what the dApp we will be creating looks like:
 
-![Demo GIF](../assets/polymarket-app-demo.gif)
+![Demo GIF](https://github.com/figment-networks/learn-tutorials/raw/master/assets/polymarket-app-demo.gif)
 
 # Prerequisites
 
@@ -359,27 +359,27 @@ truffle deploy --network matic
 
 In our dApp, we will be creating five pages:
 
-![Pages folder structure](../assets/pages-folder-structure.png)
+![Pages folder structure](https://github.com/figment-networks/learn-tutorials/raw/master/assets/pages-folder-structure.png)
 
 `index.tsx` contains the main page for users where all the markets are listed.
 
-![Index page](../assets/index-page.png)
+![Index page](https://github.com/figment-networks/learn-tutorials/raw/master/assets/index-page.png)
 
 `portfolio.tsx` contains all the market bets placed by the logged-in user.
 
-![Portfolio view](../assets/portfolio-view.png)
+![Portfolio view](https://github.com/figment-networks/learn-tutorials/raw/master/assets/portfolio-view.png)
 
 `admin/index.tsx` used by admin to create new markets.
 
-![Admin form view](../assets/admin-form-view.png)
+![Admin form view](https://github.com/figment-networks/learn-tutorials/raw/master/assets/admin-form-view.png)
 
 `admin/markets.tsx` can be used by admin to resolve the market and decide the out, which will call the `distributeWinningAmount` method of Polymarket contract.
 
-![Admin market list](../assets/admin-markets-list.png)
+![Admin market list](https://github.com/figment-networks/learn-tutorials/raw/master/assets/admin-markets-list.png)
 
 `markets/[id].tsx` contains the details of a specific market, including description, Yes/No graph, and a section where users can place predictions on the outcome of that market.
 
-![Market details](../assets/market-details.png)
+![Market details](https://github.com/figment-networks/learn-tutorials/raw/master/assets/market-details.png)
 
 We will start by creating `context.tsx` which will handle the smart contract instances. Create a file `DataContext.tsx` in `context` directory and paste the following code:
 
@@ -667,7 +667,7 @@ const TabButton = ({
 };
 ```
 
-![Navbar](../assets/polymarket-navbar.png)
+![Navbar](https://github.com/figment-networks/learn-tutorials/raw/master/assets/polymarket-navbar.png)
 
 The navbar has two basic functions, connect our dApp with Metamask, and show the tab bar for the user to toggle between Markets and Portfolio. We only show the tab bar if the user is not on admin pages.
 
@@ -742,7 +742,7 @@ export const MarketCard: React.FC<MarketProps> = ({
 
 ```
 
-![Polymarket Card](../assets/polymarket-card.png)
+![Polymarket Card](https://github.com/figment-networks/learn-tutorials/raw/master/assets/polymarket-card.png)
 
 `MarketCard` accepts the `MarketProps` as a parameter and displays the image, title, market total values, YES/NO total values in that market. Clicking each market will redirect the user to the market details page.
 
@@ -881,7 +881,7 @@ const Admin = () => {
 export default Admin;
 ```
 
-![Admin index demo](../assets/admin-index.gif)
+![Admin index demo](https://github.com/figment-networks/learn-tutorials/raw/master/assets/admin-index.gif)
 
 On this page, we are creating a form through which the admin can create a new market. While creating a new market,  the admin must add a title, description, title image, resolve URL, and the end date for the market. Here resolve URL is the URL that will be referred by the admin to decide the outcome of the market. We have two functions, one to upload the image to IPFS and the other to call the `createMarket` method of the `Polymarket` contract.
 
@@ -1104,7 +1104,7 @@ const Details = () => {
 export default Details;
 ```
 
-![Market details](../assets/market-market-details.gif)
+![Market details](https://github.com/figment-networks/learn-tutorials/raw/master/assets/market-market-details.gif)
 
 The market details page has four sections:
 
@@ -1599,7 +1599,7 @@ const Markets: React.FC = () => {
 export default Markets;
 ```
 
-![Admin market resolve](../assets/admin-market-resolve.gif)
+![Admin market resolve](https://github.com/figment-networks/learn-tutorials/raw/master/assets/admin-market-resolve.gif)
 
 On this page, we are just fetching all the markets from `Polymarket` and displaying them on a card. For the card, we have to create a new component called `AdminMarketCard`.
 
