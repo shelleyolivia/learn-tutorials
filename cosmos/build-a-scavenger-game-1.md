@@ -18,7 +18,7 @@ The state machine we are building will use an implementation of **proof-of-stake
 
 So, now that we know a little more about **why** we might build an app like this, let's dive into the game itself.
 
-## The Game
+# The Game
 
 The application we're building today can be used in many different ways but I'll be talking about it as **scavenger hunt** game. Scavenger hunts are all about someone setting up tasks or questions that challenge a participant to find solutions which come with some sort of a prize. The basic mechanics of the game are as follows:
 
@@ -46,7 +46,7 @@ Another way of achieving this would be to have an Access Control List where ther
 
 Now that we know what we're building we can get started.
 
-## Scaffold
+# Scaffold
 
 We'll be using a tool called [scaffold](https://github.com/cosmos/scaffold) to help us spin up a boilerplate app quickly. To use `scaffold` first clone and install it on your local machine:
 
@@ -137,10 +137,9 @@ Let's start with **Create**
 
 ## MsgCreateScavenge
 
-Messages are `types` which live inside the `./x/scavenge/types/` directory. There is already a `msg.go` file but we will make a new file for each Message type. We can use `msg.go` as a starting point by renaming it to `MsgCreateScavenge.go` like:
+Messages are `types` which live inside the `./x/scavenge/types/` directory. There is already a `msg.go` file but we will make a new file for each Message type. We can use `msg.go` as a starting point by renaming it to `MsgCreateScavenge.go` like this (ssuming your current working directory is the root of your application):
 
-```bash
-# Assuming your current working directory is the root of your application
+```text
 mv ./x/scavenge/types/msg.go  ./x/scavenge/types/MsgCreateScavenge.go
 ```
 
@@ -215,7 +214,7 @@ The `Msg` interface requires some other methods be set, like validating the cont
 
 Now that one can create a scavenge the only other essential action is to be able to solve it. This should be broken into two separate actions as described before: `MsgCommitSolution` and `MsgRevealSolution`.
 
-### MsgCommitSolution 
+## MsgCommitSolution 
 
 This message type should live in `./x/scavenge/types/MsgCommitSolution.go` and look like:
 
@@ -286,7 +285,7 @@ The Message `struct` contains all the necessary information when revealing a sol
 
 This message also fulfils the `sdk.Msg` interface.
 
-### MsgRevealSolution 
+## MsgRevealSolution 
 
 This message type should live in `./x/scavenge/types/MsgRevealSolution.go` and look like:
 
@@ -372,7 +371,7 @@ The Message `struct` contains all the necessary information when revealing a sol
 
 This message also fulfils the `sdk.Msg` interface.
 
-### Codec 
+# Codec 
 
 Once we have defined our messages, we need to describe to our encoder how they should be stored as bytes. To do this we edit the file located at `./x/scavenge/types/codec.go`. By describing our types as follows they will work with our encoding library:
 
@@ -401,7 +400,7 @@ func init() {
 }
 ```
 
-### Alias
+# Alias
 
 Now that we have these new message types, we'd like to make sure other parts of the module can access them. To do so we use the `./x/scavenge/alias.go` file. This imports the types from the nested `types` directory and makes them accessible at the modules top level directory.
 
@@ -454,7 +453,7 @@ It's great to have Messages, but we need somewhere to store the information they
 
 Let's make a `Keeper` for our Scavenge Module next.
 
-## Keeper 
+# Keeper 
 
 After using the `scaffold` command you should have a boilerplate `Keeper` at `./x/scavenge/keeper/keeper.go`. It contains a basic keeper with references to basic functions like `Set`, `Get` and `Delete`.
 
@@ -557,7 +556,7 @@ func (k Keeper) GetCommitsIterator(ctx sdk.Context) sdk.Iterator {
 }
 ```
 
-### Commits and Scavenges 
+## Commits and Scavenges 
 
 You may notice reference to `types.Commit` and `types.Scavenge` throughout the `Keeper`. These are new structs defined in `./x/scavenge/types/types.go` that contain all necessary information about different scavenge challenges, and different commited solutions to those challenges. They appear similar to the `Msg` types we saw earlier because they contain similar information. You can create this file now and add the following:
 
@@ -619,7 +618,7 @@ func (c Commit) String() string {
 
 You can imagine that an unsolved `Scavenge` would contain a `nil` value for the fields `Solution` and `Scavenger` before they are solved. You might also notice that each type has the `String` method. This allows us to render the struct as a string for rendering.
 
-### Prefixes
+## Prefixes
 
 You may notice the use of `types.ScavengePrefix` and `types.CommitPrefix`. These are defined in a file called `./x/scavenge/types/key.go` and help us keep our `Keeper` organized. The `Keeper` is really just a key value store. That means that, similar to an `Object` in javascript, all values are referenced under a key. To access a value, you need to know the key under which it is stored. This is a bit like a unique identifier \(UID\).
 
@@ -647,13 +646,13 @@ const (
 
 Copypackage types const \( // ModuleName is the name of the module ModuleName = "scavenge" // StoreKey to be used when creating the KVStore StoreKey = ModuleName // RouterKey to be used for routing msgs RouterKey = ModuleName QuerierRoute = ModuleName ScavengePrefix = "sk-" CommitPrefix = "ck-" \)
 
-### Iterators 
+## Iterators 
 
 Sometimes you will want to access a `Commit` or a `Scavenge` directly by their key. That's why we have the methods `GetCommit` and `GetScavenge`. However, sometimes you will want to get every `Scavenge` at once or every `Commit` at once. To do this we use an **Iterator** called `KVStorePrefixIterator`. This utility comes from the `sdk` and iterates over a key store. If you provide a prefix, it will only iterate over the keys that contain that prefix. Since we have prefixes defined for our `Scavenge` and our `Commit` we can use them here to only return our desired data types.
 
 Now that you've seen the `Keeper` where every `Commit` and `Scavenge` are stored, we need to connect the messages to the this storage. This process is called _handling_ the messages and is done inside the `Handler`.
 
-## Handler 
+# Handler 
 
 In order for a **Message** to reach a **Keeper**, it has to go through a **Handler**. This is where logic can be applied to either allow or deny a `Message` to succeed. It's also where logic as to exactly how the state should change within the Keeper should take place. If you're familiar with [Model View Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) \(MVC\) architecture, the `Keeper` is a bit like the **Model** and the `Handler` is a bit like the **Controller**. If you're familiar with [React/Redux](https://en.wikipedia.org/wiki/React_%28web_framework%29) or [Vue/Vuex](https://en.wikipedia.org/wiki/Vue.js) architecture, the `Keeper` is a bit like the **Reducer/Store** and the `Handler` is a bit like **Actions**.
 
@@ -793,11 +792,11 @@ func handleMsgRevealSolution(ctx sdk.Context, k Keeper, msg MsgRevealSolution) (
 }
 ```
 
-### moduleAcct 
+## moduleAcct 
 
 You might notice the use of `moduleAcct` within the `handleMsgCreateScavenge` and `handleMsgRevealSolution` handler functions. This account is not controlled by a public key pair, but is a reference to an account that is owned by this actual module. It is used to hold the bounty reward that is attached to a scavenge until that scavenge has been solved, at which point the bounty is paid to the account who solved the scavenge.
 
-### Events 
+# Events 
 
 At the end of each handler is an `EventManager` which will create logs within the transaction that reveals information about what occurred during the handling of this message. This is useful for client side software that wants to know exactly what happened as a result of this state transition. These Events use a series of pre-defined types that can be found in `./x/scavenge/types/events.go` and look as follows:
 
@@ -823,7 +822,7 @@ const (
 
 Now that we have all the necessary pieces for updating state \(`Message`, `Handler`, `Keeper`\) we might want to consider ways in which we can _query_ state. This is typically done via a REST endpoint and/or a CLI. Both of those clients interact with part of the app which queries state, called the `Querier`.
 
-## Querier 
+# Querier 
 
 In order to query the data of our app we need to make it accessible using our `Querier`. This piece of the app works in tandem with the `Keeper` to access state and return it. The `Querier` is defined in `./x/scavenge/keeper/querier.go`. Our `scaffold` tool starts us out with some suggestions on how it should look, and similar to our `Handler` we want to handle different queried routes. You could make many different routes within the `Querier` for many different types of queries, but we will just make three:
 
@@ -914,7 +913,7 @@ func getCommit(ctx sdk.Context, path []string, k Keeper) (res []byte, sdkError e
 }
 ```
 
-### Types 
+## Types 
 
 You may notice that we use three different imported types on our initial switch statement. These are defined within our `./x/scavenge/types/querier.go` file as simple strings. That file should look like the following:
 
@@ -955,13 +954,13 @@ Now that we have all of the basic actions of our module created, we want to make
 
 Let's take a look at what goes into making a CLI.
 
-## CLI 
+# CLI 
 
 A Command Line Interface \(CLI\) will help us interact with our app once it is running on a machine somewhere. Each Module has it's own namespace within the CLI that gives it the ability to create and sign Messages destined to be handled by that module. It also comes with the ability to query the state of that module. When combined with the rest of the app, the CLI will let you do things like generate keys for a new account or check the status of an interaction you already had with the application.
 
 The CLI for our module is broken into two files called `tx.go` and `query.go` which are located in `./x/scavenge/client/cli/`. One file is for making transactions that contain messages which will ultimately update our state. The other is for making queries which will give us the ability to read information from our state. Both files utilize the [Cobra](https://github.com/spf13/cobra) library.
 
-### tx.go 
+## tx.go 
 
 The `tx.go` file contains `GetTxCmd` which is a standard method within the Cosmos SDK. It is referenced later in the `module.go` file which describes exactly which attributes a modules has. This makes it easier to incorporate different modules for different reasons at the level of the actual application. After all, we are focusing on a module at this point, but later we will create an application that utilizes this module as well as other modules which are already available within the Cosmos SDK.
 
@@ -1099,11 +1098,11 @@ func GetCmdRevealSolution(cdc *codec.Codec) *cobra.Command {
 }
 ```
 
-### sha256
+## sha256
 
 Note that this file makes use of the `sha256` library for hashing our plain text solutions into the scrambled hashes. This activity takes place on the client side so the solutions are never leaked to any public entity which might want to sneak a peak and steal the bounty reward associated with the scavenges. You can also notice that the hashes are converted into hexadecimal representation to make them easy to read as strings \(which is how they are ultimately stored in the keeper\).
 
-### query.go 
+## query.go 
 
 The `query.go` file contains similar **Cobra** commands that reserve a new name space for referencing our `scavenge` module. Instead of creating and submitting messages however, the `query.go` file creates queries and returns the results in human readable form. The queries it handles are the same we defined in our `querier.go` file earlier:
 
@@ -1230,7 +1229,7 @@ Notice that this file also makes use of the `sha256` library for converting plai
 
 While these are all the major moving pieces of a module \(`Message`, `Handler`, `Keeper`, `Querier` and `Client`\) there are some organizational tasks which we have yet to complete. The next step will be making sure that our module is completely configured in order to make it usable within any application.
 
-## Module 
+# Module 
 
 Our `scaffold` tool has done most of the work for us in generating our `module.go` file inside `./x/scavenge/`. One way that our module is different than the simplest form of a module, is that it uses it's own `Keeper` as well as the `Keeper` from the `bank` module. The only real changes needed are under the `AppModule` and `NewAppModule`, where the `bank.Keeper` needs to be added and referenced. The file should look as follows afterwards:
 
@@ -1386,7 +1385,7 @@ This module is now able to be incorporated into any Cosmos SDK application.
 
 Since we don't want to _just_ build a module but want to build an application that also uses that module, let's go through the process of configuring an app.
 
-## App 
+# App 
 
 Our `scaffold` utility has already created a pretty complete `app.go` file for us inside of `./app/app.go`. This version of the `app.go` file is meant to be as simple of an app as possible. It contains only the necessary modules needed for using an app that knows about coins \(`bank`\), user accounts \(`auth`\) and securing the application with proof-of-stake \(`staking`\).
 
@@ -1989,7 +1988,7 @@ func exportAppStateAndTMValidators(
 
 Finally we need to update our new `cmd` names within our `Makefile`. It should be updated to look like:
 
-```go
+```makefile
 PACKAGES=$(shell go list ./... | grep -v '/simulation')
 
 VERSION := $(shell echo $(shell git describe --tags) | sed 's/^v//')
@@ -2030,7 +2029,7 @@ Now our app is configured and ready to go!
 
 Let's fire it up 🔥
 
-## Run 
+# Run the app
 
 Now that our module is built and our app is configured to use it we can start running our application! The first thing to do is make sure that the `go.mod` is correct. If you're using an IDE like vscode with `golang` extensions enabled, this should be done automatically for you after saving each file. You can also make sure all dependencies are present by running `go mod tidy`.
 
@@ -2038,7 +2037,7 @@ Once your dependencies are set, run `make` to build your binaries! You will be c
 
 After you run `make` you want to make sure you have access to both of those binaries. You can do this by running the `scavengeD --help`, where you should see the following:
 
-```go
+```text
 Scavenge Daemon (server)
 
 Usage:
@@ -2071,7 +2070,7 @@ Use "scavengeD [command] --help" for more information about a command.
 
 You should also be able to run `scavengeCLI --help` which should result in the following screen:
 
-```go
+```text
 Scavenge Client
 
 Usage:
@@ -2103,7 +2102,7 @@ Use "scavengeCLI [command] --help" for more information about a command.
 
 Now we should create some users within our app that have some initial coins that can be used as bounties for other players. First we create two users with the following commands:
 
-```go
+```text
 scavengeCLI keys add me
 scavengeCLI keys add you
 ```
@@ -2112,13 +2111,13 @@ Each command will come with a prompt to set a password to secure the account. I 
 
 Next you need to initialize your application using the Daemon command with a `<moniker>` \(which is just a nickname for your machine\) and a `<chain-id>` which will be a way to identify your application.
 
-```go
+```text
 scavengeD init mynode --chain-id scavenge
 ```
 
 Now you can add your two accounts to the initial state of the application, called the Genesis, using the following commands:
 
-```bash
+```text
 scavengeD add-genesis-account $(scavengeCLI keys show me -a) 1000foo,100000000stake
 scavengeD add-genesis-account $(scavengeCLI keys show you -a) 1foo
 ```
@@ -2127,7 +2126,7 @@ Notice we've combined two commands, which includes one from the Daemon and one f
 
 Before we start the application it's good to configure your CLI to know that it will be interacting with this app, and not any other one. These commands will tell the CLI to talk to just this application:
 
-```
+```text
 scavengeCLI config chain-id scavenge
 scavengeCLI config output json
 scavengeCLI config indent true
@@ -2136,7 +2135,7 @@ scavengeCLI config trust-node true
 
 Now we want to let the application know that it will be the user `me` who will be validating so we run this command:
 
-```
+```text
 scavengeD gentx --name me
 ```
 
@@ -2144,7 +2143,7 @@ This command will ask for the password, which if you're like me is just `1234567
 
 Our finaly step is to tell the application that we're done configuring it. This will collect all of our initial configuraiton and prepare the application to begin:
 
-```
+```text
 scavengeD collect-gentxs
 ```
 
@@ -2178,7 +2177,7 @@ scavengeD collect-gentxs
 
 To do so open a new terminal window and type the following:
 
-```javascript
+```text
 scavengeD start
 ```
 
@@ -2217,9 +2216,9 @@ Global Flags:
 Use "scavengeCLI tx scavenge [command] --help" for more information about a command.
 ```
 
-We want to use the `createScavenge` command so let's check the help screen for it as well like `scavengeCLI scavenge createScavenge --help`. It should look like:CopyCreates a new scavenge with a reward Usage: 
+We want to use the `createScavenge` command so let's check the help screen for it as well like `scavengeCLI scavenge createScavenge --help`. It should look like:
 
-```
+```text
 Creates a new scavenge with a reward
 
 Usage:
@@ -2257,13 +2256,13 @@ Next we should list our `solution`, but probably we should also know what the ac
 
 Now we have all the pieces needed to create our Message. Let's piece them all together, adding the flag `--from` so the CLI knows who is sending it:
 
-```
+```text
 scavengeCLI tx scavenge createScavenge 69foo "A stick" "What's brown and sticky?" --from me
 ```
 
 After confirming the message looks correct and signing with your password \(`1234567890`?\) you should see something like the following:
 
-```
+```text
 {
   "height": "0",
   "txhash": "3D088632B1C523EF2754153F5454E8FA464AE69747A4BD8ABC01A3428C31C185",
@@ -2291,13 +2290,13 @@ After confirming the message looks correct and signing with your password \(`123
 
 This tells you that the message was accepted into the app. Whether the message failed afterward can not be told from this screen. However, the section under `txhash` is like a receipt for this interaction. To see if it was successfully processed after being successfully included you can run the following command:
 
-```
+```text
 scavengeCLI q tx <txhash>
 ```
 
 But replace the `<txhash>` with your own. You should see something similar to this afterward:
 
-```
+```text
 {
   "height": "2622",
   "txhash": "3D088632B1C523EF2754153F5454E8FA464AE69747A4BD8ABC01A3428C31C185",
@@ -2467,7 +2466,7 @@ Since we know the solution to this question and since we have another user at ha
 
 First we should check the CLI command for `commitSolution` by running `scavengeCLI tx scavenge commitSolution --help` in order to see:
 
-```
+```text
 Commits a solution for scavenge
 
 Usage:
@@ -2501,13 +2500,13 @@ Global Flags:
 
 Let's follow the instructions and submit the answer as a commit on behalf of `you`:
 
-```
+```text
 scavengeCLI tx scavenge commitSolution "A stick" --from you 
 ```
 
 We don't need to put the `solutionHash` because it can be generated by hashing our actual solution. After confirming the transaction and signing it we should see our `txhash` again. To confirm the `txhash` let's look at it again with `scavengeCLI q tx <txhash>`. This time you should see something like:
 
-```
+```text
 {
   "height": "2733",
   "txhash": "2E27A06BA7047FD41DC0DAD5481D99D5E58BC84DA0D7E0F4E1AC789F7A410186",
@@ -2618,13 +2617,13 @@ We don't need to put the `solutionHash` because it can be generated by hashing o
 
 You'll notice that the `solutionHash` matches the one before. We've also created a new hash for the `solutionScavengerHash` which is the combination of the solution and our account address. We can make sure the commit has been made by querying it directly as well:
 
-```
+```text
 scavengeCLI q scavenge commited "A stick" $(scavengeCLI keys show you -a)
 ```
 
 Hopefully you should see something like:
 
-```
+```json
 {
   "scavenger": "cosmos1m9pxr3nrra2cl07kh8hzdty5x0mejf44997f79",
   "solutionHash": "2f9457a6e8fb202f9e10389a143a383106268c460743dd59d723c0f82d9ba906",
@@ -2634,7 +2633,7 @@ Hopefully you should see something like:
 
 This confirms that your commit was successfully submitted and is awaiting the follow-up reveal. To make that command let's first check the `--help` command using `scavengeCLI tx scavenge revealSolution --help`. This should show the following screen:
 
-```
+```text
 Reveals a solution for scavenge
 
 Usage:
@@ -2669,13 +2668,13 @@ Global Flags:
 
 Since all we need is the solution again let's send and confirm our final message:
 
-```
+```text
 scavengeCLI tx scavenge revealSolution "A stick" --from you
 ```
 
 We can gather the `txhash` and query it again using `scavengeCLI q tx <txhash>` to reveal:
 
-```
+```json
 {
   "height": "2810",
   "txhash": "086B122735C728B2556E04D537E53D6C91C3B46CE0ED0BB6C5001006A4BD2B0F",
@@ -2844,7 +2843,7 @@ We can gather the `txhash` and query it again using `scavengeCLI q tx <txhash>` 
 
 You'll notice that the final event that was submitted was a transfer. This shows the movement of the reward into the account of the user `you`. To confirm `you` now has `69foo` more you can query their account balance as follows:
 
-```
+```text
 scavengeCLI q account $(scavengeCLI keys show you -a)
 ```
 
@@ -2873,13 +2872,13 @@ This should show a healthy account balance of `70foo` since `you` began with `1f
 
 If you'd like to take a look at the completed scavenge you can first query all scavenges with:
 
-```
+```text
 scavengeCLI q scavenge list 
 ```
 
 To see the specific one just use:
 
-```
+```text
 scavengeCLI q scavenge get 2f9457a6e8fb202f9e10389a143a383106268c460743dd59d723c0f82d9ba906
 ```
 
@@ -2901,7 +2900,7 @@ Which should show you that the scavenge has in fact been completed:
 }
 ```
 
-![](https://tutorials.cosmos.network/assets/img/carmen.56751284.jpg)
+# Conclusion
 
 **Thanks for joining me** in building a deterministic state machine and using it as a game. I hope you can see that even such a simple app can be extremely powerful as it contains digital scarcity.
 
@@ -2912,6 +2911,8 @@ If you'd like to keep going, consider trying to expand on the capabilities of th
 
 If you're interested in learning more about the Cosmos SDK check out the rest of our [docs](https://docs.cosmos.network/) or join our [forum](https://forum.cosmos.network/).
 
+# Next Steps
+
 Topics to look out for in future tutorials are:
 
 * [Communication between applications \(IBC\)](https://cosmos.network/ibc/)
@@ -2920,7 +2921,6 @@ Topics to look out for in future tutorials are:
 
 If you have any questions or comments feel free to open an issue on this tutorial's [github](https://github.com/cosmos/sdk-tutorials).
 
+# About the Author
+
 If you'd like to stay in touch with me follow my github at [@okwme](https://github.com/okwme) or twitter at [@billyrennekamp](https://twitter.com/billyrennekamp).
-
-If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [join our community today](https://discord.gg/fszyM7K)!
-
