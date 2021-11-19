@@ -1,7 +1,7 @@
 
 [**The original tutorial can be found in the Cosmos SDK documentation here**](https://tutorials.cosmos.network/nameservice/tutorial/00-intro.html#). 
 
-# Getting Started
+# Introduction
 
 In this tutorial, you will build a functional [Cosmos SDK](https://github.com/cosmos/cosmos-sdk/) application and, in the process, learn the basic concepts and structures of the SDK. The example will showcase how quickly and easily you can **build your own blockchain from scratch** on top of the Cosmos SDK.
 
@@ -16,11 +16,11 @@ All of the final source code for this tutorial project is in this directory \(an
 * Desire to create your own blockchain!
 * The [scaffold tool](https://github.com/cosmos/scaffold) will be used to go through this tutorial. Clone the repo and install with `git clone git@github.com:cosmos/scaffold.git && cd scaffold && make`. Check out the repo for more detailed instructions.
 
-# Tutorial
+# Getting Started
 
 Through the course of this tutorial you will create the following files that make up your application:
 
-```javascript
+```text
 ./nameservice
 ├── Makefile
 ├── Makefile.ledger
@@ -61,7 +61,7 @@ Through the course of this tutorial you will create the following files that mak
 
 Follow along! The first step describes the design of your application.
 
-## Application Goals
+# Application Goals
 
 The goal of the application you are building is to let users buy names and to set a value these names resolve to. The owner of a given name will be the current highest bidder. In this section, you will learn how these simple requirements translate to application design.
 
@@ -81,9 +81,9 @@ Here are the modules you will need for the nameservice application:
 * `supply` : This module holds the total supply of the chain.
 * `nameservice`: This module does not exist yet! It will handle the core logic for the `nameservice` application you are building. It is the main piece of software you have to work on to build your application.
 
-Now, take a look at the two main parts of your application: the state and the message types.
+Now, take a look at the two main parts of your application: the **state** and the message **types**.
 
-## State
+# State
 
 The state represents your application at a given moment. It tells how much token each account possesses, what are the owners and price of each name, and to what value each name resolves to.
 
@@ -91,7 +91,7 @@ The state of tokens and accounts is defined by the `auth` and `bank` modules, wh
 
 In the SDK, everything is stored in one store called the `multistore`. Any number of key/value stores \(called [`KVStores`](https://godoc.org/github.com/cosmos/cosmos-sdk/types#KVStore) in the Cosmos SDK\) can be created in this multistore. For this application, we will use one store to map `name`s to its respective `whois`, a struct that holds a name's value, owner, and price.
 
-## Messages
+# Messages
 
 Messages are contained in transactions. They trigger state transitions. Each module defines a list of messages and how to handle them. Here are the messages you need to implement the desired functionality for your nameservice application:
 
@@ -103,13 +103,13 @@ When a transaction \(included in a block\) reaches a Tendermint node, it is pass
 
 Now that you have decided on how your application functions from a high-level perspective, it is time to start implementing it.
 
-## Start your application
+# Create your application
 
-Get started by creating a new app, we will be using the lvl-1 app which is provided by the scaffold tool.
+To create a new app, we will be using the lvl-1 app which is provided by the scaffold tool.
 
 You can fill in `user` with your Github username and `repo` with the name of the repo you are creating.
 
-```javascript
+```text
 scaffold app lvl-1 [user] [repo] [flags]
 
 cd [repo]
@@ -126,7 +126,7 @@ Links to godocs for each module and package imported:
 
 A couple of the packages here are `tendermint` packages. Tendermint passes transactions from the network to the application through an interface called the [ABCI](https://docs.tendermint.com/master/spec/abci/). If you look at the architecture of the blockchain node you are building, it looks like the following:
 
-```javascript
+```text
 +---------------------+
 |                     |
 |     Application     |
@@ -166,7 +166,7 @@ As you have seen in the [application design](https://tutorials.cosmos.network/na
 
 In order to complete your application, you need to include modules. Go ahead and start building your nameservice module. You will come back to `app.go` later. 
 
-## Types 
+# Types 
 
 First thing we're going to do is create a module in the `/x/` folder with the scaffold tool using the below command:
 
@@ -304,7 +304,7 @@ type BankKeeper interface {
 }
 ```
 
-## The Keeper
+# The Keeper
 
 The main core of a Cosmos SDK module is a piece called the `Keeper`. It is what handles interaction with the store, has references to other keepers for cross-module interactions, and contains most of the core functionality of a module.
 
@@ -475,7 +475,7 @@ func NewKeeper(cdc *codec.Codec, storeKey sdk.StoreKey, coinKeeper types.BankKee
 
 Next, its time to move onto describing how users interact with your new store using `Msgs` and `Handlers`.
 
-## Msgs and Handlers 
+# Msgs and Handlers 
 
 Now that you have the `Keeper` setup, it is time to build the `Msgs` and `Handlers` that actually allow users to buy names and set values for them.
 
@@ -777,8 +777,7 @@ If either `SubtractCoins` or `SendCoins` returns a non-nil error, the handler th
 
 Great, now owners can `BuyName`s! But what if they don't want the name any longer? Your module needs a way for users to delete names! Let us define the `DeleteName` message.
 
-## Delete Name
-### MsgDeleteName 
+## MsgDeleteName 
 
 Now it is time to define the `Msg` for deleting names and add it to the `./x/nameservice/types/msgs.go` file. This code is very similar to `SetName`:
 
@@ -866,9 +865,9 @@ First check to see if the name currently exists in the store. If not, throw an e
 
 Now that you have your `Msgs` and `Handlers` defined it's time to learn about making the data from these transactions available for querying. 
 
-## Queriers 
+# Queriers 
 
-### Query Types 
+**Query Types** 
 
 Start by navigating to `./x/nameservice/types/querier.go` file. This is where you will define your querier types.
 
@@ -896,7 +895,7 @@ func (n QueryResNames) String() string {
 }
 ```
 
-### Querier 
+**Querier**
 
 Now you can navigate to the `./x/nameservice/keeper/querier.go` file. This is the place to define which queries against application state users will be able to make. Your `nameservice` module will expose three queries:
 
@@ -1001,7 +1000,7 @@ Notes on the above code:
 
 Now that you have ways to mutate and view your module state it's time to put the finishing touches on it! Define the variables and types you would like to bring to the top level of the module. 
 
-## Alias 
+# Alias 
 
 Start by navigating to the `./x/nameservice/alias.go` file. The main reason for having this file is to prevent import cycles. You can read more about import cycles in go here: [Golang import cycles](https://stackoverflow.com/questions/28256923/import-cycle-not-allowed)
 
@@ -1054,7 +1053,7 @@ Now you have aliased your needed constants, variables, and types. We can move fo
 
 Register your types in the Amino encoding format next.
 
-## Codec File
+# Codec File
 
 To [register your types with Amino](https://github.com/tendermint/go-amino#registering-types) so that they can be encoded/decoded, there is a bit of code that needs to be placed in `./x/nameservice/types/codec.go`. Any interface you create and any struct that implements an interface needs to be declared in the `RegisterCodec` function. In this module the three `Msg` implementations \(`SetName`, `BuyName` and `DeleteName`\) need to be registered, but your `Whois` query return type does not. In addition, we define a module specific codec for use later.
 
@@ -1202,7 +1201,7 @@ Notes on the above code:
   * Finally there is the specific querier in the module that will be called.
   * In this example the fourth piece is the query. This works because the query parameter is a simple string. To enable more complex query inputs you need to use the second argument of the [`.QueryWithData()`](https://godoc.org/github.com/cosmos/cosmos-sdk/client/context#CLIContext.QueryWithData) function to pass in `data`. For an example of this see the [queriers in the Staking module](https://github.com/cosmos/cosmos-sdk/blob/5af6bd77aa6c0e8facc936947a3365416892e44d/x/staking/keeper/querier.go).
 
-## Transactions
+# Transactions
 
 Now that the query interactions are defined, it is time to move on to transaction generation in `tx.go`:
 
@@ -1584,7 +1583,7 @@ Notes on the above code:
 
 Next its time to augment `nameservice` by implementing the AppModule interface.
 
-## AppModule Interface
+# AppModule Interface
 
 The Cosmos SDK provides a standard interface for modules. This [`AppModule`](https://github.com/cosmos/cosmos-sdk/blob/master/types/module.go) interface requires modules to provide a set of methods used by the `ModuleBasicsManager` to incorporate them into your application. First we will scaffold out the interface and implement **some** of its methods. Then we will incorporate our nameservice module alongside `auth` and `bank` into our app.
 
@@ -1830,7 +1829,7 @@ A few notes about the above code:
 
 Now your module has everything it needs to be incorporated into your Cosmos SDK application.
 
-## Complete App
+# Complete App
 
 Now that your module is ready, it can be incorporated in the `./app.go` file. Let's begin by adding your new nameservice module to the imports:
 
@@ -2241,7 +2240,7 @@ func MakeCodec() *codec.Codec {
 
 Now that you have created an application that includes your module, it's time to build your entry points.
 
-## Entry points 
+# Entrypoints 
 
 In Golang the convention is to place files that compile to a binary in the `./cmd` folder of a project. For your application there are 2 binaries that you want to create:
 
@@ -2641,13 +2640,17 @@ Golang has a few dependency management tools. In this tutorial you will be using
 * You will have to run `go get ./...` to get all the modules the application is using. This command will get the dependency version stated in the `go.mod` file.
 * If you would like to use a specific version of a dependency then you have to run `go get github.com/<github_org>/<repo_name>@<version>`
 
-## Building the app 
+# Building the app 
 
-```bash
-# Install the app into your $GOBIN
+Install the app into your $GOBIN
+
+```text
 make install
+```
 
-# Now you should be able to run the following commands:
+Now you should be able to run the following commands:
+
+```text
 nsd help
 nscli help
 ```
@@ -2658,14 +2661,14 @@ Congratulations, you have finished your nameservice application! Try running and
 
 Now that you tested your CLI queries and transactions, time to test same things in the REST server. Leave the `nsd` that you had running earlier and start by gathering your addresses:
 
-```
+```text
 nscli keys show jack --address
 nscli keys show alice --address
 ```
 
 Now its time to start the `rest-server` in another terminal window:
 
-```
+```text
 nscli rest-server --chain-id namechain --trust-node
 ```
 
@@ -2673,65 +2676,134 @@ Then you can construct and run the following queries:
 
 > NOTE: Be sure to substitute your password and buyer/owner addresses for the ones listed below!
 
-```bash
-# Get the sequence and account numbers for jack to construct the below requests
-$ curl -s http://localhost:1317/auth/accounts/$(nscli keys show jack -a)
-# > {"type":"auth/Account","value":{"address":"cosmos127qa40nmq56hu27ae263zvfk3ey0tkapwk0gq6","coins":[{"denom":"jackCoin","amount":"1000"},{"denom":"nametoken","amount":"1010"}],"public_key":{"type":"tendermint/PubKeySecp256k1","value":"A9YxyEbSWzLr+IdK/PuMUYmYToKYQ3P/pM8SI1Bxx3wu"},"account_number":"0","sequence":"1"}}
+Get the sequence and account numbers for jack to construct the below requests:
 
-# Get the sequence and account numbers for alice to construct the below requests
+```text
+curl -s http://localhost:1317/auth/accounts/$(nscli keys show jack -a)
+```
+
+This should return similar output:
+
+```text
+{"type":"auth/Account","value":{"address":"cosmos127qa40nmq56hu27ae263zvfk3ey0tkapwk0gq6","coins":[{"denom":"jackCoin","amount":"1000"},{"denom":"nametoken","amount":"1010"}],"public_key":{"type":"tendermint/PubKeySecp256k1","value":"A9YxyEbSWzLr+IdK/PuMUYmYToKYQ3P/pM8SI1Bxx3wu"},"account_number":"0","sequence":"1"}}
+```
+
+Get the sequence and account numbers for alice to construct the below requests
+
+```text
 curl -s http://localhost:1317/auth/accounts/$(nscli keys show alice -a)
-# > {"type":"auth/Account","value":{"address":"cosmos1h7ztnf2zkf4558hdxv5kpemdrg3tf94hnpvgsl","coins":[{"denom":"aliceCoin","amount":"1000"},{"denom":"nametoken","amount":"980"}],"public_key":{"type":"tendermint/PubKeySecp256k1","value":"Avc7qwecLHz5qb1EKDuSTLJfVOjBQezk0KSPDNybLONJ"},"account_number":"1","sequence":"2"}}
+```
 
-# Buy another name for jack, first create the raw transaction
-# NOTE: Be sure to specialize this request for your specific environment, also the "buyer" and "from" should be the same address
+This should return similar output:
+
+```text
+{"type":"auth/Account","value":{"address":"cosmos1h7ztnf2zkf4558hdxv5kpemdrg3tf94hnpvgsl","coins":[{"denom":"aliceCoin","amount":"1000"},{"denom":"nametoken","amount":"980"}],"public_key":{"type":"tendermint/PubKeySecp256k1","value":"Avc7qwecLHz5qb1EKDuSTLJfVOjBQezk0KSPDNybLONJ"},"account_number":"1","sequence":"2"}}
+```
+
+Buy another name for jack, first create the raw transaction
+
+> **NOTE**: Be sure to specialize this request for your specific environment, also the "buyer" and "from" should be the same address
+
+```text
 curl -XPOST -s http://localhost:1317/nameservice/names --data-binary '{"base_req":{"from":"'$(nscli keys show jack -a)'","chain_id":"namechain"},"name":"jack1.id","amount":"5nametoken","buyer":"'$(nscli keys show jack -a)'"}' > unsignedTx.json
+```
 
-# Then sign this transaction
-# NOTE: In a real environment the raw transaction should be signed on the client side. Also the sequence needs to be adjusted, depending on what the query of alice's account has shown.
+Then sign this transaction. In a real environment the raw transaction should be signed on the client side. Also the sequence needs to be adjusted, depending on what the query of alice's account has shown.
+
+```text
 nscli tx sign unsignedTx.json --from jack --offline --chain-id namechain --sequence 1 --account-number 0 > signedTx.json
+```
 
-# And finally broadcast the signed transaction
+Finally, broadcast the signed transaction:
+
+```text
 nscli tx broadcast signedTx.json
-# > { "height": "266", "txhash": "C041AF0CE32FBAE5A4DD6545E4B1F2CB786879F75E2D62C79D690DAE163470BC", "logs": [  {   "msg_index": "0",   "success": true,   "log": ""  } ],"gas_wanted":"200000", "gas_used": "41510", "tags": [  {   "key": "action",   "value": "buy_name"  } ]}
+```
 
-# Set the data for that name that jack just bought
-# NOTE: Be sure to specialize this request for your specific environment, also the "owner" and "from" should be the same address
-$ curl -XPUT -s http://localhost:1317/nameservice/names --data-binary '{"base_req":{"from":"'$(nscli keys show jack -a)'","chain_id":"namechain"},"name":"jack1.id","value":"8.8.4.4","owner":"'$(nscli keys show jack -a)'"}' > unsignedTx.json
-# > {"check_tx":{"gasWanted":"200000","gasUsed":"1242"},"deliver_tx":{"log":"Msg 0: ","gasWanted":"200000","gasUsed":"1352","tags":[{"key":"YWN0aW9u","value":"c2V0X25hbWU="}]},"hash":"B4DF0105D57380D60524664A2E818428321A0DCA1B6B2F091FB3BEC54D68FAD7","height":"26"}
+This should return similar output:
 
-# Again we need to sign and broadcast
+```text
+{ "height": "266", "txhash": "C041AF0CE32FBAE5A4DD6545E4B1F2CB786879F75E2D62C79D690DAE163470BC", "logs": [  {   "msg_index": "0",   "success": true,   "log": ""  } ],"gas_wanted":"200000", "gas_used": "41510", "tags": [  {   "key": "action",   "value": "buy_name"  } ]}
+```
+
+Set the data for that name that jack just bought. \
+NOTE: Be sure to specialize this request for your specific environment, also the "owner" and "from" should be the same address
+
+```text
+curl -XPUT -s http://localhost:1317/nameservice/names --data-binary '{"base_req":{"from":"'$(nscli keys show jack -a)'","chain_id":"namechain"},"name":"jack1.id","value":"8.8.4.4","owner":"'$(nscli keys show jack -a)'"}' > unsignedTx.json
+```
+
+This should return similar output:
+
+```text
+{"check_tx":{"gasWanted":"200000","gasUsed":"1242"},"deliver_tx":{"log":"Msg 0: ","gasWanted":"200000","gasUsed":"1352","tags":[{"key":"YWN0aW9u","value":"c2V0X25hbWU="}]},"hash":"B4DF0105D57380D60524664A2E818428321A0DCA1B6B2F091FB3BEC54D68FAD7","height":"26"}
+```
+
+Again, we need to sign and broadcast:
+
+```text
 nscli tx sign unsignedTx.json --from jack --offline --chain-id namechain --sequence 2 --account-number 0 > signedTx.json
 nscli tx broadcast signedTx.json
+```
 
-# Query the value for the name jack just set
-$ curl -s http://localhost:1317/nameservice/names/jack1.id
-# 8.8.4.4
+Query the value for the name jack just set (should be 8.8.4.4):
 
-# Query whois for the name jack just bought
-$ curl -s http://localhost:1317/nameservice/names/jack1.id/whois
-# > {"value":"8.8.8.8","owner":"cosmos127qa40nmq56hu27ae263zvfk3ey0tkapwk0gq6","price":[{"denom":"STAKE","amount":"10"}]}
+```text
+curl -s http://localhost:1317/nameservice/names/jack1.id
+```
 
-# Alice buys name from jack
-$ curl -XPOST -s http://localhost:1317/nameservice/names --data-binary '{"base_req":{"from":"'$(nscli keys show alice -a)'","chain_id":"namechain"},"name":"jack1.id","amount":"10nametoken","buyer":"'$(nscli keys show alice -a)'"}' > unsignedTx.json
+Query whois for the name jack just bought:
 
-# Again we need to sign and broadcast
-# NOTE: The account number has changed to 1 and the sequence is now 2, according to the query of alice's account
+```
+curl -s http://localhost:1317/nameservice/names/jack1.id/whois
+```
+
+This should return similar output:
+
+```text
+{"value":"8.8.8.8","owner":"cosmos127qa40nmq56hu27ae263zvfk3ey0tkapwk0gq6","price":[{"denom":"STAKE","amount":"10"}]}
+```
+
+Alice buys a name from jack:
+
+```text
+curl -XPOST -s http://localhost:1317/nameservice/names --data-binary '{"base_req":{"from":"'$(nscli keys show alice -a)'","chain_id":"namechain"},"name":"jack1.id","amount":"10nametoken","buyer":"'$(nscli keys show alice -a)'"}' > unsignedTx.json
+```
+
+Again, we need to sign and broadcast. The account number has changed to 1 and the sequence is now 2, according to the query of alice's account:
+
+```text
 nscli tx sign unsignedTx.json --from alice --offline --chain-id namechain --sequence 2 --account-number 1 > signedTx.json
 nscli tx broadcast signedTx.json
-# > { "height": "1515", "txhash": "C9DCC423E10E7E5E40A549057A4AA060DA6D6A885A394F6ED5C0E40AEE984A77", "logs": [  {   "msg_index": "0",   "success": true,   "log": ""  } ],"gas_wanted": "200000", "gas_used": "42375", "tags": [  {   "key": "action",   "value": "buy_name"  } ]}
+```
 
-# Now, Alice no longer needs the name she bought from jack and hence deletes it
-# NOTE: Only the owner can delete the name. Since she is one, she can delete the name she bought from jack
-$ curl -XDELETE -s http://localhost:1317/nameservice/names --data-binary '{"base_req":{"from":"'$(nscli keys show alice -a)'","chain_id":"namechain"},"name":"jack1.id","owner":"'$(nscli keys show alice -a)'"}' > unsignedTx.json
+This should return similar output:
 
-# And a final time sign and broadcast
-# NOTE: The account number is still 1, but the sequence is changed to 3, according to the query of alice's account
+```text
+{ "height": "1515", "txhash": "C9DCC423E10E7E5E40A549057A4AA060DA6D6A885A394F6ED5C0E40AEE984A77", "logs": [  {   "msg_index": "0",   "success": true,   "log": ""  } ],"gas_wanted": "200000", "gas_used": "42375", "tags": [  {   "key": "action",   "value": "buy_name"  } ]}
+```
+
+Now, Alice no longer needs the name she bought from jack and hence deletes it. Only the owner can delete the name. Since she is one, she can delete the name she bought from jack:
+
+```text
+curl -XDELETE -s http://localhost:1317/nameservice/names --data-binary '{"base_req":{"from":"'$(nscli keys show alice -a)'","chain_id":"namechain"},"name":"jack1.id","owner":"'$(nscli keys show alice -a)'"}' > unsignedTx.json
+```
+
+And a final time sign and broadcast. The account number is still 1, but the sequence is changed to 3, according to the query of alice's account:
+
+```text
 nscli tx sign unsignedTx.json --from alice --offline --chain-id namechain --sequence 3 --account-number 1 > signedTx.json
 nscli tx broadcast signedTx.json
+```
 
-# Query whois for the name Alice just deleted
-$ curl -s http://localhost:1317/nameservice/names/jack1.id/whois
-# > {"value":"","owner":"","price":[{"denom":"STAKE","amount":"1"}]}
+Query whois for the name Alice just deleted:
+
+```text
+curl -s http://localhost:1317/nameservice/names/jack1.id/whois
+```
+
+```text
+{"value":"","owner":"","price":[{"denom":"STAKE","amount":"1"}]}
 ```
 
 ## Request Schemas
@@ -2784,5 +2856,7 @@ $ curl -s http://localhost:1317/nameservice/names/jack1.id/whois
 
 ```
 
-If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [join our community today](https://discord.gg/fszyM7K)!
+# Conclusion
+
+Congratulations, you now have a working nameservice app running on Cosmos!
 
