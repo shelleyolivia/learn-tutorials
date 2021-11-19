@@ -1,15 +1,12 @@
-# A beginner's guide to Blockchain and Polygon
+# Introduction
 
 Before we jump into a discussion of explaining blockchain and Polygon stuff, let's get ourselves a pizza first. Before the pizza is delivered to your doorstep, I bet, you will learn all about the topic.
 
-![](../assets/explaining-polygon-1-pizza.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/explaining-polygon-1-pizza.png)
 
+To understand **Polygon (Matic)** and the problem it solves, let’s first have a quick overview on blockchain by ordering our favorite pizza, and learn what are **transactions, validators, block, consensus, proof of work, proof of stake**, etc.
 
-## Introduction
-
-Before understanding the **Polygon Matic** and the problem it solves, let’s first have a quick overview on blockchain by ordering our favorite pizza, and learn what are **transactions, validators, block, consensus, proof of work, proof of stake**, etc.
-
-### Visiting bizza.com - STATE and TRANSACTION
+## Visiting bizza.com - STATE and TRANSACTION
 
 Let's visit a blockchain-based pizza site (**bizza**) and select a few pizzas of our choice. There are lots of pizzas to choose from. Currently, you have 0 pizzas in your cart. This is your **initial state**.
 
@@ -19,13 +16,13 @@ Once you select pizza in your cart, you need to submit a **transaction** to conf
 
 **By submitting a transaction, you are trying to change the state.**
 
-### Processing your order - VALIDATOR or NODE
+## Processing your order - VALIDATOR or NODE
 
 You are not the only one to order a pizza. People from all over your neighborhood might be ordering their own pizzas, so there will be lots of transactions.
 
 But who will ensure that these transactions are valid i.e. customers have ordered a valid pizza, their address is genuine and they have enough money to buy the pizza? These tasks are done by **validators** or **nodes**. They do it for an extra service fee that you have included in your transaction. These are often referred to as **rewards**.
 
-### Order accepted - CONSENSUS and PoW vs POS
+## Order accepted - CONSENSUS and PoW vs POS
 
 Everyone wants to be a winner and earn the rewards. So the validators compete with each other to validate a transaction and change the state of the blockchain.
 
@@ -39,7 +36,7 @@ Competing blocks from different validators may have overlapping transactions. If
 
 Each block also contains a content identifier of the previous block, known as a hash. Thus a transaction cannot alter the content of previous blocks, because this would change their hash, which would also need to change the hash in every prior block - but this cannot occur because the validators maintain the original hashes to be the truth, shared across the network. This concept is what makes blockchains immutable, inasmuch as once a transaction is confirmed it becomes part of the permanent history of the blockchain.
 
-### Proof of Work vs Proof of Stake
+# Proof of Work vs Proof of Stake
 
 In the **Proof of Work** mechanism, nodes solve a cryptographic puzzle when seeking to promote a block of transactions. Whoever solves the puzzle first will get to add their validated block to the chain and will be rewarded with the current block reward.
 
@@ -57,15 +54,15 @@ Is it because of the traffic on the road or did the pizza oven just break? No no
 
 These are called **scalability issues** of the **Ethereum** network.
 
-![](../assets/explaining-polygon-2-chart.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/explaining-polygon-2-chart.png)
 
-## Who can process my pizza order quickly? - MATIC
+## Who can process my pizza order quickly?
 
 **Ethereum** is one of the most popular and secure blockchain networks, which is capable of running multi-purpose arbitrary transactions, which is defined by **smart contracts** (business logic). **But Ethereum is not scalable.**
 
 Broadly speaking, there are two ways to scale a blockchain: **Layer 1 scaling** and **Layer 2 scaling**. In layer 1 scaling, changes or improvements are made by upgrading the main blockchain protocol. With Layer 2 scaling, we try to bypass scalability obstacles without altering the main protocol. Polygon is an example of a Layer 2 scaling solution because it incorporates several different technologies to achieve a higher number of transactions per second, all of which are implemented separately from the main Ethereum or Matic networks.
 
-![](../assets/explaining-polygon-3-scaling.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/explaining-polygon-3-scaling.png)
 
 Consider the main blockchain as a congested road, where only 20 vehicles at a time can be moving. Obviously, this would lead to long traffic jams, whenever more vehicles approach and try to use the road at the same time.
 
@@ -78,7 +75,7 @@ There are two obvious solutions to overcome this issue. Either we can broaden th
 * [ZK (zero-knowledge) Rollups](https://finematics.com/rollups-explained/)
 * [Optimistic rollups](https://finematics.com/rollups-explained/) 
 
-## What is MATIC?
+# What is MATIC?
 
 In 2017, **Matic** was created as a layer 2 scaling solution for the Ethereum network. Instead of building a new blockchain from scratch for faster transactions and low fees, Matic exists to scale the Ethereum network itself. New projects can easily connect to the Matic network, and still enjoy the security and decentralization of Ethereum.
 
@@ -106,7 +103,7 @@ This layer is responsible for submitting regular transaction reports on the main
 **Staking and Smart contract layer**
 The smart contract on the main chain is responsible for maintaining checkpoints published by the PoS layer. It also involves staking from the various node to participate as a PoS layer validator. Users can stake their ETH to the smart contract and can participate in PoS layer validation.
 
-![](../assets/explaining-polygon-4-matic-plasma-pos.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/explaining-polygon-4-matic-plasma-pos.png)
 
 ## Rebranding Matic into Polygon
 
@@ -120,7 +117,7 @@ Polygon is often called **Ethereum's Internet of Blockchains**. This is because 
 
 > A blockchain is considered Ethereum compatible if it can run smart contracts written for Ethereum, commonly known as EVM compatibility.
 
-![](../assets/explaining-polygon-5-polygon-internet.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/explaining-polygon-5-polygon-internet.png)
 
 ## Plans of Polygon
 
@@ -151,16 +148,13 @@ This article explained some of Polygon's technology and the difference between P
 There is some good news :) Our blockchain-based pizza store has read this amazing explanation on Polygon and decided to scale their system. Their delivery boy must be waiting outside with your favorite pizza.
 
 # About the author
+
 This tutorial was created by [Raj Ranjan](https://www.linkedin.com/in/iamrajranjan), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/rranjan01234/) and [GitHub](https://github.com/rajranjan0608)
 
 # References
 
 [Ethereum Layer 2 Scaling Explained](https://finematics.com/ethereum-layer-2-scaling-explained/) by Finematics
-
 [Polygon's POS and Plasma](https://docs.polygon.technology/docs/develop/ethereum-matic/getting-started) by Polygon
-
 [Rollups – The Ultimate Ethereum Scaling Solution](https://finematics.com/rollups-explained/) by Finematics
-
 [Understanding State channels](https://education.district0x.io/general-topics/understanding-ethereum/basics-state-channels/) by District0x
-
 [Understanding Plasma chains](https://education.district0x.io/general-topics/understanding-ethereum/understanding-plasma/) by District0x
