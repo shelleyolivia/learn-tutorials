@@ -78,7 +78,7 @@ Replace `Options string` with `Options []string` in `createPollRequest` struct.
 
 A user can also interact with our application through a command line interface.
 
-```
+```text
 votercli tx voter create-poll "Text editors" "Emacs" "Vim" --from user1
 ```
 
@@ -88,7 +88,7 @@ The only modification we need to make is to change a line that reads arguments f
 
 Now that we have made all the necessary changes to our app, let's take a look at the client-side application.
 
-```javascript
+```text
 starport serve
 ```
 
@@ -106,7 +106,7 @@ Since we don't need the default form component replace `<type-list />` inside of
 
 **`frontend/src/components/PollForm.vue`**
 
-```javascript
+```jsx
 <template>
     <div>
       <app-input placeholder="Title" v-model="title" />
@@ -146,6 +146,9 @@ export default {
 };
 </script>      
 ```
+
+The `add()` function:
+
 ```javascript
 <script>
   add() { 
@@ -186,6 +189,7 @@ Refresh the page, sign in with a password and create a new poll. It takes a coup
   ] 
 }
 ```
+
 # Adding votes
 
 A vote type contains poll ID and a value \(string representation of the selected option\).
@@ -200,7 +204,7 @@ Add `<poll-list />` into the `frontend/src/view/Index.vue` file after the poll f
 
 **`frontend/src/components/PollList.vue`**
 
-```javascript
+```jsx
 <template>
   <div>
     <div v-for="poll in polls">
@@ -275,7 +279,9 @@ We can think of our data storage as a lexicographically ordered key value store.
 
 Both `poll-` and `vote-` are prefixes. They are added to keys for ease of filtering. By convention, prefixes are defined in `x/voter/key.go`.
 
-Whenever a user casts a vote, a new "create vote" message is handled by a handler and is passed to a keeper. Keeper takes a `vote-` prefix, adds a UUID \(unique to every message\) and uses this string as a key. `x/voter/keeper/vote.go`:
+Whenever a user casts a vote, a new "create vote" message is handled by a handler and is passed to a keeper. Keeper takes a `vote-` prefix, adds a UUID \(unique to every message\) and uses this string as a key.
+
+**`x/voter/keeper/vote.go`**
 
 ```go
 key := []byte(types.VotePrefix + vote.ID)
@@ -309,4 +315,6 @@ Add the code above before `k.CreatePoll(ctx, poll)`. This way, if a user does no
 
 Now, restart the app and try creating several polls to see how this affects your token balance.
 
-If you had any difficulties following this tutorial or simply want to discuss Cosmos tech with us you can [join our community today](https://discord.gg/fszyM7K)!
+# Conclusion
+
+Congratulations, you now have a working poll app running on Cosmos!
