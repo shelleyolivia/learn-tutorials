@@ -157,7 +157,7 @@ What does those two commands do?
 
 As soon as you run `yarn deploy-local` you will see Docker starting to scan the Ethereum mainnet for punks!
 
-![terminal](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/mapping-01.gif)
+![terminal](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/mapping-01.gif)
 
 ## ✅ Make sure it works
 

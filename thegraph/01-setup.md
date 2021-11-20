@@ -19,7 +19,7 @@ We'll need to connect to the Ethereum mainnet to be able to listen to new events
 
 To get an Alchemy API key, [create an account](https://www.alchemy.com/), then create a new application. From that application dashboard, click on **View Details** and then on **View Key**. Copy the HTTP endpoint URL.
 
-![Alchemy](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/alchemy-view-api-key.png)
+![Alchemy](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/alchemy-view-api-key.png)
 
 ## 🎥 Video Walkthrough
 

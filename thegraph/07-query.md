@@ -6,7 +6,7 @@ We can follow the progression of the sync looking at the logged output by the ru
 
 > Before, running the query you'll need to check you have a [metamask](https://metamask.io/) extension installed with your browser and you're connected to the mainnet of Ethereum. Why? We'll decorate the date returned by the GraphQL query with data coming from the [CryptoPunks Data](https://etherscan.io/address/0x16F5A35647D6F03D5D3da7b35409D65ba03aF3B2#readContract) to be able to render the images and other punk metadata.
 
-Our Graph node come up with a GraphQL endpoint, available at [http://localhost:8000/subgraphs/name/punks](http://localhost:8000/subgraphs/name/punks/graphql). Open this in another tab and you will see a GraphiQL UI. Consider this a sandboz in which to experiment with queries. Open the right sidebar to explore your schema.
+Our Graph node come up with a GraphQL endpoint, available at [http://localhost:8000/subgraphs/name/punks](http://localhost:8000/subgraphs/name/punks/graphql). Open this in another tab and you will see a GraphQL UI. Consider this a sandboz in which to experiment with queries. Open the right sidebar to explore your schema.
 
 ## 👨‍💻Your turn! Write the GraphQL query
 
@@ -18,7 +18,7 @@ Some hints to help you:
 - You will want `id`, `index`, `value` and `date`
 - Then use `first`, `orderBy` and `orderDirection` to get 10 of highest value
 
-Remember to use **GraphiQL IDE** at [http://localhost:8000/subgraphs/name/punks](http://localhost:8000/subgraphs/name/punks) to play around
+Remember to use **GraphQL IDE** at [http://localhost:8000/subgraphs/name/punks](http://localhost:8000/subgraphs/name/punks) to play around
 
 ## 👉 The solution
 
@@ -43,7 +43,7 @@ query {
 
 Now, it's time to enjoy the result of your work! Click on the button on the right, and say hello to the Punks!
 
-![punks](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/query-01.png)
+![punks](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/query-01.png)
 
 ## 🏁 Conclusion
 

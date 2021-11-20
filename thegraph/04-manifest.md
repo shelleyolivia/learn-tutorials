@@ -4,13 +4,13 @@ Like an orchestra, your subgraph is made up of a bunch of pieces that need to pl
 
 If you open the repository in a code editor like Visual Studio Code, look for the folder called `subgraphs` and its child `punks`. It should look like this below. The manifest is the file called `subgraph.yaml`.
 
-![SG folder](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/manifest-01.png)
+![SG folder](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/manifest-01.png)
 
 ## 🔎 Inspecting the scaffolded file
 
 Open the `subgraph.yaml` file and notice that it's already been populated using the information we provided but also with A LOT of things we didn't specify.
 
-![Manifest file](https://raw.githubusercontent.com/figment-networks/datahub-learn/master/figment-learn/new-pathways/assets/the-graph/manifest-02.png)
+![Manifest file](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/manifest-02.png)
 
 Under the `mappings` key we find `entities` and `eventHandlers` - the next steps of this tutorial will be dedicated to understanding them a bit more in depth. For now just notice the information that's below them. Remember the [code](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB#code) from the CryptoPunk contract on Etherscan? They correspond to the Events emitted! The `eventHandlers` even have the right signatures already. That's promising.
 
