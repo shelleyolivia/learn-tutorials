@@ -6,7 +6,7 @@ This is analogous to the process of defining the Models in an MVC framework.
 
 Entities will be defined in the `schema.graphql` file.
 
-![Entities](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/entity-01.png)
+![Entities](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/entity-01.png)
 
 ## 🧑🏼‍💻 Your turn! Define the Punk and Account entities
 
@@ -91,7 +91,7 @@ yarn codegen
 
 What does `yarn codegen` do? This command create some boilerplate code under the `generated` folder. This boilerplate code define **typescript** classes for each `entities` (have a look at `generated/schema.ts`). We will use this code in the next step to define the mappings between our entities and the smart-contract events.
 
-![terminal](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/entity-02.gif)
+![terminal](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/entity-02.gif)
 
 ## ✅ Make sure it works
 
