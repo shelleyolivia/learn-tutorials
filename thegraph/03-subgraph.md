@@ -2,7 +2,7 @@
 
 A subgraph defines which data The Graph will index from Ethereum, and how it will store it. It's made up of 3 main pieces: a manifest, a schema of entities and mappings.
 
-![Anatomy](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/subgraph-01.png)
+![Anatomy](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/subgraph-01.png)
 
 In this Pathway we will go over each of them one by one, understand what they do and how they work.
 
@@ -12,7 +12,7 @@ In practice, a subgraph indexes events emitted by a smart contract. So the first
 
 For the purpose of this tutorial we have decided to pick a fun and popular smart contract: the Crypto Punk ETH-20 contract.
 
-![punk-variety-2x](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/subgraph-02.png)
+![punk-variety-2x](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/subgraph-02.png)
 
 You can view it on Etherscan [here](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB) and if you click on the "Contract" tab you can also have a look at [its Solidity code](https://etherscan.io/address/0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB). The contract's address is `0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB`.
 
@@ -81,7 +81,7 @@ That's a mouthful! Let's look at it line by line.
 
 Once you type Enter, you will be prompted to confirm the information: you can just accept the five suggested inputs. The output should look like:
 
-![terminal](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/subgraph-03.gif)
+![terminal](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/subgraph-03.gif)
 
 You don't need to run the next steps for now!
 
