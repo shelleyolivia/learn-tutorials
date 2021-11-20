@@ -43,7 +43,7 @@ query {
 
 Now, it's time to enjoy the result of your work! Click on the button on the right, and say hello to the Punks!
 
-![punks](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/alchemy-view-api-key.png/query-01.png)
+![punks](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/the-graph/query-01.png)
 
 ## 🏁 Conclusion
 
