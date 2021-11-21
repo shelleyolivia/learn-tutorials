@@ -85,9 +85,9 @@ The flow of a program using this structure looks like this:
 2. The entrypoint forwards the arguments to the processor
 3. The processor asks `instruction.rs` to decode the `instruction_data` argument from the entrypoint function.
 4. Using the decoded data, the processor will now decide which processing function to use to process the request.
-5. The processor may use state.rs to encode state into or decode the state of an account which has been passed into the entrypoint.
+5. The processor may use `state.rs` to encode state into or decode the state of an account which has been passed into the entrypoint.
 
-> The code in `instruction.rs` defines the API of the program.
+The code in `instruction.rs` defines the API of the program.
 
 Now let us create the `entrypoint.rs`, `instruction.rs`, `processor.rs`, `state.rs`, and `error.rs` files in the `sol-stream-program/src` directory. We can register the newly created files in `lib.rs` by updating it to include the modules:
 
@@ -162,8 +162,7 @@ pub enum StreamInstruction {
 }
 ```
 
-Note that `CreateStream` and `WithdrawFromStream` would require the input from initiator, let us create structs for them in `state.rs`.
-In `state.rs` add the following code:
+Note that `CreateStream` and `WithdrawFromStream` would require the some input from initiator, let us create structs for them in `state.rs`. In `state.rs` add the following code:
 
 ```rs
 use borsh::{BorshDeserialize, BorshSerialize};
@@ -196,7 +195,7 @@ For `WithdrawFromStream` we will want the `WithdrawInput` struct:
 
 - `amount`: The amount of Lamports the receiver wants to withdraw.
 
-Now let us import these structs into instruction.rs and use them, add this line at the very top of the file:
+Now let us import these structs into `instruction.rs` and use them, add this line at the very top of the file:
 
 ```rs
 use crate::state::{CreateStreamInput, WithdrawInput};
@@ -389,7 +388,7 @@ For reference, you can check the file [HERE](https://github.com/SushantChandla/s
 
 ## Writing Instruction logic
 
-Now we can open the `processor.rs` file again and, complete `process_create_stream`, `process_withdraw` and, `process_close` function.
+Now we can open the `processor.rs` file again and complete `process_create_stream`, `process_withdraw` and `process_close` function.
 
 **process_create_stream**
 We will parse the public key for admin. I have used my pubkey here as an example, but you can use your public key. We are using the `from_str` method. In case of an error, we return `PubKeyParseError` which we defined in `errors.rs`.
@@ -429,7 +428,7 @@ use crate::{
 
 Now, we can make a transaction of 0.03 lamports (an arbitrary amount) and send those to the admin account.
 
-> Note: Transactions are atomic, if something fails the whole transaction will be reverted.
+> Note: Transactions are atomic, if program fails the whole transaction will be reverted.
 
 Now, we can check the given instruction data.
 When we check the end time, it shouldn't be less than the start time and the start time shouldn't be less than the current time. We can get the current `unix_timestamp` by using `Clock::get()?.unix_timestamp`. We will return an `InvalidStartOrEndTime` error in case of failure.
@@ -683,7 +682,7 @@ We will get the program id as output.
 Program Id: DcGPfiGbubEKh1EnQ86EdMvitjhrUo8fGSgvqtFG4A9t
 ```
 
-We can verify this by checking on the [Solana Explorer for Devnet.](https://explorer.solana.com/?cluster=devnet). We can search for our program id to see any related transactions, including the deployment.
+We can verify the deployment by checking on the [Solana Explorer for Devnet.](https://explorer.solana.com/?cluster=devnet). We can search for our program id to see any related transactions, including the deployment.
 
 # Backend
 
@@ -787,10 +786,8 @@ It will compile and run the program then we can open `http://127.0.0.1:8000/` on
 
 Now let's see what code made this happen. In the first line, we have imported `routes` macro and `get` from the rocket. We will use `#[rocket::main]` on our function which will transform our function into a regular main function that internally initializes a Rocket-specific tokio runtime and runs the attributed async fn inside of it.
 
-Then inside the function, we will get default cors in a variable `cors`. This line of code attaches our `cors` and will start a server with a base `"/"` and it will have routes that will be passed in the `routes!` macro. As you can see we have two routes and the function for them are called `index` and `route_with_pubkey`. I have passed them in the macro. Then we await this call and return `Ok(())` so it compiles.
-Then inside the function, we will get default cors (cors stands for Cross Object Resource Sharing) in a variable `cors`. This line of code attaches our `cors` and will start a server with a base `"/"` and it will have routes that will be passed in the `routes!` macro. As you can see we have two routes and the functions for them are called `index` and `route_with_pubkey`. I have passed them in the macro. Then we await this call and return `Ok(())` so that it compiles.
 
-Now let's see `index` and `route_with_pubkey` functions. We have made use of `get` macro here. For the `index` function, we will return a String `Hello world`. In the case of `route_with_pubkey` we will get the pubkey from the URL and return `Hello <pubkey>`.
+Then inside the function, we will get default cors (cors stands for Cross Object Resource Sharing) in a variable `cors`. This line of code attaches our `cors` and will start a server with a base `"/"` and it will have routes that will be passed in the `routes!` macro. As you can see we have two routes and the functions for them are called `index` and `route_with_pubkey`. I have passed them in the macro. Then we await this call and return `Ok(())` so that it compiles.
 
 Now take a look at the `index` and `route_with_pubkey` functions. We have made use of the `get` macro here. For the `index` function, we will return a String "Hello world". In the case of `route_with_pubkey` we will get the pubkey from the URL and return "Hello <pubkey>".
 
@@ -1350,44 +1347,42 @@ export const createStream = ({
 In the code above we have created a pubkey which we will use to create a Program Drived account(PDA). We have used the function `serialize` from the borsh package to get the Uint8Array of the input data.
 
 ```js
-let data_to_send = new Uint8Array([1, ...data]);
-let rent = await connection.getMinimumBalanceForRentExemption(96);
+      let data_to_send = new Uint8Array([1, ...data]);
+      let rent = await connection.getMinimumBalanceForRentExemption(96);
 ```
 
 We have to append `1` in our Uint8Array as we are using the first character as the tag. Please refer to the unpack function in `instructions.rs`.
 
 We can then get the minimum lamports required to make the account by using the `getMinimumBalanceForRentExemption` function on the connection variable.
 
-> Note: I checked the size of the data ( the value 96) by a test [HERE](https://github.com/SushantChandla/sol-stream-program/blob/d0d537889b155d16fa3c0879e61e4f68c3d47f07/src/state.rs#L42).
-
 ```js
-const createProgramAccount = SystemProgram.createAccountWithSeed({
-  fromPubkey: wallet.publicKey,
-  basePubkey: wallet.publicKey,
-  seed: SEED,
-  newAccountPubkey: newAccount,
-  lamports: (endTime - startTime) * amountSpeed + 30000000 + rent,
-  space: 96,
-  programId: programAccount,
-});
+      const createProgramAccount = SystemProgram.createAccountWithSeed({
+        fromPubkey: wallet.publicKey,
+        basePubkey: wallet.publicKey,
+        seed: SEED,
+        newAccountPubkey: newAccount,
+        lamports: ((endTime - startTime) * amountSpeed) + 30000000 + rent,
+        space: 96,
+        programId: programAccount,
+      });
 
-const instructionTOOurProgram = new TransactionInstruction({
-  keys: [
-    { pubkey: newAccount, isSigner: false, isWritable: true },
-    { pubkey: wallet.publicKey, isSigner: true },
-    { pubkey: receiverAddress, isSigner: false },
-    { pubkey: adminAddress, isSigner: false, isWritable: true },
-  ],
-  programId: programAccount,
-  data: data_to_send,
-});
+      const instructionTOOurProgram = new TransactionInstruction({
+        keys: [
+          { pubkey: newAccount, isSigner: false, isWritable: true },
+          { pubkey: wallet.publicKey, isSigner: true, },
+          { pubkey: receiverAddress, isSigner: false, },
+          { pubkey: adminAddress, isSigner: false, isWritable: true }
+        ],
+        programId: programAccount,
+        data: data_to_send
+      });
 ```
 
 In the above code, We have created 2 instruction:
 
 1. To the system program to create a Program drived account with the space of `96` and lamports which are equal to `0.03(admin cut)+solana rent+total amount user want to send`. We are passing these arguments in the `SystemProgram.createAccountWithSeed` function.
 
-2. We have created an instruction to our Program we have passed the account that will be used which corresponds to `accounts: &[AccountInfo],` in our program in `keys`, `programId` is the address we got when we deployed our program and `data` is equal to `data_to_send` variable.
+2. This instruction contains an array of public keys associated with the transaction, specifically the `newAccount` (the PDA being created), the signer's public key coming from their connected wallet, and also the receiver and admin addresses. The `programId` is the deployed program address and `data` is the instruction data which includes the tag to specify which instruction to execute (CreateStream, WithdrawFromStream or CloseStream).
 
 Then we create a transaction object we have used the `setPayerAndBlockhashTransaction` function which we will add later.
 Once we have the transaction object we have to send the transaction with the help of the wallet. We have then dispatched the result.
@@ -1432,6 +1427,8 @@ async function setPayerAndBlockhashTransaction(instructions, wallet) {
 
 You can check out the `CreateStream` function [HERE](https://github.com/SushantChandla/sol-stream-frontend/blob/418bcdcd434d6b7e1dc3cd9e9d323066c54a6f0b/src/actions/index.js#L102), for reference.
 
+> Note: I checked the size of the data (the value 96) by a test [HERE](https://github.com/SushantChandla/sol-stream-program/blob/d0d537889b155d16fa3c0879e61e4f68c3d47f07/src/state.rs#L42).
+
 ## Withdraw
 
 Now let's write the `withdraw` function for this one also we have created the `WithdrawInput` class with schema:
@@ -1458,7 +1455,7 @@ class WithdrawInput {
 This time we aren't creating a PDA so we only have one instruction in this transaction which is to our program.
 Note that the `streamId` is the address to the `PDA` account.
 
-Here in `data_to_send`, we have to append 2 as you can see in our program's `src/instrction.rs` file we have `tag` 2 for withdraw.
+Here in `data_to_send`, we have to specify 2 at the beginning of the array. As you recall, in our program's `instruction.rs` file we have set the tag 2 for the WithdrawFromStream instruction.
 
 ```js
 export const withdraw = (streamId, amountToWithdraw, wallet) => {
