@@ -781,9 +781,9 @@ cargo run
 
 It will compile and run the program then we can open `http://127.0.0.1:8000/` on our browser to see:
 
-![browser image](/assets/solana-streaming-protocol-1.png)
+![browser image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image-solana-streaming-protocol-1.png)
 
-![browser image](/assets/solana-streaming-protocol-2.png)
+![browser image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image-solana-streaming-protocol-2.png)
 
 Now let's see what code made this happen. In the first line, we have imported `routes` macro and `get` from the rocket. We will use `#[rocket::main]` on our function which will transform our function into a regular main function that internally initializes a Rocket-specific tokio runtime and runs the attributed async fn inside of it.
 
@@ -857,7 +857,7 @@ DATABASE_URL=postgres://username:password@localhost/sol_stream_indexer > .env
 > Note that you have to change the `username` and `password` here.
 
 We are going to structure our backend in the following:
-![backend-files](/assets/solana-streaming-protocol-3.png)
+![backend-files](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image-solana-streaming-protocol-3.png)
 
 In the `src` directory:
 
