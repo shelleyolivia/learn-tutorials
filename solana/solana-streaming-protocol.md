@@ -1,38 +1,43 @@
 # Introduction
-Real-time streaming can be loosely translated as a constant flow of assets from one wallet to another every second. It makes transactions much faster and also enables a trust-less environment. Subscription services or freelancers to maintain a trustless environment with their customers can use this type of transaction. There are numerous other applications you can check out the [SuperFluid](https://www.superfluid.finance/home) protocol build on the Ethereum network.
+
+Real-time streaming can be understood as a constant flow of assets from one wallet to another over a period of time. It simplifies transactions and also enables a trustless environment. Subscription services or freelancers can use streaming transactions to maintain a trustless environment with their customers.
+There are many uses of this concept. You can check out the [SuperFluid](https://www.superfluid.finance/home) protocol built on the Ethereum network as an example. This tutorial is comprised of three parts. First, we will write a Solana program to handle the streaming, then we will create a backend for our protocol. Finally, we will connect it all with our front-end.
 
 # Prerequisites
 
 A good understanding of the [Rust](https://www.rust-lang.org/) programming language and [React](https://reactjs.org/) and [Redux](https://redux.js.org/) is required to grasp the contents of this tutorial.
 
 # Requirements
+
 The following software is required to complete this tutorial:
+
 - Git, install it from [HERE](https://git-scm.com/downloads).
 - Solana CLI, install it from [HERE](https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool).
-- Solana wallet 
+- Solana wallet
 - The Rust toolchain, install it from [HERE](https://www.rust-lang.org/tools/install).
 - Node.js (v14.18.1+), install it from [HERE](https://nodejs.org/en/download/).
 - Postgress, install it from [HERE](https://www.postgresql.org/)
 
-# Building Sol Streaming Protocol
 We will write the tutorial in 3 parts. First, we will write our Solana program then we will create a backend for our protocol, and in the end, we will connect it all with our front-end.
 
 # Solana Program
-Before coding, let us discuss what a streaming platform means and what instructions we need in our Solana program.
-A Streaming protocol creates an escrow account that will keep track of the balance of both parties with the help of time. Initially, all the funds in the escrow account will be owned by the sender. With time, ownership of some funds will be transferred to the receiver. That means the receiver can withdraw those funds. 
+
+Before getting into the coding, let us briefly review what a **streaming protocol** means and what instructions we need to create in our Solana program.
+A **streaming protocol** creates an escrow account that will keep track of the balance of both parties with the help of time. Initially, all the funds in the escrow account will be owned by the sender. As time passes, ownership of some funds will be transferred to the receiver which means the receiver can then withdraw those funds.
 
 We will need 3 instructions in our Solana program
+
 - **To Create a Stream**: This can be used the the sender and they will be funding our escrow account, give information about the receiver and define start and end time for the Stream.
 - **Withdraw funds**: This can be used by the receiver to withdraw the funds they have earned.
 - **Cancel Stream**: This may be used by the sender to cancel a stream. This instruction will distribute the owned funds in the escrow account to senders and receiver accounts.
 
-Let's now create our program open terminal in your projects folder and run the following command to create a rust project using the library template.
+Let's get started with creating our program! Open a terminal in your projects folder and run the following command to create a new Rust project using the library template:
 
 ```text
-cargo new --lib sol-stream-program 
+cargo new --lib sol-stream-program
 ```
 
-We will be now able to see the `sol-stream-program` folder in our projects directory so we can open it open our code editor, I am using VS-Code for this tutorial you can use code editor's of our choice and in `Cargo.toml`, we can add the required dependencies.
+We will be now able to see the `sol-stream-program` folder in our projects directory so we can open it open our code editor. I am using Visual Studio Code (commonly called VSCode) for this tutorial. You can use code editor of your choice - in the `Cargo.toml` file, add the required dependencies:
 
 ```toml
 [package]
@@ -51,15 +56,15 @@ solana-sdk = "=1.8.1"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-``` 
+```
 
-Now to get all the crates we can save this file and in the terminal run:
+Now to download all the crates, we can save the `Cargo.toml` file and in the terminal run:
 
 ```text
 cargo check
 ```
 
-we will create our program in the following code structure:
+We will create our program with the following structure:
 
 ```text
 ├─ src
@@ -78,13 +83,13 @@ The flow of a program using this structure looks like this:
 
 1. Someone calls the entrypoint
 2. The entrypoint forwards the arguments to the processor
-3. The processor asks instruction.rs to decode the instruction_data argument from the entrypoint function.
+3. The processor asks `instruction.rs` to decode the `instruction_data` argument from the entrypoint function.
 4. Using the decoded data, the processor will now decide which processing function to use to process the request.
 5. The processor may use state.rs to encode state into or decode the state of an account which has been passed into the entrypoint.
 
-> `instruction.rs` defines the "API" of a program.
+> The code in `instruction.rs` defines the API of the program.
 
-Now let us create the `entrypoint.rs`, `instruction.rs`, `processor.rs`, `state.rs`, and `error.rs` files in the `sol-stream-program/src` directory. We can register the newly created files in lib.rs by updating lib.rs to:
+Now let us create the `entrypoint.rs`, `instruction.rs`, `processor.rs`, `state.rs`, and `error.rs` files in the `sol-stream-program/src` directory. We can register the newly created files in `lib.rs` by updating it to include the modules:
 
 ```rs
 pub mod error;
@@ -95,7 +100,7 @@ pub mod state;
 pub mod entrypoint;
 ```
 
-Now in `entrypoint.rs` let us add code for our entry point function and register it with `entrypoint!` macro:
+Now in the `src/entrypoint.rs` file let's add the code for our entrypoint function and register it by using the `entrypoint!` macro:
 
 ```rs
 //! Program entrypoint
@@ -115,7 +120,7 @@ fn process_instruction(
 entrypoint!(process_instruction);
 ```
 
-We are importing required structs and functions and macros from the `solana_program` crate. Then we create  a function that will take accounts, instruction_data, and program_id as input parameters and return ProgramResult and register this function with `entrypoint!` in the last line.
+We are importing the required structs, functions and macros from the `solana_program` crate. Then we create a function that will take program_id, accounts, and instruction_data as input parameters and returns a ProgramResult. We then register this function with the `entrypoint!` macro in the last line.
 
 Now let us open `instruction.rs` and add the following code:
 
@@ -157,7 +162,7 @@ pub enum StreamInstruction {
 }
 ```
 
-Note that `CreateStream` and `WithdrawFromStream` would require the , let us create structs for them in `state.rs`.
+Note that `CreateStream` and `WithdrawFromStream` would require the input from initiator, let us create structs for them in `state.rs`.
 In `state.rs` add the following code:
 
 ```rs
@@ -180,19 +185,18 @@ pub struct WithdrawInput {
 ```
 
 For `CreateStream` we will want `CreateStreamInput` struct:
+
 - `start_time`: The [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) at which the stream will start.
 - `end_time`: The [Unix timestamp](https://en.wikipedia.org/wiki/Unix_time) at which the stream will end.
 - `receiver`: Public key of the receiver.
-- `lamports_withdrawn`: We allow the receiver to withdraw Lamports when they have its ownership, we would also want to keep track of the Lamport withdrawn for calculation purposes.
-- `amount_speed`: The num
-ber of  Lamport transferred to receiver every second.
+- `lamports_withdrawn`: We allow the receiver to withdraw Lamports when they have ownership, we would also want to keep track of the number of Lamports withdrawn for calculation purposes.
+- `amount_speed`: The number of Lamports transferred to the receiver every second.
 
-For `WithdrawFromStream` we will want the `WithdrawInput` struct: 
-- `amount`: The amount of Lamport receiver wants to withdraw.
+For `WithdrawFromStream` we will want the `WithdrawInput` struct:
 
-Now let us import these in `instruction.rs` and use them:
+- `amount`: The amount of Lamports the receiver wants to withdraw.
 
-add this line at the very top of the file to import our structs:
+Now let us import these structs into instruction.rs and use them, add this line at the very top of the file:
 
 ```rs
 use crate::state::{CreateStreamInput, WithdrawInput};
@@ -237,7 +241,9 @@ impl StreamInstruction {
     }
 }
 ```
-We have added a function to unpack data since there is only one entry point. We have used the first element of `insturction_data` as a tag. Then we have used the `BorshDerialization` Derivation to which provides us with the `try_from_slice` function to unpack data. We are using:
+
+We have added a function to unpack data since there is only one entrypoint. We have used the first element of `instruction_data` as a tag. Then we have used the `BorshDeserialization` derivation which provides us with the `try_from_slice` function to unpack data. We are using:
+
 - Tag 1 -> Create Stream Instruction.
 - Tag 2 -> Withdraw Instruction.
 - Tag 3 -> Close Stream Instruction.
@@ -278,14 +284,16 @@ impl Processor {
     }
 }
 ```
-We have imported the required struct and function from the `solana_program` crate. Then we will create a struct Processor and implement on Processor and create a function named `process` which would take 
+
+We have imported the required struct and functions from the `solana_program` crate. Then we will create a struct called `Processor` and implement it by creating a function named `process` which will take as input:
+
 - `program_id`: Program ID of program.
 - `accounts`: Accounts passed in the transaction.
 - `instruction_data`: Instruction data passed for instruction.
 
-This function will return `ProgramResult`. In the function, we have unpacked the `instruction_data` using the unpack function we created on `StreamInstruction` enum. We have used `?`  operator to unwrap valid values or return the erroneous value, propagating them to the calling function. Then we have used a match statement on instruction and added `todo!()` macro for them.
+This function will return `ProgramResult`. In the function, we have unpacked the `instruction_data` using the unpack function we created on `StreamInstruction` enum. We have used the `?` operator to unwrap valid values or return the error value, propagating them to the calling function. Then we have used a match statement on the instructions and stubbed them out by adding the `todo!()` macro to each of them.
 
-Before we do that, let us update the `entrypoint.rs` file.
+Before we move on to defining the instructions, let us update the `entrypoint.rs` file.
 
 ```rs
 use crate::processor::Processor;
@@ -303,7 +311,7 @@ For reference, you can check the file [HERE](https://github.com/SushantChandla/s
 
 Now let us go to `processor.rs` and remove the todos. For each instruction, we will create a function and write the logic in there.
 
-we can update the code to:
+Update the code in `processor.rs` to:
 
 ```rs
 impl Processor {
@@ -347,17 +355,13 @@ impl Processor {
 }
 ```
 
-We have created empty functions process_create_stream, process_withdraw, and process_close. The `process_create_stream` and `process_withdraw` have a parameter `data` which would be the struct `CreateStreamInput` and `WithdrawInput` respectively.
+We have created empty functions `process_create_stream`, `process_withdraw`, and `process_close`. The `process_create_stream` and `process_withdraw` functions have a parameter `data` which would be the struct `CreateStreamInput` and `WithdrawInput` respectively.
 
-
-Now let us go open `errors.rs` and write some error that our program might return in some case.
-In `errors.rs`:
+Now let's open `errors.rs` and write the errors that our program might return in some cases.
 
 ```rs
 use thiserror::Error;
-
 use solana_program::{msg, program_error::ProgramError};
-
 
 #[derive(Error, Debug, Copy, Clone)]
 pub enum StreamError {
@@ -371,7 +375,6 @@ pub enum StreamError {
     InvalidStartOrEndTime,
     #[error("Receiver does not own enough tokens")]
     WithdrawError,
-
 }
 
 impl From<StreamError> for ProgramError {
@@ -385,15 +388,15 @@ impl From<StreamError> for ProgramError {
 For reference, you can check the file [HERE](https://github.com/SushantChandla/sol-stream-program/blob/main/src/error.rs).
 
 ## Writing Instruction logic
+
 Now we can open the `processor.rs` file again and, complete `process_create_stream`, `process_withdraw` and, `process_close` function.
 
 **process_create_stream**
+We will parse the public key for admin. I have used my pubkey here as an example, but you can use your public key. We are using the `from_str` method. In case of an error, we return `PubKeyParseError` which we defined in `errors.rs`.
 
-We will parse pub key for admin. I have used my pubkey here if you can use your public key here. We are making using `from_str` method. In case of error we return `PubKeyParseError` which we created in `errors.rs`.
+Then we will get all the accounts. First we create an iterator and then we can use the `next_account_info` function to get all the accounts. We will store all the accounts with a corresponding variable name.
 
-Then we will get all the accounts. First we create a iterator and then we can use the `next_account_info` function to get all the account. We will store all the accounts with a corresponding variable name.
-
-Now we can check if the admin account provide was correct or incorrect by comparing it's key with the pubkey we produce in our function. If it is incorrect we return a error.
+Now we can check if the admin account provided was correct or incorrect by comparing its key with the pubkey we provided in our function. If it is incorrect, we return an error.
 
 ```rs
 // Updated at top of file.
@@ -424,12 +427,12 @@ use crate::{
         }
 ```
 
-Now, we can make a transaction of 0.03 lamports which I have chosen arbitrarily and send those to admin account.
+Now, we can make a transaction of 0.03 lamports (an arbitrary amount) and send those to the admin account.
 
-> Note: If the program fails, this transaction will not be refected.
+> Note: Transactions are atomic, if something fails the whole transaction will be reverted.
 
 Now, we can check the given instruction data.
-We will check the start time shouldn't be smaller then end time and the start time shouldn't be less then the current time. We can get current unix_timestamp by using `Clock::get()?.unix_timestamp`. We will return `InvalidStartOrEndTime` error in case of failure.
+When we check the end time, it shouldn't be less than the start time and the start time shouldn't be less than the current time. We can get the current `unix_timestamp` by using `Clock::get()?.unix_timestamp`. We will return an `InvalidStartOrEndTime` error in case of failure.
 
 Then we can check that the total Lamport deposited in the account should be equal to the amount we want to send + the minimum number of Rent required to create the account on the chain. We can get the minimum amount of balance required by using the `Rent::get()?.minimum_balance(len)` method. If this failed we can return the `NotEnoughLamports` error.
 
@@ -451,7 +454,7 @@ Then we can check that the total Lamport deposited in the account should be equa
         }
 ```
 
-Then we will check who signed this transaction. And the pub key of the receiver is data is equal to the account provided to us.
+Then we will check who signed this transaction, and the public key of the receiver is equal to the account provided to us.
 
 ```rs
         if !sender_account.is_signer {
@@ -493,9 +496,9 @@ impl StreamData {
 
 For reference, you can check the file [HERE](https://github.com/SushantChandla/sol-stream-program/blob/main/src/state.rs).
 
-We have added a method new to create an instance of the struct with the help of `CreateStreamInput` and Sender's pub key.
+We have added a new method to create an instance of the struct with the help of `CreateStreamInput` and the sender's public key.
 
-Now let's jump back to our function in the `processor.rs` file and complete the function.
+Now let's jump back to the `processor.rs` file and complete the function:
 
 ```rs
        let escrow_data = StreamData::new(data, *sender_account.key);
@@ -505,11 +508,11 @@ Now let's jump back to our function in the `processor.rs` file and complete the 
     }
 ```
 
-We will first create the `escrow_data` and then with the help of borsh, we have the `serialize` method we can use to write data to `escrow_account`. We complete the function by returning `Ok(())` at the end of the function.
+We will first create the `escrow_data` and then with the help of the borsh `serialize` method we can write data to `escrow_account`. We complete the function by returning the result `Ok(())` at the end of the function.
 
 **process_withdraw**
 
-We have stored accounts into variables just like we did in the `process_create_stream` function. Then we have deserialized data in the `escrow_account` not that this data is what we saved in the `process_create_stream` function. Then we perform a check that the receiver of this account is the singer and this `escrow_account` belongs to him. 
+We have stored accounts into variables just like we did in the `process_create_stream` function. Then we have deserialized data in the `escrow_account` not that this data is what we saved in the `process_create_stream` function. Then we perform a check that the receiver of this account is the singer and this `escrow_account` belongs to him.
 
 ```rs
  fn process_withdraw(
@@ -533,7 +536,7 @@ We have stored accounts into variables just like we did in the `process_create_s
         }
 ```
 
-Then we can check if the user can withdraw the required Lamport or not. We will get the current time and calculate the total number of Lamport owned by them. By subtraction `lamports_withdrawn` we can keep track of the Lamport that are already withdrawn by the receiver.
+Then we can check if the user can withdraw the required Lamports or not. We will get the current time and calculate the total number of Lamports owned by them. By subtracting `lamports_withdrawn`, we can keep track of the Lamports that are already withdrawn by the receiver.
 
 ```rs
         let time = Clock::get()?.unix_timestamp;
@@ -547,7 +550,7 @@ Then we can check if the user can withdraw the required Lamport or not. We will 
         }
 ```
 
-Now we can proceed with the transaction and send the token to `receiver_account`. We will also make an increment in `lamported_withdrawn`. We finish the function by writing the new `escrow_data` to `escrow_account` and then returning `Ok(())`.
+Now we can proceed with the transaction and send the token to `receiver_account`. We will also make an increment in `lamports_withdrawn`. We finish the function by writing the new `escrow_data` to `escrow_account` and then returning the result `Ok(())`.
 
 ```rs
         **escrow_account.try_borrow_mut_lamports()? -= data.amount;
@@ -594,7 +597,7 @@ We are closing the escrow account, so we want to transfer the funds to the recei
         }
 ```
 
-Now we have the total Lamports that are owned by the receiver. We can send the remaining Lamports to the sender. At last, we set the escrow_account balance to 0. And then we can return `Ok(())`.
+Now we have the total Lamports that are owned by the receiver. We can send the remaining Lamports to the sender. At last, we set the `escrow_account` balance to 0, then we can return the result `Ok(())`.
 
 ```rs
         **receiver_account.try_borrow_mut_lamports()? += lamport_streamed_to_receiver;
@@ -611,9 +614,9 @@ For reference, you can check the file [HERE](https://github.com/SushantChandla/s
 
 You can check the complete code of the Solana program on [GitHub](https://github.com/SushantChandla/sol-stream-program).
 
-## Deploy the program.
+## Deploy the program
 
-Let us deploy the program. We can use the following command to create a build. In this command, the manifest-path should be the path of your `Cargo.toml` file. This will output the compiled program in Shared Object format (.so) in the `dist/program` directory
+Now to deploy the program, we can use the following command to create a build. In this command, the manifest-path should be the path of your `Cargo.toml` file. This will output the compiled program in Shared Object format (.so) in the `dist/program` directory:
 
 ```text
 cargo build-bpf --manifest-path=Cargo.toml --bpf-out-dir=dist/program
@@ -655,13 +658,13 @@ Once complete you will have the `keypair.json` file, containing the private and 
 Now we are going to request an airdrop of SOL tokens on the Solana Devnet. This command will add 1 SOL token to the account:
 
 ```text
-solana airdrop 1 <YourPublicKey> --url https://api.devnet.solana.com 
+solana airdrop 1 <YourPublicKey> --url https://api.devnet.solana.com
 ```
 
 Example
 
 ```text
-solana airdrop 1 7WQDnydTTtyb2DsTuuFpeu2bDxQdpZMRc4R6qja1UzP --url https://api.devnet.solana.com 
+solana airdrop 1 7WQDnydTTtyb2DsTuuFpeu2bDxQdpZMRc4R6qja1UzP --url https://api.devnet.solana.com
 ```
 
 > If you are getting an error: "**RPC request error**: cluster version query failed: error sending request for url (https://api.devnet.solana.com/): error trying to connect: dns error: failed to lookup address information: nodename nor servname provided, or not known." - Please consider switching your primary DNS server over to one of Google, DNSWatch, OpenDNS, SAFEDNS, Dyn, Yandex, AdGuard, or Cloudflare.
@@ -680,15 +683,15 @@ We will get the program id as output.
 Program Id: DcGPfiGbubEKh1EnQ86EdMvitjhrUo8fGSgvqtFG4A9t
 ```
 
-We can verify this by checking on the [Solana Explorer for Devnet.](https://explorer.solana.com/?cluster=devnet)
-We can search our program id here.
+We can verify this by checking on the [Solana Explorer for Devnet.](https://explorer.solana.com/?cluster=devnet). We can search for our program id to see any related transactions, including the deployment.
 
 # Backend
+
 We will be creating our backend with help of the [rocket web framework](https://rocket.rs/), but before we start writing the code for the backend it would be a great time to understand why we need a backend.
 
-Let's think of a scenario where we do not have a backend for our protocol. We have stored all the data in the Program driven account(PDA) so for fetching all streams we can `getProgramAccounts` function provided in the `@solana/web3.js` package and then with the help of the `borsh` package we will deserialize the byte data. Then we can check among all the PDA's data which one of those belongs to a user i.e either they are sending or receiving. 
+Let's think of a scenario where we do not have a backend for our protocol. We have stored all the data in the Program driven account(PDA) so for fetching all streams we can `getProgramAccounts` function provided in the `@solana/web3.js` package and then with the help of the `borsh` package we will deserialize the byte data. Then we can check among all the PDA's data which one of those belongs to a user i.e either they are sending or receiving.
 
-Now let us suppose we have made our app live and it has about 1000 users and all users have created 2 streams. So this means we will have 2000 Program driven accounts and then fetching all the accounts just to display the 2 streams will make our protocol slow and with the increase in users unuseable. 
+Now let us suppose we have made our app live and it has about 1000 users. If all users have created 2 streams, this means we would have 2000 program driven accounts! Fetching all the accounts just to display the 2 streams for each user would make our protocol slow and with any increase in users, it becomes unusable.
 
 We will use our backend to index our PDA's and fix the scalability issue. Let us create a rust project again but this time with the default template i.e binary (application) template.
 Open the console in your projects folder and run the following command:
@@ -730,12 +733,12 @@ dotenv = "0.15.0"
 
 - borsh: To serialize and deserialize data
 - rocket_cors: To enable cross-origin resource sharing
-- solana-client: To  fetch all program accounts on the solana blockchain
+- solana-client: To fetch all program accounts on the solana blockchain
 - serde: For JSON Serialization and Deserialization.
 - diesel: For SQL query building
 - dotenv: To manage our database_url
 
-We are going to need all of these crates, to get them we can save this file and in the terminal run:
+We are going to need all of these crates, to download them we can save the `Cargo.toml` file and in the terminal run:
 
 ```text
 cargo check
@@ -785,9 +788,11 @@ It will compile and run the program then we can open `http://127.0.0.1:8000/` on
 Now let's see what code made this happen. In the first line, we have imported `routes` macro and `get` from the rocket. We will use `#[rocket::main]` on our function which will transform our function into a regular main function that internally initializes a Rocket-specific tokio runtime and runs the attributed async fn inside of it.
 
 Then inside the function, we will get default cors in a variable `cors`. This line of code attaches our `cors` and will start a server with a base `"/"` and it will have routes that will be passed in the `routes!` macro. As you can see we have two routes and the function for them are called `index` and `route_with_pubkey`. I have passed them in the macro. Then we await this call and return `Ok(())` so it compiles.
+Then inside the function, we will get default cors (cors stands for Cross Object Resource Sharing) in a variable `cors`. This line of code attaches our `cors` and will start a server with a base `"/"` and it will have routes that will be passed in the `routes!` macro. As you can see we have two routes and the functions for them are called `index` and `route_with_pubkey`. I have passed them in the macro. Then we await this call and return `Ok(())` so that it compiles.
 
 Now let's see `index` and `route_with_pubkey` functions. We have made use of `get` macro here. For the `index` function, we will return a String `Hello world`. In the case of `route_with_pubkey` we will get the pubkey from the URL and return `Hello <pubkey>`.
 
+Now take a look at the `index` and `route_with_pubkey` functions. We have made use of the `get` macro here. For the `index` function, we will return a String "Hello world". In the case of `route_with_pubkey` we will get the pubkey from the URL and return "Hello <pubkey>".
 
 > NOTE: You can stop the running server by using `cmd+c` on mac and `control+c` on windows.
 
@@ -820,13 +825,13 @@ Update the `up.sql` file to:
 
 Create Table streams(
    pda_account Varchar PRIMARY KEY,
-    start_time BIGINT NOT NUll,
-    end_time BIGINT NOT NUll,
-    receiver Varchar Not NUll,
-    lamports_withdrawn BIGINT NOT NUll,
-    amount_second BIGINT NOT NUll,
-    sender Varchar Not NUll, 
-    total_amount BIGINT NOT NUll
+    start_time BIGINT NOT NULL,
+    end_time BIGINT NOT NULL,
+    receiver Varchar Not NULL,
+    lamports_withdrawn BIGINT NOT NULL,
+    amount_second BIGINT NOT NULL,
+    sender Varchar Not NULL,
+    total_amount BIGINT NOT NULL
 )
 ```
 
@@ -840,7 +845,7 @@ Drop Table streams
 Now we can run the following command which would create `src/schema.rs` file which would contain schema required for `diesel`:
 
 ```text
-diesel migration run 
+diesel migration run
 ```
 
 Now we can run the following command to create a `.env` file in our project which would contain the database URL.
@@ -852,9 +857,9 @@ DATABASE_URL=postgres://username:password@localhost/sol_stream_indexer > .env
 > Note that you have to change the `username` and `password` here.
 
 We are going to structure our backend in the following:
-![backend-files](/assets/solana-streaming-protocol-2.png)
+![backend-files](/assets/solana-streaming-protocol-3.png)
 
-In the `src`:
+In the `src` directory:
 
 - `main.rs`: will contain the main function and we will use it to add all the modules.
 - `models.rs`: will contain `Stream` and `StreamData` model
@@ -926,8 +931,9 @@ pub struct Stream {
 }
 ```
 
-Here we have 2 structs one of them is the same we had in our program `StreamData` and `Stream` 
-- `StreamData`: This is the same we had in our program we will be using it when we want to get the data from the PDA account.
+Here we have 2 structs one of them is the same we had in our program `StreamData` and `Stream`
+
+- `StreamData`: Used to get the data from the PDA account.
 - `Stream`: This is the struct we would like to store in our database. We will have `pda_account` PubKey as ID. We have changed Pubkey types to `String` for `sender` and `receiver` as we can use the `.tostring` function on pubkey and it would be easy to store that in our database compared to an array of i32. We have also drived `Queryable` and `Insertable` from diesel so we can generate find, insert, update, and other SQL queries with the help of diesel. We have also drived `Serialize` from the `serde` crate to convert this to JSON format.
 
 Now we will need some more functions in on `Stream` so at the end of the file add:
@@ -1020,10 +1026,9 @@ We have added the following functions:
 
 - `id_is_present`: function to check if the database contains the particular id.
 
-- `insert_or_update`: function to `insert` a new Stream if the `id` is not present which we can check with  `id_is_present` function and `update` if it is present.
+- `insert_or_update`: function to `insert` a new Stream if the `id` is not present which we can check with `id_is_present` function and `update` if it is present.
 
 If you want to learn more about diesel you can read [HERE](https://diesel.rs/guides/getting-started).
-
 
 Now we can move to the `src/solana.rs` file:
 
@@ -1048,7 +1053,6 @@ pub fn get_all_program_accounts() -> Vec<(Pubkey, Account)> {
         .expect("Something went wrong")
 }
 
-
 pub fn subscribe_to_program() {
     let url = "ws://api.devnet.solana.com".to_string();
     let program_pub_key = Pubkey::from_str("DcGPfiGbubEKh1EnQ86EdMvitjhrUo8fGSgvqtFG4A9t")
@@ -1058,7 +1062,6 @@ pub fn subscribe_to_program() {
         let subscription =
             pubsub_client::PubsubClient::program_subscribe(&url, &program_pub_key, None)
                 .expect("Something went wrong");
-
         let conn = establish_connection();
 
         loop {
@@ -1085,7 +1088,6 @@ pub fn subscribe_to_program() {
         get_accounts_and_update()
     });
 }
-
 
 pub fn get_accounts_and_update() {
     let program_accounts = get_all_program_accounts();
@@ -1156,10 +1158,21 @@ pub fn get_all_stream(pubkey: &str) -> Json<Value> {
 ```
 
 We have added create two functions the `index` function is the same as we had in our rocket example.
+
 - `get_all_stream`: This function will return Json response we are using `get_all_with_sender` and `get_all_with_receiver` function to get them from our indexed table.
 
-Now let us move to `src/main.rs` and add the main function
-at the end of the file add:
+Now let us move to `src/main.rs` and add the main function. At top of the file add the following Code:
+
+```rs
+use solana::get_all_program_accounts;
+use solana::subscribe_to_program;
+
+use crate::models::Stream;
+use crate::routes::get_all_stream;
+use crate::routes::index;
+```
+
+Now add the `main` function:
 
 ```rs
 #[rocket::main]
@@ -1188,23 +1201,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-And to fix the error on top of the file add:
-
-```rs
-use solana::get_all_program_accounts;
-use solana::subscribe_to_program;
-
-use crate::models::Stream;
-use crate::routes::get_all_stream;
-use crate::routes::index;
-```
-
-In the main function, we are getting all the program accounts and populating our database then, we can call the `subscribe_to_program` function. We are starting the rocket server after this.
+In the main function we are getting all the program accounts and populating our database, then we can call the `subscribe_to_program` function. After this, we are starting the rocket server.
 
 You can see the complete Backend [HERE](https://github.com/SushantChandla/sol-stream-backend).
 
 # Frontend
-Now let's write the frontend part of the app. I have created a react app for the front end. We are using Redux for state management. I have already created the UI part of it. You can get the UI part of the app [HERE](https://github.com/SushantChandla/sol-stream-frontend/tree/ui).
+
+Now let's write the frontend part of the app. I have created a React app for the frontend, using Redux for state management. I have already created the UI part of it, which you can find [HERE](https://github.com/SushantChandla/sol-stream-frontend/tree/ui).
 
 You can clone and checkout the `ui` branch and run it with the help of the following commands:
 
@@ -1213,31 +1216,33 @@ yarn
 yarn start
 ```
 
-you can see the UI in the browser:
+Once it is running, you can see the UI in the browser:
 
 {% embed url="https://youtu.be/r9CwLIR4afY" caption="UI Sample"  %}
 
-Now let us write the functions to connect with the sol-stream-program. 
+Now let us write the functions to connect with the sol-stream-program.
 
 In `src/actions/index.js`:
 
 ```js
 import {
-	SystemProgram,
-	Transaction,
-	PublicKey,
-	TransactionInstruction,
-	Connection
+  SystemProgram,
+  Transaction,
+  PublicKey,
+  TransactionInstruction,
+  Connection,
 } from "@solana/web3.js";
 
 import axios from "../config";
-import { deserialize, serialize, } from 'borsh';
+import { deserialize, serialize } from "borsh";
 
 const programAccount = new PublicKey(
-	"DcGPfiGbubEKh1EnQ86EdMvitjhrUo8fGSgvqtFG4A9t"
+  "DcGPfiGbubEKh1EnQ86EdMvitjhrUo8fGSgvqtFG4A9t"
 );
 
-const adminAddress = new PublicKey("DGqXoguiJnAy8ExJe9NuZpWrnQMCV14SdEdiMEdCfpmB");
+const adminAddress = new PublicKey(
+  "DGqXoguiJnAy8ExJe9NuZpWrnQMCV14SdEdiMEdCfpmB"
+);
 
 const cluster = "https://api.devnet.solana.com";
 const connection = new Connection(cluster, "confirmed");
@@ -1246,13 +1251,12 @@ const connection = new Connection(cluster, "confirmed");
 We have created `programAccount` and `adminAddress` variables to store the program id and admin address for the program.
 We have also created a `connection` variable with the help of the `cluster` variable which contains the link to devnet RPC.
 
-
-Now let's write the `getAllStreams` function first which you can find at the very last in the `action/index.js` file. It just contains a request to our backend client it takes in the string value of  `pubkey` as a parameter in it. I have used the axios package for it we can change the base URL in `src/config/index.js`:
+Now let's write the `getAllStreams` function first which you can find at the very last in the `action/index.js` file. It just contains a request to our backend client it takes in the string value of `pubkey` as a parameter in it. I have used the axios package for it we can change the base URL in `src/config/index.js`:
 
 ```js
 import axios from "axios";
 
-export default  axios.create({
+export default axios.create({
   baseURL: "http://127.0.0.1:8000",
 });
 ```
@@ -1261,123 +1265,128 @@ Now that our `baseURL` is set we can write the function in `src/actions/index.js
 
 ```js
 export const getAllStreams = (pubkey) => {
-	return async (dispatch, getState) => {
-		try {
-			let response = await axios.get(
-				`/${pubkey}`
-			);
-			console.log(response);
-			if (response.status !== 200)
-				throw new Error("Something went wrong");
-			dispatch({
-				type: "DATA_RECEIVED",
-				result: response.data,
-			});
-		} catch (e) {
-			console.log(e);
-			dispatch({
-				type: "DATA_NOT_RECEIVED",
-				result: { data: null },
-			})
-		}
-	};
+  return async (dispatch, getState) => {
+    try {
+      let response = await axios.get(`/${pubkey}`);
+      console.log(response);
+      if (response.status !== 200) throw new Error("Something went wrong");
+      dispatch({
+        type: "DATA_RECEIVED",
+        result: response.data,
+      });
+    } catch (e) {
+      console.log(e);
+      dispatch({
+        type: "DATA_NOT_RECEIVED",
+        result: { data: null },
+      });
+    }
+  };
 };
 ```
 
-In this we requesting "/\<pubkey>" and then we dispatch the result. We have added the code in the try and catch block to handle network errors.
+We are requesting the route "/<pubkey>" and then we dispatch the result. We have added the code in the try and catch block to handle network errors.
 
 ## Create Stream
+
 Now let's write the functions that will contain the instructions to our program. We will also create a Schema for data Serialization.
+
+In `src/actions/index.js` file:
 
 ```js
 class CreateStreamInput {
-	constructor(properties) {
-		Object.keys(properties).forEach((key) => {
-			this[key] = properties[key];
-		});
-	}
-	static schema = new Map([[CreateStreamInput,
-		{
-			kind: 'struct',
-			fields: [
-				['start_time', 'u64'],
-				['end_time', 'u64'],
-				['receiver', [32]],
-				['lamports_withdrawn', 'u64'],
-				['amount_second', 'u64']]
-		}]]);
+  constructor(properties) {
+    Object.keys(properties).forEach((key) => {
+      this[key] = properties[key];
+    });
+  }
+  static schema = new Map([
+    [
+      CreateStreamInput,
+      {
+        kind: "struct",
+        fields: [
+          ["start_time", "u64"],
+          ["end_time", "u64"],
+          ["receiver", [32]],
+          ["lamports_withdrawn", "u64"],
+          ["amount_second", "u64"],
+        ],
+      },
+    ],
+  ]);
 }
 ```
 
-For creating stream instruction we have created a Schema that describes the data type for variables. We will be using this in the `createStream` function:
+For creating the stream instructions we have defined a Schema that describes the data type for variables. We will be using this in the `createStream` function:
 
 ```js
 export const createStream = ({
-	receiverAddress,
-	startTime,
-	endTime,
-	amountSpeed,
-	wallet
+  receiverAddress,
+  startTime,
+  endTime,
+  amountSpeed,
+  wallet
 }) => {
-	return async (dispatch, getState) => {
-		try {
-			const SEED = "abcdef" + Math.random().toString();
-			let newAccount = await PublicKey.createWithSeed(
-				wallet.publicKey,
-				SEED,
-				programAccount
-			);
-			let create_stream_input = new CreateStreamInput({
-				start_time: startTime,
-				end_time: endTime,
-				receiver: new PublicKey(receiverAddress).toBuffer(),
-				lamports_withdrawn: 0,
-				amount_second: amountSpeed,
-			});
+  return async (dispatch, getState) => {
+    try {
+      const SEED = "abcdef" + Math.random().toString();
+      let newAccount = await PublicKey.createWithSeed(
+        wallet.publicKey,
+        SEED,
+        programAccount
+      );
+      let create_stream_input = new CreateStreamInput({
+        start_time: startTime,
+        end_time: endTime,
+        receiver: new PublicKey(receiverAddress).toBuffer(),
+        lamports_withdrawn: 0,
+        amount_second: amountSpeed,
+      });
 
-            let data = serialize(CreateStreamInput.schema, create_stream_input);
+      let data = serialize(CreateStreamInput.schema, create_stream_input);
 ```
 
 In the code above we have created a pubkey which we will use to create a Program Drived account(PDA). We have used the function `serialize` from the borsh package to get the Uint8Array of the input data.
 
-
 ```js
-			let data_to_send = new Uint8Array([1, ...data]);
-
-            let rent = await connection.getMinimumBalanceForRentExemption(96);
+let data_to_send = new Uint8Array([1, ...data]);
+let rent = await connection.getMinimumBalanceForRentExemption(96);
 ```
 
 We have to append `1` in our Uint8Array as we are using the first character as the tag. Please refer to the unpack function in `instructions.rs`.
 
-And then we can get the minimum lamports required to make the account lamports by using the provided function on the connection variable.
+We can then get the minimum lamports required to make the account by using the `getMinimumBalanceForRentExemption` function on the connection variable.
+
 > Note: I checked the size of the data ( the value 96) by a test [HERE](https://github.com/SushantChandla/sol-stream-program/blob/d0d537889b155d16fa3c0879e61e4f68c3d47f07/src/state.rs#L42).
 
 ```js
-			const createProgramAccount = SystemProgram.createAccountWithSeed({
-				fromPubkey: wallet.publicKey,
-				basePubkey: wallet.publicKey,
-				seed: SEED,
-				newAccountPubkey: newAccount,
-				lamports: ((endTime - startTime) * amountSpeed) + 30000000 + rent,
-				space: 96,
-				programId: programAccount,
-			});
+const createProgramAccount = SystemProgram.createAccountWithSeed({
+  fromPubkey: wallet.publicKey,
+  basePubkey: wallet.publicKey,
+  seed: SEED,
+  newAccountPubkey: newAccount,
+  lamports: (endTime - startTime) * amountSpeed + 30000000 + rent,
+  space: 96,
+  programId: programAccount,
+});
 
-			const instructionTOOurProgram = new TransactionInstruction({
-				keys: [
-					{ pubkey: newAccount, isSigner: false, isWritable: true },
-					{ pubkey: wallet.publicKey, isSigner: true, },
-					{ pubkey: receiverAddress, isSigner: false, },
-					{ pubkey: adminAddress, isSigner: false, isWritable: true }
-				],
-				programId: programAccount,
-				data: data_to_send
-			});
+const instructionTOOurProgram = new TransactionInstruction({
+  keys: [
+    { pubkey: newAccount, isSigner: false, isWritable: true },
+    { pubkey: wallet.publicKey, isSigner: true },
+    { pubkey: receiverAddress, isSigner: false },
+    { pubkey: adminAddress, isSigner: false, isWritable: true },
+  ],
+  programId: programAccount,
+  data: data_to_send,
+});
 ```
 
-Here we have created 2 instruction
+In the above code, We have created 2 instruction:
 
-1. To the system program to create a Program drived account with the space of `96` and lamports which are equal to `0.03(admin cut)+solana rent+total amount user want to send`.
+1. To the system program to create a Program drived account with the space of `96` and lamports which are equal to `0.03(admin cut)+solana rent+total amount user want to send`. We are passing these arguments in the `SystemProgram.createAccountWithSeed` function.
+
 2. We have created an instruction to our Program we have passed the account that will be used which corresponds to `accounts: &[AccountInfo],` in our program in `keys`, `programId` is the address we got when we deployed our program and `data` is equal to `data_to_send` variable.
 
 Then we create a transaction object we have used the `setPayerAndBlockhashTransaction` function which we will add later.
@@ -1385,64 +1394,64 @@ Once we have the transaction object we have to send the transaction with the hel
 In case of an error, we can just alert the user.
 
 ```js
-			const trans = await setPayerAndBlockhashTransaction(
-				[createProgramAccount, instructionTOOurProgram], wallet
-			);
+      const trans = await setPayerAndBlockhashTransaction(
+        [createProgramAccount, instructionTOOurProgram], wallet
+      );
 
-			let signature = await wallet.sendTransaction(trans, connection);
-
-			const result = await connection.confirmTransaction(signature);
-			console.log("end sendMessage", result);
-
-			dispatch(getAllStreams(wallet.publicKey.toString()));
-			dispatch({
-				type: "CREATE_RESPONSE",
-				result: true,
-				id: newAccount.toString(),
-			});
-		} catch (e) {
-			alert(e);
-			dispatch({ type: "CREATE_FAILED", result: false });
-		}
-	};
+      let signature = await wallet.sendTransaction(trans, connection);
+      const result = await connection.confirmTransaction(signature);
+      console.log("end sendMessage", result);
+      dispatch(getAllStreams(wallet.publicKey.toString()));
+      dispatch({
+        type: "CREATE_RESPONSE",
+        result: true,
+        id: newAccount.toString(),
+      });
+    } catch (e) {
+      alert(e);
+      dispatch({ type: "CREATE_FAILED", result: false });
+    }
+  };
 };
 ```
-
 
 `setPayerAndBlockhashTransaction`: This function takes in the instructions array and then returns a `Transaction` object.
 
 ```js
 async function setPayerAndBlockhashTransaction(instructions, wallet) {
-	const transaction = new Transaction();
-	instructions.forEach(element => {
-		transaction.add(element);
-	});
-	transaction.feePayer = wallet.publicKey;
-	let hash = await connection.getRecentBlockhash();
-	transaction.recentBlockhash = hash.blockhash;
-	return transaction;
+  const transaction = new Transaction();
+  instructions.forEach(element => {
+    transaction.add(element);
+  });
+  transaction.feePayer = wallet.publicKey;
+  let hash = await connection.getRecentBlockhash();
+  transaction.recentBlockhash = hash.blockhash;
+  return transaction;
 }
 ```
 
+You can check out the `CreateStream` function [HERE](https://github.com/SushantChandla/sol-stream-frontend/blob/418bcdcd434d6b7e1dc3cd9e9d323066c54a6f0b/src/actions/index.js#L102), for reference.
+
 ## Withdraw
+
 Now let's write the `withdraw` function for this one also we have created the `WithdrawInput` class with schema:
 
 We only have the `amount` variable in the struct for withdrawal input.
 
 ```js
 class WithdrawInput {
-	constructor(properties) {
-		Object.keys(properties).forEach((key) => {
-			this[key] = properties[key];
-		});
-	}
-	static schema = new Map([[WithdrawInput,
-		{
-			kind: 'struct',
-			fields: [
-				['amount', 'u64'],
-			]
-		}]]);
+  constructor(properties) {
+    Object.keys(properties).forEach((key) => {
+      this[key] = properties[key];
+    });
+  }
+  static schema = new Map([[WithdrawInput,
+    {
+      kind: 'struct',
+      fields: [
+        ['amount', 'u64'],
+      ]
+    }]]);
 }
 ```
 
@@ -1453,85 +1462,87 @@ Here in `data_to_send`, we have to append 2 as you can see in our program's `src
 
 ```js
 export const withdraw = (streamId, amountToWithdraw, wallet) => {
-	return async (dispatch, getState) => {
-		try {
-			let create_stream_input = new WithdrawInput({
-				amount: amountToWithdraw
-			});
-			let data = serialize(WithdrawInput.schema, create_stream_input);
-			let data_to_send = new Uint8Array([2, ...data]);
+  return async (dispatch, getState) => {
+    try {
+      let create_stream_input = new WithdrawInput({
+        amount: amountToWithdraw
+      });
+      let data = serialize(WithdrawInput.schema, create_stream_input);
+      let data_to_send = new Uint8Array([2, ...data]);
 
-			const instructionTOOurProgram = new TransactionInstruction({
-				keys: [
-					{ pubkey: streamId, isSigner: false, isWritable: true },
-					{ pubkey: wallet.publicKey, isSigner: true, },
-				],
-				programId: programAccount,
-				data: data_to_send
-			});
+      const instructionTOOurProgram = new TransactionInstruction({
+        keys: [
+          { pubkey: streamId, isSigner: false, isWritable: true },
+          { pubkey: wallet.publicKey, isSigner: true, },
+        ],
+        programId: programAccount,
+        data: data_to_send
+      });
 
-			const trans = await setPayerAndBlockhashTransaction(
-				[instructionTOOurProgram], wallet
-			);
+      const trans = await setPayerAndBlockhashTransaction(
+        [instructionTOOurProgram], wallet
+      );
 
-			let signature = await wallet.sendTransaction(trans, connection);
-			const result = await connection.confirmTransaction(signature);
-
-			console.log("end sendMessage", result);
-			dispatch({ type: "WITHDRAW_SUCCESS" });
-		} catch (e) {
-			alert(e);
-			dispatch({ type: "WITHDRAW_FAILED" });
-		}
-	};
+      let signature = await wallet.sendTransaction(trans, connection);
+      const result = await connection.confirmTransaction(signature);
+      console.log("end sendMessage", result);
+      dispatch({ type: "WITHDRAW_SUCCESS" });
+    } catch (e) {
+      alert(e);
+      dispatch({ type: "WITHDRAW_FAILED" });
+    }
+  };
 }
 ```
 
-We have dispatched the withdraw response in the end.
+We have dispatched the withdraw result in the end. You can check out the `Withdraw` function [HERE](https://github.com/SushantChandla/sol-stream-frontend/blob/418bcdcd434d6b7e1dc3cd9e9d323066c54a6f0b/src/actions/index.js#L23), for reference.
 
 ## Close Stream
+
 Now let's write the last function in the file to close a stream.
 
 For this function, we do not have any instruction data we are only passing the tag. Then we have packed the instruction by calling `setPayerAndBlockhashTransaction` and then dispatched the result.
 
 ```js
 export const closeStream = (streamId, receiverAddress, wallet) => {
-	return async (dispatch, getState) => {
-		try {
-			const instructionTOOurProgram = new TransactionInstruction({
-				keys: [
-					{ pubkey: streamId, isSigner: false, isWritable: true },
-					{ pubkey: wallet.publicKey, isSigner: true, isWritable:true },
-					{ pubkey: receiverAddress, isSigner: false, isWritable:true}
-				],
-				programId: programAccount,
-				data: new Uint8Array([3])
-			});
+  return async (dispatch, getState) => {
+    try {
+      const instructionTOOurProgram = new TransactionInstruction({
+        keys: [
+          { pubkey: streamId, isSigner: false, isWritable: true },
+          { pubkey: wallet.publicKey, isSigner: true, isWritable: true },
+          { pubkey: receiverAddress, isSigner: false, isWritable: true }
+        ],
+        programId: programAccount,
+        data: new Uint8Array([3])
+      });
 
-			const trans = await setPayerAndBlockhashTransaction(
-				[instructionTOOurProgram], wallet
-			);
+      const trans = await setPayerAndBlockhashTransaction(
+        [instructionTOOurProgram], wallet
+      );
 
-			let signature = await wallet.sendTransaction(trans, connection);
-			const result = await connection.confirmTransaction(signature);
-			console.log("end sendMessage", result);
-			dispatch({ type: "CANCEL_SUCCESS" });
-		} catch (e) {
-			alert(e);
-			dispatch({ type: "CANCEL_FAILED" });
-		}
-	};
+      let signature = await wallet.sendTransaction(trans, connection);
+      const result = await connection.confirmTransaction(signature);
+      console.log("end sendMessage", result);
+      dispatch({ type: "CANCEL_SUCCESS" });
+    } catch (e) {
+      alert(e);
+      dispatch({ type: "CANCEL_FAILED" });
+    }
+  };
 };
 ```
 
-You can check the frontend code [HERE](https://github.com/SushantChandla/sol-stream-frontend).
+You can check the frontend code [HERE](https://github.com/SushantChandla/sol-stream-frontend). You can check out the `closeStream` function [HERE](https://github.com/SushantChandla/sol-stream-frontend/blob/418bcdcd434d6b7e1dc3cd9e9d323066c54a6f0b/src/actions/index.js#L72), for reference.
 
 Now for testing it we will need the backend server running. Here is a video walkthrough.
 
 {% embed url="https://youtu.be/MUyt5Rz9T64" caption="Sol Streaming Protocol"  %}
 
 # Conclusion
+
 In this tutorial, you learned how to build a Sol token streaming protocol on Solana. We covered the on-chain program's code using the Rust programming language. We built the User Interface with React. And we have created a backend with Rocket framework to index PDA's data.
 
 # About the Author
+
 This tutorial was created by [Sushant Chandla](https://github.com/SushantChandla).
