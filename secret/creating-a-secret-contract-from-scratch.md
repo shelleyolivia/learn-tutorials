@@ -1,5 +1,3 @@
-# Developing your first secret contract
-
 # Introduction
 
 In this tutorial you will learn the basics of creating a new secret contract from scratch. You will learn the basics of handling messages and storing data for your contract on the chain. The contract that you make will allow individual users to store a private reminder on the secret network that can be read back at a later time. Using a secret contract for such a task is probably overkill, but it will teach you the basics of secret contract construction which provides a foundation for building more complex secret dapps using the same principles.
@@ -14,7 +12,7 @@ Make sure you have completed the [Secret Pathway](https://learn.figment.io/proto
 
 # Generating our project
 
-To generate a new project we follow the directions from the [Secret Pathway](https://learn.figment.io/tutorials/deploy-secret-contract), however we choose a new name, in this case `reminder`.
+To generate a new project we follow the directions from the Secret Pathway, however we choose a new name, in this case `reminder`.
 
 ```text
 cargo generate --git https://github.com/enigmampc/secret-template --name reminder
