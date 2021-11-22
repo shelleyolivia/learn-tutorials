@@ -6,7 +6,7 @@ For a high level introduction to Non-Fungible-Tokens see the [first installment 
 
 # Prerequisites
 
-This tutorial assumes that you have completed the [Secret Learn Pathway](https://learn.figment.io/network-documentation/secret/secret-pathway) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in section 5 of the Pathway.
+This tutorial assumes that you have completed the [Secret Pathway](https://learn.figment.io/protocols/secret) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in section 5 of the Pathway.
 
 # Requirements
 
@@ -284,6 +284,3 @@ This tutorial was created by [Florian Uhde](https://twitter.com/florianuhde), a 
 # References
 
 snip721 Reference Implementation: [Github Repo](https://github.com/baedrik/snip721-reference-impl)
-
-If you had any difficulties following this tutorial or simply want to discuss anything technical with us you can [join our community](https://discord.gg/fszyM7K) today!
-
