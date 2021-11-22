@@ -8,7 +8,7 @@ At a high level, an NFT has a number of important properties. First we are inter
 
 # Prerequisites
 
-This tutorial assumes that you have completed the [Secret Learn Pathway](https://learn.figment.io/pathways/secret-pathway) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in section 5 of the Pathway.
+This tutorial assumes that you have completed the [Secret Pathway](https://learn.figment.io/protocols/secret) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in section 5 of the Pathway.
 # Requirements
 
 * The latest version of NodeJS installed \(use of nvm, the node version manager, is _encouraged_ for Web 3 developers\)
