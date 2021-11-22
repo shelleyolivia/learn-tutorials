@@ -55,7 +55,7 @@ The implementation is followed by a challenge that aims to give you just enough 
 
 By the time you're done with this tutorial, you'll have a functional wallet capable of changing the state of the Solana blockchain by receiving and transferring onchain funds. In [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2), we'll generate a 12-word phrase that will grant us access to a wallet.
 
-![](https://github.com/figment-networks/learn-tutorials/blob/master/solana/solana-wallet/assets/create.png)
+![](https://github.com/figment-networks/learn-tutorials/blob/master/solana/solana-wallet/assets/create.png?raw=true)
 
 Then we'll build a function to fetch the balance of our newly created wallet in [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3) before leveraging functionality to issue "test tokens" through something called an "airdrop" that we'll explore in [Step 4](https://learn.figment.io/tutorials/solana-wallet-step-4).
 
