@@ -127,7 +127,7 @@ setBalance(updatedBalance);
 
 ## Test driving
 
-If you haven't already, airdrop some devnet SOL into your account and test transferring funds to another account - preferably another account that you also control so you can check the funds flow.
+If you haven't already, airdrop some devnet SOL into your account and test transferring funds to another account. If you have another account to use, feel free to do that. Otherwise you can send the devnet SOL back to the smart contract that sent them to you (these are called faucets)! Here's its public address: 9B5XszUGdMaxCZ7uSQhPzdks5ZQSmWxrmzCSvtJ6Ns6g.
 
 Once you fill in the public address of your recipient and the amount, say one million lamports, the **Sign and Send** button will be enabled. Once you click **Sign and Send** you will see a successful message displayed at the top of the page along with a link to the [Solana Block Explorer](https://explorer.solana.com/?cluster=devnet) at the top left of the check.
 
@@ -140,7 +140,7 @@ The [Solana Block Explorer](https://explorer.solana.com/?cluster=devnet) is a si
 {% label %}
 Figure 9: Oh the places you'll go!
 
-In this case, if you click the link on the check, you'll be able to see a basic overview of the transfer you just issued. In the middle of the page, you'll see our transfer's information - mainly, the sender (your public address) and how much SOL you sent; and the recipient (the other public address) and how much SOL they received.
+In this case, if you click the link on the check, you'll be able to see a basic overview of the transfer you just issued. In the middle of the page, you'll see our transfer's information - mainly, the sender (your public address) and how much SOL you sent; and the recipient (the other public address) and how much SOL they received. In fact, you can check whether you sent the SOL back to the same contract that sent it to you by clicking on the previous transaction in the Transaction History.
 
 You might notice a field labeled "Fee (SOL)". If you scroll to the Account Input(s), you'll also notice that it was charged to your account. While the recipient received the funds you specified, your account was deducted the amount you sent plus a small fee. These [transaction fees](https://docs.solana.com/transaction_fees) are designed to reward validators for the compute power spent to process transactions.
 

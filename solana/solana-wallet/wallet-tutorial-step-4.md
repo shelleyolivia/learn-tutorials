@@ -60,6 +60,9 @@ const confirmation = await connection.requestAirdrop(
 );
 ```
 
+{% sidenote title="Box 4.2: Where Do Devnet Airdrops Come From?" %}
+Devnet airdrops come from smart contracts deployed with a high initial token balance and a transfer function that allows anyone to request tokens into their devnet account. These so-called faucets are designed to help developers test dApps before going live on mainnet. In our case, the airdrop function is sending a request to a smart contract that transfers devnet SOL from the original supply to your account by updating the balances of both accounts.
+
 ## Confirming airdrop
 
 Finally, before we can refresh our account's balance automatically, we need a way to make sure the blockchain ledger has been updated with our airdropped funds before we call `refreshBalance`. As with any database-type operations, blockchain state changes are asynchronous. In fact, given the decentralized nature of most blockchain protocols, some updates [can take a while](https://twitter.com/CryptoKitties/status/937444644740198400?s=20).

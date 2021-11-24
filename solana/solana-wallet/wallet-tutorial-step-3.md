@@ -15,13 +15,13 @@ The concept of various networks for a single protocol is similar to that of diff
 {% label %}
 Figure 4: It's always important to test on devnet before deploying on mainnet
 
-Solana has a production network called mainnet and two exploration networks called testnet and devnet. Solana's devnet is designed for developers and users to play with various features and debug dApps before launching on mainnet with real economic consequences. The testnet is where Solana tests potential protocol updates.
+Solana has a production network called mainnet and two experimentation networks called testnet and devnet. Solana's devnet is designed for developers and users to play with various features and debug dApps before launching on mainnet with real economic consequences. The testnet is where Solana tests potential protocol updates.
 
 You'll notice the wallet includes a dropdown at the top-right that allows users to select what network they want to connect to. This allows the wallet to manage assets specific to the connected network. Our default network is devnet since we'll be using it to receive test tokens in [Step 4](https://learn.figment.io/tutorials/solana-wallet-step-4) and then transfer them in [Step 5](https://learn.figment.io/tutorials/solana-wallet-step-5), but the functionality we'll build will work for any of the Solana networks.
 
 # Implementation 🧩
 
-In the [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2), we discussed how a wallet is more like a keychain that holds keypairs representing an account address and the key to access it. We built a function that allowed us to generate a unique account and the corresponding phrase that works like a password for accessing the account. Now we need to connect with the Solana blockchain so we can fetch the account's balance, which at this point should be zero because we just created it.
+In [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2), we discussed how a wallet is more like a keychain that holds keypairs representing an account address and the key to access it. We built a function that allowed us to generate a unique account and the corresponding phrase that works like a password for accessing the account. Now we need to connect with the Solana blockchain so we can fetch the account's balance, which at this point should be zero because we just created it.
 
 ## Connecting
 
@@ -34,7 +34,7 @@ As for `commitmentOrConfig`, it looks like the definition for `Commitment` types
 {% sidenote title="Box 3.1: A Note on Technical Sophistication" %}
 In his ground-breaking series on software development, Michael Hartl and the [Learn Enough](https://www.learnenough.com/) team introduced the concept of _technical sophistication_ as a key attribute of the technical development process. They define it as "the combination of hard and soft skills that make it seem like you can magically solve any technical problem." Figuring things out and being resourceful is at least half the battle, and sometimes the whole war. When in doubt, refer to the [xkcd flowchart](https://m.xkcd.com/627/).
 
-Putting the above together, we can build our connection instance:
+Putting the above together, we can start implementing the `refreshBalance` function with a connection instance in `utils/index.ts`:
 
 ```javascript
 const connection = new Connection(clusterApiUrl(network), "confirmed");
