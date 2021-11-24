@@ -91,7 +91,7 @@ The code in `instruction.rs` defines the API of the program.
 
 Now let us create the `entrypoint.rs`, `instruction.rs`, `processor.rs`, `state.rs`, and `error.rs` files in the `sol-stream-program/src` directory. We can register the newly created files in `lib.rs` by updating it to include the modules:
 
-```rs
+```rust
 pub mod error;
 pub mod instruction;
 pub mod native_mint;
@@ -102,7 +102,7 @@ pub mod entrypoint;
 
 Now in the `src/entrypoint.rs` file let's add the code for our entrypoint function and register it by using the `entrypoint!` macro:
 
-```rs
+```rust
 //! Program entrypoint
 
 use solana_program::{
@@ -124,7 +124,7 @@ We are importing the required structs, functions and macros from the `solana_pro
 
 Now let us open `instruction.rs` and add the following code:
 
-```rs
+```rust
 use borsh::BorshDeserialize;
 use solana_program::program_error::ProgramError;
 
@@ -164,7 +164,7 @@ pub enum StreamInstruction {
 
 Note that `CreateStream` and `WithdrawFromStream` would require the some input from initiator, let us create structs for them in `state.rs`. In `state.rs` add the following code:
 
-```rs
+```rust
 use borsh::{BorshDeserialize, BorshSerialize};
 use solana_program::{clock::UnixTimestamp, pubkey::Pubkey};
 
@@ -197,31 +197,27 @@ For `WithdrawFromStream` we will want the `WithdrawInput` struct:
 
 Now let us import these structs into `instruction.rs` and use them, add this line at the very top of the file:
 
-```rs
+```rust
 use crate::state::{CreateStreamInput, WithdrawInput};
 ```
 
 Update `CreateStream` and `WithdrawFromStream` to :
 
-```rs
-...
+```rust
 // CreateStream,
 CreateStream(CreateStreamInput),
-...
 ```
 
-```rs
-...
-//WithdrawFromStream
+```rust
+// WithdrawFromStream
 WithdrawFromStream(WithdrawInput)
-...
 ```
 
 For reference, you can check the file [HERE](https://github.com/SushantChandla/sol-stream-program/blob/main/src/instruction.rs).
 
 Now that our enums are complete, let us add a function to unpack the instruction given to our program. At the end of `instruction.rs`:
 
-```rs
+```rust
 impl StreamInstruction {
     pub fn unpack(instruction_data: &[u8]) -> Result<Self, ProgramError> {
         let (tag, data) = instruction_data
@@ -249,7 +245,7 @@ We have added a function to unpack data since there is only one entrypoint. We h
 
 Returning an error otherwise. Now we can open the `processor.rs` file and add the logic for instructions in it.
 
-```rs
+```rust
 use std::str::FromStr;
 
 use crate::{
@@ -294,7 +290,7 @@ This function will return `ProgramResult`. In the function, we have unpacked the
 
 Before we move on to defining the instructions, let us update the `entrypoint.rs` file.
 
-```rs
+```rust
 use crate::processor::Processor;
 fn process_instruction(
     program_id: &Pubkey,
@@ -312,7 +308,7 @@ Now let us go to `processor.rs` and remove the todos. For each instruction, we w
 
 Update the code in `processor.rs` to:
 
-```rs
+```rust
 impl Processor {
     pub fn process(
         program_id: &Pubkey,
@@ -358,7 +354,7 @@ We have created empty functions `process_create_stream`, `process_withdraw`, and
 
 Now let's open `errors.rs` and write the errors that our program might return in some cases.
 
-```rs
+```rust
 use thiserror::Error;
 use solana_program::{msg, program_error::ProgramError};
 
@@ -397,7 +393,7 @@ Then we will get all the accounts. First we create an iterator and then we can u
 
 Now we can check if the admin account provided was correct or incorrect by comparing its key with the pubkey we provided in our function. If it is incorrect, we return an error.
 
-```rs
+```rust
 // Updated at top of file.
 use crate::{
     error::StreamError,
@@ -435,7 +431,7 @@ When we check the end time, it shouldn't be less than the start time and the sta
 
 Then we can check that the total Lamport deposited in the account should be equal to the amount we want to send + the minimum number of Rent required to create the account on the chain. We can get the minimum amount of balance required by using the `Rent::get()?.minimum_balance(len)` method. If this failed we can return the `NotEnoughLamports` error.
 
-```rs
+```rust
         // 0.03 sol token admin account fee
         // 30000000 Lamports = 0.03 sol
         **escrow_account.try_borrow_mut_lamports()? -= 30000000;
@@ -455,7 +451,7 @@ Then we can check that the total Lamport deposited in the account should be equa
 
 Then we will check who signed this transaction, and the public key of the receiver is equal to the account provided to us.
 
-```rs
+```rust
         if !sender_account.is_signer {
             return Err(ProgramError::MissingRequiredSignature);
         }
@@ -468,7 +464,7 @@ Then we will check who signed this transaction, and the public key of the receiv
 Now we are all set to write the stream data to our program account. We will create a `StreamData` struct and store that in our escrow account.
 In `state.rs` at the end add a new struct:
 
-```rs
+```rust
 #[derive(Clone, Debug, PartialEq, BorshDeserialize, BorshSerialize)]
 pub struct StreamData {
     pub start_time: UnixTimestamp,
@@ -499,7 +495,7 @@ We have added a new method to create an instance of the struct with the help of 
 
 Now let's jump back to the `processor.rs` file and complete the function:
 
-```rs
+```rust
        let escrow_data = StreamData::new(data, *sender_account.key);
 
         escrow_data.serialize(&mut &mut escrow_account.data.borrow_mut()[..])?;
@@ -513,7 +509,7 @@ We will first create the `escrow_data` and then with the help of the borsh `seri
 
 We have stored accounts into variables just like we did in the `process_create_stream` function. Then we have deserialized data in the `escrow_account` not that this data is what we saved in the `process_create_stream` function. Then we perform a check that the receiver of this account is the singer and this `escrow_account` belongs to him.
 
-```rs
+```rust
  fn process_withdraw(
         _program_id: &Pubkey,
         accounts: &[AccountInfo],
@@ -537,7 +533,7 @@ We have stored accounts into variables just like we did in the `process_create_s
 
 Then we can check if the user can withdraw the required Lamports or not. We will get the current time and calculate the total number of Lamports owned by them. By subtracting `lamports_withdrawn`, we can keep track of the Lamports that are already withdrawn by the receiver.
 
-```rs
+```rust
         let time = Clock::get()?.unix_timestamp;
 
         let total_token_owned = escrow_data.amount_second
@@ -551,7 +547,7 @@ Then we can check if the user can withdraw the required Lamports or not. We will
 
 Now we can proceed with the transaction and send the token to `receiver_account`. We will also make an increment in `lamports_withdrawn`. We finish the function by writing the new `escrow_data` to `escrow_account` and then returning the result `Ok(())`.
 
-```rs
+```rust
         **escrow_account.try_borrow_mut_lamports()? -= data.amount;
         **receiver_account.try_borrow_mut_lamports()? += data.amount;
         escrow_data.lamports_withdrawn += data.amount;
@@ -565,7 +561,7 @@ Now we can proceed with the transaction and send the token to `receiver_account`
 
 In this function also we will get the accounts and store them in variables. Then we get the `escrow_data` just like we did in the `process_withdraw` function. We then check if the `sender_account` is the owner of `escrow_account` and if `sender` has signed the transaction or not.
 
-```rs
+```rust
 fn process_close(_program_id: &Pubkey, accounts: &[AccountInfo]) -> ProgramResult {
         let account_info_iter = &mut accounts.iter();
         let escrow_account = next_account_info(account_info_iter)?;
@@ -585,7 +581,7 @@ fn process_close(_program_id: &Pubkey, accounts: &[AccountInfo]) -> ProgramResul
 
 We are closing the escrow account, so we want to transfer the funds to the receiver and sender which they own. So we can calculate the total tokens owned by the receiver.
 
-```rs
+```rust
         let time: i64 = Clock::get()?.unix_timestamp;
         let mut lamport_streamed_to_receiver: u64 = 0;
 
@@ -598,7 +594,7 @@ We are closing the escrow account, so we want to transfer the funds to the recei
 
 Now we have the total Lamports that are owned by the receiver. We can send the remaining Lamports to the sender. At last, we set the `escrow_account` balance to 0, then we can return the result `Ok(())`.
 
-```rs
+```rust
         **receiver_account.try_borrow_mut_lamports()? += lamport_streamed_to_receiver;
         escrow_data.lamports_withdrawn += lamport_streamed_to_receiver;
         **sender_account.try_borrow_mut_lamports()? += **escrow_account.lamports.borrow();
@@ -745,7 +741,7 @@ cargo check
 
 Now in the `main.rs` let us add code to create a "Hello world!" route with rocket.rs.
 
-```rs
+```rust
 use rocket::{get, routes};
 
 #[rocket::main]
@@ -780,9 +776,9 @@ cargo run
 
 It will compile and run the program then we can open `http://127.0.0.1:8000/` on our browser to see:
 
-![browser image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image-solana-streaming-protocol-1.png)
+![browser image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image-solana-streaming-protocol-1.png?raw=true)
 
-![browser image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image-solana-streaming-protocol-2.png)
+![browser image](https://github.com/figment-networks/learn-tutorials/raw/master/assets/image-solana-streaming-protocol-2.png?raw=true)
 
 Now let's see what code made this happen. In the first line, we have imported `routes` macro and `get` from the rocket. We will use `#[rocket::main]` on our function which will transform our function into a regular main function that internally initializes a Rocket-specific tokio runtime and runs the attributed async fn inside of it.
 
@@ -847,7 +843,7 @@ diesel migration run
 
 Now we can run the following command to create a `.env` file in our project which would contain the database URL.
 
-```
+```text
 DATABASE_URL=postgres://username:password@localhost/sol_stream_indexer > .env
 ```
 
@@ -868,7 +864,7 @@ Create the empty files and let us write the code for our backend.
 
 Firstly in `main.rs` at the top add:
 
-```rs
+```rust
 #[macro_use]
 extern crate diesel;
 
@@ -894,7 +890,7 @@ We have added `#[macro_use]` for diesel. We will create the function to get `PgC
 
 Now we can go in `models.rs` and add:
 
-```rs
+```rust
 use crate::diesel::ExpressionMethods;
 use borsh::{BorshDeserialize, BorshSerialize};
 use diesel::{Insertable, PgConnection, QueryDsl, Queryable, RunQueryDsl};
@@ -935,7 +931,7 @@ Here we have 2 structs one of them is the same we had in our program `StreamData
 
 Now we will need some more functions in on `Stream` so at the end of the file add:
 
-```rs
+```rust
 impl Stream {
     pub fn new(pda_pubkey: String, pda_data: &Vec<u8>) -> Option<Self> {
         let stream_data = match StreamData::try_from_slice(pda_data) {
@@ -1031,7 +1027,7 @@ Now we can move to the `src/solana.rs` file:
 
 We have added three functions to this file.
 
-```rs
+```rust
 use std::{str::FromStr, thread};
 
 use solana_client::{pubsub_client, rpc_client::RpcClient};
@@ -1111,7 +1107,7 @@ In the `subscribe_to_program` we have spawned a thread to listen to updates we w
 
 Now let's go to `src/routes.rs`:
 
-```rs
+```rust
 use std::str::FromStr;
 use rocket::get;
 use rocket::serde::json::serde_json::json;
@@ -1160,7 +1156,7 @@ We have added create two functions the `index` function is the same as we had in
 
 Now let us move to `src/main.rs` and add the main function. At top of the file add the following Code:
 
-```rs
+```rust
 use solana::get_all_program_accounts;
 use solana::subscribe_to_program;
 
@@ -1171,7 +1167,7 @@ use crate::routes::index;
 
 Now add the `main` function:
 
-```rs
+```rust
 #[rocket::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let program_accounts = get_all_program_accounts();
