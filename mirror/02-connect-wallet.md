@@ -34,6 +34,6 @@ Furthermore, we should implement flow control for the logic above and consider a
 
 # Challenge 🏋️
 
-Navigate to `context/web3Context.tsx` in your editor and follow the steps included as comments to finish writing the `Web3Provider` function. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 3.1](#listing-31-instructions-for-fetching-an-accounts-balance) below.
+Navigate to `context/web3Context.tsx` in your editor and follow the steps included as comments to finish writing the `Web3Provider` function. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 2.2](#listing-22-instructions-for-connecting-a-wallet) below.
 
 ##### _Listing 2.2: Instructions for connecting a wallet_
