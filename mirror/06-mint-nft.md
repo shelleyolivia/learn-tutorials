@@ -1,5 +1,10 @@
 # Step 6: Minting a Post NFT
 
+## Steps
+* Write simple smart contract for NFT using solidity. Smart contract exposes createToken method which takes in Arweave transactionId
+* Write unit test for createToken functionality
+* Add createToken smart contract call to handleSubmit in CreatePostForm right after successfull creation of entry on Arweave.
+
 ## [Concept 1]
 
 ## [Concept 2, etc]
