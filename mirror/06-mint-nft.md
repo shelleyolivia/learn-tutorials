@@ -4,6 +4,7 @@
 * Write simple smart contract for NFT using solidity. Smart contract exposes createToken method which takes in Arweave transactionId
 * Write unit test for createToken functionality
 * Add createToken smart contract call to handleSubmit in CreatePostForm right after successfull creation of entry on Arweave.
+* Create a NFTDetails component in which you retrieve tokenId for given transactionId and it's owner. You can display tokenId to the user to indicate that entry has a token associated with it.
 
 ## [Concept 1]
 
