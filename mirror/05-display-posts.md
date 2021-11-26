@@ -1,5 +1,11 @@
 # Step 5: Fetching a List of Posts
 
+## Steps
+* Create a new API endpoint api/arweave/search/[[query]].ts. In this endpointuse `search` method together with `tags` and limit to find entries for our tag with key `App-Name`
+* Add a new custom hook to useArweave.ts `indexTransactions`
+* Create PostsList component which uses above hook to fetch most recent entries for our app.
+* Add PostsList component to index page
+
 ## [Concept 1]
 
 ## [Concept 2, etc]
