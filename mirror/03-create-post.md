@@ -1,5 +1,16 @@
 # Step 3: Writing a Post
 
+## Steps
+* Setup Arweave wallet
+* Create `CreatePostForm` component with title and body fields
+* Create API route `/api/arweave/post`which will create, sign and post transaction. Make sure that relevant tags are added
+* Update handleSubmit in CreatePostForm with:
+  * create JSON metadata file
+  * make a request to created API endpoint using axios POST request and passing in data and address as data object
+* Write simple smart contract for NFT using solidity. Smart contract exposes createToken method which takes in Arweave transactionId
+* Write unit test for createToken functionality
+* Add createToken smart contract call to handleSubmit after successfull creation of entry on Arweave
+
 ## [Concept 1]
 
 ## [Concept 2, etc]
