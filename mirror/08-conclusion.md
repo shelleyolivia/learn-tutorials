@@ -29,4 +29,7 @@ _If you want to connect with an amazing community of developers, join us on [Dis
 
 ## Additional Resources
 
-- [TBD]()
+- [Arweave Overview](https://www.arweave.org/technology)
+- [Arweave Lightpaper](https://www.arweave.org/files/arweave-lightpaper.pdf)
+- [OpenZeppelin](https://openzeppelin.com/)
+- [Hardhat](https://hardhat.org/)
