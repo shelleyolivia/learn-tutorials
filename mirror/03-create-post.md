@@ -18,11 +18,9 @@ The architecture to achieve all this is beyond the scope of this tutorial, but i
 
 ## Steps
 * Setup Arweave wallet
-* Create `CreatePostForm` component with title and body fields
-* Create API route `/api/arweave/post`which will create, sign and post transaction. Make sure that relevant tags are added
+* Update API route in `/api/arweave/post`in order to create, sign and post transaction. Make sure that relevant tags are added
 * Update handleSubmit in CreatePostForm with:
-  * create JSON metadata file
-  * make a request to created API endpoint using axios POST request and passing in data and address as data object
+  * Request to above API endpoint. (Submit JSON metadata composed of post title and body to Arweave)
 
 ##### _Listing 3.1: Code for creating a post_
 >>>>>>> Insert code here
