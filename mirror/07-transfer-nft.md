@@ -1,9 +1,7 @@
 # Step 7: Transferring an NFT
 
 ## Steps
-* Create a TransferNFTForm component. 
-* This component has one input field for the address of recipient.
-* Create a handleSubmit method. In it first we need to getSigner and associate it with smart contract and then call `transferFrom` method passing in owner address, recipient address and tokenId we want to transfer. 
+* Update a handleSubmit method of components/TransferNFTForm. In it first we need to getSigner and associate it with smart contract and then call `transferFrom` method passing in owner address, recipient address and tokenId we want to transfer. 
 
 ## [Concept 1]
 
