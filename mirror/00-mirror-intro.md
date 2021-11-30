@@ -1,14 +1,14 @@
 # Mirror Tutorial
 
-Welcome to the Mirror Tutorial! The goal of this tutorial is to introduce the Web 3 development process in the context of a full stack application. Specifically, we'll be bridging common Web 2.0 concepts by building a blog using a Web 3 stack. As you build, we'll introduce key concepts to help you scaffold your development mental model and start adding Web 3 skills into your toolbox.
+Welcome to the Mirror Tutorial. The goal of this tutorial is to introduce the Web 3 development process in the context of a full stack application. Specifically, we'll be bridging you from Web 2 to Web 3 by building a blog using a Web 3 stack. As you build, we'll introduce key concepts to help you scaffold your development mental model and start adding Web 3 skills into your toolbox.
 
 ## Prerequisites
 
-If you know how to program and have [JavaScript](https://www.javascript.com/) experience, you'll be able to complete the tutorial. Having said that, this will be a more comfortable experience if you have some experience with [TypeScript](https://www.typescriptlang.org/), [React](https://reactjs.org/), and [Next.js](https://nextjs.org/). While you may not have built full stack Web 3 applications, hopefully you have used a crypto wallet like [MetaMask](https://metamask.io/) and you are familiar with basic blockchain concepts like public address, private keys, and signing transactions.
+If you know how to program and have [JavaScript](https://www.javascript.com/) experience, you'll be able to complete the tutorial. Having said that, you'll be more comfortable if you have some experience with [TypeScript](https://www.typescriptlang.org/), [React](https://reactjs.org/), and [Next.js](https://nextjs.org/). Moreover, while you may not have built full stack Web 3 applications before, hopefully you have used a crypto wallet like [MetaMask](https://metamask.io/) and you're familiar with basic blockchain concepts like public address, private keys, and signing transactions.
 
 If any of that sounds unfamiliar, or the idea of engaging with those concepts sounds daunting at this point in your learning, we recommend starting with the [Solana Wallet](https://learn.figment.io/tutorials/solana-wallet-intro) tutorial before completing this one.
 
-We think of ourselves as your guide - for a brief amount of time - on your journey to build a better internet. We hope you walk away with a better understanding of what it takes to build full stack Web 3 decentralized applications (dApps) and perhaps even a bit more confidence to tackle significant projects.
+As always, we think of ourselves as your guide - for a brief amount of time - on your journey to build a better internet. We hope you walk away with a better understanding of what it takes to develop full stack Web 3 decentralized applications (dApps) and perhaps even a bit more confidence to tackle significant projects.
 
 We've tried to show you the door (or maybe part of it). Your job is to discover your path and walk it courageously.
 
@@ -27,7 +27,9 @@ Finally, we **challenge** you to implement the feature on your own by providing 
 
 ## Blog Preview
 
-By the time you're done, you'll have a blog similar to [Mirror.xyz](https://mirror.xyz/). Users will be able to write posts, publish them, mint NFTs for each post, and transfer those NFTs to other public addresses. The posts will be saved on [Arweave](https://www.arweave.org/), a decentralized storage solution for immutable data, and the NFTs will be ERC-721 tokens on [Polygon](https://polygon.technology/), a protocol for scalable Ethereum dApps. 
+By the time you're done, you'll have a blog similar to [Mirror.xyz](https://mirror.xyz/). Users will be able to write posts, publish them, mint NFTs for each post, and transfer those NFTs to other public addresses.
+
+The posts will be saved on [Arweave](https://www.arweave.org/), a decentralized storage solution for immutable data storage, and the NFTs will be ERC-721 tokens on [Polygon](https://polygon.technology/), a protocol for scalable Ethereum dApps. 
 
 **Update once tutorial is more developed**
 >>>>>>>>>>>>>>> Start
@@ -51,6 +53,9 @@ Although building a production-ready, non-custodial wallet like [Phantom](https:
 
 >>>>>>>>>>>>>>> End
 
-![Figure 2: All big things come from small beginnings](./assets/ladder.jpeg)
-##### _Figure 2: All big things come from small beginnings_
+Let's get started!
 
+![Figure 2: All big things come from small beginnings](./assets/ladder.jpeg)
+
+{% label %}
+Figure 2: All big things come from small beginnings

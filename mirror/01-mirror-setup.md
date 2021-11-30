@@ -37,7 +37,7 @@ PRIVATE_KEY=Your private key exported from Metamask. Go to https://metamask.zend
 {% sidenote title="Box 1.1: What is MetaMask?" %}
 [MetaMask](https://metamask.io/) is a crypto wallet built as a browser extension that allows you to interact with Ethereum and Ethereum-compatible blockchains as well as dApps built on top of them.
 
-> **Warning**: The **private key** environment variable is required to deploy the smart contract in [Step X](). Despite the fact that the `.env.local` file has been placed in `.gitignore`, we recommend you create a wallet whose sole purpose is its use in tutorials and local development. That way, you can mitigate the risk of exposing your actual wallet's private keys.
+> **Warning**: The **private key** environment variable is required to deploy the smart contract in [Step X](). Despite the fact that the `.env.local` file has been placed in `.gitignore`, we recommend you create a wallet whose sole purpose is its use in tutorials and local development. That way, you can mitigate the risk of exposing your wallet's private key.
 
 With the environment variables in place, we're ready to compile and run the dApp.
 
@@ -64,6 +64,4 @@ Ethers is a JavaScript library designed to interact with Ethereum and Ethereum-c
 
 Hardhat is a development environment for Ethereum and Ethereum-compatible blockchains. It allows you to write and compile Solidity locally, run tests, and deploy smart contracts, all while fully supporting TypeScript. We'll leverage Hardhat in [Step X]() to manage development of the smart contract used to mint and transfer NFTs related to blog posts.
 
->>>>>>>>> Start
-Should we describe the non-standard directories like web3, context, fetchers, etc here? My sense is that it's probably helpful to provide context on the template before we use it in subsequent steps.
->>>>>>>>> End
+Feel free to explore the rest of the template. It includes standard hooks and components that we'll leverage to add functionality to our blog. But that's enough set up for now. Let's build!
