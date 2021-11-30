@@ -16,10 +16,10 @@ We'll be leveraging [OpenZeppelin](https://openzeppelin.com/), a library of stan
 # Implementation 🧩
 
 ## Steps
-* Write simple smart contract for NFT using solidity. Smart contract exposes createToken method which takes in Arweave transactionId
-* Write unit test for createToken functionality
-* Add createToken smart contract call to handleSubmit in CreatePostForm right after successfull creation of entry on Arweave.
-* Create a NFTDetails component in which you retrieve tokenId for given transactionId and it's owner. You can display tokenId to the user to indicate that entry has a token associated with it.
+* Update createToken method in smart contract in web3/contracts/MirrorClone.sol. Smart contract takes in Arweave transactionId
+* Make sure unit tests for smart contract are passing
+* Update `web3/scripts/deploy.ts` with functionality to deploy MirrorClone smart contract to testnet. 
+* Add `createToken` smart contract call to handleSubmit in CreatePostForm right after successfull creation of entry on Arweave. As mentioned above this method takes in Arweave transactionId.
 
 ##### _Listing 6.1: Code for minting a post NFT_
 >>>>>>> Insert code here
