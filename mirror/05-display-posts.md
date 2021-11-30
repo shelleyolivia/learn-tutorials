@@ -9,6 +9,7 @@
 ## Steps
 * Update API endpoint api/arweave/search/[[query]].ts: 
 * Use `search` method together with `tags` and `limit` to find entries for our tag with key `App-Name` (APP_NAME env variable)
+* First query parameter is optional and it is an address. It allows to query for entries for specific address. Add optional `Address` tag if address is present. This query is used on /profile page
 
 ##### _Listing 5.1: Code for fetching a list of posts_
 >>>>>>> Insert code here
