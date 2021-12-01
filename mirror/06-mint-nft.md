@@ -11,15 +11,150 @@ Smart contracts are computer programs that run on certain blockchain protocols a
 
 We'll be leveraging [OpenZeppelin](https://openzeppelin.com/), a library of standard smart contracts that have been audited for security and are fully composable. As with any library or package you may have used before, this allows us to leverage off-the-shelf functionality and extend it if we need anything custom.
 
-[Hardhat](https://hardhat.org/) is another important tool that we'll be leveraging as a development environment. It will allow us to compile Solidity, which is the programming language we'll use to write our smart contract. Moreover, it will provide us with a testing framework for unit tests, and will facilitate the deployment to Polygon when we're ready.
+[Hardhat](https://hardhat.org/) is another important tool that we'll be leveraging as a development environment. It will allow us to compile [Solidity](https://docs.soliditylang.org/), which is the programming language we'll use to write our smart contract. Moreover, it will provide us with a testing framework for unit tests, and will facilitate the deployment to Polygon when we're ready.
 
 # Implementation 🧩
 
-## Steps
-* Update createToken method in smart contract in web3/contracts/MirrorClone.sol. Smart contract takes in Arweave transactionId
-* Make sure unit tests for smart contract are passing
-* Update `web3/scripts/deploy.ts` with functionality to deploy MirrorClone smart contract to testnet. 
-* Add `createToken` smart contract call to handleSubmit in CreatePostForm right after successfull creation of entry on Arweave. As mentioned above this method takes in Arweave transactionId.
+If you navigate to `web3/contracts/MirrorClone.sol` you'll notice we have scaffolded a smart contract for you already. Before diving into the `createToken` function we need to write, let's dive into the general structure of the code.
+
+## Smart Contract Review
+
+Solidity programs always start with the Solidity version at the top using the keyword `pragma`. This tells the compiler what version of Solidity to use.
+
+In this case we've also imported a few pre-built contracts from the OpenZeppelin library. Our contract will be inheriting the basic functionality of an ERC-721 token from these. That will allows us to focus on the functionality we want to add.
+
+You can think of the smart contract as a class with properties, a constructor, and methods. That maps pretty closely to the subsequent lines, which include defining the properties for our smart contract (e.g. a mapping called `tokenURIToTokenId`), setting up a constructor that takes in a name and symbol, and adding functions to extend the inherited functionality.
+
+## Creating Tokens
+
+Focusing on the `createToken` function, the first instruction tells us we need to make sure we are passing a `tokenURI` before creating a token, so we'll need to leverage Solidity's `require` function. If the requirement fails, we should return a simple, descriptive message.
+
+```javascript
+require(bytes(_tokenURI).length > 0, "Empty tokenURI");
+```
+
+Next we should increment the counter for `tokenIds` so we can assign a unique token ID for each post.
+
+```javascript
+_tokenIds.increment();
+uint256 newItemId = _tokenIds.current();
+```
+
+We can then leverage the `_safeMint` function we inherited from the **ERC721.sol contract** to create a token for the post's author. The intent will be for the dApp to immediately mint a post's NFT when the author clicks publish.
+
+Once minted we should set the token's URI to connect it to the post using the Arweave transaction hash. We should also add this relationship to our mapping tracker, `tokenURIToTokenId`, so we can later query NFTs by their tokenURI.
+
+Finally, we should emit an event that includes the author's address, the token ID and the token URI before the function returns the token ID.
+
+```javascript
+_safeMint(msg.sender, newItemId);
+_setTokenURI(newItemId, _tokenURI);
+tokenURIToTokenId[_tokenURI] = newItemId;
+
+emit TokenMinted(msg.sender, newItemId, _tokenURI);
+
+return newItemId;
+```
+
+## Testing the Smart Contract
+
+Smart contracts are no different than any other programs we write, so we should write tests to help us build robust contracts and provide a safety net for changes throughout development. We have already written 3 tests for you, and you can confirm they're passing by running:
+
+```text
+$ yarn web3:compile
+$ yarn web3:test
+```
+
+All three of these should be passing at this point because we implemented the code above. But to sanity check, we can comment out the code for the `createToken` function we just wrote. If we run the tests again, you'll notice both the minting test and the emit event test fail.
+
+```text
+$ yarn web3:test
+yarn run v1.22.11
+$ npx hardhat test
+.
+.
+.
+MirrorClone
+    methods
+      createToken
+        ✓ reverts when empty tokenURI passed (42ms)
+        1) mints new token
+        2) emits TokenMinted event
+1 passing
+2 failing
+```
+
+If you uncomment the code again, everything will be nice and green.
+
+Let's write one more test for the smart contract. In Solidity, mappings return 0 when a key doesn't have a value assigned to it. In other words, all keys exist with a default value of 0. We can write a test to make sure that any `tokenURI` that doesn't exist returns 0.
+
+```javascript
+describe('tokenURIToTokenId', () => {
+  it('returns 0 if tokenURI does not exists', async () => {
+    expect(await contract.tokenURIToTokenId('ar://does-not-exists')).to.eq(
+      0,
+    );
+  });
+});
+```
+
+Running the tests again should confirm all four tests are passing. 
+
+## Deploying the Smart Contract
+
+Now that we have a working smart contract that works as intended, we're ready to deploy. We're going to leverage the Polygon protocol to avoid the high gas fees on Ethereum. For our purposes Polygon works identically and is fully compatible with the Ethereum Virtual Machine.
+
+Moreover, we're going to be deploying to Polygon's Mumbai testnet so you don't have to use valuable tokens to complete this dApp. In fact, if you were developing this for production, you'd deploy it to testnet first in order to test the functionality before deploying it to mainnet. Most production projects do that to make sure that mainnet deployments have been battle tested.
+
+{% sidenote title="Box 6.1: What's a testnet?" %}
+If you're unfamiliar with the concept of various networks, you can think of it as different environments for an app in Web 2 (e.g. development, test, production, etc). Most protocols have a mainnet blockchain for production deployments with real economic value, and a testnet for experimentation. The testnet matches the mainnet in functionality but doesn't manage economic value.
+
+In order to deploy the contract, we can leverage **ethers** and **hardhat** and reference the `getContractFactory` to load the **MirrorClone** smart contract we just wrote. We can then use the `deploy` method passing in the name and the symbol as required by the `constructor`.
+
+We can also include a console log that prints the smart contract public address.
+
+```javascript
+const MirrorClone = await ethers.getContractFactory('MirrorClone');
+const mirrorClone = await MirrorClone.deploy('Mirror clone', 'MRM');
+
+await mirrorClone.deployed();
+
+console.log('MirrorClone deployed to:', mirrorClone.address);
+```
+
+No we can go to the command line and deploy the contract:
+
+```text
+$ yarn web3:deploy:testnet
+```
+
+The contract public address was logged to the console by our deployment script. Let's copy that and paste it into **.env.development** as the `NEXT_PUBLIC_CONTRACT_ADDRESS` environment variable. The dApp will leverage this when publishing to assign NFTs to posts.
+
+We'll also want to verify the contract, which allows chain explorers like [Polygonscan](https://polygonscan.com/) and [Etherscan](https://etherscan.io/) to confirm the deployed contract matches the source code and to display the source code for developers and users to review.
+
+```text
+$ yarn web3:verify:testnet CONTRACT_ADDRESS 'Mirror clone' 'MRM'
+```
+
+If you visit [Polygonscan](https://mumbai.polygonscan.com/) set to testnet, you can copy-paste the contract address from the command line into the search box and confirm the contract is on the blockchain!
+
+## Minting NFTs for Posts
+
+Recall from Step 3 that we wrote a function that created posts in Arweave. We now need to integrate the NFT minting functionality into that workflow. If we return to `CreatePostForm.tsx`, we notice instructions at the bottom of the try block in `handleSubmit` for minting an NFT.
+
+We'll need to instantiate a signer and connect the contract to the signer. We'll then need to leverage the `createToken` function we just wrote to mint the NFT.
+
+```javascript
+const signer = provider.getSigner();
+const contractWithSigner = contract.connect(signer);
+
+const resp = await contractWithSigner.createToken(transactionId);
+const rec = await resp.wait();
+```
+
+If you try to create an entry now, your MetaMask wallet will ask you to sign a transaction to mint the NFT. After Arweave confirms the post, you'll be able to navigate to the post and see the NFT!
+
+But wouldn't it be nice if you could transfer that NFT to someone else? Perhaps someone wants to purchase the post from you or you want to gift ownership of the post to a friend. We'll tackle that next in Step 7.
 
 ##### _Listing 6.1: Code for minting a post NFT_
 >>>>>>> Insert code here
