@@ -41,15 +41,16 @@ To successfully launch our Collection on Solana we need to go through three step
 First, we create an empty folder in our desktop named "solana_generative_nfts". Then we open GitHub repositories of these tools and clone those in our folder. (links are provided in the references section)
 For example for hashlips art engine first, we open the link in our browser:
 
-![hashlips github.jpg](../../../.gitbook/assets/hashlips_github.jpg)
+![hashlips github.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/hashlips_github.jpg)
+
 
 Then first we click on the green Code button and from the new menu we click on Download ZIP:
 
-![download zip in github.jpg](../../../.gitbook/assets/download_zip_in_github.jpg)
+![download zip in github.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/download_zip_in_github.jpg)
 
 After the download is completed we simply extract the folder inside the zip file in our "solana_generative_nfts" folder. We simply repeat this process for "metaplex" and "candy machine" as well and the final result should be like this:
 
-![folders in man folder.jpg](../../../.gitbook/assets/folders_in_man_folder.jpg)
+![folders in man folder.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/folders_in_man_folder.jpg)
 
 # Setting up Solana-Cli
 
@@ -59,11 +60,11 @@ We can first deploy our collection on **devnet** and then in case of successful 
 
 If you want to see current config being used in CLI, you can always run command `solana config get` in a terminal and result would be like:
 
-![solana config get screenshot.jpg](../../../.gitbook/assets/solana_config_get_screenshot.jpg)
+![solana config get screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solana_config_get_screenshot.jpg)
 
 To change the default network to devnet first we run command `solana config set --url devnet` :
 
-![setting solana-cli to devnet screenshot.jpg](../../../.gitbook/assets/setting_solana-cli_to_devnet_screenshot.jpg)
+![setting solana-cli to devnet screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/setting_solana-cli_to_devnet_screenshot.jpg)
 
 Then we create a wallet by running command below:
 
@@ -71,11 +72,11 @@ Then we create a wallet by running command below:
 
 Terminal prompts message bellow:
 
-![enter BIP39 pashh in terminal screenshot.jpg](../../../.gitbook/assets/enter_BIP39_pashh_in_terminal_screenshot.jpg)
+![enter BIP39 pashh in terminal screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/enter_BIP39_pashh_in_terminal_screenshot.jpg)
 
 You can enter a password but make sure you save your entered passphrase in a safe place because if you forget it you wouldn't be able to recover your wallet.
 
-![confirmation for creating a devnet keypair.jpg](../../../.gitbook/assets/confirmation_for_creating_a_devnet_keypair.jpg)
+![confirmation for creating a devnet keypair.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/confirmation_for_creating_a_devnet_keypair.jpg)
 
 I'm sharing my seed phrase with you because of educational purposes and the fact that I'm gonna remove this keypair after this tutorial but you shouldn't share yours under any circumstances.
 
@@ -169,7 +170,7 @@ If you want to dig deeper and maybe add other metadata I recommend referring to 
 
 Now we're OK with configuration and we can generate our Collection. To do so, in a terminal make sure you're in hashlips art engine folder and then run `yarn run generate`:
 
-![NFTs generated screenshot.jpg](../../../.gitbook/assets/NFTs_generated_screenshot.jpg)
+![NFTs generated screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/NFTs_generated_screenshot.jpg)
 
 Awesome! now we have our NFTs and their metadata inside the build folder.
 
@@ -177,7 +178,7 @@ Awesome! now we have our NFTs and their metadata inside the build folder.
 
 We will use Metaplex to create a Candy Machine for our collection on Solana. Candy machine is a minimal marketplace where people can mint our NFTs for themselves. We first head back to three folders we had then we open metaplex folder in VS code. Inside the "metaplex-master" folder we create a new folder and name it "assets". Then from the build folder in hashlips folder, we copy all the .png files and .json files except _metadata.json. the final result should be like this:
 
-![assets_in_metaplex_screenshot.jpg](../../../.gitbook/assets/assets_in_metaplex_screenshot.jpg)
+![assets_in_metaplex_screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/assets_in_metaplex_screenshot.jpg)
 
 In the new VS code window open a terminal and run `cd js` then run `yarn install` wait for it to install dependencies. After completion of that run `yarn run build` and wait for that to finish as well. then run `yarn run bootstrap`.
 
@@ -191,13 +192,13 @@ We will use candy-machine-cli.ts to set up our candy machine. To upload your col
 
 after `--keypair` you need to put your wallet's address.
 
-![upload sucessful candy machine.jpg](../../../.gitbook/assets/upload_sucessful_candy_machine.jpg)
+![upload sucessful candy machine.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/upload_sucessful_candy_machine.jpg)
 
 Wait for it to finish. The next step is creating a candy machine. for that run command bellow:
 
 `ts-node js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env devnet --keypair /home/mmostafavi/.config/solana/devnet.json -p 1`
 
-![candy machine created screen shot.jpg](../../../.gitbook/assets/candy_machine_created_screen_shot.jpg)
+![candy machine created screen shot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/candy_machine_created_screen_shot.jpg)
 
 Now after this is finished our candy machine is ready. We can see the pubKey of our candy machine in the terminal but you can find all information related to our candy machine in the newly generated file in .cache folder.
 
@@ -205,7 +206,7 @@ The last thing we need to do in metaplex is to update our candy machine. We need
 
 `ts-node js/packages/cli/src/candy-machine-cli.ts update_candy_machine --env devnet --keypair /home/mmostafavi/.config/solana/devnet.json -p 0.1 --date "17 Oct 2021 00:00:00 GMT"`
 
-![updated the candy machine with date and price.jpg](../../../.gitbook/assets/updated_the_candy_machine_with_date_and_price.jpg)
+![updated the candy machine with date and price.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/updated_the_candy_machine_with_date_and_price.jpg)
 
 Awesome! Now we have our candy machine all set up and updated. let's build a dApp connected to our candy machine.
 
@@ -240,11 +241,11 @@ from **devnet-temp** find:
 
 Now we have set up everything up for our dApp. We can run `yarn start` to run our dApp locally on localhost;//3000.
 
-![initial state of dapp candy machine screenshot.jpg](../../../.gitbook/assets/initial_state_of_dapp_candy_machine_screenshot.jpg)
+![initial state of dapp candy machine screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/initial_state_of_dapp_candy_machine_screenshot.jpg)
 
 Now let's connect our phantom wallet
 
-![cansy store up and running wallet connected.jpg](../../../.gitbook/assets/cansy_store_up_and_running_wallet_connected.jpg)
+![cansy store up and running wallet connected.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/cansy_store_up_and_running_wallet_connected.jpg)
 
 Awesome! now we have an ugly-looking dApp! but we can change the UI of our website inside the "candy-machine-mint-main" folder, so it's not a big deal.
 
