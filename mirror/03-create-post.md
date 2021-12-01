@@ -81,7 +81,7 @@ const response = await axios.post(routes.api.arweave.post, {
 const transactionId = response.data;
 ```
 
-With that our users are able to create entries that will live forever on the Arweave blockchain! There's one issue though - even though we can create an entry, we can't see it in our dApp yet. We'll address that shortly in Step 4.
+With that our users are able to create entries that will live forever on the Arweave blockchain! There's one issue though - even though we can create an entry, we can't see it in our dApp yet. We'll address that shortly but first we need an endpoint to fetch posts. We'll tackle that next in Step 4.
 
 ##### _Listing 3.1: Code for creating a post endpoint_
 
