@@ -137,6 +137,12 @@ $ yarn web3:deploy:testnet
 
 The contract public address was logged to the console by our deployment script. Let's copy that and replace the default zeros in `.env.development` for the `NEXT_PUBLIC_CONTRACT_ADDRESS` environment variable. The dApp will leverage this when publishing entries to assign them NFTs.
 
+We'll need to restart the local server for the variable to reset:
+
+```bash
+$ ARWEAVE_WALLET=$(cat arweave-wallet.json) yarn dev
+```
+
 We'll also want to verify the contract, which allows chain explorers like [Polygonscan](https://polygonscan.com/) and [Etherscan](https://etherscan.io/) to confirm the deployed contract matches the source code and to display the source code for developers and users to review.
 
 Note that you should replace the `INSERT_CONTRACT_ADDRESS_HERE` in the following command with your smart contract public address.
