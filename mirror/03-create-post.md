@@ -6,7 +6,7 @@ The blockchain however is a bit different because it's decentralized. Rather tha
   
 ## Arweave - Sustainable Onchain Storage
 
-Arweave is a decentralized network that allows users with extra storage space to provide that space as a storage to the network in exchange for economic incentives. Users looking to store data in a decentralized, secure, censorship-resistant way, can leverage the network to do so. Effectively, Arweave is the storage part of the stack for dApps.
+[Arweave](https://www.arweave.org/) is a decentralized network that allows users with extra storage space to provide that space as a storage to the network in exchange for economic incentives. Users looking to store data in a decentralized, secure, censorship-resistant way, can leverage the network to do so. Effectively, Arweave is the storage part of the stack for dApps.
 
 Arwaeve uses a technology called "blockweaves" to achieve this. Similar to a blockchain, which connects transactions in a main chain across blocks, blockweaves are connected blocks that contain data. One of the main differences is that rather than connect blocks as a singly linked list, blockweaves are more like graphs.
 

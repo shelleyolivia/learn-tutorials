@@ -1,6 +1,6 @@
 # Mirror Tutorial
 
-Welcome to the Mirror Tutorial. The goal of this tutorial is to introduce the Web 3 development process in the context of a full stack application. Specifically, we'll be bridging you from Web 2 to Web 3 by building a blog using a Web 3 stack. As you build, we'll introduce key concepts to help you scaffold your development mental model and start adding Web 3 skills into your toolbox.
+Welcome to the Mirror Tutorial. The goal of this tutorial is to introduce the Web 3 development process in the context of a full stack application. Specifically, we'll be bridging you from Web 2 to Web 3 by building a blog using a Web 3 stack. As you build, we'll introduce key concepts to help you scaffold your mental model and start adding Web 3 skills into your toolbox.
 
 ## Prerequisites
 
@@ -29,29 +29,31 @@ Finally, we **challenge** you to implement the feature on your own by providing 
 
 By the time you're done, you'll have a blog similar to [Mirror.xyz](https://mirror.xyz/). Users will be able to write posts, publish them, mint NFTs for each post, and transfer those NFTs to other public addresses.
 
-The posts will be saved on [Arweave](https://www.arweave.org/), a decentralized storage solution for immutable data storage, and the NFTs will be ERC-721 tokens on [Polygon](https://polygon.technology/), a protocol for scalable Ethereum dApps. 
+The posts will be saved on [Arweave](https://www.arweave.org/), a decentralized storage solution for immutable data storage, and the NFTs will be [ERC-721](https://eips.ethereum.org/EIPS/eip-721) tokens on [Polygon](https://polygon.technology/), a protocol for scalable Ethereum dApps.
 
-**Update once tutorial is more developed**
->>>>>>>>>>>>>>> Start
-In [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2), we'll generate a 12-word phrase that will grant us access to a wallet.
+Step 1 will walk you through some basic set up and configuration. This will include cloning a template repo so you don't have to write code you're already familiar with (i.e. NextJS). It will also include setting up a few environment variables you'll need in later steps.
 
-![](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/create.png)
+In Step 2, we'll introduce the [ethers.js](https://docs.ethers.io/) library and learn how to a user's MetaMask wallet to the dApp.
 
-Then we'll build a function to fetch the balance of our newly created wallet in [Step 3](https://learn.figment.io/tutorials/solana-wallet-step-3) before leveraging functionality to issue "test tokens" through something called an "airdrop" that we'll explore in [Step 4](https://learn.figment.io/tutorials/solana-wallet-step-4).
+![Screenshot of connecting wallet]()
 
-![](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/airdrop.png)
+Then we'll introduce [Arweave](https://www.arweave.org/) - a decentralized, censorship resistant storage solution - in Step 3. We'll write an endpoint to create blog posts and finish a form to submit them. In Step 4 we'll learn how to fetch them and in Step 5 we'll write code to display a list of the latest posts.
 
-Having added funds to our wallet, we'll build the ability to transfer funds to another wallet in [Step 5](https://learn.figment.io/tutorials/solana-wallet-step-5) using bank checks as a scaffolding analogy.
+![Screenshot displaying a list of posts]()
 
-![](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/transfer.png)
+Step 6 will be a brief introduction to smart contracts including inheriting from standard libraries, writing functions, testing them and deploying the smart contract to the Polygon testnet. We'll be minting an NFT for each post so authors can own their posts.
 
-Finally, we'll use the phrase we generated in [Step 2](https://learn.figment.io/tutorials/solana-wallet-step-2) to sign into an account and recover access to it in [Step 6](https://learn.figment.io/tutorials/solana-wallet-step-6).
+![Screenshot of NFT]()
 
-![](https://raw.githubusercontent.com/dgamboa/writing-stage/main/public/import.png)
+Finally, Step 7 will implement functionality that allows author's to transfer NFTs. This sets up the application for expansion into a marketplace for blog post ownership.
 
-Although building a production-ready, non-custodial wallet like [Phantom](https://phantom.app/) or [MetaMask](https://metamask.io/) is beyond the scope of this tutorial, by the end of it you'll have developed a foundation of judgment that will let you better allocate your learning time as you explore new projects. To assist with that, we'll end the tutorial with a list of [additional resources](#additional-resources) that you'll be well prepared to explore.
+![Screenshot of transfer]()
 
->>>>>>>>>>>>>>> End
+There are countless ways a dApp like this could be expanded. You could implement the NFT marketplace natively, or you might choose to implement a tipping button for readers who want to reward the writer.
+
+You could even leverage the same smart contracts and Arweave data to restructure the dApp altogether and create a completely new client-side application. Part of what makes Web 3 so powerful is the composability of its stack. There are endless opportunities to get creative and build when data gardens aren't walled and users own their data.
+
+At the end of the tutorial, we'll include a few [additional resources]() if you want to dive deeper into these topics or take the next step in your learning journey.
 
 Let's get started!
 
