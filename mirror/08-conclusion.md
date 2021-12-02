@@ -33,3 +33,4 @@ _If you want to connect with an amazing community of developers, join us on [Dis
 - [Arweave Lightpaper](https://www.arweave.org/files/arweave-lightpaper.pdf)
 - [OpenZeppelin](https://openzeppelin.com/)
 - [Hardhat](https://hardhat.org/)
+- [Ethereum Virtual Machine](https://ethereum.org/en/developers/docs/evm/)

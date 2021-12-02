@@ -35,6 +35,7 @@ Step 1 will walk you through some basic set up and configuration. This will incl
 
 In Step 2, we'll introduce the [ethers.js](https://docs.ethers.io/) library and learn how to a user's MetaMask wallet to the dApp.
 
+>>>>> TBD insert screenshots
 ![Screenshot of connecting wallet]()
 
 Then we'll introduce [Arweave](https://www.arweave.org/) - a decentralized, censorship resistant storage solution - in Step 3. We'll write an endpoint to create blog posts and finish a form to submit them. In Step 4 we'll learn how to fetch them and in Step 5 we'll write code to display a list of the latest posts.

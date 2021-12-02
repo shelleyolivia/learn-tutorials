@@ -42,7 +42,17 @@ PRIVATE_KEY=Your private key exported from MetaMask. Go to https://metamask.zend
 The **private key** environment variable is required to deploy the smart contract in Step 6. Despite the fact that the `.env.local` file has been placed in `.gitignore` already so you don't expose your private key, we still recommend you create a wallet whose sole purpose is its use in tutorials and local development. That way, you can mitigate the risk of exposing your wallet's private key.
 {% endhint %}
 
-With that in place, our dApp template is ready to be built into a functional blog!
+Finally, we want to add certain libraries that will set us up for smart contract development in Step 6 but without which we'll get a few compiling errors.
+
+```bash
+$ yarn web3:compile
+```
+
+With that in place, our dApp template is ready to be built into a functional blog. You can run the local server to get started:
+
+```bash
+$ yarn dev
+```
 
 ## Reviewing the Template
 

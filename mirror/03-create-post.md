@@ -2,11 +2,11 @@
 
 Traditional blogs use databases to persist a post. An author might write some content and publish it, which triggers a create action on the server that writes the data to the database. The database would have schema that define the data structure. For instance, we might have a **posts** table with columns for post id, content, and author id.
 
-The blockchain however is a bit different because it's decentralized. Rather than writing to a specific database, we'll be leveraging a distributed system that can't be controlled by a central authority.
+The blockchain, however, is a bit different because it's decentralized. Rather than writing to a specific database, we'll be leveraging a distributed system that can't be controlled by a central authority.
   
-## Arweave - Sustainable Onchain Storage
+## Sustainable, Decentralized Storage
 
-[Arweave](https://www.arweave.org/) is a decentralized network that allows users with extra storage space to provide that space as a storage to the network in exchange for economic incentives. Users looking to store data in a decentralized, secure, censorship-resistant way, can leverage the network to do so. Effectively, Arweave is the storage part of the stack for dApps.
+[Arweave](https://www.arweave.org/) is a decentralized network that allows users with extra storage space to provide that space as storage to the network in exchange for economic incentives. Users looking to store data in a decentralized, secure, censorship-resistant way, can leverage the network to do so. Effectively, Arweave is the storage part of the stack for dApps.
 
 Arwaeve uses a technology called "blockweaves" to achieve this. Similar to a blockchain, which connects transactions in a main chain across blocks, blockweaves are connected blocks that contain data. One of the main differences is that rather than connect blocks as a singly linked list, blockweaves are more like graphs.
 
@@ -14,23 +14,31 @@ This system requires a robust and sustainable economic structure to ensure stora
 
 The architecture to achieve all this is beyond the scope of this tutorial, but if you're interested in going deeper, we recommend checking out the [Arweave yellow paper](https://www.arweave.org/yellow-paper.pdf).
 
+![Figure 5: Like this but decentralized...](./assets/storage.jpeg)
+
+{% label %}
+Figure 5: Like this but decentralized...
+
 # Implementation 🧩
 
-There are several ways to interact with Arweave. You might expect that we would build something on a testnet-like set up first. But we're actually going to interact with the Arweave mainnet directly. This is enabled by a faucet program from Arweave that allows us to create an Arweave wallet and fund it with just enough tokens to get us going.
+There are several ways to interact with Arweave. In our case we're going to use a faucet program from Arweave that allows us to create an Arweave wallet and fund it with just enough tokens to get us going.
+
+{% sidenote title="Box 3.1: What's a faucet?" %}
+Faucets are smart contracts that transfer a limited amount of tokens to users for testing purposes. Most protocols implement faucets to facilitate developers' testing and building efforts.
 
 ## Arweave Wallet
 
-Go to the [Arweave mainnet faucet](https://faucet.arweave.net/) and follow the instructions to create a wallet. Make sure you download the JSON file at the end of the process. Re-name that file to `arweave-wallet.json` and save it at the root of the project. You'll notice we have included this in the `.gitignore`.
+Go to the [Arweave mainnet faucet](https://faucet.arweave.net/) and follow the instructions to create a wallet. Make sure you download the JSON file at the end of the process. Re-name that file to `arweave-wallet.json` and save it at the root of the project. You'll notice we have included this in the `.gitignore` to prevent exposing any private information.
 
-Now initialize the `ARWEAVE_WALLET` environment variable in the command line:
+Once you've saved the JSON file to the root, we should stop the local server in our terminal. Then we can initialize the `ARWEAVE_WALLET` environment variable in the command line and run the local server again:
 
-```text
-$ ARWEAVE_WALLET=$(cat arweave-wallet.json)
+```bash
+$ ARWEAVE_WALLET=$(cat arweave-wallet.json) yarn dev
 ```
 
 ## Posting to Arweave
 
-With the wallet set up, we can now develop an endpoint to create posts. In `/api/arweave/post.ts` we have a skeleton endpoint for us to add the Arweave write logic. You'll notice that we're passing in `req.body` which includes data and address fields. The data in this case will be the post's text and the address will be the public address of the author.
+With the Arweave wallet in place, we can now develop an endpoint to create posts. In `/api/arweave/post.ts` we have a skeleton endpoint for us to add the Arweave write logic. You'll notice that we're passing in `req.body` which includes data and address fields. The data in this case will be the post's text and the address will be the author's public address.
 
 First we need to initialize the wallet by using `JSON.parse`:
 
@@ -44,7 +52,7 @@ We should also instantiate a transaction by leveraging [Arweave's JavaScript lib
 const transaction = await arweave.createTransaction({data: data}, wallet);
 ```
 
-We also want to add tags as the metadata that will associate the data with our app and with the author. We should also include a tag denoting the data "application/json".
+Next, we'll want to add tags as the metadata that will associate the data with our dApp and with the author. We should also include a tag denoting the data as "application/json".
 
 ```javascript
 transaction.addTag('App-Name', process.env.APP_NAME as string);
@@ -52,7 +60,7 @@ transaction.addTag('Content-Type', 'application/json');
 transaction.addTag('Address', address);
 ```
 
-Then we want to sign the transaction and post it to Arweave:
+Then, we want to sign the transaction and post it to Arweave:
 
 ```javascript
 await arweave.transactions.sign(transaction, wallet);
@@ -71,7 +79,7 @@ res.status(200).json(transaction.id);
 
 Now we need to make use of our post endpoint. To do that, we need to go to `CreatePostForm.tsx` and finish the `handleSubmit` function.
 
-In order to submit the Arweave transaction that creates the post, we can leverage axios and call the `post` endpoint we wrote above. We should pass in the data and address as part of the request body. And we should store the return value, the transaction id, in a variable as well since we'll need it later when we incorporate the NFT functionality.
+In order to submit the Arweave transaction that creates the post, we can leverage axios and call the `post` endpoint we wrote above. We should pass in the data and address as part of the request body. And we should store the return value - the transaction id - in a variable as well since we'll need it later when we incorporate the NFT functionality.
 
 ```javascript
 const response = await axios.post(routes.api.arweave.post, {
@@ -79,9 +87,12 @@ const response = await axios.post(routes.api.arweave.post, {
   address,
 });
 const transactionId = response.data;
+console.log('transactionId: ', transactionId);
 ```
 
-With that our users are able to create entries that will live forever on the Arweave blockchain! There's one issue though - even though we can create an entry, we can't see it in our dApp yet. We'll address that shortly but first we need an endpoint to fetch posts. We'll tackle that next in Step 4.
+With that our users are able to create entries that will live forever on the Arweave blockchain! You can create an entry yourself and confirm that the `transactionId` is printed in the console.
+
+There's one issue though. Even though we can create an entry, we can't see it in our dApp yet. We'll address that shortly but first we need an endpoint to fetch posts. We'll tackle that next in Step 4.
 
 ##### _Listing 3.1: Code for creating a post endpoint_
 
@@ -130,11 +141,12 @@ if (provider && contract) {
     address,
   });
   const transactionId = response.data;
+  console.log('transactionId: ', transactionId);
 ```
 
 # Challenge 🏋️
 
-Navigate to `[ ]` in your editor and follow the steps included as comments to finish writing the `[ ]` function. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 3.2](#listing-32-instructions-for-creating-a-post) below.
+Navigate to `/api/arweave/post.ts` and `CreatePostForm.tsx` in your editor and follow the steps included as comments to finish writing the create post functionality. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 3.3](#listing-33-instructions-for-creating-a-post-endpoint) and [Listing 3.4](#listing-34-instructions-for-handling-post-submission) below.
 
 ##### _Listing 3.3: Instructions for creating a post endpoint_
 
@@ -166,7 +178,7 @@ export default async function (
 }
 ```
 
-##### _Listing 3.4: Instructions for writing handling post submission_
+##### _Listing 3.4: Instructions for handling post submission_
 
 ```javascript
 if (provider && contract) {
