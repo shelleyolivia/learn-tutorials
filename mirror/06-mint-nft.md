@@ -7,7 +7,7 @@ In our case we'll be leveraging a standard referred to as [ERC-721](https://ethe
 {% sidenote title="Box 6.1: A note on smart contracts" %}
 Smart contracts are computer programs that run on certain blockchain protocols and can be executed to perform actions on the blockchain. They are deterministic and have specific, limited functionality designed to react to an input with certain predictable state changes. A common physical analogy are vending machines. You insert a predefined amount of money, and the machine drops a snack into a slot for you to pick up. Note that, as with many labels in crypto, the term smart contract can be a bit confusing since these are not smart in the intelligence sense of the word and they're certainly not legal contracts.
 
-## Key Development Tools - OpenZeppelin and Hardhat
+## Development Tools
 
 We'll be leveraging [OpenZeppelin](https://openzeppelin.com/), a library of standard smart contracts that have been audited for security and are fully composable. As with any library or package you may have used before, this allows us to leverage off-the-shelf functionality and extend it if we need anything custom.
 
@@ -21,13 +21,15 @@ If you navigate to `web3/contracts/MirrorClone.sol` you'll notice we have scaffo
 
 Solidity programs always start with the Solidity version at the top using the keyword `pragma`. This tells the compiler what version of Solidity to use.
 
-In this case we've also imported a few pre-built contracts from the OpenZeppelin library. Our contract will be inheriting the basic functionality of an ERC-721 token from these. That will allows us to focus on the functionality we want to add.
+In this case we've also imported a few pre-built contracts from the OpenZeppelin library. Our contract will be inheriting the basic functionality of an ERC-721 token. That will allows us to focus on the functionality we want to add.
 
 You can think of the smart contract as a class with properties, a constructor, and methods. That maps pretty closely to the subsequent lines, which include defining the properties for our smart contract (e.g. a mapping called `tokenURIToTokenId`), setting up a constructor that takes in a name and symbol, and adding functions to extend the inherited functionality.
 
 ## Creating Tokens
 
-Focusing on the `createToken` function, the first instruction tells us we need to make sure we are passing a `tokenURI` before creating a token, so we'll need to leverage Solidity's `require` function. If the requirement fails, we should return a simple, descriptive message.
+Focusing on the `createToken` function, the first instruction tells us we need to make sure we are passing a `tokenURI` before creating a token. In this context the token URI will be the transaction id, also known as the transaction hash, from Arweave.
+
+We'll need to leverage Solidity's `require` function. If the requirement fails, we should return a simple, descriptive message.
 
 ```javascript
 require(bytes(_tokenURI).length > 0, "Empty tokenURI");
@@ -42,7 +44,7 @@ uint256 newItemId = _tokenIds.current();
 
 We can then leverage the `_safeMint` function we inherited from the **ERC721.sol contract** to create a token for the post's author. The intent will be for the dApp to immediately mint a post's NFT when the author clicks publish.
 
-Once minted we should set the token's URI to connect it to the post using the Arweave transaction hash. We should also add this relationship to our mapping tracker, `tokenURIToTokenId`, so we can later query NFTs by their tokenURI.
+Once minted we should set the token's URI to link it to the post using the Arweave transaction hash. We should also add this relationship to our mapping tracker, `tokenURIToTokenId`, so we can later query NFTs by their token URI.
 
 Finally, we should emit an event that includes the author's address, the token ID and the token URI before the function returns the token ID.
 
@@ -65,7 +67,7 @@ $ yarn web3:compile
 $ yarn web3:test
 ```
 
-All three of these should be passing at this point because we implemented the code above. But to sanity check, we can comment out the code for the `createToken` function we just wrote. If we run the tests again, you'll notice both the minting test and the emit event test fail.
+All three of these should be passing at this point because we implemented the code above. But to sanity check, we can comment out the code for the `createToken` function we just wrote. If we run the tests again, you'll notice they fail.
 
 ```text
 $ yarn web3:test
@@ -77,14 +79,19 @@ $ npx hardhat test
 MirrorClone
     methods
       createToken
-        ✓ reverts when empty tokenURI passed (42ms)
-        1) mints new token
-        2) emits TokenMinted event
-1 passing
-2 failing
+        1) reverts when empty tokenURI passed
+        2) mints new token
+        3) emits TokenMinted event
+0 passing
+3 failing
 ```
 
 If you uncomment the code again, everything will be nice and green.
+
+![Figure 8: Nice and green, just like we like it.](./assets/green.jpeg)
+
+{% label %}
+Figure 8: Nice and green, just like we like it.
 
 Let's write one more test for the smart contract. In Solidity, mappings return 0 when a key doesn't have a value assigned to it. In other words, all keys exist with a default value of 0. We can write a test to make sure that any `tokenURI` that doesn't exist returns 0.
 
@@ -109,9 +116,9 @@ Moreover, we're going to be deploying to Polygon's Mumbai testnet so you don't h
 {% sidenote title="Box 6.1: What's a testnet?" %}
 If you're unfamiliar with the concept of various networks, you can think of it as different environments for an app in Web 2 (e.g. development, test, production, etc). Most protocols have a mainnet blockchain for production deployments with real economic value, and a testnet for experimentation. The testnet matches the mainnet in functionality but doesn't manage economic value.
 
-In order to deploy the contract, we can leverage **ethers** and **hardhat** and reference the `getContractFactory` to load the **MirrorClone** smart contract we just wrote. We can then use the `deploy` method passing in the name and the symbol as required by the `constructor`.
+In order to deploy the contract, we can use the `deploy.ts` file where the template provides us with a place to leverage **ethers** and **hardhat**. We can reference the `getContractFactory` to load the **MirrorClone** smart contract we just wrote. We can then use the `deploy` method passing in the name and the symbol as required by the `constructor`.
 
-We can also include a console log that prints the smart contract public address.
+We can also include a console log that prints the smart contract public address, which we'll need to add as an environment variable shortly.
 
 ```javascript
 const MirrorClone = await ethers.getContractFactory('MirrorClone');
@@ -122,21 +129,30 @@ await mirrorClone.deployed();
 console.log('MirrorClone deployed to:', mirrorClone.address);
 ```
 
-No we can go to the command line and deploy the contract:
+No we can go to the command line and deploy the contract. Note that this can fail from connectivity issues sometimes. If it does, just try again.
 
 ```text
 $ yarn web3:deploy:testnet
 ```
 
-The contract public address was logged to the console by our deployment script. Let's copy that and paste it into **.env.development** as the `NEXT_PUBLIC_CONTRACT_ADDRESS` environment variable. The dApp will leverage this when publishing to assign NFTs to posts.
+The contract public address was logged to the console by our deployment script. Let's copy that and replace the default zeros in `.env.development` for the `NEXT_PUBLIC_CONTRACT_ADDRESS` environment variable. The dApp will leverage this when publishing entries to assign them NFTs.
 
 We'll also want to verify the contract, which allows chain explorers like [Polygonscan](https://polygonscan.com/) and [Etherscan](https://etherscan.io/) to confirm the deployed contract matches the source code and to display the source code for developers and users to review.
 
+Note that you should replace the `INSERT_CONTRACT_ADDRESS_HERE` in the following command with your smart contract public address.
+
 ```text
-$ yarn web3:verify:testnet CONTRACT_ADDRESS 'Mirror clone' 'MRM'
+$ yarn web3:verify:testnet INSERT_CONTRACT_ADDRESS_HERE 'Mirror Clone' 'MRM'
 ```
 
-If you visit [Polygonscan](https://mumbai.polygonscan.com/) set to testnet, you can copy-paste the contract address from the command line into the search box and confirm the contract is on the blockchain!
+If the verification fails, double check your `PRIVATE_KEY` and `ETHERSCAN_API_KEY`. Also make sure that the name you passed in as the smart contract name in the verify command above matches the name you gave your API key on Polygonscan.
+
+If you visit [Polygonscan's testnet explorer](https://mumbai.polygonscan.com/), you can copy-paste the contract address from the command line into the search box and confirm the contract is on the blockchain!
+
+![Figure 9: If a contract deployment isn't reason for fireworks, I don't know what is. ](./assets/fireworks.jpeg)
+
+{% label %}
+Figure 9: If a contract deployment isn't reason for fireworks, I don't know what is.
 
 ## Minting NFTs for Posts
 
@@ -236,7 +252,7 @@ const handleSubmit = useCallback(
 
 # Challenge 🏋️
 
-Open `web3/contracts/MirrorClone.sol`, `index.test.ts`, `deploy.ts`, and `CreatePostForm.tsx` in your editor and follow the steps included as comments to finish writing the smart contract, its tests, the deploy script and the NFT minting functionality, respectively. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 6.2](#listing-62-instructions-for-minting-a-post-NFT) below.
+Open `web3/contracts/MirrorClone.sol`, `index.test.ts`, `deploy.ts`, and `CreatePostForm.tsx` in your editor and follow the steps included as comments to finish writing the smart contract, its tests, the deploy script and the NFT minting functionality, respectively. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code blocks are also included in the listings below.
 
 ##### _Listing 6.5: Instructions for smart contract_
 ```javascript
