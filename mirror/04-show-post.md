@@ -1,16 +1,12 @@
 # Step 4: Fetching a Post
 
-## [Concept 1]
-
-## [Concept 2, etc]
+The previous step left us hanging since we still having seen our post. Let's keep progressing by building an endpoint to retrieve a post.
 
 # Implementation 🧩
 
-The previous step left us hanging since we still having seen our post. Let's keep progressing by building an endpoint to retrieve a post.
-
 We first need to write another endpoint that will fetch a certain post for our application. We've structured the endpoint at `api/arweave/[transactionHash].ts` but we still need to write the core functionality.
 
-Thinking about this endpoint, we should be able to pass in an identifier for a transaction, and get the transaction data in response. We can do that by leveraging the `getData` method for Arweave transactions and we can parse the JSON it returns:
+Thinking about this endpoint, we should be able to pass in an identifier for a transaction and get the transaction data in response. We can do that by leveraging the `getData` method for Arweave transactions and we can parse the JSON it returns:
 
 ```javascript
 const txDataResp = (await arweave.transactions.getData(
@@ -23,7 +19,14 @@ const txDataResp = (await arweave.transactions.getData(
 const txData = JSON.parse(txDataResp);
 ```
 
-We should then check whether the transaction has been confirmed before sending a response to the client. It will be clear why in Step 6 when we associate NFTs with each post but as a preview, we wouldn't want users claiming NFTs before a post is actually created on Arweave.
+We should then check whether the transaction has been confirmed before sending a response to the client.
+
+{% sidenote title="Box 4.1: What does it mean for Arweave transactions to confirm?" %}
+As with any distributed system, there is a trade off between decentralized and speed. In order for the data to be stored, the Arweave protocol has to achieve consensus. You can read more about Arweave's consensus mechanism [here](https://arweave.medium.com/what-is-arweave-explain-like-im-five-425362144eb5) but suffice it to say that the lag most databases experience when writing data is exacerbated in distributed storage. That lag is amplified by the fact that data is not only being written, but agreed upon across the protocol. This takes anywhere from 5-10 minutes at the time of writing.
+
+It will be clear why in Step 6 when we associate NFTs with each post but as a preview, we wouldn't want users claiming NFTs before a post is actually created on Arweave.
+
+We should also note that you can choose how many confirmations a post should receive before considering it confirmed. For this template, we have set them in `constants.ts` through the `MIN_NUMBER_OF_CONFIRMATIONS` environment variable.
 
 ```javascript
 const txStatusResp = await arweave.transactions.getStatus(
@@ -39,10 +42,7 @@ const txStatus =
     : TransactionStatusE.NOT_CONFIRMED;
 ```
 
-{% sidenote title="Box 4.1: What does it mean for Arweave transactions to confirm?" %}
-As with any distributed system, there is a trade off between decentralized and consensus. In order for the data to be stored, the Arweave protocol has to achieve consensus. You can read more about Arweave's consensus mechanism [here](https://arweave.medium.com/what-is-arweave-explain-like-im-five-425362144eb5) but suffice it to say that the lag most databases experience when writing data is no stranger in Web 3. However, that lag is amplified by the fact that data is not only being written, but agreed upon across the protocol. This takes anywhere from 5-10 minutes at the time of writing.
-
-Once we've confirmed that our data has been written to Arweave, we can get the transaction by using its identifier from the query params, `transactionHash`:
+Once we've confirmed that our data has been written to Arweave, we can get the transaction by using its identifier from the query param `transactionHash`. 
 
 ```javascript
 const tx = await arweave.transactions.get(transactionHash as string);
@@ -78,7 +78,12 @@ res.status(200).json({
 });
 ```
 
-But we still haven't displayed a post you yell! Yes, yes - we absolutely should do that. We'll get to that in the Step 5.
+"But we still haven't displayed a post!", you yell. Yes, yes - we absolutely should do that. We'll get to that in the Step 5.
+
+![Figure 6: We're getting very close to some magic.](./assets/map.jpeg)
+
+{% label %}
+Figure 6: We're getting very close to some magic.
 
 ##### _Listing 4.1: Code for fetching a post_
 ```javascript
