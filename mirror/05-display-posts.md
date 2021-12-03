@@ -35,7 +35,7 @@ const txs = await ardb.search('transactions').tags(tags).limit(10).find();
 
 Now everything is in place. If you refresh your dApp, you'll see the posts you created in the previous steps. Magic!
 
-![Figure 7: And all the posts simply... appear!](./assets/magic.jpeg)
+![Figure 7: And all the posts simply... appear!](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/magic.jpeg?raw=true)
 
 {% label %}
 Figure 7: And all the posts simply... appear!

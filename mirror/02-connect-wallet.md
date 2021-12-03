@@ -43,7 +43,7 @@ Going deep into something like the Ethereum Virtual Machine is beyond the scope 
 
 Putting these three lines together with our `connect` function, and understanding that our custom hook is already in use, our users should now be able to connect by clicking on the **Connect** button at the top right.
 
->>>> TBD Insert gif
+> TBD Insert gif
 ![Figure 4: Forget logins, now our users can connect to our app with their wallets!]()
 
 {% label %}

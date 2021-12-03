@@ -88,7 +88,7 @@ MirrorClone
 
 If you uncomment the code again, everything will be nice and green.
 
-![Figure 8: Nice and green, just like we like it.](./assets/green.jpeg)
+![Figure 8: Nice and green, just like we like it.](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/green.jpeg?raw=true)
 
 {% label %}
 Figure 8: Nice and green, just like we like it.
@@ -155,7 +155,7 @@ If the verification fails, double check your `PRIVATE_KEY` and `ETHERSCAN_API_KE
 
 If you visit [Polygonscan's testnet explorer](https://mumbai.polygonscan.com/), you can copy-paste the contract address from the command line into the search box and confirm the contract is on the blockchain!
 
-![Figure 9: If a contract deployment isn't reason for fireworks, I don't know what is. ](./assets/fireworks.jpeg)
+![Figure 9: If a contract deployment isn't reason for fireworks, I don't know what is. ](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/fireworks.jpeg?raw=true)
 
 {% label %}
 Figure 9: If a contract deployment isn't reason for fireworks, I don't know what is.

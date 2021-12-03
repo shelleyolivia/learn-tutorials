@@ -4,7 +4,7 @@ One of the key tenets of Web 3 is composability so you can think of this step as
 
 Because the Web 3 stack is decentralized, it means data no longer lives behind a walled garden where the app owners control access and own the data. In Web 3 users retain, not only ownership over the data, but the ability to port their data to other UIs that can access it directly from the blockchain.
 
-![Figure 10: Hooray! No more walled gardens for data](./assets/free.jpeg)
+![Figure 10: Hooray! No more walled gardens for data](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/free.jpeg?raw=true)
 
 {% label %}
 Figure 10: Hooray! No more walled gardens for data

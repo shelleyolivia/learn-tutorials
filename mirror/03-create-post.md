@@ -14,7 +14,7 @@ This system requires a robust and sustainable economic structure to ensure stora
 
 The architecture to achieve all this is beyond the scope of this tutorial, but if you're interested in going deeper, we recommend checking out the [Arweave yellow paper](https://www.arweave.org/yellow-paper.pdf).
 
-![Figure 5: Like this but decentralized...](./assets/storage.jpeg)
+![Figure 5: Like this but decentralized...](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/storage.jpeg?raw=true)
 
 {% label %}
 Figure 5: Like this but decentralized...

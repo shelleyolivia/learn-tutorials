@@ -80,7 +80,7 @@ res.status(200).json({
 
 "But we still haven't displayed a post!", you yell. Yes, yes - we absolutely should do that. We'll get to that in the Step 5.
 
-![Figure 6: We're getting very close to some magic.](./assets/map.jpeg)
+![Figure 6: We're getting very close to some magic.](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/map.jpeg?raw=true)
 
 {% label %}
 Figure 6: We're getting very close to some magic.

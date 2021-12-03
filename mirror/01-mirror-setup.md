@@ -28,7 +28,7 @@ $ cp .env.local.example .env.local
 
 Navigate to `.env.local` and set the four environment variables based on the instructions included below.
 
-```bash
+```text
 ETHERSCAN_API_KEY=Polygonscan API Key. Go to https://polygonscan.com/login and login or create an account. Then click on API-KEYs on the left navigation panel to create an api key. Name the app MirrorClone. Copy-paste the API key here.
 MAINNET_NODE_URL=https://matic-mainnet.chainstacklabs.com
 TESTNET_NODE_URL=https://matic-mumbai.chainstacklabs.com
@@ -66,7 +66,7 @@ Feel free to explore the rest of the template. It includes standard hooks and co
 
 Let's build!
 
-![Figure 3: “I can feel the anticipation.”](./assets/lego.jpeg)
+![Figure 3: “I can feel the anticipation.”](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/lego.jpeg?raw=true)
 
 {% label %}
 Figure 3: “I can feel the anticipation.”
