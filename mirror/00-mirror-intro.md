@@ -12,7 +12,7 @@ As always, we think of ourselves as your guide - for a brief amount of time - on
 
 We've tried to show you the door (or maybe part of it). Your job is to discover your path and walk it courageously.
 
-![Figure 1: “I do not believe it to be a matter of hope, it is simply a matter of time.”](./assets/matrix.jpeg)
+![Figure 1: “I do not believe it to be a matter of hope, it is simply a matter of time.”](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/matrix.jpeg?raw=true)
 
 {% label %}
 Figure 1: “I do not believe it to be a matter of hope, it is simply a matter of time.”
@@ -58,7 +58,7 @@ At the end of the tutorial, we'll include a few [additional resources]() if you 
 
 Let's get started!
 
-![Figure 2: All big things come from small beginnings](./assets/ladder.jpeg)
+![Figure 2: All big things come from small beginnings](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/ladder.jpeg?raw=true)
 
 {% label %}
 Figure 2: All big things come from small beginnings
