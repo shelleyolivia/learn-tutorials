@@ -35,20 +35,19 @@ Step 1 will walk you through some basic set up and configuration. This will incl
 
 In Step 2, we'll introduce the [ethers.js](https://docs.ethers.io/) library and learn how to a user's MetaMask wallet to the dApp.
 
-> TBD insert screenshots
-![Screenshot of connecting wallet]()
+![Screenshot of connecting wallet](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/connect.jpg?raw=true)
 
 Then we'll introduce [Arweave](https://www.arweave.org/) - a decentralized, censorship resistant storage solution - in Step 3. We'll write an endpoint to create blog posts and finish a form to submit them. In Step 4 we'll learn how to fetch them and in Step 5 we'll write code to display a list of the latest posts.
 
-![Screenshot displaying a list of posts]()
+![Screenshot displaying a list of posts](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/posts.jpg?raw=true)
 
 Step 6 will be a brief introduction to smart contracts including inheriting from standard libraries, writing functions, testing them and deploying the smart contract to the Polygon testnet. We'll be minting an NFT for each post so authors can own their posts.
 
-![Screenshot of NFT]()
+![Screenshot of NFT](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/nft.jpg?raw=true)
 
 Finally, Step 7 will implement functionality that allows author's to transfer NFTs. This sets up the application for expansion into a marketplace for blog post ownership.
 
-![Screenshot of transfer]()
+![Screenshot of transfer](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/transfer.jpg?raw=true)
 
 There are countless ways a dApp like this could be expanded. You could implement the NFT marketplace natively, or you might choose to implement a tipping button for readers who want to reward the writer.
 
