@@ -765,7 +765,7 @@ npm start
 
 # Walkthrough
 
-To be Added
+![demo](../assets/polkadot-amm/demo.gif)
 
 # Conclusion
 
@@ -803,4 +803,4 @@ The tutorial was created by [Sayan Kar](https://github.com/SayanKar) and [Nimish
 
 - [Constant Product Market Maker](https://github.com/runtimeverification/verified-smart-contracts/blob/uniswap/uniswap/x-y-k.pdf)
 
-- [How to integrate with frontend](https://github.com/polk4-net/flipper-app)
+- [How to integrate substate contract with frontend](https://github.com/polk4-net/flipper-app)
