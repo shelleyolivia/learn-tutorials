@@ -1,6 +1,6 @@
-# Mirror Tutorial
+# Blog Platform Tutorial
 
-Welcome to the Mirror Tutorial. The goal of this tutorial is to introduce the Web 3 development process in the context of a full stack application. Specifically, we'll be bridging you from Web 2 to Web 3 by building a blog using a Web 3 stack. As you build, we'll introduce key concepts to help you scaffold your mental model and start adding Web 3 skills into your toolbox.
+Welcome to the Blog Platform Tutorial. The goal of this tutorial is to introduce the Web 3 development process in the context of a full stack decentralized application. Specifically, we'll be bridging you from Web 2 to Web 3 by building a blog similar to [Mirror.xyz](https://mirror.xyz/) using a Web 3 stack. As you build, we'll introduce key concepts to help you scaffold your mental model and start adding Web 3 skills into your toolbox.
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ Step 1 will walk you through some basic set up and configuration. This will incl
 
 In Step 2, we'll introduce the [ethers.js](https://docs.ethers.io/) library and learn how to a user's MetaMask wallet to the dApp.
 
->>>>> TBD insert screenshots
+> TBD insert screenshots
 ![Screenshot of connecting wallet]()
 
 Then we'll introduce [Arweave](https://www.arweave.org/) - a decentralized, censorship resistant storage solution - in Step 3. We'll write an endpoint to create blog posts and finish a form to submit them. In Step 4 we'll learn how to fetch them and in Step 5 we'll write code to display a list of the latest posts.
