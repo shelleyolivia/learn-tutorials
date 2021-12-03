@@ -25,7 +25,9 @@ The opportunities are endless and we wish you well on your journey!
 _If you want to connect with an amazing community of developers, join us on [Discord](https://discord.gg/fszyM7K)._
 
 ![Figure 11: With ten miles behind me and ten thousand more to go…](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/hike.jpeg)
-##### _Figure 11: With ten miles behind me and ten thousand more to go…_
+
+{% label %}
+Figure 11: With ten miles behind me and ten thousand more to go…
 
 ## Additional Resources
 
