@@ -4,7 +4,7 @@ Traditional blogs use databases to persist a post. An author might write some co
 
 The blockchain, however, is a bit different because it's decentralized. Rather than writing to a specific database, we'll be leveraging a distributed system that can't be controlled by a central authority.
   
-## Sustainable, Decentralized Storage
+## Sustainable, Decentralized Storage 💾
 
 [Arweave](https://www.arweave.org/) is a decentralized network that allows users with extra storage space to provide that space as storage to the network in exchange for economic incentives. Users looking to store data in a decentralized, secure, censorship-resistant way, can leverage the network to do so. Effectively, Arweave is the storage part of the stack for dApps.
 
@@ -26,19 +26,19 @@ There are several ways to interact with Arweave. In our case we're going to use 
 {% sidenote title="Box 3.1: What's a faucet?" %}
 Faucets are smart contracts that transfer a limited amount of tokens to users for testing purposes. Most protocols implement faucets to facilitate developers' testing and building efforts.
 
-## Arweave Wallet
+## Arweave Wallet 👜
 
 Go to the [Arweave mainnet faucet](https://faucet.arweave.net/) and follow the instructions to create a wallet. Make sure you download the JSON file at the end of the process. Re-name that file to `arweave-wallet.json` and save it at the root of the project. You'll notice we have included this in the `.gitignore` to prevent exposing any private information.
 
 Once you've saved the JSON file to the root, we should stop the local server in our terminal. Then we can initialize the `ARWEAVE_WALLET` environment variable in the command line and run the local server again:
 
-```bash
+```text
 $ ARWEAVE_WALLET=$(cat arweave-wallet.json) yarn dev
 ```
 
-## Posting to Arweave
+## Posting to Arweave 📨
 
-With the Arweave wallet in place, we can now develop an endpoint to create posts. In `/api/arweave/post.ts` we have a skeleton endpoint for us to add the Arweave write logic. You'll notice that we're passing in `req.body` which includes data and address fields. The data in this case will be the post's text and the address will be the author's public address.
+With the Arweave wallet in place, we can now develop an endpoint to create posts. In `pages/api/arweave/post.ts`, we have a skeleton endpoint for us to add the Arweave write logic. You'll notice that we're passing in `req.body` which includes data and address fields. The data in this case will be the post's text and the address will be the author's public address.
 
 First we need to initialize the wallet by using `JSON.parse`:
 
@@ -75,9 +75,9 @@ To finish the endpoint, we'll want to return the transaction id as part of the r
 res.status(200).json(transaction.id);
 ```
 
-## Finishing the Form
+## Finishing the Form 📝
 
-Now we need to make use of our post endpoint. To do that, we need to go to `CreatePostForm.tsx` and finish the `handleSubmit` function.
+Now we need to make use of our post endpoint. To do that, we need to go to `components/CreatePostForm/CreatePostForm.tsx` and finish the `handleSubmit` function.
 
 In order to submit the Arweave transaction that creates the post, we can leverage axios and call the `post` endpoint we wrote above. We should pass in the data and address as part of the request body. And we should store the return value - the transaction id - in a variable as well since we'll need it later when we incorporate the NFT functionality.
 
@@ -146,7 +146,7 @@ if (provider && contract) {
 
 # Challenge 🏋️
 
-Navigate to `/api/arweave/post.ts` and `CreatePostForm.tsx` in your editor and follow the steps included as comments to finish writing the create post functionality. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 3.3](#listing-33-instructions-for-creating-a-post-endpoint) and [Listing 3.4](#listing-34-instructions-for-handling-post-submission) below.
+Navigate to `pages/api/arweave/post.ts` and `CreatePostForm.tsx` in your editor and follow the steps included as comments to finish writing the create post functionality. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 3.3](#listing-33-instructions-for-creating-a-post-endpoint) and [Listing 3.4](#listing-34-instructions-for-handling-post-submission) below.
 
 ##### _Listing 3.3: Instructions for creating a post endpoint_
 

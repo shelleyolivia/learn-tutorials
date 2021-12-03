@@ -7,7 +7,7 @@ In our case we'll be leveraging a standard referred to as [ERC-721](https://ethe
 {% sidenote title="Box 6.1: A note on smart contracts" %}
 Smart contracts are computer programs that run on certain blockchain protocols and can be executed to perform actions on the blockchain. They are deterministic and have specific, limited functionality designed to react to an input with certain predictable state changes. A common physical analogy are vending machines. You insert a predefined amount of money, and the machine drops a snack into a slot for you to pick up. Note that, as with many labels in crypto, the term smart contract can be a bit confusing since these are not smart in the intelligence sense of the word and they're certainly not legal contracts.
 
-## Development Tools
+## Development Tools 🛠
 
 We'll be leveraging [OpenZeppelin](https://openzeppelin.com/), a library of standard smart contracts that have been audited for security and are fully composable. As with any library or package you may have used before, this allows us to leverage off-the-shelf functionality and extend it if we need anything custom.
 
@@ -17,27 +17,27 @@ We'll be leveraging [OpenZeppelin](https://openzeppelin.com/), a library of stan
 
 If you navigate to `web3/contracts/MirrorClone.sol` you'll notice we have scaffolded a smart contract for you already. Before diving into the `createToken` function we need to write, let's dive into the general structure of the code.
 
-## Smart Contract Review
+## Smart Contract Review 🧐
 
 Solidity programs always start with the Solidity version at the top using the keyword `pragma`. This tells the compiler what version of Solidity to use.
 
-In this case we've also imported a few pre-built contracts from the OpenZeppelin library. Our contract will be inheriting the basic functionality of an ERC-721 token. That will allows us to focus on the functionality we want to add.
+In this case, we've also imported a few pre-built contracts from the OpenZeppelin library. Our contract will be inheriting the basic functionality of an [ERC-721 token](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/). That will allow us to focus on the functionality we want to add instead of having to write it from scratch.
 
 You can think of the smart contract as a class with properties, a constructor, and methods. That maps pretty closely to the subsequent lines, which include defining the properties for our smart contract (e.g. a mapping called `tokenURIToTokenId`), setting up a constructor that takes in a name and symbol, and adding functions to extend the inherited functionality.
 
-## Creating Tokens
+## Creating Tokens 🏭
 
-Focusing on the `createToken` function, the first instruction tells us we need to make sure we are passing a `tokenURI` before creating a token. In this context the token URI will be the transaction id, also known as the transaction hash, from Arweave.
+Focusing on the `createToken` function, the first instruction tells us we need to make sure we are passing a `tokenURI` before creating a token. In this context, the token URI will be the transaction id, also known as the transaction hash, from Arweave.
 
-We'll need to leverage Solidity's `require` function. If the requirement fails, we should return a simple, descriptive message.
+We'll need to leverage Solidity's `require` function. If the requirement fails, we should return a simple, descriptive error message.
 
-```javascript
+```solidity
 require(bytes(_tokenURI).length > 0, "Empty tokenURI");
 ```
 
 Next we should increment the counter for `tokenIds` so we can assign a unique token ID for each post.
 
-```javascript
+```solidity
 _tokenIds.increment();
 uint256 newItemId = _tokenIds.current();
 ```
@@ -48,7 +48,7 @@ Once minted we should set the token's URI to link it to the post using the Arwea
 
 Finally, we should emit an event that includes the author's address, the token ID and the token URI before the function returns the token ID.
 
-```javascript
+```solidity
 _safeMint(msg.sender, newItemId);
 _setTokenURI(newItemId, _tokenURI);
 tokenURIToTokenId[_tokenURI] = newItemId;
@@ -58,7 +58,7 @@ emit TokenMinted(msg.sender, newItemId, _tokenURI);
 return newItemId;
 ```
 
-## Testing the Smart Contract
+## Testing the Smart Contract 🧪
 
 Smart contracts are no different than any other programs we write, so we should write tests to help us build robust contracts and provide a safety net for changes throughout development. We have already written 3 tests for you, and you can confirm they're passing by running:
 
@@ -67,7 +67,7 @@ $ yarn web3:compile
 $ yarn web3:test
 ```
 
-All three of these should be passing at this point because we implemented the code above. But to sanity check, we can comment out the code for the `createToken` function we just wrote. If we run the tests again, you'll notice they fail.
+All three of these should be passing at this point because we implemented the code above. But to sanity check, we can comment out the code for the `createToken` function we just wrote. If we run the tests again, notice that they will fail:
 
 ```text
 $ yarn web3:test
@@ -107,7 +107,7 @@ describe('tokenURIToTokenId', () => {
 
 Running the tests again should confirm all four tests are passing. 
 
-## Deploying the Smart Contract
+## Deploying the Smart Contract 🚀
 
 Now that we have a working smart contract that works as intended, we're ready to deploy. We're going to leverage the Polygon protocol to avoid the high gas fees on Ethereum. For our purposes Polygon works identically and is fully compatible with the Ethereum Virtual Machine.
 
@@ -129,7 +129,7 @@ await mirrorClone.deployed();
 console.log('MirrorClone deployed to:', mirrorClone.address);
 ```
 
-No we can go to the command line and deploy the contract. Note that this can fail from connectivity issues sometimes. If it does, just try again.
+Now we can go to the command line and deploy the contract. Note that this can fail from connectivity issues sometimes. If it does, just try again.
 
 ```text
 $ yarn web3:deploy:testnet
@@ -139,7 +139,7 @@ The contract public address was logged to the console by our deployment script. 
 
 We'll need to restart the local server for the variable to reset:
 
-```bash
+```text
 $ ARWEAVE_WALLET=$(cat arweave-wallet.json) yarn dev
 ```
 
@@ -160,7 +160,7 @@ If you visit [Polygonscan's testnet explorer](https://mumbai.polygonscan.com/), 
 {% label %}
 Figure 9: If a contract deployment isn't reason for fireworks, I don't know what is.
 
-## Minting NFTs for Posts
+## Minting NFTs for Posts 🍬
 
 Recall from Step 3 that we wrote a function that created posts in Arweave. We now need to integrate the NFT minting functionality into that workflow. If we return to `CreatePostForm.tsx`, we notice instructions at the bottom of the try block in `handleSubmit` for minting an NFT.
 

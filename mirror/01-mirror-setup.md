@@ -2,11 +2,11 @@
 
 You'll be building the blog application on top of a [Next.js](https://nextjs.org/) template that we have pre-built. This way you can quickly scaffold your way into developing the Web 3 dApp with minimal configuration.
 
-## Setting Up
+## Setting Up 🧑‍💻
 
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/getting-started/install) installed. Make sure you've setup [SSH or token-based authentication](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/) for Github. Then clone the repo and run the yarn command to install the app dependencies:
 
-```bash
+```text
 $ git clone git@github.com:figment-networks/web3-evm-template.git
 $ cd web3-evm-template
 $ yarn
@@ -16,13 +16,13 @@ If you into any Node issues, make sure you're running version 14.17.0 or greater
 
 Now that you have the template, you need to navigate to this tutorial's branch:
 
-```bash
+```text
 $ git checkout mirror-clone
 ```
 
 Next, you'll need to copy the example environment file `.env.local.example` to set the environment variables we'll need to write and deploy the smart contract. 
 
-```bash
+```text
 $ cp .env.local.example .env.local
 ```
 
@@ -44,17 +44,17 @@ The **private key** environment variable is required to deploy the smart contrac
 
 Finally, we want to add certain libraries that will set us up for smart contract development in Step 6 but without which we'll get a few compiling errors.
 
-```bash
+```text
 $ yarn web3:compile
 ```
 
 With that in place, our dApp template is ready to be built into a functional blog. You can run the local server to get started:
 
-```bash
+```text
 $ yarn dev
 ```
 
-## Reviewing the Template
+## Reviewing the Template 🧐
 
 Before we dive into the code, we should understand what the template comes with. Along with the standard folder structure and dependencies found in most NextJS applications, we have added two Web 3-specific libraries that we'll leverage throughout the tutorial - [ethers.js](https://docs.ethers.io/) and [Hardhat](https://hardhat.org/).
 

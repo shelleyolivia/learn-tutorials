@@ -11,7 +11,7 @@ Figure 10: Hooray! No more walled gardens for data
 
 # Implementation 🧩
 
-## Transferring NFTs
+## Transferring NFTs ♻️
 
 In order to make each post's NFT transferable, we need to write a function that activates the blue **Transfer NFT** button shown on each entry's page. If we go to the `TransferNFTForm.tsx` component, we see a `handleSubmit` button with some simple instructions to connect the smart contract to signer, and to call `transferFrom` on the smart contract.
 
