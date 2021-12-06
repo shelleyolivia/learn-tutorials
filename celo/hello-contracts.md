@@ -4,7 +4,7 @@
 
 This guide walks you through the basics of how to deploy your own smart contracts on Celo networks. As Celo is fully EVM compatible, we inherit the rich developer ecosystem and tooling of the Ethereum community. You will be deploying a typical hello world smart contract onto the Alfajores testnet with typical Ethereum tools like Truffle and Ganache.
 
-## Setup
+# Setup
 
 This guide assumes that you have a basic Node/[NPM](https://www.npmjs.com/get-npm) setup. If so, you can install truffle with:
 
@@ -39,7 +39,7 @@ We will not go into the details of how to write Solidity in this exercise, but y
 
 The contract will just store a name for now:
 
-```text
+```solidity
 pragma solidity >=0.5.0;
 
 contract HelloWorld {
@@ -55,9 +55,7 @@ contract HelloWorld {
 }
 ```
 
-## Prepare Deployment
-
-### Compile the contract
+# Compile the contract
 
 Before you deploy the contract, you need to compile the Solidity code into Ethereum bytecode. The following truffle command will look in the `./contracts` directory and compile any new or updated Solidity \(`.sol`\) contracts.
 
@@ -69,7 +67,6 @@ After compiling the contract, you need to create a migration to deploy the contr
 
 > [Learn more about Truffle migrations](https://www.trufflesuite.com/docs/truffle/getting-started/running-migrations).
 
-
 ```javascript
 var HelloWorld = artifacts.require('HelloWorld')
 
@@ -80,7 +77,7 @@ module.exports = function(deployer) {
 
 > You can also learn more about [Truffle configuration options](https://www.trufflesuite.com/docs/truffle/reference/configuration).
 
-## Deploy to Alfajores \(remotely\)
+# Deploy to Alfajores \(remotely\)
 
 When you deploy contracts to the Celo network with a remote node, you have to sign the contract deployment transaction locally before sending it to the remote node to be broadcast to the network. This presents some unique challenges when using Ethereum development tools \(like Truffle\) because Celo transaction objects are slightly different than Ethereum transaction objects.
 
@@ -139,11 +136,9 @@ Then add your account to the `kit` with the private key:
 kit.connection.addAccount(account.privateKey) // this account must have a CELO balance to pay transaction fees
 ```
 
-### Deploy the contract
+## Deploy the contract with Truffle
 
-#### Truffle Deployment
-
-Before you can use truffle for the migration, you need to set up the proper configuration in `./truffle-config.js`. At the top of `./truffle-config.js`, set up the `kit` by connecting to the test network and adding the account you just funded.
+Before you can use Truffle for the migration, you need to set up the proper configuration in `./truffle-config.js`. At the top of `./truffle-config.js`, set up the `kit` by connecting to the test network and adding the account you just funded.
 
 ```javascript
 const Web3 = require('web3')
@@ -159,7 +154,7 @@ async function awaitWrapper(){
 awaitWrapper()
 ```
 
-Then, in the `networks` object, you can add the initialized `kit`provider to an `alfajores` property.
+Then, in the `networks` object, you can add the initialized `kit` provider to an `alfajores` property.
 
 ```javascript
   networks: {
@@ -178,17 +173,17 @@ Then, in the `networks` object, you can add the initialized `kit`provider to an 
 
 Now, deploy the contracts to Alfajores with this command:
 
-```javascript
+```text
 truffle migrate --network alfajores
 ```
 
-## Custom Node.js Deployment
+# Custom Node.js Deployment
 
 In this section, you will deploy a contract using a simple Node.js script to show how you can do it without using Truffle.
 
 You need to compile the `HelloWorld.sol` contract using \(if it isn't already\):
 
-```javascript
+```text
 truffle compile
 ```
 
@@ -198,7 +193,7 @@ This command will generate a `HelloWorld.json` file in the `./build/contracts/` 
 const HelloWorld = require('./build/contracts/HelloWorld.json')
 ```
 
-You are finally ready to deploy the contract. Use the `kit`to create a custom transaction that includes the contract bytecode.
+You are finally ready to deploy the contract. Use the `kit` to create a custom transaction that includes the contract bytecode:
 
 ```javascript
 let tx = await kit.sendTransaction({
@@ -208,7 +203,7 @@ let tx = await kit.sendTransaction({
 ```
 
 {% hint style="info" %}
-To deploy a contract on Celo, use the `kit.sendTransaction()` function with no `to:` field and the contract bytecode in the `data` field. The account that you are sending the transaction from must have enough CELO to pay the transaction fee, unless you specify another currency as the `feeCurrency`, then you need enough of that currency to pay the transaction fee.
+To deploy a contract on Celo, use the `kit.sendTransaction()` function without a `to:` field and the contract bytecode in the `data` field. The account that you are sending the transaction from must have enough CELO to pay the transaction fee, unless you specify another currency as the `feeCurrency`, then you need enough of that currency to pay the transaction fee.
 {% endhint %}
 
 The entire deployment script is less than 20 lines of code.
@@ -242,7 +237,7 @@ awaitWrapper()
 
 Congratulations! You have deployed your first contract onto Celo! You can verify your contract deployment on [Blockscout](https://alfajores-blockscout.celo-testnet.org/). You can get the transaction hash from the receipt and look it up on the block explorer.
 
-## Interacting with Custom Contracts
+# Interacting with Custom Contracts
 
 Now HelloWorld.sol is deployed onto the Alfajores testnet. How can you interact with the deployed contract using ContractKit? `helloWorld.js` includes some example code that shows how you can do this.
 
@@ -287,7 +282,7 @@ async function setName(instance, newName){
     let account = await getAccount()
 
     // Add your account to ContractKit to sign transactions
-    // This account must have a CELO balance to pay tx fees, get some https://celo.org/build/faucet
+    // This account must have a CELO balance to pay tx fees, get some at https://celo.org/build/faucet
     kit.connection.addAccount(account.privateKey)
     const txObject = await instance.methods.setName(newName)
     let tx = await kit.sendTransactionObject(txObject, { from: account.address })
@@ -302,6 +297,3 @@ The above method shows a more detail about how to create custom deployment trans
 As you can see, all the goodies from Ethereum apply to Celo, so virtually all tutorials and other content should be easily translatable to Celo.
 
 Check out [https://celo.org/build](https://celo.org/build) for more resources!
-
-f you had any difficulties following this tutorial or simply want to discuss Celo tech with us you can [join our community today](https://discord.gg/fszyM7K)!
-
