@@ -37,7 +37,7 @@ Then, run `yarn dev` in your terminal to start the development server on port 30
 ##### _Listing 1.2: Terminal message on app start up_
 ```text
 yarn run v1.22.11
-$ next dev
+$ yarn dev
 ready - started server on 0.0.0.0:3000, url: http://localhost:3000
 info  - Using webpack 5. Reason: Enabled by default https://nextjs.org/docs/messages/webpack5
 event - compiled successfully
