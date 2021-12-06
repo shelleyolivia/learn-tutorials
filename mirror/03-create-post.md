@@ -1,23 +1,21 @@
-# Step 3: Writing a Post
-
-Traditional blogs use databases to persist a post. An author might write some content and publish it, which triggers a create action on the server that writes the data to the database. The database would have schema that define the data structure. For instance, we might have a **posts** table with columns for post id, content, and author id.
+Traditional blogs use databases to persist an entry. An author might write some content and publish it, which triggers a create action on the server that writes the data to the database. The database would have schema that define the data structure. For instance, we might have a **entries** table with columns for entry id, content, and author id.
 
 The blockchain, however, is a bit different because it's decentralized. Rather than writing to a specific database, we'll be leveraging a distributed system that can't be controlled by a central authority.
   
-## Sustainable, Decentralized Storage 💾
+# Sustainable, Decentralized Storage 💾
 
 [Arweave](https://www.arweave.org/) is a decentralized network that allows users with extra storage space to provide that space as storage to the network in exchange for economic incentives. Users looking to store data in a decentralized, secure, censorship-resistant way, can leverage the network to do so. Effectively, Arweave is the storage part of the stack for dApps.
 
-Arwaeve uses a technology called "blockweaves" to achieve this. Similar to a blockchain, which connects transactions in a main chain across blocks, blockweaves are connected blocks that contain data. One of the main differences is that rather than connect blocks as a singly linked list, blockweaves are more like graphs.
+Arweave uses a technology called "blockweaves" to achieve this. Similar to a blockchain, which connects transactions in a main chain across blocks, blockweaves are connected blocks that contain data. One of the main differences is that rather than connect blocks as a singly linked list, blockweaves are more like graphs.
 
 This system requires a robust and sustainable economic structure to ensure storage providers are incentivized to replicate information forever at reasonable costs to the user. Basically, the user pays a small fee upfront to permanently store data. That fee is treated as principal that generates interest over time for storage providers.
 
 The architecture to achieve all this is beyond the scope of this tutorial, but if you're interested in going deeper, we recommend checking out the [Arweave yellow paper](https://www.arweave.org/yellow-paper.pdf).
 
-![Figure 5: Like this but decentralized...](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/storage.jpeg?raw=true)
+![Like this but decentralized...](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/storage.jpeg?raw=true)
 
 {% label %}
-Figure 5: Like this but decentralized...
+Like this but decentralized...
 
 # Implementation 🧩
 
@@ -26,7 +24,7 @@ There are several ways to interact with Arweave. In our case we're going to use 
 {% sidenote title="Box 3.1: What's a faucet?" %}
 Faucets are smart contracts that transfer a limited amount of tokens to users for testing purposes. Most protocols implement faucets to facilitate developers' testing and building efforts.
 
-## Arweave Wallet 👜
+# Arweave Wallet 👜
 
 Go to the [Arweave mainnet faucet](https://faucet.arweave.net/) and follow the instructions to create a wallet. Make sure you download the JSON file at the end of the process. Re-name that file to `arweave-wallet.json` and save it at the root of the project. You'll notice we have included this in the `.gitignore` to prevent exposing any private information.
 
@@ -36,33 +34,33 @@ Once you've saved the JSON file to the root, we should stop the local server in 
 $ ARWEAVE_WALLET=$(cat arweave-wallet.json) yarn dev
 ```
 
-## Posting to Arweave 📨
+# Posting to Arweave 📨
 
-With the Arweave wallet in place, we can now develop an endpoint to create posts. In `pages/api/arweave/post.ts`, we have a skeleton endpoint for us to add the Arweave write logic. You'll notice that we're passing in `req.body` which includes data and address fields. The data in this case will be the post's text and the address will be the author's public address.
+With the Arweave wallet in place, we can now develop an endpoint to create entries. In `pages/api/arweave/entry.ts`, we have a skeleton endpoint for us to add the Arweave write logic. You'll notice that we're passing in `req.body` which includes data and address fields. The data in this case will be the entry's text and the address will be the author's public address.
 
 First we need to initialize the wallet by using `JSON.parse`:
 
-```javascript
+```typescript
 const wallet = JSON.parse(process.env.ARWEAVE_WALLET as string);
 ```
 
 We should also instantiate a transaction by leveraging [Arweave's JavaScript library](https://github.com/ArweaveTeam/arweave-js) and passing in the data and the wallet.
 
-```javascript
+```typescript
 const transaction = await arweave.createTransaction({data: data}, wallet);
 ```
 
 Next, we'll want to add tags as the metadata that will associate the data with our dApp and with the author. We should also include a tag denoting the data as "application/json".
 
-```javascript
+```typescript
 transaction.addTag('App-Name', process.env.APP_NAME as string);
 transaction.addTag('Content-Type', 'application/json');
 transaction.addTag('Address', address);
 ```
 
-Then, we want to sign the transaction and post it to Arweave:
+Then, we want to sign the transaction and posty it to Arweave:
 
-```javascript
+```typescript
 await arweave.transactions.sign(transaction, wallet);
 await arweave.transactions.post(transaction);
 ```
@@ -71,17 +69,17 @@ You'll notice that Arweave's syntax is pretty straightforward. The only new aspe
 
 To finish the endpoint, we'll want to return the transaction id as part of the response:
 
-```javascript
+```typescript
 res.status(200).json(transaction.id);
 ```
 
-## Finishing the Form 📝
+# Finishing the Form 📝
 
-Now we need to make use of our post endpoint. To do that, we need to go to `components/CreatePostForm/CreatePostForm.tsx` and finish the `handleSubmit` function.
+Now we need to make use of our entry endpoint. To do that, we need to go to `components/CreateEntryForm/CreateEntryForm.tsx` and finish the `handleSubmit` function.
 
-In order to submit the Arweave transaction that creates the post, we can leverage axios and call the `post` endpoint we wrote above. We should pass in the data and address as part of the request body. And we should store the return value - the transaction id - in a variable as well since we'll need it later when we incorporate the NFT functionality.
+In order to submit the Arweave transaction that creates the entry, we can use [axios](https://axios-http.com/docs/intro) to call the `entry` endpoint we wrote above. We should pass in the data and address as part of the request body, and we should store the return value - the transaction id - in a variable as well. We'll need the transaction id later when we incorporate the NFT functionality into our dApp.
 
-```javascript
+```typescript
 const response = await axios.post(routes.api.arweave.post, {
   data,
   address,
@@ -90,13 +88,13 @@ const transactionId = response.data;
 console.log('transactionId: ', transactionId);
 ```
 
-With that our users are able to create entries that will live forever on the Arweave blockchain! You can create an entry yourself and confirm that the `transactionId` is printed in the console.
+With that complete, our users are able to create entries that will live forever on the Arweave blockchain! You can create an entry yourself and confirm that the `transactionId` is printed in the console.
 
-There's one issue though. Even though we can create an entry, we can't see it in our dApp yet. We'll address that shortly but first we need an endpoint to fetch posts. We'll tackle that next in Step 4.
+There's one issue though. Even though we can create an entry, we can't see it in our dApp yet. We'll address that shortly but first we need an endpoint to fetch entries. We'll tackle that next in Step 4.
 
-##### _Listing 3.1: Code for creating a post endpoint_
+##### _Listing 3.1: Code for creating a entry endpoint_
 
-```javascript
+```typescript
 export default async function (
   req: NextApiRequest,
   res: NextApiResponse<string>,
@@ -121,14 +119,14 @@ export default async function (
 }
 ```
 
-##### _Listing 3.2: Code for handling post submission_
+##### _Listing 3.2: Code for handling entry submission_
 
-```javascript
+```typescript
 if (provider && contract) {
   const data = createJsonMetaData(values);
 
   // Submit Arweave transaction
-  // Use axios to post data and address to api/arweave/post endpoint.
+  // Use axios to post data and address to api/arweave/entry endpoint.
   // This request should return transactionId
 
   // Mint NFT
@@ -146,11 +144,11 @@ if (provider && contract) {
 
 # Challenge 🏋️
 
-Navigate to `pages/api/arweave/post.ts` and `CreatePostForm.tsx` in your editor and follow the steps included as comments to finish writing the create post functionality. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 3.3](#listing-33-instructions-for-creating-a-post-endpoint) and [Listing 3.4](#listing-34-instructions-for-handling-post-submission) below.
+Navigate to `pages/api/arweave/entry.ts` and `components/CreateEntryForm/CreateEntryForm.tsx` in your editor and follow the steps included as comments to finish writing the create entry functionality. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 3.3](#listing-33-instructions-for-creating-a-entry-endpoint) and [Listing 3.4](#listing-34-instructions-for-handling-entry-submission) below.
 
-##### _Listing 3.3: Instructions for creating a post endpoint_
+##### _Listing 3.3: Instructions for creating a entry endpoint_
 
-```javascript
+```typescript
 export default async function (
   req: NextApiRequest,
   res: NextApiResponse<string>,
@@ -178,13 +176,13 @@ export default async function (
 }
 ```
 
-##### _Listing 3.4: Instructions for handling post submission_
+##### _Listing 3.4: Instructions for handling entry submission_
 
-```javascript
+```typescript
 if (provider && contract) {
   const data = createJsonMetaData(values);
   // Submit Arweave transaction
-  // Use axios to post data and address to api/arweave/post endpoint.
+  // Use axios to post data and address to api/arweave/entry endpoint.
   // This request should return transactionId
   alert('Entry created successfully');
 }
