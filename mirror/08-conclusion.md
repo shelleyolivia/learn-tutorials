@@ -1,4 +1,6 @@
-Congratulations! You've built a Web 3-native blog that resembles the functionality of [Mirror.xyz](https://mirror.xyz/).
+# Wrapping up 🎁
+
+Congratulations! You've built a Web 3-native blog that resembles the functionality of [Mirror](https://mirror.xyz/).
 
 By leveraging a handful of protocols and tools like Polygon, Arweave, Hardhat, ethers.js, and ArDB, you were able to quickly build a full stack distributed application (dApp). In **Step 1** we leveraged a Next.js template to scaffold a simple application & we immediately got to work on turning it into a dApp. In **Step 2** we built functionality to connect to a user's MetaMask wallet.
 

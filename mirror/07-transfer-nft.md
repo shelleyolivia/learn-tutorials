@@ -9,8 +9,6 @@ Hooray! No more walled gardens for data
 
 # Implementation 🧩
 
-# Transferring NFTs ♻️
-
 In order to make each entry's NFT transferable, we need to write a function that activates the blue **Transfer NFT** button shown on each entry's page. If we go to the `TransferNFTForm.tsx` component, we see a `handleSubmit` button with some simple instructions to connect the smart contract to signer, and to call `transferFrom` on the smart contract.
 
 Recall from Step 6 that we can instantiate a signer by calling `getSigner` on `provider`. Recall also that we can connect the `signer` to the `contract` as well, so we can use that code here to connect the smart contract and the signer at the top of `handleSubmit`:
@@ -19,6 +17,8 @@ Recall from Step 6 that we can instantiate a signer by calling `getSigner` on `p
 const signer = provider.getSigner();
 const contractWithSigner = contract.connect(signer);
 ```
+
+# Transferring an NFT ♻️
 
 Now all that's left is calling the `transferFrom` function in the contract. You might be wondering where that function is since we didn't write it in Step 6 when we finalized the `MirrorClone.sol` contract.
 
