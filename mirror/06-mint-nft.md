@@ -137,7 +137,7 @@ $ yarn web3:deploy:testnet
 
 The contract public address was logged to the console by our deployment script. Let's copy that and replace the default zeros in `.env.development` for the `NEXT_PUBLIC_CONTRACT_ADDRESS` environment variable. The dApp will leverage this when publishing entries to assign them NFTs.
 
-We'll need to restart the local server for the changed variable to be available. Stop the running server by pressing CTRL+C in the terminal where it is running. Start it again with rhe command:
+We'll need to restart the local server for the changed variable to be available. Stop the running server by pressing CTRL+C in the terminal where it is running. Start it again with the command:
 
 ```text
 $ ARWEAVE_WALLET=$(cat arweave-wallet.json) yarn dev
