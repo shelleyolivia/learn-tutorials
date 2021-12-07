@@ -145,7 +145,7 @@ $ ARWEAVE_WALLET=$(cat arweave-wallet.json) yarn dev
 
 We'll also want to verify the contract, which allows chain explorers like [Polygonscan](https://polygonscan.com/) and [Etherscan](https://etherscan.io/) to confirm the deployed contract matches the source code and to display the source code for developers and users to review.
 
-Note that you should replace the `INSERT_CONTRACT_ADDRESS_HERE` in the following command with your smart contract public address.
+Note that you should replace the `INSERT_CONTRACT_ADDRESS_HERE` in the following command with your smart contract public address. It is also very important to pass the same constructor arguments that were used during deployment of the contract - make sure the 'Mirror Clone' and 'MRM' arguments are using identical case and spacing as the arguments passed to `MirrorClone.deploy()`.
 
 ```text
 $ yarn web3:verify:testnet INSERT_CONTRACT_ADDRESS_HERE 'Mirror Clone' 'MRM'
