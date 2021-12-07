@@ -1,6 +1,6 @@
 You'll be building the blog application on top of a [Next.js](https://nextjs.org/) template that we have pre-built. This way you can quickly scaffold your way into developing the Web 3 dApp with minimal configuration.
 
-# Setting Up 🧑‍💻
+# Getting Started 🎬
 
 Make sure you have [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [Node](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/getting-started/install) installed. Make sure you've setup [SSH or token-based authentication](https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/) for Github. Then clone the repo and run the yarn command to install the app dependencies:
 
@@ -11,6 +11,7 @@ $ yarn
 ```
 
 If you run into any Node issues, make sure you're running version 14.17.0 or greater. You can use the [Node Version Manager](https://github.com/nvm-sh/nvm) if you need to manage multiple Node versions locally.
+
 
 Now that you have the template, you need to navigate to this tutorial's branch:
 
@@ -51,6 +52,24 @@ With that in place, our dApp template is ready to be built into a functional blo
 ```text
 $ yarn dev
 ```
+
+# ⛓ Add the Mumbai testnet to Metamask
+
+You'll need to be able to connect to the Polygon Mumbai testnet for these tutorials, so add it to the list of RPC endpoints in Metamask. Click on the Fox head icon in your web browser to open the popup, and then follow this workflow to complete the process :
+
+- Click on the current network at the top of the Metamask popup (by default is says "Ethereum Mainnet")
+- Scroll down and click on "Custom RPC"
+- Fill in the form:
+  - Network Name: `Polygon Mumbai`
+  - New RPC URL: `https://rpc-mumbai.maticvigil.com/`
+  - Chain ID: `80001`
+  - Currency Symbol: `MATIC`
+  - Block Explorer URL : `https://mumbai.polygonscan.com`
+- Double check the information, then click on the Save button.
+
+![](https://raw.githubusercontent.com/figment-networks/learn-web3-dapp/main/markdown/__images__/polygon/add_mumbai.png?raw=true)
+
+We strongly recommend using the testnet for development before moving into production on the main network or "mainnet".
 
 # Reviewing the Template 🧐
 

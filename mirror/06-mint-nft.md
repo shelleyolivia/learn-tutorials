@@ -95,7 +95,7 @@ Let's write one more test for the smart contract. In Solidity, mappings return 0
 
 Add the following test to `web3/test/index.test.ts` :
 
-```javascript
+```typescript
 describe('tokenURIToTokenId', () => {
   it('returns 0 if tokenURI does not exist', async () => {
     expect(await contract.tokenURIToTokenId('ar://does-not-exist')).to.eq(
@@ -137,7 +137,7 @@ $ yarn web3:deploy:testnet
 
 The contract public address was logged to the console by our deployment script. Let's copy that and replace the default zeros in `.env.development` for the `NEXT_PUBLIC_CONTRACT_ADDRESS` environment variable. The dApp will leverage this when publishing entries to assign them NFTs.
 
-We'll need to restart the local server for the variable to reset. Stop the running server by pressing CTRL+C in the terminal where it is running:
+We'll need to restart the local server for the changed variable to be available. Stop the running server by pressing CTRL+C in the terminal where it is running. Start it again with rhe command:
 
 ```text
 $ ARWEAVE_WALLET=$(cat arweave-wallet.json) yarn dev
@@ -162,11 +162,11 @@ If a contract deployment isn't reason for fireworks, I don't know what is.
 
 # Minting NFTs for Entries 🍬
 
-Recall from Step 3 that we wrote a function that created entries in Arweave. We now need to integrate the NFT minting functionality into that workflow. If we return to `CreatePostForm.tsx`, we notice instructions at the bottom of the try block in `handleSubmit` for minting an NFT.
+Recall from Step 3 that we wrote a function that created entries in Arweave. We now need to integrate the NFT minting functionality into that workflow. If we return to `CreateEntryForm.tsx`, we notice instructions at the bottom of the try block in `handleSubmit` for minting an NFT.
 
 We'll need to instantiate a signer and connect the contract to the signer. We'll then need to leverage the `createToken` function we just wrote to mint the NFT.
 
-```javascript
+```typescript
 const signer = provider.getSigner();
 const contractWithSigner = contract.connect(signer);
 
@@ -217,7 +217,7 @@ describe('tokenURIToTokenId', () => {
 ```
 
 ##### _Listing 6.3: Code for deployment_
-```javascript
+```typescript
 async function main() {
   const MirrorClone = await ethers.getContractFactory('MirrorClone');
   const mirrorClone = await MirrorClone.deploy('Mirror clone', 'MRM');
@@ -229,7 +229,7 @@ async function main() {
 ```
 
 ##### _Listing 6.4: Code for minting the NFT when publishing post_
-```javascript
+```typescript
 const handleSubmit = useCallback(
 .
 .
@@ -318,3 +318,7 @@ const handleSubmit = useCallback(
     .
     .
 ```
+
+Once you have completed the code, creating an entry will mint it as an NFT automatically:
+
+![Screenshot of NFT](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/nft.jpg?raw=true)

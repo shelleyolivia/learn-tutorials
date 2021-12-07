@@ -187,3 +187,7 @@ if (provider && contract) {
   alert('Entry created successfully');
 }
 ```
+
+Once you have completed the code, you will want to try out creating an entry by clicking on the **Create Entry** button on the Dashboard.
+
+![Screenshot displaying a list of entries](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/entries.jpg?raw=true)

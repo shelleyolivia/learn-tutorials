@@ -1,8 +1,8 @@
 # Welcome 👋
 
-Welcome to the Mirror Clone tutorial! The goal of this tutorial is to introduce the Web 3 development process in the context of a full stack decentralized application. Specifically, we’ll be bridging you from Web 2 to Web 3 by building a blog similar to [Mirror](https://mirror.xyz/) using a Web 3 stack.
-Mirror is a powerful Web 3 platform for publishing content. It allows writers to publish in a decentralized, censorship-resistant way while retaining full ownership of their content. It also enables functionality like tipping writers, splitting proceeds with co-writers and contributors, and crowdfunding projects. We’ll only be implementing the basics of publishing entries and minting their NFTs, but you’ll end up with a dApp that you can extend as you like.
-As you build, we’ll introduce key concepts to help you scaffold your mental model and start adding Web 3 skills into your toolbox.
+Welcome to the Mirror Clone tutorial! The goal of this tutorial is to introduce the Web 3 development process in the context of a full stack decentralized application. Specifically, we’ll be bridging you from Web 2 to Web 3 by building a blog similar to [Mirror](https://mirror.xyz/) using a Web 3 stack. \
+Mirror is a powerful Web 3 platform for publishing content. It allows writers to publish in a decentralized, censorship-resistant way while retaining full ownership of their content. It also enables functionality like tipping writers, splitting proceeds with co-writers and contributors, and crowdfunding projects. \
+We’ll only be implementing the basics of publishing entries and minting their NFTs, but you’ll end up with a dApp that you can extend as you like.As you build, we’ll introduce key concepts to help you scaffold your mental model and start adding Web 3 skills into your toolbox.
 
 # Prerequisites 🪜
 
