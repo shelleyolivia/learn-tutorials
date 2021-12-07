@@ -53,11 +53,11 @@ With that in place, our dApp template is ready to be built into a functional blo
 $ yarn dev
 ```
 
-# ⛓ Add the Mumbai testnet to Metamask
+# ⛓ Add the Mumbai testnet to MetaMask
 
-You'll need to be able to connect to the Polygon Mumbai testnet for these tutorials, so add it to the list of RPC endpoints in Metamask. Click on the Fox head icon in your web browser to open the popup, and then follow this workflow to complete the process :
+You'll need to be able to connect to the Polygon Mumbai testnet for these tutorials, so add it to the list of RPC endpoints in MetaMask. Click on the Fox head icon in your web browser to open the popup, and then follow this workflow to complete the process :
 
-- Click on the current network at the top of the Metamask popup (by default is says "Ethereum Mainnet")
+- Click on the current network at the top of the MetaMask popup (by default is says "Ethereum Mainnet")
 - Scroll down and click on "Custom RPC"
 - Fill in the form:
   - Network Name: `Polygon Mumbai`
