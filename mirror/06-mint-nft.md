@@ -96,14 +96,16 @@ Let's write one more test for the smart contract. In Solidity, mappings return 0
 Add the following test to `web3/test/index.test.ts` :
 
 ```typescript
-describe("tokenURIToTokenId", () => {
-  it("returns 0 if tokenURI does not exist", async () => {
-    expect(await contract.tokenURIToTokenId("ar://does-not-exist")).to.eq(0);
+describe('tokenURIToTokenId', () => {
+  it('returns 0 if tokenURI does not exist', async () => {
+    expect(await contract.tokenURIToTokenId('ar://does-not-exist')).to.eq(
+      0,
+    );
   });
 });
 ```
 
-Running the tests again should confirm all four tests are passing.
+Running the tests again should confirm all four tests are passing. 
 
 # Deploying the Smart Contract 🚀
 
@@ -119,12 +121,12 @@ In order to deploy the contract, we can use the `web3/scripts/deploy.ts` file wh
 We can also include a console log that prints the smart contract public address, which we'll need to add as an environment variable shortly.
 
 ```typescript
-const MirrorClone = await ethers.getContractFactory("MirrorClone");
-const mirrorClone = await MirrorClone.deploy("Mirror Clone", "MRM");
+const MirrorClone = await ethers.getContractFactory('MirrorClone');
+const mirrorClone = await MirrorClone.deploy('Mirror Clone', 'MRM');
 
 await mirrorClone.deployed();
 
-console.log("MirrorClone deployed to:", mirrorClone.address);
+console.log('MirrorClone deployed to:', mirrorClone.address);
 ```
 
 Now we can go to the command line and deploy the contract. Note that this can fail from connectivity issues sometimes. If it does, just try again.
@@ -177,7 +179,6 @@ If you try to create an entry now, your MetaMask wallet will ask you to sign a t
 But wouldn't it be nice if you could transfer that NFT to someone else? Perhaps someone wants to purchase the entry from you or you want to gift ownership of the entry to a friend. We'll tackle that next in Step 7.
 
 ##### _Listing 6.1: Code for smart contract_
-
 ```javascript
 function createToken(string memory _tokenURI) public returns (uint) {
     // require statement to check if _tokenURI is not empty
@@ -205,30 +206,29 @@ function createToken(string memory _tokenURI) public returns (uint) {
 ```
 
 ##### _Listing 6.2: Code for tokenURIToTokenId test_
-
 ```javascript
-describe("tokenURIToTokenId", () => {
-  it("returns 0 if tokenURI does not exist", async () => {
-    expect(await contract.tokenURIToTokenId("ar://does-not-exist")).to.eq(0);
+describe('tokenURIToTokenId', () => {
+  it('returns 0 if tokenURI does not exist', async () => {
+    expect(await contract.tokenURIToTokenId('ar://does-not-exist')).to.eq(
+      0,
+    );
   });
 });
 ```
 
 ##### _Listing 6.3: Code for deployment_
-
 ```typescript
 async function main() {
-  const MirrorClone = await ethers.getContractFactory("MirrorClone");
-  const mirrorClone = await MirrorClone.deploy("Mirror clone", "MRM");
+  const MirrorClone = await ethers.getContractFactory('MirrorClone');
+  const mirrorClone = await MirrorClone.deploy('Mirror clone', 'MRM');
 
   await mirrorClone.deployed();
 
-  console.log("MirrorClone deployed to:", mirrorClone.address);
+  console.log('MirrorClone deployed to:', mirrorClone.address);
 }
 ```
 
 ##### _Listing 6.4: Code for minting the NFT when publishing post_
-
 ```typescript
 const handleSubmit = useCallback(
 .
@@ -261,7 +261,6 @@ const handleSubmit = useCallback(
 Open `web3/contracts/MirrorClone.sol`, `index.test.ts`, `deploy.ts`, and `CreatePostForm.tsx` in your editor and follow the steps included as comments to finish writing the smart contract, its tests, the deploy script and the NFT minting functionality. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code blocks are also included in the listings below.
 
 ##### _Listing 6.5: Instructions for smart contract_
-
 ```javascript
 function createToken(string memory _tokenURI) public returns (uint) {
     // require statement to check if _tokenURI is not empty
@@ -281,24 +280,21 @@ function createToken(string memory _tokenURI) public returns (uint) {
 ```
 
 ##### _Listing 6.2: Code for tokenURIToTokenId test_
-
 ```javascript
 // Write a describe block that tests for a 0 return when a token URI doesn't exist in the tokenURIToTokenId mapping
 ```
 
 ##### _Listing 6.3: Code for deployment_
-
 ```javascript
 async function main() {
   // Deploy MirrorClone smart contract
   // More information can be found here: https://hardhat.org/guides/deploying.html
 
-  console.log("MirrorClone deployed to:", "<CONTRACT ADDRESS>");
+  console.log('MirrorClone deployed to:', '<CONTRACT ADDRESS>');
 }
 ```
 
 ##### _Listing 6.4: Code for minting the NFT when publishing post_
-
 ```javascript
 const handleSubmit = useCallback(
 .
