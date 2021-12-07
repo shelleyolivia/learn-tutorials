@@ -220,7 +220,7 @@ describe('tokenURIToTokenId', () => {
 ```typescript
 async function main() {
   const MirrorClone = await ethers.getContractFactory('MirrorClone');
-  const mirrorClone = await MirrorClone.deploy('Mirror clone', 'MRM');
+  const mirrorClone = await MirrorClone.deploy('Mirror Clone', 'MRM');
 
   await mirrorClone.deployed();
 
