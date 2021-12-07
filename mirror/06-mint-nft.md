@@ -151,9 +151,21 @@ Note that you should replace the `INSERT_CONTRACT_ADDRESS_HERE` in the following
 $ yarn web3:verify:testnet INSERT_CONTRACT_ADDRESS_HERE 'Mirror Clone' 'MRM'
 ```
 
-If the verification fails, double check your `PRIVATE_KEY` and `ETHERSCAN_API_KEY`. Also make sure that the name you passed in as the smart contract name in the verify command above matches the name you gave your API key on Polygonscan.
+If the verification fails the error messages are generally quite helpful, but double check your `PRIVATE_KEY` and `ETHERSCAN_API_KEY`.
 
-If you visit [Polygonscan's testnet explorer](https://mumbai.polygonscan.com/), you can copy-paste the contract address from the command line into the search box and confirm the contract is on the blockchain!
+
+_If you deploy the smart contract verbatim_, you will see this error in the terminal during verification:
+
+```text
+Error in plugin @nomiclabs/hardhat-etherscan: 
+The Etherscan API responded with a failure status.
+The verification may still succeed but should be checked manually.
+Reason: Already Verified
+```
+
+Nothing to worry about! This simply means that the exact bytecode for the smart contract you've deployed has already been verified at a different address. Any change to the source of the smart contract including extra linebreaks, comments added or removed, or even different indentation will alter the compiled bytecode and therefore not trigger this error from the contract verification plugin. 
+
+If you visit [Polygonscan's testnet explorer](https://mumbai.polygonscan.com/), you can copy-paste the contract address from the command line into the search box and confirm the contract is on the blockchain.
 
 ![If a contract deployment isn't reason for fireworks, I don't know what is. ](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/fireworks.jpeg?raw=true)
 
@@ -319,6 +331,6 @@ const handleSubmit = useCallback(
     .
 ```
 
-Once you have completed the code, creating an entry will mint it as an NFT automatically:
+Once you have completed the code, creating an entry will mint it as an NFT automatically (once you've confirmed the transaction in MetaMask):
 
 ![Screenshot of NFT](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/nft.jpg?raw=true)
