@@ -12,7 +12,7 @@ First we should instantiate an ArDB instance, which we can do by confirming we'v
 
 ```typescript
 const ardb = new ArDB(arweave);
-const tags = [{name: 'App-Name', values: [process.env.APP_NAME as string]}];
+const tags = [{ name: "App-Name", values: [process.env.APP_NAME as string] }];
 ```
 
 Next we should retrieve the author's address from the `query` param if there is one and create another tag in the tags list:
@@ -21,14 +21,14 @@ Next we should retrieve the author's address from the `query` param if there is 
 const searchAddress = query && query[0];
 
 if (searchAddress) {
-  tags.push({name: 'Address', values: [searchAddress]});
+  tags.push({ name: "Address", values: [searchAddress] });
 }
 ```
 
 With everything we need in place, we can leverage `ardb` to issue a search query for a transaction matching our `tags`. Similar to other query builders, we can chain methods to increase the specificity of the query. In this case, we'll want to find the latest 10 entries.
 
 ```typescript
-const txs = await ardb.search('transactions').tags(tags).limit(10).find();
+const txs = await ardb.search("transactions").tags(tags).limit(10).find();
 ```
 
 Now everything is in place. If you refresh your dApp, you'll see the entries you created in the previous steps. Magic!
@@ -45,6 +45,7 @@ Recall from Box 4.1 that distributed systems take a few minutes to come to conse
 You'll also notice that if you click on an entry, there's a warning in the NFT box with an error message. That's because we currently have a zero address as the default smart contract address. We'll fix that in Step 6.
 
 ##### _Listing 5.1: Code for fetching a list of entries_
+
 ```typescript
 try {
   const {query} = _req.query;
@@ -72,6 +73,7 @@ try {
 Navigate to `api/arweave/search/[[query]].ts` in your editor and follow the steps included as comments to finish writing the query endpoint. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 5.2](#listing-52-instructions-for-fetching-a-list-of-entries) below.
 
 ##### _Listing 5.2: Instructions for fetching a list of entries_
+
 ```typescript
 try {
   const {query} = _req.query;
@@ -92,3 +94,7 @@ try {
   res.status(200).json(data);
 }
 ```
+
+Once the code is complete, you will be able to see a list of posts on the Dashboard as well as under your user profile:
+
+![Screenshot displaying a list of entries](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/entries.jpg?raw=true)
