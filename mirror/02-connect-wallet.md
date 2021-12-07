@@ -82,3 +82,8 @@ const connect = useCallback(async () => {
   }
 }, [provider]);
 ```
+
+ Once you've completed the code, you will want to try connecting your Metamask wallet by clicking on the **Connect Wallet** button in the top right corner of the screen:
+
+ ![Screenshot of connecting wallet](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/connect.jpg?raw=true)
+ 

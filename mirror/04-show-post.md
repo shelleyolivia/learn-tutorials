@@ -161,3 +161,7 @@ if (txStatus === TransactionStatusE.CONFIRMED) {
   throw new Error('Transaction not confirmed');
 }
 ```
+
+Once you have completed the code, you will see the list of entries when you view the user profile or the Dashboard:
+
+![Screenshot displaying a list of entries](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/entries.jpg?raw=true)
