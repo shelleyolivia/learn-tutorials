@@ -86,6 +86,6 @@ const handleSubmit = useCallback(
 );
 ```
 
-Once you have completed the code, you can try transferring an entry NFT by pasting the address of the account you want to transfer the NFT to into the textinput, then clicking on **TransferNFT** and confirming the transaction in Metamask:
+Once you have completed the code, you can try transferring an entry NFT by pasting the address of the account you want to transfer the NFT to into the textinput, then clicking on **TransferNFT** and confirming the transaction in MetaMask:
 
 ![Screenshot of transfer](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/transfer.jpg?raw=true)

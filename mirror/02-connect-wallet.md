@@ -55,6 +55,12 @@ const connect = useCallback(async () => {
     await provider.send('eth_requestAccounts', []);
     const signer = provider.getSigner();
     const address = await signer.getAddress();
+    const chainId = await signer.getChainId();
+
+    if (chainId != 80001) {
+      alert('Please connect to the Polygon Mumbai testnet in MetaMask!')
+    }
+
 
     setAddress(address);
   } else {
@@ -75,6 +81,11 @@ const connect = useCallback(async () => {
     // More information can be found: https://docs.ethers.io/v5/getting-started/#getting-started--connecting
 
     const address = '';
+    const chainId = '';
+
+    if (chainId != 80001) {
+      alert('Please connect to the Polygon Mumbai testnet in MetaMask!')
+    }
 
     setAddress(address);
   } else {
@@ -83,7 +94,6 @@ const connect = useCallback(async () => {
 }, [provider]);
 ```
 
- Once you've completed the code, you will want to try connecting your Metamask wallet by clicking on the **Connect Wallet** button in the top right corner of the screen:
+ Once you've completed the code, you will want to try connecting your MetaMask wallet by clicking on the **Connect Wallet** button in the top right corner of the screen:
 
  ![Screenshot of connecting wallet](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/connect.jpg?raw=true)
- 
