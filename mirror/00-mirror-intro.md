@@ -1,14 +1,18 @@
 # Welcome 👋
 
-Welcome to the Mirror Clone tutorial! The goal of this tutorial is to introduce the Web 3 development process in the context of a full stack decentralized application. Specifically, we’ll be bridging you from Web 2 to Web 3 by building a blog similar to [Mirror](https://mirror.xyz/) using a Web 3 stack. \
-Mirror is a powerful Web 3 platform for publishing content. It allows writers to publish in a decentralized, censorship-resistant way while retaining full ownership of their content. It also enables functionality like tipping writers, splitting proceeds with co-writers and contributors, and crowdfunding projects. \
-We’ll only be implementing the basics of publishing entries and minting their NFTs, but you’ll end up with a dApp that you can extend as you like.As you build, we’ll introduce key concepts to help you scaffold your mental model and start adding Web 3 skills into your toolbox.
+Welcome to the Mirror Clone tutorial! The goal of this tutorial is to introduce the Web 3 development process in the context of a full stack decentralized application. Specifically, we’ll be bridging you from Web 2 to Web 3 by building a blog similar to [Mirror](https://mirror.xyz/) using a Web 3 stack.
+
+Mirror is a powerful Web 3 platform for publishing content. It allows writers to publish in a decentralized, censorship-resistant way while retaining full ownership of their content. It also enables functionality like tipping writers, splitting proceeds with co-writers and contributors, and crowdfunding projects.
+
+We’ll only be implementing the basics of publishing entries and minting their NFTs, but you’ll end up with a dApp that you can extend as you like. As you build, we’ll introduce key concepts to help you scaffold your mental model and start adding Web 3 skills into your toolbox.
 
 # Prerequisites 🪜
 
 If you know how to program and have [JavaScript](https://www.javascript.com/) experience, you'll be able to complete the tutorial. Having said that, you'll be more comfortable if you have some experience with [Typescript](https://www.typescriptlang.org/), [React](https://reactjs.org/), and [Next.js](https://nextjs.org/). Moreover, while you may not have built full stack Web 3 applications before, hopefully you have used a crypto wallet like [MetaMask](https://metamask.io/) and you're familiar with basic blockchain concepts like public addresses, private keys, and signing transactions.
 
 If any of that sounds unfamiliar, or the idea of engaging with those concepts sounds daunting at this point in your learning, we recommend starting with the [Solana Wallet](https://learn.figment.io/tutorials/solana-wallet-intro) tutorial before completing this one.
+
+It is up to you to choose a code editor that you are comfortable with, although we recommend [Visual Studio Code](https://code.visualstudio.com/) because it is free, packed with useful features and has good cross-platform support.
 
 As always, we think of ourselves as your guide - for a brief amount of time - on your journey to build a better internet. We hope you walk away with a better understanding of what it takes to develop full stack Web 3 decentralized applications (dApps) and perhaps even a bit more confidence to tackle significant projects.
 
@@ -35,7 +39,7 @@ The entries will be saved on [Arweave](https://www.arweave.org/), a decentralize
 
 **Step 1** will walk you through some basic set up and configuration. This will include cloning a template repo, so you don't have to write code you're already familiar with (i.e. NextJS). It will also include setting up a few environment variables you'll need in later steps.
 
-In **Step 2**, we'll introduce the [ethers.js](https://docs.ethers.io/) library and learn how to a user's MetaMask wallet to the dApp.
+In **Step 2**, we'll introduce the [ethers.js](https://docs.ethers.io/) library and learn how to connect a user's MetaMask wallet to the dApp.
 
 ![Screenshot of connecting wallet](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/connect.jpg?raw=true)
 
