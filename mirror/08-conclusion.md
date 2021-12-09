@@ -24,7 +24,6 @@ The opportunities are endless and we wish you well on your journey!
 
 _If you want to connect with an amazing community of developers, join us on [Discord](https://figment.io/devchat)._
 
-##### _With ten miles behind me and ten thousand more to go…_
 ![With ten miles behind me and ten thousand more to go…](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/hike.jpeg?raw=true)
 
 {% label %}
@@ -32,6 +31,7 @@ With ten miles behind me and ten thousand more to go…
 
 # Additional Resources 📚
 
+- [Mirror's Blog](https://dev.mirror.xyz/)
 - [Arweave Overview](https://www.arweave.org/technology)
 - [Arweave Lightpaper](https://www.arweave.org/files/arweave-lightpaper.pdf)
 - [OpenZeppelin](https://openzeppelin.com/)
