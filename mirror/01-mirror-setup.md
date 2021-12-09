@@ -64,6 +64,8 @@ TESTNET_NODE_URL=https://matic-mumbai.chainstacklabs.com
 PRIVATE_KEY=The private key of an account funded with MATIC that you've exported from MetaMask. Go to https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key to learn how to export your private key.
 ```
 
+If you don't already have MetaMask installed as a browser extension, you should do that before proceeding. You can go to its download page [here](https://metamask.io/download.html).
+
 {% sidenote title="Box 1.1: What is MetaMask?" %}
 [MetaMask](https://metamask.io/) is a crypto wallet built as a browser extension that allows you to interact with Ethereum and Ethereum-compatible blockchains as well as dApps built on top of them.
 
