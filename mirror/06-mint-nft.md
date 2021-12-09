@@ -151,7 +151,7 @@ Note that you should replace the `INSERT_CONTRACT_ADDRESS_HERE` in the following
 $ yarn web3:verify:testnet INSERT_CONTRACT_ADDRESS_HERE 'Mirror Clone' 'MRM'
 ```
 
-If the verification fails the error messages are generally quite helpful, but double check your `PRIVATE_KEY` and `ETHERSCAN_API_KEY`.
+If the verification fails the error messages are generally quite helpful, but double check your `PRIVATE_KEY` and `POLYGONSCAN_API_KEY`.
 
 
 _If you deploy the smart contract verbatim_, you will see this error in the terminal during verification:
