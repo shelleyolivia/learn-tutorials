@@ -1,6 +1,6 @@
-Traditional blogs use databases to persist an entry. An author might write some content and publish it, which triggers a create action on the server that writes the data to the database. The database would have schema that define the data structure. For instance, we might have a **entries** table with columns for entry id, content, and author id.
+Traditional blogs use databases to persist an entry. An author might write some content and publish it, which triggers a create action on the server that writes the data to the database. The database would have schema that define the data structure. For instance, we might have an **entries** table with columns for entry id, content, and author id.
 
-The blockchain, however, is a bit different because it's decentralized. Rather than writing to a specific database, we'll be leveraging a distributed system that can't be controlled by a central authority.
+The blockchain, however, is a bit different because it's decentralized. Rather than writing to a specific database, we'll be leveraging a distributed system that cannot be controlled by a central authority.
   
 # Sustainable, Decentralized Storage 💾
 
@@ -28,7 +28,7 @@ Faucets are smart contracts that transfer a limited amount of tokens to users fo
 
 Go to the [Arweave mainnet faucet](https://faucet.arweave.net/) and follow the instructions to create a wallet. Make sure you download the JSON file at the end of the process. Re-name that file to `arweave-wallet.json` and save it at the root of the project. You'll notice we have included this in the `.gitignore` to prevent exposing any private information.
 
-Once you've saved the JSON file to the root, we should stop the local server in our terminal. Then we can initialize the `ARWEAVE_WALLET` environment variable in the command line and run the local server again:
+Once you've saved the JSON file to the root, we should stop the local server in our terminal (press CTRL+C in the terminal window where the server is running). Then we can initialize the `ARWEAVE_WALLET` environment variable in the command line and run the local server again:
 
 ```text
 $ ARWEAVE_WALLET=$(cat arweave-wallet.json) yarn dev
@@ -36,7 +36,7 @@ $ ARWEAVE_WALLET=$(cat arweave-wallet.json) yarn dev
 
 # Posting to Arweave 📨
 
-With the Arweave wallet in place, we can now develop an endpoint to create entries. In `pages/api/arweave/entry.ts`, we have a skeleton endpoint for us to add the Arweave write logic. You'll notice that we're passing in `req.body` which includes data and address fields. The data in this case will be the entry's text and the address will be the author's public address.
+With the Arweave wallet in place, we can now develop an endpoint to create entries. In `pages/api/arweave/entry.ts`, we have a skeleton endpoint for us to add the Arweave write logic. You'll notice that we're passing in `req.body` which includes data and address fields. The data in this case will be the entry's text and the address will be the author's public address. In the file `routes.ts` you can see how the routes are defined. 
 
 First we need to initialize the wallet by using `JSON.parse`:
 
@@ -58,7 +58,7 @@ transaction.addTag('Content-Type', 'application/json');
 transaction.addTag('Address', address);
 ```
 
-Then, we want to sign the transaction and posty it to Arweave:
+Then, we want to sign the transaction and post it to Arweave:
 
 ```typescript
 await arweave.transactions.sign(transaction, wallet);
@@ -90,7 +90,7 @@ console.log('transactionId: ', transactionId);
 
 With that complete, our users are able to create entries that will live forever on the Arweave blockchain! You can create an entry yourself and confirm that the `transactionId` is printed in the console.
 
-There's one issue though. Even though we can create an entry, we can't see it in our dApp yet. We'll address that shortly but first we need an endpoint to fetch entries. We'll tackle that next in Step 4.
+There's one issue though. Even though we can create an entry, we can't see it in our dApp yet. We'll address that shortly, but first we need an endpoint to fetch entries. We'll tackle that next in Step 4.
 
 ##### _Listing 3.1: Code for creating a entry endpoint_
 
@@ -103,7 +103,6 @@ export default async function (
     const {data, address} = req.body;
 
     const wallet = JSON.parse(process.env.ARWEAVE_WALLET as string);
-
     const transaction = await arweave.createTransaction({data: data}, wallet);
 
     transaction.addTag('App-Name', process.env.APP_NAME as string);
@@ -112,7 +111,6 @@ export default async function (
 
     await arweave.transactions.sign(transaction, wallet);
     await arweave.transactions.post(transaction);
-
     res.status(200).json(transaction.id);
   }
   ...
@@ -125,26 +123,18 @@ export default async function (
 if (provider && contract) {
   const data = createJsonMetaData(values);
 
-  // Submit Arweave transaction
-  // Use axios to post data and address to api/arweave/entry endpoint.
-  // This request should return transactionId
-
-  // Mint NFT
-  // Get signer and connect it to smart contract
-  // More information can be found here: https://docs.ethers.io/v5/getting-started/#getting-started--writing
-
-  // Call `createToken` method passing in transactionId
   const response = await axios.post(routes.api.arweave.post, {
     data,
     address,
   });
   const transactionId = response.data;
   console.log('transactionId: ', transactionId);
+}
 ```
 
 # Challenge 🏋️
 
-Navigate to `pages/api/arweave/entry.ts` and `components/CreateEntryForm/CreateEntryForm.tsx` in your editor and follow the steps included as comments to finish writing the create entry functionality. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in [Listing 3.3](#listing-33-instructions-for-creating-a-entry-endpoint) and [Listing 3.4](#listing-34-instructions-for-handling-entry-submission) below.
+Navigate to `pages/api/arweave/entry.ts` and `components/CreateEntryForm/CreateEntryForm.tsx` in your code editor and follow the steps included as comments to finish writing the create entry functionality. We include a description along with a link to the documentation you need to review in order to implement each line. The relevant code block is also included in **Listing 3.3** and **Listing 3.4** below.
 
 ##### _Listing 3.3: Instructions for creating a entry endpoint_
 
@@ -164,7 +154,7 @@ export default async function (
     // - App-Name - APP_NAME environmental variable
     // - Content-Type - Should be application/json
     // - Address - Address of a user
-    //Documentation can be found here: https://github.com/ArweaveTeam/arweave-js
+    // Documentation can be found here: https://github.com/ArweaveTeam/arweave-js
 
     // Sign Arweave transaction with your wallet. Documentation can be found here: https://github.com/ArweaveTeam/arweave-js
 
@@ -184,10 +174,12 @@ if (provider && contract) {
   // Submit Arweave transaction
   // Use axios to post data and address to api/arweave/entry endpoint.
   // This request should return transactionId
-  alert('Entry created successfully');
+
+  // Stop here when you complete Step 3 ^^^^
+  ...
 }
 ```
 
-Once you have completed the code, you will want to try out creating an entry by clicking on the **Create Entry** button on the Dashboard.
+Once you have completed the code, you will want to try out creating an entry by clicking on the **Create Entry** button on the Dashboard, then entering a title and some text.
 
 ![Screenshot displaying a list of entries](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/entries.jpg?raw=true)
