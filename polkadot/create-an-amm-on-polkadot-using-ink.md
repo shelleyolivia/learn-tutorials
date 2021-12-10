@@ -1,11 +1,11 @@
 # Introduction
 
-In this tutorial, we will learn how to build an AMM having features - Provide, Withdraw & Swap with trading fees & slippage tolerance. We will build the smart contract in ink! (a rust based eDSL language) and then see how to deploy it on a public testnet and will create our frontend in ReactJS.
+In this tutorial, we will learn how to build an AMM with the functionality to Provide, Withdraw & Swap with trading fees & slippage tolerance. We will build the smart contract in ink!, a Rust-based embedded Domain Specific Language (eDSL) and then see how to deploy it on a public testnet. Finally, we will create a frontend to the smart contract in ReactJS.
 
 # Prerequisites
 
-* Should be familiar with Rust and ReactJS
-* Have gone through [ink! beginners guide](https://docs.substrate.io/tutorials/v3/ink-workshop/pt1/)
+* You should be familiar with Rust and ReactJS
+* It will be much easier to follow this tutorial if you have completed the [ink! beginners guide](https://docs.substrate.io/tutorials/v3/ink-workshop/pt1/)
 
 # Requirements
 
@@ -13,7 +13,7 @@ In this tutorial, we will learn how to build an AMM having features - Provide, W
 * [Polkadot{.js} extension](https://polkadot.js.org/extension/) on your browser
 * [Ink! v3 setup](https://paritytech.github.io/ink-docs/getting-started/setup)
 
-# What's an AMM?
+# What is an AMM?
 
 Automated Market Maker(AMM) is a type of decentralized exchange which is based on a mathematical formula of price assets. It allows digital assets to be traded without any permissions and automatically by using liquidity pools instead of any traditional buyers and sellers which uses an order book that was used in traditional exchange, here assets are priced according to a pricing algorithm. 
 
@@ -93,7 +93,8 @@ pub enum Error {
 
 ## Part 2. Define storage struct
 
-Next, we define the state variables needed to operate the AMM. We will be using the same mathematical formula as used by Uniswap to determine the price of the assets (**K = totalToken1 * totalToken2**). For simplicity purposes, We are maintaining our own internal balance mapping (token1Balance & token2Balance) instead of dealing with external tokens.
+Next, we define the state variables needed to operate the AMM. We will be using the same mathematical formula as used by Uniswap to determine the price of the assets (K = totalToken1 * totalToken2). For simplicity, We are maintaining our own internal balance mapping (token1Balance & token2Balance) instead of dealing with external tokens. The `HashMap` in Rust works in a similar way to a mapping in the Solidity language, storing a key-value pair.
+Also keep in mind that in Rust, data must have an associated type - which is why you'll see the type `Balance` associated with the number of shares.
 
 ```rust
 #[derive(Default)]
@@ -111,8 +112,8 @@ pub struct Amm {
 
 ## Part 3. Helper functions
 
-We will define the private functions in a separate implementation block to keep the code structure clean and we need to add the `#[ink(impl)]` attribute to make ink! aware of it. The following functions will be used to check the validity of the parameters passed to the functions and restrict certain activities when the pool is empty.
-
+We will define the private functions in a separate implementation block to keep the code structure clean and we need to add the `#[ink(impl)]` attribute to make ink! aware of it.
+The following functions will be used to check the validity of the parameters passed to the functions and restrict certain activities when the pool is empty.
 ```rust
 #[ink(impl)]
 impl Amm {
@@ -149,8 +150,7 @@ impl Amm {
 
 ## Part 4. Constructor
 
-Our constructor takes `_fees` as a parameter that determines the percent of fees the user is charged when doing a swap operation. The value of `_fees` should be between 0 and 1000(exclusive). Then any swap operation will be charged **_fees/1000** percent of the amount deposited.
-
+Our constructor takes `_fees` as a parameter which determines the percent of fees the user is charged when performing a swap operation. The value of `_fees` should be between 0 and 1000 (exclusive) so that any swap operation will be charged **_fees/1000** percent of the amount deposited.
 ```rust
 /// Constructs a new AMM instance
 /// @param _fees: valid interval -> [0,1000)
@@ -166,7 +166,7 @@ pub fn new(_fees: Balance) -> Self {
 
 ## Part 5. Faucet
 
-As we are not using the external tokens and instead, maintaining a record of the balance ourselves; we need a way to allocate tokens to the new users so that they can interact with the dApp. Users can call the faucet function to get some tokens to play with!
+We are not using any external tokens for the purposes of this tutorial, instead we are maintaining a record of the balance ourselves. We need a way to allocate tokens to new users so that they can interact with the dApp. Users can call this faucet function to get some tokens to play with!
 
 ```rust
 /// Sends free token(s) to the invoker
@@ -210,7 +210,7 @@ pub fn getPoolDetails(&self) -> (Balance, Balance, Balance, Balance) {
 
 ## Part 7. Provide
 
-`provide` function takes two parameters - the amount of token1 & the amount of token2 that the user wants to lock in the pool. If the pool is initially empty then the equivalence rate is set as **_amountToken1 : _amountToken2** and the user is issued 100 shares for it. Otherwise, it is checked whether the two amounts provided by the user have equivalent value or not. This is done by checking if the two amounts are in equal proportion to the total number of their respective token locked in the pool i.e. **_amountToken1 : totalToken1 : : _amountToken2 : totalToken2** should hold.
+The `provide` function takes two parameters - the amount of token1 & the amount of token2 that the user wants to lock in the pool. If the pool is initially empty then the equivalence rate is set as **_amountToken1 : _amountToken2** and the user is issued 100 shares for it. Otherwise, it is checked whether the two amounts provided by the user have equivalent value or not. This is done by checking if the two amounts are in equal proportion to the total number of their respective token locked in the pool i.e. **_amountToken1 : totalToken1 : : _amountToken2 : totalToken2** should hold.
 
 ```rust
 /// Adding new liquidity in the pool
@@ -260,7 +260,7 @@ pub fn provide(
 }
 ```
 
-The given functions help the user get an estimate of the amount of the second token that they need to lock for the given token amount. Here again, we use the proportion **_amountToken1 : totalToken1 : : _amountToken2 : totalToken2** to determine the amount of token1 required if we wish to lock given amount of token2 and vice-versa.
+These estimate functions help the user get an idea of the amount of a token that they need to lock for the given token amount. Here again, we use the proportion **_amountToken1 : totalToken1 : : _amountToken2 : totalToken2** to determine the amount of token1 required if we wish to lock a given amount of token2 and vice-versa.
 
 ```rust
 /// Returns amount of Token1 required when providing liquidity with _amountToken2 quantity of Token2
@@ -441,7 +441,7 @@ pub fn swapToken1GivenToken2(
 
 Similarly for Token2 to Token1 swap we need to implement four functions - `getSwapToken2EstimateGivenToken2`, `getSwapToken2EstimateGivenToken1`, `swapToken2GivenToken2` & `swapToken2GivenToken1`. This is left as an exercise for you to implement :)
 
-Congrats!! on completing the implementation of the smart contract. The complete code can be found [here](https://github.com/realnimish/polkadot-amm/blob/main/contract/lib.rs).
+Congrats! That was a lot of code to go through to finish the implementation of the smart contract. The complete code can be found [here](https://github.com/realnimish/polkadot-amm/blob/main/contract/lib.rs).
 
 ## Part 10. Unit Testing
 
@@ -533,17 +533,17 @@ From your ink! project directory run the following command in the terminal to ru
 cargo +nightly contract test
 ```
 
-Next, we will learn how to deploy the contract on a public testnet in the next section.
+Next, we will learn how to deploy the contract on a public testnet.
 
 # Deploying the smart contract
 
-We will deploy our ink! smart contract on Jupiter A1 testnet of Patract ([More info](https://docs.patract.io/en/jupiter/network)). First, we need to build our ink! project to obtain the necessary artifacts. From your ink! project directory run the following command in the terminal:
+We will deploy our ink! smart contract on the Jupiter A1 testnet of Patract ([More info about the Jupiter testnet](https://docs.patract.io/en/jupiter/network)). First, we need to build our ink! project to obtain the necessary artifacts. From your ink! project directory run the following command in the terminal:
 
 ```text
 cargo +nightly contract build --release
 ```
 
-This will generate the artifacts at `./target/ink`. We will use the `amm.wasm` and `metadata.json` (*It is the ABI of our contract and it will be needed when we integrate it with the frontend of our dApp*) files to deploy our smart contract.
+This will generate the artifacts at `./target/ink`. We will use the `amm.wasm` and `metadata.json` files to deploy our smart contract. The `amm.wasm` file is the compiled smart contract, in WebAssembly format. `metadata.json` is the ABI of our contract and it will be needed when we integrate with the frontend of our dApp.
 
 Next, we need to fund our address to interact with the network. Go to the [faucet](https://patrastore.io/#/jupiter-a1/system/accounts) to get some testnet tokens. 
 
