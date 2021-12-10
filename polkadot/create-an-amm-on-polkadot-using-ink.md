@@ -637,6 +637,11 @@ const faucet = async (amountKAR, amountKOTHI) => {
 
 In the above javascript code, we have demonstrated how to make a query and transaction to our AMM smart contract. Now let's understand each line of the above code.
 
+
+{% hint style="info" %}  
+ The above code is just a reference on how to interact with the smart contract.
+{% endhint %}
+
 ```javascript
 // Creates a provider
 const wsProvider = new WsProvider("ws://127.0.0.1:9944");
@@ -667,7 +672,7 @@ Now we need to select an account to work with. We can get the list of all inject
  
 ```javascript
 // Retrieves the signer interface from this account
-// web#FromSource returns an InjectedExtension type
+// web3FromSource returns an InjectedExtension type
 const accountSigner = await web3FromSource(selectedAccount.meta.source).then(
   (res) => res.signer
 );
@@ -728,25 +733,25 @@ npm install
 
 In our react application we keep all the React components in the `src/components` directory.
 
-* **BoxTemplate** :- 
+* **BoxTemplate** :
 It renders the box containing the input field, its header, and the element on the right of the box, which can be a token name account balance, a button, or is empty.
 
-* **FaucetComponent** :-
+* **FaucetComponent** :
  Takes amount of token1 (KAR) and token2 (KOTHI) as input and funds the user address with that much amount.
 
-* **ProvideComponent** :-
+* **ProvideComponent** :
 Takes amount of one token (KAR or KOTHI) fills in the estimated amount of the other token and helps provide liquidity to the pool.
 
-* **SwapComponent** :- 
+* **SwapComponent** :
 Helps swap a token to another. It takes the amount of token in input field *From* and estimates the amount of token in input field *To* and vise versa, and also helps set the slippage tolerance while swapping.
 
-* **WithdrawComponent** :-
+* **WithdrawComponent** :
 Helps withdraw the share one has. Also enables them to withdraw to his maximum limit.
 
-* **Account** :-
+* **Account** :
 Shows the pool detail and the account details. It enables to switch between accounts in the application.
 
-* **ContainerComponent** :- 
+* **ContainerComponent** :
 This component renders the main body of our application which contains the center box, the tabs to switch between the five components Swap, Provide, Faucet, Withdraw, Account.
 
 The `App.js` renders the `ContainerComponent` and connects the application to `polkadot.{js}`. 
@@ -754,7 +759,7 @@ The `App.js` renders the `ContainerComponent` and connects the application to `p
 The `constants.js` file stores the contract **ABI** and **CONTRACT_ADDRESS**. Don't forget to store your contract address and ABI in the respective variables. 
 
 {% hint style="info" %}  
-ABI can be obtained from your ink! project folder at `.../target/ink/metadata.json`
+ABI can be obtained from your ink! project folder at `/target/ink/metadata.json`
 {% endhint %}
 
 Now it's time to run our React app. Use the following command to start the React app.
