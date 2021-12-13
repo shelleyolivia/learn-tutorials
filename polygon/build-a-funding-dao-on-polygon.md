@@ -1,39 +1,39 @@
 # Introduction
 
-In this tutorial, we will learn how to create DAO with a Solidity smart contract and the NextJS website to interact with the DAO.
+In this tutorial, we will learn how to create a Decentralized Autonomous Organization, or "DAO" with a Solidity smart contract deployed on Polygon and a NextJS front-end to interact with the DAO.
 
-We will be creating a Venture/Grant DAO, where people can use MATIC token to become either a Member or Stakeholder in the DAO, after which if the user is a member then they can apply for requesting funding for their project or in case of stakeholder, user can vote on the projects to fund on and later can delegate funds in MATIC to the project proposer.
+We will be creating a Venture/Grant DAO, where people can use MATIC tokens to become either a Member or Stakeholder in the DAO. Members can apply for funding for their project and Stakeholders can vote on the projects to fund from the DAO treasury.
 
 This DAO will have the following features:
 
-- Users can provide up to 5 MATIC tokens to become a member of DAO and can provide more than 5 tokens to become a Stakeholder in the DAO.
-- A member can create a new proposal and request funding. Every new proposal requires the user to add 3 MATIC tokens to the DAO treasury.
-- If the proposal is accepted after voting then the initial 3 MATIC tokens are refunded to the user, else the tokens are reserved in the DAO treasury
-- Upon creating a new proposal, stakeholders have 3 days to vote on the proposal, either in favor or against it.
-- At the end of 3 days, if the proposal is selected, stakeholders have an option to provide the required funds to the proposer.
+- Users can provide up to 5 MATIC tokens to become a Member of the DAO and can provide more than 5 tokens to become a Stakeholder in the DAO.
+- A Member can create new proposals and request funding. Every new proposal requires the Member to add 3 MATIC tokens to the DAO treasury.
+- If the proposal is accepted after the voting period the initial 3 MATIC tokens are refunded, otherwise the tokens are reserved in the DAO treasury.
+- When a Member creates a new proposal Stakeholders have 3 days to vote on the proposal, either in favor or against it.
+- At the end of the voting period, if the proposal is selected, Stakeholders have an option to provide the requested funds to the Member who made the proposal.
 
 This is what the DAO we will be creating looks like:
 
-![Demo GIF](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-demo.gif)
+![Demo GIF](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/filename.gif?raw=true)
 
 # Prerequisites
 
-To successfully follow along with this tutorial, you will need a good understanding of the smart contract, Solidity language, the Truffle framework, and the Next.js framework. Having a basic understanding of what DAO is and how it functions is a plus point.
+To successfully follow along with this tutorial, you will need a good understanding of the Solidity language, the Truffle framework, and the Next.js framework. Having a basic understanding of what a DAO is and how it functions is also beneficial.
 
-We will be using the [web3.js](https://web3js.readthedocs.io/en/v1.5.2/) javascript library to interact with smart contract and Next.js for backend logic.
+We will be using the [web3.js](https://web3js.readthedocs.io/en/v1.5.2/) JavaScript library to interact with the smart contract and Next.js for backend logic.
 
 # Requirements
 
 - [Truffle](https://github.com/trufflesuite/truffle) - Truffle provides a local development environment for creating and testing blockchain applications.
 - [Metamask](https://metamask.io/) - You will need a Metamask wallet installed in your browser.
 - [NodeJs](https://nodejs.org/en/) - You must have Node.js installed. We recommend using v16.13.0 LTS.
-- [Arweave](https://www.arweave.org/) - We will store images for a proposal on Arweave.
+- [Arweave](https://www.arweave.org/) - We will store images related to a proposal on Arweave.
 - [Next.js](https://nextjs.org/) - A web framework to create a user interface.
 - [TailwindCSS](https://tailwindcss.com/) - A CSS utility framework.
 
 # Project Setup
 
-Run the following commands in the terminal to create project directories and install required packages.
+Run the following commands in a terminal to create the project directories and install the required packages:
 
 ```text
 npm install -g truffle
@@ -44,13 +44,13 @@ yarn add @openzeppelin/contracts web3 tailwindcss postcss autoprefixer  @tailwin
 npx tailwindcss init -p
 ```
 
-`npx create-next-app --typescript funding-dao` will create a Next.js app with typescript support, `truffle init` will initiate a smart contract, `yarn add` will install all the required dependencies required for the dApp and `npx tailwindcss init -p` will initiate the tailwindcss.
+`npm install -g truffle` will install the Truffle utilities, `npx create-next-app --typescript funding-dao` will create a Next.js app with typescript support, `truffle init` will scaffold a smart contract, yarn add will install all the required dependencies for the dApp and `npx tailwindcss init -p` will set up tailwindcss for the project.
 
 # Creating FundingDao smart contract
 
 ```solidity
-// /contracts/FundingDao.sol
 // SPDX-License-Identifier: MIT
+// /contracts/FundingDao.sol
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/AccessControl.sol";
@@ -276,7 +276,7 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 ```
 
-We will be using OpenZepellin's [AccessControl](https://docs.openzeppelin.com/contracts/2.x/access-control) to manage members' and stakeholders' roles in the DAO. We need OpenZepellin's [ReentrancyGuard](https://docs.openzeppelin.com/contracts/4.x/api/security#ReentrancyGuard) to make sure there can't be any nested reentrant calls. These are security features that should not be ignored while creating a smart contract.
+We will be using OpenZepellin's [AccessControl](https://docs.openzeppelin.com/contracts/2.x/access-control) to manage the Member and Stakeholder roles in the DAO. We also need OpenZepellin's [ReentrancyGuard](https://docs.openzeppelin.com/contracts/4.x/api/security#ReentrancyGuard) to make sure there can't be any nested reentrant calls. These are important security features that should not be ignored while creating a smart contract.
 
 ```solidity
     struct Proposal {
@@ -303,7 +303,7 @@ We will be using OpenZepellin's [AccessControl](https://docs.openzeppelin.com/co
     }
 ```
 
-The `Proposal` struct holds all the proposals created by members.
+The `Proposal` struct holds all the proposals created by members. The `Funding` struct holds the data related to payments into the DAO treasury.
 
 ```solidity
     mapping(uint256 => Proposal) private proposals;
@@ -312,10 +312,10 @@ The `Proposal` struct holds all the proposals created by members.
     mapping(address => uint256[]) private votes;
 ```
 
-- `proposals` mapping stores the instances of `Proposal` structs.
-- `stakeholders` mapping contains all the tokens provided to DAO treasury by stakeholders.
-- `members` mapping contains all the tokens provided to DAO treasury by members.
-- `votes` mapping contains the array of proposal ids for each stakeholder to keep track of votes.
+- `proposals` stores the instances of `Proposal` structs, mapped to a unique number.
+- `stakeholders` maps a Stakeholder's address to their balance of tokens provided to DAO treasury.
+- `members` maps a Member's address to their balance of tokens provided to the DAO treasury.
+- `votes` contains the array of proposal IDs for each Stakeholder to keep track of their votes.
 
 ```solidity
     bytes32 public constant MEMBER = keccak256("MEMBER");
@@ -325,9 +325,9 @@ The `Proposal` struct holds all the proposals created by members.
     uint256 public proposalsCount = 0;
 ```
 
-`MEMBER` and `STAKEHOLDER` are the two roles for members and stakeholders which will be used to define access control features in smart control.
+`MEMBER` and `STAKEHOLDER` are the two roles in the DAO which will be used to define access control features. The value of each constant is the [keccak256](https://solidity-by-example.org/hashing/) hash which creates a deterministic unique identifier.
 
-`votingPeriod` is the time provided to stakeholders for the voting on a proposal and proposalsCount keeps the count of all the proposals.
+`votingPeriod` is the amount of time provided to stakeholders to vote on a proposal and `proposalsCount` keeps the count of all the proposals.
 
 ```solidity
     modifier onlyMember(string memory message) {
@@ -341,7 +341,7 @@ The `Proposal` struct holds all the proposals created by members.
     }
 ```
 
-`onlyMember` and `onlyStakeholder` are modifiers for members and stakeholders respectively to implement access control on method calls in the contract.
+`onlyMember` and `onlyStakeholder` are [function modifiers](https://docs.soliditylang.org/en/latest/contracts.html#function-modifiers) for Members and Stakeholders respectively to implement access control on method calls in the contract.
 
 ```solidity
     function createProposal(
@@ -349,7 +349,7 @@ The `Proposal` struct holds all the proposals created by members.
         string calldata desc,
         address receiverAddress,
         uint256 amount
-    ) public payable onlyMember("Only members can create new proposal.") {
+    ) public payable onlyMember("Only Members can create proposals.") {
         require(
             msg.value == 5 * 10**18,
             "You need to add 5 MATIC to create a proposal"
@@ -370,7 +370,9 @@ The `Proposal` struct holds all the proposals created by members.
     }
 ```
 
-`createProposal` accepts the relevant data for a proposal, create an instance of the `Proposal` struct and store it in `proposals` mapping. Here we are using the `onlyMember` modifier, as only members of DAO are allowed to create a proposal. To create a proposal, the member has to lock 5 MATIC tokens, if the proposal is accepted, the tokens will be refunded to the proposer, or else the tokens will be added to the DAO treasury.
+`createProposal` accepts the relevant data for a proposal, creates an instance of the `Proposal` struct and stores it in `proposals` mapping.
+
+Here we are using the `onlyMember` modifier, as only Members of DAO are allowed to create a proposal. To create a proposal, the Member has to lock 5 MATIC tokens. If the proposal is accepted the tokens will be refunded to the proposer, otherwise the tokens will be added to the DAO treasury.
 
 ```solidity
     function getAllProposals() public view returns (Proposal[] memory) {
@@ -425,7 +427,7 @@ The `Proposal` struct holds all the proposals created by members.
     }
 ```
 
-These are some view function to get the data and to verify the state of the contract.
+`getAllProposals`, `getProposal`, `getVotes`, `getStakeholderBal`, `getMemberBal`, `isStakeholder` and `isMember` are all view functions used to verify the state of the contract.
 
 ```solidity
     function vote(uint256 proposalId, bool inFavour)
@@ -450,7 +452,7 @@ These are some view function to get the data and to verify the state of the cont
     }
 ```
 
-The `vote` method can only be called by stakeholders, where we check first if the proposal is not completed and the stakeholder calling the method has not already voted for the respective proposal. On successful validation, votes are counted for the proposal and the `votes` mapping is updated for that stakeholder, such that the stakeholder cannot vote on this proposal again.
+The `vote` method can only be called by Stakeholders. First we check if the proposal is not completed and the Stakeholder calling the method has not already voted for the respective proposal. On successful validation, votes are counted for the proposal and the `votes` mapping is updated for that Stakeholder, so that the Stakeholder cannot vote on this proposal again.
 
 ```solidity
     function provideFunds(uint256 proposalId, uint256 fundAmount)
@@ -460,11 +462,11 @@ The `vote` method can only be called by stakeholders, where we check first if th
     {
         Proposal storage proposal = proposals[proposalId];
 
-        if (proposal.isPaid) revert("Required funds are provided.");
+        if (proposal.isPaid) revert("Proposal already paid out.");
         if (proposal.voteInFavor <= proposal.voteAgainst)
             revert("This proposal is not selected for funding.");
         if (proposal.totalFundRaised >= proposal.amount)
-            revert("Required funds are provided.");
+            revert("Proposal funding goal already reached.");
         proposal.totalFundRaised += fundAmount;
         proposal.funders.push(Funding(msg.sender, fundAmount, block.timestamp));
         if (proposal.totalFundRaised >= proposal.amount) {
@@ -473,11 +475,11 @@ The `vote` method can only be called by stakeholders, where we check first if th
     }
 ```
 
-The `provideFunds` method can only be called by stakeholders, once the voting is completed and the proposal is selected by the community. Before accepting the funds we make sure -
+The `provideFunds` method can only be called by Stakeholders once the voting is completed and the proposal is selected by the community. Before accepting the funds, we need to make sure:
 
-- The proposal is not already paid.
+- The proposal has not already been paid out.
 - The proposal has more votes in favor than against.
-- The proposal has not yet met the required amount of funding requested by the proposer.
+- The proposal has not already met the requested funding goal.
 
 After validation, the funds are added to the treasury temporarily and the `funders` array in `Proposal` is updated with the amount funded by the stakeholder who invoked the method. In the end, we check if the `totalFundRaised` is more than the amount requested by the proposer, if so we set the `isCompleted` to `true`.
 
@@ -490,7 +492,7 @@ After validation, the funds are added to the treasury temporarily and the `funde
         Proposal storage proposal = proposals[proposalId];
 
         if (proposal.totalFundRaised <= proposal.amount) {
-            revert("Required funds are not met. Please provider funds.");
+            revert("Requested funding goal is not met. Please provide funds.");
         }
         proposal.receiverAddress.transfer(proposal.totalFundRaised);
         proposal.isPaid = true;
@@ -498,9 +500,9 @@ After validation, the funds are added to the treasury temporarily and the `funde
     }
 ```
 
-`releaseFunding` can only be invoked by stakeholders, once the funds are provided for a proposal and can be sent to the receiver's address. In `releaseFunding` we make sure that `totalFundRaised` is greater than or equal to the amount requested by the proposer.
+`releaseFunding` can only be called by Stakeholders once the funds are provided for a proposal and can be sent to the receiver's address. In `releaseFunding` we make sure that `totalFundRaised` is greater than or equal to the amount requested by the proposer.
 
-Now we can transfer the `totalFundRaised` from DAO treasury to the receiver's address and set `isPaid` to `true` for the respective proposal.
+Now we can transfer the `totalFundRaised` from the DAO treasury to the receiver's address and set `isPaid` to `true` for the respective proposal.
 
 ```solidity
     function createStakeholder() public payable {
@@ -525,11 +527,11 @@ Now we can transfer the `totalFundRaised` from DAO treasury to the receiver's ad
 
 The `createStakeholder` can be invoked by anyone, members, stakeholder, or the users who wish to join the DAO. Here we are checking for a few things -
 
-- If the account calling the method is a new user, and the MATIC token sent with method invocation is more than 2 MATIC, we give the stakeholder and member role to that account, if it's less than 2 MATIC we only give member role to that account.
-- If the account calling is already a member, then we create a total of all the tokens added by the account previously and check if total tokens are greater than 2 MATIC, if so we give stakeholder access to the account.
-- If the account calling is already a stakeholder then we just add the token send with method invocation to DAO's treasury.
+- If the account calling the method is a new user, and the amount of MATIC tokens sent during method invocation is more than 2 MATIC, we give the Stakeholder and Member roles to that account. If the amount sent is less than 2 MATIC, we only give member role to that account. Keep in mind that while Solidity uses the ether keyword to denote one full utility token, we will be deploying this smart contract to Polygon which uses MATIC tokens rather than Ether.
+- If the account calling is already a Member, then we create a total of all the tokens added by the account previously and check if total tokens are greater than 2 MATIC, if so we give the Stakeholder role to the account.
+- If the account calling is already a Stakeholder, then we just add the tokens sent with the method call to the DAO treasury.
 
-We are done with `FundingDao.sol`, let's deploy the smart contract to a local blockchain.
+We are done with `FundingDao.sol`, now let's deploy the smart contract to a local blockchain for testing.
 
 # Compiling and deploying with Truffle
 
@@ -573,10 +575,16 @@ module.exports = {
 
 ```
 
-For the development purpose, we will be deploying to the local blockchain. To start local blockchain run the following command -
+For the purposes of development and testing, we will be deploying the smart contract to a local blockchain. To start the Ganache local blockchain that comes with Truffle, run the following command in your terminal:
 
 ```text
 ganache-cli
+```
+
+Ganache will start up, and you will see the addresses and private keys of the 10 default accounts displayed in the terminal. You will know that Ganache is running and ready to use when you see:
+
+```text
+Listening on 127.0.0.1:8545
 ```
 
 Open new terminal and run the following command to compile and deploy the contracts.
@@ -586,7 +594,17 @@ truffle compile
 truffle deploy
 ```
 
-# Creating Frontend
+# Creating the Frontend
+
+In Next.js, a page is a React Component exported from `.jsx` or `.tsx` file in the `pages` directory. Each page is associated with a route based on it's file name. Example, If you create `pages/home.tsx` that exported component like below, it will be accessible at `/home` endpoint in the browser.
+
+```typescript
+const Home = () => {
+  return <div>Home</div>
+}
+
+export default Home;
+```
 
 In our dApp, we will be creating four pages:
 
@@ -594,7 +612,7 @@ In our dApp, we will be creating four pages:
 
 In the Next.js app, we will be separating the business logic and UI with the use of `contexts`. We will create a `DataContext` which will handle all the state and method calls, and our UI will call these methods and variables. This allows us to write a clean UI code with no business logic.
 
-We will start by creating the `context`. Create a file called `dataContext.tsx` in the contexts directory and paste the code for the below file.
+We will start by creating the data context. Make a file called `dataContext.tsx` in the `contexts` directory and paste the code from the file linked below into it.
 
 [contexts/dataContext.tsx](https://github.com/viral-sangani/Funding-DAO/blob/main/contexts/dataContext.tsx)
 
@@ -673,9 +691,9 @@ We have created a type interface for our `DataContext` and initialized the `Data
 
 These are the state variables that we will require in our dApp. `loading` is set to false until we fetch all the required data from our contact which will be used to show a loading screen to the user. `account` variable contains the account address of the current user.
 
-`fundingDao` is an instance of our smart contract, and `allProposals` contains a list of all the proposals present in our contract. `isStakeholder` and `isMember` defines the role of the current user in DAO.
+`fundingDao` is an instance of our smart contract, and `allProposals` contains a list of all the proposals present in our contract. `isStakeholder` and `isMember` define the roles of the current user in the DAO.
 
-`currentBal` stores the balance of the user in DAO treasury. `allVotes` and `allInvestedProposal` store the ID of proposal and proposal objects respectively for the stakeholders.
+`currentBal` stores the balance of the user in the DAO treasury. `allVotes` and `allInvestedProposal` store the IDs of proposal and proposal objects respectively for the Stakeholders.
 
 ```typescript
   const connect = async () => {
@@ -695,7 +713,7 @@ These are the state variables that we will require in our dApp. `loading` is set
   };
 ```
 
-In the `connect` function we are connecting our dApp with metamask and fetching the account.
+In the `connect` function we are connecting our dApp with MetaMask and fetching the account.
 
 ```typescript
 const loadBlockchainData = async () => {
@@ -814,7 +832,7 @@ const createProposal = async ({
   };
 ```
 
-In `createProposal`, we are accepting the title, description, amount, and recipient as argument and calling `createProposal` of contract. `createProposal` is a transaction call as the user has to lock 5 MATIC tokens to create a proposal.
+In `createProposal`, we are passing the title, description, amount, and recipient as arguments and calling `createProposal` of contract. `createProposal` is a transaction call as the user has to lock 5 MATIC tokens to create a proposal.
 
 ```typescript
 const getProposal = async (id: string) => {
@@ -833,7 +851,7 @@ const getProposal = async (id: string) => {
   };
 ```
 
-In `getProposal` we are fetching only one proposal from the contract by sending the proposal id in the `getProposal` method call. In the `vote` function, we are accepting the proposal id and the boolean value for vote button action and calling the `vote` method of contract. Note that only stakeholders can call the vote method.
+In `getProposal` we are fetching only one proposal from the contract by passing the proposal id as the only argument. In the `vote` function, we are accepting the proposal id and the boolean value for vote button action and calling the `vote` method of the contract. Note that only Stakeholders can call the `vote` method.
 
 ```typescript
 const provideFunds = async (id: string, amount: string) => {
@@ -853,11 +871,11 @@ const releaseFunding = async (id: string) => {
   };
 ```
 
-The `provideFunds` function is called by stakeholders when the voting period is over and the proposal is accepted. Any stakeholder can call the `provideFunds` and pass in the number of tokens they want to invest in the project. `releaseFunding` is called when the stakeholder has provided the requested funds and DAO is ready to transfer the funds to the receiver's address. Any of the stakeholders can call `releaseFunding`.
+The `provideFunds` function is called by Stakeholders when the voting period is over and the proposal is accepted. Any Stakeholder can call `provideFunds` and pass in the number of tokens they want to invest in the project. `releaseFunding` is called when the Stakeholder has provided the requested funds and the DAO is ready to transfer the funds to the receiver's address. Any of the Stakeholders can call `releaseFunding`.
 
-Now that we are done with the business logic of our dApp, let's start the frontend.
+Now that we are done with the business logic of our dApp, let's start with displaying the interface.
 
-`index.tsx` is the entry page for all the users. If the user is new, then we show a box and ask them to transfer MATIC token to become a member or stakeholder. The UI for the same looks something like this -
+`index.tsx` is the entry page for all the users. If the user is new, then we show a box and ask them to transfer MATIC tokens to become a Member or Stakeholder. The UI for the same looks something like this -
 
 ```typescript
 // pages/index.tsx
@@ -905,7 +923,7 @@ export default function Home() {
 
 ![Funding Dao Index](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-index.png)
 
-In `index.tsx` we make sure that if we are loading data from the contract then we show loading status, and if the user has not connected metamask, we ask the user to connect the wallet. On the index page, if the user is neither a stakeholder nor a member, then we show the user, a UI from which he/she can transfer MATIC to treasury and become a member of the DAO. If the user is already a member, then we show a list of all the proposals.
+In `index.tsx` we make sure that if we are loading data from the contract then we show loading status, and if the user has not connected MetaMask, we ask the user to connect their wallet. On the index page, if the user is neither a Stakeholder nor a Member, then we show the user a UI from which he/she can transfer MATIC to treasury and become a Member of the DAO. If the user is already a Member, then we show a list of all the current proposals.
 
 Let's see how our navbar looks like:
 
@@ -1023,7 +1041,8 @@ const TabButton = ({
 ```
 
 In navbar, if the user is a member we show **Member** badge if the user is a stakeholder we show **Stakeholder** badge or else we show **Not a Member** badge.
-For the non-member, we only show the Home tab, for members we show Create Proposal and Stakeholder Lounge tabs and for stakeholders, we show an additional Investments tab in the navbar.
+
+For the non-Member, we only show the Home tab, for Members we show Create Proposal and Stakeholder Lounge tabs and for Stakeholders, we show an additional Investments tab in the navbar.
 
 ```typescript
 // components/createMember.tsx
@@ -1039,8 +1058,8 @@ export const CreateMember = () => {
         <div className="flex flex-col justify-center">
           <span>You are not a member.</span>
           <p>
-            Add <strong>2 MATIC</strong> to become member and more than 2 MATIC
-            become a stakeholder
+            Add <strong>2 MATIC</strong> to become Member and more than 2 MATIC
+            become a Stakeholder
           </p>
           <input
             type="search"
@@ -1068,7 +1087,7 @@ export const CreateMember = () => {
 
 ![Create member](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-create-member.png)
 
-We are using the `CreateMember` component on the index page if the user has not joined the DAO. In this component, we are accepting the amount of MATIC token user wants to give to DAO to become a member/stakeholder. On the Send button, we are calling the `createStakeholder` method from `dataContext`.
+We are using the `CreateMember` component on the index page if the user has not joined the DAO. In this component, we are accepting the amount of MATIC token user wants to give to DAO to become a Member/Stakeholder. On the Send button, we are calling the `createStakeholder` method from `dataContext`.
 
 ```typescript
 // components/proposalList.tsx
@@ -1120,7 +1139,7 @@ export const ProposalList = () => {
 };
 ```
 
-`ProposalList` component shows the list of `ProposalCard` present in the contract. If the user is a stakeholder then, the user can click on the card and get a popup modal to vote on the proposal.
+`ProposalList` component shows the list of `ProposalCard` present in the contract. If the user is a Stakeholder then the user can click on the card and get a popup modal to vote on the proposal.
 
 ```typescript
 // components/proposalCard.tsx
@@ -1359,13 +1378,13 @@ export default function Home() {
 
 On this page, we are rendering a form for the user to create a new proposal.  Once all the fields are filled we are calling the `createProposal` method from `dataContext`.
 
-Before calling the `createProposal` we are making an api call to a Next.js api endpoint and passing the image uploaded by the user as form-data. In the api call, we are uploading the image, converting the image to base64, and storing the image in **Arweave**, and returning the ID of the object.
+Before calling the `createProposal` function, we are making an API call to a Next.js API endpoint and passing the image uploaded by the user as form-data. In the API call, we are uploading the image, converting it to base64, and storing the image on Arweave, then returning the ID of the object.
 
 Now we need to create an account on Arweave and get the key for the account and make sure we have some AR token in the account to upload the data.
 
-Goto [https://faucet.arweave.net/](https://faucet.arweave.net/) and follow all the steps to get the `.json` key and `0.02AR` token in the account. Once you have the key, copy the key to the root directory of the project and rename the file to `arweave-key.json`. Make sure to add `arweave-key.json` into your `.gitignore` file.
+Go to [https://faucet.arweave.net/](https://faucet.arweave.net/) and follow all the steps to get your `.json` key and 0.02 AR tokens in the account. Once you have the key, copy the key to the root directory of the project and rename the file to `arweave-key.json`. Make sure to add `arweave-key.json` into your `.gitignore` file.
 
-Let's create the `upload-image.tsx` file and handle the Arweave calls.
+Let's create the `upload-image.ts` file and handle the Arweave calls.
 
 ```typescript
 // pages/api/upload-image.ts
@@ -1413,7 +1432,7 @@ export default function handler(
       await uploader.uploadChunk();
     }
     console.log(`transactionA.id`, transactionA.id)
-    res.json({id: transactionA.id});
+    res.status(200).json({id: transactionA.id});
   });
 }
 ```
@@ -1919,7 +1938,7 @@ export const AddFundsModal: React.FC<Props> = ({
 
 In the `AddFundsModal` we are showing basic information about the proposal and a text field from which stakeholders can invest the desired amount in the proposal. Investors can invest multiple times until the required funds are reached.
 
-The last page of the dApp is Stakeholder Lounge. Here users can see their token delegation to the DAO's treasury and can always delegate more token. Members can delegate more tokens from this page to become a stakeholder.
+The last page of the dApp is the Stakeholder Lounge. Here users can see their token delegation to the DAO's treasury and can always delegate more tokens. Members can delegate more tokens from this page if they want to become a Stakeholder.
 
 ```typescript
 // pages/stakeholder-lounge.tsx
@@ -2001,6 +2020,12 @@ This is how the DAO dApp looks like at the end:
 
 ![Demo Video](https://vimeo.com/654823931)
 
-About the Author
+# Conclusion
+
+Congratulation on finishing this tutorial. Thank you for taking the time to complete it. In this tutorial, we have learned how to create a Funding DAO smart contract and a frontend using Next.js for the same. To extend this dApp you can create an authentication system using protocols like [Ceremic Network](https://ceramic.network/).
+
+Keep building on Web3.
+
+# About the Author
 
 I'm Viral Sangani, a tech enthusiast working on blockchain projects & love the Web3 community. Feel free to connect with me on [Github](https://github.com/viral-sangani).
