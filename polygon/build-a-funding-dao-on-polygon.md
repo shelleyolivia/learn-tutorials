@@ -14,7 +14,7 @@ This DAO will have the following features:
 
 This is what the DAO we will be creating looks like:
 
-![Demo GIF](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/filename.gif?raw=true)
+![Demo GIF](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/funding-dao-demo.gif?raw=true)
 
 # Prerequisites
 
@@ -608,7 +608,7 @@ export default Home;
 
 In our dApp, we will be creating four pages:
 
-![Folder Structure](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-folder-structure.png)
+![Folder Structure](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/funding-dao-folder-structure.png?raw=true)
 
 In the Next.js app, we will be separating the business logic and UI with the use of `contexts`. We will create a `DataContext` which will handle all the state and method calls, and our UI will call these methods and variables. This allows us to write a clean UI code with no business logic.
 
@@ -921,7 +921,7 @@ export default function Home() {
 }
 ```
 
-![Funding Dao Index](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-index.png)
+![Funding Dao Index](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/funding-dao-index.png?raw=true)
 
 In `index.tsx` we make sure that if we are loading data from the contract then we show loading status, and if the user has not connected MetaMask, we ask the user to connect their wallet. On the index page, if the user is neither a Stakeholder nor a Member, then we show the user a UI from which he/she can transfer MATIC to treasury and become a Member of the DAO. If the user is already a Member, then we show a list of all the current proposals.
 
@@ -1085,7 +1085,7 @@ export const CreateMember = () => {
 };
 ```
 
-![Create member](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-create-member.png)
+![Create member](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/funding-dao-create-member.png?raw=true)
 
 We are using the `CreateMember` component on the index page if the user has not joined the DAO. In this component, we are accepting the amount of MATIC token user wants to give to DAO to become a Member/Stakeholder. On the Send button, we are calling the `createStakeholder` method from `dataContext`.
 
@@ -1245,7 +1245,7 @@ export const ProposalCard: React.FC<Props> = ({ proposal, openModal }) => {
 };
 ```
 
-![Proposal Card](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-proposal-card.png)
+![Proposal Card](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/funding-dao-proposal-card.png?raw=true)
 
 `ProposalCard` component accepts the proposal data and shows the UI accordingly. We are using `react-timer-hook` to show the timer for the remaining time of the voting period.
 
@@ -1374,7 +1374,7 @@ export default function Home() {
 }
 ```
 
-![Create Proposal](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-create-proposal.png)
+![Create Proposal](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/funding-dao-create-proposal.png?raw=true)
 
 On this page, we are rendering a form for the user to create a new proposal.  Once all the fields are filled we are calling the `createProposal` method from `dataContext`.
 
@@ -1607,7 +1607,7 @@ export const VoteModal: React.FC<Props> = ({
 };
 ```
 
-![Voting Modal](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-voting.png)
+![Voting Modal](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/funding-dao-voting.png?raw=true)
 
 In the `VoteModal` we are accepting a proposal and displaying the relevant data to stakeholders. We are also using the arweave library to fetch the base64 of the image for that proposal and display the image in the modal.
 
@@ -1670,7 +1670,7 @@ export default function Home() {
 }
 ```
 
-![Investments Page](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-investments.png)
+![Investments Page](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/funding-dao-investments.png?raw=true)
 
 On the `investments` page, we are using `allInvestedProposal` which contains all the proposals that the user has voted on in the past. We will show each proposal using the `ProposalInvestmentCard` component.
 
@@ -1934,7 +1934,7 @@ export const AddFundsModal: React.FC<Props> = ({
 };
 ```
 
-![Add Funds](https://github.com/figment-networks/learn-tutorials/raw/master/assets/funding-dao-add-funds.png)
+![Add Funds](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/funding-dao-add-funds.png?raw=true)
 
 In the `AddFundsModal` we are showing basic information about the proposal and a text field from which stakeholders can invest the desired amount in the proposal. Investors can invest multiple times until the required funds are reached.
 
