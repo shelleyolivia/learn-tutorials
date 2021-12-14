@@ -6,7 +6,7 @@ For a high level introduction to Non-Fungible-Tokens see the [first installment 
 
 # Prerequisites
 
-This tutorial assumes that you have completed the [Secret Pathway](https://learn.figment.io/protocols/secret) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. We will start with the same project folder as in section 5 of the Pathway.
+This tutorial assumes that you have completed the [Secret Pathway](https://learn.figment.io/protocols/secret) already, as we will be building upon that foundation of knowledge and skill. If you have not already done so, you would be wise to take the time to complete the Pathway. 
 
 # Requirements
 
@@ -15,9 +15,18 @@ This tutorial assumes that you have completed the [Secret Pathway](https://learn
 * Required JavaScript packages –
   * [secretjs](https://www.npmjs.com/package/secretjs) - for the Secret Network JavaScript API
   * [dotenv](https://www.npmjs.com/package/dotenv) - for working with environment variables
-* [Rust](https://rustup.rs) + [docker](https://docs.docker.com/get-docker/) toolchain to compile secret contracts
+* [Rust](https://rustup.rs) toolchain to compile secret contracts
+* [Docker](https://docs.docker.com/get-docker/) is needed for smart contract optimization
 
 ## Generate the contract
+
+If you do not already have the `cargo-generate` crate installed, add it with the command
+
+```text
+cargo install cargo-generate
+```
+
+Next, use `cargo-generate` to set up the snip-721 reference implementation with the command:
 
 ```text
 cargo generate --git https://github.com/baedrik/snip721-reference-impl --name my-snip721
@@ -31,7 +40,7 @@ You can have a look at the generated files by stepping into the folder using:
 cd my-snip721 && ls
 ```
 
-Most of the files in here should look very familiar from what you saw in part 5 of the Secret pathway, with the main difference that the `src` folder contains more files, due to the complexity of the contract
+The `src` folder contains the Rust smart contract.
 
 ```text
 Cargo.lock  Developing.md  LICENSE  Publishing.md  examples      schema  tests
@@ -48,7 +57,13 @@ To compile the smart contract into a WebAssembly \(.wasm\) binary, run this comm
 cargo wasm
 ```
 
-Before deploying or storing the contract on the testnet, you need to run the [secret contract optimizer](https://hub.docker.com/r/enigmampc/secret-contract-optimizer).
+If the build process fails to compile the secp256k1-sys crate, you may need to run the contract optimizer instead - this can take quite some time, be patient. You will need to remember to have Docker Desktop installed and running to complete this step:
+
+```text
+make compile-optimized-reproducible
+```
+
+Before deploying or storing the contract on the testnet, you need to run the [secret contract optimizer](https://hub.docker.com/r/enigmampc/secret-contract-optimizer). Note that if you already did this due to `cargo wasm` failing, it is not necessary to do it again.
 
 ## Optimize compiled wasm
 
@@ -56,7 +71,7 @@ Before deploying or storing the contract on the testnet, you need to run the [se
 docker run --rm -v "$(pwd)":/contract \
   --mount type=volume,source="$(basename "$(pwd)")_cache",target=/code/target \
   --mount type=volume,source=registry_cache,target=/usr/local/cargo/registry \
-  enigmampc/secret-contract-optimizer
+  enigmampc/secret-contract-optimizer:1.0.5
 ```
 
 This will output an optimized build file, `contract.wasm.gz`, ready to be stored on the Secret Network. _Note that Windows users should replace the backslashes `\` in the command with carets `^` or optionally remove them and paste the command as a single line._
@@ -69,15 +84,11 @@ gunzip contract.wasm.gz
 
 You should be able to find a newly created file `contract.wasm` in the current directory.
 
-For uploading the compiled contract we will reuse the knowledge you gained during part 5 of the secret pathway.
-
 ## Uploading the contract
 
-We are now switching back to the project root directory and will start writing some Javascript modules to manage our newly created contract. For this we will need the `secretjs` and `dotenv` packages. If you haven't set it up by now I recommend a quick detour to the first step of the secret pathway to do so:
+We are now switching back to the project root directory and will start writing some Javascript to manage our newly created contract. For this we will need the `secretjs` and `dotenv` packages to be installed.
 
-{% page-ref page="intro-pathway-secret-basics/1.-connecting-to-a-secret-node-using-datahub.md" %}
-
-After setting everything up we start by creating a new file `deploy-nft.js` in the root project directory and add the code below:
+After setting those up we start by creating a new file `deploy-nft.js` in the project root directory and add the code below:
 
 ```javascript
 const {
@@ -94,8 +105,8 @@ require("dotenv").config();
 
 const customFees = {
   upload: {
-    amount: [{ amount: "4000000", denom: "uscrt" }],
-    gas: "4000000",
+    amount: [{ amount: "5000000", denom: "uscrt" }],
+    gas: "5000000",
   },
   init: {
     amount: [{ amount: "500000", denom: "uscrt" }],
@@ -156,7 +167,7 @@ main().catch((err) => {
 
 ## Initialize the client
 
-In the `deploy-ft.js` file, under the comment `// 1. Initialize client` add the following code :
+In the `deploy-nft.js` file, under the comment `// 1. Initialize client` add the following code :
 
 ```javascript
   const txEncryptionSeed = EnigmaUtils.GenerateNewSeed();
@@ -192,7 +203,7 @@ Ensure that if you have changed the name of the contract folder, you also change
 
 # Instantiating the contract
 
-Similar to what you have seen before, we first got the `codeId` from the upload receipt and then defined the `initMsg` to instantiate the contract. In this case the initMsg is more complex that for a simple counter and allows us to configure the secret NFT to our liking.
+Similar to what you have seen before, we first got the `codeId` from the upload receipt and then defined the `initMsg` to instantiate the contract. In this case the initMsg is more complex than for a simple counter and allows us to configure the secret NFT to our liking.
 
 Open up the `msg.rs` file within the `src` folder of the contract code. You will see two structs: `InitMsg` and `InitConfig` in there, which describe the settings object we can pass to our contract on initialization. For most values a sensible default is predefined, giving the most privacy-preserving behavior.
 
@@ -221,9 +232,12 @@ Lets have a look at the different fields and what part of the contract they cont
 | owner\_may\_update\_metadata | bool | This config value indicates whether the owner of a token is permitted to update a token's metadata | yes | false |
 | enable\_burn | bool | This config value indicates whether burn functionality is enabled | yes | false |
 
-For this tutorial we will keep most of the default values and just change the name, symbol and the default ownership visibility of the token. Insert this piece of code below `// 3. Create an instance of the NFT contract init msg` and add some values for name and symbol, as well as some random string for the entropy. Remember to keep the strings enclosed within the single quotes.
+For this tutorial we will keep most of the default values and just change the name, symbol and the default ownership visibility of the token.
+
+Add these properties to the `initMsg` object below `// 3. Create an instance of the NFT contract init msg` and add some values for name and symbol, as well as some random string for the entropy. Remember to keep the strings enclosed within the single quotes.
 
 ```javascript
+const initMsg = {
   /// name of token contract
   name: '',
   /// token contract symbol
@@ -234,6 +248,7 @@ For this tutorial we will keep most of the default values and just change the na
   config: {
       public_owner: true
   },
+}
 ```
 
 Let's run the code:
