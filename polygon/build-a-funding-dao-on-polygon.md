@@ -2022,7 +2022,7 @@ This is how the DAO dApp looks like at the end:
 
 # Conclusion
 
-Congratulation on finishing this tutorial. Thank you for taking the time to complete it. In this tutorial, we have learned how to create a Funding DAO smart contract and a frontend using Next.js for the same. To extend this dApp you can create an authentication system using protocols like [Ceremic Network](https://ceramic.network/).
+Congratulation on finishing this tutorial. In this tutorial, we have learned how to create a Funding DAO smart contract and a frontend using Next.js for the same. To extend this dApp you can create an authentication system using protocols like [Ceremic Network](https://ceramic.network/).
 
 Keep building on Web3.
 
