@@ -882,7 +882,7 @@ cd /path/to/<the-name-of-the-project>
 ```
 
 The project directory structure should look like:
-![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/pathways/solana/solana-mail-2.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/solana-mail-2.png?raw=true)
 Now let's see what we've done so far. Run:
 
 ```text
@@ -890,7 +890,7 @@ yarn start
 ```
 
 This command starts your project and then loads it up on your favorite browser:
-![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/pathways/solana/solana-mail-1.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/solana-mail-1.png?raw=true)
 
 Now that we have setup react successfully, let us also set up MaterialUI:
 
@@ -1257,7 +1257,7 @@ return (
 ```
 
 Here, we used the [Drawer](https://mui.com/components/drawers/) component to render our side menu. The addition to this code is the `Drawer` component. We used two of these to render the menu component we declared earlier twice, one for large screen devices and the other for small screen devices. After this, the UI should look like this:
-![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/pathways/solana/solana-mail-3.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/solana-mail-3.png?raw=true)
 
 # Signin page
 
@@ -1352,7 +1352,7 @@ Back in the `App.jsx` file, import the `Signin.jsx` page we just created and cha
 
 The user interface should look like this now:
 
-![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/pathways/solana/solana-mail-4.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/solana-mail-4.png?raw=true)
 
 # Inbox page
 
@@ -1841,7 +1841,7 @@ In this file, we used the [Typography](https://mui.com/components/typography/) c
 
 The `ViewMail` page should look like this:
 
-![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/pathways/solana/solana-mail-5.png)`
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/solana-mail-5.png?raw=true)
 
 Now that we are done with the pages, let's connect the User Interface with the on-chain program.
 
