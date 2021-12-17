@@ -549,11 +549,11 @@ Next, we need to fund our address to interact with the network. Go to the [fauce
 
 Now visit [https://polkadot.js.org/apps](https://polkadot.js.org/apps) and switch to the Jupiter testnet. You can do this by clicking on the chain logo available on the top-left of the navbar where you will see a list of available networks. Move to the *"TEST NETWORKS"* section and search for a network called **Jupiter**. Select it and scroll back to the top and click on *Switch*.
 
-![Switch Network](../assets/polkadot-amm/polkadot-js.png)
+![Switch Network](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/polkadot-amm/polkadot-js.pngraw=true)
 
 After switching the network, Click on the *Contracts* option under the *Developer* tab from the navbar. There click on *Upload & Deploy Code* and select the account through which you wish to deploy and in the field - *"json for either ABI or .contract bundle"* upload the `metadata.json` file. Next a new field - *"compiled contract WASM"* will emerge where you need to upload your wasm file i.e. `amm.wasm` in our case. It will look something like this - 
 
-![Deploy step 1](../assets/polkadot-amm/deploy1.png)
+![Deploy step 1](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/polkadot-amm/deploy1.png?raw=true)
 
 Now click on *Next*. As we have just one constructor in our contract, It will be chosen by default otherwise a dropdown option would have been present to select from multiple constructors. As our constructor `new()` accepts one parameter called `fees`. We need to set the *fees* field with a positive number. 
 
@@ -563,11 +563,11 @@ Note down that the default unit is set to *DOT* which multiplies the input by a 
 
 Set *endowment* to 1 DOT which transfers 1 DOT to the contract for storage rent. Finally set *max gas allowed (M)* to 200000. It will look something like this - 
 
-![Deploy step 2](../assets/polkadot-amm/deploy2.png)
+![Deploy step 2](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/polkadot-amm/deploy2.png?raw=true)
 
 Click on *Deploy* followed by *Sign and Submit*. Wait for the Tx to be mined and after a few seconds, you can see the updated contract page with the list of your deployed contracts. Click on the name of your contract to see the contract address and note it down as it will be needed when integrating with the frontend.
 
-![Find contract address](../assets/polkadot-amm/contract-address.png)
+![Find contract address](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/polkadot-amm/contract-address.png?raw=true)
 
 # How to interact with polkadot.{js}
 
@@ -770,7 +770,7 @@ npm start
 
 # Walkthrough
 
-![demo](../assets/polkadot-amm/demo.gif)
+![demo](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/polkadot-amm/demo.gif?raw=true)
 
 # Conclusion
 
@@ -782,7 +782,7 @@ Congratulations! We have successfully developed a working AMM model where users 
 
 Make sure that you have added the account on the polkadot{.js} extension and the account visibility is set to either "Allow use on any chain" or "Jupiter A1". You can find this by opening the polkadot{.js} extension and clicking on the hamburger menu of the corresponding account. 
 
-![chain visibility](../assets/polkadot-amm/chain-visibility.png)
+![chain visibility](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/polkadot-amm/chain-visibility.png?raw=true)
 
 **Ink! project is not building**
 
