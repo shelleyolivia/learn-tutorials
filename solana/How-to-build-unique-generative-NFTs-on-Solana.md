@@ -1,17 +1,12 @@
 # Introduction
 
-In this tutorial, we will be creating a collection of generative NFTs and a minting machine on the Solana blockchain.
+In this tutorial, you will learn to create a collection of generative NFTs and a minting machine on the Solana blockchain.
 
-First, We generate our NFT collection using an algorithm and then upload those to blockchain and finally create a marketplace for users to mint our NFTs and own them. You can refer to [pixelape.art](https://pixelape.art/#/) as an example of what we will be building.
-
-We will use three tools:
-**HashLips art engine**: this tool is an open-source program to create unique generative NFTs.
-**Metaplex**: this tool helps us to launch our collection on Solana.
-**Candy machine**: this tool helps us to create a frontend for our candy mint machine
+First, you'll generate your NFT collection using an algorithm and then you'll upload those to arweave using metaplex and finally, you'll create a marketplace for users to mint your NFTs. You can refer to [pixelape.art](https://pixelape.art/#/) as an example of the final result.
 
 # Prerequisites
 
-Basic familiarity with javascript and json.
+Basic familiarity with JavaScript and JSON.
 
 # Requirements
 
@@ -33,190 +28,578 @@ phantom, install it from [here](https://phantom.app/)
 
 # Preparing tools
 
-To successfully launch our Collection on Solana we need to go through three steps:
-1- generating our collection of unique NFTs using hashlips art engine
-2- uploading the collection on Solana using metaplex
-3- creating a store for our collection using a candy machine
+To successfully launch your Collection on Solana you'll need to go through three steps:
+1- generating your collection of unique NFTs using hashlips art engine
+2- uploading the collection to Arweave using metaplex
+3- creating a store for our collection using candy machine
 
-First, we create an empty folder in our desktop named "solana_generative_nfts". Then we open GitHub repositories of these tools and clone those in our folder. (links are provided in the references section)
-For example for hashlips art engine first, we open the link in our browser:
+You will find more extensive explanations about tools later in the tutorial where you will be learning to use them. First, we create an empty folder on our desktop. Then we open GitHub repositories of these tools and clone those in our folder. (links are provided in the references section)
+For example for hashlips art engine, first, we open the link in our browser:
 
-![hashlips github.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/hashlips_github.jpg)
-
+![hashlips github.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/hashlips_github.jpg)
 
 Then first we click on the green Code button and from the new menu we click on Download ZIP:
 
-![download zip in github.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/download_zip_in_github.jpg)
+![download zip in github.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/download_zip_in_github.jpg)
 
-After the download is completed we simply extract the folder inside the zip file in our "solana_generative_nfts" folder. We simply repeat this process for "metaplex" and "candy machine" as well and the final result should be like this:
+After the download is completed we simply extract the folder inside the zip file to the folder we created. We simply repeat this process for "metaplex" and "candy machine" as well and the final result should be like this:
 
-![folders in man folder.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/folders_in_man_folder.jpg)
+![folders in man folder.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/folders_in_man_folder.jpg)
 
 # Setting up Solana-Cli
 
-Make sure Solana-CLI is installed by running the Solana --version in a command line. If it shows the version, then CLI is installed, otherwise, you may need to follow the installation process provided up in the requirements section.
+Make sure Solana-CLI is installed by running the `Solana --version` in a command line. If it shows the version, then CLI is installed, otherwise, you may need to follow the installation process provided up in the requirements section.
 
-We can first deploy our collection on **devnet** and then in case of successful launch we may want to deploy the same collection this time on **mainnet-beta**.
+```
+$ solana --version
+solana-cli <version installed in your machine>
+```
 
-If you want to see current config being used in CLI, you can always run command `solana config get` in a terminal and result would be like:
+If you want to see the current config being used in CLI, you can always run command `solana config get` in a terminal and the result would be like:
 
-![solana config get screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solana_config_get_screenshot.jpg)
+```
+$ solana config get
+Config File: /home/<your username>/.config/solana/cli/config.yml
+RPC URL: https://api.mainnet-beta.solana.com
+WebSocket URL: wss://api.mainnet-beta.solana.com/ (computed)
+Keypair Path: /home/<your username>/.config/solana/id.json
+Commitment: confirmed
+```
 
-To change the default network to devnet first we run command `solana config set --url devnet` :
+<aside>
+💡 The word **<your username>** would be your username on your local Linux machine. In all following outputs and commands, you should be seeing or using your own username.
 
-![setting solana-cli to devnet screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/setting_solana-cli_to_devnet_screenshot.jpg)
+If you don't know your username run command `whoami` to see it
 
-Then we create a wallet by running command below:
+</aside>
+
+To change the default network to **devnet** first run command `solana config set --url devnet` :
+
+```
+$ solana config set --url devnet
+Config File: /home/<your username>/.config/solana/cli/config.yml
+RPC URL: https://api.devnet.solana.com
+WebSocket URL: wss://api.devnet.solana.com/ (computed)
+Keypair Path: /home/<your username>/.config/solana/id.json
+Commitment: confirmed
+```
+
+Then create a wallet by running the command below:
 
  `solana-keygen new --outfile ~/.config/solana/devnet.json`
 
 Terminal prompts message bellow:
 
-![enter BIP39 pashh in terminal screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/enter_BIP39_pashh_in_terminal_screenshot.jpg)
+```
+$ solana-keygen new --outfile ~/.config/solana/devnet.json
+Generating a new keypair
 
-You can enter a password but make sure you save your entered passphrase in a safe place because if you forget it you wouldn't be able to recover your wallet.
+For added security, enter a BIP39 passphrase
 
-![confirmation for creating a devnet keypair.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/confirmation_for_creating_a_devnet_keypair.jpg)
+NOTE! This passphrase improves security of the recovery seed phrase NOT the
+keypair file itself, which is stored as insecure plain text
 
-I'm sharing my seed phrase with you because of educational purposes and the fact that I'm gonna remove this keypair after this tutorial but you shouldn't share yours under any circumstances.
+BIP39 Passphrase (empty for none):
+```
 
-We need to copy the private key of our wallet, so keep the path to your wallet in mind:  `/home/mmostafavi/.config/solana/devnet.json`
+You can enter a password but make sure you save your entered passphrase in a safe place because if you forget it you wouldn't be able to restore your wallet.
 
-Then we set this path as default wallet in the Solana CLI:
+```
+
+Wrote new keypair to /home/mmostafavi/.config/solana/temp.json
+===================================================================
+pubkey: dgFgNJo6ietb5Vm7XKbjuPj3LtxRMCuHgUM39zL6xDt
+===================================================================
+Save this seed phrase and your BIP39 passphrase to recover your new keypair:
+<here will be your 12 word seed phrase you can recover your wallet with>
+===================================================================
+```
+
+<aside>
+🚨 you shouldn't share your seed phrase under any circumstances.
+
+</aside>
+
+Then set this new wallet as the default wallet in the Solana CLI:
 
 `solana config set --keypair /home/mmostafavi/.config/solana/devnet.json`
 
-And finally, we airdrop some SOL to our wallet:
+```
+$ solana config set --keypair /home/mmostafavi/.config/solana/devnet.json
+Config File: /home/<your username>/.config/solana/cli/config.yml
+RPC URL: https://api.devnet.solana.com
+WebSocket URL: wss://api.devnet.solana.com/ (computed)
+Keypair Path: /home/<your username>/.config/solana/devnet.json
+Commitment: confirmed
+```
 
-`solana airdrop 5`
+And finally, airdrop some SOL to your new wallet: `solana airdrop 5`
 
-And to check whether it was successful:
+```
+$ solana airdrop 5
+Requesting airdrop of 5 SOL
 
-`solana balance`
+Signature: <transaction signature>
 
-It should print "5 SOL"
+5 SOL
+```
 
-Ok, let's add our newly created wallet to our phantom wallet on the browser. for that first, we need to go to the path containing our wallet Keypair. First, we open a new terminal and run `cd /home/mmostafavi/.config/solana/` and now we can copy our private key from devnet.json. then open phantom and from the side menu select **Add / Connect Wallet** then **import private key** and paste your private key.
+And to check whether it was successful: `solana balance`
+
+```
+$ solana balance
+5 SOL
+```
+
+## Adding the new wallet to Phantom
+
+Later in the tutorial, you will connect phantom to your NFT minting dApp to mint some NFTs. so as the last step let's add your wallet to phantom. for that first we fetch the path to our wallet by running:
+
+```
+$ solana config get
+Config File: /home/<your username>/.config/solana/cli/config.yml
+RPC URL: https://api.devnet.solana.com
+WebSocket URL: wss://api.devnet.solana.com/ (computed)
+Keypair Path: /home/<your username>/.config/solana/devnet.json
+Commitment: confirmed
+```
+
+Then copy the path in Keypair Path: "/home/<your username>/.config/solana/devnet.json"
+
+next run command cat /home/<your username>/.config/solana/devnet.json to print content of the devnet.json file in terminal:
+
+```
+$ cat /home/<your username>/.config/solana/devnet.json
+<it will print your private key in array format>
+```
+
+Now you need to head over to the phantom extension in the browser. open it. from hamburger menu at left click at "Add / Connect Wallet":
+
+![import private key in phantom screen shot.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/import_private_key_in_phantom_screen_shot.jpg)
+
+Then choose a name and copy-paste the private key:
+
+![linking NFTs wallet in phantom screenshot.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/linking_NFTs_wallet_in_phantom_screenshot.jpg)
+
+Since you will be working with **devnet**, you need to set the network to **devnet** in phantom's settings. For that click on ⚙️ then "Change Network" then "Devnet":
+
+![changing the network from mainnet to devnet screenshot.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/changing_the_network_from_mainnet_to_devnet_screenshot.jpg)
 
 # Generating NFTs
 
-Layers play an important role in the generation of unique NFTs. Those are like traits and characteristics and a set of these layers together creates a unique NFT. The art engine makes sure none of the two NFTs in the collection have the same layers and this way those are guaranteed to be unique.
+Layers play an important role in the generation of unique NFTs. Those are like traits and characteristics and a set of these layers together creates a unique NFT. The Hash lips art engine makes sure none of the two NFTs in the collection have the same layers and this way those are guaranteed to be unique.
 
-In this tutorial, I'll step you through the process of creating and launching the NFT collection but you may need to create your layers for your collection. I've added a YouTube link in the References section for "how to create layers for our NFTs", which may be a good starting point.
+Hash lips art engine is an open-source engine for creating unique NFT collections using layers as their building blocks. If we provide unique classified layers for our collection, NFTs are guaranteed to be unique by the engine.
 
-This engine comes with some initial Layers and we will be using them to generate our Collection. If you open the Layers folder you'd see some folders. Each folder is a layer and contains different forms of that Layer. For instance, in the Bottom id Layer, there are three layers. High#20.png, Low#40.png, and Middle#40.png. numbers in files' names are related to their chance of appearing in an NFT.
+In this tutorial, we will create a very simple set of layers to give you an idea about them but this is the part that makes each Collection distinct from others. So you may want to spend more time on this step and provide much more details in your layers.
 
-To put it in simple words; if we generate10,000 NFTs, roughly 20% of them would have High#20.png, 40% would have Low#40.png and 40% would have Middle#40.png as their Bottom id layer. So you can specify your customization for your layers.
+## Creating the layer
 
-## Configuring our collection's metadata
+You can use any tool like photoshop or something similar for creating your layers but make sure the layers which are going to sit on top of other layers have a transparent background. Here are some simple layers I created using the paint app!
 
-We open hashlips art engine folder in VS code (or code editor of your choice) and open a new terminal ( `Ctrl + ``  or hovering over Terminal Tab and selecting open a new Terminal). 
-Make sure the current directory in the terminal is hashlips art engine folder and then run `yarn install` to install dependencies.
+backgrounds:
 
-Open "**Config.js**" file in "**src**" folder. in this file, we specify important metadata like the **name of the collection**, **website related to collection**, **network which our collection would be deployed**, etc.
+![background1.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/background1.png)
+
+![background2.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/background2.png)
+
+circles:
+
+![circle1.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/circle1.png)
+
+![circle2.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/circle2.png)
+
+![circle3.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/circle3.png)
+
+and triangles:
+
+![triangle1.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/triangle1.png)
+
+![triangle2.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/triangle2.png)
+
+![triangle3.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/triangle3.png)
+
+So now I have 3 Layers and overall 8 traits. you can download these layers from the link in references.
+
+## Putting layers in layers folder
+
+In hashlips engine, we can specify the rarity of a trait within a group of traits. To do that we add a `#` and a percentage following that to the end of the assets' file name. for example if we wanted **background2.png** to appear 80% of the time we would rename it to **background2#80.png** and the other background would appear in the other 20% of the time by renaming it **background1#20.png**.
+
+So for each Layer (aka background, triangle, or circle), we specify the rarity of traits. the sum of rarity numbers should be 100. here is an example:
+
+- Background
+    
+    background1#50.png
+    
+    background2#50.png
+    
+- Triangle
+    
+    triangle1#30.png
+    
+    triangle2#40.png
+    
+    triangle3#30.png
+    
+- Circle
+    
+    circle1#30.png
+    
+    circle2#40.png
+    
+    circle3#30.png
+    
+
+The next step is putting our layers in the **layers** folder. First, delete all initial folders and layers inside the layers folder. Then create three folders and name them after our layers: Background, Circle, and Triangle (first letters are uppercase). Then copy and paste traits to their relative Folder and specify the rarity for them.
+
+## Setting up the Engine
+
+We need to set up metadata related to our collection like the owner of the collection or the name of the collection. To do that we need to open the `config.js` file inside the **src** folder. Let's go through the code inside this file step by step and configure our NFT collection.
+
+This part of the code imports some internal variables and modules and you don't need to touch it.
 
 ```jsx
 const basePath = process.cwd();
 const { MODE } = require(`${basePath}/constants/blend_mode.js`);
 const { NETWORK } = require(`${basePath}/constants/network.js`);
+```
 
+**network**: You can change the network you are going to deploy your collection to, by changing **`eth`** to your target network. which in our case it is **`sol`**(sol here stands for Solana)
+
+```jsx
 const network = NETWORK.sol;
+```
 
+Here you can specify the name and a description for your collection. ignore the comment, it's not specifically for Ethereum. And leave the baseUri as it is.
+
+```jsx
 // General metadata for Ethereum
-const namePrefix = "Eyes on you";
-const description = "a collection of eyes";
+const namePrefix = "Triangle and Circle";
+const description = "Unique combinatons of a Circle and a Triangle with two backgrounds";
 const baseUri = "ipfs://NewUriToReplace";
+```
 
+Here we set up metadata specific to Solana NFTs. 
+
+**symbol**: In symbol, you can set an abbreviation for the name of your collection. I chose the first letters of the words in the name.
+
+**seller_fee_basis_points**:  this parameter specifies the share which creators want to earn from future sales of their NFTs. Each point is 0.01% so if a creator wants to earn 1% from future trades of their collection they should set it to100 points. This parameter is known as royalty as well.
+
+**external_url**: if the collection has a website or a YouTube channel or a link related, you can put it here
+
+**creators**: In this field, you can specify shares of profit between creators. If there is just a single creator then you can put the public key of them in the **address** field and set the **share** field to 100 (standing for 100%).
+
+If there is more than one creator for the collection you can add a similar object in the **creators** array for all other creators and set their shares and their Solana addresses
+
+for this collection, we have one creator so we set shares to 100 and put our Solana address for address.
+
+<aside>
+💡 as a reminder, you can see your Solana address by running the command `solana address` in terminal
+
+</aside>
+
+```jsx
 const solanaMetadata = {
-  symbol: "EOY",
-  seller_fee_basis_points: 250, // Define how much % you want from secondary market sales 1000 = 10%
-  external_url: "https://yourwebsite.com",
+  symbol: "TAC",
+  seller_fee_basis_points: 100, // Define how much % you want from secondary market sales 1000 = 10%
+  external_url: "",
   creators: [
     {
-      address: "A7pGKQxXTFX8DSFURgJtqM9ccCp7RMJvhyDKZDVWPAuB",
+      address: "<your solana address>",
       share: 100,
     },
+		/* you can add new creators like this
+		{
+      address: "creator's solana address",
+      share: creator's share out of 100,
+    },
+		*/
   ],
 };
+```
 
+**growEditionSizeTo**: In this part of the code we specify the number of NFTs we want to generate. An important factor to consider here is the maximum unique NFTs we can expect to yield from the layers we have provided. we have 3 circles and 3 triangles and 2 backgrounds then:
+
+maximum number of unique NFTs =  3*3*2 = 18.
+
+You can put any number equal to or less than 18.
+
+**layersOrder**: In this field, we specify the order we want the layers to sit on each other. Since the background is the bottom-most layer we put it first and the other two layers after that.
+
+```jsx
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
   {
-    growEditionSizeTo: 10,
+    growEditionSizeTo: 5,
     layersOrder: [
       { name: "Background" },
-      { name: "Eyeball" },
-      { name: "Eye color" },
-      { name: "Iris" },
-      { name: "Shine" },
-      { name: "Bottom lid" },
-      { name: "Top lid" },
+      { name: "Circle" },
+      { name: "Triangle" },
     ],
   },
 ];
 ```
 
-The code above shows the parts you need to adjust. 
+we are done with configuring our collection but for the advanced configuration, you can follow the next chapter.
 
-In line 5 we replaced "eth" with "sol". 
+## Advanced Configuration (Optional)
 
-Then we set our Collection's name and description changing values of variables "namePrefix" and "description".
+**shuffleLayersConfigurations**: this field is for when we have more than one layer Configuration. here is an example:
 
-Then in solanaMetadata object, we set symbol, the fee we want to charge for secondary sales of our NFTs ( 1000pts = 10% then 250pts = 2.5% ), a URI related to our NFT collection and creators' address which is the pubKey we generated at the previous step in CLI setup. ( yours would be different )
+```jsx
+const layerConfigurations = [
+	// we want 5 images with this configuration
+  {
+    growEditionSizeTo: 5,
+    layersOrder: [
+      { name: "Background" },
+      { name: "Circle" },
+      { name: "Triangle" },
+    ],
+  },
 
-And the last thing we need to specify is the number of NFTs to be generated. I set it to 10 but you may want to have more or less. Finally, we save our changes in config.js.
+// and we want 10 images with this configuration
+{
+    growEditionSizeTo: 10,
+    layersOrder: [
+      { name: "Circle" },
+      { name: "Triangle" },
+			{ name: "Background" },
+    ],
+  },
+];
+```
 
-If you want to dig deeper and maybe add other metadata I recommend referring to hashlips' GitHub and reading their guides.
+In the example above we have two configurations. if we set the field to the **true** engine wouldn’t follow the order of our configurations. for example image number 1 can be created from any of these configurations. It is false by default and will save all images in numerical order. (first 5 images using the first config and then 10 images using the second config).
 
-Now we're OK with configuration and we can generate our Collection. To do so, in a terminal make sure you're in hashlips art engine folder and then run `yarn run generate`:
+**debugLogs**:  If you want to have logs to debug and see what is happening when you generate images you can set the variable `debugLogs` ****to true. It is false by default, so you will only see general logs.
 
-![NFTs generated screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/NFTs_generated_screenshot.jpg)
+```jsx
+const shuffleLayerConfigurations = false;
 
-Awesome! now we have our NFTs and their metadata inside the build folder.
+const debugLogs = false;
+```
 
-# Creating a Candy Machine
+In this part you can specify output image width and height sizes in pixel
 
-We will use Metaplex to create a Candy Machine for our collection on Solana. Candy machine is a minimal marketplace where people can mint our NFTs for themselves. We first head back to three folders we had then we open metaplex folder in VS code. Inside the "metaplex-master" folder we create a new folder and name it "assets". Then from the build folder in hashlips folder, we copy all the .png files and .json files except _metadata.json. the final result should be like this:
+```jsx
+const format = {
+  width: 512,
+  height: 512,
+  smoothing: false,
+};
+```
 
-![assets_in_metaplex_screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/assets_in_metaplex_screenshot.jpg)
+If you want gif outputs you can set `export` to true. repeat is the number of cycles in each gif. 
 
-In the new VS code window open a terminal and run `cd js` then run `yarn install` wait for it to install dependencies. After completion of that run `yarn run build` and wait for that to finish as well. then run `yarn run bootstrap`.
+`repeat: -1` will produce a one-time render and `reapeat: 0` will loop forever.
 
-We are done with js folder. run `cd ..`
+You can specify the quality you want for your gifs. A higher-quality means larger files in size. You can specify the delay in **ms** before the animation starts in the gif.
 
-We have prepared everything to start uploading our collection and creating a candy mint machine for our collection.
+```jsx
+const gif = {
+  export: false,
+  repeat: 0,
+  quality: 100,
+  delay: 500,
+};
+```
 
-We will use candy-machine-cli.ts to set up our candy machine. To upload your collection for your candy machine We run the command bellow:
+If you want to change the ratio of the pixilation then you can update the `ratio` property. The lower the number on the left, the more pixelated the image will be.
 
-`ts-node js/packages/cli/src/candy-machine-cli.ts upload ./assets --env devnet --keypair /home/mmostafavi/.config/solana/devnet.json`
+```jsx
+const pixelFormat = {
+  ratio: 2 / 128,
+};
+```
 
-after `--keypair` you need to put your wallet's address.
+If you want to add any extra metadata to your collection you can put it inside `extraMetadata` object. For example:
 
-![upload sucessful candy machine.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/upload_sucessful_candy_machine.jpg)
+```jsx
+const extraMetadata = {
+	creator: "<Put creator's name>"
+};
+```
 
-Wait for it to finish. The next step is creating a candy machine. for that run command bellow:
+## Generating images
 
-`ts-node js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env devnet --keypair /home/mmostafavi/.config/solana/devnet.json -p 1`
+First, you need to install dependencies for this engine. Open a terminal and make sure you’re at **hashlips_art_engine**  directory and run `yarn install`.
 
-![candy machine created screen shot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/candy_machine_created_screen_shot.jpg)
+To generate images run `yarn run generate`:
 
-Now after this is finished our candy machine is ready. We can see the pubKey of our candy machine in the terminal but you can find all information related to our candy machine in the newly generated file in .cache folder.
+```jsx
+hashlips_art_engine-main$ yarn run generate
+yarn run v1.22.17
+warning ../../../../../../package.json: No license field
+$ node index.js
+Created edition: 0, with DNA: 327303194f43b8111321be04af9aefa991021daf
+Created edition: 1, with DNA: 830a7d0d732f8b676ff6349659409b5efc171513
+Created edition: 2, with DNA: 2aed7015b3023e509c46dd1fb870cf40d3c8ea59
+Created edition: 3, with DNA: 63c561781f810ddbecce9ca086b1c7b2dcc1a589
+Created edition: 4, with DNA: 35742657abda4d22190a0761df5d0426da72ece5
+```
 
-The last thing we need to do in metaplex is to update our candy machine. We need to update the date users can mint NFTs after that date and the price of our NFTs. in command bellow we set the price of each NFT to 0.1 SOL and we set "17 Oct 2021 00:00:00 GMT" as the launch date so we make sure users can mint as soon as we put our candy machine online.
+Awesome! now you have your images in the build>images folder. and their metadata inside the build>json folder. check them out. here are my 5 generated images altogether. 
 
-`ts-node js/packages/cli/src/candy-machine-cli.ts update_candy_machine --env devnet --keypair /home/mmostafavi/.config/solana/devnet.json -p 0.1 --date "17 Oct 2021 00:00:00 GMT"`
+![preview.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/preview.png)
 
-![updated the candy machine with date and price.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/updated_the_candy_machine_with_date_and_price.jpg)
+In the next section, we will upload our assets to Arweave and we will create a candy machine for minting our NFTs.
 
-Awesome! Now we have our candy machine all set up and updated. let's build a dApp connected to our candy machine.
+# Uploading to the Arweave and creating a candy machine
 
-# Creating a candy machine dApp
+We will use candy-machine-cli to upload our images to the Arwaeve and create a minting machine for our NFTs.
 
-To create dApp first we head back again to three folders we had and this time we open the third folder "candy-machine-mint-main". 
+## What is Candy machine CLI?
 
-First, we want to install all the dependencies of this project. so we need to run `yarn install`
+Candy Machine is a tool built by Metaplex and Solana for uploading NFT assets to arweave and building a minting machine program on Solana For NFTs.
 
-We have a .env.example file with the content below:
+In this tutorial, we are using it to upload the assets and create a minting machine for our NFTs.
+
+## What is Arweave?
+
+If you open Arweave’s website you find this definition: 
+
+> Arweave is a new type of storage that backs data with sustainable and perpetual endowments, allowing users and developers to truly store data forever – for the very first time.
+
+As a collectively owned hard drive that never forgets, Arweave allows us to remember and preserve valuable information, apps, and history indefinitely. By preserving history, it prevents others from rewriting it.
+> 
+
+In simple words, Arweave enables you to store documents and applications permanently. Candy machine CLI uploads our assets to the arweave by default.
+
+## Preparing Assets for upload
+
+First, we need to create an “**assets**” folder inside **metaplex-master** repository we downloaded before. Copy all the images from the build>images folder inside hashlips_art_engine folder and paste them to the assets folder. do the same thing with build>json folder inside hashlips_art_engine except for for**`_metadata.json`** file. now in your assets folder, you should have the structure below:
+
+- assets
+    - 0.json
+    - 0.png
+    - 1.json
+    - 1.png
+    - 2.json
+    - 2.png
+    - 3.json
+    - 3.png
+    - 4.json
+    - 4.png
+
+## Installing candy-machine-cli
+
+ Before using candy-machine-cli we need to install its dependencies and build an executable version of that. For that first open a terminal in `metaplex-master/js` directory. To install dependencies run `yarn install`. It may take a while.
+
+to build an executable version of candy-machine-cli run `yarn run build` and wait for that to finish as well. and finally, run `yarn run bootstrap`. You are done with installing candy-machine-cli and can return to the main directory by running `cd ..`
+
+## Uploading to Arweave
+
+In the terminal make sure you’re in metaplex-master directory. To upload the assets to arweave we need to run the command below:
+
+`ts-node js/packages/cli/src/candy-machine-cli.ts upload ./assets --env devnet --keypair /home/<your username>/.config/solana/devnet.json`
+
+- `ts-node js/packages/cli/src/candy-machine-cli.ts` compiles the executable and runs it
+- `upload` is the function we want to use from executable
+- `./assets` is the directory our images and their metadata exist
+- `--env devnet` specifies which network we are targeting. If you wanted to deploy your collection on mainnet-beta then replace it with `--env mainnet-beta`
+- `--keypair /home/<your username>/.config/solana/devnet.json` specifies the path to keypair which will pay for the fees of uploading. here we are using the keypair we generated at beginning of the tutorial.
+
+```
+metaplex-master$ ts-node js/packages/cli/src/candy-machine-cli.ts upload ./assets --env devnet --keypair /home/<your username>/.config/solana/devnet.json
+Beginning the upload for 5 (png+json) pairs
+started at: 1639748729410
+wallet public key: <your wallet public key will be printed here>
+Processing file: 0, 0.png
+initializing config
+initialized config for a candy machine with publickey: <another publick key will be allocated for your candy machine here>
+Processing file: 1, 1.png
+Processing file: 2, 2.png
+Processing file: 3, 3.png
+Processing file: 4, 4.png
+Writing indices 0-4
+Done. Successful = true.
+ended at: 2021-12-17T13:46:37.408Z. time taken: 00:01:07
+```
+
+## Creating a candy machine
+
+The next step is creating a candy machine. for that you need to run the command below:
+
+`ts-node js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env devnet --keypair /home/<your username>/.config/solana/devnet.json -p <price for minting one of your NFTs>`
+
+- `ts-node js/packages/cli/src/candy-machine-cli.ts` compiles the executable and runs it
+- `create_candy_machine` is the function we need to call for creating the candy machine
+- `--env devnet` specifies which network we are targeting. If you wanted to deploy your collection on mainnet-beta then replace it with `--env mainnet-beta`
+- `--keypair /home/<your username>/.config/solana/devnet.json` specifies the path to keypair which will pay for the fees of uploading. here we are using the keypair we generated at beginning of the tutorial.
+- `-p <price for minting one of your NFTs>` specifies the price in $SOL for minting each NFT
+
+```
+metaplex-master$ ts-node js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env devnet --keypair /home/<your username>/.config/solana/devnet.json -p 0.1
+wallet public key: <your public key will be printed here>
+create_candy_machine finished. candy machine pubkey: <public key of your candy machine will be printed here>
+```
+
+## Updating the candy machine
+
+Your candy machine is created but before users are able to mint your NFTs you need to tell the candy machine the date for launching your collection. Only after that date, users can mint your NFTs. You need to use `update_candy_machine` function to update the date field. you can update the price of your NFTs in this command too.
+
+`ts-node js/packages/cli/src/candy-machine-cli.ts update_candy_machine --env devnet --keypair /home/<your username>/.config/solana/devnet.json -p <set your price> --date <set the launch date>`
+
+- `ts-node js/packages/cli/src/candy-machine-cli.ts` compiles the executable and runs it
+- `update_candy_machine` is the function we need for updating our candy machine
+- `--env devnet` specifies which network we are targeting. If you wanted to deploy your collection on mainnet-beta then replace it with `--env mainnet-beta`
+- `--keypair /home/<your username>/.config/solana/devnet.json` specifies the path to keypair which will pay for the fees of uploading. here we are using the keypair we generated at beginning of the tutorial.
+- `-p <set your price>` here you can update price of your NFTs if you want or put the previous price
+- `--date <set the launch date>` here you can set your launch date. for example: 
+`--date "1 Dec 2021 00:00:00 GMT"`
+
+```
+metaplex-master$ ts-node js/packages/cli/src/candy-machine-cli.ts update_candy_machine --env devnet --keypair /home/<your username>/.config/solana/devnet.json -p 0.1 --date "1 Dec 2021 00:00:00 GMT"wallet public key: 3PB5heBX81zkb5aFzDh4R3Z5d7oF3FjMjUXtbP3w6VWa
+ - updated startDate timestamp: 1638316800 (1 Dec 2021 00:00:00 GMT)
+ - updated price: 100000000 lamports (0.1 SOL)
+update_candy_machine finished <transaction hash will be printend here>
+```
+
+Now, your candy machine is created and you can find all of the information and details about it in a file created in the **.cache** folder. Depending on the network you have chosen for creating your candy machine name of the file has the structure below:
+
+ **<name of the network you’ve deployed your collection to>-temp**
+
+for instance, if you have deployed on devnet, it would be **devnet-temp**. 
+
+```
+{
+  "program": {
+    "uuid": <your uuid>,
+    "config": <public key for configuring the candy machine dApp>,
+  },
+  "items": {
+    /*
+			here you find information about each NFT item inside your collection
+			with this structure:
+
+			// for NFT number "i" in the NFT collection
+			"i" : {
+				"link": <a link to the asset on the arweave>,
+	      "imageLink": <a link to image of the NFT on arweave>,
+	      "name": < name of the NFT >,
+	      "onChain": < true or false >
+			}, 
+		
+		*/
+  },
+  "env": <network the collection is on>,
+  "cacheName": <suffix has been used in filename>,
+  "authority": <owner of the candy machine, which will be your public key>,
+  "candyMachineAddress": <the public key of your minting machine>,
+	"startDate": <the timestamp for the launch date>
+}
+```
+
+You will need some of this information later in configuring the candy machine dApp.
+
+Awesome! Now we have our candy machine all set up and updated. let's build a Frontend connected to our candy machine.
+
+# Building a Frontend for our candy machine
+
+To create the frontend first head back again to three folders you cloned and this time open the third folder "candy-machine-mint-main". This is a react project created for the candy machine and gives us a basic UI and minting functionality and we can customize the UI.
+
+First, you need to install all the dependencies of this project. run `yarn install`. before you start the frontend, you need to configure the frontend. We have a .env.example file with the content below:
 
 ```
 REACT_APP_CANDY_MACHINE_CONFIG=__PLACEHOLDER__
@@ -228,63 +611,242 @@ REACT_APP_SOLANA_NETWORK=devnet
 REACT_APP_SOLANA_RPC_HOST=https://explorer-api.devnet.solana.com
 ```
 
-Network and RPC host is set correctly since we are launching on devnet but we need to replace __PLACEHOLDER__ with appropriate data.
+Let’s configure it step by step. To configure this file we need to use **devnet-temp** file.
 
-If we head back to the previous folder we were in, Metaplex-master, now there is a new folder "**.cache**" and inside that a new file named "**devnet-temp**" basically that's all the information related to the candy machine we created. from this file we want to pick some values to fill out our .env file with.
+```
+// this takes config field
+REACT_APP_CANDY_MACHINE_CONFIG= <put the config public key here>
 
-from **devnet-temp** find:
+// this takes candyMachineAddress
+REACT_APP_CANDY_MACHINE_ID= <put the candyMachineAddress here>
 
-- program.config and copy its value to REACT_APP_CANDY_MACHINE_CONFIG
-- authority and copy its value to REACT_APP_TREASURY_ADDRESS
-- candyMachineAddress and copy its value to REACT_APP_CANDY_MACHINE_ID
-- startDate and copy its value to REACT_APP_CANDY_START_DATE
+// this takes authority
+REACT_APP_TREASURY_ADDRESS= <put the authority here>
 
-Now we have set up everything up for our dApp. We can run `yarn start` to run our dApp locally on localhost;//3000.
+// this takes startDate
+REACT_APP_CANDY_START_DATE= <put the startDate here>
 
-![initial state of dapp candy machine screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/initial_state_of_dapp_candy_machine_screenshot.jpg)
+// we are using devent so we don't need to change this variable
+// but if you wanted to connect to a candy machine on mainnet-beta
+// you should change devnet to mainnet-beta
+REACT_APP_SOLANA_NETWORK=devnet
 
-Now let's connect our phantom wallet
+// we are using devent so we don't need to change this variable
+// but if you wanted to connect to a candy machine on mainnet-beta
+// you should change devnet to mainnet-beta
+REACT_APP_SOLANA_RPC_HOST=https://explorer-api.devnet.solana.com
+```
 
-![cansy store up and running wallet connected.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/cansy_store_up_and_running_wallet_connected.jpg)
+To let your react app use these environment variables you should rename the **.env.example** file to **.env** and then run `yarn start` to run our dApp locally on localhost:3000
 
-Awesome! now we have an ugly-looking dApp! but we can change the UI of our website inside the "candy-machine-mint-main" folder, so it's not a big deal.
+![initial state of dapp candy machine screenshot.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/initial_state_of_dapp_candy_machine_screenshot.jpg)
+
+It’s a simple ugly looking UI with just a “Connect Wallet” button. Ok let’s connect our wallet: 
+
+![cansy store up and running wallet connected.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/cansy_store_up_and_running_wallet_connected.jpg)
 
 You may ask why we launched it on devnet and not on mainnet-beta?! for two reasons:
 
-1. We can estimate the costs of our launch on mainnet-beta
-2. We can make sure there isn't any spooky bug stopping us in the middle of the process
+1. You can estimate the costs of launching on mainnet-beta
+2. You can make sure there isn't any spooky bug stopping you in the middle of the process
 
-Awesome! now we have a react candy mint machine app we can deploy to any hosting service we may want. if you're curious how you can deploy your collection to mainnet-beta read the next section.
+From the UI aspect our app isn’t that good. So let’s add some styling to our app in the next section.
 
-# Launching on Mainnet-beta
+# Styling the frontend
 
-We successfully launched our collection on devnet and now we are ready to deploy on mainnet-beta. There isn't any significant difference between deploying on devnet and mainnet-beta. We will need to switch back to mainnet-beta by running `solana config set --url mainnet-beta` and then this time we need to charge our wallet with real SOL. you can easily purchase some from an exchange like [FTX](https://ftx.com/). Let's assume we've purchased some and transferred them to our local wallet we created at beginning of this tutorial.
+Replace the code below with code in **index.css**. It defines some CSS classes which we will utilize in Home.tsx component.
 
-In the second stage of the tutorial where we are creating a candy machine and uploading the assets, we need to change `--env devnet` to  `--env mainnet-beta` in all three commands.
+```css
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #303030;
+  color: #FFFFFF;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.Welcome-header {
+  text-align: center;
+  font-size: 80px;
+  font-weight: bolder;
+  
+}
+
+.Welcome-description {
+  text-align: center;
+  align-self: stretch;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.Connected-wallet {
+  /* display: block; */
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 1rem;
+  background-color: salmon;
+  color: rgb(0, 0, 0);
+  width: 15rem;
+  border-radius: 25px;
+}
+
+.Collection-description {
+  padding: 1rem;
+  margin: auto;
+  margin-top: 15rem;
+  font-size: xx-large;
+  width: 50%;
+}
+
+.Redeemed-by-available {
+  text-align: center;
+  padding: 1rem;
+  font-size: x-large;
+}
+```
+
+Head over to src/Home.tsx and find the variable **MintContainer** and add styles below :
+
+```jsx
+const MintContainer = styled.div`
+  margin: auto;
+  width: 25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+```
+
+Replace return part of Home.tsx component with code below. New code removes redundant information like remaining NFTs and Balance. it creates a nice-looking component for a connected wallet at the top-right of the screen. It adds some explanations and details about the NFT collection as well.
+
+```jsx
+return (
+    <main>
+      {wallet && (
+        <>
+          <div className="Connected-wallet">
+            Connected Wallet: {shortenAddress(wallet.publicKey.toBase58() || "")}
+          </div>
+
+          <div className="Collection-description">
+            This collection is consisted of 5 unique combinations of a circle and a triangle
+            with a background either red or white.
+          </div>
+
+          <div className="Redeemed-by-available">
+          {itemsRedeemed} / {itemsAvailable}
+          </div>
+        </>
+        
+      )}
+
+      <MintContainer>
+        {!wallet ? (
+          <>
+            <p className="Welcome-header">Welcome!</p>
+            <p className="Welcome-description">
+              Our NFTs would be out of stock soon!
+              Hurry up and mint yours!
+            </p>
+            <ConnectButton>Connect Wallet</ConnectButton>
+          </>
+        ) : (
+          <MintButton
+            disabled={isSoldOut || isMinting || !isActive}
+            onClick={onMint}
+            variant="contained"
+          >
+            {isSoldOut ? (
+              "SOLD OUT"
+            ) : isActive ? (
+              isMinting ? (
+                <CircularProgress />
+              ) : (
+                "MINT"
+              )
+            ) : (
+              <Countdown
+                date={startDate}
+                onMount={({ completed }) => completed && setIsActive(true)}
+                onComplete={() => setIsActive(true)}
+                renderer={renderCounter}
+              />
+            )}
+          </MintButton>
+        )}
+      </MintContainer>
+
+      <Snackbar
+        open={alertState.open}
+        autoHideDuration={6000}
+        onClose={() => setAlertState({ ...alertState, open: false })}
+      >
+        <Alert
+          onClose={() => setAlertState({ ...alertState, open: false })}
+          severity={alertState.severity}
+        >
+          {alertState.message}
+        </Alert>
+      </Snackbar>
+    </main>
+  );
+```
+
+Let’s mint an NFT in our nice-looking app!
+
+![NFT minting gif.gif](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/NFT_minting_gif.gif)
+
+YaY, we did it! Let’s check out our newly minted NFT in our wallet:
+
+![Checking NFT in wallet gif.gif](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/Checking_NFT_in_wallet_gif.gif)
+
+# Launching to Mainnet-beta
+
+You successfully launched your collection on devnet and now you are ready to deploy to mainnet-beta. There isn't any significant difference between deploying to devnet and mainnet-beta. you need to switch back to mainnet-beta by running `solana config set --url mainnet-beta`. this time we need to top our wallet up with real SOL. You can easily purchase some from an exchange like [FTX](https://ftx.com/).
+
+generating the assets wouldn’t be any different from devnet approach since it’s agnostic about the Solana network you are using.
+
+In the tutorial where you are creating a candy machine and uploading the assets, you need to change `--env devnet` to  `--env mainnet-beta` in all three commands.
 
 so new commands would be:
 
-1- `ts-node js/packages/cli/src/candy-machine-cli.ts upload ./assets --env mainnet-beta --keypair /home/mmostafavi/.config/solana/devnet.json`
+1- `ts-node js/packages/cli/src/candy-machine-cli.ts upload ./assets --env mainnet-beta --keypair /home/<your username>/.config/solana/devnet.json`
 
-2- `ts-node js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env mainnet-beta --keypair /home/mmostafavi/.config/solana/devnet.json -p 1`
+2- `ts-node js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env mainnet-beta --keypair /home/<your username>/.config/solana/devnet.json -p 0.1`
 
-3- `ts-node js/packages/cli/src/candy-machine-cli.ts update_candy_machine --env mainnet-beta --keypair /home/mmostafavi/.config/solana/devnet.json -p 0.1 --date "17 Oct 2021 00:00:00 GMT"`
+3- `ts-node js/packages/cli/src/candy-machine-cli.ts update_candy_machine --env mainnet-beta --keypair /home/<your username/.config/solana/devnet.json -p 0.1 --date "17 Dec 2021 00:00:00 GMT"`
 
 Easy peasy! 
 
-In the third stage of the tutorial where we are configuring our dApp we will need to some adjustments. This time inside "**.cache**" folder we would have "**mainnet-beta-temp**" instead of "**devnet-temp**" but the structure of files is the same. But because this time we are launching on mainnet-beta, we need to set the last two env variables like below:
+In the tutorial where you are configuring your dApp you will need to do some adjustments. This time inside the **`.cache`** folder we would have **`mainnet-beta-temp`** instead of **`devnet-temp`** but the structure of the two files is the same. Because this time we are launching on **mainnet-beta**, we need to set the last two .env variables like below:
 
 ```
+// same as devnet approach you should put
+// appropriate values from mainnet-beta-temp
+// in variables below
+
 REACT_APP_CANDY_MACHINE_CONFIG=__PLACEHOLDER__
 REACT_APP_CANDY_MACHINE_ID=__PLACEHOLDER__
 REACT_APP_TREASURY_ADDRESS=__PLACEHOLDER__
 REACT_APP_CANDY_START_DATE=__PLACEHOLDER__
 
+// change "devnet" in two variables bellow to "mainnet-beta"
 REACT_APP_SOLANA_NETWORK=mainnet-beta
 REACT_APP_SOLANA_RPC_HOST=https://explorer-api.mainnet-beta.solana.com
 ```
 
-That's All of the adjustments you need to make to launch your minting dApp on mainnet-beta.
+That's All of the adjustments you need to make to launch your minting dApp on **mainnet-beta**.
 
 # Conclusion
 
@@ -304,4 +866,4 @@ metaplex: [https://github.com/metaplex-foundation/metaplex](https://github.com/m
 
 candy machine: [https://github.com/exiled-apes/candy-machine-mint](https://github.com/exiled-apes/candy-machine-mint)‣
 
-how to create layers for our NFTs: [https://www.youtube.com/watch?v=eYkAu4eZG80](https://www.youtube.com/watch?v=eYkAu4eZG80)
+NFT collection assets: [https://bit.ly/3EYmc5X](https://bit.ly/3EYmc5X)
