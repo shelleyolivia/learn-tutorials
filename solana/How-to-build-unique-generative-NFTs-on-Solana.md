@@ -36,15 +36,15 @@ To successfully launch your Collection on Solana you'll need to go through three
 You will find more extensive explanations about tools later in the tutorial where you will be learning to use them. First, we create an empty folder on our desktop. Then we open GitHub repositories of these tools and clone those in our folder. (links are provided in the references section)
 For example for hashlips art engine, first, we open the link in our browser:
 
-![hashlips github.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/hashlips_github.jpg)
+![hashlips github.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/hashlips_github.jpg)
 
 Then first we click on the green Code button and from the new menu we click on Download ZIP:
 
-![download zip in github.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/download_zip_in_github.jpg)
+![download zip in github.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/download_zip_in_github.jpg)
 
 After the download is completed we simply extract the folder inside the zip file to the folder we created. We simply repeat this process for "metaplex" and "candy machine" as well and the final result should be like this:
 
-![folders in man folder.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/folders_in_man_folder.jpg)
+![folders in man folder.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/folders_in_man_folder.jpg)
 
 # Setting up Solana-Cli
 
@@ -175,15 +175,15 @@ $ cat /home/<your username>/.config/solana/devnet.json
 
 Now you need to head over to the phantom extension in the browser. open it. from hamburger menu at left click at "Add / Connect Wallet":
 
-![import private key in phantom screen shot.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/import_private_key_in_phantom_screen_shot.jpg)
+![import private key in phantom screen shot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/import_private_key_in_phantom_screen_shot.jpg)
 
 Then choose a name and copy-paste the private key:
 
-![linking NFTs wallet in phantom screenshot.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/linking_NFTs_wallet_in_phantom_screenshot.jpg)
+![linking NFTs wallet in phantom screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/linking_NFTs_wallet_in_phantom_screenshot.jpg)
 
 Since you will be working with **devnet**, you need to set the network to **devnet** in phantom's settings. For that click on ⚙️ then "Change Network" then "Devnet":
 
-![changing the network from mainnet to devnet screenshot.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/changing_the_network_from_mainnet_to_devnet_screenshot.jpg)
+![changing the network from mainnet to devnet screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/changing_the_network_from_mainnet_to_devnet_screenshot.jpg)
 
 # Generating NFTs
 
@@ -199,25 +199,25 @@ You can use any tool like photoshop or something similar for creating your layer
 
 backgrounds:
 
-![background1.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/background1.png)
+![background1.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/background1.png)
 
-![background2.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/background2.png)
+![background2.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/background2.png)
 
 circles:
 
-![circle1.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/circle1.png)
+![circle1.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/circle1.png)
 
-![circle2.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/circle2.png)
+![circle2.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/circle2.png)
 
-![circle3.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/circle3.png)
+![circle3.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/circle3.png)
 
 and triangles:
 
-![triangle1.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/triangle1.png)
+![triangle1.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/triangle1.png)
 
-![triangle2.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/triangle2.png)
+![triangle2.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/triangle2.png)
 
-![triangle3.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/triangle3.png)
+![triangle3.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/triangle3.png)
 
 So now I have 3 Layers and overall 8 traits. you can download these layers from the link in references.
 
@@ -441,7 +441,7 @@ Created edition: 4, with DNA: 35742657abda4d22190a0761df5d0426da72ece5
 
 Awesome! now you have your images in the build>images folder. and their metadata inside the build>json folder. check them out. here are my 5 generated images altogether. 
 
-![preview.png](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/preview.png)
+![preview.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/preview.png)
 
 In the next section, we will upload our assets to Arweave and we will create a candy machine for minting our NFTs.
 
@@ -639,11 +639,11 @@ REACT_APP_SOLANA_RPC_HOST=https://explorer-api.devnet.solana.com
 
 To let your react app use these environment variables you should rename the **.env.example** file to **.env** and then run `yarn start` to run our dApp locally on localhost:3000
 
-![initial state of dapp candy machine screenshot.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/initial_state_of_dapp_candy_machine_screenshot.jpg)
+![initial state of dapp candy machine screenshot.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/initial_state_of_dapp_candy_machine_screenshot.jpg)
 
 It’s a simple ugly looking UI with just a “Connect Wallet” button. Ok let’s connect our wallet: 
 
-![cansy store up and running wallet connected.jpg](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/cansy_store_up_and_running_wallet_connected.jpg)
+![cansy store up and running wallet connected.jpg](https://github.com/figment-networks/learn-tutorials/raw/master/assets/cansy_store_up_and_running_wallet_connected.jpg)
 
 You may ask why we launched it on devnet and not on mainnet-beta?! for two reasons:
 
@@ -805,11 +805,11 @@ return (
 
 Let’s mint an NFT in our nice-looking app!
 
-![NFT minting gif.gif](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/NFT_minting_gif.gif)
+![NFT minting gif.gif](https://github.com/figment-networks/learn-tutorials/raw/master/assets/NFT_minting_gif.gif)
 
 YaY, we did it! Let’s check out our newly minted NFT in our wallet:
 
-![Checking NFT in wallet gif.gif](How%20to%20build%20unique%20generative%20NFTs%20on%20Solana%20cf14e78d049d47fe802ddae302c87235/Checking_NFT_in_wallet_gif.gif)
+![Checking NFT in wallet gif.gif](https://github.com/figment-networks/learn-tutorials/raw/master/assets/Checking_NFT_in_wallet_gif.gif)
 
 # Launching to Mainnet-beta
 
