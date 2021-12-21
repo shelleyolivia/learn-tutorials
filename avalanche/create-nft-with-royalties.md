@@ -8,7 +8,7 @@ Refer to the official Ethereum developer documentation to learn more about [ERC-
 
 # Prerequisites
 
-In preparation for the tutorial, you will need to have a basic understanding of [Remix IDE](https://remix.ethereum.org/) and Solidity [smart contracts](https://solidity-by-example.org/). Please refer to the Avalanche [smart contract tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) for more information on the Avalanche wallet.
+In preparation for the tutorial, you will need to have a basic understanding of [Remix IDE](https://remix.ethereum.org/) and Solidity [smart contracts](https://solidity-by-example.org/). Please refer to the Avalanche [smart contract tutorial](https://learn.figment.io/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask) for more information on the Avalanche wallet.
 
 ## Write a smart contract using Remix IDE
 
@@ -103,7 +103,7 @@ We can now compile the amended ERC721 smart contract and check for warnings, mak
 
 ![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/compile-ERC721.png)
 
-Next, download and install the Metamask wallet for your browser. Create a new wallet in Metamask, then [follow our quick guide](https://learn.figment.io/network-documentation/avalanche/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask) to connect to the Avalanche Fuji C-Chain. You will need to have a valid DataHub API key for Avalanche. 
+Next, download and install the Metamask wallet for your browser. Create a new wallet in Metamask, then [follow our quick guide](https://learn.figment.io/tutorials/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask#step-1-setting-up-metamask) to connect to the Avalanche Fuji C-Chain. You will need to have a valid DataHub API key for Avalanche. 
 
 Request AVAX from the test faucet for the deployment, from [https://faucet.avax-test.network/](https://faucet.avax-test.network/).
 
