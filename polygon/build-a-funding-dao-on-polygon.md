@@ -2018,7 +2018,7 @@ We have covered all the Frontend required to make the Funding DAO. The source co
 
 This is how the DAO dApp looks like at the end:
 
-![Demo Video](https://vimeo.com/654823931)
+[Demo Video](https://vimeo.com/654823931)
 
 # Conclusion
 
