@@ -9,7 +9,7 @@ Often times you will need to pull information about the blockchain and its state
 
 Let’s see how this can be done by using DataHub to connect to a Terra node.
 
-In this tutorial, we will explore different queries that we can run again our [**DataHub** ](https://figment.io/datahub-waitlist/)Terra node. More specifically, we will take a look at retrieving data about:
+In this tutorial, we will explore different queries that we can run again our [DataHub](https://datahub.figment.io/) Terra node. More specifically, we will take a look at retrieving data about:
 
 * Blockchain details
 * Account details
