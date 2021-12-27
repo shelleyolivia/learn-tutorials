@@ -628,7 +628,7 @@ In this response, you can find a list of proposals. Each one comes with an ID, t
 
 Congratulations! Now you know how to query a Terra node with [DataHub](https://datahub.figment.io/) to get the information you need.
 
-For more queries please refer to the Terra documentation for the **Tendermint RPC**and **Terra LCD** - [**HERE**](https://docs.figment.io/network-documentation/terra) 
+For more queries please refer to the Terra documentation for the **Tendermint RPC** and **Terra LCD** - [**HERE**](https://docs.figment.io/network-documentation/terra) 
 
 The complete code for this tutorial can be found [**here**](https://github.com/figment-networks/tutorials/blob/main/terra/3_query_node/query.js). 
 
