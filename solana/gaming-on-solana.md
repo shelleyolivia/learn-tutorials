@@ -1,7 +1,4 @@
-
-# Gaming on Solana Blockchain
-
-## Introduction
+# Introduction
 
 Blockchain is evolving with every release and there are lots of L1 blockchains which are solving real world problems.
 
@@ -10,7 +7,7 @@ Solana is one of the blockchain which has a high transaction rate per second and
 Considering these factors we are going to build a decentralized gaming platform where users will be able to play the game by paying SOL to a wallet and will be able to create the NFT for the game scores.
 
 
-## Features
+# Features
 
 The decentralized application will include the following features 
 
@@ -22,7 +19,7 @@ The decentralized application will include the following features
 4. NFT creation for the game play
 
 
-## Topics which will be learnt in this tutorial
+# Topics which will be learnt in this tutorial
 
 In this tutorial we learnt multiple concepts about Solana
 
@@ -38,25 +35,24 @@ In this tutorial we learnt multiple concepts about Solana
 8. What is NFT and how it is different from regular tokens
 
 
-## Prerequisites
+# Prerequisites
 
 Although the tutorial doesn’t require you to know everything, still having basic knowledge of React, Web3 and Solana Blockchain will be of great help.
 
 Do not worry even if you do not have experience because we will try to explain most of the basic things in this tutorial.
 
 
-## Requirements
+# Requirements
 
 As such no requirements, only a good code editor will work. I prefer to use VS Code.
 
 
-## Folder structure
+# Folder structure
 
 **Folder structure expected of the react app to run this tutorial**
 
 
-
-* Assuming app name as "DistributeToken"
+* App name is "solana-games"
     * App-Name
         * node_modules
         * public
@@ -82,15 +78,17 @@ As such no requirements, only a good code editor will work. I prefer to use VS C
         * package.json
 
 
-## Flow of the DApp
+# Flow of the DApp
 
-![alt_text](assets/Solana_Games.png "Solana Games")
-
-
-## Accept the game fee from the game player
+![Solana Games](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/Solana_Games.png?raw=true "Solana Games")
 
 
-### Connect to the phantom wallet
+# Accept the game fee from the game player
+The DApp (Decentralised Application) which we are building accepts the payment in the form of SOL tokens and let use play the game. 
+The tokens which we receive can be interpreted as a game fee. The same model can be applied to any DApp which can provide service after receiving the payment.
+Hence to make the payment (Game fee) to the DApp possible we will first integrate the Phantom wallet which will eventually enable us to accept the payment.
+
+## Connect to the phantom wallet
 
 To transfer the SOL from your wallet to the game's wallet, you first need to connect to the wallet.
 
@@ -98,17 +96,15 @@ Without the connection, you will not be able to transfer SOL and move forward.
 
 Hence below are a few lines of code which will connect the application to the phantom wallet.
 
-In the below code
+In the code below
 
 * First we are fetching the "solana" variable from the window object, if the solana variable is present that means the phantom wallet is installed as a chrome extension.
 * Once we have the provider, then we are calling the "connect" function to connect with the phantom wallet. It will open a popup to ask the phantom password. Once you provide the correct password, it will connect the wallet to the application.
 * Phantom provides a way to listen to the connected or disconnected events by using hooks like "connect" and "disconnect". Once phantom wallet is successfully authorised then it will trigger the "connect" method and we can use this method to start out DApp functionality
 
-File: src/App.js
-
-
-```
+```javascript
 /**
+  * File: src/App.js  
   * React will call this useEffect everytime there is an update in the provider variable.
   * Phantom provider provides 2 methods to listen on
   * 1. connect -> This method gets triggered when the wallet connection is successful
@@ -144,29 +140,14 @@ File: src/App.js
 
 Use the provider instance as the owner of all subsequent transactions.
 
-Once the wallet is connected, then it becomes important to assign the provider as the owner which can be used throughout the feature to sign the transactions related to the token distribution.
+Now that the provider is set, we can use the provider instance for all subsequent transactions. When the user connects their wallet, then it becomes important to assign the provider which can be used throughout the dApp to sign transactions.
 
+## Signing the transaction
 
-## Signing the transactions
+**Once we are ready with transaction, then to sign the transaction is important - signTransaction**
 
-**Once we are ready with transaction, then signing it is important - signTransaction**
-
-In this step we will be going through the flow of signing the mint transaction. To complete the mint process we need to write our block to the solana blockchain. To get this transaction on the blockchain it needs to be signed from the wallet owner and sent for the validation.
-
-Few key variables to be used in above function
-
-
-
-* transaction.recentBlockhash : As solana works on **proof of history**, hence every transaction in the solana blockchain requires the latest blockhash to be associated with the new transaction. Without the getRecentBlockhash, the validators will not be able to verify the transaction.
-* proof of history**: **Proof of History is a sequence of computation that can provide a way to cryptographically verify passage of time between two events. Validator nodes "timestamp" blocks with cryptographic proofs that some duration of time has passed since the last proof. All data hashed into the proof most certainly have occurred before the proof was generated. The node then shares the new block with validator nodes, which are able to verify those proofs. The blocks can arrive at validators in any order or even could be replayed years later. With such reliable synchronization guarantees, Solana is able to break blocks into smaller batches of transactions called _entries_. Entries are streamed to validators in realtime, before any notion of block consensus. \
-This is very different and efficient from the **Proof of Work** or **Proof of Stake** where the energy consumption is high as every node in the blockchain has to perform the action to validate a node. The winner gets the reward but other validator’s work gets wasted in the process. \
-
-* transaction.feePayer: This variable denotes the fee payer of the transaction which will pay the fees to sign the transaction and send it for validation
-
-File: src/utils/transferToken.js
-
-
-```
+```javascript
+/* File: src/utils/transferToken.js */
 const createTransferTransaction = async (ownerPubkey, connection, fromTokenAccountPubkey, toTokenAccountPubkey, tokenToTransferLamports) => {
 
  let transaction = new Transaction().add(
@@ -185,6 +166,48 @@ const createTransferTransaction = async (ownerPubkey, connection, fromTokenAccou
 };
 ```
 
+In the above code, we are preparing the transaction object to get signed and added to the Solana Blockchain. To make the transaction valid, below are the few important properties which are required: 
+
+**transaction.recentBlockhash** : As solana works on **proof of history**, hence every transaction in the solana blockchain requires the latest blockhash to be associated with the new transaction. Without the getRecentBlockhash, the validators will not be able to verify the transaction.
+
+**proof of history**: Proof of History is a sequence of computation that can provide a way to cryptographically verify passage of time between two events. Validator nodes "timestamp" blocks with cryptographic proofs that some duration of time has passed since the last proof. All data hashed into the proof most certainly have occurred before the proof was generated. The node then shares the new block with validator nodes, which are able to verify those proofs. The blocks can arrive at validators in any order or even could be replayed years later. With such reliable synchronization guarantees, Solana is able to break blocks into smaller batches of transactions called _entries_. Entries are streamed to validators in realtime, before any notion of block consensus.
+This is very different and efficient from the **Proof of Work** or **Proof of Stake** where the energy consumption is high as every node in the blockchain has to perform the action to validate a node. The winner gets the reward but other validator’s work gets wasted in the process. \
+
+**transaction.feePayer** : This variable denotes the fee payer of the transaction which will pay the fees to sign the transaction and send it for validation
+
+
+## Connection provider to the Phantom Wallet
+
+In the utility function below, we are trying to connect to the wallet if it is not connected already.
+
+The util function will alert the user if there is no Phantom Wallet present as a chrome extension.
+
+Phantom wallet as extension injects the “solana” object in the global object of the browser ie. “window” object. We check the existence of wallet by checking the existence of “solana” in the window object.
+
+
+```javascript
+/**
+* Helpder function to detect whether Phantom wallet extension installed or not
+* @param {*} connectToWallet
+* @returns
+*/
+export const connectOrGetPhantomProvider = (connectToWallet) => {
+   if ("solana" in window) {
+     const provider = window.solana;
+     if(connectToWallet && !window.solana.isConnected){
+           window.solana.connect();
+       }
+       if (provider.isPhantom) {
+           return provider;
+       }
+   }else if(connectToWallet){
+     alert(`Please install the phantom wallet from https://phantom.app/`);
+   }
+
+
+};
+```
+
 ## Transfer SOL from user wallet to Game’s wallet
 
 To transfer the SOL from the user’s wallet to game’s wallet we need to create the new transaction which will hold the information about the sender of the SOL, receiver of the SOL and the amount of the SOL.
@@ -193,18 +216,21 @@ Once we have these information then we have to sign the transaction using the ab
 
 For the safe check we have also added the `if` condition which will not let the transaction process in case the SOL amount is less than 0.
 
-File: src/utils/transferToken.js
 
 
-```
+
+```javascript
 /**
+* File: src/utils/transferToken.js
 * This utility function will transfer the token from one user wallet to another user's wallet
 * @param {*} provider : provider of the phantom wallet
 * @param {*} connection : connection to the solana cluster
 * @param {*} tokenToTransfer : tokens to be transferred in lamports
 * @param {*} fromTokenAccountPubkey : sender of the token
 * @param {*} toTokenAccountPubkey : receiver of the token
-* @returns
+* @return {object} 
+//{ status: true, signature: "transaction signature hash"} in case of success
+//{ status: true, signature: "transaction signature hash"} in case of failure
 */
 
 export const transferCustomToken = async (provider, connection, tokenToTransfer, fromTokenAccountPubkey, toTokenAccountPubkey) => {
@@ -243,34 +269,23 @@ export const transferCustomToken = async (provider, connection, tokenToTransfer,
 }
 ```
 
+# How to create the NFT on Solana
+A non-fungible token (NFT) is a unique and non-interchangeable unit of data stored on a blockchain, a form of digital ledger. So to make ourselves pride by possessing the one and only scorecard of our gameplay we will convert our scores into a NFT.
+Once we convert it to NFT, then we can claim the highest score made while playing the game.
+Let's dive into the NFT creation process in Solana. 
 
+## Create NFT util functions
 
-## How to create the NFT on Solana
+NFT stands for non-fungible token, which basically means that it's a one-of-a-kind digital asset that belongs to you and you only. The most popular NFTs right now include artwork and music, but can also include videos and even tweets
 
-### Create NFT util functions
+NFT can hold image/video/audio as a metadata property, which means if we own the NFT then we own the metadata of the NFT. All these metadata need to be stored somewhere on the internet and link of these uploaded item used as metadata property of an NFT.
 
-As NFTs are meant to be represented in the form of image/video/gif, hence each NFT needs to be associated with a metadata account which can hold the image/video/gif for the NFT and fetch the data wherever needed.
-
-We will be using **arweave **blockchain based data hosting service, which is decentralized and distributed across the network.
-
-**File: src/utils/nftCreation.js**
+We will use Arweave, a blockchain based data hosting service which is decentralized and distributed across the network.
 
 In this code snippet we will talk about the different libraries which are needed to work on this tutorial.
+```javascript
+/* File: src/utils/nftCreation.js */
 
-**borsh: **It is a library which provides us the functionality of serialization or deserialization of data. 
-
-**bs58**: It helps to encode the string to base 58 encoding. 
-
-**@solana/spl-token : **It is a library which holds all the util functions to create the token on the solana blockchain.
-
-**crypto:** It is an algorithm that performs data encryption and decryption.
-
-**bn.js: **The BN.js library for calculating with big numbers in JavaScript.
-
-**@solana/web3.js: **It helps to prepare the instruction for transactions using various util methods.
-
-
-```
 import { BinaryReader, BinaryWriter } from 'borsh';
 import base58 from 'bs58';
 import * as splToken from '@solana/spl-token'
@@ -287,18 +302,21 @@ import {
      TransactionInstruction
    } from "@solana/web3.js";
 ```
+**borsh:** It is a library which provides us the functionality of serialization or deserialization of data. 
 
+**bs58**: It helps to encode the string to base 58 encoding. 
 
-**sleepUtil: **This util function will help to make the setTimeOut work as a synchronous function. With the help of this function we can wait synchronously at any place in the code.
+**@solana/spl-token :** It is a library which holds all the util functions to create the token on the solana blockchain.
 
-**NETWORK: **This parameter signifies to which cluster of Solana the application will be connected to.
+**crypto:** It is an algorithm that performs data encryption and decryption.
 
-Other variables mentioned below are the predefined standards from the Metaplex which internally uses metadata on-chain program to store all the artifacts of the NFT.
+**bn.js:** The BN.js library for calculating with big numbers in JavaScript.
 
-**File: src/utils/nftCreation.js**
+**@solana/web3.js:** It helps to prepare the instruction for transactions using various util methods.
 
+```javascript
+/*File: src/utils/nftCreation.js*/
 
-```
 export const TOKEN_PROGRAM_ID = new PublicKey(
  'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
 );
@@ -342,27 +360,32 @@ export const MetadataKey = {
 }
 export const TOKEN_PROGRAM_ID = programIds.token
 ```
+**sleepUtil:** This function will help to make setTimeOut work as a synchronous function. With the help of this function we can wait synchronously at any place in the code.
+
+**NETWORK:** This parameter signifies to which cluster of Solana the application will be connected to.
+
+Other variables mentioned are the predefined standards from Metaplex which internally uses an on-chain program to store all the metadata and artifacts of the NFT.
 
 
+# On-chain program’s data structures
 
-## On-chain program’s data structures
+On-chain program written in Rust expects the data to be in 'struct' format, hence to pass a valid format via transaction the data needs to be in struct format.
+Hence the class needs to be created to use in Web3 (Iavasript), but to send it through the transaction first the 'class' data structure needs to be converted to 'struct' data structure and then serialized via Borsh serialiser.
 
-On-chain program expects the data to be in structure format hence to pass a valid format the class needs to be created and then serialized through Borsh serialiser.
+Serialization is important as without it, an on-chain program written in Rust will not be able to deserialize the instruction data and it will return fatal error.
 
-Serialization is important without which an on-chain program will not be able to deserialize the instruction data and it will return fatal error.
+**CreateMetadataArgs:** This defines the structure of the data which is expected from the Metaplex on-chain programs to perform the NFT creation action.
 
-**CreateMetadataArgs: **This defines the structure of the data which is expected from the Metaplex on-chain programs to perform the NFT creation action.
+**UpdateMetadataArgs:** This defines the structure of the data to update the metadata of the NFT, without which we can not update the metadata of the NFT.
 
-**UpdateMetadataArgs: **This defines the structure of the data to update the metadata of the NFT, without which we can not update the metadata of the NFT.
-
-**CreateMasterEditionArgs: **This defines the structure of the data which needs to create Master Edition of the NFT, which can be minted to other NFTs in the future. Users can set the max supply for the master edition which can be minted.
+**CreateMasterEditionArgs:** This defines the structure of the data which needs to create Master Edition of the NFT, which can be minted to other NFTs in the future. Users can set the max supply for the master edition which can be minted.
 
 **Creator**: This defines the structure of the data for the creator of the NFT. This information will be injected to each NFT which gets minted on the blockchain.
 
-**Metadata: **This defines the structure of the metadata data which will be associated with each NFT minted on the blockchain. In the metadata we can store the images, videos on the NFT which can be sold on NFT marketplaces.
+**Metadata:** This defines the structure of the metadata data which will be associated with each NFT minted on the blockchain. In the metadata we can store the images, videos on the NFT which can be sold on NFT marketplaces.
 
 
-```
+```javascript
 /**
 * Classes to be used to create the NFT
 */
@@ -469,113 +492,23 @@ class CreateMetadataArgs {
    }
  }
 
- class MasterEditionV1 {
-   key;
-   supply;
-   maxSupply;
-   /// Can be used to mint tokens that give one-time permission to mint a single limited edition.
-   printingMint;
-   /// If you don't know how many printing tokens you are going to need, but you do know
-   /// you are going to need some amount in the future, you can use a token from this mint.
-   /// Coming back to token metadata with one of these tokens allows you to mint (one time)
-   /// any number of printing tokens you want. This is used for instance by Auction Manager
-   /// with participation NFTs, where we dont know how many people will bid and need participation
-   /// printing tokens to redeem, so we give it ONE of these tokens to use after the auction is over,
-   /// because when the auction begins we just dont know how many printing tokens we will need,
-   /// but at the end we will. At the end it then burns this token with token-metadata to
-   /// get the printing tokens it needs to give to bidders. Each bidder then redeems a printing token
-   /// to get their limited editions.
-   oneTimePrintingAuthorizationMint;
-    constructor(args) {
-     this.key = MetadataKey.MasterEditionV1;
-     this.supply = args.supply;
-     this.maxSupply = args.maxSupply;
-     this.printingMint = args.printingMint;
-     this.oneTimePrintingAuthorizationMint =
-       args.oneTimePrintingAuthorizationMint;
-   }
- }
-  class MasterEditionV2 {
-   key;
-   supply;
-   maxSupply;
-    constructor(args) {
-     this.key = MetadataKey.MasterEditionV2;
-     this.supply = args.supply;
-     this.maxSupply = args.maxSupply;
-   }
- }
-
- class EditionMarker {
-   key;
-   ledger;
-    constructor(args) {
-     this.key = MetadataKey.EditionMarker;
-     this.ledger = args.ledger;
-   }
-    editionTaken(edition) {
-     const editionOffset = edition % EDITION_MARKER_BIT_SIZE;
-     const indexOffset = Math.floor(editionOffset / 8);
-      if (indexOffset > 30) {
-       throw Error('bad index for edition');
-     }
-      const positionInBitsetFromRight = 7 - (editionOffset % 8);
-      const mask = Math.pow(2, positionInBitsetFromRight);
-      const appliedMask = this.ledger[indexOffset] & mask;
-      return appliedMask != 0;
-   }
- }
 ```
 
 
 
-## Connection provider to the Phantom Wallet
 
-In the utility function below, we are trying to connect to the wallet if it is not connected already.
+## HTML DOM to Image util function
 
-The util function will alert the user if there is no Phantom Wallet present as a chrome extension.
+To create NFT which can hold the image as the metadata we need to provide the image in the form of base64 encoded string and from base64 to file object which eventually gets uploaded to Arweave.
 
-Phantom wallet as extension injects the “solana” object in the global object of the browser ie. “window” object. We check the existence of wallet by checking the existence of “solana” in the window object.
+So to prepare the file object of the image, we wrote our custom function which can convert any DOM element to base64 string and then base64 to File object.
 
-
-```
-/**
-* Helpder function to detect whether Phantom wallet extension installed or not
-* @param {*} connectToWallet
-* @returns
-*/
-export const connectOrGetPhantomProvider = (connectToWallet) => {
-   if ("solana" in window) {
-     const provider = window.solana;
-     if(connectToWallet && !window.solana.isConnected){
-           window.solana.connect();
-       }
-       if (provider.isPhantom) {
-           return provider;
-       }
-   }else if(connectToWallet){
-     alert(`Please install the phantom wallet from https://phantom.app/`);
-   }
-
-
-};
-```
-
-
-
-## DOM to Image util function
-
-To create NFT which can hold the image as the metadata we need to provide the image in the form of base64 encoded string and from base64 to file object which eventually gets uploaded to arweave.
-
-So the prepare the file object of the image, we wrote our custom function which can convert any DOM element to base64 string and then base64 to File object.
-
-
-```
+```javascript
 /**
 * Helper function to convert base64 to file object
 * @param {*} dataurl
 * @param {*} filename
-* @returns
+* @returns {File} File object.
 */
 export const dataURLtoFile = (dataurl, filename) => {
    let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
@@ -588,14 +521,14 @@ export const dataURLtoFile = (dataurl, filename) => {
 ```
 
 
-**Borsch extended functionality**
+## Borsch extended functionality
 
 This functionality is provided by the Metaplex team where they added an extra util function to the BinaryReader to make the communication seamless with metaplex on-chain programs.
 
 Without the appropriate serialization, the NFT creation will not work as the transaction will not be deserialized properly from the on-chain programs.
 
 
-```
+```javascript
 /**
 * Utility to add functionality to BinaryReader
 */
@@ -628,22 +561,21 @@ extendBorsh();
 ```
 
 
-**mintNFT: **It is a utility wrapper function which expects different parameters to create the NFT process. All the required parameters are explained below.
+**mintNFT:** It is a utility wrapper function which expects different parameters to create the NFT process. All the required parameters are explained below.
 
-**createMint: **It is** **to create the minting address for the NFT with the required parameters.
+**createMint:** It is to create the minting address for the NFT with the required parameters.
 
 
 
 1. **Instructions**: It includes all the instructions related to mint creation, associate account creation and metadata upload.
 2. **payer**: This parameter defines the payer of the transaction.
-3. **mintRentExempt: **This parameter is required to enable rent free account on Solana blockchain.
-4. **decimals: **This parameter is required to tell how many decimals will be placed with the mint key. In the case of NFT, where maximum supply needs to be 1 only, then it will be passed as 0.
-5. **owner: **This parameter tells about the owner of the wallet as well as owner of the NFT which will be minted/created.
-6. **freezeAuthority: **This parameter tells who can freeze authority of the NFT created. Freezing authority is a super set of owners and can override the actions of the owner.
-7. **signers: **This parameter tells about the signers of the transaction, of course while creating the NFT, connected wallet will act as a signer.
+3. **mintRentExempt**: This parameter is required to enable rent free account on Solana blockchain.
+4. **decimals**: This parameter is required to tell how many decimals will be placed with the mint key. In the case of NFT, where maximum supply needs to be 1 only, then it will be passed as 0.
+5. **owner**: This parameter tells about the owner of the wallet as well as owner of the NFT which will be minted/created.
+6. **freezeAuthority**: This parameter tells who can freeze authority of the NFT created. Freezing authority is a super set of owners and can override the actions of the owner.
+7. **signers**: This parameter tells about the signers of the transaction, of course while creating the NFT, connected wallet will act as a signer.
 
-
-```
+```javascript
  export const mintNFT = async function(
    connection,
    provider,
@@ -653,23 +585,23 @@ extendBorsh();
 
    const wallet = provider
    const metadataContent = {
-         name: metadata.name,
-         symbol: metadata.symbol,
-         description: metadata.description,
-         seller_fee_basis_points: metadata.sellerFeeBasisPoints,
-         image: metadata.image,
-         animation_url: metadata.animation_url,
-         external_url: metadata.external_url,
-         properties: {
-           ...metadata.properties,
-           creators: metadata.creators.map(creator => {
-             return {
-               address: creator.address,
-               share: creator.share,
-             };
-           }),
-         },
-     };
+      name: metadata.name,
+      symbol: metadata.symbol,
+      description: metadata.description,
+      seller_fee_basis_points: metadata.sellerFeeBasisPoints,
+      image: metadata.image,
+      animation_url: metadata.animation_url,
+      external_url: metadata.external_url,
+      properties: {
+        ...metadata.properties,
+        creators: metadata.creators.map(creator => {
+          return {
+            address: creator.address,
+            share: creator.share,
+          };
+        }),
+      },
+    };
    const realFiles = [
      ...files,
      new File([JSON.stringify(metadataContent)], 'metadata.json'),
@@ -821,117 +753,16 @@ extendBorsh();
    );}
    return { metadataAccount, arweaveLink, mintKey, account: recipientKey };
  }
-
- //END the mintNFT
-
- /**
-  *
-  * @param {*} maxSupply
-  * @param {*} mintKey
-  * @param {*} updateAuthorityKey
-  * @param {*} mintAuthorityKey
-  * @param {*} payer
-  * @param {*} instructions
-  */
-
- async function createMasterEdition(
-   maxSupply,
-   mintKey,
-   updateAuthorityKey,
-   mintAuthorityKey,
-   payer,
-   instructions,
- ) {
-   const metadataProgramId = programIds.metadata;
-    const metadataAccount = (
-     await findProgramAddress(
-       [
-         Buffer.from(METADATA_PREFIX),
-         new PublicKey(metadataProgramId).toBuffer(),
-         new PublicKey(mintKey).toBuffer(),
-       ],
-       new PublicKey(metadataProgramId),
-     )
-   )[0];
-    const editionAccount = (
-     await findProgramAddress(
-       [
-         Buffer.from(METADATA_PREFIX),
-         new PublicKey(metadataProgramId).toBuffer(),
-         new PublicKey(mintKey).toBuffer(),
-         Buffer.from(EDITION),
-       ],
-       new PublicKey(metadataProgramId),
-     )
-   )[0];
-    const value = new CreateMasterEditionArgs({ maxSupply: maxSupply || null });
-   const data = Buffer.from(serialize(METADATA_SCHEMA, value));
-    const keys = [
-     {
-       pubkey: new PublicKey(editionAccount),
-       isSigner: false,
-       isWritable: true,
-     },
-     {
-       pubkey: new PublicKey(mintKey),
-       isSigner: false,
-       isWritable: true,
-     },
-     {
-       pubkey: new PublicKey(updateAuthorityKey),
-       isSigner: true,
-       isWritable: false,
-     },
-     {
-       pubkey: new PublicKey(mintAuthorityKey),
-       isSigner: true,
-       isWritable: false,
-     },
-     {
-       pubkey: new PublicKey(payer),
-       isSigner: true,
-       isWritable: false,
-     },
-     {
-       pubkey: new PublicKey(metadataAccount),
-       isSigner: false,
-       isWritable: false,
-     },
-      {
-       pubkey: programIds.token,
-       isSigner: false,
-       isWritable: false,
-     },
-     {
-       pubkey: SystemProgram.programId,
-       isSigner: false,
-       isWritable: false,
-     },
-     {
-       pubkey: SYSVAR_RENT_PUBKEY,
-       isSigner: false,
-       isWritable: false,
-     },
-   ];
-    instructions.push(
-     new TransactionInstruction({
-       keys,
-       programId: new PublicKey(metadataProgramId),
-       data,
-     }),
-   );
- }
 ```
 
+**prepPayForFilesTxn:** It is used to calculate the fees for the files which need to be uploaded to arweave. It is mentioned in the arweave documentation that you need Tokens to upload onto the arweave platform but none of the creators faced any such issue yet.
 
-**prepPayForFilesTxn: **It is used to calculate the fees for the files which need to be uploaded to arweave. It is mentioned in the arweave documentation that you need Tokens to upload onto the arweave platform but none of the creators faced any such issue yet.
-
-**findProgramAddress: **It is** **to find the account address based on the program id and seed provided. It is a deterministic function, hence it will always provide the address for the same seed and same program id.
+**findProgramAddress:** It is to find the account address based on the program id and seed provided. It is a deterministic function, hence it will always provide the address for the same seed and same program id.
 
 Deterministic function is needed because it will help to deduplicate any associated account with the same mintKey.
 
 
-```
+```javascript
  const prepPayForFilesTxn = async (
    wallet,
    files,
@@ -1064,14 +895,14 @@ Deterministic function is needed because it will help to deduplicate any associa
 ```
 
 
-**createUninitializedMint: **It is to create the basic mint account to hold the uninitialised token. The token which is just minted but not provided any value. This is needed to attach the metadata with the token before increasing the supply of the token to 1.
+**createUninitializedMint:** It is to create the basic mint account to hold the uninitialised token. The token which is just minted but not provided any value. This is needed to attach the metadata with the token before increasing the supply of the token to 1.
 
-**createUninitializedAccount: **Used** **to create the associated account to hold the SPL token which is going to be NFT.
+**createUninitializedAccount:** Used to create the associated account to hold the SPL token which is going to be NFT.
 
-**createAssociatedTokenAccountInstruction: **Used to create the associate token instruction, which will help to create an associate account which can hold the NFT.
+**createAssociatedTokenAccountInstruction:** Used to create the associate token instruction, which will help to create an associate account which can hold the NFT.
 
 
-```
+```javascript
  function createAssociatedTokenAccountInstruction(
    instructions,
    associatedTokenAddress,
@@ -1128,42 +959,38 @@ Deterministic function is needed because it will help to deduplicate any associa
 
 
 
-## Transaction which needs to be signed 
+# Transaction which needs to be signed 
 
-**sendTransactionWithRetry: **Used** **to retry the transaction in case of failure. While doing any transaction in blockchain there is always a chance of transaction failure and it can lead to bad user experience if it fails in the first go. Hence this function helps to re-initiate the transaction in case of failure.
+**sendTransactionWithRetry:** Used to retry the transaction in case of failure. While doing any transaction in blockchain there is always a chance of transaction failure and it can lead to bad user experience if it fails in the first go. Hence this function helps to re-initiate the transaction in case of failure.
 
-**getUnixTs: **Helps to get the correct unix timestamp in milliseconds.
+**getUnixTs:** Helps to get the correct unix timestamp in milliseconds.
 
-**awaitTransactionSignatureConfirmation: **It** **waits for the transaction’s signature.
+**awaitTransactionSignatureConfirmation:** It waits for the transaction’s signature.
 
-**sendSignedTransaction: **Used** **to send the signed transaction to the Solana blockchain, which will eventually write the data instruction on the solana blockchain.
+**sendSignedTransaction:** Used to send the signed transaction to the Solana blockchain, which will eventually write the data instruction on the solana blockchain.
 
-​​**createMetadata: **Helps** **to create the metadata for the NFT. A metadata can contain anything from images, gif, urls or any piece of code as well. Hence using it logically with the different use-cases can serve many purposes.
+​​**createMetadata:** Helps to create the metadata for the NFT. A metadata can contain anything from images, gif, urls or any piece of code as well. Hence using it logically with the different use-cases can serve many purposes.
 
 In this step we will be going through the flow of signing the transaction. To complete the mint process we need to write our block to the solana blockchain. To get this transaction on the blockchain it needs to be signed from the wallet owner and sent for the validation.
 
 Few key variables to be used in above function
 
+**transaction.recentBlockhash** : As solana works on **proof of history**, hence every transaction in the solana blockchain requires the latest blockhash to be associated with the new transaction. Without the getRecentBlockhash, the validators will not be able to verify the transaction.
+**proof of history**: Proof of History is a sequence of computation that can provide a way to cryptographically verify passage of time between two events. Validator nodes "timestamp" blocks with cryptographic proofs that some duration of time has passed since the last proof. All data hashed into the proof most certainly have occurred before the proof was generated. The node then shares the new block with validator nodes, which are able to verify those proofs. The blocks can arrive at validators in any order or even could be replayed years later. With such reliable synchronization guarantees, Solana is able to break blocks into smaller batches of transactions called _entries_. Entries are streamed to validators in real time, before any notion of block consensus.
+This is very different and efficient from the **Proof of Work** or **Proof of Stake** where the energy consumption is high as every node in the blockchain has to perform the action to validate a node. The winner gets the reward but other validator’s work gets wasted in the process.
 
+**wallet.publicKey** : Every transaction needs a fee to be paid to the computers who are making the transaction possible. This parameter tells Solana who will be paying the fees for this transaction.
+```wallet.publicKey = provider.publicKey```
 
-* transaction.recentBlockhash : As solana works on **proof of history**, hence every transaction in the solana blockchain requires the latest blockhash to be associated with the new transaction. Without the getRecentBlockhash, the validators will not be able to verify the transaction.
-* proof of history**: **Proof of History is a sequence of computation that can provide a way to cryptographically verify passage of time between two events. Validator nodes "timestamp" blocks with cryptographic proofs that some duration of time has passed since the last proof. All data hashed into the proof most certainly have occurred before the proof was generated. The node then shares the new block with validator nodes, which are able to verify those proofs. The blocks can arrive at validators in any order or even could be replayed years later. With such reliable synchronization guarantees, Solana is able to break blocks into smaller batches of transactions called _entries_. Entries are streamed to validators in real time, before any notion of block consensus. \
-This is very different and efficient from the **Proof of Work** or **Proof of Stake** where the energy consumption is high as every node in the blockchain has to perform the action to validate a node. The winner gets the reward but other validator’s work gets wasted in the process. \
-
-* wallet.publicKey: Every transaction needs a fee to be paid to the computers who are making the transaction possible. This parameter tells Solana who will be paying the fees for this transaction.  \
- \
-<code>wallet.publicKey = provider.publicKey <strong> \
-</strong></code> \
-In Ethereum, we have smart contracts and ethereum accounts which deploys these smart contracts. Hence the address of the smart contract is used to fetch the public function and interact with the smart contract. But there are few functions in smart contracts which can only be executed by the owner of the smart contract. 
-* signers.map: List of accounts which will be used to sign the ongoing transaction, that is defined by this list of signers. If any action is going to be taken on this account, it requires the signature using the account’s private key. This ensures that the program never updates the account of a user without the permission of the owner of that account.
-* transaction.serialize() : All the data must be stored on the blockchain. To keep the content format agnostic of the programming language used, the data is serialized before storing. 
-* skipPreflight: It’s a bool data type
+In Ethereum, we have smart contracts and Ethereum accounts which deploys these smart contracts. Hence the address of the smart contract is used to fetch the public function and interact with the smart contract. But there are few functions in smart contracts which can only be executed by the owner of the smart contract. 
+* **signers.map** : List of accounts which will be used to sign the ongoing transaction, that is defined by this list of signers. If any action is going to be taken on this account, it requires the signature using the account’s private key. This ensures that the program never updates the account of a user without the permission of the owner of that account.
+* **transaction.serialize()** : All the data must be stored on the blockchain. To keep the content format agnostic of the programming language used, the data is serialized before storing. 
+* **skipPreflight** : It’s a bool data type
     * true: preflight transaction checks for the available methods before sending the transaction, which involves a very little latency.
     * false: (default value) : It is turned off by default to save the network bandwidth.
-* preflightCommitment: Every transaction on Solana goes through a process of finalization. The longer the transaction has existed on the blockchain, the less likely it is to get reverted. A transaction is reverted when the blockchain realizes later that the transaction was actually not supposed to be allowed. However, the process of finalization takes some time. Depending on the security required in your code, you can choose between single, confirmed and finalized security levels. Single means that there is atleast one “confirmation” given to the transaction by a validator on Solana.
 
 
-```
+```javascript
  const sendTransactionWithRetry = async (
    connection,
    wallet,
@@ -1345,12 +1172,12 @@ In Ethereum, we have smart contracts and ethereum accounts which deploys these s
 
 **getEdition:** Helps to find the correct edition of the NFT, based on the parameters passed.
 
-**findProgramAddress: **This utility method is used to find the associated address with the mintkey and the metadata account. 
+**findProgramAddress:** This utility method is used to find the associated address with the mintkey and the metadata account. 
 
 Associated token is needed to mint the new token and add the metadata data to the token.
 
 
-```
+```javascript
  async function getEdition(
    tokenMint,
  ){   
@@ -1370,14 +1197,12 @@ Associated token is needed to mint the new token and add the metadata data to th
 
 
 
-## Schema mapping of the required classes
+# Schema mapping of the required classes
 
-All the classes which we declared on the top need to be converted to struct format with valid data types like u8 which is expected from the on-chain program.
-
-Rust does not support the classes, it only supports the structure hence the classes need to be converted to struct to make the serialization and deserialization process valid.
+As Rust does not support the classes, it only supports the struc data structure hence the 'classes' need to be converted to 'struct' to make the valid serialization and deserialization. 
 
 
-```
+```javascript
   const METADATA_SCHEMA = new Map([
    [
      CreateMetadataArgs,
@@ -1512,7 +1337,7 @@ Rust does not support the classes, it only supports the structure hence the clas
 **createMetadata**: In the below util function, we are trying to create the metadata for the mint token which was created earlier. Metadata is going to store the artifacts from the NFT which can be in the form of image/gif/video.
 
 
-```
+```javascript
  async function createMetadata(
    data,
    updateAuthority,
@@ -1641,37 +1466,21 @@ Rust does not support the classes, it only supports the structure hence the clas
 
 
 
-## Setting up the react repo
+# Steps to setup up the base repo
 
-
-
-1. Create a react app 
-    1. npx create-react-app solana-games
-    2. cd solana-games
-2. Copy paste the below initiator code in the App.js
-
-
+## Create a React app
+1. Create a React app: **npx create-react-app solana-games**
+2. Enter the project root directory: **cd solana-games**
 ## Setting up the Phantom wallet
-
-
 
 1. Install phantom wallet chrome extension
 2. add some SOL to the wallet.
 
-
-## Setting up the code in right files and folders
-
-
-
-1. Add the routings for the application
-
-
 ## Connecting the application to a Phantom Wallet
 
-File: index.js
+```javascript
+/* File: index.js */
 
-
-```
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -1704,12 +1513,15 @@ reportWebVitals();
 ```
 
 
-2. Add the source code for the game dashboard screen
+2. In the next step, we will add the code for the dashboard screen
+The code below will act as a front page of the game, we can redirect the user to the main game based on the different conditions like 
+  . If user has valid funds to play the game, then redirect user to the game
+  . If user do not have the enough fund then prompt them to fund the wallet
 
-File: src/App.js
+The code of the game can be put in any folder, the redirection should be made correctly.
 
-
-```
+```javascript
+/* File: src/App.js */
 import { useEffect, useState } from 'react';
 import stack from './assets/images/stack.png'
 import './App.css';
@@ -1730,11 +1542,6 @@ function App() {
   *
   * Connection to the Solana cluster
   */
-```
-
-
-
-```
  const connection = new Connection(NETWORK);
 
  const playStack = async () =>{
@@ -1758,7 +1565,6 @@ function App() {
    /**
     * Check if the user has SOL in his wallet
     */
-   console.log(new PublicKey(providerPubKey.toBase58()),'---providerPubKey---')
     const accountBalance = await connection.getBalance(providerPubKey)
     const balanceInLamports = accountBalance ? parseInt(accountBalance):0
     if(balanceInLamports < lamportsRequiredToPlay){
@@ -1781,11 +1587,6 @@ function App() {
    /**
     * If the status is true, that means transaction got successful and we can proceed
     */
-```
-
-
-
-```
    history.push('/stack')
       
  }
@@ -1833,11 +1634,6 @@ function App() {
        <div className="gameThumbnail">
            <img src={stack} alt="Stack Game" />
            <button className="playButton" onClick={() => playStack()}>Play Stack</button>
-```
-
-
-
-```
        </div>
    </div>
  );
@@ -1847,17 +1643,13 @@ export default App;
 ```
 
 
-
-
 3. Add the source code for the game we want to integrate with our application
 
     Check the source code of the game at : https://github.com/solanauniversity/solana-games
 
 
 
-## What's Next
-
-
+# What's Next
 
 * Once you complete the above tutorial then you can build any pay per use platform for the end users. 
 * You can provide services against which you can charge some from the users.
@@ -1865,17 +1657,18 @@ export default App;
 * You can use the knowledge of NFT creation and build NFT marketplaces like opensea
 
 
-## About The Author
+# About The Author
 
-I am a passionate blockchain engineer, avid thinker who is currently thriving to build multiple products in the Solana Ecosystem.
+This tutorial is written by Sandeep Ghosh. You can connect with me on [LinkedIn](https://www.linkedin.com/in/ersandy/) & [Figment Forum](https://community.figment.io/).
+I am a passionate blockchain engineer, an avid thinker who is currently thriving to build multiple products in the Solana ecosystem.
 
-More to know about me at https://github.com/blocksan
+If interested to know more about me, please visit https://github.com/blocksan
 
 
-## References
+# References
 
-1. [https://docs.solana.com/](https://docs.solana.com/)
-2. [https://spl.solana.com/token](https://spl.solana.com/token)
-3. [https://docs.solana.com/terminology](https://docs.solana.com/terminology)
-4. [https://www.metaplex.com/](https://www.metaplex.com/)
-5. https://solgames.fun/
+1. [Solgames.fun - Superset of this tutorial](https://solgames.fun/) 
+2. [Solana Docs](https://docs.solana.com)
+3. [SPL Token](https://spl.solana.com/token)
+4. [Solana Terminologies](https://docs.solana.com/terminology)
+5. [Metaplex Documenation](https://www.metaplex.com) 
