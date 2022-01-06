@@ -526,7 +526,7 @@ It is important to include all variables above in your `config.json` because if 
 
 `goLiveDate`: Timestamp when minting is allowed after
 
-Parameters explained above are fundamental ones to understand for creating a simple candy machine but this isn't always the use case. Maybe you're expecting a certain feature or you want to set an ending date for you launch or something else. For that there is a detailed documentation for different  available variables to be used inside `config.json` [here]("https://docs.metaplex.com/candy-machine-v2/configuration").
+Parameters explained above are fundamental ones to understand for creating a simple candy machine but this isn't always the use case. Maybe you're expecting a certain feature or you want to set an ending date for you launch or something else. For that there is a detailed documentation for different  available variables to be used inside `config.json` [here](https://docs.metaplex.com/candy-machine-v2/configuration).
 
 ## Uploading assets and Creating a Candy Machine
 In candy machine version 1 you needed to upload assets and create a candy machine in two separate cli commands. But in candy machine version 2 you can do both using command bellow:
@@ -580,7 +580,7 @@ You will need some of this information later in configuring the candy machine dA
 # Building the frontend
 To build a minting website for your candy machine, you can use a frontend framework like react and build everything from scratch. But there are community boiler plate projects which provide all fundamental parts like connecting to solana, connecting wallet and etc. There is also a similar project "fair-launch" built by Metaplex. It comes with Metaplex repository you cloned. It is located at `js/packages/fair-launch`. This project gives us a basic UI, we just need to customize it.
 
-First, you need to install all the dependencies of this project. run `npm install`. before you start the frontend, you need to configure the frontend. We have a `.env` file inside the project directory with the content below:
+First, you need to install all the dependencies of this project. run `npm install`. Before you start the frontend local host, you need to configure the project. We have a `.env` file inside the project directory with the content below:
 
 ```text
 REACT_APP_CANDY_MACHINE_ID=<You candyMachine address>
