@@ -1659,10 +1659,10 @@ export default App;
 
 # About The Author
 
-This tutorial is written by Sandeep Ghosh. You can connect with me on [LinkedIn](https://www.linkedin.com/in/ersandy/) & [Figment Forum](https://community.figment.io/).
-I am a passionate blockchain engineer, an avid thinker who is currently thriving to build multiple products in the Solana ecosystem.
+This tutorial is written by Sandeep Ghosh. You can connect with the author on [LinkedIn](https://www.linkedin.com/in/ersandy/) & [Figment Forum](https://community.figment.io/).
+He is passionate blockchain engineer, an avid thinker who is currently thriving to build multiple products in the Solana ecosystem.
 
-If interested to know more about me, please visit https://github.com/blocksan
+If interested to know more about him, please visit https://github.com/blocksan
 
 
 # References
