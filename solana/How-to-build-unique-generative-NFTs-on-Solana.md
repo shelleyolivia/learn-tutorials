@@ -26,7 +26,7 @@ To successfully launch your Collection on Solana you'll need to go through three
 2. Uploading the collection to Arweave using metaplex
 3. Creating a store for the collection using a Metaplex "candy machine"
 
-We will go into more detail regarding the tools later in the tutorial. First,You need to create an empty folder on your desktop to contain the project files. Then clone these repositories into that project folder (links are also provided in the References section at the end of the tutorial).
+We will go into more detail regarding the tools later in the tutorial. First, you need to create an empty folder on your desktop to contain the project files. Then clone these repositories into that project folder (links are also provided in the References section at the end of the tutorial).
 
 For that open a terminal in your desktop. Then run command below to create a folder:
 ```text
@@ -38,7 +38,6 @@ Now to clone repositories run commands below respectively:
 ```text
 git clone https://github.com/HashLips/hashlips_art_engine
 git clone https://github.com/metaplex-foundation/metaplex
-git clone https://github.com/exiled-apes/candy-machine-mint
 ```
 
 # Setting up the Solana CLI
@@ -108,7 +107,7 @@ Save this seed phrase and your BIP39 passphrase to recover your new keypair:
 ```
 
 {% hint style="tip" %}
-you shouldn't share your seed phrase under any circumstances.
+You shouldn't share your seed phrase under any circumstances.
 {% endhint %}
 
 Then set this new wallet as the default wallet in the Solana CLI:
@@ -481,87 +480,71 @@ First, we need to create an `assets` folder inside `metaplex-master` repository 
   - 4.png
 
 ## Installing candy-machine-cli
-Before using the candy-machine-cli, we need to install its dependencies and build an executable version. To do that, open a terminal in the `metaplex-master/js` directory. To install the dependencies, run `yarn install`. It may take a few moments.
-
-To build an executable version of candy-machine-cli, run `yarn run build` and wait for that to finish as well. Finally, run `yarn run bootstrap`. You are done with installing candy-machine-cli and can return to the Metaplex project directory with `cd ..`
+Before using the candy-machine-cli, we need to install its dependencies and build an executable version. To do that, open a terminal in the `metaplex-master/js` directory. To install the dependencies, run `yarn install`. It may take a few moments. You are done with installing candy-machine-cli and can return to the Metaplex project directory with `cd ..`
 
 # Uploading to Arweave
-In your terminal make sure you’re in the metaplex-master directory. To upload the assets to Arweave, run the command:
 
-```text
-ts-node js/packages/cli/src/candy-machine-cli.ts upload ./assets --env devnet --keypair /home/<your username>/.config/solana/devnet.json
+To upload our Assets to Arweave and create our candy machine first we need to configure the candy machine we want to create.
+
+## Configuring the Candy Machine
+To configure a candy machine you need to create `config.json` file in your metaplex directory. In this file we can setup and customize our candy machine. A minimal, simple setup can be:
+
+```json
+{
+  "price": "<price for minting>",
+  "number": "<number of NFT in the Collection to be minted>",
+  "gatekeeper": null,
+  "solTreasuryAccount": "<your solana address>",
+  "splTokenAccount": null,
+  "splToken": null,
+  "goLiveDate": "1 JAN 2022 00:00:00 GMT",
+  "endSettings": null,
+  "whitelistMintSettings": null,
+  "hiddenSettings": null,
+  "storage": "arweave",
+  "ipfsInfuraProjectId": null,
+  "ipfsInfuraSecret": null,
+  "awsS3Bucket": null,
+  "noRetainAuthority": false,
+  "noMutable": false
+}
+
 ```
+It is important to include all variables above in your `config.json` because if you remove a variable with `null` value you would get an error while creating your candy machine.
 
-- `ts-node js/packages/cli/src/candy-machine-cli.ts` compiles the executable and runs it
-- `upload` is the function we want to use from executable
-- `./assets` is the directory our images and their metadata exist
-- `--env devnet` specifies which network we are targeting. If you wanted to deploy your collection on mainnet-beta then replace it with `--env mainnet-beta`
-- `--keypair /home/<your username>/.config/solana/devnet.json` specifies the path to keypair which will pay for the fees of uploading. here we are using the keypair we generated at beginning of the tutorial.
+`price`:  Specifies the price in $SOL for minting each NFT
+`number`: Number of NFTs in the Collection to be minted
+`gateKeeper`: Since a candy machine is open for bot attacks, you can set this field to ask the user to solve a captcha before being able to mint an NFT.
 
-```text
-metaplex-master$ ts-node js/packages/cli/src/candy-machine-cli.ts upload ./assets --env devnet --keypair /home/<your username>/.config/solana/devnet.json
-
-Beginning the upload for 5 (png+json) pairs
-started at: 1639748729410
-wallet public key: <your wallet public key will be printed here>
-Processing file: 0, 0.png
-initializing config
-initialized config for a candy machine with publickey: <another publick key will be allocated for your candy machine here>
-Processing file: 1, 1.png
-Processing file: 2, 2.png
-Processing file: 3, 3.png
-Processing file: 4, 4.png
-Writing indices 0-4
-Done. Successful = true.
-ended at: 2021-12-17T13:46:37.408Z. time taken: 00:01:07
+```json
+"gatekeeper": {
+    "gatekeeperNetwork" : "ignREusXmGrscGNUesoU9mxfds9AiYTezUKex2PsZV6",
+    "expireOnUse" : true
+}
 ```
+`solTreasuryAccount`: SOL wallet to receive proceedings SOL payments
 
-## Creating a candy machine
+`goLiveDate`: Timestamp when minting is allowed after
 
-The next step is creating a candy machine. for that you need to run the command below:
+Parameters explained above are fundamental ones to understand for creating a simple candy machine but this isn't always the use case. Maybe you're expecting a certain feature or you want to set an ending date for you launch or something else. For that there is a detailed documentation for different  available variables to be used inside `config.json` [here]("https://docs.metaplex.com/candy-machine-v2/configuration").
 
+## Uploading assets and Creating a Candy Machine
+In candy machine version 1 you needed to upload assets and create a candy machine in two separate cli commands. But in candy machine version 2 you can do both using command bellow:
 ```text
-ts-node js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env devnet --keypair /home/<your username>/.config/solana/devnet.json -p <price for minting one of your NFTs>
+ts-node js/packages/cli/src/candy-machine-v2-cli.ts upload \
+    -e devnet \
+    -k /home/<your username>/.config/solana/devnet.json \
+    -cp config.json \
+    -c temp \
+    ./assets
 ```
+`-e`: Environment you're using. Here we are using devnet
+`-k`: Specifies the path to keypair which will pay for the fees of uploading. Here we are using the keypair we generated at beginning of the tutorial.
+`-cp`: The path to candy machine configuration file `config.json`
+`-c`: The cache file suffix. This a suffix which will be added to a cache file generated after creating candy machine holding the information related to it.
+`./assets`: The path to folder holding assets of the collection.
 
-- `ts-node js/packages/cli/src/candy-machine-cli.ts` compiles the executable and runs it
-- `create_candy_machine` is the function we need to call for creating the candy machine
-- `--env devnet` specifies which network we are targeting. If you wanted to deploy your collection on mainnet-beta then replace it with `--env mainnet-beta`
-- `--keypair /home/<your username>/.config/solana/devnet.json` specifies the path to keypair which will pay for the fees of uploading. here we are using the keypair we generated at beginning of the tutorial.
-- `-p <price for minting one of your NFTs>` specifies the price in $SOL for minting each NFT
-
-```text
-metaplex-master$ ts-node js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env devnet --keypair /home/<your username>/.config/solana/devnet.json -p 0.1
-
-wallet public key: <your public key will be printed here>
-create_candy_machine finished. candy machine pubkey: <public key of your candy machine will be printed here>
-```
-
-## Updating the candy machine
-Before users are able to mint your NFTs you need to tell the candy machine the date for launching your collection. Only after that date will users be able to mint your NFTs. You need to use the `update_candy_machine` command to update the date field. You can update the price of your NFTs using this command too.
-
-```text
-ts-node js/packages/cli/src/candy-machine-cli.ts update_candy_machine --env devnet --keypair /home/<your username>/.config/solana/devnet.json -p <set your price> --date <set the launch date>
-```
-
-- `ts-node js/packages/cli/src/candy-machine-cli.ts` compiles the executable and runs it
-- `update_candy_machine` is the function we need for updating our candy machine
-- `--env devnet` specifies which network we are targeting. If you wanted to deploy your collection on mainnet-beta then replace it with `--env mainnet-beta`
-- `--keypair /home/<your username>/.config/solana/devnet.json` specifies the path to keypair which will pay for the fees of uploading. here we are using the keypair we generated at beginning of the tutorial.
-- `-p <set your price>` here you can update price of your NFTs if you want or put the previous price
-- `--date <set the launch date>` here you can set your launch date. for example: 
-`--date "1 Dec 2021 00:00:00 GMT"`
-
-```text
-metaplex-master$ ts-node js/packages/cli/src/candy-machine-cli.ts update_candy_machine --env devnet --keypair /home/<your username>/.config/solana/devnet.json -p 0.1 --date "1 Dec 2021 00:00:00 GMT"
-
-wallet public key: <your wallet public key will be printed here>
- - updated startDate timestamp: 1638316800 (1 Dec 2021 00:00:00 GMT)
- - updated price: 100000000 lamports (0.1 SOL)
-update_candy_machine finished <transaction hash will be printend here>
-```
-
-Now, your candy machine is created and you can find all of the information and details about it in a file created in the **.cache** folder. The filename will be different depending on the network you have chosen for creating your candy machine - for instance, if you have deployed on devnet it would be `devnet-temp`.
+In your terminal make sure you’re in the metaplex-master directory then run the command. Now, your candy machine is created and you can find all of the information and details about it in a file created in the **.cache** folder. The filename will be different depending on the network you have chosen for creating your candy machine - for instance, if you have deployed on devnet it would be `devnet-temp`.
 
  **<name of the network you’ve deployed your collection to>-temp**
 
@@ -571,7 +554,7 @@ for instance, if you have deployed on devnet, it would be **devnet-temp**.
 {
   "program": {
     "uuid": <your uuid>,
-    "config": <public key for configuring the candy machine dApp>,
+    "candyMachine": <public key for the candy machine>,
   },
   "items": {
     /*
@@ -589,64 +572,58 @@ for instance, if you have deployed on devnet, it would be **devnet-temp**.
   },
   "env": <network the collection is on>,
   "cacheName": <suffix has been used in filename>,
-  "authority": <owner of the candy machine, which will be your public key>,
-  "candyMachineAddress": <the public key of your minting machine>,
-  "startDate": <the timestamp for the launch date>
 }
 ```
 
-You will need some of this information later in configuring the candy machine dApp.
-
-Awesome! Now we have our candy machine all set up and updated. Let's build a frontend connected to our candy machine so that users can mint our NFTs.
+You will need some of this information later in configuring the candy machine dApp. Let's build a frontend connected to our candy machine so that users can mint our NFTs.
 
 # Building the frontend
-To create the frontend, navigate to the `candy-machine-mint` directory (this will be inside the project directory where we cloned the repositories at the beginning of the tutorial). This is a React project created for the candy machine and gives us a basic UI and minting functionality, we just need to customize the UI.
+To build a minting website for your candy machine, you can use a frontend framework like react and build everything from scratch. But there are community boiler plate projects which provide all fundamental parts like connecting to solana, connecting wallet and etc. There is also a similar project "fair-launch" built by Metaplex. It comes with Metaplex repository you cloned. It is located at `js/packages/fair-launch`. This project gives us a basic UI, we just need to customize it.
 
-First, you need to install all the dependencies of this project. run `yarn install`. before you start the frontend, you need to configure the frontend. We have a .env.example file with the content below:
+First, you need to install all the dependencies of this project. run `npm install`. before you start the frontend, you need to configure the frontend. We have a `.env` file inside the project directory with the content below:
 
 ```text
-REACT_APP_CANDY_MACHINE_CONFIG=__PLACEHOLDER__
-REACT_APP_CANDY_MACHINE_ID=__PLACEHOLDER__
-REACT_APP_TREASURY_ADDRESS=__PLACEHOLDER__
-REACT_APP_CANDY_START_DATE=__PLACEHOLDER__
+REACT_APP_CANDY_MACHINE_ID=<You candyMachine address>
 
-REACT_APP_SOLANA_NETWORK=devnet
-REACT_APP_SOLANA_RPC_HOST=https://explorer-api.devnet.solana.com
+# REACT_APP_SOLANA_NETWORK=devnet
+# REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com
+
+REACT_APP_SOLANA_NETWORK=mainnet-beta
+REACT_APP_SOLANA_RPC_HOST=https://trashpandas.rpcpool.com
+
+# Phase 1
+REACT_APP_FAIR_LAUNCH_ID=
 ```
 
-Let’s configure it step by step. To configure this file we need to use **devnet-temp** file.
+To configure this file we need to use `devnet-temp.json` file.
 
 ```text
-// this takes config field
-REACT_APP_CANDY_MACHINE_CONFIG= <put the config public key here>
 
-// this takes candyMachineAddress
+# this takes candyMachineAddress
+# copy it from devnet-temp.json
 REACT_APP_CANDY_MACHINE_ID= <put the candyMachineAddress here>
-
-// this takes authority
-REACT_APP_TREASURY_ADDRESS= <put the authority here>
-
-// this takes startDate
-REACT_APP_CANDY_START_DATE= <put the startDate here>
-
-// we are using devnet so we don't need to change this variable
-// but if you wanted to connect to a candy machine on mainnet-beta
-// you should change devnet to mainnet-beta
+# since you have deployed to devnet you need to uncomment
+# two lines below to use devnet as environment in the app
+# uncomment a line by removing # from beginning of it
 REACT_APP_SOLANA_NETWORK=devnet
+REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com
 
-// we are using devnet so we don't need to change this variable
-// but if you wanted to connect to a candy machine on mainnet-beta
-// you should change devnet to mainnet-beta
-REACT_APP_SOLANA_RPC_HOST=https://explorer-api.devnet.solana.com
+
+# comment two lines bellow since you are not using
+# mainnet-beta, but if you deploy to mainnet-beta later
+# you need to uncomment lines bellow and comment two lines
+# above
+# comment a line by adding a # to the beginning of a line
+# REACT_APP_SOLANA_NETWORK=mainnet-beta
+# REACT_APP_SOLANA_RPC_HOST=https://trashpandas.rpcpool.com
+
+# Phase 1
+REACT_APP_FAIR_LAUNCH_ID=
 ```
 
-To ensure your React app use these environment variables, you should rename the `.env.example` file to `.env` and then run `yarn start` to run our dApp locally on localhost:3000.
+Run `npm start` to run our dApp locally on localhost:3000.
 
-![initial state of dapp candy machine screenshot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/initial_state_of_dapp_candy_machine_screenshot.jpg?raw=true)
-
-It’s a simple ugly looking UI with just a “Connect Wallet” button. Ok let’s connect our wallet: 
-
-![candy store up and running wallet connected.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/candy_store_up_and_running_wallet_connected.jpg?raw=true)
+![initial_state_of_dapp_screenshot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/initial_state_of_dapp_screenshot.jpg?raw=true)
 
 You may ask why we launched it on devnet and not on mainnet-beta?! for two reasons:
 
@@ -656,7 +633,9 @@ You may ask why we launched it on devnet and not on mainnet-beta?! for two reaso
 From the UI aspect our app isn’t that good. So let’s add some styling to our app in the next section.
 
 # Styling the frontend
-Replace the CSS in `candy-machine-mint/src/index.css` with the CSS shown below. This is what we will use to style the `Home.tsx` component.
+To customize the frontend you are free to do whatever you want. Here is a simple example on how you can Customize it:
+
+Replace the CSS in `candy-machine-mint/src/index.css` with the CSS shown below. This adds a nice gradient background to our app.
 
 ```css
 body {
@@ -668,182 +647,128 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #303030;
   color: #FFFFFF;
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.Welcome-header {
-  text-align: center;
-  font-size: 80px;
-  font-weight: bolder;
-  
-}
-
-.Welcome-description {
-  text-align: center;
-  align-self: stretch;
-  font-size: 40px;
-  font-weight: bold;
-}
-
-.Connected-wallet {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 1rem;
-  background-color: salmon;
-  color: rgb(0, 0, 0);
-  width: 15rem;
-  border-radius: 25px;
-}
-
-.Collection-description {
-  padding: 1rem;
-  margin: auto;
-  margin-top: 15rem;
-  font-size: xx-large;
-  width: 50%;
-}
-
-.Redeemed-by-available {
-  text-align: center;
-  padding: 1rem;
-  font-size: x-large;
-}
 ```
+From assets folder copy-paste `0.png` to `fair-launch/src` folder.
 
-Head over to `src/Home.tsx` and find the variable `MintContainer` and add the styling shown below:
-
+In the `PhaseHeader.tsx` first import the `0.png` file you just added.
 ```jsx
-const MintContainer = styled.div`
-  margin: auto;
-  width: 25rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
+import previewNFT from "./0.png"
 ```
-Replace the `return()` portion of `Home.tsx` with the following code. This new code removes redundant information like remaining NFTs and Balance. It creates a nice looking component for a connected wallet at the top-right of the screen. It also adds some explanations and details about the NFT collection.
-
+Then in the definition of `Header` component, replace the code below with the existing one. This removes status badge and includes a description about our NFT collection
 ```jsx
-return (
-    <main>
-      {wallet && (
-        <>
-          <div className="Connected-wallet">
-            Connected Wallet: {shortenAddress(wallet.publicKey.toBase58() || "")}
-          </div>
-
-          <div className="Collection-description">
-            This collection is consisted of 5 unique combinations of a circle and a triangle
-            with a background either red or white.
-          </div>
-
-          <div className="Redeemed-by-available">
-          {itemsRedeemed} / {itemsAvailable}
-          </div>
-        </>
-        
-      )}
-
-      <MintContainer>
-        {!wallet ? (
-          <>
-            <p className="Welcome-header">Welcome!</p>
-            <p className="Welcome-description">
-              Our NFTs would be out of stock soon!
-              Hurry up and mint yours!
-            </p>
-            <ConnectButton>Connect Wallet</ConnectButton>
-          </>
-        ) : (
-          <MintButton
-            disabled={isSoldOut || isMinting || !isActive}
-            onClick={onMint}
-            variant="contained"
-          >
-            {isSoldOut ? (
-              "SOLD OUT"
-            ) : isActive ? (
-              isMinting ? (
-                <CircularProgress />
-              ) : (
-                "MINT"
-              )
-            ) : (
-              <Countdown
-                date={startDate}
-                onMount={({ completed }) => completed && setIsActive(true)}
-                onComplete={() => setIsActive(true)}
-                renderer={renderCounter}
-              />
-            )}
-          </MintButton>
-        )}
-      </MintContainer>
-
-      <Snackbar
-        open={alertState.open}
-        autoHideDuration={6000}
-        onClose={() => setAlertState({ ...alertState, open: false })}
-      >
-        <Alert
-          onClose={() => setAlertState({ ...alertState, open: false })}
-          severity={alertState.severity}
+const { phaseName, desc, date, status } = props;
+  return (
+    <Grid container justifyContent="center">
+      <Grid xs={12} justifyContent="center" direction="column">
+        <Typography
+          variant="h5"
+          style={{
+            fontWeight: 600,
+            textAlign: 'center',
+            paddingBottom: '10px',
+            fontSize: '30px',
+          }}
         >
-          {alertState.message}
-        </Alert>
-      </Snackbar>
-    </main>
+          {phaseName}
+        </Typography>
+        <Typography variant="body1" color="textSecondary">
+          {desc}
+        </Typography>
+      </Grid>
+      <Grid xs={12} justifyContent="center" direction="column">
+        <Typography
+          color="textSecondary"
+          style={{ padding: '1rem 0', fontSize: '20px' }}
+        >
+          This is a collection of 5 NFTs. Each NFT is a combination of a circle
+          and a triangle with a background either red or white.
+        </Typography>
+
+        <img src={previewNFT} style={{ width: '100%' }} />
+      </Grid>
+    </Grid>
   );
 ```
-
+Inside the `PhaseHeader` component definition, find the `phase === Phase.Unknown && !candyMachine` part and replace its code with code below. This removes description since you added it in code above and adds a title for the case when user hasn't connected their wallet yet.
+```jsx
+{phase === Phase.Unknown && !candyMachine && (
+  <Header phaseName={'Welcome!'} desc={''} date={undefined} />
+)}
+```
+Find the `phase === Phase.Phase4` and replace its code with code below. It specifies the title to be used in `Header` component.
+```jsx
+{phase === Phase.Phase4 && (
+  <Header
+    phaseName="Circlangle Collection!"
+    desc={''}
+    date={candyMachine?.state.goLiveDate}
+    status="LIVE"
+  />
+)}
+```
 Now let’s mint an NFT in our nice looking app!
 
-![NFT minting gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/NFT_minting_gif.gif?raw=true)
+![NFT minting gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/miniting_nft_on_dapp_gif.gif?raw=true)
 
 YaY, we did it! Let’s check out our newly minted NFT in our wallet:
 
-![Checking NFT in wallet gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/Checking_NFT_in_wallet_gif.gif?raw=true)
+![Checking NFT in wallet gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/checking_nft_in_phantom_wallet.gif?raw=true)
 
+You can deploy this project to your favorite hosting service like Firebase, Vercel or any other provider. I deployed it to Firebase and you can check it out [here](https://circleanglenfts.web.app/) and mint your own nft if there are left any😉.
 # Launching to Mainnet-beta
 
 You successfully launched your collection on devnet and now you are ready to deploy to mainnet-beta. There isn't any significant difference between deploying to devnet and mainnet-beta. you need to switch back to mainnet-beta by running `solana config set --url mainnet-beta`. this time we need to top our wallet up with real SOL. You can easily purchase some from an exchange like [FTX](https://ftx.com/).
 
 The process of generating the assets works the same since it’s unrelated to the Solana network you are using.
 
-In the tutorial where you are creating a candy machine and uploading the assets, you need to change `--env devnet` to  `--env mainnet-beta` in all three commands.
+In the tutorial where you are creating a candy machine and uploading the assets, you need to change `-e devnet` to  `-e mainnet-beta` in the command.
 
-To clarify, when deploying to mainnet-beta those commands would look like this:
-
-1. `ts-node js/packages/cli/src/candy-machine-cli.ts upload ./assets --env mainnet-beta --keypair /home/<your username>/.config/solana/devnet.json`
-
-2. `ts-node js/packages/cli/src/candy-machine-cli.ts create_candy_machine --env mainnet-beta --keypair /home/<your username>/.config/solana/devnet.json -p 0.1`
-
-3. `ts-node js/packages/cli/src/candy-machine-cli.ts update_candy_machine --env mainnet-beta --keypair /home/<your username/.config/solana/devnet.json -p 0.1 --date "17 Dec 2021 00:00:00 GMT"`
+To clarify, when deploying to mainnet-beta that command would look like this:
+```text
+ts-node js/packages/cli/src/candy-machine-v2-cli.ts upload \
+    -e mainnet-beta \
+    -k /home/<your username>/.config/solana/devnet.json \
+    -cp config.json \
+    -c temp \
+    ./assets
+```
 
 Easy peasy!
 
-In the tutorial where you are configuring your dApp you will need to make some adjustments. This time inside the `.cache` folder we would have `mainnet-beta-temp` instead of `devnet-temp` but the structure of the two files is the same. Because this time we are launching on mainnet-beta, we need to set the last two `.env` variables like below:
+In the tutorial where you are configuring your fair-launch dApp, this time inside the `.cache` folder we would have `mainnet-beta-temp` instead of `devnet-temp` but the structure of the two files is the same. Because this time we are launching on mainnet-beta, we need to set the `.env` file in `fair-launch` folder like below:
 
 ```text
-// same as devnet approach you should put
-// appropriate values from mainnet-beta-temp
-// in variables below
+# this takes candyMachineAddress
+# copy it from mainnet-beta-temp.json
+REACT_APP_CANDY_MACHINE_ID= <put the candyMachineAddress here>
+# since you have deployed to mainnet-beta
+# you need to comment two lines below
+# comment a line by adding a # to the beginning of a line
+# REACT_APP_SOLANA_NETWORK=devnet
+# REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com
 
-REACT_APP_CANDY_MACHINE_CONFIG=__PLACEHOLDER__
-REACT_APP_CANDY_MACHINE_ID=__PLACEHOLDER__
-REACT_APP_TREASURY_ADDRESS=__PLACEHOLDER__
-REACT_APP_CANDY_START_DATE=__PLACEHOLDER__
 
-// change "devnet" in two variables bellow to "mainnet-beta"
+# uncomment two lines bellow since you are
+# using mainnet-beta
+# uncomment a line by removing # from beginning of it
 REACT_APP_SOLANA_NETWORK=mainnet-beta
-REACT_APP_SOLANA_RPC_HOST=https://explorer-api.mainnet-beta.solana.com
+REACT_APP_SOLANA_RPC_HOST=https://trashpandas.rpcpool.com
+
+# Phase 1
+REACT_APP_FAIR_LAUNCH_ID=
 ```
 
 That's All of the adjustments you need to make to launch your minting dApp on **mainnet-beta**.
@@ -856,7 +781,7 @@ In this tutorial, we learned how to create a  collection of unique generative NF
 2. We created the layers for our NFT collection.
 3. We used **Hashlips art engine** for creating NFT assets from our layers.
 4. We uploaded NFT assets to Arweave using Metaplex "candy machine"
-5. We built a frontend for our Metaplex "candy machine" app using "candy machine mint" React project
+5. We built a frontend for our Metaplex "candy machine" app using "fair-launch" React project.
 
 # About the Author
 
@@ -868,8 +793,6 @@ If you found any misinformation in the article or had any suggestions to improve
 
 hashlips art engine: [https://github.com/HashLips/hashlips_art_engine](https://github.com/HashLips/hashlips_art_engine)
 
-metaplex: [https://github.com/metaplex-foundation/metaplex](https://github.com/metaplex-foundation/metaplex)
-
-candy machine mint: [https://github.com/exiled-apes/candy-machine-mint](https://github.com/exiled-apes/candy-machine-mint)‣
+metaplex candy machine V2: [(https://docs.metaplex.com/candy-machine-v2](https://docs.metaplex.com/candy-machine-v2)
 
 NFT collection assets: [https://bit.ly/3EYmc5X](https://bit.ly/3EYmc5X)
