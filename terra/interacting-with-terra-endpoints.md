@@ -2,27 +2,26 @@
 
 In order to benefit from the full potential of the Terra blockchain, you will first need to connect to a Terra node. 
 
-In this tutorial, we will use the Terra SDK to connect to a Terra node hosted by ****[**DataHub**](https://figment.io/datahub-waitlist/). We will be building a simple Nodejs application, which we will develop further during the Terra Pathway. 
+In this tutorial, we will use the Terra SDK to connect to a Terra node hosted by [**DataHub**](https://figment.io/datahub-waitlist/). We will be building a simple NodeJS application. More details about Terra.js can be found [**here**](https://terra-project.github.io/terra.js/).
 
-More details about Terra.js can be found [**here**](https://terra-project.github.io/terra.js/).
-
-## **Creating the NodeJS App**
+# Creating the NodeJS App
 
 Before we can jump in and start using the Terra SDK, we need to set up our project and all required dependencies. 
 
 {% hint style="info" %}
-Please make sure that you have Node 10+ installed on your machine.
+Please make sure that you have Node v10+ installed on your machine.
 {% endhint %}
 
-The next step is to create a directory for your project where you will initialize the new Nodejs project. You can do this using the following command:
+The first step is to create a directory for your project where you will initialize the new NodeJS project. You can do this using the following commands:
 
-```javascript
+```text
+mkdir terra-project && cd terra-project
 npm init
 ```
 
-You will then be prompted with several questions. For the purpose of this tutorial, you can safely press `Enter` for every one of these questions \(which will create `package.json` with the default options\). This should create a `package.json` file in the root of your directory that looks similar to:
+You will then be prompted with several questions. For the purpose of this tutorial, you can safely press Enter for every one of these questions \(which will create a manifest using the default options\). This should create a `package.json` file in the root of your directory that looks similar to:
 
-```javascript
+```json
 {
   "name": "terra",
   "version": "1.0.0",
@@ -38,36 +37,35 @@ You will then be prompted with several questions. For the purpose of this tutori
 }
 ```
 
-## **Installing packages**
+# Installing packages
 
-Now that we have our Nodejs application set up we can install the required packages:  
+Now that we have our NodeJS application set up we can install the required packages:  
 
-
-* **dotenv** - for keeping sensitive data
+* **dotenv** - for keeping sensitive data. See our [guide on docs.figment.io](https://docs.figment.io/network-documentation/extra-guides/dotenv-and-.env) for more information!
 * **terra.js** - Terra SDK
 
-```javascript
+```text
 npm install --save dotenv @terra-money/terra.js
 ```
 
-## **Store sensitive data**
+# Store sensitive data
 
 When we have that out of our way, we can continue by creating an `.env` file which will hold all our sensitive data.
 
-You should never commit this file to a git repository so make sure to create a `.gitignore` file and the following command:
+**You should never commit this file to a git repository** so make sure to create a `.gitignore` file and add the following line to it:
 
 ```javascript
 .env
 ```
 
-Now open `.env` file and add the first environmental variables:
+Now open the `.env` file and add the first environmental variables:
 
-* **TERRA\_NODE\_URL** - url to DH Tequila node
+* **TERRA\_NODE\_URL** - The URL to a DataHub Tequila node
 * **TERRA\_CHAIN\_ID** - chain id which should be set to `tequila-0004`
 
 Your `.env` file should look similar to:
 
-```javascript
+```text
 TERRA_NODE_URL='https://tequila-0004--lcd--archive.datahub.figment.io/apikey/<YOUR API KEY>/'
 TERRA_CHAIN_ID='tequila-0004'
 ```
@@ -76,16 +74,87 @@ TERRA_CHAIN_ID='tequila-0004'
 **Warning! Make sure that you don’t forget about the trailing slash for the TERRA\_NODE\_URL**
 {% endhint %}
 
-## **Conclusion**
+# Connect to Terra
+
+Add the following code to a new file called `connect.js` inside the project folder, for example `terra-project/connect.js`:
+
+```javascript
+const { LCDClient } = require('@terra-money/terra.js');
+require('dotenv').config();
+
+const main = async () => {
+  // Create connection to DataHub Terra node
+  const terra = new LCDClient({
+    URL: process.env.TERRA_NODE_URL,
+    chainID: process.env.TERRA_CHAIN_ID,
+  });
+
+  console.log('Successfully connected to Terra node');
+  return terra;
+}
+
+main().then(resp => {
+  console.log(resp);
+}).catch(err => {
+  console.log(err);
+})
+```
+
+This uses the LCDClient class to create a connection to Terra. Run this code with the command `node connect.js` and you will see similar output:
+
+```text
+<ref *1> LCDClient {
+  config: {
+    gasAdjustment: 1.75,
+    gasPrices: { uluna: 0.15 },
+    URL: 'https://tequila-0004--lcd--archive.datahub.figment.io/apikey/REDACTED/',
+    chainID: 'tequila-0004'
+  },
+  apiRequester: APIRequester {
+    axios: [Function: wrap] {
+      request: [Function: wrap],
+      getUri: [Function: wrap],
+      delete: [Function: wrap],
+      get: [Function: wrap],
+      head: [Function: wrap],
+      options: [Function: wrap],
+      post: [Function: wrap],
+      put: [Function: wrap],
+      patch: [Function: wrap],
+      defaults: [Object],
+      interceptors: [Object],
+      create: [Function: create]
+    }
+  },
+  auth: AuthAPI { c: APIRequester { axios: [Function] } },
+  bank: BankAPI { c: APIRequester { axios: [Function] } },
+  distribution: DistributionAPI { c: APIRequester { axios: [Function] } },
+  feeGrant: FeeGrantAPI { c: APIRequester { axios: [Function] } },
+  gov: GovAPI { c: APIRequester { axios: [Function] } },
+  market: MarketAPI { c: APIRequester { axios: [Function] } },
+  mint: MintAPI { c: APIRequester { axios: [Function] } },
+  authz: AuthzAPI { c: APIRequester { axios: [Function] } },
+  oracle: OracleAPI { c: APIRequester { axios: [Function] } },
+  slashing: SlashingAPI { c: APIRequester { axios: [Function] } },
+  staking: StakingAPI { c: APIRequester { axios: [Function] } },
+  tendermint: TendermintAPI { c: APIRequester { axios: [Function] } },
+  treasury: TreasuryAPI { c: APIRequester { axios: [Function] } },
+  wasm: WasmAPI { c: APIRequester { axios: [Function] } },
+  ibcTransfer: IbcTransferAPI { c: APIRequester { axios: [Function] } },
+  tx: TxAPI { c: APIRequester { axios: [Function] }, lcd: [Circular *1] },
+  utils: LCDUtils { lcd: [Circular *1] }
+}
+```
+
+# Conclusion
 
 Now that we have successfully connected to a Terra node using [**DataHub**](https://figment.io/datahub-waitlist/), we are ready to move on to the next tutorial.
 
-The complete code for this tutorial can be found [**here**](https://github.com/figment-networks/tutorials/blob/main/terra/1_connecting_to_node/connect.js).   
+The complete code for this tutorial series can be found here: <https://github.com/figment-networks/tutorials/tree/main/terra>
 
+# Next Steps
 
-## **Next steps**
+In the [next tutorial](https://github.com/figment-networks/tutorials/blob/main/terra/2_creating_account/create_account.js), we will be creating a Terra account using the Terra SDK.
 
-In the next tutorial, we will be creating your very first Terra account using the Terra SDK.
-
-If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!                        ****
+If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [**join our community today**](https://figment.io/devchat)!
 
