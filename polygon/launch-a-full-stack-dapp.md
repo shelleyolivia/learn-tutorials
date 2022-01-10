@@ -1,11 +1,11 @@
 [**The original tutorial can be found on Polygon \(Matic\)'s official documentation here.**](https://docs.matic.network/docs/develop/full-stack-dapp-with-pos)
 # Introduction
 
-This tutorial is a brief introduction to Full Stack DApp deployed on Polygon \(Matic\) with Proof of Stake Security. As a DApp developer, to build on PoS security, the procedure is as simple as taking your smart contract and deploying it on Polygon \(Matic\). This is possible because of the account**-**based architecture enabling an EVM-compatible sidechain.
+This tutorial is a brief introduction to Full Stack DApp deployed on Polygon \(Matic\) with Proof of Stake Security. As a DApp developer, to build on PoS security, the procedure is as simple as taking your smart contract and deploying it on Polygon \(Matic\). This is possible because of the account-based architecture enabling an EVM-compatible sidechain.
 
 # Prerequisites
 
-- Node 8.10+
+- NodeJS v8.10+
 
 ```text
 node -v
@@ -22,13 +22,13 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | 
 
 # What are we building?
 
-We plan to build a Decentralized Airbnb that incorporates three main functionalities:
+We plan to build a Decentralized AirBnB that incorporates three main functionalities:
 
-* Rent out a space
+* Rent out your space
 * View available spaces
-* Rent a space
+* Rent a space from someone
 
-Go ahead and clone the [repository](https://github.com/maticnetwork/ethindia-workshop) and install dependencies and then run `npm install`
+Go ahead and clone the [repository](https://github.com/maticnetwork/ethindia-workshop) and install dependencies and then run `npm install`.
 
 # Setup
 
@@ -38,7 +38,7 @@ We’d like a property with a name, description, owner and a price to be rented.
 
 So we’d like a structure named ‘property’ that would include a name, description, price, owner, boolean flag denoting if its active or not, and a boolean array denoting the booked days of the property.
 
-```javascript
+```solidity
 struct Property { 
   string name;
   string description;
@@ -56,7 +56,7 @@ We’d also like to keep track of the Property object we just created by mapping
 
 For this, we first declare a variable propertyId followed by a mapping of propertyId to property, called properties.
 
-```javascript
+```solidity
 uint256 public propertyId;
 // mapping of propertyId to Property object
 mapping(uint256 => Property) public properties;
@@ -66,7 +66,7 @@ Having a property we’d also like to keep track of all the bookings made to dat
 
 We can do that by creating another structure for a Booking with properties such as: propertyId, check in and check out date and the user who made the booking.
 
-```javascript
+```solidity
 struct Booking {
   uint256 propertyId;
   uint256 checkInDate;
@@ -77,7 +77,7 @@ struct Booking {
 
 Similar to what we did to keep track of each property, we can do to keep track of each booking - by mapping each booking id to a particular booking object.
 
-```javascript
+```solidity
 uint256 public bookingId;
 // mapping of bookingId to Booking object
 mapping(uint256 => Booking)
@@ -96,22 +96,22 @@ On the whole, we require three basic functions:
 
 ## Defining functions
 
-`renOutProperty`
+**`rentOutProperty`**
 
-```javascript
+```solidity
 function rentOutproperty(string memory name, string memory description, uint256 price) public {
 Property memory property = Property(name, description, true /* isActive */, price, msg.sender /* owner */, new bool[](365));
 
 // Persist `property` object to the "permanent" storage
 properties[propertyId] = property;
 
-// emit an event to notify the clients
+// Emit an event to notify the clients
 emit NewProperty(propertyId++);
 ```
 
-`rentProperty`
+**`rentProperty`**
 
-```javascript
+```solidity
 function rentProperty(uint256 _propertyId, uint256 checkInDate, uint256 checkoutDate) public payable {
 // Retrieve `property` object from the storage
 Property storage property = properties[_propertyId];
@@ -131,9 +131,9 @@ for (uint256 i = checkInDate; i < checkoutDate; i++) {
 }
 ```
 
-`markPropertyAsInactive`
+**`markPropertyAsInactive`**
 
-```javascript
+```solidity
 function markPropertyAsInactive(uint256 _propertyId) public {
 require(
   properties[_propertyId].owner == msg.sender,
@@ -147,17 +147,19 @@ We used two functions `_sendFunds` and `_createBooking` in the `rentProperty` fu
 
 These two functions are defined as:
 
-`_sendFunds` You can read more about the particular transfer function we’ve used [here](https://solidity.readthedocs.io/en/v0.5.10/050-breaking-changes.html?highlight=address%20payable#explicitness-requirements).
+**`_sendFunds`**
 
-```javascript
+You can read more about the particular transfer function we’ve used [here](https://solidity.readthedocs.io/en/v0.5.10/050-breaking-changes.html?highlight=address%20payable#explicitness-requirements).
+
+```solidity
 function _sendFunds (address beneficiary, uint256 value) internal {
   address(uint160(beneficiary)).transfer(value);
 }
 ```
 
-`_createBooking`
+**`_createBooking`**
 
-```javascript
+```solidity
 function _createBooking(uint256 _propertyId, uint256 checkInDate, uint256 checkoutDate) internal {
 // Create a new booking object
 bookings[bookingId] = Booking(_propertyId, checkInDate, checkoutDate, msg.sender);
@@ -178,7 +180,7 @@ emit NewBooking(_propertyId, bookingId++);
 
 You can view the entire code [here](https://github.com/maticnetwork/ethindia-workshop/blob/master/contracts/Airbnb.sol).
 
-Once you have the contract code ready, next steps would be to deploy the code on a testnet and test its working.
+Once you have the contract code ready, next steps would be to deploy the code on a testnet and test it's working.
 
 # Deploy and Test
 
@@ -186,18 +188,18 @@ For this, we use the Remix IDE - an online IDE to develop smart contracts.
 
 * Head over to [https://remix.ethereum.org](https://remix.ethereum.org/) If you’re new to Remix, You’ll first need to activate two modules: Solidity Compiler and Deploy and Run Transactions.
 
-![](https://docs.matic.network/img/solidity/remix-plugin-manager.png)
+![](https://docs.polygon.technology/img/solidity/remix-plugin-manager.png)
 
-If not already activated, you will need to activate plugins such as `Deploy & Run Transactions` and `Solidity Complier`
+If not already activated, you will need to activate plugins such as **Deploy & Run Transactions** and **Solidity Compiler**
 
 Your left menu should look something like this:
 
-![](https://docs.matic.network/img/solidity/remix-left-menu.png)
+![](https://docs.polygon.technology/img/solidity/remix-left-menu.png)
 
-* Create a new file, Airbnb.sol
-* Copy the entire smart contract code and paste it in the editor
+* Create a new file, `Airbnb.sol`
+* Copy the entire smart contract code and paste it in the editor:
 
-```javascript
+```solidity
 pragma solidity ^0.5.7;
 
 contract Airbnb {
@@ -337,18 +339,18 @@ contract Airbnb {
 * Once compiled, the smart contract is ready to be deployed onto the testnet/mainnet.
 * Copy the generated ABI - we would be needing that for our next steps
 
-![](https://docs.matic.network/img/solidity/remix-abi.png)
+![](https://docs.polygon.technology/img/solidity/remix-abi.png)
 
 * Select Javascript VM as the environment in the dropdown - this connects remix to a simple blockchain environment via your browser - we'll learn more about deploying on Polygon \(Matic\)'s test network in the next tutorial \[link\]
 
-![](https://docs.matic.network/img/solidity/remix-contract-test-functions.png)
+![](https://docs.polygon.technology/img/solidity/remix-contract-test-functions.png)
 
 Once Metamask is connected to Remix, the ‘Deploy’ transaction would generate another metamask popup that requires transaction confirmation.
 
-![](https://docs.matic.network/img/solidity/remix-metamask-tx-confirm.png)
+![](https://docs.polygon.technology/img/solidity/remix-metamask-tx-confirm.png)
 
-* Click Deploy
-* And once the contract is deployed you can test the functions
+* Click **Deploy**
+* Once the contract is deployed, you can test the functions
 
 # Setting up our DApp
 
@@ -371,22 +373,22 @@ Get the ABI copied from the previous step
 {"abi": [{"constant": true,"inputs": [],"name": "bookingId","outputs": [{"name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"},.................................]}
 ```
 
-## Connect UI to Metamask
+## Connect UI to MetaMask
 
 Next, we’d like the UI to be connected with Metamask. For this we follow the following two steps:
 
 First, add the `setProvider()` method inside `mounted()` method in `dapp-ui/pages/index.vue`
 
-> Note: You might face indentation issues after pasting it.
+> Note: You might face indentation issues after pasting it. Use Prettier to keep the code clean.
 
 ```javascript
 // init Metamask
-await setProvider()
+await setProvider();
 // fetch all properties
-const properties = await fetchAllProperties()this.posts = properties
+const properties = await fetchAllProperties()this.posts = properties;
 ```
 
-Next we’d like to inject metamask instance - for this we define the `setProvider()` method in `dapp-ui/plugins/utils.js`
+Next we’d like to inject the MetaMask instance - for this we define the `setProvider()` method in `dapp-ui/plugins/utils.js`
 
 ```javascript
 if (window.ethereum)
@@ -408,9 +410,9 @@ account = await metamaskWeb3.eth.getAccounts()
 
 ## Defining components and functions
 
-Once we have connected metamask, we’d next want to be able to communicate with the deployed contract. For this, we’ll create a new contract object - that represents our airbnb smart contract
+Once we have connected MetaMask, we’d next want to be able to communicate with the deployed contract. For this, we’ll create a new contract object - that represents our AirBnB smart contract.
 
-Inside `dapp-ui/plugins/utils.js` create the following function that instantiates and returns the `airbnbContract`
+Inside `dapp-ui/plugins/utils.js` create the following function that instantiates and returns the `airbnbContract`:
 
 ```javascript
 function getAirbnbContract(){
@@ -419,11 +421,11 @@ function getAirbnbContract(){
 }
 ```
 
-With metamask connected and contract initiated we can go forward with interacting with our contract
+With MetaMask connected and contract initiated we can go forward with interacting with our contract.
 
 The `dapp-ui` folder structure looks something like this:
 
-![](https://docs.matic.network/img/dapp/folder-structure.png)
+![](https://docs.polygon.technology/img/dapp/folder-structure.png)
 
 Inside the `dapp-ui/components` directory, we have the separate components that make up our app interface.
 
@@ -497,18 +499,18 @@ And this marks the end of our DApp tutorial! We know it’s been a long one.
 
 Execute `npm run dev` to view and interact with your decentralized application.
 
-![](https://docs.matic.network/img/dapp/rent-your-property.png)
+![](https://docs.polygon.technology/img/dapp/rent-your-property.png)
 
 Click on ‘Rent your Property’ button on top right, it displays a dialogue box requiring title, description and price. The submit button sends these values to the function ‘rentOutProperty’ on the smart contract in the form of a transaction. Since it ‘transacts’ with the blockchain it would create a metamask popup requiring you to sign the transaction, shown below.
 
-![](https://docs.matic.network/img/dapp/dapp-metamask-tx-confirm.png)
+![](https://docs.polygon.technology/img/dapp/dapp-metamask-tx-confirm.png)
 
 The Metamask popup displays the gas price for the transaction.
 
-![](https://docs.matic.network/img/dapp/dapp-rent-success.png)
+![](https://docs.polygon.technology/img/dapp/dapp-rent-success.png)
 
-![](https://docs.matic.network/img/dapp/rent-out-success.png)
+![](https://docs.polygon.technology/img/dapp/rent-out-success.png)
 
 After the transaction is confirmed, the property lives on the blockchain and since it is available to be booked, it is displayed on the homepage.
 
-If you had any difficulties following this tutorial or simply want to discuss Polygon \(Matic\) and DataHub tech with us you can [join our community](https://discord.gg/Chhuv5zHy3) today!
+If you had any difficulties following this tutorial or simply want to discuss Polygon \(Matic\) and DataHub tech with us you can [join our community](https://figment.io/devchat) today!
