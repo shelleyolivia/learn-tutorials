@@ -575,17 +575,16 @@ To build a minting website for your candy machine, you can use a frontend framew
 First, you need to install all the dependencies of this project. run `npm install`. Before you start the frontend local host, you need to configure the project. We have a `.env` file inside the project directory with the content below:
 
 ```text
-REACT_APP_CANDY_MACHINE_ID=<You candyMachine address>
-
-# REACT_APP_SOLANA_NETWORK=devnet
-# REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com
-
-REACT_APP_SOLANA_NETWORK=mainnet-beta
-REACT_APP_SOLANA_RPC_HOST=https://trashpandas.rpcpool.com
-
-# Phase 1
+REACT_APP_CANDY_MACHINE_ID=<your candyMachine address>
+REACT_APP_SOLANA_NETWORK=devnet
+REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com
 REACT_APP_FAIR_LAUNCH_ID=
 ```
+
+- `REACT_APP_CANDY_MACHINE_ID` this takes your `candyMachineAddress`, copy it from devnet-temp.json
+- Remember to uncomment the lines `REACT_APP_SOLANA_NETWORK=devnet` and `REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com`
+- Also comment out the lines `REACT_APP_SOLANA_NETWORK=mainnet-beta` and `REACT_APP_SOLANA_RPC_HOST=https://trashpandas.rpcpool.com` since we are not deploying to Mainnet-beta!
+- `REACT_APP_FAIR_LAUNCH_ID=` is used for Phase 1 of the fair launch
 
 To configure this file we need to use `devnet-temp.json` file.
 
@@ -599,15 +598,6 @@ REACT_APP_CANDY_MACHINE_ID= <put the candyMachineAddress here>
 # uncomment a line by removing # from beginning of it
 REACT_APP_SOLANA_NETWORK=devnet
 REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com
-
-
-# comment two lines bellow since you are not using
-# mainnet-beta, but if you deploy to mainnet-beta later
-# you need to uncomment lines bellow and comment two lines
-# above
-# comment a line by adding a # to the beginning of a line
-# REACT_APP_SOLANA_NETWORK=mainnet-beta
-# REACT_APP_SOLANA_RPC_HOST=https://trashpandas.rpcpool.com
 
 # Phase 1
 REACT_APP_FAIR_LAUNCH_ID=
@@ -653,13 +643,17 @@ code {
     monospace;
 }
 ```
+
 From assets folder copy-paste `0.png` to `fair-launch/src` folder.
 
-In the `PhaseHeader.tsx` first import the `0.png` file you just added.
+In the `PhaseHeader.tsx` first import the `0.png` file you just added:
+
 ```jsx
 import previewNFT from "./0.png"
 ```
-Then in the definition of `Header` component, replace the code below with the existing one. This removes status badge and includes a description about our NFT collection
+
+Then in the definition of `Header` component, replace the code below with the existing one. This removes status badge and includes a description about our NFT collection:
+
 ```jsx
 const { phaseName, desc, date, status } = props;
   return (
@@ -695,12 +689,15 @@ const { phaseName, desc, date, status } = props;
   );
 ```
 Inside the `PhaseHeader` component definition, find the `phase === Phase.Unknown && !candyMachine` part and replace its code with code below. This removes description since you added it in code above and adds a title for the case when user hasn't connected their wallet yet.
+
 ```jsx
 {phase === Phase.Unknown && !candyMachine && (
   <Header phaseName={'Welcome!'} desc={''} date={undefined} />
 )}
 ```
+
 Find the `phase === Phase.Phase4` and replace its code with code below. It specifies the title to be used in `Header` component.
+
 ```jsx
 {phase === Phase.Phase4 && (
   <Header
@@ -711,6 +708,7 @@ Find the `phase === Phase.Phase4` and replace its code with code below. It speci
   />
 )}
 ```
+
 Now let’s mint an NFT in our nice looking app!
 
 ![NFT minting gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/miniting_nft_on_dapp_gif.gif?raw=true)
@@ -719,7 +717,8 @@ YaY, we did it! Let’s check out our newly minted NFT in our wallet:
 
 ![Checking NFT in wallet gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/checking_nft_in_phantom_wallet.gif?raw=true)
 
-You can deploy this project to your favorite hosting service like Firebase, Vercel or any other provider. I deployed it to Firebase and you can check it out [here](https://circleanglenfts.web.app/) and mint your own nft if there are left any😉.
+You can deploy this project to your favorite hosting service like Firebase, Vercel or any other provider. I deployed it to Firebase and you can check it out [here](https://circleanglenfts.web.app/) and mint your own NFT if there are any left 😉.
+
 # Launching to Mainnet-beta
 
 You successfully launched your collection on devnet and now you are ready to deploy to mainnet-beta. There isn't any significant difference between deploying to devnet and mainnet-beta. you need to switch back to mainnet-beta by running `solana config set --url mainnet-beta`. this time we need to top our wallet up with real SOL. You can easily purchase some from an exchange like [FTX](https://ftx.com/).
@@ -743,25 +742,17 @@ Easy peasy!
 In the tutorial where you are configuring your fair-launch dApp, this time inside the `.cache` folder we would have `mainnet-beta-temp` instead of `devnet-temp` but the structure of the two files is the same. Because this time we are launching on mainnet-beta, we need to set the `.env` file in `fair-launch` folder like below:
 
 ```text
-# this takes candyMachineAddress
-# copy it from mainnet-beta-temp.json
-REACT_APP_CANDY_MACHINE_ID= <put the candyMachineAddress here>
-# since you have deployed to mainnet-beta
-# you need to comment two lines below
-# comment a line by adding a # to the beginning of a line
-# REACT_APP_SOLANA_NETWORK=devnet
-# REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com
-
-
-# uncomment two lines bellow since you are
-# using mainnet-beta
-# uncomment a line by removing # from beginning of it
+REACT_APP_CANDY_MACHINE_ID=<put the candyMachineAddress here>
 REACT_APP_SOLANA_NETWORK=mainnet-beta
 REACT_APP_SOLANA_RPC_HOST=https://trashpandas.rpcpool.com
-
-# Phase 1
 REACT_APP_FAIR_LAUNCH_ID=
 ```
+
+- `REACT_APP_CANDY_MACHINE_ID` this takes your `candyMachineAddress`, copy it from mainnet-beta-temp.json
+- Remember to uncomment the lines `REACT_APP_SOLANA_NETWORK=mainnet-beta` and `REACT_APP_SOLANA_RPC_HOST=https://trashpandas.rpcpool.com`
+- Also comment out the lines `REACT_APP_SOLANA_NETWORK=devnet` and `REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com` as we are not deploying to devnet!
+- `REACT_APP_FAIR_LAUNCH_ID=` is used for Phase 1 of the fair launch
+
 
 That's All of the adjustments you need to make to launch your minting dApp on **mainnet-beta**.
 
