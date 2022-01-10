@@ -165,15 +165,15 @@ $ cat /home/<your username>/.config/solana/devnet.json
 
 Now you need to open the Phantom wallet extension in your browser. From the hamburger menu on the left, click "Add / Connect Wallet":
 
-![import private key in phantom screen shot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/import_private_key_in_phantom_screen_shot.jpg?raw=true)
+![import private key in phantom screen shot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/import_private_key_in_phantom_screen_shot.jpg?raw=true)
 
 Then choose a name and copy-paste the private key:
 
-![linking NFTs wallet in phantom screenshot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/linking_NFTs_wallet_in_phantom_screenshot.jpg?raw=true)
+![linking NFTs wallet in phantom screenshot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/linking_NFTs_wallet_in_phantom_screenshot.jpg?raw=true)
 
 Since you will be working with **devnet**, you need to set the network to **devnet** in the Phantom wallet settings. For that click on the gear icon, then "Change Network" then "Devnet":
 
-![changing the network from mainnet to devnet screenshot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/changing_the_network_from_mainnet_to_devnet_screenshot.jpg?raw=true)
+![changing the network from mainnet to devnet screenshot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/changing_the_network_from_mainnet_to_devnet_screenshot.jpg?raw=true)
 
 # Generating NFTs
 Each NFT in a generative NFT collection is a combination of different layers. Each layer defines a part of the NFT. for example if our collection is about the human face, layers could be:
@@ -197,25 +197,25 @@ You can use any tool like photoshop or something similar for creating your layer
 
 Backgrounds:
 
-![background1.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/background1.png?raw=true)
+![background1.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/background1.png?raw=true)
 
-![background2.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/background2.png?raw=true)
+![background2.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/background2.png?raw=true)
 
 Circles:
 
-![circle1.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/circle1.png?raw=true)
+![circle1.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/circle1.png?raw=true)
 
-![circle2.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/circle2.png?raw=true)
+![circle2.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/circle2.png?raw=true)
 
-![circle3.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/circle3.png?raw=true)
+![circle3.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/circle3.png?raw=true)
 
 Triangles:
 
-![triangle1.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/triangle1.png?raw=true)
+![triangle1.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/triangle1.png?raw=true)
 
-![triangle2.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/triangle2.png?raw=true)
+![triangle2.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/triangle2.png?raw=true)
 
-![triangle3.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/triangle3.png?raw=true)
+![triangle3.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/triangle3.png?raw=true)
 
 So now I have 3 layers and overall 8 traits. You can download these layers from the link in the References section at the end of the tutorial.
 
@@ -226,27 +226,18 @@ In the hashlips engine, we can specify the rarity of a trait within a group of t
 So for each layer (background, triangle, or circle), we specify the rarity of traits. The sum of rarity percentages should always equal 100. Here is an example:
 
 - Backgrounds
-    
     - `background1#50.png`
-    
     - `background2#50.png`
     
 - Triangles
-    
     - `triangle1#30.png`
-    
     - `triangle2#40.png`
-    
     - `triangle3#30.png`
     
-- Circles
-    
+- Circles  
     - `circle1#30.png`
-    
     - `circle2#40.png`
-    
     - `circle3#30.png`
-    
 
 The next step is putting our layers in the **layers** folder. Navigate to the layers directory inside of the hashlips submodule that we cloned at the beginning of the tutorial, and then remove the existing folders and their contents:
 
@@ -254,6 +245,7 @@ The next step is putting our layers in the **layers** folder. Navigate to the la
 cd hashlips_art_engine/layers
 rm -rf *
 ```
+
 When this is done, create three new folders named for the layers we will be using: Background, Circle and Triangle (make sure the first letter is Uppercase!). Next, copy the images into their respective directories and rename the files to include the rarity percentages if you have not already done so.
 
 ## Setting up the Engine
@@ -439,7 +431,7 @@ Created edition: 4, with DNA: 35742657abda4d22190a0761df5d0426da72ece5
 
 Awesome! now you have your images in the `hashlips_art_engine/build/images` folder, and their metadata inside the `hashlips_art_engine/build/json` folder. Check them out! Here are my 5 generated images altogether:
 
-![preview.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/preview.png?raw=true)
+![preview.png](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/preview.png?raw=true)
 
 In the next section, we will upload our assets to Arweave and we will create a candy machine for minting our NFTs.
 
@@ -623,7 +615,7 @@ REACT_APP_FAIR_LAUNCH_ID=
 
 Run `npm start` to run our dApp locally on localhost:3000.
 
-![initial_state_of_dapp_screenshot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/initial_state_of_dapp_screenshot.jpg?raw=true)
+![initial_state_of_dapp_screenshot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/initial_state_of_dapp_screenshot.jpg?raw=true)
 
 You may ask why we launched it on devnet and not on mainnet-beta?! for two reasons:
 
@@ -721,11 +713,11 @@ Find the `phase === Phase.Phase4` and replace its code with code below. It speci
 ```
 Now let’s mint an NFT in our nice looking app!
 
-![NFT minting gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/miniting_nft_on_dapp_gif.gif?raw=true)
+![NFT minting gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/miniting_nft_on_dapp_gif.gif?raw=true)
 
 YaY, we did it! Let’s check out our newly minted NFT in our wallet:
 
-![Checking NFT in wallet gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/checking_nft_in_phantom_wallet.gif?raw=true)
+![Checking NFT in wallet gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/checking_nft_in_phantom_wallet.gif?raw=true)
 
 You can deploy this project to your favorite hosting service like Firebase, Vercel or any other provider. I deployed it to Firebase and you can check it out [here](https://circleanglenfts.web.app/) and mint your own nft if there are left any😉.
 # Launching to Mainnet-beta
