@@ -588,21 +588,6 @@ REACT_APP_FAIR_LAUNCH_ID=
 
 To configure this file we need to use `devnet-temp.json` file.
 
-```text
-
-# this takes candyMachineAddress
-# copy it from devnet-temp.json
-REACT_APP_CANDY_MACHINE_ID= <put the candyMachineAddress here>
-# since you have deployed to devnet you need to uncomment
-# two lines below to use devnet as environment in the app
-# uncomment a line by removing # from beginning of it
-REACT_APP_SOLANA_NETWORK=devnet
-REACT_APP_SOLANA_RPC_HOST=https://api.devnet.solana.com
-
-# Phase 1
-REACT_APP_FAIR_LAUNCH_ID=
-```
-
 Run `npm start` to run our dApp locally on localhost:3000.
 
 ![initial_state_of_dapp_screenshot.jpg](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/initial_state_of_dapp_screenshot.jpg?raw=true)
@@ -711,7 +696,7 @@ Find the `phase === Phase.Phase4` and replace its code with code below. It speci
 
 Now let’s mint an NFT in our nice looking app!
 
-![NFT minting gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/miniting_nft_on_dapp_gif.gif?raw=true)
+![NFT minting gif.gif](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/minting_nft_on_dapp_gif.gif?raw=true)
 
 YaY, we did it! Let’s check out our newly minted NFT in our wallet:
 
