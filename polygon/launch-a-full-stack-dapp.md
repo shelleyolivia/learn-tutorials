@@ -188,13 +188,13 @@ For this, we use the Remix IDE - an online IDE to develop smart contracts.
 
 * Head over to [https://remix.ethereum.org](https://remix.ethereum.org/) If you’re new to Remix, You’ll first need to activate two modules: Solidity Compiler and Deploy and Run Transactions.
 
-![](https://docs.polygon.technology/img/solidity/remix-plugin-manager.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/remix-plugin-manager.png)
 
 If not already activated, you will need to activate plugins such as **Deploy & Run Transactions** and **Solidity Compiler**
 
 Your left menu should look something like this:
 
-![](https://docs.polygon.technology/img/solidity/remix-left-menu.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/remix-left-menu.png)
 
 * Create a new file, `Airbnb.sol`
 * Copy the entire smart contract code and paste it in the editor:
@@ -339,15 +339,15 @@ contract Airbnb {
 * Once compiled, the smart contract is ready to be deployed onto the testnet/mainnet.
 * Copy the generated ABI - we would be needing that for our next steps
 
-![](https://docs.polygon.technology/img/solidity/remix-abi.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/remix-abi.png)
 
 * Select Javascript VM as the environment in the dropdown - this connects remix to a simple blockchain environment via your browser - we'll learn more about deploying on Polygon \(Matic\)'s test network in the next tutorial \[link\]
 
-![](https://docs.polygon.technology/img/solidity/remix-contract-test-functions.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/remix-contract-test-functions.png)
 
 Once Metamask is connected to Remix, the ‘Deploy’ transaction would generate another metamask popup that requires transaction confirmation.
 
-![](https://docs.polygon.technology/img/solidity/remix-metamask-tx-confirm.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/remix-metamask-tx-confirm.png)
 
 * Click **Deploy**
 * Once the contract is deployed, you can test the functions
@@ -425,7 +425,7 @@ With MetaMask connected and contract initiated we can go forward with interactin
 
 The `dapp-ui` folder structure looks something like this:
 
-![](https://docs.polygon.technology/img/dapp/folder-structure.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/folder-structure.png)
 
 Inside the `dapp-ui/components` directory, we have the separate components that make up our app interface.
 
@@ -499,17 +499,17 @@ And this marks the end of our DApp tutorial! We know it’s been a long one.
 
 Execute `npm run dev` to view and interact with your decentralized application.
 
-![](https://docs.polygon.technology/img/dapp/rent-your-property.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/rent-your-property.png)
 
 Click on ‘Rent your Property’ button on top right, it displays a dialogue box requiring title, description and price. The submit button sends these values to the function ‘rentOutProperty’ on the smart contract in the form of a transaction. Since it ‘transacts’ with the blockchain it would create a metamask popup requiring you to sign the transaction, shown below.
 
-![](https://docs.polygon.technology/img/dapp/dapp-metamask-tx-confirm.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/dapp-metamask-tx-confirm.png)
 
 The Metamask popup displays the gas price for the transaction.
 
-![](https://docs.polygon.technology/img/dapp/dapp-rent-success.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/dapp-rent-success.png)
 
-![](https://docs.polygon.technology/img/dapp/rent-out-success.png)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/rent-out-success.png)
 
 After the transaction is confirmed, the property lives on the blockchain and since it is available to be booked, it is displayed on the homepage.
 
