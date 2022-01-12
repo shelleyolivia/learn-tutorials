@@ -1,5 +1,3 @@
-# Access the Polkadot Pathway
-
 We no longer host the Pathway pages on this website, the content has moved to the `learn-web3-dapp` repository at <https://github.com/figment-networks/learn-web3-dapp#-get-started>.
 
 For less experienced developers or for anyone who wants to dive in without complicated setup, **[we recommend using Gitpod](https://gitpod.io/#https://github.com/figment-networks/learn-web3-dapp)** to work with the `learn-web3-dapp` project (this requires you to have a GitHub account to sign in). Gitpod can save you a considerable amount of time, as you don't have to install dependencies or set up a development environment - everything just works!
