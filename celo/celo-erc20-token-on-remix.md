@@ -1,71 +1,74 @@
-# Prerequisite:
+# Introduction 
 
-1. Celo environment setup for Remix, tutorial for which can be found [here](https://github.com/figment-networks/datahub-learn/tree/297924b808c15ce2bb97c8963ea6d7640a4d3cf4/network-documentation/celo/tutorial/network-documentation/celo/tutorial/celo-for-remix.md)
+It is important to understand the different types of tokens which can be traded or sold on a blockchain like Celo. There are many use cases for blockchain tokens, and developers are coming up with new ones all the time. This tutorial will show you how to create your own **fungible** token on Celo using the Solidity smart contract language.
+
+# Prerequisites
+
+1. Celo environment setup for Remix, tutorial for which can be found [here](https://learn.figment.io/tutorials/celo-for-remix)
 2. Basic knowledge of [Solidity](https://https://solidity-by-example.org/) and the [Remix IDE](https://remix.ethereum.org)
 
-# 1. What are tokens?
+# What are tokens?
 
-Tokens are a unit of measurement in the virtual world. It can represent any value the creator wants it to have.
+Tokens are a unit of measurement, some of which can be used in the virtual world. A token can represent any value the creator wants it to have. Some examples:
 
-For Example:
+* Shares of a company
+* Player currency in online games
+* A unit of influence in governance of DeFi projects
+* A piece of art or media
 
-* `Shares of a company`
-* `Player currency in Online games`
-* `Unit of influence in governance of Defi projects`
-* `Piece of Art or Media`
-* `more ...`
-
-# 2. Types of Tokens
+# Types of Tokens
 
 Broadly these digital tokens can be classified into two categories:
 
 ## a. Fungible Tokens :
 
-Fungibility means **replaceable** by another identical item. In simple terms, tokens that have equal value and are interchangable. This is identical to `Fiat currency`. Every Dollar is equal to every other Dollar of same value.
+Fungibility means **replaceable** by another identical item. In simple terms, tokens that have equal value and are interchangable. This could be understood in much the same way as fiat currency - a dollar bill of a certain denomination. Every dollar is equal to every other dollar of the same value, except in very specific circumstances any five dollar bill could be replaced with any other five dollar bill. The exact value of a cryptocurrency token could be subject to change, but one fungible token could serve all the same functions as any other fungible token issued by the same on-chain contract. 
 
 ## b. Non-Fungible Tokens \(NFTs\):
 
-As you can guess, these are exactly the opposite of fungible tokens. Every non-fungible token is `unique` thus can't be interchanged. Examples can be Digital Art or Songs.
+As you can guess, these are exactly the opposite of fungible tokens: They are not replaceable. Every non-fungible token is unique, thus cannot be interchanged. Examples can be digital art or songs.
 
-In this example we will learn how to mint `fungible tokens`. We will use standard interface of `fungible tokens` that are quite popular on **Ethereum** and learn how to build similar tokens on **Celo**.
+In this example we will learn how to mint **fungible** tokens. We will use a standard interface of fungible tokens that is quite popular on the **Ethereum** blockchain and learn how to build similar tokens on **Celo**.
 
-## 3. ERC20 Standard
+# ERC-20 Standard
 
-ERC20 is a standard interface used on Ethereum to build fungible tokens.
+ERC-20 is a standard interface used on Ethereum to build fungible tokens. The "ERC" portion of the name refers to "Ethereum Request for Comments" and is a standard adopted by the Ethereum foundation as well as many projects which develop predominantly on Ethereum. 
 
-This interface contains some **functions**
+Because the Solidity language can be used by any EVM-compatible blockchain, the entire standard can be reproduced on Celo with little extra work.
 
-```javascript
-//optional
+This interface contains some **functions**:
+
+```solidity
+// Optional
 function name() public view returns (string)
 function symbol() public view returns (string)
 function decimals() public view returns (uint)
-//required
+// Required
 function totalSupply() public view returns (uint)
 function balanceOf(address tokenOwner) public view returns (uint balance)
 function allowance(address tokenOwner, address spender) public view returns (uint remaining)
 function transfer(address to, uint tokens) public returns (bool success)
 function approve(address spender, uint tokens) public returns (bool success)
-function transferFrom(address from, address to, uint tokens)public returns (bool success)
+function transferFrom(address from, address to, uint tokens) public returns (bool success)
 ```
 
-and some **events**
+As well as some **events**:
 
-```javascript
+```solidity
 event Transfer(address indexed from, address indexed to, uint tokens)
 event Approval(address indexed tokenOwner, address indexed spender, uint tokens)
 ```
 
-that needs to be defined before deploying our smart contract on the blockchain.
+These need to be defined before deploying our smart contract on the blockchain.
 
-In this tutorial, we will create a minimalistic version of ERC20 \(fungible\) tokens.
+In this tutorial, we will create a minimalistic version of ERC-20 \(fungible\) tokens.
 
-## 4. Defining Functions and Events
+# Defining Functions and Events
 
-We have named our contract `CeloFungibleToken` and the implementation is given below. Create a new file on Remix `erc20.sol` and copy the code.
+We have named our contract `CeloFungibleToken` and the implementation is given below. Create a new file on Remix named `erc20.sol` and copy the code below:
 
-```javascript
-// This contract should not be used in production
+```solidity
+// WARNING: This contract should not be used in production
 
 pragma solidity ^0.5.0;
 
@@ -99,12 +102,10 @@ contract CeloFungibleToken is ERC20Interface{
         _totalSupply = 10000000000000; // total tokens would equal (_totalSupply/10**decimals)=1000
 
         /** 
-         decimals means the unit of divisibility we want for our tokens,
-         For example if we want a divisibility of 10^(-3) and total supply of 1000 tokens then
-         decimals = 3 and _totalSupply = 1000000
-
-        **/
-
+          * decimals means the unit of divisibility we want for our tokens,
+          * For example if we want a divisibility of 10^(-3) and total supply of 1000 tokens then
+          * decimals = 3 and _totalSupply = 1000000
+          **/
 
         balances[msg.sender] = _totalSupply;
         emit Transfer(address(0), msg.sender, _totalSupply);
@@ -119,7 +120,7 @@ contract CeloFungibleToken is ERC20Interface{
     }
 
 
-    // this function allows an address to give an allowance to another address (spender) 
+    // This function allows an address to give an allowance to another address (spender) 
     // to be able to retrieve tokens from it. 
 
     function allowance(address tokenOwner, address spender) public view returns (uint remaining) {
@@ -140,7 +141,7 @@ contract CeloFungibleToken is ERC20Interface{
     }
 
 
-     // this function moves the amount of tokens from sender to recipient and the given amount is 
+     // This function moves the amount of tokens from sender to recipient and the given amount is 
      // then deducted from the caller’s allowance. 
 
     function transferFrom(address from, address to, uint tokens) public returns (bool success) {
@@ -153,32 +154,32 @@ contract CeloFungibleToken is ERC20Interface{
 }
 ```
 
-Our contract should be able to `Compile` now.
+Our contract should be able to compile now.
 
-## 5. Deployment
+# Deployment
 
-We will deploy our contract on `Alfajores testnet`. We need to make sure that we have enough balance in our testnet account. We can get free testnet balance from [the Celo Developers faucet](https://celo.org/developers/faucet).
+We will deploy our contract on Celo's Alfajores testnet. We need to make sure that we have enough balance in our testnet account. We can get free testnet balance from [the Celo Developers faucet](https://celo.org/developers/faucet).
 
 # Procedure
 
-a. Select the account on Celo Wallet with which we want to deploy the smart contract. Make sure to select the account on `Alfajores Test Network`!
+a. Select the account on Celo Wallet with which we want to deploy the smart contract. Make sure to select the account on Alfajores testnet!
 
 b. Click on **Deploy** button.  
- ![accessibility text](https://github.com/figment-networks/learn-tutorials/raw/master/assets/celo-extension-deploy-button%20%281%29%20%281%29.JPG)
+ ![accessibility text](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/celo-extension-deploy-button%20%281%29%20%281%29.JPG)
 
 c. Pay the `transaction fee` and sign the transaction using celo wallet.
 
-![accessibility text](https://github.com/figment-networks/learn-tutorials/raw/master/assets/signing-transaction-celo.JPG)
+![accessibility text](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/signing-transaction-celo.JPG)
 
 **Congratulations!** we have deployed our very own Fungible token on the Celo blockchain. It usually takes around 5 seconds to achieve finality for our transactions. Once our transaction is confirmed, let's head over to [BlockScout](https://alfajores-blockscout.celo-testnet.org/) to see all the details.
 
 [Here](https://alfajores-blockscout.celo-testnet.org/address/0x4324bf228a8a3f1ddfd232335372d5cbaae38cd1/transactions) are the details of the smart contract deployment shown in this example.
 
-## 6. Transferring Token
+# Transferring tokens
 
-Now that our contract is deployed, we have all the CFT tokens that exist on Celo Blockchain. Now we should also learn how to transfer these tokens from our account to others.
+Now that our contract is deployed, we have all the CFT tokens that exist on Celo Blockchain. There are many ways of transferring tokens from one address to another. We will discuss a couple of methods. 
 
-There are many ways of transferring tokens from one address to another. We will discuss a couple of methods. **1. SMART CONTRACT INTERACTION** :
+**1. SMART CONTRACT INTERACTION** :
 
 a. Select the account which has 1000 CFT, in the example case `0x0eAd666A5B65ED614990fD582693039ed49847E6` \(which you can verify on Blockscout using the link given above\) on Celo extension wallet.
 
@@ -192,17 +193,17 @@ c. Click on `Transact`
 
 d. Pay the `transaction fee`
 
-With that, we have learned how to transfer your fungible tokens to other addresses. But there is still a problem, we aren't able to see our tokens on our Celo wallet. To display the tokens we'll need to
+With that, we have learned how to transfer your fungible tokens to other addresses. But there is still a problem, we aren't able to see our tokens on our Celo wallet. To display the tokens we'll need to:
 
-a. Select the **Add Token** button on our Celo wallet as shown in the image.
+- Select the **Add Token** button on our Celo wallet as shown in the image.
 
 ![accessibility text](https://github.com/figment-networks/learn-tutorials/raw/master/assets/celo-extension-wallet.JPG)
 
-b. Enter the contract address in **Token Contract Address** and click `Next`.
+- Enter the contract address in **Token Contract Address** and click `Next`.
 
 ![accessibility text](https://github.com/figment-networks/learn-tutorials/raw/master/assets/token-address-celo-wallet.JPG)
 
-c. Click on `Add token`
+- Click on `Add token`
 
 Now we are able to see our token balance!
 
@@ -210,14 +211,14 @@ Now we are able to see our token balance!
 
 **2. Celo Wallet**
 
-After adding the token address to our wallet, simply click on the `Send` button and input the address of a recipient. Tokens will be transferred after signing the transaction and paying the `transaction fee`.
+After adding the token address to our wallet, simply click on the Send button and input the address of a recipient. Tokens will be transferred after signing the transaction and paying the transaction fee.
 
 # Conclusion
 
 In this tutorial, we learned: 
-1. Some different use cases of Fungible tokens 
+1. Some different use cases of fungible tokens 
 2. There are different types of tokens with different standards 
-3. How to deploy a custom Fungible token on the Celo blockchain 
+3. How to deploy a custom fungible token on the Celo blockchain 
 4. How to send tokens over Celo!
 
 We cannot wait to see what you create!

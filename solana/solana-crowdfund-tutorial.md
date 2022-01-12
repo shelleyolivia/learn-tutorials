@@ -1,13 +1,16 @@
 # Introduction
+
 We are going to make a CrowdFunding platform like GoFundMe, Kickstarter, and Indiegogo. Our DApp will let people create campaings, Donate SOL to existing campaings and payout to the compaign creator. 
 We are going to make a Solana program and connect it with our front-end application.
 
 
 # Prerequisites
+
 - React
 - Javascript
 
 # Requirements
+
 The following software is required to complete this tutorial:
 - Git, install it from [HERE](https://git-scm.com/downloads).
 - Solana CLI, install it from [HERE](https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool).
@@ -20,15 +23,17 @@ The following software is required to complete this tutorial:
 
 
 # Introduction to Rust
+
 Rust is a multi-paradigm, high-level, general-purpose programming language designed for performance and safety, especially safe concurrency.
 
 Rust code uses snake case as the conventional style for function and variable names.
 
 ## Installing Rust on your system
+
 You can follow this this [link](https://doc.rust-lang.org/book/ch01-01-installation.html) for your operating system.
 > **Note**: If you are using Visual Studio Code (VSCode) you should install the extension `matklad.rust-analyzer`. I have found it to work better than `Rust-lang.rust` for code analysis, auto-completion and snippets.
 
-Before we start the tutorial, we need to understand some basics of Rust. I have added the link to the [Rust book](https://doc.Rust-lang.org/book/ch00-00-introduction.html) pages if you want to read more about any topic.
+Before we start the tutorial, we need to understand some basics of Rust. I have added the link to the [Rust book](https://doc.rust-lang.org/book/ch00-00-introduction.html) pages if you want to read more about any topic.
 
 ## Basics Data types in Rust
 Rust has four primary scalar types: integers, floating-point numbers, Booleans, and characters.
@@ -45,9 +50,10 @@ Integers are `u8`,`u32`, `i32`, `i64`, `usize`, and the list goes on here basica
 We have `f32` and `f64` for floating-point numbers. `bool` for booleans, and `char` for characters.
 Rust has 2 types for strings, `str` and `String`. `String` is a growable, heap-allocated data structure. `str` is an immutable fixed-length string somewhere in memory.
 
-Read more on [Rust book](https://doc.Rust-lang.org/book/ch03-02-data-types.html).
+Read more on [Rust book](https://doc.rust-lang.org/book/ch03-02-data-types.html).
 
 ## Creating a variable and mutability
+
 We can create a variable with the `let` keyword
 
 ```rust
@@ -71,9 +77,10 @@ a=a+1;
 a=100;
 ```
 
-Read more on [Rust book](https://doc.Rust-lang.org/book/ch03-01-variables-and-mutability.html).
+Read more on [Rust book](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html).
 
 ## Control flow
+
 We can use `if` `else` statement in Rust just like we can do in other language, here is a small program for us to understand the syntax.
 
 ```rust
@@ -88,7 +95,7 @@ fn main(){
 }
 ```
 
-We also have loops in Rust. We can create a loop with 3 keywords `loop`, `for`, and `while`. Since `for` is most common. Here is an example of it. You can checkout example for `loop` and `while` [here](https://doc.Rust-lang.org/book/ch03-05-control-flow.html#repeating-code-with-loop).
+We also have loops in Rust. We can create a loop with 3 keywords `loop`, `for`, and `while`. Since `for` is most common. Here is an example of it. You can checkout example for `loop` and `while` [here](https://doc.rust-lang.org/book/ch03-05-control-flow.html#repeating-code-with-loop).
 
 ```rust
 fn main() {
@@ -98,7 +105,7 @@ fn main() {
 }
 ```
 
-Read more on [Rust book](https://doc.Rust-lang.org/book/ch03-05-control-flow.html).
+Read more on [Rust book](https://doc.rust-lang.org/book/ch03-05-control-flow.html).
 
 
 ## Functions and Macros
@@ -121,7 +128,7 @@ fn another_function_with_x_and_y(x: i32,y:i32) {
 
 For this tutorial, we can assume macros are also functions. They end with `!`, like `println!` macro, `format!` macro, and `msg!` macro.
 
-Read more about functions on [Rust book](https://doc.Rust-lang.org/book/ch03-03-how-functions-work.html).
+Read more about functions on [Rust book](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html).
 
 ## Enums and the match syntax
 Rust has enums. They are more than simple enums other languages provide. In Rust, we can even store data in the enums.
@@ -137,10 +144,9 @@ pub enum Result<T, E> {
 }
 ```
 
-Read more about enums on [rust book](https://doc.Rust-lang.org/book/ch06-01-defining-an-enum.html). 
+Read more about enums on [rust book](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html). 
 
-Here is an enum and match example with an explanation of each line.
-
+Here is an enum and match example with an explanation of each line:
 
 ```rust
 enum Coin {
@@ -170,10 +176,10 @@ assert_eq!(a,30);
 // In this case a will be equal to 30 because coin is Custom with value 30.
 ```
 
-Read more about match syntax on [rust book](https://doc.Rust-lang.org/book/ch06-02-match.html).
+Read more about match syntax in the [Rust book](https://doc.Rust-lang.org/book/ch06-02-match.html).
 
 ## Cargo and Borsh
-Cargo is the Rust package manager. We use it to build our program and get dependencies. It also makes adding packages(crates) very easy. Read more about the Cargo on [rust book](https://doc.Rust-lang.org/book/ch01-03-hello-cargo.html)
+Cargo is the Rust package manager. We use it to build our program and get dependencies. It also makes adding packages(crates) very easy. Read more about Cargo  in the [Rust book](https://doc.Rust-lang.org/book/ch01-03-hello-cargo.html)
 
 Borsh stands for Binary Object Representation Serializer for Hashing. It is meant to be used in security-critical projects as it prioritizes consistency, safety, speed, and comes with a strict specification. 
 We are using it for data serialization and deserialization. Read more about the carte on [crates.io](https://crates.io/crates/borsh).
@@ -270,7 +276,7 @@ We can create as many program-owned accounts as we want, so the idea here is tha
 Now that we have discussed what we want to create. Let start coding.
 Go ahead and open up the `program` folder in VSCode or your favorite IDE.
 File structure in the `program` directory should look like this.
-![file structure](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solana-crowdfunding-program-files.png)
+![file structure](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/solana-crowdfunding-program-files.png?raw=true)
 
 Go ahead and open up the `lib.rs` file in your code editor, and let us add some boilerplate code first.
 
@@ -434,7 +440,7 @@ struct Human {
 
 Now you must be wondering what is the meaning of `#[derive(Debug)]`. It is interesting to note that we can derive some traits for our struct.
 
-[Traits](https://doc.Rust-lang.org/Rust-by-example/trait.html) :  A trait in Rust is a group of methods that are defined for a particular type.
+[Traits](https://doc.rust-lang.org/rust-by-example/trait.html) :  A trait in Rust is a group of methods that are defined for a particular type.
 
 Now let's code our `CampaignDetails` struct.
 I have added the fields name, admin, description, image_link,amount_donated for our Campaign.
@@ -728,7 +734,7 @@ This will output the compiled program in Shared Object format (.so) in the `dist
 
 > If you run this command in the `program` directory, you will see the `dist/program` directory is created automatically if it does not already exist.
 
-![program_complied-bpf](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solana-crowdfunding-program-complied-bpf.png)
+![program_complied-bpf](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/solana-crowdfunding-program-complied-bpf.png?raw=true)
 
 Now that we have compiled our program we can deploy it. 
 
@@ -805,9 +811,9 @@ Hooray! We have completed everything to do with Rust for this tutorial and succe
 We have created a React app, so we can open the `crowd-funding` directory in our code editor.
 This is not a React tutorial, so we will not go into the details of React. But I will be explaining what we are going to do.
 
-Let's first clean our project. We will remove `setupTests.js`, `reportWebVitals.js`, `logo.svg` and `app.test.js`. And remove the usage of `reportWebVitals.js` in index.js.
-Now the project should look like:
-![front-end-project](https://github.com/figment-networks/learn-tutorials/raw/master/assets/solana-crowdfunding-front-end-files.png)
+Let's first clean our project. We will remove `setupTests.js`, `reportWebVitals.js`, `logo.svg` and `app.test.js`. Also remove the usage of `reportWebVitals.js` in index.js. Now the project should look like:
+
+![front-end-project](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/solana-crowdfunding-frontend-files.png?raw=true)
 
 We will create a basic UI for the app. I have used sementic-ui to do that.
 

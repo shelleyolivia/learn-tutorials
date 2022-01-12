@@ -16,7 +16,7 @@ Before we get to the implementation of the Virtual Machine, we’ll look at the 
 
 We’ll show and explain all the code that constitutes this Virtual Machine in snippets. In-line comments explain what’s going on in the code. At the bottom of some snippets, we expound further on some portions of the code. If you want to see the code in one place, rather than in snippets, you can see it in our [Github repository.](https://github.com/ava-labs/avalanchego/tree/master/vms/timestampvm)
 
-## The `snowman.VM` Interface
+## The snowman.VM Interface
 
 To reach consensus on linear blockchains \(as opposed to DAG blockchains\), Avalanche uses the Avalanche-powered **Snowman** consensus engine. The blockchain we’re defining is linear, so it will use Snowman. In order to be compatible with Snowman, the Virtual Machine that defines the blockchain must implement the `snowman.VM` interface, which we include below from its declaration in [`github.com/ava-labs/avalanchego/snow/engine/snowman/vm.go`.](https://github.com/ava-labs/avalanchego/blob/master/snow/engine/snowman/vm.go)
 
@@ -167,13 +167,13 @@ type Block interface {
 }
 ```
 
-## Libraries
+# Libraries
 
 We’ve created some types that your Virtual Machine implementation can embed \(embedding is like Go’s version of inheritance\) in order to handle boilerplate code.
 
 In our example we use both of the below library types, and we encourage you to use them too.
 
-#### core.SnowmanVM
+## core.SnowmanVM
 
 This type, a struct, contains methods and fields common to all implementations of the `snowman.ChainVM` interface.
 
@@ -198,7 +198,7 @@ This type contains several fields that you’ll want to include in your Virtual 
 * `toEngine`: the channel through which messages are sent to the consensus engine powering the blockchain
 * `State`: used to persist data such as blocks. Can be used to put/get any bytes.
 
-#### core.Block
+## core.Block
 
 This type, a struct, contains methods and fields common to all implementations of the `snowman.Block` interface.
 
@@ -224,7 +224,7 @@ Now we know the interface our Virtual Machine must implement and the libraries w
 
 Let’s write our Virtual Machine, which implements `snowman.VM`, and whose blocks implement `snowman.Block`.
 
-#### Block <a id="block"></a>
+## Block
 
 First, let’s look at our block implementation.
 
@@ -288,7 +288,7 @@ func (b *Block) Verify() error {
 
 That’s all the code for our block implementation! All of the other methods of `snowman.Block`, which our `Block` must implement, are inherited from `*core.Block`.
 
-#### Virtual Machine
+## Virtual Machine
 
 Now let’s look at the implementation of VM, which implements the `snowman.VM` interface.
 
@@ -503,7 +503,7 @@ func (vm *VM) CreateHandlers() map[string]*common.HTTPHandler {
 }
 ```
 
-### Service
+## Service
 
 AvalancheGo uses [Gorilla’s RPC library.](https://www.gorillatoolkit.org/pkg/rpc) to implement APIs.
 
@@ -620,7 +620,7 @@ func (s *Service) GetBlock(_ *http.Request, args *GetBlockArgs, reply *GetBlockR
 }
 ```
 
-## Wrapping Up
+# Conclusion
 
 That’s it! That’s the entire implementation of a Virtual Machine which defines a blockchain-based timestamp server.
 
@@ -630,5 +630,5 @@ In this tutorial we learned:
 * The `snowman.Block` interface, which all blocks that are part of a linear chain must implement
 * The `core.SnowmanVM` and `core.Block` library types, which make defining Virtual Machines faster
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [join our community today](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [join our community today](https://figment.io/devchat)!
 

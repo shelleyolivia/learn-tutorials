@@ -4,7 +4,7 @@ Figment's Transaction Search API allows users to filter and query by account, tr
 
 This tutorial describes how to create a simple Javascript widget showing the last transactions for given accounts account with basic filtering and pagination. We will not be using any framework in order to focus on the bare API calls. You can find the full code example [**here**](https://github.com/figment-networks/tutorials/pull/1/commits/3d8577d7d88b20b33b72eb23ae468899ee55284e). 
 
-> **Note that we have removed the DataHub API key from the code snippets but they will be necessary to complete the tutorial. 
+> Note that we have removed the DataHub API key from the code snippets but they will be necessary to complete the tutorial. 
 
 # Prerequisites 
 
@@ -149,9 +149,9 @@ http.createServer(function (req, res) {
 
 The first step for the frontend app will be to create three files: `index.html` `style.css` and `lib.js`
 
-### `index.html`
+## index.html
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -168,7 +168,7 @@ The first step for the frontend app will be to create three files: `index.html` 
 </html>
 ```
 
-### `style.css`
+## style.css
 
 ```css
 body {
@@ -198,7 +198,7 @@ body {
 }
 ```
 
-### `lib.js`
+## lib.js
 
 ```javascript
 class SearchRequest {
@@ -268,7 +268,7 @@ The `lib.js` file contains two classes `Widget` which will be our main class / c
 
 To check if our script is working, let's add a javascript snippet inside a `<script>` tag at the bottom of the `index.html` file:
 
-```
+```html
    <script type="text/javascript">
         sr = new SearchRequest("terra", 30); 
         w = new Widget("transactions-container", sr);
@@ -335,9 +335,9 @@ We will now call the `makeRequest(sr)` render function so that we can construct 
 
 To render the data, we'll use the simplest approach of HTML templates. So let's add the templates first by loading the following functions:
 
-### `index.html`
+## index.html
 
-```markup
+```html
 <template id="transactionRow">
     <div class="transaction">
         <div class="transaction-head">
@@ -391,7 +391,7 @@ To render the data, we'll use the simplest approach of HTML templates. So let's 
 </template>
 ```
 
-In `lib.js` , we add rendering to `Widget` along with a linking function
+In `lib.js` , we add rendering to `Widget` along with a linking function:
 
 ```javascript
 render() {
@@ -598,7 +598,7 @@ attachEvents() {
 
 To attach a type filter to the widget, we need to create HTML inputs, and then attach them to the change events.
 
-```markup
+```html
 <div id="transactions-typebox">
   <div>
     <label><input type="checkbox" name="type" value="send" >send</label>
@@ -669,25 +669,23 @@ initialRequest() {
 }
 ```
 
-```markup
-...
-
+```jsx
    <script type="text/javascript">
         sr = new SearchRequest("terra", 30); 
 
-				// any initial parameters you like
+	// any initial parameters you like
 
-				// cetrain account
-				sr.addAccounts("terra1fnsu4x447XXXXXXXXXXXXXXqudty");
+	// certain account
+	sr.addAccounts("terra1fnsu4x447XXXXXXXXXXXXXXqudty");
 
-				// given timerange
-				const now = Date.now();
+	// given timerange
+	const now = Date.now();
         sr.timeAfter(new Date(now - (1000 * 3600 * 24 * 7))); // a week ago
         sr.timeBefore(new Date(now));
 
         w = new Widget("transactions-container", sr);
         w.setRequest("http://localhost:8080"); 
-				w.liveDates();
+	w.liveDates();
         w.initialRequest();
         w.attachEvents();
    </script>
@@ -702,6 +700,6 @@ initialRequest() {
 
 Congratulations, you've built your first implementation of the Transaction Search API. You should now have what it takes to implement it in your DApp and leverage the full power of Transaction Search.
 
-If you haven't done so already, remember to [**sign up now**](https://figment.io/datahub-waitlist/) ****to start building in minutes and discover the superpowers Datahub can offer you!  
+If you haven't done so already, remember to [**sign up with DataHub**](https://datahub.figment.io/) to start building in minutes and discover the superpowers DataHub can offer you!  
 
-If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Terra tech with us you can [**join our community today**](https://figment.io/devchat)!

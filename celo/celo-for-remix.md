@@ -13,13 +13,13 @@ Remix is an in-browser Solidity IDE that’s used to write, compile and debug So
 
 Head over to [Remix](https://remix.ethereum.org/) and click on `Plugin Manger`. Here search for **Celo** Plugin and click on **Activate**.
 
-![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/celo-extension-first.JPG)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/celo-extension-first.JPG)
 
 Now we should be able to see **Celo** icon in Icon Tray.
 
 Our development area should look like this.
 
-![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/celo-extension-added.JPG)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/celo-extension-added.JPG)
 
 # Connecting Celo Extension Wallet to Remix
 
@@ -35,7 +35,7 @@ We will deploy a very simple smart contract for this tutorial.
 
 Create a new file named `simple_contract.sol` from file explorer and copy the following content.
 
-```javascript
+```solidity
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.7.0 <0.8.0;
@@ -72,7 +72,7 @@ After compiling the successfully, we are ready to deploy our contract.
 
 Click on the **Deploy** button and sign the transaction using your wallet.
 
-![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/celo-extension-deploy-button%20%281%29%20%281%29%20%281%29.JPG)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/celo-extension-deploy-button%20%281%29%20%281%29%20%281%29.JPG)
 
 Yay! we have successfully deployed our contract to the Alfajores Testnet. We can check the status of the transaction on [Alfajores Blockscout](https://alfajores-blockscout.celo-testnet.org/) by pasting the transaction hash.
 

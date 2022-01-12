@@ -1,4 +1,4 @@
-[The original tutorial can be found in the official Substrate documentation here. ](https://substrate.dev/docs/en/tutorials/build-a-dapp/)
+[The original tutorial can be found in the official Substrate documentation here. ](https://docs.substrate.io/tutorials/v3/proof-of-existence/)
 
 # Introduction 
 
@@ -14,7 +14,7 @@ We only expect that:
 
 If you run into an issue on this tutorial, **we are here to help!** You can [ask a question on Stack Overflow](https://stackoverflow.com/questions/tagged/substrate) and use the `substrate` tag or contact us on [Element](https://matrix.to/#/#substrate-technical:matrix.org).
 
-### What you will be doing
+## What you will be doing
 
 Before we even get started, let's lay out what we are going to do over the course of this tutorial. We will:
 
@@ -24,20 +24,19 @@ Before we even get started, let's lay out what we are going to do over the cours
 
 Sound reasonable? Good, then let's begin!
 
-## Prepare to build a dApp 
-### Install the Node Template
+## Install the Node Template
 
 You should already have version `v3.0.0` of the [Substrate Developer Hub Node Template](https://github.com/substrate-developer-hub/substrate-node-template) compiled on your computer from when you completed the [Create Your First Substrate Chain Tutorial](https://substrate.dev/docs/en/tutorials/create-your-first-substrate-chain). If you do not, please complete that tutorial.
 
 > Experienced developers who truly prefer to skip that tutorial may install the Node Template according to [the instructions in its readme](https://github.com/substrate-developer-hub/substrate-node-template#getting-started).
 
-### Install the Front-End Template
+## Install the Front-End Template
 
 The Create Your First Substrate Chain Tutorial used the front-end template, so there is no additional set-up required if you have already completed that tutorial.
 
 > Refer directly to the [front-end setup instructions](https://substrate.dev/docs/en/tutorials/create-your-first-substrate-chain/setup#install-the-front-end-template) for the Create Your First Chain Tutorial if necessary.
 
-### About Proof of Existence
+# About Proof of Existence
 
 The dApp we will build is a Proof of Existence \(PoE\) service. From [Wikipedia](https://en.wikipedia.org/wiki/Proof_of_Existence):
 
@@ -45,11 +44,11 @@ The dApp we will build is a Proof of Existence \(PoE\) service. From [Wikipedia]
 
 Rather than uploading the entire file to the blockchain to "prove its existence", users submit a [hash of the file](https://en.wikipedia.org/wiki/File_verification), known as a file digest or checksum. These hashes are powerful because huge files can be uniquely represented by a small hash value, which is efficient for storing on the blockchain. Any user with the original file can prove that this file matches the one on the blockchain by simply recomputing the hash of the file and comparing it with the hash stored on chain.
 
-![File Hash](https://substrate.dev/docs/assets/tutorials/build-a-dapp/file-hash.png)
+![File Hash](https://docs.substrate.io/static/77bf39ee00dd51777a57e249152bbc23/a01dc/file-hash.png)
 
 To add to this, blockchains also provide a robust identity system. So when a file digest is stored on the blockchain, we can also record which user uploaded that digest. This allows that user to later prove that they were the original person to claim the file.
 
-### Interface and Design
+## Interface and Design
 
 Our PoE API will expose two callable functions:
 
@@ -64,7 +63,7 @@ Sounds simple enough? Great, let's get coding.
 
 The Substrate Developer Hub Node Template, which is used as the starting point for this tutorial, has a FRAME-based [runtime](https://substrate.dev/docs/en/knowledgebase/runtime/). [FRAME](https://substrate.dev/docs/en/knowledgebase/runtime/frame) is a library of code that allows you to build a Substrate runtime by composing modules called "pallets". You can think of these pallets as individual pieces of logic that define what your blockchain can do! Substrate provides you with a number of pre-built pallets for use in FRAME-based runtimes.
 
-![Runtime Composition](https://substrate.dev/docs/assets/frame-runtime.png)
+![Runtime Composition](https://docs.substrate.io/static/62c5814ba32b884ece148e7c84ccc17c/9ce1c/frame-runtime.png)
 
 For example, FRAME includes a [Balances](https://substrate.dev/rustdocs/v3.0.0/pallet_balances/) pallet that controls the underlying currency of your blockchain by managing the _balance_ of all the accounts in your system.
 
@@ -74,11 +73,11 @@ Even things like on-chain governance can be added to your blockchain by includin
 
 The goal of this tutorial is to teach you how to create your own FRAME pallet to include in your custom blockchain! The Substrate Developer Hub Node Template comes with a template pallet that you will use as a starting point to build custom runtime logic on top of.
 
-### File Structure
+## File Structure
 
 Open the Node Template in your favorite code editor, then open the file `pallets/template/src/lib.rs`
 
-```rust
+```text
 substrate-node-template
 |
 +-- node
@@ -106,7 +105,7 @@ substrate-node-template
 
 You will see some pre-written code that acts as a template for a new pallet. You can read over this file if you'd like, and then delete the contents since we will start from scratch for full transparency. When writing your own pallets in the future, you will likely find the scaffolding in this template pallet useful.
 
-### Build Your New Pallet
+# Build Your New Pallet
 
 At a high level, a FRAME pallet can be broken down into six sections:
 
@@ -129,7 +128,6 @@ decl_error! { /* --snip-- */ }
 
 // 6. Callable Functions
 decl_module! { /* --snip-- */ }
-Copy
 ```
 
 Things like events, storage, and callable functions may look familiar to you if you have done other blockchain development. We will show you what each of these components looks like for a basic Proof Of Existence pallet.
@@ -146,7 +144,6 @@ use frame_support::{
 };
 use frame_system::ensure_signed;
 use sp_std::vec::Vec;
-Copy
 ```
 
 Most of these imports are already available because they were used in the template pallet whose code we just deleted. However, `sp_std` is not available and we need to list it as a dependency.
@@ -172,7 +169,7 @@ std = [
 ]
 ```
 
-### Configuration
+## Configuration
 
 Every pallet has a component called `Config` that is used for configuration. This component is a [Rust "trait"](https://doc.rust-lang.org/book/ch10-02-traits.html); traits in Rust are similar to interfaces in languages such as C++, Java and Go. For now, the only thing we will configure about our pallet is that it will emit some Events. The `Config` interface is another topic that will be covered in greater depth in the next tutorial, the [Add a Pallet](https://substrate.dev/docs/en/tutorials/add-a-pallet) tutorial. The following code will need to be added to your `pallets/template/src/lib.rs` file:
 
@@ -184,7 +181,7 @@ pub trait Config: frame_system::Config {
 }
 ```
 
-### Events
+## Events
 
 After we've configured our pallet to emit events, let's go ahead and define which events:
 
@@ -229,7 +226,7 @@ decl_error! {
 
 The first of these errors can occur when attempting to claim a new proof. Of course a user cannot claim a proof that has already been claimed. The latter two can occur when attempting to revoke a proof.
 
-### Storage
+## Storage
 
 To add a new proof to the blockchain, we will simply store that proof in our pallet's storage. To store that value, we will create a [hash map](https://en.wikipedia.org/wiki/Hash_table) from the proof to the owner of that proof and the block number the proof was made.
 
@@ -247,7 +244,7 @@ decl_storage! {
 
 If a proof has an owner and a block number, then we know that it has been claimed! Otherwise, the proof is available to be claimed.
 
-### Callable Functions
+## Callable Functions
 
 As implied by our pallet's events and errors, we will have two "dispatchable functions" the user can call in this FRAME pallet:
 
@@ -316,11 +313,11 @@ decl_module! {
 
 > The functions you see here do not have return types explicitly stated. In reality they all return [`DispatchResult`](https://substrate.dev/rustdocs/v3.0.0/frame_support/dispatch/type.DispatchResult.html)s. This return type is added on your behalf by the `decl_module!` macro.
 
-## Compile Your New Pallet
+# Compile Your New Pallet
 
 After you've copied all of the parts of this pallet correctly into your `pallets/template/lib.rs` file, you should be able to recompile your node without warning or error. Run this command in the root directory of the `substrate-node-template` repository to build and run the node:
 
-```
+```text
 WASM_BUILD_TOOLCHAIN=nightly-2020-10-05 cargo run --release -- --dev --tmp
 ```
 
@@ -336,26 +333,18 @@ We will give you a custom React component that you can use to interact with your
 
 To start the Front-End Template, navigate to its directory and run:
 
-```rust
-# Install dependencies if this is the first time you run front-end template
+```text
 yarn install
-# Start the template
 yarn start
 ```
 
-A new tab should open in your web browser and you'll see the following interface.
-
-![Front End Template](https://substrate.dev/docs/assets/tutorials/build-a-dapp/front-end-template.png)
-
-You'll see a list of pre-funded accounts, and you can make token transfers between those accounts.
-
-![Balance Transfer](https://substrate.dev/docs/assets/tutorials/build-a-dapp/front-end-template-balance-transfer.png)
+`yarn install` will install dependencies if this is the first time you run front-end template. `yarn start` will start the template.
 
 ## Add Your Custom React Component
 
 In the Front-End Template project, edit the `TemplateModule.js` file in the `/src/` folder:
 
-```rust
+```text
 substrate-front-end-template
 |
 +-- src
@@ -521,11 +510,11 @@ We won't walk you step by step through the creation of this component, but do lo
 
 Your Front-End Template should reload when you save your changes, and you'll notice our new component. Now we're ready to try out our new dApp. Select any file on your computer, and you will see that you can create a claim with its file digest:
 
-![Proof Of Existence Component](https://substrate.dev/docs/assets/tutorials/build-a-dapp/poe-component.png)
+![Proof Of Existence Component](https://docs.substrate.io/static/03f6832f8cfaad701f5750831a88fe95/dc61a/poe-component.png)
 
 If you press "Create Claim", a transaction will be dispatched to your custom Proof of Existence pallet, where this digest and the selected user account will be stored on chain.
 
-![Claimed File](https://substrate.dev/docs/assets/tutorials/build-a-dapp/poe-claimed.png)
+![Claimed File](https://docs.substrate.io/static/f19b3afd20d8b6fadc0e1c8b5f0170ea/a13c9/poe-claimed.png)
 
 If all went well, you should see a new `ClaimCreated` event appear in the Events component. The front-end automatically recognizes that your file is now claimed, and even gives you the option to revoke the claim if you want.
 

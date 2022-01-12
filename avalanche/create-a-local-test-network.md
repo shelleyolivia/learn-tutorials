@@ -2,7 +2,7 @@
 
 # Introduction
 
-In the [quickstart tutorial](https://docs.avax.network/build/getting-started) we connect a node to the test network. You might find it useful to create a local test network.
+In the [quickstart tutorial](https://docs.avax.network/learn/getting-started) we connect a node to the test network. You might find it useful to create a local test network.
 
 We’ll show you how to launch a 5 node local test network. For both we’ll show how to launch the network using [Avash](https://docs.avax.network/build/tools/avash) and manually.
 

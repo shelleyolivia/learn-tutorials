@@ -941,10 +941,6 @@ Make sure your friend is also registered to the application before adding them a
 
 ![Chatting with a friend](https://i.imgur.com/LfkjLSK.gif)
 
-# Conclusion
-
-Congratulations! We have successfully deployed a decentralized chat application which can be deployed on Avalanche or other EVM-compatible blockchain. We also created a boilerplate React application to use as the frontend for our dApp.
-
 # Troubleshooting
 
 ## Transaction Failure
@@ -962,6 +958,10 @@ Congratulations! We have successfully deployed a decentralized chat application 
 ![Error!](https://github.com/figment-networks/learn-tutorials/raw/master/assets/chat-dapp-crash.png)
 
 To resolve this error, doublecheck that you have updated the `CONTRACT_ADDRESS` variable in `src/index.js.`
+
+# Conclusion
+
+Congratulations! We have successfully deployed a decentralized chat application which can be deployed on Avalanche or other EVM-compatible blockchain. We also created a boilerplate React application to use as the frontend for our dApp.
 
 # Next Steps
 
