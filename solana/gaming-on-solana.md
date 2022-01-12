@@ -200,11 +200,9 @@ export const connectOrGetPhantomProvider = (connectToWallet) => {
        if (provider.isPhantom) {
            return provider;
        }
-   } else if(connectToWallet) {
+   } else if (connectToWallet) {
      alert(`Please install the phantom wallet from https://phantom.app/`);
    }
-
-
 };
 ```
 
@@ -306,7 +304,7 @@ import {
 
 **bs58:** It helps to encode the string to base 58 encoding. 
 
-**@solana/spl-token: ** It is a library which holds all the util functions to create the token on the Solana blockchain.
+**@solana/spl-token:** It is a library containing all the utility functions to create the token on the Solana blockchain.
 
 **crypto:** It is an algorithm that performs data encryption and decryption.
 
