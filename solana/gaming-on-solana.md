@@ -80,13 +80,13 @@ As such no requirements, only a good code editor will work. I prefer to use VS C
 
 # Flow of the DApp
 
-![Solana Games](https://raw.githubusercontent.com/figment-networks/learn-tutorials/assets/Solana_Games.png?raw=true "Solana Games")
+![Solana Games](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/Solana_Games.png?raw=true)
 
 
-# Accept the game fee from the game player
-The DApp (Decentralised Application) which we are building accepts the payment in the form of SOL tokens and let use play the game. 
+# Accept fees from the game player
+The DApp (Decentralised Application) which we are building accepts the payment in the form of SOL tokens and lets users play the game after they have paid.
 The tokens which we receive can be interpreted as a game fee. The same model can be applied to any DApp which can provide service after receiving the payment.
-Hence to make the payment (Game fee) to the DApp possible we will first integrate the Phantom wallet which will eventually enable us to accept the payment.
+To make the payment to the DApp possible, we will first integrate the Phantom wallet which will enable users to send the payment.
 
 ## Connect to the phantom wallet
 
@@ -171,7 +171,7 @@ In the above code, we are preparing the transaction object to get signed and add
 **transaction.recentBlockhash** : As solana works on **proof of history**, hence every transaction in the solana blockchain requires the latest blockhash to be associated with the new transaction. Without the getRecentBlockhash, the validators will not be able to verify the transaction.
 
 **proof of history**: Proof of History is a sequence of computation that can provide a way to cryptographically verify passage of time between two events. Validator nodes "timestamp" blocks with cryptographic proofs that some duration of time has passed since the last proof. All data hashed into the proof most certainly have occurred before the proof was generated. The node then shares the new block with validator nodes, which are able to verify those proofs. The blocks can arrive at validators in any order or even could be replayed years later. With such reliable synchronization guarantees, Solana is able to break blocks into smaller batches of transactions called _entries_. Entries are streamed to validators in realtime, before any notion of block consensus.
-This is very different and efficient from the **Proof of Work** or **Proof of Stake** where the energy consumption is high as every node in the blockchain has to perform the action to validate a node. The winner gets the reward but other validator’s work gets wasted in the process. \
+This is very different and efficient from the **Proof of Work** or **Proof of Stake** where the energy consumption is high as every node in the blockchain has to perform the action to validate a node. The winner gets the reward but other validator’s work gets wasted in the process.
 
 **transaction.feePayer** : This variable denotes the fee payer of the transaction which will pay the fees to sign the transaction and send it for validation
 
@@ -182,7 +182,7 @@ In the utility function below, we are trying to connect to the wallet if it is n
 
 The util function will alert the user if there is no Phantom Wallet present as a chrome extension.
 
-Phantom wallet as extension injects the “solana” object in the global object of the browser ie. “window” object. We check the existence of wallet by checking the existence of “solana” in the window object.
+The Phantom wallet browser extension injects the solana object in the global window object of the browser. We check for the presence of a wallet by checking the existence of a solana property on the window object.
 
 
 ```javascript
@@ -194,13 +194,13 @@ Phantom wallet as extension injects the “solana” object in the global object
 export const connectOrGetPhantomProvider = (connectToWallet) => {
    if ("solana" in window) {
      const provider = window.solana;
-     if(connectToWallet && !window.solana.isConnected){
+     if (connectToWallet && !window.solana.isConnected) {
            window.solana.connect();
        }
        if (provider.isPhantom) {
            return provider;
        }
-   }else if(connectToWallet){
+   } else if(connectToWallet) {
      alert(`Please install the phantom wallet from https://phantom.app/`);
    }
 
@@ -230,7 +230,7 @@ For the safe check we have also added the `if` condition which will not let the 
 * @param {*} toTokenAccountPubkey : receiver of the token
 * @return {object} 
 //{ status: true, signature: "transaction signature hash"} in case of success
-//{ status: true, signature: "transaction signature hash"} in case of failure
+//{ status: false, error: "error message"} in case of failure
 */
 
 export const transferCustomToken = async (provider, connection, tokenToTransfer, fromTokenAccountPubkey, toTokenAccountPubkey) => {
@@ -276,9 +276,9 @@ Let's dive into the NFT creation process in Solana.
 
 ## Create NFT util functions
 
-NFT stands for non-fungible token, which basically means that it's a one-of-a-kind digital asset that belongs to you and you only. The most popular NFTs right now include artwork and music, but can also include videos and even tweets
+NFT stands for non-fungible token, which basically means that it's a one-of-a-kind digital asset that belongs to you and you only. The most popular NFTs right now include artwork and music, but can also include videos and even tweets.
 
-NFT can hold image/video/audio as a metadata property, which means if we own the NFT then we own the metadata of the NFT. All these metadata need to be stored somewhere on the internet and link of these uploaded item used as metadata property of an NFT.
+NFT metadata can include links to images/videos/audio files. All the metadata needs to be stored somewhere on the internet, and generally the NFT metadata will include links to the uploaded files rather than storing the files on the blockchain itself. The reason for this is that storing large amounts of data on the blockchain is computationally expensive. Storing a few bytes for a URL is much easier than storing an entire JPEG. Because of this, it is important to use durable file storage such as Arweave or IPFS to maintain the metadata files of an NFT.
 
 We will use Arweave, a blockchain based data hosting service which is decentralized and distributed across the network.
 
@@ -304,15 +304,15 @@ import {
 ```
 **borsh:** It is a library which provides us the functionality of serialization or deserialization of data. 
 
-**bs58**: It helps to encode the string to base 58 encoding. 
+**bs58:** It helps to encode the string to base 58 encoding. 
 
-**@solana/spl-token :** It is a library which holds all the util functions to create the token on the solana blockchain.
+**@solana/spl-token: ** It is a library which holds all the util functions to create the token on the Solana blockchain.
 
 **crypto:** It is an algorithm that performs data encryption and decryption.
 
 **bn.js:** The BN.js library for calculating with big numbers in JavaScript.
 
-**@solana/web3.js:** It helps to prepare the instruction for transactions using various util methods.
+**@solana/web3.js:** This JavaScript API helps to prepare the instructions for transactions made on Solana.
 
 ```javascript
 /*File: src/utils/nftCreation.js*/
@@ -369,8 +369,8 @@ Other variables mentioned are the predefined standards from Metaplex which inter
 
 # On-chain program’s data structures
 
-On-chain program written in Rust expects the data to be in 'struct' format, hence to pass a valid format via transaction the data needs to be in struct format.
-Hence the class needs to be created to use in Web3 (Iavasript), but to send it through the transaction first the 'class' data structure needs to be converted to 'struct' data structure and then serialized via Borsh serialiser.
+On-chain programs written in Rust expect the data passed to them to be in 'struct' format.
+The class needs to be created to use in Web3 (JavaScript), but to send it through the transaction first the 'class' data structure needs to be converted to 'struct' data structure and then serialized (so it can be sent over the network) via the borsh serializer.
 
 Serialization is important as without it, an on-chain program written in Rust will not be able to deserialize the instruction data and it will return fatal error.
 
@@ -521,9 +521,9 @@ export const dataURLtoFile = (dataurl, filename) => {
 ```
 
 
-## Borsch extended functionality
+## Borsh extended functionality
 
-This functionality is provided by the Metaplex team where they added an extra util function to the BinaryReader to make the communication seamless with metaplex on-chain programs.
+This functionality is provided by the Metaplex team where they added an extra util function to the BinaryReader to make the communication seamless with Metaplex on-chain programs.
 
 Without the appropriate serialization, the NFT creation will not work as the transaction will not be deserialized properly from the on-chain programs.
 
@@ -755,7 +755,11 @@ extendBorsh();
  }
 ```
 
-**prepPayForFilesTxn:** It is used to calculate the fees for the files which need to be uploaded to arweave. It is mentioned in the arweave documentation that you need Tokens to upload onto the arweave platform but none of the creators faced any such issue yet.
+**prepPayForFilesTxn:** It is used to calculate the fees for the files which need to be uploaded to arweave. It is mentioned in the arweave documentation that you need Tokens to upload onto the arweave platform.
+There are a few storage types which can be used to upload the images and metadata.
+Two of the most common while working with Metaplex and Arweave are 
+1. "arweave-sol" : Uploads to arweave but only accepts payment in SOL and only works in mainnet.
+2. "arweave" : Uploads to arweave via Metaplex Google Cloud function. Best to be used in devnet and mainnet.
 
 **findProgramAddress:** It is to find the account address based on the program id and seed provided. It is a deterministic function, hence it will always provide the address for the same seed and same program id.
 
@@ -980,14 +984,13 @@ Few key variables to be used in above function
 This is very different and efficient from the **Proof of Work** or **Proof of Stake** where the energy consumption is high as every node in the blockchain has to perform the action to validate a node. The winner gets the reward but other validator’s work gets wasted in the process.
 
 **wallet.publicKey** : Every transaction needs a fee to be paid to the computers who are making the transaction possible. This parameter tells Solana who will be paying the fees for this transaction.
-```wallet.publicKey = provider.publicKey```
+`wallet.publicKey = provider.publicKey`
 
-In Ethereum, we have smart contracts and Ethereum accounts which deploys these smart contracts. Hence the address of the smart contract is used to fetch the public function and interact with the smart contract. But there are few functions in smart contracts which can only be executed by the owner of the smart contract. 
 * **signers.map** : List of accounts which will be used to sign the ongoing transaction, that is defined by this list of signers. If any action is going to be taken on this account, it requires the signature using the account’s private key. This ensures that the program never updates the account of a user without the permission of the owner of that account.
 * **transaction.serialize()** : All the data must be stored on the blockchain. To keep the content format agnostic of the programming language used, the data is serialized before storing. 
 * **skipPreflight** : It’s a bool data type
-    * true: preflight transaction checks for the available methods before sending the transaction, which involves a very little latency.
-    * false: (default value) : It is turned off by default to save the network bandwidth.
+    * true: Skips the preflight transaction checks
+    * false: (default value) : Transaction checks for the available methods before sending the transaction, which involves a very little latency. 
 
 
 ```javascript
@@ -1474,7 +1477,7 @@ As Rust does not support the classes, it only supports the struc data structure 
 ## Setting up the Phantom wallet
 
 1. Install phantom wallet chrome extension
-2. add some SOL to the wallet.
+2. Add some SOL to the wallet.
 
 ## Connecting the application to a Phantom Wallet
 
@@ -1659,16 +1662,15 @@ export default App;
 
 # About The Author
 
-This tutorial is written by Sandeep Ghosh. You can connect with me on [LinkedIn](https://www.linkedin.com/in/ersandy/) & [Figment Forum](https://community.figment.io/).
-I am a passionate blockchain engineer, an avid thinker who is currently thriving to build multiple products in the Solana ecosystem.
+This tutorial is written by Sandeep Ghosh. You can connect with him on [LinkedIn](https://www.linkedin.com/in/ersandy/) & [Figment Forum](https://community.figment.io/u/sandyghosh555/).
+He is a passionate blockchain engineer, an avid thinker who is currently working on building multiple products in the Solana ecosystem.
 
-If interested to know more about me, please visit https://github.com/blocksan
-
+If interested to know more about him, please visit https://github.com/blocksan
 
 # References
 
 1. [Solgames.fun - Superset of this tutorial](https://solgames.fun/) 
 2. [Solana Docs](https://docs.solana.com)
-3. [SPL Token](https://spl.solana.com/token)
-4. [Solana Terminologies](https://docs.solana.com/terminology)
-5. [Metaplex Documenation](https://www.metaplex.com) 
+3. [SPL Token Docs](https://spl.solana.com/token)
+4. [Solana Terminology](https://docs.solana.com/terminology)
+5. [Metaplex Documentation](https://docs.metaplex.com/) 
