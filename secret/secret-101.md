@@ -1,9 +1,3 @@
-{% hint style="info" %}
-Feel Free to skip this section and [**start the challenges**](https://learn.figment.io/tutorials/setup-the-secret-project)
-{% endhint %}
-
-------------------------
-
 # What is Secret?
 
 Secret Network is the first blockchain with privacy-preserving smart contracts. That means applications built on Secret can utilize encrypted data without revealing it to anyone, even the nodes in the network. For the first time, Secret Network allows developers to build powerful, permissionless, privacy-preserving applications - Secret Apps.
