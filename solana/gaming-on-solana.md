@@ -1202,7 +1202,7 @@ Associated token is needed to mint the new token and add the metadata data to th
 
 # Schema mapping of the required classes
 
-As Rust does not support the classes, it only supports the struc data structure hence the 'classes' need to be converted to 'struct' to make the valid serialization and deserialization. 
+For Solana programs, Rust only supports the struct data structure hence the 'classes' need to be converted to 'struct' to perform valid serialization and deserialization.
 
 
 ```javascript
@@ -1476,7 +1476,7 @@ As Rust does not support the classes, it only supports the struc data structure 
 2. Enter the project root directory: **cd solana-games**
 ## Setting up the Phantom wallet
 
-1. Install phantom wallet chrome extension
+1. Install Phantom wallet extension (it supports Chrome, Brave, Firefox and Edge browsers)
 2. Add some SOL to the wallet.
 
 ## Connecting the application to a Phantom Wallet
