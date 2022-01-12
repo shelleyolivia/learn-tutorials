@@ -20,7 +20,7 @@ There are a few important sites that will be of interest to users of **Polygon**
 * [For knowledge!](https://docs.matic.network/) 
 * [For free testnet assets](https://faucet.matic.network/)
 
--------------------------------------
+---
 
 ## Heimdall & Bor
 
@@ -31,7 +31,7 @@ For **Polygon**, the node is designed with a two layer implementation with Heimd
 * **Bor** is compatible with the Ethereum Virtual Machine (EVM), it is a fork of the [Geth client](https://geth.ethereum.org/docs/) with customized consensus algorithms. User interaction on **Polygon** takes place on this chain, it also makes available the functionality and compatibility of Ethereum developer tooling and applications.  Read more about the [core concepts](https://docs.matic.network/docs/contribute/bor/core_concepts) of Bor.
   * On DataHub, the JSON-RPC endpoint is used to access Bor.
 
--------------------------------------
+---
 
 ## Bridging Polygon & Ethereum
 
@@ -43,8 +43,42 @@ It is possible to process many transactions on **Polygon** and use relatively li
 
 In summary, **Polygon** is an attractive solution for developers who wish to keep much of the tooling and community of Ethereum, while leveraging the best scaling for their decentralized applications.
 
--------------------------------------
+---
 
-# Next Steps
+# Why build on Polygon \(Matic\)?
 
-Now that we gave you a quick overview of Polygon ecosystem, we still need to set up our environment.
+Here are the advantages of the Polygon \(Matic\) network:
+
+1. **Easy to port for Ethereum developers:** Polygon \(Matic\) uses an account-based Plasma \(EVM\) model rather than the UTXO system. This enables developers to leverage the entire Ethereum toolbox: smart contracts, developer tools, integration libraries, etc. 
+2. **Major focus on developer & user experience:** Polygon \(Matic\) provides UI libraries, SDKs & added services, enabling developers to focus on their core product. For example, the tools available include Dagger, a notification engine for smart contract related events, Transaction fee abstraction so DApps can pay for their users, and Walletconnect for easier private key management. 
+3. **Built to scale for mass adoption:** The checkpointing layer makes Polygon \(Matic\) orders of magnitude faster than the other Plasma implementations as they batch block proofs via checkpoints. 
+4. **Decentralized & secure:** Polygon \(Matic\) achieves decentralization and security via three layers of structure in its architecture: Proof of Stake consensus for block production, checkpointing layer to prevent fraudulent activity from validators, and a challenge system for potentially fraudulent transactions.
+
+# What can you build on Polygon \(Matic\)?
+
+Polygon \(Matic\) is a scalable extension to Ethereum and as such, it can power any type of DApps found on Ethereum. There are already 100s of applications focused on DeFi, NFTs, gaming, prediction markets, and more, live on Polygon \(Matic\).
+
+# Network Specifications
+
+## Transaction Fees
+
+The transaction fees will be determined by the users on the network as they do on Ethereum, but given the high transaction throughput that is possible, the transaction fees are expected to be significantly lower than those of Ethereum due to the supply and demand of "gas fee" markets.
+
+## Transaction Speed & Finality
+
+Currently “a single Matic side chain” can theoretically handle 2^16 \(65,000+\) transactions per second with a block time of 1 second. Polygon \(Matic\) network has the capability to add multiple side chains, But the current focus would be on stabilizing the network with one side chain.
+
+## Languages supported
+
+Similar to Ethereum, Polygon \(Matic\) uses the Web3.js APIs for smart contract development, which means Javascript and Solidity are supported.
+
+## EVM compatibility
+
+Polygon \(Matic\) Network uses an account-based Plasma sidechain and an EVM-compatible runtime known as the Polygon \(Matic\) VM. This makes it easy for Ethereum based DApps to migrate to Polygon \(Matic\) Network, as well as using all developer tools, integration libraries, and frameworks built for Ethereum.
+
+## Role of the MATIC token
+
+There are two primary uses of the MATIC token:
+
+1. The token is used to pay for the transaction fees in the network
+2. The token is used for staking to participate in the Proof of Stake consensus mechanism for checkpointing layer and block production layer
