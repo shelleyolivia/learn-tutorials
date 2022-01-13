@@ -12,7 +12,7 @@ This tutorial requires:
 
 * Install Node.js and NPM
 * Install the [NEAR CLI](https://github.com/near/near-cli) 
-* Complete the [NEAR smart contract tutorial](https://learn.figment.io/tutorials/deploy-near-contract)
+* Complete the [NEAR 101 Pathway](https://learn.figment.io/protocols/near)
 * Complete the [intro to NFTs on NEAR](https://learn.figment.io/tutorials/write-nft-contracts-in-rust)
 
 Not required but still valuable reference material can be found in the NEAR Docs [AssemblyScript Intro](https://docs.near.org/docs/develop/contracts/as/intro), as well as the [Data Storage](https://docs.near.org/docs/concepts/data-storage) page.
