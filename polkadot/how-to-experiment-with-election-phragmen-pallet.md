@@ -62,7 +62,9 @@ Since we want to install the Elections Phragmen pallet, we will also need to ins
 To add the Elections Phragmen and Collective pallets, follow these steps:
 
 1 - Enter the root directory of the node template
+
 2 - Open the `runtime/Cargo.toml` configuration file in a text editor
+
 3 - Add the `pallet-elections-phragmen` and `pallet-collective` crates to the dependencies list, so they will be available for the node template runtime.
 
 ```
