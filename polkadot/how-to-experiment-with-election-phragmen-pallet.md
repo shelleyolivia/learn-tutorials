@@ -1,8 +1,12 @@
 # Introduction
-During your studies of the Polkadot protocol, you will come across several pallets that act in different categories such as Consensus, Runtime, Identity, etc. In this tutorial, **you will learn how to work with a governance pallet, used in Polkadot itself, called Elections Phragmen**. We will build a blockchain that has elections built into the network itself. After this tutorial, you will have a network where you can submit applications and vote for example.
+During your studies of the Polkadot protocol, you will come across several pallets that act in different categories such as Consensus, Runtime, Identity, etc. But what exactly is a pallet? We can define a pallet as a blockchain module that is responsible for one aspect of our blockchain. For example, if we want to make elections in our blockchain, we need to install an election pallet!
+
+In this tutorial, **you will learn how to work with a governance pallet, used in Polkadot itself, called Elections Phragmen**. We will build a blockchain that has elections built into the network itself. After this tutorial, you will have a network where you can submit applications and vote for example.
+
+Before we begin, we need to clarify one thing: what is a governance pallet? A governance pallet is a pallet that solves problems related to the governance of a blockchain. For example, the elements of Polkadot like elections, democracy, and the council, are all implemented based on governance pallets.
 
 # Prerequisites
-Although **this tutorial has no formal prerequisites**, we recommend that you understand the basics of what pallets are and how blockchains work. This will give you a better understanding of the tutorial.
+Although **this tutorial has no formal prerequisites**, we recommend that you understand the basics of [what pallets are](https://docs.substrate.io/v3/runtime/frame/#pallets) and how blockchains work. This will give you a better understanding of the tutorial.
 
 Even if you don't have the prerequisites listed, give this tutorial a try anyway. We will do our best to make sure you are not confused by the instructions and understand what is going on.
 
@@ -56,8 +60,8 @@ Now, with both templates installed, let's install the necessary pallets. Once in
 ## Add the Elections Phragmen to the node template
 Since we want to install the Elections Phragmen pallet, we will also need to install its dependencies i.e. the pallets that are used by the Elections Phragmen pallet:
 
-- pallet-collective
-- pallet-balances (**Already installed in the node template**)
+- pallet-collective: We will use this pallet for the instantiation of a council on our blockchain. Whenever an election is over, the elected accounts will be added to this council. We must use it whenever we work with the pallet-elections-phragmen since it is a dependency of this pallet.
+- pallet-balances: This pallet is essential for almost any other pallet and is a dependency for our phragmén election pallet, it is responsible for handling accounts and balances. (**Already installed in the node template**)
 
 To add the Elections Phragmen and Collective pallets, follow these steps:
 
@@ -96,6 +100,27 @@ std = [
 ]
 ```
 
+If you forget to add the new pallets in the std feature set, you might see errors like the following:
+
+```
+error: cannot find macro `vec` in this scope
+  --> /home/kelvin/.cargo/git/checkouts/substrate-7e08433d4c370a21/e6fbbd5/primitives/npos-elections/src/phragmms.rs:52:20
+   |
+52 |     let mut winners = vec![];
+   |                       ^^^
+   |
+   = note: consider importing one of these items:
+           codec::alloc::vec
+           crate::sp_std::vec
+           scale_info::prelude::vec
+           sp_std::vec
+
+    Checking sp-api v4.0.0-dev (https://github.com/paritytech/substrate.git?tag=devhub/latest#e6fbbd5c)
+error: could not compile `sp-npos-elections` due to previous error
+```
+
+To fix this error, just go back to step 4 and properly add the new pallets in the std feature set.
+
 5 - Finally, we need to check that the dependencies resolve correctly, to do this, use the following command:
 
 ```
@@ -111,7 +136,28 @@ Let's start by implementing the Config trait of the Collective pallet:
 
 1 - Open the runtime/src/lib.rs file in a text editor.
 
-2 - Look in the file for the section where the Config trait for the Balances pallet is implemented.
+2 - Look in the file for the section where the Config trait for the Balances pallet is implemented. The code snippet you are looking for should look something like the following:
+
+```rust
+parameter_types! {
+	pub const ExistentialDeposit: u128 = 500;
+	pub const MaxLocks: u32 = 50;
+}
+
+impl pallet_balances::Config for Runtime {
+	type MaxLocks = MaxLocks;
+	type MaxReserves = ();
+	type ReserveIdentifier = [u8; 8];
+	/// The type for recording an account's balance.
+	type Balance = Balance;
+	/// The ubiquitous event type.
+	type Event = Event;
+	type DustRemoval = ();
+	type ExistentialDeposit = ExistentialDeposit;
+	type AccountStore = System;
+	type WeightInfo = pallet_balances::weights::SubstrateWeight<Runtime>;
+}
+```
 
 3 - After locating the section, add the following code block after the last line of the Balances pallet code block: 
 
@@ -136,7 +182,7 @@ impl pallet_collective::Config for Runtime {
 
 The block of code you just put in is responsible for setting up the Collective pallet. The blockchain will be built from configurations like this, now let's set up the Elections Phragmen pallet:
 
-1 - Import the `LockIdentifier` from `frame_support`:
+1 - Import the `LockIdentifier` from `frame_support` in the same file (runtime/src/lib.rs):
 
 ```rust
 // A few exports that help ease life for downstream crates.
@@ -148,7 +194,7 @@ pub use frame_support::{
 };
 ```
 
-2 - Add the following code block after the last line of the Collective pallet code block:
+2 - Add the following code block after the last line of the Collective pallet code block that we inserted before:
 
 ```rust
 parameter_types! {
@@ -194,7 +240,7 @@ construct_runtime!(
         // ...
         // Add these lines
         ElectionsPhragmen: pallet_elections_phragmen,
-		Collective: pallet_collective,
+		    Collective: pallet_collective,
         // ...
     }
 );
@@ -242,6 +288,40 @@ Finally, we can verify that everything has gone according to plan. To do this, c
 ```
 cargo check -p node-template-runtime
 ```
+
+During this step, you might see some errors like: 
+
+```
+error[E0412]: cannot find type `LockIdentifier` in this scope
+     --> /home/kelvin/www/substrate-node-template/runtime/src/lib.rs:277:38
+      |
+  277 |     pub const PhragmenElectionPalletId: LockIdentifier = *b"phrelect";
+      |                                         ^^^^^^^^^^^^^^ not found in this scope
+      |
+  help: consider importing this type alias
+      |
+  9   | use frame_support::traits::LockIdentifier;
+      |
+```
+
+The above error means that you ended up forgetting to import the LockIdentifier in step 1 of the Elections Phragmén pallet configuration.
+
+```
+error[E0412]: cannot find type `Collective` in this scope
+     --> /home/kelvin/www/substrate-node-template/runtime/src/lib.rs:291:27
+      |
+  291 |     type InitializeMembers = Collective;
+      |                              ^^^^^^^^^^ not found in this scope
+
+  error[E0277]: the trait bound `Event: From<pallet_collective::Event<Runtime>>` is not satisfied
+     --> /home/kelvin/www/substrate-node-template/runtime/src/lib.rs:266:2
+      |
+  266 |     type Event = Event;
+      |     ^^^^^^^^^^^^^^^^^^^ the trait `From<pallet_collective::Event<Runtime>>` is not implemented for `Event`
+      |
+```
+
+The above error means that you ended up forgetting to add the new pallets to the `construct_runtime!` macro.
 
 If there are no errors, we are ready to compile our blockchain! To perform the compilation, use the following command:
 
@@ -540,6 +620,10 @@ import Election from './Election';
 Finally, **you are ready to try the Elections Phragmen pallet!** Go ahead and run tests, create a poll, elect members, run for an election, and so on.
 
 ![Election component preview](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/electionComponentPreview.png?raw=true)
+
+The gif below shows some features of the application we developed in this tutorial. See that we use Alice's account to apply for the election and then switch to Bob's account to vote for Alice.
+
+![Elections dApp preview](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/electionsPreview.gif?raw=true)
 
 # Conclusion
 Congratulations! We have successfully created a blockchain that holds elections. We have added and configured governance pallets to a blockchain and created a unique component for interaction with the Elections Phragmen pallet. You can make improvements to the Election component and also make changes to the Config trait of the pallets (such as the number of members for example).
