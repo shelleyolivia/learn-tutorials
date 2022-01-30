@@ -1,6 +1,6 @@
 # Introduction  
 Avalanche is a low cost, high-speed blockchain network on which we can deploy smart contracts written in solidity. Due to its low gas fees and a high number of transactions per second, Avalanche is a good platform for deploying dApps on it.     
-In this tutorial, we will learn how to build a decentralized Kickstarter dApp having features namely create a project, fund a project, withdraw fund, get refund if funding isn't successful etc. We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.    
+In this tutorial, we will learn how to build a decentralized Kickstarter dApp having features namely create a project, fund a project, withdraw fund, get refund if funding isn't successful etc. We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.  
   
 # Prerequisites
 - Familiarity with ReactJS and Solidity.  
@@ -645,9 +645,11 @@ This component renders the first page of the site. It contains a `Connect to met
   
 ## ScrollShowbarComponent  
 This component renders a carousel which is used by various other components to display a list of projects.  
-      
-    
+  
+Don't forget to change the contract address in `App.js` file before starting up the react app.  
+            
 # Walkthrough  
+You can check out the live demo of the dApp [here](https://hyp3r5pace.github.io/crowdfunding-platform-avalanche/)  
   
 ## Create Project  
 ![gif displaying the process of creating a project](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-a-decentralized-kickstarter-01.gif)  
