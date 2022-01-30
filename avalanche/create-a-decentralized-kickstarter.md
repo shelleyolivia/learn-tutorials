@@ -10,8 +10,8 @@ In this tutorial, we will learn how to build a decentralized Kickstarter dApp ha
 - [Node.js](https://nodejs.org/en/download/releases/) v10.18.0+  
 - [Metamask extension](https://metamask.io/download/) on your browser  
   
-# Implementing the smart contract
-
+# Implementing the smart contract  
+  
 Now we will build the smart contract of our application. Let's start by making a contract named **crowdfunding**.
 
 ```solidity
@@ -19,15 +19,14 @@ Now we will build the smart contract of our application. Let's start by making a
 pragma solidity >=0.8.0 <0.9.0;
 
 contract crowdfunding {
-
 }
 ``` 
 
-Let's define the structures and enums that will be required to define states. We will make two enums **Category**, which can have four values representing the category to which the project belongs, and the other enum **RefundPolicy**, it can have two values:
-* *REFUNDABLE*:- This type represent that on failing to achieve the goal amount within the specified duration, all the raised funds will be returned to contributors.      
-* *NONREFUNDABLE*:- For this type of project, creator can claim the amount even if the goal is not achieved.
+Let's define the structures and enums that are required to define states. We will make two enums **Category**, which can have four values representing the category to which the project belongs, and the other enum **RefundPolicy**, it can have two values:
+* *REFUNDABLE*:- This type of project returns the amount funded by the contributor when the project fails to achieve the goal amount within the duration.    
+* *NONREFUNDABLE*:- For this type of project, the creator can claim the amount even if it doesn't achieve the funding goal.
 
-Next, we declare our structures, we will create three  **Project**, **ProjectMetadata** and **Funded**. 
+Next, we declare our structures, we will create three  **Project**, **ProjectMetadata**, and **Funded**. 
 
 ```solidity
 // The category values
@@ -98,7 +97,7 @@ mapping(address => uint256[]) addressProjectsList;
 mapping(address => Funded[]) addressFundingList;
 ```
 
-Now, we define a modifier which will be used to check if the parameter passed is a valid index in projects array.
+Now, we define a modifier that will help to check if the parameter passed is a valid index in the project's array.
 
 ```solidity
 // Checks if an index is a valid index in projects array
@@ -108,7 +107,7 @@ modifier validIndex(uint256 _index) {
 }
 ```
 
-Now we will define a function which will create a new project.
+Now we will define a function that will create a new project.
 
 ```solidity
 // Create a new project and updates the addressProjectsList and projects array
@@ -145,8 +144,8 @@ function createNewProject(
 }
 ```
 
-We will now create three functions to retrieve the projects. `getAllProjectsDetail` function helps to retrieve all the project's metadata.
-Next, `getProjectsDetail` accepts a array of project indexes and returns the metadata of all the project's whose index are present in the array.`getProject` accepts an index and retrieve the project details at that index of **projects** array.
+We will now create three functions to retrieve the project details. `getAllProjectsDetail` function helps to retrieve all the project's metadata.
+Next, `getProjectsDetail` accepts an array of project indexes and returns the metadata of all the projects whose indexes are present in the array.`getProject` accepts an index and retrieves the project details at that index of **projects** array.
 
 ```solidity
 // Returns the project metadata of all entries in projects
@@ -226,7 +225,7 @@ function getUserFundings(address contributor) external view returns(Funded[] mem
 }
 ```
 
-Time to implement the function to fund a project. The functions `addContribution` and `addToFundingList` are helper functions for `fundProject` function. `addContribution` checks if contributor already exists and then updates the amount, if not then it adds the contribution amount and contributor to the project. Similarly `addToFundingList` checks if there is a previous contribution and then updates the amount, if not found then adds a new struct Funded to keep the contribution details in the mapping **addressFundingList**. 
+Time to implement the function to fund a project. The functions `addContribution` and `addToFundingList` are helper functions for `fundProject` function. `addContribution` checks if the contributor already exists and updates the amount, if not then adds the contribution amount and contributor to the project. Similarly `addToFundingList` checks if there is a previous contribution and then updates the amount, if not found then add a new struct Funded to keep the contribution details in the mapping **addressFundingList**. 
 
 ```solidity
 // Helper function adds details of Funding to addressFundingList
@@ -283,7 +282,7 @@ function claimFund(uint256 _index) validIndex(_index) external {
 }
 ```
 
-When **REFUNDABLE** project is not able to achieve it's funding goal, the contributors can get their refund with the help of `claimRefund` function. `getContributorIndex` is a helper function to retrieve the `msg.sender` index in contributors array if he/she has contributed otherwise returns -1.
+When **REFUNDABLE** project is not able to achieve its funding goal, the contributors can get their refund with the help of `claimRefund` function. `getContributorIndex` is a helper function to retrieve the `msg.sender` index in the **contributors** array if he/she has contributed otherwise returns -1.
 
 ```solidity
 // Helper function to get the contributor index in the projects' contributor's array
@@ -315,8 +314,8 @@ function claimRefund(uint256 _index) validIndex(_index) external {
 }
 ```
 
-We have now completed the smart contract implementation. Now let's move to contract deployment.
-
+We have now completed the smart contract implementation. Now let's move to contract deployment.    
+  
 # Deploying the smart contract
 
 ## Setting up Metamask
@@ -651,16 +650,16 @@ This component renders a carousel which is used by various other components to d
 # Walkthrough  
   
 ## Create Project  
-![gif displaying the process of creating a project](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/createProject.gif)  
+![gif displaying the process of creating a project](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-a-decentralized-kickstarter-01.gif)  
   
 ## Fund Project  
-![gif displaying the process of funding a project](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/fundProject.gif)  
+![gif displaying the process of funding a project](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-a-decentralized-kickstarter-02.gif)  
   
 ## Claim Fund  
-![gif displaying the process of claiming refund](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/Claim%20Fund.gif)  
+![gif displaying the process of claiming refund](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-a-decentralized-kickstarter-03.gif)  
   
 ## Claim Refund  
-![gif displaying the process of claiming refund](https://github.com/hyp3r5pace/crowdfunding-platform-avalanche/blob/main/src/assets/Claim%20Refund.gif)  
+![gif displaying the process of claiming refund](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-a-decentralized-kickstarter-04.gif)  
   
   
 # Conclusion  
