@@ -2,7 +2,7 @@
 
 In this tutorial, we will learn how to create an NFT game with a Solidity smart contract deployed on Avalanche Network and a NextJS front-end to interact with the game.
 
-We will be creating an Avengers theme NFT game with an ERC20 token, which can be used to mint characters in the game and buy special powers from the marketplace. Yes, we will be creating a marketplace where players can buy additional powers for their character. The game will have the following features -
+We will be creating an Avengers-theme NFT game with an ERC20 token, which can be used to mint characters in the game and buy special powers from the marketplace. Yes, we will be creating a marketplace where players can buy additional powers for their character. The game will have the following features -
 
 - Each user can mint a character of their choice using the EPIC token.
 - One can get the EPIC tokens from the faucet we will be creating in the dApp.
@@ -13,7 +13,7 @@ We will be creating an Avengers theme NFT game with an ERC20 token, which can be
 - Users can claim more health over time using EPIC tokens.
 - If a character's health reaches 0, they cannot play the game until they claim new health.
 - Boss will have very high HP, but boss's HP does not increase over time.
-- The boss character will be the same for all the players with the same HP and everyone have to collectively try to defeat the boss.
+- The boss character will be the same for all the players with the same HP and everyone has to collectively try to defeat the boss.
 
 Sounds interesting? This is what the game we will be creating looks like:
 
@@ -21,7 +21,7 @@ Sounds interesting? This is what the game we will be creating looks like:
 
 # Prerequisites
 
-To successfully follow along with this tutorial, you will need a good understanding of ERC721 standards, Solidity language, the Hardhat framework, and the Next.js framework.
+To successfully follow along with this tutorial, you will need a good understanding of [ERC721 standards](https://eips.ethereum.org/EIPS/eip-721), [Solidity language](https://docs.soliditylang.org/en/v0.8.11/), the [Hardhat framework](https://hardhat.org/), and the [Next.js framework](https://nextjs.org/).
 
 We will be using [ethers.js](https://docs.ethers.io/v5/) library to interact with the smart contract and Next.js for the frontend.
 
@@ -75,7 +75,7 @@ contract EPICToken is ERC20 {
 
 In the `EPICToken` contract, we will accept the token name and token symbol from the constructor and mint some tokens for the contract owner.
 
-We also have a faucet method that will airdrop up to 20 EPIC tokens in the caller's account. Note that method call will revert if more than 20 tokens are requested.
+We also have a faucet method that will airdrop up to 20 EPIC tokens in the caller's account. Note that the method call will revert if more than 20 tokens are requested.
 
 # Creating NFTEpicGame smart contract
 
@@ -97,7 +97,7 @@ import "./libraries/Base64.sol";
 import "hardhat/console.sol";
 ```
 
-Here we are importing all the necessary openzeppelin contract. We need ERC721 to mint character NFTs and IERC20 to call ERC20 methods on our EPIC token. We will be using some utility contracts like `Counters.sol`, `SafeMath.sol`, `Strings.sol`, `Ownable.sol`, `ReentrancyGuard.sol` and `Base64.sol`.
+Here we are importing all the necessary Openzeppelin contracts. We need ERC721 to mint character NFTs and IERC20 to call ERC20 methods on our EPIC token. We will be using some utility contracts like `Counters.sol`, `SafeMath.sol`, `Strings.sol`, `Ownable.sol`, `ReentrancyGuard.sol` and `Base64.sol`.
 
 `console.sol` is provided by hardhat, used to add some debug statements in the smart contract which will be removed when the contract is compiled for deployment.
 
@@ -358,7 +358,7 @@ Each time a player wants to call the `claimHealth` method they have to pay a fee
             nftTokenIdOfPlayer
         ];
         require(player.hp > 0, "Error: character must have HP to attack boss.");
-        require(bigBoss.hp > 0, "Error: boss must have HP to attack boss.");
+        require(bigBoss.hp > 0, "Error: boss is already dead");
         uint256 attackDamage = 0;
         for (uint256 i = 0; i < player.attacks.length; i++) {
             if (attackIndex == player.attacks[i]) {
@@ -462,8 +462,9 @@ Once we confirm that the user has approved the special attack's price we make a 
     }
 ```
 
-These all are the helper function to read the data from the contract.
-`checkIfUserHasNFT` check if the player has minted NFTbefore, if yes then it returns the `CharacterAttributes` instance of the minted NFT or else returns an empty instance of `CharacterAttributes`.
+These all are the helper functions to read the data from the contract:
+
+`checkIfUserHasNFT` checks if the player has minted NFT before, if yes then it returns the `CharacterAttributes` instance of the minted NFT or else returns an empty instance of `CharacterAttributes`.
 `getAllDefaultCharacters` method returns an array of all the available characters that the user can mint.
 `getAllAttacks` and `getAllSpecialAttacks` returns arrays of `allAttacks` and `allSpecialAttacks` respectively.
 `getBigBoss` simply returns the `bigBoss` variable.
@@ -608,7 +609,7 @@ First, we get the Contract Factory for `EPICToken` and then call the deploy meth
 
 In the `const gameContract = await gameContractFactory.deploy()` call we are passing all the required data we need in the constructor of the `NFTEpicGame` contract. If you notice for `characterImageURI` we are using `arweave.net` URLs. In the next section, we will cover how to upload images in arweave and get the image URLs.
 
-Once `NFTEpicGame` is deployed we need to make two contract call because anyone can use this contract. We need to add attacks and special attacks. You might think we should have accepted this data in the contract constructor, but solidity only accepts up to 15 arguments in the contract constructor, hence we have created two separate methods to add attacks and special attacks. Doing so gives us the flexibility of updating special attacks in the marketplace anytime we want.
+Once `NFTEpicGame` is deployed we need to make two contract calls before anyone can use this contract. We need to add attacks and special attacks. You might think we should have accepted this data in the contract constructor, but solidity only accepts up to 15 arguments in the contract constructor, hence we have created two separate methods to add attacks and special attacks. Doing so gives us the flexibility of updating special attacks in the marketplace anytime we want.
 
 That's all we are doing in `run.ts`, deploying two smart contracts and calling `addAttacks` and `addSpecialAttacks` which sets up the game characters.
 
@@ -967,7 +968,7 @@ The `claimHealth` method does two things, make an `approve` call for 0.1 EPIC to
 `fetchSpecialAttacks` and `buySpecialAttack` are used on the marketplace screen.
 
 - `fetchSpecialAttacks` makes a call to the `getAllSpecialAttacks` method and returns the parsed data.
-- `buySpecialAttack` accepts the price and index of the special attack user wished to buy and check if the user has enough EPIC token balance to make the purchase.
+- `buySpecialAttack` accepts the price and index of the special attack user wishes to buy and checks if the user has enough EPIC tokens to make the purchase.
 - If the user has enough balance, we have to make an `approve` call for the attack's price and then call `buySpecialAttack` with the `index` value to add the special attack for that player's character.
 
 ```typescript
