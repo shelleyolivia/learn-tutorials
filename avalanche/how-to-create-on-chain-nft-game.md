@@ -2,7 +2,7 @@
 
 In this tutorial, we will learn how to create an NFT game with a Solidity smart contract deployed on Avalanche Network and a NextJS front-end to interact with the game.
 
-We will be creating an Avengers-theme NFT game with an ERC20 token, which can be used to mint characters in the game and buy special powers from the marketplace. Yes, we will be creating a marketplace where players can buy additional powers for their character. The game will have the following features -
+We will be creating an Avengers-themed NFT game with an ERC20 token, which can be used to mint characters in the game and buy special powers from the marketplace. Yes, we will be creating a marketplace where players can buy additional powers for their character. The game will have the following features -
 
 - Each user can mint a character of their choice using the EPIC token.
 - One can get the EPIC tokens from the faucet we will be creating in the dApp.
