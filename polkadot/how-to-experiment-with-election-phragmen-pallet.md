@@ -18,20 +18,20 @@ In this tutorial, we will use the Substrate node template to build our blockchai
 
 The first necessary step is to prepare the Substrate node template. To do this, clone the node template repository:
 
-```
+```text
 git clone https://github.com/substrate-developer-hub/substrate-node-template
 ```
 
 After that, go into the node template folder and checkout the latest `branch`:
 
-```
+```text
 cd substrate-node-template
 git checkout latest
 ```
 
 Finally, compile the node template (The first compilation can take a while, so grab a cup of coffee):
 
-```
+```text
 cargo build --release
 ```
 
@@ -39,19 +39,19 @@ Along with the node template, we will also use the front-end template that will 
 
 1 - Clone the front-end template repository. Caution: do not clone into the node template directory, exit the directory before performing this operation.
 
-```
+```text
 git clone https://github.com/substrate-developer-hub/substrate-front-end-template
 ```
 
 2 - Enter the front-end template directory and checkout the latest `branch`:
 
-```
+```text
 cd substrate-front-end-template
 git checkout latest
 ```
 
 3 - Install the front-end template dependencies using the following command:
-```
+```text
 yarn install
 ```
 
@@ -71,7 +71,7 @@ To add the Elections Phragmen and Collective pallets, follow these steps:
 
 3 - Add the `pallet-elections-phragmen` and `pallet-collective` crates to the dependencies list, so they will be available for the node template runtime.
 
-```
+```text
 [dependencies.pallet-collective]
 default-features = false
 git = 'https://github.com/paritytech/substrate.git'
@@ -87,7 +87,7 @@ version = '5.0.0-dev'
 
 4 - Now add the pallet-elections-phragmen and pallet-collective crates in the std feature set by adding the following lines within the `features` section:
 
-```
+```text
 [features]
 default = ['std']
 std = [
@@ -102,7 +102,7 @@ std = [
 
 If you forget to add the new pallets in the std feature set, you might see errors like the following:
 
-```
+```text
 error: cannot find macro `vec` in this scope
   --> /home/kelvin/.cargo/git/checkouts/substrate-7e08433d4c370a21/e6fbbd5/primitives/npos-elections/src/phragmms.rs:52:20
    |
@@ -123,7 +123,7 @@ To fix this error, just go back to step 4 and properly add the new pallets in th
 
 5 - Finally, we need to check that the dependencies resolve correctly, to do this, use the following command:
 
-```
+```text
 cargo check -p node-template-runtime
 ```
 
@@ -285,13 +285,13 @@ fn testnet_genesis(
 
 Finally, we can verify that everything has gone according to plan. To do this, check that the dependencies resolve correctly using the following command:
 
-```
+```text
 cargo check -p node-template-runtime
 ```
 
 During this step, you might see some errors like: 
 
-```
+```text
 error[E0412]: cannot find type `LockIdentifier` in this scope
      --> /home/kelvin/www/substrate-node-template/runtime/src/lib.rs:277:38
       |
@@ -306,7 +306,7 @@ error[E0412]: cannot find type `LockIdentifier` in this scope
 
 The above error means that you ended up forgetting to import the LockIdentifier in step 1 of the Elections Phragmén pallet configuration.
 
-```
+```text
 error[E0412]: cannot find type `Collective` in this scope
      --> /home/kelvin/www/substrate-node-template/runtime/src/lib.rs:291:27
       |
@@ -325,14 +325,14 @@ The above error means that you ended up forgetting to add the new pallets to the
 
 If there are no errors, we are ready to compile our blockchain! To perform the compilation, use the following command:
 
-```
+```text
 cargo build --release
 ```
 
 ## Start the blockchain
 If the compilation occurred correctly, we are ready to start our blockchain, use the following command:
 
-```
+```text
 ./target/release/node-template --dev
 ```
 
@@ -341,7 +341,7 @@ This command will run our blockchain in development mode, this means that our bl
 ## Start the front-end template
 With our blockchain running, we can now also run the front-end template. To do this, simply access the root folder of the front-end template and run the following command:
 
-```
+```text
 yarn start
 ```
 
@@ -354,7 +354,7 @@ Although we can interact with the Elections Phragmen pallet using the Pallet Int
 
 2 - Inside this file, copy and paste the following block of code:
 
-```js
+```jsx
 import React, { useEffect, useState } from 'react';
 import { Grid, Table, Button, Message, Form, Input, Dropdown } from 'semantic-ui-react';
 import { web3FromSource } from '@polkadot/extension-dapp';
@@ -575,16 +575,27 @@ export default function Election (props) {
 }
 ```
 
-Woah there! That's a lot of code! Although it is a lot of code, most of it is made up of the verbosity of the React.js framework. So let's break this code into parts to try to understand what is going on. From line 96 to line 214 is where we have everything that will be rendered by our created component. Our component will render 4 elements: 
+Woah there! That's a lot of code! Although it is a lot of code, most of it is made up of the verbosity of the React.js framework. So let's break this code into parts to try to understand what is going on. Our component will render 4 elements. To find them in the code, just look at the code in the return value to see which 4 elements the Election component is rendering.
+
+```jsx
+// src/Election.js
+
+return (
+    <>
+    <Grid.Row>
+// ...
+```
+
+In the code snippet you have just found, you can find the 4 elements rendered by our component:
 
 - A table of the current members, which are the accounts that won the last election.
 - A table of the current candidates, these are the accounts that are running in the current election.
 - A section for submitting your candidacy.
 - A section for submitting votes. 
 
-Well, how do all these elements work? **They all rely on the API found in the front-end template** that automatically detects the pallets of the blockchain and provides all the functions and variables of each pallet. You can find this API on line 8 of the file and you will notice that it is used in all interactions with the blockchain.
+Well, how do all these elements work? **They all rely on the API found in the front-end template** that automatically detects the pallets of the blockchain and provides all the functions and variables of each pallet. You can find this API at the beginning of the `Main` function and you will notice that it is used in all interactions with the blockchain.
 
-To fetch the data used in the candidate and member tables, we perform queries with the API that automatically return subscription functions for this data. What does this mean? It means that whenever member and candidate data changes, such as at the end of an election, for example, subscriptions will receive these updates, and our data tables will be updated as well. You can see the interaction with these functions in the useEffect block on line 64.
+To fetch the data used in the candidate and member tables, we perform queries with the API that automatically return subscription functions for this data. What does this mean? It means that whenever member and candidate data changes, such as at the end of an election, for example, subscriptions will receive these updates, and our data tables will be updated as well. You can see the interaction with these functions in the useEffect block.
 
 Well, the data consumption was explained, but what about an interaction with the Elections Phragmen pallet? The interactions are a bit different, for them, we need to put together the necessary data (collected in the candidacy and voting forms) and then send it in a signed transaction. Take a look at the `submitCandidacy` and `submitVote` functions to better understand how interactions with the Elections Phragmen pallet work.
 
@@ -592,18 +603,18 @@ Ok, after a long explanation about a frighteningly large file, we need to perfor
 
 1 - Open the src/App.js file in a text editor
 
-2 - At the beginning of the file, add the import of the `Election` component after the last import (line 17): 
+2 - At the beginning of the file, add the import of the `Election` component after the last import: 
 
-```js
+```jsx
 import Upgrade from './Upgrade';
 
 // Add this line
 import Election from './Election';
 ```
 
-3 - Add the `Election` component to the App grid (line 75):
+3 - Add the `Election` component to the App grid:
 
-```js
+```jsx
 <Grid.Row>
     <Interactor accountPair={accountPair} />
     <Events />
