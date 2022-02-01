@@ -437,7 +437,7 @@ response:  {
 
 # Conclusion
 
-Congratulations! We have made it to the end of the first installment of this Secret NFT series. We have covered a lot of information, and I feel you can really be proud of what you have achieved. Just to recap:
+Congratulations! We have made it to the end of the first instalment of this Secret NFT series. We have covered a lot of information, and I feel you can really be proud of what you have achieved. Just to recap:
 
 * You have minted your own, personalized NFT on the Secret network
 * You learned about the privacy model and how Viewing keys help us to save gas, while making sure we can verify ownership of an account
@@ -458,4 +458,4 @@ Let's keep on building!
 
 # About the author
 
-This tutorial was created by [Florian Uhde](https://twitter.com/florianuhde), a software engineer and game developer with a passion for blockchain, creativity and systemic design. You can get in touch with the author on [Figment Forum](https://community.figment.io/u/floar) if you have any queries pertaining to the tutorial, secretNFTs, etc.hello
+This tutorial was created by [Florian Uhde](https://twitter.com/florianuhde), a software engineer and game developer with a passion for blockchain, creativity and systemic design. You can get in touch with the author on [twitter](https://twitter.com/florianuhde) if you have any queries pertaining to the tutorial, secretNFTs, etc.

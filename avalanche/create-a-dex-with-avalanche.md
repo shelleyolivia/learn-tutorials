@@ -805,13 +805,13 @@ export default SellForm;
 
 # Conclusion
 
-Now you know about creating a Decentralized Exchange (DEX) with Trufflesuite and ReactJS on the Avalanche network.
+Now you know about creating a Decentralized Exchange (DEX) with Truffle suite and ReactJS on the Avalanche network.
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our discord channel**](https://discord.gg/fszyM7K)!
 
 # About the author
 
-[Devendra Yadav](https://community.figment.io/u/dev.koold)
+[Devendra Yadav](https://twitter.com/de_villa7)
 
 # References
 

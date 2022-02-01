@@ -531,7 +531,7 @@ Congratulations! We have successfully developed a working AMM model where users 
 
 # About the Author(s)  
 
-The tutorial was created by [Sayan Kar](https://github.com/SayanKar), [Yash Kothari](https://github.com/Yashkothari9), and [Nimish Agrawal](https://github.com/realnimish). You can reach out to them on [Figment Forum](https://community.figment.io/u/nimishagrawal100.in/) for any query regarding the tutorial.
+The tutorial was created by [Sayan Kar](https://github.com/SayanKar), [Yash Kothari](https://github.com/Yashkothari9), and [Nimish Agrawal](https://github.com/realnimish). You can reach out to them for any query regarding the tutorial.
 
 # References
 

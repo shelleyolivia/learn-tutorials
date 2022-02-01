@@ -246,5 +246,4 @@ Keep in mind this is not the only way to set up a full node. This node is now un
 
 # About the Author
 
-This tutorial was put together by [Aidan Dedecker](https://github.com/Aidandedecker/), a bright young member of the Learn community. You can contact him on the [community forums](https://community.figment.io/u/aidanbdedecker/summary).
-
+This tutorial was put together by [Aidan Dedecker](https://github.com/Aidandedecker/), a bright young member of the Learn community.

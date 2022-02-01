@@ -129,7 +129,7 @@ When you combine all 8 of these innovations, you get a web-scale blockchain. One
 At the end of the day, for the non-developer, blockchains are all an attempt to create a fault-tolerant replicated state machine. Every blockchain in competition comes at this problem with a different approach. Anchored by Proof-of-History, and guided by a team committed to delivering the best Web3 ecosystem possible, Solana is poised to make waves in the industry for years to come.
 
 # About the Author
-This tutorial was written by Brandon Goss, an aspiring crypto and blockchain research analyst. You can reach out to Brandon on [Figment Forum](https://community.figment.io/u/brandonmichaelgoss/summary) if you have any questions pertaining to this guide or Solana. 
+This tutorial was written by Brandon Goss, an aspiring crypto and blockchain research analyst. You can reach out to Brandon on [twitter](https://twitter.com/brandongoss5) if you have any questions pertaining to this guide or Solana. 
 
 # References
 [1] [Solana](https://solana.com/#)

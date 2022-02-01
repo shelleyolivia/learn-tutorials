@@ -339,4 +339,4 @@ Congratulations on finishing this tutorial! You have learned how to create and d
 
 # About the Author
 
-I'm Robin Thomas, a blockchain enthusiast with few years of experience working with various blockchain protocols. Feel free to connect with me on [GitHub](https://github.com/robin-thomas) or [Figment Community](https://community.figment.io/u/robinthomas2591).
+I'm Robin Thomas, a blockchain enthusiast with few years of experience working with various blockchain protocols. Feel free to connect with me on [GitHub](https://github.com/robin-thomas).

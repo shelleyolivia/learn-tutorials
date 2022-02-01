@@ -1625,7 +1625,7 @@ In this tutorial we learned about:
 
 # About The Author
 
-This tutorial is written by [Sandeep Ghosh](https://github.com/blocksan). You can connect with him on [LinkedIn](https://www.linkedin.com/in/ersandy/) & [Figment Forum](https://community.figment.io/u/sandyghosh555/). He is a passionate blockchain engineer, an avid thinker who is currently working on building multiple products in the Solana ecosystem.
+This tutorial is written by [Sandeep Ghosh](https://github.com/blocksan). You can connect with him on [LinkedIn](https://www.linkedin.com/in/ersandy/). He is a passionate blockchain engineer, an avid thinker who is currently working on building multiple products in the Solana ecosystem.
 
 # References
 

@@ -1314,7 +1314,7 @@ There is still room for improvements in the Blog Dapp like,
 
 # About Author
 
-This tutorial was created by [Kiran Bhalerao](https://github.com/kiran-bhalerao). For any suggestions/questions, you can connect with author on [Figment Forum](https://community.figment.io/u/kiranbhalerao/).
+This tutorial was created by [Kiran Bhalerao](https://github.com/kiran-bhalerao). For any suggestions/questions, you can connect with author on [twitter](https://twitter.com/_KiranBhalerao).
 
 # References
 

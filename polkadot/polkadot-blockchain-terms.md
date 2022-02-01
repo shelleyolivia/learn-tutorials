@@ -175,7 +175,7 @@ Why not try building your first Substrate-based chain!
 
 # About the Author
 
-This guide was created by Danny Salman. You can reach out to Danny on [Figment Forum](https://community.figment.io/u/salman.danny03/) & on GitHub for help or if you have questions pertaining to Polkadot and this guide.
+This guide was created by Danny Salman. You can reach out to Danny on [GitHub](https://github.com/DannyS03) for help or if you have questions pertaining to Polkadot and this guide.
 
 # References
 
