@@ -284,7 +284,7 @@ After this executed successfully you can take the program you created in the [fi
 
 # Conclusion
 
-Congratulations! We have made it to the end of the first installment of this Secret NFT series. We have covered a lot of information, and I feel you can really be proud of what you have achieved. Just to recap:
+Congratulations! We have made it to the end of the first instalment of this Secret NFT series. We have covered a lot of information, and I feel you can really be proud of what you have achieved. Just to recap:
 
 * You created and compiled your very own secretNFT contract, based on snip721
 * You explored different parameters to configure the contract to your liking
@@ -294,7 +294,7 @@ This is a solid foundation to play with and build upon!
 
 # About the author
 
-This tutorial was created by [Florian Uhde](https://twitter.com/florianuhde), a software engineer and game developer with a passion for blockchain, creativity and systemic design. You can get in touch with the author on [Figment Forum](https://community.figment.io/u/floar) if you have any queries pertaining to the tutorial, secretNFTs, etc.
+This tutorial was created by [Florian Uhde](https://twitter.com/florianuhde), a software engineer and game developer with a passion for blockchain, creativity and systemic design.
 
 # References
 

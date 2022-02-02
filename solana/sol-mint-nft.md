@@ -245,7 +245,7 @@ In this tutorial, we created our own NFT marketplace and NFT on the Solana block
 
 # About the author
 
-This tutorial was created by Jacob Makarsky. He can be found on [Github](https://github.com/jacobmakarsky) or the [Figment Forum](https://community.figment.io/u/jacobmakarsky/summary).
+This tutorial was created by Jacob Makarsky. He can be found on [Github](https://github.com/jacobmakarsky).
 
 # References
 

@@ -451,5 +451,5 @@ Thank you for following along with this tutorial, now take this knowledge and bu
 
 # About the Author
 
-This tutorial was created by [Nikhil Bhintade](https://www.linkedin.com/in/nikbhintade). A crypto enthusiast who wants to document what he learned. You can get in touch with the author on [Figment Forum](https://community.figment.io/u/nikbhintade/) and on [Github](https://github.com/nikbhintade).
+This tutorial was created by [Nikhil Bhintade](https://www.linkedin.com/in/nikbhintade). A crypto enthusiast who wants to document what he learned. You can get in touch with the author on [Github](https://github.com/nikbhintade).
 

@@ -122,13 +122,13 @@ Copy the address of the deployed contract to import in the Avalanche wallet. It 
 Congratulations! You have successfully added the NFT as collectible in the Avalanche wallet.
 
 # Conclusion
-Thank you for completing this tutorial, you should now know how to create an NFT with royalties on Avalanche using a simple Solidity smart contract. Have fun with it! If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out this [Avalanche NFT tutorial](https://learn.figment.io/network-documentation/avalanche/tutorials/create-mint-transfer-nft)!.
+Thank you for completing this tutorial, you should now know how to create an NFT with royalties on Avalanche using a simple Solidity smart contract. Have fun with it! If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out this [Avalanche NFT tutorial](https://learn.figment.io/tutorials/create-mint-transfer-nft)!.
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our discord channel**](https://discord.gg/fszyM7K)!
 
 # About the author
 
-[Devendra Yadav](https://community.figment.io/u/dev.koold)
+[Devendra Yadav](https://twitter.com/de_villa7)
 
 # References
 

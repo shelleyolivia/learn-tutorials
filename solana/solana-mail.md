@@ -2350,4 +2350,4 @@ There's still a lot of grounds to cover on this project. For instance, data stor
 
 # About the Author
 
-This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe). You can get in touch with the author on [Figment Forum](https://community.figment.io/u/segun-ogundipe) and on [GitHub](https://github.com/segun-ogundipe)
+This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe). You can get in touch with the author on [GitHub](https://github.com/segun-ogundipe)

@@ -261,4 +261,4 @@ Understanding this unit of measurement: 1e16 = 0.01CUSD, 1e15 = 0.1CUSD, 1e14 = 
 #
  ###  About the Author 
    
-  This tutorial was put together by Aidan Dedecker. Here is my git hub page: https://github.com/Aidandedecker/Aidandedecker. here is my figment forum profile: https://community.figment.io/u/aidanbdedecker/summary.
+  This tutorial was put together by Aidan Dedecker. Here is my git hub page: https://github.com/Aidandedecker/Aidandedecker.

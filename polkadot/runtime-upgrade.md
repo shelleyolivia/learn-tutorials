@@ -230,7 +230,7 @@ During reading the tutorial you have learnt basics of Rust language, how to comp
 
 # About The Author
 
-The tutorial was created by Tomasz Waszczyk. In case any questions, you can reach out to Tomasz on [Figment Forum](https://community.figment.io/u/pantarhei) and on [Github](https://github.com/tomaszwaszczyk) for help or explaining doubts pertaining to Polkadot/Kusama ecosystem and this guide.
+The tutorial was created by Tomasz Waszczyk. In case any questions, you can reach out to Tomasz on [Github](https://github.com/tomaszwaszczyk) for help or explaining doubts pertaining to Polkadot/Kusama ecosystem and this guide.
 
 # References
 
