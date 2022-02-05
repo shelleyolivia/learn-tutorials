@@ -1,6 +1,6 @@
 # Introduction
 
-In this tutorial, you will learn how to successfully connect your React Native App to use the Celo Wallet and return a Wallet Address from the Alfajores Wallet.
+In this tutorial, you will learn how to successfully connect your React Native App to use the Celo Wallet and return a Wallet Address, CELO and cUSD balances from your personal Valora Mobile Wallet (installed on your iPhone or Android phone).
 
 _To carry out transactions on the Celo Network, you have to connect your Wallet to be able to carry out transactions. When you start out building a dAPP using React Native, you will need this guide to demonstrate how you can install the required libraries to get your dApp up and running._
 
@@ -8,13 +8,15 @@ _To carry out transactions on the Celo Network, you have to connect your Wallet 
 
 This article assumes that you have basic knowledge of JavaScript \(TypeScript\) and how to start a React Native App using expo. It is also assumed that you have read the expo documentation and have basic knowledge of the Celo Wallet.
 
-1. [Celo Wallet](https://docs.celo.org/getting-started/alfajores-testnet/using-the-mobile-wallet)
+1. [Celo Wallet](https://docs.celo.org/getting-started/alfajores-testnet/using-the-mobile-wallet and https://valoraapp.com/)
 2. [React Native using expo](https://docs.expo.io/)
-3. [DappKit](https://docs.celo.org/developer-guide/dappkit/setup)
+4. [Valora + WalletConnect v1](https://docs.celo.org/developer-resources/walkthroughs/valora-wc-v1)
 
 # Project Setup
 
-You will need node version `^10.13.0`  
+The app is implemented using node version `^v17.3.0` and modifies the original app based on`^10.13.0`
+The original app was used as a foundation and we replaced the initial DappKit approach (https://docs.celo.org/developer-guide/dappkit) 
+that is no longer recommended with WalletConnect v1
 Open the Celo documentation and follow the setup instructions:
 
 `expo init $YOUR_APP_NAME`  
@@ -22,22 +24,17 @@ We will use the `TypeScript Template >> Tabs`
 
 ![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/terminalimage.png)
 
-To use the Celo DappKit, install using: `yarn add @celo/dappkit`  
-DAppKit's dependencies require a bit of adjustment to use vanilla Expo. The first are a lot of the Node.js modules that are expected. You can get those mostly by using the following modules:`yarn add node-libs-react-native vm-browserify`
+To use the WalletConnect v1, install using: 
 
-**Important Note!**
+```
+yarn add @celo/contractkit
+yarn add @walletconnect/web3-provider
+yarn add react-native-tcp
+yarn add web3
+```
+The below step is not needed if you want to run the application in a web browser
 
-The default React Native library that is installed with the expo package will cause your app to break. To fix this, go to the `package.json` file and replace the `react-native` version value:
-
-with this: `^0.63.4` at the time of writing this tutorial. You can always use the most recent version of React Native.
-
-**A Note on the installed Packages**
-
-_node-libs-react-native_: This package provides React Native compatible implementations of Node core modules like stream and http. This is a fork of node-libs-browser with a few packages swapped to be compatible in React Native.
-
-_vm-browserify_ is used to emulate node's vm module for the browser.
-
-**A couple of points to note:**
+**A couple of points to note for iOS simulator and Expo Go from App Store:**
 
 _The metro.config.js file_
 
@@ -102,6 +99,8 @@ Install the Redux libraries using the following command:
 For TypeScript to run redux logger locally without any errors, you have to add the library `@types/redux-logger` to the devDependencies using the command:
 
 `yarn add @types/redux-logger --dev`
+
+Prior running the application make sure to execute `export NODE_OPTIONS=--openssl-legacy-provider` needed for some Linux operation systems (Centos7)
 
 Run the app using: `expo start`
 
