@@ -16,18 +16,8 @@ This article assumes that you have basic knowledge of JavaScript \(TypeScript\) 
 
 The app is implemented using node version `^v17.3.0` and modifies the original app based on`^10.13.0`
 The original app was used as a foundation and we replaced the initial DappKit approach (https://docs.celo.org/developer-guide/dappkit) 
-that is no longer recommended, with WalletConnect v1
-Open the Celo documentation and follow the setup instructions.
-
-1. Make sure you have nvm installed. This helps you switch between node versions very easy, depending on project needs
-```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
-```
-2. Install and use node v17.3.0
-```
-nvm install v17.3.0
-nvm use 17.3.0
-```
+that is no longer recommended with WalletConnect v1
+Open the Celo documentation and follow the setup instructions:
 
 `expo init $YOUR_APP_NAME`  
 We will use the `TypeScript Template >> Tabs` 
@@ -112,22 +102,15 @@ For TypeScript to run redux logger locally without any errors, you have to add t
 
 Prior running the application make sure to execute `export NODE_OPTIONS=--openssl-legacy-provider` needed for some Linux operation systems (Centos7)
 
-Run the app using: `expo start` You should see the following:
+Run the app using: `expo start`
 
-![Start](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/START_APP.png)
-
-Point your web browser under: http://localhost;19002 according to above picture. 
-In the following screen, choose "Run in web browser" and your app will be launched in a new web page.
-
-![Run in web browser](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/RUN_WEB_BROWSER.png)
-
+Find documentation how to run your app [here](how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp.md)
 
 # Code
 
 After installing the required libraries, we can then build 2 simple screens in the React Native app.   
-The first screen will have two buttons. The "connect" button will be used to sign a User into the dApp via your Valora Mobile App.
-The disconnect button will close the connection. For a new connection, the "connect" button needs to be pushed again.
-The second screen will be the screen that proves that the user has successfully authenticated. The second screen will return the user's wallet address, his cUSD and CELO balances
+The first screen will have one button. The button will be used to sign a User into the dApp.  
+The second screen will be the screen that proves that the user has successfully authenticated. The second screen will return the user's wallet address.
 
 **Let's build the Screens:**
 
@@ -135,23 +118,20 @@ The second screen will be the screen that proves that the user has successfully 
 export default function LoginScreen() {
   return (
     <View style={styles.container}>
-        <Button title="Connect Wallet"></Button>
-        <Button title="Disconnect Wallet"></Button>
+      <Button>Connect Wallet</Button>
     </View>
   );
 }
 ```
 
-![Login Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/TAB_ONE.png)
-
+![Login Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/loginscreen.png)
 
 ```javascript
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Address: </Text>
-      <Text>cUSD: </Text>
-      <Text>Celo: </Text>
+    <View>
+      <Text>wallet address</Text>
+      <Text>wallet phone</Text>
     </View>
   );
 }
@@ -161,7 +141,7 @@ export default function HomeScreen() {
 
 We will use Redux to manage the app state, we have to set up redux actions to make a call to the Celo Wallet and return the result which is then saved in the app global state. To keep your directory devoid of clutter, open a directory to hold the files for the Redux logic:
 
-![](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/NEW_DIR_FILES.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/reduxdirectory.png)
 
 You can add a file called `constants.js` to the Redux Store Directory. The constants will be used to track the wallet connection process by having the constants as the type of action that was dispatched and then update the state accordingly using a reducer.
 
@@ -170,7 +150,6 @@ export const walletConstants = {
   CONNECT_REQUEST: 'WALLET_CONNECT_REQUEST',
   CONNECT_SUCCESS: 'WALLET_CONNECT_SUCCESS',
   CONNECT_FAILURE: 'WALLET_CONNECT_FAILURE',
-  DISCONNECT_REQUEST: 'WALLET_DISCONNECT_REQUEST'
 };
 ```
 
@@ -178,49 +157,44 @@ Create a `walletsAction.ts` file in the actions folder
 
 ```javascript
 /*
- The export statement is used to export the two functions in the file so that the functions can be called using, for example `walletsActions.connect()`
+ The export statement is used to export the only function in the file so that the function can be called using `walletsActions.connect()`
  */
 export const walletActions = {
-  connect, disconnect,
+  connect,
 };
 
 /*
- Provider configuration to enable wallet connection
+This function is a simple method provided by Celo to connect to the Valora or Alfajores (for testing) wallet. The `dispatch()` is a redux function which is used to emit actions which we can then listen for in the reducer and update the state accordingly.
 */
-const provider = new WalletConnectProvider({
-  rpc: {
-    44787: "https://alfajores-forno.celo-testnet.org",
-    42220: "https://forno.celo.org",
-  },
-});
-
-/*
-This function is a simple method provided by Celo to connect to the Valora or Alfajores (for testing) wallet. 
-The `dispatch()` is a redux function which is used to emit actions which we can then listen for in the reducer and update the state accordingly.
-*/
-function connect(navigation) {
+function connect() {
   return (dispatch: any) => {
     // This dispatch calls a function that is declared later on in the code.
-    let asyncConnect = async() => {
-      await provider.enable();
-      const web3 = new Web3(provider);
-      let kit = newKitFromWeb3(web3)
-      kit.defaultAccount = provider.accounts[0]
-      let asyncGetData = async() => {
-        const stableToken = await kit.contracts.getStableToken();
-        const goldToken = await kit.contracts.getGoldToken();
-        const cUsdBalanceObj = await stableToken.balanceOf(kit.defaultAccount);
-        const goldBalanceObj = await goldToken.balanceOf(kit.defaultAccount);
-        const res = {address:kit.defaultAccount, cUsd:cUsdBalanceObj/10**18, celo:goldBalanceObj/10**18};
-        dispatch(success(res));
-        navigation.navigate('TabTwo');
-      }
-      provider.on("accountsChanged", (accounts) => {
-        asyncGetData();
-      });
-    }
     dispatch(request('Connecting to wallet'));
-    asyncConnect();
+
+    // These variables are needed to connect to the wallet
+    // requestId is used to identify the request so we can listen for the same request using the waitForAccoutAuth() function
+    // dappName holds the name of the App the wallet will expose as requesting for the detaila
+    // callback is the screen we want to send the user to after a successfull connection is made
+    const requestId = 'dapplogin';
+    const dappName = 'celodapp';
+    const callback = Linking.makeUrl('two');
+
+    //T his is from the Celo DappKit library, it fires up the wallet and gets the neccessary information
+    requestAccountAddress({
+      requestId,
+      dappName,
+      callback,
+    });
+
+    //This function listens for the request above and fire up an action to be handled by a reducer.
+    waitForAccountAuth(requestId)
+      .then((res) => {
+        dispatch(success(res));
+      })
+      .catch((err) => {
+        dispatch(failure(err));
+        dispatch(alertActions.error(err.toString()));
+      });
   };
 
   //These are the function calls which are dispatched when the user makes a request. The state of the app changes with the status of the request response.
@@ -234,22 +208,6 @@ function connect(navigation) {
     return { type: walletConstants.CONNECT_FAILURE, error };
   }
 }
-/* Disconnect from wallet function
-*/
-function disconnect() {
-  return (dispatch: any) => {
-    // This dispatch calls a function that is declared later on in the code.
-    let asyncDisconnect = async() => {
-        await provider.disconnect();
-    }
-    dispatch(requestDisconnect('Disconnecting from wallet'));
-    asyncDisconnect();
-    };
-    function requestDisconnect(message: string) {
-      return { type: walletConstants.DISCONNECT_REQUEST, message };
-
-    }
-}
 ```
 
 The above file is the `walletAction.ts` It contains the logic to connect to the Wallet and saves the response in the global redux state which is accessible to any part of the codebase. The next thing will be to write the reducer logic to handle the app state modification.
@@ -257,14 +215,13 @@ The above file is the `walletAction.ts` It contains the logic to connect to the 
 Create a `walletReducer.ts` file in the reducers folder
 
 ```javascript
-//The initial state of the wallet
+//T he initial state of the wallet
 const initialState = {
   failed: true,
   connecting: false,
   message: '',
   address: '',
-  cUsd: '',
-  celo:''
+  phone: '',
 };
 
 // This is the wallet reducer which takes the state and action as parameters.
@@ -280,8 +237,7 @@ export function wallet(state = initialState, action: any) {
       return {
         failed: false,
         address: action.res.address,
-        cUsd: action.res.cUsd,
-        celo: action.res.celo
+        phone: action.res.phoneNumber,
       };
     case walletConstants.CONNECT_FAILURE:
       return {
@@ -301,11 +257,11 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
-import { wallet } from './reducers/walletReducer';
+import { rootReducer } from './reducers';
 
 const loggerMiddleware = createLogger();
 
-export const store = createStore(wallet, applyMiddleware(thunkMiddleware, loggerMiddleware));
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 ```
 
 Let's update the `App.tsx` file with the Redux Provider.
@@ -321,37 +277,32 @@ export default function App() {
 }
 ```
 
-Time to update the LoginScreen with the Redux Actions:
+Time to update the LoginScreen and the HomeScreen with the Redux Actions:
 
 ```javascript
-export default function LoginScreen({ navigation }) {
+//The useDispatch is a React Redux Hook to dispatch an action creator.
+export default function HomeScreen() {
   const dispatch = useDispatch();
 
   // This function calls up the connect function from the walletAction Action
   const login = () => {
-    dispatch(walletActions.connect(navigation));
-  };
-
-  const logout = () => {
-    dispatch(walletActions.disconnect());
+    dispatch(walletActions.connect());
   };
 
   return (
     <View style={styles.container}>
-
-        <Button onPress={login} title="Connect Wallet"></Button>
-        <Button onPress={logout} title="Disconnect Wallet"></Button>
-
+      <Button onPress={login}>Connect Wallet</Button>
     </View>
   );
 }
 ```
 
-Also update the HomeScreen with the Redux Actions:
+Also update the HomeScreen and the HomeScreen with the Redux Actions:
 
 ```javascript
-export default function HomeScreen({ navigation }) {
-  const wallet = useSelector((state: any) => state);
+// Here, we connect to the global state with useSelector hook
+export default function HomeScreen() {
+  const wallet = useSelector((state: any) => state.wallet);
 
   // We make sure to handle instances where a user tries to navigate to this page without connecting the app to their wallet by making sure to navigate back to the loginscreen if a connection to the wallet hasn't been made yet
   React.useEffect(() => {
@@ -359,26 +310,21 @@ export default function HomeScreen({ navigation }) {
       navigation.navigate('Root');
     }
   }, []);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Address: {wallet.address}</Text>
-      <Text style={styles.title1}>cUSD: {wallet.cUsd}</Text>
-      <Text style={styles.title1}>Celo: {wallet.celo}</Text>
+    <View>
+      <Text>{wallet.address}</Text>
+      <Text>{wallet.phone}</Text>
     </View>
   );
 }
 ```
 
-Run your app and Login to see the Wallet address and balances returned to the Home Screen.
+Run your app and Login to see the Wallet and Phone number returned to the Home Screen.
 
-First, scan your valora mobile app with the WalletConnect screen shown after the Connect button is pressed (first picture from below)
-You need to allow access from your Valora Mobile app in order to see the data from Home Screen (second picture from below)
-When permission granted, the second tab (home screen) is automatically displayed with address and balances information (third picture from below)
-![Wallet connect Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/VALORA_QR.png)
+![Wallet Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/walletscreen.png)
 
-![Wallet Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/VALORA_CONNECT_F.jpeg)
-
-![Home Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/VALORA_TAB2_F.png)
+![Home Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/homescreen.png)
 
 # Conclusion
 
@@ -387,5 +333,3 @@ This was a very interesting tutorial. In this tutorial, we learned: How to succe
 # About the Authors
 
 This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe) and [Emmanuel Oaikhenan](https://github.com/emmaodia).
-Changes using WalletConnect instead of Celo DappKit were done by [Mircea Carasel] (https://ro.linkedin.com/in/mirceac). 
-Also the full code with the WalletConnect approach here: https://github.com/mirceac/valora2
