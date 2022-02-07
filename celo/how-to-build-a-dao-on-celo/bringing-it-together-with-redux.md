@@ -130,5 +130,5 @@ Congratulations for completing these tutorials. There are no limits to what you 
 
 # About the authors 
 
-This tutorial was created by [Segun Ogundipe](https://community.figment.io/u/segun-ogundipe) and [Emmanuel Oaikhenan](https://community.figment.io/u/odia.emma/).
+This tutorial was created by [Segun Ogundipe](https://github.com/Segun-Ogundipe) and [Emmanuel Oaikhenan](https://github.com/emmaodia).
 

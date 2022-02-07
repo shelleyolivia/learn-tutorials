@@ -149,4 +149,4 @@ The App is available in an Open Source code repository on [Github](https://githu
 We hope this was not the longest tutorial for you to follow. Lol. Congratulations if you have made it this far! There’s no limits to what you can build given the knowledge that you have thus acquired reading and following this tutorial! Go forth and build great things! 
 
 About the Authors
-This tutorial was created by [Segun Ogundipe](https://community.figment.io/u/segun-ogundipe). Connect with Segun on [LinkedIn](https://www.linkedin.com/in/segun-ogundipe/) and [Emmanuel Oaikhenan](https://community.figment.io/u/odia.emma/).
+This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe/) and [Emmanuel Oaikhenan](https://github.com/emmaodia).

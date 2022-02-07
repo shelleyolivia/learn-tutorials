@@ -1107,7 +1107,7 @@ Dapp-scaffold allows you to connect to your wallet, you can move forward by crea
 
 # About the author
 
-This tutorial was created by Giovanni Fu. He can be found on [Github](https://github.com/aeither) or the [Figment Forum](https://community.figment.io/u/giovannifulin/summary).
+This tutorial was created by Giovanni Fu. He can be found on [Github](https://github.com/aeither).
 
 # References
 

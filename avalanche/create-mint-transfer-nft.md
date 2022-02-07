@@ -130,11 +130,11 @@ After pressing **Send Transaction** it will be published on the network, and the
 
 Now, you should know how to create families of collectible NFTs, mint NFTs in groups, and send them to other addresses. Have fun with it! If you would like to know the technical background of how NFTs work on the Avalanche network or would like to build products using NFTs, please check out this [Avalanche NFT tutorial](https://learn.figment.io/tutorials/creating-an-nft-part-1)!.
 
-If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://community.figment.io/) or [**Join our discord channel**](https://discord.gg/fszyM7K)!
+If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our discord channel**](https://discord.gg/fszyM7K)!
 
 # About the author
 
-[Devendra Yadav](https://community.figment.io/u/dev.koold)
+[Devendra Yadav](https://twitter.com/de_villa7)
 
 # References
 

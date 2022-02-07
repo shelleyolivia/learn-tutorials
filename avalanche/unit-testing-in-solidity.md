@@ -255,7 +255,7 @@ Though this tutorial covers the basics involved in writing unit tests for smart 
 
 # About the author
 
-This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe), You can get in touch with the author on [Figment Forum](https://community.figment.io/u/segun-ogundipe) and on [GitHub](https://github.com/segun-ogundipe)
+This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe), You can get in touch with the author on [GitHub](https://github.com/segun-ogundipe)
 
 If you had any difficulties following this tutorial or simply want to discuss Avalanche tech with us you can [**join our community today**](https://discord.gg/fszyM7K)!
 
