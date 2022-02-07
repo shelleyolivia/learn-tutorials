@@ -1,6 +1,6 @@
-# Introduction  
-Avalanche is a low cost, high-speed blockchain network on which we can deploy smart contracts written in solidity. Due to its low gas fees and a high number of transactions per second, Avalanche is a good platform for deploying dApps on it.     
+# Introduction     
 In this tutorial, we will learn how to build a decentralized Kickstarter dApp having features namely create a project, fund a project, withdraw fund, get refund if funding isn't successful etc. We will build the smart contract in Solidity and the frontend of our application with the help of ReactJS.  
+Avalanche is a low cost, high-speed blockchain network on which we can deploy smart contracts written in solidity. Due to its low gas fees and a high number of transactions per second, Avalanche is a good platform for deploying dApps on it.       
   
 # Prerequisites
 - Familiarity with ReactJS and Solidity.  
@@ -678,7 +678,7 @@ Congratulations! We have successfully developed a working decentralized Kickstar
 ![metamask wallet with multiple account display](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_multiple_accounts.jpeg)  
       
 # About the author(s)
-This tutorial was created by [Soumyajit Deb](https://github.com/hyp3r5pace) and [Sayan Kar](https://github.com/SayanKar). You can reach out to them on [Figment Forum](https://community.figment.io/u/debsoumyajit100/) for any query regarding the tutorial.
+This tutorial was created by [Soumyajit Deb](https://github.com/hyp3r5pace) and [Sayan Kar](https://github.com/SayanKar). You can reach out to [Soumyajit Deb](https://www.linkedin.com/in/soumyajitdeb/) for any query regarding the tutorial.  
   
 # References
 [Deploy a smart contract on Avalanche using Remix and Metamask](https://docs.avax.network/build/tutorials/smart-contracts/deploy-a-smart-contract-on-avalanche-using-remix-and-metamask/)
