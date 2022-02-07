@@ -116,7 +116,7 @@ Run the app using: `expo start` You should see the following:
 
 ![Start](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/START_APP.png)
 
-Point your web browser under: http://localhost:19002 according to above picture. 
+Point your web browser under: http://localhost;19002 according to above picture. 
 In the following screen, choose "Run in web browser" and your app will be launched in a new web page.
 
 ![Run in web browser](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/RUN_WEB_BROWSER.png)
@@ -371,17 +371,12 @@ export default function HomeScreen({ navigation }) {
 
 Run your app and Login to see the Wallet address and balances returned to the Home Screen.
 
-1. First, scan your valora mobile app with the WalletConnect screen shown after the Connect button is pressed (first picture from below)
-
-2. You need to allow access from your Valora Mobile app in order to see the data from Home Screen (second picture from below)
-
-3. When permission granted, the second tab (home screen) is automatically displayed with address and balances information (third picture from below)
-
+First, scan your valora mobile app with the WalletConnect screen shown after the Connect button is pressed (first picture from below)
+You need to allow access from your Valora Mobile app in order to see the data from Home Screen (second picture from below)
+When permission granted, the second tab (home screen) is automatically displayed with address and balances information (third picture from below)
 ![Wallet connect Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/VALORA_QR.png)
 
-
 ![Wallet Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/VALORA_CONNECT_F.jpeg)
-
 
 ![Home Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/VALORA_TAB2_F.png)
 
@@ -392,7 +387,5 @@ This was a very interesting tutorial. In this tutorial, we learned: How to succe
 # About the Authors
 
 This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe) and [Emmanuel Oaikhenan](https://github.com/emmaodia).
-
 Changes using WalletConnect instead of Celo DappKit were done by [Mircea Carasel] (https://ro.linkedin.com/in/mirceac). 
-
 Also the full code with the WalletConnect approach here: https://github.com/mirceac/valora2
