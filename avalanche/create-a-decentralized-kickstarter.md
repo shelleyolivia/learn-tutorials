@@ -11,7 +11,10 @@ Avalanche is a low cost, high-speed blockchain network on which we can deploy sm
 - [Metamask extension](https://metamask.io/download/) on your browser  
   
 # Implementing the smart contract  
-  
+
+![Image displaying contract_architecture](https://github.com/figment-networks/learn-tutorials/raw/master/assets/create-a-decentralized-kickstarter-05.jpg) 
+The above image displays the architecture of the smart contract.
+
 Now we will build the smart contract of our application. Let's start by making a contract named **crowdfunding**.
 
 ```solidity
