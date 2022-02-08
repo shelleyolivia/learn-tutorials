@@ -597,16 +597,17 @@ contract crowdfunding{
 ```
   
 Now, navigate to the solidity contract compiler tab on the left side navigation bar and click the blue button to compile `crowdfunding.sol` contract. Also, note down the `ABI` after compilation is completed.  
-
-Navigate to deploy tab and open the "ENVIRONMENT" drop-down. Select "Injected Web3" (make sure metamask is loaded) and click the "deploy" button.  
+{% hint style="danger" %}  
+Make sure the compiler version mentioned in Remix, matches the version mentioned in the smart contract.  
+{% endhint %}  
+  
+Navigate to deploy tab and open the "ENVIRONMENT" drop-down. Select "Injected Web3" (make sure metamask is loaded) and click the "deploy" button.   
+{% hint style="danger" %}    
+Before deploying the smart contract on testnet, make sure the deployment environment in Remix is set to **Injected web3**.  
+{% endhint %}  
   
 Approve the transaction on Metamask pop-up interface. Once our contract is deployed successfully, make note of the deployed `contract address`.  
   
- ## Troubleshooting in remix  
-  - **Install Metamask**: Make sure the metamask browser extension is installed before smart contract is deployed on remix.  
-  - **Compiler version**: Make sure the compiler version mentioned in Remix, matches the version mentioned in the smart contract.  
-  - **Injected web3**: Before deploying the smart contract on testnet, make sure the deployment environment in Remix is set to **Injected web3**.  
-      
 # Creating a frontend in React  
   
 Now, we are going to create a react app and set up the frontend of the application.  
