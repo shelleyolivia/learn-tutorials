@@ -357,12 +357,12 @@ Prior running the application make sure to execute `export NODE_OPTIONS=--openss
 
 Run the app using: `expo start` You should see the following:
 
-![Start](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/START_APP.png)
+![Start](https://github.com/figment-networks/learn-tutorials/raw/master/assets/START_APP.png)
 
 Point your web browser under: http://localhost:19002 according to above picture. 
 In the following screen, choose "Run in web browser" and your app will be launched in a new web page.
 
-![Run in web browser](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/RUN_WEB_BROWSER.png)
+![Run in web browser](https://github.com/figment-networks/learn-tutorials/raw/master/assets/RUN_WEB_BROWSER.png)
 
 ## Code changes
 1. In the `constants.js` add new constant:
@@ -484,7 +484,7 @@ export default function LoginScreen({ navigation }) {
 }
 ```
 Here is how the login page should look like now, the new disconnect button is added
-![Login Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/TAB_ONE.png)
+![Login Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/TAB_ONE.png)
 
 5. Change HomeScreen to display balances in addition to address
 
@@ -509,13 +509,13 @@ Run your app and Login to see the Wallet address and balances returned to the Ho
 
 3. When permission granted, the second tab (home screen) is automatically displayed with address and balances information (third picture from below)
 
-![Wallet connect Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/VALORA_QR.png)
+![Wallet connect Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/VALORA_QR.png)
 
 
-![Wallet Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/VALORA_CONNECT_F.jpeg)
+![Wallet Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/VALORA_CONNECT_F.jpeg)
 
 
-![Home Screen](https://github.com/mirceac/learn-tutorials/blob/connectCeloWallet/celo/connect-celo-wallet/VALORA_TAB2_F.png)
+![Home Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/VALORA_TAB2_F.png)
 
 # Conclusion
 
