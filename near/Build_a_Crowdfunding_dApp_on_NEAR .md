@@ -1,4 +1,5 @@
 
+
 # Introduction
 
 The dApp will have the following functionalities:
@@ -40,24 +41,26 @@ We have looked at the things we need to install to follow along in this tutorial
 
 We set up our project with [create-near-app](https://github.com/near/create-near-app) by running the following command:
 
-    npx create-near-app --frontend=react --contract=rust crowdfundDapp
-    cd crowdfundDapp
+```shell
+ npx create-near-app --frontend=react --contract=rust crowdfundDapp
+ cd crowdfundDapp
+```
 
 with the `--frontend=react` and `--contract=rust` options, we create our project to have a react frontend and a rust contract. After waiting a while for the command to install everything, we see this in our terminal:
 
-![](https://paper-attachments.dropbox.com/s_6663B3E85151DBD5BD66114327FA68CBB8E9D8C0AC631CAC16FA01B63E05A7E0_1643847478993_createcrowdfund.png)
+![create crowdfund](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/createcrowdfund.png?raw=true)
 
 
 Now everything is successfully installed, and everything is ready to go, let’s look at what our file structure looks like.
 
 ## File structure
 
-![](https://paper-attachments.dropbox.com/s_6663B3E85151DBD5BD66114327FA68CBB8E9D8C0AC631CAC16FA01B63E05A7E0_1643848112786_filestructure.png)
+![file structure](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/filestructure.png?raw=true)
 
 
 In our file structure, we have the `contract` folder, where we will be writing our contract specifically in the `src` directory. Then there is our `near-dev` folder that contains the configuration for deploying our contract in development mode and our `src` folder for our frontend. Looking closer into our contract folder:
 
-![](https://paper-attachments.dropbox.com/s_6663B3E85151DBD5BD66114327FA68CBB8E9D8C0AC631CAC16FA01B63E05A7E0_1643848699118_contract.png)
+![project image](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/contract.png?raw=true)
 
 
 In the contract folder we have the `src` folder where we’ll be creating a `model.rs`, `lib.rs`,  and `utils.rs` file. We already have the `lib.rs` file, so no need to create another one. The `cargo.toml` file contains information about our contract, including all the dependencies we need. 
@@ -82,7 +85,8 @@ Create a `model.rs`, `lib.rs`, and `utils.rs` file in the `src` folder. In our `
 > The `utils.rs` file contains some helpful functions and types we will be using as we build our contract, with some comments explaining what they do. Don’t get intimidated as you only need to copy and paste it into your `utils.rs` file
 
 
-    // utils.rs
+```rust   
+ // utils.rs
     use near_sdk::{
         env,
         PromiseResult,
@@ -136,11 +140,12 @@ Create a `model.rs`, `lib.rs`, and `utils.rs` file in the `src` folder. In our `
             _ => panic!("Expected PromiseStatus to be successful"),
         };
     }
-
+```
 ## Create our models
 We can describe the model in our contract as a custom data container for defining new types. Just like the way we have primitive types, we can create our own custom types in our model that describe or are patterned to what we are building. The code for our `model.rs` file can be found below and we will explain what it does step by step
 
-    // model.rs  
+```rust  
+// model.rs  
     use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
     #[allow(unused_imports)]
     use near_sdk::{env, near_bindgen};
@@ -195,33 +200,36 @@ We can describe the model in our contract as a custom data container for definin
             }
         }  
     }
-
+```
 Let’s breakdown what the code above is doing:
 
+```rust  
     use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
     #[allow(unused_imports)]
     use near_sdk::{env, near_bindgen};
     use near_sdk::serde::{Deserialize, Serialize};
-
+```
 Above we have the rust contract standard imports and can see the dependencies that are used in the `Cargo.toml` file. The dependencies that have to do with serialization which are `BorshDeserialize` and `BorshSerialize` are used to bundle our contract code and storage so it is ready for NEAR blockchain. The `use` statement before the dependencies just shows which dependencies we are using in this file.
 
 
 > `env` is used to log into your console or return some useful information like the signer’s account
 
 
-    // model.rs
+```rust
+   // model.rs
     use crate::utils::{
         AccountId,
         Money,
         Timestamp
     };
-
+```
 Here, we just import some custom types we will be using from our `utils.rs` file. After this piece of code, we have our crowdfund `struct` which is crucial to our contract.
 
 ## Crowdfund Struct
 A `struct` in rust is similar to classes in other languages. Structs kind of hold the state of the contract. Building our contract, our `struct` will be followed by an `impl`, where we write the core logic function of the contract.
 
-    //model.rs
+```rust   
+//model.rs
     #[derive(Clone, Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
     #[serde(crate = "near_sdk::serde")]
     pub struct Crowdfund{
@@ -235,14 +243,15 @@ A `struct` in rust is similar to classes in other languages. Structs kind of hol
         description: String,
        pub votes: Vec<String>
     }
-
+```
 We want to be able to add a new crowdfunding project, so the crowdfund `struct` above contains the fields of information a particular crowdfund project will have. We can see that each of the fields has a type. The last field is a type of vector, but we can just look at it as an array.
 
 
 > The keyword `pub` means that whatever we prefix it with is public and can be used externally
 
 
-    //model.rs
+```rust
+  //model.rs
     impl Crowdfund{
         pub fn new(id:i32, title: String, donation_target:u128, description: String) -> Self {
             
@@ -259,7 +268,7 @@ We want to be able to add a new crowdfunding project, so the crowdfund `struct` 
             }
         }
     }
-
+```
 The block of code above is where we initialize our `Crowdund` model. The contract was initialized with some arguments and also contains some default data like the `creator` field which has its default as the signer account’s id. The `total_donations` and `total_votes` are also set to zero by default. The contract is also initialized with some arguments that we will provide when invoking the function to add a crowdfund. The arguments are:
 
 - `id`: A unique ID for each crowdfund
@@ -269,7 +278,8 @@ The block of code above is where we initialize our `Crowdund` model. The contrac
 
 The following model we have in our `model.rs` file is:
 
-    //model.rs
+```rust  
+//model.rs
     #[derive(Clone, Serialize, Deserialize, BorshDeserialize, BorshSerialize)]
     #[serde(crate = "near_sdk::serde")]
     pub struct Donation {
@@ -282,7 +292,7 @@ The following model we have in our `model.rs` file is:
             }
         }  
     }
-
+```
 For our donation `struct` we have a `donor` field we would like to store on the blockchain. Then we initialize the donation `struct` with the `donor` with the default value of the `predecessor_account_id()` which signifies the person that donated to the crowdfunding campaign.
 Now let's move over to our `lib.rs` file where we call the different functions that will make all the features for our crowdfunding dApp possible.
 
@@ -291,7 +301,7 @@ Now let's move over to our `lib.rs` file where we call the different functions t
 
 We have created our models in the model.rs file and we are now moving over to our `lib.rs` file where we will be writing the different functions we need to call to perform certain operations in the dApp. Before we get into the nitty-gritty of things let's look at some code we need available at the top of our `lib.rs` file.
 
-    //lib.rs
+  ```rust //lib.rs
     mod models;
     mod utils;
     use crate::{
@@ -310,23 +320,27 @@ We have created our models in the model.rs file and we are now moving over to ou
     use near_sdk::{borsh::{self, BorshDeserialize, BorshSerialize}, Promise};
     #[allow(unused_imports)]
     use near_sdk::{env, PromiseIndex, near_bindgen};
-    near_sdk::setup_alloc!();
-    
+    near_sdk::setup_alloc!();   
+
+```
 
 The first thing we do in our `lib.rs` file is import the `utils.rs` and `models.rs` modules which are also in the same `src` folder. After that, we signify what in particular we will be using in those modules with the `use` keyword, then finally the rust standard imports. Now to continue we need to create a contract struct 
 
-    #[near_bindgen]
+```rust  
+ #[near_bindgen]
     #[derive(Clone, Default, BorshDeserialize, BorshSerialize)]
     pub struct Contract {
         owner: AccountId,
         crowdfunds: Vec<Crowdfund>,
         donations: Vec<Donation>,
     }
+```
 > The `#[near_bindgen]` before our contract `struct` is to allow easy compilation of our contract code into WebAssembly, so it is compatible and optimizable for the NEAR blockchain
 
 In our contract `struct` we have the the `owner` field and then we have the `crowdfund` and `donation` field which are just vectors of their models `Crowdfund` and `Donation`. Next, we will have the `impl`
 
-    #[near_bindgen]
+```rust 
+  #[near_bindgen]
     impl Contract{
         #[init]
         pub fn init(
@@ -342,16 +356,18 @@ In our contract `struct` we have the the `owner` field and then we have the `cro
             }
         }
     }
+```
 
 In our Contract `impl` the `#init` allows us to create a custom initialization of the contract with a function that takes in a parameter of `owner`. We construct a new, empty vector with the `Vec::new()`and assign it to `crowdfund` and `donations` respectively.
 
 
 > The vector will not be allocated until elements are pushed onto it.
 
-## The `**add_crowdfund**` function
+## The add_crowdfund function
 After our initialization, we start writing our functions. The first function we have is the `add_crowdfund` function.
 
-        pub fn add_crowdfund(&mut self, title: String, donate:u128,description: String) {
+```rust
+       pub fn add_crowdfund(&mut self, title: String, donate:u128,description: String) {
             
             let id = self.crowdfunds.len() as i32;
             
@@ -363,6 +379,7 @@ After our initialization, we start writing our functions. The first function we 
             ));
             env::log("Added a new crowdfund".as_bytes());
         }
+```
 
 The `add_crowdfund` function accepts three parameters, `title`, `donate`, and `description`  we will pass in when the function is called. We want to have a unique `id` for each crowdfunding project, so we create an `id` variable to the length of the total crowdfunds project we have in our vector. We have added a new Crowdfund project to our list of crowdfunding projects. So each time we call the `add_crowdfund` function, we update the blockchain state and a new crowdfund project is added to the list with the information we have provided as parameters. Finally, we log “Added a new crowdfund” to the blockchain. 
 
@@ -374,11 +391,13 @@ The `add_crowdfund` function accepts three parameters, `title`, `donate`, and `d
 
 We need to return all crowdfunding projects, so we create a function `list_crowdfunds` . 
 
-        pub fn list_crowdfunds(&self) -> Vec<Crowdfund> {
+```rust     
+ pub fn list_crowdfunds(&self) -> Vec<Crowdfund> {
             assert_self();
            let crowdfunds = &self.crowdfunds;
            return crowdfunds.to_vec();
         }
+```
 
 When we call the function, we make use of the `assert_self` function from our `utils.rs`  file, to make sure the contract calls itself, then we return our crowdfunds as a vector that displays an array of all our crowdfunding projects.
 
@@ -386,6 +405,7 @@ When we call the function, we make use of the `assert_self` function from our `u
 
 Assuming there is a project that really needs some support, the user can vote on that project. So in our contract, we added an `add_vote` function.
 
+```rust
         pub fn add_vote(&mut self, id:usize){
             let crowdfund: &mut Crowdfund = self.crowdfunds.get_mut(id).unwrap();
             let voter = env::predecessor_account_id();
@@ -394,11 +414,12 @@ Assuming there is a project that really needs some support, the user can vote on
             crowdfund.votes.push(voter);
             
         }
-
+```
 We pass an `id` parameter to the `add_vote` function to determine the particular project we want to vote on. Then we can access the project by calling `.get_mut(id)` and passing in the id of the project. We set our voter to be the `predecessor_account_id()` and then we mutate our state with this line.
 
+```rust
     crowdfund.total_votes = crowdfund.total_votes + 1;
-
+```
 This increments the `total_votes` field by 1, each time we call the function, then we add the voter to the votes vector, and we can see who has voted on that project.
 
 
@@ -406,7 +427,8 @@ This increments the `total_votes` field by 1, each time we call the function, th
 
 To donate to a particular project, we create an `add_donation` function and pass in the `id` of the project we want to donate to, and the amount of NEAR token we want to donate.
 
-        pub fn add_donation(&mut self, id:usize, amount:u128) {
+```rust
+     pub fn add_donation(&mut self, id:usize, amount:u128) {
             let transfer_amount: u128 = ONE_NEAR * amount;
             let crowdfund: &mut Crowdfund = self.crowdfunds.get_mut(id).unwrap();
             crowdfund.total_donations = crowdfund.total_donations + transfer_amount;
@@ -415,7 +437,7 @@ To donate to a particular project, we create an `add_donation` function and pass
            Promise::new(env::predecessor_account_id()).transfer(transfer_amount);
           env::log("You have donated succesfully".as_bytes());
         }
-
+```
 Here we pass as a parameter, the `id` of the crowdfunding project and the `amount` we want to donate. We then add the donated amount to our current `total_donations` balance, and push a new donation each time we call the function and the amount in NEAR is transferred to the crowdfunding project owner.
 
 
@@ -423,7 +445,8 @@ Here we pass as a parameter, the `id` of the crowdfunding project and the `amoun
 
 Let’s add two more functions to our contract to determine the total crowdfunding projects we have and the total sum of donations a particular crowdfunding project has received.
 
-        pub fn crowdfund_count(&mut self) -> usize {
+```rust 
+    pub fn crowdfund_count(&mut self) -> usize {
             return self.crowdfunds.len();
         }
     
@@ -431,7 +454,7 @@ Let’s add two more functions to our contract to determine the total crowdfundi
             let crowdfund: &mut Crowdfund = self.crowdfunds.get_mut(id).unwrap();
             return crowdfund.total_donations;
         }
-
+```
 We have created two functions `crowdfund_count` that simply returns the length of our crowdfund vector and `get_total_donations` to return the total donations a particular crowdfund project has received.
 
 Now that we are done with all the functions for this contract, it is time to deploy and invoke the functions in our contract to make sure everything is working fine, and that is what we will be doing in the next section
@@ -440,30 +463,38 @@ Now that we are done with all the functions for this contract, it is time to dep
 # Deploying the smart contract🚀
 
 Before we deploy our smart contract, let’s first login with the `near-cli` into the NEAR account we created.
-**Login with** `**near-cli**`
+
+**Login with `near-cli`**
+
 Make sure you already have the `near-cli` installed, you can see the installation steps from the link in the prerequisites. Then run this command:
 
-    near login
-
+```shell
+   near login
+```
 After login to the account we created, we see a successful message in the
 terminal.
 ## Deploy the contract
 To deploy our crowdfunding contract, we need to create an account for it. Since we have already created a testnet account, in my case `umavictor.testnet` , we can create a subaccount under `umavictor.testnet` to deploy the contract.
 
-    near create-account crowdfunddapp.umavictor.testnet --masterAccount umavictor.testnet
-![](https://paper-attachments.dropbox.com/s_6663B3E85151DBD5BD66114327FA68CBB8E9D8C0AC631CAC16FA01B63E05A7E0_1644076641228_createsubaccount.png)
+```shell
+  near create-account crowdfunddapp.umavictor.testnet --masterAccount umavictor.testnet
+```
+
+![sub account](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/createsubaccount.png?raw=true)
 
 > In your case, the `umavictor` will be replaced by your own NEAR testnet account name you created
 
 Once your sub-account is created, navigate to `src/config.js` and modify the line that sets the account name of the contract. Set it to the sub-account `id` you created above.
 
-    const CONTRACT_NAME = process.env.CONTRACT_NAME || 'crowdfunddapp.umavictor.testnet'
-
+```shell
+  const CONTRACT_NAME = process.env.CONTRACT_NAME || 'crowdfunddapp.umavictor.testnet'
+```
 
 we can finally deploy our contract. Since we use [create-near-app](https://github.com/near/create-near-app), deploying our contract is easy and can be done with the command
 
     near deploy
-![](https://paper-attachments.dropbox.com/s_6663B3E85151DBD5BD66114327FA68CBB8E9D8C0AC631CAC16FA01B63E05A7E0_1644077211588_crowdfunddeploy.png)
+
+![deploy contract](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/crowdfunddeploy.png?raw=true)
 
 
 we can see that after running the command, our contract was deployed successfully. yay!.
@@ -479,29 +510,33 @@ Now we can interact with our contract and make sure all our functions are doing 
 ## Add Crowdfund project
 Call `add_crowdfund` with the `near-cli`:
 
+```shell
     near call crowdfunddapp.umavictor.testnet add_crowdfund '{"title": "Eliots eye sight", "donate": 30, "description":"Raise funds for little Eliot to see again. Loss of sight was caused by an accident to the head"}' --accountId umavictor.testnet
+```
 
 What the command above does is to call the contract deployed on `crowdfunddapp.umavictor.testnet`. On the contract, there is a method called `add_crowdfund` with three arguments provided and is signed by `umavictor.testnet`.
 In your terminal, you will see an output like this:
 
-![](https://paper-attachments.dropbox.com/s_6663B3E85151DBD5BD66114327FA68CBB8E9D8C0AC631CAC16FA01B63E05A7E0_1644094536637_addcrowdfund.png)
+![add crowdfund](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/addcrowdfund.png?raw=true)
 
 
 ## Vote on a Crowdfund Project
 Call  `add_vote` with the `near-cli`:
 
-    near call crowdfunddapp.umavictor.testnet add_vote '{"id":0}' --accountId umavictor.testnet
-
+```shell
+   near call crowdfunddapp.umavictor.testnet add_vote '{"id":0}' --accountId umavictor.testnet
+```
 this command increments the vote of the first crowdfunding project by one.
 
-![](https://paper-attachments.dropbox.com/s_6663B3E85151DBD5BD66114327FA68CBB8E9D8C0AC631CAC16FA01B63E05A7E0_1644096453517_addvote.png)
+![addvote](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/addvote.png?raw=true)
 
 # Donate to a crowdfunding project
 
 Call the `add_donate` method with the `near-cli`
 
-    near call crowdfunddapp.umavictor.testnet add_donation '{"id":0, "amount":1}' --accountId umavictor.testnet
-
+```shell 
+ near call crowdfunddapp.umavictor.testnet add_donation '{"id":0, "amount":1}' --accountId umavictor.testnet
+```
 this command calls the `add_donation` method and 1 NEAR is sent to the crowdfund project.
 
 
@@ -509,11 +544,12 @@ this command calls the `add_donation` method and 1 NEAR is sent to the crowdfund
 
 Call the `list_crowdfunds` method.
 
-    near call crowdfunddapp.umavictor.testnet list_crowdfunds --accountId umavictor.testnet
-
+```shell 
+ near call crowdfunddapp.umavictor.testnet list_crowdfunds --accountId umavictor.testnet
+```
 This command lists all the crowdfunding projects to the terminal.
 
-![](https://paper-attachments.dropbox.com/s_6663B3E85151DBD5BD66114327FA68CBB8E9D8C0AC631CAC16FA01B63E05A7E0_1644097192393_listcrowdfunds.png)
+![list crowdfunds](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/listcrowdfunds.png?raw=true)
 
 
 You can see the two crowdfund projects from the image and all the information we set. 
@@ -525,17 +561,20 @@ We have invoked the methods to see how they are working, let’s now build the r
 We are finally done building the smart contract. To connect and build our React frontend, we will be working on the `src` folder. This is not a React tutorial, so we will only touch on the important things.
 First, navigate to `utils.js` and update your change and view methods
 
-    window.contract = await new Contract(window.walletConnection.account(), nearConfig.contractName, {
+```js
+//utils.js
+  window.contract = await new Contract(window.walletConnection.account(), nearConfig.contractName, {
         // View methods are read only. They don't modify the state, but usually return some value.
         viewMethods: ['get_donation_count',"crowdfund_count"],
         // Change methods can modify the state. But you don't receive the returned value when called.
         changeMethods: ['add_crowdfund', 'add_vote','add_donation',"list_crowdfunds"],
       })
     }
-
+```
 Take a look at the code in our `App.js`:
 
-    // App.js
+```js
+   // App.js
     import 'regenerator-runtime/runtime'
     import { useEffect, useState } from 'react'
     import ListCrowdfunds from './components/ListCrowdfunds'
@@ -606,7 +645,7 @@ Take a look at the code in our `App.js`:
         </>
       )
     }
-    
+```  
 
 In the `App.js` file above, we import the configurations, utils, and components we will be using. We created our `crowdfunds` state which is an array of objects containing all our crowdfunding projects. In the `useEffect` hook, we call the `list_crowdfund` method from `window.contract` which has been set by `initContract` in the `index.js` file. We then set the crowdfunds state, using React’s `setState`.
 
@@ -620,7 +659,8 @@ Once signed in, we will see available projects we can donate to.
 ## List Crowdfund component
 For our `App.js` component, we looped through all our crowdfunding projects and passed in the object prop to our `ListCrowdfunds` component. This is what our `ListCrowdfunds` component looks like.
 
-    // components/ListCrowdfunds.js
+```js 
+  // components/ListCrowdfunds.js
     import React, { useState } from 'react'
     const ONE_NEAR = 1_000_000_000_000_000_000_000_000
     function ListCrowdfunds({ project }) {
@@ -671,6 +711,7 @@ For our `App.js` component, we looped through all our crowdfunding projects and 
       )
     }
     export default ListCrowdfunds
+```
 
 In the `ListCrowdfunds` component, we set the donation amount state and when we want to donate, by clicking on the `Donate`  button, the `donate` function is called which calls the `add_donation` method in our contract with the argument we provide from the form.
 We also have a notification component that notifies the user when our donation is successful.
@@ -678,7 +719,8 @@ We also have a notification component that notifies the user when our donation i
 ## Create Crowdfund Component
 Our `CreateCrowdfund` component is a modal that contains a form for us to add a new crowdfund project.
 
-    import React, { useState } from 'react'
+```js  
+   import React, { useState } from 'react'
     function CreateCrowdfund({toggleModal}) {
       const [title, setTitle] = useState('')
       const [description, setDescription] = useState('')
@@ -741,11 +783,12 @@ Our `CreateCrowdfund` component is a modal that contains a form for us to add a 
       )
     }
     export default CreateCrowdfund
-    
+```    
 
 This component conditionally renders when the `toggleModal` state is `true` . We have a state for the crowdfund `title`, `description`, and `target donation amount`, and each time our input changes, we set the state to the input value. On submitting the form, the `handleSubmit` function runs and our `add_crowdfund` method is called from the `window.contract` with the arguments we got from the input values.  
 
-You can check out a this [video](https://www.loom.com/share/f65f0c04298e434f88e0696d9bf3ad6b) walkthrough demo of the final dApp
+You can check out a this [video](https://www.loom.com/share/f65f0c04298e434f88e0696d9bf3ad6b) walkthrough demo of the final dApp.
+
 Yay!. We have concluded the tutorial and you can find the source code [here](https://github.com/uma-victor1/Crowdfunding-dApp).
 
 # Conclusion
@@ -763,4 +806,3 @@ This tutorial was created by [Uma Victor](https://twitter.com/umavictor_), a sof
 
 # References
 - NEAR [docs](https://docs.near.org/docs/develop/basics/getting-started).
-
