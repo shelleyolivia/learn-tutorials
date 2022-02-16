@@ -16,17 +16,17 @@ Avalanche is a low cost, high-speed blockchain network on which we can deploy sm
 
 The above image displays the architecture of the smart contract.
 
-Now we will build the smart contract of our application. Let's start by making a contract named **crowdfunding**.
+Now we will build the smart contract of our application. Let's start by making a contract named **Crowdfunding**.
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-contract crowdfunding {
+contract Crowdfunding {
 }
 ``` 
 
-Let's define the structures and enums that are required to define states. We will make two enums **Category**, which can have four values representing the category to which the project belongs, and the other enum **RefundPolicy**, it can have two values:
+Let's define the structures and enums that are required for the contract state. We will make two enums: **Category**, which can have four values representing the category to which the project belongs, and **RefundPolicy**, which can have two values.
 * *REFUNDABLE*:- This type of project returns the amount funded by the contributor when the project fails to achieve the goal amount within the duration.    
 * *NONREFUNDABLE*:- For this type of project, the creator can claim the amount even if it doesn't achieve the funding goal.
 
@@ -34,7 +34,7 @@ Next, we declare our structures, we will create three  **Project**, **ProjectMet
 
 ```solidity
 // The category values
-enum Category{
+enum Category {
     DESIGNANDTECH,
     FILM,
     ARTS,
@@ -42,13 +42,13 @@ enum Category{
 }
 
 // Refund policies 
-enum RefundPolicy{
+enum RefundPolicy {
     REFUNDABLE,
     NONREFUNDABLE
 }
 
 // Structure of each project in our dApp 
-struct Project{
+struct Project {
     string projectName;             // Stores the project's name
     string projectDescription;      // Stores the project's description
     string creatorName;             // Stores the project creator name
@@ -68,7 +68,7 @@ struct Project{
 }
 
 // Structure used to return metadata of each project
-struct ProjectMetadata{
+struct ProjectMetadata {
     string projectName;             // Stores the project's name
     string projectDescription;      // Stores the project's description
     string creatorName;             // Stores the project creator name
@@ -82,7 +82,7 @@ struct ProjectMetadata{
 }
 
 // Each user funding gets recorded in Funded structure
-struct Funded{
+struct Funded {
 	uint256 projectIndex;           // Stores the project index of project that's funded
 	uint256 totalAmount;            // Stores the amount funded
 }
@@ -229,7 +229,7 @@ function getUserFundings(address contributor) external view returns(Funded[] mem
 }
 ```
 
-Time to implement the function to fund a project. The functions `addContribution` and `addToFundingList` are helper functions for `fundProject` function. `addContribution` checks if the contributor already exists and updates the amount, if not then adds the contribution amount and contributor to the project. Similarly `addToFundingList` checks if there is a previous contribution and then updates the amount, if not found then add a new struct Funded to keep the contribution details in the mapping **addressFundingList**. 
+Time to implement the function to fund a project. The functions `addContribution` and `addToFundingList` are helper functions for the `fundProject` function. `addContribution` checks if the contributor already exists and updates the amount, if not then it adds the contribution amount and contributor to the project. Similarly `addToFundingList` checks if there is a previous contribution and then updates the amount, if not found then add a new struct `Funded` to keep the contribution details in the mapping `addressFundingList`. 
 
 ```solidity
 // Helper function adds details of Funding to addressFundingList
@@ -279,14 +279,14 @@ function claimFund(uint256 _index) validIndex(_index) external {
     require(projects[_index].creatorAddress == msg.sender, "You are not Project Owner");
     require(projects[_index].duration + projects[_index].creationTime < block.timestamp, "Project Funding Time Not Expired");
     require(projects[_index].refundPolicy == RefundPolicy.NONREFUNDABLE 
-                || projects[_index].amountRaised >= projects[_index].fundingGoal, "Funding goal not reached");
+    || projects[_index].amountRaised >= projects[_index].fundingGoal, "Funding goal not reached");
     require(!projects[_index].claimedAmount, "Already claimed raised funds");
     projects[_index].claimedAmount = true;
     payable(msg.sender).transfer(projects[_index].amountRaised);
 }
 ```
 
-When **REFUNDABLE** project is not able to achieve its funding goal, the contributors can get their refund with the help of `claimRefund` function. `getContributorIndex` is a helper function to retrieve the `msg.sender` index in the **contributors** array if he/she has contributed otherwise returns -1.
+When **REFUNDABLE** project is not able to achieve its funding goal, the contributors can get their refund with the help of `claimRefund` function. `getContributorIndex` is a helper function to retrieve the `msg.sender` index in the **contributors** array if they have contributed otherwise returns -1.
 
 ```solidity
 // Helper function to get the contributor index in the projects' contributor's array
@@ -305,7 +305,7 @@ function getContributorIndex(uint256 _index) validIndex(_index) internal view re
 function claimRefund(uint256 _index) validIndex(_index) external {
     require(projects[_index].duration + projects[_index].creationTime < block.timestamp, "Project Funding Time Not Expired");
     require(projects[_index].refundPolicy == RefundPolicy.REFUNDABLE 
-                && projects[_index].amountRaised < projects[_index].fundingGoal, "Funding goal not reached");
+    && projects[_index].amountRaised < projects[_index].fundingGoal, "Funding goal not reached");
     
     int256 index = getContributorIndex(_index);
     require(index != -1, "You did not contribute to this project");
@@ -329,10 +329,10 @@ Log in to Metamask -> Click the Network drop-down -> Select custom RPC
 ![image of metamask](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_metamask.png)  
 #### FUJI Tesnet Settings:  
  - **Network name:** Avalanche FUJI C-Chain  
- - **New RPC URL:** [ https://api.avax-test.network/ext/bc/C/rpc]( https://api.avax-test.network/ext/bc/C/rpc)  
+ - **New RPC URL:** [https://api.avax-test.network/ext/bc/C/rpc](https://api.avax-test.network/ext/bc/C/rpc)  
  - **ChainID:** `43113`  
  - **Symbol:** `C-AVAX`  
- - **Explorer:** [https://cchain.explorer.avax-test.network]( https://cchain.explorer.avax-test.network)  
+ - **Explorer:** [https://cchain.explorer.avax-test.network](https://cchain.explorer.avax-test.network)  
   
 Fund your address from the given [faucet](https://faucet.avax-test.network/).  
   
@@ -343,27 +343,27 @@ Open [Remix](https://remix.ethereum.org/) --> Select Solidity
 ![Picture of Remix site](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_remix.png)  
 
     
-Create a `crowdfunding.sol` file in the remix file explorer and paste the following code:  
+Create a `Crowdfunding.sol` file in the Remix file explorer and paste the following code:  
   
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-contract crowdfunding{
-    enum Category{
+contract Crowdfunding {
+    enum Category {
         DESIGNANDTECH,
         FILM,
         ARTS,
         GAMES
     }
 
-    enum RefundPolicy{
+    enum RefundPolicy {
         REFUNDABLE,
         NONREFUNDABLE
     }
 
     // Structure of each project in our dApp 
-    struct Project{
+    struct Project {
         string projectName;
         string projectDescription;
         string creatorName;
@@ -383,7 +383,7 @@ contract crowdfunding{
     }
 
     // Structure used to return metadata of each project
-    struct ProjectMetadata{
+    struct ProjectMetadata {
         string projectName;
         string projectDescription;
         string creatorName;
@@ -397,7 +397,7 @@ contract crowdfunding{
     }
 
     // Each user funding gets recorded in Funded structure
-    struct Funded{
+    struct Funded {
 		uint256 projectIndex;
 		uint256 totalAmount;
     }
@@ -564,7 +564,7 @@ contract crowdfunding{
         require(projects[_index].creatorAddress == msg.sender, "You are not Project Owner");
         require(projects[_index].duration + projects[_index].creationTime < block.timestamp, "Project Funding Time Not Expired");
         require(projects[_index].refundPolicy == RefundPolicy.NONREFUNDABLE 
-                    || projects[_index].amountRaised >= projects[_index].fundingGoal, "Funding goal not reached");
+        || projects[_index].amountRaised >= projects[_index].fundingGoal, "Funding goal not reached");
         require(!projects[_index].claimedAmount, "Already claimed raised funds");
         projects[_index].claimedAmount = true;
         payable(msg.sender).transfer(projects[_index].amountRaised);
@@ -586,7 +586,7 @@ contract crowdfunding{
     function claimRefund(uint256 _index) validIndex(_index) external {
         require(projects[_index].duration + projects[_index].creationTime < block.timestamp, "Project Funding Time Not Expired");
         require(projects[_index].refundPolicy == RefundPolicy.REFUNDABLE 
-                    && projects[_index].amountRaised < projects[_index].fundingGoal, "Funding goal not reached");
+        && projects[_index].amountRaised < projects[_index].fundingGoal, "Funding goal not reached");
         
         int256 index = getContributorIndex(_index);
         require(index != -1, "You did not contribute to this project");
@@ -600,13 +600,15 @@ contract crowdfunding{
 }
 ```
   
-Now, navigate to the solidity contract compiler tab on the left side navigation bar and click the blue button to compile `crowdfunding.sol` contract. Also, note down the `ABI` after compilation is completed.  
-{% hint style="danger" %}  
+Now, navigate to the solidity contract compiler tab on the left side navigation bar and click the blue button to compile `crowdfunding.sol` contract. Also, make note of the location of the `ABI` after compilation is completed.
+
+{% hint style="tip" %}  
 Make sure the compiler version mentioned in Remix, matches the version mentioned in the smart contract.  
 {% endhint %}  
   
 Navigate to deploy tab and open the "ENVIRONMENT" drop-down. Select "Injected Web3" (make sure metamask is loaded) and click the "deploy" button.   
-{% hint style="danger" %}    
+
+{% hint style="tip" %}    
 Before deploying the smart contract on testnet, make sure the deployment environment in Remix is set to **Injected web3**.  
 {% endhint %}  
   
@@ -617,19 +619,19 @@ Approve the transaction on Metamask pop-up interface. Once our contract is deplo
 Now, we are going to create a react app and set up the frontend of the application.  
 Open a terminal and navigate to the directory where we will create the application.  
   
-```bash
+```text
 cd /path/to/directory
 ```
   
 Now, clone the github repository, move into the newly created `crowdfunding-platform-avalanche` directory and install all dependencies.  
   
-```bash
+```text
 git clone https://github.com/hyp3r5pace/crowdfunding-platform-avalanche.git
 cd crowdfunding-platform-avalanche
 npm install
 ```
   
-In our react application we keep all the react components in the `src/components` directory.  
+In our React application we keep all the React components in the `src/components` directory.  
   
 ## HomeComponent  
 It renders the home page of the dApp. The home page displays various projects which are being posted on the dApp for funding. The home page has three sections, mainly a featured project section, a recommended project section, and a recent upload section. The recommended project section recommends some projects for you to check out. The recent upload section displays projects which were uploaded recently for funding. Also, at the top of the home page, the total number of projects posted on the site is displayed along with the total amount of AVAX funded to date and also the number of unique users who funded the projects.  
@@ -641,22 +643,22 @@ It renders a form for creating a new project. The form has various inputs, requi
 The project component renders all the details about an individual project. At the top, it displays the project name and image, then the total funding it received till now, the number of unique people who funded the project and a button for a user to fund the project with AVAX. After that, it displays the project description and other project information such as project owner name, project link, refund policy, project category and creation date. At the bottom, a table is rendered, listing all the contributors who contributed to the project to date and the amount they contributed, sorted in the descending order of amount contributed.  
   
 ## PaymentModal  
-This component renders the modal for payment upon clicking the `back this project` button. The modal has an input for the amount of AVAX you want to fund and a `fund` button to send the fund to the contract. The modal automatically closes once the transfer of the AVAX token is successful.   
+This component renders the modal for payment upon clicking the **back this project** button. The modal has an input for the amount of AVAX you want to fund and a **fund** button to send the fund to the contract. The modal automatically closes once the transfer of the AVAX token is successful.   
   
 ## ProfileComponent  
-This component renders the profile information of a user. This component has three sections, namely `Ongoing projects` section, `Completed projects` section and `Projects funded` section. The `Ongoing projects` section displays all the projects that the user has created and the funding period for which hasn't ended yet. The `Completed projects` section displays all the projects that the user has created and the funding period for which is over. `Projects funded` section displays all the projects to which the user has provided some funding. The `Projects funded` section isn't rendered if you visit some other user's profile.    
+This component renders the profile information of a user. This component has three sections, namely **Ongoing projects** section, **Completed projects** section and **Projects funded** section. The **Ongoing projects** section displays all the projects that the user has created and the funding period for which hasn't ended yet. The **Completed projects** section displays all the projects that the user has created and the funding period for which is over. **Projects funded** section displays all the projects to which the user has provided some funding. The **Projects funded** section isn't rendered if you visit some other user's profile.    
 To visit your profile, click the account address displayed on the right end of the navbar.  
   
 ## DiscoverComponent  
 This component renders a list of projects posted on the site, based on the project category selected. There are four categories, namely Design & tech, Film, Arts and Games.  
     
 ## ConnectWallet  
-This component renders the first page of the site. It contains a `Connect to metamask` button, which allows you to connect your metamask account to the dApp.  
+This component renders the first page of the site. It contains a **Connect to metamask** button, which allows you to connect your Metamask account to the dApp.  
   
 ## ScrollShowbarComponent  
 This component renders a carousel which is used by various other components to display a list of projects.  
   
-Don't forget to change the contract address in `App.js` file before starting up the react app.  
+Don't forget to change the contract address in `App.js` file before starting up the React app.  
             
 # Walkthrough  
 You can check out the live demo of the dApp [here](https://hyp3r5pace.github.io/crowdfunding-platform-avalanche/)  
@@ -675,11 +677,11 @@ You can check out the live demo of the dApp [here](https://hyp3r5pace.github.io/
   
   
 # Conclusion  
-Congratulations! We have successfully developed a working decentralized Kickstarter where users can create projects, fund various projects and even claim refunds if possible. As a next step, you can try adding new features to the dApp, such as royalties for the dApp owner or providing NFTs to the top contributors of a project.  
+Congratulations! We have successfully developed a working decentralized crowdfunding application where users can create projects, fund various projects and even claim refunds if possible. As a next step, you can try adding new features to the dApp, such as royalties for the dApp owner or providing NFTs to the top contributors of a project.
         
 # Troubleshooting  
 ## Transaction Failure  
-- Check if your account has sufficient balance at [fuji block-explorer](https://cchain.explorer.avax-test.network/). You ca fund your address from the given [faucet](https://faucet.avax-test.network/).  
+- Check if your account has sufficient balance at [Fuji block-explorer](https://cchain.explorer.avax-test.network/). You can fund your address from the Avalanche testnet [faucet](https://faucet.avax-test.network/).  
   
 ![metamask wallet image with 0 AVAX](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-an-amm-on-avalanche_zero_balance.jpeg)  
   
