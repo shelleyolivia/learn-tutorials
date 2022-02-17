@@ -1,6 +1,7 @@
 
 
 # Introduction
+In this tutorial, we will build a crowdfunding dApp on the NEAR blockchain. Our smart contract will be written in Rust and our frontend will be written in React.
 
 The dApp will have the following functionalities:
 
