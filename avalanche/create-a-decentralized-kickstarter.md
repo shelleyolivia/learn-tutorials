@@ -601,20 +601,16 @@ contract Crowdfunding {
 ```
   
 Now, navigate to the solidity contract compiler tab on the left side navigation bar and click the blue button to compile `crowdfunding.sol` contract. Also, make note of the location of the `ABI` after compilation is completed.
-
-{% hint style="tip" %} 
-
-Make sure the Solidity compiler version being used in Remix matches the version used at the beginning of the smart contract.  
-
-{% endhint %}  
   
+{% hint style="tip" %}
+Make sure the Solidity compiler version being used in Remix matches the version used at the beginning of the smart contract.
+{% endhint %}
+    
 Navigate to deploy tab and open the "ENVIRONMENT" drop-down. Select "Injected Web3" (make sure metamask is loaded) and click the "deploy" button.   
 
-{% hint style="tip" %}   
-
-Before deploying the smart contract on testnet, make sure the deployment environment in Remix is set to **Injected web3**.  
-
-{% endhint %}  
+{% hint style="tip" %}
+Before deploying the smart contract on testnet, make sure the deployment environment in Remix is set to **Injected web3**.
+{% endhint %}
   
 Approve the transaction on Metamask pop-up interface. Once our contract is deployed successfully, make note of the deployed `contract address`.  
   
