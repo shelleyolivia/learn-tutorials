@@ -1,88 +1,157 @@
-STILL TO DO:
--- clarify: standard says that `base_uri` is required, but the official tutorial doesn't use it?
--- clarify: standard says that `copies` is optional, but the official tutorial sets it to `1` which should be the same as leaving it blank?
--- clarify: spec field may be wrong? NEP-171(core) is not on 1.0.0 anymore and NEP-177 (metadata) is already up to 2.0.0 ... I'm not sure which of those the field refers to.
--- resolve: the NEAR example NFT code doesn't test right on M1 macs.  How to resolve or workaround?
-
 # Introduction
 
-[Non-Fungible Tokens](https://en.wikipedia.org/wiki/Non-fungible_token) are unique records of ownership on the blockchain. Usually an NFT is tied to something interesting and rare, such as an artwork, a concert ticket, a collectable cat, a domain name, or a real physical object. NFTs can be bought, sold, given away, and can even be minted or destroyed, depending on the rules of the contract. [Cryptokitties](https://www.cryptokitties.co/), [SuperRare](https://superrare.co/) and [Bored Ape Yacht Club](https://boredapeyachtclub.com/) are just a few popular examples of Ethereum-based NFT projects. We can implement NFTs just as easily on NEAR.ddd
+[Non-Fungible Tokens](https://en.wikipedia.org/wiki/Non-fungible_token) are unique records of ownership on the blockchain. Usually an NFT is tied to something interesting and rare, such as an artwork, a concert ticket, a collectable cat, a domain name, or a real physical object. NFTs can be bought, sold, given away, and can even be minted or destroyed, depending on the rules of the contract. [Cryptokitties](https://www.cryptokitties.co/) and [SuperRare](https://superrare.co/) are two popular examples of Ethereum-based NFTs. We can implement NFTs just as easily on NEAR.
 
-In this tutorial we will create a simple collectable NFT artwork called a Flarn, consisting of a name, a description and a JPEG image. Our smart contract will allow Flarns to be created, collected and traded on the NEAR blockchain.  
+In this tutorial we will issue a new species of NFT: the CryptoFlarn, a single-celled organism with unique DNA. Our smart contract will allow Flarns to be created, collected and traded on the NEAR blockchain.
 
 ## About NFT standards
 
-There are many standards for NFTs! However the most widely used by far is Ethereum's [ERC721](https://eips.ethereum.org/EIPS/eip-721) standard, which defines how NFTs can be created and transfered among other things. This standard works well, but like all the ERC standards it is defined only for the Ethereum blockchain. Recent high gas prices on Ethereum have driven a lot of interest in more affordable alternatives, such as NEAR.
+There are many standards for NFTs! However the most widely supported by far is the [ERC721](https://eips.ethereum.org/EIPS/eip-721) standard, which defines how NFTs can be created and transfered among other things. This standard works well, but like all the ERC standards it is defined only for the Ethereum blockchain. ERC721 may be portable to NEAR once [NEAR EVM](https://near.org/blog/running-ethereum-applications-on-near/) emulation is available, but for now, the NEAR team has created an NFT reference implementation that uses a different NFT standard: [NEP-4](https://github.com/nearprotocol/NEPs/pull/4), which is defined in a language-independent way that is more compatible with NEAR.
 
-To support NFT development on NEAR, the core developers and marketplace stakeholders have proposed the new NEP-171 standard.  NEP-171 attempts to handle all of the same NFT use-cases as ERC721, as well as optional support for a number of advanced features for NFT marketplaces.  For instance, NEP-171 NFTs can be offered for sale in multiple marketplaces at once, and complex distributions of royalties are baked in.  Also, NFTs can be attached directly to smart contract calls, as a form of payment or as part of more complex trading projects. 
+NEP-4 is a very simple standard that does the bare minimum required to support ownership and transfer of NFTs, but it includes the possibility of delegating authority to other users or to other smart contracts. This is a powerful feature, because it means that future enhancements might be added by cross-contract calls with another, smarter contract, instead of having to upgrade the contract we write today. Other NFT projects on NEAR are already beginning to support NEP-4, so it's a good short-term choice.
+
+## About Rust
+
+In the NEAR Pathway, the smart contract was written in AssemblyScript, which was then compiled to WebAssembly \(WASM\) to run in the blockchain. However, NEAR smart contracts can also be written in [Rust](https://www.rust-lang.org/), a C-like language for server applications that has become popular for its built-in safety checks that help avoid bugs. Rust also features a robust testing infrastructure, copious on-line documentation, and a compiler that tries its best to help you fix any errors it finds.
+
+The NEAR team recommends using Rust for any smart contracts of a financial nature, and their reference implementation of NEP-4 NFTs is written in Rust. So we will start with that reference implementation, and add some useful features.
 
 # Prerequisites
 
- If you have completed [the NEAR pathway](https://learn.figment.io/pathways/near-pathway) and  [the Figment NEAR + Rust tutorial](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near), you should have already taken care of all prerequisites. For this tutorial you must:
+If you have completed the NEAR Pathway, you should have already taken care of these prerequisites. For this tutorial you must:
 
 * Install Node.js and npm, and set up your DataHub environment
-* [Use npm to install the NEAR CLI](https://www.npmjs.com/package/near-cli)
-* [Create a wallet on the NEAR Testnet](https://nearhelp.zendesk.com/hc/en-us/articles/1500002248242-Creating-a-NEAR-Wallet-account)
-* [Install Rust and Rustup](https://www.rust-lang.org/tools/install)
+* Create an account on the NEAR Testnet
+* Install the NEAR CLI
 
+# Installing the Toolchain
 
-# Setting up the project
-## Install the WebAssembly target using rustup
+Before we can start working on the Rust contract, we need to install a few more tools.
 
-NEAR uses WebAssembly as its virtual machine.  Many languages can compile to WebAssembly, but NEAR core developers recommend that all financial smart contracts be written in the Rust language. Before we can start working on the Rust contract, we need to install the cross-compilation tools that compile a Rust smart contract into WebAssembly, using Rustup.  Run this command:
+[rustup.rs](https://rustup.rs/) provides Rust installers for Unix and Windows platforms. If you're using Unix, run the following command to install `rustup`, the Rust meta-installer:
+
+```text
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+This will also download and install `rustc`, the Rust compiler, and `cargo`, the Rust package manager. The installer will also add `$HOME/.cargo/bin` to your `PATH` environment variable.
+
+\(If you're using Windows, download and run the executable Rust installer from [rustup.rs](https://rustup.rs/). The rest of this tutorial is written for a Unix environment, but the steps are essentially the same under Windows.\)
+
+Next we need to tell Rust to compile WebAssembly output \(WASM\) for the NEAR VM. If your `rust` toolchain is missing the WASM components, the compiler will report an error similar to this one:
+
+```text
+error[E0463]: can't find crate for `core`
+  |
+  = note: the `wasm32-unknown-unknown` target may not be installed
+```
+
+Run this command to add the WASM target to the Rust toolchain:
 
 ```text
 rustup target add wasm32-unknown-unknown
 ```
-Example output:
-```
-**info:** downloading component 'rust-std' for 'wasm32-unknown-unknown'
-**info:** installing component 'rust-std' for 'wasm32-unknown-unknown'
-15.6 MiB /  15.6 MiB (100 %) 8.7 MiB/s in  1s ETA:  0s
+
+## yarn
+
+If you haven't already, we need to install the `yarn` package manager. The example code we're working with uses `yarn` as its build tool. Run this command to install `yarn`:
+
+```text
+npm i -g yarn
 ```
 
-## Clone the NEAR NFT repo
+If that all worked, you're ready to develop smart contracts in Rust.
 
-In this tutorial we'll modify NEAR's NFT-171 example code from the NEAR repository on Github. On Unix, run these commands in the `bash` shell to clone that repo and install its requirements:
+## Cloning the NEAR NFT repo
+
+In this tutorial we'll modify NEAR's NFT example code from the NEAR repository on Github. On Unix, run these commands in the `bash` shell to clone that repo and install its requirements:
 
 ```text
 git clone https://github.com/near-examples/NFT
-```
-Example output:
-```
-Cloning into 'NFT'...
-remote: Enumerating objects: 1334, done.
-remote: Counting objects: 100% (456/456), done.
-remote: Compressing objects: 100% (90/90), done.
-remote: Total 1334 (delta 397), reused 398 (delta 363), pack-reused 878
-Receiving objects: 100% (1334/1334), 1.41 MiB | 2.40 MiB/s, done.
-Resolving deltas: 100% (642/642), done.
+cd NFT
+yarn install
 ```
 
-To build the example, enter this command in the shell:
+This repo contains NFT examples in both AssemblyScript and Rust, plus support files and documentation. All the files we need for our smart contract live in the subdirectory `contracts/rust`
+
+## Add Rust packages with Cargo
+
+Rust includes an extensive ecosystem of support libraries \(called [Crates](https://crates.io/)\), and a package manager called Cargo to help you use them. To create our NFT Flarns, we're going to add a few crates to this repo's Cargo manifest.
+
+Edit the file `contracts/rust/Cargo.toml`, and replace the entire contents with this:
+
+```toml
+[package]
+name = "nep4-rs"
+version = "0.1.0"
+authors = ["NEAR Inc <hello@near.org>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.60"
+near-sdk = "2.0.0"
+borsh = "0.7.1"
+wee_alloc = "0.4.5"
+rand = "=0.7.3"
+rand_chacha = "=0.2.2"
+rand_seeder = "=0.2.1"
+
+[profile.release]
+codegen-units = 1
+
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+overflow-checks = true
+```
+
+> `opt-level = "z"` Tells `rustc` to optimize for small code size.
+>
+> `overflow-checks = true` Opts into extra safety checks on arithmetic operations as per https://stackoverflow.com/a/64136471/249801
+
+We've only made one change to the original file: in the `[dependencies]` section we've added the `rand`, `rand_chacha` and `rand_seeder` crates. Together they'll provide a random number generator that we will use to generate the unique DNA of our Flarns.
+
+## Test the compiler
+
+Every time the rust compiler runs it checks `Cargo.toml` for recent changes. If it finds any, Cargo will automatically download those crates, build them, and cache them for future use.
+
+Lets run `cargo` manually now, to be sure we didn't make any typos in the manifest. Type the following at the command line:
 
 ```text
-cd NFT
-./build.sh
+cargo verify-project --manifest-path contracts/rust/Cargo.toml
+```
+
+If there are no errors in the file, you should see this result in JSON format:
+
+```json
+{"success":"true"}
+```
+
+Cargo is a powerful and important companion to Rust, and the `cargo` command has many options. But this repo comes with pre-made build targets that will let us use `yarn` as our build tool, and `yarn` will use `cargo` under the hood. So that was the last time we'll run `cargo` directly. Instead, let's use `yarn` to make sure the contract in this repo is working before we modify it. To build the example, enter this command in the shell:
+
+```text
+yarn build:rs
 ```
 
 Because this is our first build, Cargo and Rust will download and build all the dependencies. If might take some time. When it's finished, you should see something like this at the end of the output:
 
 ```text
-Compiling near-sdk v3.1.0
-Compiling near-contract-standards v3.2.0
-Compiling approval-receiver v0.0.1 (/Users/mykle/Documents/near/flarns2.0/NFT/test-approval-receiver)
-Compiling token-receiver v0.0.1 (/Users/mykle/Documents/near/flarns2.0/NFT/test-token-receiver)
-Compiling non-fungible-token v1.1.0 (/Users/mykle/Documents/near/flarns2.0/NFT/nft)
-Finished release [optimized] target(s) in 2m 07s
+/Users/alice/NFT/contracts/rust
+   Compiling nep4-rs v0.1.0 (/Users/alice/NFT/contracts/rust)
+    Finished release [optimized] target(s) in 6.10s
+✨  Done in 6.42s.
 ```
 
 We can also run all of the included unit tests with this command:
 
 ```text
-cargo test -- --nocapture
+yarn test:unit:rs
 ```
-TODO: TEST CAN'T COMPILE ON M1 MACS...
 
 The unit test output is messy, but at the end you should see a summary of results.
 
@@ -92,316 +161,417 @@ test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 
 If you see `test result: ok`, all is well.
 
+# Getting to know a Rust Contract
 
-# Getting to know the NFT Contract
+The Rust smart contract that we will modify is at `contracts/rust/src/lib.rs`. Open that file in your editor. We'll visit all the sections, and make a few important additions.
 
-The Rust smart contract that we will modify is at `nft/src/lib.rs`. Open that file in your editor. We'll make a few simple changes.
+## Preamble
 
-If you browse this contract, you'll find it only implements three methods: `new` and `new_default_meta` for initializing a new contract, and `nft_mint` for minting a new NFT.  But the contract also imports symbols, methods and other features from a group of related packages that together provide all the core and optional features of the NEP-171 standard.  Also notice that a broad set of unit tests make up more than half of the contract file.  There are also lots of tests in the imported modules.  We will run all of the tests after we modify the contract, to be sure we haven't broken anything.
+The first section is some boilerplate that imports useful features and configures the Rust compiler.
 
-## Customize the contract
+```rust
+#![deny(warnings)]
 
-NEP-171 requires our contract to have a human-readable name and an abbreviated symbol for use by marketplaces and wallets.  These are defined in the `new_default_meta` function that starts on line 52.
+use borsh::{BorshDeserialize, BorshSerialize};
+use near_sdk::collections::UnorderedMap;
+use near_sdk::collections::UnorderedSet;
+use near_sdk::{env, near_bindgen, AccountId};
 
-Let's modify that function to use our own name and symbol.  Change the name to "CryptoFlarns" and the symbol to "FLARN".  When you're done, the method should look like this:
-```
-	/// Initializes the contract owned by `owner_id` with
-	/// default metadata (for example purposes only).
-	#[init]
-	pub fn new_default_meta(owner_id: ValidAccountId) ->  Self {
-		Self::new(
-			owner_id,
-			NFTContractMetadata {
-				spec: NFT_METADATA_SPEC.to_string(),
-				name: "CryptoFlarns".to_string(),
-				symbol: "FLARN".to_string(),
-				icon: Some(DATA_IMAGE_SVG_NEAR_ICON.to_string()),
-				base_uri: None,
-				reference: None,
-				reference_hash: None,
-			},
-		)
-	}
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 ```
 
-NEP-171 contracts can also have an optional icon, which is shown in the NEAR wallet and used by marketplaces and other NFT apps.  Your contract doesn't need to have an icon, but since this example contract defines one, let's change it to something more colorful.  
+## The NEP-4 Interface
 
-NEP-171 advises that the `icon` field should be encoded in [data-URI format](https://en.wikipedia.org/wiki/Data_URI_scheme), for maximum compatibility with web browsers.  The icon in the example contract is a simple SVG file, data-URI encoded according to [this guide by Jenny Knuth](https://bl.ocks.org/jennyknuth/222825e315d45a738ed9d6e04c7a88d0).  Other image file formats such as GIF and PNG can also be data-URI encoded, but SVGs are nice because they can be quite small.  
+Next comes a block labeled `pub trait NEP4`. This defines the API that we'll be able to use to interact with the smart contract. A Trait in Rust is similar to an interface in Java or C++: it defines an API, but doesn't implement it. The API here is the API for NFTs defined in the NEP-4 standard. These 6 API methods allow a client to
 
-Here is our very simple example icon:
-[![CryptoFlarns icon](/assets/cryptoflarns_icon.svg "CryptoFlarns icon")](/assets/cryptoflarns_icon.svg)
+* Look up a token's owner, 
+* Transfer a token between owners, 
+* Assign or revoke token-transfer rights to another user
 
-The icon is defined on line 39 of the example contract, as a long string of text.  In your editor, change that very long line to this even longer line:
-```
-const DATA_IMAGE_SVG_NEAR_ICON: &str  =  "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2764%27%20height%3D%2764%27%20xml%3Aspace%3D%27preserve%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27transparent%27%2F%3E%3Crect%20style%3D%27stroke%3Anone%3Bstroke-width%3A1%3Bstroke-dasharray%3Anone%3Bstroke-linecap%3Abutt%3Bstroke-dashoffset%3A0%3Bstroke-linejoin%3Amiter%3Bstroke-miterlimit%3A4%3Bfill%3A%23ffec20%3Bfill-rule%3Anonzero%3Bopacity%3A1%27%20vector-effect%3D%27non-scaling-stroke%27%20x%3D%27-32%27%20y%3D%27-32%27%20rx%3D%270%27%20ry%3D%270%27%20width%3D%2764%27%20height%3D%2764%27%20transform%3D%27translate%2832%2032%29%27%2F%3E%3Ccircle%20style%3D%27stroke%3A%23000%3Bstroke-width%3A0%3Bstroke-dasharray%3Anone%3Bstroke-linecap%3Abutt%3Bstroke-dashoffset%3A0%3Bstroke-linejoin%3Amiter%3Bstroke-miterlimit%3A4%3Bfill%3A%2370ff10%3Bfill-rule%3Anonzero%3Bopacity%3A1%27%20vector-effect%3D%27non-scaling-stroke%27%20r%3D%2735%27%20transform%3D%27matrix%28.37%200%200%20.37%2032%2032%29%27%2F%3E%3C%2Fsvg%3E";
-```
+```rust
+/// This trait provides the baseline of functions as described at:
+/// https://github.com/nearprotocol/NEPs/blob/nep-4/specs/Standards/Tokens/NonFungibleToken.md
+pub trait NEP4 {
+    // Grant the access to the given `accountId` for the given `tokenId`.
+    // Requirements:
+    // * The caller of the function (`predecessor_id`) should have access to the token.
+    fn grant_access(&mut self, escrow_account_id: AccountId);
 
-Now build and test the contract again, to confirm there are no typos:
-```
-./build.sh
-cargo test -- --nocapture
-```
-Look for `Finished` after the build, and `test result: ok` after the tests.
+    // Revoke the access to the given `accountId` for the given `tokenId`.
+    // Requirements:
+    // * The caller of the function (`predecessor_id`) should have access to the token.
+    fn revoke_access(&mut self, escrow_account_id: AccountId);
 
-# Designing our first NFT
- 
-For this example, let's create a new kind of collectable digital NFT artwork called a Flarn. Every NEP-171 Flarn will have a unique Token ID, an Owner ID to record ownership, and three pieces of metadata: a name, a description and a JPEG image.
+    // Transfer the given `tokenId` to the given `accountId`. Account `accountId` becomes the new owner.
+    // Requirements:
+    // * The caller of the function (`predecessor_id`) should have access to the token.
+    fn transfer_from(&mut self, owner_id: AccountId, new_owner_id: AccountId, token_id: TokenId);
 
-## Define NFT Metadata
-NEP-171 doesn't actually require NFTs to have any metadata at all; you can still mint and trade completely blank records of ownership, if that's what you're into.  But without metadata, NFTs would be pretty boring!  Here are the types of NFT metadata supported by the standard:
--   `title`: The name of this specific token.
--   `description`: A longer description of the token.
--   `media`: URL to associated media. 
--   `media_hash`: the base64-encoded sha256 hash of content referenced by the  `media`  field. This is to guard against off-chain tampering.
--   `copies`: How many copies of this specific token exist
--   `issued_at`: Timestamp when token was issued or minted
--   `expires_at`: Timestamp when token expires
--   `starts_at`: Timestamp when token starts being valid
--   `updated_at`: Timestamp when token was last updated
--   `extra`: anything extra the NFT wants to store on-chain. Can be stringified JSON.
--   `reference`: URL to an off-chain JSON file with more info.
--   `reference_hash`: Base64-encoded sha256 hash of JSON from reference field. Required if  `reference`  is included.
+    // Transfer the given `tokenId` to the given `accountId`. Account `accountId` becomes the new owner.
+    // Requirements:
+    // * The caller of the function (`predecessor_id`) should be the owner of the token. Callers who have
+    // escrow access should use transfer_from.
+    fn transfer(&mut self, new_owner_id: AccountId, token_id: TokenId);
 
-For our example we'll use `title`, `description` and `media`, and ignore the rest.  Because we use `media` we are required to also use `media_hash`. We can leave `copies` blank to say our flarns are unique; `copies` defaults to `1` if not specified.  
+    // Returns `true` or `false` based on caller of the function (`predecessor_id) having access to the token
+    fn check_access(&self, account_id: AccountId) -> bool;
 
-NEP-171's built-in metadata fields are intended to cover the major needs of most NFT projects.  If some future NFT project requires other metadata fields not on this list, NEP-171 gives you two options.  You can either encode it as a JSON string in the `extra` field, or place it off-chain and store a link to it in the `reference` field.  (But if you use `reference`, you also need to store a hash of the data in the `reference_hash` field, to prevent tampering.)
+    // Get an individual owner by given `tokenId`.
+    fn get_token_owner(&self, token_id: TokenId) -> String;
+}
 
-## Create your masterpiece
-You can either invent your own metadata at this point, or you can use this example data:
-
-* `title`: Alice
-* `description`: Alice is uniquely adorable & loves long walks on the beach.
-* `media`: [![A Flarn called Alice](assets/flarn.jpg "Alice")](assets/flarn.jpg)
-
-## Include off-chain data
-Due to the high cost of Ethereum storage, most Ethereum NFTs of digital media do not store the media on the blockchain.  On-chain storage is much cheaper on NEAR, but since media files are large, it will still be thrifty of us to store our Flarn image elsewhere.  The `media` field of our on-chain record will hold a URL pointing to our off-chain image.  We could host that image anywhere on the Web we choose, but it would be nice to put it somewhere that's always online, decentralized, and free. 
-
-### Upload the image to NFT Storage
-
-For this example, we'll use the free  [NFT Storage](https://nft.storage/#getting-started) service built specifically for storing off-chain NFT data. NFT Storage offers free decentralized storage and bandwidth for NFTs on  [IPFS](https://ipfs.io/)  and  [Filecoin](https://filecoin.io/).
-
-#### Steps
-
-1.  [Register an account](https://nft.storage/login/)  and log in to  [nft.storage](https://nft.storage/login/).
-    
-2.  Go to the  [Files](https://nft.storage/files/)  section, and click on the  [Upload](https://nft.storage/new-file/)  button to upload your Flarn image.
-    
-    ![nft.storage](assets/uploading_to_nft_storage_1.png)
-    
-3.  Once you have uploaded your file, select `Actions -> View URL` to see your upload in a new browser tab.  Then copy the URL from that tab.  That is the URL for your content, based on an IPFS Content-ID string.  It should look something like this:
-    
-    ```
-    https://ipfs.io/ipfs/bafkreic2y4z2hvfkzalogw3yeh5hntbvr4op4a5ccjo5zfhouss4mozlnm
-    ```
-
-    ![nft.storage](assets/uploading_to_nft_storage_2.png)
-   
-
-### Generate the `media_hash`
-The checksum of our media file stored in the `media_hash` field, must be a Base64-encoded SHA256 hash of the original data, to prove the file hasn't been tampered with.  NEP-171 requires Base64 encoding of the hash for maximum portability between platforms.  However, most online and command-line SHA256 tools generate hashes as Hexadecimal+Unicode, so we also will need to convert from that to Base64. 
-
-There are a few different ways to do this.  On a UNIX-based system, use this command:
-```
-cat flarn.jpg | shasum -a 256 | xxd -r -p | base64
+/// The token ID type is also defined in the NEP
+pub type TokenId = u64;
+pub type AccountIdHash = Vec<u8>;
 ```
 
-On the web, you can generate the media hash in two steps.  
-1: Upload your file to [this online SHA256 calculator](https://emn178.github.io/online-tools/sha256_checksum.html) to generate a SHA256 hash in hexadecimal format.
-![Online SHA256 calculator](/assets/sha256.png)
-2: Copy the hexadecimal string from that tool, and paste it into [this online Hex-Base64 converter](https://base64.guru/converter/encode/hex):
-![Online Base64 converter](assets/hex_to_base64.png)
+## Blockchain storage
 
-__NOTE__: do not upload sensitive or private data to these web services! Use the UNIX commands above if privacy is important.
+After the `trait` definition is the declaration of the contract's main data structure, `NonFungibleTokenBasic`. Each of the methods in the NEP-4 trait will be implemented for that structure. It uses two `UnorderedMap`s to manage the ownership of our NFTs: `token_to_account` remembers the owner of each token, and `account_gives_access` remembers who has been granted transfer access by whom.  
+`near_sdk::collections::UnorderedMap` is a custom hashmap implementation from the NEAR SDK, that's cheaper and more efficient to run on the chain than the standard hashmap provided by Rust, but is otherwise the same. `near_sdk::collections::UnorderedSet` is a similar structure, but simpler: it's just a set of keys, with no duplicates allowed.
 
-If you used [our example Flarn image](assets/flarn.jpg), the strings should match the screenshots. If you're using your own image, the strings will be different.
-
-## Assemble the pieces
-Now that we've chosen our metadata, have stored our media stored off-chain, and have generated the media URL and media hash, we can construct our NFT Token record.  Use your editor to create a file in the current directory called `token.json`, containing a single object of JSON metadata.  You can start by pasting in this text:
-```json
-{
-	"title": "Alice",
-	"description": "Alice is uniquely adorable & loves long walks on the beach.",
-	"media": "https://bafyreiabag3ztnhe5pg7js4bj6sxuvkz3sdf76cjvcuqjoidvnfjz7vwrq.ipfs.dweb.link/",
-	"media_hash": "e8MzVN0Pq1ztofypQoperJC8gWo2xfs8f9few+SwHes="
+```rust
+// Begin implementation
+#[near_bindgen]
+#[derive(BorshDeserialize, BorshSerialize)]
+pub struct NonFungibleTokenBasic {
+    pub token_to_account: UnorderedMap<TokenId, AccountId>,
+    pub account_gives_access: UnorderedMap<AccountIdHash, UnorderedSet<AccountIdHash>>, // Vec<u8> is sha256 of account, makes it safer and is how fungible token also works
+    pub owner_id: AccountId,
 }
 ```
-Now edit the following values:
-* Use the URL you got from NFT.storage as the value for "media".
-* Use the base64 sha256 hash you generated for "media_hash", if you're using a different image file than our example.
-* Use your own NEAR testnet id for "receiver_id", so that you will own the newly minted NFT.
-* Change `title` and `description` to whatever you like, or leave them as-is.
 
-Save the file, then verify it at [JSONLint](https://jsonlint.com/)
-![JSONLint](assets/jsonlint.png)
+## Customize metadata
 
+That's technically everything our contract needs to manage the ownership of a set of Non-Fungible Token IDs. But so far these token IDs don't refer to anything but themselves. They have no metadata!
+
+Every type of NFT needs to define some metadata, to describe the individual interesting things being tracked: the name of a CryptoKitty, the title and author of an artwork, the date of a virtual ticketed event, or whatever else the NFT represents. In fact, most NFTs are mostly metadata, and the metadata would in most cases principally refer to an image, video, or gif which is stored off-chain, say on a cloud storage service\(like AWS S3\) or preferably on a decentralized file storage service\(like IPFS, Sia\). That said, let's go ahead and enhance this contract to store the metadata of each unique Flarn.
+
+Add the following lines of Rust code right beneath the comment that says `// Begin implementation`:
+
+```rust
+// Begin implementation
+use near_sdk::serde::Serialize;
+#[derive(Serialize, BorshDeserialize, BorshSerialize)]
+pub struct Flarn {
+    pub dna: u64,
+}
+```
+
+This `Flarn` structure defines a minimal metadata for each CryptoFlarn: a single `dna` record that can be initialized with a unique random value. This is a very simple example, but consider that all of the variations we can see between individual CryptoKitties are derived from a similar block of random data, also called `dna`!
+
+\(The `#[derive]` attribute gives our Flarn the `BorschSerialize` trait, which lets the contract convert Flarns to a raw bytestream for storage and retrieval on NEAR. Notice we didn't have to implement anything there, we just asked the compiler to figure it out for us. [Derived traits](https://doc.rust-lang.org/rust-by-example/trait/derive.html) are a handy feature of Rust! We're also using a related trait, `Serialize`, which lets the contract send Flarns over the network.\)
+
+Next, we will update the definition of `NonFungibleTokenBasic` with one extra line of Rust. We'll add an `UnorderedMap` called `token_to_flarn` which will hold all the Flarn records in our smart contract.
+
+```rust
+#[near_bindgen]
+#[derive(BorshDeserialize, BorshSerialize)]
+pub struct NonFungibleTokenBasic {
+    pub token_to_account: UnorderedMap<TokenId, AccountId>,
+    pub account_gives_access: UnorderedMap<AccountIdHash, UnorderedSet<AccountIdHash>>, // Vec<u8> is sha256 of account, makes it safer and is how fungible token also works
+    pub owner_id: AccountId,
+    pub token_to_flarn: UnorderedMap<TokenId, Flarn>,  // <-- ADD THIS LINE
+}
+```
+
+Finally, add one line of Rust to the initializer for `NonFungibleTokenBasic`, so our flarns will be initialized when the smart contract is deployed to the blockchain :
+
+```rust
+#[near_bindgen]
+impl NonFungibleTokenBasic {
+    #[init]
+    pub fn new(owner_id: AccountId) -> Self {
+        assert!(env::is_valid_account_id(owner_id.as_bytes()), "Owner's account ID is invalid.");
+        assert!(!env::state_exists(), "Already initialized");
+        Self {
+            token_to_account: UnorderedMap::new(b"token-belongs-to".to_vec()),
+            account_gives_access: UnorderedMap::new(b"gives-access".to_vec()),
+            owner_id,
+            token_to_flarn: UnorderedMap::new(b"gives-flarn".to_vec()),  // <-- ADD THIS LINE 
+        }
+    }
+}
+```
+
+## Browse the rest
+
+After the initializer for `NonFungibleTokenBasic` comes the implementation of the six API methods that make up the NEP4 trait. That's a big block of code. It won't all make sense if you're new to Rust, but parts of it may resemble other programming languages you know.
+
+Fortunately, we won't need to change anything in this section. If you do browse through it, you might notice:
+
+* Methods in an `impl` block access their private instance of `NonFungibleTokenBasic` through an argument called `self`, similar to `this` in Javascript.
+* Rust has an unusual `Some`/`None` construct for handling exceptions.
+* Mutable variables are declared with the `mut` keyword; variables without `mut` are immutable by default.
+* Only one or two lines near the end of each method actually modify our data. Most of this code deals with access control.
+* The imported global `env` contains the ID of the NEAR user calling the contract, plus various other useful tidbits.
+
+```rust
+#[near_bindgen]
+impl NEP4 for NonFungibleTokenBasic {
+    fn grant_access(&mut self, escrow_account_id: AccountId) {
+        let escrow_hash = env::sha256(escrow_account_id.as_bytes());
+        let predecessor = env::predecessor_account_id();
+        let predecessor_hash = env::sha256(predecessor.as_bytes());
+
+        let mut access_set = match self.account_gives_access.get(&predecessor_hash) {
+            Some(existing_set) => {
+                existing_set
+            },
+            None => {
+                UnorderedSet::new(b"new-access-set".to_vec())
+            }
+        };
+        access_set.insert(&escrow_hash);
+        self.account_gives_access.insert(&predecessor_hash, &access_set);
+    }
+
+    fn revoke_access(&mut self, escrow_account_id: AccountId) {
+        let predecessor = env::predecessor_account_id();
+        let predecessor_hash = env::sha256(predecessor.as_bytes());
+        let mut existing_set = match self.account_gives_access.get(&predecessor_hash) {
+            Some(existing_set) => existing_set,
+            None => env::panic(b"Access does not exist.")
+        };
+        let escrow_hash = env::sha256(escrow_account_id.as_bytes());
+        if existing_set.contains(&escrow_hash) {
+            existing_set.remove(&escrow_hash);
+            self.account_gives_access.insert(&predecessor_hash, &existing_set);
+            env::log(b"Successfully removed access.")
+        } else {
+            env::panic(b"Did not find access for escrow ID.")
+        }
+    }
+
+    fn transfer(&mut self, new_owner_id: AccountId, token_id: TokenId) {
+        let token_owner_account_id = self.get_token_owner(token_id);
+        let predecessor = env::predecessor_account_id();
+        if predecessor != token_owner_account_id {
+            env::panic(b"Attempt to call transfer on tokens belonging to another account.")
+        }
+        self.token_to_account.insert(&token_id, &new_owner_id);
+    }
+
+    fn transfer_from(&mut self, owner_id: AccountId, new_owner_id: AccountId, token_id: TokenId) {
+        let token_owner_account_id = self.get_token_owner(token_id);
+        if owner_id != token_owner_account_id {
+            env::panic(b"Attempt to transfer a token from a different owner.")
+        }
+
+        if !self.check_access(token_owner_account_id) {
+            env::panic(b"Attempt to transfer a token with no access.")
+        }
+        self.token_to_account.insert(&token_id, &new_owner_id);
+    }
+
+    fn check_access(&self, account_id: AccountId) -> bool {
+        let account_hash = env::sha256(account_id.as_bytes());
+        let predecessor = env::predecessor_account_id();
+        if predecessor == account_id {
+            return true;
+        }
+        match self.account_gives_access.get(&account_hash) {
+            Some(access) => {
+                let predecessor = env::predecessor_account_id();
+                let predecessor_hash = env::sha256(predecessor.as_bytes());
+                access.contains(&predecessor_hash)
+            },
+            None => false
+        }
+    }
+
+    fn get_token_owner(&self, token_id: TokenId) -> String {
+        match self.token_to_account.get(&token_id) {
+            Some(owner_id) => owner_id,
+            None => env::panic(b"No owner of the token ID specified")
+        }
+    }
+}
+```
+
+## Make NFTs Mintable
+
+After those NEP4 methods, there's a few more methods added to `NonFungibleTokenBasic` which aren't part of the NEP4 standard. For instance, because NEP4 doesn't say anything about how NFTs are created, this example contains a `mint_token()` method that can create them on demand. `mint_token()` takes two arguments: a token ID and an owner ID.
+
+Let's modify `mint_token()` to mint our flarns. We'll import the random number generator that we added to the manifest earlier, and use it to initialize each new flarn's DNA with a random 64-bit value.
+
+Replace the entire block underneath `/// Methods not in the strict scope of the NFT spec` with this code:
+
+```rust
+/// Methods not in the strict scope of the NFT spec (NEP4)
+#[near_bindgen]
+impl NonFungibleTokenBasic {
+    /// Creates a token for owner_id, doesn't use autoincrement, fails if id is taken
+    pub fn mint_token(&mut self, owner_id: String, token_id: TokenId) {
+        // make sure that only the owner can call this funtion
+        self.only_owner();
+        // Since Map doesn't have `contains` we use match
+        let token_check = self.token_to_account.get(&token_id);
+        if token_check.is_some() {
+            env::panic(b"Token ID already exists.")
+        }
+        // No token with that ID exists, mint and add token to data structures
+        self.token_to_account.insert(&token_id, &owner_id);
+
+        // Generate random Flarn DNA:
+        use rand::prelude::*;
+        use rand_chacha::ChaCha8Rng;
+        use rand_seeder::{Seeder};
+        let mut rng: ChaCha8Rng = Seeder::from(env::random_seed()).make_rng();
+        let new_flarn = Flarn {dna: rng.gen()};
+        self.token_to_flarn.insert(&token_id, &new_flarn);
+    }
+
+    /// helper function determining contract ownership
+    fn only_owner(&mut self) {
+        assert_eq!(env::predecessor_account_id(), self.owner_id, "Only contract owner can call this method.");
+    }
+
+    /// Added method: get the metadata for a token
+    pub fn get_token_meta(&self, token_id: TokenId) -> Flarn {
+        match self.token_to_flarn.get(&token_id) {
+            Some(flarn) => flarn,
+            None => env::panic(b"Missing metadata.")
+        }
+    }
+}
+```
+
+We've changed two things here:
+
+* We added code in `mint_token()` to create a new Flarn metadata record, fill its dna with random data, and save that to our metadata hash
+* We've added a new contract method `token_to_meta()` to return a token's metadata when we pass its ID
+
+That's the end of the smart contract. The rest of the code in this file is unit tests.
+
+## Add a test
+
+In Rust, unit tests usually live in the same file as the code being tested, wrapped in a `mod tests` block, and decorated with `#[test]` attributes that show the compiler where to find each test. It's a good practice to write at least one test for every new feature we add. Let's add a test for our new `token_to_meta()` method.
+
+Scroll to the bottom of `lib.rs`. The very last line in the file has just one closing bracket. Replace that entire line \(including the final bracket\) with this block of code \(including the final bracket\):
+
+```rust
+    #[test]
+    fn token_to_meta() {
+        // Make an instance of the contract, and set up a test context
+        let context = get_context(robert(), 0);
+        testing_env!(context);
+        let mut contract = NonFungibleTokenBasic::new(robert());
+        // Mint a token
+        contract.mint_token(mike(), 19u64);
+        // Get the token's metadata
+        let metadata = contract.get_token_meta(19u64);
+        // check that the DNA contains a value:
+        assert!(metadata.dna != 0, "DNA not set.");
+    }
+}
+```
+
+## Check our work
+
+Now that we've added some code, let's try building and testing again, and see if we broke anything. As before, type this command to build the project:
+
+```text
+yarn build:rs
+```
+
+If you have made any errors, the compiler should give you a detailed explanation. Since you've copied and pasted everything from this tutorial, it's probably just typos. But if you can't fix it with the compiler's help, replace the entire lib.rs file with [this version](https://github.com/figment-networks/tutorials/tree/main/near/6_NFT/contracts/rust/src/lib.rs), which contains all the changes we've made so far.
+
+Once that's building correctly, try running the unit tests:
+
+```text
+yarn test:unit:rs
+```
+
+You'll see that there are now 11 unit tests running, and they should all pass.
+
+\(After running the unit tests Yarn will try to run documentation tests -- but there aren't any here. That's why you'll see some output about `running 0 tests`. You can ignore that part.\)
+
+```text
+(output)
+```
 
 # Deploying and using the contract
 
+We can use the NEAR CLI to deploy this contract, and to test that it's working. If you configured your environment in Tutorials 1 and 2, the CLI will connect to DataHub's high-availability testnet. If you don't have DataHub access you can still run the CLI with its defaults, though the default testnet node may be slower to respond. Run this command to deploy the contract you just built:
 
-We can use the NEAR CLI to deploy this contract, and to test that it's working. If you configured your environment in Tutorials 1 and 2, the CLI will connect to DataHub's high-availability testnet. If you don't have DataHub access you can still run the CLI with its defaults, but the default testnet node may be slower to respond. 
-
-## Log in
-Log in to your testnet account with  `near-cli`  by running the following command in your terminal.
-```
-near login
-```
-This will open your testnet NEAR wallet in a web browser, so you can authorize the NEAR CLI with your testnet account.  Once that's done, you should see something like this output in the terminal:
-```
-Logged in as [ **accountname.testnet** ] with public key [ **ed25519:BDGh7Q...** ] successfully
+```text
+near dev-deploy out/nep4_rs.wasm
 ```
 
-To make this tutorial easier to copy/paste, we're going to set an environment variable with your testnet account ID. Run the command below, replacing  `accountname.testnet`  with the Account ID field output by `near login`
+The output will show details of the deployment transaction, and the ID of the test NEAR account that the CLI auto-generated for you. It should look something like this:
 
-```
-export ID=accountname.testnet
-```
-
-Test that the environment variable is set correctly by running:
-
-```
-echo $ID
-```
-
-Verify that the correct account ID is printed in the terminal. If everything looks correct you can now deploy your contract. 
-## Deploy the contract 
-
-Run this command to deploy the contract in your testnet account:
-```
-near deploy --wasmFile res/non_fungible_token.wasm --accountId $ID
-```
-If you have previously deployed a contract on this account, you will be asked if you want to replace it.  Answer `y` here:
-```
-**This account already has a deployed contract [** **G6TEwD4VXXYaUjgMmTw7y41R4x2DyDjcbXdX4xkESnXX** **]. Do you want to proceed?** **(y/n)**
-```
-Example output:
-```
-Starting deployment. Account id: accountname.testnet, node: https://rpc.testnet.near.org, helper: https://helper.testnet.near.org, file: res/non_fungible_token.wasm
-Transaction Id F9p9s7DKNkekZYeBcSiYt2ZMzwpuVsugDDVGcDizxBNN
+```text
+Starting deployment. Account id: dev-1607722059840-7354752, node: https://near-testnet--rpc.datahub.figment.io/apikey/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx, helper: https://helper.testnet.near.org, file: out/nep4_rs.wasm
+Transaction Id DanbgVsY3VCsQMh2zQvAGKuYWe1WFBuwsJo2oMti5QkC
 To see the transaction in the transaction explorer, please open this url in your browser
-https://explorer.testnet.near.org/transactions/F9p9s7DKNkekZYeBcSiYt2ZMzwpuVsugDDVGcDizxBNN
-Done deploying to accountname.testnet
+https://explorer.testnet.near.org/transactions/DanbgVsY3VCsQMh2zQvAGKuYWe1WFBuwsJo2oMti5QkC
+Done deploying to dev-1607722059840-7354752
 ```
 
 The provided link will give you complete details about the deployment in the NEAR Explorer.
 
-![NEAR explorer](assets/contract_deployed.png)
+![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/screen-shot-2021-02-01-at-6.30.27-pm.png)
+
+In this step, the CLI created a new user account on the testnet and deployed the contract in that account. Make a note of that new Account ID, which looks something like `dev-nnnnnnnnn-nnnnn`, where the `n`s are replaced by digits.
 
 ## Initialize the contract
 
-A smart contract can define an initialization method that can be used to set the contract's initial state. This NFT example contract must be initialized before use. Run this command to initialize it with the default metadata and set the owner to your dev account:
-```
-near call $ID new_default_meta '{"owner_id": "'$ID'"}' --accountId $ID
+Our NFT smart contract is now deployed on NEAR! Let's use the CLI to test this interface.
+
+## Contract arguments
+
+First, we we need to call our contract's `new()` method, to initialize the blockchain data store. If we call any other method before that, we'll get an error. The 'new' method takes one argument, `owner_id`, the accountID of the user who will be allowed to mint new Flarns from this contract.
+
+## CLI arguments
+
+To call that `new()` method from the CLI, run this command, replacing `CALLER-ID`, `RECEIVER-ID` and `OWNER-ID` with the test account ID you got from the previous step. \(Here, `CALLER-ID` is the account the CLI will use to make the call, `RECEIVER-ID` is the account where the contract is deployed, and `OWNER-ID` is the account that the contract will authorize to mint Flarns. For this test, we'll use the same account in all three roles.\)
+
+```text
+near call --accountId CALLER-ID RECEIVER-ID new '{"owner_id": "OWNER-ID"}'
 ```
 
-You can then view the contract metadata by running the following  `view`  call:
+The output should return a Transaction ID and a link to the NEAR Explorer:
 
+```text
+Scheduling a call: dev-1607722059840-7354752.new({"owner_id": "dev-1607722059840-7354752"})
+Transaction Id 9PZZFWJUco7f33vJEjTbcjzsGhiigtYiSSyNh5FmJdNb
+To see the transaction in the transaction explorer, please open this url in your browser
+https://explorer.testnet.near.org/transactions/9PZZFWJUco7f33vJEjTbcjzsGhiigtYiSSyNh5FmJdNb
 ```
-near view $ID nft_metadata
-```
-
-Example response:
-```
-View call: accountname.testnet.nft_metadata()
-{
-	spec: 'nft-1.0.0',
-	name: 'CryptoFlarns',
-	symbol: 'FLARN',
-	icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 288 288'%3E%3Cg id='l' data-name='l'%3E%3Cpath d='M187.58,79.81l-30.1,44.69a3.2,3.2,0,0,0,4.75,4.2L191.86,103a1.2,1.2,0,0,1,2,.91v80.46a1.2,1.2,0,0,1-2.12.77L102.18,77.93A15.35,15.35,0,0,0,90.47,72.5H87.34A15.34,15.34,0,0,0,72,87.84V201.16A15.34,15.34,0,0,0,87.34,216.5h0a15.35,15.35,0,0,0,13.08-7.31l30.1-44.69a3.2,3.2,0,0,0-4.75-4.2L96.14,186a1.2,1.2,0,0,1-2-.91V104.61a1.2,1.2,0,0,1,2.12-.77l89.55,107.23a15.35,15.35,0,0,0,11.71,5.43h3.13A15.34,15.34,0,0,0,216,201.16V87.84A15.34,15.34,0,0,0,200.66,72.5h0A15.35,15.35,0,0,0,187.58,79.81Z'/%3E%3C/g%3E%3C/svg%3E",
-	base_uri: null,
-	reference: null,
-	reference_hash: null
-}
-```
-
 
 # Mint an NFT!
 
-Now let's mint our first token! Run the following command to mint one copy of your NFT, using the metadata in `token.json`:
+Now we'll make a call to `mint_token()`. We'll need a block of JSON containing the two arguments to that method: an ID for the token, which can be any integer, and an account ID of the token's first owner. We'll use the same test account ID as before, and give `1234` as a token ID.
 
-```
-near call $ID nft_mint '{"token_id": "0", "receiver_id": "'$ID'", "token_metadata": '"`cat token.json`}" --accountId $ID --deposit 0.1
-```
+Run this at your command line, again substituting `CALLER-ID` and `RECEIVER-ID`:
 
-Example response:
-```
-Scheduling a call: accountname.testnet.nft_mint({"token_id": "2", "receiver_id": "accountname.testnet", "token_metadata": {
-			"title": "Alice",
-			"description": "Alice is uniquely adorable & loves long walks on the beach.",
-			"media": "https://bafyreiabag3ztnhe5pg7js4bj6sxuvkz3sdf76cjvcuqjoidvnfjz7vwrq.ipfs.dweb.link/",
-			"media_hash": "e8MzVN0Pq1ztofypQoperJC8gWo2xfs8f9few+SwHes="
-}}) with attached 0.1 NEAR
-Doing account.functionCall()
-Transaction Id HQtMD9M4WnjJ4bJ8xz2A82pBMDNgMthkaegbNb4GsP7f
-To see the transaction in the transaction explorer, please open this url in your browser
-https://explorer.testnet.near.org/transactions/HQtMD9M4WnjJ4bJ8xz2A82pBMDNgMthkaegbNb4GsP7f
-{
-	token_id: '2',
-	owner_id: 'accountname.testnet',
-	metadata: {
-		title: 'Alice',
-		description: 'Alice is uniquely adorable & loves long walks on the beach.',
-		media: 'https://bafyreiabag3ztnhe5pg7js4bj6sxuvkz3sdf76cjvcuqjoidvnfjz7vwrq.ipfs.dweb.link/',
-		media_hash: 'e8MzVN0Pq1ztofypQoperJC8gWo2xfs8f9few+SwHes=',
-		copies: null,
-		issued_at: null,
-		expires_at: null,
-		starts_at: null,
-		updated_at: null,
-		extra: null,
-		reference: null,
-		reference_hash: null
-	},
-	approved_account_ids: {}
-}
-```
-The contract has minted our NFT.  The return value of the contract call is the NFT record itself.  It's pretty much the same data we sent, shown as it's stored on the blockchain. 
-- Notice that `receiver_id` became `owner_id`. 
-- All the optional metadata fields we didn't specify are set to `null`.  
-- The `approved_account_ids` field would list any other NEAR users who are authorized to manipulate this NFT, but we didn't authorize anybody, so that list is empty.
-
-
-To view all the flarns you own, you can call the NFT contract with the following  `near-cli`  command:
-
-```
-near view $ID nft_tokens_for_owner '{"account_id": "'$ID'"}'
+```text
+near call --accountId CALLER-ID RECEIVER-ID mint_token '{ "token_id":1234, "owner_id": "CALLER-ID"}'
 ```
 
-Since this is your only flarn so far, the result will be a JSON array containing just the one NFT you've already seen: 
-```
-[
-  {
-    token_id: '0',
-	owner_id: 'accountname.testnet',
-	metadata: {
-		title: 'Alice',
-		description: 'Alice is uniquely adorable & loves long walks on the beach.',
-		media: 'https://bafyreiabag3ztnhe5pg7js4bj6sxuvkz3sdf76cjvcuqjoidvnfjz7vwrq.ipfs.dweb.link/',
-		media_hash: 'e8MzVN0Pq1ztofypQoperJC8gWo2xfs8f9few+SwHes=',
-		copies: null,
-		issued_at: null,
-		expires_at: null,
-		starts_at: null,
-		updated_at: null,
-		extra: null,
-		reference: null,
-		reference_hash: null
-	},
-	approved_account_ids: {}
-  }
-]
+The output will look pretty similar to the output of the `new()` method. Neither of those methods return any data. But the new transaction ID and the explorer link should confirm for us that the token was minted.
+
+Still, we can be even more sure. Let's fetch the metadata for our newly minted token and have a look at it. Run this command, again replacing `ACCOUNT-ID` and `CONTRACT-ID`:
+
+```text
+near view --accountId ACCOUNT-ID CONTRACT-ID get_token_meta '{"token_id":1234}'
 ```
 
-Also, the NEAR Wallet will automatically check the entire network for NFTs you own, so you can see your new Flarn in your Wallet, under the Collectables tab:
-[Flarn NFT in wallet](assets/flarn_in_wallet.png)
+The output is similar, but the last line contains the return value in JSON:
+
+```text
+{ dna: 9932525801968679000 }
+```
+
+The actual number you see will be different from this, if the random number generator is good at generating random numbers. But here is our NFT metadata, stored in the NEAR blockchain.
 
 # Conclusion
 
-You now have deployed an NFT-171 smart contract on the NEAR testnet, and have minted one CryptoFlarn NFT. From here you could use the CLI or the NEAR Javascript SDK to transfer ownership of that token, or to mint more tokens. If your next NFT project needs more complex metadata, you've seen how that can be added.  
-
-When you're ready to go public with your new NFT contract, you can easily [point NEAR CLI at mainnet](https://docs.near.org/docs/tools/near-cli#network-selection), and deploy using the same steps.
+You now have deployed an NFT smart contract on the NEAR testnet, and have minted one CryptoFlarn NFT. From here you could use the CLI or the NEAR Javascript SDK to transfer ownership of that token, or to make more tokens. NFT marketplaces are already under development on NEAR; when they support NEP-4, you'll be able to trade these tokens there. If your next NFT project needs more complex metadata, you've seen how that can be added.
 
 The complete code for this tutorial can be found on [Github](https://github.com/figment-networks/tutorials/tree/main/near/6_NFT).
 # About the Author
 
 This tutorial was created by [Mykle Hansen](https://github.com/myklemykle), a contributor to the [Plantary](https://github.com/myklemykle/plantary) project which allows users to grow and harvest plant NFTs on NEAR.
-
