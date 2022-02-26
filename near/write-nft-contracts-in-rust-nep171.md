@@ -1,5 +1,3 @@
-
-
 # Introduction
 
 [Non-Fungible Tokens](https://en.wikipedia.org/wiki/Non-fungible_token) are unique records of ownership on the blockchain. Usually an NFT is tied to something interesting and rare, such as an artwork, a concert ticket, a collectable cat, a domain name, or a real physical object. NFTs can be bought, sold, given away, and can even be minted or destroyed, depending on the rules of the contract. [Cryptokitties](https://www.cryptokitties.co/), [SuperRare](https://superrare.co/) and [Bored Ape Yacht Club](https://boredapeyachtclub.com/) are just a few popular examples of Ethereum-based NFT projects. We can implement NFTs just as easily on NEAR.ddd
@@ -14,7 +12,7 @@ To support NFT development on NEAR, the core developers and marketplace stakehol
 
 # Prerequisites
 
- If you have completed [the NEAR pathway](https://learn.figment.io/pathways/near-pathway) and  [the Figment NEAR + Rust tutorial](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near), you should have already taken care of all prerequisites. For this tutorial you must:
+ If you have completed [the NEAR pathway](https://learn.figment.io/protocols/near) and  [the Figment NEAR + Rust tutorial](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near), you should have already taken care of all prerequisites. For this tutorial you must:
 
 * Install Node.js and npm, and set up your DataHub environment
 * [Use npm to install the NEAR CLI](https://www.npmjs.com/package/near-cli)
@@ -28,11 +26,13 @@ __NOTE FOR M1 MACS__: The NFT examples repo used by this tutorial does not curre
 
 NEAR uses WebAssembly as its virtual machine.  Many languages can compile to WebAssembly, but NEAR core developers recommend that all financial smart contracts be written in the Rust language. Before we can start working on the Rust contract, we need to install the cross-compilation tools that compile a Rust smart contract into WebAssembly, using Rustup.  Run this command:
 
-```text
+```bash
 rustup target add wasm32-unknown-unknown
 ```
+
 Example output:
-```
+
+```bash
 **info:** downloading component 'rust-std' for 'wasm32-unknown-unknown'
 **info:** installing component 'rust-std' for 'wasm32-unknown-unknown'
 15.6 MiB /  15.6 MiB (100 %) 8.7 MiB/s in  1s ETA:  0s
@@ -42,11 +42,12 @@ Example output:
 
 In this tutorial we'll modify NEAR's NFT-171 example code from the NEAR repository on Github. On Unix, run these commands in the `bash` shell to clone that repo and install its requirements:
 
-```text
+```bash
 git clone https://github.com/near-examples/NFT
 ```
+
 Example output:
-```
+```bash
 Cloning into 'NFT'...
 remote: Enumerating objects: 1334, done.
 remote: Counting objects: 100% (456/456), done.
@@ -58,14 +59,14 @@ Resolving deltas: 100% (642/642), done.
 
 To build the example, enter this command in the shell:
 
-```text
+```bash
 cd NFT
 ./build.sh
 ```
 
 Because this is our first build, Cargo and Rust will download and build all the dependencies. If might take some time. When it's finished, you should see something like this at the end of the output:
 
-```text
+```bash
 Compiling near-sdk v3.1.0
 Compiling near-contract-standards v3.2.0
 Compiling approval-receiver v0.0.1 (/Users/mykle/Documents/near/flarns2.0/NFT/test-approval-receiver)
@@ -76,7 +77,7 @@ Finished release [optimized] target(s) in 2m 07s
 
 We can also run all of the included unit tests with this command:
 
-```text
+```bash
 cargo test -- --nocapture
 ```
 
@@ -84,7 +85,7 @@ cargo test -- --nocapture
 
 The unit test output is messy, but at the end you should see a summary of results.
 
-```text
+```bash
 test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
@@ -103,7 +104,7 @@ If you browse this contract, you'll find it only implements three methods: `new`
 NEP-171 requires our contract to have a human-readable name and an abbreviated symbol for use by marketplaces and wallets.  These are defined in the `new_default_meta` function that starts on line 52.
 
 Let's modify that function to use our own name and symbol.  Change the name to "CryptoFlarns" and the symbol to "FLARN".  (Also change the "base_uri" field as shown; we'll explain why shortly.)  When you're done, the method should look like this:
-```
+```rust
 	/// Initializes the contract owned by `owner_id` with
 	/// default metadata (for example purposes only).
 	#[init]
@@ -131,15 +132,18 @@ Here is our very simple example icon:
 [![CryptoFlarns icon](/assets/cryptoflarns_icon.svg "CryptoFlarns icon")](/assets/cryptoflarns_icon.svg)
 
 The icon is defined on line 39 of the example contract, as a long string of text.  In your editor, change that very long line to this even longer line:
-```
+
+```rust
 const DATA_IMAGE_SVG_NEAR_ICON: &str  =  "data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2764%27%20height%3D%2764%27%20xml%3Aspace%3D%27preserve%27%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27transparent%27%2F%3E%3Crect%20style%3D%27stroke%3Anone%3Bstroke-width%3A1%3Bstroke-dasharray%3Anone%3Bstroke-linecap%3Abutt%3Bstroke-dashoffset%3A0%3Bstroke-linejoin%3Amiter%3Bstroke-miterlimit%3A4%3Bfill%3A%23ffec20%3Bfill-rule%3Anonzero%3Bopacity%3A1%27%20vector-effect%3D%27non-scaling-stroke%27%20x%3D%27-32%27%20y%3D%27-32%27%20rx%3D%270%27%20ry%3D%270%27%20width%3D%2764%27%20height%3D%2764%27%20transform%3D%27translate%2832%2032%29%27%2F%3E%3Ccircle%20style%3D%27stroke%3A%23000%3Bstroke-width%3A0%3Bstroke-dasharray%3Anone%3Bstroke-linecap%3Abutt%3Bstroke-dashoffset%3A0%3Bstroke-linejoin%3Amiter%3Bstroke-miterlimit%3A4%3Bfill%3A%2370ff10%3Bfill-rule%3Anonzero%3Bopacity%3A1%27%20vector-effect%3D%27non-scaling-stroke%27%20r%3D%2735%27%20transform%3D%27matrix%28.37%200%200%20.37%2032%2032%29%27%2F%3E%3C%2Fsvg%3E";
 ```
 
 Now build and test the contract again, to confirm there are no typos:
-```
+
+```bash
 ./build.sh
 cargo test -- --nocapture
 ```
+
 Look for `Finished` after the build, and `test result: ok` after the tests.
 
 # Designing our first NFT
@@ -189,7 +193,7 @@ For this example, we'll use the free  [NFT.Storage](https://nft.storage/#getting
     
 3.  Once you have uploaded your file, select `Actions -> View URL` to see your upload in a new browser tab.  Then copy the URL from that tab.  That is the URL for your content, based on an IPFS Content-ID string.  It should look something like this:
     
-    ```
+    ```bash
     https://ipfs.io/ipfs/bafkreic2y4z2hvfkzalogw3yeh5hntbvr4op4a5ccjo5zfhouss4mozlnm
     ```
 
@@ -201,7 +205,8 @@ For this example, we'll use the free  [NFT.Storage](https://nft.storage/#getting
 The checksum of our media file stored in the `media_hash` field, must be a Base64-encoded SHA256 hash of the original data, to prove the file hasn't been tampered with.  NEP-171 requires Base64 encoding of the hash for maximum portability between platforms.  However, most online and command-line SHA256 tools generate hashes as Hexadecimal+Unicode, so we also will need to convert from that to Base64. 
 
 There are a few different ways to do this.  On a UNIX-based system, use this command:
-```
+
+```bash
 cat flarn.jpg | shasum -a 256 | xxd -r -p | base64
 ```
 
@@ -217,6 +222,7 @@ If you used [our example Flarn image](assets/flarn.jpg), the strings should matc
 
 ## Assemble the pieces
 Now that we've chosen our metadata, have stored our media stored off-chain, and have generated the media URL and media hash, we can construct our NFT Token record.  Use your editor to create a file in the current directory called `token.json`, containing a single object of JSON metadata.  You can start by pasting in this text:
+
 ```json
 {
 	"title": "Alice",
@@ -225,6 +231,7 @@ Now that we've chosen our metadata, have stored our media stored off-chain, and 
 	"media_hash": "e8MzVN0Pq1ztofypQoperJC8gWo2xfs8f9few+SwHes="
 }
 ```
+
 Now edit the following values:
 * Use the URL you got from NFT.storage as the value for "media".
 * Use the base64 sha256 hash you generated for "media_hash", if you're using a different image file than our example.
@@ -242,23 +249,26 @@ We can use the NEAR CLI to deploy this contract, and to test that it's working. 
 
 ## Log in
 Log in to your testnet account with  `near-cli`  by running the following command in your terminal.
-```
+
+```bash
 near login
 ```
+
 This will open your testnet NEAR wallet in a web browser, so you can authorize the NEAR CLI with your testnet account.  Once that's done, you should see something like this output in the terminal:
-```
+
+```bash
 Logged in as [ **accountname.testnet** ] with public key [ **ed25519:BDGh7Q...** ] successfully
 ```
 
 To make this tutorial easier to copy/paste, we're going to set an environment variable with your testnet account ID. Run the command below, replacing  `accountname.testnet`  with the Account ID field output by `near login`
 
-```
+```bash
 export ID=accountname.testnet
 ```
 
 Test that the environment variable is set correctly by running:
 
-```
+```bash
 echo $ID
 ```
 
@@ -266,15 +276,20 @@ Verify that the correct account ID is printed in the terminal. If everything loo
 ## Deploy the contract 
 
 Run this command to deploy the contract in your testnet account:
-```
+
+```bash
 near deploy --wasmFile res/non_fungible_token.wasm --accountId $ID
 ```
+
 If you have previously deployed a contract on this account, you will be asked if you want to replace it.  Answer `y` here:
-```
+
+```bash
 **This account already has a deployed contract [** **G6TEwD4VXXYaUjgMmTw7y41R4x2DyDjcbXdX4xkESnXX** **]. Do you want to proceed?** **(y/n)**
 ```
+
 Example output:
-```
+
+```bash
 Starting deployment. Account id: accountname.testnet, node: https://rpc.testnet.near.org, helper: https://helper.testnet.near.org, file: res/non_fungible_token.wasm
 Transaction Id F9p9s7DKNkekZYeBcSiYt2ZMzwpuVsugDDVGcDizxBNN
 To see the transaction in the transaction explorer, please open this url in your browser
@@ -289,18 +304,20 @@ The provided link will give you complete details about the deployment in the NEA
 ## Initialize the contract
 
 A smart contract can define an initialization method that can be used to set the contract's initial state. This NFT example contract must be initialized before use. Run this command to initialize it with the default metadata and set the owner to your dev account:
-```
+
+```bash
 near call $ID new_default_meta '{"owner_id": "'$ID'"}' --accountId $ID
 ```
 
 You can then view the contract metadata by running the following  `view`  call:
 
-```
+```bash
 near view $ID nft_metadata
 ```
 
 Example response:
-```
+
+```bash
 View call: accountname.testnet.nft_metadata()
 {
 	spec: 'nft-1.0.0',
@@ -318,12 +335,13 @@ View call: accountname.testnet.nft_metadata()
 
 Now let's mint our first token! Run the following command to mint one copy of your NFT, using the metadata in `token.json`:
 
-```
+```bash
 near call $ID nft_mint '{"token_id": "0", "receiver_id": "'$ID'", "token_metadata": '"`cat token.json`}" --accountId $ID --deposit 0.1
 ```
 
 Example response:
-```
+
+```bash
 Scheduling a call: accountname.testnet.nft_mint({"token_id": "2", "receiver_id": "accountname.testnet", "token_metadata": {
 			"title": "Alice",
 			"description": "Alice is uniquely adorable & loves long walks on the beach.",
@@ -354,6 +372,7 @@ https://explorer.testnet.near.org/transactions/HQtMD9M4WnjJ4bJ8xz2A82pBMDNgMthka
 	approved_account_ids: {}
 }
 ```
+
 The contract has minted our NFT.  The return value of the contract call is the NFT record itself.  It's pretty much the same data we sent, shown as it's stored on the blockchain. 
 - Notice that `receiver_id` became `owner_id`. 
 - All the optional metadata fields we didn't specify are set to `null`.  
@@ -362,12 +381,13 @@ The contract has minted our NFT.  The return value of the contract call is the N
 
 To view all the flarns you own, you can call the NFT contract with the following  `near-cli`  command:
 
-```
+```bash
 near view $ID nft_tokens_for_owner '{"account_id": "'$ID'"}'
 ```
 
 Since this is your only flarn so far, the result will be a JSON array containing just the one NFT you've already seen: 
-```
+
+```bash
 [
   {
     token_id: '0',
