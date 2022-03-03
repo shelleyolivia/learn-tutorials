@@ -12,14 +12,18 @@ To support NFT development on NEAR, the core developers and marketplace stakehol
 
 # Prerequisites
 
- If you have completed [the NEAR pathway](https://learn.figment.io/protocols/near) and  [the Figment NEAR + Rust tutorial](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near), you should have already taken care of all prerequisites. For this tutorial you must:
+* [The NEAR 101 pathway](https://learn.figment.io/protocols/near) 
+* [How to write and deploy a smart contract in Rust ](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near)
 
-* Install Node.js and npm, and set up your DataHub environment
+
+# Requirements
+
+* [Install Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 * [Use npm to install the NEAR CLI](https://www.npmjs.com/package/near-cli)
 * [Create a wallet on the NEAR Testnet](https://nearhelp.zendesk.com/hc/en-us/articles/1500002248242-Creating-a-NEAR-Wallet-account)
 * [Install Rust and Rustup](https://www.rust-lang.org/tools/install)
 
-__NOTE FOR M1 MACS__: The NFT examples repo used by this tutorial does not currently compile on M1 Macintoshes.  If you don't have access to an Intel-based Mac, you can instead do this tutoral on __GitPod__.  [Open this link in a separate tab](https://gitpod.io/#https://github.com/near-examples/NFT),  then skip ahead to the next section: __Getting To Know The NFT Contract__.
+__NOTE FOR M1 MAC USERS__: The NFT examples repo used by this tutorial does not currently compile on M1 Macintoshes.  If you don't have access to an Intel-based Mac, you can instead do this tutoral on __GitPod__.  [Open this link in a separate tab](https://gitpod.io/#https://github.com/near-examples/NFT),  then skip ahead to the next section: __Getting To Know The NFT Contract__.
 
 # Setting up the project
 ## Install the WebAssembly target using rustup
@@ -47,6 +51,7 @@ git clone https://github.com/near-examples/NFT
 ```
 
 Example output:
+
 ```bash
 Cloning into 'NFT'...
 remote: Enumerating objects: 1334, done.
@@ -104,6 +109,7 @@ If you browse this contract, you'll find it only implements three methods: `new`
 NEP-171 requires our contract to have a human-readable name and an abbreviated symbol for use by marketplaces and wallets.  These are defined in the `new_default_meta` function that starts on line 52.
 
 Let's modify that function to use our own name and symbol.  Change the name to "CryptoFlarns" and the symbol to "FLARN".  (Also change the "base_uri" field as shown; we'll explain why shortly.)  When you're done, the method should look like this:
+
 ```rust
 	/// Initializes the contract owned by `owner_id` with
 	/// default metadata (for example purposes only).
@@ -129,7 +135,7 @@ NEP-171 contracts can also have an optional icon, which is shown in the NEAR wal
 NEP-171 advises that the `icon` field should be encoded in [data-URI format](https://en.wikipedia.org/wiki/Data_URI_scheme), for maximum compatibility with web browsers.  The icon in the example contract is a simple SVG file, data-URI encoded according to [this guide by Jenny Knuth](https://bl.ocks.org/jennyknuth/222825e315d45a738ed9d6e04c7a88d0).  Other image file formats such as GIF and PNG can also be data-URI encoded, but SVGs are nice because they can be quite small.  
 
 Here is our very simple example icon:
-[![CryptoFlarns icon](/assets/cryptoflarns_icon.svg "CryptoFlarns icon")](/assets/cryptoflarns_icon.svg)
+[![CryptoFlarns icon](/https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/cryptoflarns_icon.svg "CryptoFlarns icon")](/https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/cryptoflarns_icon.svg)
 
 The icon is defined on line 39 of the example contract, as a long string of text.  In your editor, change that very long line to this even longer line:
 
@@ -174,7 +180,7 @@ You can either invent your own metadata at this point, or you can use this examp
 
 * `title`: Alice
 * `description`: Alice is uniquely adorable & loves long walks on the beach.
-* `media`: [![A Flarn called Alice](assets/flarn.jpg "Alice")](assets/flarn.jpg)
+* `media`: [![A Flarn called Alice](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/flarn.jpg "Alice")](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/flarn.jpg)
 
 ## Include off-chain data
 Due to the high cost of Ethereum storage, most Ethereum NFTs of digital media do not store the media on the blockchain.  On-chain storage is much cheaper on NEAR, but since media files are large, it will still be thrifty of us to store our Flarn image elsewhere.  The `media` field of our on-chain record will hold a URL pointing to our off-chain image.  We could host that image anywhere on the Web we choose, but it would be nice to put it somewhere that's always online, decentralized, and free. 
@@ -189,15 +195,15 @@ For this example, we'll use the free  [NFT.Storage](https://nft.storage/#getting
     
 2.  Go to the  [Files](https://nft.storage/files/)  section, and click on the  [Upload](https://nft.storage/new-file/)  button to upload your Flarn image.
     
-    ![nft.storage](assets/uploading_to_nft_storage_1.png)
+    ![nft.storage](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/uploading_to_nft_storage_1.png)
     
 3.  Once you have uploaded your file, select `Actions -> View URL` to see your upload in a new browser tab.  Then copy the URL from that tab.  That is the URL for your content, based on an IPFS Content-ID string.  It should look something like this:
-    
+ 
     ```bash
     https://ipfs.io/ipfs/bafkreic2y4z2hvfkzalogw3yeh5hntbvr4op4a5ccjo5zfhouss4mozlnm
     ```
 
-    ![nft.storage](assets/uploading_to_nft_storage_2.png)
+    ![nft.storage](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/uploading_to_nft_storage_2.png)
    
 4. NEP-171 requires the `base_uri` field of the contract to point to a site that will have reliable access to the URLs in the `media` and `reference` fields. That's why we set `base_uri` to `https://nft.storage/` when we customized the contract.  Since our media is stored with NFT.Storage, we can use their URL for this field. 
 
@@ -212,13 +218,13 @@ cat flarn.jpg | shasum -a 256 | xxd -r -p | base64
 
 On the web, you can generate the media hash in two steps.  
 1: Upload your file to [this online SHA256 calculator](https://emn178.github.io/online-tools/sha256_checksum.html) to generate a SHA256 hash in hexadecimal format.
-![Online SHA256 calculator](/assets/sha256.png)
+![Online SHA256 calculator](/https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/sha256.png)
 2: Copy the hexadecimal string from that tool, and paste it into [this online Hex-Base64 converter](https://base64.guru/converter/encode/hex):
-![Online Base64 converter](assets/hex_to_base64.png)
+![Online Base64 converter](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/hex_to_base64.png)
 
 __NOTE__: do not upload sensitive or private data to these web services! Use the UNIX commands above if privacy is important.
 
-If you used [our example Flarn image](assets/flarn.jpg), the strings should match the screenshots. If you're using your own image, the strings will be different.
+If you used [our example Flarn image](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/flarn.jpg), the strings should match the screenshots. If you're using your own image, the strings will be different.
 
 ## Assemble the pieces
 Now that we've chosen our metadata, have stored our media stored off-chain, and have generated the media URL and media hash, we can construct our NFT Token record.  Use your editor to create a file in the current directory called `token.json`, containing a single object of JSON metadata.  You can start by pasting in this text:
@@ -239,7 +245,7 @@ Now edit the following values:
 * Change `title` and `description` to whatever you like, or leave them as-is.
 
 Save the file, then verify it at [JSONLint](https://jsonlint.com/)
-![JSONLint](assets/jsonlint.png)
+![JSONLint](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/jsonlint.png)
 
 
 # Deploying and using the contract
@@ -299,7 +305,7 @@ Done deploying to accountname.testnet
 
 The provided link will give you complete details about the deployment in the NEAR Explorer.
 
-![NEAR explorer](assets/contract_deployed.png)
+![NEAR explorer](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/contract_deployed.png)
 
 ## Initialize the contract
 
@@ -412,7 +418,7 @@ Since this is your only flarn so far, the result will be a JSON array containing
 ```
 
 Also, the NEAR Wallet will automatically check the entire network for NFTs you own, so you can see your new Flarn in your Wallet, under the Collectables tab:
-[Flarn NFT in wallet](assets/flarn_in_wallet.png)
+[Flarn NFT in wallet](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/flarn_in_wallet.png)
 
 # Conclusion
 
