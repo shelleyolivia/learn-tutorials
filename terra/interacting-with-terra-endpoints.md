@@ -2,7 +2,7 @@
 
 In order to benefit from the full potential of the Terra blockchain, you will first need to connect to a Terra node. 
 
-In this tutorial, we will use the Terra SDK to connect to a Terra node hosted by [**DataHub**](https://figment.io/datahub-waitlist/). We will be building a simple NodeJS application. More details about Terra.js can be found [**here**](https://terra-project.github.io/terra.js/).
+In this tutorial, we will use the Terra SDK to connect to a Terra node hosted by [**DataHub**](https://datahub.figment.io/). We will be building a simple NodeJS application. More details about Terra.js can be found [**here**](https://terra-project.github.io/terra.js/).
 
 # Creating the NodeJS App
 
@@ -148,9 +148,9 @@ This uses the LCDClient class to create a connection to Terra. Run this code wit
 
 # Conclusion
 
-Now that we have successfully connected to a Terra node using [**DataHub**](https://figment.io/datahub-waitlist/), we are ready to move on to the next tutorial.
+Now that we have successfully connected to a Terra node using [**DataHub**](https://datahub.figment.io/), we are ready to move on to the next tutorial.
 
-The complete code for this tutorial series can be found here: <https://github.com/figment-networks/tutorials/tree/main/terra>
+The complete code for this tutorial series can be found [here](https://github.com/figment-networks/tutorials/tree/main/terra)
 
 # Next Steps
 
