@@ -427,6 +427,11 @@ You now have deployed an NFT-171 smart contract on the NEAR testnet, and have mi
 When you're ready to go public with your new NFT contract, you can easily [point NEAR CLI at mainnet](https://docs.near.org/docs/tools/near-cli#network-selection), and deploy using the same steps.
 
 The complete code for this tutorial can be found on [Github](https://github.com/figment-networks/tutorials/tree/main/near/6_NFT).
+
+# Next Steps
+
+From here you can implement a web interface to show off your NFTs, using [near-api-js](https://docs.near.org/docs/api/javascript-library) to fetch the metadata of the NFTs in your contract.  Then you can explore other optional substandards of NEP-171, such as the [Approval Management](https://nomicon.io/Standards/NonFungibleToken/ApprovalManagement) standard (NEP-178) that lets you authorize marketplaces to trade your NFT on your behalf, or the [Royalties and Payouts](https://nomicon.io/Standards/NonFungibleToken/Payout) standard (NEP-199) that lets you specify how the proceeds of an NFT sale should be distributed.
+
 # About the Author
 
 This tutorial was created by [Mykle Hansen](https://github.com/myklemykle), a contributor to the [Plantary](https://github.com/myklemykle/plantary) project which allows users to grow and harvest plant NFTs on NEAR.
