@@ -124,7 +124,7 @@ function provide(uint256 _amountToken1, uint256 _amountToken2) external validAmo
 }
 ```
 
-{% hint style="danger" %}  
+{% hint style="danger" %}
 Carefully notice the order of balance update we are performing in the above function. We are first deducting the tokens from the users' account and in the very last step, we are updating her share balance. This is done to prevent a reentrancy attack.  
 {% endhint %}
 
@@ -448,7 +448,7 @@ Navigate to Deploy Tab and open the “ENVIRONMENT” drop-down. Select "Injecte
 
 Approve the transaction on Metamask pop-up interface. Once our contract is deployed successfully, make note of the `contract address`.
 
-{% hint style="info" %}  
+{% hint style="info" %}
 An Application Binary Interface (ABI) is a JSON object which stores the metadata about the methods of a contract like data type of input parameters, return data type & property of the method like payable, view, pure, etc. You can learn more about the ABI from the [solidity documentation](https://docs.soliditylang.org/en/latest/abi-spec.html)  
 {% endhint %}
 

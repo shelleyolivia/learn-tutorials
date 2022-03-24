@@ -557,7 +557,7 @@ After switching the network, Click on the *Contracts* option under the *Develope
 
 Now click on *Next*. As we have just one constructor in our contract, It will be chosen by default otherwise a dropdown option would have been present to select from multiple constructors. As our constructor `new()` accepts one parameter called `fees`. We need to set the *fees* field with a positive number. 
 
-{% hint style="info" %}  
+{% hint style="info" %}
 Note down that the default unit is set to *DOT* which multiplies the input by a factor of 10^4. So if we wish to pass a value say 10 (which corresponds to 1% trading fee, 10/1000 fraction, in our contract) then we need to write 0.0001 DOT.  
 {% endhint %}
 
@@ -638,7 +638,7 @@ const faucet = async (amountKAR, amountKOTHI) => {
 In the above javascript code, we have demonstrated how to make a query and transaction to our AMM smart contract. Now let's understand each line of the above code.
 
 
-{% hint style="info" %}  
+{% hint style="info" %}
  The above code is just a reference on how to interact with the smart contract.
 {% endhint %}
 
@@ -758,7 +758,7 @@ The `App.js` renders the `ContainerComponent` and connects the application to `p
 
 The `constants.js` file stores the contract **ABI** and **CONTRACT_ADDRESS**. Don't forget to store your contract address and ABI in the respective variables. 
 
-{% hint style="info" %}  
+{% hint style="info" %}
 ABI can be obtained from your ink! project folder at `/target/ink/metadata.json`
 {% endhint %}
 
