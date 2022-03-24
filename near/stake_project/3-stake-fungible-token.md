@@ -154,7 +154,7 @@ fn ft_transfer(
 * In order to commit the transfer to the blockchain, we must remember to persist the state change to storage. Both the sender and receiver accounts are saved to storage.
 
 {% hint style="info" %}
-# Best Practices
+Best Practices
 
 1. You should always use [ValidAccountId](https://docs.rs/near-sdk/2.0.1/near_sdk/json_types/struct.ValidAccountId.html) as the contract function argument type
 2. Contract API function should be easy to read to understand the business logic
