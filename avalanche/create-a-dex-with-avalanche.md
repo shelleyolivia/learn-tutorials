@@ -430,8 +430,6 @@ You can now view AvaSwap in the browser.
  Local: http://localhost:3000/
  ```
 
-![](/.gitbook/assets/avaswap.png)
-
 We will be using `Main.js`, `BuyForm.js` & `SellForm.js` components to build the UI and Smart Contract integration.
 
 **Main.js**
