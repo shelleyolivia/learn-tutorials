@@ -989,8 +989,6 @@ Now we are finally ready to test our product.
 
 Create a new NFT and list it in the marketplace smart contract. I am using [this](https://mumbai.polygonscan.com/address/0x12Fc3C44b4092aD55cf0212fa3A84a1210fCED5f#writeContract) contract to create NFT and [this](https://mumbai.polygonscan.com/address/0x9a606932f7F0d07EAd02693D71768268FECc9c88#writeContract) is my Marketplace contract. Now click on the play button. The artwork will spawn at the first spawn point listed. When you move closer to the artwork, the details to appear on the screen.
 
-![Screenshot 2021-10-17 at 18.50.40.png](Making%20a%203D-Art%20Gallery%207e74bfddb15b42ddb6332adb0cf8113a/Screenshot_2021-10-17_at_18.50.40.png)
-
 Congratulations 🎉🎉🎉, your game is ready.
 
 ## Building the game
