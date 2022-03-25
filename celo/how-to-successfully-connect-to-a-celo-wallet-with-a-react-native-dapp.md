@@ -327,10 +327,202 @@ Run your app and Login to see the Wallet and Phone number returned to the Home S
 
 ![Home Screen](https://github.com/figment-networks/learn-tutorials/raw/master/assets/homescreen.png)
 
+# WalletConnect v1 alternative
+
+Instead of using celo DappKit api, nowadays WalletConnect is recommended:
+
+[Valora + WalletConnect v1](https://docs.celo.org/developer-resources/walkthroughs/valora-wc-v1)
+
+This chapter explains how to upgrade the app using node version `^v17.3.0` WalletConnect instead of DappKit
+In addition, disconnect functionality and balances information are retrieved and displayed (new sample pictures added). Also, we will explain how to run
+the application in web browser mode.
+
+1. Make sure you have nvm installed. This helps you switch between node versions very easy, depending on project needs
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+```
+2. Install and use node v17.3.0
+```
+nvm install v17.3.0
+nvm use 17.3.0
+```
+3. To use the WalletConnect v1, install using: 
+```
+yarn add @celo/contractkit
+yarn add @walletconnect/web3-provider
+yarn add react-native-tcp
+yarn add web3
+```
+Prior running the application make sure to execute `export NODE_OPTIONS=--openssl-legacy-provider` needed for some Linux operation systems (Centos7)
+
+Run the app using: `expo start` You should see the following:
+
+![Start](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/START_APP.png?raw=true)
+
+Point your web browser under: http://localhost:19002 according to above picture. 
+In the following screen, choose "Run in web browser" and your app will be launched in a new web page.
+
+![Run in web browser](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/RUN_WEB_BROWSER.png?raw=true)
+
+## Code changes
+1. In the `constants.js` add new constant:
+  ```javascript
+   DISCONNECT_REQUEST: 'WALLET_DISCONNECT_REQUEST'
+  ```
+  
+2. Remove DappKit logic from `walletsAction.ts`, change the logic of connect function with WalletConnect support. Add `disconnect` function
+
+  ```javascript
+
+  export const walletActions = {
+    connect, disconnect,
+  };
+
+  /*
+   Provider configuration to enable wallet connection
+  */
+  const provider = new WalletConnectProvider({
+    rpc: {
+      44787: "https://alfajores-forno.celo-testnet.org",
+      42220: "https://forno.celo.org",
+    },
+  });
+
+function connect(navigation) {
+  return (dispatch: any) => {
+    // This dispatch calls a function that is declared later on in the code.
+    let asyncConnect = async() => {
+      await provider.enable();
+      const web3 = new Web3(provider);
+      let kit = newKitFromWeb3(web3)
+      kit.defaultAccount = provider.accounts[0]
+      let asyncGetData = async() => {
+        const stableToken = await kit.contracts.getStableToken();
+        const goldToken = await kit.contracts.getGoldToken();
+        const cUsdBalanceObj = await stableToken.balanceOf(kit.defaultAccount);
+        const goldBalanceObj = await goldToken.balanceOf(kit.defaultAccount);
+        const res = {address:kit.defaultAccount, cUsd:cUsdBalanceObj/10**18, celo:goldBalanceObj/10**18};
+        dispatch(success(res));
+        navigation.navigate('TabTwo');
+      }
+      provider.on("accountsChanged", (accounts) => {
+        asyncGetData();
+      });
+    }
+    dispatch(request('Connecting to wallet'));
+    asyncConnect();
+  };
+  ...
+ }
+ /* Disconnect from wallet function
+ */
+ function disconnect() {
+  return (dispatch: any) => {
+    // This dispatch calls a function that is declared later on in the code.
+    let asyncDisconnect = async() => {
+        await provider.disconnect();
+    }
+    dispatch(requestDisconnect('Disconnecting from wallet'));
+    asyncDisconnect();
+    };
+    function requestDisconnect(message: string) {
+      return { type: walletConstants.DISCONNECT_REQUEST, message };
+
+    }
+  }
+  ```
+  
+3. Add `cUsd` and `celo` fields to app state in `walletReducer.ts`
+
+  ```javascript
+  const initialState = {
+    failed: true,
+    connecting: false,
+    message: '',
+    address: '',
+    cUsd: '',
+    celo:''
+  };
+
+  export function wallet(state = initialState, action: any) {
+    switch (action.type) {
+      ...
+      case walletConstants.CONNECT_SUCCESS:
+        return {
+          failed: false,
+          address: action.res.address,
+          cUsd: action.res.cUsd,
+          celo: action.res.celo
+        };
+     ...
+    }
+  }
+  ```
+4. Add logout function to LoginScreen, and inject tab two navigation object in `connect` (as you noticed, we removed the Linking.makeUrl used by DappKit callback, with react native navigation support, which does not refresh entire page to show wallet address/balances. This is not needed, since react uses `state` to show updated page in a responsive async manner. 
+
+```javascript
+export default function LoginScreen({ navigation }) {
+  const dispatch = useDispatch();
+
+  // This function calls up the connect function from the walletAction Action
+  const login = () => {
+    dispatch(walletActions.connect(navigation));
+  };
+
+  const logout = () => {
+    dispatch(walletActions.disconnect());
+  };
+
+  return (
+    <View style={styles.container}>
+
+        <Button onPress={login} title="Connect Wallet"></Button>
+        <Button onPress={logout} title="Disconnect Wallet"></Button>
+
+    </View>
+  );
+}
+```
+Here is how the login page should look like now, the new disconnect button is added
+![Login Screen](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/TAB_ONE.png?raw=true)
+
+5. Change HomeScreen to display balances in addition to address
+
+```javascript
+export default function HomeScreen({ navigation }) {
+  ...
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Address: {wallet.address}</Text>
+      <Text style={styles.title1}>cUSD: {wallet.cUsd}</Text>
+      <Text style={styles.title1}>Celo: {wallet.celo}</Text>
+    </View>
+  );
+}
+```
+## Application workflow
+Run your app and Login to see the Wallet address and balances returned to the Home Screen.
+
+1. First, scan your valora mobile app with the WalletConnect screen shown after the Connect button is pressed (first picture from below)
+
+2. You need to allow access from your Valora Mobile app in order to see the data from Home Screen (second picture from below)
+
+3. When permission granted, the second tab (home screen) is automatically displayed with address and balances information (third picture from below)
+
+![Wallet connect Screen](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/VALORA_QR.png?raw=true)
+
+
+![Wallet Screen](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/VALORA_CONNECT_F.jpeg?raw=true)
+
+
+![Home Screen](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/VALORA_TAB2_F.png?raw=true)
+
 # Conclusion
 
-This was a very interesting tutorial. In this tutorial, we learned: How to successfully connect your Redux based React Native App to use the Celo Wallet and return a Wallet Address from the Valora/Alfajores Wallet.
+This was a very interesting tutorial. In this tutorial, we learned: How to successfully connect your Redux based React Native App to use the Celo Wallet and return a Wallet Address from the Valora/Alfajores Wallet. The last chapter (WalletConnect v1 alternative) explains how to use the new connection api supported by valora with your mobile installed valora app (https://valoraapp.com/).
 
 # About the Authors
 
 This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe) and [Emmanuel Oaikhenan](https://github.com/emmaodia).
+The WalletConnect v1 alternative chapter was created by [Mircea Carasel](https://ro.linkedin.com/in/mirceac)
+Also, the full code with the WalletConnect approach here: https://github.com/mirceac/valora2
