@@ -27,9 +27,7 @@ DAppKit's dependencies require a bit of adjustment to use vanilla Expo. The firs
 
 **Important Note!**
 
-The default React Native library that is installed with the expo package will cause your app to break. To fix this, go to the `package.json` file and replace the `react-native` version value:
-
-with this: `^0.63.4` at the time of writing this tutorial. You can always use the most recent version of React Native.
+The default React Native library that is installed with the expo package will cause your app to break. To fix this, go to the `package.json` file and replace the `react-native` version value with this: `^0.63.4` at the time of writing this tutorial. You can always use the most recent version of React Native.
 
 **A Note on the installed Packages**
 
@@ -97,23 +95,25 @@ And then add `import './global'` at the top of your `App.js/tsx` file
 
 Install the Redux libraries using the following command:
 
-`yarn add redux redux-thunk redux-logger react-redux`
+```text
+yarn add redux redux-thunk redux-logger react-redux
+```
 
 For TypeScript to run redux logger locally without any errors, you have to add the library `@types/redux-logger` to the devDependencies using the command:
 
-`yarn add @types/redux-logger --dev`
+```text
+yarn add @types/redux-logger --dev
+```
 
-Run the app using: `expo start`
-
-Find documentation how to run your app [here](how-to-successfully-connect-to-a-celo-wallet-with-a-react-native-dapp.md)
+Run the app with the command `expo start`.
 
 # Code
 
-After installing the required libraries, we can then build 2 simple screens in the React Native app.   
-The first screen will have one button. The button will be used to sign a User into the dApp.  
-The second screen will be the screen that proves that the user has successfully authenticated. The second screen will return the user's wallet address.
+After installing the required libraries, we can then build 2 simple screens in the React Native app. The first screen will have one button. The button will be used to sign a User into the dApp. The second screen will be the screen that proves that the user has successfully authenticated. 
 
-**Let's build the Screens:**
+The second screen will return the user's wallet address.
+
+**Let's build the Screens**:
 
 ```javascript
 export default function LoginScreen() {
@@ -138,9 +138,9 @@ export default function HomeScreen() {
 }
 ```
 
-**Let's implement the Logic to connect to the Wallet:**
+**Let's implement the Logic to connect to the Wallet**:
 
-We will use Redux to manage the app state, we have to set up redux actions to make a call to the Celo Wallet and return the result which is then saved in the app global state. To keep your directory devoid of clutter, open a directory to hold the files for the Redux logic:
+We will use Redux to manage the app state, we have to set up Redux actions to make a call to the Celo Wallet and return the result which is then saved in the app global state. To keep your directory devoid of clutter, open a directory to hold the files for the Redux logic:
 
 ![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/reduxdirectory.png)
 
@@ -180,7 +180,7 @@ function connect() {
     const dappName = 'celodapp';
     const callback = Linking.makeUrl('two');
 
-    //T his is from the Celo DappKit library, it fires up the wallet and gets the neccessary information
+    // This is from the Celo DappKit library, it fires up the wallet and gets the neccessary information
     requestAccountAddress({
       requestId,
       dappName,
@@ -198,7 +198,7 @@ function connect() {
       });
   };
 
-  //These are the function calls which are dispatched when the user makes a request. The state of the app changes with the status of the request response.
+  // These are the function calls which are dispatched when the user makes a request. The state of the app changes with the status of the request response.
   function request(message: string) {
     return { type: walletConstants.CONNECT_REQUEST, message };
   }
@@ -213,10 +213,10 @@ function connect() {
 
 The above file is the `walletAction.ts` It contains the logic to connect to the Wallet and saves the response in the global redux state which is accessible to any part of the codebase. The next thing will be to write the reducer logic to handle the app state modification.
 
-Create a `walletReducer.ts` file in the reducers folder
+Create a `walletReducer.ts` file in the reducers folder and add the following code:
 
 ```javascript
-//T he initial state of the wallet
+// The initial state of the wallet
 const initialState = {
   failed: true,
   connecting: false,
@@ -250,7 +250,7 @@ export function wallet(state = initialState, action: any) {
 }
 ```
 
-Create a `store.ts` file in the store folder
+Create a `store.ts` file in the store folder:
 
 ```javascript
 // This is where the store is setup. This is where redux updates the state of the store based on the user actions.
@@ -265,10 +265,10 @@ const loggerMiddleware = createLogger();
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 ```
 
-Let's update the `App.tsx` file with the Redux Provider.
+Let's update the `App.tsx` file with the Redux Provider:
 
 ```javascript
-//The Redux Provider wraps around the entire application
+// The Redux Provider wraps around the entire application
 export default function App() {
   return (
     <Provider store={store}>
@@ -281,7 +281,7 @@ export default function App() {
 Time to update the LoginScreen and the HomeScreen with the Redux Actions:
 
 ```javascript
-//The useDispatch is a React Redux Hook to dispatch an action creator.
+// The useDispatch is a React Redux Hook to dispatch an action creator.
 export default function HomeScreen() {
   const dispatch = useDispatch();
 
@@ -338,22 +338,28 @@ In addition, disconnect functionality and balances information are retrieved and
 the application in web browser mode.
 
 1. Make sure you have nvm installed. This helps you switch between node versions very easy, depending on project needs
-```
+
+```text
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 ```
-2. Install and use node v17.3.0
-```
+
+2. Install and use node v17.3.0 with `nvm` the [Node.js version manager](https://github.com/nvm-sh/nvm#intro)
+
+```text
 nvm install v17.3.0
 nvm use 17.3.0
 ```
+
 3. To use the WalletConnect v1, install using: 
-```
+
+```text
 yarn add @celo/contractkit
 yarn add @walletconnect/web3-provider
 yarn add react-native-tcp
 yarn add web3
 ```
-Prior running the application make sure to execute `export NODE_OPTIONS=--openssl-legacy-provider` needed for some Linux operation systems (Centos7)
+
+Prior to running the application, you may need to execute `export NODE_OPTIONS=--openssl-legacy-provider` needed for some Linux systems (CentOS 7)
 
 Run the app using: `expo start` You should see the following:
 
@@ -366,13 +372,13 @@ In the following screen, choose "Run in web browser" and your app will be launch
 
 ## Code changes
 1. In the `constants.js` add new constant:
-  ```javascript
-   DISCONNECT_REQUEST: 'WALLET_DISCONNECT_REQUEST'
-  ```
+```javascript
+DISCONNECT_REQUEST: 'WALLET_DISCONNECT_REQUEST'
+```
   
 2. Remove DappKit logic from `walletsAction.ts`, change the logic of connect function with WalletConnect support. Add `disconnect` function
 
-  ```javascript
+```javascript
 
   export const walletActions = {
     connect, disconnect,
@@ -430,11 +436,11 @@ function connect(navigation) {
 
     }
   }
-  ```
+```
   
 3. Add `cUsd` and `celo` fields to app state in `walletReducer.ts`
 
-  ```javascript
+```javascript
   const initialState = {
     failed: true,
     connecting: false,
@@ -457,7 +463,8 @@ function connect(navigation) {
      ...
     }
   }
-  ```
+```
+
 4. Add logout function to LoginScreen, and inject tab two navigation object in `connect` (as you noticed, we removed the Linking.makeUrl used by DappKit callback, with react native navigation support, which does not refresh entire page to show wallet address/balances. This is not needed, since react uses `state` to show updated page in a responsive async manner. 
 
 ```javascript
@@ -483,6 +490,7 @@ export default function LoginScreen({ navigation }) {
   );
 }
 ```
+
 Here is how the login page should look like now, the new disconnect button is added
 ![Login Screen](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/TAB_ONE.png?raw=true)
 
@@ -500,7 +508,9 @@ export default function HomeScreen({ navigation }) {
   );
 }
 ```
+
 ## Application workflow
+
 Run your app and Login to see the Wallet address and balances returned to the Home Screen.
 
 1. First, scan your valora mobile app with the WalletConnect screen shown after the Connect button is pressed (first picture from below)
@@ -511,18 +521,17 @@ Run your app and Login to see the Wallet address and balances returned to the Ho
 
 ![Wallet connect Screen](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/VALORA_QR.png?raw=true)
 
-
 ![Wallet Screen](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/VALORA_CONNECT_F.jpeg?raw=true)
-
 
 ![Home Screen](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/VALORA_TAB2_F.png?raw=true)
 
 # Conclusion
 
-This was a very interesting tutorial. In this tutorial, we learned: How to successfully connect your Redux based React Native App to use the Celo Wallet and return a Wallet Address from the Valora/Alfajores Wallet. The last chapter (WalletConnect v1 alternative) explains how to use the new connection api supported by valora with your mobile installed valora app (https://valoraapp.com/).
+In this tutorial, we learned: How to successfully connect your Redux based React Native App to use the Celo Wallet and return a Wallet Address from the Valora/Alfajores Wallet. The last chapter (WalletConnect v1 alternative) explains how to use the new connection api supported by valora with your mobile installed valora app (https://valoraapp.com/).
 
 # About the Authors
 
 This tutorial was created by [Segun Ogundipe](https://www.linkedin.com/in/segun-ogundipe) and [Emmanuel Oaikhenan](https://github.com/emmaodia).
-The WalletConnect v1 alternative chapter was created by [Mircea Carasel](https://ro.linkedin.com/in/mirceac)
-Also, the full code with the WalletConnect approach here: https://github.com/mirceac/valora2
+
+The WalletConnect v1 alternative chapter was created by [Mircea Carasel](https://ro.linkedin.com/in/mirceac).
+Also, the full code with the WalletConnect approach can be found here: https://github.com/mirceac/valora2
