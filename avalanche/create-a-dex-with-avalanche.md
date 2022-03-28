@@ -799,7 +799,7 @@ export default SellForm;
 
 **Example Demo:**
 
-![](/.gitbook/assets/Awaswap_demo.gif)
+![](/assets/Awaswap_demo.gif)
 
 # Conclusion
 
