@@ -799,7 +799,7 @@ export default SellForm;
 
 **Example Demo:**
 
-![](/assets/Awaswap_demo.gif)
+![](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/Awaswap_demo.gif)
 
 # Conclusion
 
