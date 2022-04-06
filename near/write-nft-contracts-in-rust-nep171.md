@@ -1,6 +1,6 @@
 # Introduction
 
-[Non-Fungible Tokens](https://en.wikipedia.org/wiki/Non-fungible_token) are unique records of ownership on the blockchain. Usually an NFT is tied to something interesting and rare, such as an artwork, a concert ticket, a collectable cat, a domain name, or a real physical object. NFTs can be bought, sold, given away, and can even be minted or destroyed, depending on the rules of the contract. [Cryptokitties](https://www.cryptokitties.co/), [SuperRare](https://superrare.co/) and [Bored Ape Yacht Club](https://boredapeyachtclub.com/) are just a few popular examples of Ethereum-based NFT projects. We can implement NFTs just as easily on NEAR.ddd
+[Non-Fungible Tokens](https://en.wikipedia.org/wiki/Non-fungible_token) are unique records of ownership on the blockchain. Usually an NFT is tied to something interesting and rare, such as an artwork, a concert ticket, a collectable cat, a domain name, or a real physical object. NFTs can be bought, sold, given away, and can even be minted or destroyed, depending on the rules of the contract. [Cryptokitties](https://www.cryptokitties.co/), [SuperRare](https://superrare.co/) and [Bored Ape Yacht Club](https://boredapeyachtclub.com/) are just a few popular examples of Ethereum-based NFT projects. We can implement NFTs just as easily on NEAR.
 
 In this tutorial we will create a simple collectable NFT artwork called a Flarn, consisting of a name, a description and a JPEG image. Our smart contract will allow Flarns to be created, collected and traded on the NEAR blockchain.  
 
