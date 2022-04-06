@@ -4,17 +4,10 @@
 
 In this tutorial we will create a simple collectable NFT artwork called a Flarn, consisting of a name, a description and a JPEG image. Our smart contract will allow Flarns to be created, collected and traded on the NEAR blockchain.  
 
-## About NFT standards
-
-There are many standards for NFTs! However the most widely used by far is Ethereum's [ERC721](https://eips.ethereum.org/EIPS/eip-721) standard, which defines how NFTs can be created and transfered among other things. This standard works well, but like all the ERC standards it is defined only for the Ethereum blockchain. Recent high gas prices on Ethereum have driven a lot of interest in more affordable alternatives, such as NEAR.
-
-To support NFT development on NEAR, the core developers and marketplace stakeholders have proposed the new NEP-171 standard.  NEP-171 attempts to handle all of the same NFT use-cases as ERC721, as well as optional support for a number of advanced features for NFT marketplaces.  For instance, NEP-171 NFTs can be offered for sale in multiple marketplaces at once, and complex distributions of royalties are baked in.  Also, NFTs can be attached directly to smart contract calls, as a form of payment or as part of more complex trading projects. 
-
 # Prerequisites
 
 * [The NEAR 101 pathway](https://learn.figment.io/protocols/near) 
 * [How to write and deploy a smart contract in Rust ](https://learn.figment.io/tutorials/write-and-deploy-a-smart-contract-on-near)
-
 
 # Requirements
 
@@ -23,36 +16,43 @@ To support NFT development on NEAR, the core developers and marketplace stakehol
 * [Create a wallet on the NEAR Testnet](https://nearhelp.zendesk.com/hc/en-us/articles/1500002248242-Creating-a-NEAR-Wallet-account)
 * [Install Rust and Rustup](https://www.rust-lang.org/tools/install)
 
-__NOTE FOR M1 MAC USERS__: The NFT examples repo used by this tutorial does not currently compile on M1 Macintoshes.  If you don't have access to an Intel-based Mac, you can instead do this tutoral on __GitPod__.  [Open this link in a separate tab](https://gitpod.io/#https://github.com/near-examples/NFT),  then skip ahead to the next section: __Getting To Know The NFT Contract__.
+__NOTE FOR M1 MAC USERS__: The NFT examples repo used by this tutorial does not currently compile on Apple products with an M1 chip. If you don't have access to an Intel-based Mac, you can instead do this tutoral on __GitPod__.  [Open this link in a separate tab](https://gitpod.io/#https://github.com/near-examples/NFT), then skip ahead to the next section: __Getting To Know The NFT Contract__.
+
+# About NFT standards
+
+There are many standards for NFTs! However the most widely used by far is Ethereum's [ERC721](https://eips.ethereum.org/EIPS/eip-721) standard, which defines how NFTs can be created and transfered among other things. This standard works well, but like all the ERC standards it is defined only for the Ethereum blockchain. Recent high gas prices on Ethereum have driven a lot of interest in more affordable alternatives, such as NEAR.
+
+To support NFT development on NEAR, the core developers and marketplace stakeholders have proposed the new NEP-171 standard.  NEP-171 attempts to handle all of the same NFT use-cases as ERC721, as well as optional support for a number of advanced features for NFT marketplaces.  For instance, NEP-171 NFTs can be offered for sale in multiple marketplaces at once, and complex distributions of royalties are baked in.  Also, NFTs can be attached directly to smart contract calls, as a form of payment or as part of more complex trading projects. 
 
 # Setting up the project
-## Install the WebAssembly target using rustup
 
-NEAR uses WebAssembly as its virtual machine.  Many languages can compile to WebAssembly, but NEAR core developers recommend that all financial smart contracts be written in the Rust language. Before we can start working on the Rust contract, we need to install the cross-compilation tools that compile a Rust smart contract into WebAssembly, using Rustup.  Run this command:
+**Install the WebAssembly target using rustup**:
 
-```bash
+NEAR uses WebAssembly as its virtual machine. Many languages can compile to WebAssembly, but NEAR core developers recommend that all financial smart contracts be written in the Rust language. Before we can start working on the Rust contract, we need to install the cross-compilation tools that compile a Rust smart contract into WebAssembly, using Rustup.  Run this command:
+
+```text
 rustup target add wasm32-unknown-unknown
 ```
 
 Example output:
 
-```bash
+```text
 **info:** downloading component 'rust-std' for 'wasm32-unknown-unknown'
 **info:** installing component 'rust-std' for 'wasm32-unknown-unknown'
 15.6 MiB /  15.6 MiB (100 %) 8.7 MiB/s in  1s ETA:  0s
 ```
 
-## Clone the NEAR NFT repo
+# Clone the NEAR NFT repo
 
-In this tutorial we'll modify NEAR's NFT-171 example code from the NEAR repository on Github. On Unix, run these commands in the `bash` shell to clone that repo and install its requirements:
+In this tutorial we'll modify NEAR's NFT-171 example code from the NEAR repository on Github. On Linux, Unix, or macOS run these commands in the `bash` (or `zsh`) shell to clone that repo and install its requirements:
 
-```bash
+```text
 git clone https://github.com/near-examples/NFT
 ```
 
 Example output:
 
-```bash
+```text
 Cloning into 'NFT'...
 remote: Enumerating objects: 1334, done.
 remote: Counting objects: 100% (456/456), done.
@@ -64,14 +64,14 @@ Resolving deltas: 100% (642/642), done.
 
 To build the example, enter this command in the shell:
 
-```bash
+```text
 cd NFT
 ./build.sh
 ```
 
 Because this is our first build, Cargo and Rust will download and build all the dependencies. If might take some time. When it's finished, you should see something like this at the end of the output:
 
-```bash
+```text
 Compiling near-sdk v3.1.0
 Compiling near-contract-standards v3.2.0
 Compiling approval-receiver v0.0.1 (/Users/mykle/Documents/near/flarns2.0/NFT/test-approval-receiver)
@@ -82,21 +82,19 @@ Finished release [optimized] target(s) in 2m 07s
 
 We can also run all of the included unit tests with this command:
 
-```bash
+```text
 cargo test -- --nocapture
 ```
 
-
-
 The unit test output is messy, but at the end you should see a summary of results.
 
-```bash
+```text
 test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 ```
 
 If you see `test result: ok`, all is well.
 
-***NOTE: At the time of this writing, these tests fail on M1-based Macintoshes, with an error about `get_fault_info`.  We recommend M1 users use Gitpod to complete this tutorial.***
+**NOTE: At the time of this writing, these tests fail on M1-based Macs, with an error about `get_fault_info`. We recommend M1 users use Gitpod to complete this tutorial.**
 
 # Getting to know the NFT Contract
 
@@ -145,7 +143,7 @@ const DATA_IMAGE_SVG_NEAR_ICON: &str  =  "data:image/svg+xml,%3Csvg%20xmlns%3D%2
 
 Now build and test the contract again, to confirm there are no typos:
 
-```bash
+```text
 ./build.sh
 cargo test -- --nocapture
 ```
@@ -157,7 +155,9 @@ Look for `Finished` after the build, and `test result: ok` after the tests.
 For this example, let's create a new kind of collectable digital NFT artwork called a Flarn. Every NEP-171 Flarn will have a unique Token ID, an Owner ID to record ownership, and three pieces of metadata: a name, a description and a JPEG image.
 
 ## Define NFT Metadata
+
 NEP-171 doesn't actually require NFTs to have any metadata at all; you can still mint and trade completely blank records of ownership, if that's what you're into.  But without metadata, NFTs would be pretty boring!  Here are the types of NFT metadata supported by the standard:
+
 -   `title`: The name of this specific token.
 -   `description`: A longer description of the token.
 -   `media`: URL to associated media. 
@@ -169,50 +169,53 @@ NEP-171 doesn't actually require NFTs to have any metadata at all; you can still
 -   `updated_at`: Timestamp when token was last updated
 -   `extra`: anything extra the NFT wants to store on-chain. Can be stringified JSON.
 -   `reference`: URL to an off-chain JSON file with more info.
--   `reference_hash`: Base64-encoded sha256 hash of JSON from reference field. Required if  `reference`  is included.
+-   `reference_hash`: Base64-encoded sha256 hash of JSON from reference field. Required if `reference` is included.
 
-For our example we'll use `title`, `description` and `media`, and ignore the rest.  Because we use `media` we are required to also use `media_hash`. We can leave `copies` blank to say our flarns are unique; `copies` defaults to `1` if not specified.  
+For our example we'll use `title`, `description` and `media`, and ignore the rest. Because we use `media` we are required to also use `media_hash`. We can leave `copies` blank to say our flarns are unique; `copies` defaults to `1` if not specified.  
 
 NEP-171's built-in metadata fields are intended to cover the major needs of most NFT projects.  If some future NFT project requires other metadata fields not on this list, NEP-171 gives you two options.  You can either encode it as a JSON string in the `extra` field, or place it off-chain and store a link to it in the `reference` field.  (But if you use `reference`, you also need to store a hash of the data in the `reference_hash` field, to prevent tampering.)
 
 ## Create your masterpiece
+
 You can either invent your own metadata at this point, or you can use this example data:
 
-* `title`: Alice
-* `description`: Alice is uniquely adorable & loves long walks on the beach.
-* `media`: [![A Flarn called Alice](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/flarn.jpg "Alice")](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/flarn.jpg)
+- `title`: Alice
+- `description`: Alice is uniquely adorable & loves long walks on the beach.
+- `media`: [![A Flarn called Alice](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/flarn.jpg "Alice")](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/flarn.jpg)
 
 ## Include off-chain data
+
 Due to the high cost of Ethereum storage, most Ethereum NFTs of digital media do not store the media on the blockchain.  On-chain storage is much cheaper on NEAR, but since media files are large, it will still be thrifty of us to store our Flarn image elsewhere.  The `media` field of our on-chain record will hold a URL pointing to our off-chain image.  We could host that image anywhere on the Web we choose, but it would be nice to put it somewhere that's always online, decentralized, and free. 
 
-### Upload the image to NFT Storage
+## Upload the image to NFT Storage
 
 For this example, we'll use the free  [NFT.Storage](https://nft.storage/#getting-started) service built specifically for storing off-chain NFT data. NFT.Storage offers free decentralized storage and bandwidth for NFTs on  [IPFS](https://ipfs.io/)  and  [Filecoin](https://filecoin.io/). 
 
-#### Steps
+**Steps**:
 
-1.  [Register an account](https://nft.storage/login/)  and log in to  [nft.storage](https://nft.storage/login/).
+1. [Register an account](https://nft.storage/login/) and log in to [nft.storage](https://nft.storage/login/).
     
-2.  Go to the  [Files](https://nft.storage/files/)  section, and click on the  [Upload](https://nft.storage/new-file/)  button to upload your Flarn image.
+2. Go to the [Files](https://nft.storage/files/) section, and click on the [Upload](https://nft.storage/new-file/) button to upload your Flarn image.
     
-    ![nft.storage](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/uploading_to_nft_storage_1.png)
+![nft.storage](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/uploading_to_nft_storage_1.png)
     
-3.  Once you have uploaded your file, select `Actions -> View URL` to see your upload in a new browser tab.  Then copy the URL from that tab.  That is the URL for your content, based on an IPFS Content-ID string.  It should look something like this:
+3. Once you have uploaded your file, select `Actions -> View URL` to see your upload in a new browser tab. Then copy the URL from that tab. That is the URL for your content, based on an IPFS Content-ID string. It should look something like this:
  
-    ```bash
-    https://ipfs.io/ipfs/bafkreic2y4z2hvfkzalogw3yeh5hntbvr4op4a5ccjo5zfhouss4mozlnm
-    ```
+```text
+https://ipfs.io/ipfs/bafkreic2y4z2hvfkzalogw3yeh5hntbvr4op4a5ccjo5zfhouss4mozlnm
+```
 
-    ![nft.storage](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/uploading_to_nft_storage_2.png)
+![nft.storage](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/uploading_to_nft_storage_2.png)
    
 4. NEP-171 requires the `base_uri` field of the contract to point to a site that will have reliable access to the URLs in the `media` and `reference` fields. That's why we set `base_uri` to `https://nft.storage/` when we customized the contract.  Since our media is stored with NFT.Storage, we can use their URL for this field. 
 
-### Generate the `media_hash`
+## Generate the media_hash
+
 The checksum of our media file stored in the `media_hash` field, must be a Base64-encoded SHA256 hash of the original data, to prove the file hasn't been tampered with.  NEP-171 requires Base64 encoding of the hash for maximum portability between platforms.  However, most online and command-line SHA256 tools generate hashes as Hexadecimal+Unicode, so we also will need to convert from that to Base64. 
 
 There are a few different ways to do this.  On a UNIX-based system, use this command:
 
-```bash
+```text
 cat flarn.jpg | shasum -a 256 | xxd -r -p | base64
 ```
 
@@ -226,8 +229,9 @@ __NOTE__: do not upload sensitive or private data to these web services! Use the
 
 If you used [our example Flarn image](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/flarn.jpg), the strings should match the screenshots. If you're using your own image, the strings will be different.
 
-## Assemble the pieces
-Now that we've chosen our metadata, have stored our media stored off-chain, and have generated the media URL and media hash, we can construct our NFT Token record.  Use your editor to create a file in the current directory called `token.json`, containing a single object of JSON metadata.  You can start by pasting in this text:
+# Assemble the pieces
+
+Now that we've chosen our metadata, have stored our media stored off-chain, and have generated the media URL and media hash, we can construct our NFT Token record.  Use your editor to create a file in the current directory called `token.json`, containing a single object of JSON metadata. You can start by pasting in this text:
 
 ```json
 {
@@ -239,63 +243,64 @@ Now that we've chosen our metadata, have stored our media stored off-chain, and 
 ```
 
 Now edit the following values:
-* Use the URL you got from NFT.storage as the value for "media".
-* Use the base64 sha256 hash you generated for "media_hash", if you're using a different image file than our example.
-* Use your own NEAR testnet id for "receiver_id", so that you will own the newly minted NFT.
-* Change `title` and `description` to whatever you like, or leave them as-is.
+- Use the URL you got from NFT.storage as the value for "media".
+- Use the base64 sha256 hash you generated for "media_hash", if you're using a different image file than our example.
+- Use your own NEAR testnet id for "receiver_id", so that you will own the newly minted NFT.
+- Change `title` and `description` to whatever you like, or leave them as-is.
 
-Save the file, then verify it at [JSONLint](https://jsonlint.com/)
+Save the file, then verify it at [JSONLint](https://jsonlint.com/).
+
 ![JSONLint](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/jsonlint.png)
 
-
 # Deploying and using the contract
-
 
 We can use the NEAR CLI to deploy this contract, and to test that it's working. If you configured your environment in Tutorials 1 and 2, the CLI will connect to DataHub's high-availability testnet. If you don't have DataHub access you can still run the CLI with its defaults, but the default testnet node may be slower to respond. 
 
 ## Log in
-Log in to your testnet account with  `near-cli`  by running the following command in your terminal.
 
-```bash
+Log in to your testnet account with `near-cli` by running the following command in your terminal.
+
+```text
 near login
 ```
 
-This will open your testnet NEAR wallet in a web browser, so you can authorize the NEAR CLI with your testnet account.  Once that's done, you should see something like this output in the terminal:
+This will open your testnet NEAR wallet in a web browser, so you can authorize the NEAR CLI with your testnet account. Once that's done, you should see something like this output in the terminal:
 
-```bash
+```text
 Logged in as [ **accountname.testnet** ] with public key [ **ed25519:BDGh7Q...** ] successfully
 ```
 
 To make this tutorial easier to copy/paste, we're going to set an environment variable with your testnet account ID. Run the command below, replacing  `accountname.testnet`  with the Account ID field output by `near login`
 
-```bash
+```text
 export ID=accountname.testnet
 ```
 
 Test that the environment variable is set correctly by running:
 
-```bash
+```text
 echo $ID
 ```
 
-Verify that the correct account ID is printed in the terminal. If everything looks correct you can now deploy your contract. 
-## Deploy the contract 
+Verify that the correct account ID is printed in the terminal. If everything looks correct you can now deploy your contract.
+
+# Deploy the contract 
 
 Run this command to deploy the contract in your testnet account:
 
-```bash
+```text
 near deploy --wasmFile res/non_fungible_token.wasm --accountId $ID
 ```
 
 If you have previously deployed a contract on this account, you will be asked if you want to replace it.  Answer `y` here:
 
-```bash
-**This account already has a deployed contract [** **G6TEwD4VXXYaUjgMmTw7y41R4x2DyDjcbXdX4xkESnXX** **]. Do you want to proceed?** **(y/n)**
+```text
+This account already has a deployed contract [G6TEwD4VXXYaUjgMmTw7y41R4x2DyDjcbXdX4xkESnXX]. Do you want to proceed? (y/n)
 ```
 
 Example output:
 
-```bash
+```text
 Starting deployment. Account id: accountname.testnet, node: https://rpc.testnet.near.org, helper: https://helper.testnet.near.org, file: res/non_fungible_token.wasm
 Transaction Id F9p9s7DKNkekZYeBcSiYt2ZMzwpuVsugDDVGcDizxBNN
 To see the transaction in the transaction explorer, please open this url in your browser
@@ -307,23 +312,23 @@ The provided link will give you complete details about the deployment in the NEA
 
 ![NEAR explorer](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/contract_deployed.png)
 
-## Initialize the contract
+# Initialize the contract
 
 A smart contract can define an initialization method that can be used to set the contract's initial state. This NFT example contract must be initialized before use. Run this command to initialize it with the default metadata and set the owner to your dev account:
 
-```bash
+```text
 near call $ID new_default_meta '{"owner_id": "'$ID'"}' --accountId $ID
 ```
 
 You can then view the contract metadata by running the following  `view`  call:
 
-```bash
+```text
 near view $ID nft_metadata
 ```
 
 Example response:
 
-```bash
+```text
 View call: accountname.testnet.nft_metadata()
 {
 	spec: 'nft-1.0.0',
@@ -336,18 +341,17 @@ View call: accountname.testnet.nft_metadata()
 }
 ```
 
-
 # Mint an NFT!
 
 Now let's mint our first token! Run the following command to mint one copy of your NFT, using the metadata in `token.json`:
 
-```bash
+```text
 near call $ID nft_mint '{"token_id": "0", "receiver_id": "'$ID'", "token_metadata": '"`cat token.json`}" --accountId $ID --deposit 0.1
 ```
 
 Example response:
 
-```bash
+```text
 Scheduling a call: accountname.testnet.nft_mint({"token_id": "2", "receiver_id": "accountname.testnet", "token_metadata": {
 			"title": "Alice",
 			"description": "Alice is uniquely adorable & loves long walks on the beach.",
@@ -380,20 +384,20 @@ https://explorer.testnet.near.org/transactions/HQtMD9M4WnjJ4bJ8xz2A82pBMDNgMthka
 ```
 
 The contract has minted our NFT.  The return value of the contract call is the NFT record itself.  It's pretty much the same data we sent, shown as it's stored on the blockchain. 
+
 - Notice that `receiver_id` became `owner_id`. 
 - All the optional metadata fields we didn't specify are set to `null`.  
 - The `approved_account_ids` field would list any other NEAR users who are authorized to manipulate this NFT, but we didn't authorize anybody, so that list is empty.
 
+To view all the flarns you own, you can call the NFT contract with the following `near-cli` command:
 
-To view all the flarns you own, you can call the NFT contract with the following  `near-cli`  command:
-
-```bash
+```text
 near view $ID nft_tokens_for_owner '{"account_id": "'$ID'"}'
 ```
 
 Since this is your only flarn so far, the result will be a JSON array containing just the one NFT you've already seen: 
 
-```bash
+```text
 [
   {
     token_id: '0',
@@ -435,4 +439,3 @@ From here you can implement a web interface to show off your NFTs, using [near-a
 # About the Author
 
 This tutorial was created by [Mykle Hansen](https://github.com/myklemykle), a contributor to the [Plantary](https://github.com/myklemykle/plantary) project which allows users to grow and harvest plant NFTs on NEAR.
-
