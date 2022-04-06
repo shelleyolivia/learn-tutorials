@@ -133,7 +133,7 @@ NEP-171 contracts can also have an optional icon, which is shown in the NEAR wal
 NEP-171 advises that the `icon` field should be encoded in [data-URI format](https://en.wikipedia.org/wiki/Data_URI_scheme), for maximum compatibility with web browsers.  The icon in the example contract is a simple SVG file, data-URI encoded according to [this guide by Jenny Knuth](https://bl.ocks.org/jennyknuth/222825e315d45a738ed9d6e04c7a88d0).  Other image file formats such as GIF and PNG can also be data-URI encoded, but SVGs are nice because they can be quite small.  
 
 Here is our very simple example icon:
-![CryptoFlarns icon](/https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/cryptoflarns_icon.svg)
+![CryptoFlarns icon](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/nep171/cryptoflarns_icon.svg)
 
 The icon is defined on line 39 of the example contract, as a long string of text.  In your editor, change that very long line to this even longer line:
 
