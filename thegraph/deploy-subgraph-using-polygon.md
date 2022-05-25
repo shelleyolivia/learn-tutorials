@@ -264,15 +264,18 @@ module.exports = {
 
 ## Getting your Datahub API Key
 
-To get your `DATAHUB_API_KEY`, head over to <https://datahub.figment.io/sign_up> and create a free account.
+To get your `DATAHUB_API_KEY`, head over to <https://datahub.figment.io/signup> and create a free account.
 
 ![Datahub Signup](https://github.com/figment-networks/learn-tutorials/raw/master/assets/datahub_signup.png)
 
 Click on the verification link you shall receive in your email. After email verification, you will be redirected to <https://datahub.figment.io/>.
 
-Click on the `Polygon` button to view the Polygon Services Dashboard at <https://datahub.figment.io/services/polygon>. You can copy your API key to the clipboard by clicking on the **copy** button.
+Create a new application on DataHub using the Polygon protocol. You can choose the Staging environment, select the Polygon protocol then click to create the app.
 
-![Datahub Polygon API Key](https://github.com/figment-networks/learn-tutorials/raw/master/assets/datahub_polygon_api.png)
+![Create DataHub app](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/assets/create-dh-app.png)
+
+On your app **Overview** tab, locate the **View Key** button next to the text "API Key". You can also copy the HTTP endpoint URL including the API key from the Protocols view.
+
 
 ## Getting your Metamask private key
 
