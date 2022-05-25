@@ -272,7 +272,7 @@ Click on the verification link you shall receive in your email. After email veri
 
 Create a new application on DataHub using the Polygon protocol. You can choose the Staging environment, select the Polygon protocol then click to create the app.
 
-![Create DataHub app](https://raw.githubusercontent.com/learn-tutorials/raw/master/assets/create-dh-app.png)
+![Create DataHub app](https://raw.githubusercontent.com/figment-networks/learn-tutorials/raw/master/assets/create-dh-app.png)
 
 On your app **Overview** tab, locate the **View Key** button next to the text "API Key". You can also copy the HTTP endpoint URL including the API key from the Protocols view.
 
