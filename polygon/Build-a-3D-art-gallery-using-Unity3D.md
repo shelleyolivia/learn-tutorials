@@ -41,7 +41,7 @@ It is important to visualise how our end project should look and what features w
 
 ## Building the environment
 
-For the simplicity of this tutorial we are not going to design the 3D Art Gallery ourselves. Rather we are going to use the one already available [here](https://www.notion.so/67497c50b017469d9d404c48d1d2739c). Unzip the downloaded `.zip` file and import them into our Unity Project. To do so, drag and drop the extracted folder into `The Project Window` .
+For the simplicity of this tutorial we are not going to design the 3D Art Gallery ourselves. Rather we are going to use the one already available [here](https://connect-prd-cdn.unity.com/20201009/67497c50-b017-469d-9d40-4c48d1d2739c/3D%20Gallery%20Assets.zip). Unzip the downloaded `.zip` file and import them into our Unity Project. To do so, drag and drop the extracted folder into `The Project Window` .
 
 ![3DGalleryImported.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/unity3.png)
 
@@ -979,7 +979,7 @@ public class ArtworkSpawner : MonoBehaviour
 
 Now that we have our script ready, we attach this script to the `ArtworkSpawner` game object we created. Now with `ArtworkSpawner` selected in the `Hierarchy Window` we set the public variables of the script from `Inspector Window`. We drag the `picture` prefab, present in `Prefabs` folder, into the `Artwork` field. In the Spawn Points field, we enter the number of spawn points created (in this example `5`), and then drag each Spawn Point one-by-one in respective fields. It should look something like this:
 
-![Demo](https://github.com/figment-networks/learn-tutorials/raw/master/assets/unity28.png)
+![Demo](https://github.com/figment-networks/learn-tutorials/raw/master/assets/unity29.png)
 
  
 
@@ -988,6 +988,8 @@ Now we are finally ready to test our product.
 # Running our game
 
 Create a new NFT and list it in the marketplace smart contract. I am using [this](https://mumbai.polygonscan.com/address/0x12Fc3C44b4092aD55cf0212fa3A84a1210fCED5f#writeContract) contract to create NFT and [this](https://mumbai.polygonscan.com/address/0x9a606932f7F0d07EAd02693D71768268FECc9c88#writeContract) is my Marketplace contract. Now click on the play button. The artwork will spawn at the first spawn point listed. When you move closer to the artwork, the details to appear on the screen.
+
+![Demo](https://github.com/figment-networks/learn-tutorials/raw/master/assets/unity28.png)
 
 Congratulations 🎉🎉🎉, your game is ready.
 
