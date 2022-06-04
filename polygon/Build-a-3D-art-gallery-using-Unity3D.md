@@ -41,7 +41,7 @@ It is important to visualise how our end project should look and what features w
 
 ## Building the environment
 
-For the simplicity of this tutorial we are not going to design the 3D Art Gallery ourselves. Rather we are going to use the one already available [here](https://www.notion.so/67497c50b017469d9d404c48d1d2739c). Unzip the downloaded `.zip` file and import them into our Unity Project. To do so, drag and drop the extracted folder into `The Project Window` .
+For the simplicity of this tutorial we are not going to design the 3D Art Gallery ourselves. Rather we are going to use the one already available [here](https://connect-prd-cdn.unity.com/20201009/67497c50-b017-469d-9d40-4c48d1d2739c/3D%20Gallery%20Assets.zip). Unzip the downloaded `.zip` file and import them into our Unity Project. To do so, drag and drop the extracted folder into `The Project Window` .
 
 ![3DGalleryImported.png](https://github.com/figment-networks/learn-tutorials/raw/master/assets/unity3.png)
 
