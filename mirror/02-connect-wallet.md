@@ -42,7 +42,7 @@ Going deep into something like the Ethereum Virtual Machine is beyond the scope 
 
 Putting these four lines together with our `connect` function and understanding that our custom hook is already in use, our users should now be able to connect by clicking on the **Connect Wallet** button at the top right.
 
-![Forget logins, now our users can connect to our app with their wallets!](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/wallet.gif?raw=true)
+![Forget logins, now our users can connect to our app with their wallets!](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/wallet.gif)
 
 {% label %}
 Forget logins, now our users can connect to our app with their wallets!
@@ -96,4 +96,4 @@ const connect = useCallback(async () => {
 
  Once you've completed the code, you will want to try connecting your MetaMask wallet by clicking on the **Connect Wallet** button in the top right corner of the screen:
 
- ![Screenshot of connecting wallet](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/connect.jpg?raw=true)
+ ![Screenshot of connecting wallet](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/connect.jpg)

@@ -86,7 +86,7 @@ MirrorClone
 
 If you uncomment the code again, everything will be nice and green.
 
-![Nice and green, just the way we like it.](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/green.jpeg?raw=true)
+![Nice and green, just the way we like it.](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/green.jpeg)
 
 {% label %}
 Nice and green, just the way we like it.
@@ -167,7 +167,7 @@ Nothing to worry about! This simply means that the exact bytecode for the smart 
 
 If you visit [Polygonscan's testnet explorer](https://mumbai.polygonscan.com/), you can copy-paste the contract address from the command line into the search box and confirm the contract is on the blockchain.
 
-![If a contract deployment isn't reason for fireworks, I don't know what is. ](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/fireworks.jpeg?raw=true)
+![If a contract deployment isn't reason for fireworks, I don't know what is. ](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/fireworks.jpeg)
 
 {% label %}
 If a contract deployment isn't reason for fireworks, I don't know what is.
@@ -333,4 +333,4 @@ const handleSubmit = useCallback(
 
 Once you have completed the code, creating an entry will mint it as an NFT automatically (once you've confirmed the transaction in MetaMask):
 
-![Screenshot of NFT](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/nft.jpg?raw=true)
+![Screenshot of NFT](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/nft.jpg)

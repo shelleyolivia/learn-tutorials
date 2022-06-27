@@ -2,7 +2,7 @@ One of the key tenets of Web 3 is composability, so you can think of this step a
 
 Because the Web 3 stack is decentralized, it means data no longer lives behind a walled garden where the app owners control access and own the data. In Web 3 users retain not only ownership over the data, but the ability to port their data to other UIs that can access it directly from the blockchain.
 
-![Hooray! No more walled gardens for data](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/free.jpeg?raw=true)
+![Hooray! No more walled gardens for data](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/free.jpeg)
 
 {% label %}
 Hooray! No more walled gardens for data
@@ -90,4 +90,4 @@ const handleSubmit = useCallback(
 
 Once you have completed the code, you can try transferring an entry NFT by pasting the address of the account you want to transfer the NFT to into the textinput, then clicking on **Transfer NFT** and confirming the transaction in MetaMask:
 
-![Screenshot of transfer](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/transfer.jpg?raw=true)
+![Screenshot of transfer](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/transfer.jpg)

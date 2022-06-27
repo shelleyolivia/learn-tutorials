@@ -18,7 +18,7 @@ As always, we think of ourselves as your guide - for a brief amount of time - on
 
 We've tried to show you the door (or maybe part of it). Your job is to discover your path and walk it courageously.
 
-![“I do not believe it to be a matter of hope, it is simply a matter of time.”](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/matrix.jpeg?raw=true)
+![“I do not believe it to be a matter of hope, it is simply a matter of time.”](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/matrix.jpeg)
 
 {% label %}
 “I do not believe it to be a matter of hope, it is simply a matter of time.”
@@ -41,19 +41,19 @@ The entries will be saved on [Arweave](https://www.arweave.org/), a decentralize
 
 In **Step 2**, we'll introduce the [ethers.js](https://docs.ethers.io/) library and learn how to connect a user's MetaMask wallet to the dApp.
 
-![Screenshot of connecting wallet](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/connect.jpg?raw=true)
+![Screenshot of connecting wallet](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/connect.jpg)
 
 Then we'll introduce [Arweave](https://www.arweave.org/) - a decentralized, censorship resistant storage solution - in **Step 3**. We'll write an endpoint to create blog entries and finish a form to submit them. In **Step 4** we'll learn how to fetch them and in **Step 5** we'll write code to display a list of the latest entries.
 
-![Screenshot displaying a list of entries](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/entries.jpg?raw=true)
+![Screenshot displaying a list of entries](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/entries.jpg)
 
 **Step 6** will be a brief introduction to smart contracts including inheriting from standard libraries, writing functions, testing them and deploying the smart contract to the Polygon testnet. We'll be minting an NFT for each entry so authors can own their entries.
 
-![Screenshot of NFT](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/nft.jpg?raw=true)
+![Screenshot of NFT](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/nft.jpg)
 
 Finally, **Step 7** will implement functionality that allows authors to transfer NFTs. This sets up the application for expansion into a marketplace for blog entry ownership.
 
-![Screenshot of transfer](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/transfer.jpg?raw=true)
+![Screenshot of transfer](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/transfer.jpg)
 
 There are countless ways a dApp like this could be expanded. You could implement the NFT marketplace natively, or you might choose to implement a tipping button for readers who want to reward the writer.
 
@@ -63,7 +63,7 @@ At the end of the tutorial, we'll include a few [additional resources](https://l
 
 Let's get started!
 
-![All big things come from small beginnings](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/ladder.jpeg?raw=true)
+![All big things come from small beginnings](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/ladder.jpeg)
 
 {% label %}
 All big things come from small beginnings

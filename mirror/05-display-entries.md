@@ -33,7 +33,7 @@ const txs = await ardb.search("transactions").tags(tags).limit(10).find();
 
 Now everything is in place. If you refresh your dApp, you'll see the entries you created in the previous steps. Magic!
 
-![And all the entries simply... appear!](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/magic.jpeg?raw=true)
+![And all the entries simply... appear!](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/magic.jpeg)
 
 {% label %}
 And all the entries simply... appear!
@@ -97,4 +97,4 @@ try {
 
 Once the code is complete, you will be able to see a list of posts on the Dashboard as well as under your user profile:
 
-![Screenshot displaying a list of entries](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/entries.jpg?raw=true)
+![Screenshot displaying a list of entries](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/entries.jpg)

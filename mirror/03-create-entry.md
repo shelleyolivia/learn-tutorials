@@ -12,7 +12,7 @@ This system requires a robust and sustainable economic structure to ensure stora
 
 The architecture to achieve all this is beyond the scope of this tutorial, but if you're interested in going deeper, we recommend checking out the [Arweave yellow paper](https://www.arweave.org/yellow-paper.pdf).
 
-![Like this but decentralized...](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/storage.jpeg?raw=true)
+![Like this but decentralized...](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/storage.jpeg)
 
 {% label %}
 Like this but decentralized...
@@ -182,4 +182,4 @@ if (provider && contract) {
 
 Once you have completed the code, you will want to try out creating an entry by clicking on the **Create Entry** button on the Dashboard, then entering a title and some text.
 
-![Screenshot displaying a list of entries](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/entries.jpg?raw=true)
+![Screenshot displaying a list of entries](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/entries.jpg)

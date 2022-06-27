@@ -97,7 +97,7 @@ Feel free to explore the rest of the template on your own. It includes standard 
 
 Let's build!
 
-![“I can feel the anticipation.”](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/lego.jpeg?raw=true)
+![“I can feel the anticipation.”](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/lego.jpeg)
 
 {% label %}
 “I can feel the anticipation.”

@@ -78,7 +78,7 @@ res.status(200).json({
 
 "But we still haven't displayed an entry!", you yell. Yes, we absolutely should do that. We'll get to that in Step 5.
 
-![We're getting very close to some magic.](https://raw.githubusercontent.com/figment-networks/learn-tutorials/mirror-tutorial/mirror/assets/map.jpeg?raw=true)
+![We're getting very close to some magic.](https://raw.githubusercontent.com/figment-networks/learn-tutorials/master/mirror/assets/map.jpeg)
 
 {% label %}
 We're getting very close to some magic.
