@@ -34,19 +34,26 @@ To install truffle, open a terminal (windows cmd prompt or mac terminal) and run
 
 Ganache is a personal blockchain environment for DApp development. It provides a local blockchain with 10 default accounts, each already funded with 100 ETH. This can be very useful for testing and development, [check it out](https://www.trufflesuite.com/ganache) if you are interested.
 
-### MetaMask Setup
+### MetaMask Setup for the Mumbai Testnet
 
 MetaMask is used to interact with the Ethereum blockchain. It allows users to access their Ethereum wallet through a browser extension or mobile app, which can then be used to interact with decentralized applications.
 
 To install MetaMask extension, click on this [link](https://metamask.io/).
 Now, `Create a MetaMask account -> save the mnemonics (12 secret words) because we need those mnemonics at the time of deployment`
 
-To interact with Polygon via Metamask we first have to add a new RPC endpoint. Open the Metamask extension by clicking on the Fox icon in your browser toolbar then select `Settings -> Networks -> Add network -> Save`. Fill out the information as given in the image below.
+To interact with Polygon via Metamask we first have to add a new RPC endpoint. Open the Metamask extension by clicking on the Fox icon in your browser toolbar then select `Settings -> Networks -> Add network -> Save`. You can use free RPC endpoints from providers like [Alchemy](https://docs.alchemy.com/docs/how-to-add-alchemy-rpc-endpoints-to-metamask), [Quicknode](https://quicknode.com), and [Moralis](https://moralis.io). 
+
+Fill out the information as given in the image below. Note that the image's shown RPC URL is a public endpoint and thus, rate-limited. As a best practice, most developers choose to use a private RPC endpoint like the ones below: 
+
+- Alchemy: https://polygon-mumbai.g.alchemy.com/v2/Alchemy-api-key. You'll need a [free API key](https://docs.alchemy.com)
+- Quicknode: https://mumbai.network.quiknode.pro/Quicknode-api-key/. You'll need a [Infura key](https://infura.io]
+- Moralis: https:speedy-notes-nyc.moralis.io/Moralis-api-key/polygon/mumbai. You'll need a [Moralis API key](https://moralis.io)
 
 ![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/deploy-and-debug-on-polygon-1.png)
 
 Now you'll notice zero balance (0 MATIC) in your wallet, To get test Matic for deployment and testing,
-`go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network).
+`go to Matic Faucet -> Select Mumbai -> Paste wallet address -> Submit`, Matic Faucet [link](https://faucet.matic.network). You can also get Mumbai test tokens from the [mumbaifaucet.com](https://mumbaifaucet.com).
+
 Done! check your wallet, you'll see some Matic there. *(We only need small amount of Matic (5-10 Matic) to deploy and test our DApp.)*
 
 ![](https://github.com/figment-networks/learn-tutorials/raw/master/assets/deploy-and-debug-on-polygon-2.png)
@@ -56,7 +63,7 @@ Done! check your wallet, you'll see some Matic there. *(We only need small amoun
 * **Languages:** `Solidity, JavaScript, HTML5, CSS3`
 * **Libraries:** `React.js, Web3.js`
 * **Tools:** `IPFS`
-* **Network:** `Polygon (Matic)`
+* **Network:** `Polygon (Matic), Mumbai testnet`
 * **Platforms:** `Ethereum, Fleek`
 
 ### Roadmap
@@ -71,7 +78,7 @@ To connect our Smart Contracts with front-end we'll use [Web3.js](https://web3js
 
 What are **Smart Contracts?**
 
-Smart Contracts are peer-to-peer digital user agreements on the blockchain. To write Smart contracts in Ethereum we use solidity programming language.
+Smart Contracts are peer-to-peer digital user agreements on the blockchain. To write Smart contracts in Ethereum we use Solidity as the programming language.
 
 
 What is [Web3.js](https://web3js.readthedocs.io/en/v3.0.0-rc.5/)?
@@ -583,7 +590,7 @@ Wow, that's a lot of code! You can run the React app locally with the command `n
 
 *The `<Footer>` component was created in bootstrap for hackathon purposes. It's not related to our DApp. You can simply modify that part as per your needs.*
   
-# Smart Contracts Deployment on Polygon (Matic)
+# Smart Contracts Deployment on Polygon Mainnet (Matic)
 
 ### truffle-config
 * `truffle-config.js` for Mac users
@@ -633,6 +640,15 @@ Now, let's add `matic` network in our truffle-config file which will contain our
     },
 ```
 You can set the gas price and gas limits for faster transactions as shown in the above code block.
+
+Note, the above uses a public RPC endpoint and is thus rate-limited. Most developers choose to use free private RPC endpoints through providers like Alchemy, Quicknode, or Moralis. For example, similar to when we deployed to Mumbai testnet above, select Polygon Mainnet in your Metamak and enter the following:
+
+  - **Network Name**: Polygon Mainnet
+  - **New RPC URL**: https://polygon-mainnet.g.alchemy.com/v2/your-api-key
+  - **Chain ID**: 137
+  - **Currency Symbol**: MATIC
+  - **Block Explorer URL**: https://polygonscan.com/
+
 
 ### Deploy Smart Contracts
 * Command: `truffle migrate --network matic`
@@ -722,4 +738,6 @@ I'm Akhilesh Thite, an Indian tech enthusiast with a passion for Software Develo
 * *IPFS docs: https://docs.ipfs.io/concepts/what-is-ipfs/#decentralization*
 * *Async/Await: https://www.geeksforgeeks.org/async-await-function-in-javascript/*
 * *Dapp University YouTube: https://www.youtube.com/watch?v=OLsteD3xkPQ*
-* *Deploying & debugging smart contracts on Polygon :https://learn.figment.io/tutorials/deploying-and-debugging-smart-contracts-on-polygon*
+* *Deploying & debugging smart contracts on Polygon: https://learn.figment.io/tutorials/deploying-and-debugging-smart-contracts-on-polygon*
+* Alchemy University (free): https://university.alchemy.com
+* How to code & deploy a polygon smart contract using Metamask, Solidity, HardHat, and Ethers.js: https://docs.alchemy.com/docs/how-to-code-and-deploy-a-polygon-smart-contract
