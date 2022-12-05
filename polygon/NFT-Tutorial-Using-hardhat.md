@@ -13,7 +13,7 @@ Please make sure you have the following software installed:
 - [Node.js](https://nodejs.org/en/) v14.17.6 LTS or higher, for installing HardHat and other node packages.
 - [MetaMask](https://metamask.io/) for interacting with the blockchain. 
   - Once you have installed MetaMask, add a connection with the [Polygon Mumbai testnet](https://docs.matic.network/docs/develop/metamask/config-polygon-on-metamask).
-- Remember to get your account funded with testnet MATIC tokens using the [Polygon faucet](https://faucet.polygon.technology/).
+- Remember to get your account funded with testnet MATIC tokens using the this [Polygon faucet](https://faucet.polygon.technology/) or [this one](https://mumbaifaucet.com/). 
 
 # Creating Polygonscan API key
 
@@ -21,13 +21,13 @@ When we deploy our contract to the blockchain (either mainnet or testnet), it is
 
 Using a HardHat plugin, smart contracts can be verified automatically during the deployment process. To do this, we will need a Polygonscan API key. Follow these steps to get your own API key:
 
-1. Open [Polygonscan](https://polygonscan.com/).
+1. Open [Polygonscan](https://polygonscan.com/). You can also get free RPC API keys from providers like [Alchemy](https://docs.alchemy.com) or [Moralis](https://moralis.io). 
 2. Click on **SignIn** in the upper right corner of the page.
-3. If you already have an account, enter your username and password to login, or else create your new account by visiting [https://polygonscan.com/register](https://polygonscan.com/register).
+3. If you already have an account, enter your username and password to login, or else create your new account by visiting [https://polygonscan.com/register](https://polygonscan.com/register), [https://alchemy.com](https://alchemy.com), or [https://moralis.io](https://moralis.io)
 4. Once you are logged in, go to the API-KEYs section on the left sidebar.
 5. Click on the "Add" button, give it a name and click on continue.
 
-You now have an API key which will allow you to access the Polygonscan API features such as contract verification. This key will be same for both mainnet and testnet.
+You now have an API key which will allow you to access the Polygonscan API features such as contract verification. This key will be same for both mainnet and testnet. 
 
 # Creating a HardHat project
 
@@ -610,11 +610,11 @@ Congratulations🥳🥳🥳, Your NFT is successfully minted. You can visit the 
 
 # Conclusion
 
-In this tutorial, we learned some of the basics of HardHat. We wrote a smart contract that can be used to create NFTs, wrote tests for our smart contract and finally deployed it to the Mumbai testnet. We also verified our contract using a HardHat plugin and a Polygonscan API key. Using a similar procedure, we can build any number of DeFi projects and deploy to any EVM compatible network (Ethereum, Polygon, Binance Smart Chain, Avalanche, etc.). 
+In this tutorial, we learned some of the basics of HardHat. We wrote a smart contract that can be used to create NFTs, wrote tests for our smart contract and finally deployed it to the Mumbai testnet. We also verified our contract using a HardHat plugin and a Polygonscan, Alchemy, or Moralis RPC API key. Using a similar procedure, we can build any number of DeFi projects and deploy to any EVM compatible network (Ethereum, Polygon, Binance Smart Chain, Avalanche, etc.).
 
 # Next Steps
 
-Why stop here? Looking ahead, you can also learn how to build an NFT Marketplace contract where various NFTs can be listed, bought and sold. You can also dig deeper into other aspects of NFTs and learn new things 😎!
+Why stop here? Looking ahead, you can also learn how to build an NFT Marketplace contract where various NFTs can be listed, bought and sold. You can also dig deeper into other aspects of NFTs and learn new things 😎! Also remember that you've only deployed to Polygon's Mumbai testnet in this tutorial. You can also deploy to Polygon's mainnet to put it on the Polygon chain, however just remember it does cost real money in the form of Polygon tokens :)
 
 # About The Author
 
@@ -627,3 +627,5 @@ I found the following very helpful while learning:
 - [Hardhat Official Documentation](https://hardhat.org/)
 - [Matic Official Documentation](https://docs.matic.network/docs/develop/getting-started)
 - [OpenZeppelin Forum Page](https://forum.openzeppelin.com/t/function-settokenuri-in-erc721-is-gone-with-pragma-0-8-0/5978/3) about the setTokenURI change in Solidity 0.8.0.
+- [How to write and deploy a smart contract on Polygon](https://docs.alchemy.com/docs/how-to-code-and-deploy-a-polygon-smart-contract)
+- [Alchemy University](https://university.alchemy.com)
